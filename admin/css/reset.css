@@ -6,6 +6,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 body{
 	font: 62.5% Arial, Helvetica, sans-serif;
 }
+pre{
+	font-size: 2em;
+}
 table{
 	/*border-collapse:collapse;
 	border-spacing:0;*/
@@ -48,35 +51,19 @@ a{
 	display: inline-block;
 }
 /*\*/* html .clearfix {
-	height: 1%;
+    height: 1%;
 }
 .clearfix {
-	display: block;
+    display: block;
 }/**/
 .margen_bloque{
-	margin-right:10px;
+    margin-right:10px;
 }
 .flotar_izq{
-	float:left;
-	display:inline;
+    float:left;
+    display:inline;
 }
 .flotar_der{
-	float:right;
-	display:inline;
-}
-.vhalign{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.valign{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.halign{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    float:right;
+    display:inline;
 }
