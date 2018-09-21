@@ -1,0 +1,205 @@
+/* MODAL CARTA */
+.modal_carta .info_modal{
+    
+}
+/* MODAL CARRO */
+.modal_carro .info_modal{
+    
+}
+/* MODAL PRODUCTOS PROMO */
+.modal_productos_promo .info_modal{
+    
+}
+/* MODAL PREGUNTA PRODUCTOS */
+.modal_pregunta_productos .info_modal{
+    
+}
+
+/* LISTA PRODUCTOS */
+.lista_productos{
+    padding: 10px;
+}
+.lista_productos .producto{
+    background: #ccc;
+    margin-bottom: 6px;
+    padding: 6px;
+}
+.lista_productos .producto .nombre{
+    font-size: 16px;
+}
+.lista_productos .producto .descripcion{
+    font-size: 10px;
+}
+/* LISTA CATEGORIAS */
+.lista_categorias{
+    padding: 10px;
+}
+.lista_categorias .categoria{
+    background: #ccc;
+    margin-bottom: 6px;
+    padding: 6px;
+}
+.lista_categorias .categoria .nombre{
+    font-size: 16px;
+}
+.lista_categorias .categoria .descripcion{
+    font-size: 10px;
+}
+.lista_promociones{
+    margin: 10px;
+    padding-top: 10px;
+}
+/* LISTA PROMOCIONES */
+.lista_promociones .promocion{
+    margin-bottom: 6px;
+    padding: 6px;
+    background: #ccc;
+}
+.lista_promociones .promocion .nombre{
+    font-size: 16px;
+}
+.lista_promociones .promocion .descripcion{
+    font-size: 10px;
+}
+.lista_promociones .promocion_categoria{
+    padding: 0px 10px 10px 10px;
+}
+.lista_promociones .promocion_categoria .pro_titulo{
+    
+}
+.lista_promociones .promocion_categoria .item_pro_cat{
+    
+}
+.lista_promociones .promocion_categoria .item_pro_cat span:nth-child(1){
+    font-size: 22px;
+    padding-right: 4px;
+}
+.lista_promociones .promocion_categoria .item_pro_cat span:nth-child(2){
+    font-size: 14px;
+}
+.lista_promociones .promocion_producto{
+    padding: 0px 10px 10px 10px;
+}
+.lista_promociones .promocion_producto .pro_titulo{
+    
+}
+.lista_promociones .promocion_producto .item_pro_pro{
+    font-size: 12px;
+}
+.lista_promociones .promo_precio{
+    padding: 6px 10px;
+    background: #bbb;
+    text-align: right;
+    font-size: 22px;
+}
+.s_pregunta{
+    padding: 10px;
+}
+.s_pregunta .e_pregunta{
+
+}
+.s_pregunta .e_pregunta .pregunta_titulo{
+    font-size: 20px;
+}
+.s_pregunta .e_pregunta .v_pregunta{
+}
+.s_pregunta .e_pregunta .titulo_v_pregunta{
+    margin-top: 14px;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+.s_pregunta .e_pregunta .v_pregunta .n_pregunta{
+    background: #ccc;
+    padding: 6px;
+    font-size: 14px;
+}
+.s_pregunta .e_pregunta .v_pregunta .selected{
+    background: #999;
+}
+.process_carro{
+    padding: 10px;
+}
+.process_carro .process_carro_promo{
+    margin-bottom: 10px;
+    background: #ccc;
+    padding: 6px;
+}
+.process_carro .process_carro_promo .promo_info{
+    font-size: 18px;
+    padding-bottom: 6px;
+}
+.process_carro .process_carro_promo .promo_detalle{
+    
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item{
+    margin-bottom: 1px;
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_nombre{
+    width: calc(100% - 60px);
+    float: left;
+    font-size: 10px;
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones{
+    width: 60px;
+    float: left;
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .accion{
+    width: 19px;
+    float: left;
+    background: #f00;
+    margin-left: 1px;
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .precio{
+    width: 39px;
+    float: left;
+    background: #f0f;
+    margin-left: 1px;
+}
+.process_carro .process_carro_restantes{
+    background: #ccc;
+    padding: 6px;
+}
+.process_carro .process_carro_restantes .restantes_detalle_item{
+    margin-bottom: 2px;
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_nombre{
+    width: calc(100% - 60px);
+    float: left;
+    font-size: 12px;
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones{
+    width: 60px;
+    float: left;
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .accion{
+    width: 19px;
+    float: left;
+    background: #f00;
+    margin-left: 1px;
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .precio{
+    width: 39px;
+    float: left;
+    background: #f00;
+    margin-left: 1px;
+}
+.pro_cat_promo{
+    padding: 10px;
+}
+.pro_cat_promo .pro_cat_item{
+    margin-top: 2px;
+}
+.pro_cat_promo .pro_cat_item .pro_cat_item_select{
+    float: left;
+    width: 40px;
+}
+.pro_cat_promo .pro_cat_item .pro_cat_item_select .select_promo{
+    width: 100%;
+}
+.pro_cat_promo .pro_cat_item .pro_cat_item_nombre{
+    width: calc(100% - 50px);
+    float: left;
+    padding-left: 10px;
+    font-size: 12px;
+    padding-top: 4px;
+}

@@ -1,0 +1,33 @@
+
+.color_font_01{
+    color: #999;
+}
+.color_font_02{
+    color: #666;
+}
+.color_font_03{
+    color: #333;
+}
+.color_back_01{
+    background: #90afc5;
+}
+.color_back_02{
+    background: #336b87;
+}
+.color_back_03{
+    background: #2a3132;
+}
+.color_back_04{
+    background: #763626;
+}
+
+
+.size_font_01{
+    font-size: 20px;
+}
+.size_font_02{
+    font-size: 16px;
+}
+.size_font_03{
+    font-size: 24px;
+}

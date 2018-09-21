@@ -1,0 +1,254 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+.contenedor{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+/* MENU LEFT */
+.contenedor .menu_left{
+    position: fixed;
+    z-index: 2;
+}
+.contenedor .menu_left .cont_menu_left{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.contenedor .menu_left .cont_menu_left .btn_toogle{
+    position: absolute;
+}
+.contenedor .menu_left .cont_menu_left .menu_info{
+    display: block;
+}
+.contenedor .menu_left .cont_menu_left .menu_info h1{
+    
+}
+.contenedor .menu_left .cont_menu_left .menu_info ul{
+    
+}
+.contenedor .menu_left .cont_menu_left .menu_info ul li{
+    
+}
+/* PAGINA */
+.contenedor .pagina{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+.contenedor .pagina .fixed{
+    position: fixed;
+}
+/* PAGINA HEADER */
+.contenedor .pagina .header{
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+.contenedor .pagina .header .header_logo{
+    position: absolute;
+}
+.contenedor .pagina .header .menu_right{
+    position: absolute;
+    z-index: 2;
+}
+.contenedor .pagina .header .menu_right .shop{
+    
+}
+.contenedor .pagina .header .menu_right .cantcart{
+    position: absolute;
+}
+.contenedor .pagina .header .menu_right .cantcart .cantcart_num{
+    position: absolute;
+}
+/* PAGINA FOOTER */
+.contenedor .pagina .footer{
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+}
+/* PAGINA CONTENIDO */
+.contenedor .pagina .contenido{
+    display: block;
+    width: 100%;
+}
+.contenedor .pagina .contenido .cont_contenido{
+    display: block;
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales{
+    display: block;
+}
+
+/* BOTON PRINCIPAL  */
+
+/* MODALS */
+.contenedor .modals{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    display: none;
+}
+.contenedor .modals .cont_modals{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.contenedor .modals .cont_modals .modal{
+    position: absolute;
+}
+.contenedor .modals .cont_modals .modal .cont_modal{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .titulo{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .titulo .cont_titulo{
+    position: absolute;
+    width: 100%;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .titulo .cont_titulo h1{
+    display: block;
+    padding-top: 8px;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .titulo .cont_titulo h2{
+    display: block;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .close{
+    position: absolute;
+    z-index: 3;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal{
+    display: block;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .acciones{
+    position: absolute;
+    z-index: 2;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar{
+    padding: 5px 15px;
+}
+.hide{
+    display: none;
+}
+
+/*
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal .pro_cat_promo{
+    
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item{
+    padding: 4px 10px;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_select{
+    width: 15%;
+    float: left;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_select select{
+    width: 100%;
+    margin-top: 3px;
+}
+.contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_nombre{
+    width: 80%;
+    padding-left: 5%;
+    float: left;
+    font-size: 22px;
+}
+
+
+
+.style_promo{
+    width: 94%;
+    padding: 3%;
+}
+.style_promo .nombre{
+    font-size: 28px;
+}
+.style_promo .descripcion{
+    font-size: 14px;
+}
+
+.process_carro{
+    padding: 10px;
+}
+.process_carro .process_carro_promo{
+    background: #ccc;
+    padding: 10px;
+    margin-bottom: 10px
+}
+.process_carro .process_carro_promo .promo_info{
+
+}
+.process_carro .process_carro_promo .promo_detalle{
+
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item{
+
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_nombre{
+    float: left;
+    width: calc(100% - 40px);
+}
+.process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones{
+    float: left;
+    width: 40px;
+}
+.process_carro .process_carro_restantes{
+    background: #ccc;
+    padding: 10px;
+    margin-bottom: 10px
+}
+.process_carro .process_carro_restantes .restantes_detalle_item{
+
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_nombre{
+    float: left;
+    width: calc(100% - 40px);
+}
+.process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones{
+    float: left;
+    width: 40px;
+}
+.imprimir_promo{
+    padding: 10px;
+}
+.imprimir_promo .imprimir_promo_cat{
+    margin-bottom: 10px;
+}
+.imprimir_promo .imprimir_promo_prod{
+    margin-bottom: 10px;
+}
+.imprimir_promo .imprimir_promo_cat .promo_cat_titulo{
+    font-size: 14px;
+}
+.imprimir_promo .imprimir_promo_prod .promo_prod_titulo{
+    font-size: 14px;
+}
+.imprimir_promo .imprimir_promo_precio{
+    font-size: 22px;
+}
+
+*/

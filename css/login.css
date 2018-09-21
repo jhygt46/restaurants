@@ -1,0 +1,78 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background: #FAFAFA;
+    display:block;
+}
+.login {
+    width: 427px;
+}
+.login .titulo{
+
+}
+.login .contlogin{
+    display:block;
+    width: 311px;
+    background: #fff;
+    margin: 10px auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
+}
+.login .contlogin .txt{
+    padding:20px 15px 0px 15px;
+    text-align:left;
+    font-size: 13px;
+    color: #666;
+}
+.login .contlogin .input{
+    padding:0px 15px 0px 15px;
+    text-align:left;
+}
+.login .contlogin .button{
+    padding:15px;
+}
+.login .contlogin .button .msg{
+    float:left;
+    width:184px;
+    text-align:left;
+    font-size:12px;
+    padding-top:5px;
+}
+.login .contlogin .button .btn{
+    float:left;
+    width:96px;
+}
+.login .contlogin .input input{
+    width:280px;
+    height:35px;
+    border: 1px solid #ccc;
+    background-color: #FCFCFC;
+    padding:5px;
+}
+.login .contlogin .button input{
+    background: #E34A25;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: text-shadow;
+    cursor: pointer;
+    -webkit-appearance: buton;
+    font-size: 13px;
+}
+.login .ltpass{
+    text-align:left;
+    padding-left: 60px;
+}
+.login .ltpass a{   
+    font-size:12px;
+    color: #E34A25;
+    font-weight: bold;
+    text-decoration: none;
+}
