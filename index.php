@@ -13,7 +13,7 @@ if($_GET['accion'] == "actualizar"){
     
 }
 
-require('../class/domain_class.php');
+require('admin/class/domain_class.php');
 $domain = new Dominio();
 $info = $domain->get_data();
 
