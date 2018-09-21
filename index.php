@@ -1,5 +1,5 @@
 <?php
-
+/*
 if($_GET['accion'] == "actualizar"){
     
     require('../class/core_class.php');
@@ -16,7 +16,7 @@ if($_GET['accion'] == "actualizar"){
 require('admin/class/domain_class.php');
 $domain = new Dominio();
 $info = $domain->get_data();
-
+*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
