@@ -302,13 +302,7 @@ class Core{
         }
         
         
-        if(file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return))){
-            echo "GUARDO";
-        }else{
-            echo "NOOO";
-        }
-        
-        return $aux_return;
+        file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return));
         
         
     }
