@@ -6,8 +6,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 
-echo $path.'/restaurants/admin/db_config.php<br/>';
-echo $path.'/config/config.php';
+echo $path.'admin/db_config.php<br/>';
+echo $path.'config/config.php';
 exit;
 
 require_once $path.'restaurants/admin/db_config.php';
