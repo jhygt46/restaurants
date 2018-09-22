@@ -2,7 +2,7 @@
 
 require('admin/class/core_class.php');
 $core = new Core();
-
+$core->test();
 /*
 if($_GET['accion'] == "actualizar"){
     

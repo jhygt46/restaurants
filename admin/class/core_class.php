@@ -25,6 +25,9 @@ class Core{
         echo "</pre>";
         */
     }
+    public function test(){
+        print_r($this->con->sql("SELECT * FROM contacts"));
+    }
     public function seguridad_if($arr){
         
         for($i=0; $i<count($arr); $i++){
