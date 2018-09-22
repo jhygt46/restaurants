@@ -11,7 +11,7 @@ if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
 }
 
 echo "<pre>";
-print_r($info);
+print_r($_SERVER);
 echo "</pre>";
 
 /*
