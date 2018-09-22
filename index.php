@@ -4,11 +4,6 @@ require('admin/class/domain_class.php');
 $domain = new Dominio();
 $info = $domain->get_data();
 
-echo "<pre>";
-print_r($info);
-echo "</pre>";
-
-exit;
 /*
 if($_GET['accion'] == "actualizar"){
     
