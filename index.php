@@ -10,7 +10,7 @@ if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
 }else{
     $info = $core->get_data();
 }
-exit;
+
 /*
 if($_GET['accion'] == "actualizar"){
     
