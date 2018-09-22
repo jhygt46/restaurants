@@ -301,8 +301,6 @@ class Core{
 
         }
         
-        $aux_return = mb_convert_encoding($aux_return, 'UTF-8', 'UTF-8');
-        
         echo "<pre>";
         print_r($aux_return);
         echo "</pre>";
