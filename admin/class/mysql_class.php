@@ -2,16 +2,20 @@
 
 $path = $_SERVER['DOCUMENT_ROOT'];
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path .= "/";
+    $path_db = $path."/restaurants/db_config.php";
+    $path_cf = $path."/config/config.php";
+}else{
+    $path_db = $path."restaurants/db_config.php";
+    $path_cf = $path."config/config.php";
 }
 
 
-echo $path.'admin/db_config.php<br/>';
-echo $path.'config/config.php';
+echo $path_db.'<br/>';
+echo $path_cf;
 exit;
 
-require_once $path.'restaurants/admin/db_config.php';
-require_once $path.'config/config.php';
+require_once $path_db;
+require_once $path_cf;
 
 class Conexion {
     
