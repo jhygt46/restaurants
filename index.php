@@ -1,13 +1,13 @@
 <?php
 
-require('admin/class/domain_class.php');
-$domain = new Dominio();
-
+require('admin/class/core_class.php');
+$core = new Core();
+print_r($core->get_web_js_data(3));
 
 if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
-    $info = $domain->get_data($_GET['param_dom']);
+    $info = $core->get_data($_GET['param_dom']);
 }else{
-    $info = $domain->get_data();
+    $info = $core->get_data();
 }
 
 
@@ -67,7 +67,7 @@ if($_GET['accion'] == "actualizar"){
             </div>
             <div class="pagina">
                 <div class="header color_back_03 fixed">
-                    <div class="header_logo vhalign"><img src="images/logo.png" alt="" /></div>
+                    <div class="header_logo vhalign"><img src="images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
                     <div class="menu_right" onclick="open_carro()"><div class="shop color_font_01 material-icons">shopping_cart</div><div class="cantcart color_back_02"><div class="cantcart_num vhalign size_font_02 color_font_02">15</div></div></div>
                 </div>
                 <div class="contenido color_back_01">

@@ -24,6 +24,7 @@ class Dominio{
             $info['code'] = $sql['resultado'][0]['code'];
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
             $info['font']['css'] = $sql['resultado'][0]['font_css'];
+            $info['logo'] = $sql['resultado'][0]['logo'];
             
         }
 
