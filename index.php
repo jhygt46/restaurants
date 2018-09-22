@@ -7,6 +7,9 @@ $info = $domain->get_data();
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";
+echo "<pre>";
+print_r($_SERVER);
+echo "</pre>";
 /*
 if($_GET['accion'] == "actualizar"){
     
