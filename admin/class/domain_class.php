@@ -21,7 +21,9 @@ class Dominio{
             $info['css_style'] = "/css/types/".$sql['resultado'][0]['style_page'];
             $info['css_color'] = "/css/colors/".$sql['resultado'][0]['style_color'];
             $info['css_modals'] = "/css/modals/".$sql['resultado'][0]['style_modal'];
-            $info['js_data'] = "/js/data/".$sql['resultado'][0]['js_data'];
+            $info['code'] = $sql['resultado'][0]['code'];
+            $info['font']['family'] = $sql['resultado'][0]['font_family'];
+            $info['font']['css'] = $sql['resultado'][0]['font_css'];
             
         }
 
