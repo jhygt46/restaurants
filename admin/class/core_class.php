@@ -301,14 +301,19 @@ class Core{
 
         }
         
+        $aux_return = mb_convert_encoding($aux_return, 'UTF-8', 'UTF-8');
+        
+        echo "<pre>";
+        print_r($aux_return);
+        echo "</pre>";
+        
+        
         echo json_encode($aux_return, JSON_FORCE_OBJECT);
         echo json_last_error_msg();
         exit;
         
         file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return));
-        echo "<pre>";
-        print_r($aux_return);
-        echo "</pre>";
+        
         exit;
     }
     
