@@ -42,7 +42,7 @@ if($_GET['accion'] == "actualizar"){
         <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
         <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
-        <script src="/js/info.js" type="text/javascript"></script>
+        <script src="/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="/js/html.js" type="text/javascript"></script>
         <script src="/js/html_func.js" type="text/javascript"></script>
         <script src="/js/base.js" type="text/javascript"></script>
