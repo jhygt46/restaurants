@@ -40,15 +40,15 @@ if($_GET['accion'] == "actualizar"){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo $path; ?>/css/style.css" media="all" />
-        <link rel="stylesheet" href="<?php echo $path."/css/types/".$info["css_style"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $path."/css/colors/".$info["css_color"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $path."/css/modals/".$info["css_modals"]; ?>" media="all" />
-        <script src="<?php echo $path; ?>js/jquery-1.3.2.min.js" type="text/javascript"></script>
-        <script src="<?php echo $path; ?>js/info.js" type="text/javascript"></script>
-        <script src="<?php echo $path; ?>js/html.js" type="text/javascript"></script>
-        <script src="<?php echo $path; ?>js/html_func.js" type="text/javascript"></script>
-        <script src="<?php echo $path; ?>js/base.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="/css/style.css" media="all" />
+        <link rel="stylesheet" href="/css/types/<?php echo $info["css_style"]; ?>" media="all" />
+        <link rel="stylesheet" href="/css/colors/<?php echo $info["css_color"]; ?>" media="all" />
+        <link rel="stylesheet" href="/css/modals/<?php echo $info["css_modals"]; ?>" media="all" />
+        <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="/js/info.js" type="text/javascript"></script>
+        <script src="/js/html.js" type="text/javascript"></script>
+        <script src="/js/html_func.js" type="text/javascript"></script>
+        <script src="/js/base.js" type="text/javascript"></script>
 </head>
     <body class="style_page_1">
         <div class="contenedor">
