@@ -1,4 +1,8 @@
 <?php
+
+require('admin/class/core_class.php');
+$core = new Core();
+
 /*
 if($_GET['accion'] == "actualizar"){
     

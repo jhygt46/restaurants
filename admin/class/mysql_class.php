@@ -5,7 +5,12 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path .= "/";
 }
 
-require_once $path.'easyapps/db_config.php';
+
+echo $path.'restaurants/admin/db_config.php';
+echo $path.'config/config.php';
+exit;
+
+require_once $path.'restaurants/admin/db_config.php';
 require_once $path.'config/config.php';
 
 class Conexion {
