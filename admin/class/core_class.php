@@ -26,7 +26,7 @@ class Core{
         */
     }
     public function test(){
-        print_r($this->con->sql("SELECT * FROM contacts"));
+        print_r($this->con->sql("SELECT * FROM fw_usuarios"));
     }
     public function seguridad_if($arr){
         

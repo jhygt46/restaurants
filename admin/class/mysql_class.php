@@ -9,6 +9,10 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path_cf = "/var/www/html/config/config.php";
 }
 
+echo $path_db;
+echo $path_cf;
+exit;
+
 require_once $path_db;
 require_once $path_cf;
 
