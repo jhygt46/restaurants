@@ -2,11 +2,11 @@
 
 $path = $_SERVER['DOCUMENT_ROOT'];
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path_db = $path."/restaurants/db_config.php";
+    $path_db = $path."/restaurants/admin/db_config.php";
     $path_cf = $path."/config/config.php";
 }else{
-    $path_db = $path."restaurants/db_config.php";
-    $path_cf = $path."config/config.php";
+    $path_db = $path."/admin/db_config.php";
+    $path_cf = $path."/config/config.php";
 }
 
 
