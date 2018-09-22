@@ -6,7 +6,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path_cf = $path."/config/config.php";
 }else{
     $path_db = $path."/admin/db_config.php";
-    $path_cf = $path."/config/config.php";
+    $path_cf = "var/www/html/config/config.php";
 }
 
 
