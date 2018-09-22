@@ -13,6 +13,10 @@ class Dominio{
     public function get_data(){
         
         $dominio = $_SERVER["HTTP_HOST"];
+        $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+        return $sql;
+        
+        
         if($dominio == "localhost"){
             $info['css_style'] = "css/types/style_page_01.css";
             $info['css_color'] = "css/colors/color_set_01.css";

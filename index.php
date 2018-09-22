@@ -1,8 +1,14 @@
 <?php
 
-require('admin/class/core_class.php');
-$core = new Core();
-$core->test();
+require('admin/class/domain_class.php');
+$domain = new Dominio();
+$info = $domain->get_data();
+
+echo "<pre>";
+print_r($info);
+echo "</pre>";
+
+exit;
 /*
 if($_GET['accion'] == "actualizar"){
     
@@ -17,9 +23,7 @@ if($_GET['accion'] == "actualizar"){
     
 }
 
-require('admin/class/domain_class.php');
-$domain = new Dominio();
-$info = $domain->get_data();
+
 */
 ?>
 
