@@ -183,10 +183,33 @@ class Core{
         return $productos['resultado'][0];
     }
     
-    
-    public function get_web_js_data(){
+    public function get_data($dom){
         
-        $cat_sql = $this->con->sql("SELECT * FROM categorias WHERE id_cat='".$this->id_cat."'");
+        $info['op'] = 0;
+        $dominio = ($dom !== null) ? $dom : $_SERVER["HTTP_HOST"];
+        $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+        if(count($sql['resultado']) == 1){
+            
+            $info['op'] = 1;
+            $info['css_style'] = "/css/types/".$sql['resultado'][0]['style_page'];
+            $info['css_color'] = "/css/colors/".$sql['resultado'][0]['style_color'];
+            $info['css_modals'] = "/css/modals/".$sql['resultado'][0]['style_modal'];
+            $info['code'] = $sql['resultado'][0]['code'];
+            $info['font']['family'] = $sql['resultado'][0]['font_family'];
+            $info['font']['css'] = $sql['resultado'][0]['font_css'];
+            $info['logo'] = $sql['resultado'][0]['logo'];
+            
+        }
+
+        return $info;
+        
+    }
+    public function get_web_js_data($id_gir){
+        
+        $giros_sql = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
+        $code = $giros_sql['resultados'][0]['code'];
+        
+        $cat_sql = $this->con->sql("SELECT t3.id_cae, t3.parent_id, t3.nombre FROM giros t1, catalogo_productos t2, categorias t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
         $cats = $cat_sql['resultado'];
         
         for($i=0; $i<count($cats); $i++){
@@ -276,8 +299,14 @@ class Core{
             unset($aux_pregunta);
 
         }
-        
+        if(file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return))){
+            echo "GUARDO";
+        }else{
+            echo "NOOO";
+        }
+        echo "<br>".$code;
         return $aux_return;
+        
         
     }
     
