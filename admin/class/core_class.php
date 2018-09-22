@@ -301,7 +301,6 @@ class Core{
 
         }
         
-        return "/var/www/html/restaurants/js/data/".$code.".js";
         
         if(file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return))){
             echo "GUARDO";
