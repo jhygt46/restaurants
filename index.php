@@ -38,9 +38,9 @@ if($_GET['accion'] == "actualizar"){
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link rel="stylesheet" href="/css/style.css" media="all" />
-        <link rel="stylesheet" href="/css/types/<?php echo $info["css_style"]; ?>" media="all" />
-        <link rel="stylesheet" href="/css/colors/<?php echo $info["css_color"]; ?>" media="all" />
-        <link rel="stylesheet" href="/css/modals/<?php echo $info["css_modals"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_style"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
         <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script src="/js/info.js" type="text/javascript"></script>
         <script src="/js/html.js" type="text/javascript"></script>

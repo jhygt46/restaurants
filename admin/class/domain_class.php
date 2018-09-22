@@ -18,9 +18,9 @@ class Dominio{
         if(count($sql['resultado']) == 1){
             
             $info['op'] = 1;
-            $info['css_style'] = "css/types/".$sql['resultado'][0]['style_page'];
-            $info['css_color'] = "css/colors/".$sql['resultado'][0]['style_color'];
-            $info['css_modals'] = "css/modals/".$sql['resultado'][0]['style_modal'];
+            $info['css_style'] = "/css/types/".$sql['resultado'][0]['style_page'];
+            $info['css_color'] = "/css/colors/".$sql['resultado'][0]['style_color'];
+            $info['css_modals'] = "/css/modals/".$sql['resultado'][0]['style_modal'];
             
         }
 
