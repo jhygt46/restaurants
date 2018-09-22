@@ -246,7 +246,7 @@ class Core{
             unset($aux);
         }
 
-        $promo_sql = $this->con->sql("SELECT * FROM promociones WHERE id_cat='".$this->id_cat."'");
+        $promo_sql = $this->con->sql("SELECT t3.id_prm, t3.nombre, t3.parent_id FROM giros t1, catalogo_productos t2, promociones t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
         $promos = $promo_sql['resultado'];
         
         for($i=0; $i<count($promos); $i++){
@@ -279,7 +279,7 @@ class Core{
             
         }
         
-        $preguntas_sql = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$this->id_cat."'");
+        $preguntas_sql = $this->con->sql("SELECT t3.id_pre, t3.mostrar FROM giros t1, catalogo_productos t2, preguntas t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
         $preguntas = $preguntas_sql['resultado'];
         
         for($k=0; $k<count($preguntas); $k++){
@@ -300,12 +300,15 @@ class Core{
             unset($aux_pregunta);
 
         }
+        
+        echo $code;
+        
         if(file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return))){
             echo "GUARDO";
         }else{
             echo "NOOO";
         }
-        echo "<br>".$code;
+        
         return $aux_return;
         
         
