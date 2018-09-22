@@ -14,17 +14,20 @@ class Dominio{
         
         $dominio = $_SERVER["HTTP_HOST"];
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-        return $sql;
-        
-        
-        if($dominio == "localhost"){
+        if(count($sql['resultado']) == 1){
+            
+            $info['css_style'] = "css/types/".$sql['resultado'][0]['style_page'];
+            $info['css_color'] = "css/colors/".$sql['resultado'][0]['style_color'];
+            $info['css_modals'] = "css/modals/".$sql['resultado'][0]['style_modal'];
+            
+        }else{
+            
             $info['css_style'] = "css/types/style_page_01.css";
             $info['css_color'] = "css/colors/color_set_01.css";
             $info['css_modals'] = "css/modals/style_modals_01.css";
-            $info['js_info'] = "js/custom/909PDtTJXvnpzEcA6ho7VmUlbSZhaI3t.js";
-        }else{
             
         }
+
         return $info;
         
     }
