@@ -2,14 +2,18 @@
 
 require('admin/class/domain_class.php');
 $domain = new Dominio();
-$info = $domain->get_data();
+
+
+if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
+    $info = $domain->get_data($_GET['param_dom']);
+}else{
+    $info = $domain->get_data();
+}
 
 echo "<pre>";
-print_r($_GET);
+print_r($info);
 echo "</pre>";
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
+
 /*
 if($_GET['accion'] == "actualizar"){
     
