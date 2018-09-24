@@ -20,10 +20,9 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     $id = $_GET["id"];
     $that = $fireapp->get_giro_catalogo($id);
 
-    $files = array_diff(scandir('/var/www/html/restaurants/css/types'), array('.', '..'));
-    echo "<pre>";
-    print_r($files);
-    echo "</pre>";
+    $css_types = array_diff(scandir('/var/www/html/restaurants/css/types'), array('.', '..'));
+    $css_colors = array_diff(scandir('/var/www/html/restaurants/css/colors'), array('.', '..'));
+    $css_modals = array_diff(scandir('/var/www/html/restaurants/css/modals'), array('.', '..'));
     
     
 }
@@ -63,6 +62,24 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <label>
                         <span>Google Font Css:</span>
                         <input id="titulo" type="text" value="<?php echo $that['font_css']; ?>" />
+                    </label>
+                    <label>
+                        <span>Css Pagina:</span>
+                        <select>
+                            <?php foreach($css_types as $value){ ?><option value="<?php echo $value; ?>"><?php echo $value; ?></option><?php } ?>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Css Colores:</span>
+                        <select>
+                            <?php foreach($css_colors as $value){ ?><option value="<?php echo $value; ?>"><?php echo $value; ?></option><?php } ?>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Css Pop-up:</span>
+                        <select>
+                            <?php foreach($css_modals as $value){ ?><option value="<?php echo $value; ?>"><?php echo $value; ?></option><?php } ?>
+                        </select>
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
