@@ -49,7 +49,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             <form action="" method="post" class="basic-grey">
                 <fieldset>
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="nombre" type="hidden" value="<?php echo $_GET["nombre"]; ?>" />
+                    <input id="nombre" type="hidden" value="<?php echo $that["nombre"]; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
                         <span>Titulo:</span>
