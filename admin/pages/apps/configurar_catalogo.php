@@ -55,6 +55,14 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <span>Titulo:</span>
                         <input id="titulo" type="text" value="<?php echo $that['titulo']; ?>" />
                     </label>
+                    <label>
+                        <span>Google Font Family:</span>
+                        <input id="titulo" type="text" value="<?php echo $that['font_family']; ?>" />
+                    </label>
+                    <label>
+                        <span>Google Font Css:</span>
+                        <input id="titulo" type="text" value="<?php echo $that['font_css']; ?>" />
+                    </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
                         <a id='button' onclick="form()">Enviar</a>
