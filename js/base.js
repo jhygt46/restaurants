@@ -121,10 +121,14 @@ function crear_pagina(){
     var categorias = data.categorias;
     var promociones = data.promociones;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
-        $('.cont_contenido').append(html_crear_categoria(categorias[i]));
+        if(categorias[i].parent_id == 0){
+            $('.cont_contenido').append(html_crear_categoria(categorias[i]));
+        }
     }
     for(var i=0, ilen=promociones.length; i<ilen; i++){
-        $('.cont_contenido').append(html_crear_promociones(promociones[i]));
+        if(promociones[i].parent_id == 0){
+            $('.cont_contenido').append(html_crear_promociones(promociones[i]));
+        }
     }
     
 }
