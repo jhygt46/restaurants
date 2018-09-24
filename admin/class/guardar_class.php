@@ -102,7 +102,7 @@ class Guardar extends Core{
         
         $info['op'] = 1;
         $info['res'] = $res;
-        $info['mensaje'] = "Giro modificado exitosamente";
+        $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
         $info['page'] = "apps/ver_catalogo.php?id_cat=".$id."&nombre=".$nombre;

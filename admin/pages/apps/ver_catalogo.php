@@ -68,12 +68,3 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/configurar_catalogo.php?id=<?php echo $id_cat; ?>&nombre=<?php echo $_GET["nombre"]; ?>')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Configuracion</div>
-        <div class="name2">Configura tu sitio web</div>
-        <div class="go_app"></div>
-    </div>
-</div>

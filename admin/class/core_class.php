@@ -105,10 +105,6 @@ class Core{
         return $url;
         
     }
-    public function get_giro_catalogo($id_cat){
-        $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.titulo, t2.code, t2.style_page, t2.style_color, t2.style_modal, t2.font_family, t2.font_css, t2.logo FROM catalogo_productos t1, giros t2 WHERE t1.id_cat='".$id_cat."' AND t1.id_gir=t2.id_gir AND t1.eliminado='0'");
-        return $giros['resultado'][0];
-    }
     public function get_giros(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_user='".$this->id_user."' AND eliminado='0'");
         return $giros['resultado'];

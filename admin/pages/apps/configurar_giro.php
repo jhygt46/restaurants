@@ -18,7 +18,7 @@ $sub_titulo = $sub_titulo1;
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $id = $_GET["id"];
-    $that = $fireapp->get_giro_catalogo($id);
+    $that = $fireapp->get_giro($id);
 
     $css_types = array_diff(scandir('/var/www/html/restaurants/css/types'), array('.', '..'));
     $css_colors = array_diff(scandir('/var/www/html/restaurants/css/colors'), array('.', '..'));
