@@ -83,6 +83,48 @@ class Guardar extends Core{
         }
         
     }
+    
+    public function ingresarimagen(){
+
+        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+        
+        $file_formats = array("jpg", "png", "gif");
+        $filepath = "/var/www/html/restaurants/admin/images/logos";
+
+        $name = $_FILES['file_image0']['name']; // filename to get file's extension
+        $size = $_FILES['file_image0']['size'];
+
+        if (strlen($name)){
+            $extension = substr($name, strrpos($name, '.')+1);
+            if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
+                if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
+                    $imagename =  $giro['resultado'][0]['dominio']. "." . $extension;
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if (move_uploaded_file($tmp, $filepath . $imagename)){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Imagen subida";
+                        $this->con->sql("UPDATE giros SET logo='".$imagename."' WHERE id_gir='".$this->id_gir."'");
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
+
+    
     private function configurar_catalogo(){
         
         $id = $_POST['id'];
@@ -94,7 +136,9 @@ class Guardar extends Core{
         $css_types = $_POST['css-types'];
         $css_colores = $_POST['css-colores'];
         $css_popup = $_POST['css-popup'];
-                
+        
+        $info['image'] = $this->ingresarimagen();
+        
         $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id."'");
         
         $info['op'] = 1;
