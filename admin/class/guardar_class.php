@@ -100,6 +100,7 @@ class Guardar extends Core{
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename =  $giro['resultado'][0]['dominio']. "." . $extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
+                    $info['imagename'] = $imagename;
                     if (move_uploaded_file($tmp, $filepath . $imagename)){
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
