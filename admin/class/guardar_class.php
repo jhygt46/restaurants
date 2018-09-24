@@ -95,7 +95,7 @@ class Guardar extends Core{
         $css_colores = $_POST['css-colores'];
         $css_popup = $_POST['css-popup'];
                 
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
+        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id."'");
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
