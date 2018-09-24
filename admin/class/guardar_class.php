@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require_once $path_class."core_class.php";
+date_default_timezone_set('America/Santiago');
+require_once($path."admin/class/mysql_class.php");
 
 class Guardar extends Core{
     

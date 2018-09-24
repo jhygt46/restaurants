@@ -4,18 +4,13 @@ session_start();
 header('Content-type: text/json');
 header('Content-type: application/json');
 
-$path = $_SERVER['DOCUMENT_ROOT'];
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path .= "/";
-    $path_class = $path."/easyapps/class/";
-    $path_n = $path."/easyapps/";
-    
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
 }else{
-    //$path_class = $path."admin/class/";
-    //$path_n = $path."admin/";
+    $path = "/var/www/html/restaurants/";
 }
 
-require_once($path_class."guardar_class.php");
+require_once($path."admin/class/guardar_class.php");
 $guardar = new Guardar();
 $data = $guardar->process();
 echo json_encode($data);
