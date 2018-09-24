@@ -9,9 +9,9 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }else{
     $path = "/var/www/html/restaurants/";
 }
-echo "A";
+
 require_once($path."admin/class/guardar_class.php");
-echo "B";
+
 $guardar = new Guardar();
 $data = $guardar->process();
 echo json_encode($data);

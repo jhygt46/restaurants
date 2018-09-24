@@ -2,8 +2,9 @@
 session_start();
 
 date_default_timezone_set('America/Santiago');
+echo "A->";
 require_once($path."admin/class/mysql_class.php");
-
+echo "C->";
 class Guardar extends Core{
     
     public $con = null;
