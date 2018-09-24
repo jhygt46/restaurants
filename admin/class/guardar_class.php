@@ -84,8 +84,9 @@ class Guardar extends Core{
         
     }
     private function configurar_catalogo(){
-        /*
+        
         $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
         
         $titulo = $_POST['titulo'];
         $font_family = $_POST['font-family'];
@@ -102,9 +103,9 @@ class Guardar extends Core{
         $info['mensaje'] = "Giro modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "pages/apps/ver_catalogo.php?id_cat=".$id;
+        $info['page'] = "pages/apps/ver_catalogo.php?id_cat=".$id."&nombre=".$nombre;
         return $info;
-        */
+        
     }
     private function crear_giro(){
         
