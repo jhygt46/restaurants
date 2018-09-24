@@ -18,6 +18,12 @@ $sub_titulo = $sub_titulo1;
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $id = $_GET["id"];
+    $that = $fireapp->get_giro_catalogo($id);
+    
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
+    
     
 }
 
@@ -46,8 +52,8 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <input id="nombre" type="hidden" value="<?php echo $titulo; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
-                        <span>Buscar:</span>
-                        <input id="buscar" type="text" />
+                        <span>Titulo:</span>
+                        <input id="titulo" type="text" value="<?php echo $that['titulo']; ?>" />
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>

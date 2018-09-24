@@ -4,17 +4,13 @@ session_start();
 header('Content-type: text/json');
 header('Content-type: application/json');
 
-$path = $_SERVER['DOCUMENT_ROOT'];
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path .= "/";
-    $path_class = $path."easyapps/class/";
-    $path_n = $path."easyapps/";
-    
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
 }else{
-    $path_class = "/var/www/html/restaurants/admin/class/";
+    $path = "/var/www/html/restaurants/";
 }
 
-require_once($path_class."login_class.php");
+require_once($path."admin/class/login_class.php");
 $login = new Login();
 
 if($_POST['accion'] == "login"){

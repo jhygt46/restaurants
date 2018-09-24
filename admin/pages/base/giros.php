@@ -1,8 +1,13 @@
 <?php
 session_start();
 
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
 
-require_once("../../class/core_class.php");
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 $list = $fireapp->get_giros_user();
 

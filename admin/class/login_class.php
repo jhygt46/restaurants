@@ -1,6 +1,7 @@
 <?php
+
 date_default_timezone_set('America/Santiago');
-require_once($path_class."mysql_class.php");
+require_once($path."admin/class/mysql_class.php");
 
 class Login {
     

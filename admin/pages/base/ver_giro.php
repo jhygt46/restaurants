@@ -17,7 +17,7 @@ $id_gir = 0;
 if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0){
     
     $id_gir = $_GET["id_gir"];
-    $apps = $fireapp->get_apps_giro(0);
+    $paso = $fireapp->paso_giro($id_gir);
     
 }
 
@@ -33,7 +33,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
 <hr>
 
 
-<div class="info" onclick="navlink('pages/apps/catalogo_productos.php?id_gir=<?php echo $id_gir; ?>')">
+<div class="info" onclick="navlink('<?php echo $paso; ?>')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>

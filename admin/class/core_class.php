@@ -25,8 +25,19 @@ class Core{
         echo "</pre>";
         */
     }
-    public function test(){
-        print_r($this->con->sql("SELECT * FROM fw_usuarios"));
+    public function is_admin(){
+        if($_SESSION['user']['info']['admin'] == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function is_super_admin(){
+        if($_SESSION['user']['info']['id_user'] == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     public function seguridad_if($arr){
         
@@ -77,6 +88,26 @@ class Core{
                 }
             }
         }
+    }
+    
+    public function paso_giro($id_gir){
+        
+        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
+        $catalogos = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_gir='".$id_gir."'");
+        
+        $url = "pages/apps/catalogo_productos.php?id_gir=".$id_gir;
+        if($giro['resultado'][0]['catalogo'] == 1){
+            if(count($catalogos['resultado']) == 1){
+                $url = "pages/apps/ver_catalogo.php?id_cat=".$catalogos['resultado'][0]['id_cat']."&nombre=".$catalogos['resultado'][0]['nombre'];
+            }
+        }
+        
+        return $url;
+        
+    }
+    public function get_giro_catalogo($id_cat){
+        $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre FROM catalogo_productos t1, giros t2 WHERE t1.id_cat='".$id_cat."' AND t1.id_gir=t2.id_gir AND t1.eliminado='0'");
+        return $giros['resultado'];
     }
     public function get_giros(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_user='".$this->id_user."' AND eliminado='0'");
@@ -198,6 +229,7 @@ class Core{
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
             $info['font']['css'] = $sql['resultado'][0]['font_css'];
             $info['logo'] = $sql['resultado'][0]['logo'];
+            $info['titulo'] = $sql['resultado'][0]['titulo'];
             
         }
 
@@ -402,6 +434,7 @@ class Core{
             if($cat['parent_id'] == $parent_id && !in_array($cat['id_cae'], $in)){
                 
                 $cantidad = 0;
+                $child_display = 'block';
                 for($x=0; $x<count($that['categorias']); $x++){
                     if($cat['id_cae'] == $that['categorias'][$x]['id_cae']){
                         $cantidad = $that['categorias'][$x]['cantidad'];

@@ -32,27 +32,6 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
 </div>
 <hr>
 
-<?php /*
-    for($i=0; $i<count($apps); $i++){
-        
-    $json_app = json_decode($apps[$i]['simple_txt_app']);
-    $json = json_decode($apps[$i]['simple_txt']);
-    
-    $url = ($json->{'url'} !== null) ? $json->{'url'} : $json_app->{'url'} ;
-    $titulo = ($json->{'url'} !== null) ? $json->{'titulo'} : $json_app->{'titulo'} ;
-    $subtitulo = ($json->{'url'} !== null) ? $json->{'subtitulo'} : $json_app->{'subtitulo'} ;
-    
-?>
-<div class="info" onclick="navlink('<?php echo $url."?id_gir=".$id_gir."&id_app=".$apps[$i]['id_app']; ?>')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name"><?php echo $idioma[$titulo]; ?></div>
-        <div class="name2"><?php echo $idioma[$subtitulo]; ?></div>
-        <div class="go_app"></div>
-    </div>
-</div>
-<?php } */ ?>
 <div class="info" onclick="navlink('pages/apps/categorias.php?id=<?php echo $id_cat; ?>')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
@@ -86,6 +65,15 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="close"></div>
         <div class="name">Preguntas</div>
         <div class="name2">Para categorias y Productos</div>
+        <div class="go_app"></div>
+    </div>
+</div>
+<div class="info" onclick="navlink('pages/apps/configurar_catalogo.php?id=<?php echo $id_cat; ?>')">
+    <div class="fc" id="info-0" style="height: 54px">
+        <div class="minimizar m1"></div>
+        <div class="close"></div>
+        <div class="name">Configuracion</div>
+        <div class="name2">Configura tu sitio web</div>
         <div class="go_app"></div>
     </div>
 </div>

@@ -786,6 +786,11 @@ body {
     background-position: -286px -190px;
     cursor: pointer;
 }
+.listUser .user ul .pregicon{
+    background: url('../images/icons-set.png') no-repeat;
+    background-position: -587px -237px;
+    cursor: pointer;
+}
 .basic-grey {
     margin-left: 0px;
     padding: 25px 15px 25px 10px;

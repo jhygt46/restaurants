@@ -1,10 +1,10 @@
 <?php
 
-    //if($fireapp->seguridad_if(array(0))){
+    
     $arrays["nombre"] = "Inicio";
     $arrays["link"] = "pages/base/inicio.php";
     $array[] = $arrays;
-    //}
+    
     if(isset($array)){
         $aux["ico"] = 3;
         $aux["show"] = true;
@@ -15,18 +15,21 @@
         unset($array);
     }
     
-    // ADMIN CIA //
-    //if($fireapp->seguridad_if(array(0))){
+    
+        
     $arrays["nombre"] = "Basica";
     $arrays["link"] = "pages/base/basica.php";
     $array[] = $arrays;
-    $arrays["nombre"] = "Usuarios";
-    $arrays["link"] = "pages/base/usuarios.php?tipo=admin";
-    $array[] = $arrays;
-    //}
 
+    $arrays["nombre"] = "Usuarios";
+    $arrays["link"] = "pages/base/usuarios.php";
+    $array[] = $arrays;
+        
+    
+    
     if(isset($array)){
         $aux["ico"] = 4;
+        $aux["show"] = true;
         $aux["categoria"] = "Configuracion";
         $aux["subcategoria"] = $array;
         $menu[] = $aux;

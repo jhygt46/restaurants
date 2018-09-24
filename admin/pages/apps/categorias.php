@@ -115,7 +115,8 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <li class="nombre"><?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>/<?php echo $parent_id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_cae=<?php echo $id_n; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
-                        <a title="Configurar Giro" class="icn rubroicon" onclick="navlink('pages/apps/configurar_categoria.php?id=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a title="Configurar Categoria" class="icn conficon" onclick="navlink('pages/apps/configurar_categoria.php?id=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a title="Asignar Pregunta" class="icn pregicon" onclick="navlink('pages/apps/asignar_pregunta_cat.php?id=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <?php if(!$childs && !$prods || $childs){ ?><a title="Play Apps" class="icn database" onclick="navlink('pages/apps/categorias.php?id=<?php echo $id; ?>&parent_id=<?php echo $id_n; ?>')"></a><?php }else{ ?><a class="icn sinicono"></a><?php } ?>
                         <?php if(!$childs){ ?><a title="Productos" class="icn prods" onclick="navlink('pages/apps/crear_productos.php?id=<?php echo $id_n; ?>')"></a><?php }else{ ?><a class="icn sinicono"></a><?php } ?>
                     </ul>

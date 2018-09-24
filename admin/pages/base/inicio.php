@@ -1,14 +1,6 @@
 <?php
 session_start();
 
-
-/*
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-*/
-
-
 if($_SESSION['user']['info']['admin'] == 1){
     
     unset($_SESSION['user']['giro']);
