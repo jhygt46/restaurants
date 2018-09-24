@@ -86,7 +86,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     </label>
                     <label>
                         <span>logo:</span>
-                        <input id="logo" type="file" />
+                        <input id="file_image" type="file" />
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
