@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once($path."admin/class/mysql_class.php");
+require_once($path."admin/class/core_class.php");
 
 class Guardar extends Core{
     
