@@ -81,9 +81,18 @@ class Guardar extends Core{
         if($_POST['accion'] == "configurar_catalogo"){
             return $this->configurar_catalogo();
         }
+        if($_POST['accion'] == "refresh"){
+            return $this->refresh();
+        }
         
     }
-    
+    public function refresh(){
+        
+        if($this->id_gir > 0){
+            $this->get_web_js_data($this->id_gir);
+        }
+        
+    }
     public function ingresarimagen(){
 
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");

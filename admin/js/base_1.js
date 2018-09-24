@@ -111,6 +111,7 @@ function size(m){
 function topscroll(){
     $('html, body').animate({ scrollTop: 0 }, 500);
 }
+
 function backurl(){
     
     var history = JSON.parse(window.localStorage.getItem("history"));
@@ -290,17 +291,15 @@ function search(inputval, fc, name){
         }
     });
 }
-function setadmin(id_sis){
+function refresh(){
     
-    var send = {accion: "setadmin", id_sis: id_sis};
+    var send = {accion: "refresh"};
     $.ajax({
         url: "ajax/index.php",
         type: "POST",
         data: send,
         success: function(data){
-            
-            location.reload();
-            
+            alert("ACTUALIZADO");
         }
     });
     return false;
