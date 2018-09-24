@@ -20,6 +20,8 @@ class Guardar extends Core{
     }
     public function process(){
         
+        return $_POST;
+        
         if($_POST['accion'] == "crear_giro"){
             return $this->crear_giro();
         }
