@@ -84,6 +84,10 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                             <?php foreach($css_modals as $value){ $sel = ''; if($value == $that['style_modal']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
                     </label>
+                    <label>
+                        <span>logo:</span>
+                        <input id="logo" type="file" />
+                    </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
                         <a id='button' onclick="form()">Enviar</a>
