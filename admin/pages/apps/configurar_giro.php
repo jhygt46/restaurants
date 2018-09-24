@@ -7,7 +7,7 @@ $fireapp = new Core();
 
 
 /* CONFIG PAGE */
-$titulo = "Configuracion ".$_GET["nombre"];
+
 $sub_titulo1 = "Seleccione";
 $accion = "configurar_catalogo";
 /* CONFIG PAGE */
@@ -19,7 +19,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $id = $_GET["id"];
     $that = $fireapp->get_giro($id);
-
+    $titulo = "Configuracion ".$that["nombre"];
     $css_types = array_diff(scandir('/var/www/html/restaurants/css/types'), array('.', '..'));
     $css_colors = array_diff(scandir('/var/www/html/restaurants/css/colors'), array('.', '..'));
     $css_modals = array_diff(scandir('/var/www/html/restaurants/css/modals'), array('.', '..'));
