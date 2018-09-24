@@ -94,18 +94,14 @@ class Guardar extends Core{
         $css_types = $_POST['css-types'];
         $css_colores = $_POST['css-colores'];
         $css_popup = $_POST['css-popup'];
-        
-        $giros = $this->con->sql("SELECT id_gir FROM catalogo_productos WHERE id_cat='".$id."' AND eliminado='0'");
-        $id_gir = $giros['resultado'][0]['id_gir'];
-        
-        $res = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
+                
+        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
         
         $info['op'] = 1;
-        $info['res'] = $res;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "apps/ver_catalogo.php?id_cat=".$id."&nombre=".$nombre;
+        $info['page'] = "apps/ver_giro.php?id=".$id."&nombre=".$nombre;
         return $info;
         
     }
