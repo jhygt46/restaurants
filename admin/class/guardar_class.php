@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-date_default_timezone_set('America/Santiago');
-echo "B1";
 require_once($path."admin/class/mysql_class.php");
-echo "B2";
+
 class Guardar extends Core{
     
     public $con = null;
@@ -13,7 +11,6 @@ class Guardar extends Core{
     
     public function __construct(){
         
-        echo "C1";
         $this->con = new Conexion();
         $this->id_user = $_SESSION['user']['info']['id_user'];
         $this->id_org = $_SESSION['user']['info']['id_org'];
@@ -22,7 +19,6 @@ class Guardar extends Core{
     }
     public function process(){
         
-        echo "C2";
         if($_POST['accion'] == "crear_giro"){
             return $this->crear_giro();
         }
