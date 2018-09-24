@@ -2,9 +2,8 @@
 session_start();
 
 date_default_timezone_set('America/Santiago');
-echo "A->";
 require_once($path."admin/class/mysql_class.php");
-echo "C->";
+
 class Guardar extends Core{
     
     public $con = null;
@@ -87,7 +86,7 @@ class Guardar extends Core{
         
     }
     private function configurar_catalogo(){
-        
+        /*
         $id = $_POST['id'];
         
         $titulo = $_POST['titulo'];
@@ -107,7 +106,7 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "pages/apps/ver_catalogo.php?id_cat=".$id;
         return $info;
-        
+        */
     }
     private function crear_giro(){
         
