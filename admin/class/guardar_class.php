@@ -89,7 +89,7 @@ class Guardar extends Core{
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         
         $file_formats = array("jpg", "png", "gif");
-        $filepath = "/var/www/html/restaurants/admin/images/logos";
+        $filepath = "/var/www/html/restaurants/images/logos";
 
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
