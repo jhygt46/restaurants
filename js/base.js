@@ -121,12 +121,12 @@ function crear_pagina(){
     var categorias = data.categorias;
     var promociones = data.promociones;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].parent_id == 0){
+        if(categorias[i].parent_id == 0 || categorias[i].ocultar == 1){
             $('.cont_contenido').append(html_crear_categoria(categorias[i]));
         }
     }
     for(var i=0, ilen=promociones.length; i<ilen; i++){
-        if(promociones[i].parent_id == 0){
+        if(promociones[i].parent_id == 0 || promociones[i].ocultar == 1){
             $('.cont_contenido').append(html_crear_promociones(promociones[i]));
         }
     }

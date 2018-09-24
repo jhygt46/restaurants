@@ -73,7 +73,7 @@
 }
 /* PAGINA CONTENIDO */
 .style_page_1 .contenedor .pagina .contenido{
-    min-height: 800px;
+    /*min-height: 800px;*/
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido{
     width: 340px;
