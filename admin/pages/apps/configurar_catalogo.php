@@ -74,14 +74,14 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <span>Css Colores:</span>
                         <select>
                             <option value="">Seleccionar</option>
-                            <?php foreach($css_colors as $value){ $sel = ''; if($value == $that['style_page']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
+                            <?php foreach($css_colors as $value){ $sel = ''; if($value == $that['style_color']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
                     </label>
                     <label>
                         <span>Css Pop-up:</span>
                         <select>
                             <option value="">Seleccionar</option>
-                            <?php foreach($css_modals as $value){ $sel = ''; if($value == $that['style_page']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
+                            <?php foreach($css_modals as $value){ $sel = ''; if($value == $that['style_modal']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
                     </label>
                     <label style='margin-top:20px'>
