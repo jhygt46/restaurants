@@ -11,22 +11,6 @@ if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
     $info = $core->get_data();
 }
 
-/*
-if($_GET['accion'] == "actualizar"){
-    
-    require('../class/core_class.php');
-    require('html/html.php');
-    $core = new Core();
-    $js = $core->get_web_js_data();
-    file_put_contents("js/info.js", "var data=".json_encode($js));
-    file_put_contents("js/html.js", "var html=".json_encode($html));
-    echo "Actualizado! redireccionando";
-    echo "<meta http-equiv='refresh' content='2; url=http://localhost/easyapps/web'>";
-    
-}
-
-
-*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">

@@ -11,8 +11,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path_n = $path."easyapps/";
     
 }else{
-    //$path_class = $path."admin/class/";
-    //$path_n = $path."admin/";
+    $path_class = "/var/www/html/restaurants/admin/class/";
 }
 
 require_once($path_class."login_class.php");
