@@ -79,8 +79,34 @@ class Guardar extends Core{
         if($_POST['accion'] == "eliminar_preguntas"){
             return $this->eliminar_preguntas();
         }
+        if($_POST['accion'] == "configurar_catalogo"){
+            return $this->configurar_catalogo();
+        }
+        
     }
-    
+    private function configurar_catalogo(){
+        
+        $id = $_POST['id'];
+        
+        $titulo = $_POST['titulo'];
+        $font_family = $_POST['font-family'];
+        $font_css = $_POST['font-css'];
+        $css_types = $_POST['css-types'];
+        $css_colores = $_POST['css-colores'];
+        $css_popup = $_POST['css-popup'];
+        
+        $giros = $this->con->sql("SELECT id_gir FROM catalogo_productos WHERE id_cat='".$id."' AND eliminado='0'");
+        $id_gir = $giros['resultado'][0]['id_gir'];
+        
+        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
+        $info['op'] = 1;
+        $info['mensaje'] = "Giro modificado exitosamente";
+        
+        $info['reload'] = 1;
+        $info['page'] = "pages/apps/ver_catalogo.php?id_cat=".$id;
+        return $info;
+        
+    }
     private function crear_giro(){
         
         $id = $_POST['id'];

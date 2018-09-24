@@ -9,7 +9,7 @@ $fireapp = new Core();
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
 $sub_titulo1 = "Seleccione";
-$accion = "configurar_categoria";
+$accion = "configurar_catalogo";
 /* CONFIG PAGE */
 
 
@@ -49,7 +49,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             <form action="" method="post" class="basic-grey">
                 <fieldset>
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="nombre" type="hidden" value="<?php echo $titulo; ?>" />
+                    <input id="nombre" type="hidden" value="<?php echo $_GET["nombre"]; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
                         <span>Titulo:</span>
@@ -57,29 +57,29 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     </label>
                     <label>
                         <span>Google Font Family:</span>
-                        <input id="titulo" type="text" value="<?php echo $that['font_family']; ?>" />
+                        <input id="font-family" type="text" value="<?php echo $that['font_family']; ?>" />
                     </label>
                     <label>
                         <span>Google Font Css:</span>
-                        <input id="titulo" type="text" value="<?php echo $that['font_css']; ?>" />
+                        <input id="font-css" type="text" value="<?php echo $that['font_css']; ?>" />
                     </label>
                     <label>
                         <span>Css Pagina:</span>
-                        <select>
+                        <select id="css-types">
                             <option value="">Seleccionar</option>
                             <?php foreach($css_types as $value){ $sel = ''; if($value == $that['style_page']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
                     </label>
                     <label>
                         <span>Css Colores:</span>
-                        <select>
+                        <select id="css-colores">
                             <option value="">Seleccionar</option>
                             <?php foreach($css_colors as $value){ $sel = ''; if($value == $that['style_color']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
                     </label>
                     <label>
                         <span>Css Pop-up:</span>
-                        <select>
+                        <select id="css-popup">
                             <option value="">Seleccionar</option>
                             <?php foreach($css_modals as $value){ $sel = ''; if($value == $that['style_modal']){ $sel='selected'; } echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>'; } ?>
                         </select>
