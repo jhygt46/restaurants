@@ -26,8 +26,8 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
 <div class="title">
     <h1><?php echo $titulo; ?></h1>
     <ul class="clearfix">
-        <li class="back" onclick="backurl()"></li>
         <li class="reload" onclick="refresh(<?php echo $id_gir; ?>)"></li>
+        <li class="back" onclick="backurl()"></li>
     </ul>
 </div>
 <hr>
