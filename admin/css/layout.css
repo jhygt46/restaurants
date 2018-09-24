@@ -437,7 +437,7 @@ body {
 }
 .contenido .cont .contenedor .title ul li.back{
     background: url('../images/icons-set.png') no-repeat;
-    background-position: -586px -329px;
+    background-position: -594px -334px;
     cursor: pointer;
 }
 .contenido .cont .contenedor .title ul li.reload{
@@ -447,7 +447,7 @@ body {
 }
 .contenido .cont .contenedor .title ul li.help{
     background: url('../images/icons-set.png') no-repeat;
-    background-position: -593px -334px;
+    background-position: -586px -329px;
     cursor: pointer;
 }
 .contenido .cont .contenedor .install{
