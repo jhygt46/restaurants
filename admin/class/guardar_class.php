@@ -89,7 +89,7 @@ class Guardar extends Core{
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         
         $file_formats = array("jpg", "png", "gif");
-        $filepath = "/var/www/html/restaurants/images/logos";
+        $filepath = "/var/www/html/restaurants/images/logos/";
 
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
@@ -100,7 +100,6 @@ class Guardar extends Core{
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename =  $giro['resultado'][0]['dominio']. "." . $extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
-                    $info['imagename'] = $filepath.$imagename;
                     if (move_uploaded_file($tmp, $filepath . $imagename)){
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
