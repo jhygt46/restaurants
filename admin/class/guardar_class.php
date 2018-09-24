@@ -6,10 +6,14 @@ require_once($path."admin/class/mysql_class.php");
 class Guardar extends Core{
     
     public $con = null;
+    public $id_user = null;
+    public $id_gir = null;
     
     public function __construct(){
         
         $this->con = new Conexion();
+        $this->id_user = $_SESSION['user']['info']['id_user'];
+        $this->id_gir = $_SESSION['user']['giro']['id_gir'];
         
     }
     public function process(){
@@ -80,9 +84,8 @@ class Guardar extends Core{
         
     }
     private function configurar_catalogo(){
-        
+        /*
         $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
         
         $titulo = $_POST['titulo'];
         $font_family = $_POST['font-family'];
@@ -99,9 +102,9 @@ class Guardar extends Core{
         $info['mensaje'] = "Giro modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "apps/ver_catalogo.php?id_cat=".$id."&nombre=".$nombre;
+        $info['page'] = "pages/apps/ver_catalogo.php?id_cat=".$id;
         return $info;
-        
+        */
     }
     private function crear_giro(){
         
@@ -248,7 +251,7 @@ class Guardar extends Core{
     private function eliminar_usuario(){
                 
         $id = $_POST['id'];
-        $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."' AND id_org='".$this->id_org."'");
+        $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
         
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
