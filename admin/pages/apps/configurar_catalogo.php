@@ -19,9 +19,10 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $id = $_GET["id"];
     $that = $fireapp->get_giro_catalogo($id);
-    
+
+    $files = array_diff(scandir('/var/www/html/restaurants/css/types'), array('.', '..'));
     echo "<pre>";
-    print_r($that);
+    print_r($files);
     echo "</pre>";
     
     
