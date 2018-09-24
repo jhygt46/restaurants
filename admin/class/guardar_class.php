@@ -98,8 +98,10 @@ class Guardar extends Core{
         $giros = $this->con->sql("SELECT id_gir FROM catalogo_productos WHERE id_cat='".$id."' AND eliminado='0'");
         $id_gir = $giros['resultado'][0]['id_gir'];
         
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
+        $res = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id_gir."'");
+        
         $info['op'] = 1;
+        $info['res'] = $res;
         $info['mensaje'] = "Giro modificado exitosamente";
         
         $info['reload'] = 1;
