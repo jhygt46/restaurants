@@ -440,6 +440,11 @@ body {
     background-position: -586px -329px;
     cursor: pointer;
 }
+.contenido .cont .contenedor .title ul li.reload{
+    background: url('../images/icons-set.png') no-repeat;
+    background-position: -301px -671px;
+    cursor: pointer;
+}
 .contenido .cont .contenedor .title ul li.help{
     background: url('../images/icons-set.png') no-repeat;
     background-position: -586px -329px;
