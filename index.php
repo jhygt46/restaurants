@@ -24,10 +24,10 @@ if(isset($_GET['param_dom'])){
         <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
         <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
-        <script src="/js/data/<?php echo $info["code"]; ?>.js" type="text/javascript"></script>
-        <script src="/js/html/<?php echo $info["code"]; ?>.js" type="text/javascript"></script>
-        <script src="/js/html_func.js" type="text/javascript"></script>
-        <script src="/js/base.js" type="text/javascript"></script>
+        <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_html_func"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_base"]; ?>" type="text/javascript"></script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;
