@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //crear_pagina();
+    crear_pagina();
     var carro = JSON.parse(localStorage.getItem("carro")) || [];
     $('.cantcart_num').html(carro.length);
 });

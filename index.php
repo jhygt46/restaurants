@@ -19,7 +19,7 @@ if(isset($_GET['param_dom'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        <link rel="stylesheet" href="/css/style.css" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_style"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
