@@ -1,10 +1,14 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 /* CONFIG PAGE */
 $titulo = "Categorias";
@@ -20,25 +24,22 @@ $page_mod = "pages/apps/categorias.php";
 /* CONFIG PAGE */
 
 
-$id = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
+
+$catalogo = $fireapp->get_catalogo();
+$titulo = $titulo." de ".$catalogo['nombre'];
+$list = $fireapp->get_categorias();
     
-    $id = $_GET["id"];
-    $catalogo = $fireapp->get_catalogo($id);
-    $titulo = $titulo." de ".$catalogo['nombre'];
-    $list = $fireapp->get_categorias($id);
-    
-    if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
-        
-        $id_cae = $_GET["id_cae"];
-        $that = $fireapp->get_categoria($id, $id_cae);
-        $sub_titulo = $sub_titulo2;
-        
-    }
-    
+if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
+
+    $id_cae = $_GET["id_cae"];
+    $that = $fireapp->get_categoria($id, $id_cae);
+    $sub_titulo = $sub_titulo2;
+
 }
+    
+
 
 
 

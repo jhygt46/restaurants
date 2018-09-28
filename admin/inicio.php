@@ -43,7 +43,6 @@ if(isset($_SESSION['user']['info']['id_user'])){
                         
                         <?php
                         
-                            $include = true;
                             include("pages/base/inicio.php");
                         
                         ?>

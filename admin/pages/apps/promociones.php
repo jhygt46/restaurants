@@ -1,10 +1,14 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 /* CONFIG PAGE */
 $titulo = "Promociones";
@@ -20,29 +24,27 @@ $page_mod = "pages/apps/promociones.php";
 /* CONFIG PAGE */
 
 
-$id = 0;
+
 $sub_titulo = $sub_titulo1;
 $parent_id = 0;
 if(isset($_GET["parent_id"])){
     $parent_id = $_GET["parent_id"];
 }
+   
 
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    $id = $_GET["id"];
-    $catalogo = $fireapp->get_catalogo($id);
-    $titulo = $titulo." de ".$catalogo['nombre'];
-    $list = $fireapp->get_promociones($id);
-    
-    if(isset($_GET["id_prm"]) && is_numeric($_GET["id_prm"]) && $_GET["id_prm"] != 0){
-        
-        $id_prm = $_GET["id_prm"];
-        $that = $fireapp->get_promocion($id, $id_prm);
-        $sub_titulo = $sub_titulo2;
-        
-    }
-    
+$catalogo = $fireapp->get_catalogo();
+$titulo = $titulo." de ".$catalogo['nombre'];
+$list = $fireapp->get_promociones();
+
+if(isset($_GET["id_prm"]) && is_numeric($_GET["id_prm"]) && $_GET["id_prm"] != 0){
+
+    $id_prm = $_GET["id_prm"];
+    $that = $fireapp->get_promocion($id, $id_prm);
+    $sub_titulo = $sub_titulo2;
+
 }
+    
+
 
 
 
@@ -119,7 +121,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <li class="nombre"><?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>/<?php echo $parent_id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_prm=<?php echo $id_n; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
-                        <a title="Configurar Giro" class="icn rubroicon" onclick="navlink('pages/apps/configurar_categoria.php?id=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <?php if(!$childs && !$prods || $childs){ ?><a title="Play Apps" class="icn database" onclick="navlink('pages/apps/promociones.php?id=<?php echo $id; ?>&parent_id=<?php echo $id_n; ?>')"></a><?php }else{ ?><a class="icn sinicono"></a><?php } ?>
                         <?php if(!$childs){ ?><a title="Productos" class="icn prods" onclick="navlink('pages/apps/crear_promocion.php?id_prm=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a><?php }else{ ?><a class="icn sinicono"></a><?php } ?>
                     </ul>

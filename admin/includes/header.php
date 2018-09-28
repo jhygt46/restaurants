@@ -11,6 +11,7 @@
     $header['layout']['js'][2] = "js/form_1.js";
     $header['layout']['js'][3] = "js/sweetalert.min.js";
     $header['layout']['js'][4] = "js/jquery-ui-timepicker-addon.js";
+    $header['layout']['js'][5] = "js/maps.js";
     $header['layout']['css'][0] = "css/layout.css";
     $header['layout']['css'][1] = "css/sweetalert.css";
     $header['layout']['css'][2] = "css/jquery-ui.min.css";

@@ -1,23 +1,26 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 /* CONFIG PAGE */
-$titulo = $_GET["nombre"];
 $titulo_list = "Aplicaciones";
 /* CONFIG PAGE */
 
 $id_cat = 0;
-$id_app = (isset($_GET["id_app"]))? $_GET["id_app"] : 0 ;
 if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0){
     
     $id_cat = $_GET["id_cat"];
-    $fireapp->set_catalogo($id_cat);
-    $apps = $fireapp->get_apps_giro($id_app);
+    $fireapp->is_catalogo($id_cat);
+    $info = $fireapp->get_catalogo();
+    $titulo = $info['nombre'];
     
 }
 
@@ -32,7 +35,7 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
 </div>
 <hr>
 
-<div class="info" onclick="navlink('pages/apps/categorias.php?id=<?php echo $id_cat; ?>')">
+<div class="info" onclick="navlink('pages/apps/categorias.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>
@@ -41,7 +44,7 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/promociones.php?id=<?php echo $id_cat; ?>')">
+<div class="info" onclick="navlink('pages/apps/promociones.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>
@@ -50,7 +53,7 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/ingredientes.php?id=<?php echo $id_cat; ?>')">
+<div class="info" onclick="navlink('pages/apps/ingredientes.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>
@@ -59,7 +62,7 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/preguntas.php?id=<?php echo $id_cat; ?>')">
+<div class="info" onclick="navlink('pages/apps/preguntas.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>

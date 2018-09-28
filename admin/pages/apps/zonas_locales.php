@@ -1,7 +1,5 @@
 <?php
 session_start();
-unset($_SESSION['user']['id_gir']);
-unset($_SESSION['user']['id_cat']);
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
@@ -11,36 +9,43 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-$list = $fireapp->get_giros_user();
 
 /* CONFIG PAGE */
-$titulo = "Empresa";
-$titulo_list = "Mis Empresas";
-$sub_titulo1 = "Ingresar Empresa";
-$sub_titulo2 = "Modificar Empresa";
-$accion = "crear_giro";
+$titulo = "Tramos";
+$titulo_list = "Mis Tramos";
+$sub_titulo1 = "Ingresar Tramo";
+$sub_titulo2 = "Modificar Tramo";
+$accion = "crear_locales_tramos";
 
-$eliminaraccion = "eliminar_giro";
-$id_list = "id_gir";
-$eliminarobjeto = "Empresa";
-$page_mod = "pages/base/giros.php";
+$eliminaraccion = "eliminar_tramos";
+$id_list = "id_lot";
+$eliminarobjeto = "Tramo";
+$page_mod = "pages/apps/zonas_locales.php";
 /* CONFIG PAGE */
 
-$id = 0;
+$id_loc = 0;
 $sub_titulo = $sub_titulo1;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    $sub_titulo = $sub_titulo2;
-    $that = $fireapp->get_giro($_GET["id"]);
-    $id = $_GET["id"];
+if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
+    $id_loc = $_GET["id_loc"];
+    $list = $fireapp->get_local_tramos($id_loc);
+    $id_lot = 0;
     
+    if(isset($_GET["id_lot"]) && is_numeric($_GET["id_lot"]) && $_GET["id_lot"] != 0){
+        
+        $sub_titulo = $sub_titulo2;
+        $id_lot = $_GET["id_lot"];
+        $that = $fireapp->get_local_tramo($id_lot);
+        
+    }
+
 }
 
-
-
 ?>
-
+<script>
+    iniciar_mapa();
+    renderMarkers_mod(<?php echo $that['poligono']; ?>);
+</script>
 <div class="title">
     <h1><?php echo $titulo; ?></h1>
     <ul class="clearfix">
@@ -58,16 +63,21 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
             <form action="" method="post" class="basic-grey">
                 <fieldset>
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
+                    <textarea id="posiciones" style="display:none"><?php echo $that['poligono']; ?></textarea>
+                    <input id="id_lot" type="hidden" value="<?php echo $id_lot; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
                         <span>Nombre:</span>
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
-                        <span>Dominio:</span>
-                        <input id="dominio" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
+                        <span>Precio:</span>
+                        <input id="precio" type="text" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
                     </label>
+                    <div style="margin-left: 16%; margin-right: 9%; margin-top: 10px; width: 75%">
+                        <div id="map" style="height: 460px; background: #f00"></div>
+                    </div>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
                         <a id='button' onclick="form()">Enviar</a>
@@ -91,18 +101,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 
                 <?php 
                 for($i=0; $i<count($list); $i++){
-                    $id = $list[$i][$id_list];
+                    $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
-                    $dominio = $list[$i]['dominio'];
                 ?>
                 
                 <li class="user">
                     <ul class="clearfix">
                         <li class="nombre"><?php echo $nombre; ?></li>
-                        <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', <?php echo $id; ?>, '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
-                        <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>')"></a>
-                        <a title="Website" class="icn webicon" href="http://104.154.110.217/view/<?php echo $dominio; ?>" target="_blank"></a>
-                        <a title="Play Apps" class="icn playicon" onclick="navlink('pages/base/ver_giro.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
+                        <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id_lot=<?php echo $id_n; ?>&id_loc=<?php echo $id_loc; ?>')"></a>
                     </ul>
                 </li>
                 

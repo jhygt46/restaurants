@@ -5,6 +5,10 @@
     $arrays["link"] = "pages/base/inicio.php";
     $array[] = $arrays;
     
+    $arrays["nombre"] = "Giros";
+    $arrays["link"] = "pages/base/giros.php";
+    $array[] = $arrays;
+    
     if(isset($array)){
         $aux["ico"] = 3;
         $aux["show"] = true;
@@ -14,18 +18,10 @@
         unset($aux);
         unset($array);
     }
-    
-    
-        
-    $arrays["nombre"] = "Basica";
+      
+    $arrays["nombre"] = "Configuracion";
     $arrays["link"] = "pages/base/basica.php";
-    $array[] = $arrays;
-
-    $arrays["nombre"] = "Usuarios";
-    $arrays["link"] = "pages/base/usuarios.php";
-    $array[] = $arrays;
-        
-    
+    $array[] = $arrays;    
     
     if(isset($array)){
         $aux["ico"] = 4;

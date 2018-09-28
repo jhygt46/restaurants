@@ -45,17 +45,6 @@ class Login {
                         $ses['info']['id_user'] = $user['resultado'][0]['id_user'];
                         $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                         $ses['info']['admin'] = $user['resultado'][0]['admin'];
-                        
-                        if($user['resultado'][0]['admin'] == 0){
-                            $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user='".$user['resultado'][0]['id_user']."' AND t1.id_gir=t2.id_gir");
-                            $ses['giro'] = $giros['resultado'][0];
-                        }
-                        if($user['resultado'][0]['admin'] == 1){
-                            $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre FROM fw_usuarios_giros t1, giros t2 WHERE t1.id_user='".$user['resultado'][0]['id_user']."' AND t1.id_gir=t2.id_gir");
-                            $ses['giros'] = $giros['resultado'];
-                            $ses['giro']['id_gir'] = 0;
-                        }
-                        
                         $_SESSION['user'] = $ses;
                         
                         $info['op'] = 1;

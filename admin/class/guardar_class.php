@@ -7,14 +7,17 @@ class Guardar extends Core{
     
     public $con = null;
     public $id_user = null;
+    public $admin = null;
     public $id_gir = null;
+    public $id_cat = null;
     
     public function __construct(){
         
         $this->con = new Conexion();
         $this->id_user = $_SESSION['user']['info']['id_user'];
-        $this->id_gir = $_SESSION['user']['giro']['id_gir'];
-        
+        $this->admin = $_SESSION['user']['info']['admin'];
+        $this->id_gir = $_SESSION['user']['id_gir'];
+        $this->id_cat = $_SESSION['user']['id_cat'];
     }
     public function process(){
         
@@ -32,6 +35,9 @@ class Guardar extends Core{
         }
         if($_POST['accion'] == "crear_locales"){
             return $this->crear_locales();
+        }
+        if($_POST['accion'] == "crear_locales_tramos"){
+            return $this->crear_locales_tramos();
         }
         if($_POST['accion'] == "eliminar_locales"){
             return $this->eliminar_locales();
@@ -136,9 +142,6 @@ class Guardar extends Core{
     
     private function configurar_catalogo(){
         
-        $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        
         $titulo = $_POST['titulo'];
         $font_family = $_POST['font-family'];
         $font_css = $_POST['font-css'];
@@ -148,13 +151,13 @@ class Guardar extends Core{
         
         $info['image'] = $this->ingresarimagen();
         
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$id."'");
+        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$this->id_gir."'");
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "base/ver_giro.php?id_gir=".$id."&nombre=".$nombre;
+        $info['page'] = "base/ver_giro.php?id_gir=".$this->id_gir;
         return $info;
         
     }
@@ -168,7 +171,12 @@ class Guardar extends Core{
             $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio) VALUES ('".$nombre."', now(), '".$dominio."')");
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
-            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+            if($this->admin == 0){
+                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+            }
+            if($this->admin == 1){
+                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+            }
         }
         if($id > 0){
             $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
@@ -184,7 +192,7 @@ class Guardar extends Core{
     private function eliminar_giro(){
                 
         $id = $_POST['id'];
-        $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$id."' AND id_user='".$this->id_user."'");
+        $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$id."'");
         
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
@@ -197,23 +205,22 @@ class Guardar extends Core{
     }
     private function crear_catalogo(){
         
-        $id = $_POST['id'];
-        $id_cat = $_POST['id_cat'];
+        $id_cat = $_POST['id'];
         $nombre = $_POST['nombre'];
         
         if($id_cat == 0){
-            $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$id."')");
+            $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Catalogo creado exitosamente";
         }
         if($id_cat > 0){
-            $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$id."'");
+            $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Catalogo modificado exitosamente";
         }
         
         $info['reload'] = 1;
-        $info['page'] = "apps/catalogo_productos.php?id=".$id;
+        $info['page'] = "apps/catalogo_productos.php";
         return $info;
         
     }
@@ -233,25 +240,49 @@ class Guardar extends Core{
     }
     private function crear_locales(){
         
-        $id = $_POST['id'];
         $id_loc = $_POST['id_loc'];
         $id_cat = $_POST['id_cat'];
         $nombre = $_POST['nombre'];
         $direccion = $_POST['direccion'];
+        $tipo = $_POST['tipo_despacho'];
         
         if($id_loc == 0){
-            $this->con->sql("INSERT INTO locales (nombre, direccion, fecha_creado, id_gir, id_cat) VALUES ('".$nombre."', '".$direccion."', now(), '".$id."', '".$id_cat."')");
+            $this->con->sql("INSERT INTO locales (nombre, direccion, fecha_creado, id_gir, id_cat, tipo) VALUES ('".$nombre."', '".$direccion."', now(), '".$this->id_gir."', '".$id_cat."', '".$tipo."')");
             $info['op'] = 1;
             $info['mensaje'] = "Local creado exitosamente";
         }
         if($id_loc > 0){
-            $this->con->sql("UPDATE locales SET nombre='".$nombre."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$id."'");
+            $this->con->sql("UPDATE locales SET nombre='".$nombre."', direccion='".$direccion."', tipo='".$tipo."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Local modificado exitosamente";
         }
         
         $info['reload'] = 1;
-        $info['page'] = "apps/locales.php?id=".$id;
+        $info['page'] = "apps/locales.php";
+        return $info;
+        
+    }
+    private function crear_locales_tramos(){
+        
+        $id_lot = $_POST['id_lot'];
+        $id_loc = $_POST['id_loc'];
+        $nombre = $_POST['nombre'];
+        $precio = $_POST['precio'];
+        $pol = $_POST['posiciones'];
+        
+        if($id_lot == 0){
+            $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."')");
+            $info['op'] = 1;
+            $info['mensaje'] = "Tramo creado exitosamente";
+        }
+        if($id_lot > 0){
+            $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
+            $info['op'] = 1;
+            $info['mensaje'] = "Tramo modificado exitosamente";
+        }
+        
+        $info['reload'] = 1;
+        $info['page'] = "apps/zonas_locales.php?id_loc=".$id_loc;
         return $info;
         
     }
@@ -274,20 +305,12 @@ class Guardar extends Core{
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
-        $id_gir = $_POST['id_gir'];
-        $admin = 0;
-        
-        if($this->id_user == 1){
-            $admin = 1;
-        }
         
         if($id == 0){
-            $aux = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, fecha_creado, admin) VALUES ('".$nombre."', '".$correo."', now(), '".$admin."')");
+            $aux = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo) VALUES ('".$nombre."', now(), '".$correo."')");
             $info['op'] = 1;
             $info['mensaje'] = "Usuario creado exitosamente";
-            if($admin == 0 || ($admin == 1 && $this->id_gir !== null)){
-                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$aux['insert_id']."', '".$this->id_gir."')");
-            }
+            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$aux['insert_id']."', '".$this->id_gir."')");
         }
         if($id > 0){
             $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."' WHERE id_user='".$id."'");
@@ -336,24 +359,23 @@ class Guardar extends Core{
     }
     private function crear_categoria(){
 
-        $id = $_POST['id'];
         $id_cae = $_POST['id_cae'];
         $nombre = $_POST['nombre'];
         $parent_id = $_POST['parent_id'];
 
         if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$id."')");
+            $this->con->sql("INSERT INTO categorias (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }
         if($id_cae > 0){
-            $this->con->sql("UPDATE categorias SET nombre='".$nombre."' WHERE id_cae='".$id_cae."'");
+            $this->con->sql("UPDATE categorias SET nombre='".$nombre."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria modificada exitosamente";
         }
                 
         $info['reload'] = 1;
-        $info['page'] = "apps/categorias.php?id=".$id."&parent_id=".$parent_id;
+        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
@@ -410,18 +432,17 @@ class Guardar extends Core{
     }
     private function crear_promociones(){
 
-        $id = $_POST['id'];
         $id_prm = $_POST['id_prm'];
         $nombre = $_POST['nombre'];
         $parent_id = $_POST['parent_id'];
 
         if($id_prm == 0){
-            $this->con->sql("INSERT INTO promociones (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$id."')");
+            $this->con->sql("INSERT INTO promociones (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Promocion creada exitosamente";
         }
         if($id_prm > 0){
-            $this->con->sql("UPDATE promociones SET nombre='".$nombre."' WHERE id_prm='".$id_prm."'");
+            $this->con->sql("UPDATE promociones SET nombre='".$nombre."' WHERE id_prm='".$id_prm."' AND id_cat='".$this->id_cat."'");
             $info['op'] = 1;
             $info['mensaje'] = "Promocion modificada exitosamente";
         }
@@ -483,19 +504,42 @@ class Guardar extends Core{
 
         $id_pro = $_POST['id_pro'];
         $id_cae = $_POST['id'];
+        $tipo = $_POST['tipo'];
+        
+        $numero = $_POST['numero'];
         $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+        
+        
+        if($tipo == 0){
+            if($id_pro == 0){
+                $sql = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, id_gir) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', '".$this->id_gir."')");
+                $id_pro = $sql['insert_id'];
+                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$id_pro."')");
+            }
+        }
+        if($tipo == 1){
+            $all_prods = $this->get_productos();
+            for($i=0; $i<count($all_prods); $i++){
+                $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
+                if($pro == 1){
+                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
+                }
+            }
+        }
+        if($tipo == 2){
+            
+        }
+        
+        /*
         $this->get_inputs($id_cae);
         $inputs = $this->show_inputs();
         
-        if($id_pro == 0){
-            $sql = $this->con->sql("INSERT INTO productos (id_pro) VALUES (NULL)");
-            $id_pro = $sql['insert_id'];
-            $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$id_pro."')");
-        }
+        
         for($i=0; $i<count($inputs); $i++){
             $this->con->sql("UPDATE productos SET ".$inputs[$i]['campo']."='".$_POST[$inputs[$i]['campo']]."' WHERE id_pro='".$id_pro."'");
         }
-        
+        */
         $info['op'] = 1;
         $info['mensaje'] = "Producto modificado exitosamente";
         $info['reload'] = 1;

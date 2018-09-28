@@ -1,17 +1,14 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-$fireapp = new Core();
-
-if($_GET["tipo"] == "admin"){
-    $list = $fireapp->get_usuarios('admin');
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
 }else{
-    $fireapp->is_giro($_GET["id_gir"]);
-    $list = $fireapp->get_usuarios('giro');
+    $path = "/var/www/html/restaurants/";
 }
 
-
+require_once($path."admin/class/core_class.php");
+$fireapp = new Core();
 
 
 /* CONFIG PAGE */
@@ -30,12 +27,14 @@ $page_perfil = "pages/base/usuario_perfiles.php";
 
 $id = 0;
 $sub_titulo = $sub_titulo1;
-$id_gir = (isset($_GET["id_gir"]))? $_GET["id_gir"] : 0 ;
+$list = $fireapp->get_usuarios();
+
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
+    $id = $_GET['id'];
     $sub_titulo = $sub_titulo2;
-    $that = $fireapp->get_usuario($_GET["id"]);
-    $id = $_GET["id"];
+    $that = $fireapp->get_usuario();
+    
 
 }
 ?>
@@ -58,7 +57,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             <form action="" method="post" class="basic-grey">
                 <fieldset>
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="id_gir" type="hidden" value="<?php echo $id_gir; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
                         <span>Nombre:</span>

@@ -7,38 +7,20 @@ class Core{
     
     public $con = null;
     public $id_user = null;
-    public $id_org = null;
-    public $require = null;
-    public $aux = null;
+    public $admin = null;
     public $id_gir = null;
+    public $id_cat = null;
+    public $require = [];
 
     public function __construct(){
         $this->con = new Conexion();
         $this->id_user = $_SESSION['user']['info']['id_user'];
-        $this->id_gir = $_SESSION['user']['giro']['id_gir'];
+        $this->admin = $_SESSION['user']['info']['admin'];
+        $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
-        $this->require = [];
-        $this->aux = "";
-        /*
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
-        */
+        //echo $_SERVER['PHP_SELF'];
     }
-    public function is_admin(){
-        if($_SESSION['user']['info']['admin'] == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public function is_super_admin(){
-        if($_SESSION['user']['info']['id_user'] == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
     public function seguridad_if($arr){
         
         for($i=0; $i<count($arr); $i++){
@@ -75,27 +57,56 @@ class Core{
         $_SESSION['user']['id_cat'] = $id_cat;
     }
     public function is_giro($id_gir){
-        if($_SESSION['user']['info']['admin'] == 0){
-            if($_SESSION['user']['giro']['id_gir'] != $id_gir){
-                exit;
+                
+        if($this->admin == 0){
+            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
+            if($count['count'] == 1){
+                $this->id_gir = $id_gir;
+                $_SESSION['user']['id_gir'] = $id_gir;
+            }else{
+                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
             }
         }
-        if($_SESSION['user']['info']['admin'] == 1){
-            for($i=0; $i<count($_SESSION['user']['giros']); $i++){
-                if($_SESSION['user']['giros'][$i]['id_gir'] == $id_gir){
-                    $_SESSION['user']['giro']['id_gir'] = $id_gir;
-                    $this->id_gir = $id_gir;
-                }
+        if($this->admin == 1){
+            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
+            if($count['count'] == 1){
+                $this->id_gir = $id_gir;
+                $_SESSION['user']['id_gir'] = $id_gir;
+            }else{
+                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
             }
         }
+        
+    }
+    public function is_catalogo($id_cat){
+                
+        if($this->admin == 0){
+            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros t1, catalogo_productos t2 WHERE t2.id_cat='".$id_cat."' AND t2.id_gir=t1.id_gir AND t1.id_user='".$this->id_user."'");
+            if($count['count'] == 1){
+                $this->id_cat = $id_cat;
+                $_SESSION['user']['id_cat'] = $id_cat;
+            }else{
+                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+            }
+        }
+        if($this->admin == 1){
+            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2  WHERE t2.id_cat='".$id_cat."' AND t2.id_gir=t1.id_gir AND t1.id_user='".$this->id_user."'");
+            if($count['count'] == 1){
+                $this->id_cat = $id_cat;
+                $_SESSION['user']['id_cat'] = $id_cat;
+            }else{
+                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+            }
+        }
+        
     }
     
-    public function paso_giro($id_gir){
+    public function paso_giro(){
         
-        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
-        $catalogos = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_gir='".$id_gir."'");
-        
-        $url = "pages/apps/catalogo_productos.php?id_gir=".$id_gir;
+        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+        $catalogos = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+
+        $url = "pages/apps/catalogo_productos.php";
         if($giro['resultado'][0]['catalogo'] == 1){
             if(count($catalogos['resultado']) == 1){
                 $url = "pages/apps/ver_catalogo.php?id_cat=".$catalogos['resultado'][0]['id_cat']."&nombre=".$catalogos['resultado'][0]['nombre'];
@@ -105,16 +116,25 @@ class Core{
         return $url;
         
     }
+    public function get_css(){
+        $css = $this->con->sql("SELECT * FROM css WHERE id_gir='".$this->id_gir."' OR id_gir='0'");
+        return $css['resultado'];
+    }
     public function get_giros(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_user='".$this->id_user."' AND eliminado='0'");
         return $giros['resultado'];
     }
     public function get_giros_user(){
-        $giros = $this->con->sql("SELECT * FROM fw_usuarios_giros t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir");
+        if($this->admin == 0){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
+        if($this->admin == 1){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
         return $giros['resultado'];
     }
-    public function get_giro($id){
-        $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id."' AND eliminado='0'");
+    public function get_giro(){
+        $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $giros['resultado'][0];
+    }
+    public function get_ses_giro(){
+        $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
     public function get_palabras_giro($id_gir){
@@ -129,13 +149,8 @@ class Core{
         $sql = $this->con->sql("SELECT DISTINCT t3.id_app, t3.nombre, t2.simple_txt, t2.parent_id_app, t3.simple_txt as simple_txt_app FROM palabra_giros t1, palabra_posibles_apps t2, apps t3 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_pal=t2.id_pal AND t2.id_app=t3.id_app AND t2.parent_id_app=".$parent_id);
         return $sql['resultado'];
     }
-    public function get_usuarios($tipo){
-        if($tipo == "admin"){
-            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE admin='1' AND eliminado='0'");
-        }
-        if($tipo == "giro"){
-            $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros_clientes t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-        }
+    public function get_usuarios(){
+        $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
         return $usuarios['resultado'];
     }
     public function get_usuario($id){
@@ -146,20 +161,28 @@ class Core{
         $giros = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $giros['resultado'];
     }
-    public function get_catalogo($id_cat){
-        $giros = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_cat='".$id_cat."' AND eliminado='0'");
+    public function get_catalogo(){
+        $giros = $this->con->sql("SELECT * FROM catalogo_productos WHERE id_cat='".$this->id_cat."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
-    public function get_locales($id_gir){
-        $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$id_gir."' AND eliminado='0'");
+    public function get_locales(){
+        $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $giros['resultado'];
     }
-    public function get_local($id_gir, $id_loc){
-        $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$id_gir."' AND id_loc='".$id_loc."' AND eliminado='0'");
+    public function get_local($id_loc){
+        $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$this->id_gir."' AND id_loc='".$id_loc."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
-    public function get_categorias($id_cat){
-        $cats = $this->con->sql("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat='".$id_cat."' AND t1.eliminado='0'");
+    public function get_local_tramos($id_loc){
+        $loc = $this->con->sql("SELECT * FROM locales_tramos WHERE id_loc='".$id_loc."' AND eliminado='0'");
+        return $loc['resultado'];
+    }
+    public function get_local_tramo($id_lot){
+        $lot = $this->con->sql("SELECT * FROM locales_tramos WHERE id_lot='".$id_lot."' AND eliminado='0'");
+        return $lot['resultado'][0];
+    }
+    public function get_categorias(){
+        $cats = $this->con->sql("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0'");
         return $this->process_categorias($cats['resultado'], 'id_cae');
     }
     public function get_ingredientes($id_cat){
@@ -190,8 +213,8 @@ class Core{
         $cats = $this->con->sql("SELECT nombre FROM categorias WHERE id_cae='".$id_cae."' AND eliminado='0'");
         return $cats['resultado'][0];
     }
-    public function get_promociones($id_cat){
-        $promos = $this->con->sql("SELECT DISTINCT t1.id_prm, t1.nombre, t1.parent_id, t2.id_pro FROM promociones t1 LEFT JOIN promocion_productos t2 ON t1.id_prm=t2.id_prm WHERE t1.id_cat='".$id_cat."' AND t1.eliminado='0'");
+    public function get_promociones(){
+        $promos = $this->con->sql("SELECT DISTINCT t1.id_prm, t1.nombre, t1.parent_id, t2.id_pro FROM promociones t1 LEFT JOIN promocion_productos t2 ON t1.id_prm=t2.id_prm WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0'");
         return $this->process_categorias($promos['resultado'], 'id_prm');
     }
     public function get_promocion($id_prm){
@@ -201,8 +224,12 @@ class Core{
         $aux['productos'] = $prods['resultado'];
         return $aux;
     }
-    public function get_productos($id_cae){
-        $productos = $this->con->sql("SELECT * FROM productos t1, cat_pros t2 WHERE t2.id_cae='".$id_cae."' AND t2.id_pro=t1.id_pro");
+    public function get_productos_categoria($id_cae){
+        $productos = $this->con->sql("SELECT * FROM productos t1, cat_pros t2 WHERE t2.id_cae='".$id_cae."' AND t2.id_pro=t1.id_pro AND t1.eliminado='0'");
+        return $productos['resultado'];
+    }
+    public function get_productos(){
+        $productos = $this->con->sql("SELECT * FROM productos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $productos['resultado'];
     }
     public function get_producto($id_pro){
@@ -214,19 +241,28 @@ class Core{
         
         $info['op'] = 0;
         $dominio = ($dom !== null) ? $dom : $_SERVER["HTTP_HOST"];
+        $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
         if(count($sql['resultado']) == 1){
-            
-            $info['op'] = 1;
-            $info['css_style'] = "/css/types/".$sql['resultado'][0]['style_page'];
-            $info['css_color'] = "/css/colors/".$sql['resultado'][0]['style_color'];
-            $info['css_modals'] = "/css/modals/".$sql['resultado'][0]['style_modal'];
-            $info['code'] = $sql['resultado'][0]['code'];
+                        
+            $info['titulo'] = $sql['resultado'][0]['titulo'];
+            $info['logo'] = $sql['resultado'][0]['logo'];
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
             $info['font']['css'] = $sql['resultado'][0]['font_css'];
-            $info['logo'] = $sql['resultado'][0]['logo'];
-            $info['titulo'] = $sql['resultado'][0]['titulo'];
+            $info['code'] = $sql['resultado'][0]['code'];
             
+            $info['css_base'] = $path."/css/style.css";
+            $info['css_style'] = $path."/css/types/".$sql['resultado'][0]['style_page'];
+            $info['css_color'] = $path."/css/colors/".$sql['resultado'][0]['style_color'];
+            $info['css_modals'] = $path."/css/modals/".$sql['resultado'][0]['style_modal'];
+            
+            $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
+            $info['js_data'] = $path."/js/data/".$info["code"].".js";
+            $info['js_html'] = $path."/js/html/".$info["code"].".js";
+            
+            $info['js_html_func'] = $path."/js/html_func.js";
+            $info['js_base'] = $path."/js/base.js";
+
         }
 
         return $info;

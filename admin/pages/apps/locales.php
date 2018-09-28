@@ -1,17 +1,20 @@
 <?php
 session_start();
 
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 /* CONFIG PAGE */
 $titulo = "Locales";
 $titulo_list = "Mis Locales";
-$sub_titulo1 = "Ingresar Locales";
-$sub_titulo2 = "Modificar Locales";
+$sub_titulo1 = "Ingresar Local";
+$sub_titulo2 = "Modificar Local";
 $accion = "crear_locales";
 
 $eliminaraccion = "eliminar_locales";
@@ -21,25 +24,23 @@ $page_mod = "pages/apps/locales.php";
 /* CONFIG PAGE */
 
 
-$id = 0;
+
+$giro = $fireapp->get_giro();
+$titulo = $titulo." de ".$giro['nombre'];
+$list = $fireapp->get_locales();
+$catalogos = $fireapp->get_catalogos();
+
+$id_loc = 0;
 $sub_titulo = $sub_titulo1;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    $id = $_GET["id"];
-    $giro = $fireapp->get_giro($id);
-    $titulo = $titulo." de ".$giro['nombre'];
-    $list = $fireapp->get_locales($id);
-    $catalogos = $fireapp->get_catalogos($id);
-    
-    if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
-        
-        $id_loc = $_GET["id_loc"];
-        $that = $fireapp->get_local($id, $id_loc);
-        $sub_titulo = $sub_titulo2;
-        
-    }
-    
+if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
+
+    $id_loc = $_GET["id_loc"];
+    $that = $fireapp->get_local($id_loc);
+    $sub_titulo = $sub_titulo2;
+
 }
+    
+
 
 
 
@@ -62,8 +63,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
             <form action="" method="post" class="basic-grey">
                 <fieldset>
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="id_loc" type="hidden" value="<?php echo $id_cat; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label>
                         <span>Nombre:</span>
@@ -76,6 +76,14 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                             <?php for($i=0; $i<count($catalogos); $i++){ ?>
                                 <option value="<?php echo $catalogos[$i]["id_cat"]; ?>" <?php if($catalogos[$i]["id_cat"] == $that['id_cat']){ echo "selected"; } ?> ><?php echo $catalogos[$i]["nombre"]; ?></option>
                             <?php } ?>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Tipo Despacho:</span>
+                        <select id="tipo_despacho">
+                            <option value="0" <?php if($that['tipo']==0){ echo "selected"; } ?>>Seleccionar</option>
+                            <option value="1" <?php if($that['tipo']==1){ echo "selected"; } ?>>Por Zonas</option>
+                            <option value="2" <?php if($that['tipo']==2){ echo "selected"; } ?>>Por Distancia</option>
                         </select>
                     </label>
                     <label style='margin-top:20px'>
@@ -109,7 +117,8 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <ul class="clearfix">
                         <li class="nombre"><?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
-                        <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_loc=<?php echo $id_n; ?>')"></a>
+                        <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id_loc=<?php echo $id_n; ?>')"></a>
+                        <a title="Zona de Despacho" class="icn despacho" onclick="navlink('pages/apps/zonas_locales.php?id_loc=<?php echo $id_n; ?>')"></a>
                     </ul>
                 </li>
                 

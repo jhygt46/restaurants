@@ -3,12 +3,10 @@
 require('admin/class/core_class.php');
 $core = new Core();
 
-//$core->get_web_js_data(1);
-
-if($_SERVER['HTTP_HOST'] == "104.154.110.217" && isset($_GET['param_dom'])){
+if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
 }else{
-    $info = $core->get_data();
+    $info = $core->get_data(null);
 }
 
 ?>

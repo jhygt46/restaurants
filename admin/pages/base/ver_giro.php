@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
-
-$fireapp->is_giro($_GET["id_gir"]);
-
 /* CONFIG PAGE */
-$titulo = $_GET["nombre"];
 $titulo_list = "Aplicaciones";
 /* CONFIG PAGE */
 
@@ -17,7 +18,10 @@ $id_gir = 0;
 if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0){
     
     $id_gir = $_GET["id_gir"];
-    $paso = $fireapp->paso_giro($id_gir);
+    $fireapp->is_giro($id_gir);
+    $info = $fireapp->get_giro();
+    $paso = $fireapp->paso_giro();
+    $titulo = $info['nombre'];
     
 }
 
@@ -41,7 +45,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/locales.php?id_gir=<?php echo $id_gir; ?>')">
+<div class="info" onclick="navlink('pages/apps/locales.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>
@@ -50,12 +54,21 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/configurar_giro.php?id=<?php echo $id_gir; ?>')">
+<div class="info" onclick="navlink('pages/apps/configurar_giro.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>
         <div class="close"></div>
         <div class="name">Configuracion</div>
         <div class="name2">Configura tu sitio web</div>
+        <div class="go_app"></div>
+    </div>
+</div>
+<div class="info" onclick="navlink('pages/base/usuarios.php')">
+    <div class="fc" id="info-0" style="height: 54px">
+        <div class="minimizar m1"></div>
+        <div class="close"></div>
+        <div class="name">Usuarios</div>
+        <div class="name2">Agrega o elimina usuarios</div>
         <div class="go_app"></div>
     </div>
 </div>

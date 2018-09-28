@@ -716,6 +716,11 @@ body {
     background-position: -171px -432px;
     cursor: pointer;
 }
+.listUser .user ul .despacho{
+    background: url('../images/icons-set.png') no-repeat;
+    background-position: -408px -382px;
+    cursor: pointer;
+}
 .listUser .user ul .cuadrar{
     background: url('../images/icons-set.png') no-repeat;
     background-position: -406px -383px;
