@@ -5,11 +5,11 @@ $crear_categoria[0] = <<<'EOT'
 EOT;
 
 $crear_promocion[0] = <<<'EOT'
-    <div class="botones_principales color_back_02" onclick="open_promocion(##id_prm##)">##nombre##</div>
+    <div class="botones_principales color_back_02" onclick="open_promocion(##id_cae##)">##nombre##</div>
 EOT;
 
 $html_promos[0] = <<<'EOT'
-    <div class='promocion' onclick='open_promocion(##id_prm##)'>
+    <div class='promocion' onclick='open_promocion(##id_cae##)'>
         <div class='nombre'>##nombre##</div>
         <div class='descripcion'>##descripcion##</div>
     </div>

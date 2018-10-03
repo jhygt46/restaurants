@@ -1,23 +1,31 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
-$sub_titulo1 = "Seleccione";
+$sub_titulo1 = "Modificar Configuracion";
 $accion = "configurar_categoria";
 /* CONFIG PAGE */
 
 
-$id = 0;
+$id_cae = 0;
 $sub_titulo = $sub_titulo1;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
+$parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
+
+if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
     
-    $id = $_GET["id"];
+    $id_cae = $_GET["id_cae"];
+    $that = $fireapp->get_categoria($id_cae);
     
 }
 
@@ -42,12 +50,20 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
             <form action="" method="post" class="basic-grey">
                 <fieldset>
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="nombre" type="hidden" value="<?php echo $titulo; ?>" />
+                    <input id="id_cae" type="hidden" value="<?php echo $id_cae; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
+                    <input id="parent_id" type="hidden" value="<?php echo $parent_id; ?>" />
                     <label>
-                        <span>Buscar:</span>
-                        <input id="buscar" type="text" />
+                        <span>Ocultar Categoria:</span>
+                        <select id="ocultar"><option value="0">No</option><option value="1" <?php echo($that['ocultar'] == 1)?'selected':''; ?>>Si</option></select>
+                    </label>
+                    <label>
+                        <span>Mostrar Productos:</span>
+                        <select id="mostrar_prods"><option value="0">No</option><option value="1" <?php echo($that['mostrar_prods'] == 1)?'selected':''; ?>>Si</option></select>
+                    </label>
+                    <label>
+                        <span>Imagen:</span>
+                        <input id="file_image" type="file" />
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>

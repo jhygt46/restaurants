@@ -60,26 +60,26 @@ function form(){
         
         if($(this).attr('type') == "text"){
             data.append($(this).attr('id'), $(this).val());
-            inputs.push($(this));
+            //inputs.push($(this));
         }
         if($(this).attr('type') == "date"){
             data.append($(this).attr('id'), $(this).val());
-            inputs.push($(this));
+            //inputs.push($(this));
         }
         if($(this).attr('type') == "hidden"){
             data.append($(this).attr('id'), $(this).val());
-            inputs.push($(this));
+            //inputs.push($(this));
         }
         if($(this).attr('type') == "checkbox" && $(this).is(':checked')){
             data.append($(this).attr('id'), "1");
-            inputs.push($(this));
+            //inputs.push($(this));
         }
         if($(this).attr('type') == "checkbox" && !$(this).is(':checked')){
             data.append($(this).attr('id'), "0");
         }
         if($(this).attr('type') == "radio" && $(this).is(':checked')){
             data.append($(this).attr('id'), $(this).val());
-            inputs.push($(this));
+            //inputs.push($(this));
         }
         if($(this).attr('type') == "file"){
             var inputFileImage = document.getElementById($(this).attr('id'));
@@ -91,11 +91,11 @@ function form(){
     });
     $('.basic-grey').find('select').each(function(){
         data.append($(this).attr('id'), $(this).val());
-        selects.push($(this));
+        //selects.push($(this));
     });
     $('.basic-grey').find('textarea').each(function(){
-        data.append($(this).attr('id'), $(this).html());
-        textareas.push($(this));
+        data.append($(this).attr('id'), $(this).val());
+        //textareas.push($(this));
     });
     
     

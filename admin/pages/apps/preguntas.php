@@ -19,27 +19,24 @@ $eliminarobjeto = "Pregunta";
 $page_mod = "pages/apps/preguntas.php";
 /* CONFIG PAGE */
 
-$id = 0;
+$id_pre = 0;
 $sub_titulo = $sub_titulo1;
-$parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    $id = $_GET["id"];
-    $catalogo = $fireapp->get_catalogo($id);
-    $titulo = $titulo." de ".$catalogo['nombre'];
-    $list = $fireapp->get_preguntas($id);
-    
-    if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0){
-        
-        $id_pre = $_GET["id_pre"];
-        $that = $fireapp->get_pregunta($id, $id_pre);
-        $that_valores = $fireapp->get_pregunta_valores($id_pre);
-        $sub_titulo = $sub_titulo2;
-        $cantidad = (count($that_valores)>0) ? count($that_valores)+1 : 1 ;
-        
-    }
-    
+
+$catalogo = $fireapp->get_catalogo();
+$titulo = $titulo." de ".$catalogo['nombre'];
+$list = $fireapp->get_preguntas();
+
+if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0){
+
+    $id_pre = $_GET["id_pre"];
+    $that = $fireapp->get_pregunta($id_pre);
+    $that_valores = $fireapp->get_pregunta_valores($id_pre);
+    $sub_titulo = $sub_titulo2;
+    $cantidad = (count($that_valores)>0) ? count($that_valores)+1 : 1 ;
+
 }
+    
+
 
 
 
@@ -80,7 +77,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
             <form action="" method="post" class="basic-grey">
                 <fieldset>
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
                     <input id="id_pre" type="hidden" value="<?php echo $id_pre; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <input id="cantidad" type="hidden" value="<?php echo $cantidad; ?>" />
@@ -157,7 +153,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <li class="nombre"><?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>/<?php echo $parent_id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_pre=<?php echo $id_n; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
-                        <a title="Play Apps" class="icn database" onclick="navlink('pages/apps/preguntas.php?id=<?php echo $id; ?>&parent_id=<?php echo $id_n; ?>')"></a>
                     </ul>
                 </li>
                 

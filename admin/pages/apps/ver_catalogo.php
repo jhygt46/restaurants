@@ -44,15 +44,6 @@ if(isset($_GET["id_cat"]) && is_numeric($_GET["id_cat"]) && $_GET["id_cat"] != 0
         <div class="go_app"></div>
     </div>
 </div>
-<div class="info" onclick="navlink('pages/apps/promociones.php')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Promociones</div>
-        <div class="name2">Productos Agrupados con precios baratos</div>
-        <div class="go_app"></div>
-    </div>
-</div>
 <div class="info" onclick="navlink('pages/apps/ingredientes.php')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>

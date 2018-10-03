@@ -141,3 +141,64 @@ function info_restantes(rest){
     return { precio: precio, restantes: restantes }
     
 }
+
+
+function open_promocion(id){
+    
+    show_modal('modal_carta');
+    add_history('open_promocion', id);
+    var promociones = get_promociones();
+    var promos = [];
+    
+    for(var i=0, ilen=promociones.length; i<ilen; i++){
+        if(promociones[i].id_cae == id){
+            $('.modal_carta .titulo h1').html(promociones[i].nombre);
+            $('.modal_carta .titulo h2').html('Descripcion buena nelson');
+            for(var j=0, jlen=promociones.length; j<jlen; j++){
+                if(promociones[i].id_cae == promociones[j].parent_id){
+                    promos.push(promociones[j]);
+                }
+            }
+            if(promos.length == 0){ imprimir_promo_modal(id) }
+            if(promos.length > 0){ imprimir_promos_modal(promos) }
+        }
+    }
+}
+function imprimir_promo_modal(id){
+    
+    $('.modal_carta .info_modal').html("");
+    
+    var promo = get_promocion(id);
+    var html = '<div class="lista_promociones" onclick="add_carro_promocion('+promo.id_cae+')">';
+            
+    if(promo.categorias){
+        html += '<div class="promocion_categoria"><div class="pro_titulo">Elije:</div>';
+        for(var j=0, jlen=promo.categorias.length; j<jlen; j++){
+            html += '<div class="item_pro_cat"><span>'+promo.categorias[j].cantidad+'</span><span>'+get_categoria(promo.categorias[j].id_cae).nombre+'</span></div>';
+        }
+        html += '</div>';
+    }
+    if(promo.productos){
+        html += '<div class="promocion_producto"><div class="pro_titulo">Productos</div>';
+        for(var j=0, jlen=promo.productos.length; j<jlen; j++){
+            html += '<div class="item_pro_pro">'+get_producto(promo.productos[j].id_pro).nombre+'</div>';
+        }
+        html += '</div>';
+
+    }
+    html += '<div class="promo_precio">$9.990</div></div>';
+    $('.modal_carta .info_modal').append(html);
+    
+}
+function imprimir_promos_modal(promociones){
+    
+    var html = '';
+    $('.modal_carta .info_modal').html('');
+    
+    html += '<div class="lista_promociones">';
+    for(var i=0, ilen=promociones.length; i<ilen; i++){
+        html += html_promos(promociones[i]);
+    }
+    html += '</div>';
+    $('.modal_carta .info_modal').append(html);
+}

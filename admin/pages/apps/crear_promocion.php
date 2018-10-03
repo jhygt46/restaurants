@@ -1,40 +1,31 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
-require_once("../../idioma/es-CL.php");
-$fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
-
-$titulo = "Productos";
-$titulo_list = "Productos de la Promocion";
-$sub_titulo1 = "Seleccionar Productos";
-$accion = "asignar_prods_promocion";
-
-$eliminaraccion = "eliminar_promocion";
-$id_list = "id_prm";
-$eliminarobjeto = "Promocion";
-$page_mod = "pages/apps/crear_promocion.php";
-/* CONFIG PAGE */
-
-$id = 0;
-$id_prm = 0;
-$sub_titulo = $sub_titulo1;
-
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    
-    $id = $_GET["id"];
-    $parent_id = $_GET["parent_id"];
-    $that = null;
-    if(isset($_GET["id_prm"]) && is_numeric($_GET["id_prm"]) && $_GET["id_prm"] != 0){
-        $id_prm = $_GET["id_prm"];
-        $that = $fireapp->get_promocion($id_prm);
-    }
-    $arbol = $fireapp->get_arbol_productos($id, $that);
-    
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
 }
 
+require_once($path."admin/class/core_class.php");
+$fireapp = new Core();
+
+
+$titulo = "Promociones";
+$sub_titulo1 = "Seleccionar Categorias y/o Productos";
+$accion = "asignar_prods_promocion";
+/* CONFIG PAGE */
+
+$id_cae = 0;
+$sub_titulo = $sub_titulo1;
+$parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
+
+$that = null;
+if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
+    $id_cae = $_GET["id_cae"];
+    $that = $fireapp->get_promocion($id_cae);
+}
+$arbol = $fireapp->get_arbol_productos($that);
 
 
 ?>
@@ -72,16 +63,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
             <form action="" method="post" class="basic-grey">
                 <fieldset>
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
-                    <input id="id_prm" type="hidden" value="<?php echo $id_prm; ?>" />
+                    <input id="id_cae" type="hidden" value="<?php echo $id_cae; ?>" />
                     <input id="parent_id" type="hidden" value="<?php echo $parent_id; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    <label class="arbol">
-                        <?php echo $arbol; ?>
-                    </label>
                     <label>
                         <span>Precio:</span>
                         <input id="precio" type="text" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="arbol">
+                        <?php echo $arbol; ?>
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>

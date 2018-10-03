@@ -114,7 +114,7 @@ function topscroll(){
 
 function backurl(){
     
-    var history = JSON.parse(window.localStorage.getItem("history"));
+    var history = JSON.parse(window.localStorage.getItem("history")) || [];
     var len = history.length;
     var i = 1;
     if(len > 1){

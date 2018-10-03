@@ -84,13 +84,37 @@ class Guardar extends Core{
         if($_POST['accion'] == "eliminar_preguntas"){
             return $this->eliminar_preguntas();
         }
-        if($_POST['accion'] == "configurar_catalogo"){
-            return $this->configurar_catalogo();
+        if($_POST['accion'] == "configurar_principal"){
+            return $this->configurar_principal();
+        }
+        if($_POST['accion'] == "crear_pagina"){
+            return $this->crear_pagina();
+        }
+        if($_POST['accion'] == "configurar_footer"){
+            return $this->configurar_footer();
         }
         if($_POST['accion'] == "refresh"){
             return $this->refresh();
         }
+        if($_POST['accion'] == "configurar_categoria"){
+            return $this->configurar_categoria();
+        }
+        if($_POST['accion'] == "ordercat"){
+            return $this->ordercat();
+        }
+        if($_POST['accion'] == "configurar_producto"){
+            return $this->configurar_producto();
+        }
         
+        
+    }
+    private function ordercat(){
+        
+        $values = $_POST['values'];
+        for($i=0; $i<count($values); $i++){
+            $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
+        }
+
     }
     public function refresh(){
         
@@ -99,12 +123,11 @@ class Guardar extends Core{
         }
         
     }
-    public function ingresarimagen(){
+    public function ingresarimagen($filepath, $filename){
 
-        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
-        
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "png", "gif");
-        $filepath = "/var/www/html/restaurants/images/logos/";
+        //$filepath = "/var/www/html/restaurants/images/logos/";
 
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
@@ -113,12 +136,12 @@ class Guardar extends Core{
             $extension = substr($name, strrpos($name, '.')+1);
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
-                    $imagename =  $giro['resultado'][0]['dominio']. "." . $extension;
+                    $imagename = $filename.".".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath . $imagename)){
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
-                        $this->con->sql("UPDATE giros SET logo='".$imagename."' WHERE id_gir='".$this->id_gir."'");
+                        $info['image'] = $imagename;
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -139,8 +162,20 @@ class Guardar extends Core{
 
     }
 
-    
-    private function configurar_catalogo(){
+    private function configurar_footer(){
+        
+        $texto = $_POST['texto'];        
+        $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
+        
+        $info['op'] = 1;
+        $info['mensaje'] = "Footer modificado exitosamente";
+        
+        $info['reload'] = 1;
+        $info['page'] = "apps/configurar_giro.php";
+        return $info;
+        
+    }
+    private function configurar_principal(){
         
         $titulo = $_POST['titulo'];
         $font_family = $_POST['font-family'];
@@ -149,18 +184,63 @@ class Guardar extends Core{
         $css_colores = $_POST['css-colores'];
         $css_popup = $_POST['css-popup'];
         
-        $info['image'] = $this->ingresarimagen();
-        
+        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+        $foto = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio']);
+        if($foto['op'] == 1){
+            $this->con->sql("UPDATE giros SET logo='".$foto['image']."' WHERE id_gir='".$this->id_gir."'");
+        }
         $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$this->id_gir."'");
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "base/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "apps/configurar_giro.php";
         return $info;
         
     }
+    private function configurar_categoria(){
+        
+        $id_cae = $_POST['id_cae'];
+        $parent_id = $_POST['parent_id'];
+        $mostar_prods = $_POST['mostrar_prods'];
+        $ocultar = $_POST['ocultar'];
+        //$image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null);
+        
+        $info['db'] = $this->con->sql("UPDATE categorias SET ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."', image='".$image."' WHERE id_cae='".$id_cae."'");
+        $info['op'] = 1;
+        $info['mensaje'] = "Configuracion modificado exitosamente";
+        
+        $info['reload'] = 1;
+        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
+        return $info;
+        
+    }
+    private function configurar_producto(){
+        
+        $id_pro = $_POST['id_pro'];
+        $id = $_POST['id'];
+        $list = $this->get_preguntas();
+        for($i=0; $i<count($list); $i++){
+            $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
+            if($pre == 0){
+                $this->con->sql("DELETE FROM preguntas_productos WHERE id_pro='".$id_pro."' AND id_pre='".$list[$i]['id_pre']."'");
+            }
+            if($pre == 1){
+                $this->con->sql("INSERT INTO preguntas_productos (id_pro, id_pre) VALUES ('".$id_pro."', '".$list[$i]['id_pre']."')");
+            }
+        }
+        
+        $info['op'] = 1;
+        $info['mensaje'] = "Preguntas asociadas exitosamente";
+        $info['reload'] = 1;
+        $info['page'] = "apps/crear_productos.php?id=".$id;
+        return $info;
+        
+    }
+    
+    
+    
     private function crear_giro(){
         
         $id = $_POST['id'];
@@ -203,6 +283,30 @@ class Guardar extends Core{
         return $info;
         
     }
+    
+    
+    private function crear_pagina(){
+        
+        $id_pag = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        
+        if($id_pag == 0){
+            $this->con->sql("INSERT INTO paginas (nombre, id_gir) VALUES ('".$nombre."', '".$this->id_gir."')");
+            $info['op'] = 1;
+            $info['mensaje'] = "Paginas creado exitosamente";
+        }
+        if($id_pag > 0){
+            $this->con->sql("UPDATE paginas SET nombre='".$nombre."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            $info['op'] = 1;
+            $info['mensaje'] = "Paginas modificado exitosamente";
+        }
+        
+        $info['reload'] = 1;
+        $info['page'] = "apps/configurar_giro.php";
+        return $info;
+        
+    }
+
     private function crear_catalogo(){
         
         $id_cat = $_POST['id'];
@@ -362,14 +466,15 @@ class Guardar extends Core{
         $id_cae = $_POST['id_cae'];
         $nombre = $_POST['nombre'];
         $parent_id = $_POST['parent_id'];
+        $tipo = $_POST['tipo'];
 
         if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$this->id_cat."')");
+            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }
         if($id_cae > 0){
-            $this->con->sql("UPDATE categorias SET nombre='".$nombre."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+            $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria modificada exitosamente";
         }
@@ -469,13 +574,12 @@ class Guardar extends Core{
     
     public function asignar_prods_promocion(){
         
-        $id = $_POST['id'];
-        $id_prm = $_POST['id_prm'];
+        $id_cae = $_POST['id_cae'];
         $parent_id = $_POST['parent_id'];
-        $values = $this->list_arbol_cats_prods($id);
+        $values = $this->list_arbol_cats_prods();
         
-        $this->con->sql("DELETE FROM promocion_categoria WHERE id_prm='".$id_prm."'");
-        $this->con->sql("DELETE FROM promocion_productos WHERE id_prm='".$id_prm."'");
+        $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
+        $this->con->sql("DELETE FROM promocion_productos WHERE id_cae='".$id_cae."'");
         
         for($i=0; $i<count($values); $i++){
 
@@ -483,19 +587,19 @@ class Guardar extends Core{
             if($value['id_cae'] !== null){
                 $cae_val = $_POST['sel-cae-'.$value['id_cae']];
                 if($cae_val > 0){
-                    $this->con->sql("INSERT INTO promocion_categoria (id_prm, id_cae, cantidad) VALUES ('".$id_prm."', '".$value['id_cae']."', '".$cae_val."')");
+                    $info['db_cat'][] = $this->con->sql("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES ('".$id_cae."', '".$value['id_cae']."', '".$cae_val."')");
                 }
             }
             if($value['id_pro'] !== null){
                 $pro_val = $_POST['sel-pro-'.$value['id_pro']];
                 if($pro_val > 0){
-                    $this->con->sql("INSERT INTO promocion_productos (id_prm, id_pro, cantidad) VALUES ('".$id_prm."', '".$value['id_pro']."', '".$pro_val."')");
+                    $info['db_pro'][] = $this->con->sql("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES ('".$id_cae."', '".$value['id_pro']."', '".$pro_val."')");
                 }
             }
             
         }      
         $info['reload'] = 1;
-        $info['page'] = "apps/promociones.php?id=".$id."&parent_id=".$parent_id;
+        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
@@ -564,7 +668,6 @@ class Guardar extends Core{
     }
     private function crear_preguntas(){
 
-        $id = $_POST['id'];
         $id_pre = $_POST['id_pre'];
         $nombre = $_POST['nombre'];
         $cantidad = $_POST['cantidad'];
@@ -575,7 +678,7 @@ class Guardar extends Core{
             $info['mensaje'] = "Pregunta modificada exitosamente";
         }
         if($id_pre == 0){
-            $aux = $this->con->sql("INSERT INTO preguntas (nombre, id_cat) VALUES ('".$nombre."', '".$id."')");
+            $aux = $this->con->sql("INSERT INTO preguntas (nombre, id_cat) VALUES ('".$nombre."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Pregunta creada exitosamente";
             $id_pre = $aux['insert_id'];

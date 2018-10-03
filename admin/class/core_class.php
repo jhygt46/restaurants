@@ -120,6 +120,10 @@ class Core{
         $css = $this->con->sql("SELECT * FROM css WHERE id_gir='".$this->id_gir."' OR id_gir='0'");
         return $css['resultado'];
     }
+    public function get_footer(){
+        $footer = $this->con->sql("SELECT footer_html FROM giros WHERE id_gir='".$this->id_gir."'");
+        return $footer['resultado'][0]['footer_html'];
+    }
     public function get_giros(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_user='".$this->id_user."' AND eliminado='0'");
         return $giros['resultado'];
@@ -182,27 +186,31 @@ class Core{
         return $lot['resultado'][0];
     }
     public function get_categorias(){
-        $cats = $this->con->sql("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0'");
+        $cats = $this->con->sql("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0' ORDER BY t1.orders");
         return $this->process_categorias($cats['resultado'], 'id_cae');
     }
     public function get_ingredientes($id_cat){
         $cats = $this->con->sql("SELECT * FROM ingredientes WHERE id_cat='".$id_cat."' AND eliminado='0'");
         return $this->process_categorias($cats['resultado'], 'id_ing');
     }
-    public function get_preguntas($id_cat){
-        $pres = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$id_cat."' AND eliminado='0'");
+    public function get_preguntas(){
+        $pres = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$this->id_cat."' AND eliminado='0'");
         return $pres['resultado'];
     }
-    public function get_pregunta($id_cat, $id_pre){
-        $pre = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$id_cat."' AND id_pre='".$id_pre."' AND eliminado='0'");
+    public function get_preguntas_pro($id_pro){
+        $pres = $this->con->sql("SELECT * FROM preguntas_productos WHERE id_pro='".$id_pro."'");
+        return $pres['resultado'];
+    }
+    public function get_pregunta($id_pre){
+        $pre = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$this->id_cat."' AND id_pre='".$id_pre."' AND eliminado='0'");
         return $pre['resultado'][0];
     }
     public function get_pregunta_valores($id_pre){
         $pre = $this->con->sql("SELECT * FROM preguntas_valores WHERE id_pre='".$id_pre."'");
         return $pre['resultado'];
     }
-    public function get_categoria($id_cat, $id_cae){
-        $cats = $this->con->sql("SELECT * FROM categorias WHERE id_cat='".$id_cat."' AND id_cae='".$id_cae."' AND eliminado='0'");
+    public function get_categoria($id_cae){
+        $cats = $this->con->sql("SELECT * FROM categorias WHERE id_cat='".$this->id_cat."' AND id_cae='".$id_cae."' AND eliminado='0'");
         return $cats['resultado'][0];
     }
     public function get_ingrediente($id_cat, $id_ing){
@@ -217,9 +225,9 @@ class Core{
         $promos = $this->con->sql("SELECT DISTINCT t1.id_prm, t1.nombre, t1.parent_id, t2.id_pro FROM promociones t1 LEFT JOIN promocion_productos t2 ON t1.id_prm=t2.id_prm WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0'");
         return $this->process_categorias($promos['resultado'], 'id_prm');
     }
-    public function get_promocion($id_prm){
-        $cats = $this->con->sql("SELECT id_cae, cantidad FROM promocion_categoria WHERE id_prm='".$id_prm."'");
-        $prods = $this->con->sql("SELECT id_pro, cantidad FROM promocion_productos WHERE id_prm='".$id_prm."'");
+    public function get_promocion($id_cae){
+        $cats = $this->con->sql("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
+        $prods = $this->con->sql("SELECT id_pro, cantidad FROM promocion_productos WHERE id_cae='".$id_cae."'");
         $aux['categorias'] = $cats['resultado'];
         $aux['productos'] = $prods['resultado'];
         return $aux;
@@ -235,6 +243,14 @@ class Core{
     public function get_producto($id_pro){
         $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."'");
         return $productos['resultado'][0];
+    }
+    public function get_paginas(){
+        $paginas = $this->con->sql("SELECT * FROM paginas WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $paginas['resultado'];
+    }
+    public function get_pagina($id_pag){
+        $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $pagina['resultado'][0];
     }
     
     public function get_data($dom){
@@ -262,6 +278,9 @@ class Core{
             
             $info['js_html_func'] = $path."/js/html_func.js";
             $info['js_base'] = $path."/js/base.js";
+            
+            $info['header_fixed'] = 1;
+            $info['footer_fixed'] = 1;
 
         }
 
@@ -273,72 +292,72 @@ class Core{
         $giros_sql = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
         $code = $giros_sql['resultado'][0]['code'];
         
-        $cat_sql = $this->con->sql("SELECT t3.id_cae, t3.parent_id, t3.nombre, t3.ocultar FROM giros t1, catalogo_productos t2, categorias t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
+        $cat_sql = $this->con->sql("SELECT t3.id_cae, t3.parent_id, t3.nombre, t3.ocultar, t3.tipo, t3.mostrar_prods, t3.image FROM giros t1, catalogo_productos t2, categorias t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat ORDER BY t3.orders");
         $cats = $cat_sql['resultado'];
-        
         
         for($i=0; $i<count($cats); $i++){
             
             $aux['id_cae'] = $cats[$i]['id_cae'];
             $aux['parent_id'] = $cats[$i]['parent_id'];
             $aux['nombre'] = $cats[$i]['nombre'];
+            $aux['ocultar'] = $cats[$i]['ocultar'];
+            $aux['mostrar_prods'] = $cats[$i]['mostrar_prods'];
+            $aux['image'] = $cats[$i]['image'];
             
-            $prods_sql = $this->con->sql("SELECT * FROM cat_pros t1, productos t2 WHERE t1.id_cae='".$aux['id_cae']."' AND t1.id_pro=t2.id_pro");
-            $prods = $prods_sql['resultado'];
-            
-            for($j=0; $j<count($prods); $j++){
+            if($cats[$i]['tipo'] == 0){
                 
-                $aux_productos['id_pro'] = $prods[$j]['id_pro'];
-                $aux_productos['nombre'] = $prods[$j]['nombre'];
-                $aux_productos['descripcion'] = $prods[$j]['descripcion'];
-                $aux_productos['simple_txt'] = json_decode($prods[$j]['simple_txt']);
+                $aux['tipo'] = 0;
 
-                $aux['productos'][] = $aux_productos['id_pro'];
-                
-                $pre_pro_sql = $this->con->sql("SELECT * FROM preguntas_productos WHERE id_pro='".$aux_productos['id_pro']."'");
-                $pre_pro = $pre_pro_sql['resultado'];
-                for($k=0; $k<count($pre_pro); $k++){
-                    $aux_productos['preguntas'][] = $pre_pro[$k]['id_pre'];
+                $prods_sql = $this->con->sql("SELECT * FROM cat_pros t1, productos t2 WHERE t1.id_cae='".$aux['id_cae']."' AND t1.id_pro=t2.id_pro");
+                $prods = $prods_sql['resultado'];
+
+                for($j=0; $j<count($prods); $j++){
+
+                    $aux_productos['id_pro'] = $prods[$j]['id_pro'];
+                    $aux_productos['nombre'] = $prods[$j]['nombre'];
+                    $aux_productos['descripcion'] = $prods[$j]['descripcion'];
+                    $aux_productos['simple_txt'] = json_decode($prods[$j]['simple_txt']);
+
+                    $aux['productos'][] = $aux_productos['id_pro'];
+
+                    $pre_pro_sql = $this->con->sql("SELECT * FROM preguntas_productos WHERE id_pro='".$aux_productos['id_pro']."'");
+                    $pre_pro = $pre_pro_sql['resultado'];
+                    for($k=0; $k<count($pre_pro); $k++){
+                        $aux_productos['preguntas'][] = $pre_pro[$k]['id_pre'];
+                    }
+
+                    $aux_return['productos'][] = $aux_productos;
+                    unset($aux_productos);
+
                 }
                 
-                $aux_return['productos'][] = $aux_productos;
-                unset($aux_productos);
                 
             }
-            
-            $aux_return['categorias'][] = $aux;
-            unset($aux);
-        }
+            if($cats[$i]['tipo'] == 1){
+                
+                $promo_cats = $this->con->sql("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1='".$cats[$i]['id_cae']."'");
+                $promo_c = $promo_cats['resultado'];
+                $promo_prods = $this->con->sql("SELECT * FROM promocion_productos WHERE id_cae='".$cats[$i]['id_cae']."'");
+                $promo_p = $promo_prods['resultado'];
 
-        $promo_sql = $this->con->sql("SELECT t3.id_prm, t3.nombre, t3.parent_id, t3.ocultar FROM giros t1, catalogo_productos t2, promociones t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
-        $promos = $promo_sql['resultado'];
-        
-        for($i=0; $i<count($promos); $i++){
-        
-            $promo_cats = $this->con->sql("SELECT * FROM promocion_categoria WHERE id_prm='".$promos[$i]['id_prm']."'");
-            $promo_c = $promo_cats['resultado'];
-            $promo_prods = $this->con->sql("SELECT * FROM promocion_productos WHERE id_prm='".$promos[$i]['id_prm']."'");
-            $promo_p = $promo_prods['resultado'];
-            
-            $aux['id_prm'] = $promos[$i]['id_prm'];
-            $aux['parent_id'] = $promos[$i]['parent_id'];
-            $aux['nombre'] = $promos[$i]['nombre'];
-            
-            for($j=0; $j<count($promo_c); $j++){
-                $aux_prm_cat['id_cae'] = $promo_c[$j]['id_cae'];
-                $aux_prm_cat['cantidad'] = $promo_c[$j]['cantidad'];
-                $aux['categorias'][] = $aux_prm_cat;
-                unset($aux_prm_cat);
+                $aux['tipo'] = 1;
+                
+                for($j=0; $j<count($promo_c); $j++){
+                    $aux_prm_cat['id_cae'] = $promo_c[$j]['id_cae'];
+                    $aux_prm_cat['cantidad'] = $promo_c[$j]['cantidad'];
+                    $aux['categorias'][] = $aux_prm_cat;
+                    unset($aux_prm_cat);
+                }
+
+                for($j=0; $j<count($promo_p); $j++){
+                    $aux_prm_pro['id_pro'] = $promo_p[$j]['id_pro'];
+                    $aux_prm_pro['cantidad'] = $promo_p[$j]['cantidad'];
+                    $aux['productos'][] = $aux_prm_pro;
+                    unset($aux_prm_pro);
+                }
+                
             }
-            
-            for($j=0; $j<count($promo_p); $j++){
-                $aux_prm_pro['id_pro'] = $promo_p[$j]['id_pro'];
-                $aux_prm_pro['cantidad'] = $promo_p[$j]['cantidad'];
-                $aux['productos'][] = $aux_prm_pro;
-                unset($aux_prm_pro);
-            }
-            
-            $aux_return['promociones'][] = $aux;
+            $aux_return['categorias'][] = $aux;
             unset($aux);
             
         }
@@ -365,17 +384,42 @@ class Core{
 
         }
 
-        file_put_contents("/var/www/html/restaurants/js/data/".$code.".js", "var data=".json_encode($aux_return));
+        $paginas_sql = $this->con->sql("SELECT * FROM paginas WHERE id_gir='".$id_gir."'");
+        $paginas = $paginas_sql['resultado'];
+        for($k=0; $k<count($paginas); $k++){
+            
+            $aux_pagina['id_pag'] = $paginas[$k]['id_pag'];
+            $aux_pagina['nombre'] = $paginas[$k]['nombre'];
+            
+            
+            $aux_return['paginas'][] = $aux_pagina;
+            unset($aux_pagina);
+            
+        }
+        
+        if($_SERVER['HTTP_HOST'] == "localhost"){
+            $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+        }else{
+            $path = "/var/www/html/restaurants/";
+        }
+        
+        require($path."html/html.php");
+        
+        $ruta_data = $path."js/data/".$code.".js";
+        file_put_contents($ruta_data, "var data=".json_encode($aux_return));
+        
+        $ruta_html = $path."js/html/".$code.".js";
+        file_put_contents($ruta_html, "var html=".json_encode($html));
 
     }
     
     
-    public function get_arbol_productos($id_cat, $that){
-        $cats = $this->con->sql("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat='".$id_cat."' AND t1.eliminado='0'");
+    public function get_arbol_productos($that){
+        $cats = $this->con->sql("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0' AND tipo='0'");
         return $this->process_arbol_draw($cats['resultado'], 0, $that);
     }
-    public function list_arbol_cats_prods($id_cat){
-        $cats = $this->con->sql("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat='".$id_cat."' AND t1.eliminado='0'");
+    public function list_arbol_cats_prods(){
+        $cats = $this->con->sql("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0' AND tipo='0'");
         return $cats['resultado'];
     }
     public function get_inputs($id_cae){

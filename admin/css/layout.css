@@ -766,6 +766,11 @@ body {
     background-position: -48px -383px;
     cursor: pointer;
 }
+.listUser .user ul .promo{
+    background: url('../images/icons-set.png') no-repeat;
+    background-position: -48px -478px;
+    cursor: pointer;
+}
 .listUser .user ul .catalogo{
     background: url('../images/icons-set.png') no-repeat;
     background-position: -167px -383px;
