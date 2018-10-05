@@ -114,6 +114,7 @@ function hide_modal(){
             
         }
     });
+    return_direccion();
 }
 function show_modal(clase){
     $('.modals, .'+clase).show();
@@ -189,16 +190,12 @@ function crear_pagina(){
             }
         }
     }
-    for(var i=0, ilen=data.paginas.length; i<ilen; i++){
-        $('.lista_paginas').append('<li onclick="ver_pagina('+data.paginas[i].id_pag+')">'+data.paginas[i].nombre+'</li>');
-    }
-    
+    $('.lista_paginas').append(html_paginas());
+
 }
 
 // INICIO ABRIR CATEGORIA //
 function open_categoria(id){
-    
-    console.log(id);
     
     show_modal('modal_carta');
     add_history('open_categoria', id);
@@ -214,7 +211,6 @@ function open_categoria(id){
                     cats.push(categorias[j]);
                 }
             }
-
             if(cats.length == 0){ imprimir_productos_modal(id) }
             if(cats.length > 0){ imprimir_categoria_modal(cats) }
         }
@@ -223,18 +219,18 @@ function open_categoria(id){
 }
 function imprimir_productos_modal(id){
     
-    var categorias = data.categorias;
-    var html = '';
+    var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
     
-    var html = create_element_class('lista_productos');
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].id_cae == id && categorias[i].productos){
-            var productos = categorias[i].productos;
-            for(var j=0, jlen=productos.length; j<jlen; j++){
-                html.appendChild(create_html_producto(productos[j]));
-            }
+    if(categoria.productos && categoria.tipo == 0){
+        var html = create_element_class('lista_productos');
+        var productos = categoria.productos;
+        for(var j=0, jlen=productos.length; j<jlen; j++){
+            html.appendChild(create_html_producto(productos[j]));
         }
+    }
+    if(categoria.tipo == 1){
+        var html = imprimir_promo_modal(categoria);
     }
 
     $('.modal_carta .info_modal').append(html);
@@ -242,6 +238,8 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
+    console.log("OPEN CATEGORIA MODAL: CATEGORIAS");
+    console.log(categorias);
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
@@ -383,42 +381,44 @@ function process_carro(){
         var info = process_new_promos();
         var carro = info.carro;
         var carro_promos = info.carro_promos;
-        var promocion = {};
-        var producto = {};
         var count = 0;
-        var html1;
+        var promocion, producto, promo_detalle, process_carro_promo, promo_info;
         
         var html = create_element_class('process_carro');
         
         for(var i=0, ilen=carro_promos.length; i<ilen; i++){
             
             promocion = get_categoria(carro_promos[i].id_cae);
-            html1 += "<div class='process_carro_promo'><div class='promo_info'>"+promocion.nombre+"</div><div class='promo_detalle'>";
+            
+            process_carro_promo = create_element_class('process_carro_promo');
+            
+            promo_detalle = create_element_class('promo_detalle');
+            promo_info = create_element_class_value('promo_info', promocion.nombre);
+            
             for(var j=0, jlen=carro.length; j<jlen; j++){
                 if(carro[j].promo == i){
                     count++;
                     producto = get_producto(carro[j].id_pro);
-                    html1.appendChild(promo_carros(producto, j));
+                    promo_detalle.appendChild(promo_carros(producto, j));
                 }
             }
             
-            html.appendChild(html1);
+            process_carro_promo.appendChild(promo_info);
+            process_carro_promo.appendChild(promo_detalle);
+            html.appendChild(process_carro_promo);
 
         }
         
-        
-        
-        var html2 = create_element_class('process_carro_restantes');
+        var process_carro_restantes = create_element_class('process_carro_restantes');
         for(var j=0, jlen=carro.length; j<jlen; j++){
             if(carro[j].promo === undefined){
                 count++;
                 producto = get_producto(carro[j].id_pro);
-                html2.appendChild(promo_restantes(producto, j));
+                process_carro_restantes.appendChild(promo_restantes(producto, j));
             }
         }
 
-        html.appendChild(html2);
-
+        html.appendChild(process_carro_restantes);
         $('.cantcart_num').html(count);
         $('.modal_carro .carro_inicio').append(html);
     }
@@ -532,25 +532,13 @@ function seleccionar_productos_categoria_promo(i){
     var categoria = get_categoria(id_cae);
     
     $('.modals, .modal_productos_promo').show();
-    modal = 1;
-    var html = "<div class='pro_cat_promo' data-pos='"+i+"' data-cantidad='"+cantidad+"'>";
-    
+    $('.modal_productos_promo .info_modal').html('');
     $('.modal_productos_promo .titulo h1').html(categoria.nombre);
     $('.modal_productos_promo .titulo h2').html('Debe seleccionar '+cantidad+' productos');
+    modal = 1;
     
-    if(categoria.productos){
-        for(var i=0, ilen=categoria.productos.length; i<ilen; i++){
-            producto = get_producto(categoria.productos[i]);
-            html += "<div class='pro_cat_item clearfix'><div class='pro_cat_item_select'><select id='"+categoria.productos[i]+"' class='select_promo'>";
-            for(var j=0; j<=cantidad; j++){
-                html += "<option value='"+j+"'>"+j+"</option>";
-            }
-            html += "</select></div><div class='pro_cat_item_nombre'>"+producto.nombre+"</div></div>";
-        }
-    }
-    
-    html += "</div>";
-    $('.modal_productos_promo .info_modal').html(html);
+    var html = html_seleccionar_productos_categoria_promo(categoria, i, cantidad);
+    $('.modal_productos_promo .info_modal').append(html);
     
 }
 
@@ -603,30 +591,14 @@ function mostrar_pregunta(i){
     var carros = get_carro();
     var producto = get_producto(carros[i].id_pro);
     
-    var html = "<div class='s_pregunta' data-pos='"+i+"'>";
-
     $('.modals, .modal_pregunta_productos').show();
-    modal = 1;
+    $('.modal_pregunta_productos .info_modal').html('');
     $('.modal_pregunta_productos .titulo h1').html(producto.nombre);
     $('.modal_pregunta_productos .titulo h2').html('Configurar Producto');
+    modal = 1;
     
-    for(var k=0, klen=carros[i].preguntas.length; k<klen; k++){
-        html += "<div class='e_pregunta' data-pos='"+k+"'><div class='pregunta_titulo'>"+carros[i].preguntas[k].nombre+"</div>"; 
-        for(var m=0, mlen=carros[i].preguntas[k].valores.length; m<mlen; m++){
-
-            html += "<div class='titulo_v_pregunta'>Seleccionar "+carros[i].preguntas[k].valores[m].cantidad+"</div>";
-            html += "<div class='v_pregunta' data-pos='"+m+"' data-cant='"+carros[i].preguntas[k].valores[m].cantidad+"'>"; 
-            for(var n=0, nlen=carros[i].preguntas[k].valores[m].valores.length; n<nlen; n++){
-                html += "<div onclick='select_pregunta(this)' class='n_pregunta'>"+carros[i].preguntas[k].valores[m].valores[n]+"</div>";
-            }
-            html += "</div>"; 
-            
-        }
-        html += "</div>";
-    }
-    
-    html += "</div>";
-    $('.modal_pregunta_productos .info_modal').html(html);
+    var html = html_preguntas_producto(carros[i], i);
+    $('.modal_pregunta_productos .info_modal').append(html);
 
 }
 
@@ -751,4 +723,120 @@ function confirmar_pregunta_productos(that){
         });
     });
     
+}
+
+var map;
+var map_init = 0;
+
+function show_retiro(){
+    
+    $('.cont_direccion .direccion_opciones').hide();
+    $('.cont_direccion .direccion_op1').show();
+    
+}
+function show_despacho(){
+    
+    if(map_init == 0){
+        initMap();
+    }
+    $('.cont_direccion .direccion_opciones').hide();
+    $('.cont_direccion .direccion_op2').show();
+    
+}
+function return_direccion(){
+    
+    $('.cont_direccion .direccion_opciones').show();
+    $('.cont_direccion .direccion_op1').hide();
+    $('.cont_direccion .direccion_op2').hide();
+    
+}
+
+function initMap(){
+    
+    map_init = 1;
+    map = new google.maps.Map(document.getElementById('map_direccion'), {
+        center: {lat: -33.428066, lng: -70.616695},
+        zoom: 13,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true
+    });
+    
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+    
+    var markers = [];
+    searchBox.addListener('places_changed', function(){
+        
+        var places = searchBox.getPlaces();
+        if(places.length == 0){
+            return;
+        }
+        if(places.length == 1){
+            var dir = places[0].formatted_address;
+            var lat = places[0].geometry.location.lat();
+            var lng = places[0].geometry.location.lng();
+            $('#lat').val(lat);
+            $('#lng').val(lng);
+            $('.fttl2').html(dir);
+            distance(lat, lng);
+            for(var i=0; i<places[0].address_components.length; i++){
+                if(places[0].address_components[i].types[0] == "street_number"){
+                    $('#num').val(places[0].address_components[i].long_name);
+                    $('#f_num').val(places[0].address_components[i].long_name);
+                }
+                if(places[0].address_components[i].types[0] == "route"){
+                    $('#dir').val(places[0].address_components[i].long_name);
+                    $('.fttl2').html(places[0].address_components[i].long_name);
+                }
+                if(places[0].address_components[i].types[0] == "locality"){
+                    $('#comuna').val(places[0].address_components[i].long_name);
+                }
+            }
+            
+        }
+        // Clear out the old markers.
+        markers.forEach(function(marker){
+            marker.setMap(null);
+        });
+        markers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place){
+            if(!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if(place.geometry.viewport) {
+                bounds.union(place.geometry.viewport);
+            }else{
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+
 }

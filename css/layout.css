@@ -143,7 +143,7 @@ body {
     z-index: 1;
 }
 .contenedor .modals .cont_modals .modal .cont_modal .cont_info .info_modal{
-    display: block;
+    
 }
 .contenedor .modals .cont_modals .modal .cont_modal .acciones{
     position: absolute;

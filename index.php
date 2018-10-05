@@ -83,8 +83,24 @@ $core->get_web_js_data(1);
                             <div class="close"></div>
                             <div class="cont_info">
                                 <div class="info_modal carro_inicio"></div>
-                                <div class="info_modal carro_direccion" style="display: none">INFO MODAL DATOS</div>
-                                <div class="info_modal carro_final" style="display: none">INFO MODAL FINAL</div>
+                                <div class="info_modal carro_direccion hide" style="height: 100%">
+                                    <div class="cont_direccion" style="height: 100%">
+                                        <div class="direccion_opciones">
+                                            <div onclick="show_retiro()">Retiro en Local</div>
+                                            <div onclick="show_despacho()">Despacho a Domicilio</div>
+                                        </div>
+                                        <div class="direccion_op1 hide">
+                                            <div>Local Providencia</div>
+                                        </div>
+                                        <div class="direccion_op2 hide" style="height: 100%">
+                                            <input type="text" id="pac-input" style="width: 100%; height: 40px" />
+                                            <div id="map_direccion" style="height: 100%; background: #f00"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info_modal carro_final hide">
+                                    FIN
+                                </div>
                             </div>
                             <div class="acciones">
                                 <input class="confirmar" onclick="confirmar_pedido()" type="button" value="Confirmar" />
@@ -122,6 +138,6 @@ $core->get_web_js_data(1);
                 </div>
             </div>
         </div>
-        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places" async defer></script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places" async defer></script>
     </body>
 </html>
