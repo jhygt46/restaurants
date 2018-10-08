@@ -3,8 +3,7 @@
 header('Content-type: text/json');
 header('Content-type: application/json');
 
-$parse = parse_url($_SERVER['HTTP_REFERER']);
-return json_encode($parse);
+return $_SERVER['HTTP_REFERER'];
 
 $lat = $_POST['lat'];
 $lng = $_POST['lng'];
