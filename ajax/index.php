@@ -96,7 +96,9 @@ for($i=0; $i<count($polygons); $i++){
         
     }
     $is = $pointLocation->pointInPolygon($lat." ".lng, $poli);
-    echo "(".$lat."/".$lng.")";
+    echo $is;
+    print_r($lat);
+    print_r($lng);
     print_r($poli);
     if($is == "inside" || $is == "vertex"){
         if($polygons[$i]['precio'] < $precio){
