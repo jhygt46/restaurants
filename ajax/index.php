@@ -85,6 +85,8 @@ $pointLocation = new pointLocation();
 $precio = 999999999;
 $info['op'] = 2;
 
+echo json_encode($polygons);
+
 for($i=0; $i<count($polygons); $i++){
 
     $polygon = json_decode($polygons[$i]['poligono']);
