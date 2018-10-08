@@ -799,6 +799,7 @@ function initMap(){
             
             if(num != 0){
             
+            
                 var send = {lat: lat, lng: lng};
                 $.ajax({
                     url: "ajax/index.php",
