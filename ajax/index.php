@@ -3,8 +3,8 @@
 header('Content-type: text/json');
 header('Content-type: application/json');
 
-return $_SERVER['HTTP_REFERER'];
-
+echo $_SERVER['HTTP_REFERER'];
+exit;
 $lat = $_POST['lat'];
 $lng = $_POST['lng'];
 
