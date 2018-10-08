@@ -252,6 +252,11 @@ class Core{
         $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
         return $pagina['resultado'][0];
     }
+    public function get_polygons(){
+        $referer = $_SERVER['HTTP_REFERER'];
+        $polygons = $this->con->sql("SELECT t2.id_loc, t2.nombre, t2.direccion, t3.poligono, t3.precio FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0'");
+        return $polygons['resultado'];
+    }
     
     public function get_data($dom){
         

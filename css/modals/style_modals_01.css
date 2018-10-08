@@ -239,3 +239,7 @@
     background: #f00;
     margin-left: 1px;
 }
+
+.carro_direccion{
+    height: calc(100% - 124px);
+}

@@ -83,7 +83,7 @@ $core->get_web_js_data(1);
                             <div class="close"></div>
                             <div class="cont_info">
                                 <div class="info_modal carro_inicio"></div>
-                                <div class="info_modal carro_direccion hide" style="height: 100%">
+                                <div class="info_modal carro_direccion hide">
                                     <div class="cont_direccion" style="height: 100%">
                                         <div class="direccion_opciones">
                                             <div onclick="show_retiro()">Retiro en Local</div>
@@ -93,7 +93,7 @@ $core->get_web_js_data(1);
                                             <div>Local Providencia</div>
                                         </div>
                                         <div class="direccion_op2 hide" style="height: 100%">
-                                            <input type="text" id="pac-input" style="width: 100%; height: 40px" />
+                                            <input type="text" id="pac-input" style="margin: 1%; width: 97%; height: 40px" placeholder="Ingrese su direccion y numero" />
                                             <div id="map_direccion" style="height: 100%; background: #f00"></div>
                                         </div>
                                     </div>

@@ -779,27 +779,47 @@ function initMap(){
             return;
         }
         if(places.length == 1){
-            var dir = places[0].formatted_address;
+            
+            var direccion = places[0].formatted_address;
             var lat = places[0].geometry.location.lat();
             var lng = places[0].geometry.location.lng();
-            $('#lat').val(lat);
-            $('#lng').val(lng);
-            $('.fttl2').html(dir);
-            distance(lat, lng);
+            var num = null;
+            
             for(var i=0; i<places[0].address_components.length; i++){
                 if(places[0].address_components[i].types[0] == "street_number"){
-                    $('#num').val(places[0].address_components[i].long_name);
-                    $('#f_num').val(places[0].address_components[i].long_name);
+                    num = places[0].address_components[i].long_name;
                 }
                 if(places[0].address_components[i].types[0] == "route"){
-                    $('#dir').val(places[0].address_components[i].long_name);
-                    $('.fttl2').html(places[0].address_components[i].long_name);
+                    var dir = places[0].address_components[i].long_name;
                 }
                 if(places[0].address_components[i].types[0] == "locality"){
-                    $('#comuna').val(places[0].address_components[i].long_name);
+                    var comuna = places[0].address_components[i].long_name;
                 }
             }
             
+            if(num != 0){
+            
+                var send = {lat: lat, lng: lng};
+                $.ajax({
+                    url: "ajax/index.php",
+                    type: "POST",
+                    data: send,
+                    success: function(data){
+                        console.log(data);
+                    }, error: function(e){
+                        console.log(e);
+                    }
+                });
+            
+            }
+            /*
+            console.log("direccion: "+direccion);
+            console.log("latitud: "+lat);
+            console.log("longitud: "+lng);
+            console.log("num: "+num);
+            console.log("dir: "+dir);
+            console.log("comuna: "+comuna);
+            */
         }
         // Clear out the old markers.
         markers.forEach(function(marker){
