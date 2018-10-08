@@ -85,7 +85,7 @@ $pointLocation = new pointLocation();
 $precio = 999999999;
 $info['op'] = 2;
 
-echo json_encode($polygons);
+
 
 for($i=0; $i<count($polygons); $i++){
 
@@ -98,7 +98,7 @@ for($i=0; $i<count($polygons); $i++){
         
     }
     $is = $pointLocation->pointInPolygon($lat." ".lng, $poli);
-    
+    echo $is;
     if($is == "inside" || $is == "vertex"){
         if($polygons[$i]['precio'] < $precio){
             $info['op'] = 1;
