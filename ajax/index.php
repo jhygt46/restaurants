@@ -3,8 +3,6 @@
 header('Content-type: text/json');
 header('Content-type: application/json');
 
-echo parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
-exit;
 $lat = $_POST['lat'];
 $lng = $_POST['lng'];
 
@@ -82,7 +80,7 @@ class pointLocation {
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
-$polygons = $fireapp->get_polygons('www.izusushi.cl');
+$polygons = $fireapp->get_polygons();
 $pointLocation = new pointLocation();
 $precio = 999999999;
 $info['op'] = 2;
