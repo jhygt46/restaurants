@@ -375,7 +375,7 @@ class Guardar extends Core{
         $pol = $_POST['posiciones'];
         
         if($id_lot == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."')");
+            $info['db1'] = $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc, eliminado) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."', '0')");
             $info['op'] = 1;
             $info['mensaje'] = "Tramo creado exitosamente";
         }
