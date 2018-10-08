@@ -375,12 +375,12 @@ class Guardar extends Core{
         $pol = $_POST['posiciones'];
         
         if($id_lot == 0){
-            $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."')");
+            $info['db1'] = $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."')");
             $info['op'] = 1;
             $info['mensaje'] = "Tramo creado exitosamente";
         }
         if($id_lot > 0){
-            $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
+            $info['db1'] = $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
             $info['op'] = 1;
             $info['mensaje'] = "Tramo modificado exitosamente";
         }
