@@ -16,10 +16,9 @@ $polygons = $fireapp->get_polygons();
 
 $lat = $_POST['lat'];
 $lng = $_POST['lng'];
-$precio = 9999999;
 
-//$lat = -33.439797;
-//$lng = -70.616939;
+$lat = -33.439797;
+$lng = -70.616939;
 
 $info['op'] = 2;
 
@@ -32,19 +31,18 @@ foreach($polygons as $polygon){
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
     if($is == "inside"){
         
-        if($precio > $polygon['precio']){
-            $info['op'] = 1;
-            $info['id_loc'] = $polygon['id_loc'];
-            $info['nombre'] = $polygon['nombre'];
-            $info['precio'] = $polygon['precio'];
-            $precio = $polygon['precio'];
-        }
+        $info['op'] = 1;
+        $info['id_loc'] = $polygon['id_loc'];
+        $info['nombre'] = $polygon['nombre'];
+        $info['precio'] = $polygon['precio'];
         
     }
     
 }
 
-echo json_encode($info);
+echo "<pre>";
+print_r($info);
+echo "</pre>";
 
 class pointLocation {
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
@@ -110,6 +108,13 @@ class pointLocation {
     }
  
 }
+
+
+
+
+
+
+
 
 
 ?>

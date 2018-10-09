@@ -7,6 +7,7 @@ var menu = 0;
 var modal = 0;
 var paso = 1;
 var history = [];
+var dir = 0;
 
 // INICIO BACK BUTTON //
 history.replaceState(null, document.title, location.pathname);
@@ -86,7 +87,16 @@ $(document).click(function (e) {
         add_history('hide_modal', 0);
     }
 });
-
+function close_pedido(){
+    $('.modal_carro').find('h1').html("Haz tu Pedido");
+    $('.modal_carro').find('h2').html("Verifica que esten todos tu productos");
+    $('.modal_carro').find('.carro_inicio').html("");
+    $('.modal_carro').find('.carro_inicio').show();
+    $('.modal_carro').find('.carro_direccion').hide();
+    $('.modal_carro').find('.carro_final').hide();
+    $('.modal_carro').find('.carro_seguimiento').hide();
+    return_direccion();
+}
 // SHOW HIDE MODAL //
 function hide_modal(){
     modal = 0;
@@ -99,13 +109,7 @@ function hide_modal(){
             $(this).find('.info_modal').html("");
         }
         if($(this).hasClass('modal_carro')){
-            
-            $(this).find('.carro_inicio').html("");
-            $(this).find('.carro_inicio').show();
-            $(this).find('.carro_direccion').hide();
-            $(this).find('.carro_final').hide();
-            paso = 1;
-            
+            close_pedido();
         }
         if($(this).hasClass('modal_productos_promo')){
             
@@ -114,7 +118,6 @@ function hide_modal(){
             
         }
     });
-    return_direccion();
 }
 function show_modal(clase){
     $('.modals, .'+clase).show();
@@ -661,19 +664,31 @@ function confirmar_productos_promo(that){
 function confirmar_pedido(){
     
     var modales = $('.modal_carro .cont_info').find('.info_modal');
-    var precio = $('.modal_carro .cont_info .precio');
-
-    if(paso == 1){
-        modales.eq(0).hide();
-        modales.eq(1).show();
-        precio.hide();
+    var titulo = $('.modal_carro').find('h1');
+    var subtitulo = $('.modal_carro').find('h2');
+    
+    if(modales.eq(3).is(":visible")){
+        hide_modal();
     }
-    if(paso == 2){
+    if(modales.eq(2).is(":visible")){
+        modales.eq(2).hide();
+        modales.eq(3).show();
+        titulo.html("Seguimiento");
+        subtitulo.html("Mira en que esta tu pedido");
+    }
+    if(modales.eq(1).is(":visible")){
         modales.eq(1).hide();
         modales.eq(2).show();
-        precio.hide();
+        titulo.html("Confirmacion");
+        subtitulo.html("Realiza la confirmacion de tu pedido");
     }
-    paso++;
+    if(modales.eq(0).is(":visible")){
+        modales.eq(0).hide();
+        modales.eq(1).show();
+        titulo.html("Despacho");
+        subtitulo.html("elije tu tipo de despacho");
+    }
+    
     
 }
 
@@ -798,29 +813,21 @@ function initMap(){
             }
             
             if(num != 0){
-            
-            
+                
                 var send = {lat: lat, lng: lng};
                 $.ajax({
                     url: "ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(data){
-                        console.log(data);
+                        dir = 1;
                     }, error: function(e){
                         console.log(e);
                     }
                 });
             
             }
-            /*
-            console.log("direccion: "+direccion);
-            console.log("latitud: "+lat);
-            console.log("longitud: "+lng);
-            console.log("num: "+num);
-            console.log("dir: "+dir);
-            console.log("comuna: "+comuna);
-            */
+
         }
         // Clear out the old markers.
         markers.forEach(function(marker){

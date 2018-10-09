@@ -79,7 +79,7 @@ $core->get_web_js_data(1);
                     </div>
                     <div class="modal vhalign hide modal_carro">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03">Haz tu Pedido</h1><h2 class="size_font_02 color_font_02">Verifica que esten todos tu productos</h2></div></div>
                             <div class="close"></div>
                             <div class="cont_info">
                                 <div class="info_modal carro_inicio"></div>
@@ -100,6 +100,9 @@ $core->get_web_js_data(1);
                                 </div>
                                 <div class="info_modal carro_final hide">
                                     FIN
+                                </div>
+                                <div class="info_modal carro_seguimiento hide">
+                                    SEGUIMIENTO
                                 </div>
                             </div>
                             <div class="acciones">
