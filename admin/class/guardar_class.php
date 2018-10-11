@@ -471,12 +471,12 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
 
         if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."')");
+            $info['db1'] = $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }
         if($id_cae > 0){
-            $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+            $info['db2'] = $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria modificada exitosamente";
         }
