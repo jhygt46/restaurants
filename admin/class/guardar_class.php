@@ -250,6 +250,7 @@ class Guardar extends Core{
 
         if($id == 0){
             $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo) VALUES ('".$nombre."', now(), '".$dominio."', '1')");
+            $info['db1'] = $aux;
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
             if($this->admin == 0){
