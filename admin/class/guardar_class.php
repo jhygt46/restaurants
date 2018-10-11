@@ -187,9 +187,9 @@ class Guardar extends Core{
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         $foto = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio']);
         if($foto['op'] == 1){
-            $this->con->sql("UPDATE giros SET logo='".$foto['image']."' WHERE id_gir='".$this->id_gir."'");
+            $info['foto'] = $this->con->sql("UPDATE giros SET logo='".$foto['image']."' WHERE id_gir='".$this->id_gir."'");
         }
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$this->id_gir."'");
+        $info['db1'] = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$this->id_gir."'");
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
