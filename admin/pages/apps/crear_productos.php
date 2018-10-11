@@ -172,11 +172,12 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
+                    $numero = $list[$i]['numero'];
                 ?>
                 
                 <li class="user">
                     <ul class="clearfix">
-                        <li class="nombre"><?php echo $nombre; ?></li>
+                        <li class="nombre"><?php echo $numero; ?> / <?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_pro=<?php echo $id_n; ?>')"></a>
                         <a title="Configurar Producto" class="icn conficon" onclick="navlink('pages/apps/configurar_producto.php?id_pro=<?php echo $id_n; ?>&nombre=<?php echo $nombre; ?>&id=<?php echo $id; ?>')"></a>
