@@ -86,6 +86,10 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
+                        <span>Descripcion:</span>
+                        <input id="descripcion" type="text" value="<?php echo $that['descripcion']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
                         <span>Tipo:</span>
                         <select id="tipo"><option value="0" <?php echo ($that['tipo'] == 0) ? 'selected' : '' ; ?>>Categoria</option><option value="1" <?php echo ($that['tipo'] == 1) ? 'selected' : '' ; ?>>Promocion</option></select>
                     </label>

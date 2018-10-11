@@ -469,16 +469,17 @@ class Guardar extends Core{
 
         $id_cae = $_POST['id_cae'];
         $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
         $parent_id = $_POST['parent_id'];
         $tipo = $_POST['tipo'];
 
         if($id_cae == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."')");
+            $info['db1'] = $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, descripcion) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$descripcion."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }
         if($id_cae > 0){
-            $info['db2'] = $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+            $info['db2'] = $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."', descripcion='".$descripcion."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria modificada exitosamente";
         }
