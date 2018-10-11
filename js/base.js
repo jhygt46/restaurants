@@ -214,7 +214,7 @@ function open_categoria(id){
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id){
             $('.modal_carta .titulo h1').html(categorias[i].nombre);
-            $('.modal_carta .titulo h2').html('Descripcion buena nelson');
+            $('.modal_carta .titulo h2').html(categorias[i].descripcion);
             for(var j=0, jlen=categorias.length; j<jlen; j++){
                 if(categorias[i].id_cae == categorias[j].parent_id){
                     cats.push(categorias[j]);

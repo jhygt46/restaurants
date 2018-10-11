@@ -271,15 +271,16 @@ function create_html_producto(id){
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
-    Nombre.innerHTML = aux.nombre;
+    Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
     Div.appendChild(Nombre);
     
+    /*
     var Descripcion = document.createElement('div');
     Descripcion.className = 'descripcion';
     //Descripcion.innerHTML = obj.descripcion;
     Descripcion.innerHTML = 'descripcion de la promocion';
     Div.appendChild(Descripcion);
-    
+    */
     return Div;
     
 }
