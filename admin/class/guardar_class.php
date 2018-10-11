@@ -621,6 +621,7 @@ class Guardar extends Core{
             if($id_pro == 0){
                 $sql = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, id_gir) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', '".$this->id_gir."')");
                 $id_pro = $sql['insert_id'];
+                $info['db1'] = $sql;
                 $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$id_pro."')");
             }
         }
@@ -629,7 +630,7 @@ class Guardar extends Core{
             for($i=0; $i<count($all_prods); $i++){
                 $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
                 if($pro == 1){
-                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
+                    $info['db1'] = $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
                 }
             }
         }
