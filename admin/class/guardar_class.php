@@ -247,9 +247,10 @@ class Guardar extends Core{
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $dominio = $_POST['dominio'];
-
+        $code = bin2hex(openssl_random_pseudo_bytes(10));
+        
         if($id == 0){
-            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo) VALUES ('".$nombre."', now(), '".$dominio."', '1')");
+            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."')");
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
             if($this->admin == 0){
