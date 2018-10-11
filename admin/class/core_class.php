@@ -323,6 +323,7 @@ class Core{
 
                     $aux_productos['id_pro'] = $prods[$j]['id_pro'];
                     $aux_productos['nombre'] = $prods[$j]['nombre'];
+                    $aux_productos['numero'] = $prods[$j]['numero'];
                     $aux_productos['descripcion'] = $prods[$j]['descripcion'];
                     $aux_productos['simple_txt'] = json_decode($prods[$j]['simple_txt']);
 
