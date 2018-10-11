@@ -315,7 +315,7 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         
         if($id_cat == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$this->id_gir."')");
+            $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir, eliminado) VALUES ('".$nombre."', now(), '".$this->id_gir."', '0')");
             $info['op'] = 1;
             $info['mensaje'] = "Catalogo creado exitosamente";
         }
