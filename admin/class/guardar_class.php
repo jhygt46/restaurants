@@ -250,14 +250,13 @@ class Guardar extends Core{
 
         if($id == 0){
             $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo) VALUES ('".$nombre."', now(), '".$dominio."', '1')");
-            $info['db1'] = $aux;
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
             if($this->admin == 0){
-                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                $info['db1'][] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
             if($this->admin == 1){
-                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                $info['db2'][] = $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
         }
         if($id > 0){
