@@ -271,7 +271,7 @@ function create_html_producto(id){
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
-    Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
+    Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
     Div.appendChild(Nombre);
     
     /*
