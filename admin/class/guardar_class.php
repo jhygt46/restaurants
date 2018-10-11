@@ -315,12 +315,12 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         
         if($id_cat == 0){
-            $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$this->id_gir."')");
+            $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Catalogo creado exitosamente";
         }
         if($id_cat > 0){
-            $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$this->id_gir."'");
+            $info['db2'] = $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Catalogo modificado exitosamente";
         }
