@@ -619,10 +619,11 @@ class Guardar extends Core{
         
         if($tipo == 0){
             if($id_pro == 0){
-                $sql = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
-                $id_pro = $sql['insert_id'];
-                $info['db1'] = $sql;
-                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$id_pro."')");
+                $pro = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
+                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$pro['insert_id']."')");
+            }
+            if($id_pro > 0){
+                $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."'");
             }
         }
         if($tipo == 1){
