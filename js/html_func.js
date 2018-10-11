@@ -298,7 +298,7 @@ function create_html_promocion(obj){
     var Descripcion = document.createElement('div');
     Descripcion.className = 'descripcion';
     //Descripcion.innerHTML = obj.descripcion;
-    Descripcion.innerHTML = 'descripcion de la promocion';
+    Descripcion.innerHTML = obj.descripcion;
     Div.appendChild(Descripcion);
     
     if(obj.mostrar_prods == 1){
