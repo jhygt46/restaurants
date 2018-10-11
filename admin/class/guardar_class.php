@@ -205,6 +205,7 @@ class Guardar extends Core{
         $parent_id = $_POST['parent_id'];
         $mostar_prods = $_POST['mostrar_prods'];
         $ocultar = $_POST['ocultar'];
+        
         //$image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null);
         
         $info['db'] = $this->con->sql("UPDATE categorias SET ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."', image='".$image."' WHERE id_cae='".$id_cae."'");
@@ -248,14 +249,14 @@ class Guardar extends Core{
         $dominio = $_POST['dominio'];
 
         if($id == 0){
-            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio) VALUES ('".$nombre."', now(), '".$dominio."')");
+            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo) VALUES ('".$nombre."', now(), '".$dominio."', '1')");
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
             if($this->admin == 0){
                 $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
             if($this->admin == 1){
-                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
         }
         if($id > 0){

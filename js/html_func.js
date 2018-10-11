@@ -341,12 +341,12 @@ function promo_carros(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = producto.precio;
+    Precio.innerHTML = 3000;
     Acciones.appendChild(Precio);
     
     var Accion = document.createElement('div');
     Accion.className = 'accion';
-    Accion.innerHTML = 'X';
+    Accion.innerHTML = 'DEL';
     Accion.onclick = function(){ delete_pro_carro(j) };
     Acciones.appendChild(Accion);
     
@@ -370,12 +370,12 @@ function promo_restantes(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = producto.precio;
+    Precio.innerHTML = 3000;
     Acciones.appendChild(Precio);
     
     var Accion = document.createElement('div');
     Accion.className = 'accion';
-    Accion.innerHTML = 'X';
+    Accion.innerHTML = 'DEL';
     Accion.onclick = function(){ delete_pro_carro(j) };
     Acciones.appendChild(Accion);
     

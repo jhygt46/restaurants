@@ -160,7 +160,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                 
                 <li class="user" rel="<?php echo $id_n; ?>">
                     <ul class="clearfix">
-                        <li class="nombre"><?php echo $nombre."//".$tipo; ?></li>
+                        <li class="nombre"><?php echo $nombre; ?></li>
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>/<?php echo $parent_id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_cae=<?php echo $id_n; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
                         <a title="Configurar Categoria" class="icn conficon" onclick="navlink('pages/apps/configurar_categoria.php?id_cae=<?php echo $id_n; ?>&nombre=<?php echo $nombre; ?>&parent_id=<?php echo $parent_id; ?>')"></a>

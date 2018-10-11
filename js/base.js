@@ -125,6 +125,12 @@ function show_modal(clase){
 }
 
 // GET CARRO //
+function get_pedido(){
+    return JSON.parse(localStorage.getItem("pedido")) || { id_ped: 0, despacho: null, id_loc: 0, lat: 0, lng: 0, direccion: '', num: null, calle: '', comuna: '', costo: 0 };
+}
+function set_pedido(pedido){
+    localStorage.setItem("pedido", JSON.stringify(pedido));
+}
 function get_carro(){
     return JSON.parse(localStorage.getItem("carro")) || [];
 }
@@ -363,23 +369,28 @@ function borrar_carro(){
     localStorage.setItem("carro_promos", null);
 }
 function delete_pro_carro(i){
-    var carros = get_carro();
-    carros.splice(i, 1);
-    localStorage.setItem("carro", JSON.stringify(carros));
+    console.log(i);
+    var carro = get_carro();
+    carro.splice(i, 1);
+    localStorage.setItem("carro", JSON.stringify(carro));
     process_carro();
 
 }
 function delete_pre_pro_carro(i){
-    var carros = get_carro();
-    delete carros[i].preguntas;
-    localStorage.setItem("carro", JSON.stringify(carros));
+    var carro = get_carro();
+    delete carro[i].preguntas;
+    localStorage.setItem("carro", JSON.stringify(carro));
     process_carro();
 }
 
 // PROCESS CARRO //
 function process_carro(){
     
+    console.log("PROCESS CARRO");
+    
     if(!carro_daemon()){
+        
+        $('.modal_carro .carro_inicio').html('');
         
         var info = process_new_promos();
         var carro = info.carro;
@@ -677,16 +688,65 @@ function confirmar_pedido(){
         subtitulo.html("Mira en que esta tu pedido");
     }
     if(modales.eq(1).is(":visible")){
-        modales.eq(1).hide();
-        modales.eq(2).show();
-        titulo.html("Confirmacion");
-        subtitulo.html("Realiza la confirmacion de tu pedido");
+        
+        var pedido = get_pedido();
+        if(pedido.despacho !== null && pedido.id_loc != 0){
+            
+            var op1 = modales.eq(1).find('.direccion_op1');
+            var op2 = modales.eq(1).find('.direccion_op2');
+            if((!op1.is(":visible") && !op2.is(":visible")) || (pedido.despacho == 0 && op1.is(":visible")) || (pedido.despacho == 1 && op2.is(":visible"))){
+                
+                modales.eq(1).hide();
+                modales.eq(2).show();
+                titulo.html("Confirmacion");
+                subtitulo.html("Realiza la confirmacion de tu pedido");
+                
+            }
+            if(pedido.despacho == 0 && op2.is(":visible")){
+                if(pedido.num === null){
+                    alert("DEBE INGRESAR DIRECCION Y NUMERO");
+                }
+                if(pedido.num !== null){
+                    alert("TIENE SELECCIONADO RETIRO EN LOCAL");
+                }
+            }
+            if(pedido.despacho == 1 && op1.is(":visible")){
+                alert("TIENE SELECCIONADO DESPACHO A DOMICILIO");
+            }
+            
+        }else{
+            alert("Debe ingresar Numero");
+        }
+
     }
     if(modales.eq(0).is(":visible")){
-        modales.eq(0).hide();
-        modales.eq(1).show();
-        titulo.html("Despacho");
-        subtitulo.html("elije tu tipo de despacho");
+        var carro = get_carro();
+        if(carro.length > 0){
+            
+            modales.eq(0).hide();
+            modales.eq(1).show();
+            titulo.html("Despacho");
+            subtitulo.html("elije tu tipo de despacho");
+            
+            var div_retiro = modales.eq(1).find('.dir_op').eq(0);
+            var div_domicilio = modales.eq(1).find('.dir_op').eq(1);
+            
+            var pedido = get_pedido();
+            if(pedido.despacho == 0){
+                div_retiro.addClass('dir_op_select');
+                div_domicilio.removeClass('dir_op_select');
+                div_retiro.find('.stitle').html('Local Providencia');
+            }else{
+                div_retiro.find('.stitle').html('Sin Costo');
+            }
+            if(pedido.despacho == 1){
+                div_retiro.removeClass('dir_op_select');
+                div_domicilio.addClass('dir_op_select');
+                div_domicilio.find('.stitle').html('Jose Tomas Rider 1185, Providencia, Santiago');
+            }else{
+                div_domicilio.find('.stitle').html('Desde $1.000');
+            }
+        }
     }
     
     
@@ -742,11 +802,59 @@ function confirmar_pregunta_productos(that){
 
 var map;
 var map_init = 0;
+var maps = [];
+
+function init_map_local(id){
+    
+    var map_local = new google.maps.Map(document.getElementById('lmap-'+id), {
+        center: {lat: -33.428066, lng: -70.616695},
+        zoom: 15,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true
+    });
+    
+    var myLatLng = { lat: -33.428066, lng: -70.616695 };
+    
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map_local,
+        title: 'Local Providencia'
+    });
+    
+}
+
+function map_local(id){
+    
+    $('#lmap-'+id).toggle();
+    if(maps.indexOf(id) == -1){
+        init_map_local(id);
+        maps.push(id);
+    }
+    
+}
+function select_local(id){
+    
+    var pedido = get_pedido();
+    pedido.despacho = 0;
+    pedido.id_loc = 1;
+    pedido.num = null;
+    pedido.calle = '';
+    pedido.costo = 0;
+    pedido.comuna = '';
+    pedido.lat = 0;
+    pedido.lng = 0;
+    pedido.direccion = '';
+    set_pedido(pedido);
+    confirmar_pedido();
+
+}
 
 function show_retiro(){
-    
+
     $('.cont_direccion .direccion_opciones').hide();
     $('.cont_direccion .direccion_op1').show();
+    $('.modal_carro').find('h1').html("Selecciona Local");
+    $('.modal_carro').find('h2').html("En que local retiras la compra?");
     
 }
 function show_despacho(){
@@ -756,6 +864,8 @@ function show_despacho(){
     }
     $('.cont_direccion .direccion_opciones').hide();
     $('.cont_direccion .direccion_op2').show();
+    $('.modal_carro').find('h1').html("Domicilio");
+    $('.modal_carro').find('h2').html("Ingresa tu ubicacion exacta");
     
 }
 function return_direccion(){
@@ -795,37 +905,51 @@ function initMap(){
         }
         if(places.length == 1){
             
-            var direccion = places[0].formatted_address;
-            var lat = places[0].geometry.location.lat();
-            var lng = places[0].geometry.location.lng();
-            var num = null;
+            var pedido = get_pedido();
             
             for(var i=0; i<places[0].address_components.length; i++){
                 if(places[0].address_components[i].types[0] == "street_number"){
-                    num = places[0].address_components[i].long_name;
+                    pedido.num = places[0].address_components[i].long_name;
                 }
                 if(places[0].address_components[i].types[0] == "route"){
-                    var dir = places[0].address_components[i].long_name;
+                    pedido.calle = places[0].address_components[i].long_name;
                 }
                 if(places[0].address_components[i].types[0] == "locality"){
-                    var comuna = places[0].address_components[i].long_name;
+                    pedido.comuna = places[0].address_components[i].long_name;
                 }
             }
             
-            if(num != 0){
+            if(pedido.num !== null){
                 
-                var send = {lat: lat, lng: lng};
+                var send = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
                     url: "ajax/index.php",
                     type: "POST",
                     data: send,
-                    success: function(data){
-                        dir = 1;
+                    success: function(datas){
+                        
+                        var data = JSON.parse(datas);
+
+                        if(data.op == 1){
+                            alert(data.costo);
+                            pedido.id_loc = data.id_loc;
+                            pedido.costo = data.costo;
+                            pedido.despacho = 1;
+                            pedido.lat = places[0].geometry.location.lat();
+                            pedido.lng = places[0].geometry.location.lng();
+                            pedido.direccion = places[0].formatted_address;
+                            set_pedido(pedido);
+                        }else{
+                            alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
+                        }
+                        
                     }, error: function(e){
                         console.log(e);
                     }
                 });
-            
+                
+            }else{
+                alert("DEBE INGRESAR DIRECCION EXACTA");
             }
 
         }

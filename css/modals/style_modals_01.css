@@ -239,7 +239,161 @@
     background: #f00;
     margin-left: 1px;
 }
-
 .carro_direccion{
     height: calc(100% - 124px);
+}
+.modal_carro .cont_direccion{
+    height: 100%;
+}
+.modal_carro .cont_direccion .direccion_opciones{
+    padding: 10px;
+}
+.modal_carro .cont_direccion .direccion_opciones .dir_op{
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #ccc;
+}
+.modal_carro .cont_direccion .direccion_opciones .dir_op_select{
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f99;
+}
+.modal_carro .cont_direccion .direccion_opciones .dir_op .title{
+    font-size: 17px;
+    display: block;
+}
+.modal_carro .cont_direccion .direccion_opciones .dir_op .stitle{
+    font-size: 11px;
+    display: block;
+}
+.modal_carro .cont_direccion .direccion_op1{
+    padding: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales{
+    margin-bottom: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local{
+    background: #ccc;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info{
+    width: calc(100% - 40px);
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa{
+    width: 40px;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title{
+    font-size: 17px;
+    display: block;
+    padding-left: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle{
+    font-size: 11px;
+    display: block;
+    padding-left: 10px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .lmap{
+    display: none;
+    height: 150px;
+}
+.modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa .icon_mapa{
+    width: 30px;
+    height: 30px;
+    background: #f00;
+}
+.modal_carro .cont_direccion .direccion_op2{
+    height: 100%;
+}
+.modal_carro .cont_direccion .direccion_op2 #pac-input{
+    margin: 1%;
+    width: 97%;
+    height: 40px
+}
+.modal_carro .cont_direccion .direccion_op2 #map_direccion{
+    height: 100%;
+}
+.modal_carro .carro_final .cont_final{
+    padding: 10px;
+}
+.modal_carro .carro_final .cont_final .final_section{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fs_ttl_01{
+    font-size: 14px;
+    padding-bottom: 2px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_ttl_02{
+    font-size: 12px;
+    padding-bottom: 10px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs{
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in{
+    float: left;
+    width: 50%;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_ttl{
+    font-size: 16px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_in{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_in input[type="text"]{
+    width: 94%;
+    border: 0px;
+    height: 24px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2{
+    margin-top: 6px;
+    background: #ccc;
+    padding: 6px 10px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in{
+    float: left;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in:nth-child(1){
+    width: calc(100% - 18px);
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in:nth-child(2){
+    width: 18px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_ttl{
+    font-size: 16px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_in{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_in input[type="checkbox"]{
+    width: 18px;
+    border: 0px;
+    height: 18px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3{
+    margin-top: 6px;
+    background: #ccc;
+    padding: 6px 10px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in{
+    float: left;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in:nth-child(1){
+    width: calc(100% - 40px);
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in:nth-child(2){
+    width: 40px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in .fsin_ttl{
+    font-size: 16px;
+}
+.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in .fsin_in select{
+    width: 40px;
+    border: 0px;
+    height: 18px;
 }

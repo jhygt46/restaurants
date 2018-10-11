@@ -254,7 +254,7 @@ class Core{
     }
     public function get_polygons(){
         $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
-        $referer = "localhost";
+        $referer = "www.runasushi.cl";
         $polygons = $this->con->sql("SELECT t2.id_loc, t2.nombre, t2.direccion, t3.poligono, t3.precio FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0'");
         return $polygons['resultado'];
     }
@@ -266,7 +266,8 @@ class Core{
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
         if(count($sql['resultado']) == 1){
-                        
+            
+            $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
@@ -370,7 +371,7 @@ class Core{
         
         $preguntas_sql = $this->con->sql("SELECT t3.id_pre, t3.mostrar FROM giros t1, catalogo_productos t2, preguntas t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat");
         $preguntas = $preguntas_sql['resultado'];
-        
+        $aux_return['preguntas'] = [];
         for($k=0; $k<count($preguntas); $k++){
 
             $aux_pregunta['id_pre'] = $preguntas[$k]['id_pre'];
@@ -392,6 +393,7 @@ class Core{
 
         $paginas_sql = $this->con->sql("SELECT * FROM paginas WHERE id_gir='".$id_gir."'");
         $paginas = $paginas_sql['resultado'];
+        $aux_return['paginas'] = [];
         for($k=0; $k<count($paginas); $k++){
             
             $aux_pagina['id_pag'] = $paginas[$k]['id_pag'];

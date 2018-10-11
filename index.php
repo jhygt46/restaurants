@@ -8,7 +8,8 @@ if(isset($_GET['param_dom'])){
 }else{
     $info = $core->get_data('www.izusushi.cl');
 }
-$core->get_web_js_data(1);
+
+$core->get_web_js_data($info['id_gir']);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -84,29 +85,99 @@ $core->get_web_js_data(1);
                             <div class="cont_info">
                                 <div class="info_modal carro_inicio"></div>
                                 <div class="info_modal carro_direccion hide">
-                                    <div class="cont_direccion" style="height: 100%">
+                                    <div class="cont_direccion">
                                         <div class="direccion_opciones">
-                                            <div onclick="show_retiro()">Retiro en Local</div>
-                                            <div onclick="show_despacho()">Despacho a Domicilio</div>
+                                            <div class="dir_op" onclick="show_retiro()"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div></div>
+                                            <div class="dir_op" onclick="show_despacho()"><div class="title">Despacho a Domicilio</div><div class="stitle">Desde $1.000</div></div>
                                         </div>
                                         <div class="direccion_op1 hide">
-                                            <div>Local Providencia</div>
+                                            <div class="dir_locales">
+                                                <div class="cont_local clearfix">
+                                                    <div class="local_info" onclick="select_local(1)">
+                                                        <div class="title">Local Providencia</div>
+                                                        <div class="stitle">Avda Providencia 1245</div>
+                                                    </div>
+                                                    <div class="local_mapa" onclick="map_local(1)">
+                                                        <div class="icon_mapa"></div>
+                                                    </div>
+                                                </div>
+                                                <div id="lmap-1" class="lmap"></div>
+                                            </div>
+                                            <div class="dir_locales">
+                                                <div class="cont_local clearfix">
+                                                    <div class="local_info" onclick="select_local(2)">
+                                                        <div class="title">Local Las Condes</div>
+                                                        <div class="stitle">Avda Apoquindo 6786</div>
+                                                    </div>
+                                                    <div class="local_mapa" onclick="map_local(2)">
+                                                        <div class="icon_mapa"></div>
+                                                    </div>
+                                                </div>
+                                                <div id="lmap-2" class="lmap"></div>
+                                            </div>
                                         </div>
-                                        <div class="direccion_op2 hide" style="height: 100%">
-                                            <input type="text" id="pac-input" style="margin: 1%; width: 97%; height: 40px" placeholder="Ingrese su direccion y numero" />
-                                            <div id="map_direccion" style="height: 100%; background: #f00"></div>
+                                        <div class="direccion_op2 hide">
+                                            <input type="text" id="pac-input" placeholder="Ingrese su direccion y numero" />
+                                            <div id="map_direccion" style=""></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="info_modal carro_final hide">
-                                    FIN
+                                    <div class="cont_final">
+                                        <div class="final_section">
+                                            <!--<div class="fs_ttl_01">Direccion</div>
+                                            <div class="fs_ttl_02">Jose Tomas Rider 1185, Providencia, Santiago, Chile</div>-->
+                                            <div class="fs_inputs clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Nombre</div>
+                                                    <div class="fsin_in"><input type="text" /></div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Telefono</div>
+                                                    <div class="fsin_in"><input type="text" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="fs_inputs2 clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Gengibre</div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="gengibre" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="fs_inputs2 clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Wasabi</div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="wasabi" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="fs_inputs2 clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Sushi para Embarazadas</div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="wasabi" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="fs_inputs3 clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Palitos</div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_in"><select id="palitos"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="info_modal carro_seguimiento hide">
                                     SEGUIMIENTO
                                 </div>
                             </div>
                             <div class="acciones">
-                                <input class="confirmar" onclick="confirmar_pedido()" type="button" value="Confirmar" />
+                                <input class="confirmar" onclick="confirmar_pedido()" type="button" value="Siguiente >>" />
                             </div>
                         </div>
                     </div>

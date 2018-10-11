@@ -18,9 +18,6 @@ $lat = $_POST['lat'];
 $lng = $_POST['lng'];
 $precio = 9999999;
 
-//$lat = -33.439797;
-//$lng = -70.616939;
-
 $info['op'] = 2;
 
 foreach($polygons as $polygon){
@@ -36,7 +33,7 @@ foreach($polygons as $polygon){
             $info['op'] = 1;
             $info['id_loc'] = $polygon['id_loc'];
             $info['nombre'] = $polygon['nombre'];
-            $info['precio'] = $polygon['precio'];
+            $info['costo'] = $polygon['precio'];
             $precio = $polygon['precio'];
         }
         
