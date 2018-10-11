@@ -84,6 +84,7 @@
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
     height: 100px;
     margin-top: 5px;
+    background-size: cover;
 }
 /* BOTON PRINCIPAL */
 
