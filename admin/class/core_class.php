@@ -299,7 +299,7 @@ class Core{
         $giros_sql = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
         $code = $giros_sql['resultado'][0]['code'];
         
-        $cat_sql = $this->con->sql("SELECT t3.id_cae, t3.parent_id, t3.nombre, t3.ocultar, t3.tipo, t3.mostrar_prods, t3.image FROM giros t1, catalogo_productos t2, categorias t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat ORDER BY t3.orders");
+        $cat_sql = $this->con->sql("SELECT t3.id_cae, t3.parent_id, t3.nombre, t3.ocultar, t3.tipo, t3.mostrar_prods, t3.image, t3.descripcion FROM giros t1, catalogo_productos t2, categorias t3 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_cat=t3.id_cat ORDER BY t3.orders");
         $cats = $cat_sql['resultado'];
         
         for($i=0; $i<count($cats); $i++){
