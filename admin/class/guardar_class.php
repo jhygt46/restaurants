@@ -619,7 +619,7 @@ class Guardar extends Core{
         
         if($tipo == 0){
             if($id_pro == 0){
-                $sql = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."')");
+                $sql = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
                 $id_pro = $sql['insert_id'];
                 $info['db1'] = $sql;
                 $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$id_pro."')");
