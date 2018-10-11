@@ -306,6 +306,7 @@ class Core{
             
             $aux['id_cae'] = $cats[$i]['id_cae'];
             $aux['parent_id'] = $cats[$i]['parent_id'];
+            $aux['descripcion'] = $cats[$i]['descripcion'];
             $aux['nombre'] = $cats[$i]['nombre'];
             $aux['ocultar'] = $cats[$i]['ocultar'];
             $aux['mostrar_prods'] = $cats[$i]['mostrar_prods'];
