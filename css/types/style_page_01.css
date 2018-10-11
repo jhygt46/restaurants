@@ -82,9 +82,10 @@
     padding-bottom: 94px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
-    height: 100px;
+    height: 80px;
     margin-top: 5px;
     background-size: cover;
+    padding: 10px;
 }
 /* BOTON PRINCIPAL */
 
