@@ -51,7 +51,7 @@ $core->get_web_js_data($info['id_gir']);
             <div class="pagina">
                 <div class="header color_header <?php echo ($info["header_fixed"] == 1) ? 'fixed' : ''; ?>">
                     <div class="header_logo vhalign"><img src="/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
-                    <div class="menu_right" onclick="open_carro()"><div class="shop color_icons material-icons">shopping_cart</div><div class="cantcart color_back_02"><div class="cantcart_num vhalign size_font_02 color_font_02">15</div></div></div>
+                    <div class="menu_right" onclick="open_carro()"><div class="shop color_icons material-icons">shopping_cart</div><div class="cantcart color_shop_circle"><div class="cantcart_num vhalign font_shop_circle">15</div></div></div>
                 </div>
                 <div class="contenido color_pagina">
                     <div class="cont_contenido"></div>

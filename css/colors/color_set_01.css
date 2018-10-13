@@ -10,3 +10,12 @@
 .color_icons{
     color: #fff;
 }
+.color_shop_circle{
+    background: #ccc;
+}
+.color_shop_circle .cantcart_num{
+    color: #000;
+}
+.font_shop_circle{
+    font-size: 14px;
+}
