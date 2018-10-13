@@ -1,24 +1,28 @@
-.color_header{
+.contenedor .pagina .header{
     background: #000000;
 }
-.color_footer{
-    background: #000000;
-}
-.color_pagina{
-    background: #999999;
-}
-.color_icons{
+.contenedor .pagina .header .shop{
     color: #fff;
 }
-.color_shop_circle{
+.contenedor .pagina .footer{
+    background: #000000;
+}
+.contenedor .pagina .contenido{
+    background: #999999;
+}
+.contenedor .pagina .header .shop{
+    color: #fff;
+}
+.contenedor .pagina .header .cantcart{
     background: #ccc;
 }
-.color_shop_circle .cantcart_num{
+.contenedor .pagina .header .cantcart .cantcart_num{
     color: #000;
-}
-.font_shop_circle{
     font-size: 14px;
 }
-.back_botones_principales{
+.contenedor .pagina .contenido .cont_contenido{
+    
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales{
     background: #ccc;
 }

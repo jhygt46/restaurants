@@ -82,26 +82,25 @@
     padding-bottom: 94px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
-    height: 80px;
+    height: 100px;
     margin-top: 5px;
     background-size: cover;
-    padding: 10px;
     position: relative;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .nombre{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 10px;
+    left: 10px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 10px;
+    left: 10px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .precio{
     position: absolute;
-    right: 0px;
-    bottom: 0px;
+    right: 10px;
+    bottom: 10px;
 }
 /* BOTON PRINCIPAL */
 
