@@ -3,7 +3,7 @@
 function html_crear_categoria(obj){
     
     var Div = document.createElement('div');
-    Div.className = 'botones_principales color_back_02';
+    Div.className = 'botones_principales back_botones_principales';
     
     Div.style.backgroundImage = 'url("/images/categorias/'+obj.image+'")';
     Div.onclick = function(){ open_categoria(obj.id_cae) };
