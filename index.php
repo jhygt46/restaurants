@@ -49,14 +49,16 @@ $core->get_web_js_data($info['id_gir']);
                 </div>
             </div>
             <div class="pagina">
-                <div class="header <?php echo ($info["header_fixed"] == 1) ? 'fixed' : ''; ?>">
-                    <div class="header_logo vhalign"><img src="/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
-                    <div class="menu_right" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign">15</div></div></div>
+                <div class="cont_pagina">
+                    <div class="header <?php echo ($info["header_fixed"] == 1) ? 'fixed' : ''; ?>">
+                        <div class="header_logo vhalign"><img src="/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
+                        <div class="menu_right" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign">15</div></div></div>
+                    </div>
+                    <div class="contenido">
+                        <div class="cont_contenido"></div>
+                    </div>
+                    <div class="footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"></div>
                 </div>
-                <div class="contenido">
-                    <div class="cont_contenido"></div>
-                </div>
-                <div class="footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"></div>
             </div>
             <div class="modals">
                 <div class="cont_modals">

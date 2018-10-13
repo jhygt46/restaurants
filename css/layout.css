@@ -45,14 +45,17 @@ body {
     left: 0px;
     z-index: 1;
 }
-.contenedor .pagina .fixed{
-    position: fixed;
+.contenedor .pagina .cont_pagina{
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 /* PAGINA HEADER */
 .contenedor .pagina .header{
     width: 100%;
     top: 0px;
     left: 0px;
+    position: fixed;
 }
 .contenedor .pagina .header .header_logo{
     position: absolute;
@@ -75,6 +78,7 @@ body {
     width: 100%;
     bottom: 0px;
     left: 0px;
+    position: fixed;
 }
 /* PAGINA CONTENIDO */
 .contenedor .pagina .contenido{
