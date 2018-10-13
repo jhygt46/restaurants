@@ -53,7 +53,7 @@ $core->get_web_js_data($info['id_gir']);
                     <div class="header_logo vhalign"><img src="/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
                     <div class="menu_right" onclick="open_carro()"><div class="shop color_font_01 material-icons">shopping_cart</div><div class="cantcart color_back_02"><div class="cantcart_num vhalign size_font_02 color_font_02">15</div></div></div>
                 </div>
-                <div class="contenido color_back_01">
+                <div class="contenido color_pagina">
                     <div class="cont_contenido"></div>
                 </div>
                 <div class="footer color_footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"></div>
