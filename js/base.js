@@ -230,7 +230,7 @@ function imprimir_productos_modal(id){
     
     var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
-    
+    console.log(categoria);
     if(categoria.productos && categoria.tipo == 0){
         var html = create_element_class('lista_productos');
         var productos = categoria.productos;
