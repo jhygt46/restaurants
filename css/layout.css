@@ -52,10 +52,7 @@ body {
 }
 /* PAGINA HEADER */
 .contenedor .pagina .header{
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    position: fixed;
+    display: block;
     z-index: 2;
 }
 .contenedor .pagina .header .header_logo{
@@ -76,20 +73,13 @@ body {
 }
 /* PAGINA FOOTER */
 .contenedor .pagina .footer{
-    width: 100%;
-    bottom: 0px;
-    left: 0px;
-    position: fixed;
+    display: block;
     z-index: 2;
 }
 /* PAGINA CONTENIDO */
 .contenedor .pagina .contenido{
     display: block;
-    width: 100%;
     z-index: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
 }
 .contenedor .pagina .contenido .cont_contenido{
     display: block;
