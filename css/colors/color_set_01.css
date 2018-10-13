@@ -1,14 +1,3 @@
-
-.color_font_01{
-    color: #999;
-}
-.color_font_02{
-    color: #666;
-}
-.color_font_03{
-    color: #333;
-}
-
 .color_header{
     background: #000000;
 }
@@ -18,13 +7,6 @@
 .color_pagina{
     background: #999999;
 }
-
-.size_font_01{
-    font-size: 20px;
-}
-.size_font_02{
-    font-size: 16px;
-}
-.size_font_03{
-    font-size: 24px;
+.color_icons{
+    color: #fff;
 }
