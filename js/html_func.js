@@ -16,6 +16,10 @@ function html_crear_categoria(obj){
     Divdescripcion.innerHTML = obj.descripcion;
     Div.appendChild(Divdescripcion);
     
+    var Divprecio = document.createElement('div');
+    Divprecio.innerHTML = '7000';
+    Div.appendChild(Divprecio);
+    
     return Div;
 
 }
