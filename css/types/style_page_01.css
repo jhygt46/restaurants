@@ -94,12 +94,12 @@
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
     position: absolute;
-    bottom: 10px;
+    top: 50px;
     left: 10px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .precio{
     position: absolute;
-    right: 10px;
+    left: 10px;
     bottom: 10px;
 }
 /* BOTON PRINCIPAL */

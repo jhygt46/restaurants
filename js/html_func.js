@@ -19,7 +19,7 @@ function html_crear_categoria(obj){
     Div.appendChild(Divdescripcion);
     
     var Divprecio = document.createElement('div');
-    Divprecio.innerHTML = '7000';
+    Divprecio.innerHTML = '$7.000';
     Divprecio.className = 'precio';
     Div.appendChild(Divprecio);
     
