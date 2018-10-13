@@ -262,7 +262,7 @@ function create_html_categorias(obj){
     
 }
 function view_product(that){
-    console.log(that);
+    console.log(that.parent());
 }
 function create_html_producto(id){
     
