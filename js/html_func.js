@@ -262,8 +262,11 @@ function create_html_categorias(obj){
     
 }
 function view_product(that){
-    console.log(that.parentElement.childNodes[1].style.display);
-    that.parentNode.childNodes[1].style.display = 'block';
+    if(that.parentElement.childNodes[1].style.display == 'block'){
+        that.parentNode.childNodes[1].style.display = 'none';
+    }else{
+        that.parentNode.childNodes[1].style.display = 'block';
+    }
 }
 function create_html_producto(id){
     
