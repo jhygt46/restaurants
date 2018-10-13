@@ -268,10 +268,11 @@ function view_product(that){
         that.parentNode.childNodes[1].style.display = 'block';
     }
 }
-function create_html_producto(id){
+function create_html_producto(id, detalle){
     
     var aux = get_producto(id);
     console.log(aux);
+    console.log(detalle);
     
     var Div = document.createElement('div');
     Div.className = 'categoria';

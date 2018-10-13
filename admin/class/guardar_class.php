@@ -205,12 +205,13 @@ class Guardar extends Core{
         $parent_id = $_POST['parent_id'];
         $mostar_prods = $_POST['mostrar_prods'];
         $ocultar = $_POST['ocultar'];
+        $detalle_prods = $_POST['detalle_prods'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null);
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }
-        $this->con->sql("UPDATE categorias SET ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
+        $this->con->sql("UPDATE categorias SET detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
