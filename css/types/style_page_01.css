@@ -43,7 +43,7 @@
 }
 /* PAGINA HEADER */
 .style_page_1 .contenedor .pagina .header{
-    height: 80px;
+    height: 100px;
     width: 100%;
     position: fixed;
     top: 0px;
@@ -84,10 +84,11 @@
     width: 100%;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido{
-    width: 340px;
+    width: 94%;
+    max-width: 400px;
     margin: 0 auto;
     padding-top: 80px;
-    padding-bottom: 4px;
+    padding-bottom: 104px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
     height: 100px;
