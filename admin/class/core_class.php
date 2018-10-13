@@ -310,7 +310,7 @@ class Core{
             $aux['nombre'] = $cats[$i]['nombre'];
             $aux['ocultar'] = $cats[$i]['ocultar'];
             $aux['mostrar_prods'] = $cats[$i]['mostrar_prods'];
-            $aux['detalle_prods'] = $cats[$i]['mostrar_prods'];
+            $aux['detalle_prods'] = $cats[$i]['detalle_prods'];
             $aux['image'] = $cats[$i]['image'];
             
             if($cats[$i]['tipo'] == 0){

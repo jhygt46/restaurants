@@ -21,6 +21,8 @@ $that = $fireapp->get_giro();
 $titulo = "Configuracion ".$that["nombre"];
 $css = $fireapp->get_css();
 
+echo "";
+
 ?>
 
 <div class="title">

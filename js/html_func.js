@@ -271,31 +271,38 @@ function view_product(that){
 function create_html_producto(id, detalle){
     
     var aux = get_producto(id);
-    //console.log(aux);
-    //console.log(detalle);
+    if(detalle == 0){
+        
+        var Div = document.createElement('div');
+        Div.className = 'categoria';
+        Div.onclick = function(){ add_carro_producto(aux.id_pro) };
+        
+        var Nombre = document.createElement('div');
+        Nombre.className = 'nombre';
+        Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
+        Nombre.onclick = function(){ view_product(this) };
+        Div.appendChild(Nombre);
+        
+    }
+    if(detalle == 1){
+        
+        var Div = document.createElement('div');
+        Div.className = 'categoria';
+        
+        var Nombre = document.createElement('div');
+        Nombre.className = 'nombre';
+        Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
+        Nombre.onclick = function(){ view_product(this) };
+        Div.appendChild(Nombre);
+        
+        var Info = document.createElement('div');
+        Info.className = 'info hide';
+        Info.innerHTML = 'info';
+        Div.appendChild(Info);
+        
+    }
     
-    var Div = document.createElement('div');
-    Div.className = 'categoria';
-    //Div.onclick = function(){ add_carro_producto(aux.id_pro) };
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'nombre';
-    Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
-    Nombre.onclick = function(){ view_product(this) };
-    Div.appendChild(Nombre);
-    
-    var Info = document.createElement('div');
-    Info.className = 'info hide';
-    Info.innerHTML = 'info';
-    Div.appendChild(Info);
-    
-    /*
-    var Descripcion = document.createElement('div');
-    Descripcion.className = 'descripcion';
-    //Descripcion.innerHTML = obj.descripcion;
-    Descripcion.innerHTML = 'descripcion de la promocion';
-    Div.appendChild(Descripcion);
-    */
+
     return Div;
     
 }
