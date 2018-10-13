@@ -82,6 +82,7 @@
     width: 340px;
     margin: 0 auto;
     padding-top: 80px;
+    padding-bottom: 4px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
     height: 100px;
