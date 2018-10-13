@@ -76,7 +76,6 @@ body {
 }
 /* PAGINA CONTENIDO */
 .contenedor .pagina .contenido{
-    width: 100%;
     z-index: 1;
 }
 .contenedor .pagina .contenido .cont_contenido{

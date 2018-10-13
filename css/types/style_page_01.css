@@ -46,6 +46,8 @@
     height: 80px;
     width: 100%;
     position: fixed;
+    top: 0px;
+    left: 0px;
 }
 .style_page_1 .contenedor .pagina .header .header_logo{
     height: 70px;
@@ -74,16 +76,18 @@
     height: 100px;
     position: fixed;
     width: 100%;
+    bottom: 0px;
+    left: 0px;
 }
 /* PAGINA CONTENIDO */
 .style_page_1 .contenedor .pagina .contenido{
-    /*min-height: 800px;*/
+    width: 100%;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido{
     width: 340px;
     margin: 0 auto;
     padding-top: 80px;
-    padding-bottom: 104px;
+    padding-bottom: 4px;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales{
     height: 100px;
