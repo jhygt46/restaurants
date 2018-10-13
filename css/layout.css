@@ -56,6 +56,7 @@ body {
     top: 0px;
     left: 0px;
     position: fixed;
+    z-index: 2;
 }
 .contenedor .pagina .header .header_logo{
     position: absolute;
@@ -79,11 +80,16 @@ body {
     bottom: 0px;
     left: 0px;
     position: fixed;
+    z-index: 2;
 }
 /* PAGINA CONTENIDO */
 .contenedor .pagina .contenido{
     display: block;
     width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .contenedor .pagina .contenido .cont_contenido{
     display: block;
