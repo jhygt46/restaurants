@@ -52,7 +52,6 @@ body {
 }
 /* PAGINA HEADER */
 .contenedor .pagina .header{
-    display: block;
     z-index: 2;
 }
 .contenedor .pagina .header .header_logo{
@@ -73,12 +72,11 @@ body {
 }
 /* PAGINA FOOTER */
 .contenedor .pagina .footer{
-    display: block;
     z-index: 2;
 }
 /* PAGINA CONTENIDO */
 .contenedor .pagina .contenido{
-    display: block;
+    width: 100%;
     z-index: 1;
 }
 .contenedor .pagina .contenido .cont_contenido{
