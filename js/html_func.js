@@ -266,6 +266,7 @@ function view_product(that){
 }
 function create_html_producto(id){
     
+    console.log("CREATE HTML PRODUCTO");
     var aux = get_producto(id);
 
     var Div = document.createElement('div');
