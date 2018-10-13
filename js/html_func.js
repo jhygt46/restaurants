@@ -10,14 +10,17 @@ function html_crear_categoria(obj){
     
     var Divnombre = document.createElement('div');
     Divnombre.innerHTML = obj.nombre;
+    Divnombre.className = 'nombre';
     Div.appendChild(Divnombre);
     
     var Divdescripcion = document.createElement('div');
     Divdescripcion.innerHTML = obj.descripcion;
+    Divdescripcion.className = 'descripcion';
     Div.appendChild(Divdescripcion);
     
     var Divprecio = document.createElement('div');
     Divprecio.innerHTML = '7000';
+    Divprecio.className = 'precio';
     Div.appendChild(Divprecio);
     
     return Div;
