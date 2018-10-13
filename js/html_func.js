@@ -262,7 +262,7 @@ function create_html_categorias(obj){
     
 }
 function view_product(that){
-    that.parents('.categoria').find('.info').show();
+    console.log(that);
 }
 function create_html_producto(id){
     
@@ -280,7 +280,7 @@ function create_html_producto(id){
     Div.appendChild(Nombre);
     
     var Info = document.createElement('div');
-    Info.className = 'info';
+    Info.className = 'info hide';
     Info.innerHTML = 'info';
     Div.appendChild(Info);
     
