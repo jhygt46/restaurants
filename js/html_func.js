@@ -261,18 +261,27 @@ function create_html_categorias(obj){
     return Div;
     
 }
+function view_product(that){
+    that.parents('.categoria').find('.info').show();
+}
 function create_html_producto(id){
     
     var aux = get_producto(id);
 
     var Div = document.createElement('div');
     Div.className = 'categoria';
-    Div.onclick = function(){ add_carro_producto(aux.id_pro) };
+    //Div.onclick = function(){ add_carro_producto(aux.id_pro) };
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
     Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
+    Nombre.onclick = function(){ view_product(this) };
     Div.appendChild(Nombre);
+    
+    var Info = document.createElement('div');
+    Info.className = 'info';
+    Info.innerHTML = 'info';
+    Div.appendChild(Info);
     
     /*
     var Descripcion = document.createElement('div');
