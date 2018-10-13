@@ -270,9 +270,9 @@ function view_product(that){
 }
 function create_html_producto(id){
     
-    console.log("CREATE HTML PRODUCTO");
     var aux = get_producto(id);
-
+    console.log(aux);
+    
     var Div = document.createElement('div');
     Div.className = 'categoria';
     //Div.onclick = function(){ add_carro_producto(aux.id_pro) };
