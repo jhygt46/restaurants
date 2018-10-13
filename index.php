@@ -39,7 +39,7 @@ $core->get_web_js_data($info['id_gir']);
         <div class="contenedor">
             <div class="menu_left">
                 <div class="cont_menu_left">
-                    <div class="btn_toogle color_icons material-icons" onclick="tooglemenu()">view_headline</div>
+                    <div class="btn_toogle material-icons" onclick="tooglemenu()">view_headline</div>
                     <div class="menu_info">
                         <h1>Men&uacute;</h1>
                         <ul class="lista_paginas">

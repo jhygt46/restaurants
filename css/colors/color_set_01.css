@@ -1,3 +1,6 @@
+.contenedor .menu_left .cont_menu_left .btn_toogle{
+    color: #ffffff;
+}
 .contenedor .pagina .header{
     background: #000000;
 }
@@ -30,7 +33,7 @@
     font-size: 19px;
 }
 .contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
-    font-size: 20px;
+    font-size: 18px;
 }
 .contenedor .pagina .contenido .cont_contenido .botones_principales .precio{
     font-size: 19px;
