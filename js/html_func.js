@@ -262,8 +262,8 @@ function create_html_categorias(obj){
     
 }
 function view_product(that){
-    console.log(that.parentElement);
-    console.log(that.parentNode);
+    console.log(that.parentElement.childNodes);
+    console.log(that.parentNode.childNodes);
 }
 function create_html_producto(id){
     
