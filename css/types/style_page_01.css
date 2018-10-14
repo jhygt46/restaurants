@@ -115,15 +115,15 @@
 
 /* MODALS */
 .style_page_1 .contenedor .modals{
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(0, 0, 0, 0.75);
 }
 .style_page_1 .contenedor .modals .cont_modals{
 }
 .style_page_1 .contenedor .modals .cont_modals .modal{
     width: 90%;
     height: 90%;
-    max-width: 340px;
-    max-height: 520px;
+    max-width: 400px;
+    max-height: 580px;
 }
 .style_page_1 .contenedor .modals .cont_modals .modal .cont_modal{
 
@@ -138,10 +138,10 @@
 
 }
 .style_page_1 .contenedor .modals .cont_modals .modal .cont_modal .titulo .cont_titulo h1{
-    
+    font-size: 24px;
 }
 .style_page_1 .contenedor .modals .cont_modals .modal .cont_modal .titulo .cont_titulo h2{
-    
+    font-size: 12px;
 }
 .style_page_1 .contenedor .modals .cont_modals .modal .cont_modal .close{
     width: 34px;

@@ -228,6 +228,7 @@ function open_categoria(id){
 }
 function imprimir_productos_modal(id){
     
+    console.log("ENTRO");
     var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
 
@@ -235,6 +236,7 @@ function imprimir_productos_modal(id){
         var html = create_element_class('lista_productos');
         var productos = categoria.productos;
         for(var j=0, jlen=productos.length; j<jlen; j++){
+            console.log("BUENA NELSON");
             html.appendChild(create_html_producto(productos[j], categoria.detalle_prods));
         }
     }

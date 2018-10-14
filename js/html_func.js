@@ -13,16 +13,18 @@ function html_crear_categoria(obj){
     Divnombre.className = 'nombre';
     Div.appendChild(Divnombre);
     
-    var Divdescripcion = document.createElement('div');
-    Divdescripcion.innerHTML = obj.descripcion;
-    Divdescripcion.className = 'descripcion';
-    Div.appendChild(Divdescripcion);
-    
-    var Divprecio = document.createElement('div');
-    Divprecio.innerHTML = '$7.000';
-    Divprecio.className = 'precio';
-    Div.appendChild(Divprecio);
-    
+    if(obj.descripcion){
+        var Divdescripcion = document.createElement('div');
+        Divdescripcion.innerHTML = obj.descripcion;
+        Divdescripcion.className = 'descripcion';
+        Div.appendChild(Divdescripcion);
+    }
+    if(obj.precio){
+        var Divprecio = document.createElement('div');
+        Divprecio.innerHTML = '$'.obj.precio;
+        Divprecio.className = 'precio';
+        Div.appendChild(Divprecio);
+    }
     return Div;
 
 }
@@ -270,14 +272,15 @@ function create_html_categorias(obj){
 }
 function view_product(that){
     if(that.parentElement.childNodes[1].style.display == 'block'){
-        that.parentNode.childNodes[1].style.display = 'none';
+        that.parentElement.childNodes[1].style.display = 'none';
     }else{
-        that.parentNode.childNodes[1].style.display = 'block';
+        that.parentElement.childNodes[1].style.display = 'block';
     }
 }
 function create_html_producto(id, detalle){
     
     var aux = get_producto(id);
+    console.log("detalle: "+detalle);
     if(detalle == 0){
         
         var Div = document.createElement('div');
@@ -286,8 +289,8 @@ function create_html_producto(id, detalle){
         
         var Nombre = document.createElement('div');
         Nombre.className = 'nombre';
-        Nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
-        Nombre.onclick = function(){ view_product(this) };
+        Nombre.innerHTML = aux.numero + '.- 8==D ' + aux.nombre;
+        Nombre.onclick = function(){ add_carro_producto(aux.id_pro) };
         Div.appendChild(Nombre);
         
     }
