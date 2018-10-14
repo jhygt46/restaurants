@@ -318,6 +318,8 @@ function create_html_producto(id, detalle){
 }
 function create_html_promocion(obj){
     
+    console.log(obj);
+    
     var Div = document.createElement('div');
     Div.className = 'categoria';
     Div.onclick = function(){ open_categoria(obj.id_cae) };
