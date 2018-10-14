@@ -33,7 +33,7 @@ exit;
         <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_html"]; ?>" type="text/javascript"></script>
+        <!--<script src="<?php echo $info["js_html"]; ?>" type="text/javascript"></script>-->
         <script src="<?php echo $info["js_html_func"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_base"]; ?>" type="text/javascript"></script>
         <style>
