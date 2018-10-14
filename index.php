@@ -11,10 +11,12 @@ if(isset($_GET['param_dom'])){
 
 $inf = $core->get_web_js_data($info['id_gir']);
 
+/*
 echo "<pre>";
 print_r($inf);
 echo "</pre>";
 exit;
+*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
