@@ -414,13 +414,14 @@ class Core{
             $path = "/var/www/html/restaurants/";
         }
         
-        require($path."html/html.php");
+        //require($path."html/html.php");
         
         $ruta_data = $path."js/data/".$code.".js";
         file_put_contents($ruta_data, "var data=".json_encode($aux_return));
         
-        $ruta_html = $path."js/html/".$code.".js";
-        file_put_contents($ruta_html, "var html=".json_encode($html));
+        //$ruta_html = $path."js/html/".$code.".js";
+        //file_put_contents($ruta_html, "var html=".json_encode($html));
+        return $aux_return;
 
     }
     
