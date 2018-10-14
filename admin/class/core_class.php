@@ -304,15 +304,17 @@ class Core{
         
         for($i=0; $i<count($cats); $i++){
             
-            $aux['id_cae'] = $cats[$i]['id_cae'];
-            $aux['parent_id'] = $cats[$i]['parent_id'];
+            $aux['id_cae'] = intval($cats[$i]['id_cae']);
+            $aux['parent_id'] = intval($cats[$i]['parent_id']);
             $aux['descripcion'] = $cats[$i]['descripcion'];
             $aux['nombre'] = $cats[$i]['nombre'];
-            $aux['ocultar'] = $cats[$i]['ocultar'];
-            $aux['mostrar_prods'] = $cats[$i]['mostrar_prods'];
-            $aux['detalle_prods'] = $cats[$i]['detalle_prods'];
+            $aux['ocultar'] = intval($cats[$i]['ocultar']);
+            $aux['mostrar_prods'] = intval($cats[$i]['mostrar_prods']);
+            $aux['detalle_prods'] = intval($cats[$i]['detalle_prods']);
             $aux['image'] = $cats[$i]['image'];
             
+            
+            $aux_arr_id_pro = [];
             if($cats[$i]['tipo'] == 0){
                 
                 $aux['tipo'] = 0;
@@ -335,7 +337,7 @@ class Core{
                     for($k=0; $k<count($pre_pro); $k++){
                         $aux_productos['preguntas'][] = $pre_pro[$k]['id_pre'];
                     }
-
+                    
                     $aux_return['productos'][] = $aux_productos;
                     unset($aux_productos);
 
