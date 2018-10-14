@@ -73,7 +73,7 @@ $core->get_web_js_data($info['id_gir']);
                     </div>
                     <div class="modal vhalign hide modal_carta">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class=""></h1><h2 class=""></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="buena"></h1><h2 class=""></h2></div></div>
                             <div class="close"></div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
