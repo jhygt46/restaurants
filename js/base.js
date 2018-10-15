@@ -189,6 +189,7 @@ function ver_pagina(id){
 function crear_pagina(){
     
     var categorias = data.catalogos[0].categorias;
+    console.log(categorias);
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
             if(categorias[i].tipo == 0){
