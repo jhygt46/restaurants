@@ -318,7 +318,7 @@ function create_html_producto(id, detalle){
 }
 function create_html_promocion(obj){
     
-    console.log(obj);
+    console.log(obj.mostrar_prods);
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
