@@ -150,13 +150,15 @@ function html_paginas(){
     var li, id;
     var html = [];
     
-    for(var i=0, ilen=data.paginas.length; i<ilen; i++){
-        id = data.paginas[i].id_pag;
-        li = document.createElement('LI');
-        li.onclick = function(){ ver_pagina(id) };
-        li.innerHTML = data.paginas[i].nombre;
-        html.push(li);
-        
+    if(data.paginas){
+        for(var i=0, ilen=data.paginas.length; i<ilen; i++){
+            id = data.paginas[i].id_pag;
+            li = document.createElement('LI');
+            li.onclick = function(){ ver_pagina(id) };
+            li.innerHTML = data.paginas[i].nombre;
+            html.push(li);
+
+        }
     }
     return html;
     
