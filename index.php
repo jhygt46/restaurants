@@ -11,11 +11,6 @@ if(isset($_GET['param_dom'])){
 
 $inf = $core->get_web_js_data2($info['id_gir']);
 
-echo "<pre>";
-print_r($inf);
-echo "</pre>";
-
-exit;
 
 ?>
 
