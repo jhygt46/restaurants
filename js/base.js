@@ -9,6 +9,7 @@ var paso = 1;
 var history = [];
 var dir = 0;
 var catalogo = 0;
+var debug = 1;
 
 // INICIO BACK BUTTON //
 history.replaceState(null, document.title, location.pathname);
@@ -190,15 +191,9 @@ function ver_pagina(id){
 function crear_pagina(){
     
     var categorias = data.catalogos[catalogo].categorias;
-    
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
-            if(categorias[i].tipo == 0){
-                $('.cont_contenido').append(html_crear_categoria(categorias[i]));
-            }
-            if(categorias[i].tipo == 1){
-                $('.cont_contenido').append(html_crear_promociones(categorias[i]));
-            }
+            $('.cont_contenido').append(html_home_categorias(categorias[i]));  
         }
     }
     $('.lista_paginas').append(html_paginas());
@@ -215,7 +210,6 @@ function open_categoria(id){
     var categorias = data.catalogos[catalogo].categorias;
     var cats = [];
 
-    console.log(categorias);
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id){
             $('.modal_carta .titulo h1').html(categorias[i].nombre);
