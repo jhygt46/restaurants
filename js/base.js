@@ -317,7 +317,7 @@ function get_preguntas(id_pre){
 }
 
 function get_cats(tipo){
-    var categorias = data.categorias;
+    var categorias = data.catalogos[catalogo];
     var aux = [];
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].tipo == tipo){
