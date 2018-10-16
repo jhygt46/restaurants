@@ -8,6 +8,7 @@ var modal = 0;
 var paso = 1;
 var history = [];
 var dir = 0;
+var catalogo = 0;
 
 // INICIO BACK BUTTON //
 history.replaceState(null, document.title, location.pathname);
@@ -188,8 +189,8 @@ function ver_pagina(id){
 // INICIO CREAR PAGINA //
 function crear_pagina(){
     
-    var categorias = data.catalogos[0].categorias;
-    console.log(categorias);
+    var categorias = data.catalogos[catalogo].categorias;
+    
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
             if(categorias[i].tipo == 0){
@@ -207,9 +208,11 @@ function crear_pagina(){
 // INICIO ABRIR CATEGORIA //
 function open_categoria(id){
     
+    console.log("open_categoria-id:"+id);
+    
     show_modal('modal_carta');
     add_history('open_categoria', id);
-    var categorias = data.categorias;
+    var categorias = get_categorias();
     var cats = [];
 
     for(var i=0, ilen=categorias.length; i<ilen; i++){
@@ -269,7 +272,7 @@ function imprimir_categoria_modal(categorias){
 
 // GET CATEGORIAS - PRODUCTOS - PROMOS - PREGUNTAS //
 function get_producto(id_pro){
-    var productos = data.productos;
+    var productos = data.catalogos[catalogo].productos;
     for(var i=0, ilen=productos.length; i<ilen; i++){
         if(productos[i].id_pro == id_pro){
             return productos[i];
@@ -277,7 +280,7 @@ function get_producto(id_pro){
     }
 }
 function get_categoria(id_cae){
-    var categorias = data.categorias;
+    var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id_cae){
             return categorias[i];
@@ -285,7 +288,7 @@ function get_categoria(id_cae){
     }
 }
 function get_promocion(id_cae){
-    var promociones = data.categorias;
+    var promociones = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=promociones.length; i<ilen; i++){
         if(promociones[i].id_cae == id_cae){
             return promociones[i];
