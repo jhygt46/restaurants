@@ -212,9 +212,10 @@ function open_categoria(id){
     
     show_modal('modal_carta');
     add_history('open_categoria', id);
-    var categorias = get_categorias();
+    var categorias = data.catalogos[catalogo].categorias;
     var cats = [];
 
+    console.log(categorias);
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id){
             $('.modal_carta .titulo h1').html(categorias[i].nombre);
@@ -224,6 +225,7 @@ function open_categoria(id){
                     cats.push(categorias[j]);
                 }
             }
+            
             if(cats.length == 0){ imprimir_productos_modal(id) }
             if(cats.length > 0){ imprimir_categoria_modal(cats) }
         }
@@ -232,7 +234,8 @@ function open_categoria(id){
 }
 function imprimir_productos_modal(id){
     
-    console.log("ENTRO");
+    console.log("imprimir_productos_modal-id:"+id);
+    
     var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
 
@@ -240,8 +243,7 @@ function imprimir_productos_modal(id){
         var html = create_element_class('lista_productos');
         var productos = categoria.productos;
         for(var j=0, jlen=productos.length; j<jlen; j++){
-            console.log("BUENA NELSON");
-            html.appendChild(create_html_producto(productos[j], categoria.detalle_prods));
+            html.append(create_html_producto(productos[j], categoria.detalle_prods));
         }
     }
     if(categoria.tipo == 1){
@@ -253,6 +255,7 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
+    console.log("imprimir_categoria_modal");
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');

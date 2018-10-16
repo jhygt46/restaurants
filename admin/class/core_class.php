@@ -305,6 +305,8 @@ class Core{
             $aux_categoria['nombre'] = $categorias['resultado'][$i]['nombre'];
             $aux_categoria['ocultar'] = $categorias['resultado'][$i]['ocultar'];
             $aux_categoria['image'] = $categorias['resultado'][$i]['image'];
+            $aux_categoria['mostrar_prods'] = $categorias['resultado'][$i]['mostrar_prods'];
+            $aux_categoria['detalle_prods'] = $categorias['resultado'][$i]['detalle_prods'];
             
             if($categorias['resultado'][$i]['tipo'] == 0){
                 
