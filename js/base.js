@@ -9,7 +9,7 @@ var paso = 1;
 var history = [];
 var dir = 0;
 var catalogo = 0;
-var debug = 1;
+var debug = 0;
 
 // INICIO BACK BUTTON //
 history.replaceState(null, document.title, location.pathname);
@@ -74,7 +74,7 @@ function volver(accion){
 function ver_history(){
     console.log(JSON.parse(window.localStorage.getItem("back")) || []);
 }
-
+function set_debug(n){ debug=n; }
 
 // FIN BACK BUTTON //
 
@@ -203,7 +203,7 @@ function crear_pagina(){
 // INICIO ABRIR CATEGORIA //
 function open_categoria(id){
     
-    console.log("open_categoria-id:"+id);
+    if(debug == 1){ console.log("open_categoria-id:"+id) }
     
     show_modal('modal_carta');
     add_history('open_categoria', id);
@@ -213,7 +213,7 @@ function open_categoria(id){
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id){
             $('.modal_carta .titulo h1').html(categorias[i].nombre);
-            $('.modal_carta .titulo h2').html(categorias[i].descripcion);
+            $('.modal_carta .titulo h2').html(categorias[i].descripcion_sub);
             for(var j=0, jlen=categorias.length; j<jlen; j++){
                 if(categorias[i].id_cae == categorias[j].parent_id){
                     cats.push(categorias[j]);
@@ -228,7 +228,7 @@ function open_categoria(id){
 }
 function imprimir_productos_modal(id){
     
-    console.log("imprimir_productos_modal-id:"+id);
+    if(debug == 1){ console.log("imprimir_productos_modal-id:"+id) }
     
     var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
@@ -249,7 +249,7 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
-    console.log("imprimir_categoria_modal");
+    if(debug == 1){ console.log("imprimir_categoria_modal") }
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
@@ -387,7 +387,7 @@ function delete_pre_pro_carro(i){
 // PROCESS CARRO //
 function process_carro(){
     
-    console.log("PROCESS CARRO");
+    if(debug == 1){ console.log("PROCESS CARRO") }
     
     if(!carro_daemon()){
         

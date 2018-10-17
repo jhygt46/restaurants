@@ -47,6 +47,21 @@
 .modal_carta .lista_productos .categoria .descripcion{
     font-size: 10px;
 }
+.modal_carta .lista_productos .categoria .info{
+    
+}
+.modal_carta .lista_productos .categoria .info_cont{
+    padding: 10px 4px;
+}
+.modal_carta .lista_productos .categoria .info_cont .info_01{
+    width: calc(100% - 40px);
+    float: left;
+}
+.modal_carta .lista_productos .categoria .info_cont .info_02{
+    width: 40px;
+    float: left;
+    font-size: 40px;
+}
 
 .modal_carta{
        

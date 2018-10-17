@@ -7,13 +7,7 @@ function html_home_categorias(obj){
     Div.className = 'botones_principales';
     
     Div.style.backgroundImage = 'url("/images/categorias/'+obj.image+'")';
-    
-    if(obj.tipo == 0){
-        Div.onclick = function(){ open_categoria(obj.id_cae) };
-    }
-    if(obj.tipo == 1){
-        Div.onclick = function(){ open_categoria(obj.id_cae) };
-    }
+    Div.onclick = function(){ open_categoria(obj.id_cae) };
     
     var Divnombre = document.createElement('div');
     Divnombre.innerHTML = obj.nombre;
@@ -26,9 +20,9 @@ function html_home_categorias(obj){
         Divdescripcion.className = 'descripcion';
         Div.appendChild(Divdescripcion);
     }
-    if(obj.precio){
+    if(obj.precio > 0){
         var Divprecio = document.createElement('div');
-        Divprecio.innerHTML = '$'.obj.precio;
+        Divprecio.innerHTML = '$'+obj.precio;
         Divprecio.className = 'precio';
         Div.appendChild(Divprecio);
     }
@@ -36,20 +30,292 @@ function html_home_categorias(obj){
 
 }
 
-// AUX CREAR ELEMENTOS // 
-function create_element_class(clase){
+
+// HTML MODALS //
+function create_html_categorias(obj){
+    
+    if(debug == 1){ console.log("html_func-> create_html_categorias-id:"+obj.id_cae) }
+    
     var Div = document.createElement('div');
-    Div.className = clase;
+    Div.className = 'categoria';
+    Div.onclick = function(){ open_categoria(obj.id_cae) };
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'nombre';
+    Nombre.innerHTML = obj.nombre+" BUENA NELSON";
+    Div.appendChild(Nombre);
+    
+    var Descripcion = document.createElement('div');
+    Descripcion.className = 'descripcion';
+    Descripcion.innerHTML = 'descripcion de la categoria';
+    Div.appendChild(Descripcion);
+    
+    if(obj.mostrar_prods == 1){
+        
+        var listado = document.createElement('div');
+        listado.className = 'listado';
+        var producto;
+        var aux;
+        
+        if(obj.productos){
+            for(var i=0, ilen=obj.productos.length; i<ilen; i++){
+
+                aux = get_producto(obj.productos[i]);
+                producto = document.createElement('div');
+                producto.className = 'prod_item';
+                producto.innerHTML = aux.nombre;
+                producto.onclick = function(){ add_carro_producto(aux.id_pro) };
+
+                listado.appendChild(producto);
+
+            }
+        }
+        Div.appendChild(listado);
+    }
+    
     return Div;
+    
 }
-function create_element_class_value(clase, value){
-    var Div = document.createElement('div');
-    Div.className = clase;
-    Div.innerHTML = value;
+function create_html_producto(id, detalle){
+    
+    if(debug == 1){ console.log("html_func-> create_html_producto-id:"+id) }
+    
+    var aux = get_producto(id);
+    if(detalle == 0){
+        
+        var Div = document.createElement('div');
+        Div.className = 'categoria';
+        Div.onclick = function(){ add_carro_producto(aux.id_pro) };
+        
+        var Nombre = document.createElement('div');
+        Nombre.className = 'nombre';
+        Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
+        Nombre.onclick = function(){ add_carro_producto(aux.id_pro) };
+        Div.appendChild(Nombre);
+        
+    }
+    if(detalle == 1){
+        
+        var Div = document.createElement('div');
+        Div.className = 'categoria';
+        
+        var Nombre = create_element_class_inner('nombre', aux.numero + ' ' + aux.nombre);
+        Nombre.onclick = function(){ ver_detalle_producto(this) };
+        Div.appendChild(Nombre);
+        
+        var Info = create_element_class('info hide');
+        
+        var Info_cont = create_element_class('info_cont clearfix');
+        var info_01 = create_element_class_inner('info_01', 'INFO 1');
+        Info_cont.appendChild(info_01);
+        var info_02 = create_element_class_inner('info_02 material-icons', 'shopping_cart');
+        Info_cont.appendChild(info_02);
+        
+        Info.appendChild(Info_cont);
+        Div.appendChild(Info);
+        
+    }
+    
     return Div;
+    
+}
+function create_html_promocion(obj){
+    
+    if(debug == 1){ console.log("html_func-> create_html_promocion-id:"+obj.id_cae) }
+    
+    var Div = document.createElement('div');
+    Div.className = 'categoria';
+    Div.onclick = function(){ open_categoria(obj.id_cae) };
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'nombre';
+    Nombre.innerHTML = obj.nombre;
+    Div.appendChild(Nombre);
+    
+    var Descripcion = document.createElement('div');
+    Descripcion.className = 'descripcion';
+    Descripcion.innerHTML = obj.descripcion;
+    Div.appendChild(Descripcion);
+    
+    if(obj.mostrar_prods == 1){
+        
+        var listado = document.createElement('div');
+        listado.className = 'listado';
+        var producto;
+        var cat;
+        var aux;
+        if(obj.categorias){
+            for(var i=0, ilen=obj.categorias.length; i<ilen; i++){
+                aux = get_categoria(obj.categorias[i].id_cae);
+                cat = document.createElement('div');
+                cat.className = 'prod_item';
+                cat.innerHTML = obj.categorias[i].cantidad + " " +aux.nombre;
+                listado.appendChild(cat);
+            }
+        }
+        if(obj.productos){
+            for(var i=0, ilen=obj.productos.length; i<ilen; i++){
+                aux = get_producto(obj.productos[i].id_pro);
+                producto = document.createElement('div');
+                producto.className = 'prod_item';
+                producto.innerHTML = obj.productos[i].cantidad + " " +aux.nombre;
+                listado.appendChild(producto);
+            }
+        }
+        
+        Div.appendChild(listado);
+        
+    }
+    
+    return Div;
+    
 }
 
 
+// PROMOS //
+function promo_carros(producto, j){
+    
+    var Div = document.createElement('div');
+    Div.className = 'promo_detalle_item clearfix';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'promo_detalle_nombre';
+    Nombre.innerHTML = producto.nombre;
+    Div.appendChild(Nombre);
+    
+    var Acciones = document.createElement('div');
+    Acciones.className = 'promo_detalle_acciones clearfix';
+
+    var Precio = document.createElement('div');
+    Precio.className = 'precio';
+    Precio.innerHTML = 3000;
+    Acciones.appendChild(Precio);
+    
+    var Accion = document.createElement('div');
+    Accion.className = 'accion';
+    Accion.innerHTML = 'DEL';
+    Accion.onclick = function(){ delete_pro_carro(j) };
+    Acciones.appendChild(Accion);
+    
+    Div.appendChild(Acciones);
+    return Div;
+    
+}
+function promo_restantes(producto, j){
+    
+    var Div = document.createElement('div');
+    Div.className = 'restantes_detalle_item clearfix';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'restantes_detalle_nombre';
+    Nombre.innerHTML = producto.nombre;
+    Div.appendChild(Nombre);
+    
+    var Acciones = document.createElement('div');
+    Acciones.className = 'restantes_detalle_acciones clearfix';
+
+    var Precio = document.createElement('div');
+    Precio.className = 'precio';
+    Precio.innerHTML = 3000;
+    Acciones.appendChild(Precio);
+    
+    var Accion = document.createElement('div');
+    Accion.className = 'accion';
+    Accion.innerHTML = 'DEL';
+    Accion.onclick = function(){ delete_pro_carro(j) };
+    Acciones.appendChild(Accion);
+    
+    Div.appendChild(Acciones);
+    return Div;
+    
+}
+function promo_nombre(promocion){
+    
+    var Div = document.createElement('div');
+    Div.className = 'process_carro_promo';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'promo_info';
+    Nombre.innerHTML = promocion.nombre;
+    Div.appendChild(Nombre);            
+    
+    return Div;
+    
+}
+
+
+// PROMO DETALLE //
+function imprimir_promo_modal(categoria){
+    
+    if(debug == 1){ console.log("html_func-> imprimir_promo_modal-id:"+categoria.id_cae) }
+    
+    var html = document.createElement('div');
+    html.className = 'lista_promociones';
+    html.onclick = function(){ add_carro_promocion(categoria.id_cae) };
+            
+    if(categoria.categorias){
+        
+        var catDiv = document.createElement('div');
+        catDiv.className = 'promocion_categoria';
+        
+        var cattitDiv = document.createElement('div');
+        cattitDiv.className = 'pro_titulo';
+        cattitDiv.innerHTML = 'Elije:';
+        
+        catDiv.appendChild(cattitDiv);
+        var itemDiv;
+
+        for(var j=0, jlen=categoria.categorias.length; j<jlen; j++){
+            
+            itemDiv = document.createElement('div');
+            itemDiv.className = 'item_pro_cat clearfix';
+            
+            var cantDiv = document.createElement('div');
+            cantDiv.className = 'item_pro_cat_cant';
+            cantDiv.innerHTML = categoria.categorias[j].cantidad;
+            itemDiv.appendChild(cantDiv);
+            
+            var nomDiv = document.createElement('div');
+            nomDiv.className = 'item_pro_cat_nom';
+            nomDiv.innerHTML = get_categoria(categoria.categorias[j].id_cae).nombre;
+            itemDiv.appendChild(nomDiv);
+            catDiv.appendChild(itemDiv);
+            
+        }
+        
+        html.appendChild(catDiv);
+    }
+    if(categoria.productos){
+        
+        var proDiv = document.createElement('div');
+        proDiv.className = 'promocion_producto';
+        
+        var protitDiv = document.createElement('div');
+        protitDiv.className = 'pro_titulo';
+        protitDiv.innerHTML = 'Productos';
+        
+        proDiv.appendChild(protitDiv);
+        var itemDiv;
+        
+        for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
+            
+            itemDiv = document.createElement('div');
+            itemDiv.className = 'item_pro_pro';
+            itemDiv.innerHTML = get_producto(categoria.productos[j].id_pro).nombre;
+            proDiv.appendChild(itemDiv);
+            
+        }
+        
+        html.appendChild(proDiv);
+    }
+
+    //html += '<div class="promo_precio">$9.990</div></div>';
+    return html;
+    
+}
+
+
+// PREGUNTAS PRODUCTOS //
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
     var producto;
@@ -146,6 +412,17 @@ function html_preguntas_producto(carro, i){
     return html;
     
 }
+
+// VER DETALLE PRODUCTO//
+function ver_detalle_producto(that){
+    if(that.parentElement.childNodes[1].style.display == 'block'){
+        that.parentElement.childNodes[1].style.display = 'none';
+    }else{
+        that.parentElement.childNodes[1].style.display = 'block';
+    }
+}
+
+// HTML PAGINAS //
 function html_paginas(){
     
     var li, id;
@@ -164,281 +441,16 @@ function html_paginas(){
     return html;
     
 }
-function imprimir_promo_modal(categoria){
-    
-    console.log("html_func-> imprimir_promo_modal-id:"+categoria.id_cae);
-    
-    var html = document.createElement('div');
-    html.className = 'lista_promociones';
-    html.onclick = function(){ add_carro_promocion(categoria.id_cae) };
-            
-    if(categoria.categorias){
-        
-        var catDiv = document.createElement('div');
-        catDiv.className = 'promocion_categoria';
-        
-        var cattitDiv = document.createElement('div');
-        cattitDiv.className = 'pro_titulo';
-        cattitDiv.innerHTML = 'Elije:';
-        
-        catDiv.appendChild(cattitDiv);
-        var itemDiv;
 
-        for(var j=0, jlen=categoria.categorias.length; j<jlen; j++){
-            
-            itemDiv = document.createElement('div');
-            itemDiv.className = 'item_pro_cat clearfix';
-            
-            var cantDiv = document.createElement('div');
-            cantDiv.className = 'item_pro_cat_cant';
-            cantDiv.innerHTML = categoria.categorias[j].cantidad;
-            itemDiv.appendChild(cantDiv);
-            
-            var nomDiv = document.createElement('div');
-            nomDiv.className = 'item_pro_cat_nom';
-            nomDiv.innerHTML = get_categoria(categoria.categorias[j].id_cae).nombre;
-            itemDiv.appendChild(nomDiv);
-            catDiv.appendChild(itemDiv);
-            
-        }
-        
-        html.appendChild(catDiv);
-    }
-    if(categoria.productos){
-        
-        var proDiv = document.createElement('div');
-        proDiv.className = 'promocion_producto';
-        
-        var protitDiv = document.createElement('div');
-        protitDiv.className = 'pro_titulo';
-        protitDiv.innerHTML = 'Productos';
-        
-        proDiv.appendChild(protitDiv);
-        var itemDiv;
-        
-        for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
-            
-            itemDiv = document.createElement('div');
-            itemDiv.className = 'item_pro_pro';
-            itemDiv.innerHTML = get_producto(categoria.productos[j].id_pro).nombre;
-            proDiv.appendChild(itemDiv);
-            
-        }
-        
-        html.appendChild(proDiv);
-    }
-
-    //html += '<div class="promo_precio">$9.990</div></div>';
-    return html;
-    
-}
-function create_html_categorias(obj){
-    
-    console.log("html_func-> create_html_categorias-id:"+obj.id_cae);
-    
+// AUX CREAR ELEMENTOS // 
+function create_element_class(clase){
     var Div = document.createElement('div');
-    Div.className = 'categoria';
-    Div.onclick = function(){ open_categoria(obj.id_cae) };
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'nombre';
-    Nombre.innerHTML = obj.nombre+" BUENA NELSON";
-    Div.appendChild(Nombre);
-    
-    var Descripcion = document.createElement('div');
-    Descripcion.className = 'descripcion';
-    Descripcion.innerHTML = 'descripcion de la categoria';
-    Div.appendChild(Descripcion);
-    
-    if(obj.mostrar_prods == 1){
-        
-        var listado = document.createElement('div');
-        listado.className = 'listado';
-        var producto;
-        var aux;
-        
-        if(obj.productos){
-            for(var i=0, ilen=obj.productos.length; i<ilen; i++){
-
-                aux = get_producto(obj.productos[i]);
-                producto = document.createElement('div');
-                producto.className = 'prod_item';
-                producto.innerHTML = aux.nombre;
-                producto.onclick = function(){ add_carro_producto(aux.id_pro) };
-
-                listado.appendChild(producto);
-
-            }
-        }
-        Div.appendChild(listado);
-    }
-    
+    Div.className = clase;
     return Div;
-    
 }
-function ver_detalle_producto(that){
-    if(that.parentElement.childNodes[1].style.display == 'block'){
-        that.parentElement.childNodes[1].style.display = 'none';
-    }else{
-        that.parentElement.childNodes[1].style.display = 'block';
-    }
-}
-function create_html_producto(id, detalle){
-    
-    console.log("html_func-> create_html_producto-id:"+id);
-    
-    var aux = get_producto(id);
-    if(detalle == 0){
-        
-        var Div = document.createElement('div');
-        Div.className = 'categoria';
-        Div.onclick = function(){ add_carro_producto(aux.id_pro) };
-        
-        var Nombre = document.createElement('div');
-        Nombre.className = 'nombre';
-        Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
-        Nombre.onclick = function(){ add_carro_producto(aux.id_pro) };
-        Div.appendChild(Nombre);
-        
-    }
-    if(detalle == 1){
-        
-        var Div = document.createElement('div');
-        Div.className = 'categoria';
-        
-        var Nombre = document.createElement('div');
-        Nombre.className = 'nombre';
-        Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
-        Nombre.onclick = function(){ ver_detalle_producto(this) };
-        Div.appendChild(Nombre);
-        
-        var Info = document.createElement('div');
-        Info.className = 'info hide';
-        Info.innerHTML = 'info';
-        Div.appendChild(Info);
-        
-    }
-    
-    return Div;
-    
-}
-function create_html_promocion(obj){
-    
-    console.log("html_func-> create_html_promocion-id:"+obj.id_cae);
-    
+function create_element_class_inner(clase, value){
     var Div = document.createElement('div');
-    Div.className = 'categoria';
-    Div.onclick = function(){ open_categoria(obj.id_cae) };
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'nombre';
-    Nombre.innerHTML = obj.nombre;
-    Div.appendChild(Nombre);
-    
-    var Descripcion = document.createElement('div');
-    Descripcion.className = 'descripcion';
-    Descripcion.innerHTML = obj.descripcion;
-    Div.appendChild(Descripcion);
-    
-    if(obj.mostrar_prods == 1){
-        
-        var listado = document.createElement('div');
-        listado.className = 'listado';
-        var producto;
-        var cat;
-        var aux;
-        if(obj.categorias){
-            for(var i=0, ilen=obj.categorias.length; i<ilen; i++){
-                aux = get_categoria(obj.categorias[i].id_cae);
-                cat = document.createElement('div');
-                cat.className = 'prod_item';
-                cat.innerHTML = obj.categorias[i].cantidad + " " +aux.nombre;
-                listado.appendChild(cat);
-            }
-        }
-        if(obj.productos){
-            for(var i=0, ilen=obj.productos.length; i<ilen; i++){
-                aux = get_producto(obj.productos[i].id_pro);
-                producto = document.createElement('div');
-                producto.className = 'prod_item';
-                producto.innerHTML = obj.productos[i].cantidad + " " +aux.nombre;
-                listado.appendChild(producto);
-            }
-        }
-        
-        Div.appendChild(listado);
-        
-    }
-    
+    Div.className = clase;
+    Div.innerHTML = value;
     return Div;
-    
-}
-function promo_carros(producto, j){
-    
-    var Div = document.createElement('div');
-    Div.className = 'promo_detalle_item clearfix';
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'promo_detalle_nombre';
-    Nombre.innerHTML = producto.nombre;
-    Div.appendChild(Nombre);
-    
-    var Acciones = document.createElement('div');
-    Acciones.className = 'promo_detalle_acciones clearfix';
-
-    var Precio = document.createElement('div');
-    Precio.className = 'precio';
-    Precio.innerHTML = 3000;
-    Acciones.appendChild(Precio);
-    
-    var Accion = document.createElement('div');
-    Accion.className = 'accion';
-    Accion.innerHTML = 'DEL';
-    Accion.onclick = function(){ delete_pro_carro(j) };
-    Acciones.appendChild(Accion);
-    
-    Div.appendChild(Acciones);
-    return Div;
-    
-}
-function promo_restantes(producto, j){
-    
-    var Div = document.createElement('div');
-    Div.className = 'restantes_detalle_item clearfix';
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'restantes_detalle_nombre';
-    Nombre.innerHTML = producto.nombre;
-    Div.appendChild(Nombre);
-    
-    var Acciones = document.createElement('div');
-    Acciones.className = 'restantes_detalle_acciones clearfix';
-
-    var Precio = document.createElement('div');
-    Precio.className = 'precio';
-    Precio.innerHTML = 3000;
-    Acciones.appendChild(Precio);
-    
-    var Accion = document.createElement('div');
-    Accion.className = 'accion';
-    Accion.innerHTML = 'DEL';
-    Accion.onclick = function(){ delete_pro_carro(j) };
-    Acciones.appendChild(Accion);
-    
-    Div.appendChild(Acciones);
-    return Div;
-    
-}
-function promo_nombre(promocion){
-    
-    var Div = document.createElement('div');
-    Div.className = 'process_carro_promo';
-    
-    var Nombre = document.createElement('div');
-    Nombre.className = 'promo_info';
-    Nombre.innerHTML = promocion.nombre;
-    Div.appendChild(Nombre);            
-    
-    return Div;
-    
 }

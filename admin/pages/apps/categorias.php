@@ -86,8 +86,16 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
-                        <span>Descripcion:</span>
+                        <span>Descripcion Inicio:</span>
                         <input id="descripcion" type="text" value="<?php echo $that['descripcion']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
+                        <span>Descripcion Subtitulo:</span>
+                        <input id="descripcion_sub" type="text" value="<?php echo $that['descripcion_sub']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
+                        <span>Precio:</span>
+                        <input id="precio" type="text" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <span>Tipo:</span>
