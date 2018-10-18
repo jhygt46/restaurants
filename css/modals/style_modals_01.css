@@ -4,7 +4,7 @@
 }
 /* MODAL CARRO */
 .modal_carro .info_modal{
-    
+    padding-bottom: 52px;
 }
 /* MODAL PRODUCTOS PROMO */
 .modal_productos_promo .info_modal{
@@ -41,6 +41,20 @@
     margin-bottom: 6px;
     padding: 6px;
 }
+.modal_carta .lista_productos .categoria .detalle_pro{
+    
+}
+.modal_carta .lista_productos .categoria .detalle_pro .nombre_pro{
+    width: calc(100% - 70px);
+    float: left;
+    font-size: 13px;
+}
+.modal_carta .lista_productos .categoria .detalle_pro .precio_pro{
+    width: 70px;
+    float: left;
+    text-align: right;
+    font-size: 16px;
+}
 .modal_carta .lista_productos .categoria .nombre{
     font-size: 16px;
 }
@@ -51,16 +65,18 @@
     
 }
 .modal_carta .lista_productos .categoria .info_cont{
-    padding: 10px 4px;
+    
 }
 .modal_carta .lista_productos .categoria .info_cont .info_01{
-    width: calc(100% - 40px);
+    width: calc(100% - 30px);
     float: left;
+    font-size: 12px;
+    padding-top: 9px;
 }
 .modal_carta .lista_productos .categoria .info_cont .info_02{
-    width: 40px;
+    width: 30px;
     float: left;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .modal_carta{
@@ -86,18 +102,33 @@
     padding: 6px;
 }
 .modal_carta .lista_categorias .categoria .nombre{
-    font-size: 16px;
+    font-size: 20px;
 }
 .modal_carta .lista_categorias .categoria .descripcion{
     font-size: 10px;
 }
 .modal_carta .lista_categorias .categoria .listado{
-    
+    color: #000;
+    padding-top: 6px;
 }
 .modal_carta .lista_categorias .categoria .listado .prod_item{
-    font-size: 12px;
-    color: #f00;
+    font-size: 14px;
     padding-top: 2px;
+}
+.modal_carta .lista_categorias .categoria .listado .prod_item .prod_i_nom{
+    float: left;
+    width: 78%;
+    padding-right: 2%;
+    font-size: 12px;
+}
+.modal_carta .lista_categorias .categoria .listado .prod_item .prod_i_pre{
+    float: left;
+    width: 20%;
+    text-align: right;
+    font-size: 16px;
+}
+.modal_carta .lista_categorias .categoria .listado .prod_item{
+    
 }
 
 .modal_productos_promo{
@@ -120,10 +151,12 @@
     width: calc(100% - 50px);
     float: left;
     padding-left: 10px;
-    font-size: 12px;
-    padding-top: 4px;
+    font-size: 16px;
+    padding-top: 0px;
 }
-
+.modal_productos_promo .info_modal{
+    padding-bottom: 52px;
+}
 
 
 
@@ -206,54 +239,61 @@
     margin-bottom: 1px;
 }
 .modal_carro .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_nombre{
-    width: calc(100% - 60px);
+    width: calc(100% - 75px);
     float: left;
-    font-size: 10px;
+    font-size: 13px;
+    padding-top: 6px;
 }
 .modal_carro .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones{
-    width: 60px;
+    width: 75px;
     float: left;
 }
 .modal_carro .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .accion{
     width: 19px;
     float: left;
-    background: #f00;
     margin-left: 1px;
 }
 .modal_carro .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .precio{
-    width: 39px;
+    width: 54px;
     float: left;
-    background: #f0f;
     margin-left: 1px;
+    padding-top: 6px;
+    font-size: 13px;
 }
 .modal_carro .process_carro .process_carro_restantes{
     background: #ccc;
     padding: 6px;
 }
 .modal_carro .process_carro .process_carro_restantes .restantes_detalle_item{
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 .modal_carro .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_nombre{
-    width: calc(100% - 60px);
+    width: calc(100% - 75px);
     float: left;
     font-size: 12px;
+    padding-top: 6px;
 }
 .modal_carro .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones{
-    width: 60px;
+    width: 75px;
     float: left;
 }
 .modal_carro .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .accion{
     width: 19px;
     float: left;
-    background: #f00;
     margin-left: 1px;
 }
 .modal_carro .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .precio{
-    width: 39px;
+    width: 54px;
     float: left;
-    background: #f00;
     margin-left: 1px;
+    font-size: 13px;
+    padding-top: 6px;
 }
+.modal_carro .process_carro .process_carro_precio_carta{
+    font-size: 40px;
+    text-align: right;
+}
+
 .carro_direccion{
     height: calc(100% - 124px);
 }

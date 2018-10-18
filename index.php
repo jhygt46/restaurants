@@ -67,7 +67,7 @@ $inf = $core->get_web_js_data2($info['id_gir']);
                     <div class="modal vhalign hide modal_pagina">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
-                            <div class="close"></div>
+                            <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>
@@ -76,7 +76,7 @@ $inf = $core->get_web_js_data2($info['id_gir']);
                     <div class="modal vhalign hide modal_carta">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="buena"></h1><h2 class=""></h2></div></div>
-                            <div class="close"></div>
+                            <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>
@@ -85,7 +85,7 @@ $inf = $core->get_web_js_data2($info['id_gir']);
                     <div class="modal vhalign hide modal_carro">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
-                            <div class="close"></div>
+                            <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal carro_inicio"></div>
                                 <div class="info_modal carro_direccion hide">
@@ -189,7 +189,7 @@ $inf = $core->get_web_js_data2($info['id_gir']);
                         <div class="cont_modal">
                             <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
-                            <div class="close"></div>
+                            <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>
@@ -203,7 +203,7 @@ $inf = $core->get_web_js_data2($info['id_gir']);
                         <div class="cont_modal">
                             <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
-                            <div class="close"></div>
+                            <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>

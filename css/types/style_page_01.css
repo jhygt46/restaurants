@@ -150,6 +150,8 @@
     top: -12px;
     right: -12px;
     border-radius: 17px;
+    color: #333;
+    font-size: 35px;
 }
 .style_page_1 .contenedor .modals .cont_modals .modal .cont_modal .cont_info{
     background: #ddd;

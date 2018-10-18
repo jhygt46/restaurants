@@ -38,33 +38,45 @@ function create_html_categorias(obj){
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
-    Div.onclick = function(){ open_categoria(obj.id_cae) };
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
-    Nombre.innerHTML = obj.nombre+" BUENA NELSON";
+    Nombre.innerHTML = obj.nombre;
+    Nombre.onclick = function(){ open_categoria(obj.id_cae) };
     Div.appendChild(Nombre);
     
     var Descripcion = document.createElement('div');
     Descripcion.className = 'descripcion';
-    Descripcion.innerHTML = 'descripcion de la categoria';
+    Descripcion.innerHTML = obj.descripcion;
+    Descripcion.onclick = function(){ open_categoria(obj.id_cae) };
     Div.appendChild(Descripcion);
     
     if(obj.mostrar_prods == 1){
         
         var listado = document.createElement('div');
         listado.className = 'listado';
-        var producto;
-        var aux;
         
         if(obj.productos){
+            
+            var producto, p_nombre, p_precio;
+            var aux;
+            
             for(var i=0, ilen=obj.productos.length; i<ilen; i++){
 
                 aux = get_producto(obj.productos[i]);
                 producto = document.createElement('div');
-                producto.className = 'prod_item';
-                producto.innerHTML = aux.nombre;
+                producto.className = 'prod_item clearfix';
                 producto.onclick = function(){ add_carro_producto(aux.id_pro) };
+                
+                p_nombre = document.createElement('div');
+                p_nombre.className = 'prod_i_nom';
+                p_nombre.innerHTML = aux.nombre;
+                producto.appendChild(p_nombre);
+                
+                p_precio = document.createElement('div');
+                p_precio.className = 'prod_i_pre';
+                p_precio.innerHTML = '$12.900';
+                producto.appendChild(p_precio);
 
                 listado.appendChild(producto);
 
@@ -87,11 +99,20 @@ function create_html_producto(id, detalle){
         Div.className = 'categoria';
         Div.onclick = function(){ add_carro_producto(aux.id_pro) };
         
-        var Nombre = document.createElement('div');
-        Nombre.className = 'nombre';
-        Nombre.innerHTML = aux.numero + ' ' + aux.nombre;
-        Nombre.onclick = function(){ add_carro_producto(aux.id_pro) };
-        Div.appendChild(Nombre);
+        var detalle = document.createElement('div');
+        detalle.className = 'detalle_pro clearfix';
+        
+        var nombre = document.createElement('div');
+        nombre.className = 'nombre_pro';
+        nombre.innerHTML = aux.numero + " " + aux.nombre;
+        detalle.appendChild(nombre);
+        
+        var precio = document.createElement('div');
+        precio.className = 'precio_pro';
+        precio.innerHTML = '$12.990';
+        detalle.appendChild(precio);
+        
+        Div.appendChild(detalle);
         
     }
     if(detalle == 1){
@@ -99,9 +120,22 @@ function create_html_producto(id, detalle){
         var Div = document.createElement('div');
         Div.className = 'categoria';
         
-        var Nombre = create_element_class_inner('nombre', aux.numero + ' ' + aux.nombre);
-        Nombre.onclick = function(){ ver_detalle_producto(this) };
-        Div.appendChild(Nombre);
+        var detalle = document.createElement('div');
+        detalle.className = 'detalle_pro clearfix';
+        detalle.onclick = function(){ ver_detalle_producto(this) }
+        
+        var nombre = document.createElement('div');
+        nombre.className = 'nombre_pro';
+        nombre.innerHTML = aux.numero + " " + aux.nombre;
+        detalle.appendChild(nombre);
+        
+        var precio = document.createElement('div');
+        precio.className = 'precio_pro';
+        precio.innerHTML = '$12.990';
+        detalle.appendChild(precio);
+        
+        Div.appendChild(detalle);
+
         
         var Info = create_element_class('info hide');
         
@@ -125,7 +159,7 @@ function create_html_promocion(obj){
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
-    Div.onclick = function(){ open_categoria(obj.id_cae) };
+    Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
@@ -149,7 +183,7 @@ function create_html_promocion(obj){
                 aux = get_categoria(obj.categorias[i].id_cae);
                 cat = document.createElement('div');
                 cat.className = 'prod_item';
-                cat.innerHTML = obj.categorias[i].cantidad + " " +aux.nombre;
+                cat.innerHTML = "- " + obj.categorias[i].cantidad + " " +aux.nombre;
                 listado.appendChild(cat);
             }
         }
@@ -158,7 +192,7 @@ function create_html_promocion(obj){
                 aux = get_producto(obj.productos[i].id_pro);
                 producto = document.createElement('div');
                 producto.className = 'prod_item';
-                producto.innerHTML = obj.productos[i].cantidad + " " +aux.nombre;
+                producto.innerHTML = "- " + obj.productos[i].cantidad + " " +aux.nombre;
                 listado.appendChild(producto);
             }
         }
@@ -188,12 +222,12 @@ function promo_carros(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = 3000;
+    Precio.innerHTML = '$2.990';
     Acciones.appendChild(Precio);
     
     var Accion = document.createElement('div');
-    Accion.className = 'accion';
-    Accion.innerHTML = 'DEL';
+    Accion.className = 'accion material-icons';
+    Accion.innerHTML = 'close';
     Accion.onclick = function(){ delete_pro_carro(j) };
     Acciones.appendChild(Accion);
     
@@ -216,17 +250,18 @@ function promo_restantes(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = 3000;
+    Precio.innerHTML = '$2.990';
     Acciones.appendChild(Precio);
     
     var Accion = document.createElement('div');
-    Accion.className = 'accion';
-    Accion.innerHTML = 'DEL';
+    Accion.className = 'accion material-icons';
+    Accion.innerHTML = 'close';
     Accion.onclick = function(){ delete_pro_carro(j) };
     Acciones.appendChild(Accion);
     
     Div.appendChild(Acciones);
     return Div;
+
     
 }
 function promo_nombre(promocion){

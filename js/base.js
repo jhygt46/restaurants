@@ -314,11 +314,12 @@ function get_preguntas(id_pre){
 }
 
 function get_cats(tipo){
-    var categorias = data.catalogos[catalogo];
+    var categorias = data.catalogos[catalogo].categorias;
     var aux = [];
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].tipo == tipo){
             aux.push(categorias[i]);
+            
         }
     }
     return aux;
@@ -408,7 +409,8 @@ function process_carro(){
             process_carro_promo = create_element_class('process_carro_promo');
             
             promo_detalle = create_element_class('promo_detalle');
-            promo_info = create_element_class_value('promo_info', promocion.nombre);
+            promo_info = create_element_class_inner('promo_info', promocion.nombre);
+            process_carro_promo.appendChild(promo_info);
             
             for(var j=0, jlen=carro.length; j<jlen; j++){
                 if(carro[j].promo == i){
@@ -417,9 +419,8 @@ function process_carro(){
                     promo_detalle.appendChild(promo_carros(producto, j));
                 }
             }
-            
-            process_carro_promo.appendChild(promo_info);
             process_carro_promo.appendChild(promo_detalle);
+            
             html.appendChild(process_carro_promo);
 
         }
@@ -434,6 +435,10 @@ function process_carro(){
         }
 
         html.appendChild(process_carro_restantes);
+        
+        var precio = create_element_class_inner('process_carro_precio_carta', 'total: $7.990');
+        html.appendChild(precio);
+        
         $('.cantcart_num').html(count);
         $('.modal_carro .carro_inicio').append(html);
     }
@@ -461,6 +466,7 @@ function process_new_promos(){
     
     var carro = get_carro_limpio();
     var promos = process_promo();
+    
     var carro_promos = [];
     var ocupados = [];
     var pos = 0;
@@ -506,12 +512,14 @@ function process_new_promos(){
 function process_promo(){
     
     var promos = get_promociones();
+    
     var productos = [];
     var aux = [];
     var cantidad = 0;
     
     for(var i=0, ilen=promos.length; i<ilen; i++){
         productos = [];
+        cantidad = 0;
         if(promos[i].categorias){
             for(var j=0; j<promos[i].categorias.length; j++){
                 for(var k=0, klen=promos[i].categorias[j].cantidad; k<klen; k++){
@@ -532,7 +540,9 @@ function process_promo(){
             aux.push({id_cae: promos[i].id_cae, nombre: promos[i].nombre, productos: productos, cantidad: cantidad});
         }
     }
-    aux.sort(function(a, b){return a.cantidad - b.cantidad});
+    aux.sort(function (a, b){
+        return (b.cantidad - a.cantidad)
+    })
     return aux;
     
 }
