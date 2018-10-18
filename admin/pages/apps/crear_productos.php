@@ -44,10 +44,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
         $id_pro = $_GET["id_pro"];
         $sub_titulo = $sub_titulo2;
         $that = $fireapp->get_producto($id_pro);
-        echo "<pre>";
-        print_r($that);
-        echo "<pre>";
-        
         
     }
     
