@@ -1,5 +1,8 @@
 <?php
 
+echo"Buena Nelson";
+exit;
+
 require('admin/class/core_class.php');
 $core = new Core();
 
