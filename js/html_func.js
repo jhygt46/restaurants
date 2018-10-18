@@ -131,7 +131,7 @@ function create_html_producto(id, detalle){
         
         var precio = document.createElement('div');
         precio.className = 'precio_pro';
-        precio.innerHTML = '$12.990';
+        precio.innerHTML = aux.precio;
         detalle.appendChild(precio);
         
         Div.appendChild(detalle);
