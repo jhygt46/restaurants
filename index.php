@@ -1,11 +1,11 @@
 <?php
 
 echo"Buena Nelson";
-exit;
+
 
 require('admin/class/core_class.php');
 $core = new Core();
-
+exit;
 if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
 }else{
