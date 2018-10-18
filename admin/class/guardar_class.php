@@ -623,9 +623,6 @@ class Guardar extends Core{
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
         
-        $info['tipo'] = $tipo;
-        $info['id_pro'] = $id_pro;
-        
         if($tipo == 0){
             if($id_pro == 0){
                 $pro = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");

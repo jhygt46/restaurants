@@ -241,7 +241,7 @@ class Core{
         return $productos['resultado'];
     }
     public function get_producto($id_pro){
-        $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."'");
+        $productos = $this->con->sql("SELECT * FROM productos t1, productos_precio t2 WHERE t1.id_pro='".$id_pro."' AND t1.id_pro=t2.id_pro AND t2.id_cat='".$this->id_cat."'");
         return $productos['resultado'][0];
     }
     public function get_paginas(){
