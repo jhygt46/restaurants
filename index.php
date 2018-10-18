@@ -3,17 +3,15 @@
 require('admin/class/core_class.php');
 $core = new Core();
 
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
-
 if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
+    $core->get_web_js_data2($info['id_gir']);
 }else{
+    //$info = $core->get_data();
     $info = $core->get_data('www.runasushi.cl');
 }
 
-$core->get_web_js_data2($info['id_gir']);
+
 
 ?>
 
