@@ -323,7 +323,7 @@ class Core{
                         $aux_productos['nombre'] = $prods_sql['resultado'][$j]['nombre'];
                         $aux_productos['numero'] = $prods_sql['resultado'][$j]['numero'];
                         $aux_productos['descripcion'] = $prods_sql['resultado'][$j]['descripcion'];
-                        $aux_productos['simple_txt'] = $prods_sql['resultado'][$j]['simple_txt'];
+                        $aux_productos['precio'] = $prods_sql['resultado'][$j]['precio'];
                         
                         $aux_prods[] = $prods_sql['resultado'][$j]['id_pro'];
                         
