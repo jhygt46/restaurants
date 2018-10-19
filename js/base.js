@@ -920,6 +920,7 @@ function initMap(){
         if(places.length == 1){
             
             var pedido = get_pedido();
+            pedido.num = 0;
             
             for(var i=0; i<places[0].address_components.length; i++){
                 if(places[0].address_components[i].types[0] == "street_number"){
@@ -933,7 +934,7 @@ function initMap(){
                 }
             }
             
-            if(pedido.num !== null){
+            if(pedido.num != 0){
                 
                 var send = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
@@ -942,6 +943,7 @@ function initMap(){
                     data: send,
                     success: function(datas){
                         
+                        console.log(data);
                         var data = JSON.parse(datas);
 
                         if(data.op == 1){
