@@ -394,6 +394,7 @@ function process_carro(){
         
         $('.modal_carro .carro_inicio').html('');
         
+        var total = 0;
         var info = process_new_promos();
         var carro = info.carro;
         var carro_promos = info.carro_promos;
@@ -433,14 +434,13 @@ function process_carro(){
                 count++;
                 producto = get_producto(carro[j].id_pro);
                 process_carro_restantes.appendChild(promo_restantes(producto, j));
-                console.log("restantes");
-                console.log(producto);
+                total = total + parseInt(producto.precio);
             }
         }
-
+        
         html.appendChild(process_carro_restantes);
         
-        var precio = create_element_class_inner('process_carro_precio_carta', 'total: $7.990');
+        var precio = create_element_class_inner('process_carro_precio_carta', 'total: $'+total);
         html.appendChild(precio);
         
         $('.cantcart_num').html(count);
