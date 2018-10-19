@@ -56,7 +56,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                         <div class="menu_right" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign">15</div></div></div>
                     </div>
                     <div class="contenido">
-                        <div class="cont_contenido" <?php echo ($info["footer_fixed"] == 1) ? 'padding_cont_f1' : 'padding_cont_f1'; ?>></div>
+                        <div class="cont_contenido <?php echo ($info["footer_fixed"] == 1) ? 'padding_cont_f1' : 'padding_cont_f1'; ?>"></div>
                     </div>
                     <div class="footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"></div>
                 </div>
