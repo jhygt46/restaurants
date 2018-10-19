@@ -943,7 +943,7 @@ function initMap(){
                     data: send,
                     success: function(datas){
                         
-                        console.log(data);
+                        console.log(datas);
                         var data = JSON.parse(datas);
 
                         if(data.op == 1){
