@@ -287,7 +287,7 @@ class Core{
             $info['js_base'] = $path."/js/base.js";
             
             $info['header_fixed'] = 1;
-            $info['footer_fixed'] = 1;
+            $info['footer_fixed'] = 0;
 
         }
 
