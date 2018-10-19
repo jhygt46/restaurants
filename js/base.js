@@ -406,8 +406,7 @@ function process_carro(){
         for(var i=0, ilen=carro_promos.length; i<ilen; i++){
             
             promocion = get_categoria(carro_promos[i].id_cae);
-            console.log("promocion");
-            console.log(promocion);
+            total = total + parseInt(promocion.precio);
             
             process_carro_promo = create_element_class('process_carro_promo');
             
