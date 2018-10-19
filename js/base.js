@@ -938,7 +938,7 @@ function initMap(){
                 
                 var send = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
-                    url: "ajax/index.php",
+                    url: "/ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
