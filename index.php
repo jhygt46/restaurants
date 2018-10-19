@@ -9,8 +9,10 @@ if(isset($_GET['param_dom'])){
     //$info = $core->get_data();
     $info = $core->get_data('www.runasushi.cl');
 }
-$core->get_web_js_data2($info['id_gir']);
-
+$js = $core->get_web_js_data2($info['id_gir']);
+echo "<pre>";
+print_r($js);
+echo "</pre>";
 
 ?>
 

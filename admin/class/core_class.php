@@ -396,6 +396,7 @@ class Core{
         
         $ruta_data = $path."js/data/".$giro['resultado'][0]['code'].".js";
         file_put_contents($ruta_data, "var data=".json_encode($info));
+        return $info;
         
     }
     
