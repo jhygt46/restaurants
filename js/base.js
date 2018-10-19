@@ -405,6 +405,8 @@ function process_carro(){
         for(var i=0, ilen=carro_promos.length; i<ilen; i++){
             
             promocion = get_categoria(carro_promos[i].id_cae);
+            console.log("promocion");
+            console.log(promocion);
             
             process_carro_promo = create_element_class('process_carro_promo');
             
@@ -431,6 +433,8 @@ function process_carro(){
                 count++;
                 producto = get_producto(carro[j].id_pro);
                 process_carro_restantes.appendChild(promo_restantes(producto, j));
+                console.log("restantes");
+                console.log(producto);
             }
         }
 
