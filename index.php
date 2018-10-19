@@ -10,11 +10,7 @@ if(isset($_GET['param_dom'])){
     $info = $core->get_data('www.runasushi.cl');
 }
 $js = $core->get_web_js_data2($info['id_gir']);
-echo "<pre>";
-print_r($js);
-echo "</pre>";
 
-exit;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
