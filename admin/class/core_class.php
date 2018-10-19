@@ -376,6 +376,7 @@ class Core{
     public function get_web_js_data2($id_gir){
     
         $giro = $this->con->sql("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir='".$id_gir."'");
+        $info['sql'] = $giro;
         for($i=0; $i<$giro['count']; $i++){
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);
         }
