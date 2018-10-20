@@ -46,6 +46,8 @@ foreach($polygons as $polygon){
         }
         
     }
+    $datas[] = $data;
+    unset($data);
     
 }
 
