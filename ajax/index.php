@@ -20,8 +20,6 @@ $precio = 9999999;
 
 $info['op'] = 2;
 
-echo json_encode($polygons);
-
 
 foreach($polygons as $polygon){
     
@@ -30,6 +28,8 @@ foreach($polygons as $polygon){
         $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
     }
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
+    echo $lat." - ".$lng;
+    echo json_encode($polygon);
     if($is == "inside"){
         
         if($precio > $polygon['precio']){
