@@ -30,6 +30,8 @@ foreach($polygons as $polygon){
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
     
     $data['is'] = $is;
+    $data['nombre'] = $polygon['nombre'];
+    $data['precio'] = $polygon['precio'];
     $data['punto'] = $lat." ".$lng;
     
     if($is == "inside"){
