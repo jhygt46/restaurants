@@ -947,12 +947,13 @@ function initMap(){
                         if(data.op == 1){
 
                             pedido.id_loc = data.id_loc;
-                            pedido.costo = data.costo;
+                            pedido.costo = data.precio;
                             pedido.despacho = 1;
                             pedido.lat = places[0].geometry.location.lat();
                             pedido.lng = places[0].geometry.location.lng();
                             pedido.direccion = places[0].formatted_address;
                             set_pedido(pedido);
+                            
                         }else{
                             alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
                         }
