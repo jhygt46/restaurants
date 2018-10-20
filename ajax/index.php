@@ -21,7 +21,7 @@ $precio = 9999999;
 $info['op'] = 2;
 
 echo json_encode($polygons);
-exit;
+
 
 foreach($polygons as $polygon){
     
