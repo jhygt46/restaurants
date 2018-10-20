@@ -105,7 +105,9 @@ class Guardar extends Core{
         if($_POST['accion'] == "configurar_producto"){
             return $this->configurar_producto();
         }
-        
+        if($_POST['accion'] == "eliminar_tramos"){
+            return $this->eliminar_tramos();
+        }
         
     }
     private function ordercat(){
@@ -288,7 +290,20 @@ class Guardar extends Core{
         return $info;
         
     }
-    
+    private function eliminar_tramos(){
+        
+        $id = explode("/", $_POST['id']);
+        $this->con->sql("UPDATE locales_tramos SET eliminado='1' WHERE id_lot='".$id[1]."'");
+        
+        $info['tipo'] = "success";
+        $info['titulo'] = "Eliminado";
+        $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
+        $info['reload'] = 1;
+        $info['page'] = "apps/zonas_locales.php?id_loc=".$id[0];
+
+        return $info;
+        
+    }
     
     private function crear_pagina(){
         
