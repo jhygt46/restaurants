@@ -943,12 +943,9 @@ function initMap(){
                     data: send,
                     success: function(datas){
                         
-                        console.log(datas);
-                        /*
                         var data = JSON.parse(datas);
-
                         if(data.op == 1){
-                            alert(data.costo);
+
                             pedido.id_loc = data.id_loc;
                             pedido.costo = data.costo;
                             pedido.despacho = 1;
@@ -959,7 +956,7 @@ function initMap(){
                         }else{
                             alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
                         }
-                        */
+                        
                     }, error: function(e){
                         console.log(e);
                     }
