@@ -128,8 +128,16 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                 <div class="info_modal carro_final hide">
                                     <div class="cont_final">
                                         <div class="final_section">
-                                            <!--<div class="fs_ttl_01">Direccion</div>
-                                            <div class="fs_ttl_02">Jose Tomas Rider 1185, Providencia, Santiago, Chile</div>-->
+                                            <div class="fs_inputs clearfix">
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Direccion</div>
+                                                    <div class="fsin_in" style="padding-top: 5px; font-size: 12px">Jose Tomas Rider 1185</div>
+                                                </div>
+                                                <div class="fs_in">
+                                                    <div class="fsin_ttl">Depto</div>
+                                                    <div class="fsin_in"><input type="text" /></div>
+                                                </div>
+                                            </div>
                                             <div class="fs_inputs clearfix">
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Nombre</div>
@@ -172,11 +180,16 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                     <div class="fsin_in"><select id="palitos"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
                                                 </div>
                                             </div>
+                                            <div class="fin_detalle">
+                                                <div class="fin_pedido clearfix"><div class="fin_dll_price">$10.000</div><div class="fin_dll_name">PEDIDO :</div></div>
+                                                <div class="fin_despacho clearfix"><div class="fin_dll_price">$3.000</div><div class="fin_dll_name">DESPACHO :</div></div>
+                                                <div class="fin_total clearfix"><div class="fin_dll_price">$13.000</div><div class="fin_dll_name">TOTAL :</div></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="info_modal carro_seguimiento hide">
-                                    SEGUIMIENTO
+                                    Gracias por Preferirnos
                                 </div>
                             </div>
                             <div class="acciones">

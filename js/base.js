@@ -439,6 +439,10 @@ function process_carro(){
         
         html.appendChild(process_carro_restantes);
         
+        var pedido = get_pedido();
+        pedido.total = total;
+        set_pedido(pedido);
+        
         var precio = create_element_class_inner('process_carro_precio_carta', 'total: $'+total);
         html.appendChild(precio);
         
@@ -715,6 +719,13 @@ function confirmar_pedido(){
                 titulo.html("Confirmacion");
                 subtitulo.html("Realiza la confirmacion de tu pedido");
                 
+                var total_pedido = 10000;
+                var total = total_pedido + parseInt(pedido.costo);
+                
+                $('.fin_pedido .fin_dll_price').html(formatNumber.new(total_pedido, "$"));
+                $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
+                $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));
+                
             }
             if(pedido.despacho == 0 && op2.is(":visible")){
                 if(pedido.num === null){
@@ -953,6 +964,7 @@ function initMap(){
                             pedido.lng = places[0].geometry.location.lng();
                             pedido.direccion = places[0].formatted_address;
                             set_pedido(pedido);
+                            confirmar_pedido();
                             
                         }else{
                             alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
@@ -1006,4 +1018,23 @@ function initMap(){
         map.fitBounds(bounds);
     });
 
+}
+var formatNumber = {
+ separador: ".", // separador para los miles
+ sepDecimal: ',', // separador para los decimales
+ formatear:function (num){
+ num +='';
+ var splitStr = num.split('.');
+ var splitLeft = splitStr[0];
+ var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+ var regx = /(\d+)(\d{3})/;
+ while (regx.test(splitLeft)) {
+ splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+ }
+ return this.simbol + splitLeft +splitRight;
+ },
+ new:function(num, simbol){
+ this.simbol = simbol ||'';
+ return this.formatear(num);
+ }
 }

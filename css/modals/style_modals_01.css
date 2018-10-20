@@ -383,8 +383,8 @@
     padding-bottom: 2px;
 }
 .modal_carro .carro_final .cont_final .final_section .fs_ttl_02{
-    font-size: 12px;
-    padding-bottom: 10px;
+    font-size: 22px;
+    padding-top: 16px;
 }
 .modal_carro .carro_final .cont_final .final_section .fs_inputs{
     padding-bottom: 6px;
@@ -451,4 +451,29 @@
     width: 40px;
     border: 0px;
     height: 18px;
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle{
+    padding-top: 20px;
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_pedido{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_despacho{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_total{
+    
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_dll_name{
+    float: right;
+    font-size: 14px;
+    width: calc(100% - 70px);
+    text-align: right;
+}
+.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_dll_price{
+    float: right;
+    font-size: 14px;
+    padding-left: 4px;
+    width: 66px;
+    text-align: right;
 }
