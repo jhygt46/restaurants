@@ -719,10 +719,9 @@ function confirmar_pedido(){
                 titulo.html("Confirmacion");
                 subtitulo.html("Realiza la confirmacion de tu pedido");
                 
-                var total_pedido = 10000;
-                var total = total_pedido + parseInt(pedido.costo);
+                var total = parseInt(pedido.total) + parseInt(pedido.costo);
                 
-                $('.fin_pedido .fin_dll_price').html(formatNumber.new(total_pedido, "$"));
+                $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
                 $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
                 $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));
                 
