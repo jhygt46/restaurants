@@ -23,18 +23,17 @@ $info['op'] = 2;
 
 foreach($polygons as $polygon){
     
+    $poli = [];
     $puntos = json_decode($polygon['poligono']);
     foreach($puntos as $punto){
         $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
     }
-    
-    echo json_encode($poli);
-    
+        
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
     
-    //$data['is'] = $is;
-    //$data['nombre'] = $polygon['nombre'];
-    //$data['precio'] = $polygon['precio'];
+    $data['is'] = $is;
+    $data['nombre'] = $polygon['nombre'];
+    $data['precio'] = $polygon['precio'];
     
     if($is == "inside"){
         
@@ -50,7 +49,7 @@ foreach($polygons as $polygon){
     
 }
 
-//echo json_encode($datas);
+echo json_encode($datas);
 
 class pointLocation {
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
