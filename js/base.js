@@ -705,7 +705,8 @@ function confirmar_pedido(){
     }
     if(modales.eq(2).is(":visible")){
         
-        var send = { accion: 'enviar_cotizacion' };
+        var pedido = get_pedido();
+        var send = { accion: 'enviar_pedido', pedido: pedido };
         $.ajax({
             url: "/ajax/index.php",
             type: "POST",
@@ -719,7 +720,6 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
-                    var pedido = get_pedido();
                     pedido.id_ped = data.id_ped;
                     set_pedido(pedido);
                     
@@ -983,7 +983,7 @@ function initMap(){
             
             if(pedido.num != 0){
                 
-                var send = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
+                var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
                     url: "/ajax/index.php",
                     type: "POST",
