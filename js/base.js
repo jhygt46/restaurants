@@ -713,6 +713,7 @@ function confirmar_pedido(){
             data: send,
             success: function(data){
                 
+                console.log(data);
                 if(data.id_ped){
                     
                     titulo.html("Felicitaciones");

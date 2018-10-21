@@ -16,7 +16,8 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    
+    $pedido = $_POST["pedido"];
+    $info = $pedido;
     
 }
 if($accion == "despacho_domicilio"){
