@@ -470,11 +470,13 @@ function carro_daemon(){
     if(pedido.id_ped > 0){
         
         //MOSTRAR SEGUIMIENTO
+        $('.modal_carro .titulo h1').html("PEDIDO");
+        $('.modal_carro .titulo h2').html("Tengo un pedido abierto");
+        
         $('.carro_inicio').hide();
         $('.carro_direccion').hide();
         $('.carro_final').hide();
         $('.carro_seguimiento').show();
-        console.log("ID PEDIDO MAYOR A 0, "+pedido.id_ped);
         return true;
         
     }
