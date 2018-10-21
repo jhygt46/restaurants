@@ -403,6 +403,7 @@ class Core{
         
         $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, id_loc) VALUES ('JSODJSNDHS', now(), '')");
         $info['id'] = $pedido_sql['insert_id'];
+        return $info;
         
     }
     public function get_info_preguntas($id_cat){
