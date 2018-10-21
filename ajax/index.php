@@ -17,6 +17,10 @@ $accion = $_POST["accion"];
 if($accion == "enviar_pedido"){
     
     $pedido = json_decode($_POST["pedido"]);
+    $carro = json_decode($_POST["carro"]);
+    
+    $info['pedido'] = $pedido;
+    $info['carro'] = $carro;
     $info['id_ped'] = 1;
     
 }
