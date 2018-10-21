@@ -16,7 +16,7 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $pedido = $_POST["pedido"];
+    $pedido = json_decode($_POST["pedido"]);
     $info = $pedido;
     
 }
