@@ -97,6 +97,7 @@ function close_pedido(){
     $('.modal_carro').find('.carro_direccion').hide();
     $('.modal_carro').find('.carro_final').hide();
     $('.modal_carro').find('.carro_seguimiento').hide();
+    show_acciones();
     return_direccion();
 }
 // SHOW HIDE MODAL //
@@ -477,6 +478,7 @@ function carro_daemon(){
         $('.carro_direccion').hide();
         $('.carro_final').hide();
         $('.carro_seguimiento').show();
+        hide_acciones();
         
         $('.modal_carro .carro_seguimiento .pedido .pedido_name').html("PEDIDO #"+pedido.id_ped+" - "+pedido.total);
         
@@ -486,6 +488,12 @@ function carro_daemon(){
     
     return false;
 
+}
+function hide_acciones(){
+    $('.modal_carro .acciones').hide();
+}
+function show_acciones(){
+    $('.modal_carro .acciones').show();
 }
 function process_new_promos(){
     
