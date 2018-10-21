@@ -722,6 +722,8 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
+                    $('.pedido .pedido_name').html("Pedido #"+data.id_ped+" - $"+pedido.total);
+                    
                     pedido.id_ped = data.id_ped;
                     pedido.code = data.code;
                     set_pedido(pedido);

@@ -405,7 +405,7 @@ class Core{
         $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, lat, lng, despacho, costo, direccion, calle, num, comuna, total, id_loc) VALUES ('".$code."', now(), '".$pedido->{lat}."', '".$pedido->{lng}."', '".$pedido->{despacho}."', '".$pedido->{costo}."', '".$pedido->{direccion}."', '".$pedido->{calle}."', '".$pedido->{num}."', '".$pedido->{comuna}."', '".$pedido->{total}."', '".$pedido->{id_loc}."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
         $info['code'] = $code;
-        $info['pedido_sql'] = $pedido_sql;
+        $info['total'] = $pedido->{total};
         return $info;
         
     }
