@@ -18,9 +18,7 @@ if($accion == "enviar_pedido"){
     
     $aux_pedido = json_decode($_POST["pedido"]);
     $carro = json_decode($_POST["carro"]);
-    $pedido = $fireapp->set_pedido($aux_pedido, $carro);
-    
-    $info['id_ped'] = $pedido['id'];
+    $info = $fireapp->set_pedido($aux_pedido, $carro);
     
 }
 if($accion == "despacho_domicilio"){
