@@ -191,7 +191,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                 <div class="info_modal carro_seguimiento hide">
                                     <div class="cont_pedido">
                                         <div class="pedido clearfix" onclick="detalle_pedido(this)">
-                                            <div class="pedido_name">Pedido #573 - $19.990</div>
+                                            <div class="pedido_name">Ped</div>
                                             <div class="pedido_action">+</div>
                                         </div>
                                         <div class="detalle_pedido"></div>

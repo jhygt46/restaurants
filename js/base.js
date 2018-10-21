@@ -468,10 +468,17 @@ function carro_daemon(){
     }
     var pedido = get_pedido();
     if(pedido.id_ped > 0){
+        
         //MOSTRAR SEGUIMIENTO
+        $('.carro_inicio').hide();
+        $('.carro_direccion').hide();
+        $('.carro_final').hide();
+        $('.carro_seguimiento').show();
         console.log("ID PEDIDO MAYOR A 0, "+pedido.id_ped);
         return true;
+        
     }
+    
     return false;
 
 }
