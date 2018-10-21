@@ -477,6 +477,9 @@ function carro_daemon(){
         $('.carro_direccion').hide();
         $('.carro_final').hide();
         $('.carro_seguimiento').show();
+        
+        $('.modal_carro .carro_seguimiento .pedido .pedido_name').html("PEDIDO #"+pedido.id_ped+" - "+pedido.total);
+        
         return true;
         
     }
