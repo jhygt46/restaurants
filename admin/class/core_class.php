@@ -399,7 +399,13 @@ class Core{
         file_put_contents($ruta_data, "var data=".json_encode($info));
         
     }
-    
+    public function set_pedido($pedido, $carro){
+        
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, id_loc) VALUES ('JSODJSNDHS', now(), '".$pedido.id_loc."')");
+        $info['id'] = $pedido_sql['insert_id'];
+        $info['sql'] = $pedido_sql;
+        
+    }
     public function get_info_preguntas($id_cat){
         
         $preguntas_sql = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$id_cat."' AND eliminado='0'");
