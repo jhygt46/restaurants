@@ -401,11 +401,11 @@ class Core{
     }
     public function set_pedido($pedido, $carro){
         
-        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, id_loc) VALUES ('JSODJSNDHS', now(), '')");
+        $code = bin2hex(openssl_random_pseudo_bytes(10));
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, lat, lng, despacho, costo, direccion, calle, num, comuna, total id_loc) VALUES ('".$code."', now(), '".$pedido->{lat}."', '".$pedido->{lng}.", '".$pedido->{despacho}.", '".$pedido->{costo}."', '".$pedido->{direccion}."', '".$pedido->{calle}."', '".$pedido->{num}."', '".$pedido->{comuna}."', '".$pedido->{total}."', '".$pedido->{id_loc}."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
-        $info['pedido'] = $pedido;
-        $info['despacho'] = $pedido->{despacho};
-        $info['carro'] = $carro;
+        $info['code'] = $code;
+        $info['pedido_sql'] = $pedido_sql;
         return $info;
         
     }

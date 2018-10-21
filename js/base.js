@@ -690,7 +690,7 @@ function confirmar_productos_promo(that){
 }
 
 function open_socket(code){
-    
+    console.log("COMIENZA EL SOCKET CODE: "+code);
 }
 
 // CONFIRMAR PEDIDO //
@@ -723,6 +723,7 @@ function confirmar_pedido(){
                     modales.eq(3).show();
                     
                     pedido.id_ped = data.id_ped;
+                    pedido.code = data.code;
                     set_pedido(pedido);
                     
                     open_socket(data.code);
