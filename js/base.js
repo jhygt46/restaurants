@@ -711,9 +711,9 @@ function confirmar_pedido(){
             url: "/ajax/index.php",
             type: "POST",
             data: send,
-            success: function(data){
+            success: function(datas){
                 
-                console.log(data);
+                var data = JSON.parse(datas);
                 if(data.id_ped){
                     
                     titulo.html("Felicitaciones");

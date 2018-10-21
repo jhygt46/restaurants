@@ -17,7 +17,7 @@ $accion = $_POST["accion"];
 if($accion == "enviar_pedido"){
     
     $pedido = json_decode($_POST["pedido"]);
-    $info = $pedido;
+    $info['id_ped'] = 1;
     
 }
 if($accion == "despacho_domicilio"){
