@@ -401,9 +401,8 @@ class Core{
     }
     public function set_pedido($pedido, $carro){
         
-        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, id_loc) VALUES ('JSODJSNDHS', now(), '".$pedido.id_loc."')");
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, id_loc) VALUES ('JSODJSNDHS', now(), '')");
         $info['id'] = $pedido_sql['insert_id'];
-        $info['sql'] = $pedido_sql;
         
     }
     public function get_info_preguntas($id_cat){
