@@ -689,6 +689,10 @@ function confirmar_productos_promo(that){
     
 }
 
+function open_socket(code){
+    
+}
+
 // CONFIRMAR PEDIDO //
 function confirmar_pedido(){
     
@@ -700,11 +704,37 @@ function confirmar_pedido(){
         hide_modal();
     }
     if(modales.eq(2).is(":visible")){
-        modales.eq(2).hide();
-        modales.eq(3).show();
-        titulo.html("Seguimiento");
-        subtitulo.html("Mira en que esta tu pedido");
+        
+        var send = { accion: 'enviar_cotizacion' };
+        $.ajax({
+            url: "/ajax/index.php",
+            type: "POST",
+            data: send,
+            success: function(data){
+                
+                if(data.id_ped){
+                    
+                    titulo.html("Felicitaciones");
+                    subtitulo.html("Tu pedido ha sido enviado exitosamente");
+                    modales.eq(2).hide();
+                    modales.eq(3).show();
+                    
+                    var pedido = get_pedido();
+                    pedido.id_ped = data.id_ped;
+                    set_pedido(pedido);
+                    
+                    open_socket(data.code);
+                    
+                }
+                
+            
+            }, error: function(e){
+                console.log(e);
+            }
+        });
+        
     }
+    
     if(modales.eq(1).is(":visible")){
         
         var pedido = get_pedido();
@@ -872,7 +902,14 @@ function select_local(id){
     confirmar_pedido();
 
 }
-
+function detalle_pedido(that){
+    var dll = $(that).parent().find('.detalle_pedido');
+    if(dll.is(':visible')){
+        dll.hide();
+    }else{
+        dll.show();
+    }
+}
 function show_retiro(){
 
     $('.cont_direccion .direccion_opciones').hide();

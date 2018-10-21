@@ -477,3 +477,31 @@
     width: 66px;
     text-align: right;
 }
+.modal_carro .carro_seguimiento{
+    
+}
+.modal_carro .carro_seguimiento .cont_pedido{
+    margin: 10px;
+    background: #ccc;
+    padding: 10px;
+}
+.modal_carro .carro_seguimiento .cont_pedido .pedido{
+    
+}
+.modal_carro .carro_seguimiento .cont_pedido .pedido .pedido_name{
+    float: left; 
+    width: calc(100% - 20px); 
+    font-size: 18px
+}
+.modal_carro .carro_seguimiento .cont_pedido .pedido .pedido_action{
+    float: left; 
+    width: 20px; 
+    height: 20px; 
+    background: #000;
+    margin-top: 2px;
+}
+.modal_carro .carro_seguimiento .cont_pedido .detalle_pedido{
+    height: 200px;
+    background: #f00;
+    display: none;
+}
