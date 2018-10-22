@@ -611,10 +611,10 @@ function seleccionar_productos(i){
     if(producto.preguntas){
         if(carros[i].preguntas){
             
-            for(var k=0, klen=data.catalogos[catalogo].preguntas.length; k<klen; k++){
-                for(var j=0, jlen=data.catalogos[catalogo].preguntas[k].valores.length; j<jlen; j++){
+            for(var k=0, klen=carros[i].preguntas.length; k<klen; k++){
+                for(var j=0, jlen=carros[i].preguntas[k].valores.length; j<jlen; j++){
                     
-                    valores = data.catalogos[catalogo].preguntas[k].valores[j];
+                    valores = carros[i].preguntas[k].valores[j];
 
                     if(valores.seleccionados){
                         if(valores.seleccionados.length < valores.cantidad){
