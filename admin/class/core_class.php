@@ -409,7 +409,7 @@ class Core{
         for($k=0; $k<$preguntas_sql['count']; $k++){
 
             $aux_pre['id_pre'] = $preguntas_sql['resultado'][$k]['id_pre'];
-            $aux_pre['nombre'] = $preguntas_sql['resultado'][$k]['nombre'];
+            $aux_pre['nombre'] = $preguntas_sql['resultado'][$k]['mostrar'];
             
             $pre_val_sql = $this->con->sql("SELECT * FROM preguntas_valores WHERE id_pre='".$aux_pre['id_pre']."'");
             
