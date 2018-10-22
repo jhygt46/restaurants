@@ -401,9 +401,9 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function html_preguntas_producto(carro, i){
+function html_preguntas_producto(i){
     
-    console.log(carro);
+    
     
     var html = document.createElement('div');
     html.className = 's_pregunta';

@@ -656,7 +656,9 @@ function mostrar_pregunta(i){
     $('.modal_pregunta_productos .titulo h2').html('Configurar Producto');
     modal = 1;
     
-    var html = html_preguntas_producto(carros[i], i);
+    console.log(producto);
+    
+    //var html = html_preguntas_producto(carros[i], i);
     $('.modal_pregunta_productos .info_modal').append(html);
 
 }
