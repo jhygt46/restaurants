@@ -706,7 +706,7 @@ class Guardar extends Core{
             $info['mensaje'] = "Pregunta modificada exitosamente";
         }
         if($id_pre == 0){
-            $aux = $this->con->sql("INSERT INTO preguntas (nombre, id_cat) VALUES ('".$nombre."', '".$mostrar."', '".$this->id_cat."')");
+            $aux = $this->con->sql("INSERT INTO preguntas (nombre, mostrar, id_cat) VALUES ('".$nombre."', '".$mostrar."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Pregunta creada exitosamente";
             $id_pre = $aux['insert_id'];
