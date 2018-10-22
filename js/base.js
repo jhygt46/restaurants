@@ -647,8 +647,10 @@ function seleccionar_productos(i){
 }
 function mostrar_pregunta(i){
 
-    var carros = get_carro();
-    var producto = get_producto(carros[i].id_pro);
+    var carro = get_carro();
+    var producto = get_producto(carro[i].id_pro);
+    
+    console.log(producto);
     
     $('.modals, .modal_pregunta_productos').show();
     $('.modal_pregunta_productos .info_modal').html('');
@@ -656,13 +658,7 @@ function mostrar_pregunta(i){
     $('.modal_pregunta_productos .titulo h2').html('Configurar Producto');
     modal = 1;
     
-    for(var i=0, ilen=producto.preguntas.length; i<ilen; i++){
-        
-        console.log("MOSTRAR PREGUNTA "+parseInt(producto.preguntas[i]));
-        
-    }
-    
-    //var html = html_preguntas_producto(carros[i], i);
+    var html = html_preguntas_producto(producto, i);
     $('.modal_pregunta_productos .info_modal').append(html);
 
 }
