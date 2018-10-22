@@ -96,6 +96,7 @@ if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0
                                     
                                     $aux_cant = 0;
                                     $aux_valores = "";
+                                    $aux_nombre = "";
                                     if($that_valores[$i]['cantidad'] !== null){
                                         $aux_cant = $that_valores[$i]['cantidad'];
                                         $aux_nombre = $that_valores[$i]['nombre'];
