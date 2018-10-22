@@ -75,7 +75,7 @@ function create_html_categorias(obj){
                 
                 p_precio = document.createElement('div');
                 p_precio.className = 'prod_i_pre';
-                p_precio.innerHTML = '$12.900';
+                p_precio.innerHTML = aux.precio;
                 producto.appendChild(p_precio);
 
                 listado.appendChild(producto);
