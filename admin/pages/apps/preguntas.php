@@ -107,7 +107,7 @@ if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0
                                 <div class='opcion'>
                                     <label>
                                         <span>Nombre:</span>
-                                        <input id="valores-<?php echo $i; ?>" type="text" value="<?php echo $aux_nombre; ?>" require="" placeholder="" />
+                                        <input id="nombre-<?php echo $i; ?>" type="text" value="<?php echo $aux_nombre; ?>" require="" placeholder="" />
                                     </label>
                                     <label>
                                         <span>Seleccionar:</span>
