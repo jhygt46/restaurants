@@ -98,11 +98,16 @@ if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0
                                     $aux_valores = "";
                                     if($that_valores[$i]['cantidad'] !== null){
                                         $aux_cant = $that_valores[$i]['cantidad'];
+                                        $aux_nombre = $that_valores[$i]['nombre'];
                                         $aux_valores = implode(",", json_decode($that_valores[$i]['valores']));
                                     }
                                 
                             ?>        
                                 <div class='opcion'>
+                                    <label>
+                                        <span>Nombre:</span>
+                                        <input id="valores-<?php echo $i; ?>" type="text" value="<?php echo $aux_nombre; ?>" require="" placeholder="" />
+                                    </label>
                                     <label>
                                         <span>Seleccionar:</span>
                                         <select id="cant-<?php echo $i; ?>" rel="<?php echo $i; ?>" onchange="cambiar_cantidad(this)">

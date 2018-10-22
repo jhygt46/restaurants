@@ -717,9 +717,10 @@ class Guardar extends Core{
             
             $cant = $_POST["cant-".$i];
             $valores = $_POST["valores-".$i];
+            $nombre = $_POST["nombre-".$i];
             $valores_json = json_encode(explode(",", $valores));
             if($cant > 0){
-                $this->con->sql("INSERT INTO preguntas_valores (cantidad, valores, id_pre) VALUES ('".$cant."', '".$valores_json."', '".$id_pre."')");
+                $this->con->sql("INSERT INTO preguntas_valores (cantidad, nombre, valores, id_pre) VALUES ('".$cant."', '".$nombre."', '".$valores_json."', '".$id_pre."')");
             }
             
         }
