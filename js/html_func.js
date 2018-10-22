@@ -425,6 +425,8 @@ function html_preguntas_producto(i){
             titulo_v_pregunta.className = 'titulo_v_pregunta';
             titulo_v_pregunta.innerHTML = carro[i].preguntas[k].valores[m].nombre;
             
+            console.log(carro[i].preguntas[k].valores[m]);
+            
             var v_pregunta = document.createElement('div');
             v_pregunta.className = 'v_pregunta';
             v_pregunta.setAttribute('data-pos', m);
