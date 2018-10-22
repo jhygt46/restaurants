@@ -408,6 +408,10 @@ function html_preguntas_producto(i){
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
     
+    console.log(carro);
+    console.log(carro[i]);
+    console.log(i);
+    
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
         var e_pregunta = document.createElement('div');
