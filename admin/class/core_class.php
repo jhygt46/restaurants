@@ -420,7 +420,7 @@ class Core{
             }
             
             $preguntas[] = $aux_pre;
-            
+            unset($aux_pre);
 
         }
         return $preguntas;
