@@ -381,13 +381,7 @@ class Core{
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);
         }
         
-        $paginas_sql = $this->con->sql("SELECT * FROM paginas WHERE id_gir='".$id_gir."'");
-        for($k=0; $k<$paginas_sql['count']; $k++){
-            $aux_pagina['id_pag'] = $paginas_sql['resultado'][$k]['id_pag'];
-            $aux_pagina['nombre'] = $paginas_sql['resultado'][$k]['nombre'];
-            $info['paginas'][] = $aux_pagina;
-            unset($aux_pagina);
-        }
+        
         
         if($_SERVER['HTTP_HOST'] == "localhost"){
             $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";

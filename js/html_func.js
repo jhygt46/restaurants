@@ -403,6 +403,8 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
 }
 function html_preguntas_producto(carro, i){
     
+    console.log(carro);
+    
     var html = document.createElement('div');
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
