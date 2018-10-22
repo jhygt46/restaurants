@@ -652,12 +652,13 @@ function mostrar_pregunta(i){
     
     $('.modals, .modal_pregunta_productos').show();
     $('.modal_pregunta_productos .info_modal').html('');
-    $('.modal_pregunta_productos .titulo h1').html(producto.nombre);
-    $('.modal_pregunta_productos .titulo h2').html('Configurar Producto');
+    $('.modal_pregunta_productos .titulo h1').html(carro[i].preguntas[0].nombre);
+    $('.modal_pregunta_productos .titulo h2').html(producto.nombre);
     modal = 1;
     
     var html = html_preguntas_producto(i);
     $('.modal_pregunta_productos .info_modal').append(html);
+    
 
 }
 
