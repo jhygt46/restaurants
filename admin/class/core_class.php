@@ -415,6 +415,7 @@ class Core{
             
             for($m=0; $m<$pre_val_sql['count']; $m++){
                 $aux_pre_val['cantidad'] = $pre_val_sql['resultado'][$m]['cantidad'];
+                $aux_pre_val['nombre'] = $pre_val_sql['resultado'][$m]['nombre'];
                 $aux_pre_val['valores'] = json_decode($pre_val_sql['resultado'][$m]['valores']);
                 $aux_pre['valores'][] = $aux_pre_val;
             }
