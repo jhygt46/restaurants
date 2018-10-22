@@ -697,15 +697,16 @@ class Guardar extends Core{
 
         $id_pre = $_POST['id_pre'];
         $nombre = $_POST['nombre'];
+        $mostrar = $_POST['mostrar'];
         $cantidad = $_POST['cantidad'];
 
         if($id_pre > 0){
-            $this->con->sql("UPDATE preguntas SET nombre='".$nombre."' WHERE id_pre='".$id_pre."'");
+            $this->con->sql("UPDATE preguntas SET nombre='".$nombre."', mostrar='".$mostrar."' WHERE id_pre='".$id_pre."'");
             $info['op'] = 1;
             $info['mensaje'] = "Pregunta modificada exitosamente";
         }
         if($id_pre == 0){
-            $aux = $this->con->sql("INSERT INTO preguntas (nombre, id_cat) VALUES ('".$nombre."', '".$this->id_cat."')");
+            $aux = $this->con->sql("INSERT INTO preguntas (nombre, id_cat) VALUES ('".$nombre."', '".$mostrar."', '".$this->id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Pregunta creada exitosamente";
             $id_pre = $aux['insert_id'];

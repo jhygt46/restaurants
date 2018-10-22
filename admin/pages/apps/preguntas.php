@@ -86,7 +86,7 @@ if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0
                     </label>
                     <label>
                         <span>Texto Mostrar:</span>
-                        <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="mostrar" type="text" value="<?php echo $that['mostrar']; ?>" require="" placeholder="" />
                     </label>
                     <div style="padding-top: 10px">
                         <div class="opciones">
