@@ -403,12 +403,12 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
 }
 function html_preguntas_producto(i){
     
-    var carro = get_carro()[i];
+    var carro = get_carro();
     var html = document.createElement('div');
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
     
-    for(var k=0, klen=carro.preguntas.length; k<klen; k++){
+    for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
         var e_pregunta = document.createElement('div');
         e_pregunta.className = 'e_pregunta';
@@ -416,24 +416,24 @@ function html_preguntas_producto(i){
         
         var pregunta_titulo = document.createElement('div');
         pregunta_titulo.className = 'pregunta_titulo';
-        pregunta_titulo.innerHTML = carro.preguntas[k].nombre;
+        pregunta_titulo.innerHTML = carro[i].preguntas[k].nombre;
         e_pregunta.appendChild(pregunta_titulo);
         
-        for(var m=0, mlen=carro.preguntas[k].valores.length; m<mlen; m++){
+        for(var m=0, mlen=carro[i].preguntas[k].valores.length; m<mlen; m++){
             
             var titulo_v_pregunta = document.createElement('div');
             titulo_v_pregunta.className = 'titulo_v_pregunta';
-            titulo_v_pregunta.innerHTML = 'Seleccionar '+carro.preguntas[k].valores[m].cantidad;
+            titulo_v_pregunta.innerHTML = 'Seleccionar '+carro[i].preguntas[k].valores[m].cantidad;
             
             var v_pregunta = document.createElement('div');
             v_pregunta.className = 'v_pregunta';
             v_pregunta.setAttribute('data-pos', m);
-            v_pregunta.setAttribute('data-cant', carro.preguntas[k].valores[m].cantidad);
+            v_pregunta.setAttribute('data-cant', carro[i].preguntas[k].valores[m].cantidad);
 
-            for(var n=0, nlen=carro.preguntas[k].valores[m].valores.length; n<nlen; n++){
+            for(var n=0, nlen=carro[i].preguntas[k].valores[m].valores.length; n<nlen; n++){
                 var n_pregunta = document.createElement('div');
                 n_pregunta.className = 'n_pregunta';
-                n_pregunta.innerHTML = carro.preguntas[k].valores[m].valores[n];
+                n_pregunta.innerHTML = carro[i].preguntas[k].valores[m].valores[n];
                 n_pregunta.onclick = function(){ select_pregunta(this) };
                 v_pregunta.appendChild(n_pregunta);
             }
