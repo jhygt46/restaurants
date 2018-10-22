@@ -306,9 +306,9 @@ function get_productos_categoria(id_cae){
     
 }
 function get_preguntas(id_pre){
-    for(var i=0, ilen=data.preguntas.length; i<ilen; i++){
-        if(id_pre == data.preguntas[i].id_pre){
-            return data.preguntas[i];
+    for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
+        if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
+            return data.catalogos[catalogo].preguntas[i];
         }
     }
     return null;
