@@ -423,7 +423,7 @@ function html_preguntas_producto(i){
             
             var titulo_v_pregunta = document.createElement('div');
             titulo_v_pregunta.className = 'titulo_v_pregunta';
-            titulo_v_pregunta.innerHTML = carro[i].preguntas[k].nombre;
+            titulo_v_pregunta.innerHTML = carro[i].preguntas[k].valores[m].nombre;
             
             var v_pregunta = document.createElement('div');
             v_pregunta.className = 'v_pregunta';
