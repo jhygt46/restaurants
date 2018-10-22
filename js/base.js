@@ -611,9 +611,10 @@ function seleccionar_productos(i){
     if(producto.preguntas){
         if(carros[i].preguntas){
             
-            for(var k=0, klen=carros[i].preguntas.length; k<klen; k++){
-                for(var j=0, jlen=carros[i].preguntas[k].valores.length; j<jlen; j++){
-                    valores = carros[i].preguntas[k].valores[j];
+            for(var k=0, klen=data.catalogos[catalogo].preguntas.length; k<klen; k++){
+                for(var j=0, jlen=data.catalogos[catalogo].preguntas[k].valores.length; j<jlen; j++){
+                    
+                    valores = data.catalogos[catalogo].preguntas[k].valores[j];
 
                     if(valores.seleccionados){
                         if(valores.seleccionados.length < valores.cantidad){
@@ -630,9 +631,9 @@ function seleccionar_productos(i){
             
         }else{
             
-            carros[i].preguntas = [];
+            data.catalogos[catalogo].preguntas = [];
             for(var k=0, klen=producto.preguntas.length; k<klen; k++){
-                carros[i].preguntas.push(get_preguntas(producto.preguntas[k]));
+                data.catalogos[catalogo].preguntas.push(get_preguntas(producto.preguntas[k]));
             }
             localStorage.setItem("carro", JSON.stringify(carros));
             mostrar_pregunta(i);
