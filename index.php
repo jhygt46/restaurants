@@ -86,8 +86,8 @@ $js = $core->get_web_js_data2($info['id_gir']);
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
-                                <div class="info_modal carro_inicio"></div>
-                                <div class="info_modal carro_direccion hide">
+                                <div class="info_modal carro_inicio" style="padding-bottom: 57px"></div>
+                                <div class="info_modal carro_direccion hide" style="padding-bottom: 57px">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
                                             <div class="dir_op" onclick="show_retiro()"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div></div>
@@ -125,7 +125,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info_modal carro_final hide">
+                                <div class="info_modal carro_final hide" style="padding-bottom: 57px">
                                     <div class="cont_final">
                                         <div class="final_section">
                                             <div class="fs_inputs clearfix">
@@ -188,7 +188,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info_modal carro_seguimiento hide">
+                                <div class="info_modal carro_seguimiento hide" style="padding-bottom: 57px">
                                     <div class="cont_pedido">
                                         <div class="pedido clearfix" onclick="detalle_pedido(this)">
                                             <div class="pedido_name">Ped</div>
@@ -209,7 +209,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
-                                <div class="info_modal"></div>
+                                <div class="info_modal" style="padding-bottom: 57px"></div>
                             </div>
                             <div class="acciones">
                                 <input class="confirmar" onclick="confirmar_productos_promo(this)" type="button" value="Confirmar" />
