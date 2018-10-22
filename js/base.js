@@ -137,6 +137,9 @@ function set_pedido(pedido){
 function get_carro(){
     return JSON.parse(localStorage.getItem("carro")) || [];
 }
+function get_promos(){
+    return JSON.parse(localStorage.getItem("carro_promos")) || [];
+}
 function get_carro_limpio(){
     var carro = JSON.parse(localStorage.getItem("carro")) || [];
     for(var i=0, ilen=carro.length; i<ilen; i++){
@@ -734,7 +737,7 @@ function confirmar_pedido(){
     if(modales.eq(2).is(":visible")){
         
         var pedido = get_pedido();
-        var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()) };
+        var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promo: JSON.stringify(get_promos()) };
         $.ajax({
             url: "/ajax/index.php",
             type: "POST",
@@ -1089,21 +1092,21 @@ function initMap(){
 
 }
 var formatNumber = {
- separador: ".", // separador para los miles
- sepDecimal: ',', // separador para los decimales
- formatear:function (num){
- num +='';
- var splitStr = num.split('.');
- var splitLeft = splitStr[0];
- var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
- var regx = /(\d+)(\d{3})/;
- while (regx.test(splitLeft)) {
- splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
- }
- return this.simbol + splitLeft +splitRight;
- },
- new:function(num, simbol){
- this.simbol = simbol ||'';
- return this.formatear(num);
- }
+    separador: ".", // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear:function (num){
+        num +='';
+        var splitStr = num.split('.');
+        var splitLeft = splitStr[0];
+        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+        var regx = /(\d+)(\d{3})/;
+        while (regx.test(splitLeft)) {
+            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+        }
+        return this.simbol + splitLeft +splitRight;
+    },
+    new: function(num, simbol){
+        this.simbol = simbol ||'';
+        return this.formatear(num);
+    }
 }

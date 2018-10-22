@@ -16,9 +16,10 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $aux_pedido = json_decode($_POST["pedido"]);
+    $pedido = json_decode($_POST["pedido"]);
     $carro = json_decode($_POST["carro"]);
-    $info = $fireapp->set_pedido($aux_pedido, $carro);
+    $promos = json_decode($_POST["promos"]);
+    $info = $fireapp->set_pedido($pedido, $carro, $promos);
     
 }
 if($accion == "despacho_domicilio"){

@@ -17,7 +17,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title><?php echo $info["titulo"]; ?></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
