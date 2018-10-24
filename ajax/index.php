@@ -16,14 +16,20 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $post = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
+    $pedido = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
     
+    $data['id_ped'] = $pedido['id_ped'];
+    $data['local_code'] = $pedido['local_code'];
+    
+    $info['op'] = 1;
     $info['pedido'] = json_decode($_POST['pedido']);
+    $info['carro'] = json_decode($_POST['carro']);
+    $info['promos'] = json_decode($_POST['promos']);
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
     curl_exec($ch);
     
 }
