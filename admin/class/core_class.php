@@ -395,19 +395,10 @@ class Core{
     }
     public function set_pedido($pedido, $carro, $promos){
         
-        file_put_contents("/var/www/html/restaurants/pedido.txt", $pedido);
-        file_put_contents("/var/www/html/restaurants/carro.txt", $carro);
-        file_put_contents("/var/www/html/restaurants/promos.txt", $promos);
-        
-        
-        
-        
-        
         $code = bin2hex(openssl_random_pseudo_bytes(10));
-        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, lat, lng, despacho, costo, direccion, calle, num, comuna, total, id_loc) VALUES ('".$code."', now(), '".$pedido->{lat}."', '".$pedido->{lng}."', '".$pedido->{despacho}."', '".$pedido->{costo}."', '".$pedido->{direccion}."', '".$pedido->{calle}."', '".$pedido->{num}."', '".$pedido->{comuna}."', '".$pedido->{total}."', '".$pedido->{id_loc}."')");
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$pedido."', '".$carro."', '".$promos."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
         $info['code'] = $code;
-        $info['total'] = $pedido->{total};
         return $info;
         
     }
