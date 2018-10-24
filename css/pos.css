@@ -1,0 +1,224 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+.contenedor{
+    height: 100%;
+    position: relative;
+}
+.contenedor .pop_up{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+.contenedor .pop_up .cont_pop_up{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido{
+    width: 700px;
+    height: 400px;
+    background: #fff;
+    border-radius: 12px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_title{
+    font-size: 30px;
+    color: #000;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}.contenedor .pop_up .cont_pop_up .modificar_pedido{
+    width: 700px;
+    height: 400px;
+    background: #fff;
+    border-radius: 12px;
+}
+.contenedor .pop_up .cont_pop_up .modificar_pedido .n_title{
+    font-size: 30px;
+    color: #000;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+.pedidos{
+    width: 360px;
+    height: 100%;
+    position: relative;
+    float: left;
+}
+.pedidos .titulo{
+    height: 60px;
+    width: 100%;
+    background-color: #999;
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    border-bottom: 4px solid #ccc;
+}
+.pedidos .titulo .ttl{
+    position: absolute;
+    font-size: 18px;
+    color: #fff;
+    top: 18px;
+    left: 8px;
+}
+.pedidos .titulo .opciones{
+    position: absolute;
+    top: 12px;
+    right: 6px;
+}
+.pedidos .titulo .opciones .config{
+    float: left;
+    font-size: 28px;
+    padding: 0px 4px;
+}
+.pedidos .titulo .opciones .nuevo{
+    float: left;
+    font-size: 28px;
+    padding: 0px 4px;
+}
+.pedidos .contenido{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+.pedidos .contenido .lista_pedidos{
+    background: #ddd;
+    padding: 68px 8px 8px 8px;
+    min-height: calc(100% - 76px);
+}
+.pedidos .contenido .lista_pedidos .pedido{
+    position: relative;
+    height: 80px;
+    background: #eee;
+    margin-bottom: 8px;
+}
+.pedidos .contenido .lista_pedidos .seleccionado{
+    background: #c99;
+    color: #fff;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_num{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_estado{
+    position: absolute;
+    top: 22px;
+    left: 10px;
+    font-size: 14px;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_precio{
+    position: absolute;
+    top: 46px;
+    left: 10px;
+    font-size: 20px;
+}
+.pedidos .contenido .lista_pedidos .pedido .btn_mod{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: #000;
+}
+
+.cont_sis{
+    height: 100%;
+    width: 100%;
+}
+
+.categorias{
+    width: 200px;
+    height: 100%;
+    position: relative;
+    float: left;
+    margin-left: 6px;
+}
+.categorias .titulo{
+    height: 60px;
+    width: 100%;
+    background-color: #999;
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    border-bottom: 4px solid #ccc;
+}
+.categorias .titulo .ttl{
+    position: absolute;
+    font-size: 18px;
+    color: #fff;
+    top: 18px;
+    left: 8px;
+}
+.categorias .titulo .opciones{
+    position: absolute;
+    top: 12px;
+    right: 6px;
+}
+.categorias .titulo .opciones .nuevo{
+    float: left;
+    font-size: 28px;
+    padding: 0px 4px;
+}
+.categorias .titulo .opciones .config{
+    float: left;
+    font-size: 28px;
+    padding: 0px 4px;
+}
+.categorias .contenido{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+.categorias .contenido .lista_categorias{
+    background: #ddd;
+    padding: 68px 8px 8px 8px;
+    min-height: calc(100% - 76px);
+}
+.categorias .contenido .lista_categorias .categoria{
+    position: relative;
+    height: 64px;
+    background: #eee;
+    margin-bottom: 8px;
+}
+.categorias .contenido .lista_categorias .categoria .nombre{
+    
+}
+.categorias .contenido .lista_productos{
+    background: #ddd;
+    padding: 68px 8px 8px 8px;
+    min-height: calc(100% - 76px);
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+}
+::-webkit-scrollbar-track-piece {
+    background: #eee
+}
+::-webkit-scrollbar-thumb {
+    background: #888
+}

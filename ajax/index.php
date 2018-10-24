@@ -19,7 +19,18 @@ if($accion == "enviar_pedido"){
     $pedido = json_decode($_POST["pedido"]);
     $carro = json_decode($_POST["carro"]);
     $promos = json_decode($_POST["promos"]);
-    $info = $fireapp->set_pedido($pedido, $carro, $promos);
+    $info['set_pedido'] = $fireapp->set_pedido($pedido, $carro, $promos);
+    
+    $post['id_per'] = 18;
+    $post['nombre'] = 'Diego Gomez';
+    $post['telefono'] = '+569 66166923';
+    $post['direccion'] = 'Jose Tomas Rider 1185 Depto 2';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    $info['response'] = curl_exec($ch);
     
 }
 if($accion == "despacho_domicilio"){
