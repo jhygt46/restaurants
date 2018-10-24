@@ -368,15 +368,17 @@ class Guardar extends Core{
         $id_cat = $_POST['id_cat'];
         $nombre = $_POST['nombre'];
         $direccion = $_POST['direccion'];
-        $tipo = $_POST['tipo_despacho'];
+        $lat = $_POST['lat'];
+        $lng = $_POST['lng'];
+        $code = bin2hex(openssl_random_pseudo_bytes(10));
         
         if($id_loc == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, direccion, fecha_creado, id_gir, id_cat, tipo) VALUES ('".$nombre."', '".$direccion."', now(), '".$this->id_gir."', '".$id_cat."', '".$tipo."')");
+            $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, direccion, lat, lng, code, fecha_creado, id_gir, id_cat) VALUES ('".$nombre."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$this->id_gir."', '".$id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Local creado exitosamente";
         }
         if($id_loc > 0){
-            $info['db2'] = $this->con->sql("UPDATE locales SET nombre='".$nombre."', direccion='".$direccion."', tipo='".$tipo."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            $info['db2'] = $this->con->sql("UPDATE locales SET nombre='".$nombre."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Local modificado exitosamente";
         }

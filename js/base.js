@@ -720,8 +720,12 @@ function confirmar_productos_promo(that){
     
 }
 
-function open_socket(code){
-    console.log("COMIENZA EL SOCKET CODE: "+code);
+function open_socket(pedido_code){
+    var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
+    socket.on('pedido-'+pedido_code, function(data) {
+        alert("PEDIDO");
+        console.log(data);
+    });
 }
 
 // CONFIRMAR PEDIDO //

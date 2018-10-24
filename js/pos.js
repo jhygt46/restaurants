@@ -16,13 +16,10 @@ function socket_init(){
     actualizar_pedidos();
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('local-'+local_code, function(data) {
-        alert("DATA");
-        console.log(data);
+        console.log("Socket Local: Add Pedido");
+        add_pedido(data);
     });
-    socket.on('disconnect', function(){
-        
-    });
-    
+
 }
 
 function set_pedidos(pedidos){
@@ -33,14 +30,16 @@ function get_pedidos(){
 }
 function add_pedido(data){
     
+    console.log(data);
+    
     var pedidos = get_pedidos();
-    pedidos.push(objeto_pedidos());
+    pedidos.push(objeto_pedidos(data));
     set_pedidos(pedidos);
     actualizar_pedidos();
     
 }
-function objeto_pedidos(){
-    return {id_ped: 0};
+function objeto_pedidos(data){
+    return { id_ped: data.id_per, nombre: data.nombre };
 }
 function set_pedido(index, that){
     id_ped = index;
