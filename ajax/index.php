@@ -16,11 +16,7 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $code = $this->bin2hex(openssl_random_pseudo_bytes(10));
-    $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$_POST["pedido"]."', '".$_POST["carro"]."', '".$_POST["promos"]."')");
-    
-    $post['id_ped'] = $pedido_sql['insert_id'];
-    $post['local_code'] = "anb7sd-12s9ksm";
+    $post = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');

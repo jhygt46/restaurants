@@ -16,7 +16,8 @@ function socket_init(){
     actualizar_pedidos();
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('local-'+local_code, function(data) {
-	add_pedido(data);
+        alert("DATA");
+        console.log(data);
     });
     socket.on('disconnect', function(){
         socket_init();

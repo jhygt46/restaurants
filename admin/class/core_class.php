@@ -398,7 +398,7 @@ class Core{
         $code = bin2hex(openssl_random_pseudo_bytes(10));
         $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$pedido."', '".$carro."', '".$promos."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
-        $info['code'] = $code;
+        $info['local_code'] = "anb7sd-12s9ksm";
         return $info;
         
     }
