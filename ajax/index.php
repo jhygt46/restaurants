@@ -21,6 +21,8 @@ if($accion == "enviar_pedido"){
     $data['id_ped'] = $pedido['id_ped'];
     $data['local_code'] = $pedido['local_code'];
     
+    
+    
     $info['op'] = 1;
     $info['pedido_code'] = $pedido['code'];
     $info['pedido'] = json_decode($_POST['pedido']);

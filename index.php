@@ -25,6 +25,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
         <link rel="stylesheet" href="<?php echo $info["css_style"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
+        <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <!--<script src="<?php echo $info["js_html"]; ?>" type="text/javascript"></script>-->
