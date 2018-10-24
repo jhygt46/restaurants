@@ -745,21 +745,21 @@ function confirmar_pedido(){
             success: function(data){
                 
                 console.log(data);
-                if(data.op = 1){
+                if(data.op == 1){
                     
                     titulo.html("Felicitaciones");
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
+                    /*
                     $('.pedido .pedido_name').html("Pedido #"+data.id_ped+" - $"+pedido.total);
-                    
                     pedido.id_ped = data.id_ped;
                     pedido.code = data.code;
                     set_pedido(pedido);
-                    
-                    open_socket(data.code);
-                    
+                    */
+                    open_socket(data.pedido_code);
+                   
                 }
                 
             
