@@ -16,23 +16,17 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $pedido = $_POST["pedido"];
-    $carro = $_POST["carro"];
-    $promos = $_POST["promos"];
+    $code = $this->bin2hex(openssl_random_pseudo_bytes(10));
+    $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$_POST["pedido"]."', '".$_POST["carro"]."', '".$_POST["promos"]."')");
     
-    $info['set_pedido'] = $fireapp->set_pedido($pedido, $carro, $promos);
-    
-    $post['id_per'] = 18;
-    $post['nombre'] = 'Diego Gomez';
-    $post['telefono'] = '+569 66166923';
-    $post['direccion'] = 'Jose Tomas Rider 1185 Depto 2';
+    $post['id_ped'] = $pedido_sql['insert_id'];
+    $post['local_code'] = "anb7sd-12s9ksm";
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-    
-    $info['response'] = curl_exec($ch);
+    curl_exec($ch);
     
 }
 if($accion == "despacho_domicilio"){
@@ -133,3 +127,5 @@ class pointLocation {
 
 
 ?>
+
+
