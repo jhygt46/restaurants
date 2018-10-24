@@ -742,8 +742,9 @@ function confirmar_pedido(){
             url: "/ajax/index.php",
             type: "POST",
             data: send,
-            success: function(data){
+            success: function(info){
                 
+                var data = JSON.parse(info);
                 console.log(data);
                 if(data.op == 1){
                     
