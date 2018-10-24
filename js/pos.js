@@ -20,7 +20,7 @@ function socket_init(){
         console.log(data);
     });
     socket.on('disconnect', function(){
-        socket_init();
+        
     });
     
 }

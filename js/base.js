@@ -742,11 +742,10 @@ function confirmar_pedido(){
             url: "/ajax/index.php",
             type: "POST",
             data: send,
-            success: function(datas){
+            success: function(data){
                 
-                var data = JSON.parse(datas);
                 console.log(data);
-                if(data.id_ped){
+                if(data.op = 1){
                     
                     titulo.html("Felicitaciones");
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");

@@ -18,6 +18,8 @@ if($accion == "enviar_pedido"){
     
     $post = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
     
+    $info['pedido'] = json_decode($_POST['pedido']);
+    
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
