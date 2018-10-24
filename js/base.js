@@ -737,7 +737,7 @@ function confirmar_pedido(){
     if(modales.eq(2).is(":visible")){
         
         var pedido = get_pedido();
-        var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promo: JSON.stringify(get_promos()) };
+        var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
         $.ajax({
             url: "/ajax/index.php",
             type: "POST",
