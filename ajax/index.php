@@ -22,13 +22,14 @@ if($accion == "enviar_pedido"){
     $data['pedido_code'] = $pedido['pedido_code'];
     $data['local_code'] = $pedido['local_code'];
     
-    
     $info['op'] = 1;
+    $data['id_ped'] = $pedido['id_ped'];
     $info['pedido_code'] = $pedido['pedido_code'];
+    /*
     $info['pedido'] = json_decode($_POST['pedido']);
     $info['carro'] = json_decode($_POST['carro']);
     $info['promos'] = json_decode($_POST['promos']);
-    
+    */
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
