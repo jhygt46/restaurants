@@ -1,5 +1,6 @@
 var id_ped = 0;
 var catalogo = 0;
+var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
 
 function actualizar_pedidos(){
     
@@ -99,12 +100,13 @@ function open_categoria(id){
 }
 function cambiar_estado(index, n){
 
-    console.log("CAMBIAR ESTADO "+n);
-
     var pedidos = get_pedidos();
-    var estado = parseInt(pedidos[index].estado) + n;
-    var send = { pedido_code: pedidos[index].pedido_code, estado: estado };
-    console.log(send);
+    pedidos[index].estado = pedidos[index].estado + n;
+    set_pedidos(pedidos);
+    
+    $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[pedidos[index].estado]);
+    
+    var send = { pedido_code: pedidos[index].pedido_code, estado: pedidos[index].estado };
     
     $.ajax({
         url: "http://35.196.220.197/cambiar_estado",

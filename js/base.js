@@ -10,6 +10,7 @@ var history = [];
 var dir = 0;
 var catalogo = 0;
 var debug = 0;
+var estados
 
 // INICIO BACK BUTTON //
 history.replaceState(null, document.title, location.pathname);
@@ -719,13 +720,12 @@ function confirmar_productos_promo(that){
     
     
 }
-
+var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
 function open_socket(pedido_code){
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
-    console.log('SOCKET CREADO: pedido-'+pedido_code);
+    
     socket.on('pedido-'+pedido_code, function(data) {
-        console.log("CAMBIO DE ESTADO");
-        $('.carro_seguimiento .pedido_sub').html(data.estado);
+        $('.carro_seguimiento .pedido_sub').html(estados[data.estado]);
     });
     socket.on('pedido-pos-'+pedido_code, function(data) {
         console.log("CAMBIO DE POS");
