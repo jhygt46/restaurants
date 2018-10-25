@@ -97,7 +97,7 @@ function cambiar_estado(index, n){
 
     var pedidos = get_pedidos();
     var estado_pos = parseInt(pedidos[index].estado) + n;
-    console.log(estado_pos);
+
     if(estado_pos >= 0 && estado_pos < estados.length){
         
         $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[estado_pos]);
