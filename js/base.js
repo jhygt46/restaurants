@@ -725,7 +725,10 @@ function open_socket(pedido_code){
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     
     socket.on('pedido-'+pedido_code, function(data) {
-        $('.carro_seguimiento .pedido_sub').html(estados[data.estado]);
+        
+        var estado = estados[data.estado % estados.length];
+        $('.carro_seguimiento .pedido_sub').html(estado);
+        
     });
     socket.on('pedido-pos-'+pedido_code, function(data) {
         console.log("CAMBIO DE POS");

@@ -104,7 +104,9 @@ function cambiar_estado(index, n){
     pedidos[index].estado = pedidos[index].estado + n;
     set_pedidos(pedidos);
     
-    $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[pedidos[index].estado]);
+    var estado = estados[pedidos[index].estado % estados.length];
+    
+    $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estado);
     
     var send = { pedido_code: pedidos[index].pedido_code, estado: pedidos[index].estado };
     
