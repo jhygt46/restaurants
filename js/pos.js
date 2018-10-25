@@ -30,9 +30,6 @@ function get_pedidos(){
 }
 function add_pedido(data){
     
-    console.log("ADD PEDIDO");
-    console.log(data);
-    
     var pedidos = get_pedidos();
     pedidos.push(data);
     set_pedidos(pedidos);
@@ -98,11 +95,9 @@ function open_categoria(id){
 }
 function cambiar_estado(index, n){
 
-    console.log("CAMBIAR ESTADO");
-
     var pedidos = get_pedidos();
     var estado_pos = pedidos[index].estado + n;
-    
+    console.log("ESTADO POS: "+estado_pos);
     if(estado_pos >= 0 && estado_pos < estados.length){
         
         $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[estado_pos]);
