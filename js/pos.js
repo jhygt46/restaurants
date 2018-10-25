@@ -99,31 +99,28 @@ function open_categoria(id){
 }
 function cambiar_estado(index, n){
 
-    var pedidos = get_pedidos();
-    console.log(pedidos);
+    console.log("CAMBIAR ESTADO "+n);
 
-    /*
+    var pedidos = get_pedidos();
+    var estado = parseInt(pedidos[index].estado) + n;
+    var send = { pedido_code: pedidos[index].pedido_code, estado: estado };
+    console.log(send);
     
-        var send = { pedido_code: pedidos[index].pedido_code, estado: pedidos[index].estado };
-        $.ajax({
-            url: "http://35.196.220.197/cambiar_estado",
-            type: "POST",
-            data: send,
-            success: function(info){
-                console.log("info");
-                console.log(info);
-            }, error: function(e){
-                console.log(e);
-            }
-        });
-    
-    */
+    $.ajax({
+        url: "http://35.196.220.197/cambiar_estado",
+        type: "POST",
+        data: send,
+        success: function(data){
+            console.log(data);
+        }, error: function(e){
+            console.log(e);
+        }
+    });
     
 }
 function html_home_pedidos(obj, index){
     
     var Div = create_element_class('pedido');
-    Div.setAttribute('code', obj.pedido_code);
     
     var p_num = create_element_class_inner('p_num', 'Pedido #476');
     p_num.onclick = function(){ set_pedido(index, this) };

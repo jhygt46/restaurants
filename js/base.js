@@ -722,6 +722,7 @@ function confirmar_productos_promo(that){
 
 function open_socket(pedido_code){
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
+    console.log('SOCKET CREADO: pedido-'+pedido_code);
     socket.on('pedido-'+pedido_code, function(data) {
         alert("PEDIDO");
         console.log(data);
