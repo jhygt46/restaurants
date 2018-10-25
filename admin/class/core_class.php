@@ -403,6 +403,7 @@ class Core{
         $info['direccion'] = $aux_ped->{'direccion'};
         $info['comuna'] = $aux_ped->{'comuna'};
         $info['num'] = $aux_ped->{'num'};
+        $info['estado'] = $aux_ped->{'estado'};
         $info['calle'] = $aux_ped->{'calle'};
         $info['costo'] = $aux_ped->{'costo'};
         $info['total'] = $aux_ped->{'total'};
