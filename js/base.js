@@ -130,7 +130,7 @@ function show_modal(clase){
 
 // GET CARRO //
 function get_pedido(){
-    return JSON.parse(localStorage.getItem("pedido")) || { id_ped: 0, despacho: null, id_loc: 0, lat: 0, lng: 0, direccion: '', num: null, calle: '', comuna: '', costo: 0 };
+    return JSON.parse(localStorage.getItem("pedido")) || { id_ped: 0, despacho: null, id_loc: 0, lat: 0, lng: 0, direccion: '', num: null, calle: '', comuna: '', costo: 0, total: 0 };
 }
 function set_pedido(pedido){
     localStorage.setItem("pedido", JSON.stringify(pedido));
@@ -765,8 +765,6 @@ function confirmar_pedido(){
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");
                     modales.eq(2).hide();
                     modales.eq(3).show();
-                    
-                    set_pedido(data.pedido);
                     open_socket(data.pedido_code);
                    
                 }

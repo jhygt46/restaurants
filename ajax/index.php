@@ -19,17 +19,26 @@ if($accion == "enviar_pedido"){
     $aux = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
 
     $pedido['local_code'] = $aux['local_code'];
-    $pedido['id_ped'] = $aux['id_ped'];
+    $pedido['pedido']['id_ped'] = $aux['id_ped'];
+    $pedido['pedido']['despacho'] = $aux['despacho'];
+    $pedido['pedido']['id_loc'] = $aux['id_loc'];
+    $pedido['pedido']['lat'] = $aux['lat'];
+    $pedido['pedido']['lng'] = $aux['lng'];
+    $pedido['pedido']['direccion'] = $aux['direccion'];
+    $pedido['pedido']['num'] = $aux['num'];
+    $pedido['pedido']['calle'] = $aux['calle'];
+    $pedido['pedido']['comuna'] = $aux['comuna'];
+    $pedido['pedido']['costo'] = $aux['costo'];
+    $pedido['pedido']['total'] = $aux['total'];
     
-    $info['op'] = 1;
-    $info['pedido'] = [];
-    $info['pedido_code'] = $aux['pedido_code'];
-
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
     curl_exec($ch);
+    
+    $info['op'] = 1;
+    $info['pedido_code'] = $aux['pedido_code'];
     
 }
 if($accion == "despacho_domicilio"){
