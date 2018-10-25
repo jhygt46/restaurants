@@ -485,7 +485,11 @@
     background: #ccc;
     padding: 10px;
 }
+
 .modal_carro .carro_seguimiento .cont_pedido .pedido{
+    
+}
+.modal_carro .carro_seguimiento .cont_pedido .pedido_sub{
     
 }
 .modal_carro .carro_seguimiento .cont_pedido .pedido .pedido_name{
