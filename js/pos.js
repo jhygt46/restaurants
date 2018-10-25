@@ -7,7 +7,6 @@ function actualizar_pedidos(){
     var pedidos = get_pedidos();
     $('.lista_pedidos').html('');
     pedidos.forEach(function(pedido, index){
-        console.log(pedido);
         $('.lista_pedidos').append(html_home_pedidos(pedido, index));
     });
     
@@ -18,8 +17,6 @@ function socket_init(){
     actualizar_pedidos();
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('local-'+local_code, function(data) {
-        console.log("Socket Local: Add Pedido");
-        console.log(data);
         add_pedido(data);
     });
 
@@ -33,15 +30,11 @@ function get_pedidos(){
 }
 function add_pedido(data){
     
-    console.log(data);
     var pedidos = get_pedidos();
-    pedidos.push(objeto_pedidos(data));
+    pedidos.push(data);
     set_pedidos(pedidos);
     actualizar_pedidos();
     
-}
-function objeto_pedidos(data){
-    return { id_ped: data.id_ped, estado: 0, pedido_code: data.pedido_code, despacho: data.despacho };
 }
 function set_pedido(index, that){
     
