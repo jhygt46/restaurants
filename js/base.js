@@ -759,7 +759,6 @@ function confirmar_pedido(){
             success: function(info){
                 
                 var data = JSON.parse(info);
-                console.log(data);
                 if(data.op == 1){
                     
                     titulo.html("Felicitaciones");
@@ -767,9 +766,7 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
-                    pedido.id_ped = data.id_ped;
-                    set_pedido(pedido);
-
+                    set_pedido(data.pedido);
                     open_socket(data.pedido_code);
                    
                 }
