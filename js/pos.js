@@ -31,7 +31,6 @@ function get_pedidos(){
 function add_pedido(data){
     
     console.log(data);
-    
     var pedidos = get_pedidos();
     pedidos.push(objeto_pedidos(data));
     set_pedidos(pedidos);
@@ -39,13 +38,14 @@ function add_pedido(data){
     
 }
 function objeto_pedidos(data){
-    return { id_ped: data.id_per, nombre: data.nombre };
+    return { id_ped: data.id_ped, estado: 0, pedido_code: data.pedido_code };
 }
 function set_pedido(index, that){
+    
     id_ped = index;
     var count = 0;
     categorias_base(0);
-    $(that).parent().find('.pedido').each(function(){
+    $(that).parents('.lista_pedidos').find('.pedido').each(function(){
         if(count == index){
             $(this).addClass('seleccionado');
         }else{
@@ -53,6 +53,7 @@ function set_pedido(index, that){
         }
         count++;
     });
+    
 }
 function cats_or_prods(id){
     
@@ -96,22 +97,59 @@ function open_categoria(id){
     }
 
 }
+function cambiar_estado(index, n){
+
+    var pedidos = get_pedidos();
+    console.log(pedidos);
+
+    /*
+    
+        var send = { pedido_code: pedidos[index].pedido_code, estado: pedidos[index].estado };
+        $.ajax({
+            url: "http://35.196.220.197/cambiar_estado",
+            type: "POST",
+            data: send,
+            success: function(info){
+                console.log("info");
+                console.log(info);
+            }, error: function(e){
+                console.log(e);
+            }
+        });
+    
+    */
+    
+}
 function html_home_pedidos(obj, index){
     
     var Div = create_element_class('pedido');
-    Div.onclick = function(){ set_pedido(index, this) };
+    Div.setAttribute('code', obj.pedido_code);
     
     var p_num = create_element_class_inner('p_num', 'Pedido #476');
+    p_num.onclick = function(){ set_pedido(index, this) };
     var p_estado = create_element_class_inner('p_estado', 'Abierto');
     var p_precio = create_element_class_inner('p_precio', '$2.990');
     
     var btn_mod = create_element_class('btn_mod');
     btn_mod.onclick = function(){ modificar_pedido(index) };
     
+    var estado = create_element_class('p_opciones');
+    var anterior = create_element_class('p_anterior');
+    anterior.onclick = function(){ cambiar_estado(index, -1) };
+    var nombre = create_element_class_inner('p_nombre', 'Cocinando');
+    var siguiente = create_element_class('p_siguiente');
+    siguiente.onclick = function(){ cambiar_estado(index, 1) };
+    
+    estado.appendChild(anterior);
+    estado.appendChild(nombre);
+    estado.appendChild(siguiente);
+    
     Div.appendChild(p_num);
     Div.appendChild(p_estado);
     Div.appendChild(p_precio);
     Div.appendChild(btn_mod);
+    Div.appendChild(estado);
+    
     return Div;
 }
 function modificar_pedido(index){

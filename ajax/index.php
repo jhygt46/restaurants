@@ -19,8 +19,8 @@ if($accion == "enviar_pedido"){
     $pedido = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
     
     $data['id_ped'] = $pedido['id_ped'];
+    $data['pedido_code'] = $pedido['pedido_code'];
     $data['local_code'] = $pedido['local_code'];
-    
     
     
     $info['op'] = 1;

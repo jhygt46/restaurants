@@ -399,7 +399,7 @@ class Core{
         $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$pedido."', '".$carro."', '".$promos."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
         $info['local_code'] = "anb7sd-12s9ksm";
-        $info['code'] = $code;
+        $info['pedido_code'] = $code;
         return $info;
         
     }

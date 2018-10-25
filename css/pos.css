@@ -126,7 +126,7 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_precio{
     position: absolute;
-    top: 46px;
+    bottom: 10px;
     left: 10px;
     font-size: 20px;
 }
@@ -137,6 +137,32 @@ body {
     width: 20px;
     height: 20px;
     background: #000;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_opciones{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 140px;
+    background: #ccc;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_opciones .p_anterior{
+    width: 25px;
+    float: left;
+    height: 25px;
+    background: #999;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_opciones .p_nombre{
+    width: 90px;
+    float: left;
+    text-align: center;
+    font-size: 13px;
+    padding-top: 2px;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_opciones .p_siguiente{
+    width: 25px;
+    float: left;
+    height: 25px;
+    background: #999;
 }
 
 .cont_sis{
