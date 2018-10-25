@@ -724,8 +724,10 @@ function open_socket(pedido_code){
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     console.log('SOCKET CREADO: pedido-'+pedido_code);
     socket.on('pedido-'+pedido_code, function(data) {
-        alert("PEDIDO");
-        console.log(data);
+        $('.carro_seguimiento ')
+    });
+    socket.on('pedido-pos-'+pedido_code, function(data) {
+        $('.carro_seguimiento ')
     });
 }
 
@@ -758,12 +760,9 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
-                    /*
-                    $('.pedido .pedido_name').html("Pedido #"+data.id_ped+" - $"+pedido.total);
                     pedido.id_ped = data.id_ped;
-                    pedido.code = data.code;
                     set_pedido(pedido);
-                    */
+
                     open_socket(data.pedido_code);
                    
                 }
@@ -930,6 +929,7 @@ function map_local(id){
 function select_local(id){
     
     var pedido = get_pedido();
+    pedido.id_ped = 0;
     pedido.despacho = 0;
     pedido.id_loc = 1;
     pedido.num = null;
