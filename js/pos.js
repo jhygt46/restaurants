@@ -101,25 +101,26 @@ function open_categoria(id){
 function cambiar_estado(index, n){
 
     var pedidos = get_pedidos();
-    pedidos[index].estado = pedidos[index].estado + n;
-    set_pedidos(pedidos);
+    var estado_pos = pedidos[index].estado + n;
     
-    var estado = estados[pedidos[index].estado % estados.length];
-    
-    $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estado);
-    
-    var send = { pedido_code: pedidos[index].pedido_code, estado: pedidos[index].estado };
-    
-    $.ajax({
-        url: "http://35.196.220.197/cambiar_estado",
-        type: "POST",
-        data: send,
-        success: function(data){
-            console.log(data);
-        }, error: function(e){
-            console.log(e);
-        }
-    });
+    if(estado_pos >= 0 && estado_pos < estados.length){
+        
+        $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[estado_pos]);
+        set_pedidos(pedidos);
+        
+        var send = { pedido_code: pedidos[index].pedido_code, estado: estado_pos };
+        $.ajax({
+            url: "http://35.196.220.197/cambiar_estado",
+            type: "POST",
+            data: send,
+            success: function(data){
+                console.log(data);
+            }, error: function(e){
+                console.log(e);
+            }
+        });
+        
+    }
     
 }
 function html_home_pedidos(obj, index){

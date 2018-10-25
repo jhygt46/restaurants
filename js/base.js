@@ -720,13 +720,16 @@ function confirmar_productos_promo(that){
     
     
 }
-var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
+
 function open_socket(pedido_code){
+    
+    var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
+    var estado;
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     
     socket.on('pedido-'+pedido_code, function(data) {
         
-        var estado = estados[data.estado % estados.length];
+        estado = estados[data.estado % estados.length];
         $('.carro_seguimiento .pedido_sub').html(estado);
         
     });
