@@ -766,9 +766,8 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     
-                    console.log(data.pedido);
                     set_pedido(data.pedido);
-                    open_socket(data.pedido.pedido_code);
+                    open_socket(data.pedido_code);
                    
                 }
                 
