@@ -767,7 +767,7 @@ function confirmar_pedido(){
                     modales.eq(3).show();
                     
                     set_pedido(data.pedido);
-                    open_socket(data.pedido_code);
+                    open_socket(data.pedido.pedido_code);
                    
                 }
                 

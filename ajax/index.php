@@ -20,7 +20,7 @@ if($accion == "enviar_pedido"){
     
     $pedido['data'] = $aux;
     
-    $info['res'] = $aux;
+    $info['pedido'] = $aux;
     $info['op'] = 1;
 
     $ch = curl_init();
