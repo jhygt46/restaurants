@@ -397,8 +397,20 @@ class Core{
         
         $aux_ped = json_decode($pedido);
         
+        $id_loc = $aux_ped->{'id_loc'};
+        $despacho = $aux_ped->{'despacho'};
+        $lat = $aux_ped->{'lat'};
+        $lng = $aux_ped->{'lng'};
+        $direccion = $aux_ped->{'direccion'};
+        $comuna = $aux_ped->{'comuna'};
+        $num = $aux_ped->{'num'};
+        $calle = $aux_ped->{'calle'};
+        $costo = $aux_ped->{'costo'};
+        $total = $aux_ped->{'total'};
+        
         $code = bin2hex(openssl_random_pseudo_bytes(10));
-        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, id_loc, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$aux_ped->{'id_loc'}."', '".$pedido."', '".$carro."', '".$promos."')");
+        
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, fecha, lat, lng, despacho, costo, total, comuna, calle, num, id_loc, aux_02, aux_03) VALUES ('".$code."', now(), '".$lat."', '".$lng."', '".$despacho."', '".$costo."', '".$total."', '".$comuna."', '".$calle."', '".$num."', '".$id_loc."', '".$carro."', '".$promos."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
         $info['local_code'] = "anb7sd-12s9ksm";
         $info['pedido_code'] = $code;
