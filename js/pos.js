@@ -19,6 +19,7 @@ function socket_init(){
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('local-'+local_code, function(data) {
         console.log("Socket Local: Add Pedido");
+        console.log(data);
         add_pedido(data);
     });
 

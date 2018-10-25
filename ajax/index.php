@@ -16,9 +16,11 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $pedido = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
-        
-    $info = $pedido;
+    $aux = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
+    
+    $pedido['data'] = $aux;
+    
+    $info['res'] = $aux;
     $info['op'] = 1;
 
     $ch = curl_init();
