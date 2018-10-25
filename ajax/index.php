@@ -24,7 +24,7 @@ if($accion == "enviar_pedido"){
     
     
     $info['op'] = 1;
-    $info['pedido_code'] = $pedido['code'];
+    $info['pedido_code'] = $pedido['pedido_code'];
     $info['pedido'] = json_decode($_POST['pedido']);
     $info['carro'] = json_decode($_POST['carro']);
     $info['promos'] = json_decode($_POST['promos']);
