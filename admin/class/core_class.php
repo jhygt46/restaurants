@@ -395,8 +395,10 @@ class Core{
     }
     public function set_pedido($pedido, $carro, $promos){
         
+        $aux_ped = json_decode($pedido);
+        
         $code = bin2hex(openssl_random_pseudo_bytes(10));
-        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$pedido."', '".$carro."', '".$promos."')");
+        $pedido_sql = $this->con->sql("INSERT INTO pedidos (code, id_loc, aux_01, aux_02, aux_03) VALUES ('".$code."', '".$aux_ped->{'id_loc'}."', '".$pedido."', '".$carro."', '".$promos."')");
         $info['id_ped'] = $pedido_sql['insert_id'];
         $info['local_code'] = "anb7sd-12s9ksm";
         $info['pedido_code'] = $code;

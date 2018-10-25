@@ -1,12 +1,13 @@
 var id_ped = 0;
 var catalogo = 0;
-var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
+var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 
 function actualizar_pedidos(){
     
     var pedidos = get_pedidos();
     $('.lista_pedidos').html('');
     pedidos.forEach(function(pedido, index){
+        console.log(pedido);
         $('.lista_pedidos').append(html_home_pedidos(pedido, index));
     });
     
@@ -39,7 +40,7 @@ function add_pedido(data){
     
 }
 function objeto_pedidos(data){
-    return { id_ped: data.id_ped, estado: 0, pedido_code: data.pedido_code };
+    return { id_ped: data.id_ped, estado: 0, pedido_code: data.pedido_code, despacho: data.despacho };
 }
 function set_pedido(index, that){
     
@@ -106,7 +107,7 @@ function cambiar_estado(index, n){
     if(estado_pos >= 0 && estado_pos < estados.length){
         
         $('.lista_pedidos').find('.pedido').eq(index).find('.p_opciones').find('.p_nombre').html(estados[estado_pos]);
-        set_pedidos(pedidos);
+        pedidos[index].estado = estado_pos;
         
         var send = { pedido_code: pedidos[index].pedido_code, estado: estado_pos };
         $.ajax({
@@ -114,7 +115,7 @@ function cambiar_estado(index, n){
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
+                set_pedidos(pedidos);
             }, error: function(e){
                 console.log(e);
             }

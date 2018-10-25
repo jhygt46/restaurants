@@ -723,7 +723,7 @@ function confirmar_productos_promo(that){
 
 function open_socket(pedido_code){
     
-    var estados = ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'];
+    var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
     var estado;
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     
