@@ -20,6 +20,7 @@ if($accion == "enviar_pedido"){
 
     $pedido['local_code'] = $aux['local_code'];
     $pedido['pedido']['id_ped'] = $aux['id_ped'];
+    $pedido['pedido']['pedido_code'] = $aux['pedido_code'];
     $pedido['pedido']['despacho'] = $aux['despacho'];
     $pedido['pedido']['id_loc'] = $aux['id_loc'];
     $pedido['pedido']['lat'] = $aux['lat'];

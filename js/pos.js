@@ -104,6 +104,7 @@ function cambiar_estado(index, n){
         pedidos[index].estado = estado_pos;
         
         var send = { pedido_code: pedidos[index].pedido_code, estado: estado_pos };
+
         $.ajax({
             url: "http://35.196.220.197/cambiar_estado",
             type: "POST",
