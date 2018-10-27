@@ -127,6 +127,9 @@ function np_close(that){
 }
 function html_home_pedidos(obj, index){
     
+    console.log(obj.carro);
+    console.log(obj.promos);
+
     var Div = create_element_class('pedido');
     
     var p_num = create_element_class_inner('p_num', 'Pedido #476');
