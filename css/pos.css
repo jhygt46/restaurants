@@ -34,9 +34,54 @@ body {
     font-size: 30px;
     color: #000;
     position: absolute;
-    top: 20px;
-    left: 30px;
-}.contenedor .pop_up .cont_pop_up .modificar_pedido{
+    top: 15px;
+    left: 20px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info{
+    width: 680px;
+    height: 330px;
+    left: 10px;
+    top: 60px;
+    background: #fcc;
+    position: absolute;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1{
+    width: 36%;
+    float: left;
+    padding: 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_a{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_a .n_info1_a0{
+    width: 50%;
+    float: left;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b .n_info1_b0{
+    font-size: 14px
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b .n_info1_b1{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info2{
+    width: 56%;
+    float: left;
+    padding: 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .np_close{
+    width: 50px;
+    height: 50px;
+    right: -55px;
+    top: -55px;
+    background: #000;
+    position: absolute;
+    border-radius: 25px;
+    margin: 30px;
+}
+.contenedor .pop_up .cont_pop_up .modificar_pedido{
     width: 700px;
     height: 400px;
     background: #fff;

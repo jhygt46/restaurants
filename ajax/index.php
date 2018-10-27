@@ -28,6 +28,7 @@ if($accion == "enviar_pedido"){
     $pedido['pedido']['direccion'] = $aux['direccion'];
     $pedido['pedido']['num'] = $aux['num'];
     $pedido['pedido']['estado'] = 0;
+    $pedido['pedido']['tipo'] = 1;
     $pedido['pedido']['calle'] = $aux['calle'];
     $pedido['pedido']['comuna'] = $aux['comuna'];
     $pedido['pedido']['costo'] = $aux['costo'];

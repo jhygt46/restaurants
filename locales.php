@@ -37,10 +37,25 @@ if(isset($_GET['param_dom'])){
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
                     <div class="nuevo_pedido vhalign">
+                        <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title">Ingresar Nuevo Pedido</div>
-                    </div>
-                    <div class="modificar_pedido vhalign">
-                        <div class="n_title">Modificar Pedido #347</div>
+                        <div class="n_info clearfix">
+                            <div class="n_info1">
+                                <div class="n_info1_a clearfix">
+                                    <div class="n_info1_a0">Retiro en Local</div>
+                                    <div class="n_info1_a0">Despacho a Domicilio</div>
+                                </div>
+                                <div class="n_info1_b clearfix">
+                                    <div class="n_info1_b0">Direccion</div>
+                                    <div class="n_info1_b1"><input type="text" id="ped_direccion" style="width: 100%" ></div>
+                                </div>
+                                <div class="n_info1_b clearfix">
+                                    <div class="n_info1_b0">Telefono</div>
+                                    <div class="n_info1_b1"><input type="text" id="ped_telefono" style="width: 100%" ></div>
+                                </div>
+                            </div>
+                            <div class="n_info2">2</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,8 +64,8 @@ if(isset($_GET['param_dom'])){
                     <div class="titulo">
                         <div class="ttl">Mis Pedidos</div>
                         <div class="opciones">
-                            <div class="nuevo">+</div>
-                            <div class="config">+</div>
+                            <div class="nuevo" onclick="ver_pedido(-1)">+</div>
+                            <!--<div class="config">+</div>-->
                         </div>
                     </div>
                     <div class="contenido">

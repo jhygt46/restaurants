@@ -17,6 +17,8 @@ function socket_init(){
     actualizar_pedidos();
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('local-'+local_code, function(data) {
+        console.log("DATA SOCKET");
+        console.log(data);
         add_pedido(data);
     });
 
@@ -29,12 +31,10 @@ function get_pedidos(){
     return JSON.parse(localStorage.getItem("pedidos")) || [];
 }
 function add_pedido(data){
-    
     var pedidos = get_pedidos();
     pedidos.push(data);
     set_pedidos(pedidos);
     actualizar_pedidos();
-    
 }
 function set_pedido(index, that){
     
@@ -119,6 +119,12 @@ function cambiar_estado(index, n){
     }
     
 }
+function np_close(that){
+    
+    $('.pop_up').hide();
+    $('.nuevo_pedido').hide();
+    
+}
 function html_home_pedidos(obj, index){
     
     var Div = create_element_class('pedido');
@@ -129,31 +135,52 @@ function html_home_pedidos(obj, index){
     var p_precio = create_element_class_inner('p_precio', '$2.990');
     
     var btn_mod = create_element_class('btn_mod');
-    btn_mod.onclick = function(){ modificar_pedido(index) };
-    
-    var estado = create_element_class('p_opciones');
-    var anterior = create_element_class('p_anterior');
-    anterior.onclick = function(){ cambiar_estado(index, -1) };
-    var nombre = create_element_class_inner('p_nombre', 'Cocinando');
-    var siguiente = create_element_class('p_siguiente');
-    siguiente.onclick = function(){ cambiar_estado(index, 1) };
-    
-    estado.appendChild(anterior);
-    estado.appendChild(nombre);
-    estado.appendChild(siguiente);
+    btn_mod.onclick = function(){ ver_pedido(index) };
     
     Div.appendChild(p_num);
     Div.appendChild(p_estado);
     Div.appendChild(p_precio);
     Div.appendChild(btn_mod);
-    Div.appendChild(estado);
+    
+    if(obj.tipo == 1){
+        
+        var estado = create_element_class('p_opciones');
+        var anterior = create_element_class('p_anterior');
+        anterior.onclick = function(){ cambiar_estado(index, -1) };
+        var nombre = create_element_class_inner('p_nombre', 'Cocinando');
+        var siguiente = create_element_class('p_siguiente');
+        siguiente.onclick = function(){ cambiar_estado(index, 1) };
+
+        estado.appendChild(anterior);
+        estado.appendChild(nombre);
+        estado.appendChild(siguiente);
+        
+        Div.appendChild(estado);
+    }
+    
+    
+    
     
     return Div;
 }
-function modificar_pedido(index){
+function ver_pedido(index){
+    
+    if(index > -1){
+        // VER PEDIDO
+        var pedidos = get_pedidos();
+        var pedido = pedidos[index];
+        
+        console.log(pedido);
+        $('.ped_direccion').val(pedido.direccion);
+        $('.ped_telefono').val(pedido.telefono);
+    }
+    if(index == -1){
+        // NUEVO PEDIDO
+        console.log("NUEVO PEDIDO");
+    }
     $('.pop_up').show();
-    $('.nuevo_pedido').hide();
-    $('.modificar_pedido').show();
+    $('.nuevo_pedido').show();
+    
 }
 function html_home_categorias(obj){
     var Div = create_element_class('categoria');
