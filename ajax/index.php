@@ -33,8 +33,8 @@ if($accion == "enviar_pedido"){
     $pedido['pedido']['comuna'] = $aux['comuna'];
     $pedido['pedido']['costo'] = $aux['costo'];
     $pedido['pedido']['total'] = $aux['total'];
-    $pedido['pedido']['carro'] = $_POST['carro'];
-    $pedido['pedido']['promos'] = $_POST['promos'];
+    $pedido['pedido']['carro'] = json_decode($_POST['carro']);
+    $pedido['pedido']['promos'] = json_decode($_POST['promos']);
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');

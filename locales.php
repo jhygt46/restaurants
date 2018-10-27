@@ -77,6 +77,10 @@ if(isset($_GET['param_dom'])){
                 <div class="categorias">
                     <div class="titulo">
                         <div class="ttl">Categorias</div>
+                        <div class="opciones">
+                            <div class="nuevo" onclick="categoria_padre()"><</div>
+                            <!--<div class="config">+</div>-->
+                        </div>
                     </div>
                     <div class="contenido">
                         <div class="lista_categorias"></div>

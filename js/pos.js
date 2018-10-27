@@ -1,4 +1,5 @@
-var id_ped = 0;
+var seleccionado = null;
+var categoia = 0;
 var catalogo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 
@@ -38,7 +39,7 @@ function add_pedido(data){
 }
 function set_pedido(index, that){
     
-    id_ped = index;
+    seleccionado = index;
     var count = 0;
     categorias_base(0);
     $(that).parents('.lista_pedidos').find('.pedido').each(function(){
@@ -84,9 +85,18 @@ function open_productos(id){
     }
     
 }
+function categoria_padre(){
+    if(categoria != 0){
+        var cat = get_categoria(categoria);
+        open_categoria(cat.parent_id);
+    }else{
+        open_categoria(0);
+    }
+}
 function open_categoria(id){
 
     if(cats_or_prods(id)){
+        categoria = id;
         categorias_base(id);
     }else{
         open_productos(id);
@@ -160,11 +170,9 @@ function html_home_pedidos(obj, index){
         
         Div.appendChild(estado);
     }
-    
-    
-    
-    
+
     return Div;
+    
 }
 function ver_pedido(index){
     
@@ -185,6 +193,14 @@ function ver_pedido(index){
     $('.nuevo_pedido').show();
     
 }
+function add_carro_producto(id_pro){
+    
+    var pedidos = get_pedidos();
+    var pedido = pedidos[seleccionado];
+    pedido.carro.push({id_pro: id_pro});
+    set_pedidos(pedidos);
+    
+}
 function html_home_categorias(obj){
     var Div = create_element_class('categoria');
     Div.onclick = function(){ open_categoria(obj.id_cae) };
@@ -194,6 +210,7 @@ function html_home_categorias(obj){
 }
 function html_home_productos(obj){
     var Div = create_element_class('producto');
+    Div.onclick = function(){ add_carro_producto(obj.id_pro); };
     var Divnombre = create_element_class_inner('nombre', obj.nombre);
     Div.appendChild(Divnombre);
     return Div;
