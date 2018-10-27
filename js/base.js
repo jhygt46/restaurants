@@ -152,6 +152,9 @@ function ver_carro(){
     var carro = {};
     carro.carro = JSON.parse(localStorage.getItem("carro")) || [];
     carro.promos = JSON.parse(localStorage.getItem("carro_promos")) || [];
+    
+    
+    
     console.log(carro);
 }
 // OPEN CARRO //
@@ -543,8 +546,13 @@ function process_new_promos(){
     var aux = {};
     aux.carro = carro;
     aux.carro_promos = carro_promos;
+    set_carro(carro, carro_promos);
     return aux;
     
+}
+function set_carro(carro, carro_promos){
+    localStorage.setItem("carro", JSON.stringify(carro));
+    localStorage.setItem("carro_promos", JSON.stringify(carro_promos));
 }
 function process_promo(){
     
