@@ -95,6 +95,8 @@ function categoria_padre(){
 }
 function open_categoria(id){
 
+    console.log(id);
+
     if(cats_or_prods(id)){
         categoria = id;
         categorias_base(id);
@@ -136,16 +138,27 @@ function np_close(that){
     
 }
 function html_home_pedidos(obj, index){
-    
-    console.log(obj.carro);
-    console.log(obj.promos);
 
+    var total = 0;
+    var pro, cat;
+    if(obj.carro){
+        obj.carro.forEach(function(carro_item, index){
+            pro = get_producto(carro_item.id_pro);
+            total = total + parseInt(pro.precio);
+        });
+    }
+    if(obj.promos){
+        obj.promos.forEach(function(promo_item, index){
+            cat = get_categoria(promo_item.id_cae);
+            total = total + parseInt(cat.precio);
+        });
+    }
     var Div = create_element_class('pedido');
     
     var p_num = create_element_class_inner('p_num', 'Pedido #476');
     p_num.onclick = function(){ set_pedido(index, this) };
     var p_estado = create_element_class_inner('p_estado', 'Abierto');
-    var p_precio = create_element_class_inner('p_precio', '$2.990');
+    var p_precio = create_element_class_inner('p_precio', '$'+total);
     
     var btn_mod = create_element_class('btn_mod');
     btn_mod.onclick = function(){ ver_pedido(index) };
@@ -201,9 +214,19 @@ function add_carro_producto(id_pro){
     set_pedidos(pedidos);
     
 }
+function add_carro_promocion(id){
+    
+}
 function html_home_categorias(obj){
+    
+    
     var Div = create_element_class('categoria');
-    Div.onclick = function(){ open_categoria(obj.id_cae) };
+    if(obj.tipo == 0){
+        Div.onclick = function(){ open_categoria(obj.id_cae) };
+    }
+    if(obj.tipo == 1){
+        Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
+    }
     var Divnombre = create_element_class_inner('nombre', obj.nombre);
     Div.appendChild(Divnombre);
     return Div;
