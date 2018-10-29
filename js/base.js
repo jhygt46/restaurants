@@ -160,11 +160,20 @@ function ver_carro(){
 // OPEN CARRO //
 function open_carro(){
     
-    console.log(get_pedido());
-    
-    show_modal('modal_carro');
-    add_history('open_carro', 0);
-    process_carro();
+    var pedido = get_pedido();
+    if(pedido.id_ped == 0){
+        show_modal('modal_carro');
+        add_history('open_carro', 0);
+        process_carro();
+    }
+    if(pedido.id_ped > 0){
+        
+        show_modal('modal_carro');
+        $('.modal_carro .carro_inicio').hide();
+        $('.modal_carro .carro_direccion').hide();
+        $('.modal_carro .carro_final').hide();
+        $('.modal_carro .carro_seguimiento').show();
+    }
 }
 
 // INICIO MENU IZQUIERDA //
