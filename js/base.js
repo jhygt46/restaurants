@@ -768,6 +768,7 @@ function confirmar_pedido(){
             success: function(info){
                 
                 var data = JSON.parse(info);
+                console.log(data);
                 if(data.op == 1){
                     
                     titulo.html("Felicitaciones");
