@@ -729,7 +729,7 @@ function confirmar_productos_promo(that){
     
 }
 
-function open_socket(pedido_code){
+function open_socket(pedido_code, id_per){
     
     var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
     var estado;
@@ -737,7 +737,6 @@ function open_socket(pedido_code){
     
     socket.on('pedido-'+pedido_code, function(data) {
         
-        console.log("SOCKET PEDIDO");
         estado = estados[data.estado % estados.length];
         $('.carro_seguimiento .pedido_sub').html(estado);
         
@@ -783,11 +782,14 @@ function confirmar_pedido(){
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");
                     modales.eq(2).hide();
                     modales.eq(3).show();
-                    open_socket(data.pedido_code);
-                    borrar_carro();
+                    
+                    open_socket(data.pedido_code, data.id_per);
+                    
                     pedido.id_per = data.id_per;
+                    pedido.pedido_code = data.pedido_code;
                     set_pedido(pedido);
-                   
+                    borrar_carro();
+                    
                 }
                 
             
