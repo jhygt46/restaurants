@@ -785,7 +785,8 @@ function confirmar_pedido(){
                     modales.eq(3).show();
                     open_socket(data.pedido_code);
                     borrar_carro();
-                    set_pedido(null);
+                    pedido.id_per = data.id_per;
+                    set_pedido(pedido);
                    
                 }
                 
@@ -949,12 +950,13 @@ function map_local(id){
     }
     
 }
-function select_local(id){
+function select_local(id, nombre){
     
     var pedido = get_pedido();
     pedido.id_ped = 0;
     pedido.despacho = 0;
-    pedido.id_loc = 1;
+    pedido.id_loc = id;
+    pedido.local_nombre = nombre;
     pedido.num = null;
     pedido.calle = '';
     pedido.costo = 0;
@@ -975,6 +977,7 @@ function detalle_pedido(that){
     }
 }
 function show_retiro(){
+
 
     $('.cont_direccion .direccion_opciones').hide();
     $('.cont_direccion .direccion_op1').show();

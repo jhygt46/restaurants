@@ -45,7 +45,7 @@ if($accion == "enviar_pedido"){
             
             $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
             $pedido['pedido']['costo'] = 0;
-            $info['db1'] = $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
         if($pedido['pedido']['despacho'] == 1){
@@ -58,10 +58,9 @@ if($accion == "enviar_pedido"){
             $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
             $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
             $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
-
-            $id_loc = $aux_pedido->{'id_loc'};
-            $pedido['pedido']['id_loc'] = $id_loc;
-            $info['db2'] = $fireapp->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', depto='".$pedido['pedido']['depto']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
+            
+            $fireapp->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', depto='".$pedido['pedido']['depto']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
 

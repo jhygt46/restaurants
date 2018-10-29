@@ -97,7 +97,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                         <div class="direccion_op1 hide">
                                             <div class="dir_locales">
                                                 <div class="cont_local clearfix">
-                                                    <div class="local_info" onclick="select_local(1)">
+                                                    <div class="local_info" onclick="select_local(1, 'Local Providencia')">
                                                         <div class="title">Local Providencia</div>
                                                         <div class="stitle">Avda Providencia 1245</div>
                                                     </div>
@@ -109,7 +109,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                             </div>
                                             <div class="dir_locales">
                                                 <div class="cont_local clearfix">
-                                                    <div class="local_info" onclick="select_local(2)">
+                                                    <div class="local_info" onclick="select_local(2, 'Local Apoquindo')">
                                                         <div class="title">Local Las Condes</div>
                                                         <div class="stitle">Avda Apoquindo 6786</div>
                                                     </div>
