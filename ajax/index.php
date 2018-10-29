@@ -24,27 +24,27 @@ if($accion == "enviar_pedido"){
     if($nombre != "" && $telefono != ""){
         
         $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
-        $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-        $pedido_insert = $fireapp->con->sql("INSERT INTO pedidos (code, fecha, despacho) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."')");
+        $pedido['pedido']['total'] = $aux_pedido->{'total'};
+        $pedido['pedido']['carro'] = json_decode($_POST['carro']);
+        $pedido['pedido']['promos'] = json_decode($_POST['promos']);
         
-        $id_ped = $pedido_insert['insert_id'];
+        $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+        $pedido_insert = $fireapp->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."')");
         
         $info['op'] = 1;
         $info['pedido_code'] = $pedido_code;
         
         $pedido['local_code'] = "anb7sd-12s9ksm";
-        $pedido['pedido']['id_ped'] = $id_ped;
+        $pedido['pedido']['id_ped'] = $pedido_insert['insert_id'];
         $pedido['pedido']['pedido_code'] = $pedido_code;
         $pedido['pedido']['tipo'] = 1;
         $pedido['pedido']['estado'] = 0;
-        $pedido['pedido']['total'] = $aux_pedido->{'total'};
-        $pedido['pedido']['carro'] = json_decode($_POST['carro']);
-        $pedido['pedido']['promos'] = json_decode($_POST['promos']);
         
         if($pedido['pedido']['despacho'] == 0){
             
             $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
             $pedido['pedido']['costo'] = 0;
+            
             $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
