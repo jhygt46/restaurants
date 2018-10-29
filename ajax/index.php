@@ -25,7 +25,7 @@ if($accion == "enviar_pedido"){
         
         $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
         $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-        $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."')");
+        $pedido_insert = $fireapp->con->sql("INSERT INTO pedidos (code, fecha, despacho) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."')");
         
         $id_ped = $pedido_insert['insert_id'];
         
@@ -45,7 +45,7 @@ if($accion == "enviar_pedido"){
             
             $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
             $pedido['pedido']['costo'] = 0;
-            $this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
         if($despacho == 1){
@@ -61,7 +61,7 @@ if($accion == "enviar_pedido"){
 
             $id_loc = $aux_pedido->{'id_loc'};
             $pedido['pedido']['id_loc'] = $id_loc;
-            $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', depto='".$pedido['pedido']['depto']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            $fireapp->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', depto='".$pedido['pedido']['depto']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
 
