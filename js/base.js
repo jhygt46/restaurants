@@ -777,6 +777,7 @@ function confirmar_pedido(){
             success: function(info){
                 
                 var data = JSON.parse(info);
+                console.log(data);
                 if(data.op == 1){
                     
                     titulo.html("Felicitaciones");
@@ -854,21 +855,22 @@ function confirmar_pedido(){
             
             var div_retiro = modales.eq(1).find('.dir_op').eq(0);
             var div_domicilio = modales.eq(1).find('.dir_op').eq(1);
+            var despacho_desde = "1.000";
             
             var pedido = get_pedido();
             if(pedido.despacho == 0){
                 div_retiro.addClass('dir_op_select');
                 div_domicilio.removeClass('dir_op_select');
-                div_retiro.find('.stitle').html('Local Providencia');
+                div_retiro.find('.stitle').html(pedido.local_nombre);
             }else{
                 div_retiro.find('.stitle').html('Sin Costo');
             }
             if(pedido.despacho == 1){
                 div_retiro.removeClass('dir_op_select');
                 div_domicilio.addClass('dir_op_select');
-                div_domicilio.find('.stitle').html('Jose Tomas Rider 1185, Providencia, Santiago');
+                div_domicilio.find('.stitle').html(pedido.direccion);
             }else{
-                div_domicilio.find('.stitle').html('Desde $1.000');
+                div_domicilio.find('.stitle').html('Desde $'+despacho_desde);
             }
         }
     }
