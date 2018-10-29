@@ -136,17 +136,17 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                 </div>
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Depto</div>
-                                                    <div class="fsin_in"><input type="text" /></div>
+                                                    <div class="fsin_in"><input type="text" class="pedido_depto" /></div>
                                                 </div>
                                             </div>
                                             <div class="fs_inputs clearfix">
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Nombre</div>
-                                                    <div class="fsin_in"><input type="text" /></div>
+                                                    <div class="fsin_in"><input type="text" class="pedido_nombre" /></div>
                                                 </div>
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Telefono</div>
-                                                    <div class="fsin_in"><input type="text" /></div>
+                                                    <div class="fsin_in"><input type="text" class="pedido_telefono" /></div>
                                                 </div>
                                             </div>
                                             <div class="fs_inputs2 clearfix">
@@ -154,7 +154,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                     <div class="fsin_ttl">Gengibre</div>
                                                 </div>
                                                 <div class="fs_in">
-                                                    <div class="fsin_in"><input type="checkbox" value="1" id="gengibre" /></div>
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="pedido_gengibre" /></div>
                                                 </div>
                                             </div>
                                             <div class="fs_inputs2 clearfix">
@@ -162,7 +162,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                     <div class="fsin_ttl">Wasabi</div>
                                                 </div>
                                                 <div class="fs_in">
-                                                    <div class="fsin_in"><input type="checkbox" value="1" id="wasabi" /></div>
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="pedido_wasabi" /></div>
                                                 </div>
                                             </div>
                                             <div class="fs_inputs2 clearfix">
@@ -170,7 +170,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                     <div class="fsin_ttl">Sushi para Embarazadas</div>
                                                 </div>
                                                 <div class="fs_in">
-                                                    <div class="fsin_in"><input type="checkbox" value="1" id="wasabi" /></div>
+                                                    <div class="fsin_in"><input type="checkbox" value="1" id="pedido_embarazadas" /></div>
                                                 </div>
                                             </div>
                                             <div class="fs_inputs3 clearfix">
@@ -178,7 +178,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                     <div class="fsin_ttl">Palitos</div>
                                                 </div>
                                                 <div class="fs_in">
-                                                    <div class="fsin_in"><select id="palitos"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+                                                    <div class="fsin_in"><select id="pedido_palitos"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
                                                 </div>
                                             </div>
                                             <div class="fin_detalle">
