@@ -261,10 +261,10 @@ class Core{
     
     public function get_data($dom){
         
-        $info['op'] = 0;
         $dominio = ($dom !== null) ? $dom : $_SERVER["HTTP_HOST"];
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+        
         if(count($sql['resultado']) == 1){
             
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
@@ -288,6 +288,17 @@ class Core{
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
+            
+            $sql_locales = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$sql['resultado'][0]['id_gir']."'");
+            for($i=0; $i<$sql_locales['count']; $i++){
+
+                $aux_loc['lat'] = $sql_locales['resultado'][$i]['lat'];
+                $aux_loc['lng'] = $sql_locales['resultado'][$i]['lng'];
+                $aux_loc['nombre'] = $sql_locales['resultado'][$i]['nombre'];
+                $info['locales'][] = $aux_loc;
+                unset($aux_loc);
+
+            }
 
         }
 
