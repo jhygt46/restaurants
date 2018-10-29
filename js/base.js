@@ -769,7 +769,7 @@ function confirmar_pedido(){
         pedido.palitos = $('.pedido_palitos').val();
         
         var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
-        console.log(send);
+
         $.ajax({
             url: "/ajax/index.php",
             type: "POST",
@@ -788,7 +788,12 @@ function confirmar_pedido(){
                 }
                 if(data.op == 2){
                     
-                    alert("ERROR:");
+                    if($('.pedido_nombre').val()){
+                        $('.pedido_nombre').css({border: '1px'});
+                    }
+                    if($('.pedido_telefono').val()){
+                        $('.pedido_telefono').css({border: '1px'});
+                    }
                     
                 }
                 
