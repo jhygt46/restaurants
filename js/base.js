@@ -159,6 +159,9 @@ function ver_carro(){
 }
 // OPEN CARRO //
 function open_carro(){
+    
+    console.log(get_pedido());
+    
     show_modal('modal_carro');
     add_history('open_carro', 0);
     process_carro();
@@ -777,9 +780,6 @@ function confirmar_pedido(){
                 
                 var data = JSON.parse(info);
                 if(data.op == 1){
-                    
-                    console.log("data");
-                    console.log(data);
                     
                     titulo.html("Felicitaciones");
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");
