@@ -788,6 +788,7 @@ function confirmar_pedido(){
                     pedido.id_per = data.id_per;
                     pedido.pedido_code = data.pedido_code;
                     set_pedido(pedido);
+                    
                     borrar_carro();
                     
                 }
