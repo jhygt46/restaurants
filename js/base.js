@@ -925,18 +925,17 @@ var maps = [];
 function init_map_local(id, lat, lng){
     
     var map_local = new google.maps.Map(document.getElementById('lmap-'+id), {
-        center: {lat: -33.428066, lng: -70.616695},
+        center: {lat: lat, lng: lng},
         zoom: 15,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     });
     
-    var myLatLng = { lat: -33.428066, lng: -70.616695 };
+    var myLatLng = { lat: lat, lng: lng };
     
     var marker = new google.maps.Marker({
         position: myLatLng,
-        map: map_local,
-        title: 'Local Providencia'
+        map: map_local
     });
     
 }
