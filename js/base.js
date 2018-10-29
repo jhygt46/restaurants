@@ -788,7 +788,7 @@ function confirmar_pedido(){
                     
                     open_socket(data.pedido_code, data.id_per);
                     
-                    pedido.id_per = data.id_per;
+                    pedido.id_ped = data.id_ped;
                     pedido.pedido_code = data.pedido_code;
                     set_pedido(pedido);
                     
