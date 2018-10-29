@@ -292,9 +292,11 @@ class Core{
             $sql_locales = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$sql['resultado'][0]['id_gir']."'");
             for($i=0; $i<$sql_locales['count']; $i++){
 
+                $aux_loc['id_loc'] = $sql_locales['resultado'][$i]['id_loc'];
                 $aux_loc['lat'] = $sql_locales['resultado'][$i]['lat'];
                 $aux_loc['lng'] = $sql_locales['resultado'][$i]['lng'];
                 $aux_loc['nombre'] = $sql_locales['resultado'][$i]['nombre'];
+                $aux_loc['direccion'] = $sql_locales['resultado'][$i]['direccion'];
                 $info['locales'][] = $aux_loc;
                 unset($aux_loc);
 
