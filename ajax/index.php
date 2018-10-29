@@ -41,14 +41,14 @@ if($accion == "enviar_pedido"){
         $pedido['pedido']['carro'] = json_decode($_POST['carro']);
         $pedido['pedido']['promos'] = json_decode($_POST['promos']);
         
-        if($despacho == 0){
+        if($pedido['pedido']['despacho'] == 0){
             
             $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
             $pedido['pedido']['costo'] = 0;
             $info['db1'] = $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
-        if($despacho == 1){
+        if($pedido['pedido']['despacho'] == 1){
             
             $pedido['pedido']['lat'] = $aux_pedido->{'lat'};
             $pedido['pedido']['lng'] = $aux_pedido->{'lng'};
