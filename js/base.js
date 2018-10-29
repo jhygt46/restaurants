@@ -777,7 +777,6 @@ function confirmar_pedido(){
             success: function(info){
                 
                 var data = JSON.parse(info);
-                console.log(data);
                 if(data.op == 1){
                     
                     titulo.html("Felicitaciones");
@@ -785,17 +784,9 @@ function confirmar_pedido(){
                     modales.eq(2).hide();
                     modales.eq(3).show();
                     open_socket(data.pedido_code);
+                    borrar_carro();
+                    set_pedido(null);
                    
-                }
-                if(data.op == 2){
-                    
-                    if($('.pedido_nombre').val()){
-                        $('.pedido_nombre').css({border: '1px'});
-                    }
-                    if($('.pedido_telefono').val()){
-                        $('.pedido_telefono').css({border: '1px'});
-                    }
-                    
                 }
                 
             
