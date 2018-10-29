@@ -16,35 +16,67 @@ $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
     
-    $aux = $fireapp->set_pedido($_POST['pedido'], $_POST['carro'], $_POST['promos']);
+    $aux_pedido = json_decode($_POST['pedido']);
+    
+    $nombre = $aux_pedido->{'nombre'};
+    $telefono = $aux_pedido->{'telefono'};
+    
+    if($nombre != "" && $telefono != ""){
+        
+        $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
+        $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+        $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."')");
+        
+        $id_ped = $pedido_insert['insert_id'];
+        
+        $info['op'] = 1;
+        $info['pedido_code'] = $pedido_code;
+        
+        $pedido['local_code'] = "anb7sd-12s9ksm";
+        $pedido['pedido']['id_ped'] = $id_ped;
+        $pedido['pedido']['pedido_code'] = $pedido_code;
+        $pedido['pedido']['tipo'] = 1;
+        $pedido['pedido']['estado'] = 0;
+        $pedido['pedido']['total'] = $aux_pedido->{'total'};
+        $pedido['pedido']['carro'] = json_decode($_POST['carro']);
+        $pedido['pedido']['promos'] = json_decode($_POST['promos']);
+        
+        if($despacho == 0){
+            
+            $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
+            $pedido['pedido']['costo'] = 0;
+            $this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            
+        }
+        if($despacho == 1){
+            
+            $pedido['pedido']['lat'] = $aux_pedido->{'lat'};
+            $pedido['pedido']['lng'] = $aux_pedido->{'lng'};
+            $pedido['pedido']['direccion'] = $aux_pedido->{'direccion'};
+            $pedido['pedido']['calle'] = $aux_pedido->{'calle'};
+            $pedido['pedido']['num'] = $aux_pedido->{'num'};
+            $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
+            $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
+            $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
 
-    $pedido['local_code'] = $aux['local_code'];
-    $pedido['pedido']['id_ped'] = $aux['id_ped'];
-    $pedido['pedido']['pedido_code'] = $aux['pedido_code'];
-    $pedido['pedido']['despacho'] = $aux['despacho'];
-    $pedido['pedido']['id_loc'] = $aux['id_loc'];
-    $pedido['pedido']['lat'] = $aux['lat'];
-    $pedido['pedido']['lng'] = $aux['lng'];
-    $pedido['pedido']['direccion'] = $aux['direccion'];
-    $pedido['pedido']['num'] = $aux['num'];
-    $pedido['pedido']['estado'] = 0;
-    $pedido['pedido']['tipo'] = 1;
-    $pedido['pedido']['calle'] = $aux['calle'];
-    $pedido['pedido']['comuna'] = $aux['comuna'];
-    $pedido['pedido']['costo'] = $aux['costo'];
-    $pedido['pedido']['total'] = $aux['total'];
-    $pedido['pedido']['carro'] = json_decode($_POST['carro']);
-    $pedido['pedido']['promos'] = json_decode($_POST['promos']);
-    
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-    curl_exec($ch);
-    
-    $info['op'] = 1;
-    $info['pedido_code'] = $aux['pedido_code'];
-    $info['aux'] = $pedido;
+            $id_loc = $aux_pedido->{'id_loc'};
+            $pedido['pedido']['id_loc'] = $id_loc;
+            $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', depto='".$pedido['pedido']['depto']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+            
+        }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
+        curl_exec($ch);
+        
+    }else{
+        
+        $info['op'] = 2;
+        $info['mensaje'] = "Error: debe completar todos los campos";
+        
+    }
     
 }
 if($accion == "despacho_domicilio"){
