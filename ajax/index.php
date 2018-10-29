@@ -44,6 +44,7 @@ if($accion == "enviar_pedido"){
     
     $info['op'] = 1;
     $info['pedido_code'] = $aux['pedido_code'];
+    $info['aux'] = $pedido;
     
 }
 if($accion == "despacho_domicilio"){
