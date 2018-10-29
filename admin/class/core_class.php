@@ -392,8 +392,6 @@ class Core{
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);
         }
         
-        
-        
         if($_SERVER['HTTP_HOST'] == "localhost"){
             $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
         }else{

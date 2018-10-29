@@ -9,10 +9,6 @@ if(isset($_GET['param_dom'])){
     $info = $core->get_data('www.runasushi.cl');
 }
 
-echo "<pre>";
-print_r($info);
-echo "</pre>";
-
 $js = $core->get_web_js_data2($info['id_gir']);
 
 ?>
@@ -99,6 +95,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                             <div class="dir_op" onclick="show_despacho()"><div class="title">Despacho a Domicilio</div><div class="stitle">Desde $1.000</div></div>
                                         </div>
                                         <div class="direccion_op1 hide">
+                                            <?php for($i=0; $i<count($info['locales']); $i++){ ?>
                                             <div class="dir_locales">
                                                 <div class="cont_local clearfix">
                                                     <div class="local_info" onclick="select_local(1, 'Local Providencia')">
@@ -111,18 +108,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                 </div>
                                                 <div id="lmap-1" class="lmap"></div>
                                             </div>
-                                            <div class="dir_locales">
-                                                <div class="cont_local clearfix">
-                                                    <div class="local_info" onclick="select_local(2, 'Local Apoquindo')">
-                                                        <div class="title">Local Las Condes</div>
-                                                        <div class="stitle">Avda Apoquindo 6786</div>
-                                                    </div>
-                                                    <div class="local_mapa" onclick="map_local(2)">
-                                                        <div class="icon_mapa"></div>
-                                                    </div>
-                                                </div>
-                                                <div id="lmap-2" class="lmap"></div>
-                                            </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="direccion_op2 hide">
                                             <input type="text" id="pac-input" placeholder="Ingrese su direccion y numero" />
