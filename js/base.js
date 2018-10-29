@@ -922,7 +922,7 @@ var map;
 var map_init = 0;
 var maps = [];
 
-function init_map_local(id){
+function init_map_local(id, lat, lng){
     
     var map_local = new google.maps.Map(document.getElementById('lmap-'+id), {
         center: {lat: -33.428066, lng: -70.616695},

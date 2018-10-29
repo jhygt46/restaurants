@@ -98,15 +98,15 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                             <?php for($i=0; $i<count($info['locales']); $i++){ ?>
                                             <div class="dir_locales">
                                                 <div class="cont_local clearfix">
-                                                    <div class="local_info" onclick="select_local(1, 'Local Providencia')">
-                                                        <div class="title">Local Providencia</div>
-                                                        <div class="stitle">Avda Providencia 1245</div>
+                                                    <div class="local_info" onclick="select_local(<?php echo $info['locales'][$i]['id_loc']; ?>, '<?php echo $info['locales'][$i]['nombre']; ?>')">
+                                                        <div class="title"><?php echo $info['locales'][$i]['nombre']; ?></div>
+                                                        <div class="stitle"><?php echo $info['locales'][$i]['direccion']; ?></div>
                                                     </div>
-                                                    <div class="local_mapa" onclick="map_local(1)">
+                                                    <div class="local_mapa" onclick="map_local(<?php echo $info['locales'][$i]['id_loc']; ?>, <?php echo $info['locales'][$i]['lat']; ?>, <?php echo $info['locales'][$i]['lng']; ?>)">
                                                         <div class="icon_mapa"></div>
                                                     </div>
                                                 </div>
-                                                <div id="lmap-1" class="lmap"></div>
+                                                <div id="lmap-<?php echo $info['locales'][$i]['id_loc']; ?>" class="lmap"></div>
                                             </div>
                                             <?php } ?>
                                         </div>
