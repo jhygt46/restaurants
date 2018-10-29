@@ -32,10 +32,11 @@ if($accion == "enviar_pedido"){
         $pedido_insert = $fireapp->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."')");
         
         $info['op'] = 1;
+        $info['id_ped'] = $pedido_insert['insert_id'];
         $info['pedido_code'] = $pedido_code;
         
         $pedido['local_code'] = "anb7sd-12s9ksm";
-        $pedido['pedido']['id_ped'] = $pedido_insert['insert_id'];
+        $pedido['pedido']['id_ped'] = $info['id_ped'];
         $pedido['pedido']['pedido_code'] = $pedido_code;
         $pedido['pedido']['tipo'] = 1;
         $pedido['pedido']['estado'] = 0;
