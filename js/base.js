@@ -778,6 +778,9 @@ function confirmar_pedido(){
                 var data = JSON.parse(info);
                 if(data.op == 1){
                     
+                    console.log("data");
+                    console.log(data);
+                    
                     titulo.html("Felicitaciones");
                     subtitulo.html("Tu pedido ha sido enviado exitosamente");
                     modales.eq(2).hide();
