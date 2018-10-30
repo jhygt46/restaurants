@@ -834,6 +834,7 @@ function confirmar_pedido(){
                 
                 var total = parseInt(pedido.total) + parseInt(pedido.costo);
                 
+                $('.render_dir').html(pedido.direccion);
                 $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
                 $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
                 $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));
@@ -996,7 +997,6 @@ function detalle_pedido(that){
     }
 }
 function show_retiro(){
-
 
     $('.cont_direccion .direccion_opciones').hide();
     $('.cont_direccion .direccion_op1').show();

@@ -122,7 +122,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                             <div class="fs_inputs clearfix">
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Direccion</div>
-                                                    <div class="fsin_in" style="padding-top: 5px; font-size: 12px">Jose Tomas Rider 1185</div>
+                                                    <div class="fsin_in render_dir" style="padding-top: 5px; font-size: 12px"></div>
                                                 </div>
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Depto</div>
