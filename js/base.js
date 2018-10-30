@@ -833,8 +833,16 @@ function confirmar_pedido(){
                 subtitulo.html("Realiza la confirmacion de tu pedido");
                 
                 var total = parseInt(pedido.total) + parseInt(pedido.costo);
+                if(pedido.despacho == 0){
+                    $('.fs_dire').hide();
+                }
+                if(pedido.despacho == 1){
+                    $('.fs_dire').show();
+                    $('.render_dir').html(pedido.direccion);
+                }
                 
-                $('.render_dir').html(pedido.direccion);
+                
+                
                 $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
                 $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
                 $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));

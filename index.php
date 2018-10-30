@@ -119,7 +119,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                 <div class="info_modal carro_final hide" style="padding-bottom: 57px">
                                     <div class="cont_final">
                                         <div class="final_section">
-                                            <div class="fs_inputs clearfix">
+                                            <div class="fs_inputs fs_dire clearfix">
                                                 <div class="fs_in">
                                                     <div class="fsin_ttl">Direccion</div>
                                                     <div class="fsin_in render_dir" style="padding-top: 5px; font-size: 12px"></div>
