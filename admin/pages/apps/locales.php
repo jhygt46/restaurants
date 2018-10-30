@@ -111,6 +111,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
+                    $code = $list[$i]['code'];
                 ?>
                 
                 <li class="user">
@@ -119,7 +120,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <a title="Eliminar" class="icn borrar" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>/<?php echo $id_n; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a title="Modificar" class="icn modificar" onclick="navlink('<?php echo $page_mod; ?>?id_loc=<?php echo $id_n; ?>')"></a>
                         <a title="Zona de Despacho" class="icn despacho" onclick="navlink('pages/apps/zonas_locales.php?id_loc=<?php echo $id_n; ?>')"></a>
-                        <a title="Punto de Venta" class="icn pventa" href="../locales.php" target="_blank"></a>
+                        <a title="Punto de Venta" class="icn pventa" href="../locales.php?code=<?php echo $code; ?>" target="_blank"></a>
                     </ul>
                 </li>
                 
