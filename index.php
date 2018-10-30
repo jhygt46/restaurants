@@ -187,7 +187,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                         </div>
                                         <div class="pedido_sub">Enviado</div>
                                         <div class="detalle_pedido"></div>
-                                        <div class="nuevo_pedido">Hacer nuevo Pedido</div>
+                                        <div class="nuevo_pedido" onclick="nuevo_pedido()">Hacer nuevo Pedido</div>
                                     </div>
                                 </div>
                             </div>

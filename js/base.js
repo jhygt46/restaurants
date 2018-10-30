@@ -741,7 +741,11 @@ function confirmar_productos_promo(that){
     
     
 }
-
+function nuevo_pedido(){
+    borrar_carro();
+    set_pedido(null);
+    hide_modal();
+}
 function open_socket(pedido_code, id_per){
     
     var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
