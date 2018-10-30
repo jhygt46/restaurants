@@ -91,7 +91,7 @@ function paso_4(){
     pedido.palitos = $('.pedido_palitos').val();
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
     $.ajax({
-        url: "ajax/index.php",
+        url: "/ajax/index.php",
         type: "POST",
         data: send,
         success: function(info){
@@ -212,7 +212,7 @@ function initMap(){
                 
                 var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
-                    url: "ajax/index.php",
+                    url: "/ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
