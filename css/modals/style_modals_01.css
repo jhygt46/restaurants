@@ -359,7 +359,7 @@
 .modal_carro .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa .icon_mapa{
     width: 30px;
     height: 30px;
-    background: url('../images/mapa_icon.jpg') no-repeat;
+    background: url('/images/google-maps.png') no-repeat;
 }
 .modal_carro .cont_direccion .direccion_op2{
     height: 100%;
