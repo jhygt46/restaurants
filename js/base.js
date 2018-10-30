@@ -173,6 +173,7 @@ function open_carro(){
         $('.modal_carro .carro_direccion').hide();
         $('.modal_carro .carro_final').hide();
         $('.modal_carro .carro_seguimiento').show();
+        
     }
 }
 
