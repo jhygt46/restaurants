@@ -721,6 +721,11 @@ body {
     background-position: -408px -382px;
     cursor: pointer;
 }
+.listUser .user ul .pventa{
+    background: url('../images/icons-set.png') no-repeat;
+    background-position: -287px -527px;
+    cursor: pointer;
+}
 .listUser .user ul .cuadrar{
     background: url('../images/icons-set.png') no-repeat;
     background-position: -406px -383px;
