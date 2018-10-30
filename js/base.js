@@ -127,10 +127,9 @@ function show_modal(clase){
     $('.modals, .'+clase).show();
     modal = 1;
 }
-
 // GET CARRO //
 function get_pedido(){
-    return JSON.parse(localStorage.getItem("pedido")) || { id_ped: 0, despacho: null, id_loc: 0, lat: 0, lng: 0, direccion: '', num: 0, estado: 0, calle: '', comuna: '', costo: 0, total: 0 };
+    return JSON.parse(localStorage.getItem("pedido")) || { id_ped: 0, despacho: null };
 }
 function set_pedido(pedido){
     localStorage.setItem("pedido", JSON.stringify(pedido));
@@ -152,29 +151,22 @@ function ver_carro(){
     var carro = {};
     carro.carro = JSON.parse(localStorage.getItem("carro")) || [];
     carro.promos = JSON.parse(localStorage.getItem("carro_promos")) || [];
-    
-    
-    
-    console.log(carro);
 }
 // OPEN CARRO //
 function open_carro(){
     
     var pedido = get_pedido();
     if(pedido.id_ped == 0){
-        show_modal('modal_carro');
+        show_modal('paso_01');
         add_history('open_carro', 0);
         process_carro();
     }
     if(pedido.id_ped > 0){
-        
-        show_modal('modal_carro');
-        $('.modal_carro .carro_inicio').hide();
-        $('.modal_carro .carro_direccion').hide();
-        $('.modal_carro .carro_final').hide();
-        $('.modal_carro .carro_seguimiento').show();
-        
+        show_modal('paso_04');
+        add_history('open_carro', 0);
+        open_socket(pedido);
     }
+    
 }
 
 // INICIO MENU IZQUIERDA //
@@ -413,7 +405,7 @@ function process_carro(){
     
     if(!carro_daemon()){
         
-        $('.modal_carro .carro_inicio').html('');
+        $('.paso_01 .info_modal').html('');
         
         var total = 0;
         var info = process_new_promos();
@@ -468,7 +460,7 @@ function process_carro(){
         html.appendChild(precio);
         
         $('.cantcart_num').html(count);
-        $('.modal_carro .carro_inicio').append(html);
+        $('.paso_01 .info_modal').append(html);
     }
 }
 function carro_daemon(){
@@ -746,158 +738,6 @@ function nuevo_pedido(){
     set_pedido(null);
     hide_modal();
 }
-function open_socket(pedido_code, id_per){
-    
-    var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
-    var estado;
-    var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
-    
-    socket.on('pedido-'+pedido_code, function(data) {
-        
-        estado = estados[data.estado % estados.length];
-        $('.carro_seguimiento .pedido_sub').html(estado);
-        
-    });
-    socket.on('pedido-pos-'+pedido_code, function(data) {
-        console.log("CAMBIO DE POS");
-    });
-}
-
-// CONFIRMAR PEDIDO //
-function confirmar_pedido(){
-    
-    var modales = $('.modal_carro .cont_info').find('.info_modal');
-    var titulo = $('.modal_carro').find('h1');
-    var subtitulo = $('.modal_carro').find('h2');
-    
-    if(modales.eq(3).is(":visible")){
-        hide_modal();
-    }
-    if(modales.eq(2).is(":visible")){
-        
-        var pedido = get_pedido();
-        pedido.nombre = $('.pedido_nombre').val();
-        pedido.telefono = $('.pedido_telefono').val();
-        pedido.depto = $('.pedido_depto').val();
-        pedido.gengibre = $('.pedido_gengibre').val();
-        pedido.wasabi = $('.pedido_wasabi').val();
-        pedido.embarazadas = $('.pedido_embarazadas').val();
-        pedido.palitos = $('.pedido_palitos').val();
-        
-        var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
-
-        $.ajax({
-            url: "/ajax/index.php",
-            type: "POST",
-            data: send,
-            success: function(info){
-                
-                var data = JSON.parse(info);
-                if(data.op == 1){
-                    
-                    titulo.html("Felicitaciones");
-                    subtitulo.html("Tu pedido ha sido enviado exitosamente");
-                    modales.eq(2).hide();
-                    modales.eq(3).show();
-                    
-                    open_socket(data.pedido_code, data.id_per);
-                    
-                    pedido.id_ped = data.id_ped;
-                    pedido.pedido_code = data.pedido_code;
-                    set_pedido(pedido);
-                    
-                    borrar_carro();
-                    
-                }
-                
-            
-            }, error: function(e){
-                console.log(e);
-            }
-        });
-        
-    }
-    
-    if(modales.eq(1).is(":visible")){
-        
-        var pedido = get_pedido();
-        if(pedido.despacho !== null && pedido.id_loc != 0){
-            
-            var op1 = modales.eq(1).find('.direccion_op1');
-            var op2 = modales.eq(1).find('.direccion_op2');
-            if((!op1.is(":visible") && !op2.is(":visible")) || (pedido.despacho == 0 && op1.is(":visible")) || (pedido.despacho == 1 && op2.is(":visible"))){
-                
-                modales.eq(1).hide();
-                modales.eq(2).show();
-                titulo.html("Confirmacion");
-                subtitulo.html("Realiza la confirmacion de tu pedido");
-                
-                var total = parseInt(pedido.total) + parseInt(pedido.costo);
-                if(pedido.despacho == 0){
-                    $('.fs_dire').hide();
-                }
-                if(pedido.despacho == 1){
-                    $('.fs_dire').show();
-                    $('.render_dir').html(pedido.direccion);
-                }
-                
-                
-                
-                $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
-                $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
-                $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));
-                
-            }
-            if(pedido.despacho == 0 && op2.is(":visible")){
-                if(pedido.num === null){
-                    alert("DEBE INGRESAR DIRECCION Y NUMERO");
-                }
-                if(pedido.num !== null){
-                    alert("TIENE SELECCIONADO RETIRO EN LOCAL");
-                }
-            }
-            if(pedido.despacho == 1 && op1.is(":visible")){
-                alert("TIENE SELECCIONADO DESPACHO A DOMICILIO");
-            }
-            
-        }else{
-            alert("Debe ingresar Numero");
-        }
-
-    }
-    if(modales.eq(0).is(":visible")){
-        var carro = get_carro();
-        if(carro.length > 0){
-            
-            modales.eq(0).hide();
-            modales.eq(1).show();
-            titulo.html("Despacho");
-            subtitulo.html("elije tu tipo de despacho");
-            
-            var div_retiro = modales.eq(1).find('.dir_op').eq(0);
-            var div_domicilio = modales.eq(1).find('.dir_op').eq(1);
-            var despacho_desde = "1.000";
-            
-            var pedido = get_pedido();
-            if(pedido.despacho == 0){
-                div_retiro.addClass('dir_op_select');
-                div_domicilio.removeClass('dir_op_select');
-                div_retiro.find('.stitle').html(pedido.local_nombre);
-            }else{
-                div_retiro.find('.stitle').html('Sin Costo');
-            }
-            if(pedido.despacho == 1){
-                div_retiro.removeClass('dir_op_select');
-                div_domicilio.addClass('dir_op_select');
-                div_domicilio.find('.stitle').html(pedido.direccion);
-            }else{
-                div_domicilio.find('.stitle').html('Desde $'+despacho_desde);
-            }
-        }
-    }
-    
-    
-}
 
 // CONFIRMAR PREGUNTAS PRODUCTO //
 function confirmar_pregunta_productos(that){
@@ -969,33 +809,6 @@ function init_map_local(id, lat, lng){
     
 }
 
-function map_local(id){
-    
-    $('#lmap-'+id).toggle();
-    if(maps.indexOf(id) == -1){
-        init_map_local(id);
-        maps.push(id);
-    }
-    
-}
-function select_local(id, nombre){
-    
-    var pedido = get_pedido();
-    pedido.id_ped = 0;
-    pedido.despacho = 0;
-    pedido.id_loc = id;
-    pedido.local_nombre = nombre;
-    pedido.num = null;
-    pedido.calle = '';
-    pedido.costo = 0;
-    pedido.comuna = '';
-    pedido.lat = 0;
-    pedido.lng = 0;
-    pedido.direccion = '';
-    set_pedido(pedido);
-    confirmar_pedido();
-
-}
 function detalle_pedido(that){
     var dll = $(that).parent().find('.detalle_pedido');
     if(dll.is(':visible')){
@@ -1004,25 +817,7 @@ function detalle_pedido(that){
         dll.show();
     }
 }
-function show_retiro(){
 
-    $('.cont_direccion .direccion_opciones').hide();
-    $('.cont_direccion .direccion_op1').show();
-    $('.modal_carro').find('h1').html("Selecciona Local");
-    $('.modal_carro').find('h2').html("En que local retiras la compra?");
-    
-}
-function show_despacho(){
-    
-    if(map_init == 0){
-        initMap();
-    }
-    $('.cont_direccion .direccion_opciones').hide();
-    $('.cont_direccion .direccion_op2').show();
-    $('.modal_carro').find('h1').html("Domicilio");
-    $('.modal_carro').find('h2').html("Ingresa tu ubicacion exacta");
-    
-}
 function return_direccion(){
     
     $('.cont_direccion .direccion_opciones').show();
@@ -1031,124 +826,7 @@ function return_direccion(){
     
 }
 
-function initMap(){
-    
-    map_init = 1;
-    map = new google.maps.Map(document.getElementById('map_direccion'), {
-        center: {lat: -33.428066, lng: -70.616695},
-        zoom: 13,
-        mapTypeId: 'roadmap',
-        disableDefaultUI: true
-    });
-    
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-      searchBox.setBounds(map.getBounds());
-    });
-    
-    var markers = [];
-    searchBox.addListener('places_changed', function(){
-        
-        var places = searchBox.getPlaces();
-        if(places.length == 0){
-            return;
-        }
-        if(places.length == 1){
-            
-            var pedido = get_pedido();
-            pedido.num = 0;
-            
-            for(var i=0; i<places[0].address_components.length; i++){
-                if(places[0].address_components[i].types[0] == "street_number"){
-                    pedido.num = places[0].address_components[i].long_name;
-                }
-                if(places[0].address_components[i].types[0] == "route"){
-                    pedido.calle = places[0].address_components[i].long_name;
-                }
-                if(places[0].address_components[i].types[0] == "locality"){
-                    pedido.comuna = places[0].address_components[i].long_name;
-                }
-            }
-            
-            if(pedido.num != 0){
-                
-                var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
-                $.ajax({
-                    url: "/ajax/index.php",
-                    type: "POST",
-                    data: send,
-                    success: function(datas){
-                        
-                        var data = JSON.parse(datas);
-                        if(data.op == 1){
-
-                            pedido.id_loc = data.id_loc;
-                            pedido.costo = data.precio;
-                            pedido.despacho = 1;
-                            pedido.lat = places[0].geometry.location.lat();
-                            pedido.lng = places[0].geometry.location.lng();
-                            pedido.direccion = places[0].formatted_address;
-                            set_pedido(pedido);
-                            confirmar_pedido();
-                            
-                        }else{
-                            alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
-                        }
-                        
-                    }, error: function(e){
-                        console.log(e);
-                    }
-                });
-                
-            }else{
-                alert("DEBE INGRESAR DIRECCION EXACTA");
-            }
-
-        }
-        // Clear out the old markers.
-        markers.forEach(function(marker){
-            marker.setMap(null);
-        });
-        markers = [];
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place){
-            if(!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if(place.geometry.viewport) {
-                bounds.union(place.geometry.viewport);
-            }else{
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
-    });
-
-}
 var formatNumber = {
     separador: ".", // separador para los miles
     sepDecimal: ',', // separador para los decimales

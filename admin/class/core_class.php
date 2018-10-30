@@ -285,6 +285,7 @@ class Core{
             
             $info['js_html_func'] = $path."/js/html_func.js";
             $info['js_base'] = $path."/js/base.js";
+            $info['js_base_lista'] = $path."/js/base_lista.js";
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;

@@ -35,7 +35,14 @@ if($accion == "enviar_pedido"){
         $info['id_ped'] = $pedido_insert['insert_id'];
         $info['pedido_code'] = $pedido_code;
         
-        $pedido['local_code'] = "anb7sd-12s9ksm";
+        $info_local = $fireapp->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
+        
+        /* VERIFICAR LOCAL */
+        $pedido['local_code'] = $info_local['resultado'][0]['code'];
+        $info['position_lat'] = $info_local['resultado'][0]['lat'];
+        $info['position_lng'] = $info_local['resultado'][0]['lng'];
+        /* VERIFICAR LOCAL */
+        
         $pedido['pedido']['id_ped'] = $info['id_ped'];
         $pedido['pedido']['pedido_code'] = $pedido_code;
         $pedido['pedido']['tipo'] = 1;
@@ -43,9 +50,7 @@ if($accion == "enviar_pedido"){
         
         if($pedido['pedido']['despacho'] == 0){
             
-            $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
             $pedido['pedido']['costo'] = 0;
-            
             $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
@@ -59,8 +64,6 @@ if($accion == "enviar_pedido"){
             $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
             $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
             $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
-            $pedido['pedido']['id_loc'] = $aux_pedido->{'id_loc'};
-            
             $fireapp->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."', id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
             
         }
@@ -107,7 +110,6 @@ if($accion == "despacho_domicilio"){
     }
 
 }
-
 echo json_encode($info);
 
 class pointLocation {

@@ -372,146 +372,132 @@
 .modal_carro .cont_direccion .direccion_op2 #map_direccion{
     height: 100%;
 }
-.modal_carro .carro_final .cont_final{
+.modal_carro .cont_final{
     padding: 10px;
 }
-.modal_carro .carro_final .cont_final .final_section{
+.modal_carro .cont_final .final_section{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fs_ttl_01{
+.modal_carro .cont_final .final_section .fs_ttl_01{
     font-size: 14px;
     padding-bottom: 2px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_ttl_02{
+.modal_carro .cont_final .final_section .fs_ttl_02{
     font-size: 22px;
     padding-top: 16px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs{
+.modal_carro .cont_final .final_section .fs_inputs{
     padding-bottom: 6px;
     padding-top: 6px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in{
+.modal_carro .cont_final .final_section .fs_inputs .fs_in{
     float: left;
     width: 50%;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_ttl{
+.modal_carro .cont_final .final_section .fs_inputs .fs_in .fsin_ttl{
     font-size: 16px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_in{
+.modal_carro .cont_final .final_section .fs_inputs .fs_in .fsin_in{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs .fs_in .fsin_in input[type="text"]{
+.modal_carro .cont_final .final_section .fs_inputs .fs_in .fsin_in input[type="text"]{
     width: 94%;
     border: 0px;
     height: 24px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2{
+.modal_carro .cont_final .final_section .fs_inputs2{
     margin-top: 6px;
     background: #ccc;
     padding: 6px 10px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in{
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in{
     float: left;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in:nth-child(1){
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in:nth-child(1){
     width: calc(100% - 18px);
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in:nth-child(2){
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in:nth-child(2){
     width: 18px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_ttl{
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in .fsin_ttl{
     font-size: 16px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_in{
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in .fsin_in{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs2 .fs_in .fsin_in input[type="checkbox"]{
+.modal_carro .cont_final .final_section .fs_inputs2 .fs_in .fsin_in input[type="checkbox"]{
     width: 18px;
     border: 0px;
     height: 18px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3{
+.modal_carro .cont_final .final_section .fs_inputs3{
     margin-top: 6px;
     background: #ccc;
     padding: 6px 10px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in{
+.modal_carro .cont_final .final_section .fs_inputs3 .fs_in{
     float: left;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in:nth-child(1){
+.modal_carro .cont_final .final_section .fs_inputs3 .fs_in:nth-child(1){
     width: calc(100% - 40px);
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in:nth-child(2){
+.modal_carro .cont_final .final_section .fs_inputs3 .fs_in:nth-child(2){
     width: 40px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in .fsin_ttl{
+.modal_carro .cont_final .final_section .fs_inputs3 .fs_in .fsin_ttl{
     font-size: 16px;
 }
-.modal_carro .carro_final .cont_final .final_section .fs_inputs3 .fs_in .fsin_in select{
+.modal_carro .cont_final .final_section .fs_inputs3 .fs_in .fsin_in select{
     width: 40px;
     border: 0px;
     height: 18px;
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle{
+.modal_carro .cont_final .final_section .fin_detalle{
     padding-top: 20px;
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_pedido{
+.modal_carro .cont_final .final_section .fin_detalle .fin_pedido{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_despacho{
+.modal_carro .cont_final .final_section .fin_detalle .fin_despacho{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_total{
+.modal_carro .cont_final .final_section .fin_detalle .fin_total{
     
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_dll_name{
+.modal_carro .cont_final .final_section .fin_detalle .fin_dll_name{
     float: right;
     font-size: 14px;
     width: calc(100% - 70px);
     text-align: right;
 }
-.modal_carro .carro_final .cont_final .final_section .fin_detalle .fin_dll_price{
+.modal_carro .cont_final .final_section .fin_detalle .fin_dll_price{
     float: right;
     font-size: 14px;
     padding-left: 4px;
     width: 66px;
     text-align: right;
 }
-.modal_carro .carro_seguimiento{
-    
+.info_modal_pedido{
+    padding: 87px 20px 77px 20px;
 }
-.modal_carro .carro_seguimiento .cont_pedido{
-    margin: 10px;
-    background: #ccc;
-    padding: 10px;
-}
-
-.modal_carro .carro_seguimiento .cont_pedido .pedido{
-    
-}
-.modal_carro .carro_seguimiento .cont_pedido .pedido_sub{
-    
-}
-.modal_carro .carro_seguimiento .cont_pedido .pedido .pedido_name{
-    float: left; 
-    width: calc(100% - 20px); 
-    font-size: 18px
-}
-.modal_carro .carro_seguimiento .cont_pedido .pedido .pedido_action{
-    float: left; 
-    width: 20px; 
-    height: 20px; 
-    margin-top: 2px;
-}
-.modal_carro .carro_seguimiento .cont_pedido .detalle_pedido{
-    height: 200px;
-    background: #999;
-}
-.modal_carro .carro_seguimiento .cont_pedido .nuevo_pedido{
-    width: 100%;
+.info_modal_pedido .nombre{
+    display: block;
     text-align: center;
-    padding: 10px 0px;
-    font-size: 16px;
-    background: #f99;
-    margin-top: 4px;
+    font-size: 18px;
+}
+.info_modal_pedido .estado{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+.info_modal_pedido .tiempo{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+.info_modal_pedido .posicion{
+    width: 100%;
+    height: 250px;
+    background: #ccc;
+    margin: 8px 0px 8px 0px;
 }

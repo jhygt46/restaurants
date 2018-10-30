@@ -31,6 +31,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
         <!--<script src="<?php echo $info["js_html"]; ?>" type="text/javascript"></script>-->
         <script src="<?php echo $info["js_html_func"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_base"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_base_lista"]; ?>" type="text/javascript"></script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;
@@ -82,13 +83,57 @@ $js = $core->get_web_js_data2($info['id_gir']);
                             </div>
                         </div>
                     </div>
-                    <div class="modal vhalign hide modal_carro">
+                    <div class="modal vhalign hide modal_productos_promo">
+                        <div class="cont_modal">
+                            <div class="cont_modal">
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="close material-icons">close</div>
+                            <div class="cont_info">
+                                <div class="info_modal" style="padding-bottom: 57px"></div>
+                            </div>
+                            <div class="acciones">
+                                <input class="confirmar" onclick="confirmar_productos_promo(this)" type="button" value="Confirmar" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="modal vhalign hide modal_pregunta_productos">
+                        <div class="cont_modal">
+                            <div class="cont_modal">
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="close material-icons">close</div>
+                            <div class="cont_info">
+                                <div class="info_modal" style="padding-bottom: 57px"></div>
+                            </div>
+                            <div class="acciones">
+                                <input class="confirmar" onclick="confirmar_pregunta_productos(this)" type="button" value="Confirmar" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <!-- MODAL CARRO 01 -->
+                    <div class="modal vhalign hide modal_carro paso_01">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
-                                <div class="info_modal carro_inicio" style="padding-bottom: 57px"></div>
-                                <div class="info_modal carro_direccion hide" style="padding-bottom: 57px">
+                                <div class="info_modal" style="padding-bottom: 57px"></div>
+                            </div>
+                            <div class="acciones">
+                                <input class="confirmar" onclick="paso_2()" type="button" value="Siguiente" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal vhalign hide modal_carro paso_02">
+                        <div class="cont_modal">
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="close material-icons">close</div>
+                            <div class="cont_info">
+                                <div class="info_modal" style="height: calc(100% - 67px); padding-bottom: 0px">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
                                             <div class="dir_op" onclick="show_retiro()"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div></div>
@@ -112,11 +157,24 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                         </div>
                                         <div class="direccion_op2 hide">
                                             <input type="text" id="pac-input" placeholder="Ingrese su direccion y numero" />
-                                            <div id="map_direccion" style=""></div>
+                                            <div id="map_direccion" style="height: 100%"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info_modal carro_final hide" style="padding-bottom: 57px">
+                            </div>
+                            <div class="acciones acc_paso2" style="display: none">
+                                <input class="confirmar" onclick="paso_3()" type="button" value="Siguiente" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal vhalign hide modal_carro paso_03">
+                        <div class="cont_modal">
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="close material-icons">close</div>
+                            <div class="cont_info">
+                                <div class="info_modal" style="padding-bottom: 57px">
+                                    
                                     <div class="cont_final">
                                         <div class="final_section">
                                             <div class="fs_inputs fs_dire clearfix">
@@ -172,58 +230,41 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                                 </div>
                                             </div>
                                             <div class="fin_detalle">
-                                                <div class="fin_pedido clearfix"><div class="fin_dll_price">$10.000</div><div class="fin_dll_name">PEDIDO :</div></div>
-                                                <div class="fin_despacho clearfix"><div class="fin_dll_price">$3.000</div><div class="fin_dll_name">DESPACHO :</div></div>
-                                                <div class="fin_total clearfix"><div class="fin_dll_price">$13.000</div><div class="fin_dll_name">TOTAL :</div></div>
+                                                <div class="fin_pedido clearfix"><div class="fin_dll_price"></div><div class="fin_dll_name">PEDIDO :</div></div>
+                                                <div class="fin_despacho clearfix"><div class="fin_dll_price"></div><div class="fin_dll_name">DESPACHO :</div></div>
+                                                <div class="fin_total clearfix"><div class="fin_dll_price"></div><div class="fin_dll_name">TOTAL :</div></div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="info_modal carro_seguimiento hide" style="padding-bottom: 57px">
-                                    <div class="cont_pedido">
-                                        <div class="pedido clearfix">
-                                            <div class="pedido_name">Pedido #476</div>
-                                            <div class="pedido_action"></div>
-                                        </div>
-                                        <div class="pedido_sub">Enviado</div>
-                                        <div class="detalle_pedido"></div>
-                                        <div class="nuevo_pedido" onclick="nuevo_pedido()">Hacer nuevo Pedido</div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="acciones">
-                                <input class="confirmar" onclick="confirmar_pedido()" type="button" value="Siguiente >>" />
+                                <input class="confirmar" id="enviar_cotizacion" onclick="paso_4()" type="button" value="Finalizar" />
                             </div>
                         </div>
                     </div>
-                    <div class="modal vhalign hide modal_productos_promo">
+                    
+                    <div class="modal vhalign hide modal_carro paso_04">
                         <div class="cont_modal">
-                            <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
-                                <div class="info_modal" style="padding-bottom: 57px"></div>
+                                <div class="info_modal_pedido" style="padding-bottom: 57px">
+                                    
+                                    <div class="nombre">PEDIDO #457</div>
+                                    <div class="estado">Estado: Recepcionado</div>
+                                    <div class="posicion" id="mapa_posicion"></div>
+                                    <div class="tiempo">Tiempo estimado: 25 minutos</div>
+                                    
+                                </div>
                             </div>
                             <div class="acciones">
-                                <input class="confirmar" onclick="confirmar_productos_promo(this)" type="button" value="Confirmar" />
+                                <input class="confirmar" onclick="nuevo_pedido()" type="button" value="Hacer Nuevo Pedido" />
                             </div>
-                        </div>
                         </div>
                     </div>
-                    <div class="modal vhalign hide modal_pregunta_productos">
-                        <div class="cont_modal">
-                            <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
-                            <div class="close material-icons">close</div>
-                            <div class="cont_info">
-                                <div class="info_modal" style="padding-bottom: 57px"></div>
-                            </div>
-                            <div class="acciones">
-                                <input class="confirmar" onclick="confirmar_pregunta_productos(this)" type="button" value="Confirmar" />
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
