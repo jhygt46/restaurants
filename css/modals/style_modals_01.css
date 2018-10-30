@@ -510,7 +510,7 @@
 .modal_carro .carro_seguimiento .cont_pedido .nuevo_pedido{
     width: 100%;
     text-align: center;
-    padding: 4px;
+    padding: 10px 0px;
     font-size: 16px;
     background: #f99;
     margin-top: 4px;
