@@ -25,7 +25,7 @@ if(isset($_GET['param_dom'])){
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="http://35.185.64.95/js/data/7f3e85e0c8cfb8a85c02.js" type="text/javascript"></script>
         <script src="js/pos.js" type="text/javascript"></script>
-        <script> var local_code = "anb7sd-12s9ksm"; </script>
+        <script> var local_code = "<?php echo $_GET["code"]; ?>"; </script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;
