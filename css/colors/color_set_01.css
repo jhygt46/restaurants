@@ -8,13 +8,13 @@
     color: #941C80;
 }
 .contenedor .pagina .footer{
-    background: #000000;
+    background: #ffffff;
 }
 .contenedor .pagina .contenido{
-    background: #999999;
+    background: #e5e5e5;
 }
 .contenedor .pagina .header .cantcart{
-    background: #ccc;
+    background: #EC9BDE;
 }
 .contenedor .pagina .header .cantcart .cantcart_num{
     color: #000;
