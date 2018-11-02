@@ -1,20 +1,17 @@
 .contenedor .menu_left .cont_menu_left .btn_toogle{
-    color: #ffffff;
+    color: #941C80;
 }
 .contenedor .pagina .header{
     background: #ffffff;
 }
 .contenedor .pagina .header .shop{
-    color: #fff;
+    color: #941C80;
 }
 .contenedor .pagina .footer{
     background: #000000;
 }
 .contenedor .pagina .contenido{
     background: #999999;
-}
-.contenedor .pagina .header .shop{
-    color: #fff;
 }
 .contenedor .pagina .header .cantcart{
     background: #ccc;
