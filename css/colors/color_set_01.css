@@ -6,7 +6,7 @@
     border-bottom: 1px solid #941C80;
 }
 .contenedor .pagina .header .shop{
-    color: #F9DDF3;
+    color: #941C80;
 }
 .contenedor .pagina .footer{
     background: #ffffff;
@@ -16,7 +16,7 @@
     background: #e5e5e5;
 }
 .contenedor .pagina .header .cantcart{
-    background: #EC9BDE;
+    background: #F9DDF3;
 }
 .contenedor .pagina .header .cantcart .cantcart_num{
     color: #000;
