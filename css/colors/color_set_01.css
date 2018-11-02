@@ -3,12 +3,14 @@
 }
 .contenedor .pagina .header{
     background: #ffffff;
+    border-bottom: 1px solid #941C80;
 }
 .contenedor .pagina .header .shop{
-    color: #941C80;
+    color: #F9DDF3;
 }
 .contenedor .pagina .footer{
     background: #ffffff;
+    border-top: 1px solid #941C80;
 }
 .contenedor .pagina .contenido{
     background: #e5e5e5;
