@@ -258,7 +258,17 @@ class Core{
         $polygons = $this->con->sql("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0' AND t3.eliminado='0'");
         return $polygons['resultado'];
     }
-    
+    public function ver_detalle($code){
+        
+        $sql = $this->con->sql("SELECT t1.aux_02, t1.aux_03, t3.code FROM pedidos t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir");
+        $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
+        $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
+        $info['js_data'] = $path."/js/data/".$sql['resultado'][0]['code'].".js";
+        $info['carro'] = $sql['resultado'][0]['aux_02'];
+        $info['carro_promo'] = $sql['resultado'][0]['aux_03'];
+        return $info;
+        
+    }
     public function get_data($dom){
         
         $dominio = ($dom !== null) ? $dom : $_SERVER["HTTP_HOST"];
