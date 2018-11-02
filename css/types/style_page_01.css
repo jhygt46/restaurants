@@ -108,8 +108,10 @@
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
     position: absolute;
-    top: 30px;
+    top: 32px;
     left: 10px;
+    line-height: 15px;
+    padding-right: 20%;
 }
 .style_page_1 .contenedor .pagina .contenido .cont_contenido .botones_principales .precio{
     position: absolute;
