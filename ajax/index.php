@@ -12,9 +12,9 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/restaurant_class.php");
 
 $rest = new Rest();
-$info = $rest->get_info();
+//$info = $rest->get_info();
 
-echo json_encode($info);
+//echo json_encode($info);
 
 /*
 $accion = $_POST["accion"];
