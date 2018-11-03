@@ -145,7 +145,7 @@ function open_socket(pedido){
     
     var myLatlng = new google.maps.LatLng(pedido.position_lat, pedido.position_lng);
     var mapOptions = {
-        zoom: 4,
+        zoom: 18,
         center: myLatlng,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
