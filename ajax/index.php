@@ -86,36 +86,6 @@ if($accion == "enviar_pedido"){
     }
     
 }
-if($accion == "despacho_domicilio"){
-    
-    $pointLocation = new pointLocation();
-    $polygons = $fireapp->get_polygons();
-    $lat = $_POST['lat'];
-    $lng = $_POST['lng'];
-    $precio = 9999999;
-    $info['op'] = 2;
-
-    foreach($polygons as $polygon){
-
-        $poli = [];
-        $puntos = json_decode($polygon['poligono']);
-        foreach($puntos as $punto){
-            $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
-        }
-        $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
-        if($is == "inside"){
-            if($precio > $polygon['precio']){
-                $info['op'] = 1;
-                $info['id_loc'] = $polygon['id_loc'];
-                $info['precio'] = $polygon['precio'];
-                $precio = $polygon['precio'];
-            }
-        }
-    }
-
-}
-
-
 
 ?>
 
