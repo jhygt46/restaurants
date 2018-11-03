@@ -9,9 +9,14 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "/var/www/html/restaurants/";
 }
 
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once($path."admin/class/restaurant_class.php");
 
+$rest = new Rest();
+$info = $rest->get_info();
+
+echo json_encode($info);
+
+/*
 $accion = $_POST["accion"];
 
 if($accion == "enviar_pedido"){
@@ -37,11 +42,11 @@ if($accion == "enviar_pedido"){
         
         $info_local = $fireapp->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
         
-        /* VERIFICAR LOCAL */
+        
         $pedido['local_code'] = $info_local['resultado'][0]['code'];
         $info['position_lat'] = $info_local['resultado'][0]['lat'];
         $info['position_lng'] = $info_local['resultado'][0]['lng'];
-        /* VERIFICAR LOCAL */
+        
         
         $pedido['pedido']['id_ped'] = $info['id_ped'];
         $pedido['pedido']['pedido_code'] = $pedido_code;
@@ -110,72 +115,7 @@ if($accion == "despacho_domicilio"){
     }
 
 }
-echo json_encode($info);
 
-class pointLocation {
-    var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
- 
-    function pointLocation() {
-    }
- 
-    function pointInPolygon($point, $polygon, $pointOnVertex = true) {
-        $this->pointOnVertex = $pointOnVertex;
- 
-        // Transform string coordinates into arrays with x and y values
-        $point = $this->pointStringToCoordinates($point);
-        $vertices = array(); 
-        foreach ($polygon as $vertex) {
-            $vertices[] = $this->pointStringToCoordinates($vertex); 
-        }
- 
-        // Check if the point sits exactly on a vertex
-        if ($this->pointOnVertex == true and $this->pointOnVertex($point, $vertices) == true) {
-            return "vertex";
-        }
- 
-        // Check if the point is inside the polygon or on the boundary
-        $intersections = 0; 
-        $vertices_count = count($vertices);
- 
-        for ($i=1; $i < $vertices_count; $i++) {
-            $vertex1 = $vertices[$i-1]; 
-            $vertex2 = $vertices[$i];
-            if ($vertex1['y'] == $vertex2['y'] and $vertex1['y'] == $point['y'] and $point['x'] > min($vertex1['x'], $vertex2['x']) and $point['x'] < max($vertex1['x'], $vertex2['x'])) { // Check if point is on an horizontal polygon boundary
-                return "boundary";
-            }
-            if ($point['y'] > min($vertex1['y'], $vertex2['y']) and $point['y'] <= max($vertex1['y'], $vertex2['y']) and $point['x'] <= max($vertex1['x'], $vertex2['x']) and $vertex1['y'] != $vertex2['y']) { 
-                $xinters = ($point['y'] - $vertex1['y']) * ($vertex2['x'] - $vertex1['x']) / ($vertex2['y'] - $vertex1['y']) + $vertex1['x']; 
-                if ($xinters == $point['x']) { // Check if point is on the polygon boundary (other than horizontal)
-                    return "boundary";
-                }
-                if ($vertex1['x'] == $vertex2['x'] || $point['x'] <= $xinters) {
-                    $intersections++; 
-                }
-            } 
-        } 
-        // If the number of edges we passed through is odd, then it's in the polygon. 
-        if ($intersections % 2 != 0) {
-            return "inside";
-        } else {
-            return "outside";
-        }
-    }
- 
-    function pointOnVertex($point, $vertices) {
-        foreach($vertices as $vertex) {
-            if ($point == $vertex) {
-                return true;
-            }
-        }
- 
-    }
- 
-    function pointStringToCoordinates($pointString) {
-        $coordinates = explode(" ", $pointString);
-        return array("x" => $coordinates[0], "y" => $coordinates[1]);
-    }
- 
-}
 
 
 ?>

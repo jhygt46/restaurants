@@ -96,6 +96,10 @@ function paso_4(){
         data: send,
         success: function(info){
             var data = JSON.parse(info);
+            
+            console.log("ENVIAR PEDIDO");
+            console.log(data);
+            
             if(data.op == 1){
                 
                 pedido.id_ped = data.id_ped;
@@ -218,6 +222,10 @@ function initMap(){
                     success: function(datas){
                         
                         var data = JSON.parse(datas);
+                        
+                        console.log("DESPACHO DOMICILIO");
+                        console.log(data);
+                        
                         if(data.op == 1){
 
                             var pedido = get_pedido();
