@@ -38,13 +38,13 @@ class Rest{
             $pedido['pedido']['promos'] = json_decode($_POST['promos']);
 
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_insert = $fireapp->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."')");
+            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."')");
 
             $info['op'] = 1;
             $info['id_ped'] = $pedido_insert['insert_id'];
             $info['pedido_code'] = $pedido_code;
 
-            $info_local = $fireapp->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
+            $info_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
 
 
             $pedido['local_code'] = $info_local['resultado'][0]['code'];
@@ -60,7 +60,7 @@ class Rest{
             if($pedido['pedido']['despacho'] == 0){
 
                 $pedido['pedido']['costo'] = 0;
-                $fireapp->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+                $this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
             if($pedido['pedido']['despacho'] == 1){
@@ -73,7 +73,7 @@ class Rest{
                 $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
                 $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
                 $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
-                $fireapp->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."', id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+                $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."', id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
 
