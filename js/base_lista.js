@@ -63,7 +63,7 @@ function paso_3(){
         }
         if(pedido.despacho == 1){
             $('.fs_dire').show();
-            $('.render_dir').html(pedido.direccion);
+            $('.render_dir').html(pedido.calle+" "+pedido.num);
         }
 
         $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
