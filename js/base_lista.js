@@ -95,10 +95,11 @@ function paso_4(){
         type: "POST",
         data: send,
         success: function(info){
-            var data = JSON.parse(info);
-            
+
             console.log("ENVIAR PEDIDO");
-            console.log(data);
+            console.log(info);
+            
+            var data = JSON.parse(info);
             
             if(data.op == 1){
                 
@@ -221,11 +222,11 @@ function initMap(){
                     data: send,
                     success: function(datas){
                         
-                        var data = JSON.parse(datas);
-                        
                         console.log("DESPACHO DOMICILIO");
-                        console.log(data);
+                        console.log(datas);
                         
+                        var data = JSON.parse(datas);
+
                         if(data.op == 1){
 
                             var pedido = get_pedido();
