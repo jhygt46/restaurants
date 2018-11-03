@@ -20,14 +20,13 @@ class Rest{
         
         }
         if($accion == "despacho_domicilio"){
-            return get_info_despacho($_POST["lat"], $_POST["lng"]);
+            return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
         
     }
     public function get_info_despacho($lat, $lng){
         
         $polygons = $this->get_polygons();
-        return $polygons;
         $precio = 9999999;
         $info['op'] = 2;
 
