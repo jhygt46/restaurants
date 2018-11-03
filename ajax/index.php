@@ -10,8 +10,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/restaurant_class.php");
-
-//$rest = new Rest();
+$rest = new Rest();
+echo "{}";
 //echo json_encode($_POST)
 //$info = $rest->get_info();
 
