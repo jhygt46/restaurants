@@ -15,6 +15,9 @@ class Rest{
     }
     public function get_info(){
         
+        $info['op'] = 2;
+        return $info;
+        
         $accion = $_POST["accion"];
         if($accion == "enviar_pedido"){
         
