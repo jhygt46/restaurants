@@ -20,11 +20,11 @@ function create_item(item){
                 
                 var Dpregunta = document.createElement('div');
                 Dpregunta.className = 'pregunta';
-                Dpregunta.innerHTML = item.preguntas[j].valores[k].nombre;
+                Dpregunta.innerHTML = item.preguntas[j].valores[k].nombre+": ";
                 
-                for(var m=0, mlen=item.preguntas[j].valores[k].seleccionados.length; m<mlen; m++){
-                    Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados[m];
-                }
+                
+                Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados.join('/');
+                
                 
                 Div.appendChild(Dpregunta);
                 
