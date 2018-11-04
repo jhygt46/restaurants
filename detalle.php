@@ -29,7 +29,7 @@ if(isset($_GET['code'])){
                 html.className = 'prod_item';
                 html.innerHTML = "1.- Buena Nelson";
                 
-                $('.list_product').appendChild(html);
+                $('#list_product').append(html);
                 
             });
             function get_producto(id_pro){
@@ -59,7 +59,7 @@ if(isset($_GET['code'])){
     </head>
     <body>
         <div class="font_a bor_bottom">Pedido #457</div>
-        <div class="list_product"></div>
+        <div id="list_product"></div>
     </body>
 </html>
 
