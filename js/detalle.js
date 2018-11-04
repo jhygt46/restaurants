@@ -11,7 +11,7 @@ function create_item(item){
     
     var Dnombre = document.createElement('div');
     Dnombre.className = 'nombre';
-    Dnombre.innerHTML = producto.nombre;
+    Dnombre.innerHTML = producto.numero+".- "+producto.nombre;
     Div.appendChild(Dnombre);
     
     if(item.preguntas){
