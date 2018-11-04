@@ -16,30 +16,11 @@ if(isset($_GET['code'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         <script>
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
-            carro.forEach(function(item_carro){
-                
-                var producto = get_producto(item_carro.id_pro);
-                console.log(producto);
-                
-                var html = document.createElement('div');
-                html.className = 'prod_item';
-                html.innerHTML = "1.- Buena Nelson";
-                
-                $('#list_product').append(html);
-                
-            });
-            function get_producto(id_pro){
-                var productos = data.catalogos[catalogo].productos;
-                for(var i=0, ilen=productos.length; i<ilen; i++){
-                    if(productos[i].id_pro == id_pro){
-                        return productos[i];
-                    }
-                }
-            }
         </script>
         <style>
             div{

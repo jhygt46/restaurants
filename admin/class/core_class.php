@@ -264,6 +264,7 @@ class Core{
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
         $info['js_data'] = $path."/js/data/".$sql['resultado'][0]['code'].".js";
+        $info['js_detalle'] = $path."/js/detalle.js";
         $info['carro'] = $sql['resultado'][0]['aux_02'];
         $info['carro_promo'] = $sql['resultado'][0]['aux_03'];
         return $info;
