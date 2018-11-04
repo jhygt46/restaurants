@@ -9,8 +9,12 @@ function render_items(carro){
     for(var i=0, ilen=carro.length; i<ilen; i++){
     
         var producto = get_producto(carro[i].id_pro);
-        for(var j=0, jlen=carro[i].preguntas.length; j<jlen; j++){
-            console.log(carro[i].preguntas[j]);
+        if(carro[i].preguntas){
+            for(var j=0, jlen=carro[i].preguntas.length; j<jlen; j++){
+                for(var k=0, klen=carro[i].preguntas[j].valores.length; k<klen; k++){
+                    console.log(carro[i].preguntas[j].valores[k]);
+                }
+            }
         }
         html += "<div>"+producto.nombre+"</div>";
     
