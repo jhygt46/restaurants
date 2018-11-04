@@ -16,12 +16,12 @@ if(isset($_GET['code'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         <script>
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
         </script>
+        <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         <style>
             div{
                 width: 100%;
