@@ -12,7 +12,8 @@ function render_items(carro){
         if(carro[i].preguntas){
             for(var j=0, jlen=carro[i].preguntas.length; j<jlen; j++){
                 for(var k=0, klen=carro[i].preguntas[j].valores.length; k<klen; k++){
-                    console.log(carro[i].preguntas[j].valores[k]);
+                    console.log(carro[i].preguntas[j].valores[k].nombre);
+                    console.log(carro[i].preguntas[j].valores[k].seleccionados);
                 }
             }
         }
