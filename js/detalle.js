@@ -9,6 +9,7 @@ function render_items(carro){
     for(var i=0, ilen=carro.length; i<ilen; i++){
     
         var producto = get_producto(carro[i].id_pro);
+        console.log(carro[i].preguntas);
         html += "<div>"+producto.nombre+"</div>";
     
     }
