@@ -5,8 +5,14 @@ $(document).ready(function(){
 function create_item(item){
     
     var producto = get_producto(item.id_pro);
+    
     var Div = document.createElement('div');
-    Div.innerHTML = producto.nombre;
+    Div.className = 'producto';
+    
+    var Div_nombre = document.createElement('div');
+    Div_nombre.className = 'nombre';
+    Div_nombre.innerHTML = producto.nombre;
+    Div.appendChild(Div_nombre);
     
     if(item.preguntas){
         for(var j=0, jlen=item.preguntas.length; j<jlen; j++){
