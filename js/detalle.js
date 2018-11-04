@@ -17,17 +17,11 @@ function create_item(item){
     if(item.preguntas){
         for(var j=0, jlen=item.preguntas.length; j<jlen; j++){
             for(var k=0, klen=item.preguntas[j].valores.length; k<klen; k++){
-                
                 var Dpregunta = document.createElement('div');
                 Dpregunta.className = 'pregunta';
                 Dpregunta.innerHTML = item.preguntas[j].valores[k].nombre+": ";
-                
-                
                 Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados.join('/');
-                
-                
                 Div.appendChild(Dpregunta);
-                
             }
         }
     }
@@ -38,7 +32,7 @@ function create_item(item){
 
 function render_items(carro){
     for(var i=0, ilen=carro.length; i<ilen; i++){
-        $('#list_product').append(create_item(carro[i]));
+        $('.lista_de_productos').append(create_item(carro[i]));
     }
 }
 
