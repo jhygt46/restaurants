@@ -20,8 +20,16 @@ if(isset($_GET['code'])){
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
             carro.forEach(function(item_carro){
-                console.log(item_carro);
+                console.log(get_producto(item_carro.id_pro));
             });
+            function get_producto(id_pro){
+                var productos = data.catalogos[catalogo].productos;
+                for(var i=0, ilen=productos.length; i<ilen; i++){
+                    if(productos[i].id_pro == id_pro){
+                        return productos[i];
+                    }
+                }
+            }
         </script>
         <style>
             div{
