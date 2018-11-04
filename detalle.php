@@ -21,12 +21,15 @@ if(isset($_GET['code'])){
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
             carro.forEach(function(item_carro){
+                
                 var producto = get_producto(item_carro.id_pro);
                 console.log(producto);
+                
                 var html = document.createElement('div');
                 html.className = 'prod_item';
                 html.innerHTML = "1.- Buena Nelson";
-                $('.list_product').append(html);
+                
+                $('.list_product').appendChild(html);
                 
             });
             function get_producto(id_pro){
