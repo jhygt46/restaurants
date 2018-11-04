@@ -266,7 +266,7 @@ class Core{
         $info['js_data'] = $path."/js/data/".$sql['resultado'][0]['code'].".js";
         $info['carro'] = $sql['resultado'][0]['aux_02'];
         $info['carro_promo'] = $sql['resultado'][0]['aux_03'];
-        return $info;
+        return $sql;
         
     }
     public function get_data($dom){
