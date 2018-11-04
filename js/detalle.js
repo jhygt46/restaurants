@@ -9,14 +9,20 @@ function create_item(item){
     var Div = document.createElement('div');
     Div.className = 'producto';
     
-    var Div_nombre = document.createElement('div');
-    Div_nombre.className = 'nombre';
-    Div_nombre.innerHTML = producto.nombre;
-    Div.appendChild(Div_nombre);
+    var Dnombre = document.createElement('div');
+    Dnombre.className = 'nombre';
+    Dnombre.innerHTML = producto.nombre;
+    Div.appendChild(Dnombre);
     
     if(item.preguntas){
         for(var j=0, jlen=item.preguntas.length; j<jlen; j++){
             for(var k=0, klen=item.preguntas[j].valores.length; k<klen; k++){
+                
+                var Dpregunta = document.createElement('div');
+                Dpregunta.className = 'pregunta';
+                Dpregunta.innerHTML = item.preguntas[j].valores[k].nombre;
+                Div.appendChild(Dpregunta);
+                
                 console.log(item.preguntas[j].valores[k].nombre);
                 console.log(item.preguntas[j].valores[k].seleccionados);
             }
