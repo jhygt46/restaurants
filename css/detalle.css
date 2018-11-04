@@ -13,7 +13,7 @@ body {
     padding: 15px 0px;
 }
 .lista_de_productos{
-    padding: 15px 0px;
+    padding: 15px 0px 5px 0px;
     text-align: center;
     border-bottom: 1px solid #000;
 }
@@ -27,13 +27,15 @@ body {
     font-size: 14px;
 }
 .info_cliente{
-    padding: 15px 0px;
+    padding: 15px 0px 10px 0px;
     text-align: center;
     border-bottom: 1px solid #000;
 }
 .info_cliente .direccion{
     font-size: 16px;
+    padding-bottom: 5px;
 }
 .info_cliente .depto{
     font-size: 16px;
+    padding-bottom: 5px;
 }
