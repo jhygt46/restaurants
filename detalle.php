@@ -24,25 +24,11 @@ if(isset($_GET['code'])){
         <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
         <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
-        <style>
-            div{
-                width: 100%;
-                text-align: center;
-            }
-            .font_a{
-                font-size: 28px;
-            }
-            .bor_bottom{
-                border-bottom: 1px solid #000;
-            }
-            .padding_a{
-                
-            }
-        </style>
+
     </head>
     <body>
-        <div class="font_a bor_bottom">Pedido #457</div>
-        <div id="list_product"></div>
+        <div class="titulo">Pedido #457</div>
+        <div class="lista_de_productos"></div>
     </body>
 </html>
 
