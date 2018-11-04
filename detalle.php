@@ -31,6 +31,7 @@ if(isset($_GET['code'])){
         <div class="lista_de_productos"></div>
         <div class="info_cliente">
             <div class="direccion"><?php echo $info["direccion"]; ?></div>
+            <div class="depto"><?php echo $info["depto"]; ?></div>
         </div>
     </body>
 </html>
