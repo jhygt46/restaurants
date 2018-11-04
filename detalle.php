@@ -27,7 +27,7 @@ if(isset($_GET['code'])){
 
     </head>
     <body>
-        <div class="titulo">Pedido #457</div>
+        <div class="titulo">Pedido #<?php echo $info["id_ped"]; ?></div>
         <div class="lista_de_productos"></div>
     </body>
 </html>

@@ -259,7 +259,7 @@ class Core{
     }
     public function ver_detalle($code){
         
-        $sql = $this->con->sql("SELECT t1.aux_02, t1.aux_03, t3.code FROM pedidos t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$_SERVER["HTTP_HOST"]."'");
+        $sql = $this->con->sql("SELECT t1.aux_02, t1.aux_03, t3.code, t3.id_ped FROM pedidos t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$_SERVER["HTTP_HOST"]."'");
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
         $info['js_data'] = $path."/js/data/".$sql['resultado'][0]['code'].".js";
@@ -268,6 +268,7 @@ class Core{
         $info['carro_promo'] = $sql['resultado'][0]['aux_03'];
         $info['css_base'] = $path."/css/reset.css";
         $info['css_detalle'] = $path."/css/detalle.css";
+        $info['id_ped'] = $sql['resultado'][0]['id_ped'];
         return $info;
         
     }
