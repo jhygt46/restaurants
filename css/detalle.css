@@ -17,11 +17,11 @@ body {
     text-align: center;
 }
 .lista_de_productos .producto{
-    
+    padding-bottom: 10px;
 }
 .lista_de_productos .producto .nombre{
-    
+    font-size: 20px;
 }
 .lista_de_productos .producto .pregunta{
-    
+    font-size: 14px;
 }
