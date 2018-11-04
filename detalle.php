@@ -20,8 +20,10 @@ if(isset($_GET['code'])){
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
+            var producto;
             carro.forEach(function(item_carro){
-                console.log(get_producto(item_carro.id_pro));
+                producto = get_producto(item_carro.id_pro));
+                $('.list_product').append("<div>"+producto.nombre+"</div>");
             });
             function get_producto(id_pro){
                 var productos = data.catalogos[catalogo].productos;
@@ -50,6 +52,7 @@ if(isset($_GET['code'])){
     </head>
     <body>
         <div class="font_a bor_bottom">Pedido #457</div>
+        <div class="list_product"></div>
     </body>
 </html>
 
