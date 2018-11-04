@@ -29,6 +29,9 @@ if(isset($_GET['code'])){
     <body>
         <div class="titulo">Pedido #<?php echo $info["id_ped"]; ?></div>
         <div class="lista_de_productos"></div>
+        <div class="info_cliente">
+            <div class="direccion"><?php echo $info["direccion"]; ?></div>
+        </div>
     </body>
 </html>
 
