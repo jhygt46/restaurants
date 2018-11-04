@@ -26,3 +26,11 @@ body {
 .lista_de_productos .producto .pregunta{
     font-size: 14px;
 }
+.info_cliente{
+    padding: 15px 0px;
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+.info_cliente .direccion{
+    
+}
