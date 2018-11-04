@@ -23,7 +23,7 @@ if(isset($_GET['code'])){
             var producto;
             carro.forEach(function(item_carro){
                 producto = get_producto(item_carro.id_pro);
-                $('.list_product').append("<div>"+producto.nombre+"</div>");
+                $('.list_product').append("<div>aa: "+producto.nombre+"</div>");
             });
             function get_producto(id_pro){
                 var productos = data.catalogos[catalogo].productos;
