@@ -19,7 +19,9 @@ if(isset($_GET['code'])){
         <script>
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
-            console.log(carro);
+            carro.forEach(function(item_carro){
+                console.log(item_carro);
+            });
         </script>
         <style>
             div{
