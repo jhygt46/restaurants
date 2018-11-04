@@ -20,10 +20,14 @@ if(isset($_GET['code'])){
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
-            var producto;
             carro.forEach(function(item_carro){
-                producto = get_producto(item_carro.id_pro);
-                $('.list_product').append("<div>aa: "+producto.nombre+"</div>");
+                var producto = get_producto(item_carro.id_pro);
+                console.log(producto);
+                var html = document.createElement('div');
+                html.className = 'prod_item';
+                html.innerHTML = "1.- Buena Nelson";
+                $('.list_product').append(html);
+                
             });
             function get_producto(id_pro){
                 var productos = data.catalogos[catalogo].productos;
