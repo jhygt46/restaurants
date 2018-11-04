@@ -21,6 +21,8 @@ if(isset($_GET['code'])){
             var carro = <?php echo $info['carro']; ?>;
             var carro_promo = <?php echo $info['carro_promo']; ?>;
         </script>
+        <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
         <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         <style>
             div{
