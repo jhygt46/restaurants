@@ -22,7 +22,7 @@ if(isset($_GET['code'])){
             var carro_promo = <?php echo $info['carro_promo']; ?>;
             var producto;
             carro.forEach(function(item_carro){
-                producto = get_producto(item_carro.id_pro));
+                producto = get_producto(item_carro.id_pro);
                 $('.list_product').append("<div>"+producto.nombre+"</div>");
             });
             function get_producto(id_pro){
