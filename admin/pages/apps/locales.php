@@ -42,10 +42,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     $sub_titulo = $sub_titulo2;
     $lat = $that["lat"];
     $lng = $that["lng"];
-    
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
 
 }
     
