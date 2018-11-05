@@ -38,7 +38,7 @@ class Rest{
             $pedido['pedido']['promos'] = json_decode($_POST['promos']);
 
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$aux_pedido->{'id_loc'}."')");
+            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$aux_pedido->{'id_loc'}."', '".$nombre."', '".$telefono."')");
 
             file_get_contents("https://www.usinox.cl/jbmks/tsmp.php?accion=hFdydMsabtSaf&code=".$pedido_code);
             
@@ -47,7 +47,6 @@ class Rest{
             $info['pedido_code'] = $pedido_code;
 
             $info_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
-
 
             $pedido['local_code'] = $info_local['resultado'][0]['code'];
             $info['position_lat'] = $info_local['resultado'][0]['lat'];
