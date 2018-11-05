@@ -51,7 +51,7 @@ var map;
 var markers = Array();
 $(document).ready(function(){
 
-    map = initMap('input_gmap', 0, 0);
+    map = initMap('input_gmap', -33.428843, -70.620346);
     crear_llamado(map);
 
 });
@@ -126,6 +126,8 @@ function crear_llamado(map){
                 <fieldset>
                     <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
+                    <input id="lat" type="hidden" value="<?php echo $that['lat']; ?>" />
+                    <input id="lng" type="hidden" value="<?php echo $that['lng']; ?>" />
                     <label>
                         <span>Nombre:</span>
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
