@@ -1,22 +1,22 @@
 .contenedor .menu_left .cont_menu_left .btn_toogle{
-    color: #941C80;
+    color: #ED030C;
 }
 .contenedor .pagina .header{
-    background: #ffffff;
-    border-bottom: 1px solid #941C80;
+    background: #000;
+    border-bottom: 1px solid #ED030C;
 }
 .contenedor .pagina .header .shop{
-    color: #941C80;
+    color: #ED030C;
 }
 .contenedor .pagina .footer{
-    background: #ffffff;
-    border-top: 1px solid #941C80;
+    background: #000;
+    border-top: 1px solid #ED030C;
 }
 .contenedor .pagina .contenido{
     background: #e5e5e5;
 }
 .contenedor .pagina .header .cantcart{
-    background: #F9DDF3;
+    background: #fff;
 }
 .contenedor .pagina .header .cantcart .cantcart_num{
     color: #000;
@@ -30,6 +30,7 @@
 }
 .contenedor .pagina .contenido .cont_contenido .botones_principales .nombre{
     font-size: 19px;
+    font-weight: bold;
 }
 .contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
     font-size: 15px;
