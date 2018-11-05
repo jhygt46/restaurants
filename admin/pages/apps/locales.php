@@ -45,7 +45,68 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
 
 
 ?>
+<script>
+    
+var map;
+var markers = Array();
+$(document).ready(function(){
 
+    map = initMap('mapa', 0, 0);
+    crear_llamado(map);
+
+});
+    
+    
+function crear_llamado(map){
+        
+    var searchBox = new google.maps.places.SearchBox(document.getElementById("input_gmap"));
+    searchBox.addListener('places_changed', function(){
+        var places = searchBox.getPlaces();
+        if (places.length == 0) {
+            return;
+        }
+        $("#address").val(places[0].formatted_address);
+        $("#lat").val(places[0].geometry.location.lat());
+        $("#lng").val(places[0].geometry.location.lng());
+
+        markers.forEach(function(marker){
+            marker.setMap(null);
+        });
+        markers = [];
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place){
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            }else{
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+    map.addListener('bounds_changed', function(){
+        searchBox.setBounds(map.getBounds()); 
+    });
+    
+    function initMap(variable, lat, lng, zoom = 8) {
+        return new google.maps.Map(document.getElementById(variable), { center: { lat: lat, lng: lng }, zoom: zoom } );
+    }
+    
+}
+</script>
 <div class="title">
     <h1><?php echo $titulo; ?></h1>
     <ul class="clearfix">
@@ -73,6 +134,13 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <span>Correo:</span>
                         <input id="correo" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
+                    <label>
+                        <span>Direccion:</span>
+                        <input id="correo" type="text" value="<?php echo $that['direccion']; ?>" require="" placeholder="" />
+                    </label>
+                    <div style="margin-left: 16%; margin-right: 9%; margin-top: 10px; width: 75%">
+                        <div id="map" style="height: 460px"></div>
+                    </div>
                     <label>
                         <span>Catalogo:</span>
                         <select id="id_cat">

@@ -76,7 +76,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <input id="precio" type="text" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
                     </label>
                     <div style="margin-left: 16%; margin-right: 9%; margin-top: 10px; width: 75%">
-                        <div id="map" style="height: 460px; background: #f00"></div>
+                        <div id="map" style="height: 460px"></div>
                     </div>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
