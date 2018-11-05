@@ -60,12 +60,22 @@ var map;
 var markers = Array();
 $(document).ready(function(){
 
-    map = initMap('input_gmap', <?php echo $lat; ?>, <?php echo $lng; ?>);
+    map = initMap('input_gmap', <?php echo $lat; ?>, <?php echo $lng; ?>, 17);
+    <?php if(isset($that)){ ?> addmarker(map, <?php echo $lat; ?>, <?php echo $lng; ?>) <?php } ?>
     crear_llamado(map);
 
 });
     
+function addmarker(map, lat, lng){
     
+    var myLatLng = {lat: lat, lng: lng};
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Ubicacion'
+    });
+
+}
 function crear_llamado(map){
         
     var searchBox = new google.maps.places.SearchBox(document.getElementById("direccion"));
@@ -159,14 +169,6 @@ function crear_llamado(map){
                             <?php for($i=0; $i<count($catalogos); $i++){ ?>
                                 <option value="<?php echo $catalogos[$i]["id_cat"]; ?>" <?php if($catalogos[$i]["id_cat"] == $that['id_cat']){ echo "selected"; } ?> ><?php echo $catalogos[$i]["nombre"]; ?></option>
                             <?php } ?>
-                        </select>
-                    </label>
-                    <label>
-                        <span>Tipo Despacho:</span>
-                        <select id="tipo_despacho">
-                            <option value="0" <?php if($that['tipo']==0){ echo "selected"; } ?>>Seleccionar</option>
-                            <option value="1" <?php if($that['tipo']==1){ echo "selected"; } ?>>Por Zonas</option>
-                            <option value="2" <?php if($that['tipo']==2){ echo "selected"; } ?>>Por Distancia</option>
                         </select>
                     </label>
                     <label style='margin-top:20px'>
