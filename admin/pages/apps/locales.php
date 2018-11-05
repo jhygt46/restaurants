@@ -70,6 +70,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
+                        <span>Correo:</span>
+                        <input id="correo" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
                         <span>Catalogo:</span>
                         <select id="id_cat">
                             <option value="0">Seleccionar</option>
