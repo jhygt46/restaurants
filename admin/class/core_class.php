@@ -271,6 +271,8 @@ class Core{
         $info['id_ped'] = $sql['resultado'][0]['id_ped'];
         $info['direccion'] = $sql['resultado'][0]['direccion'];
         $info['depto'] = $sql['resultado'][0]['depto'];
+        $info['nombre'] = $sql['resultado'][0]['nombre'];
+        $info['telefono'] = $sql['resultado'][0]['telefono'];
         return $info;
         
     }
