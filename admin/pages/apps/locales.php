@@ -32,11 +32,20 @@ $catalogos = $fireapp->get_catalogos();
 
 $id_loc = 0;
 $sub_titulo = $sub_titulo1;
+$lat = -33.428843;
+$lng = -70.620346;
+
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
     $id_loc = $_GET["id_loc"];
     $that = $fireapp->get_local($id_loc);
     $sub_titulo = $sub_titulo2;
+    $lat = $that["lat"];
+    $lng = $that["lng"];
+    
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
 
 }
     
@@ -51,7 +60,7 @@ var map;
 var markers = Array();
 $(document).ready(function(){
 
-    map = initMap('input_gmap', -33.428843, -70.620346);
+    map = initMap('input_gmap', <?php echo $lat; ?>, <?php echo $lng; ?>);
     crear_llamado(map);
 
 });
