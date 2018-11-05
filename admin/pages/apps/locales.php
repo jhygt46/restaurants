@@ -61,7 +61,7 @@ var markers = Array();
 $(document).ready(function(){
 
     map = initMap('input_gmap', <?php echo $lat; ?>, <?php echo $lng; ?>, 17);
-    <?php if(isset($that)){ ?> addmarker(map, <?php echo $lat; ?>, <?php echo $lng; ?>) <?php } ?>
+    <?php if(isset($that)){ ?> addmarker(map, <?php echo $lat; ?>, <?php echo $lng; ?>); <?php } ?>
     crear_llamado(map);
 
 });
