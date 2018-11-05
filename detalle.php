@@ -32,6 +32,8 @@ if(isset($_GET['code'])){
         <div class="info_cliente">
             <div class="direccion"><?php echo $info["direccion"]; ?></div>
             <?php if($info["depto"] != ""){ ?><div class="depto">Departamento: <?php echo $info["depto"]; ?></div><?php } ?>
+            <div class="nombre"><?php echo $info["nombre"]; ?></div>
+            <div class="telefono"><?php echo $info["telefono"]; ?></div>
         </div>
     </body>
 </html>
