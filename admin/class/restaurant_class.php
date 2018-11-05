@@ -66,7 +66,7 @@ class Rest{
             if($pedido['pedido']['despacho'] == 0){
 
                 $pedido['pedido']['costo'] = 0;
-                $this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+                //$this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
             if($pedido['pedido']['despacho'] == 1){
@@ -79,7 +79,7 @@ class Rest{
                 $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
                 $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
                 $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
-                $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."', id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+                $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
 
