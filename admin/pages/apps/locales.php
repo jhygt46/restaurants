@@ -139,7 +139,7 @@ function crear_llamado(map){
                         <input id="correo" type="text" value="<?php echo $that['direccion']; ?>" require="" placeholder="" />
                     </label>
                     <div style="margin-left: 16%; margin-right: 9%; margin-top: 10px; width: 75%">
-                        <div id="map" style="height: 460px"></div>
+                        <div id="map" style="height: 260px"></div>
                     </div>
                     <label>
                         <span>Catalogo:</span>
