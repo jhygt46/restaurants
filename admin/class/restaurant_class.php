@@ -30,6 +30,10 @@ class Rest{
         $nombre = $aux_pedido->{'nombre'};
         $telefono = $aux_pedido->{'telefono'};
         
+        $info['aa_pedido'] = json_decode($_POST['pedido']);
+        $info['aa_carro'] = json_decode($_POST['carro']);
+        $info['aa_promos'] = json_decode($_POST['promos']);
+        
         if($nombre != "" && $telefono != ""){
         
             $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
