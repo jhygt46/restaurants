@@ -1,0 +1,39 @@
+.contenedor .menu_left .cont_menu_left .btn_toogle{
+    color: #941C80;
+}
+.contenedor .pagina .header{
+    background: #ffffff;
+    border-bottom: 1px solid #941C80;
+}
+.contenedor .pagina .header .shop{
+    color: #941C80;
+}
+.contenedor .pagina .footer{
+    background: #ffffff;
+    border-top: 1px solid #941C80;
+}
+.contenedor .pagina .contenido{
+    background: #e5e5e5;
+}
+.contenedor .pagina .header .cantcart{
+    background: #F9DDF3;
+}
+.contenedor .pagina .header .cantcart .cantcart_num{
+    color: #000;
+    font-size: 14px;
+}
+.contenedor .pagina .contenido .cont_contenido{
+    
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales{
+    background: #ccc;
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales .nombre{
+    font-size: 19px;
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales .descripcion{
+    font-size: 15px;
+}
+.contenedor .pagina .contenido .cont_contenido .botones_principales .precio{
+    font-size: 19px;
+}
