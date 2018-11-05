@@ -51,7 +51,7 @@ var map;
 var markers = Array();
 $(document).ready(function(){
 
-    map = initMap('mapa', 0, 0);
+    map = initMap('input_gmap', 0, 0);
     crear_llamado(map);
 
 });
@@ -59,7 +59,7 @@ $(document).ready(function(){
     
 function crear_llamado(map){
         
-    var searchBox = new google.maps.places.SearchBox(document.getElementById("input_gmap"));
+    var searchBox = new google.maps.places.SearchBox(document.getElementById("direccion"));
     searchBox.addListener('places_changed', function(){
         var places = searchBox.getPlaces();
         if (places.length == 0) {
@@ -136,10 +136,10 @@ function crear_llamado(map){
                     </label>
                     <label>
                         <span>Direccion:</span>
-                        <input id="correo" type="text" value="<?php echo $that['direccion']; ?>" require="" placeholder="" />
+                        <input id="direccion" type="text" value="<?php echo $that['direccion']; ?>" require="" placeholder="" />
                     </label>
                     <div style="margin-left: 16%; margin-right: 9%; margin-top: 10px; width: 75%">
-                        <div id="map" style="height: 260px"></div>
+                        <div id="input_gmap" style="height: 260px"></div>
                     </div>
                     <label>
                         <span>Catalogo:</span>
