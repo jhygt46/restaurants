@@ -38,8 +38,10 @@ class Rest{
             $pedido['pedido']['promos'] = json_decode($_POST['promos']);
 
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."')");
+            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$aux_pedido->{'id_loc'}."')");
 
+            file_get_contents("https://www.usinox.cl/jbmks/tsmp.php?accion=hFdydMsabtSaf&code=".$pedido_code);
+            
             $info['op'] = 1;
             $info['id_ped'] = $pedido_insert['insert_id'];
             $info['pedido_code'] = $pedido_code;
@@ -77,6 +79,8 @@ class Rest{
 
             }
 
+            
+            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
