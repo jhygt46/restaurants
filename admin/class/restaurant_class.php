@@ -30,18 +30,16 @@ class Rest{
         $nombre = $aux_pedido->{'nombre'};
         $telefono = $aux_pedido->{'telefono'};
         $id_loc = $aux_pedido->{'id_loc'};
-        /*
-        $info['aa_pedido'] = json_decode($_POST['pedido']);
-        $info['aa_carro'] = json_decode($_POST['carro']);
-        $info['aa_promos'] = json_decode($_POST['promos']);
-        */
-        if($nombre != "" && $telefono != ""){
+
+        if($nombre != "" && $telefono != "+569 "){
         
             $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
             $pedido['pedido']['total'] = $aux_pedido->{'total'};
             $pedido['pedido']['carro'] = json_decode($_POST['carro']);
             $pedido['pedido']['promos'] = json_decode($_POST['promos']);
-
+            $pedido['nombre'] = $nombre;
+            $pedido['telefono'] = $telefono;
+            
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."')");
             
@@ -63,6 +61,7 @@ class Rest{
             if($pedido['pedido']['despacho'] == 0){
 
                 $pedido['pedido']['costo'] = 0;
+                $pedido['pedido']['direccion'] = "Retiro en Local";
                 $this->con->sql("UPDATE pedidos SET costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
@@ -86,7 +85,6 @@ class Rest{
             $pedido['correo'] = $info_local['resultado'][0]['correo'];
             $pedido['numero'] = $info['id_ped'];
             $pedido['dominio'] = $info_local['resultado'][0]['dominio'];
-            $pedido['telefono'] = $telefono;
             
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');

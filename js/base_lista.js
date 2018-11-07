@@ -96,12 +96,9 @@ function paso_4(){
         type: "POST",
         data: send,
         success: function(info){
-
-            console.log("ENVIAR PEDIDO");
-            console.log(info);
             
             var data = JSON.parse(info);
-            console.log(data);
+
             if(data.op == 1){
                 
                 pedido.id_ped = data.id_ped;
