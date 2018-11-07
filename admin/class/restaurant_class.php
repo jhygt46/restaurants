@@ -44,19 +44,16 @@ class Rest{
 
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."')");
-            $info['db'] = $pedido_insert;
-            //file_get_contents("https://www.usinox.cl/jbmks/tsmp.php?accion=hFdydMsabtSaf&code=".$pedido_code);
             
             $info['op'] = 1;
             $info['id_ped'] = $pedido_insert['insert_id'];
             $info['pedido_code'] = $pedido_code;
 
-            $info_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$aux_pedido->{'id_loc'}."'");
+            $info_local = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$aux_pedido->{'id_loc'}."' AND t1.id_gir=t2.id_gir");
 
             $pedido['local_code'] = $info_local['resultado'][0]['code'];
             $info['position_lat'] = $info_local['resultado'][0]['lat'];
             $info['position_lng'] = $info_local['resultado'][0]['lng'];
-
 
             $pedido['pedido']['id_ped'] = $info['id_ped'];
             $pedido['pedido']['pedido_code'] = $pedido_code;
@@ -66,7 +63,7 @@ class Rest{
             if($pedido['pedido']['despacho'] == 0){
 
                 $pedido['pedido']['costo'] = 0;
-                //$this->con->sql("UPDATE pedidos SET id_loc='".$pedido['pedido']['id_loc']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
+                $this->con->sql("UPDATE pedidos SET costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
             if($pedido['pedido']['despacho'] == 1){
@@ -82,8 +79,14 @@ class Rest{
                 $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
 
             }
-
             
+            //ENVIAR MAIL //
+            $pedido['accion'] = 'enviar_pedido_local';
+            $pedido['hash'] = 'hash';
+            $pedido['correo'] = $info_local['resultado'][0]['correo'];
+            $pedido['numero'] = $info['id_ped'];
+            $pedido['dominio'] = $info_local['resultado'][0]['dominio'];
+            $pedido['telefono'] = $telefono;
             
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
