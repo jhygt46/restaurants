@@ -6,11 +6,11 @@ $core = new Core();
 if(isset($_GET['code'])){
     
     $info = $core->ver_detalle($_GET['code']);
-    /*
+    
     echo "<pre>";
     print_r($info);
     echo "</pre>";
-    */
+    
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +23,7 @@ if(isset($_GET['code'])){
         <script>
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
-            var carro_promo = <?php echo $info['carro_promo']; ?>;
+            var carro_prom= <?php echo $info['carro_promo']; ?>;
         </script>
         <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
