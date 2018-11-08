@@ -39,6 +39,12 @@ if(isset($_GET['code'])){
             <div class="nombre"><?php echo $info["nombre"]; ?></div>
             <div class="telefono"><?php echo $info["telefono"]; ?></div>
         </div>
+        <div class="info_cliente">
+            <?php if($info["wasabi"] == 1){ ?><div class="wasabi">Wasabi</div><?php } ?>
+            <?php if($info["gengibre"] == 1){ ?><div class="wasabi">Gengibre</div><?php } ?>
+            <?php if($info["embarazada"] == 1){ ?><div class="wasabi">Embarazada</div><?php } ?>
+            <?php if($info["palitos"] > 0){ ?><div class="wasabi">Palitos: <?php echo $info["palitos"]; ?></div><?php } ?>
+        </div>
     </body>
 </html>
 
