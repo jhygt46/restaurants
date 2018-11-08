@@ -90,6 +90,8 @@ function paso_4(){
     pedido.embarazadas = $('#pedido_embarazadas').val();
     pedido.palitos = $('#pedido_palitos').val();
     
+    console.log(pedido);
+    
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
     $.ajax({
         url: "/ajax/index.php",
