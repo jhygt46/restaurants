@@ -42,11 +42,11 @@ class Rest{
             
             $wasabi = $aux_pedido->{'wasabi'};
             $gengibre = $aux_pedido->{'gengibre'};
-            $embarazada = $aux_pedido->{'embarazada'};
+            $embarazadas = $aux_pedido->{'embarazadas'};
             $palitos = $aux_pedido->{'palitos'};
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono, wasabi, gengibre, embarazada, palitos) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."', '".$swasabi."', '".$gengibre."', '".$embarazada."', '".$palitos."')");
+            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono, wasabi, gengibre, embarazada, palitos) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."', '".$wasabi."', '".$gengibre."', '".$embarazadas."', '".$palitos."')");
             
             $info['db'] = $pedido_insert;
             $info['pedido'] = $aux_pedido;
