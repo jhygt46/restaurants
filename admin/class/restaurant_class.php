@@ -29,10 +29,10 @@ class Rest{
         $aux_pedido = json_decode($_POST['pedido']);
         $nombre = $aux_pedido->{'nombre'};
         $telefono = $aux_pedido->{'telefono'};
-        $id_loc = $aux_pedido->{'id_loc'};
 
         if($nombre != "" && $telefono != "+569 "){
         
+            $id_loc = $aux_pedido->{'id_loc'};
             $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
             $pedido['pedido']['total'] = $aux_pedido->{'total'};
             $pedido['pedido']['carro'] = json_decode($_POST['carro']);
