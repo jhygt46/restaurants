@@ -85,12 +85,11 @@ function paso_4(){
     pedido.nombre = $('.pedido_nombre').val();
     pedido.telefono = $('.pedido_telefono').val();
     pedido.depto = $('.pedido_depto').val();
-    pedido.gengibre = $('#pedido_gengibre').val();
-    pedido.wasabi = $('#pedido_wasabi').val();
-    pedido.embarazadas = $('#pedido_embarazadas').val();
+
+    pedido.gengibre = ($('#pedido_gengibre').prop('checked') ? 1 : 0 );
+    pedido.wasabi = ($('#pedido_wasabi').prop('checked') ? 1 : 0 );
+    pedido.embarazadas = ($('#pedido_embarazadas').prop('checked') ? 1 : 0 );
     pedido.palitos = $('#pedido_palitos').val();
-    
-    console.log(pedido);
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
     $.ajax({
