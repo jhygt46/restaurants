@@ -98,7 +98,7 @@ function paso_4(){
         success: function(info){
             
             var data = JSON.parse(info);
-
+            console.log(data);
             if(data.op == 1){
                 
                 pedido.id_ped = data.id_ped;
