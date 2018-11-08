@@ -86,9 +86,9 @@ function paso_4(){
     pedido.telefono = $('.pedido_telefono').val();
     pedido.depto = $('.pedido_depto').val();
 
-    pedido.gengibre = ($('#pedido_gengibre').prop('checked') ? 1 : 0 );
-    pedido.wasabi = ($('#pedido_wasabi').prop('checked') ? 1 : 0 );
-    pedido.embarazadas = ($('#pedido_embarazadas').prop('checked') ? 1 : 0 );
+    pedido.gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
+    pedido.wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
+    pedido.embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
     pedido.palitos = $('#pedido_palitos').val();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
