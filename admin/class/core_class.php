@@ -273,6 +273,12 @@ class Core{
         $info['depto'] = $sql['resultado'][0]['depto'];
         $info['nombre'] = $sql['resultado'][0]['nombre'];
         $info['telefono'] = $sql['resultado'][0]['telefono'];
+        
+        $info['wasabi'] = $sql['resultado'][0]['wasabi'];
+        $info['gengibre'] = $sql['resultado'][0]['gengibre'];
+        $info['embarazada'] = $sql['resultado'][0]['embarazada'];
+        $info['palitos'] = $sql['resultado'][0]['palitos'];
+        
         return $info;
         
     }
