@@ -48,6 +48,8 @@ class Rest{
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono, wasabi, gengibre, embarazada, palitos) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."', '".$swasabi."', '".$gengibre."', '".$embarazada."', '".$palitos."')");
             
+            $info['db'] = $pedido_insert;
+            $info['pedido'] = $aux_pedido;
             $info['op'] = 1;
             $info['id_ped'] = $pedido_insert['insert_id'];
             $info['pedido_code'] = $pedido_code;
