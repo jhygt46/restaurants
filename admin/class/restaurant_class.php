@@ -63,18 +63,22 @@ class Rest{
                         
                     }else{
                         $info['op'] = 2;
+                        $info['mensaje'] = "DOMINIO EXISTENTE";
                     }
 
                 }else{
                     $info['op'] = 2;
+                    $info['mensaje'] = "DOMINIO INCORRECTO";
                 }
                 
             }else{
                 $info['op'] = 2;
+                $info['mensaje'] = "CORREO EXISTENTE";
             }
             
         }else{
             $info['op'] = 2;
+            $info['mensaje'] = "CORREO INCORRECTO";
         }
         
         return $info;
