@@ -37,8 +37,8 @@ class Rest{
             $validar = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE correo='".$correo."' AND eliminado='0'");
             if($validar['count'] == 0){
                 
-                $dominio = explode(".", $_POST["dominio"]);
-                if(count($dominio) == 3 && $dominio[0] == "www" && strlen($dominio[1]) > 1 && strlen($dominio[2]) > 1){
+                $dominio_val = explode(".", $_POST["dominio"]);
+                if(count($dominio_val) == 3 && $dominio_val[0] == "www" && strlen($dominio_val[1]) > 1 && strlen($dominio_val[2]) > 1){
 
                     $dominio = $_POST["dominio"]; 
                     $code = bin2hex(openssl_random_pseudo_bytes(10));
@@ -57,6 +57,7 @@ class Rest{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     curl_exec($ch);
+                    $info['resp'] = $ch;
 
                 }else{
                     $info['op'] = 2;
