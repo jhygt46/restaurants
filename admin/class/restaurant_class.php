@@ -61,7 +61,7 @@ class Rest{
                         curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                        $res = curl_exec($ch);
+                        $res = json_encode(curl_exec($ch));
                         $info['res'] = $res->{'op'};
                         curl_close($ch);
                         
