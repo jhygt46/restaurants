@@ -34,9 +34,9 @@ class Rest{
         $dominio = $_POST["dominio"]; 
         $correo = $_POST["correo"];
         
-        $giro = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-        $usurio = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
-        $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giro['insert_id']."', '".$usuario['insert_id']."')");
+        $info['giros'] = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+        $info['usuarios'] = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
+        //$info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giro['insert_id']."', '".$usuario['insert_id']."')");
         
         return $info;
         
