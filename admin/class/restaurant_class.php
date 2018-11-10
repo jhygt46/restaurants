@@ -44,9 +44,6 @@ class Rest{
                     $validar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."' AND eliminado='0'");
                     if($validar_dominio['count'] == 0){
                         
-                        $info['op'] = 1;
-                        $info['mensaje'] = "FELICITACIONES";
-                        
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
                         $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
                         $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
@@ -61,8 +58,11 @@ class Rest{
                         curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                        $res = json_decode(curl_exec($ch));
-                        $info['res'] = $res;
+                        curl_exec($ch);
+                        
+                        $info['op'] = 1;
+                        $info['mensaje'] = "FELICITACIONES";
+                        
                         curl_close($ch);
                         
                     }else{
