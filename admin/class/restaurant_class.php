@@ -22,6 +22,23 @@ class Rest{
         if($accion == "despacho_domicilio"){
             return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
+        if($accion == "enviar_pedido"){
+            return $this->enviar_pedido();
+        }
+        if($accion == "crear_dominio"){
+            return $this->crear_dominio();
+        }
+    }
+    public function crear_dominio(){
+        
+        $dominio = $_POST["dominio"]; 
+        $correo = $_POST["correo"];
+        
+        $giro = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+        $usurio = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
+        $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giro['insert_id']."', '".$usuario['insert_id']."')");
+        
+        return $info;
         
     }
     public function enviar_pedido(){
