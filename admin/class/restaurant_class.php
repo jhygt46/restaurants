@@ -33,12 +33,14 @@ class Rest{
         
         $dominio = $_POST["dominio"]; 
         $correo = $_POST["correo"];
+        $code = bin2hex(openssl_random_pseudo_bytes(10));
         
-        $info['giros'] = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-        $info['usuarios'] = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
-        //$info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giro['insert_id']."', '".$usuario['insert_id']."')");
+        $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+        $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
         
+        $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
         return $info;
+        
         
     }
     public function enviar_pedido(){
