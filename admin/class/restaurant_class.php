@@ -33,22 +33,43 @@ class Rest{
         
         $correo = $_POST["correo"];
         if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-            $dominio = explode(".", $_POST["dominio"]);
-            if(count($dominio) == 3 && $dominio[0] == "www" && strlen($dominio[1]) > 1 && strlen($dominio[2]) > 1){
+            
+            $validar = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE correo='".$correo."' AND eliminado='0'");
+            if($validar['count'] == 0){
                 
-                $dominio = $_POST["dominio"]; 
-                $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-                $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
-                $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
-                $info['op'] = 1;
+                $dominio = explode(".", $_POST["dominio"]);
+                if(count($dominio) == 3 && $dominio[0] == "www" && strlen($dominio[1]) > 1 && strlen($dominio[2]) > 1){
+
+                    $dominio = $_POST["dominio"]; 
+                    $code = bin2hex(openssl_random_pseudo_bytes(10));
+                    $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+                    $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
+                    $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
+                    $info['op'] = 1;
+
+                    $send['dominio'] = $dominio;
+                    $send['correo'] = $correo;
+                    $send['id'] = $usuarios['insert_id'];
+                    $send['code'] = $code;
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                    curl_exec($ch);
+
+                }else{
+                    $info['op'] = 2;
+                }
                 
             }else{
                 $info['op'] = 2;
             }
+            
         }else{
             $info['op'] = 2;
         }
+        
         return $info;
         
     }
