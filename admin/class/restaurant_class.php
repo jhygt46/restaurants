@@ -57,7 +57,6 @@ class Rest{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     curl_exec($ch);
-                    $info['resp'] = $ch;
 
                 }else{
                     $info['op'] = 2;
