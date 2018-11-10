@@ -61,7 +61,9 @@ class Rest{
                         curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                        curl_exec($ch);
+                        $res = curl_exec($ch);
+                        curl_close ($ch);
+                        $info['res'] = $res;
                         
                     }else{
                         $info['op'] = 2;
@@ -158,6 +160,7 @@ class Rest{
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
             curl_exec($ch);
+            curl_close($ch);
 
         }else{
 
