@@ -62,8 +62,8 @@ class Rest{
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                         $res = curl_exec($ch);
-                        curl_close ($ch);
                         $info['res'] = $res;
+                        curl_close($ch);
                         
                     }else{
                         $info['op'] = 2;
