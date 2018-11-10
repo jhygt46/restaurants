@@ -44,11 +44,13 @@ class Rest{
                     $validar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."' AND eliminado='0'");
                     if($validar_dominio['count'] == 0){
                         
+                        $info['op'] = 1;
+                        $info['mensaje'] = "FELICITACIONES";
+                        
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
                         $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
                         $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
                         $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
-                        $info['op'] = 1;
 
                         $send['dominio'] = $dominio;
                         $send['correo'] = $correo;
