@@ -34,29 +34,36 @@ class Rest{
         $correo = $_POST["correo"];
         if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
             
-            $validar = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE correo='".$correo."' AND eliminado='0'");
-            if($validar['count'] == 0){
+            $validar_correo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo."' AND eliminado='0'");
+            if($validar_correo['count'] == 0){
                 
                 $dominio_val = explode(".", $_POST["dominio"]);
                 if(count($dominio_val) == 3 && $dominio_val[0] == "www" && strlen($dominio_val[1]) > 1 && strlen($dominio_val[2]) > 1){
 
-                    $dominio = $_POST["dominio"]; 
-                    $code = bin2hex(openssl_random_pseudo_bytes(10));
-                    $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-                    $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
-                    $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
-                    $info['op'] = 1;
+                    $dominio = $_POST["dominio"];
+                    $validar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."' AND eliminado='0'");
+                    if($validar_dominio['count'] == 0){
+                        
+                        $code = bin2hex(openssl_random_pseudo_bytes(10));
+                        $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+                        $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
+                        $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
+                        $info['op'] = 1;
 
-                    $send['dominio'] = $dominio;
-                    $send['correo'] = $correo;
-                    $send['id'] = $usuarios['insert_id'];
-                    $send['code'] = $code;
+                        $send['dominio'] = $dominio;
+                        $send['correo'] = $correo;
+                        $send['id'] = $usuarios['insert_id'];
+                        $send['code'] = $code;
 
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                    curl_exec($ch);
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_inicio');
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                        curl_exec($ch);
+                        
+                    }else{
+                        $info['op'] = 2;
+                    }
 
                 }else{
                     $info['op'] = 2;
