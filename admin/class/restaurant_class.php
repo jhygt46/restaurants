@@ -31,16 +31,25 @@ class Rest{
     }
     public function crear_dominio(){
         
-        $dominio = $_POST["dominio"]; 
         $correo = $_POST["correo"];
-        $code = bin2hex(openssl_random_pseudo_bytes(10));
-        
-        $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-        $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
-        
-        $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
+        if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            $dominio = explode(".", $_POST["dominio"]);
+            if(count($dominio) == 3 && $dominio[0] == "www" && strlen($dominio[1]) > 1 && strlen($dominio[2]) > 1){
+                
+                $dominio = $_POST["dominio"]; 
+                $code = bin2hex(openssl_random_pseudo_bytes(10));
+                $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
+                $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, fecha_creado, admin, eliminado) VALUES ('".$correo."', now(), '1', '0')");
+                $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
+                $info['op'] = 1;
+                
+            }else{
+                $info['op'] = 2;
+            }
+        }else{
+            $info['op'] = 2;
+        }
         return $info;
-        
         
     }
     public function enviar_pedido(){
