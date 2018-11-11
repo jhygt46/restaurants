@@ -305,7 +305,6 @@ class Core{
             
             $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
             $info['js_data'] = $path."/js/data/".$info["code"].".js";
-            $info['js_html'] = $path."/js/html/".$info["code"].".js";
             
             $info['js_html_func'] = $path."/js/html_func.js";
             $info['js_base'] = $path."/js/base.js";
