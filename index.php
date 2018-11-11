@@ -5,6 +5,12 @@ $core = new Core();
 
 if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
+    
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
+    exit;
+    
 }else{
     $info = $core->get_data();
 }
