@@ -5,12 +5,6 @@ $core = new Core();
 
 if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
-    
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
-    exit;
-    
 }else{
     $info = $core->get_data();
 }
@@ -65,7 +59,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     <div class="contenido">
                         <div class="cont_contenido <?php echo ($info["footer_fixed"] == 1) ? 'padding_cont_f1' : 'padding_cont_f2'; ?>"></div>
                     </div>
-                    <div class="footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"></div>
+                    <div class="footer <?php echo ($info["footer_fixed"] == 1) ? 'fixed' : ''; ?>"><?php echo $info["footer_html"]; ?></div>
                 </div>
             </div>
             <div class="modals">
