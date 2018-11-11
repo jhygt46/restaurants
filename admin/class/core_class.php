@@ -296,6 +296,7 @@ class Core{
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
             $info['font']['css'] = $sql['resultado'][0]['font_css'];
             $info['code'] = $sql['resultado'][0]['code'];
+            $info['footer_html'] = $sql['resultado'][0]['footer_html'];
             
             $info['css_base'] = $path."/css/style.css";
             $info['css_style'] = $path."/css/types/".$sql['resultado'][0]['style_page'];
