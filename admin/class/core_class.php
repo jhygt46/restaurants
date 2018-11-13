@@ -279,6 +279,9 @@ class Core{
         $info['embarazada'] = $sql['resultado'][0]['embarazada'];
         $info['palitos'] = $sql['resultado'][0]['palitos'];
         
+        $info['costo'] = $sql['resultado'][0]['costo'];
+        $info['total'] = $sql['resultado'][0]['total'];
+        
         return $info;
         
     }
