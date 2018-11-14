@@ -309,14 +309,17 @@ class Guardar extends Core{
         
         $id_pag = $_POST['id'];
         $nombre = $_POST['nombre'];
+        $titulo = $_POST['titulo'];
+        $subtitulo = $_POST['subtitulo'];
+        $html = $_POST['html'];
         
         if($id_pag == 0){
-            $this->con->sql("INSERT INTO paginas (nombre, id_gir) VALUES ('".$nombre."', '".$this->id_gir."')");
+            $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas creado exitosamente";
         }
         if($id_pag > 0){
-            $this->con->sql("UPDATE paginas SET nombre='".$nombre."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', titulo='".$titulo."', subtitulo='".$subtitulo."', html='".$html."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas modificado exitosamente";
         }

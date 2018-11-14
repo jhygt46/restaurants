@@ -72,7 +72,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                         <input id="titulo" type="text" value="<?php echo $that['titulo']; ?>" require="" placeholder="" />
                     </label>
                     <label>
-                        <span>Nombre:</span>
+                        <span>Subtitulo:</span>
                         <input id="subtitulo" type="text" value="<?php echo $that['subtitulo']; ?>" require="" placeholder="" />
                     </label>
                     <label>
