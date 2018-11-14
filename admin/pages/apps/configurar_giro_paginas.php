@@ -67,6 +67,18 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                         <span>Nombre:</span>
                         <input id="nombre" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
+                    <label>
+                        <span>Titulo:</span>
+                        <input id="titulo" type="text" value="<?php echo $that['titulo']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
+                        <span>Nombre:</span>
+                        <input id="subtitulo" type="text" value="<?php echo $that['subtitulo']; ?>" require="" placeholder="" />
+                    </label>
+                    <label>
+                        <span>Footer:</span>
+                        <Textarea id="html"><?php echo $that['html']; ?></Textarea>
+                    </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>
                         <a id='button' onclick="form()">Enviar</a>
