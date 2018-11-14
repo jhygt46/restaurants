@@ -417,6 +417,7 @@ class Core{
     
         $giro = $this->con->sql("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir");
         $aux_pagina = $this->con->sql("SELECT id_pag, nombre, titulo, subtitulo, html FROM paginas WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        
         $info['paginas'] = $aux_pagina['resultado'];
         
         for($i=0; $i<$giro['count']; $i++){
@@ -431,6 +432,7 @@ class Core{
         
         $ruta_data = $path."js/data/".$giro['resultado'][0]['code'].".js";
         file_put_contents($ruta_data, "var data=".json_encode($info));
+        // $this->con->sql("UPDATE giros SET ultima_actualizacion=now() WHERE id_gir='".$id_gir."'");
         
     }
     public function set_pedido($pedido, $carro, $promos){
