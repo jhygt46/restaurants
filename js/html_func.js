@@ -466,7 +466,7 @@ function html_paginas(){
     var li, id;
     var html = [];
     
-    if(data.paginas){
+    if(data.paginas !== null){
         for(var i=0, ilen=data.paginas.length; i<ilen; i++){
             id = data.paginas[i].id_pag;
             li = document.createElement('LI');

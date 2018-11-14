@@ -6,7 +6,7 @@ $core = new Core();
 if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
 }else{
-    $info = $core->get_data();
+    $info = $core->get_data('www.mikasushi.cl');
 }
 
 $js = $core->get_web_js_data2($info['id_gir']);
