@@ -131,7 +131,7 @@ function addhistorylink(url){
     if(history.length > 0){
         var file_name = url.split("?");
         var last = history[history.length - 1].split("?");
-        console.log(file_name + " - " + last);
+        console.log(file_name[0] + " - " + last[0]);
     }else{
         history.push(url);
     }    
