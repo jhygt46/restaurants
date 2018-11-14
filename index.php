@@ -9,7 +9,7 @@ if(isset($_GET['param_dom'])){
     $info = $core->get_data();
 }
 
-$js = $core->get_web_js_data2($info['id_gir']);
+//$js = $core->get_web_js_data2($info['id_gir']);
 
 ?>
 

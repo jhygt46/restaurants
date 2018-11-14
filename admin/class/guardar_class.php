@@ -121,7 +121,7 @@ class Guardar extends Core{
     public function refresh(){
         
         if($this->id_gir > 0){
-            $this->get_web_js_data($this->id_gir);
+            $this->get_web_js_data2($this->id_gir);
         }
         
     }
