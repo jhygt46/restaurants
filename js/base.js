@@ -197,6 +197,9 @@ function ver_pagina(id){
             $('.modal_pagina .titulo h1').html(data.paginas[i].titulo);
             $('.modal_pagina .titulo h2').html(data.paginas[i].subtitulo);
             $('.modal_pagina .info_modal').html(data.paginas[i].html);
+            
+            console.log(data.paginas[i]);
+            
             show_modal('modal_pagina');
         }
     }
