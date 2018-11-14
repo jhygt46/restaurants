@@ -213,10 +213,11 @@ function crear_pagina(){
         }
     }
     var paginas = data.paginas;
-    for(var i=0, ilen=paginas.length; i<ilen; i++){
-        $('.lista_paginas').append(html_paginas(paginas[i])); 
+    if(paginas !== null){
+        for(var i=0, ilen=paginas.length; i<ilen; i++){
+            $('.lista_paginas').append(html_paginas(paginas[i])); 
+        }
     }
-    
 
 }
 
