@@ -461,22 +461,12 @@ function ver_detalle_producto(that){
 }
 
 // HTML PAGINAS //
-function html_paginas(){
+function html_paginas(pagina){
     
-    var li, id;
-    var html = [];
-    
-    if(data.paginas !== null){
-        for(var i=0, ilen=data.paginas.length; i<ilen; i++){
-            id = data.paginas[i].id_pag;
-            li = document.createElement('LI');
-            li.onclick = function(){ ver_pagina(id) };
-            li.innerHTML = data.paginas[i].nombre;
-            html.push(li);
-
-        }
-    }
-    return html;
+    li = document.createElement('LI');
+    li.onclick = function(){ ver_pagina(pagina.id_pag) };
+    li.innerHTML = pagina.nombre;
+    return li;
     
 }
 

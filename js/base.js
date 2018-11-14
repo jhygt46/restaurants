@@ -197,9 +197,6 @@ function ver_pagina(id){
             $('.modal_pagina .titulo h1').html(data.paginas[i].titulo);
             $('.modal_pagina .titulo h2').html(data.paginas[i].subtitulo);
             $('.modal_pagina .info_modal').html(data.paginas[i].html);
-            
-            console.log(data.paginas[i]);
-            
             show_modal('modal_pagina');
         }
     }
@@ -215,7 +212,11 @@ function crear_pagina(){
             $('.cont_contenido').append(html_home_categorias(categorias[i]));  
         }
     }
-    $('.lista_paginas').append(html_paginas());
+    var paginas = data.paginas;
+    for(var i=0, ilen=paginas.length; i<ilen; i++){
+        $('.lista_paginas').append(html_paginas(paginas[i])); 
+    }
+    
 
 }
 
