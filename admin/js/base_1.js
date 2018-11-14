@@ -129,8 +129,8 @@ function addhistorylink(url){
     
     var history = JSON.parse(window.localStorage.getItem("history")) || [];
     
-    console.log("URL");
-    console.log(url);
+    var file_name = url.split("?");
+    console.log(file_name);
     
     history.push(url);
     localStorage.setItem("history", JSON.stringify(history));
