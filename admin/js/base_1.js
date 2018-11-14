@@ -128,11 +128,14 @@ function backurl(){
 function addhistorylink(url){
     
     var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    if(history.length > 0){
+        var file_name = url.split("?");
+        var last = history[history.length - 1].split("?");
+        console.log(file_name + " - " + last);
+    }else{
+        history.push(url);
+    }    
     
-    var file_name = url.split("?");
-    console.log(file_name);
-    
-    history.push(url);
     localStorage.setItem("history", JSON.stringify(history));
     
 }
