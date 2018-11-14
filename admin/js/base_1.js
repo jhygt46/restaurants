@@ -127,10 +127,11 @@ function backurl(){
 }
 function addhistorylink(url){
     
-    var history = JSON.parse(window.localStorage.getItem("history"));
-    if(history == null){
-        history = new Array();
-    }
+    var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    
+    console.log("URL");
+    console.log(url);
+    
     history.push(url);
     localStorage.setItem("history", JSON.stringify(history));
     
