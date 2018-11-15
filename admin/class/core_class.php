@@ -296,6 +296,7 @@ class Core{
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
+            $info['favicon'] = $sql['resultado'][0]['favicon'];
             $info['font']['family'] = $sql['resultado'][0]['font_family'];
             $info['font']['css'] = $sql['resultado'][0]['font_css'];
             $info['code'] = $sql['resultado'][0]['code'];
