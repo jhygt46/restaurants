@@ -1,7 +1,7 @@
 // IMPRIME CATEGORIAS Y PROMOCIONES EN HOME //
 function html_home_categorias(obj){
     
-    console.log(domain);
+    console.log(dominio);
     
     if(debug == 1){ console.log("html_func-> html_crear_categoria-id:"+obj.id_cae) }
     
