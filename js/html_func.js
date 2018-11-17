@@ -6,7 +6,7 @@ function html_home_categorias(obj){
     var Div = document.createElement('div');
     Div.className = 'botones_principales';
     
-    Div.style.backgroundImage = 'url('+dominio+'"/images/categorias/'+obj.image+'")';
+    Div.style.backgroundImage = 'url("/images/categorias/'+obj.image+'")';
     Div.onclick = function(){ open_categoria(obj.id_cae) };
     
     var Divnombre = document.createElement('div');
