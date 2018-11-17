@@ -1,14 +1,12 @@
 // IMPRIME CATEGORIAS Y PROMOCIONES EN HOME //
 function html_home_categorias(obj){
-    
-    console.log(dominio);
-    
+        
     if(debug == 1){ console.log("html_func-> html_crear_categoria-id:"+obj.id_cae) }
     
     var Div = document.createElement('div');
     Div.className = 'botones_principales';
     
-    Div.style.backgroundImage = 'url("/images/categorias/'+obj.image+'")';
+    Div.style.backgroundImage = 'url('+dominio+'"/images/categorias/'+obj.image+'")';
     Div.onclick = function(){ open_categoria(obj.id_cae) };
     
     var Divnombre = document.createElement('div');

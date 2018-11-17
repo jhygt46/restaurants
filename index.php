@@ -28,7 +28,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/<?php echo $info["favicon"]; ?>' />
         <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
-        <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
+        <script type="text/javascript"> var dominio = "http://<?php echo $info["dominio"]; ?>"; </script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_html_func"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_base"]; ?>" type="text/javascript"></script>
