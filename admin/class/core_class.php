@@ -291,8 +291,10 @@ class Core{
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
         
+        
         if(count($sql['resultado']) == 1){
             
+            $info['dominio'] = $dominio;
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
