@@ -18,7 +18,8 @@
         unset($aux);
         unset($array);
     }
-      
+    
+    /*
     $arrays["nombre"] = "Configuracion";
     $arrays["link"] = "pages/base/basica.php";
     $array[] = $arrays;    
@@ -32,5 +33,6 @@
         unset($aux);
         unset($array);
     }
-
+    */
+    
 ?>

@@ -53,6 +53,10 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 ?>
 <script>
 
+    $('.nombre').blur(function(){
+        console.log($(this));
+    });
+
     $('#tipo').change(function(){
         if($(this).val() == 0){
             $('#tipo-0').show();

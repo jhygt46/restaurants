@@ -69,7 +69,7 @@ class Core{
         }
         if($this->admin == 1){
             $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
-            if($count['count'] == 1){
+            if(($count['count'] == 1 && $this->id_user > 1) || $this->id_user == 1){
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }else{
@@ -130,7 +130,8 @@ class Core{
     }
     public function get_giros_user(){
         if($this->admin == 0){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
-        if($this->admin == 1){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
+        if($this->admin == 1 && $this->id_user > 1){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
+        if($this->admin == 1 && $this->id_user == 1){ $giros = $this->con->sql("SELECT id_gir, nombre, dominio FROM giros WHERE eliminado='0'"); }
         return $giros['resultado'];
     }
     public function get_giro(){
