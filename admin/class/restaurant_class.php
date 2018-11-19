@@ -45,6 +45,7 @@ class Rest{
         }else{ 
             echo "ERROR"; 
         }
+        
         $info['post'] = $_POST;
 
         
