@@ -96,12 +96,12 @@ class Rest{
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+Captcha");
+                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+Captcha");
+            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
             exit; 
         }
         
