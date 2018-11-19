@@ -46,8 +46,7 @@ class Rest{
             echo "ERROR"; 
         }
         $info['post'] = $_POST;
-        return $info;
-        exit;
+
         
         $correo = $_POST["correo"];
         if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
