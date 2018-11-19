@@ -72,36 +72,36 @@ class Rest{
                                 $info['mensaje'] = "FELICITACIONES";
 
                                 curl_close($ch);
-                                header("Location: http://www.misitiodelivery.cl/complete");
+                                header("Location: http://www.misitiodelivery.cl?realizado=1");
                                 exit;
                                 
                             }else{
-                                header("Location: http://www.misitiodelivery.cl/error?m=DOMINIO+EXISTENTE");
+                                header("Location: http://www.misitiodelivery.cl?realizado=0&error=Dominio+Existente");
                                 exit;
                             }
 
                         }else{
-                            header("Location: http://www.misitiodelivery.cl/error?m=DOMINIO+INCORRECTO");
+                            header("Location: http://www.misitiodelivery.cl?realizado=0&error=Dominio+Existente");
                             exit;
                         }
 
                     }else{
-                        header("Location: http://www.misitiodelivery.cl/error?m=CORREO+EXISTENTE");
+                        header("Location: http://www.misitiodelivery.cl?realizado=0&error=Correo+Existente");
                         exit;
                     }
 
                 }else{
-                    header("Location: http://www.misitiodelivery.cl/error?m=CORREO+INCORRECTO");
+                    header("Location: http://www.misitiodelivery.cl?realizado=0&error=Correo+Incorrecto");
                     exit;
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl/error?m=NO+RECAPTCHA");
+                header("Location: http://www.misitiodelivery.cl?realizado=0&error=Error+Captcha");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl/error?m=NO+RECAPTCHA");
+            header("Location: http://www.misitiodelivery.cl?realizado=0&error=Error+Captcha");
             exit; 
         }
         
