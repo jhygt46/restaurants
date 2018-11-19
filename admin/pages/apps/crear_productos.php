@@ -52,9 +52,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
 
 ?>
 <script>
-
-    $('.nombre').blur(function(){
-        console.log($(this));
+    
+    var valores = [{nom: '#p1', valor: 'Salmon'}, {nom: '#p2', valor: 'Pollo Teriyaki'}];
+    
+    $('#nombre').keyup(function() {
+        var valor = $(this).val();
+        for(var i=0; i<valores.length; i++){
+            valor = valor.replace(valores[i].nom, valores[i].valor);
+        }
+        $(this).val(valor);
     });
 
     $('#tipo').change(function(){

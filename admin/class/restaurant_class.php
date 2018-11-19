@@ -31,6 +31,24 @@ class Rest{
     }
     public function crear_dominio(){
         
+        $res = $_POST["g-recaptcha-response"]; 
+        if(isset($res) && $res){ 
+            $secret = "6Lf8j3sUAAAAAP6pYvdgk9qiWoXCcKKXGsKFQXH4";
+            $v = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$_POST["g-recaptcha-response"]."&remoteip=".$_SERVER["REMOTE_ADDR"]); 
+            $data = json_decode(($v)); 
+            if($data->{'success'}){ 
+                echo "CREAR DOMINIO"; 
+            }else{ 
+                echo "ERROR"; 
+            } 
+            
+        }else{ 
+            echo "ERROR"; 
+        }
+        $info['post'] = $_POST;
+        return $info;
+        exit;
+        
         $correo = $_POST["correo"];
         if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
             
