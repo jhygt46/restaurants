@@ -31,6 +31,10 @@ class Rest{
     }
     public function crear_dominio(){
         
+        
+        header("Location: www.misitiodelivery.cl");
+        exit;
+        
         $res = $_POST["g-recaptcha-response"]; 
         if(isset($res) && $res){ 
             
