@@ -76,32 +76,32 @@ class Rest{
                                 exit;
                                 
                             }else{
-                                header("Location: http://www.misitiodelivery.cl?realizado=0&error=Dominio+Existente");
+                                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
                                 exit;
                             }
 
                         }else{
-                            header("Location: http://www.misitiodelivery.cl?realizado=0&error=Dominio+Existente");
+                            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
                             exit;
                         }
 
                     }else{
-                        header("Location: http://www.misitiodelivery.cl?realizado=0&error=Correo+Existente");
+                        header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Existente");
                         exit;
                     }
 
                 }else{
-                    header("Location: http://www.misitiodelivery.cl?realizado=0&error=Correo+Incorrecto");
+                    header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
                     exit;
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl?realizado=0&error=Error+Captcha");
+                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+Captcha");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl?realizado=0&error=Error+Captcha");
+            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+Captcha");
             exit; 
         }
         
