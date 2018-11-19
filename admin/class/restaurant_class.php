@@ -31,10 +31,6 @@ class Rest{
     }
     public function crear_dominio(){
         
-        
-        header("Location: http://www.misitiodelivery.cl/complete");
-        exit;
-        
         $res = $_POST["g-recaptcha-response"]; 
         if(isset($res) && $res){ 
             
@@ -76,38 +72,38 @@ class Rest{
                                 $info['mensaje'] = "FELICITACIONES";
 
                                 curl_close($ch);
-
+                                header("Location: http://www.misitiodelivery.cl/complete");
+                                exit;
+                                
                             }else{
-                                $info['op'] = 2;
-                                $info['mensaje'] = "DOMINIO EXISTENTE";
+                                header("Location: http://www.misitiodelivery.cl/error?m=DOMINIO+EXISTENTE");
+                                exit;
                             }
 
                         }else{
-                            $info['op'] = 2;
-                            $info['mensaje'] = "DOMINIO INCORRECTO";
+                            header("Location: http://www.misitiodelivery.cl/error?m=DOMINIO+INCORRECTO");
+                            exit;
                         }
 
                     }else{
-                        $info['op'] = 2;
-                        $info['mensaje'] = "CORREO EXISTENTE";
+                        header("Location: http://www.misitiodelivery.cl/error?m=CORREO+EXISTENTE");
+                        exit;
                     }
 
                 }else{
-                    $info['op'] = 2;
-                    $info['mensaje'] = "CORREO INCORRECTO";
+                    header("Location: http://www.misitiodelivery.cl/error?m=CORREO+INCORRECTO");
+                    exit;
                 }
                 
             }else{ 
-                $info['op'] = 2;
-                $info['mensaje'] = "NO RECAPTCHA"; 
+                header("Location: http://www.misitiodelivery.cl/error?m=NO+RECAPTCHA");
+                exit;
             } 
             
         }else{ 
-            $info['op'] = 2;
-            $info['mensaje'] = "NO RECAPTCHA"; 
+            header("Location: http://www.misitiodelivery.cl/error?m=NO+RECAPTCHA");
+            exit; 
         }
-
-        return $info;
         
     }
     public function enviar_pedido(){
