@@ -95,12 +95,12 @@ class Rest{
                 
             }else{ 
                 $info['op'] = 2;
-                $info['mensaje'] = "CORREO INCORRECTO"; 
+                $info['mensaje'] = "NO RECAPTCHA"; 
             } 
             
         }else{ 
             $info['op'] = 2;
-            $info['mensaje'] = "CORREO INCORRECTO"; 
+            $info['mensaje'] = "NO RECAPTCHA"; 
         }
 
         return $info;
