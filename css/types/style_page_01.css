@@ -50,7 +50,10 @@
     left: 0px;
 }
 .style_page_1 .contenedor .pagina .header .header_logo{
-    height: 70px;
+    
+}
+.style_page_1 .contenedor .pagina .header .header_logo img{
+    max-width: 100%;
 }
 .style_page_1 .contenedor .pagina .header .menu_right{
     height: 40px;
