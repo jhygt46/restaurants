@@ -9,12 +9,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 
-/*
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-*/
-
 if($_SESSION['user']['info']['admin'] == 1){
     
     include($path."admin/pages/base/giros.php");

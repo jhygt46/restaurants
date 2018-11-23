@@ -21,8 +21,6 @@ $that = $fireapp->get_giro();
 $titulo = "Configuracion ".$that["nombre"];
 $css = $fireapp->get_css();
 
-echo "";
-
 ?>
 
 <div class="title">
@@ -56,7 +54,7 @@ echo "";
                         <input id="font-css" type="text" value="<?php echo $that['font_css']; ?>" />
                     </label>
                     <label>
-                        <span>Css Pagina:</span>
+                        <span>Css Tipo Pagina:</span>
                         <select id="css-types">
                             <option value="">Seleccionar</option>
                             <?php 
@@ -86,7 +84,7 @@ echo "";
                         </select>
                     </label>
                     <label>
-                        <span>Css Pop-up:</span>
+                        <span>Css Tamaño Letra:</span>
                         <select id="css-popup">
                             <option value="">Seleccionar</option>
                             <?php 
@@ -103,6 +101,38 @@ echo "";
                     <label>
                         <span>logo:</span>
                         <input id="file_image" type="file" />
+                    </label>
+                    <label>
+                        <span>Pedido 01 Titulo:</span>
+                        <input id="pedido_01_titulo" type="text" value="<?php echo $that['pedido_01_titulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 01 Subtitulo:</span>
+                        <input id="pedido_01_subtitulo" type="text" value="<?php echo $that['pedido_01_subtitulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 02 Titulo:</span>
+                        <input id="pedido_02_titulo" type="text" value="<?php echo $that['pedido_02_titulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 02 Subtitulo:</span>
+                        <input id="pedido_02_subtitulo" type="text" value="<?php echo $that['pedido_02_subtitulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 03 Titulo:</span>
+                        <input id="pedido_03_titulo" type="text" value="<?php echo $that['pedido_03_titulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 03 Subtitulo:</span>
+                        <input id="pedido_03_subtitulo" type="text" value="<?php echo $that['pedido_03_subtitulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 04 Titulo:</span>
+                        <input id="pedido_04_titulo" type="text" value="<?php echo $that['pedido_04_titulo']; ?>" />
+                    </label>
+                    <label>
+                        <span>Pedido 04 Subtitulo:</span>
+                        <input id="pedido_04_subtitulo" type="text" value="<?php echo $that['pedido_04_subtitulo']; ?>" />
                     </label>
                     <label style='margin-top:20px'>
                         <span>&nbsp;</span>

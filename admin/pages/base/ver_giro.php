@@ -24,9 +24,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     $titulo = $info['nombre'];
     
 }
-
 ?>
-
 <div class="title">
     <h1><?php echo $titulo; ?></h1>
     <ul class="clearfix">
@@ -35,7 +33,6 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     </ul>
 </div>
 <hr>
-
 <div class="info" onclick="navlink('<?php echo $paso; ?>')">
     <div class="fc" id="info-0" style="height: 54px">
         <div class="minimizar m1"></div>

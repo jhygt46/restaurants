@@ -305,10 +305,11 @@ class Core{
             $info['code'] = $sql['resultado'][0]['code'];
             $info['footer_html'] = $sql['resultado'][0]['footer_html'];
             
-            $info['css_base'] = $path."/css/style.css";
-            $info['css_style'] = $path."/css/types/".$sql['resultado'][0]['style_page'];
-            $info['css_color'] = $path."/css/colors/".$sql['resultado'][0]['style_color'];
-            $info['css_modals'] = $path."/css/modals/".$sql['resultado'][0]['style_modal'];
+            $info['css_reset'] = $path."/css/reset.css";
+            $info['css_base'] = $path."/css/css_base.css";
+            $info['css_tipo'] = $path."/css/".$sql['resultado'][0]['style_page'];
+            $info['css_color'] = $path."/css/".$sql['resultado'][0]['style_color'];
+            $info['css_font_size'] = $path."/css/".$sql['resultado'][0]['style_modal'];
             
             $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
             $info['js_data'] = $path."/js/data/".$info["code"].".js";
@@ -319,6 +320,16 @@ class Core{
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
+            
+            $info['pedido_01_titulo'] = $sql['resultado'][0]['pedido_01_titulo'];
+            $info['pedido_01_subtitulo'] = $sql['resultado'][0]['pedido_01_subtitulo'];
+            $info['pedido_02_titulo'] = $sql['resultado'][0]['pedido_02_titulo'];
+            $info['pedido_02_subtitulo'] = $sql['resultado'][0]['pedido_02_subtitulo'];
+            
+            $info['pedido_03_titulo'] = $sql['resultado'][0]['pedido_03_titulo'];
+            $info['pedido_03_subtitulo'] = $sql['resultado'][0]['pedido_03_subtitulo'];
+            $info['pedido_04_titulo'] = $sql['resultado'][0]['pedido_04_titulo'];
+            $info['pedido_04_subtitulo'] = $sql['resultado'][0]['pedido_04_subtitulo'];
             
             $sql_locales = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$sql['resultado'][0]['id_gir']."'");
             for($i=0; $i<$sql_locales['count']; $i++){
@@ -421,8 +432,9 @@ class Core{
     
         $giro = $this->con->sql("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir");
         $aux_pagina = $this->con->sql("SELECT id_pag, nombre, titulo, subtitulo, html FROM paginas WHERE id_gir='".$id_gir."' AND eliminado='0'");
-        
         $info['paginas'] = $aux_pagina['resultado'];
+        
+        
         
         for($i=0; $i<$giro['count']; $i++){
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);

@@ -1,7 +1,10 @@
 $(document).ready(function(){
-    crear_pagina();
+    render_pagina();
+    /*
     var carro = JSON.parse(localStorage.getItem("carro")) || [];
     $('.cantcart_num').html(carro.length);
+    */
+    borrar_carro();
 });
 var menu = 0;
 var modal = 0;
@@ -9,7 +12,7 @@ var paso = 1;
 var history = [];
 var dir = 0;
 var catalogo = 0;
-var debug = 0;
+var debug = 1;
 var estados
 
 // INICIO BACK BUTTON //
@@ -176,6 +179,9 @@ function showmenu(){
     }, 200, function(){
         menu = 1;
     });
+    $('.btn_toogle').animate({
+        right: "20px"
+    }, 400);
 }
 function hidemenu(){
     $('.menu_left').animate({
@@ -183,6 +189,9 @@ function hidemenu(){
     }, 200, function(){
         menu = 0;
     });
+    $('.btn_toogle').animate({
+        right: "-50px"
+    }, 400);
 }
 function tooglemenu(){
     if(menu == 0)
@@ -203,90 +212,6 @@ function ver_pagina(id){
     
     
 }
-// INICIO CREAR PAGINA //
-function crear_pagina(){
-    
-    var categorias = data.catalogos[catalogo].categorias;
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
-            $('.cont_contenido').append(html_home_categorias(categorias[i]));  
-        }
-    }
-    var paginas = data.paginas;
-    if(paginas !== null){
-        for(var i=0, ilen=paginas.length; i<ilen; i++){
-            $('.lista_paginas').append(html_paginas(paginas[i])); 
-        }
-    }
-
-}
-
-// INICIO ABRIR CATEGORIA //
-function open_categoria(id){
-    
-    if(debug == 1){ console.log("open_categoria-id:"+id) }
-    
-    show_modal('modal_carta');
-    add_history('open_categoria', id);
-    var categorias = data.catalogos[catalogo].categorias;
-    var cats = [];
-
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].id_cae == id){
-            $('.modal_carta .titulo h1').html(categorias[i].nombre);
-            $('.modal_carta .titulo h2').html(categorias[i].descripcion_sub);
-            for(var j=0, jlen=categorias.length; j<jlen; j++){
-                if(categorias[i].id_cae == categorias[j].parent_id){
-                    cats.push(categorias[j]);
-                }
-            }
-            
-            if(cats.length == 0){ imprimir_productos_modal(id) }
-            if(cats.length > 0){ imprimir_categoria_modal(cats) }
-        }
-    }
-    
-}
-function imprimir_productos_modal(id){
-    
-    if(debug == 1){ console.log("imprimir_productos_modal-id:"+id) }
-    
-    var categoria = get_categoria(id);
-    $('.modal_carta .info_modal').html('');
-
-    if(categoria.productos && categoria.tipo == 0){
-        var html = create_element_class('lista_productos');
-        var productos = categoria.productos;
-        for(var j=0, jlen=productos.length; j<jlen; j++){
-            html.append(create_html_producto(productos[j], categoria.detalle_prods));
-        }
-    }
-    if(categoria.tipo == 1){
-        var html = imprimir_promo_modal(categoria);
-    }
-
-    $('.modal_carta .info_modal').append(html);
-    
-}
-function imprimir_categoria_modal(categorias){
-    
-    if(debug == 1){ console.log("imprimir_categoria_modal") }
-    $('.modal_carta .info_modal').html('');
-    
-    var html = create_element_class('lista_categorias');
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].tipo == 0){
-            html.appendChild(create_html_categorias(categorias[i]));
-        }
-        if(categorias[i].tipo == 1){
-            html.appendChild(create_html_promocion(categorias[i]));
-        }
-    }
-    
-    $('.modal_carta .info_modal').append(html);
-    
-}
-
 
 // GET CATEGORIAS - PRODUCTOS - PROMOS - PREGUNTAS //
 function get_producto(id_pro){

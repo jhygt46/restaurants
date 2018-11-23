@@ -25,10 +25,13 @@ $js = $core->get_web_js_data2($info['id_gir']);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_style"]; ?>" media="all" />
+        
+        <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_font_size"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_modals"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_tipo"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
+        
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/<?php echo $info["favicon"]; ?>' />
         <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
@@ -43,7 +46,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
             }
         </style>
 </head>
-    <body class="style_page_1">
+    <body>
         <div class="contenedor">
             <div class="menu_left">
                 <div class="cont_menu_left">
@@ -60,7 +63,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                 <div class="cont_pagina">
                     <div class="header <?php echo ($info["header_fixed"] == 1) ? 'fixed' : ''; ?>">
                         <div class="header_logo vhalign"><img src="http://<?php echo $info["dominio"]; ?>/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
-                        <div class="menu_right" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign">15</div></div></div>
+                        <div class="menu_right valign" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign">15</div></div></div>
                     </div>
                     <div class="contenido">
                         <div class="cont_contenido <?php echo ($info["footer_fixed"] == 1) ? 'padding_cont_f1' : 'padding_cont_f2'; ?>"></div>
@@ -72,7 +75,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                 <div class="cont_modals">
                     <div class="modal vhalign hide modal_pagina">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
@@ -81,7 +84,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     </div>
                     <div class="modal vhalign hide modal_carta">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="buena"></h1><h2 class=""></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class="buena"></h1><h2></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
@@ -90,8 +93,8 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     </div>
                     <div class="modal vhalign hide modal_productos_promo">
                         <div class="cont_modal">
-                            <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            
+                            <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
@@ -99,13 +102,12 @@ $js = $core->get_web_js_data2($info['id_gir']);
                             <div class="acciones">
                                 <input class="confirmar" onclick="confirmar_productos_promo(this)" type="button" value="Confirmar" />
                             </div>
-                        </div>
+                        
                         </div>
                     </div>
                     <div class="modal vhalign hide modal_pregunta_productos">
                         <div class="cont_modal">
-                            <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="size_font_03 color_font_03"></h1><h2 class="size_font_02 color_font_02"></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
@@ -114,7 +116,6 @@ $js = $core->get_web_js_data2($info['id_gir']);
                                 <input class="confirmar" onclick="confirmar_pregunta_productos(this)" type="button" value="Confirmar" />
                             </div>
                         </div>
-                        </div>
                     </div>
 
                     
@@ -122,7 +123,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     <!-- MODAL CARRO 01 -->
                     <div class="modal vhalign hide modal_carro paso_01">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_01_titulo"]; ?></h1><h2><?php echo $info["pedido_01_subtitulo"]; ?></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
@@ -135,7 +136,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     
                     <div class="modal vhalign hide modal_carro paso_02">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_02_titulo"]; ?></h1><h2><?php echo $info["pedido_02_subtitulo"]; ?></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="height: calc(100% - 67px); padding-bottom: 0px">
@@ -175,7 +176,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     
                     <div class="modal vhalign hide modal_carro paso_03">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_03_titulo"]; ?></h1><h2><?php echo $info["pedido_03_subtitulo"]; ?></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px">
@@ -252,7 +253,7 @@ $js = $core->get_web_js_data2($info['id_gir']);
                     
                     <div class="modal vhalign hide modal_carro paso_04">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class="">Haz tu Pedido</h1><h2 class="">Verifica que esten todos tu productos</h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class=""><?php echo $info["pedido_04_titulo"]; ?></h1><h2 class=""><?php echo $info["pedido_04_subtitulo"]; ?></h2></div></div>
                             <div class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal_pedido" style="padding-bottom: 57px">

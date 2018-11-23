@@ -5,38 +5,17 @@
     
 }
 /* MENU LEFT */
-.style_page_1 .contenedor .menu_left{
-    width: 219px;
-    height: 100%;
-    top: 0px;
-    left: -220px;
-    background: #fff;
-    border-right: 1px solid #999;
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left{
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left .btn_toogle{
-    width: 40px;
-    height: 40px;
-    right: -50px;
-    top: 30px;
-    font-size: 40px;
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info{
-    padding: 20px;
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info h1{
-    font-size: 22px;
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info ul{
-    padding-top: 15px;
-}
-.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info ul li{
-    padding: 5px 0px;
-    border-bottom: 1px solid #ddd;
-    font-size: 12px;
-    /*background: url('../img/flecha_next.png') no-repeat right center;*/
-}
+.style_page_1 .contenedor .menu_left{}
+.style_page_1 .contenedor .menu_left .cont_menu_left{}
+.style_page_1 .contenedor .menu_left .cont_menu_left .btn_toogle{}
+.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info{}
+.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info h1{}
+.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info ul{}
+.style_page_1 .contenedor .menu_left .cont_menu_left .menu_info ul li{}
+
+
+
+
 /* PAGINA */
 .style_page_1 .contenedor .pagina{
     
@@ -45,7 +24,6 @@
 .style_page_1 .contenedor .pagina .header{
     height: 100px;
     width: 100%;
-    position: fixed;
     top: 0px;
     left: 0px;
 }
@@ -122,6 +100,12 @@
     bottom: 10px;
 }
 /* BOTON PRINCIPAL */
+
+
+
+
+
+
 
 /* MODALS */
 .style_page_1 .contenedor .modals{

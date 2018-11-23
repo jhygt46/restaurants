@@ -125,14 +125,14 @@ class Guardar extends Core{
         }
         
     }
-    public function ingresarimagen($filepath, $filename){
+    public function ingresarimagen($filepath, $filename, $i){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "png", "gif");
+        $file_formats = array("jpg", "png", "gif", "ico");
         //$filepath = "/var/www/html/restaurants/images/logos/";
 
-        $name = $_FILES['file_image0']['name']; // filename to get file's extension
-        $size = $_FILES['file_image0']['size'];
+        $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
+        $size = $_FILES['file_image'.$i]['size'];
 
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.')+1);
@@ -187,11 +187,18 @@ class Guardar extends Core{
         $css_popup = $_POST['css-popup'];
         
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
-        $foto = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio']);
-        if($foto['op'] == 1){
-            $info['foto'] = $this->con->sql("UPDATE giros SET logo='".$foto['image']."' WHERE id_gir='".$this->id_gir."'");
+        
+        $foto_logo = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio'], 0);
+        $foto_favicon = $this->ingresarimagen('/var/www/html/restaurants/images/favicon/', $giro['resultado'][0]['dominio'], 1);
+        
+        if($foto_logo['op'] == 1){
+            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo['image']."' WHERE id_gir='".$this->id_gir."'");
         }
-        $info['db1'] = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."' WHERE id_gir='".$this->id_gir."'");
+        if($foto_favicon['op'] == 1){
+            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$foto_favicon['image']."' WHERE id_gir='".$this->id_gir."'");
+        }
+        
+        $info['db1'] = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."', pedido_01_titulo='".$_POST['pedido_01_titulo']."', pedido_01_subtitulo='".$_POST['pedido_01_subtitulo']."', pedido_02_titulo='".$_POST['pedido_02_titulo']."', pedido_02_subtitulo='".$_POST['pedido_02_subtitulo']."', pedido_03_titulo='".$_POST['pedido_03_titulo']."', pedido_03_subtitulo='".$_POST['pedido_03_subtitulo']."', pedido_04_titulo='".$_POST['pedido_04_titulo']."', pedido_04_subtitulo='".$_POST['pedido_04_subtitulo']."' WHERE id_gir='".$this->id_gir."'");
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
@@ -209,7 +216,7 @@ class Guardar extends Core{
         $ocultar = $_POST['ocultar'];
         $detalle_prods = $_POST['detalle_prods'];
         
-        $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null);
+        $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }

@@ -1,4 +1,4 @@
-// IMPRIME CATEGORIAS Y PROMOCIONES EN HOME //
+// IMPRIME CATEGORIAS Y PAGINAS EN HOME //
 function html_home_categorias(obj){
     
     if(debug == 1){ console.log("html_func-> html_crear_categoria-id:"+obj.id_cae) }
@@ -29,6 +29,15 @@ function html_home_categorias(obj){
     return Div;
 
 }
+function html_paginas(pagina){
+    
+    li = document.createElement('LI');
+    li.onclick = function(){ ver_pagina(pagina.id_pag) };
+    li.innerHTML = pagina.nombre;
+    return li;
+    
+}
+
 
 
 // HTML MODALS //
@@ -38,6 +47,8 @@ function create_html_categorias(obj){
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
+    
+    Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
     
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
@@ -90,7 +101,7 @@ function create_html_categorias(obj){
 }
 function create_html_producto(id, detalle){
     
-    if(debug == 1){ console.log("html_func-> create_html_producto-id:"+id) }
+    if(debug == 1){ console.log("nombre func -> create_html_producto-id") }
     
     var aux = get_producto(id);
     if(detalle == 0){
@@ -161,6 +172,8 @@ function create_html_promocion(obj){
     Div.className = 'categoria';
     Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     
+    Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
+    
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
     Nombre.innerHTML = obj.nombre;
@@ -170,6 +183,11 @@ function create_html_promocion(obj){
     Descripcion.className = 'descripcion';
     Descripcion.innerHTML = obj.descripcion;
     Div.appendChild(Descripcion);
+    
+    var Precio = document.createElement('div');
+    Precio.className = 'precio';
+    Precio.innerHTML = '$'+obj.precio;
+    Div.appendChild(Precio);
     
     if(obj.mostrar_prods == 1){
         
@@ -183,7 +201,7 @@ function create_html_promocion(obj){
                 aux = get_categoria(obj.categorias[i].id_cae);
                 cat = document.createElement('div');
                 cat.className = 'prod_item';
-                cat.innerHTML = "- " + obj.categorias[i].cantidad + " " +aux.nombre;
+                cat.innerHTML = obj.categorias[i].cantidad + " " +aux.nombre;
                 listado.appendChild(cat);
             }
         }
@@ -192,7 +210,7 @@ function create_html_promocion(obj){
                 aux = get_producto(obj.productos[i].id_pro);
                 producto = document.createElement('div');
                 producto.className = 'prod_item';
-                producto.innerHTML = "- " + obj.productos[i].cantidad + " " +aux.nombre;
+                producto.innerHTML = obj.productos[i].cantidad + " " +aux.nombre;
                 listado.appendChild(producto);
             }
         }
@@ -416,17 +434,16 @@ function html_preguntas_producto(i){
         
         var pregunta_titulo = document.createElement('div');
         pregunta_titulo.className = 'pregunta_titulo';
-        pregunta_titulo.innerHTML = carro[i].preguntas[k].nombre;
+        pregunta_titulo.innerHTML = carro[i].preguntas[k].descripcion;
         e_pregunta.appendChild(pregunta_titulo);
+        
         
         for(var m=0, mlen=carro[i].preguntas[k].valores.length; m<mlen; m++){
             
             var titulo_v_pregunta = document.createElement('div');
             titulo_v_pregunta.className = 'titulo_v_pregunta';
             titulo_v_pregunta.innerHTML = carro[i].preguntas[k].valores[m].nombre;
-            
-            console.log(carro[i].preguntas[k].valores[m]);
-            
+                        
             var v_pregunta = document.createElement('div');
             v_pregunta.className = 'v_pregunta';
             v_pregunta.setAttribute('data-pos', m);
@@ -460,15 +477,7 @@ function ver_detalle_producto(that){
     }
 }
 
-// HTML PAGINAS //
-function html_paginas(pagina){
-    
-    li = document.createElement('LI');
-    li.onclick = function(){ ver_pagina(pagina.id_pag) };
-    li.innerHTML = pagina.nombre;
-    return li;
-    
-}
+
 
 // AUX CREAR ELEMENTOS // 
 function create_element_class(clase){
