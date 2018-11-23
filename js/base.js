@@ -2,8 +2,8 @@ $(document).ready(function(){
     render_pagina();
     /*
     var carro = JSON.parse(localStorage.getItem("carro")) || [];
-    $('.cantcart_num').html(carro.length);
     */
+   $('.cantcart_num').html("0");
     borrar_carro();
 });
 var menu = 0;
