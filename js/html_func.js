@@ -240,7 +240,7 @@ function promo_carros(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = '$'+producto.nombre;
+    Precio.innerHTML = '$'+producto.precio;
     Acciones.appendChild(Precio);
     
     var Accion = document.createElement('div');
