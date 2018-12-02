@@ -3,12 +3,15 @@
 require('admin/class/core_class.php');
 $core = new Core();
 
-if(isset($_GET['param_dom'])){
-    $info = $core->get_data($_GET['param_dom']);
-}else{
-    //$info = $core->get_data();
-    $info = $core->get_data('www.runasushi.cl');
+$info = $core->get_data('www.mikasushi.cl');
+$code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
+
+if($code === null){
+    echo "ERROR: SIN ACCESO AL SISTEMA";
+    exit;
 }
+
+$pedidos = $core->get_ultimos_pedidos($_GET['id_loc']);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -19,13 +22,17 @@ if(isset($_GET['param_dom'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        <link rel="stylesheet" href="css/reset.css" media="all" />
-        <link rel="stylesheet" href="css/pos.css" media="all" />
+        
+        <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["css_pos"]; ?>" media="all" />
+        
         <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
+        
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
-        <script src="http://35.185.64.95/js/data/7f3e85e0c8cfb8a85c02.js" type="text/javascript"></script>
-        <script src="js/pos.js" type="text/javascript"></script>
-        <script> var local_code = "<?php echo $_GET["code"]; ?>"; </script>
+        <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_pos"]; ?>" type="text/javascript"></script>
+        <script> var local_code = '<?php echo $code; ?>'; </script>
+        <script> var pedidos = '<?php echo json_encode($pedidos); ?>'; </script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;

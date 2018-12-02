@@ -1,7 +1,6 @@
 // INICIO CREAR PAGINA //
 function render_pagina(){
     
-    
     // BOTONES PRINCIPALES
     var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
@@ -19,14 +18,9 @@ function render_pagina(){
     }
 
 }
-
-// MODAL CARTA ABRIR CATEGORIA //
 function open_categoria(id){
     
-    if(debug == 1){ console.log("open_categoria-id:"+id) }
-    
     show_modal('modal_carta');
-    add_history('open_categoria', id);
     var categorias = data.catalogos[catalogo].categorias;
     var cats = [];
 
@@ -46,11 +40,19 @@ function open_categoria(id){
     }
     
 }
-
-// MODAL CARTA MOSTRAR CATEGORIAS Y PRODUCTOS //
-function imprimir_productos_modal(id){
+function open_carro(){
     
-    if(debug == 1){ console.log("imprimir_productos_modal-id:"+id) }
+    var pedido = get_pedido();    
+    if(pedido.id_ped == 0){
+        process_carro();
+        show_modal('paso_01');
+    }
+    if(pedido.id_ped > 0){
+        show_modal('paso_04');
+    }
+    
+}
+function imprimir_productos_modal(id){
     
     var categoria = get_categoria(id);
     $('.modal_carta .info_modal').html('');
@@ -71,7 +73,6 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
-    if(debug == 1){ console.log("imprimir_categoria_modal") }
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
@@ -88,126 +89,586 @@ function imprimir_categoria_modal(categorias){
     
 }
 
-
-
-
-
-
-
-
-// CONFIRMAR PEDIDO //
-function show_retiro(){
-    $('.cont_direccion .direccion_opciones').hide();
-    $('.cont_direccion .direccion_op1').show();
-}
-function show_despacho(){
-    if(map_init == 0){
-        initMap();
+// ADD PRODUCTOS Y PROMOCION //
+function add_carro_producto(id_pro){
+    
+    var producto = get_producto(id_pro);
+    var carro = get_carro();
+    
+    var item_carro = { id_pro: parseInt(id_pro) };
+    if(producto.preguntas){
+        item_carro.preguntas = [];
+        for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+        }
     }
-    $('.cont_direccion .direccion_opciones').hide();
-    $('.cont_direccion .direccion_op2').show();
+    
+    carro.push(item_carro);
+    set_cantidad(1);
+    localStorage.setItem("carro", JSON.stringify(carro));
+    if(tiene_pregunta(item_carro)){ mostrar_pregunta(carro.length - 1) }else{ hide_modal() }
+    
 }
-function map_local(id){    
-    $('#lmap-'+id).toggle();
-    if(maps.indexOf(id) == -1){
-        init_map_local(id);
-        maps.push(id);
+function add_carro_promocion(id_cae){
+    
+    var producto, item_carro;
+    var carro = JSON.parse(localStorage.getItem("carro")) || [];
+    var promo = get_categoria(id_cae);
+    if(promo.categorias){
+        for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
+            carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad)});
+        }
+    }
+    if(promo.productos){
+        for(var i=0, ilen=promo.productos.length; i<ilen; i++){
+            for(var j=0, jlen=promo.productos[i].cantidad; j<jlen; j++){
+                producto = get_producto(promo.productos[i].id_pro);
+                item_carro = { id_pro: parseInt(promo.productos[i].id_pro) };
+                if(producto.preguntas){
+                    item_carro.preguntas = [];
+                    for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+                        item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+                    }
+                }
+                carro.push(item_carro);
+            }
+        }
+    }
+    set_cantidad(1);
+    localStorage.setItem("carro", JSON.stringify(carro));
+    
+    var pro = process_new_promos();
+    for(var i=pro.carro_promos.length-1; i>=0; i--){
+        if(pro.carro_promos[i].id_cae == id_cae){
+            mostrar_pregunta_promo(pro, i);
+            return;
+        }
+    }
+    
+    process_carro();
+    show_modal('paso_01');
+    
+}
+function tiene_pregunta(carro){
+    
+    if(carro.preguntas){
+        for(var k=0, klen=carro.preguntas.length; k<klen; k++){
+            for(var j=0, jlen=carro.preguntas[k].valores.length; j<jlen; j++){
+                var valores = carro.preguntas[k].valores[j];
+                if(valores.seleccionados){
+                    if(valores.seleccionados.length < valores.cantidad){
+                        return true;
+                    }
+                }else{
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+function confirmar_pregunta_productos(that){
+
+    var carros = get_carro();
+    var parent = $(that).parents('.modal_pregunta_productos');
+    var pregunta = parent.find('.s_pregunta');
+    var i = pregunta.attr('data-pos');
+    var k = 0;
+    var m = 0;
+    var n = 0;
+    var count = 0;
+    var cant = 0;
+    var valores = [];
+    var diff = 0;
+    
+    var preguntas = pregunta.find('.e_pregunta');
+    preguntas.each(function(){
+        k = $(this).attr('data-pos');
+        $(this).find('.v_pregunta').each(function(){
+            m = $(this).attr('data-pos');
+            cant = $(this).attr('data-cant');
+            count = 0;
+            valores = [];
+            $(this).find('.n_pregunta').each(function(){
+                if($(this).hasClass('selected')){
+                    count++;
+                    valores.push($(this).html().trim());
+                }
+            });
+            diff = cant - count;
+            if(diff < 0){
+                alert("HA SELECCIONADO "+Math.abs(diff)+" OPCIONES MAS");
+            }
+            if(diff > 0){
+                alert("FALTA SELECCIONAR "+diff+" OPCIONES");
+            }
+            if(diff == 0){
+                
+                carros[i].preguntas[k].valores[m].seleccionados = valores;
+                localStorage.setItem("carro", JSON.stringify(carros));
+
+                if(mostrar_preguntas.length > 0){
+                    
+                    mostrar_pregunta(mostrar_preguntas.pop());
+                    
+                }else{
+                    
+                    if(paso == 2){
+                        if(proceso(true, true)){
+                            show_modal('paso_02');
+                        }
+                    }else{
+                        open_carro();
+                    }
+                    
+                }
+            }
+        });
+    });
+    
+}
+function mostrar_pregunta(i){
+    
+    var carro = get_carro();
+    var producto = get_producto(carro[i].id_pro);
+
+    show_modal('modal_pregunta_productos');
+    $('.modal_pregunta_productos .titulo h1').html(producto.nombre); 
+    $('.modal_pregunta_productos .info_modal').html('');
+    $('.modal_pregunta_productos .info_modal').append(html_preguntas_producto(i));
+
+}
+function mostrar_pregunta_promo(pro, x){
+    
+    mostrar_preguntas = [];
+    for(var i=0, ilen=pro.carro.length; i<ilen; i++){
+        if(pro.carro[i].promo !== null && pro.carro[i].promo == x && tiene_pregunta(pro.carro[i])){
+            mostrar_preguntas.push(i);
+        }
+    }
+    
+    if(mostrar_preguntas.length > 0){
+        mostrar_pregunta(mostrar_preguntas.pop());
+    }
+
+}
+function select_pregunta(that){
+    
+    var parent = $(that).parent();
+    var cantidad = parent.attr('data-cant');
+    var seleccionadas = parent.find('.selected').length;
+    var diff = cantidad - seleccionadas;
+
+    if($(that).hasClass('selected')){
+        $(that).removeClass('selected');
+    }
+    if(cantidad == 1 && !$(that).hasClass('selected')){
+        parent.find('.selected').eq(0).removeClass('selected');
+        $(that).addClass('selected');
+    }
+    if(cantidad > 1 && !$(that).hasClass('selected') && diff > 0){
+        $(that).addClass('selected');
+    }
+    
+}
+function process_carro(){
+
+    var total = 0;
+    var info = process_new_promos();
+    var carro = info.carro;
+    var carro_promos = info.carro_promos;
+    var count = 0;
+    var promocion, producto, promo_detalle, process_carro_promo, promo_info, promo_delete, promo_precio;
+
+    var html = create_element_class('process_carro');
+
+    for(var i=0, ilen=carro_promos.length; i<ilen; i++){
+
+        promocion = get_categoria(carro_promos[i].id_cae);
+        total = total + parseInt(promocion.precio);
+
+        process_carro_promo = create_element_class('process_carro_promo');
+
+        promo_detalle = create_element_class('promo_detalle');
+        promo_info = create_element_class_inner('promo_info', promocion.nombre);
+        promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promocion.preciformatNumbero), "$"));
+        promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
+        promo_delete.setAttribute('promo-pos', i);
+        promo_delete.onclick = function(){ delete_promo(this) };
+
+        process_carro_promo.appendChild(promo_info);
+        process_carro_promo.appendChild(promo_precio);
+        process_carro_promo.appendChild(promo_delete);
+
+        for(var j=0, jlen=carro.length; j<jlen; j++){
+            if(carro[j].promo == i){
+                count++;
+                producto = get_producto(carro[j].id_pro);
+                promo_detalle.appendChild(promo_carros(producto, j));
+            }
+        }
+
+        process_carro_promo.appendChild(promo_detalle);
+        html.appendChild(process_carro_promo);
+
+    }
+
+    var restantes = false;
+    var process_carro_restantes = create_element_class('process_carro_restantes');
+
+    for(var j=0, jlen=carro.length; j<jlen; j++){
+        if(carro[j].promo === undefined){
+            count++;
+            producto = get_producto(carro[j].id_pro);
+            process_carro_restantes.appendChild(promo_restantes(producto, j, tiene_pregunta(carro[j])));
+            total = total + parseInt(producto.precio);
+            restantes = true;
+        }
+    }
+
+    if(restantes){ 
+        html.appendChild(process_carro_restantes);
+    }
+    
+    $('.paso_01 .info_modal').html('');
+    $('.paso_01 .info_modal').append(html);
+    set_carro(info.carro, info.carro_promos);
+    $('.paso_01_sub_total').html("Pedido: "+formatNumber.new(parseInt(total), "$"));
+    
+    var pedido = get_pedido();
+    pedido.total = total;
+    set_pedido(pedido);
+    
+}
+function process_new_promos(){
+    
+    var carro = get_carro_limpio();
+    var promos = process_promo();
+    
+    var carro_promos = [];
+    var ocupados = [];
+    var pos = 0;
+    var repeat = true;
+    var aux = {};
+
+    for(var i=0, ilen=promos.length; i<ilen; i++){
+        repeat = true;
+        while(repeat){
+            
+            ocupados = [];
+            for(var j=0, jlen=promos[i].productos.length; j<jlen; j++){
+                for(var k=0, klen=carro.length; k<klen; k++){
+                    if(promos[i].productos[j].id_pro.indexOf(carro[k].id_pro) != -1 && ocupados.indexOf(k) == -1){
+                        if(carro[k].promo === undefined){
+                            ocupados.push(k);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if(ocupados.length == promos[i].productos.length){
+                pos = carro_promos.length;
+                carro_promos.push({ id_cae: promos[i].id_cae });
+                for(var k=0, klen=carro.length; k<klen; k++){
+                    if(ocupados.indexOf(k) != -1){
+                        carro[k].promo = pos;
+                    }
+                }
+                repeat = true;
+            }else{
+                repeat = false;        
+            }
+        }
+    }
+    
+    var aux = {};
+    aux.carro = carro;
+    aux.carro_promos = carro_promos;
+    return aux;
+    
+}
+function process_promo(){
+    
+    var promos = get_promociones();
+    
+    var productos = [];
+    var aux = [];
+    var cantidad = 0;
+    
+    for(var i=0, ilen=promos.length; i<ilen; i++){
+        productos = [];
+        cantidad = 0;
+        if(promos[i].categorias){
+            for(var j=0; j<promos[i].categorias.length; j++){
+                for(var k=0, klen=promos[i].categorias[j].cantidad; k<klen; k++){
+                    productos.push({id_pro: get_productos_categoria(promos[i].categorias[j].id_cae)});
+                    cantidad++;
+                }
+            }
+        }
+        if(promos[i].productos){
+            for(var j=0; j<promos[i].productos.length; j++){
+                for(var k=0, klen=promos[i].productos[j].cantidad; k<klen; k++){
+                    productos.push({id_pro: [parseInt(promos[i].productos[j].id_pro)]});
+                    cantidad++;
+                }
+            }
+        }
+        if(productos.length > 0){
+            aux.push({id_cae: promos[i].id_cae, nombre: promos[i].nombre, productos: productos, cantidad: cantidad});
+        }
+    }
+    aux.sort(function (a, b){
+        return (b.cantidad - a.cantidad)
+    })
+    return aux;
+    
+}
+function delete_promo(that){
+    
+    var promos = get_promos();
+    var j = that.getAttribute("promo-pos");
+    for(var i=0, ilen=promos.length; i<ilen; i++){
+        if(i == j){
+            
+            promos.splice(i, 1);
+            set_promos(promos);
+            
+            var carro = get_carro();
+            for(var m=0, mlen=carro.length; m<mlen; m++){
+                if(carro[m].promo == i){
+                    if(carro.splice(m, 1)){
+                        m--;
+                        mlen--;
+                    }
+                }
+            }
+            set_carro(carro);
+            process_carro();
+            
+        }
+    }
+    set_cantidad(-1);
+    
+}
+function delete_pro_carro(i){
+    var carro = get_carro();
+    carro.splice(i, 1);
+    localStorage.setItem("carro", JSON.stringify(carro));
+    process_carro();
+    set_cantidad(-1);
+}
+function set_cantidad(n){
+    cantidad = cantidad + n;
+    $('.cantcart_num').html(cantidad);
+}
+function get_carro(){
+    return JSON.parse(localStorage.getItem("carro")) || [];
+}
+function get_pedido(){
+    return JSON.parse(localStorage.getItem("pedido")) || obj_pedido();
+}
+function borrar_pedido(){
+    localStorage.setItem("pedido", null);
+}
+function get_promos(){
+    return JSON.parse(localStorage.getItem("carro_promos")) || [];
+}
+function get_categoria(id_cae){
+    var categorias = data.catalogos[catalogo].categorias;
+    for(var i=0, ilen=categorias.length; i<ilen; i++){
+        if(categorias[i].id_cae == id_cae){
+            return categorias[i];
+        }
     }
 }
-function nuevo_pedido(){
-    set_pedido(null);
-    borrar_carro();
-    hide_modal();
-    location.reload();
+function get_producto(id_pro){
+    var productos = data.catalogos[catalogo].productos;
+    for(var i=0, ilen=productos.length; i<ilen; i++){
+        if(productos[i].id_pro == id_pro){
+            return productos[i];
+        }
+    }
+}
+function get_preguntas(id_pre){
+    for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
+        if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
+            return data.catalogos[catalogo].preguntas[i];
+        }
+    }
+    return null;
+}
+function get_carro_limpio(){
+    var carro = JSON.parse(localStorage.getItem("carro")) || [];
+    for(var i=0, ilen=carro.length; i<ilen; i++){
+        delete carro[i].promo;
+    }
+    return carro;
+}
+function get_cats(tipo){
+    var categorias = data.catalogos[catalogo].categorias;
+    var aux = [];
+    for(var i=0, ilen=categorias.length; i<ilen; i++){
+        if(categorias[i].tipo == tipo){
+            aux.push(categorias[i]);
+            
+        }
+    }
+    return aux;
+}
+function get_categorias(){
+    return get_cats(0);
+}
+function get_promociones(){
+    return get_cats(1);
+}
+function set_carro(carro, carro_promos){
+    localStorage.setItem("carro", JSON.stringify(carro));
+    localStorage.setItem("carro_promos", JSON.stringify(carro_promos));
+}
+function set_promos(carro_promos){
+    localStorage.setItem("carro_promos", JSON.stringify(carro_promos));
+}
+function set_pedido(pedido){
+    localStorage.setItem("pedido", JSON.stringify(pedido));
+}
+function borrar_carro(){
+    localStorage.setItem("carro", null);
+    localStorage.setItem("carro_promos", null);
+}
+function ver_pagina(id){
+    
+    for(var i=0, ilen=data.paginas.length; i<ilen; i++){
+        if(data.paginas[i].id_pag == id){
+            $('.modal_pagina .titulo h1').html(data.paginas[i].titulo);
+            $('.modal_pagina .titulo h2').html(data.paginas[i].subtitulo);
+            $('.modal_pagina .info_modal').html(data.paginas[i].html);
+            show_modal('modal_pagina');
+        }
+    }
+    
+}
+function showmenu(){
+    $('.menu_left').animate({
+        left: "0px"
+    }, 200, function(){
+        menu = 1;
+    });
+    $('.btn_toogle').animate({
+        right: "20px"
+    }, 400);
+}
+function hidemenu(){
+    $('.menu_left').animate({
+        left: "-220px"
+    }, 200, function(){
+        menu = 0;
+    });
+    $('.btn_toogle').animate({
+        right: "-50px"
+    }, 400);
+}
+function tooglemenu(){
+    if(menu == 0)
+        showmenu();
+    if(menu == 1)
+        hidemenu();
+}
+function show_modal(clase){
+    $('.modal').hide();
+    $('.modals, .'+clase).show();
+    modal = 1;
+}
+function hide_modal(){
+    modal = 0;
+    mostrar_preguntas = [];
+    $('.modals').hide();
+    $('.modals .cont_modals').find('.modal').each(function(){
+        $(this).hide();
+        if($(this).hasClass('modal_carta') || $(this).hasClass('modal_productos_promo') || $(this).hasClass('modal_pregunta_productos') || $(this).hasClass('modal_pagina')){
+            $(this).find('h1').html("");
+            $(this).find('h2').html("");
+            $(this).find('.info_modal').html("");
+        }
+        if($(this).hasClass('modal_carro')){
+            //close_pedido();
+        }
+    });
+}
+function proceso(categorias, preguntas){
+
+    var carro = get_carro();
+    for(var i=0, ilen=carro.length; i<ilen; i++){
+        if(!carro[i].id_pro && categorias){
+            seleccionar_productos_categoria_promo(i);
+            return false;
+        }else{
+            if(tiene_pregunta(carro[i]) && preguntas){
+                mostrar_pregunta(i);
+                return false;
+            }
+        }
+    }
+    return true;
+    
 }
 function paso_2(){
-    var pedido = get_pedido();
-    if(pedido.despacho !== null){
-        $('.acc_paso2').show();
-        if(pedido.despacho == 0){
-            $('.direccion_opciones').find('.dir_op').eq(0).addClass('dir_op_select');
-            $('.direccion_opciones').find('.dir_op').eq(0).find('.stitle').html(pedido.local_nombre);
+
+    paso = 2;
+    if(proceso(true, true) && cantidad > 0){
+        if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){            
+            show_modal('paso_02');
         }else{
-            $('.direccion_opciones').find('.dir_op').eq(0).removeClass('dir_op_select');
-            $('.direccion_opciones').find('.dir_op').eq(0).find('.stitle').html('Sin Costo');
+            if(data.config.retiro_local == 1){
+                show_modal('paso_02a');
+            }
+            if(data.config.despacho_domicilio == 1){
+                show_despacho();
+            }
         }
-        if(pedido.despacho == 1){
-            $('.direccion_opciones').find('.dir_op').eq(1).addClass('dir_op_select');
-            $('.direccion_opciones').find('.dir_op').eq(1).find('.stitle').html(pedido.direccion);
-        }else{
-            $('.direccion_opciones').find('.dir_op').eq(1).removeClass('dir_op_select');
-            $('.direccion_opciones').find('.dir_op').eq(1).find('.stitle').html('Desde $1.000');
-        }
-    }else{
-        $('.acc_paso2').hide();
-        $('.direccion_opciones').find('.dir_op').eq(0).removeClass('dir_op_select');
-        $('.direccion_opciones').find('.dir_op').eq(0).find('.stitle').html('Sin Costo');
-        $('.direccion_opciones').find('.dir_op').eq(1).removeClass('dir_op_select');
-        $('.direccion_opciones').find('.dir_op').eq(1).find('.stitle').html('Desde $1.000');
     }
-    $('.paso_01').hide();
-    $('.paso_02').show();
+    
 }
 function paso_3(){
-    
-    var pedido = get_pedido();
-    if(pedido.despacho !== null){
-        var total = parseInt(pedido.total) + parseInt(pedido.costo);
-
-        if(pedido.despacho == 0){
-            $('.fs_dire').hide();
-        }
-        if(pedido.despacho == 1){
-            $('.fs_dire').show();
-            $('.render_dir').html(pedido.calle+" "+pedido.num);
-        }
-
-        $('.fin_pedido .fin_dll_price').html(formatNumber.new(parseInt(pedido.total), "$"));
-        $('.fin_despacho .fin_dll_price').html(formatNumber.new(parseInt(pedido.costo), "$"));
-        $('.fin_total .fin_dll_price').html(formatNumber.new(total, "$"));
-
-        $('.paso_02').hide();
-        $('.paso_03').show();
-    }else{
-        
-    }
-    
+    paso = 3;
+    show_modal('paso_03');
 }
 function paso_4(){
     
     document.getElementById("enviar_cotizacion").disabled = true;
     
     var pedido = get_pedido();
-    pedido.nombre = $('.pedido_nombre').val();
-    pedido.telefono = $('.pedido_telefono').val();
-    pedido.depto = $('.pedido_depto').val();
+    pedido.nombre = $('#pedido_nombre').val();
+    pedido.telefono = $('#pedido_telefono').val();
+    pedido.despacho_domicilio.depto = $('#pedido_depto').val();
 
-    pedido.gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
-    pedido.wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
-    pedido.embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
-    pedido.palitos = $('#pedido_palitos').val();
+    pedido.preguntas = {};
+    pedido.preguntas.gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
+    pedido.preguntas.wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
+    pedido.preguntas.embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
+    pedido.preguntas.palitos = $('#pedido_palitos').val();
+    pedido.comentarios = $('#pedido_comentarios').html();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
+    
+    
     $.ajax({
-        url: "/ajax/index.php",
+        url: "http://localhost/restaurants/ajax/index.php",
         type: "POST",
         data: send,
         success: function(info){
-            
+
             var data = JSON.parse(info);
             console.log(data);
+            
             if(data.op == 1){
-                
+
+                pedido = {};
                 pedido.id_ped = data.id_ped;
                 pedido.pedido_code = data.pedido_code;
-                pedido.position_lat = data.position_lat;
-                pedido.position_lng = data.position_lng;
-                
+                pedido.fecha = new Date().getTime();
                 set_pedido(pedido);
-                open_socket(pedido);
-                
-                $('.paso_03').hide();
-                $('.paso_04').show();
                 document.getElementById("enviar_cotizacion").disabled = false;
                 
             }else{
@@ -219,50 +680,34 @@ function paso_4(){
     });
     
 }
-
-function select_local(id, nombre){
-    
-    var pedido = get_pedido();
-    pedido.despacho = 0;
-    pedido.id_loc = id;
-    pedido.local_nombre = nombre;
-    pedido.costo = 0;
-    set_pedido(pedido);
-    paso_3();
-
+function show_locales(){
+    show_modal('paso_02a');
 }
-
-var marker_pos;
-function open_socket(pedido){
-    
-    var pedido = get_pedido();
-    console.log(pedido);
-    
-    var myLatlng = new google.maps.LatLng(pedido.position_lat, pedido.position_lng);
-    var mapOptions = {
-        zoom: 18,
-        center: myLatlng,
-        mapTypeId: 'roadmap',
-        disableDefaultUI: true
+function show_despacho(){
+    if(map_init == 0){
+        initMap();
     }
-    var map = new google.maps.Map(document.getElementById("mapa_posicion"), mapOptions);
-    marker_pos = new google.maps.Marker({
-        position: myLatlng,
-        map: map
-    });
-
-    var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
-    var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
-    
-    socket.on('pedido-'+pedido.pedido_code, function(data){
-        $('.info_modal_pedido .estado').html("Estado: "+estados[data.estado % estados.length]); 
-    });
-    socket.on('pedido-pos-'+pedido.pedido_code, function(data) {
-        marker_pos.setPosition( new google.maps.LatLng( data.lat, data.lng ) );
-    });
-    
+    show_modal('paso_02b');
 }
-
+var formatNumber = {
+    separador: ".", // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear:function (num){
+        num +='';
+        var splitStr = num.split('.');
+        var splitLeft = splitStr[0];
+        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+        var regx = /(\d+)(\d{3})/;
+        while (regx.test(splitLeft)) {
+            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+        }
+        return this.simbol + splitLeft +splitRight;
+    },
+    new: function(num, simbol){
+        this.simbol = simbol ||'';
+        return this.formatear(num);
+    }
+}
 function initMap(){
     
     map_init = 1;
@@ -312,33 +757,30 @@ function initMap(){
                 
                 var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
-                    url: "/ajax/index.php",
+                    url: "http://localhost/restaurants/ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
                         
-                        console.log("DESPACHO DOMICILIO");
-                        console.log(datas);
-                        
-                        var data = JSON.parse(datas);
-
+                        var data = JSON.parse(datas);                        
                         if(data.op == 1){
 
                             var pedido = get_pedido();
-                            pedido.id_loc = data.id_loc;
-                            pedido.costo = data.precio;
                             pedido.despacho = 1;
-                            pedido.lat = places[0].geometry.location.lat();
-                            pedido.lng = places[0].geometry.location.lng();
-                            pedido.direccion = places[0].formatted_address;
-                            pedido.num = num;
-                            pedido.calle = calle;
-                            pedido.comuna = comuna;
+                            pedido.despacho_domicilio.lat = places[0].geometry.location.lat();
+                            pedido.despacho_domicilio.lng = places[0].geometry.location.lng();
+                            pedido.despacho_domicilio.direccion = places[0].formatted_address; 
+                            pedido.despacho_domicilio.calle = calle;
+                            pedido.despacho_domicilio.num = num;
+                            pedido.despacho_domicilio.comuna = comuna;     
+                            pedido.despacho_domicilio.id_loc = data.id_loc;
+                            pedido.despacho_domicilio.costo = data.precio;
+                            
                             set_pedido(pedido);
-                            paso_3();
+                            paso_3_despacho();
                             
                         }else{
-                            alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias")
+                            alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                         }
                         
                     }, error: function(e){
@@ -389,4 +831,106 @@ function initMap(){
         map.fitBounds(bounds);
     });
 
+}
+function map_local(id, lat, lng){    
+    $('#lmap-'+id).toggle();
+    if(maps.indexOf(id) == -1){
+        init_map_local(id, lat, lng);
+        maps.push(id);
+    }
+}
+function init_map_local(id, lat, lng){
+    
+    var map_local = new google.maps.Map(document.getElementById('lmap-'+id), {
+        center: {lat: lat, lng: lng},
+        zoom: 15,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true
+    });
+    
+    var myLatLng = { lat: lat, lng: lng };
+    
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map_local
+    });
+    
+}
+function select_local(id, nombre, direccion){
+    
+    var pedido = get_pedido();
+    pedido.despacho = 0;
+    pedido.retiro_local.id_loc = id;
+    pedido.retiro_local.local_nombre = nombre;
+    pedido.retiro_local.local_direccion = direccion;
+    set_pedido(pedido);
+    
+    selecciono_retiro(nombre, direccion, pedido.total);
+    paso_3();
+    
+}
+function paso_3_despacho(){
+    
+    var pedido = get_pedido();
+    
+    if(pedido.despacho_domicilio.lat != 0 && pedido.despacho_domicilio.lng != 0){
+        
+        pedido.despacho = 1;
+        set_pedido(pedido);
+        var total = pedido.despacho_domicilio.costo + pedido.total;
+        selecciono_despacho(pedido.despacho_domicilio.calle, pedido.despacho_domicilio.num, pedido.despacho_domicilio.costo, total);
+        paso_3();
+        
+    }
+    
+}
+function selecciono_retiro(nombre, direccion, total){
+    
+    var dir_ops = $('.direccion_opciones').find('.dir_op');
+        
+    dir_ops.eq(0).addClass('selected');
+    dir_ops.eq(0).find('.stitle').html(nombre+": "+direccion);
+
+    dir_ops.eq(1).removeClass('selected');
+    dir_ops.eq(1).find('.stitle').html("Desde "+formatNumber.new(parseInt(data.config.desde), "$"));
+    
+    $('.acc_paso2').show();
+    $('.paso_03_costo').html('');
+    $('.paso_03_total').html('Total: '+formatNumber.new(parseInt(total), "$"));
+    $('.block_direccion').hide();
+    
+}
+function selecciono_despacho(calle, num, costo, total){
+    
+    var dir_ops = $('.direccion_opciones').find('.dir_op');
+
+    dir_ops.eq(0).removeClass('selected');
+    dir_ops.eq(0).find('.stitle').html("Sin Costo");
+
+    dir_ops.eq(1).addClass('selected');
+    dir_ops.eq(1).find('.stitle').html(calle+" "+num+": "+formatNumber.new(parseInt(costo), "$"));
+    
+    $('.acc_paso2').show();
+    $('.paso_03_costo').html('Despacho: '+formatNumber.new(parseInt(costo), "$"));
+    $('.paso_03_total').html('Total: '+formatNumber.new(parseInt(total), "$"));
+    $('.block_direccion').show();
+    
+}
+function obj_pedido(){
+        
+    var pedido = { 
+        id_ped: 0,
+        pedido_code: '',
+        fecha: null, 
+        despacho: null,
+        nombre: '',
+        telefono: '',
+        retiro_local: { id_loc: 0, local_nombre: '', local_direccion: '' },
+        despacho_domicilio: { id_loc: 0, calle: '', num: 0, depto: '', comuna: '', direccion: '', lat: 0, lng: 0, costo: 0 },
+        preguntas: { gengibre: 0, wasabi: 0, embarazadas: 0, palitos: 0 },
+        comentarios: '',
+        total: 0
+    }
+    return pedido;
+    
 }

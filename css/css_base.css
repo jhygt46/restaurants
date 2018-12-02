@@ -178,6 +178,15 @@ body .contenedor .modals .cont_modals .modal .cont_modal .cont_info {
   overflow-y: auto;
   z-index: 1;
 }
+body .contenedor .modals .cont_modals .modal .cont_modal .sub_total {
+  position: absolute;
+  z-index: 2;
+}
+body .contenedor .modals .cont_modals .modal .cont_modal .sub_total .cont_subtotal {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
   width: 100%;
   position: absolute;
@@ -213,17 +222,27 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .modal_productos_promo .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_nombre {
   float: left;
 }
-.paso_01 .process_carro .process_carro_promo .promo_info .promo_detalle .promo_detalle_item .promo_detalle_nombre {
+.paso_01 .process_carro .process_carro_promo {
+  position: relative;
+}
+.paso_01 .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_nombre {
   float: left;
 }
-.paso_01 .process_carro .process_carro_promo .promo_info .promo_detalle .promo_detalle_item .promo_detalle_acciones {
+.paso_01 .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones {
   float: left;
 }
-.paso_01 .process_carro .process_carro_promo .promo_info .promo_detalle .promo_detalle_item .promo_detalle_acciones .accion {
+.paso_01 .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .accion {
   float: left;
 }
-.paso_01 .process_carro .process_carro_promo .promo_info .promo_detalle .promo_detalle_item .promo_detalle_acciones .precio {
+.paso_01 .process_carro .process_carro_promo .promo_detalle .promo_detalle_item .promo_detalle_acciones .precio {
   float: left;
+}
+.paso_01 .process_carro .process_carro_promo .promo_delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
 }
 .paso_01 .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_nombre {
   float: left;
@@ -237,6 +256,9 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .paso_01 .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .precio {
   float: left;
 }
+.paso_01 .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .pregunta {
+  float: left;
+}
 .paso_02 .cont_direccion {
   height: 100%;
 }
@@ -246,47 +268,91 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .paso_02 .cont_direccion .direccion_opciones .dir_op .stitle {
   display: block;
 }
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info {
-  float: left;
-}
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title {
-  display: block;
-}
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle {
-  display: block;
-}
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa {
-  float: left;
-}
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .lmap {
-  display: none;
-}
-.paso_02 .cont_direccion .direccion_op2 {
+.paso_02a .cont_direccion {
   height: 100%;
 }
-.paso_02 .cont_direccion .direccion_op2 #pac-input {
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info {
+  float: left;
+}
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title {
+  display: block;
+}
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle {
+  display: block;
+}
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa {
+  float: left;
+}
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .lmap {
+  display: none;
+}
+
+.paso_02b .cont_direccion {
+  height: 100%;
+}
+.paso_02b .cont_direccion .direccion_op2 {
+  height: 100%;
+}
+.paso_02b .cont_direccion .direccion_op2 #pac-input {
   margin: 1%;
   width: 97%;
   height: 40px;
 }
-.paso_02 .cont_direccion .direccion_op2 #map_direccion {
+.paso_02b .cont_direccion .direccion_op2 #map_direccion {
+  height: 100%;
+}
+.paso_02b .info_modal {
   height: 100%;
 }
 
-.paso_03 .cont_final .final_section .fs_inputs .fs_in {
+.paso_03 .cont_final .block_direccion {
+  display: block;
+}
+.paso_03 .cont_final .block_direccion li {
   float: left;
 }
-.paso_03 .cont_final .final_section .fs_inputs2 .fs_in {
+.paso_03 .cont_final .block_direccion li h1 {
+  display: block;
+  font-size: 12px;
+}
+.paso_03 .cont_final .block_direccion li h2 {
+  display: block;
+  font-size: 16px;
+  height: 30px;
+  width: calc(100% - 2px);
+  padding-top: 3px;
+}
+.paso_03 .cont_final .block_direccion li input {
+  width: calc(100% - 2px);
+  margin-right: 2px;
+  border: 0px;
+  height: 30px;
+}
+.paso_03 .cont_final .block_nombre_telefono {
+  display: block;
+}
+.paso_03 .cont_final .block_nombre_telefono li {
   float: left;
 }
-.paso_03 .cont_final .final_section .fs_inputs3 .fs_in {
+.paso_03 .cont_final .block_nombre_telefono input {
+  width: calc(100% - 3px);
+  margin-right: 3px;
+  border: 0px;
+  height: 30px;
+}
+.paso_03 .cont_final .block_nombre_telefono h1 {
+  display: block;
+  font-size: 12px;
+}
+.paso_03 .cont_final .block_preguntas {
+  display: block;
+}
+.paso_03 .cont_final .block_preguntas h1 {
+  display: block;
+  font-size: 12px;
+}
+.paso_03 .cont_final .block_preguntas .preguntas .pregunta li {
   float: left;
-}
-.paso_03 .cont_final .final_section .fin_detalle .fin_dll_name {
-  float: right;
-}
-.paso_03 .cont_final .final_section .fin_detalle .fin_dll_price {
-  float: right;
 }
 
 .hide {

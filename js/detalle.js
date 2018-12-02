@@ -1,5 +1,29 @@
 $(document).ready(function(){
     render_items(carro);
+    /*
+    console.log(pedido);
+    console.log(carro);
+    console.log(promos);
+    */
+    var total_process = 0;
+    
+    for(var i=0, ilen=carro.length; i<ilen; i++){
+        total_process = total_process + parseInt(get_producto(carro[i].id_pro).precio);
+    }
+    
+    console.log(costo);
+    console.log(total_process);
+    console.log(total);
+    
+    if(costo + total_process == total){
+        // GREAT
+        console.log("GREAT");
+    }else{
+        // OCURRIO UN ERROR
+        console.log("ERROR");
+    }
+    
+    
 });
 
 function create_item(item){

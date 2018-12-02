@@ -1,0 +1,62 @@
+.detalle {
+    width: 100%;
+    .txtcen { 
+        text-align: center;
+    }
+    .font_01 {
+        font-size: 30px;
+    }
+    .font_02 {
+        font-size: 20px;
+    }
+    .font_03 {
+        font-size: 16px;
+    }
+    .font_04 {
+        font-size: 14px;
+    }
+    .font_05 {
+        font-size: 12px;
+    }
+    .font_06 {
+        font-size: 27px;
+    }
+    .padding_01 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .padding_02 {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .borbottom {
+        border-bottom: 1px solid #000;
+    }
+    .strong {
+        font-weight: bold;
+    }
+    .pddtop_01{
+        padding-top: 8px;
+    }
+    .titulo {
+        
+    }
+    .lista_de_productos {
+        .producto {
+            .nombre {
+                text-align: center;
+                font-size: 16px;
+            }
+            .pregunta {
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+    }
+    .contacto {
+        
+    }
+    .total {
+        
+    }
+}

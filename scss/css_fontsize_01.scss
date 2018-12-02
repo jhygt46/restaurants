@@ -121,8 +121,8 @@ body {
     .cont_modal {
         .titulo {
             .cont_titulo {
-                h1 { font-size: 18px }
-                h2 { font-size: 16px }
+                h1 { font-size: 22px }
+                h2 {}
             }
         }
         .close {}
@@ -167,38 +167,53 @@ body {
     .process_carro{
         .process_carro_promo {
             .promo_info {
-                font-size: 18px;
-                .promo_detalle {
-                    .promo_detalle_item {
-                        .promo_detalle_nombre{
-                            font-size: 13px;
+                font-size: 26px;
+            }
+            .promo_precio {
+                font-size: 20px;
+            }
+            .promo_detalle {
+                .promo_detalle_item {
+                    .promo_detalle_nombre{
+                        font-size: 12px;
+                    }
+                    .promo_detalle_acciones {
+                        .accion {
+                            font-size: 22px;
                         }
-                        .promo_detalle_acciones {
-                            .accion {
-                            }
-                            .precio {
-                                font-size: 13px;
-                            }
+                        .precio {
+                            font-size: 13px;
                         }
                     }
                 }
+            }
+            .promo_delete {
+                
             }
         }
         .process_carro_restantes {
             .restantes_detalle_item {
                 .restantes_detalle_nombre { 
-                    font-size: 12px;
+                    font-size: 13px;
                 }
                 .restantes_detalle_acciones {
                     .accion {}
                     .precio {
-                        font-size: 13px;
+                        font-size: 16px;
                     }
+                    .pregunta {}
                 }
             }
         }
         .process_carro_precio_carta {
             font-size: 40px;
+        }
+    }
+    .sub_total{
+        .cont_subtotal {
+            .total_detalle {
+                li { font-size: 28px; }
+            }
         }
     }
 }
@@ -216,6 +231,17 @@ body {
             .dir_op_select {
             }
         }
+    }
+    .sub_total{
+        .cont_subtotal {
+            .total_detalle {
+                li { font-size: 14px; }
+            }
+        }
+    }
+}
+.paso_02a {
+    .cont_direccion{
         .direccion_op1{
             .dir_locales{
                 .cont_local{
@@ -234,6 +260,10 @@ body {
                 .lmap {}
             }
         }
+    }
+}
+.paso_02b {
+    .cont_direccion{
         .direccion_op2 {
             #pac-input {}
             #map_direccion {}
@@ -242,52 +272,38 @@ body {
 }
 .paso_03 {
     .cont_final{
-        .final_section {
-            .fs_ttl_01 {
-                font-size: 14px;
+        .block_direccion {
+            
+        }
+        .block_nombre_telefono {
+            
+        }
+        .block_preguntas{
+            h1 {
+                font-size: 12px;
             }
-            .fs_ttl_02 {
-                font-size: 22px;
-            }
-            .fs_inputs {
-                .fs_in {
-                    .fsin_ttl {}
-                    .fsin_in {
-                        input[type="text"] {}
+            .preguntas {
+                .pregunta {
+                    li.pre_nom {
+                        font-size: 14px;
+                    }
+                    li.pre_input {
                     }
                 }
             }
-            .fs_inputs2 {
-                .fs_in {
-                    .fsin_ttl {
-                        font-size: 16px;
-                    }
-                    .fsin_in {
-                        input[type="checkbox"] {}
-                    }
+        }
+    }
+    .sub_total{
+        .cont_subtotal {
+            .total_detalle {
+                li {
+                    
                 }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
-            }
-            .fs_inputs3 {
-                .fs_in {
-                    font-size: 16px;
-                    .fsin_ttl {
-                        select {}
-                    }
-                }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
-            }
-            .fin_detalle {
-                .fin_pedido {}
-                .fin_despacho {}
-                .fin_total {}
-                .fin_dll_name {
+                .paso_03_costo{
                     font-size: 14px;
                 }
-                .fin_dll_price {
-                    font-size: 14px;
+                .paso_03_total{
+                    font-size: 28px;
                 }
             }
         }
@@ -316,6 +332,7 @@ body {
                         .cont_info {
                             .info_modal {}
                         }
+                        
                         .acciones {
                             .confirmar{}
                         }

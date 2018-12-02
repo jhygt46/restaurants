@@ -22,9 +22,6 @@ class Rest{
         if($accion == "despacho_domicilio"){
             return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
-        if($accion == "enviar_pedido"){
-            return $this->enviar_pedido();
-        }
         if($accion == "crear_dominio"){
             return $this->crear_dominio();
         }
@@ -111,67 +108,61 @@ class Rest{
         $aux_pedido = json_decode($_POST['pedido']);
         $nombre = $aux_pedido->{'nombre'};
         $telefono = $aux_pedido->{'telefono'};
-
-        if($nombre != "" && $telefono != "+569 "){
+        $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
         
-            $id_loc = $aux_pedido->{'id_loc'};
-            $pedido['pedido']['despacho'] = $aux_pedido->{'despacho'};
-            $pedido['pedido']['total'] = $aux_pedido->{'total'};
-            $pedido['pedido']['carro'] = json_decode($_POST['carro']);
-            $pedido['pedido']['promos'] = json_decode($_POST['promos']);
-            $pedido['nombre'] = $nombre;
-            $pedido['telefono'] = $telefono;
+        if($nombre != "" && $telefono != "+569 "){
             
-            $wasabi = $aux_pedido->{'wasabi'};
-            $gengibre = $aux_pedido->{'gengibre'};
-            $embarazadas = $aux_pedido->{'embarazadas'};
-            $palitos = $aux_pedido->{'palitos'};
+            $verify_despacho = 0;
+            $verify_direccion = 0;
+            $precision = 0.001;
             
-            $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_insert = $this->con->sql("INSERT INTO pedidos (code, fecha, despacho, total, aux_02, aux_03, id_loc, nombre, telefono, wasabi, gengibre, embarazada, palitos) VALUES ('".$pedido_code."', now(), '".$pedido['pedido']['despacho']."', '".$pedido['pedido']['total']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$id_loc."', '".$nombre."', '".$telefono."', '".$wasabi."', '".$gengibre."', '".$embarazadas."', '".$palitos."')");
+            if($aux_pedido->{'despacho'} == 0){
+                
+                $id_loc = $aux_pedido->{'retiro_local'}->{'id_loc'};
+                $verify_despacho = 1;
+                
+            }
+            if($aux_pedido->{'despacho'} == 1){
+                
+                $id_loc = $aux_pedido->{'despacho_domicilio'}->{'id_loc'};
+                $costo = $aux_pedido->{'despacho_domicilio'}->{'costo'};
+                
+                $geocode = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($aux_pedido->{'despacho_domicilio'}->{'direccion'})."&key=".$key));
+                if($geocode->{'status'} == "OK"){
+                    $dif_lat = $aux_pedido->{'despacho_domicilio'}->{'lat'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+                    $dif_lng = $aux_pedido->{'despacho_domicilio'}->{'lng'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+                    if($dif_lat < $precision && $dif_lng < $precision){
+                        $verify_direccion = 1;
+                    }
+                }
+
+                $aux_verify = $this->get_info_despacho($aux_pedido->{'despacho_domicilio'}->{'lat'}, $aux_pedido->{'despacho_domicilio'}->{'lng'});
+                if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
+                    $verify_despacho = 1;
+                }
+                
+            }
+            
+            $locales = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."'");
+            
+            $pedido['pedido']['pedido_code'] = bin2hex(openssl_random_pseudo_bytes(10));
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido['pedido']['pedido_code']."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
+            
+            $id_ped = $pedido_sql['insert_id'];
             
             $info['op'] = 1;
-            $info['id_ped'] = $pedido_insert['insert_id'];
-            $info['pedido_code'] = $pedido_code;
-
-            $info_local = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$aux_pedido->{'id_loc'}."' AND t1.id_gir=t2.id_gir");
-
-            $pedido['local_code'] = $info_local['resultado'][0]['code'];
-            $info['position_lat'] = $info_local['resultado'][0]['lat'];
-            $info['position_lng'] = $info_local['resultado'][0]['lng'];
-
-            $pedido['pedido']['id_ped'] = $info['id_ped'];
-            $pedido['pedido']['pedido_code'] = $pedido_code;
-            $pedido['pedido']['tipo'] = 1;
-            $pedido['pedido']['estado'] = 0;
-
-            if($pedido['pedido']['despacho'] == 0){
-
-                $pedido['pedido']['costo'] = 0;
-                $pedido['pedido']['direccion'] = "Retiro en Local";
-                $this->con->sql("UPDATE pedidos SET costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
-
-            }
-            if($pedido['pedido']['despacho'] == 1){
-
-                $pedido['pedido']['lat'] = $aux_pedido->{'lat'};
-                $pedido['pedido']['lng'] = $aux_pedido->{'lng'};
-                $pedido['pedido']['direccion'] = $aux_pedido->{'direccion'};
-                $pedido['pedido']['calle'] = $aux_pedido->{'calle'};
-                $pedido['pedido']['num'] = $aux_pedido->{'num'};
-                $pedido['pedido']['depto'] = $aux_pedido->{'depto'};
-                $pedido['pedido']['comuna'] = $aux_pedido->{'comuna'};
-                $pedido['pedido']['costo'] = $aux_pedido->{'costo'};
-                $this->con->sql("UPDATE pedidos SET lat='".$pedido['pedido']['lat']."', lng='".$pedido['pedido']['lng']."', direccion='".$pedido['pedido']['direccion']."', num='".$pedido['pedido']['num']."', calle='".$pedido['pedido']['calle']."', depto='".$pedido['pedido']['depto']."', comuna='".$pedido['pedido']['comuna']."', costo='".$pedido['pedido']['costo']."' WHERE id_ped='".$pedido['pedido']['id_ped']."'");
-
-            }
+            $info['id_ped'] = $pedido_sql['insert_id'];
+            $info['pedido_code'] = $pedido['pedido']['pedido_code'];
+            $info['id_loc'] = $id_loc;
+            $info['despacho'] = $aux_pedido->{'despacho'};
             
-            //ENVIAR MAIL //
+            
             $pedido['accion'] = 'enviar_pedido_local';
             $pedido['hash'] = 'hash';
             $pedido['correo'] = $info_local['resultado'][0]['correo'];
             $pedido['numero'] = $info['id_ped'];
             $pedido['dominio'] = $info_local['resultado'][0]['dominio'];
+            $pedido['pedido']['id_ped'] = $id_ped;
             
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
@@ -206,8 +197,8 @@ class Rest{
             if($is == "inside"){
                 if($precio > $polygon['precio']){
                     $info['op'] = 1;
-                    $info['id_loc'] = $polygon['id_loc'];
-                    $info['precio'] = $polygon['precio'];
+                    $info['id_loc'] = intval($polygon['id_loc']);
+                    $info['precio'] = intval($polygon['precio']);
                     $precio = $polygon['precio'];
                 }
             }
@@ -217,11 +208,9 @@ class Rest{
         
     }
     public function get_polygons(){
-        
-        $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+        $referer = (parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) == "localhost") ? "www.mikasushi.cl" : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
         $polygons = $this->con->sql("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0' AND t3.eliminado='0'");
         return $polygons['resultado'];
-        
     }
     public function pointOnVertex($point, $vertices) {
         foreach($vertices as $vertex) {

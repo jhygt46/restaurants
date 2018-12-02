@@ -189,14 +189,19 @@ body {
         .process_carro_promo {
             background: $modal-paso01-promo;
             .promo_info {
-                .promo_detalle {
-                    .promo_detalle_item {
-                        .promo_detalle_nombre{
-                        }
-                        .promo_detalle_acciones {
-                            .accion {}
-                            .precio {}
-                        }
+                
+            }
+            .promo_precio {
+                
+            }
+            .promo_detalle {
+                .promo_detalle_item {
+                    .promo_detalle_nombre{
+                    }
+                    .promo_detalle_acciones {
+                        .accion {}
+                        .precio {}
+                        .pregunta {}
                     }
                 }
             }

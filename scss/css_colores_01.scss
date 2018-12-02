@@ -224,7 +224,14 @@ body {
             }
             .dir_op_select {
             }
+            .selected {
+                background: #fcc;
+            }
         }
+    }
+}
+.paso_02a {
+    .cont_direccion{
         .direccion_op1{
             .dir_locales{
                 .cont_local{
@@ -242,6 +249,10 @@ body {
                 .lmap {}
             }
         }
+    }
+}
+.paso_02b {
+    .cont_direccion{
         .direccion_op2 {
             #pac-input {}
             #map_direccion {}
@@ -249,45 +260,21 @@ body {
     }
 }
 .paso_03 {
-    .cont_final{
-        .final_section {
-            .fs_ttl_01 {}
-            .fs_ttl_02 {}
-            .fs_inputs {
-                .fs_in {
-                    .fsin_ttl {}
-                    .fsin_in {
-                        input[type="text"] {}
-                    }
-                }
+    .cont_final {
+        .block_direccion {
+            
+        }
+        .block_nombre_telefono {
+            
+        }
+        .block_preguntas {
+            h1 {
             }
-            .fs_inputs2 {
-                background: #ccc;
-                .fs_in {
-                    .fsin_ttl {}
-                    .fsin_in {
-                        input[type="checkbox"] {}
-                    }
+            .preguntas {
+                background: #ddd;
+                .pregunta {
+                    
                 }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
-            }
-            .fs_inputs3 {
-                background: #ccc;
-                .fs_in {
-                    .fsin_ttl {
-                        select {}
-                    }
-                }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
-            }
-            .fin_detalle {
-                .fin_pedido {}
-                .fin_despacho {}
-                .fin_total {}
-                .fin_dll_name {}
-                .fin_dll_price {}
             }
         }
     }

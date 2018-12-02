@@ -52,14 +52,15 @@ body .contenedor .modals .cont_modals .modal .cont_modal .cont_info {
 .paso_02 .cont_direccion .direccion_opciones .dir_op {
   background: #ccc;
 }
-.paso_02 .cont_direccion .direccion_op1 .dir_locales .cont_local {
+.paso_02 .cont_direccion .direccion_opciones .selected {
+  background: #fcc;
+}
+
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local {
   background: #ccc;
 }
-.paso_03 .cont_final .final_section .fs_inputs2 {
-  background: #ccc;
-}
-.paso_03 .cont_final .final_section .fs_inputs3 {
-  background: #ccc;
+.paso_03 .cont_final .block_preguntas .preguntas {
+  background: #ddd;
 }
 
 /*# sourceMappingURL=css_colores_01.css.map */

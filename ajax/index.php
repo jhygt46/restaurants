@@ -1,9 +1,7 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Content-type: text/json');
-header('Content-type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";

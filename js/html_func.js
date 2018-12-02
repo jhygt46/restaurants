@@ -1,8 +1,6 @@
 // IMPRIME CATEGORIAS Y PAGINAS EN HOME //
 function html_home_categorias(obj){
     
-    if(debug == 1){ console.log("html_func-> html_crear_categoria-id:"+obj.id_cae) }
-    
     var Div = document.createElement('div');
     Div.className = 'botones_principales';
     
@@ -22,7 +20,7 @@ function html_home_categorias(obj){
     }
     if(obj.precio > 0){
         var Divprecio = document.createElement('div');
-        Divprecio.innerHTML = '$'+obj.precio;
+        Divprecio.innerHTML = formatNumber.new(parseInt(obj.precio), "$");
         Divprecio.className = 'precio';
         Div.appendChild(Divprecio);
     }
@@ -42,8 +40,6 @@ function html_paginas(pagina){
 
 // HTML MODALS //
 function create_html_categorias(obj){
-    
-    if(debug == 1){ console.log("html_func-> create_html_categorias-id:"+obj.id_cae) }
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
@@ -101,8 +97,6 @@ function create_html_categorias(obj){
 }
 function create_html_producto(id, detalle){
     
-    if(debug == 1){ console.log("nombre func -> create_html_producto-id") }
-    
     var aux = get_producto(id);
     if(detalle == 0){
         
@@ -120,7 +114,7 @@ function create_html_producto(id, detalle){
         
         var precio = document.createElement('div');
         precio.className = 'precio_pro';
-        precio.innerHTML = aux.precio;
+        precio.innerHTML = formatNumber.new(parseInt(aux.precio), "$");
         detalle.appendChild(precio);
         
         Div.appendChild(detalle);
@@ -165,8 +159,6 @@ function create_html_producto(id, detalle){
     
 }
 function create_html_promocion(obj){
-    
-    if(debug == 1){ console.log("html_func-> create_html_promocion-id:"+obj.id_cae) }
     
     var Div = document.createElement('div');
     Div.className = 'categoria';
@@ -237,23 +229,38 @@ function promo_carros(producto, j){
     
     var Acciones = document.createElement('div');
     Acciones.className = 'promo_detalle_acciones clearfix';
-
-    var Precio = document.createElement('div');
-    Precio.className = 'precio';
-    Precio.innerHTML = '$'+producto.precio;
-    Acciones.appendChild(Precio);
     
-    var Accion = document.createElement('div');
-    Accion.className = 'accion material-icons';
-    Accion.innerHTML = 'close';
-    Accion.onclick = function(){ delete_pro_carro(j) };
-    Acciones.appendChild(Accion);
+    var carros = get_carro();
+    var carro = carros[j];
+    
+    if(carro.preguntas){
+        
+        var Accion = document.createElement('div');
+        Accion.className = 'accion material-icons';
+        Accion.onclick = function(){ mostrar_pregunta(j) };
+        
+        if(tiene_pregunta(carro)){
+            Accion.innerHTML = 'help_outline';
+        }else{
+            Accion.innerHTML = 'more_horiz';
+        }
+        
+        Acciones.appendChild(Accion);
+        
+    }
     
     Div.appendChild(Acciones);
     return Div;
     
 }
-function promo_restantes(producto, j){
+function pregunta(carro){
+    
+    for(var i=0, ilen=carro.preguntas.length; i<ilen; i++){
+        
+    }
+    
+}
+function promo_restantes(producto, j, tiene_pregunta){
     
     var Div = document.createElement('div');
     Div.className = 'restantes_detalle_item clearfix';
@@ -268,8 +275,25 @@ function promo_restantes(producto, j){
 
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = producto.precio;
+    Precio.innerHTML = formatNumber.new(parseInt(producto.precio), "$");
     Acciones.appendChild(Precio);
+    
+    var carros = get_carro();
+    var carro = carros[j];
+    
+    if(carro.preguntas){
+    
+        var Pregunta = document.createElement('div');
+        Pregunta.className = 'pregunta material-icons';
+        if(!tiene_pregunta){
+            Pregunta.innerHTML = 'more_horiz';
+        }else{
+            Pregunta.innerHTML = 'help_outline';
+        }
+        Pregunta.onclick = function(){ mostrar_pregunta(j) };
+        Acciones.appendChild(Pregunta);
+    
+    }
     
     var Accion = document.createElement('div');
     Accion.className = 'accion material-icons';
@@ -299,8 +323,6 @@ function promo_nombre(promocion){
 
 // PROMO DETALLE //
 function imprimir_promo_modal(categoria){
-    
-    if(debug == 1){ console.log("html_func-> imprimir_promo_modal-id:"+categoria.id_cae) }
     
     var html = document.createElement('div');
     html.className = 'lista_promociones';
@@ -434,7 +456,7 @@ function html_preguntas_producto(i){
         
         var pregunta_titulo = document.createElement('div');
         pregunta_titulo.className = 'pregunta_titulo';
-        pregunta_titulo.innerHTML = carro[i].preguntas[k].descripcion;
+        pregunta_titulo.innerHTML = carro[i].preguntas[k].nombre;
         e_pregunta.appendChild(pregunta_titulo);
         
         
@@ -450,11 +472,21 @@ function html_preguntas_producto(i){
             v_pregunta.setAttribute('data-cant', carro[i].preguntas[k].valores[m].cantidad);
 
             for(var n=0, nlen=carro[i].preguntas[k].valores[m].valores.length; n<nlen; n++){
+                
                 var n_pregunta = document.createElement('div');
-                n_pregunta.className = 'n_pregunta';
+                if(carro[i].preguntas[k].valores[m].seleccionados){
+                    if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
+                        n_pregunta.className = 'n_pregunta selected';
+                    }else{
+                        n_pregunta.className = 'n_pregunta';
+                    }
+                }else{
+                    n_pregunta.className = 'n_pregunta';
+                }
                 n_pregunta.innerHTML = carro[i].preguntas[k].valores[m].valores[n];
                 n_pregunta.onclick = function(){ select_pregunta(this) };
                 v_pregunta.appendChild(n_pregunta);
+                
             }
             
             e_pregunta.appendChild(titulo_v_pregunta);

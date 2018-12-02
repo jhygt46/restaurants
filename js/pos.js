@@ -3,6 +3,10 @@ var categoia = 0;
 var catalogo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 
+function verpedidos(){
+    console.log(pedidos);
+}
+
 function actualizar_pedidos(){
     
     var pedidos = get_pedidos();
@@ -10,7 +14,6 @@ function actualizar_pedidos(){
     pedidos.forEach(function(pedido, index){
         $('.lista_pedidos').append(html_home_pedidos(pedido, index));
     });
-    
     
 }
 function socket_init(){

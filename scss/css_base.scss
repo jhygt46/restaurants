@@ -187,7 +187,18 @@ body {
                             height: 100%;
                             overflow-y: auto;
                             z-index: 1;
-                            .info_modal {}
+                            .info_modal {
+                                
+                            }
+                        }
+                        .sub_total {
+                            position: absolute;
+                            z-index: 2;
+                            .cont_subtotal {
+                                width: 100%;
+                                height: 100%;
+                                position: relative;
+                            }
                         }
                         .acciones {
                             width: 100%;
@@ -377,23 +388,35 @@ body {
 .paso_01 {
     .process_carro{
         .process_carro_promo {
+            position: relative;
             .promo_info {
-                .promo_detalle {
-                    .promo_detalle_item {
-                        .promo_detalle_nombre{
+                
+            }
+            .promo_precio {
+                
+            }
+            .promo_detalle {
+                .promo_detalle_item {
+                    .promo_detalle_nombre{
+                        float: left;
+                    }
+                    .promo_detalle_acciones {
+                        float: left;
+                        .accion {
                             float: left;
                         }
-                        .promo_detalle_acciones {
+                        .precio {
                             float: left;
-                            .accion {
-                                float: left;
-                            }
-                            .precio {
-                                float: left;
-                            }
                         }
                     }
                 }
+            }
+            .promo_delete {
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                width: 30px;
+                height: 30px;
             }
         }
         .process_carro_restantes {
@@ -407,6 +430,9 @@ body {
                         float: left;
                     }
                     .precio {
+                        float: left;
+                    }
+                    .pregunta {
                         float: left;
                     }
                 }
@@ -430,6 +456,11 @@ body {
             .dir_op_select {
             }
         }
+    }
+}
+.paso_02a {
+    .cont_direccion{
+        height: 100%;
         .direccion_op1{
             .dir_locales{
                 .cont_local{
@@ -452,6 +483,11 @@ body {
                 }
             }
         }
+    }
+}
+.paso_02b {
+    .cont_direccion{
+        height: 100%;
         .direccion_op2 {
             height: 100%;
             #pac-input {
@@ -464,57 +500,62 @@ body {
             }
         }
     }
+    .info_modal {
+        height: 100%;
+    }
 }
 .paso_03 {
     .cont_final{
-        .final_section {
-            .fs_ttl_01 {}
-            .fs_ttl_02 {}
-            .fs_inputs {
-                .fs_in {
-                    float: left;
-                    .fsin_ttl {}
-                    .fsin_in {
-                        input[type="text"] {}
-                    }
+        .block_direccion{
+            display: block;
+            li {
+                float: left;
+                h1 {
+                    display: block;
+                    font-size: 12px;
+                }
+                h2 {
+                    display: block;
+                    font-size: 16px;
+                    height: 30px;
+                    width: calc(100% - 2px);
+                    padding-top: 3px;
+                }
+                input {
+                    width: calc(100% - 2px);
+                    margin-right: 2px;
+                    border: 0px;
+                    height: 30px;
                 }
             }
-            .fs_inputs2 {
-                .fs_in {
-                    float: left;
-                    .fsin_ttl {}
-                    .fsin_in {
-                        input[type="checkbox"] {}
-                    }
-                }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
+        }
+        .block_nombre_telefono {
+            display: block;
+            li {
+                float: left;
             }
-            .fs_inputs3 {
-                .fs_in {
-                    float: left;
-                    .fsin_ttl {
-                        select {}
-                    }
-                }
-                .fs_in:nth-child(1){}
-                .fs_in:nth-child(2){}
+            input {
+                width: calc(100% - 3px);
+                margin-right: 3px;
+                border: 0px;
+                height: 30px;
             }
-            .fin_detalle {
-                .fin_pedido {
-
-                }
-                .fin_despacho {
-
-                }
-                .fin_total {
-
-                }
-                .fin_dll_name {
-                    float: right;
-                }
-                .fin_dll_price {
-                    float: right;
+            h1 {
+                display: block;
+                font-size: 12px;
+            }
+        }
+        .block_preguntas{
+            display: block;
+            h1 {
+                display: block;
+                font-size: 12px;
+            }
+            .preguntas {
+                .pregunta {
+                    li {
+                        float: left;
+                    }
                 }
             }
         }
