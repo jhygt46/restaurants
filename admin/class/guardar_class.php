@@ -267,7 +267,7 @@ class Guardar extends Core{
         
         if($id == 0){
             
-            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1')");
+            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
             $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$aux['insert_id']."')");
             
             $info['op'] = 1;
