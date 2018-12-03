@@ -8,11 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }else{
     $path = "/var/www/html/restaurants/";
 }
-/*
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-*/
+
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 $list = $fireapp->get_giros_user();

@@ -266,20 +266,27 @@ class Guardar extends Core{
         $code = bin2hex(openssl_random_pseudo_bytes(10));
         
         if($id == 0){
-            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."')");
+            
+            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1')");
+            $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$aux['insert_id']."')");
+            
             $info['op'] = 1;
             $info['mensaje'] = "Giro creado exitosamente";
+            
             if($this->admin == 0){
-                $info['db1'][] = $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
             if($this->admin == 1){
-                $info['db2'][] = $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
             }
+            
         }
         if($id > 0){
+            
             $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
             $info['op'] = 1;
             $info['mensaje'] = "Giro modificado exitosamente";
+            
         }
 
         $info['reload'] = 1;
