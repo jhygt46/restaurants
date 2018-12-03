@@ -18,7 +18,7 @@ if($info['id_gir'] != 0){
 
     //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
     if($info['con_cambios'] == 1){
-        $core->get_web_js_data2($info['id_gir']);
+        print_r($core->get_web_js_data2($info['id_gir']));
     }
     $locales = json_decode($info['lista_locales']);
 

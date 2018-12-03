@@ -481,6 +481,8 @@ class Core{
         file_put_contents($ruta_data, "var data=".json_encode($info));
         $this->con->sql("UPDATE giros SET ultima_actualizacion=now(), con_cambios='0' WHERE id_gir='".$id_gir."'");
         
+        return $giro;
+        
     }
     public function set_pedido($pedido, $carro, $promos){
         
