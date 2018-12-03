@@ -19,7 +19,7 @@ $locales = json_decode($info['lista_locales']);
 if($info['id_gir'] != 0 && $info['con_cambios'] == 1){
 
     //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
-    $data = $core->get_web_js_data2($info['id_gir']);
+    //$data = $core->get_web_js_data2($info['id_gir']);
 
 ?>
 
