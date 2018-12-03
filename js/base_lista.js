@@ -982,3 +982,45 @@ function nuevo_pedido(){
     borrar_carro();
     set_pedido(null);
 }
+function confirmar_productos_promo(that){
+    
+    var count = 0;
+    var arr = [];
+    var parent = $(that).parents('.modal_productos_promo');
+    var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
+    var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
+    
+    parent.find('.pro_cat_item').each(function(){
+        count = count + parseInt($(this).find('.select_promo').val());
+        arr.push({id_pro: parseInt($(this).find('.select_promo').attr('id')), cantidad: parseInt($(this).find('.select_promo').val())});
+    });
+    
+    if(count == cantidad){
+        var carro = get_carro();
+        carro.splice(carro_pos, 1);
+        for(var i=0, ilen=arr.length; i<ilen; i++){
+            for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
+                carro.push({id_pro: parseInt(arr[i].id_pro)});
+            }
+        }
+        localStorage.setItem("carro", JSON.stringify(carro));
+        if(proceso(true, false)){
+            hide_modal();
+        }
+    }else{
+        var diff = cantidad - count;
+        if(diff == 1){
+            alert("FALTA 1 PRODUCTO");
+        }
+        if(diff > 1){
+            alert("FALTA "+diff+" PRODUCTOS");
+        }
+        if(diff == -1){
+            alert("SOBRA 1 PRODUCTO");
+        }
+        if(diff < -1){
+            alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
+        }
+    }
+     
+}

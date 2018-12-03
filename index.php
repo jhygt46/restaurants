@@ -265,7 +265,7 @@ if($info['id_gir'] != 0){
                                                 <?php if($info['pedido_palitos'] == 1){ ?>
                                                 <ul class="pregunta clearfix">
                                                     <li class="pre_nom">Palitos</li>
-                                                    <li class="pre_input"><select id="pedido_palitos"><option value="0">0</option><option value="1">1</option></select></li>
+                                                    <li class="pre_input"><select id="pedido_palitos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></li>
                                                 </ul>
                                                 <?php } ?>
                                             </div>
