@@ -659,13 +659,12 @@ function paso_4(){
     
     
     $.ajax({
-        url: "http://localhost/restaurants/ajax/index.php",
+        url: "/ajax/index.php",
         type: "POST",
         data: send,
         success: function(info){
 
             var data = JSON.parse(info);
-            console.log(data);
             
             if(data.op == 1){
 
