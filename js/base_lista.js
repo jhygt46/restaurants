@@ -709,10 +709,10 @@ function paso_4(){
                 hide_modal();
                 
                 if(despacho == 0){
-                    alert(nombre+" Tu Pedido Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
+                    alert(nombre+" Tu Pedido fue Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
                 }
                 if(despacho == 1){
-                    alert(nombre+" Tu Pedido Enviado Exitosamente. En 60 Minutos estaremos allá. ");
+                    alert(nombre+" Tu Pedido fue Enviado Exitosamente. En 60 Minutos estaremos allá. ");
                 }
                 
             }else{
@@ -977,4 +977,8 @@ function obj_pedido(){
     }
     return pedido;
     
+}
+function nuevo_pedido(){
+    borrar_carro();
+    set_pedido(null);
 }
