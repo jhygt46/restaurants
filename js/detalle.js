@@ -12,7 +12,7 @@ $(document).ready(function(){
     
     var diff = costo + total_process - total;
     
-    if(diff >= 0){
+    if(diff > 0){
         
         $('.verificar').append('<div>ERROR: TOTAL ENVIADO ES MENOR: ($'+diff+')</div>')
         
