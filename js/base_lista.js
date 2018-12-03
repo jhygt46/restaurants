@@ -705,7 +705,12 @@ function paso_4(){
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
                 hide_modal();
-                alert("LISTO");
+                if(pedido.despacho == 0){
+                    alert(pedido.nombre+" Tu Pedido Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
+                }
+                if(pedido.despacho == 1){
+                    alert(pedido.nombre+" Tu Pedido Enviado Exitoamente. En 60 Minutos estaremos allá. ");
+                }
                 
             }else{
                 document.getElementById("enviar_cotizacion").disabled = false;
