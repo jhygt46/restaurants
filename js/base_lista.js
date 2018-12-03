@@ -712,7 +712,7 @@ function paso_4(){
                     alert(nombre+" Tu Pedido Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
                 }
                 if(despacho == 1){
-                    alert(nombre+" Tu Pedido Enviado Exitoamente. En 60 Minutos estaremos allá. ");
+                    alert(nombre+" Tu Pedido Enviado Exitosamente. En 60 Minutos estaremos allá. ");
                 }
                 
             }else{
@@ -921,6 +921,8 @@ function paso_3_despacho(){
         set_pedido(pedido);
         var total = pedido.despacho_domicilio.costo + pedido.total;
         selecciono_despacho(pedido.despacho_domicilio.calle, pedido.despacho_domicilio.num, pedido.despacho_domicilio.costo, total);
+        $('.block_direccion .item_direccion h2').html(pedido.despacho_domicilio.calle);
+        $('.block_direccion .item_numero h2').html(pedido.despacho_domicilio.num);
         paso_3();
         
     }

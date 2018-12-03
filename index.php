@@ -233,7 +233,7 @@ if($info['id_gir'] != 0){
                                     <div class="cont_final">
                                         <ul class="block_direccion clearfix">
                                             <li class="item_direccion"><h1>Direccion: </h1><h2></h2></li>
-                                            <li class="item_numero"><h1>Numero: </h1><h2>1185</h2></li>
+                                            <li class="item_numero"><h1>Numero: </h1><h2></h2></li>
                                             <li class="item_depto"><h1>Depto: </h1><input type="text" id="pedido_depto" /></li>
                                         </ul>
                                         <ul class="block_nombre_telefono clearfix">
