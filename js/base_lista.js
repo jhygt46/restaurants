@@ -243,8 +243,21 @@ function mostrar_pregunta(i){
     show_modal('modal_pregunta_productos');
     $('.modal_pregunta_productos .titulo h1').html(producto.nombre); 
     $('.modal_pregunta_productos .info_modal').html('');
-    $('.modal_pregunta_productos .info_modal').append(html_preguntas_producto(i));
+    $('.modal_pregunta_productos .info_modal').html(html_preguntas_producto(i));
 
+}
+function seleccionar_productos_categoria_promo(i){
+    
+    var carros = get_carro();
+    var id_cae = carros[i].id_cae;
+    var cantidad = carros[i].cantidad;
+    var categoria = get_categoria(id_cae);
+    
+    show_modal('modal_productos_promo');
+    $('.modal_productos_promo .titulo h1').html(categoria.nombre);
+    $('.modal_productos_promo .titulo h2').html('Debe seleccionar '+cantidad+' productos');
+    $('.modal_productos_promo .info_modal').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
+    
 }
 function mostrar_pregunta_promo(pro, x){
     
