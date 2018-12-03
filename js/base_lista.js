@@ -864,9 +864,7 @@ function select_local(id, nombre, direccion){
     
     var pedido = get_pedido();
     pedido.despacho = 0;
-    pedido.retiro_local.id_loc = id;
-    pedido.retiro_local.local_nombre = nombre;
-    pedido.retiro_local.local_direccion = direccion;
+    pedido.retiro_local = { id_loc: id, local_nombre: nombre, local_direccion: direccion };
     set_pedido(pedido);
     
     selecciono_retiro(nombre, direccion, pedido.total);
