@@ -143,27 +143,37 @@ class Rest{
                 
             }
             
-            $locales = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."'");
+            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             
-            $pedido['pedido']['pedido_code'] = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido['pedido']['pedido_code']."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
-            
+            $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido_code."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
             $id_ped = $pedido_sql['insert_id'];
             
-            $info['op'] = 1;
-            $info['id_ped'] = $pedido_sql['insert_id'];
-            $info['pedido_code'] = $pedido['pedido']['pedido_code'];
-            $info['id_loc'] = $id_loc;
-            $info['despacho'] = $aux_pedido->{'despacho'};
+            // POST NODE-JS MAIL Y SOCKET //
             
+            // SOCKET //
             
+            $pedido['local_code'] = $loc_gir['resultado'][0]['code'];
+            $pedido['id_ped'] = $id_ped;
+            
+            // CORREO //
+            
+            $pedido['correo'] = $loc_gir['resultado'][0]['correo'];
+            $pedido['numero'] = $id_ped;
             $pedido['accion'] = 'enviar_pedido_local';
+            $pedido['activar_envio'] = $loc_gir['resultado'][0]['activar_envio'];
             $pedido['hash'] = 'hash';
-            $pedido['correo'] = $info_local['resultado'][0]['correo'];
-            $pedido['numero'] = $info['id_ped'];
-            $pedido['dominio'] = $info_local['resultado'][0]['dominio'];
-            $pedido['pedido']['id_ped'] = $id_ped;
+            $pedido['dominio'] = $loc_gir['resultado'][0]['dominio'];
+            $pedido['pedido_code'] = $pedido_code;
+            $pedido['nombre'] = $nombre;
+            $pedido['telefono'] = $telefono;
             
+            
+            
+            $info['op'] = 1;
+            $info['id_ped'] = $id_ped;
+            $info['pedido_code'] = $pedido_code;
+;            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
