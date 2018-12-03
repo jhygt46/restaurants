@@ -258,7 +258,7 @@ if($info['id_gir'] != 0){
                                                 <?php } ?>
                                                 <?php if($info['pedido_embarazadas'] == 1){ ?>
                                                 <ul class="pregunta clearfix">
-                                                    <li class="pre_nom">Sushi para Embarazadas</li>
+                                                    <li class="pre_nom">Es para Embarazada?</li>
                                                     <li class="pre_input"><input type="checkbox" id="pedido_embarazadas" /></li>
                                                 </ul>
                                                 <?php } ?>
