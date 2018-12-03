@@ -177,6 +177,9 @@ class Guardar extends Core{
         return $info;
         
     }
+    private function con_cambios(){
+        $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
+    }
     private function configurar_principal(){
         
         $titulo = $_POST['titulo'];
@@ -187,6 +190,7 @@ class Guardar extends Core{
         $css_popup = $_POST['css-popup'];
         
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+        $this->con_cambios();
         
         $foto_logo = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio'], 0);
         $foto_favicon = $this->ingresarimagen('/var/www/html/restaurants/images/favicon/', $giro['resultado'][0]['dominio'], 1);
