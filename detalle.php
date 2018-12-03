@@ -53,7 +53,7 @@ if(isset($_GET['code'])){
     <body>
         
         <div class="detalle">
-            <?php if($info["despacho"] == 1){ ?>
+            <?php if($despacho == 1){ ?>
             <div class="verificar">
                 <div><?php if($info["verify_despacho"] == 0){ ?>COSTO DESPACHO VERIFICADO<?php } ?></div>
                 <div><?php if($info["verify_direccion"] == 0){ ?>DIRECCION VERIFICADA<?php } ?></div>
