@@ -2,18 +2,22 @@
 function render_pagina(){
     
     // BOTONES PRINCIPALES
-    var categorias = data.catalogos[catalogo].categorias;
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
-            $('.cont_contenido').append(html_home_categorias(categorias[i]));  
+    if(data.catalogos[catalogo].categorias){
+        var categorias = data.catalogos[catalogo].categorias;
+        for(var i=0, ilen=categorias.length; i<ilen; i++){
+            if(categorias[i].parent_id == 0 && categorias[i].ocultar == 0){
+                $('.cont_contenido').append(html_home_categorias(categorias[i]));  
+            }
         }
     }
     
     // MENU LEFT PAGINAS
-    var paginas = data.paginas;
-    if(paginas !== null){
-        for(var i=0, ilen=paginas.length; i<ilen; i++){
-            $('.lista_paginas').append(html_paginas(paginas[i])); 
+    if(data.paginas){
+        var paginas = data.paginas;
+        if(paginas !== null){
+            for(var i=0, ilen=paginas.length; i<ilen; i++){
+                $('.lista_paginas').append(html_paginas(paginas[i])); 
+            }
         }
     }
 
