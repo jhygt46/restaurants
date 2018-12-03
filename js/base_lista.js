@@ -703,6 +703,8 @@ function paso_4(){
                 pedido.fecha = new Date().getTime();
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
+                hide_modal();
+                alert("LISTO");
                 
             }else{
                 document.getElementById("enviar_cotizacion").disabled = false;

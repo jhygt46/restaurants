@@ -324,4 +324,6 @@ if($info['id_gir'] != 0){
     </body>
 </html>
 
-<?php } ?>
+<?php } exit; ?>
+
+
