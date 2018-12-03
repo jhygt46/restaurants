@@ -149,7 +149,7 @@ function add_carro_promocion(id_cae){
         }
     }
     
-    process_carro();
+    //process_carro();
     show_modal('paso_01');
     
 }
