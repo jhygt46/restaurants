@@ -291,14 +291,17 @@ function promo_restantes(producto, j, tiene_pregunta){
             Pregunta.innerHTML = 'help_outline';
         }
         Pregunta.onclick = function(){ mostrar_pregunta(j) };
-        
+        Acciones.appendChild(Pregunta);
     
     }else{
+        
         var Espacio = document.createElement('div');
         Espacio.className = 'espacio';
         Acciones.appendChild(Espacio);
         
     }
+        
+    
     
     var Accion = document.createElement('div');
     Accion.className = 'accion material-icons';
