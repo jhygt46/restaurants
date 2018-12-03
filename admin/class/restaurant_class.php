@@ -119,7 +119,6 @@ class Rest{
             if($aux_pedido->{'despacho'} == 0){
                 
                 $id_loc = $aux_pedido->{'retiro_local'}->{'id_loc'};
-                $verify_despacho = 1;
                 
             }
             if($aux_pedido->{'despacho'} == 1){
