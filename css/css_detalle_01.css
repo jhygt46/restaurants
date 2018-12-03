@@ -49,12 +49,16 @@
 }
 .detalle .verificar {
   display: block;
+  border-bottom: 1px solid #f00;
+  background: #fee;
 }
 .detalle .verificar div {
   display: block;
   color: #f00;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
+  border-top: 1px solid #f00;
+  padding: 10px 0px;
 }
 
 /*# sourceMappingURL=css_detalle_01.css.map */

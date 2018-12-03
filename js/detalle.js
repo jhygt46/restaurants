@@ -1,10 +1,5 @@
 $(document).ready(function(){
     render_items(carro);
-    /*
-    console.log(pedido);
-    console.log(carro);
-    console.log(promos);
-    */
     var total_process = 0;
     
     for(var i=0, ilen=carro.length; i<ilen; i++){
@@ -15,12 +10,12 @@ $(document).ready(function(){
     console.log(total_process);
     console.log(total);
     
-    if(costo + total_process == total){
-        // GREAT
-        console.log("GREAT");
-    }else{
-        // OCURRIO UN ERROR
-        console.log("ERROR");
+    var diff = costo + total_process - total;
+    
+    if(diff > 0){
+        
+        $('.verificar').append('<div>ERROR: TOTAL ENVIADO ES MENOR: ($'+diff+')</div>')
+        
     }
     
     
