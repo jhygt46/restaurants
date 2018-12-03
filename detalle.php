@@ -55,8 +55,8 @@ if(isset($_GET['code'])){
         <div class="detalle">
             <?php if($despacho == 1){ ?>
             <div class="verificar">
-                <div><?php if($info["verify_despacho"] == 0){ ?>COSTO DESPACHO VERIFICADO<?php } ?></div>
-                <div><?php if($info["verify_direccion"] == 0){ ?>DIRECCION VERIFICADA<?php } ?></div>
+                <?php if($info["verify_despacho"] == 0){ ?><div>ERROR: COSTO DESPACHO NO COINCIDE</div><?php } ?>
+                <?php if($info["verify_direccion"] == 0){ ?><div>ERROR: DIRECCION NO CORRESPONDE A COORDENADAS</div><?php } ?>
             </div>
             <?php } ?>
             <div class="titulo txtcen font_01 padding_01 borbottom">Pedido #<?php echo $info["id_ped"]; ?></div>
