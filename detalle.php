@@ -10,6 +10,10 @@ if(isset($_GET['code'])){
     $info = $core->ver_detalle($_GET['code']);
     if($info['op']){
         
+        echo "<pre>";
+        print_r($info);
+        echo "</pre>";
+        
         $id_ped = $info["id_ped"];
         $pedido = json_decode($info["pedido"]);
         $preguntas = $pedido->{'preguntas'};
