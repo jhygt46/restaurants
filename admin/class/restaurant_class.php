@@ -177,8 +177,11 @@ class Rest{
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            curl_exec($ch);
+            $result = curl_exec($ch);
             curl_close($ch);
+            
+            $info['nodejs'] = $result;
+            
 
         }else{
 
