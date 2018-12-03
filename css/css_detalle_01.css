@@ -47,5 +47,14 @@
   text-align: center;
   font-size: 16px;
 }
+.detalle .verificar {
+  display: block;
+}
+.detalle .verificar div {
+  display: block;
+  color: #f00;
+  font-size: 20px;
+  text-align: center;
+}
 
 /*# sourceMappingURL=css_detalle_01.css.map */
