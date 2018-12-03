@@ -307,7 +307,7 @@ class Core{
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
         
-        if(count($sql['resultado']) == 1){
+        if($sql['count'] == 1){
             
             $info['dominio'] = $dominio;
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
@@ -360,6 +360,12 @@ class Core{
             
             
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
+            
+        }
+        
+        if($sql['count'] == 0){
+            
+            $info['id_gir'] = 0;
             
         }
 

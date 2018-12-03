@@ -14,18 +14,13 @@ if(isset($_GET['param_dom'])){
     }
 }
 
-if(isset($_GET['show'])){
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
-}
-$core->get_web_js_data2($info['id_gir']);
+if($info['id_gir'] != 0){
 
-$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
-if($info['con_cambios'] == 1){
-    
-}
-$locales = json_decode($info['lista_locales']);
+    //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
+    if($info['con_cambios'] == 1){
+        $core->get_web_js_data2($info['id_gir']);
+    }
+    $locales = json_decode($info['lista_locales']);
 
 ?>
 
@@ -325,3 +320,5 @@ $locales = json_decode($info['lista_locales']);
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places" async defer></script>
     </body>
 </html>
+
+<?php } ?>
