@@ -325,6 +325,8 @@ class Guardar extends Core{
     
     private function crear_pagina(){
         
+        $this->con_cambios();
+        
         $id_pag = $_POST['id'];
         $nombre = $_POST['nombre'];
         $titulo = $_POST['titulo'];
