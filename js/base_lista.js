@@ -761,7 +761,7 @@ function initMap(){
                 
                 var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
-                    url: "http://localhost/restaurants/ajax/index.php",
+                    url: "/ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
