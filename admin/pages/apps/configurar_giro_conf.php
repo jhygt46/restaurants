@@ -103,6 +103,10 @@ $css = $fireapp->get_css();
                         <input id="file_image" type="file" />
                     </label>
                     <label>
+                        <span>Favicon:</span>
+                        <input id="file_image" type="file" />
+                    </label>
+                    <label>
                         <span>Pedido 01 Titulo:</span>
                         <input id="pedido_01_titulo" type="text" value="<?php echo $that['pedido_01_titulo']; ?>" />
                     </label>
