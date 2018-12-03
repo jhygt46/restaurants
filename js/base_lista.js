@@ -537,6 +537,18 @@ function set_promos(carro_promos){
 function set_pedido(pedido){
     localStorage.setItem("pedido", JSON.stringify(pedido));
 }
+function get_productos_categoria(id_cae){
+    
+    var categorias = get_categoria(id_cae);
+    var productos = [];
+    if(categorias.productos){
+        for(var i=0, ilen=categorias.productos.length; i<ilen; i++){
+            productos.push(parseInt(categorias.productos[i]));
+        }
+    }
+    return productos;
+    
+}
 function borrar_carro(){
     localStorage.setItem("carro", null);
     localStorage.setItem("carro_promos", null);
