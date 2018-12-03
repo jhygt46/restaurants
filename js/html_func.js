@@ -283,7 +283,8 @@ function promo_restantes(producto, j, tiene_pregunta){
     
     if(carro.preguntas){
     
-        
+        var Pregunta = document.createElement('div');
+        Pregunta.className = 'pregunta material-icons';
         if(!tiene_pregunta){
             Pregunta.innerHTML = 'more_horiz';
         }else{
@@ -296,6 +297,7 @@ function promo_restantes(producto, j, tiene_pregunta){
         var Espacio = document.createElement('div');
         Espacio.className = 'espacio';
         Acciones.appendChild(Espacio);
+        
     }
     
     var Accion = document.createElement('div');
