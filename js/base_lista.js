@@ -672,8 +672,10 @@ function paso_4(){
     document.getElementById("enviar_cotizacion").disabled = true;
     
     var pedido = get_pedido();
-    console.log(pedido);
-    pedido.nombre = $('#pedido_nombre').val();
+    var despacho = pedido.despacho;
+    var nombre = $('#pedido_nombre').val();
+    
+    pedido.nombre = nombre;
     pedido.telefono = $('#pedido_telefono').val();
     pedido.despacho_domicilio.depto = $('#pedido_depto').val();
 
@@ -705,11 +707,12 @@ function paso_4(){
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
                 hide_modal();
-                if(pedido.despacho == 0){
-                    alert(pedido.nombre+" Tu Pedido Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
+                
+                if(despacho == 0){
+                    alert(nombre+" Tu Pedido Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
                 }
-                if(pedido.despacho == 1){
-                    alert(pedido.nombre+" Tu Pedido Enviado Exitoamente. En 60 Minutos estaremos allá. ");
+                if(despacho == 1){
+                    alert(nombre+" Tu Pedido Enviado Exitoamente. En 60 Minutos estaremos allá. ");
                 }
                 
             }else{
