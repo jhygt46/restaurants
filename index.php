@@ -14,7 +14,9 @@ if(isset($_GET['param_dom'])){
     }
 }
 
-if($info['id_gir'] != 0){
+$locales = json_decode($info['lista_locales']);
+
+if($info['id_gir'] != 0 && isset($_GET['show'])){
 
     //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
     if($info['con_cambios'] == 1){
@@ -22,8 +24,9 @@ if($info['id_gir'] != 0){
         echo "<pre>";
         print_r($data);
         echo "</pre>";
+        exit;
     }
-    $locales = json_decode($info['lista_locales']);
+    
 
 ?>
 
