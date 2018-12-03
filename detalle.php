@@ -53,6 +53,7 @@ if(isset($_GET['code'])){
     <body>
         
         <div class="detalle">
+            <div><?php if($info["verify_despacho"] == 1){ ?>COSTO DESPACHO VERIFICADO<?php } ?> / <?php if($info["verify_direccion"] == 1){ ?>DIRECCION VERIFICADA<?php } ?> </div>
             <div class="titulo txtcen font_01 padding_01 borbottom">Pedido #<?php echo $info["id_ped"]; ?></div>
             <div class="lista_de_productos padding_01 borbottom"></div>
             <?php if($preguntas->{'wasabi'} == 1 || $preguntas->{'gengibre'} == 1 || $preguntas->{'embarazadas'} == 1 || $preguntas->{'palitos'} > 0){ ?>
