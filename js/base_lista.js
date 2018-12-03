@@ -643,6 +643,7 @@ function paso_4(){
     document.getElementById("enviar_cotizacion").disabled = true;
     
     var pedido = get_pedido();
+    console.log(pedido);
     pedido.nombre = $('#pedido_nombre').val();
     pedido.telefono = $('#pedido_telefono').val();
     pedido.despacho_domicilio.depto = $('#pedido_depto').val();
