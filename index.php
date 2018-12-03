@@ -14,6 +14,11 @@ if(isset($_GET['param_dom'])){
     }
 }
 
+if(isset($_GET['show'])){
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
+}
 $core->get_web_js_data2($info['id_gir']);
 
 $dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
