@@ -227,11 +227,20 @@ function confirmar_pregunta_productos(that){
     });
     
 }
-function preguntas_promo(x){
+function preguntas_promo(pro){
     
+    if(pro.promo){
     
+        var carros = get_carro();
+        for(var i=0, ilen=carros.length; i<ilen; i++){
+            if(carros[i].promo && carros[i].promo == pro.promo && tiene_pregunta(carros[i])){
+                mostrar_pregunta(i);
+                return false;
+            }
+        }
     
-    console.log(x);
+    }
+    
     return true;
 }
 function mostrar_pregunta(i){
