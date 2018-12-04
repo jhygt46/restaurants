@@ -991,6 +991,8 @@ function confirmar_productos_promo(that){
     var parent = $(that).parents('.modal_productos_promo');
     var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
     var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
+    var producto;
+    var item_carro;
     
     parent.find('.pro_cat_item').each(function(){
         count = count + parseInt($(this).find('.select_promo').val());
@@ -1002,7 +1004,18 @@ function confirmar_productos_promo(that){
         carro.splice(carro_pos, 1);
         for(var i=0, ilen=arr.length; i<ilen; i++){
             for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
-                carro.push({id_pro: parseInt(arr[i].id_pro)});
+                
+                producto = get_producto(arr[i].id_pro);
+                item_carro = { id_pro: parseInt(arr[i].id_pro) };
+                if(producto.preguntas){
+                    item_carro.preguntas = [];
+                    for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+                        item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+                    }
+                }
+                carro.push(item_carro);
+                set_cantidad(1);
+                
             }
         }
         localStorage.setItem("carro", JSON.stringify(carro));
@@ -1025,4 +1038,24 @@ function confirmar_productos_promo(that){
         }
     }
      
+}
+
+function add(){
+    
+    var producto = get_producto(id_pro);
+    var carro = get_carro();
+    
+    var item_carro = { id_pro: parseInt(id_pro) };
+    if(producto.preguntas){
+        item_carro.preguntas = [];
+        for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+        }
+    }
+    
+    carro.push(item_carro);
+    set_cantidad(1);
+    localStorage.setItem("carro", JSON.stringify(carro));
+    if(tiene_pregunta(item_carro)){ mostrar_pregunta(carro.length - 1) }else{ hide_modal() }
+    
 }

@@ -224,7 +224,7 @@ function promo_carros(producto, j){
     
     var Nombre = document.createElement('div');
     Nombre.className = 'promo_detalle_nombre';
-    Nombre.innerHTML = producto.numero + ') ' + producto.nombre;
+    Nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
     Div.appendChild(Nombre);
     
     var Acciones = document.createElement('div');
