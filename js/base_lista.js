@@ -142,14 +142,6 @@ function add_carro_promocion(id_cae){
     }
     set_cantidad(1);
     localStorage.setItem("carro", JSON.stringify(carro));
-    
-    var pro = process_new_promos();
-    for(var i=pro.carro_promos.length-1; i>=0; i--){
-        if(pro.carro_promos[i].id_cae == id_cae){
-            mostrar_pregunta_promo(pro, i, false);
-        }
-    }
-    
     if(proceso(true, false)){
         process_carro();
         show_modal('paso_01');
@@ -214,12 +206,8 @@ function confirmar_pregunta_productos(that){
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
 
-                console.log(mostrar_preguntas);
-
-                if(mostrar_preguntas.length > 0){
-                    
+                if(mostrar_preguntas.length > 0){                    
                     mostrar_pregunta(mostrar_preguntas.pop());
-                    
                 }else{
                     
                     if(paso == 2){
@@ -260,6 +248,7 @@ function seleccionar_productos_categoria_promo(i){
     $('.modal_productos_promo .info_modal').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
 }
+/*
 function mostrar_pregunta_promo(pro, x, y){
     
     mostrar_preguntas = [];
@@ -274,6 +263,7 @@ function mostrar_pregunta_promo(pro, x, y){
     }
 
 }
+*/
 function select_pregunta(that){
     
     var parent = $(that).parent();
@@ -295,71 +285,74 @@ function select_pregunta(that){
 }
 function process_carro(){
 
-    var total = 0;
-    var info = process_new_promos();
-    var carro = info.carro;
-    var carro_promos = info.carro_promos;
-    var count = 0;
-    var promocion, producto, promo_detalle, process_carro_promo, promo_info, promo_delete, promo_precio;
+    if(proceso(true, false)){
+    
+        var total = 0;
+        var info = process_new_promos();
+        var carro = info.carro;
+        var carro_promos = info.carro_promos;
+        var count = 0;
+        var promocion, producto, promo_detalle, process_carro_promo, promo_info, promo_delete, promo_precio;
 
-    var html = create_element_class('process_carro');
+        var html = create_element_class('process_carro');
 
-    for(var i=0, ilen=carro_promos.length; i<ilen; i++){
+        for(var i=0, ilen=carro_promos.length; i<ilen; i++){
 
-        promocion = get_categoria(carro_promos[i].id_cae);
-        total = total + parseInt(promocion.precio);
+            promocion = get_categoria(carro_promos[i].id_cae);
+            total = total + parseInt(promocion.precio);
 
-        process_carro_promo = create_element_class('process_carro_promo');
+            process_carro_promo = create_element_class('process_carro_promo');
 
-        promo_detalle = create_element_class('promo_detalle');
-        promo_info = create_element_class_inner('promo_info', promocion.nombre);
-        promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promocion.precio), "$"));
-        promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
-        promo_delete.setAttribute('promo-pos', i);
-        promo_delete.onclick = function(){ delete_promo(this) };
+            promo_detalle = create_element_class('promo_detalle');
+            promo_info = create_element_class_inner('promo_info', promocion.nombre);
+            promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promocion.precio), "$"));
+            promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
+            promo_delete.setAttribute('promo-pos', i);
+            promo_delete.onclick = function(){ delete_promo(this) };
 
-        process_carro_promo.appendChild(promo_info);
-        process_carro_promo.appendChild(promo_precio);
-        process_carro_promo.appendChild(promo_delete);
+            process_carro_promo.appendChild(promo_info);
+            process_carro_promo.appendChild(promo_precio);
+            process_carro_promo.appendChild(promo_delete);
+
+            for(var j=0, jlen=carro.length; j<jlen; j++){
+                if(carro[j].promo == i){
+                    count++;
+                    producto = get_producto(carro[j].id_pro);
+                    promo_detalle.appendChild(promo_carros(producto, j));
+                }
+            }
+
+            process_carro_promo.appendChild(promo_detalle);
+            html.appendChild(process_carro_promo);
+
+        }
+
+        var restantes = false;
+        var process_carro_restantes = create_element_class('process_carro_restantes');
 
         for(var j=0, jlen=carro.length; j<jlen; j++){
-            if(carro[j].promo == i){
+            if(carro[j].promo === undefined){
                 count++;
                 producto = get_producto(carro[j].id_pro);
-                promo_detalle.appendChild(promo_carros(producto, j));
+                process_carro_restantes.appendChild(promo_restantes(producto, j, tiene_pregunta(carro[j])));
+                total = total + parseInt(producto.precio);
+                restantes = true;
             }
         }
 
-        process_carro_promo.appendChild(promo_detalle);
-        html.appendChild(process_carro_promo);
-
-    }
-
-    var restantes = false;
-    var process_carro_restantes = create_element_class('process_carro_restantes');
-
-    for(var j=0, jlen=carro.length; j<jlen; j++){
-        if(carro[j].promo === undefined){
-            count++;
-            producto = get_producto(carro[j].id_pro);
-            process_carro_restantes.appendChild(promo_restantes(producto, j, tiene_pregunta(carro[j])));
-            total = total + parseInt(producto.precio);
-            restantes = true;
+        if(restantes){ 
+            html.appendChild(process_carro_restantes);
         }
-    }
 
-    if(restantes){ 
-        html.appendChild(process_carro_restantes);
+        $('.paso_01 .info_modal').html(html);
+        set_carro(info.carro, info.carro_promos);
+        $('.paso_01_sub_total').html("Pedido: "+formatNumber.new(parseInt(total), "$"));
+
+        var pedido = get_pedido();
+        pedido.total = total;
+        set_pedido(pedido);
+        
     }
-    
-    $('.paso_01 .info_modal').html('');
-    $('.paso_01 .info_modal').append(html);
-    set_carro(info.carro, info.carro_promos);
-    $('.paso_01_sub_total').html("Pedido: "+formatNumber.new(parseInt(total), "$"));
-    
-    var pedido = get_pedido();
-    pedido.total = total;
-    set_pedido(pedido);
     
 }
 function process_new_promos(){
