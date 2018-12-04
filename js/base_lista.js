@@ -143,16 +143,20 @@ function add_carro_promocion(id_cae){
     set_cantidad(1);
     localStorage.setItem("carro", JSON.stringify(carro));
     
+    if(proceso(true, false)){
+        process_carro();
+        show_modal('paso_01');
+    }
+    /*
     var pro = process_new_promos();
     for(var i=pro.carro_promos.length-1; i>=0; i--){
         if(pro.carro_promos[i].id_cae == id_cae){
             mostrar_pregunta_promo(pro, i);
-            if(proceso(true, false)){
-                process_carro();
-                show_modal('paso_01');
-            }
+            return;
         }
     }
+    */
+    
     
 }
 function tiene_pregunta(carro){
