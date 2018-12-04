@@ -229,21 +229,17 @@ function confirmar_pregunta_productos(that){
 }
 function preguntas_promo(pro){
     
-    console.log(pro);
     if(pro.promo !== null){
         var carros = get_carro();
         for(var i=0, ilen=carros.length; i<ilen; i++){
-            console.log(carros[i]);
             if(carros[i].promo !== null && carros[i].promo == pro.promo && tiene_pregunta(carros[i])){
-                console.log("BUEE");
                 mostrar_pregunta(i);
                 return false;
             }
         }
-    
     }
-    
     return true;
+    
 }
 function mostrar_pregunta(i){
     
