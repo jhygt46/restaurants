@@ -1014,7 +1014,6 @@ function confirmar_productos_promo(that){
                     }
                 }
                 carro.push(item_carro);
-                set_cantidad(1);
                 
             }
         }
@@ -1022,7 +1021,9 @@ function confirmar_productos_promo(that){
         if(proceso(true, true)){
             hide_modal();
         }
+        
     }else{
+        
         var diff = cantidad - count;
         if(diff == 1){
             alert("FALTA 1 PRODUCTO");
@@ -1036,6 +1037,7 @@ function confirmar_productos_promo(that){
         if(diff < -1){
             alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
         }
+        
     }
      
 }
