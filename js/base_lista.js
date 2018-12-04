@@ -210,22 +210,26 @@ function confirmar_pregunta_productos(that){
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
 
-                console.log("BUENA");
-                console.log(carros[i]);
+                if(preguntas_promo(carros[i])){
                     
-                if(paso == 2){
-                    if(proceso(true, true)){
-                        show_modal('paso_02');
+                    if(paso == 2){
+                        if(proceso(true, true)){
+                            show_modal('paso_02');
+                        }
+                    }else{
+                        open_carro();
                     }
-                }else{
-                    open_carro();
-                }
                     
+                }
                 
             }
         });
     });
     
+}
+function preguntas_promo(x){
+    console.log(x);
+    return true;
 }
 function mostrar_pregunta(i){
     
