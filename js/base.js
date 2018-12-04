@@ -33,9 +33,12 @@ function inicio(){
     var pedido = get_pedido();
     var carro = get_carro();
     
+    set_pedido(null);
+    borrar_carro();
+    
     if(pedido.id_ped == 0){
-        set_pedido(null);
-        borrar_carro();
+        //set_pedido(null);
+        //borrar_carro();
         console.log("NO TIENE PEDIDO");
     }
     if(pedido.id_ped > 0){
