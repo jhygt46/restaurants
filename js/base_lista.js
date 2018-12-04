@@ -230,7 +230,7 @@ function confirmar_pregunta_productos(that){
 function preguntas_promo(pro){
     
     console.log(pro);
-    if(pro.promo){
+    if(pro.promo !== null){
         console.log("ENTRO");
         var carros = get_carro();
         for(var i=0, ilen=carros.length; i<ilen; i++){
