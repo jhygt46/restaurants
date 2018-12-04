@@ -28,3 +28,10 @@ $(document).click(function (e) {
         hide_modal();
     }
 });
+
+function inicio(){
+    
+    console.log(get_pedido());
+    console.log(get_carro());
+    
+}

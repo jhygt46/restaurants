@@ -1041,23 +1041,3 @@ function confirmar_productos_promo(that){
     }
      
 }
-
-function add(){
-    
-    var producto = get_producto(id_pro);
-    var carro = get_carro();
-    
-    var item_carro = { id_pro: parseInt(id_pro) };
-    if(producto.preguntas){
-        item_carro.preguntas = [];
-        for(var k=0, klen=producto.preguntas.length; k<klen; k++){
-            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
-        }
-    }
-    
-    carro.push(item_carro);
-    set_cantidad(1);
-    localStorage.setItem("carro", JSON.stringify(carro));
-    if(tiene_pregunta(item_carro)){ mostrar_pregunta(carro.length - 1) }else{ hide_modal() }
-    
-}
