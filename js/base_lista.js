@@ -214,6 +214,8 @@ function confirmar_pregunta_productos(that){
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
 
+                console.log(mostrar_preguntas);
+
                 if(mostrar_preguntas.length > 0){
                     
                     mostrar_pregunta(mostrar_preguntas.pop());
