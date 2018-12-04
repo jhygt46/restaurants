@@ -228,6 +228,9 @@ function confirmar_pregunta_productos(that){
     
 }
 function preguntas_promo(x){
+    
+    
+    
     console.log(x);
     return true;
 }
@@ -1013,6 +1016,9 @@ function confirmar_productos_promo(that){
             }
         }
         localStorage.setItem("carro", JSON.stringify(carro));
+        if(proceso(true, false)){
+            process_carro();
+        }
         if(proceso(true, true)){
             hide_modal();
         }
