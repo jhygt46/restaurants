@@ -22,6 +22,7 @@ function render_pagina(){
     }
 
 }
+
 function open_categoria(id){
     
     show_modal('modal_carta');
