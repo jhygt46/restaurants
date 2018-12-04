@@ -147,15 +147,12 @@ function add_carro_promocion(id_cae){
     for(var i=pro.carro_promos.length-1; i>=0; i--){
         if(pro.carro_promos[i].id_cae == id_cae){
             mostrar_pregunta_promo(pro, i);
-            return;
+            if(proceso(true, false)){
+                process_carro();
+                show_modal('paso_01');
+            }
         }
     }
-    
-    if(proceso(true, false)){
-        process_carro();
-        show_modal('paso_01');
-    }
-    
     
 }
 function tiene_pregunta(carro){
