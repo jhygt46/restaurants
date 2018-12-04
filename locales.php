@@ -32,7 +32,7 @@ $pedidos = $core->get_ultimos_pedidos($_GET['id_loc']);
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_pos"]; ?>" type="text/javascript"></script>
         <script> var local_code = '<?php echo $code; ?>'; </script>
-        <script> var pedidos = '<?php echo json_encode($pedidos); ?>'; </script>
+        <script> var pedidos = <?php echo json_encode($pedidos); ?>; </script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;

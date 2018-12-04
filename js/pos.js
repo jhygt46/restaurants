@@ -1,3 +1,4 @@
+
 var seleccionado = null;
 var categoia = 0;
 var catalogo = 0;
