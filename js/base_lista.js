@@ -230,9 +230,10 @@ function confirmar_pregunta_productos(that){
 function preguntas_promo(pro){
     
     if(pro.promo){
-    
+        console.log(pro);
         var carros = get_carro();
         for(var i=0, ilen=carros.length; i<ilen; i++){
+            console.log(carros[i]);
             if(carros[i].promo && carros[i].promo == pro.promo && tiene_pregunta(carros[i])){
                 mostrar_pregunta(i);
                 return false;
