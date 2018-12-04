@@ -210,19 +210,18 @@ function confirmar_pregunta_productos(that){
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
 
-                if(mostrar_preguntas.length > 0){                    
-                    mostrar_pregunta(mostrar_preguntas.pop());
-                }else{
+                console.log("BUENA");
+                console.log(carros[i]);
                     
-                    if(paso == 2){
-                        if(proceso(true, true)){
-                            show_modal('paso_02');
-                        }
-                    }else{
-                        open_carro();
+                if(paso == 2){
+                    if(proceso(true, true)){
+                        show_modal('paso_02');
                     }
-                    
+                }else{
+                    open_carro();
                 }
+                    
+                
             }
         });
     });
