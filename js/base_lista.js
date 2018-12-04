@@ -231,6 +231,7 @@ function preguntas_promo(pro){
     
     console.log(pro);
     if(pro.promo){
+        console.log("ENTRO");
         var carros = get_carro();
         for(var i=0, ilen=carros.length; i<ilen; i++){
             console.log(carros[i]);
