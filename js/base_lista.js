@@ -1019,7 +1019,7 @@ function confirmar_productos_promo(that){
             }
         }
         localStorage.setItem("carro", JSON.stringify(carro));
-        if(proceso(true, false)){
+        if(proceso(true, true)){
             hide_modal();
         }
     }else{
