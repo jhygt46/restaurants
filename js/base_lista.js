@@ -23,7 +23,6 @@ function render_pagina(){
 
 }
 
-
 function open_categoria(id){
     
     if(proceso(true, false)){
@@ -50,7 +49,6 @@ function open_categoria(id){
     }
     
 }
-
 function tiene_pedido(){
     
     var pedido = get_pedido();    
@@ -58,26 +56,27 @@ function tiene_pedido(){
         return false;
     }
     if(pedido.id_ped > 0){
-        console.log(pedido.fecha);
-        return true;
+        
+        var limit = new Date().getTime() + 7200000;
+        if(pedido.fecha < limit){
+            return true;
+        }else{
+            return false;
+        }
     }
+    
 }
-
-
 function open_carro(){
     
-    var t_pedido = tiene_pedido();
-        
-    var pedido = get_pedido();    
-    if(pedido.id_ped == 0){
+    var tp = tiene_pedido();
+    if(!tp){
         
         if(proceso(true, false)){
             process_carro();
             show_modal('paso_01');
         }
-
     }
-    if(pedido.id_ped > 0){
+    if(tp){
         show_modal('paso_04');
     }
     
@@ -1067,4 +1066,6 @@ function confirmar_productos_promo(that){
 function nuevo(){
     borrar_carro();
     set_pedido(null);
+    $('.cantcart_num').html(0);
+    hide_modal();
 }
