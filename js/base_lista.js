@@ -243,8 +243,7 @@ function confirmar_pregunta_productos(that){
                             show_modal('paso_02');
                         }
                     }else{
-                        process_carro();
-                        show_modal('paso_01');
+                        hide_modal();
                     }
                     
                 }
@@ -724,13 +723,7 @@ function paso_4(){
                 pedido.pedido_code = data.pedido_code;
                 pedido.fecha = new Date().getTime();
                 
-                /*
-                $.getScript("http://35.196.220.197/socket.io/socket.io.js", function(data, textStatus, jqxhr) {
-                    
-                    open_socket("fherueggr");
-                    
-                });
-                */
+                open_socket(data.pedido_code);
                
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
