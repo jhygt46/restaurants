@@ -64,12 +64,11 @@ function tiene_pedido(){
         return false;
     }
     if(pedido.id_ped > 0){
-        
-        var limit = new Date().getTime() + 7200000;
-        if(pedido.fecha < limit){
+        var limit = new Date().getTime() - 7200000;
+        if(pedido.fecha > limit){
             return true;
         }else{
-            return false;
+            return nuevo();
         }
     }
     
@@ -630,8 +629,6 @@ function show_modal(clase){
     $('.modal').hide();
     $('.modals, .'+clase).show();
     modal = 1;
-    console.log("show modal "+clase);
-    
 }
 function hide_modal(){
     modal = 0;
@@ -1072,8 +1069,10 @@ function confirmar_productos_promo(that){
      
 }
 function nuevo(){
+    volver_tipo_despacho();
     borrar_carro();
     set_pedido(null);
     $('.cantcart_num').html(0);
     hide_modal();
+    return false;
 }
