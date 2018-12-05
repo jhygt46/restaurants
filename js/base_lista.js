@@ -244,7 +244,7 @@ function confirmar_pregunta_productos(that){
                             show_modal('paso_02');
                         }
                     }else{
-                        open_carro();
+                        show_modal('paso_01');
                     }
                     
                 }
@@ -723,6 +723,18 @@ function paso_4(){
                 pedido.id_ped = data.id_ped;
                 pedido.pedido_code = data.pedido_code;
                 pedido.fecha = new Date().getTime();
+                
+                $.getScript("http://35.196.220.197/socket.io/socket.io.js", function(data, textStatus, jqxhr) {
+                    
+                    console.log(data); //data returned
+                    console.log(textStatus); //success
+                    console.log(jqxhr.status); //200
+                    console.log('Load was performed.');
+                    
+                    open_socket("fherueggr");
+                    
+                });
+                
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
                 hide_modal();
@@ -742,6 +754,15 @@ function paso_4(){
         }, error: function(e){
             console.log(e);
         }
+    });
+    
+}
+function open_socket(code){
+    
+    var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
+    socket.on('pedido-'+code, function(data){
+        console.log("data");
+        console.log(data);
     });
     
 }
