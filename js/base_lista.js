@@ -236,7 +236,6 @@ function confirmar_pregunta_productos(that){
                 
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
-
                 if(preguntas_promo(carros[i])){
                     
                     if(paso == 2){
