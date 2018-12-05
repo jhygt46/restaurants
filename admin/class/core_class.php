@@ -329,6 +329,8 @@ class Core{
             $info['pedido_embarazadas'] = $sql['resultado'][0]['pedido_embarazadas'];
             $info['pedido_palitos'] = $sql['resultado'][0]['pedido_palitos'];
             $info['pedido_comentarios'] = $sql['resultado'][0]['pedido_comentarios'];
+            $info['pedido_soya'] = $sql['resultado'][0]['pedido_soya'];
+            $info['pedido_teriyaki'] = $sql['resultado'][0]['pedido_teriyaki'];
             
             $info['css_reset'] = $path."/css/reset.css";
             $info['css_base'] = $path."/css/css_base.css";

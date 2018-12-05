@@ -262,6 +262,18 @@ if($info['id_gir'] != 0){
                                                     <li class="pre_input"><input type="checkbox" id="pedido_embarazadas" /></li>
                                                 </ul>
                                                 <?php } ?>
+                                                <?php if($info['pedido_soya'] == 1){ ?>
+                                                <ul class="pregunta clearfix">
+                                                    <li class="pre_nom">Soya</li>
+                                                    <li class="pre_input"><input type="checkbox" id="pedido_soya" /></li>
+                                                </ul>
+                                                <?php } ?>
+                                                <?php if($info['pedido_teriyaki'] == 1){ ?>
+                                                <ul class="pregunta clearfix">
+                                                    <li class="pre_nom">Teriyaki</li>
+                                                    <li class="pre_input"><input type="checkbox" id="pedido_teriyaki" /></li>
+                                                </ul>
+                                                <?php } ?>
                                                 <?php if($info['pedido_palitos'] == 1){ ?>
                                                 <ul class="pregunta clearfix">
                                                     <li class="pre_nom">Palitos</li>
