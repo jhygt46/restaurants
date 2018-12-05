@@ -1064,3 +1064,7 @@ function confirmar_productos_promo(that){
     }
      
 }
+function nuevo(){
+    borrar_carro();
+    set_pedidos(null);
+}

@@ -312,7 +312,7 @@ if($info['id_gir'] != 0){
                                 </div>
                             </div>
                             <div class="acciones">
-                                <input class="confirmar" onclick="inicio()" type="button" value="Hacer Nuevo Pedido" />
+                                <input class="confirmar" onclick="nuevo()" type="button" value="Hacer Nuevo Pedido" />
                             </div>
                         </div>
                     </div>
