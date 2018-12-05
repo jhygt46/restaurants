@@ -701,6 +701,8 @@ function paso_4(){
     pedido.preguntas.wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
     pedido.preguntas.embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
     pedido.preguntas.palitos = $('#pedido_palitos').val();
+    pedido.preguntas.soya = $('#pedido_soya').val();
+    pedido.preguntas.teriyaki = $('#pedido_teriyaki').val();
     pedido.comentarios = $('#pedido_comentarios').html();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
