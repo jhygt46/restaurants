@@ -265,22 +265,6 @@ function seleccionar_productos_categoria_promo(i){
     $('.modal_productos_promo .info_modal').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
 }
-/*
-function mostrar_pregunta_promo(pro, x, y){
-    
-    mostrar_preguntas = [];
-    for(var i=0, ilen=pro.carro.length; i<ilen; i++){
-        if(pro.carro[i].promo !== null && pro.carro[i].promo == x && tiene_pregunta(pro.carro[i])){
-            mostrar_preguntas.push(i);
-        }
-    }
-    
-    if(mostrar_preguntas.length > 0 && y){
-        mostrar_pregunta(mostrar_preguntas.pop());
-    }
-
-}
-*/
 function select_pregunta(that){
     
     var parent = $(that).parent();
@@ -622,7 +606,6 @@ function show_modal(clase){
 }
 function hide_modal(){
     modal = 0;
-    mostrar_preguntas = [];
     $('.modals').hide();
     $('.modals .cont_modals').find('.modal').each(function(){
         $(this).hide();
@@ -714,6 +697,8 @@ function paso_4(){
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
                 hide_modal();
+                volver_tipo_despacho();
+                paso = 1;
                 
                 if(despacho == 0){
                     alert(nombre+" Tu Pedido fue Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
@@ -935,6 +920,17 @@ function paso_3_despacho(){
     }
     
 }
+function volver_tipo_despacho(){
+    
+    var dir_ops = $('.direccion_opciones').find('.dir_op');
+    
+    dir_ops.eq(0).removeClass('selected');
+    dir_ops.eq(0).find('.stitle').html("Sin Costo");
+    
+    dir_ops.eq(1).removeClass('selected');
+    dir_ops.eq(1).find('.stitle').html("Desde "+formatNumber.new(parseInt(data.config.desde), "$"));
+    
+}
 function selecciono_retiro(nombre, direccion, total){
     
     var dir_ops = $('.direccion_opciones').find('.dir_op');
@@ -985,10 +981,6 @@ function obj_pedido(){
     return pedido;
     
 }
-function nuevo_pedido(){
-    borrar_carro();
-    set_pedido(null);
-}
 function confirmar_productos_promo(that){
     
     var count = 0;
@@ -1023,6 +1015,7 @@ function confirmar_productos_promo(that){
             }
         }
         localStorage.setItem("carro", JSON.stringify(carro));
+        // IMPORTANTE
         if(proceso(true, false)){
             process_carro();
         }

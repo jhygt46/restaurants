@@ -10,7 +10,6 @@ var modal = 0;
 var paso = 1;
 var catalogo = 0;
 var debug = 1;
-var mostrar_preguntas = [];
 var cantidad = 0;
 var pre_promo = 0;
 var map_init = 0;
@@ -27,6 +26,10 @@ $(document).click(function (e) {
         hide_modal();
     }
 });
+
+function nuevo(){
+    
+}
 
 function inicio(){
     
