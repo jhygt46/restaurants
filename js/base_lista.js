@@ -724,12 +724,14 @@ function paso_4(){
                 pedido.pedido_code = data.pedido_code;
                 pedido.fecha = new Date().getTime();
                 
+                /*
                 $.getScript("http://35.196.220.197/socket.io/socket.io.js", function(data, textStatus, jqxhr) {
                     
                     open_socket("fherueggr");
                     
                 });
-                
+                */
+               
                 set_pedido(pedido);
                 document.getElementById("enviar_cotizacion").disabled = false;
                 hide_modal();
