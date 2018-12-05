@@ -244,6 +244,7 @@ function confirmar_pregunta_productos(that){
                             show_modal('paso_02');
                         }
                     }else{
+                        process_carro();
                         show_modal('paso_01');
                     }
                     
