@@ -50,8 +50,24 @@ function open_categoria(id){
     }
     
 }
+
+function tiene_pedido(){
+    
+    var pedido = get_pedido();    
+    if(pedido.id_ped == 0){
+        return false;
+    }
+    if(pedido.id_ped > 0){
+        console.log(pedido.fecha);
+        return true;
+    }
+}
+
+
 function open_carro(){
     
+    var t_pedido = tiene_pedido();
+        
     var pedido = get_pedido();    
     if(pedido.id_ped == 0){
         
@@ -607,6 +623,8 @@ function show_modal(clase){
     $('.modal').hide();
     $('.modals, .'+clase).show();
     modal = 1;
+    console.log("show modal "+clase);
+    
 }
 function hide_modal(){
     modal = 0;
