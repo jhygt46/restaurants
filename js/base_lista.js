@@ -146,7 +146,7 @@ function add_carro_promocion(id_cae){
     }
     set_cantidad(1);
     localStorage.setItem("carro", JSON.stringify(carro));
-    if(proceso(true, false)){
+    if(proceso(true, true)){
         process_carro();
         show_modal('paso_01');
     }
