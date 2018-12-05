@@ -64,12 +64,18 @@ function tiene_pedido(){
         return false;
     }
     if(pedido.id_ped > 0){
+        
         var limit = new Date().getTime() - 7200000;
+        console.log("TIME 1: "+pedido.fecha);
+        console.log("TIME 2: "+limit);
+        
         if(pedido.fecha > limit){
             return true;
         }else{
-            return nuevo();
+            nuevo();
+            return false;
         }
+        
     }
     
 }
@@ -1073,6 +1079,4 @@ function nuevo(){
     borrar_carro();
     set_pedido(null);
     $('.cantcart_num').html(0);
-    hide_modal();
-    return false;
 }
