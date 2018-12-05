@@ -726,11 +726,6 @@ function paso_4(){
                 
                 $.getScript("http://35.196.220.197/socket.io/socket.io.js", function(data, textStatus, jqxhr) {
                     
-                    console.log(data); //data returned
-                    console.log(textStatus); //success
-                    console.log(jqxhr.status); //200
-                    console.log('Load was performed.');
-                    
                     open_socket("fherueggr");
                     
                 });
