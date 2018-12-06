@@ -19,15 +19,12 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     
     $id_gir = $_GET["id_gir"];
     $fireapp->is_giro($id_gir);
-    $info = $fireapp->get_giro();
-    $paso = $fireapp->paso_giro();
-    $titulo = $info['nombre'];
     
 }
 
 if($_SESSION['user']['info']['id_user'] == 1){
     echo "<div class='panel_admin'>";
-    echo "<div class='data_info'>pages/base/ver_giro.php</div>";
+    echo "<div class='data_info'>pages/base/ver_informe.php</div>";
     echo "</div>";
 }
 
