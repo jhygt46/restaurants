@@ -281,50 +281,50 @@ class Guardar extends Core{
         $code = bin2hex(openssl_random_pseudo_bytes(10));
         
         $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-        if($verificar_dominio['count'] == 0 && $this->verificar_dominio($dominio)){
-        
-            if($id == 0){
-                $sql = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
-                if($sql['estado']){
-                    $id_gir = $sql['insert_id'];
-                    $sql2 = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
-                    if($sql2['estado']){
-                        $info['op'] = 1;
-                        $info['mensaje'] = "Giro creado exitosamente";
-                        if($this->admin == 0){
-                            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
-                        }
-                        if($this->admin == 1){
-                            $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+        if($this->verificar_dominio($dominio)){
+            if($verificar_dominio['count'] == 0){
+                if($id == 0){
+                    $sql = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
+                    if($sql['estado']){
+                        $id_gir = $sql['insert_id'];
+                        $sql2 = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
+                        if($sql2['estado']){
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Giro creado exitosamente";
+                            if($this->admin == 0){
+                                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                            }
+                            if($this->admin == 1){
+                                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                            }
+                        }else{
+                            $info['op'] = 2;
+                            $info['mensaje'] = "Se produjo un error: intente mas tarde";
                         }
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "Se produjo un error: intente mas tarde";
                     }
-                }else{
-                    $info['op'] = 2;
-                    $info['mensaje'] = "Se produjo un error: intente mas tarde";
                 }
-            }
-
-            if($id > 0){
-                $sql = $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
-                if($sql['estado']){
-                    $info['op'] = 1;
-                    $info['mensaje'] = "Giro modificado exitosamente";
-                }else{
-                    $info['op'] = 2;
-                    $info['mensaje'] = "Se produjo un error: intente mas tarde";
+                if($id > 0){
+                    $sql = $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
+                    if($sql['estado']){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Giro modificado exitosamente";
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "Se produjo un error: intente mas tarde";
+                    }
                 }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Error: Dominio Ya Existe";
             }
-        
         }else{
-            
             $info['op'] = 2;
-            $info['mensaje'] = "Error: Dominio Ya Existe";
-            
+            $info['mensaje'] = "Error: Dominio Invalido";
         }
-
+        
         $info['reload'] = 1;
         $info['page'] = "base/giros.php";
         return $info;
