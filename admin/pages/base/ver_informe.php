@@ -21,9 +21,13 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     $fireapp->is_giro($id_gir);
     $giro = $fireapp->get_giro();
     
-    echo "<pre>";
-    print_r($giro);
-    echo "</pre>";
+    
+    $giro_nombre = $giro['nombre'];
+    $giro_dominio = $giro['dominio'];
+    
+    echo file_get_contents("http://".$giro_dominio."?accion=verificar_dominio_online");
+    echo "<br>";
+    echo file_get_contents("https://".$giro_dominio."?accion=verificar_dominio_online");
     
 }
 

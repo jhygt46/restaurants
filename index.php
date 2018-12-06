@@ -1,5 +1,10 @@
 <?php
 
+if($_GET["accion"] == "verificar_dominio_online"){
+    die("X403-Y202-Z703");
+}
+
+
 date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
