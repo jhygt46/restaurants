@@ -3,7 +3,6 @@ session_start();
 
 require_once("../../class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
 
 
 /* CONFIG PAGE */
@@ -28,6 +27,13 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
 }
 
+if($_SESSION['user']['info']['id_user'] == 1){
+    echo "<div style='padding-top: 20px'>";
+    echo "<div style='font-size: 28px; font-weight: bold'>".$accion."</div>";
+    echo "<div style='font-size: 28px; font-weight: bold'>".$eliminaraccion."</div>";
+    echo "<div style='font-size: 28px; font-weight: bold'>configurar_giro.php</div>";
+    echo "</div>";
+}
 
 
 ?>

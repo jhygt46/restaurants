@@ -233,11 +233,9 @@ function confirmar_pregunta_productos(that){
                 alert("FALTA SELECCIONAR "+diff+" OPCIONES");
             }
             if(diff == 0){
-                
                 carros[i].preguntas[k].valores[m].seleccionados = valores;
                 localStorage.setItem("carro", JSON.stringify(carros));
                 if(preguntas_promo(carros[i])){
-                    
                     if(paso == 2){
                         if(proceso(true, true)){
                             show_modal('paso_02');
@@ -245,9 +243,7 @@ function confirmar_pregunta_productos(that){
                     }else{
                         hide_modal();
                     }
-                    
                 }
-                
             }
         });
     });

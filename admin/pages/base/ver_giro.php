@@ -7,6 +7,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "/var/www/html/restaurants/";
 }
 
+$admin = $_SESSION['user']['info']['id_user'];
+
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
@@ -24,6 +26,13 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     $titulo = $info['nombre'];
     
 }
+
+if($_SESSION['user']['info']['id_user'] == 1){
+    echo "<div class='panel_admin'>";
+    echo "<div class='data_info'>pages/base/ver_giro.php</div>";
+    echo "</div>";
+}
+
 ?>
 <div class="title">
     <h1><?php echo $titulo; ?></h1>

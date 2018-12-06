@@ -167,13 +167,21 @@ class Guardar extends Core{
     private function configurar_footer(){
         
         $texto = $_POST['texto'];        
-        $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
+        $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
         
-        $info['op'] = 1;
-        $info['mensaje'] = "Footer modificado exitosamente";
-        
-        $info['reload'] = 1;
-        $info['page'] = "apps/configurar_giro.php";
+        if($sql['estado']){
+            $info['op'] = 1;
+            $info['mensaje'] = "Footer modificado exitosamente";
+            $info['reload'] = 1;
+            $info['page'] = "apps/configurar_giro.php";
+            $this->con_cambios();
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Se produjo un error: porfavor intente mas tarde";
+            $info['reload'] = 1;
+            $info['page'] = "apps/configurar_giro.php";
+        }
+
         return $info;
         
     }
@@ -255,9 +263,16 @@ class Guardar extends Core{
         return $info;
         
     }
-    
-    
-    
+    private function verificar_dominio($dominio){
+        
+        $aux = explode(".", $dominio);
+        if($aux[0] == "www" && strlen(aux[1]) > 0 && strlen(aux[2]) > 0){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
     private function crear_giro(){
         
         $id = $_POST['id'];
@@ -265,27 +280,48 @@ class Guardar extends Core{
         $dominio = $_POST['dominio'];
         $code = bin2hex(openssl_random_pseudo_bytes(10));
         
-        if($id == 0){
-            
-            $aux = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
-            $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$aux['insert_id']."')");
-            
-            $info['op'] = 1;
-            $info['mensaje'] = "Giro creado exitosamente";
-            
-            if($this->admin == 0){
-                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+        $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+        if($verificar_dominio['count'] == 0 && $this->verificar_dominio($dominio)){
+        
+            if($id == 0){
+                $sql = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
+                if($sql['estado']){
+                    $id_gir = $sql['insert_id'];
+                    $sql2 = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
+                    if($sql2['estado']){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Giro creado exitosamente";
+                        if($this->admin == 0){
+                            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                        }
+                        if($this->admin == 1){
+                            $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+                        }
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "Se produjo un error: intente mas tarde";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Se produjo un error: intente mas tarde";
+                }
             }
-            if($this->admin == 1){
-                $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$aux['insert_id']."')");
+
+            if($id > 0){
+                $sql = $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
+                if($sql['estado']){
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Giro modificado exitosamente";
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Se produjo un error: intente mas tarde";
+                }
             }
+        
+        }else{
             
-        }
-        if($id > 0){
-            
-            $this->con->sql("UPDATE giros SET nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Giro modificado exitosamente";
+            $info['op'] = 2;
+            $info['mensaje'] = "Error: Dominio Ya Existe";
             
         }
 
@@ -407,6 +443,9 @@ class Guardar extends Core{
             $info['mensaje'] = "Local modificado exitosamente";
         }
         
+        $aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET retiro_local='1', lista_locales='".json_encode($aux['resultado'])."' WHERE id_gir='".$this->id_gir."'");
+        
         $info['reload'] = 1;
         $info['page'] = "apps/locales.php";
         return $info;
@@ -421,14 +460,23 @@ class Guardar extends Core{
         $pol = $_POST['posiciones'];
         
         if($id_lot == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc, eliminado) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."', '0')");
+            $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc, eliminado) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."', '0')");
             $info['op'] = 1;
             $info['mensaje'] = "Tramo creado exitosamente";
         }
         if($id_lot > 0){
-            $info['db1'] = $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
+            $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
             $info['op'] = 1;
             $info['mensaje'] = "Tramo modificado exitosamente";
+        }
+        
+        $aux = $this->con->sql("SELECT MIN(t3.precio) as min FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t3.eliminado='0' AND t2.eliminado='0'");
+        $min = $aux['resultado'][0]['min'];
+        
+        if($min !== null){
+            $this->con->sql("UPDATE giros SET despacho_domicilio='1', desde='".$min."' WHERE id_gir='".$this->id_gir."'");
+        }else{
+            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
         }
         
         $info['reload'] = 1;

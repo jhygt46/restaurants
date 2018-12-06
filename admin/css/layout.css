@@ -1623,6 +1623,14 @@ body {
     width: 45px;
 }
 
+.panel_admin{
+    
+}
+.panel_admin .data_info{
+    font-size: 28px;
+    font-weight: bold
+}
+
 
     
 @keyframes scale {

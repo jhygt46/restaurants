@@ -3,6 +3,7 @@ session_start();
 unset($_SESSION['user']['id_gir']);
 unset($_SESSION['user']['id_cat']);
 
+
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
 }else{
@@ -33,8 +34,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     $sub_titulo = $sub_titulo2;
     $that = $fireapp->get_giro($_GET["id"]);
     $id = $_GET["id"];
-
     
+}
+
+if($_SESSION['user']['info']['id_user'] == 1){
+    echo "<div class='panel_admin'>";
+    echo "<div class='data_info'>".$accion."</div>";
+    echo "<div class='data_info'>".$eliminaraccion."</div>";
+    echo "<div class='data_info'>".$page_mod."</div>";
+    echo "</div>";
 }
 
 
