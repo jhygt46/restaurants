@@ -19,6 +19,11 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     
     $id_gir = $_GET["id_gir"];
     $fireapp->is_giro($id_gir);
+    $giro = $fireapp->get_giro();
+    
+    echo "<pre>";
+    print_r($giro);
+    echo "</pre>";
     
 }
 
