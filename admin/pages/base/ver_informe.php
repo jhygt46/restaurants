@@ -37,39 +37,3 @@ if($_SESSION['user']['info']['id_user'] == 1){
     </ul>
 </div>
 <hr>
-<div class="info" onclick="navlink('<?php echo $paso; ?>')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Catalogo de Productos</div>
-        <div class="name2">Ingresa todas las categorias y productos</div>
-        <div class="go_app"></div>
-    </div>
-</div>
-<div class="info" onclick="navlink('pages/apps/locales.php')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Locales</div>
-        <div class="name2">Ingresa la informacion de tus locales</div>
-        <div class="go_app"></div>
-    </div>
-</div>
-<div class="info" onclick="navlink('pages/apps/configurar_giro.php')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Configuracion</div>
-        <div class="name2">Configura tu sitio web</div>
-        <div class="go_app"></div>
-    </div>
-</div>
-<div class="info" onclick="navlink('pages/base/usuarios.php')">
-    <div class="fc" id="info-0" style="height: 54px">
-        <div class="minimizar m1"></div>
-        <div class="close"></div>
-        <div class="name">Usuarios</div>
-        <div class="name2">Agrega o elimina usuarios</div>
-        <div class="go_app"></div>
-    </div>
-</div>
