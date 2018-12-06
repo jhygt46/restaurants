@@ -24,16 +24,23 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     $giro_nombre = $giro['nombre'];
     $giro_dominio = $giro['dominio'];
     
-    $http_code = file_get_contents("http://".$giro_dominio."?accion=verificar_dominio_online");
-    $https_code = file_get_contents("https://".$giro_dominio."?accion=verificar_dominio_online");
+    $send['accion'] = "verificar_dominio_online";
     
-    if($http_code == "X403-Y202-Z703"){
-        echo "SITIO SIN SEGURIDAD ARRIBA";
-    }
-    if($https_code == "X403-Y202-Z703"){
-        echo "SITIO CON SEGURIDAD ARRIBA";
-    }
+    $ch1 = curl_init();
+    curl_setopt($ch1, CURLOPT_URL, 'http://'.$giro_dominio);
+    curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch1, CURLOPT_POSTFIELDS, http_build_query($send));
+    echo curl_exec($ch1);
+    curl_close($ch1);
     
+    $ch2 = curl_init();
+    curl_setopt($ch2, CURLOPT_URL, 'https://'.$giro_dominio);
+    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch2, CURLOPT_POSTFIELDS, http_build_query($send));
+    echo curl_exec($ch2);
+    curl_close($ch2);
+    
+    //X403-Y202-Z703
     
 }
 

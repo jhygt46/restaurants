@@ -1,6 +1,6 @@
 <?php
 
-if($_GET["accion"] == "verificar_dominio_online"){
+if($_POST["accion"] == "verificar_dominio_online"){
     die("X403-Y202-Z703");
 }
 
