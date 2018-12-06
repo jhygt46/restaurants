@@ -11,7 +11,6 @@ class Core{
     public $id_gir = null;
     public $id_cat = null;
     public $require = [];
-
     public function __construct(){
         $this->con = new Conexion();
         $this->id_user = $_SESSION['user']['info']['id_user'];
@@ -20,7 +19,6 @@ class Core{
         $this->id_cat = $_SESSION['user']['id_cat'];
         //echo $_SERVER['PHP_SELF'];
     }
-
     public function seguridad_if($arr){
         
         for($i=0; $i<count($arr); $i++){
@@ -57,7 +55,6 @@ class Core{
         $_SESSION['user']['id_cat'] = $id_cat;
     }
     public function is_giro($id_gir){
-                
         if($this->admin == 0){
             $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
             if($count['count'] == 1){
@@ -76,7 +73,6 @@ class Core{
                 die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
             }
         }
-        
     }
     public function is_catalogo($id_cat){
                 
@@ -100,7 +96,6 @@ class Core{
         }
         
     }
-    
     public function paso_giro(){
         
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
@@ -123,10 +118,6 @@ class Core{
     public function get_footer(){
         $footer = $this->con->sql("SELECT footer_html FROM giros WHERE id_gir='".$this->id_gir."'");
         return $footer['resultado'][0]['footer_html'];
-    }
-    public function get_giros(){
-        $giros = $this->con->sql("SELECT * FROM giros WHERE id_user='".$this->id_user."' AND eliminado='0'");
-        return $giros['resultado'];
     }
     public function get_giros_user(){
         if($this->admin == 0){ $giros = $this->con->sql("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros t1, giros t2 WHERE t1.id_user='".$this->id_user."' AND t1.id_gir=t2.id_gir AND t2.eliminado='0'"); }
@@ -535,7 +526,6 @@ class Core{
         return $preguntas;
         
     }
-    
     public function get_web_js_data($id_gir){
         
         $giros_sql = $this->con->sql("SELECT code, catalogo FROM giros WHERE id_gir='".$id_gir."'");
@@ -654,8 +644,6 @@ class Core{
         return $aux_return;
 
     }
-    
-    
     public function get_arbol_productos($that){
         $cats = $this->con->sql("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat='".$this->id_cat."' AND t1.eliminado='0' AND tipo='0'");
         return $this->process_arbol_draw($cats['resultado'], 0, $that);
