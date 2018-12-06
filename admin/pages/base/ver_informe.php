@@ -11,7 +11,7 @@ require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
 /* CONFIG PAGE */
-$titulo_list = "Aplicaciones";
+$titulo_list = "Informe ".$_GET["nombre"];
 /* CONFIG PAGE */
 
 $id_gir = 0;
@@ -30,7 +30,7 @@ if($_SESSION['user']['info']['id_user'] == 1){
 
 ?>
 <div class="title">
-    <h1><?php echo $titulo; ?></h1>
+    <h1><?php echo $titulo_list; ?></h1>
     <ul class="clearfix">
         <li class="reload" onclick="refresh()"></li>
         <li class="back" onclick="backurl()"></li>
