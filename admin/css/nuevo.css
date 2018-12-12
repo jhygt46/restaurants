@@ -1,0 +1,32 @@
+form {
+  width: 100%;
+  display: block;
+}
+form fieldset .columna_2 li {
+  float: left;
+}
+form fieldset .columna_3 li {
+  float: left;
+}
+
+.form_style_01 {
+  background: #999;
+  padding: 2px;
+}
+.form_style_01 fieldset {
+  background: #ddd;
+}
+.form_style_01 fieldset .columna_2 {
+  height: 200px;
+}
+.form_style_01 fieldset .columna_2 li {
+  width: 50%;
+}
+.form_style_01 fieldset .columna_3 {
+  height: 200px;
+}
+.form_style_01 fieldset .columna_3 li {
+  width: 33.33%;
+}
+
+/*# sourceMappingURL=nuevo.css.map */

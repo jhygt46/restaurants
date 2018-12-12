@@ -3,7 +3,7 @@
 require('admin/class/core_class.php');
 $core = new Core();
 
-$info = $core->get_data('www.mikasushi.cl');
+$info = $core->get_data('www.izusushi.cl');
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
 
 if($code === null){

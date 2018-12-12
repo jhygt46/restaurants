@@ -126,6 +126,17 @@ function form(){
     return false;
 }
 
+function formulario(that){
+    
+    $(that).parents('form').find('input').each(function(){
+        
+        console.log($(this));
+        
+    })
+    
+}
+
+
 function mensaje(op, mens){
     
     if(op == 1){

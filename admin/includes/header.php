@@ -16,7 +16,8 @@
     $header['layout']['css'][1] = "css/sweetalert.css";
     $header['layout']['css'][2] = "css/jquery-ui.min.css";
     $header['layout']['css'][3] = "css/jquery-ui-timepicker-addon.css";
-
+    $header['layout']['css'][4] = "css/nuevo.css";
+    
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
