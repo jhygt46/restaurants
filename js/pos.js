@@ -10,7 +10,6 @@ function verpedidos(){
 
 function actualizar_pedidos(){
     
-    var pedidos = get_pedidos();
     $('.lista_pedidos').html('');
     pedidos.forEach(function(pedido, index){
         $('.lista_pedidos').append(html_home_pedidos(pedido, index));
@@ -144,19 +143,22 @@ function np_close(that){
 function html_home_pedidos(obj, index){
 
     var total = 0;
-    var pro, cat;
+    var pro, cat, carro, promos;
+    carro = JSON.parse(obj.carro);
+    promos = JSON.parse(obj.promos);
     if(obj.carro){
-        obj.carro.forEach(function(carro_item, index){
-            pro = get_producto(carro_item.id_pro);
-            total = total + parseInt(pro.precio);
+        carro.forEach(function(carro_item, index){
+            //pro = get_producto(carro_item.id_pro);
+            //total = total + parseInt(pro.precio);
         });
     }
     if(obj.promos){
-        obj.promos.forEach(function(promo_item, index){
+        promos.forEach(function(promo_item, index){
             cat = get_categoria(promo_item.id_cae);
             total = total + parseInt(cat.precio);
         });
     }
+    
     var Div = create_element_class('pedido');
     
     var p_num = create_element_class_inner('p_num', 'Pedido #476');

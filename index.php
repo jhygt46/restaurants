@@ -26,6 +26,12 @@ if($info['id_gir'] != 0){
     //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
     //if($info['con_cambios'] == 1){
         $data = $core->get_web_js_data2($info['id_gir']);
+        
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        
+        exit;
     //}
     
     
@@ -91,7 +97,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_pagina">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>
@@ -100,7 +106,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carta">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class="buena"></h1><h2></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal"></div>
                             </div>
@@ -110,7 +116,7 @@ if($info['id_gir'] != 0){
                         <div class="cont_modal">
                             
                             <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
                             </div>
@@ -123,7 +129,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_pregunta_productos">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
                             </div>
@@ -137,7 +143,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_01">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_01_titulo"]; ?></h1><h2><?php echo $info["pedido_01_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px"></div>
                             </div>
@@ -158,7 +164,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_02">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_02_titulo"]; ?></h1><h2><?php echo $info["pedido_02_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal">
                                     <div class="cont_direccion">
@@ -179,7 +185,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_02a">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_02_titulo"]; ?></h1><h2><?php echo $info["pedido_02_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal">
                                     <div class="cont_direccion">
@@ -210,7 +216,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_02b">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_02_titulo"]; ?></h1><h2><?php echo $info["pedido_02_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal">
                                     <div class="cont_direccion">
@@ -231,7 +237,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_03">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1><?php echo $info["pedido_03_titulo"]; ?></h1><h2><?php echo $info["pedido_03_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 116px">
                                     
@@ -317,7 +323,7 @@ if($info['id_gir'] != 0){
                     <div class="modal vhalign hide modal_carro paso_04">
                         <div class="cont_modal">
                             <div class="titulo"><div class="cont_titulo valign"><h1 class=""><?php echo $info["pedido_04_titulo"]; ?></h1><h2 class=""><?php echo $info["pedido_04_subtitulo"]; ?></h2></div></div>
-                            <div class="close material-icons">close</div>
+                            <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
                                 <div class="info_modal_pedido" style="padding-bottom: 57px">
                                     

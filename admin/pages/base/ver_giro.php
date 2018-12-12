@@ -24,6 +24,8 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     $giro = $fireapp->get_giro();
     $catalogos = $fireapp->get_catalogos();
     
+    $paso = $fireapp->paso_giro();
+    
     $num_cats = $giro['catalogo'];
     $mis_cats = count($catalogos);
 

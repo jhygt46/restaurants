@@ -22,7 +22,10 @@ function render_pagina(){
     }
 
 }
-
+function close_that(that){
+    $('.modals').hide();
+    $(that).parents('.modal').hide();
+}
 function open_categoria(id){
     
     var tp = tiene_pedido();

@@ -462,6 +462,7 @@ class Core{
         
         for($i=0; $i<$giro['count']; $i++){
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);
+            
         }
         
         if($_SERVER['HTTP_HOST'] == "localhost"){
