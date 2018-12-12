@@ -23,9 +23,6 @@ $(document).click(function (e) {
     if($(e.target).hasClass('cont_modals')){
         hide_modal();
     }
-    if($(e.target).hasClass('close')){
-        hide_modal();
-    }
 });
 
 
