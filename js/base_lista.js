@@ -770,6 +770,8 @@ function paso_4(){
                     $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
                 }                
                 
+                $('.pedido_mensaje').show();
+                
                 show_modal_4(pedido);
                 set_pedido(pedido);
                 paso = 1;
