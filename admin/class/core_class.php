@@ -282,7 +282,7 @@ class Core{
             $info['js_detalle'] = $path."/js/detalle.js";
 
             $info['id_ped'] = $sql['resultado'][0]['id_ped'];
-            $info['pedido'] = $sql['resultado'][0]['pedido'];
+            $info['pep'] = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
             $info['carro'] = $sql['resultado'][0]['carro'];
             $info['promos'] = $sql['resultado'][0]['promos'];
             

@@ -11,9 +11,11 @@ if(isset($_GET['code'])){
     if($info['op']){
         
         $id_ped = $info["id_ped"];
-        $pedido = json_decode($info["pedido"]);
-        $preguntas = $pedido->{'preguntas'};
-        $total = intval($pedido->{'total'});
+        $pep = $info['pep'];
+        
+        echo "<pre>";
+        print_r($pep);
+        echo "</pre>";
         
         $despacho = $pedido->{'despacho'};
         
