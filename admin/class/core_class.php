@@ -301,6 +301,7 @@ class Core{
             $info['total'] = $sql['resultado'][0]['total'];
             
             $info['verify_despacho'] = $sql['resultado'][0]['verify_despacho'];
+            $info['verify_direccion'] = $aux_pep['resultado'][0]['verificado'];
             
             $info['op'] = true;
             
