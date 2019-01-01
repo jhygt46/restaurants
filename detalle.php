@@ -13,10 +13,6 @@ if(isset($_GET['code'])){
         $id_ped = $info["id_ped"];
         $pep = $info['pep'];
         
-        echo "<pre>";
-        print_r($pep);
-        echo "</pre>";
-        
         $despacho = $pedido->{'despacho'};
         
         if($despacho == 0){
@@ -66,15 +62,19 @@ if(isset($_GET['code'])){
             <div class="lista_de_productos padding_01 borbottom"></div>
             <?php if($preguntas->{'wasabi'} == 1 || $preguntas->{'gengibre'} == 1 || $preguntas->{'embarazadas'} == 1 || $preguntas->{'palitos'} > 0){ ?>
             <div class="contacto padding_01 borbottom">
-                <?php if($preguntas->{'wasabi'} == 1){ ?><div class="txtcen font_04">Wasabi</div><?php } ?>
-                <?php if($preguntas->{'gengibre'} == 1){ ?><div class="txtcen font_04">Gengibre</div><?php } ?>
-                <?php if($preguntas->{'embarazadas'} == 1){ ?><div class="txtcen font_04">Embarazada</div><?php } ?>
-                <?php if($preguntas->{'palitos'} > 0){ ?><div class="txtcen font_04">Palitos: <?php echo $preguntas->{'palitos'}; ?></div><?php } ?>
+                
+                <?php if($info['pre_wasabi'] == 1){ ?><div class="txtcen font_04">Wasabi</div><?php } ?>
+                <?php if($info['pre_gengibre'] == 1){ ?><div class="txtcen font_04">Gengibre</div><?php } ?>
+                <?php if($info['pre_embarazadas'] == 1){ ?><div class="txtcen font_04">Embarazadas</div><?php } ?>
+                <?php if($info['pre_palitos'] == 1){ ?><div class="txtcen font_04">Palitos</div><?php } ?>
+                <?php if($info['pre_soya'] == 1){ ?><div class="txtcen font_04">Soya</div><?php } ?>
+                <?php if($info['pre_teriyaki'] == 1){ ?><div class="txtcen font_04">Teriyaki</div><?php } ?>
+                
             </div>
             <?php } ?>            
             <div class="contacto padding_01 borbottom">
-                <div class="txtcen font_02"><?php echo $pedido->{'nombre'}; ?></div>
-                <div class="txtcen font_03"><?php echo $pedido->{'telefono'}; ?></div>
+                <div class="txtcen font_02"><?php echo $pep['nombre']; ?></div>
+                <div class="txtcen font_03"><?php echo $pep['telefono']; ?></div>
                 <?php 
                     if($despacho == 0){
                 ?>
@@ -86,8 +86,8 @@ if(isset($_GET['code'])){
                     
                 ?>
                 <div class="txtcen font_03 strong pddtop_01">Despacho a Domicilio</div>
-                <div class="txtcen font_03"><?php echo $despacho_domicilio->{'calle'}; ?> <?php echo $despacho_domicilio->{'num'}; ?> <?php if($despacho_domicilio->{'depto'} != ""){ ?>Depto: <?php echo $despacho_domicilio->{'depto'}; ?><?php } ?></div>
-                <div class="txtcen font_04"><?php echo $despacho_domicilio->{'comuna'}; ?></div>
+                <div class="txtcen font_03"><?php echo $pep['calle']; ?> <?php echo $pep['num']; ?> <?php if($pep['depto'] != ""){ ?>Depto: <?php echo $pep['depto']; ?><?php } ?></div>
+                <div class="txtcen font_04"><?php echo $pep['comuna']; ?></div>
                 <?php } ?>
             </div>
             <div class="total padding_01 borbottom">

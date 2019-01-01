@@ -282,12 +282,22 @@ class Core{
             $info['js_detalle'] = $path."/js/detalle.js";
 
             $info['id_ped'] = $sql['resultado'][0]['id_ped'];
-            $info['pep'] = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
+            $aux_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
+            $info['pep'] = $aux_pep['resultado'][0];
+            
             $info['carro'] = $sql['resultado'][0]['carro'];
             $info['promos'] = $sql['resultado'][0]['promos'];
             
+            $info['pre_wasabi'] = $sql['resultado'][0]['pre_wasabi'];
+            $info['pre_gengibre'] = $sql['resultado'][0]['pre_gengibre'];
+            $info['pre_embarazadas'] = $sql['resultado'][0]['pre_embarazadas'];
+            $info['pre_palitos'] = $sql['resultado'][0]['pre_palitos'];
+            $info['pre_teriyaki'] = $sql['resultado'][0]['pre_teriyaki'];
+            $info['pre_soya'] = $sql['resultado'][0]['pre_soya'];
+            
+            $info['comentarios'] = $sql['resultado'][0]['comentarios'];
+            
             $info['verify_despacho'] = $sql['resultado'][0]['verify_despacho'];
-            $info['verify_direccion'] = $sql['resultado'][0]['verify_direccion'];
             
             $info['op'] = true;
             
