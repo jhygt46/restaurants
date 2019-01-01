@@ -414,6 +414,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 .paso_04 .cont_modal .titulo h1 {
   font-size: 30px !important;
 }
+.paso_04 .cont_modal .info_modal .pedido_mensaje {
+  margin: 15px 25px 0px 25px;
+  font-size: 15px;
+  background: #fcc;
+  padding: 10px;
+  color: #600;
+}
 .paso_04 .cont_modal .info_modal .pedido_final {
   padding: 10px;
 }
