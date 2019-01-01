@@ -735,10 +735,6 @@ function paso_4(){
     pedido.telefono = $('#pedido_telefono').val();
     pedido.depto = $('#pedido_depto').val();
 
-    var pep = get_pep();
-    pedido.id_pep = pep.id_pep;
-    pedido.pep_code = pep.pep_code;
-
     pedido.pre_gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
     pedido.pre_wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
     pedido.pre_embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
@@ -770,14 +766,7 @@ function paso_4(){
                 }
                 if(pedido.despacho == 1){
                     pedido.time = 60;
-                }
-                
-                if(data.nuevo_pep == 1){
-                    var pep = get_pep();
-                    pep.id_pep = data.id_pep;
-                    pep.pep_code = data.pep_code;
-                    set_pep(pep);
-                }
+                }                
                 
                 show_modal_4(pedido);
                 set_pedido(pedido);
