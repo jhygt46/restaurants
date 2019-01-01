@@ -133,6 +133,7 @@ class Rest{
         $lat = $aux_pedido->{'lat'};
         $lng = $aux_pedido->{'lng'};
         $costo = $aux_pedido->{'costo'};
+        $total = $aux_pedido->{'total'};
         
         if($nombre != "" && $telefono != "+569 "){
             
@@ -200,7 +201,7 @@ class Rest{
             $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep) VALUES ('".$pedido_code."', now(), '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep, costo, total) VALUES ('".$pedido_code."', now(), '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."', '".$costo."', '".$total."')");
             $id_ped = $pedido_sql['insert_id'];
 
             $info['id_pep'] = $id_pep;
