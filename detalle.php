@@ -101,7 +101,7 @@ if(isset($_GET['code'])){
         
         
         
-        
+        <!--
         <div class="lista_de_productos"></div>
         <div class="info_cliente">
             <div class="direccion"><?php echo $info["direccion"]; ?></div>
@@ -122,7 +122,7 @@ if(isset($_GET['code'])){
             <div class="wasabi">Costo Pedido: $<?php echo $info["total"]; ?></div>
             <div class="wasabi">Total: $<?php $total = $info["total"] + $info["costo"]; echo $total; ?></div>
         </div>
-        
+        -->
     </body>
 </html>
 
