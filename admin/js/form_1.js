@@ -1,4 +1,8 @@
-function form(){
+function form(that){
+    
+    console.log("BUENA");
+    return;
+    
     
     var inputs = new Array();
     var selects = new Array();

@@ -411,5 +411,53 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 .paso_03 .sub_total .cont_subtotal .total_detalle {
   right: 6px;
 }
+.paso_04 .cont_modal .titulo h1 {
+  font-size: 30px !important;
+}
+.paso_04 .cont_modal .info_modal .pedido_final {
+  padding: 10px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido {
+  margin: 0px 15px;
+  background: #ddd;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .estado {
+  width: 46%;
+  float: left;
+  display: block;
+  padding: 2%;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .estado h1 {
+  font-size: 12px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .estado h2 {
+  font-size: 16px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .tiempo {
+  width: 46%;
+  float: left;
+  display: block;
+  padding: 2%;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .tiempo h1 {
+  font-size: 12px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .cont_pedido .tiempo h2 {
+  font-size: 16px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .posicion {
+  height: 240px;
+  background: #ccc;
+  display: block;
+  margin: 0px 15px;
+}
+.paso_04 .cont_modal .info_modal .pedido_final .total {
+  font-size: 24px;
+  text-align: right;
+  display: block;
+  margin: 0 15px;
+  background: #ddd;
+  padding: 2%;
+}
 
 /*# sourceMappingURL=css_tipo_01.css.map */

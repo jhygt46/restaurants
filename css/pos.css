@@ -25,57 +25,114 @@ body {
     width: 100%;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido{
-    width: 700px;
-    height: 400px;
+    width: 90%;
+    max-width: 460px;
+    height: 80%;
+    max-height: 560px;
     background: #fff;
     border-radius: 12px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_title{
-    font-size: 30px;
+    font-size: 24px;
     color: #000;
     position: absolute;
-    top: 15px;
-    left: 20px;
+    top: 10px;
+    left: 5%;
+    height: 40px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info{
-    width: 680px;
-    height: 330px;
-    left: 10px;
-    top: 60px;
-    background: #fcc;
+    width: 90%;
+    margin: 0 5%;
+    height: calc(100% - 95px);
+    top: 50px;
+    background: #ddd;
     position: absolute;
+    overflow-y: auto;   
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1{
-    width: 36%;
-    float: left;
-    padding: 2%;
-}
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_a{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info{
     
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_a .n_info1_a0{
-    width: 50%;
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel{
+    padding: 10px 10px 0px 10px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel span{
+    display: block;
+    font-size: 16px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel input{
+    width: 100%;
+    height: 28px;
+    border: 0px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel select{
+    width: 100%;
+    height: 28px;
+    border: 0px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel .nom{
+    float: left;
+    width: 46%;
+    padding: 0 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel .tel{
+    float: left;
+    width: 46%;
+    padding: 0 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel .direccion{
+    width: 72%;
+    padding: 0 2%;
     float: left;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b{
-    
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel .tipo{
+    width: 96%;
+    padding: 0 2%;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b .n_info1_b0{
-    font-size: 14px
-}
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info1 .n_info1_b .n_info1_b1{
-    
-}
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .n_info2{
-    width: 56%;
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel .depto{
+    width: 20%;
+    padding: 0 2%;
     float: left;
-    padding: 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas{
+    padding: 15px 10px 0px 10px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta{
+    padding: 0 2%;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .pre_nom{
+    width: 90%;
+    float: left;
+    font-size: 14px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .pre_check{
+    width: 10%;
+    float: left;
+    text-align: right;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .pre_check input{
+    width: 16px;
+    height: 16px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_submit{
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_submit input{
+    width: 120px;
+    height: 30px;
+    background: #999;
+    margin: 0 auto;
+    border: 0px;
+    color: #fff;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .np_close{
     width: 50px;
     height: 50px;
-    right: -55px;
-    top: -55px;
+    right: -45px;
+    top: -45px;
     background: #000;
     position: absolute;
     border-radius: 25px;
@@ -157,62 +214,145 @@ body {
     background: #c99;
     color: #fff;
 }
+.pedidos .contenido .lista_pedidos .pedido .p_cont{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 125px;
+    z-index: 2;
+}
 .pedidos .contenido .lista_pedidos .pedido .p_num{
     position: absolute;
     top: 10px;
     left: 10px;
     font-size: 14px;
+    z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_estado{
     position: absolute;
     top: 22px;
     left: 10px;
     font-size: 14px;
+    z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_precio{
     position: absolute;
     bottom: 10px;
     left: 10px;
     font-size: 20px;
+    z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_mod{
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background: #000;
+    z-index: 1;
+}
+.pedidos .contenido .lista_pedidos .pedido .btn_open{
+    position: absolute;
+    top: 10px;
+    right: 44px;
+    width: 30px;
+    height: 30px;
+    background: #00f;
+    z-index: 1;
+}
+.pedidos .contenido .lista_pedidos .pedido .btn_carro{
+    position: absolute;
+    top: 10px;
+    right: 78px;
+    width: 30px;
+    height: 30px;
+    background: #ccc;
+    z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
-    bottom: 10px;
+    bottom: 8px;
     right: 10px;
-    width: 140px;
-    background: #ccc;
+    width: 114px;
+    background: #000;
+    z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones .p_anterior{
-    width: 25px;
+    width: 20px;
     float: left;
     height: 25px;
-    background: #999;
+    background: #666;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones .p_nombre{
-    width: 90px;
+    width: 74px;
     float: left;
     text-align: center;
-    font-size: 13px;
-    padding-top: 2px;
+    font-size: 11px;
+    padding-top: 4px;
+    color: #fff;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones .p_siguiente{
-    width: 25px;
+    width: 20px;
     float: left;
     height: 25px;
-    background: #999;
+    background: #666;
+}
+.pedidos .contenido .lista_pedidos .pedido .t_tiempo{
+    position: absolute;
+    bottom: 8px;
+    right: 130px;
+    width: 80px;
+    background: #000;
+    z-index: 1;
+}
+.pedidos .contenido .lista_pedidos .pedido .t_tiempo .t_anterior{
+    width: 20px;
+    float: left;
+    height: 25px;
+    background: #666;
+}
+.pedidos .contenido .lista_pedidos .pedido .t_tiempo .t_nombre{
+    width: 40px;
+    float: left;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 3px;
+    color: #fff;
+}
+.pedidos .contenido .lista_pedidos .pedido .t_tiempo .t_siguiente{
+    width: 20px;
+    float: left;
+    height: 25px;
+    background: #666;
 }
 
 .cont_sis{
     height: 100%;
     width: 100%;
+}
+.cont_sis .alert_socket{
+    display: block;
+    background: #fdd;
+    padding: 5px;
+    display: none;
+}
+.cont_sis .alert_socket .text{
+    display: block;
+    padding: 5px;
+    color: #900;
+    font-size: 18px;
+    border: 1px solid #900;
+}
+.cont_sis .alert_socket .text .text_1{
+    display: block;
+    color: #900;
+    font-size: 18px;
+}
+.cont_sis .alert_socket .text .text_2{
+    display: block;
+    color: #900;
+    font-size: 14px;
 }
 .categorias{
     width: 250px;

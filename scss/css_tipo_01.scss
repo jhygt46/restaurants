@@ -594,7 +594,58 @@ body {
     }
 }
 .paso_04 {
-    .info_modal_pedido{
-        
+    .cont_modal{
+        .titulo{
+            h1{
+                font-size: 30px !important;
+            }
+        }
+        .info_modal{
+            .pedido_final{
+                padding: 10px;
+                .cont_pedido{
+                    margin: 0px 15px;
+                    background: #ddd;
+                    .estado{
+                        width: 46%;
+                        float: left;
+                        display: block;
+                        padding: 2%;
+                        h1{
+                            font-size: 12px;
+                        }
+                        h2{
+                            font-size: 16px;
+                        }
+                    }
+                    .tiempo{
+                        width: 46%;
+                        float: left;
+                        display: block;
+                        padding: 2%;
+                        h1{
+                            font-size: 12px;
+                        }
+                        h2{
+                            font-size: 16px;
+                        }
+                    }
+                }
+                .posicion{
+                    height: 240px;
+                    background: #ccc;
+                    display: block;
+                    margin: 0px 15px;
+                }
+                .total{
+                    font-size: 24px;
+                    text-align: right;
+                    display: block;
+                    margin: 0 15px;
+                    background: #ddd;
+                    padding: 2%;
+                }
+            }
+        }
     }
 }

@@ -40,7 +40,6 @@ if(isset($_GET['code'])){
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var promos = <?php echo $info['promos']; ?>;
-            var pedido = <?php echo $info['pedido']; ?>;
             var costo = <?php echo $costo; ?>;
             var total = <?php echo $total; ?>;
         </script>
@@ -50,7 +49,7 @@ if(isset($_GET['code'])){
         <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         
     </head>
-    <body>
+    <body onload="window.print()">
         
         <div class="detalle">
             

@@ -25,6 +25,10 @@ class Rest{
         if($accion == "crear_dominio"){
             return $this->crear_dominio();
         }
+        if($accion == "get_pedido"){
+            return $this->get_pedido();
+        }
+        
     }
     public function crear_dominio(){
         
@@ -103,12 +107,32 @@ class Rest{
         }
         
     }
+    
     public function enviar_pedido(){
         
         $aux_pedido = json_decode($_POST['pedido']);
-        $nombre = $aux_pedido->{'nombre'};
-        $telefono = $aux_pedido->{'telefono'};
         $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
+        
+        $nombre = $aux_pedido->{'nombre'};
+        $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
+        
+        $pre_gengibre = $aux_pedido->{'pre_gengibre'};
+        $pre_wasabi = $aux_pedido->{'pre_wasabi'};
+        $pre_embarazadas = $aux_pedido->{'pre_embarazadas'};
+        $pre_palitos = $aux_pedido->{'pre_palitos'};
+        $pre_soya = $aux_pedido->{'pre_soya'};
+        $pre_teriyaki = $aux_pedido->{'pre_teriyaki'};
+        $comentarios = $aux_pedido->{'comentarios'};
+        $despacho = $aux_pedido->{'despacho'};
+            
+        $calle = $aux_pedido->{'calle'};
+        $num = $aux_pedido->{'num'};
+        $depto = $aux_pedido->{'depto'};
+        $comuna = $aux_pedido->{'comuna'};
+        $direccion = $aux_pedido->{'direccion'};
+        $lat = $aux_pedido->{'lat'};
+        $lng = $aux_pedido->{'lng'};
+        $costo = $aux_pedido->{'costo'};
         
         if($nombre != "" && $telefono != "+569 "){
             
@@ -116,42 +140,75 @@ class Rest{
             $verify_direccion = 0;
             $precision = 0.001;
             
+            $id_pep = $aux_pedido->{'id_pep'};
+            $pep_code = $aux_pedido->{'pep_code'};
+            $code = bin2hex(openssl_random_pseudo_bytes(10));
+            
+            if($id_pep > 0 && $pep_code != ""){
+                $sql_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$id_pep."' AND code='".$pep_code."'");
+                if($sql_pep['count'] == 1 && $aux_pedido->{'despacho'} == 1){
+                    if($sql_pep['resultado'][0]['lat'] != $lat || $sql_pep['resultado'][0]['lng'] != $lng || $sql_pep['resultado'][0]['telefono'] != $telefono){
+                        
+                        $geocode = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($aux_pedido->{'despacho_domicilio'}->{'direccion'})."&key=".$key));
+                        if($geocode->{'status'} == "OK"){
+                            
+                            $dif_lat = $aux_pedido->{'lat'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+                            $dif_lng = $aux_pedido->{'lng'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+                            if($dif_lat < $precision && $dif_lng < $precision){
+                                $verify_direccion = 1;
+                            }
+                            
+                            $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (code, nombre, telefono, direccion, lat, lng, calle, num, depto, comuna, verificado) VALUES ('".$code."', '".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$verify_direccion."')");
+                            $id_pep = $aux_pep['insert_id'];
+                            $info['nuevo_pep'] = 1;
+                            
+                        }
+                        
+                    }
+                }
+                if($sql_pep['count'] == 0 || $aux_pedido->{'despacho'} == 0){
+                    $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (code, nombre, telefono, direccion, lat, lng, calle, num, depto, comuna, verificado) VALUES ('".$code."', '".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$verify_direccion."')");
+                    $id_pep = $aux_pep['insert_id'];
+                    $info['nuevo_pep'] = 1;
+                }
+            }else{
+                $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (code, nombre, telefono, direccion, lat, lng, calle, num, depto, comuna, verificado) VALUES ('".$code."', '".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$verify_direccion."')");
+                $id_pep = $aux_pep['insert_id'];
+                $info['nuevo_pep'] = 1;
+            }
+            
             if($aux_pedido->{'despacho'} == 0){
                 
-                $id_loc = $aux_pedido->{'retiro_local'}->{'id_loc'};
+                $id_loc = $aux_pedido->{'id_loc'};
+                $costo = 0;
+                $despacho = 0;
                 
             }
             if($aux_pedido->{'despacho'} == 1){
                 
-                $id_loc = $aux_pedido->{'despacho_domicilio'}->{'id_loc'};
-                $costo = $aux_pedido->{'despacho_domicilio'}->{'costo'};
+                $id_loc = $aux_pedido->{'id_loc'};
+                $costo = $aux_pedido->{'costo'};
+                $despacho = 1;
                 
-                $geocode = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($aux_pedido->{'despacho_domicilio'}->{'direccion'})."&key=".$key));
-                if($geocode->{'status'} == "OK"){
-                    $dif_lat = $aux_pedido->{'despacho_domicilio'}->{'lat'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-                    $dif_lng = $aux_pedido->{'despacho_domicilio'}->{'lng'} - $geocode->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
-                    if($dif_lat < $precision && $dif_lng < $precision){
-                        $verify_direccion = 1;
-                    }
-                }
-
-                $aux_verify = $this->get_info_despacho($aux_pedido->{'despacho_domicilio'}->{'lat'}, $aux_pedido->{'despacho_domicilio'}->{'lng'});
+                $aux_verify = $this->get_info_despacho($aux_pedido->{'lat'}, $aux_pedido->{'lng'});
                 if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
                     $verify_despacho = 1;
                 }
-                
+
             }
             
             $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido_code."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep) VALUES ('".$pedido_code."', now(), '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."')");
             $id_ped = $pedido_sql['insert_id'];
-            
+
+            $info['id_pep'] = $id_pep;
+            $info['pep_code'] = $code;
+            $info['fecha'] = time();
             // POST NODE-JS MAIL Y SOCKET //
             
             // SOCKET //
-            
             $pedido['local_code'] = $loc_gir['resultado'][0]['code'];
             $pedido['id_ped'] = $id_ped;
             
@@ -172,7 +229,7 @@ class Rest{
             $info['op'] = 1;
             $info['id_ped'] = $id_ped;
             $info['pedido_code'] = $pedido_code;
-;            
+            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -220,7 +277,7 @@ class Rest{
         
     }
     public function get_polygons(){
-        $referer = (parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) == "localhost") ? "www.mikasushi.cl" : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
+        $referer = (parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) == "localhost") ? "www.izusushi.cl" : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
         $polygons = $this->con->sql("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0' AND t3.eliminado='0'");
         return $polygons['resultado'];
     }

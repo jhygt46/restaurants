@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
 $core = new Core();
@@ -11,7 +12,7 @@ if($code === null){
     exit;
 }
 
-$pedidos = $core->get_ultimos_pedidos($_GET['id_loc']);
+$pedidos = $core->get_ultimos_pedidos($_GET['id_loc'], null);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -22,15 +23,12 @@ $pedidos = $core->get_ultimos_pedidos($_GET['id_loc']);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        
         <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_pos"]; ?>" media="all" />
-        
         <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
-        
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_pos"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["js_pos_lista"]; ?>" type="text/javascript"></script>
         <script> var local_code = '<?php echo $code; ?>'; </script>
         <script> var pedidos = <?php echo json_encode($pedidos); ?>; </script>
         <style>
@@ -39,39 +37,92 @@ $pedidos = $core->get_ultimos_pedidos($_GET['id_loc']);
             }
         </style>
     </head>
-    <body onload="socket_init()">
+    <body>
         <div class="contenedor">
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
                     <div class="nuevo_pedido vhalign">
                         <div class="np_close" onclick="np_close(this)"></div>
-                        <div class="n_title">Ingresar Nuevo Pedido</div>
-                        <div class="n_info clearfix">
-                            <div class="n_info1">
-                                <div class="n_info1_a clearfix">
-                                    <div class="n_info1_a0">Retiro en Local</div>
-                                    <div class="n_info1_a0">Despacho a Domicilio</div>
+                        <div class="n_title"></div>
+                        <div class="n_info">
+                            <div class="data_info">
+                                <div class="nom_tel clearfix">
+                                    <div class="nom">
+                                        <span>Nombre: </span>
+                                        <input id="nombre" type="text" />
+                                    </div>
+                                    <div class="tel">
+                                        <span>Telefono: </span>
+                                        <input id="telefono" type="tel" />
+                                    </div>
                                 </div>
-                                <div class="n_info1_b clearfix">
-                                    <div class="n_info1_b0">Direccion</div>
-                                    <div class="n_info1_b1"><input type="text" id="ped_direccion" style="width: 100%" ></div>
+                                <div class="nom_tel clearfix">
+                                    <div class="tipo">
+                                        <span>Tipo: </span>
+                                        <select id="despacho" onchange="change_despacho(this)"><option value="1">Despacho Domicilio</option><option value="0">Retiro Local</option></select>
+                                    </div>
                                 </div>
-                                <div class="n_info1_b clearfix">
-                                    <div class="n_info1_b0">Telefono</div>
-                                    <div class="n_info1_b1"><input type="text" id="ped_telefono" style="width: 100%" ></div>
+                                <div class="nom_tel t_despacho clearfix">
+                                    <div class="direccion">
+                                        <span>Direccion: </span>
+                                        <input id="direccion" type="text" />
+                                    </div>
+                                    <div class="depto">
+                                        <span>Depto: </span>
+                                        <input id="depto" type="text" />
+                                    </div>
                                 </div>
+                                <div class="preguntas">
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Wasabi</div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_wasabi" /></div>
+                                    </div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Gengibre</div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_gengibre" /></div>
+                                    </div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Embarazadas</div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_embarazadas" /></div>
+                                    </div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Soya</div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_soya" /></div>
+                                    </div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Teriyaki</div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_teriyaki" /></div>
+                                    </div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Palitos</div>
+                                        <div class="pre_check"><select id="pre_palitos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="pregunta clearfix" style="padding-top: 20px">
+                                        <div class="pre_nom">Repartidor</div>
+                                        <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                    </div>
                             </div>
-                            <div class="n_info2">2</div>
+                        </div>
+                        <div class="n_submit">
+                            <input type="button" value="Enviar" onclick="done_pedido()" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="cont_sis clearfix">
+                <div class="alert_socket">
+                    <div class="text">
+                        <div class="text_1">ATENCION:</div>
+                        <div class="text_2">Al sistema no estan llegando los pedidos automaticamente</div>
+                    </div>
+                </div>
                 <div class="pedidos">
                     <div class="titulo">
                         <div class="ttl">Mis Pedidos</div>
                         <div class="opciones">
-                            <div class="nuevo" onclick="ver_pedido(-1)">+</div>
+                            <div class="nuevo" onclick="ver_pedido(-1, null)">+</div>
                             <!--<div class="config">+</div>-->
                         </div>
                     </div>

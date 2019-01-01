@@ -188,7 +188,9 @@ body {
                             overflow-y: auto;
                             z-index: 1;
                             .info_modal {
-                                
+                                .pedido_final{
+                                    display: block;
+                                }
                             }
                         }
                         .sub_total {

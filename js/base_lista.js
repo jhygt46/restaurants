@@ -56,24 +56,30 @@ function open_categoria(id){
     
     }
     if(tp){
-        show_modal('paso_04');
+        
+        show_modal_4(get_pedido());
+        
     }
     
 }
+var time_limit = 7200;
 function tiene_pedido(){
     
-    var pedido = get_pedido();    
+    var pedido = get_pedido();
     if(pedido.id_ped == 0){
         return false;
     }
     if(pedido.id_ped > 0){
-        var limit = new Date().getTime() - 7200000;
-        if(pedido.fecha > limit){
+        
+        var limit = Math.round(new Date().getTime()/1000) - pedido.fecha;
+        if(limit < time_limit){
             return true;
-        }else{
-            nuevo();
+        }
+        if(limit >= time_limit){
+            aux_nuevo();
             return false;
         }
+        
     }
     
 }
@@ -500,6 +506,12 @@ function set_cantidad(n){
     cantidad = cantidad + n;
     $('.cantcart_num').html(cantidad);
 }
+function get_pep(){
+    return JSON.parse(localStorage.getItem("pep")) || { id_pep: 0, pep_code: '' };
+}
+function set_pep(pep){
+    localStorage.setItem("pep", JSON.stringify(pep));
+}
 function get_carro(){
     return JSON.parse(localStorage.getItem("carro")) || [];
 }
@@ -682,61 +694,97 @@ function paso_3(){
     paso = 3;
     show_modal('paso_03');
 }
+var map_socket, markers;
+function show_modal_4(pedido){
+    
+    map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
+        center: {lat: pedido.lat, lng: pedido.lng},
+        zoom: 13,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true
+    });
+    
+    markers = new google.maps.Marker({
+        map: map_socket,
+        title: 'PEDIDO #'+pedido.id_ped,
+        position: { lat: pedido.lat, lng: pedido.lng }
+    });
+    
+    
+    $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
+    $('.pedido_final .estado h2').html("Enviado");
+    $('.pedido_final .tiempo h2').html("13 minutos aprox");
+    $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total), "$"));
+    show_modal('paso_04');
+    open_socket(pedido.pedido_code);
+    time();
+    
+}
+function move_marker(lat, lng){
+    
+    markers.setPosition( new google.maps.LatLng( lat, lng ) );
+    map_socket.panTo( new google.maps.LatLng( lat, lng ) );
+    
+}
 function paso_4(){
     
     document.getElementById("enviar_cotizacion").disabled = true;
     
     var pedido = get_pedido();
-    var despacho = pedido.despacho;
-    var nombre = $('#pedido_nombre').val();
-    
-    pedido.nombre = nombre;
+    pedido.nombre = $('#pedido_nombre').val();
     pedido.telefono = $('#pedido_telefono').val();
-    pedido.despacho_domicilio.depto = $('#pedido_depto').val();
+    pedido.depto = $('#pedido_depto').val();
 
-    pedido.preguntas = {};
-    pedido.preguntas.gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
-    pedido.preguntas.wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
-    pedido.preguntas.embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
-    pedido.preguntas.palitos = $('#pedido_palitos').val();
-    pedido.preguntas.soya = $('#pedido_soya').val();
-    pedido.preguntas.teriyaki = $('#pedido_teriyaki').val();
-    pedido.comentarios = $('#pedido_comentarios').html();
+    var pep = get_pep();
+    pedido.id_pep = pep.id_pep;
+    pedido.pep_code = pep.pep_code;
+
+    pedido.pre_gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
+    pedido.pre_wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
+    pedido.pre_embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
+    pedido.pre_palitos = $('#pedido_palitos').val();
+    pedido.pre_soya = ($('#pedido_soya').is(':checked') ? 1 : 0 );
+    pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
+    pedido.comentarios = $('#pedido_comentarios').val();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
     
     
     $.ajax({
-        url: "/ajax/index.php",
+        url: "ajax/index.php",
         type: "POST",
         data: send,
         success: function(info){
 
             var data = JSON.parse(info);
-            console.log(data);
-            
             if(data.op == 1){
 
-                pedido = {};
+                document.getElementById("enviar_cotizacion").disabled = false;
+
                 pedido.id_ped = data.id_ped;
                 pedido.pedido_code = data.pedido_code;
-                pedido.fecha = new Date().getTime();
+                pedido.fecha = data.fecha;
                 
-                open_socket(data.pedido_code);
-               
+                if(pedido.despacho == 0){
+                    pedido.time = 15;
+                }
+                if(pedido.despacho == 1){
+                    pedido.time = 60;
+                }
+                
+                if(data.nuevo_pep == 1){
+                    var pep = get_pep();
+                    pep.id_pep = data.id_pep;
+                    pep.pep_code = data.pep_code;
+                    set_pep(pep);
+                }
+                
+                show_modal_4(pedido);
                 set_pedido(pedido);
-                document.getElementById("enviar_cotizacion").disabled = false;
-                hide_modal();
-                volver_tipo_despacho();
                 paso = 1;
-                
-                if(despacho == 0){
-                    alert(nombre+" Tu Pedido fue Enviado Exitosamente. Retira tu Pedido en 25 Minutos. ");
-                }
-                if(despacho == 1){
-                    alert(nombre+" Tu Pedido fue Enviado Exitosamente. En 60 Minutos estaremos allá. ");
-                }
-                
+
+                //volver_tipo_despacho();
+
             }else{
                 document.getElementById("enviar_cotizacion").disabled = false;
             }
@@ -746,12 +794,46 @@ function paso_4(){
     });
     
 }
+function time(){
+    
+    var pedido = get_pedido();
+    var fecha_1 = pedido.fecha * 1000;
+    var fecha_2 = new Date().getTime();
+    
+    var diff = Math.round((fecha_1 + Math.round(pedido.time * 60000) - fecha_2)/60000);
+    
+    if(diff >= 2){
+        $('.pedido_final .tiempo h2').html(diff+" minutos aprox");
+        setTimeout(time, 4000);
+    }
+    if(diff == 1){
+        $('.pedido_final .tiempo h2').html("1 minuto aprox");
+        setTimeout(time, 4000);
+    }
+    if(diff <= 0){
+        $('.pedido_final .tiempo h2').html("Cumplido");
+    }
+    
+}
 function open_socket(code){
     
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('pedido-'+code, function(data){
-        console.log("data");
-        console.log(data);
+
+        var info = JSON.parse(data.estado);
+
+        if(info.accion == 0){
+            $('.pedido_final .estado').html("Estado: "+info.estado);
+        }
+        if(info.accion == 1){
+            var pedido = get_pedido();
+            pedido.fecha = info.fecha;
+            set_pedido(pedido);
+        }
+        if(info.accion == 2){
+            move_marker(info.lat, info.lng);
+        }
+        
     });
     
 }
@@ -832,7 +914,7 @@ function initMap(){
                 
                 var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
-                    url: "/ajax/index.php",
+                    url: "ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
@@ -842,14 +924,14 @@ function initMap(){
 
                             var pedido = get_pedido();
                             pedido.despacho = 1;
-                            pedido.despacho_domicilio.lat = places[0].geometry.location.lat();
-                            pedido.despacho_domicilio.lng = places[0].geometry.location.lng();
-                            pedido.despacho_domicilio.direccion = places[0].formatted_address; 
-                            pedido.despacho_domicilio.calle = calle;
-                            pedido.despacho_domicilio.num = num;
-                            pedido.despacho_domicilio.comuna = comuna;     
-                            pedido.despacho_domicilio.id_loc = data.id_loc;
-                            pedido.despacho_domicilio.costo = data.precio;
+                            pedido.lat = places[0].geometry.location.lat();
+                            pedido.lng = places[0].geometry.location.lng();
+                            pedido.direccion = places[0].formatted_address; 
+                            pedido.calle = calle;
+                            pedido.num = num;
+                            pedido.comuna = comuna;     
+                            pedido.id_loc = data.id_loc;
+                            pedido.costo = data.precio;
                             
                             set_pedido(pedido);
                             paso_3_despacho();
@@ -935,7 +1017,7 @@ function select_local(id, nombre, direccion){
     
     var pedido = get_pedido();
     pedido.despacho = 0;
-    pedido.retiro_local = { id_loc: id, local_nombre: nombre, local_direccion: direccion };
+    pedido.id_loc = id;
     set_pedido(pedido);
     
     selecciono_retiro(nombre, direccion, pedido.total);
@@ -946,14 +1028,14 @@ function paso_3_despacho(){
     
     var pedido = get_pedido();
     
-    if(pedido.despacho_domicilio.lat != 0 && pedido.despacho_domicilio.lng != 0){
+    if(pedido.lat != 0 && pedido.lng != 0){
         
         pedido.despacho = 1;
         set_pedido(pedido);
-        var total = pedido.despacho_domicilio.costo + pedido.total;
-        selecciono_despacho(pedido.despacho_domicilio.calle, pedido.despacho_domicilio.num, pedido.despacho_domicilio.costo, total);
-        $('.block_direccion .item_direccion h2').html(pedido.despacho_domicilio.calle);
-        $('.block_direccion .item_numero h2').html(pedido.despacho_domicilio.num);
+        var total = pedido.costo + pedido.total;
+        selecciono_despacho(pedido.calle, pedido.num, pedido.costo, total);
+        $('.block_direccion .item_direccion h2').html(pedido.calle);
+        $('.block_direccion .item_numero h2').html(pedido.num);
         paso_3();
         
     }
@@ -1011,9 +1093,21 @@ function obj_pedido(){
         despacho: null,
         nombre: '',
         telefono: '',
-        retiro_local: { id_loc: 0, local_nombre: '', local_direccion: '' },
-        despacho_domicilio: { id_loc: 0, calle: '', num: 0, depto: '', comuna: '', direccion: '', lat: 0, lng: 0, costo: 0 },
-        preguntas: { gengibre: 0, wasabi: 0, embarazadas: 0, palitos: 0 },
+        id_loc: 0,
+        calle: '', 
+        num: 0, 
+        depto: '', 
+        comuna: '', 
+        direccion: '', 
+        lat: 0, 
+        lng: 0, 
+        costo: 0,
+        pre_gengibre: 0,
+        pre_wasabi: 0,
+        pre_embarazadas: 0,
+        pre_palitos: 0,
+        pre_teriyaki: 0,
+        pre_soya: 0,
         comentarios: '',
         total: 0
     }
@@ -1088,6 +1182,9 @@ function nuevo(){
     $('.cantcart_num').html(0);
 }
 function aux_nuevo(){
-    nuevo();
+    borrar_carro();
+    set_pedido(null);
+    $('.cantcart_num').html(0);
     hide_modal();
+    // VOLVER A LA NORMALIDAD
 }

@@ -26,6 +26,7 @@ if($info['id_gir'] != 0){
     //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
     //if($info['con_cambios'] == 1){
         $data = $core->get_web_js_data2($info['id_gir']);
+
     //}
     
     
@@ -316,15 +317,19 @@ if($info['id_gir'] != 0){
                     
                     <div class="modal vhalign hide modal_carro paso_04">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1 class=""><?php echo $info["pedido_04_titulo"]; ?></h1><h2 class=""><?php echo $info["pedido_04_subtitulo"]; ?></h2></div></div>
+                            <div class="titulo"><div class="cont_titulo valign"><h1 class=""></h1><h2 class=""></h2></div></div>
                             <div onclick="close_that(this)" class="close material-icons">close</div>
                             <div class="cont_info">
-                                <div class="info_modal_pedido" style="padding-bottom: 57px">
+                                <div class="info_modal" style="padding-bottom: 57px">
                                     
-                                    <div class="nombre">PEDIDO #457</div>
-                                    <div class="estado">Estado: Recepcionado</div>
-                                    <div class="posicion" id="mapa_posicion"></div>
-                                    <div class="tiempo">Tiempo estimado: 25 minutos</div>
+                                    <div class="pedido_final">
+                                        <div class="cont_pedido clearfix">
+                                            <div class="estado"><h1>Estado</h1><h2>Enviado</h2></div>
+                                            <div class="tiempo"><h1>Tiempo Restante</h1><h2>15 minutos aprox</h2></div>
+                                        </div>
+                                        <div class="posicion" id="mapa_posicion"></div>
+                                        <div class="total"></div>
+                                    </div>
                                     
                                 </div>
                             </div>

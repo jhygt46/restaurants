@@ -1,7 +1,7 @@
 $(document).ready(function(){
     render_pagina();
     borrar_carro();
-    set_pedido(null);
+    //set_pedido(null);
     cantidad = get_carro().length;
     $('.cantcart_num').html(cantidad);
 });
