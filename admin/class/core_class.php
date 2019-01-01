@@ -294,8 +294,11 @@ class Core{
             $info['pre_palitos'] = $sql['resultado'][0]['pre_palitos'];
             $info['pre_teriyaki'] = $sql['resultado'][0]['pre_teriyaki'];
             $info['pre_soya'] = $sql['resultado'][0]['pre_soya'];
-            
+            $info['despacho'] = $sql['resultado'][0]['despacho'];
             $info['comentarios'] = $sql['resultado'][0]['comentarios'];
+            
+            $info['costo'] = $sql['resultado'][0]['costo'];
+            $info['total'] = $sql['resultado'][0]['total'];
             
             $info['verify_despacho'] = $sql['resultado'][0]['verify_despacho'];
             

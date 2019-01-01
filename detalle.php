@@ -4,7 +4,6 @@ require('admin/class/core_class.php');
 $core = new Core();
 
 
-
 if(isset($_GET['code'])){
     
     $info = $core->ver_detalle($_GET['code']);
@@ -13,15 +12,14 @@ if(isset($_GET['code'])){
         $id_ped = $info["id_ped"];
         $pep = $info['pep'];
         
-        $despacho = $pedido->{'despacho'};
+        $despacho = $info['despacho'];
+        $total = $info['total'];
         
         if($despacho == 0){
-            $retiro_local = $pedido->{'retiro_local'};
             $costo = 0;
         }
         if($despacho == 1){
-            $despacho_domicilio = $pedido->{'despacho_domicilio'};
-            $costo = intval($despacho_domicilio->{'costo'});
+            $costo = $info['costo'];
             $total = $total + $costo;
         }
         
@@ -60,7 +58,7 @@ if(isset($_GET['code'])){
             
             <div class="titulo txtcen font_01 padding_01 borbottom">Pedido #<?php echo $info["id_ped"]; ?></div>
             <div class="lista_de_productos padding_01 borbottom"></div>
-            <?php if($preguntas->{'wasabi'} == 1 || $preguntas->{'gengibre'} == 1 || $preguntas->{'embarazadas'} == 1 || $preguntas->{'palitos'} > 0){ ?>
+            <?php if($info['pre_wasabi'] == 1 || $info['pre_gengibre'] == 1 || $info['pre_embarazadas'] == 1 || $info['pre_palitos'] > 0 || $info['pre_soya'] == 1 || $info['pre_teriyaki'] == 1){ ?>
             <div class="contacto padding_01 borbottom">
                 
                 <?php if($info['pre_wasabi'] == 1){ ?><div class="txtcen font_04">Wasabi</div><?php } ?>
