@@ -322,6 +322,7 @@ if($info['id_gir'] != 0){
                             <div class="cont_info">
                                 <div class="info_modal" style="padding-bottom: 57px">
                                     
+                                    <div class="pedido_mensaje"></div>
                                     <div class="pedido_final">
                                         <div class="cont_pedido clearfix">
                                             <div class="estado"><h1>Estado</h1><h2>Enviado</h2></div>

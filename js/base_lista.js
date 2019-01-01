@@ -762,10 +762,12 @@ function paso_4(){
                 pedido.fecha = data.fecha;
                 
                 if(pedido.despacho == 0){
-                    pedido.time = 15;
+                    pedido.time = 25;
+                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puede venir a buscarlo");
                 }
                 if(pedido.despacho == 1){
                     pedido.time = 60;
+                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
                 }                
                 
                 show_modal_4(pedido);

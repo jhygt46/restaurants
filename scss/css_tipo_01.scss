@@ -601,6 +601,13 @@ body {
             }
         }
         .info_modal{
+            .pedido_mensaje{
+                margin: 15px 25px 0px 25px;
+                font-size: 15px;
+                background: #fcc;
+                padding: #10px;
+                color: #600;
+            }
             .pedido_final{
                 padding: 10px;
                 .cont_pedido{
