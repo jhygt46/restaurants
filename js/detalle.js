@@ -4,7 +4,7 @@ $(document).ready(function(){
     
     var total_process = 0;
     for(var i=0, ilen=carro.length; i<ilen; i++){
-        if(!carro[i].promo){
+        if(!carro[i].hasOwnProperty('promo')){
             total_process = total_process + parseInt(get_producto(carro[i].id_pro).precio);
             console.log("prod: "+get_producto(carro[i].id_pro).precio);
         }
