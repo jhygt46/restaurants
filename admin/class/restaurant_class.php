@@ -146,6 +146,7 @@ class Rest{
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido_code."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
+            $info['db_0'] = $pedido_sql;
             $id_ped = $pedido_sql['insert_id'];
             
             // POST NODE-JS MAIL Y SOCKET //
