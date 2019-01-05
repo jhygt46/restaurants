@@ -152,10 +152,8 @@ class Rest{
             // POST NODE-JS MAIL Y SOCKET //
             
             // SOCKET //
-            
             $pedido['local_code'] = $loc_gir['resultado'][0]['code'];
             $pedido['id_ped'] = $id_ped;
-            
             // CORREO //
             
             $pedido['correo'] = $loc_gir['resultado'][0]['correo'];
@@ -168,12 +166,10 @@ class Rest{
             $pedido['nombre'] = $nombre;
             $pedido['telefono'] = $telefono;
             
-            
-            
             $info['op'] = 1;
             $info['id_ped'] = $id_ped;
             $info['pedido_code'] = $pedido_code;
-;            
+            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
