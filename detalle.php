@@ -55,7 +55,7 @@ if(isset($_GET['code'])){
         <div class="detalle">
             
             <div class="verificar">
-            <?php if($despacho == 1){ ?>
+            <?php if($despacho == 1 && false){ ?>
                 <?php if($info["verify_despacho"] == 0){ ?><div>ERROR: COSTO DESPACHO NO COINCIDE</div><?php } ?>
                 <?php if($info["verify_direccion"] == 0){ ?><div>ERROR: DIRECCION NO CORRESPONDE A COORDENADAS</div><?php } ?>
             <?php } ?>
