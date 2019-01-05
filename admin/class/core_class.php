@@ -273,7 +273,7 @@ class Core{
         
         $info['op'] = false;
         $host = ($_SERVER["HTTP_HOST"] == "localhost") ? "www.mikasushi.cl" : $_SERVER["HTTP_HOST"] ;
-        $sql = $this->con->sql("SELECT t1.id_ped, t1.pedido, t1.carro, t1.promos, t3.code, t1.verify_despacho, t1.verify_direccion FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
+        $sql = $this->con->sql("SELECT t1.id_ped, t1.carro, t1.promos, t3.code, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
         
         $info['sql'] = $sql;
         
