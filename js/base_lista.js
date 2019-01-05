@@ -763,7 +763,7 @@ function paso_4(){
                 
                 if(pedido.despacho == 0){
                     pedido.time = 25;
-                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puede venir a buscarlo");
+                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puedes venir a buscarlo");
                 }
                 if(pedido.despacho == 1){
                     pedido.time = 60;
