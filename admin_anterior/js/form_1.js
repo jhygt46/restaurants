@@ -1,5 +1,9 @@
 function form(that){
     
+    console.log("BUENA");
+    return;
+    
+    
     var inputs = new Array();
     var selects = new Array();
     var textareas = new Array();
@@ -8,7 +12,7 @@ function form(that){
     var func = "";
     var send = true;
     
-    $(that).parents('form').find('input').each(function(){
+    $('.basic-grey').find('input').each(function(){
         
         if($(this).attr('require')){
             require = $(this).attr('require').split(" ");
@@ -89,14 +93,15 @@ function form(that){
             }
         }
     });
-    $(that).parents('form').find('select').each(function(){
+    $('.basic-grey').find('select').each(function(){
         data.append($(this).attr('id'), $(this).val());
         //selects.push($(this));
     });
-    $(that).parents('form').find('textarea').each(function(){
+    $('.basic-grey').find('textarea').each(function(){
         data.append($(this).attr('id'), $(this).val());
         //textareas.push($(this));
     });
+    
     
     if(send){
         $('.loading').show();
@@ -111,10 +116,9 @@ function form(that){
                 if(data != null){
                     console.log(data);
                     if(data.reload)
-                        navlink('pages/'+data.page);
+                        navlinks('pages/'+data.page);
                     if(data.op != null)
                         mensaje(data.op, data.mensaje);
-                    
                 }
             },
             error: function(e){
@@ -122,9 +126,21 @@ function form(that){
             }
         });
     }
+    
     return false;
+}
+
+function formulario(that){
+    
+    $(that).parents('form').find('input').each(function(){
+        
+        console.log($(this));
+        
+    })
     
 }
+
+
 function mensaje(op, mens){
     
     if(op == 1){
@@ -135,6 +151,7 @@ function mensaje(op, mens){
         var type = "error";
         var timer = 6000;
     }
+    
     swal({
         title: "",
         text: mens,
@@ -144,6 +161,7 @@ function mensaje(op, mens){
     });
     
 }
+
 function deleteinfo(inputs, selects, textareas){
     
     for(var i=0; i<inputs.length; i++){
@@ -196,66 +214,4 @@ function textme(x, i){
         return true;
     }
     return false;
-}
-function eliminar(accion, id, tipo, name){
-
-    var msg = {
-        title: "Eliminar "+tipo, 
-        text: "Esta seguro que desea eliminar a "+name, 
-        confirm: "Si, deseo eliminarlo",
-        name: name,
-        accion: accion,
-        id: id,
-    };
-
-    confirm(msg);
-        
-}
-
-function confirm(message){
-    
-    swal({   
-        title: message['title'],   
-        text: message['text'],   
-        type: "error",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: message['confirm'],   
-        closeOnConfirm: false,
-        showLoaderOnConfirm: true
-    }, function(isConfirm){
-
-        if(isConfirm){
-            
-            var send = {accion: message['accion'], id: message['id'], nombre: message['name']};
-            console.log(send);
-            
-            $.ajax({
-                url: "ajax/index.php",
-                type: "POST",
-                data: send,
-                success: function(data){
-                    
-                    console.log(data);
-                    setTimeout(function(){  
-                        swal({
-                            title: data.titulo,
-                            text: data.texto,
-                            type: data.tipo,
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                        if(data.reload)
-                            navlink('pages/'+data.page);
-                    }, 10);
-
-                }, error: function(e){
-                    console.log(e);
-                }
-            });
- 
-        }
-        
-    });
-    
 }

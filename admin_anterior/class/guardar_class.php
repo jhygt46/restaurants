@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once($path."class/core_class.php");
+require_once($path."admin/class/core_class.php");
 
 class Guardar extends Core{
     
@@ -26,9 +26,6 @@ class Guardar extends Core{
         }
         if($_POST['accion'] == "eliminar_giro"){
             return $this->eliminar_giro();
-        }
-        if($_POST['accion'] == "eliminar_pagina"){
-            return $this->eliminar_pagina();
         }
         if($_POST['accion'] == "crear_catalogo"){
             return $this->crear_catalogo();
@@ -87,11 +84,8 @@ class Guardar extends Core{
         if($_POST['accion'] == "eliminar_preguntas"){
             return $this->eliminar_preguntas();
         }
-        if($_POST['accion'] == "configurar_giro"){
-            return $this->configurar_giro();
-        }
-        if($_POST['accion'] == "configurar_estilos"){
-            return $this->configurar_estilos();
+        if($_POST['accion'] == "configurar_principal"){
+            return $this->configurar_principal();
         }
         if($_POST['accion'] == "crear_pagina"){
             return $this->crear_pagina();
@@ -114,9 +108,6 @@ class Guardar extends Core{
         if($_POST['accion'] == "eliminar_tramos"){
             return $this->eliminar_tramos();
         }
-        if($_POST['accion'] == "crear_lista_ingredientes"){
-            return $this->crear_lista_ingredientes();
-        }
         
     }
     private function ordercat(){
@@ -125,7 +116,7 @@ class Guardar extends Core{
         for($i=0; $i<count($values); $i++){
             $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
         }
-        
+
     }
     public function refresh(){
         
@@ -196,43 +187,14 @@ class Guardar extends Core{
     private function con_cambios(){
         $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
     }
-    private function configurar_estilos(){
-        
-        $font_family = $_POST['font-family'];
-        $font_css = $_POST['font-css'];
-        $css_page = $_POST['css_page'];
-        $css_color = $_POST['css_color'];
-        $css_modal = $_POST['css_modal'];
-        $this->con_cambios();
-        
-        $this->con->sql("UPDATE giros SET font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_page."', style_color='".$css_color."', style_modal='".$css_modal."' WHERE id_gir='".$this->id_gir."'");
-        
-        $info['op'] = 1;
-        $info['mensaje'] = "Configuracion de Estilos Modificado Exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
-        return $info;
-        
-    }
-    private function configurar_giro(){
+    private function configurar_principal(){
         
         $titulo = $_POST['titulo'];
-        
-        $pedido_wasabi = $_POST['pedido_wasabi'];
-        $pedido_gengibre = $_POST['pedido_gengibre'];
-        $pedido_soya = $_POST['pedido_soya'];
-        $pedido_teriyaki = $_POST['pedido_teriyaki'];
-        $pedido_palitos = $_POST['pedido_palitos'];
-        $pedido_comentarios = $_POST['pedido_comentarios'];
-        
-        $pedido_01_titulo = $_POST['titulo_01'];
-        $pedido_01_subtitulo = $_POST['subtitulo_01'];
-        $pedido_02_titulo = $_POST['titulo_02'];
-        $pedido_02_subtitulo = $_POST['subtitulo_02'];
-        $pedido_03_titulo = $_POST['titulo_03'];
-        $pedido_03_subtitulo = $_POST['subtitulo_03'];
-        $pedido_04_titulo = $_POST['titulo_04'];
-        $pedido_04_subtitulo = $_POST['subtitulo_04'];
+        $font_family = $_POST['font-family'];
+        $font_css = $_POST['font-css'];
+        $css_types = $_POST['css-types'];
+        $css_colores = $_POST['css-colores'];
+        $css_popup = $_POST['css-popup'];
         
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         $this->con_cambios();
@@ -247,17 +209,13 @@ class Guardar extends Core{
             $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$foto_favicon['image']."' WHERE id_gir='".$this->id_gir."'");
         }
         
-        // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
-        
-        // MODIFICAR TITULO
-        $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
-        
+        $info['db1'] = $this->con->sql("UPDATE giros SET titulo='".$titulo."', font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_types."', style_color='".$css_colores."', style_modal='".$css_popup."', pedido_01_titulo='".$_POST['pedido_01_titulo']."', pedido_01_subtitulo='".$_POST['pedido_01_subtitulo']."', pedido_02_titulo='".$_POST['pedido_02_titulo']."', pedido_02_subtitulo='".$_POST['pedido_02_subtitulo']."', pedido_03_titulo='".$_POST['pedido_03_titulo']."', pedido_03_subtitulo='".$_POST['pedido_03_subtitulo']."', pedido_04_titulo='".$_POST['pedido_04_titulo']."', pedido_04_subtitulo='".$_POST['pedido_04_subtitulo']."' WHERE id_gir='".$this->id_gir."'");
         
         $info['op'] = 1;
-        $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
+        $info['mensaje'] = "Configuracion modificado exitosamente";
+        
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "apps/configurar_giro.php";
         return $info;
         
     }
@@ -286,9 +244,7 @@ class Guardar extends Core{
         
         $id_pro = $_POST['id_pro'];
         $id = $_POST['id'];
-        $parent_id = $_POST['parent_id'];
         $list = $this->get_preguntas();
-        
         for($i=0; $i<count($list); $i++){
             $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
             if($pre == 0){
@@ -299,21 +255,10 @@ class Guardar extends Core{
             }
         }
         
-        $list_ing = $this->get_lista_ingredientes();
-        for($i=0; $i<count($list_ing); $i++){
-            $lin = $_POST['lista_ing-'.$list_ing[$i]['id_lin']];
-            if($lin == 0){
-                $info['db_0'][] = $this->con->sql("DELETE FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."' AND id_lin='".$list_ing[$i]['id_lin']."'");
-            }
-            if($lin == 1){
-                $info['db_1'][] = $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
-            }
-        }
-        
         $info['op'] = 1;
-        $info['mensaje'] = "Configuracion Modificada Exitosamente";
+        $info['mensaje'] = "Preguntas asociadas exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
+        $info['page'] = "apps/crear_productos.php?id=".$id;
         return $info;
         
     }
@@ -445,7 +390,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "apps/configurar_giro.php";
         return $info;
         
     }
@@ -510,7 +455,7 @@ class Guardar extends Core{
         $this->con->sql("UPDATE giros SET retiro_local='1', lista_locales='".json_encode($aux['resultado'])."' WHERE id_gir='".$this->id_gir."'");
         
         $info['reload'] = 1;
-        $info['page'] = "msd/locales.php";
+        $info['page'] = "apps/locales.php";
         return $info;
         
     }
@@ -543,7 +488,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
+        $info['page'] = "apps/zonas_locales.php?id_loc=".$id_loc;
         return $info;
         
     }
@@ -620,7 +565,7 @@ class Guardar extends Core{
     }
     private function crear_categoria(){
 
-        $id_cae = $_POST['id'];
+        $id_cae = $_POST['id_cae'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $descripcion_sub = $_POST['descripcion_sub'];
@@ -640,7 +585,7 @@ class Guardar extends Core{
         }
                 
         $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
@@ -717,20 +662,6 @@ class Guardar extends Core{
         return $info;
         
     }
-    private function eliminar_pagina(){
-                
-        $id = $_POST['id'];
-        $this->con->sql("UPDATE paginas SET eliminado='1' WHERE id_pag='".$id."'");
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Pagina ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
-
-        return $info;
-        
-    }
     private function eliminar_promociones(){
                 
         $id = explode("/", $_POST['id']);
@@ -772,7 +703,7 @@ class Guardar extends Core{
             
         }      
         $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
@@ -823,7 +754,7 @@ class Guardar extends Core{
         $info['op'] = 1;
         $info['mensaje'] = "Producto modificado exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?id=".$id_cae;
+        $info['page'] = "apps/crear_productos.php?id=".$id_cae;
         
         return $info;
         
@@ -844,7 +775,7 @@ class Guardar extends Core{
     }
     private function crear_preguntas(){
 
-        $id_pre = $_POST['id'];
+        $id_pre = $_POST['id_pre'];
         $nombre = $_POST['nombre'];
         $mostrar = $_POST['mostrar'];
         $cantidad = $_POST['cantidad'];
@@ -875,42 +806,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
-        return $info;
-        
-    }
-    private function crear_lista_ingredientes(){
-        
-        $id_lin = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        
-        if($id_lin > 0){
-            $this->con->sql("UPDATE lista_ingredientes SET nombre='".$nombre."' WHERE id_lin='".$id_lin."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Lista de Ingredientes modificada exitosamente";
-        }
-        if($id_lin == 0){
-            $aux = $this->con->sql("INSERT INTO lista_ingredientes (nombre, id_cat, id_gir) VALUES ('".$nombre."', '".$this->id_cat."', '".$this->id_gir."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Lista de Ingredientes creada exitosamente";
-            $id_lin = $aux['insert_id'];
-        }
-        
-        $ingredientes = $this->get_ingredientes_base();
-        for($i=0; $i<count($ingredientes); $i++){
-            $id_ing = $ingredientes[$i]['id_ing'];
-            $valor = $_POST["ing-".$id_ing];
-            if($valor == ""){
-                $this->con->sql("DELETE FROM lista_precio_ingrediente WHERE id_ing='".$id_ing."' AND id_lin='".$id_lin."'");
-            }
-            if($valor >= 0 && $valor != ""){
-                $this->con->sql("DELETE FROM lista_precio_ingrediente WHERE id_ing='".$id_ing."' AND id_lin='".$id_lin."'");
-                $this->con->sql("INSERT INTO lista_precio_ingrediente (id_ing, id_lin, valor) VALUES ('".$id_ing."', '".$id_lin."', '".$valor."')");
-            }
-        }
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "apps/preguntas.php?id=".$id;
         return $info;
         
     }

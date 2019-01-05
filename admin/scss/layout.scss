@@ -1,0 +1,811 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background: #ddd;
+    font-family: 'Open Sans Condensed', sans-serif;
+    .contenedor{
+        .modals{
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 2;
+            display: none;
+            .cont_modal{
+                width: 85%;
+                max-width: 400px;
+                height: 85%;
+                max-height: 550px;
+                background: #999;
+                border-radius: 25px;
+                .close{
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    background: #ccc url('../images/icons-set.png') no-repeat;
+                    background-position: -112px -329px;
+                    top: -10px;
+                    right: -10px;
+                    border-radius: 20px;
+                }
+            }
+        }
+        .sitio{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            .menu_top{
+                width: 100%;
+                height: 50px;
+                background: #000;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 3;
+                .btn_menu{
+                    width: 40px;
+                    height: 40px;
+                    left: 10px;
+                    background: url('../images/icons-set.png') no-repeat;
+                    background-position: -173px -378px;
+                }
+                .btn_perfil{
+                    width: 40px;
+                    height: 40px;
+                    right: 10px;
+                    background: url('../images/icons-set.png') no-repeat;
+                    background-position: -710px -378px;
+                }
+                .logo{
+                    width: 170px;
+                    position: absolute;
+                    .logo_img{
+                        width: 40px;
+                        height: 40px;
+                        float: left;
+                        background: url('../images/icons-set.png') no-repeat;
+                        background-position: -474px -621px;
+                    }
+                    .logo_txt{
+                        float: left;
+                        color: #fff;
+                        font-size: 24px;
+                        width: 130px;
+                        padding-top: 3px;
+                    }
+                }
+            }
+            .menu_left{
+                height: 100%;
+                background: #222;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 2;
+                .cont_menu{
+                    overflow-y: scroll;
+                    .menu{
+                        padding-top: 50px;
+                        .bloque{
+                            display: block;
+                            .titulo{
+                                position: relative;
+                                width: 198px;
+                                background: rgba(39, 39, 39, 1);
+                                .icono{
+                                    width: 40px;
+                                    height: 40px;
+                                    position: absolute;
+                                    background: url('../images/icons-set.png') no-repeat;
+                                }
+                                .ic1{
+                                    background-position: 7px -185px;
+                                }
+                                .texto{
+                                    display: block;
+                                    font-size: 16px;
+                                    color: #fff;
+                                    padding: 9px 0px 9px 40px;
+                                }
+                            }
+                            .bloque_lista{
+                                background: #333;
+                                width: 198px;
+                                display: block;
+                                li{
+                                    color: #fff;
+                                    font-size: 14px;
+                                    padding: 7px 10px;
+                                    position: relative;
+                                    p{
+                                        position: absolute;
+                                        background: #151515;
+                                        right: 10px;
+                                        width: 20px;
+                                        height: 20px;
+                                        border-radius: 10px;
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .contenido{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 1;
+                .cont_contenido{
+                    overflow-y: scroll;
+                    .html{
+                        width: calc(100% - 206px);
+                        height: calc(100% - 54px);
+                        padding-top: 54px;
+                        padding-left: 202px;
+                        padding-bottom: 0px;
+                        padding-right: 0px;
+                        background: #ccc;
+                    }
+                }
+            }
+        }
+    }
+    .relative{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+}
+.pagina{
+    .cont_pagina{
+        .cont_pag{
+            .list_titulo{
+                position: relative;
+                .titulo{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    h1{
+                        font-size: 22px;
+                    }
+                    h2{
+                        font-size: 14px;
+                    }
+                }
+                .opts{
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                    .opt{
+                        float: left;
+                        font-size: 16px;
+                        font-weight: bold;
+                        padding-right: 10px;
+                        .order{
+                            width: 28px;
+                            height: 28px;
+                            background: url('../images/icons-set.png') no-repeat;
+                            background-position: -776px -672px;
+                        }
+                    }
+                }
+            }
+            .listado_items{
+                padding: 60px 2% 10px 2%;
+                .l_item{
+                    display: block;
+                    background: #d6d6d6;
+                    border-bottom: 1px solid #bbb;
+                    padding: 5px;
+                    margin-bottom: 5px;
+                    .detalle_item{
+                        position: relative;
+                        .nombre{
+                            float: left;
+                            padding-top: 3px;
+                            font-size: 16px;
+                            position: absolute;
+                        }
+                        .icono{
+                            float: right;
+                            width: 28px;
+                            height: 28px;
+                            background: url('../images/icons-set.png') no-repeat;
+                            cursor: pointer;
+                            transform: scale(1);
+                            padding-left: 4px;
+                        }
+                        .ic1{
+                            background-position: -173px -432px;
+                        }
+                        .ic2{
+                            background-position: -416px -674px;
+                        }
+                        .ic3{
+                            background-position: -358px -482px;
+                        }
+                        .ic4{
+                            background-position: -414px -383px;
+                        }
+                        .ic5{
+                            background-position: -294px -527px;
+                        }
+                        .ic6{
+                            background-position: -771px -46px;
+                        }
+                        .ic7{
+                            background-position: -114px -95px;
+                        }
+                        .ic8{
+                            background-position: -712px -481px;
+                        }
+                        .ic9{
+                            background-position: -54px -479px;
+                        }
+                        .ic10{
+                            background-position: -54px -383px;
+                        }
+                        .ic11{
+                            background-position: -773px -47px;
+                        }
+                        .ic12{
+                            background-position: -115px -625px;
+                        }
+                    }
+                }
+            }
+            .list_data{
+                .data{
+                    float: left;
+                    .cont_data{
+                        padding: 10px;
+                        h1{
+                            font-size: 22px;
+                        }
+                        .data_list{
+                            display:block;
+                            height: 131px;
+                            overflow-y: auto;
+                            .cat_list{
+                                li{
+                                    display: block;
+                                    background: #ccc;
+                                    border-bottom: 1px solid #999;
+                                    padding: 2px 10px;
+                                    font-size: 18px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .normal{
+                .data{
+                    width: 50%;
+                }
+            }
+            .resp{
+                .data{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+.pagina{
+    .cont_pagina{
+        .cont_pag{
+            .lista_items{
+                .titulo_items{
+                    font-size: 28px;
+                    padding-bottom: 20px;
+                    h1{
+                        font-size: 22px;
+                    }
+                    h2{
+                        font-size: 14px;
+                    }
+                }
+                .items_list{
+                    .list_item{
+                        float: left;
+                        width: 33.33%;
+                        min-width: 90px;
+                        .cont_item{
+                            width: 90px; 
+                            margin: 0 auto;
+                            cursor: pointer;
+                            .item_image{
+                                background: #bbb;
+                                height: 100px;
+                            }
+                            .item_ttl{
+                                padding-top: 5px;
+                                text-align: center;
+                                font-size: 15px
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.pagina{
+    .cont_pagina{
+        .cont_pag{
+            form{
+                .form_titulo{
+                    .titulo{
+                        float: left;
+                        font-size: 28px;
+                    }
+                    .opts{
+                        float: right;
+                        .opt{
+                            float: left;
+                        }
+                    }
+                }
+                fieldset.normal{
+                    padding: 10px 0px;
+                    label{
+                        display: block;
+                        margin-top: 6px;
+                        padding: 0 5%;
+                        span{
+                            width: 16%;
+                            float: left;
+                            text-align: right;
+                            height: 32px;
+                            position: relative;
+                            p{
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 90%;
+                                padding-right: 10%;
+                                font-size: 14px;
+                                line-height: 12px;
+                            }
+                        }
+                        .inputs{
+                            width: 84%;
+                            float: left;
+                            height: 32px;
+                        }
+                        .checkbox{
+                            width: 20px;
+                            height: 20px;
+                            float: left;
+                            margin-top: 6px;
+                        }
+                        textarea{
+                            width: 84%;
+                            float: left;
+                            height: 84px;
+                        }
+                        select{
+                            width: 84%;
+                            float: left;
+                            height: 32px;
+                        }
+                        #map{
+                            width: 84%;
+                            float: left;
+                            height: 300px;
+                        }
+                        .groupdetail{
+                            width: 84%;
+                            float: left;
+                        }
+                        .perfil_preguntas{
+                            width: 84%;
+                            float: left;
+                            padding-top: 4px;
+                        }
+                        .enviar{
+                            margin-left: 16%;
+                            margin-top: 16px;
+                            a{
+                                text-decoration: none;
+                                padding: 6px 26px;
+                                background: #333;
+                                color: #fff;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                    .arbol{
+                        display: block;
+                        padding: 0 5%;
+                        .cont_arbol{
+                            padding-left: 16%;
+                            .parent_arbol{
+                                padding-top: 5px;
+                                .bottom_arbol{
+                                    padding-bottom: 4px;
+                                    div{
+                                        .cantidad_arbol{
+                                            width: 50px;
+                                            float: left;
+                                            .select_arbol{
+                                                height: 30px;
+                                            }
+                                        }
+                                        .nombre_arbol{
+                                            float: left;
+                                            padding-top: 8px;
+                                            font-size: 16px;
+                                        }
+                                    }
+                                    .left_arbol{
+                                        padding-left: 30px;
+                                        padding-top: 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .map{
+                        display: block;
+                        height: 200px;
+                    }
+                }
+                fieldset.resp{
+                    padding: 10px 0px;
+                    label{
+                        display: block;
+                        margin-top: 6px;
+                        padding: 0 3%;
+                        span{
+                            width: 100%;
+                            height: 32px;
+                            p{
+                                width: 100%;
+                                font-size: 14px;
+                                text-align: left;
+                            }
+                        }
+                        .inputs{
+                            width: 100%;
+                            height: 32px;
+                        }
+                        .checkbox{
+                            width: 20px;
+                            height: 20px;
+                        }
+                        textarea{
+                            width: 100%;
+                            height: 64px;
+                        }
+                        select{
+                            width: 100%;
+                            height: 32px;
+                        }
+                        #map{
+                            width: 100%;
+                            height: 300px;
+                        }
+                        .perfil_preguntas{
+                            width: 100%;
+                            padding-top: 4px;
+                        }
+                        .groupdetail{
+                            width: 100%;
+                        }
+                        .enviar{
+                            margin-top: 16px;
+                            a{
+                                text-decoration: none;
+                                padding: 6px 26px;
+                                background: #333;
+                                color: #fff;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                    .arbol{
+                        display: block;
+                        padding: 0 3%;
+                        .cont_arbol{
+                            .parent_arbol{
+                                padding-top: 5px;
+                                .bottom_arbol{
+                                    padding-bottom: 4px;
+                                    div{
+                                        .cantidad_arbol{
+                                            width: 50px;
+                                            float: left;
+                                            .select_arbol{
+                                                height: 30px;
+                                            }
+                                        }
+                                        .nombre_arbol{
+                                            float: left;
+                                            padding-top: 8px;
+                                            font-size: 16px;
+                                        }
+                                    }
+                                    .left_arbol{
+                                        padding-left: 30px;
+                                        padding-top: 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .map{
+                        display: block;
+                        height: 200px;
+                        margin: 5px 3% 0 3%;
+                        background: #999;
+                    }
+                }
+                fieldset.mini{
+                    padding: 10px;
+                    label{
+                        display: block;
+                        h1{
+                            display: block;
+                            padding-bottom: 6px;
+                            font-size: 22px;
+                        }
+                        span{
+                            width: 100%;
+                            p{
+                                width: 100%;
+                                font-size: 14px;
+                                text-align: left;
+                            }
+                        }
+                        .inputs{
+                            width: 100%;
+                            height: 24px;
+                        }
+                        .checkbox{
+                            width: 20px;
+                            height: 20px;
+                        }
+                        textarea{
+                            width: 100%;
+                            height: 48px;
+                        }
+                        #map{
+                            width: 100%;
+                            height: 300px;
+                        }
+                        .perfil_preguntas{
+                            width: 100%;
+                            padding-top: 4px;
+                        }
+                        .groupdetail{
+                            width: 100%;
+                        }
+                        .enviar{
+                            margin-top: 16px;
+                            a{
+                                text-decoration: none;
+                                padding: 6px 26px;
+                                background: #333;
+                                color: #fff;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                    .arbol{
+                        display: block;
+                        padding: 0 5%;
+                        .cont_arbol{
+                            padding-left: 16%;
+                            .parent_arbol{
+                                padding-top: 5px;
+                                .bottom_arbol{
+                                    padding-bottom: 4px;
+                                    div{
+                                        .cantidad_arbol{
+                                            width: 50px;
+                                            float: left;
+                                            .select_arbol{
+                                                height: 30px;
+                                            }
+                                        }
+                                        .nombre_arbol{
+                                            float: left;
+                                            padding-top: 8px;
+                                            font-size: 16px;
+                                        }
+                                    }
+                                    .left_arbol{
+                                        padding-left: 30px;
+                                        padding-top: 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .map{
+                        display: block;
+                        height: 200px;
+                        margin: 5px 5% 0 5%;
+                        background: #999;
+                    }
+                }
+            }
+        }
+    }
+}
+.pagina{
+    padding: 0px 10px 15px 10px;
+    background: #ccc;
+    .title{
+        margin-top: 10px;
+        position: relative;
+        height: 42px;
+        h1{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            font-weight: bold;
+            font-size: 32px;
+            text-shadow: 1px 1px 0px rgba(150, 150, 150, 1);
+        }
+        ul{
+            position: absolute;
+            top: 6px;
+            right: 0px;
+            li{
+                float: left;
+                width: 30px;
+                height: 30px;
+            }
+            li.back{
+                background: url('../images/icons-set.png') no-repeat;
+                background-position: -594px -334px;
+                cursor: pointer;
+            }
+        }
+    }
+    .cont_pagina{
+        display: block;
+        padding: 2px;
+        background: #999;
+        margin-top: 10px;
+        .cont_pag{
+            display: block;
+            background: #ddd;
+            padding: 10px;
+        }
+    }
+}
+.panel_admin{
+    margin: 10px;
+    padding: 10px;
+    background: #999;
+    .data_info{
+        font-weight: bold;
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    body {
+        .contenedor{
+            .modals{
+                .cont_modal{}
+            }
+            .sitio{
+                .menu_top{
+                    .btn_menu{
+                        display: block;
+                    }
+                    .btn_perfil{
+
+                    }
+                    .logo{
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        .logo_img{
+
+                        }
+                        .logo_txt{
+
+                        }
+                    }
+                }
+                .menu_left{
+                    left: -210px;
+                    .cont_menu{
+                        .menu{
+                            .bloque{
+                                .titulo{
+                                    .icono{}
+                                    .ic1{}
+                                    .texto{}
+                                }
+                                .bloque_lista{
+                                    li{
+                                        p{}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .contenido{
+                    .cont_contenido{
+                        .html{
+                            width: calc(100% - 6px);
+                            padding-left: 2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 640px) {
+    body {
+        .contenedor{
+            .modals{
+                .cont_modal{}
+            }
+            .sitio{
+                .menu_top{
+                    .btn_menu{
+                        display: none;
+                    }
+                    .btn_perfil{
+
+                    }
+                    .logo{
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 5px;
+                        .logo_img{
+
+                        }
+                        .logo_txt{
+
+                        }
+                    }
+                }
+                .menu_left{
+                    width: 200px;
+                    .cont_menu{
+                        .menu{
+                            .bloque{
+                                .titulo{
+                                    .icono{}
+                                    .ic1{}
+                                    .texto{}
+                                }
+                                .bloque_lista{
+                                    li{
+                                        p{}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .contenido{
+                    .cont_contenido{
+                        .html{}
+                    }
+                }
+            }
+        }
+    }
+}

@@ -67,29 +67,3 @@ a{
     float:right;
     display:inline;
 }
-.vhalign{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.valign{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.halign{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-}
-::-webkit-scrollbar-track-piece {
-  background: #eee;
-}
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
