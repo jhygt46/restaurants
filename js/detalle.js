@@ -6,10 +6,12 @@ $(document).ready(function(){
     for(var i=0, ilen=carro.length; i<ilen; i++){
         if(!carro[i].promo){
             total_process = total_process + parseInt(get_producto(carro[i].id_pro).precio);
+            console.log("prod: "+get_producto(carro[i].id_pro).precio);
         }
     }
     for(var i=0, ilen=promos.length; i<ilen; i++){
         total_process = total_process + parseInt(get_categoria(promos[i].id_cae).precio);
+        console.log("cate: "+get_categoria(promos[i].id_cae).precio);
     }
     
     console.log(carro);
