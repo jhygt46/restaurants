@@ -61,7 +61,7 @@ if(isset($_GET['code'])){
             
             <div class="titulo txtcen font_01 padding_01 borbottom">Pedido #<?php echo $info["id_ped"]; ?></div>
             <div class="lista_de_productos padding_01 borbottom"></div>
-            <?php if($info['pre_wasabi'] == 1 || $info['pre_gengibre'] == 1 || $info['pre_embarazadas'] == 1 || $info['pre_palitos'] > 0 || $info['pre_soya'] == 1 || $info['pre_teriyaki'] == 1){ ?>
+            <?php if($info['pre_wasabi'] == 1 || $info['pre_gengibre'] == 1 || $info['pre_embarazadas'] == 1 || $info['pre_palitos'] > 0 || $info['pre_soya'] == 1 || $info['pre_teriyaki'] == 1 || $info['comentarios'] != ""){ ?>
             <div class="contacto padding_01 borbottom">
                 
                 <?php if($info['pre_wasabi'] == 1){ ?><div class="txtcen font_04">Wasabi</div><?php } ?>
@@ -70,6 +70,7 @@ if(isset($_GET['code'])){
                 <?php if($info['pre_palitos'] == 1){ ?><div class="txtcen font_04">Palitos</div><?php } ?>
                 <?php if($info['pre_soya'] == 1){ ?><div class="txtcen font_04">Soya</div><?php } ?>
                 <?php if($info['pre_teriyaki'] == 1){ ?><div class="txtcen font_04">Teriyaki</div><?php } ?>
+                <?php if($info['comentarios'] == 1){ ?><div class="txtcen font_04"><?php echo $info['comentarios']; ?></div><?php } ?>
                 
             </div>
             <?php } ?>            
