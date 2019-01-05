@@ -145,7 +145,7 @@ class Rest{
             $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho, verify_direccion) VALUES ('".$pedido_code."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$verify_direccion."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, id_loc, pedido, carro, promos, verify_despacho) VALUES ('".$pedido_code."', now(), '".$id_loc."', '".$_POST['pedido']."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."')");
             $info['db_0'] = $pedido_sql;
             $id_ped = $pedido_sql['insert_id'];
             
