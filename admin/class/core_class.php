@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Santiago');
 
 require_once 'mysql_class.php';
 
@@ -209,10 +210,6 @@ class Core{
         $pres = $this->con->sql("SELECT * FROM preguntas_productos WHERE id_pro='".$id_pro."'");
         return $pres['resultado'];
     }
-    public function get_lista_ingredientes_pro($id_pro){
-        $pres = $this->con->sql("SELECT * FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."'");
-        return $pres['resultado'];
-    }
     public function get_pregunta($id_pre){
         $pre = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$this->id_cat."' AND id_pre='".$id_pre."' AND eliminado='0'");
         return $pre['resultado'][0];
@@ -272,11 +269,8 @@ class Core{
     public function ver_detalle($code){
         
         $info['op'] = false;
-        $host = ($_SERVER["HTTP_HOST"] == "localhost") ? "www.mikasushi.cl" : $_SERVER["HTTP_HOST"] ;
-        $sql = $this->con->sql("SELECT t1.id_ped, t1.carro, t1.promos, t3.code, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
-        
-        $info['sql'] = $sql;
-        
+        $host = ($_SERVER["HTTP_HOST"] == "localhost") ? "www.izusushi.cl" : $_SERVER["HTTP_HOST"] ;
+        $sql = $this->con->sql("SELECT * FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['css_base'] = $path."/css/reset.css";
         $info['css_detalle'] = $path."/css/css_detalle_01.css";
@@ -288,12 +282,26 @@ class Core{
             $info['js_detalle'] = $path."/js/detalle.js";
 
             $info['id_ped'] = $sql['resultado'][0]['id_ped'];
-            $info['pedido'] = $sql['resultado'][0]['pedido'];
+            $aux_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
+            $info['pep'] = $aux_pep['resultado'][0];
+            
             $info['carro'] = $sql['resultado'][0]['carro'];
             $info['promos'] = $sql['resultado'][0]['promos'];
             
+            $info['pre_wasabi'] = $sql['resultado'][0]['pre_wasabi'];
+            $info['pre_gengibre'] = $sql['resultado'][0]['pre_gengibre'];
+            $info['pre_embarazadas'] = $sql['resultado'][0]['pre_embarazadas'];
+            $info['pre_palitos'] = $sql['resultado'][0]['pre_palitos'];
+            $info['pre_teriyaki'] = $sql['resultado'][0]['pre_teriyaki'];
+            $info['pre_soya'] = $sql['resultado'][0]['pre_soya'];
+            $info['despacho'] = $sql['resultado'][0]['despacho'];
+            $info['comentarios'] = $sql['resultado'][0]['comentarios'];
+            
+            $info['costo'] = $sql['resultado'][0]['costo'];
+            $info['total'] = $sql['resultado'][0]['total'];
+            
             $info['verify_despacho'] = $sql['resultado'][0]['verify_despacho'];
-            $info['verify_direccion'] = $sql['resultado'][0]['verify_direccion'];
+            $info['verify_direccion'] = $aux_pep['resultado'][0]['verificado'];
             
             $info['op'] = true;
             
@@ -302,10 +310,136 @@ class Core{
         return $info;
         
     }
-    public function get_ultimos_pedidos($id_loc){
+    public function add_pedido_moto($id_mot, $id_ped, $code){
         
-        $aux = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."'");
-        return $aux['resultado'];
+        $data['id_mot'] = $id_mot;
+        $data['id_ped'] = $id_ped;
+        $data['code'] = $code;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/add_pedido_moto');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $info['db_h'] = curl_exec($ch);
+        curl_close($ch);
+        
+    }
+    public function rm_pedido_moto($id_mot, $id_ped){
+        
+        $data['id_mot'] = $id_mot;
+        $data['id_ped'] = $id_ped;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/rm_pedido_moto');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $info['db_h'] = curl_exec($ch);
+        curl_close($ch);
+        
+    }
+    public function set_web_pedido(){
+       
+        $pedido = json_decode($_POST['pedido']);
+        $id_ped = intval($pedido->{'id_ped'});
+        $despacho = intval($pedido->{'despacho'});
+        $pre_wasabi = intval($pedido->{'pre_wasabi'});
+        $pre_gengibre = intval($pedido->{'pre_gengibre'});
+        $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
+        $pre_palitos = intval($pedido->{'pre_palitos'});
+        $estado = intval($pedido->{'estado'});
+        
+        $id_loc = 14;
+        $id_mot = intval($pedido->{'id_mot'});
+        
+        if($id_ped > 0){
+            $sql_pedido = $this->con->sql("SELECT code, id_mot FROM pedidos_aux WHERE id_ped='".$id_ped."'");
+            $code = $sql_pedido['resultado'][0]['code'];
+            $id_mot_aux = $sql_pedido['resultado'][0]['id_mot'];
+        }
+        if($id_ped == 0){
+            $code = bin2hex(openssl_random_pseudo_bytes(10));
+            $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
+            $id_ped = $insert['insert_id'];
+            $id_mot_aux = 0;
+        }
+        
+        if($id_mot == 0 && $id_mot_aux != 0){
+            // BORRAR PEDIDO MOTO
+            $this->rm_pedido_moto($id_mot, $id_ped);
+        }
+        if($id_mot > 0){
+            if($id_mot != $id_mot_aux){
+                // ADD PEDIDO MOTO
+                $this->add_pedido_moto($id_mot, $id_ped, $code);
+                
+            }
+        }
+        
+        
+        $info['db_a'] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."' WHERE id_ped='".$id_ped."'");
+        $info['db_b'] = $this->con->sql("UPDATE pedidos_aux SET pre_wasabi='".$pre_wasabi."' WHERE id_ped='".$id_ped."'");
+        $info['db_c'] = $this->con->sql("UPDATE pedidos_aux SET pre_gengibre='".$pre_gengibre."' WHERE id_ped='".$id_ped."'");
+        $info['db_d'] = $this->con->sql("UPDATE pedidos_aux SET pre_embarazadas='".$pre_embarazadas."' WHERE id_ped='".$id_ped."'");
+        $info['db_e'] = $this->con->sql("UPDATE pedidos_aux SET pre_palitos='".$pre_palitos."' WHERE id_ped='".$id_ped."'");
+        $info['db_f'] = $this->con->sql("UPDATE pedidos_aux SET estado='".$estado."' WHERE id_ped='".$id_ped."'");
+        $info['db_g'] = $this->con->sql("UPDATE pedidos_aux SET id_mot='".$id_mot."' WHERE id_ped='".$id_ped."'");
+        
+        
+        if($id_mot == 0){
+            
+        }
+        
+        
+        $info['db_0'] = $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($pedido->{'carro'})."' WHERE id_ped='".$id_ped."'");
+        $info['db_1'] = $this->con->sql("UPDATE pedidos_aux SET promos='".json_encode($pedido->{'promos'})."' WHERE id_ped='".$id_ped."'");
+        
+        $info['id_ped'] = $id_ped;
+        return $info;
+        
+    }
+    public function get_ultimos_pedidos($id_loc, $id_ped){
+        
+        $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
+        for($i=0; $i<$sql['count']; $i++){
+            
+            $id_pep = $sql['resultado'][$i]['id_pep'];
+            
+            $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
+            $res['pedido_code'] = $sql['resultado'][$i]['code'];
+            $res['tipo'] = $sql['resultado'][$i]['tipo'];
+            $res['estado'] = $sql['resultado'][$i]['estado'];
+            $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
+            $res['despacho'] = $sql['resultado'][$i]['despacho'];
+            $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
+            $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
+            $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
+            $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
+            $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
+            $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
+            $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
+            $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
+            $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
+            
+            $sql2 = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$id_pep."'");
+            $res['nombre'] = $sql2['resultado'][0]['nombre'];
+            $res['telefono'] = $sql2['resultado'][0]['telefono'];
+            
+            if($res['despacho'] == 1){
+                
+                $res['direccion'] = $sql2['resultado'][0]['direccion'];
+                $res['lat'] = $sql2['resultado'][0]['lat'];
+                $res['lng'] = $sql2['resultado'][0]['lng'];
+                $res['calle'] = $sql2['resultado'][0]['calle'];
+                $res['num'] = $sql2['resultado'][0]['num'];
+                $res['depto'] = $sql2['resultado'][0]['depto'];
+                $res['comuna'] = $sql2['resultado'][0]['num'];
+                
+            }
+            
+            
+            $aux[] = $res;
+            unset($res);
+            
+        }
+        return $aux;
         
     }
     public function socket_code($id_loc, $id_gir){
@@ -359,6 +493,7 @@ class Core{
             $info['js_base'] = $path."/js/base.js";
             $info['js_base_lista'] = $path."/js/base_lista.js";
             $info['js_pos'] = $path."/js/pos.js";
+            $info['js_pos_lista'] = $path."/js/pos_lista.js";
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
@@ -373,8 +508,10 @@ class Core{
             $info['pedido_04_titulo'] = $sql['resultado'][0]['pedido_04_titulo'];
             $info['pedido_04_subtitulo'] = $sql['resultado'][0]['pedido_04_subtitulo'];
             
-            
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
+            
+            $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info['id_gir']."'");
+            $info['motos'] = $sql_motos['resultado'];
             
         }
         
@@ -491,7 +628,7 @@ class Core{
         }else{
             $path = "/var/www/html/restaurants/";
         }
-        
+
         $ruta_data = $path."js/data/".$giro['resultado'][0]['code'].".js";
         file_put_contents($ruta_data, "var data=".json_encode($info));
         $this->con->sql("UPDATE giros SET ultima_actualizacion=now(), con_cambios='0' WHERE id_gir='".$id_gir."'");
