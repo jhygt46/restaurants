@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
 date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
