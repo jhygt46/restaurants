@@ -7,6 +7,14 @@ $core = new Core();
 $info = $core->get_data('www.izusushi.cl');
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
 
+echo "<pre>";
+print_r($info);
+echo "</pre>";
+
+echo "<pre>";
+print_r($code);
+echo "</pre>";
+
 if($code === null){
     echo "ERROR: SIN ACCESO AL SISTEMA";
     exit;
