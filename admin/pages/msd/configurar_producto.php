@@ -28,7 +28,6 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     $list_pre = $fireapp->get_preguntas();
     $list_lin = $fireapp->get_lista_ingredientes();
     
-    exit;
     $id_pro = $_GET["id_pro"];
     
     $pre_prod = $fireapp->get_preguntas_pro($id_pro);
