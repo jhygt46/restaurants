@@ -210,6 +210,10 @@ class Core{
         $pres = $this->con->sql("SELECT * FROM preguntas_productos WHERE id_pro='".$id_pro."'");
         return $pres['resultado'];
     }
+    public function get_lista_ingredientes_pro($id_pro){
+        $pres = $this->con->sql("SELECT * FROM lista_ingredientes WHERE id_pro='".$id_pro."'");
+        return $pres['resultado'];
+    }
     public function get_pregunta($id_pre){
         $pre = $this->con->sql("SELECT * FROM preguntas WHERE id_cat='".$this->id_cat."' AND id_pre='".$id_pre."' AND eliminado='0'");
         return $pre['resultado'][0];
