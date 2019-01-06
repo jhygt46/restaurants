@@ -74,7 +74,7 @@
                         <div class="cont_contenido relative">
                             <div class="html">
                                 
-                                <?php require 'pages/msd/inicio.php'; ?>
+                                <?php //require 'pages/msd/inicio.php'; ?>
                                 
                             </div>
                         </div>
