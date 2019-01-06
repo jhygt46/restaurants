@@ -5,9 +5,9 @@ header('Content-type: text/json');
 header('Content-type: application/json');
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/admin/";
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/admin/";
 }else{
-    $path = "/var/www/html/admin/";
+    $path = "/var/www/html/restaurants/admin/";
 }
 
 require_once($path."class/guardar_class.php");
