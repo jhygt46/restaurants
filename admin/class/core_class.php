@@ -211,7 +211,7 @@ class Core{
         return $pres['resultado'];
     }
     public function get_lista_ingredientes_pro($id_pro){
-        $pres = $this->con->sql("SELECT * FROM lista_ingredientes WHERE id_pro='".$id_pro."'");
+        $pres = $this->con->sql("SELECT * FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."'");
         return $pres['resultado'];
     }
     public function get_pregunta($id_pre){
