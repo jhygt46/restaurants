@@ -4,7 +4,7 @@ date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
 
-$info = $core->get_data('www.izusushi.cl');
+$info = $core->get_data();
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
 
 echo "<pre>";
