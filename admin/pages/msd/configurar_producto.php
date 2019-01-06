@@ -10,8 +10,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
-exit;
-
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
 $sub_titulo1 = "Modificar Configuracion";
@@ -30,6 +28,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     $list_pre = $fireapp->get_preguntas();
     $list_lin = $fireapp->get_lista_ingredientes();
     
+    exit;
     $id_pro = $_GET["id_pro"];
     
     $pre_prod = $fireapp->get_preguntas_pro($id_pro);
