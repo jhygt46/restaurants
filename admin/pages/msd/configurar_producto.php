@@ -11,7 +11,6 @@ require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
 
-
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
 $sub_titulo1 = "Modificar Configuracion";
