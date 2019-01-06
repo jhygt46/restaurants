@@ -10,6 +10,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
+exit;
 
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
