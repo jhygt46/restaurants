@@ -1,10 +1,5 @@
 <?php
 session_start();
-
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
 date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
@@ -12,7 +7,7 @@ $core = new Core();
 
 $info = $core->get_data();
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
-
+/*
 echo "<pre>";
 print_r($info);
 echo "</pre>";
@@ -20,7 +15,7 @@ echo "</pre>";
 echo "<pre>";
 print_r($code);
 echo "</pre>";
-
+*/
 if($code === null){
     echo "ERROR: SIN ACCESO AL SISTEMA";
     exit;
@@ -43,8 +38,10 @@ $pedidos = $core->get_ultimos_pedidos($_GET['id_loc'], null);
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_pos_lista"]; ?>" type="text/javascript"></script>
-        <script> var local_code = '<?php echo $code; ?>'; </script>
-        <script> var pedidos = <?php echo json_encode($pedidos); ?>; </script>
+        <script> 
+            var local_code = '<?php echo $code; ?>'; 
+            var pedidos = <?php echo json_encode($pedidos); ?>;
+        </script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;

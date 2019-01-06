@@ -3,6 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
+    mantener_session();
 });
 var seleccionado = 0;
 var categoria = 0;
@@ -11,7 +12,12 @@ var pedidos = [];
 var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempos = { retiro: 900, despacho: 3600 };
-
+function mantener_session(){
+    
+    console.log("SESSION");
+    setTimeout(mantener_session, 1200000);
+    
+}
 function actualizar_seleccionado(){
     
 }
