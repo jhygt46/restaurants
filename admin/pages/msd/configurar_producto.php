@@ -1,9 +1,15 @@
 <?php
 session_start();
 
-require_once("../../class/core_class.php");
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
+
 
 
 /* CONFIG PAGE */
