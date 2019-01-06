@@ -12,7 +12,7 @@ $core = new Core();
 $info = $core->get_data();
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
 
-setcookie("SessionCookier", $value, time()+50400);
+setcookie("SessionCookier", 'BUENA NELSON', time()+50400);
 
 
 
