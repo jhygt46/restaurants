@@ -2,11 +2,20 @@
 session_start();
 date_default_timezone_set('America/Santiago');
 
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
+
 require('admin/class/core_class.php');
 $core = new Core();
 
 $info = $core->get_data();
 $code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
+
+setcookie("SessionCookier", $value, time()+50400);
+
+
+
 /*
 echo "<pre>";
 print_r($info);
