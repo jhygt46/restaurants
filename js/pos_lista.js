@@ -226,6 +226,7 @@ function get_producto(id_pro){
 function listar_pedidos(){
     $('.lista_pedidos').html('');
     var pedidos = get_pedidos();
+    console.log(pedidos);
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
