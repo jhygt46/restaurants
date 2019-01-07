@@ -6,9 +6,7 @@ require('admin/class/core_class.php');
 $core = new Core();
 //$core->is_local($_GET['id_loc']);
 $code_verificado = false;
-
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
-
 
 if($_SESSION['user']['info']['id_user'] > 0){
     
@@ -43,6 +41,12 @@ if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
 $info = $core->get_data('www.izusushi.cl');
 $pedidos = $core->get_ultimos_pedidos($id_loc, null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
+
+echo "<pre>";
+print_r($pedidos);
+echo "</pre>";
+
+exit;
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
