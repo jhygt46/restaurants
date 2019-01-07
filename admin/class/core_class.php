@@ -402,6 +402,7 @@ class Core{
     public function get_ultimos_pedidos($id_loc, $id_ped){
         
         $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
+        return $sql;
         for($i=0; $i<$sql['count']; $i++){
             
             $id_pep = $sql['resultado'][$i]['id_pep'];
