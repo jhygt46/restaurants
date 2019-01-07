@@ -225,8 +225,7 @@ function get_producto(id_pro){
 }
 function listar_pedidos(){
     $('.lista_pedidos').html('');
-    var pedidos = get_pedidos();
-    console.log(pedidos);
+    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
@@ -509,7 +508,7 @@ function set_pedidos(pedidos){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
 function get_pedidos(){
-    return JSON.parse(localStorage.getItem("pedidos")) || false;
+    return JSON.parse(localStorage.getItem("pedidos")) || get_pedido_blank();
 }
 function get_pedido_blank(){
     return [pedido_obj()];
