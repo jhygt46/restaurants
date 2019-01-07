@@ -8,7 +8,6 @@ $(document).ready(function(){
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
-var pedidos = [];
 var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempos = { retiro: 900, despacho: 3600 };
