@@ -2,35 +2,47 @@
 session_start();
 date_default_timezone_set('America/Santiago');
 
-echo "<pre>";
-print_r($_COOKIE);
-echo "</pre>";
-
 require('admin/class/core_class.php');
 $core = new Core();
+//$core->is_local($_GET['id_loc']);
+$code_verificado = false;
 
-$info = $core->get_data();
-$code = $core->socket_code($_GET['id_loc'], $info['id_gir']);
-
-setcookie("SessionCookier", 'BUENA NELSON', time()+50400);
-
+$id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 
 
-/*
-echo "<pre>";
-print_r($info);
-echo "</pre>";
+if($_SESSION['user']['info']['id_user'] > 0){
+    
+    $id_user = $_SESSION['user']['info']['id_user'];
+    $user_local = $core->con->sql("SELECT * FROM fw_usuarios_locales WHERE id_loc='".$id_loc."' AND id_user='".$id_user."'");
+    if($user_local['count'] == 1){
+        
+        $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
+        setcookie('CODE', $code_cookie, time()+10800);
+        $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
+        $code_verificado = true;
+        session_destroy();
+        
+    }
+    if($user_local['count'] == 0){
+        die("NO TIENE LOS PERMISOS NECESARIOS PARA INGRESAR AL PUNTO DE VENTA");
+    }
 
-echo "<pre>";
-print_r($code);
-echo "</pre>";
-*/
-if($code === null){
-    echo "ERROR: SIN ACCESO AL SISTEMA";
-    exit;
 }
 
-$pedidos = $core->get_ultimos_pedidos($_GET['id_loc'], null);
+if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
+    
+    if(!$code_verificado){
+        $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
+        if($exist['count'] == 0){
+            die("BUENA NELSON.COM #2");
+        }
+    }
+    
+}
+
+$info = $core->get_data('www.izusushi.cl');
+$pedidos = $core->get_ultimos_pedidos($id_loc, null);
+$code = $core->socket_code($id_loc, $info['id_gir']);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">

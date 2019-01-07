@@ -12,6 +12,7 @@ $fireapp = new Core();
 
 /* CONFIG PAGE */
 $titulo_list = "Aplicaciones";
+$id_list = "id_loc";
 /* CONFIG PAGE */
 
 $id_gir = 0;
@@ -111,10 +112,8 @@ if($diff > 0){
             <div class="listado_items">
                 <?php 
                 
-                $list[0]['id_loc'] = 1;
+                $list[0]['id_loc'] = 14;
                 $list[0]['nombre'] = "Buena";
-                $list[1]['id_loc'] = 2;
-                $list[1]['nombre'] = "Nelson";
                 
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
@@ -124,7 +123,7 @@ if($diff > 0){
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic5" href="../admin_responsive/locales.php?code=<?php echo $code; ?>" target="_blank"></a>
+                        <a class="icono ic5" href="../locales.php?id_loc=<?php echo $id_n; ?>" target="_blank"></a>
                     </div>
                 </div>
                 <?php } ?>
