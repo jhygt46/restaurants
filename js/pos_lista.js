@@ -509,7 +509,7 @@ function set_pedidos(pedidos){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
 function get_pedidos(){
-    return JSON.parse(localStorage.getItem("pedidos")) || get_pedido_blank();
+    return JSON.parse(localStorage.getItem("pedidos")) || false;
 }
 function get_pedido_blank(){
     return [pedido_obj()];
