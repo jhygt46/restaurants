@@ -62,7 +62,7 @@ function open_categoria(id){
     }
     
 }
-var time_limit = 7200;
+
 function tiene_pedido(){
     
     var pedido = get_pedido();
@@ -1169,16 +1169,12 @@ function confirmar_productos_promo(that){
     }
      
 }
-function nuevo(){
-    volver_tipo_despacho();
-    borrar_carro();
-    set_pedido(null);
-    $('.cantcart_num').html(0);
-}
+
 function aux_nuevo(){
     borrar_carro();
     set_pedido(null);
     $('.cantcart_num').html(0);
     hide_modal();
+    volver_tipo_despacho();
     // VOLVER A LA NORMALIDAD
 }

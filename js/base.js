@@ -15,6 +15,7 @@ var cantidad = 0;
 var pre_promo = 0;
 var map_init = 0;
 var maps = [];
+var time_limit = 7200;
 
 // FIN BACK BUTTON //
 
