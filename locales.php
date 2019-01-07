@@ -42,13 +42,6 @@ $info = $core->get_data('www.izusushi.cl');
 $pedidos = $core->get_ultimos_pedidos($id_loc, null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
 
-echo $id_loc;
-echo "<pre>";
-print_r($pedidos);
-echo "</pre>";
-
-exit;
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
