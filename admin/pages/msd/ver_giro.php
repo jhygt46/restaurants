@@ -23,7 +23,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
     
     $id_gir = $_GET["id_gir"];
     $fireapp->is_giro($id_gir);
-    
+    $list = $fireapp->get_locales();
     $giro = $fireapp->get_giro();
     $catalogos = $fireapp->get_catalogos();
         
@@ -111,9 +111,6 @@ if($diff > 0){
             </div>
             <div class="listado_items">
                 <?php 
-                
-                $list[0]['id_loc'] = 14;
-                $list[0]['nombre'] = "Buena";
                 
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
