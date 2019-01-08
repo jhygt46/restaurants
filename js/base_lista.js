@@ -747,7 +747,8 @@ function paso_4(){
     pedido.comentarios = $('#pedido_comentarios').val();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
-    
+    console.log("SEND");
+    console.log(send);
     
     $.ajax({
         url: "ajax/index.php",

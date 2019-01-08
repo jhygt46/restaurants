@@ -238,8 +238,8 @@ class Rest{
             $result = curl_exec($ch);
             curl_close($ch);
             
-            $info['nodejs'] = $result;
-            
+            $nodejs = json_decode($result);
+            $info['mail_enviado'] = $nodejs['op'];
 
         }else{
 
