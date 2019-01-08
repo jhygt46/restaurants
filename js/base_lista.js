@@ -1177,6 +1177,10 @@ function aux_nuevo(){
     hide_modal();
     volver_tipo_despacho();
     cantidad = 0;
+    
+    $('.pedido_nombre').val('');
+    $('.pedido_telefono').val('');
+    
     $('.cantcart_num').html(cantidad);
     $('.pedido_wasabi').attr('checked', false);
     $('.pedido_gengibre').attr('checked', false);
