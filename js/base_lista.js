@@ -697,6 +697,7 @@ function paso_3(){
 var map_socket, markers;
 function show_modal_4(pedido){
     
+    console.log("SHOW PEDIDO MODAL 4");
     console.log(pedido);
     
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
