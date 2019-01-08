@@ -765,6 +765,8 @@ function paso_4(){
                 pedido.id_ped = data.id_ped;
                 pedido.pedido_code = data.pedido_code;
                 pedido.fecha = data.fecha;
+                pedido.lat = data.lat;
+                pedido.lng = data.lng;
                 
                 if(pedido.despacho == 0){
                     pedido.time = 25;
