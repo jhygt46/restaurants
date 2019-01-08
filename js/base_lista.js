@@ -756,6 +756,7 @@ function paso_4(){
         success: function(info){
 
             var data = JSON.parse(info);
+            console.log("DATA");
             console.log(data);
             if(data.op == 1){
 
