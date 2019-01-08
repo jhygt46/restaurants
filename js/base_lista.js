@@ -697,6 +697,8 @@ function paso_3(){
 var map_socket, markers;
 function show_modal_4(pedido){
     
+    console.log(pedido);
+    
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
         center: {lat: pedido.lat, lng: pedido.lng},
         zoom: 13,
@@ -1180,7 +1182,7 @@ function aux_nuevo(){
     $('.cantcart_num').html(cantidad);
     
     $('#pedido_nombre').val('');
-    $('#pedido_telefono').val('');
+    $('#pedido_telefono').val('+569 ');
     
     $('#pedido_wasabi').attr('checked', false);
     $('#pedido_gengibre').attr('checked', false);
