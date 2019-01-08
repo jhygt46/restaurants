@@ -1176,5 +1176,6 @@ function aux_nuevo(){
     $('.cantcart_num').html(0);
     hide_modal();
     volver_tipo_despacho();
+    cantidad = 0;
     // VOLVER A LA NORMALIDAD
 }
