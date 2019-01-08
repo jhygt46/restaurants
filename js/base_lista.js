@@ -1188,6 +1188,6 @@ function aux_nuevo(){
     $('#pedido_soya').attr('checked', false);
     $('#pedido_teriyaki').attr('checked', false);
     $('#pedido_palitos option[value=0]').attr('selected', 'selected');
-    $('#pedido_comentarios').text('');
+    $('#pedido_comentarios').val('');
     // VOLVER A LA NORMALIDAD
 }
