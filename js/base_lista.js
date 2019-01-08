@@ -1187,7 +1187,7 @@ function aux_nuevo(){
     $('#pedido_embarazadas').attr('checked', false);
     $('#pedido_soya').attr('checked', false);
     $('#pedido_teriyaki').attr('checked', false);
-    $('#pedido_palitos option[value=0]').prop('selected', true);
-    $('#pedido_comentarios').val('');
+    $('#pedido_palitos option[value=0]').attr('selected', 'selected');
+    $('#pedido_comentarios').text('');
     // VOLVER A LA NORMALIDAD
 }
