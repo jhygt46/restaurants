@@ -801,6 +801,8 @@ function time(){
     
     var diff = Math.round((fecha_1 + Math.round(pedido.time * 60000) - fecha_2)/60000);
     
+    console.log("DIFF: "+diff);
+    
     if(diff >= 2){
         $('.pedido_final .tiempo h2').html(diff+" minutos aprox");
         setTimeout(time, 4000);
