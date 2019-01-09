@@ -342,41 +342,42 @@ class Core{
     public function set_web_pedido(){
        
         $pedido = json_decode($_POST['pedido']);
-        $info['pedido'] = $pedido;
-        $info['carro'] = json_decode($_POST['carro']);
-        $info['promos'] = json_decode($_POST['promos']);
+        $carro = $pedido->{'carro'};
+        $promos = $pedido->{'promos'};
         
-        /*
         $id_ped = intval($pedido->{'id_ped'});
         $despacho = intval($pedido->{'despacho'});
-        $pre_wasabi = intval($pedido->{'pre_wasabi'});
-        $pre_gengibre = intval($pedido->{'pre_gengibre'});
-        $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
-        $pre_palitos = intval($pedido->{'pre_palitos'});
         $estado = intval($pedido->{'estado'});
         
-        $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$_COOKIE['ID']."' AND cookie_code='".$_COOKIE['CODE']."'");
+        $pre_gengibre = intval($pedido->{'pre_gengibre'});
+        $pre_wasabi = intval($pedido->{'pre_wasabi'});
+        $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
+        $pre_palitos = intval($pedido->{'pre_palitos'});
+        $pre_soya = intval($pedido->{'pre_soya'});
+        $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
+        
+        $id_loc = $_COOKIE['ID'];
+        $cookie_code = $_COOKIE['CODE'];
+        
+        $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
         if($aux_local['count'] == 1){
             
-            $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."' WHERE id_ped='".$id_ped."'");
+            if($id_ped > 0){
+                $sql_pedido = $this->con->sql("SELECT code FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                $code = $sql_pedido['resultado'][0]['code'];
+            }
+            if($id_ped == 0){
+                $code = bin2hex(openssl_random_pseudo_bytes(10));
+                $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
+                $id_ped = $insert['insert_id'];
+            }
+            
+            $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
 
-        $id_loc = 14;
+        /*
         $id_mot = intval($pedido->{'id_mot'});
-        
-        if($id_ped > 0){
-            $sql_pedido = $this->con->sql("SELECT code, id_mot FROM pedidos_aux WHERE id_ped='".$id_ped."'");
-            $code = $sql_pedido['resultado'][0]['code'];
-            //$id_mot_aux = $sql_pedido['resultado'][0]['id_mot'];
-        }
-        if($id_ped == 0){
-            $code = bin2hex(openssl_random_pseudo_bytes(10));
-            $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
-            $id_ped = $insert['insert_id'];
-            //$id_mot_aux = 0;
-        }
-        
         if($id_mot == 0 && $id_mot_aux != 0){
             // BORRAR PEDIDO MOTO
             $this->rm_pedido_moto($id_mot, $id_ped);
@@ -388,21 +389,8 @@ class Core{
                 
             }
         }
-        
-        
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET pre_wasabi='".$pre_wasabi."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET pre_gengibre='".$pre_gengibre."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET pre_embarazadas='".$pre_embarazadas."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET pre_palitos='".$pre_palitos."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET estado='".$estado."' WHERE id_ped='".$id_ped."'");
-        //$info['db'][] = $this->con->sql("UPDATE pedidos_aux SET id_mot='".$id_mot."' WHERE id_ped='".$id_ped."'");        
-        
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($pedido->{'carro'})."' WHERE id_ped='".$id_ped."'");
-        $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET promos='".json_encode($pedido->{'promos'})."' WHERE id_ped='".$id_ped."'");
-        
-        $info['id_ped'] = $id_ped;
         */
+        
         return $info;
         
     }
