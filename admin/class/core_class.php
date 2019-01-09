@@ -342,7 +342,11 @@ class Core{
     public function set_web_pedido(){
        
         $pedido = json_decode($_POST['pedido']);
+        $info['pedido'] = $pedido;
+        $info['carro'] = json_decode($_POST['carro']);
+        $info['promos'] = json_decode($_POST['promos']);
         
+        /*
         $id_ped = intval($pedido->{'id_ped'});
         $despacho = intval($pedido->{'despacho'});
         $pre_wasabi = intval($pedido->{'pre_wasabi'});
@@ -351,8 +355,13 @@ class Core{
         $pre_palitos = intval($pedido->{'pre_palitos'});
         $estado = intval($pedido->{'estado'});
         
-        $info['BUE'] = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$_COOKIE['ID']."' AND cookie_code='".$_COOKIE['CODE']."'");
-        
+        $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$_COOKIE['ID']."' AND cookie_code='".$_COOKIE['CODE']."'");
+        if($aux_local['count'] == 1){
+            
+            $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."' WHERE id_ped='".$id_ped."'");
+
+        }
+
         $id_loc = 14;
         $id_mot = intval($pedido->{'id_mot'});
         
@@ -367,7 +376,7 @@ class Core{
             $id_ped = $insert['insert_id'];
             //$id_mot_aux = 0;
         }
-        /*
+        
         if($id_mot == 0 && $id_mot_aux != 0){
             // BORRAR PEDIDO MOTO
             $this->rm_pedido_moto($id_mot, $id_ped);
@@ -379,7 +388,7 @@ class Core{
                 
             }
         }
-        */
+        
         
         $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."' WHERE id_ped='".$id_ped."'");
         $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET pre_wasabi='".$pre_wasabi."' WHERE id_ped='".$id_ped."'");
@@ -393,6 +402,7 @@ class Core{
         $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET promos='".json_encode($pedido->{'promos'})."' WHERE id_ped='".$id_ped."'");
         
         $info['id_ped'] = $id_ped;
+        */
         return $info;
         
     }
