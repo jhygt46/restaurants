@@ -704,7 +704,7 @@ function show_modal_4(pedido){
     
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
         center: punto,
-        zoom: 8,
+        zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     });
