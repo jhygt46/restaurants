@@ -697,8 +697,7 @@ function paso_3(){
 var map_socket, markers;
 function show_modal_4(pedido){
     
-    console.log("SHOW PEDIDO MODAL 4");
-    console.log(pedido);
+    var tiempo = (pedido.despacho == 0) ? 25 : 60 ;
     
     var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
@@ -717,7 +716,7 @@ function show_modal_4(pedido){
     
     $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
     $('.pedido_final .estado h2').html("Enviado");
-    $('.pedido_final .tiempo h2').html("13 minutos aprox");
+    $('.pedido_final .tiempo h2').html(tiempo+" minutos aprox");
     $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total), "$"));
     show_modal('paso_04');
     open_socket(pedido.pedido_code);
