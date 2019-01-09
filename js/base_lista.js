@@ -697,7 +697,7 @@ function paso_3(){
 var map_socket, markers;
 function show_modal_4(pedido){
     
-    var tiempo = (pedido.despacho == 0) ? 25 : 60 ;
+    var tiempo = (pedido.despacho == 0) ? tiempo_retiro : tiempo_despacho ;
     
     var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
@@ -715,7 +715,7 @@ function show_modal_4(pedido){
     });
     
     $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
-    $('.pedido_final .estado h2').html("Enviado");
+    $('.pedido_final .estado h2').html(pedido.estado);
     $('.pedido_final .tiempo h2').html(tiempo+" minutos aprox");
     $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total), "$"));
     show_modal('paso_04');
@@ -766,13 +766,14 @@ function paso_4(){
                 pedido.fecha = data.fecha;
                 pedido.lat = data.lat;
                 pedido.lng = data.lng;
+                pedido.estado = estados[0];
                 
                 if(pedido.despacho == 0){
-                    pedido.time = 25;
+                    pedido.time = tiempo_retiro;
                     $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puedes venir a buscarlo");
                 }
                 if(pedido.despacho == 1){
-                    pedido.time = 60;
+                    pedido.time = tiempo_despacho;
                     $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
                 }                
                 
@@ -795,9 +796,7 @@ function paso_4(){
 }
 function time(){
     
-    var pedido = get_pedido();
-    console.log(pedido);
-    
+    var pedido = get_pedido();    
     var fecha_1 = pedido.fecha * 1000;
     var fecha_2 = new Date().getTime();
     
@@ -818,6 +817,7 @@ function time(){
 }
 function open_socket(code){
     
+    var pedido = get_pedido(); 
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('pedido-'+code, function(data){
 
@@ -825,6 +825,8 @@ function open_socket(code){
 
         if(info.accion == 0){
             $('.pedido_final .estado h2').html(info.estado);
+            pedido.estado = info.estado;
+            set_pedido(pedido);
         }
         if(info.accion == 1){
             var pedido = get_pedido();
@@ -1097,7 +1099,8 @@ function obj_pedido(){
         id_loc: 0,
         calle: '', 
         num: 0, 
-        depto: '', 
+        depto: '',
+        estado: 0,
         comuna: '', 
         direccion: '', 
         lat: 0, 

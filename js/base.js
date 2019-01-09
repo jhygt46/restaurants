@@ -16,6 +16,9 @@ var pre_promo = 0;
 var map_init = 0;
 var maps = [];
 var time_limit = 7200;
+var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
+var tiempo_retiro = 25;
+var tiempo_despacho = 60;
 
 // FIN BACK BUTTON //
 
