@@ -822,7 +822,7 @@ function open_socket(code){
         var info = JSON.parse(data.estado);
 
         if(info.accion == 0){
-            $('.pedido_final .estado h2').html("Estado: "+info.estado);
+            $('.pedido_final .estado h2').html(info.estado);
         }
         if(info.accion == 1){
             var pedido = get_pedido();
