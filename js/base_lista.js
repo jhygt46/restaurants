@@ -698,7 +698,6 @@ var map_socket, markers;
 function show_modal_4(pedido){
     
     var tiempo = (pedido.despacho == 0) ? tiempo_retiro : tiempo_despacho ;
-    
     var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
