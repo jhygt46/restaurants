@@ -110,6 +110,9 @@ class Rest{
     
     public function enviar_pedido(){
         
+        $info['op'] = 1;
+        
+        /*
         $aux_pedido = json_decode($_POST['pedido']);
         $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
         
@@ -247,6 +250,7 @@ class Rest{
             $info['mensaje'] = "Error: debe completar todos los campos";
 
         }
+        */
         return $info;
         
     }
