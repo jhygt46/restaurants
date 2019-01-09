@@ -142,8 +142,10 @@ class Rest{
         if($nombre != "" && $telefono != "+569 "){
             
             $id_loc = $aux_pedido->{'id_loc'};
-            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
-
+            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
+            $info['lat'] = $loc_gir['resultado'][0]['lat'];
+            $info['lng'] = $loc_gir['resultado'][0]['lng'];
+            
             $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (nombre, telefono, direccion, lat, lng, calle, num, depto, comuna) VALUES ('".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."')");
             $id_pep = $aux_pep['insert_id'];
 
@@ -182,61 +184,13 @@ class Rest{
             $result = curl_exec($ch);
             curl_close($ch);
             
-        }
-        
-        /*
-        
-        
-        if($nombre != "" && $telefono != "+569 "){
-            
-            
-            
-            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
-
-            $info['id_pep'] = $id_pep;
-            $info['pep_code'] = $code;
-            $info['fecha'] = time();
-            // POST NODE-JS MAIL Y SOCKET //
-            
-            // SOCKET //
-            $pedido['local_code'] = $loc_gir['resultado'][0]['code'];
-            $pedido['id_ped'] = $id_ped;
-            
-            // CORREO //
-            
-            $pedido['correo'] = $loc_gir['resultado'][0]['correo'];
-            $pedido['numero'] = $id_ped;
-            $pedido['accion'] = 'enviar_pedido_local';
-            $pedido['activar_envio'] = $loc_gir['resultado'][0]['activar_envio'];
-            $pedido['hash'] = 'hash';
-            $pedido['dominio'] = $loc_gir['resultado'][0]['dominio'];
-            $pedido['pedido_code'] = $pedido_code;
-            $pedido['nombre'] = $nombre;
-            $pedido['telefono'] = $telefono;
-            
-            
-            
-            $info['op'] = 1;
-            $info['id_ped'] = $id_ped;
-            $info['pedido_code'] = $pedido_code;
-            
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            $result = curl_exec($ch);
-            curl_close($ch);
-            
-            $nodejs = json_decode($result);
-            $info['mail_enviado'] = $nodejs['op'];
-
         }else{
-
+            
             $info['op'] = 2;
             $info['mensaje'] = "Error: debe completar todos los campos";
-
+            
         }
-        */
+        
         return $info;
         
     }
