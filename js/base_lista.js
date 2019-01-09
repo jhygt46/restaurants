@@ -715,14 +715,11 @@ function show_modal_4(pedido){
     
     $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
     $('.pedido_final .estado h2').html(pedido.estado);
-    $('.pedido_final .tiempo h2').html(tiempo+" minutos aprox");
     $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total + pedido.costo), "$"));
     show_modal('paso_04');
     open_socket(pedido.pedido_code);
-    if(!timer){
-        time();
-        timer = true;
-    }
+    time();
+
     
 }
 function move_marker(lat, lng){
@@ -782,7 +779,6 @@ function paso_4(){
                 show_modal_4(pedido);
                 set_pedido(pedido);
                 time();
-                timer = true;
                 paso = 1;
 
             }else{
@@ -795,8 +791,6 @@ function paso_4(){
     
 }
 function time(){
-    
-    console.log("FUNC: TIME");
 
     var pedido = get_pedido();    
     var fecha_1 = pedido.fecha * 1000;
