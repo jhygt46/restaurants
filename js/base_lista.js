@@ -703,8 +703,8 @@ function show_modal_4(pedido){
     console.log(pedido.lat);
     console.log(pedido.lng);
     
-    map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
-        center: {lat: pedido.lat, lng: pedido.lng},
+    map_socket = new google.maps.Map(document.getElementById('map_direccion'), {
+        center: {lat: -33.428066, lng: -70.616695},
         zoom: 13,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
