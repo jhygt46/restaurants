@@ -796,6 +796,8 @@ function paso_4(){
 function time(){
     
     var pedido = get_pedido();
+    console.log(pedido);
+    
     var fecha_1 = pedido.fecha * 1000;
     var fecha_2 = new Date().getTime();
     
