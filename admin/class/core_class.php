@@ -351,7 +351,7 @@ class Core{
         $pre_palitos = intval($pedido->{'pre_palitos'});
         $estado = intval($pedido->{'estado'});
         
-        $info['cookies'] = $_COOKIE;
+        $info['BUE'] = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$_COOKIE['ID']."' AND cookie_code='".$_COOKIE['CODE']."'");
         
         $id_loc = 14;
         $id_mot = intval($pedido->{'id_mot'});
