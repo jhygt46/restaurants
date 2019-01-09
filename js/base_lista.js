@@ -700,6 +700,9 @@ function show_modal_4(pedido){
     console.log("SHOW PEDIDO MODAL 4");
     console.log(pedido);
     
+    console.log(pedido.lat);
+    console.log(pedido.lng);
+    
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
         center: {lat: pedido.lat, lng: pedido.lng},
         zoom: 13,
