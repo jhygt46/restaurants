@@ -112,7 +112,6 @@ class Rest{
         
         $info['op'] = 1;
         
-        /*
         $aux_pedido = json_decode($_POST['pedido']);
         $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
         
@@ -137,6 +136,34 @@ class Rest{
         $lng = $aux_pedido->{'lng'};
         $costo = $aux_pedido->{'costo'};
         $total = $aux_pedido->{'total'};
+        $verify_despacho = 0;
+        
+        if($nombre != "" && $telefono != "+569 "){
+            
+            $id_loc = $aux_pedido->{'id_loc'};
+            
+            if($aux_pedido->{'despacho'} == 0){    
+                $costo = 0;
+                $despacho = 0;
+            }
+            if($aux_pedido->{'despacho'} == 1){
+                $costo = $aux_pedido->{'costo'};
+                $despacho = 1;
+                $aux_verify = $this->get_info_despacho($aux_pedido->{'lat'}, $aux_pedido->{'lng'});
+                if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
+                    $verify_despacho = 1;
+                }
+            }
+            
+            $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep, costo, total) VALUES ('".$pedido_code."', now(), '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."', '".$costo."', '".$total."')");
+            $id_ped = $pedido_sql['insert_id'];
+            $info['pedido_sql'] = $pedido_sql;
+            
+        }
+        
+        /*
+        
         
         if($nombre != "" && $telefono != "+569 "){
             
