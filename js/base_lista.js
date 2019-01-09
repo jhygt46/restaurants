@@ -1095,7 +1095,7 @@ function obj_pedido(){
         calle: '', 
         num: 0, 
         depto: '',
-        estado: 0,
+        estado: '',
         comuna: '', 
         direccion: '', 
         lat: 0, 
