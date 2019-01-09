@@ -721,6 +721,7 @@ function show_modal_4(pedido){
     open_socket(pedido.pedido_code);
     if(!timer){
         time();
+        timer = true;
     }
     
 }
