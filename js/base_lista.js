@@ -812,10 +812,10 @@ function time(){
 }
 function open_socket(code){
     
-    var pedido = get_pedido(); 
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
     socket.on('pedido-'+code, function(data){
 
+        var pedido = get_pedido();
         var info = JSON.parse(data.estado);
 
         if(info.accion == 0){
