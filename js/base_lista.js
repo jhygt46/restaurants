@@ -704,16 +704,18 @@ function show_modal_4(pedido){
     console.log(pedido.lng);
     
     map_socket = new google.maps.Map(document.getElementById('map_direccion'), {
-        center: {lat: -33.428066, lng: -70.616695},
+        center: { lat: pedido.lat, lng: pedido.lng },
         zoom: 13,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     });
     
+    var myLatLng = { lat: pedido.lat, lng: pedido.lng };
+    
     markers = new google.maps.Marker({
         map: map_socket,
         title: 'PEDIDO #'+pedido.id_ped,
-        position: { lat: pedido.lat, lng: pedido.lng }
+        position: myLatLng
     });
     
     
