@@ -700,22 +700,21 @@ function show_modal_4(pedido){
     console.log("SHOW PEDIDO MODAL 4");
     console.log(pedido);
     
-    console.log(pedido.lat);
-    console.log(pedido.lng);
+    var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
     map_socket = new google.maps.Map(document.getElementById('map_direccion'), {
-        center: { lat: pedido.lat, lng: pedido.lng },
+        center: punto,
         zoom: 13,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     });
     
-    var myLatLng = { lat: pedido.lat, lng: pedido.lng };
+    
     
     markers = new google.maps.Marker({
         map: map_socket,
         title: 'PEDIDO #'+pedido.id_ped,
-        position: myLatLng
+        position: punto
     });
     
     
