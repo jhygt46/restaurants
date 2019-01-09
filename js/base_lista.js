@@ -716,7 +716,7 @@ function show_modal_4(pedido){
     $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
     $('.pedido_final .estado h2').html(pedido.estado);
     $('.pedido_final .tiempo h2').html(tiempo+" minutos aprox");
-    $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total), "$"));
+    $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total + pedido.costo), "$"));
     show_modal('paso_04');
     open_socket(pedido.pedido_code);
     time();
