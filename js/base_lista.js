@@ -702,21 +702,18 @@ function show_modal_4(pedido){
     
     var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
-    map_socket = new google.maps.Map(document.getElementById('map_direccion'), {
+    map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
         center: punto,
         zoom: 13,
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     });
     
-    
-    
     markers = new google.maps.Marker({
         map: map_socket,
         title: 'PEDIDO #'+pedido.id_ped,
         position: punto
     });
-    
     
     $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
     $('.pedido_final .estado h2').html("Enviado");
