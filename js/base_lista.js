@@ -780,9 +780,8 @@ function paso_4(){
                 
                 show_modal_4(pedido);
                 set_pedido(pedido);
+                time();
                 paso = 1;
-
-                //volver_tipo_despacho();
 
             }else{
                 document.getElementById("enviar_cotizacion").disabled = false;
@@ -800,16 +799,15 @@ function time(){
     var fecha_2 = new Date().getTime();
     
     var diff = Math.round((fecha_1 + Math.round(pedido.time * 60000) - fecha_2)/60000);
-    
     console.log("DIFF: "+diff);
     
     if(diff >= 2){
         $('.pedido_final .tiempo h2').html(diff+" minutos aprox");
-        setTimeout(time, 4000);
+        setTimeout(time, 60000);
     }
     if(diff == 1){
         $('.pedido_final .tiempo h2').html("1 minuto aprox");
-        setTimeout(time, 4000);
+        setTimeout(time, 60000);
     }
     if(diff <= 0){
         $('.pedido_final .tiempo h2').html("Cumplido");
