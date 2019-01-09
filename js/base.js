@@ -19,6 +19,7 @@ var time_limit = 7200;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempo_retiro = 25;
 var tiempo_despacho = 60;
+var timer = false;
 
 // FIN BACK BUTTON //
 

@@ -719,7 +719,9 @@ function show_modal_4(pedido){
     $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total + pedido.costo), "$"));
     show_modal('paso_04');
     open_socket(pedido.pedido_code);
-    time();
+    if(!timer){
+        time();
+    }
     
 }
 function move_marker(lat, lng){
@@ -754,8 +756,6 @@ function paso_4(){
         success: function(info){
 
             var data = JSON.parse(info);
-            console.log("DATA");
-            console.log(data);
             if(data.op == 1){
 
                 document.getElementById("enviar_cotizacion").disabled = false;
@@ -781,6 +781,7 @@ function paso_4(){
                 show_modal_4(pedido);
                 set_pedido(pedido);
                 time();
+                timer = true;
                 paso = 1;
 
             }else{
@@ -793,14 +794,12 @@ function paso_4(){
     
 }
 function time(){
-    
+
     var pedido = get_pedido();    
     var fecha_1 = pedido.fecha * 1000;
     var fecha_2 = new Date().getTime();
-    
     var diff = Math.round((fecha_1 + Math.round(pedido.time * 60000) - fecha_2)/60000);
-    console.log("DIFF: "+diff);
-    
+
     if(diff >= 2){
         $('.pedido_final .tiempo h2').html(diff+" minutos aprox");
         setTimeout(time, 60000);
@@ -812,7 +811,7 @@ function time(){
     if(diff <= 0){
         $('.pedido_final .tiempo h2').html("Cumplido");
     }
-    
+
 }
 function open_socket(code){
     
