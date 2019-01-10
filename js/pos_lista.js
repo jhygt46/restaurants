@@ -486,6 +486,8 @@ function nuevo(data){
 }
 function add_pedido(obj){
     
+    console.log(obj);
+    
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
