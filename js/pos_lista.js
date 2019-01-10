@@ -9,7 +9,7 @@ var categoria = 0;
 var catalogo = 0;
 var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
-var tiempos = { retiro: 900, despacho: 3600 };
+var tiempos = { retiro: 1500, despacho: 3600 };
 
 function actualizar_seleccionado(){
     
