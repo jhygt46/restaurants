@@ -162,6 +162,8 @@ function start(){
 }
 function agregar_pedido(id){
     
+    console.log("AGREGAR PEDIDO");
+    
     var send = { id_ped: id };
     $.ajax({
         url: "ajax/get_pedido.php",
