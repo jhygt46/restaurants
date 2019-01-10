@@ -550,7 +550,7 @@ function pedido_obj(){
         pedido_code: '', 
         tipo: 0,
         estado: 0,
-        fecha: new Date().getTime(),
+        fecha: Math.round(new Date().getTime()/1000),
         despacho: null,
         carro: [],  
         promos: [], 
