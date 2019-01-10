@@ -417,11 +417,11 @@ function done_pedido(){
         pedidos[seleccionado].direccion = $('#direccion').val();
         pedidos[seleccionado].depto = $('#depto').val();
         
-        pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked') ? 1 : 0 );
-        pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked') ? 1 : 0 );
-        pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked') ? 1 : 0 );
-        pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked') ? 1 : 0 );
-        pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked') ? 1 : 0 );
+        pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
         pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
         
         pedidos[seleccionado].id_mot = $('#id_mot').val();
