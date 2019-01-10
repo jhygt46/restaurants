@@ -446,7 +446,7 @@ function done_pedido(){
         obj.pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
         obj.pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
         obj.pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
-        obj.pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 );
+        obj.pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
         obj.pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
         obj.pre_palitos = $('#pre_palitos').val();
         
