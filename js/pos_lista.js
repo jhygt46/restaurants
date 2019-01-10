@@ -112,17 +112,20 @@ function categoria_padre(){
 function modificar_horas(){
     
     var pedidos = get_pedidos();
+    console.log(pedidos);
+    
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
 
             var fecha_ahora = Math.round(new Date().getTime()/1000);
             var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
             var diff = Math.round((pedidos[i].fecha + time - fecha_ahora)/60);
+            console.log(diff);
             $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
 
         }
     }
-    setTimeout(modificar_horas, 60000);
+    setTimeout(modificar_horas, 6000);
     
 }
 
