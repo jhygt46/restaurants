@@ -443,11 +443,11 @@ function done_pedido(){
         obj.direccion = $('#direccion').val();
         obj.depto = $('#depto').val();
         
-        obj.pre_wasabi = ($('#pre_wasabi').is(':checked') ? 1 : 0 );
-        obj.pre_gengibre = ($('#pre_gengibre').is(':checked') ? 1 : 0 );
-        obj.pre_embarazadas = ($('#pre_embarazadas').is(':checked') ? 1 : 0 );
-        obj.pre_soya = ($('#pre_soya').is(':checked') ? 1 : 0 );
-        obj.pre_teriyaki = ($('#pre_teriyaki').is(':checked') ? 1 : 0 );
+        obj.pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+        obj.pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+        obj.pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
+        obj.pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 );
+        obj.pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
         obj.pre_palitos = $('#pre_palitos').val();
         
         obj.id_mot = $('#id_mot').val();
@@ -486,6 +486,7 @@ function nuevo(data){
 }
 function add_pedido(obj){
     
+    console.log("ADD PEDIDO");
     console.log(obj);
     
     var aux = [];
@@ -498,7 +499,6 @@ function add_pedido(obj){
     }
     seleccionado = 0;
     set_pedidos(aux);
-    listar_pedidos();
     
 }
 function set_pedidos(pedidos){
