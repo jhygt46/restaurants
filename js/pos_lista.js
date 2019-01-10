@@ -118,6 +118,8 @@ function modificar_horas(){
             var fecha_ahora = Math.round(new Date().getTime()/1000);
             var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
             var diff = Math.round((pedidos[i].fecha - fecha_ahora)/60);
+            console.log("PEDIDO FECHA: "+pedidos[i].fecha);
+            console.log("FECHA AHORA: "+fecha_ahora);
             console.log("DIFF: "+diff);
             console.log("TIME: "+time);
             $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
