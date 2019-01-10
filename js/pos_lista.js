@@ -217,10 +217,9 @@ function get_producto(id_pro){
         }
     }
 }
-function listar_pedidos(aux_pedidos){
-    
+function listar_pedidos(){
     $('.lista_pedidos').html('');
-    var pedidos = ( aux_pedidos === null ) ? JSON.parse(localStorage.getItem("pedidos") || false : aux_pedidos ;
+    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
