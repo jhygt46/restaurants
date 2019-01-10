@@ -111,9 +111,8 @@ function categoria_padre(){
 }
 function modificar_horas(){
     
-    var pedidos = get_pedidos();
+    var pedidos = get_pedidos_false();
     console.log(pedidos);
-    
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
 
@@ -508,6 +507,9 @@ function add_pedido(obj){
 }
 function set_pedidos(pedidos){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
+}
+function get_pedidos_false(){
+    return JSON.parse(localStorage.getItem("pedidos")) || false;
 }
 function get_pedidos(){
     return JSON.parse(localStorage.getItem("pedidos")) || get_pedido_blank();
