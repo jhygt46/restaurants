@@ -4,7 +4,6 @@ var catalogo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 
 
-
 function get_pedidos(){
     /*
     pedidos.forEach(function(pedido, index){
