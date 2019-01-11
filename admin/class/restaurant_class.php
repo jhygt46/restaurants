@@ -156,8 +156,13 @@ class Rest{
                 }
             }
             
+            $tz_object = new DateTimeZone('America/Santiago');
+            $datetime = new DateTime();
+            $datetime->setTimezone($tz_object);
+            $fecha_stgo = $datetime->format('Y-m-d h:i:s');
+            
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep, costo, total) VALUES ('".$pedido_code."', now(), '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."', '".$costo."', '".$total."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep, costo, total) VALUES ('".$pedido_code."', '".$fecha_stgo."', '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."', '".$costo."', '".$total."')");
             $id_ped = $pedido_sql['insert_id'];
             
             $info['op'] = 1;

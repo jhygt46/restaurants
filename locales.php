@@ -2,8 +2,6 @@
 session_start();
 date_default_timezone_set('America/Santiago');
 
-echo date("Y-m-d H:i:s");
-
 require('admin/class/core_class.php');
 $core = new Core();
 //$core->is_local($_GET['id_loc']);
