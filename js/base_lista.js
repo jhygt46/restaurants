@@ -799,15 +799,14 @@ function time(){
 
     if(diff >= 2){
         $('.pedido_final .tiempo h2').html(diff+" minutos aprox");
-        setTimeout(time, 60000);
     }
     if(diff == 1){
         $('.pedido_final .tiempo h2').html("1 minuto aprox");
-        setTimeout(time, 60000);
     }
     if(diff <= 0){
         $('.pedido_final .tiempo h2').html("Cumplido");
     }
+    setTimeout(time, 3000);
 
 }
 function open_socket(code){
