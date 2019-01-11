@@ -268,7 +268,7 @@ function html_home_pedidos(obj, index){
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_estado = create_element_class_inner('p_estado', 'Abierto');
-    var p_precio = create_element_class_inner('p_precio', '$'+formatNumber.new(parseInt(total), "$"));
+    var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };
     
