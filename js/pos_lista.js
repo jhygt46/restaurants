@@ -519,7 +519,7 @@ function get_pedido_blank(){
 function guardar_pedido(index){
         
     var pedidos = get_pedidos();
-    var send = { pedido: JSON.stringify(pedidos[index]), fecha: new Date().getTime() };
+    var send = { pedido: JSON.stringify(pedidos[index]) };
     
     $.ajax({
         url: "ajax/set_pedido.php",

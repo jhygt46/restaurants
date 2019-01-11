@@ -342,7 +342,6 @@ class Core{
     public function set_web_pedido(){
        
         $pedido = json_decode($_POST['pedido']);
-        $fecha = json_decode($_POST['fecha']);
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
         
@@ -369,11 +368,11 @@ class Core{
             }
             if($id_ped == 0){
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, code, id_loc) VALUES ('0', '".$code."', '".$id_loc."')");
+                $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
             }
             
-            $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET fecha='".date("Y-m-d H:i:s", $fecha)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $info['db'][] = $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
 
