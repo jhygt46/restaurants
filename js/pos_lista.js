@@ -18,7 +18,18 @@ function add_carro_producto(id_pro){
 
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-    pedido.carro.push({id_pro: parseInt(id_pro)});
+    
+    var producto = get_producto(id_pro);
+    var item_carro = { id_pro: parseInt(id_pro) };
+    
+    if(producto.preguntas){
+        item_carro.preguntas = [];
+        for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+        }
+    }
+    
+    pedido.carro.push(item_carro);
     set_pedidos(pedidos);
     listar_pedidos();
 
@@ -559,8 +570,6 @@ function pedido_obj(){
         pre_soya: 0,
         pre_teriyaki: 0,
         verify_despacho: 0,
-        nombre: '',
-        telefono: '',
         direccion: '',
         lat: '',
         lng: '',
