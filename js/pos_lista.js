@@ -305,7 +305,7 @@ function html_home_pedidos(obj, index){
         var t_tiempo = create_element_class('t_tiempo');
         var t_anterior = create_element_class('t_anterior');
         t_anterior.onclick = function(){ cambiar_hora(index, -1, this) };
-        var t_nombre = create_element_class_inner('t_nombre', '24');
+        var t_nombre = create_element_class_inner('t_nombre', '');
         var t_siguiente = create_element_class('t_siguiente');
         t_siguiente.onclick = function(){ cambiar_hora(index, 1, this) };
 
@@ -327,7 +327,7 @@ function ver_detalle_carro(index){
 function ver_comanda(index){
     var pedidos = get_pedidos();
     var code = pedidos[index].pedido_code;
-    window.open("/restaurants/detalle.php?code="+code, 'Imprimir Ctrl+P').focus();
+    window.open("/detalle.php?code="+code, 'Imprimir Ctrl+P').focus();
 }
 function html_home_categorias(obj){
     
