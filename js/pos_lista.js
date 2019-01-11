@@ -153,22 +153,7 @@ function socket_init(){
     
 }
 var time = new Date().getTime();
-function last(){
-    
-    
-    setTimeout(last, 10000);
-}
-function start(){
-    
-    $.ajax({
-        url: "ajax/start.php",
-        type: "POST",
-        data: send,
-        success: function(data){},
-        error: function(e){}
-    });
-    
-}
+
 function agregar_pedido(id){
     
     console.log("AGREGAR PEDIDO");
