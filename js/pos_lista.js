@@ -318,7 +318,15 @@ function html_home_pedidos(obj, index){
     
 }
 function ver_detalle_carro(index){
-    console.log("INDEX: "+index);
+    
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
+    
+    $('.detalle_carro .n_title').html("Ingresar Nuevo Pedido");
+    
+    $('.pop_up').show();
+    $('.detalle_carro').show();
+    
 }
 function ver_comanda(index){
     var pedidos = get_pedidos();
@@ -355,10 +363,10 @@ function ver_pedido(index, that){
         pedidos = get_pedidos();
         pedido = pedidos[index];
         if(pedido.id_ped == 0){
-            $('.n_title').html("PEDIDO AUN NO GUARDADO");
+            $('.nuevo_pedido .n_title').html("PEDIDO AUN NO GUARDADO");
         }
         if(pedido.id_ped > 0){
-            $('.n_title').html("Pedido #"+pedido.id_ped);
+            $('.nuevo_pedido .n_title').html("Pedido #"+pedido.id_ped);
         }
         crear_nuevo = 0;
         
@@ -366,12 +374,10 @@ function ver_pedido(index, that){
     if(index == -1){
         
         pedido = pedido_obj();
-        $('.n_title').html("Ingresar Nuevo Pedido");
+        $('.nuevo_pedido .n_title').html("Ingresar Nuevo Pedido");
         crear_nuevo = 1;
     
     }
-    
-    console.log(pedido);
     
     $('#nombre').val(pedido.nombre);
     $('#telefono').val(pedido.telefono);

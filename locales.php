@@ -140,8 +140,19 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                             <input type="button" value="Enviar" onclick="done_pedido()" />
                         </div>
                     </div>
+                    <div class="detalle_carro vhalign">
+                        <div class="np_close" onclick="np_close(this)"></div>
+                        <div class="n_title">BUENA NELSON</div>
+                        <div class="n_info">
+                            <div class="data_info"></div>
+                        </div>
+                        <div class="n_submit">
+                            <input type="button" value="Enviar" onclick="done_pedido()" />
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="cont_sis clearfix">
                 <div class="alert_socket">
                     <div class="text">
