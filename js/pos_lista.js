@@ -322,6 +322,9 @@ function ver_detalle_carro(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     
+    console.log(pedido.carro);
+    console.log(pedido.promos);
+    
     $('.p2 .n_title').html("Carro Pedido #"+pedido.id_ped);
     
     $('.pop_up').show();
