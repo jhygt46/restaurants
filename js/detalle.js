@@ -52,7 +52,7 @@ function create_item(item){
                 if(item.preguntas[j].valores[k].seleccionados !== undefined){
                     Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados.join('/');
                 }else{
-                    Dpregunta.innerHTML += 'No Definido';
+                    Dpregunta.innerHTML += '<b>No Definido</b>';
                 }
                 Div.appendChild(Dpregunta);
             }
