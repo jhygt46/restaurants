@@ -40,18 +40,19 @@ function add_carro_promocion(id_cae){
     var pedido = pedidos[seleccionado];
     var promo = get_categoria(id_cae);
 
-    console.log(promo);
+    pedido.promos.push({ id_cae: id_cae });
+    var num_promo = pedido.promos.length - 1;
 
     if(promo.categorias){
         for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
-            pedido.promos.carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad)});
+            pedido.carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad), promo: num_promo });
         }
     }
     if(promo.productos){
         for(var i=0, ilen=promo.productos.length; i<ilen; i++){
             for(var j=0, jlen=promo.productos[i].cantidad; j<jlen; j++){
                 var producto = get_producto(promo.productos[i].id_pro);
-                var item_carro = { id_pro: parseInt(promo.productos[i].id_pro) };
+                var item_carro = { id_pro: parseInt(promo.productos[i].id_pro), promo: num_promo };
                 if(producto.preguntas){
                     item_carro.preguntas = [];
                     for(var k=0, klen=producto.preguntas.length; k<klen; k++){
