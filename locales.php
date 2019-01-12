@@ -72,7 +72,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <div class="contenedor">
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
-                    <div class="nuevo_pedido vhalign">
+                    <div class="nuevo_pedido vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
                         <div class="n_info">
@@ -140,7 +140,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                             <input type="button" value="Enviar" onclick="done_pedido()" />
                         </div>
                     </div>
-                    <div class="detalle_carro vhalign">
+                    <div class="detalle_carro vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title">BUENA NELSON</div>
                         <div class="n_info">
