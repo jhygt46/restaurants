@@ -322,10 +322,10 @@ function ver_detalle_carro(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     
-    $('.detalle_carro .n_title').html("Ingresar Nuevo Pedido");
+    $('.p2 .n_title').html("Ingresar Nuevo Pedido");
     
     $('.pop_up').show();
-    $('.detalle_carro').show();
+    $('.p2').show();
     
 }
 function ver_comanda(index){
@@ -363,10 +363,10 @@ function ver_pedido(index, that){
         pedidos = get_pedidos();
         pedido = pedidos[index];
         if(pedido.id_ped == 0){
-            $('.nuevo_pedido .n_title').html("PEDIDO AUN NO GUARDADO");
+            $('.p1 .n_title').html("PEDIDO AUN NO GUARDADO");
         }
         if(pedido.id_ped > 0){
-            $('.nuevo_pedido .n_title').html("Pedido #"+pedido.id_ped);
+            $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
         }
         crear_nuevo = 0;
         
@@ -374,7 +374,7 @@ function ver_pedido(index, that){
     if(index == -1){
         
         pedido = pedido_obj();
-        $('.nuevo_pedido .n_title').html("Ingresar Nuevo Pedido");
+        $('.p1 .n_title').html("Ingresar Nuevo Pedido");
         crear_nuevo = 1;
     
     }
@@ -400,14 +400,14 @@ function ver_pedido(index, that){
     $('#id_mot option[value='+pedido.id_mot+']').attr('selected', 'selected');
     
     $('.pop_up').show();
-    $('.nuevo_pedido').show();
+    $('.p1').show();
     
 }
 function nuevo_pedido(){
     
     $('#nombre').val('');
     $('.pop_up').show();
-    $('.nuevo_pedido').show();
+    $('.p1').show();
     
 }
 function done_pedido(){
@@ -462,7 +462,7 @@ function done_pedido(){
         
     }
     
-    $('.nuevo_pedido').hide();
+    $('.p1').hide();
     $('.pop_up').hide();
     
 }
