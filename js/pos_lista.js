@@ -320,16 +320,31 @@ function html_home_pedidos(obj, index){
     return Div;
     
 }
+function proceso(pedido){
+
+    for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
+        if(!pedido.carro[i].id_pro){
+            seleccionar_productos_categoria_promo(pedido.carro[i].id_cae);
+            return false;
+        }
+    }
+    return true;
+    
+}
+
 function ver_detalle_carro(index){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     
-    console.log(pedido.carro);
-    console.log(pedido.promos);
-    
-    $('.p2 .n_title').html("Carro Pedido #"+pedido.id_ped);
-    
+    if(proceso(pedido)){
+        $('.p2 .n_title').html("PRODUCTOS");
+        
+    }else{
+        $('.p2 .n_title').html("SELECCIONA LOS PRODUCTOS");
+        
+    }
+
     $('.pop_up').show();
     $('.p2').show();
     
