@@ -49,7 +49,11 @@ function create_item(item){
                 var Dpregunta = document.createElement('div');
                 Dpregunta.className = 'pregunta';
                 Dpregunta.innerHTML = item.preguntas[j].valores[k].nombre+": ";
-                Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados.join('/');
+                if(item.preguntas[j].valores[k].seleccionados !== undefined){
+                    Dpregunta.innerHTML += item.preguntas[j].valores[k].seleccionados.join('/');
+                }else{
+                    Dpregunta.innerHTML += 'No Definido';
+                }
                 Div.appendChild(Dpregunta);
             }
         }
