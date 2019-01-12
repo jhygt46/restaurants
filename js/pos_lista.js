@@ -40,6 +40,8 @@ function add_carro_promocion(id_cae){
     var pedido = pedidos[seleccionado];
     var promo = get_categoria(id_cae);
 
+    console.log(promo);
+
     if(promo.categorias){
         for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
             pedido.promos.carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad)});
