@@ -643,9 +643,16 @@ function tiene_pregunta(carro){
     return false;
 }
 function ver_comanda(index){
+    
     var pedidos = get_pedidos();
-    var code = pedidos[index].pedido_code;
-    window.open("/detalle.php?code="+code, 'Imprimir Ctrl+P').focus();
+    var pedido = pedidos[index];
+    
+    if(proceso(pedido)){
+    
+        var code = pedido.pedido_code;
+        window.open("/detalle.php?code="+code, 'Imprimir Ctrl+P').focus();
+    
+    }
 }
 function html_home_categorias(obj){
     
