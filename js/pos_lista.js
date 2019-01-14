@@ -351,7 +351,6 @@ function confirmar_productos_promo(that){
     var count = 0;
     var arr = [];
     var parent = $(that).parents('.nuevo_pedido');
-    console.log($(that));
     var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
     var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
     var producto;
