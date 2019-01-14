@@ -33,12 +33,18 @@ body {
     border-radius: 12px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_title{
-    font-size: 24px;
+    font-size: 22px;
     color: #000;
     position: absolute;
     top: 10px;
     left: 5%;
-    height: 40px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_stitle{
+    font-size: 14px;
+    color: #000;
+    position: absolute;
+    top: 32px;
+    left: 5.2%;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info{
     width: 90%;
