@@ -626,6 +626,8 @@ function promo_carros(producto, j){
 }
 function tiene_pregunta(carro){
     
+    console.log(carro);
+    
     if(carro.preguntas){
         for(var k=0, klen=carro.preguntas.length; k<klen; k++){
             for(var j=0, jlen=carro.preguntas[k].valores.length; j<jlen; j++){
