@@ -123,18 +123,22 @@ body {
     
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item{
-    
+    padding: 10px 10px 0px 10px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_select{
     width: 10%;
     float: left;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_select select{
-    
+    width: 100%;
+    height: 25px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_nombre{
-    width: 90%;
+    width: 88%;
     float: left;
+    padding-left: 2%;
+    font-size: 24px;
+    padding-top: 4px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_submit{
     width: 100%;
