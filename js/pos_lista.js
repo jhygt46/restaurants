@@ -541,7 +541,7 @@ function promo_carros(producto, j){
     Acciones.className = 'promo_detalle_acciones clearfix';
     
     var pedidos = get_pedidos();
-    var carro = pedidos[seleccionado].carros[j];
+    var carro = pedidos[seleccionado].carro[j];
     
     if(carro.preguntas){
         
