@@ -498,10 +498,10 @@ function ver_detalle_carro(index){
             process_carro_promo.appendChild(promo_precio);
             process_carro_promo.appendChild(promo_delete);
             
-            for(var j=0, jlen=pedidos.carro.length; j<jlen; j++){
-                if(pedidos.carro[j].promo == i){
+            for(var j=0, jlen=pedido.carro.length; j<jlen; j++){
+                if(pedido.carro[j].promo == i){
                     count++;
-                    producto = get_producto(carro[j].id_pro);
+                    producto = get_producto(pedido.carro[j].id_pro);
                     promo_detalle.appendChild(promo_carros(producto, j));
                 }
             }
@@ -526,6 +526,42 @@ function ver_detalle_carro(index){
         
     }
 
+}
+function promo_carros(producto, j){
+    
+    var Div = document.createElement('div');
+    Div.className = 'promo_detalle_item clearfix';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'promo_detalle_nombre';
+    Nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
+    Div.appendChild(Nombre);
+    
+    var Acciones = document.createElement('div');
+    Acciones.className = 'promo_detalle_acciones clearfix';
+    
+    var carros = get_carro();
+    var carro = carros[j];
+    
+    if(carro.preguntas){
+        
+        var Accion = document.createElement('div');
+        Accion.className = 'accion material-icons';
+        Accion.onclick = function(){ mostrar_pregunta(j) };
+        
+        if(tiene_pregunta(carro)){
+            Accion.innerHTML = 'help_outline';
+        }else{
+            Accion.innerHTML = 'more_horiz';
+        }
+        
+        Acciones.appendChild(Accion);
+        
+    }
+    
+    Div.appendChild(Acciones);
+    return Div;
+    
 }
 function ver_comanda(index){
     var pedidos = get_pedidos();
