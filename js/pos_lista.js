@@ -338,8 +338,57 @@ function seleccionar_productos_categoria_promo(i){
     
     $('.p3 .n_title').html(categoria.nombre);
     $('.p3 .n_stitle').html('Debe seleccionar '+cantidad+' productos');
-    //$('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
+    $('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
+}
+function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
+    
+    var producto;
+    var pro_cat_item, pro_cat_item_select, pro_cat_item_nombre, select, option;
+    
+    
+    if(categoria.productos){
+        
+        var html = document.createElement('div');
+        html.className = 'pro_cat_promo';
+        html.setAttribute('data-pos', i);
+        html.setAttribute('data-cantidad', cantidad);
+        
+        for(var i=0, ilen=categoria.productos.length; i<ilen; i++){
+            
+            producto = get_producto(categoria.productos[i]);
+            
+            pro_cat_item = document.createElement('div');
+            pro_cat_item.className = 'pro_cat_item clearfix';
+            
+            pro_cat_item_select = document.createElement('div');
+            pro_cat_item_select.className = 'pro_cat_item_select';
+            
+            select = document.createElement("select");
+            select.id = categoria.productos[i];
+            select.className = 'select_promo';
+            
+            for(var j=0; j<=cantidad; j++){
+                option = document.createElement("option");
+                option.value = j;
+                option.text = j;
+                select.appendChild(option);
+            }
+            
+            pro_cat_item_select.appendChild(select);
+            pro_cat_item.appendChild(pro_cat_item_select);
+            
+            pro_cat_item_nombre = document.createElement('div');
+            pro_cat_item_nombre.className = 'pro_cat_item_nombre';
+            pro_cat_item_nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
+            pro_cat_item.appendChild(pro_cat_item_nombre);
+
+            html.appendChild(pro_cat_item);
+            
+        }
+        
+    }
+    return html;
     
 }
 function proceso(pedido){
