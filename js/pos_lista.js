@@ -341,6 +341,67 @@ function seleccionar_productos_categoria_promo(i){
     $('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
 }
+
+function confirmar_productos_promo(that){
+    
+    var info = $(that).parents('.nuevo_pedido').find('.data_info');
+    
+    var count = 0;
+    var arr = [];
+    var parent = $(that).parents('.nuevo_pedido');
+    var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
+    var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
+    var producto;
+    var item_carro;
+    
+    parent.find('.pro_cat_item').each(function(){
+        count = count + parseInt($(this).find('.select_promo').val());
+        arr.push({id_pro: parseInt($(this).find('.select_promo').attr('id')), cantidad: parseInt($(this).find('.select_promo').val())});
+    });
+    
+    if(count == cantidad){
+        
+        var pedidos = get_pedidos();
+        pedidos[seleccionado].carro.splice(carro_pos, 1);
+        
+        for(var i=0, ilen=arr.length; i<ilen; i++){
+            for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
+                
+                producto = get_producto(arr[i].id_pro);
+                item_carro = { id_pro: parseInt(arr[i].id_pro) };
+                if(producto.preguntas){
+                    item_carro.preguntas = [];
+                    for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+                        item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+                    }
+                }
+                pedidos[seleccionado].carro.push(item_carro);
+                
+            }
+        }
+        set_pedidos(pedidos);
+        $('.pop_up').hide();
+        $('.p3').hide();
+        
+    }else{
+        
+        var diff = cantidad - count;
+        if(diff == 1){
+            alert("FALTA 1 PRODUCTO");
+        }
+        if(diff > 1){
+            alert("FALTA "+diff+" PRODUCTOS");
+        }
+        if(diff == -1){
+            alert("SOBRA 1 PRODUCTO");
+        }
+        if(diff < -1){
+            alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
+        }
+        
+    }
+     
+}
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
     var producto;
