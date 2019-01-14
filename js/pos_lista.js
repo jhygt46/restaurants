@@ -388,7 +388,6 @@ function confirmar_productos_promo(that){
         
     }else{
         
-        console.log("BUE4");
         var diff = cantidad - count;
         if(diff == 1){
             alert("FALTA 1 PRODUCTO");
@@ -404,7 +403,6 @@ function confirmar_productos_promo(that){
         }
         
     }
-    console.log("BUE5");
      
 }
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
@@ -478,11 +476,14 @@ function ver_detalle_carro(index){
         $('.p2 .n_title').html("Listado de Productos");
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
-            console.log(pedido.carro[i]);
+            if(!pedido.carro[i].hasOwnProperty('promo')){
+                console.log("PRODUCTO SIN PROMO")
+            }
         }
         for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
-            console.log(pedido.promos[i]);
+            var promo = get_categoria(pedido.promos[i].id_cae);
+            console.log(promo);
         }
         
         $('.pop_up').show();
