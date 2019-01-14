@@ -473,10 +473,44 @@ function ver_detalle_carro(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     var total = 0;
+    var html = create_element_class('process_carro');
     
     if(proceso(pedido)){
         
         $('.p2 .n_title').html("Listado de Productos");
+        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, count, producto;
+        
+        for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
+
+            promo = get_categoria(pedido.promos[i].id_cae);
+            total = total + parseInt(promo.precio);
+            
+            process_carro_promo = create_element_class('process_carro_promo');
+            
+            promo_detalle = create_element_class('promo_detalle');
+            promo_info = create_element_class_inner('promo_info', promo.nombre);
+            promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promo.precio), "$"));
+            promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
+            promo_delete.setAttribute('promo-pos', i);
+            promo_delete.onclick = function(){ delete_promo(this) };
+            
+            process_carro_promo.appendChild(promo_info);
+            process_carro_promo.appendChild(promo_precio);
+            process_carro_promo.appendChild(promo_delete);
+            
+            for(var j=0, jlen=pedidos.carro.length; j<jlen; j++){
+                if(pedidos.carro[j].promo == i){
+                    count++;
+                    producto = get_producto(carro[j].id_pro);
+                    promo_detalle.appendChild(promo_carros(producto, j));
+                }
+            }
+            
+            process_carro_promo.appendChild(promo_detalle);
+            html.appendChild(process_carro_promo);
+            
+        }
+        
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
             if(!pedido.carro[i].hasOwnProperty('promo')){
@@ -484,11 +518,9 @@ function ver_detalle_carro(index){
                 total = total + parseInt(pro.precio);
             }
         }
-        for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
-            //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
-            var promo = get_categoria(pedido.promos[i].id_cae);
-            total = total + parseInt(promo.precio);
-        }
+        
+        $('.p2 .data_info').html(html);
+        
         $('.pop_up').show();
         $('.p2').show();
         
