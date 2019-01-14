@@ -383,8 +383,10 @@ function confirmar_productos_promo(that){
             }
         }
         set_pedidos(pedidos);
-        $('.pop_up').hide();
-        $('.p3').hide();
+        if(proceso(pedidos[seleccionado])){
+            $('.pop_up').hide();
+            $('.p3').hide();
+        }
         
     }else{
         
