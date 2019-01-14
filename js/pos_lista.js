@@ -246,7 +246,7 @@ function html_home_pedidos(obj, index){
     
     if(obj.carro){
         obj.carro.forEach(function(carro_item, index){
-            if(carro_item.id_pro && !carro_item.promo){
+            if(carro_item.id_pro && carro_item.promo === undefined){
                 pro = get_producto(carro_item.id_pro);
                 total = total + parseInt(pro.precio);
             }
