@@ -478,7 +478,8 @@ function ver_detalle_carro(index){
         
         $('.p2 .n_title').html("Listado de Productos");
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
-            $('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
+            //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
+            console.log(pedido.carro[i]);
         }
         $('.pop_up').show();
         $('.p2').show();
