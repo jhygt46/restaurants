@@ -331,6 +331,8 @@ function seleccionar_productos_categoria_promo(i){
     var cantidad = pedido.carro[i].cantidad;
     var categoria = get_categoria(id_cae);
     
+    console.log("BUENA NELSON SE VE EL POP-UP P3");
+    
     $('.pop_up').show();
     $('.p3').show();
     
