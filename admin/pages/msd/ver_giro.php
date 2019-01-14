@@ -120,7 +120,7 @@ if($diff > 0){
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic5" href="../locales.php?id_loc=<?php echo $id_n; ?>" target="_blank"></a>
+                        <a class="icono ic5" href="../locales.php?id_loc=<?php echo $id_n; ?>" target="_self"></a>
                     </div>
                 </div>
                 <?php } ?>

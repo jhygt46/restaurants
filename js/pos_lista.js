@@ -338,10 +338,14 @@ function ver_detalle_carro(index){
     var pedido = pedidos[index];
     
     if(proceso(pedido)){
-        $('.p2 .n_title').html("PRODUCTOS");
+        $('.p2 .n_title').html("Listado de Productos");
+        // MOSTRAR CARRO
+        console.log("MOSTRAR CARRO");
         
     }else{
-        $('.p2 .n_title').html("SELECCIONA LOS PRODUCTOS");
+        $('.p2 .n_title').html("Selecciona los Productos");
+        //MOSTRAR PRODUCTOS DE LA CATEGORIA
+        console.log("MOSTRAR PRODUCTOS DE LA CATEGORIA");
         
     }
 
