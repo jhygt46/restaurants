@@ -344,8 +344,6 @@ function seleccionar_productos_categoria_promo(i){
 
 function confirmar_productos_promo(that){
     
-    console.log("BUE1");
-    
     var info = $(that).parents('.nuevo_pedido').find('.data_info');
     
     var count = 0;
@@ -364,15 +362,17 @@ function confirmar_productos_promo(that){
     
     if(count == cantidad){
         
-        console.log("BUE3");
         var pedidos = get_pedidos();
+        var aux_promo = pedidos[seleccionado].carro[carro_pos].promo;
+        console.log("aux_promo: "+aux_promo);
         pedidos[seleccionado].carro.splice(carro_pos, 1);
         
         for(var i=0, ilen=arr.length; i<ilen; i++){
             for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
                 
                 producto = get_producto(arr[i].id_pro);
-                item_carro = { id_pro: parseInt(arr[i].id_pro) };
+                item_carro = { id_pro: parseInt(arr[i].id_pro), promo: aux_promo };
+                
                 if(producto.preguntas){
                     item_carro.preguntas = [];
                     for(var k=0, klen=producto.preguntas.length; k<klen; k++){
@@ -481,6 +481,11 @@ function ver_detalle_carro(index){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
             console.log(pedido.carro[i]);
         }
+        for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
+            //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
+            console.log(pedido.promos[i]);
+        }
+        
         $('.pop_up').show();
         $('.p2').show();
         
