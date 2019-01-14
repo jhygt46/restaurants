@@ -752,7 +752,7 @@ class Guardar extends Core{
         $precio = $_POST['precio'];
         $values = $this->list_arbol_cats_prods();
         
-        $info['db'] = $this->con->sql("UPDATE categoria SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
+        $this->con->sql("UPDATE categorias SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
         $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
         $this->con->sql("DELETE FROM promocion_productos WHERE id_cae='".$id_cae."'");
         
@@ -762,13 +762,13 @@ class Guardar extends Core{
             if($value['id_cae'] !== null){
                 $cae_val = $_POST['sel-cae-'.$value['id_cae']];
                 if($cae_val > 0){
-                    $info['db_cat'][] = $this->con->sql("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES ('".$id_cae."', '".$value['id_cae']."', '".$cae_val."')");
+                    $this->con->sql("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES ('".$id_cae."', '".$value['id_cae']."', '".$cae_val."')");
                 }
             }
             if($value['id_pro'] !== null){
                 $pro_val = $_POST['sel-pro-'.$value['id_pro']];
                 if($pro_val > 0){
-                    $info['db_pro'][] = $this->con->sql("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES ('".$id_cae."', '".$value['id_pro']."', '".$pro_val."')");
+                    $this->con->sql("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES ('".$id_cae."', '".$value['id_pro']."', '".$pro_val."')");
                 }
             }
             
