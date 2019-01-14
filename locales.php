@@ -142,7 +142,17 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                     </div>
                     <div class="p2 nuevo_pedido vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
-                        <div class="n_title">BUENA NELSON</div>
+                        <div class="n_title"></div>
+                        <div class="n_info">
+                            <div class="data_info"></div>
+                        </div>
+                        <div class="n_submit">
+                            <input type="button" value="Enviar" onclick="done_pedido()" />
+                        </div>
+                    </div>
+                    <div class="p2 nuevo_pedido vhalign" style="display: none">
+                        <div class="np_close" onclick="np_close(this)"></div>
+                        <div class="n_title"></div>
                         <div class="n_info">
                             <div class="data_info"></div>
                         </div>

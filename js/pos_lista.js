@@ -324,13 +324,20 @@ function html_home_pedidos(obj, index){
 }
 function seleccionar_productos_categoria_promo(i){
     
-    console.log("PREGUNTAR PRODUCTOS CATEGORIAS");
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
     
-    console.log(pedido);
-    console.log(pedido.carro);
-    console.log(pedido.carro[i]);
+    var id_cae = pedido.carro[i].id_cae;
+    var cantidad = pedido.carro[i].cantidad;
+    var categoria = get_categoria(id_cae);
+    
+    $('.pop_up').show();
+    $('.p3').show();
+    
+    $('.p3 .n_title').html(categoria.nombre);
+    //$('.p3 .n_stitle').html('Debe seleccionar '+cantidad+' productos');
+    //$('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
+    
     
 }
 function proceso(pedido){
