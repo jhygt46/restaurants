@@ -749,8 +749,10 @@ class Guardar extends Core{
         
         $id_cae = $_POST['id_cae'];
         $parent_id = $_POST['parent_id'];
+        $precio = $_POST['precio'];
         $values = $this->list_arbol_cats_prods();
         
+        $this->con->sql("UPDATE categoria SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
         $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
         $this->con->sql("DELETE FROM promocion_productos WHERE id_cae='".$id_cae."'");
         
