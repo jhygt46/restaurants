@@ -475,14 +475,16 @@ function ver_detalle_carro(index){
     var pedido = pedidos[index];
     
     if(proceso(pedido)){
+        
         $('.p2 .n_title').html("Listado de Productos");
-        console.log("MOSTRAR CARRO");
+        for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
+            $('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
+        }
         $('.pop_up').show();
         $('.p2').show();
+        
     }
 
-    
-    
 }
 function ver_comanda(index){
     var pedidos = get_pedidos();
