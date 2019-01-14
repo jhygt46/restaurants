@@ -518,7 +518,7 @@ function ver_detalle_carro(index){
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
             if(!pedido.carro[i].hasOwnProperty('promo')){
                 var pro = get_producto(pedido.carro[i].id_pro);
-                process_carro_restantes.appendChild(promo_restantes(producto, j, tiene_pregunta(pedido.carro[j])));
+                process_carro_restantes.appendChild(promo_restantes(producto, i, tiene_pregunta(pedido.carro[i])));
                 total = total + parseInt(pro.precio);
                 restantes = true;
             }
@@ -625,8 +625,6 @@ function promo_carros(producto, j){
     
 }
 function tiene_pregunta(carro){
-    
-    console.log(carro);
     
     if(carro.preguntas){
         for(var k=0, klen=carro.preguntas.length; k<klen; k++){
