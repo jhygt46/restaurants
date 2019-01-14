@@ -337,7 +337,7 @@ function seleccionar_productos_categoria_promo(i){
     $('.p3').show();
     
     $('.p3 .n_title').html(categoria.nombre);
-    //$('.p3 .n_stitle').html('Debe seleccionar '+cantidad+' productos');
+    $('.p3 .n_stitle').html('Debe seleccionar '+cantidad+' productos');
     //$('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
     
