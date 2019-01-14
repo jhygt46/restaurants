@@ -119,6 +119,23 @@ body {
     width: 16px;
     height: 16px;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_select{
+    width: 10%;
+    float: left;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_select select{
+    
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo .pro_cat_item .pro_cat_item_nombre{
+    width: 90%;
+    float: left;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_submit{
     width: 100%;
     display: block;
