@@ -563,6 +563,24 @@ function promo_carros(producto, j){
     return Div;
     
 }
+function tiene_pregunta(carro){
+    
+    if(carro.preguntas){
+        for(var k=0, klen=carro.preguntas.length; k<klen; k++){
+            for(var j=0, jlen=carro.preguntas[k].valores.length; j<jlen; j++){
+                var valores = carro.preguntas[k].valores[j];
+                if(valores.seleccionados){
+                    if(valores.seleccionados.length < valores.cantidad){
+                        return true;
+                    }
+                }else{
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 function ver_comanda(index){
     var pedidos = get_pedidos();
     var code = pedidos[index].pedido_code;
