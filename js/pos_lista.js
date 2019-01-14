@@ -358,18 +358,12 @@ function ver_detalle_carro(index){
     
     if(proceso(pedido)){
         $('.p2 .n_title').html("Listado de Productos");
-        // MOSTRAR CARRO
         console.log("MOSTRAR CARRO");
-        
-    }else{
-        $('.p2 .n_title').html("Selecciona los Productos");
-        //MOSTRAR PRODUCTOS DE LA CATEGORIA
-        console.log("MOSTRAR PRODUCTOS DE LA CATEGORIA");
-        
+        $('.pop_up').show();
+        $('.p2').show();
     }
 
-    $('.pop_up').show();
-    $('.p2').show();
+    
     
 }
 function ver_comanda(index){
