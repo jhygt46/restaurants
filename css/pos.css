@@ -188,7 +188,40 @@ body {
     font-size: 22px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes{
-    
+    padding: 6px;
+    background: #f5f5f5;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item{
+    border-bottom: 1px solid #bbb;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_nombre{
+    float: left;
+    width: calc(100% - 109px);
+    padding-top: 6px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones{
+    float: left;
+    width: 105px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .precio{
+    float: left;
+    width: 64px;
+    margin-left: 1px;
+    padding-top: 6px;
+    font-size: 16px;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .espacio{
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .accion{
+    width: 19px;
+    float: left;
+    margin-left: 1px;
+    padding-top: 5px;
 }
 
 

@@ -511,12 +511,21 @@ function ver_detalle_carro(index){
             
         }
         
+
+        var restantes = false;
+        var process_carro_restantes = create_element_class('process_carro_restantes');
+        
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
-            //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
             if(!pedido.carro[i].hasOwnProperty('promo')){
                 var pro = get_producto(pedido.carro[i].id_pro);
+                process_carro_restantes.appendChild(promo_restantes(producto, j, tiene_pregunta(pedido.carro[j])));
                 total = total + parseInt(pro.precio);
+                restantes = true;
             }
+        }
+        
+        if(restantes){ 
+            html.appendChild(process_carro_restantes);
         }
         
         $('.p2 .data_info').html(html);
@@ -526,6 +535,58 @@ function ver_detalle_carro(index){
         
     }
 
+}
+function promo_restantes(producto, j, tiene_pregunta){
+    
+    var Div = document.createElement('div');
+    Div.className = 'restantes_detalle_item clearfix';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'restantes_detalle_nombre';
+    Nombre.innerHTML = producto.nombre;
+    Div.appendChild(Nombre);
+    
+    var Acciones = document.createElement('div');
+    Acciones.className = 'restantes_detalle_acciones clearfix';
+
+    var Precio = document.createElement('div');
+    Precio.className = 'precio';
+    Precio.innerHTML = formatNumber.new(parseInt(producto.precio), "$");
+    Acciones.appendChild(Precio);
+    
+    var pedidos = get_pedidos();
+    var carro = pedidos[seleccionado].carro[j];
+    
+    if(carro.preguntas){
+    
+        var Pregunta = document.createElement('div');
+        Pregunta.className = 'pregunta material-icons';
+        if(!tiene_pregunta){
+            Pregunta.innerHTML = 'more_horiz';
+        }else{
+            Pregunta.innerHTML = 'help_outline';
+        }
+        Pregunta.onclick = function(){ mostrar_pregunta(j) };
+        Acciones.appendChild(Pregunta);
+    
+    }else{
+        
+        var Espacio = document.createElement('div');
+        Espacio.className = 'espacio';
+        Acciones.appendChild(Espacio);
+        
+    }
+    
+    var Accion = document.createElement('div');
+    Accion.className = 'accion material-icons';
+    Accion.innerHTML = 'close';
+    Accion.onclick = function(){ delete_pro_carro(j) };
+    Acciones.appendChild(Accion);
+    
+    Div.appendChild(Acciones);
+    return Div;
+
+    
 }
 function promo_carros(producto, j){
     
