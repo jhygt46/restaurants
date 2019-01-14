@@ -470,6 +470,7 @@ function ver_detalle_carro(index){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
+    var total = 0;
     
     if(proceso(pedido)){
         
@@ -477,15 +478,16 @@ function ver_detalle_carro(index){
         for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
             if(!pedido.carro[i].hasOwnProperty('promo')){
-                console.log("PRODUCTO SIN PROMO")
+                var pro = get_producto(pedido.carro[i].id_pro);
+                total = total + pro.precio;
             }
         }
         for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
             //$('.p2 .data_info').html("<div>BUENA NELSON .COM</div>");
             var promo = get_categoria(pedido.promos[i].id_cae);
-            console.log(promo);
+            total = total + promo.precio;
         }
-        
+        console.log("TOTAL: "+total);
         $('.pop_up').show();
         $('.p2').show();
         
