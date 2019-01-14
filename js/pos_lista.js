@@ -246,8 +246,10 @@ function html_home_pedidos(obj, index){
     
     if(obj.carro){
         obj.carro.forEach(function(carro_item, index){
-            pro = get_producto(carro_item.id_pro);
-            total = total + parseInt(pro.precio);
+            if(carro_item.id_pro){
+                pro = get_producto(carro_item.id_pro);
+                total = total + parseInt(pro.precio);
+            }
         });
     }
 
