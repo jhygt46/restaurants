@@ -344,6 +344,8 @@ function seleccionar_productos_categoria_promo(i){
 
 function confirmar_productos_promo(that){
     
+    console.log("BUE1");
+    
     var info = $(that).parents('.nuevo_pedido').find('.data_info');
     
     var count = 0;
@@ -357,10 +359,12 @@ function confirmar_productos_promo(that){
     parent.find('.pro_cat_item').each(function(){
         count = count + parseInt($(this).find('.select_promo').val());
         arr.push({id_pro: parseInt($(this).find('.select_promo').attr('id')), cantidad: parseInt($(this).find('.select_promo').val())});
+        console.log("BUE2");
     });
     
     if(count == cantidad){
         
+        console.log("BUE3");
         var pedidos = get_pedidos();
         pedidos[seleccionado].carro.splice(carro_pos, 1);
         
@@ -385,6 +389,7 @@ function confirmar_productos_promo(that){
         
     }else{
         
+        console.log("BUE4");
         var diff = cantidad - count;
         if(diff == 1){
             alert("FALTA 1 PRODUCTO");
@@ -400,6 +405,7 @@ function confirmar_productos_promo(that){
         }
         
     }
+    console.log("BUE5");
      
 }
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
