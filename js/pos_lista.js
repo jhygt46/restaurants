@@ -364,7 +364,6 @@ function confirmar_productos_promo(that){
         
         var pedidos = get_pedidos();
         var aux_promo = pedidos[seleccionado].carro[carro_pos].promo;
-        console.log("aux_promo: "+aux_promo);
         pedidos[seleccionado].carro.splice(carro_pos, 1);
         
         for(var i=0, ilen=arr.length; i<ilen; i++){
