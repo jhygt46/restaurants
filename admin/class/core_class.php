@@ -239,8 +239,10 @@ class Core{
         return $this->process_categorias($promos['resultado'], 'id_prm');
     }
     public function get_promocion($id_cae){
+        $pre = $this->con->sql("SELECT precio FROM categorias WHERE id_cae='".$id_cae."'");
         $cats = $this->con->sql("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
         $prods = $this->con->sql("SELECT id_pro, cantidad FROM promocion_productos WHERE id_cae='".$id_cae."'");
+        $aux['precio'] = $pre['resultado'][0]['precio'];
         $aux['categorias'] = $cats['resultado'];
         $aux['productos'] = $prods['resultado'];
         return $aux;
