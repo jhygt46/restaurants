@@ -217,6 +217,12 @@ body {
     height: 20px;
     float: left;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .pregunta{
+    width: 20px;
+    height: 20px;
+    float: left;
+    padding-top: 6px;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .process_carro .process_carro_restantes .restantes_detalle_item .restantes_detalle_acciones .accion{
     width: 19px;
     float: left;
