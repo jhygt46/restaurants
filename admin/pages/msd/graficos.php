@@ -120,7 +120,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container" style="background: #fcc; height: 400px; display: block; padding-top: 40px">
+            <div id="container" style="height: 300px; display: block; padding-top: 40px">
                 
             </div>
         </div>
