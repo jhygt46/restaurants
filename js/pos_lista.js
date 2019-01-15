@@ -440,7 +440,7 @@ function select_pregunta(that){
 }
 function confirmar_pregunta_productos(that){
 
-    var parent = $(that).parents('.modal_pregunta_productos');
+    var parent = $(that).parents('.p4');
     var pregunta = parent.find('.s_pregunta');
     var i = pregunta.attr('data-pos');
     var k = 0;
