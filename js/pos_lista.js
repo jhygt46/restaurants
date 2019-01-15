@@ -419,6 +419,25 @@ function confirmar_productos_promo(that){
     }
      
 }
+function select_pregunta(that){
+    
+    var parent = $(that).parent();
+    var cantidad = parent.attr('data-cant');
+    var seleccionadas = parent.find('.selected').length;
+    var diff = cantidad - seleccionadas;
+
+    if($(that).hasClass('selected')){
+        $(that).removeClass('selected');
+    }
+    if(cantidad == 1 && !$(that).hasClass('selected')){
+        parent.find('.selected').eq(0).removeClass('selected');
+        $(that).addClass('selected');
+    }
+    if(cantidad > 1 && !$(that).hasClass('selected') && diff > 0){
+        $(that).addClass('selected');
+    }
+    
+}
 function html_preguntas_producto(i){
     
     var pedidos = get_pedidos();
