@@ -161,6 +161,17 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                             <input type="button" value="Enviar" onclick="confirmar_productos_promo(this)" />
                         </div>
                     </div>
+                    <div class="p4 nuevo_pedido vhalign" style="display: none">
+                        <div class="np_close" onclick="np_close(this)"></div>
+                        <div class="n_title"></div>
+                        <div class="n_stitle"></div>
+                        <div class="n_info">
+                            <div class="data_info"></div>
+                        </div>
+                        <div class="n_submit">
+                            <input type="button" value="Enviar" onclick="confirmar_preguntas(this)" />
+                        </div>
+                    </div>
                 </div>
             </div>
             
