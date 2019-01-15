@@ -251,6 +251,9 @@ body {
     padding: 6px;
     background: #ccc;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta .v_pregunta .selected{
+    background: #999;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_submit{
     width: 100%;
     display: block;
