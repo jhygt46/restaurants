@@ -13,7 +13,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-$list = $fireapp->get_giros_user();
 
 /* CONFIG PAGE */
 $titulo = "Graficos";
@@ -28,51 +27,22 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     $id = $_GET["id"];
     $that = $fireapp->get_giro($id);
     
-    
 }
 
 ?>
 <script>
 
-    Highcharts.chart('container', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Monthly Average Temperature'
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com'
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: null
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
-            }
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }, {
-            name: 'Santiago',
-            data: [13.9, 14.2, 15.7, 18.5, 21.9, 25.2, 27.0, 26.6, 24.2, 20.3, 16.6, 14.8]
-        }]
-    });
-
     function stats(that){
-        console.log(that);
-        console.log("BUE NELSON");
+        var send = {accion: 'get_stats', grafico: 0};
+        $.ajax({
+            url: "ajax/stats.php",
+            type: "POST",
+            data: send,
+            success: function(data){
+                Highcharts.chart('container', JSON.parse(data));
+            },
+            error: function(e){}
+        });
     }
 
 </script>
