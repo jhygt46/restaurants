@@ -229,24 +229,24 @@ body {
     margin-left: 1px;
     padding-top: 5px;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta{
     padding: 10px;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta .e_pregunta{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta{
     padding-bottom: 16px;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta .e_pregunta .pregunta_titulo{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta .pregunta_titulo{
     font-size: 20px;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta .e_pregunta .titulo_v_pregunta{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta .titulo_v_pregunta{
     margin-top: 4px;
     font-size: 12px;
     margin-bottom: 4px;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta .e_pregunta .v_pregunta{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta .v_pregunta{
     
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .accion .s_pregunta .e_pregunta .v_pregunta .n_pregunta{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .s_pregunta .e_pregunta .v_pregunta .n_pregunta{
     font-size: 14px;
     padding: 6px;
     background: #ccc;
