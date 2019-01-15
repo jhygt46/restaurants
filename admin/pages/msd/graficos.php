@@ -48,9 +48,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            }
+            title: null
         },
         plotOptions: {
             line: {
