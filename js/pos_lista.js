@@ -423,7 +423,7 @@ function html_preguntas_producto(i){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-    var carro = pedido.carro[i];
+    var carro = pedido.carro;
     
     var html = document.createElement('div');
     html.className = 's_pregunta';
