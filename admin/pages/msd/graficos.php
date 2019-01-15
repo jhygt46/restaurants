@@ -16,30 +16,65 @@ $fireapp = new Core();
 $list = $fireapp->get_giros_user();
 
 /* CONFIG PAGE */
-$titulo = "Empresa";
-$titulo_list = "Mis Empresas";
-$sub_titulo1 = "Ingresar Empresa";
-$sub_titulo2 = "Modificar Empresa";
-$accion = "crear_giro";
-
-$eliminaraccion = "eliminar_giro";
-$id_list = "id_gir";
-$eliminarobjeto = "Empresa";
-$page_mod = "pages/msd/giros.php";
+$titulo = "Graficos";
+$titulo_list = "Estadisticas";
+$sub_titulo = "Configurar Grafico";
 /* CONFIG PAGE */
 
 $id = 0;
-$sub_titulo = $sub_titulo1;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
-    $sub_titulo = $sub_titulo2;
-    $that = $fireapp->get_giro($_GET["id"]);
     $id = $_GET["id"];
+    $that = $fireapp->get_giro($id);
+    
     
 }
 
 ?>
+<script>
+
+    Highcharts.chart('container', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Average Temperature'
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Tokyo',
+            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        }, {
+            name: 'London',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        }]
+    });
+
+    function stats(that){
+        console.log(that);
+        console.log("BUE NELSON");
+    }
+
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -70,7 +105,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <input id="dominio" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
-                        <div class="enviar"><a onclick="form(this)">Enviar</a></div>
+                        <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
                     </label>
                 </fieldset>
             </form>
@@ -85,7 +120,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container" style="background: #fcc; height: 200px; display: block; padding: 60px 2% 10px 2%">
+            <div id="container" style="background: #fcc; height: 400px; display: block; padding-top: 40px">
                 
             </div>
         </div>
