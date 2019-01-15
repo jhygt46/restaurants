@@ -39,7 +39,8 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             type: "POST",
             data: send,
             success: function(data){
-                Highcharts.chart('container', JSON.parse(data));
+                console.log(data);
+                Highcharts.chart('container', data);
             },
             error: function(e){}
         });
