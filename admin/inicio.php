@@ -64,6 +64,7 @@
                                     <ul class="bloque_lista">
                                         <li onclick="navlink('pages/msd/inicio.php')">Inicio<p class="valign">3</p></li>
                                         <li onclick="navlink('pages/msd/giros.php')">Crear Giros</li>
+                                        <li onclick="navlink('pages/msd/graficos.php')">Graficos</li>
                                     </ul>
                                 </div>
                                 
