@@ -169,7 +169,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                             <div class="data_info"></div>
                         </div>
                         <div class="n_submit">
-                            <input type="button" value="Enviar" onclick="confirmar_preguntas(this)" />
+                            <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
                         </div>
                     </div>
                 </div>
