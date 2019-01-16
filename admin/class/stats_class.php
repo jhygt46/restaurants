@@ -55,8 +55,6 @@ class Stats extends Core{
         $aux_from = $from;
         $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         
-        $infos['a'] = $dif_tiempo;
-        
         if($dif_tiempo <= 50){
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
@@ -102,6 +100,10 @@ class Stats extends Core{
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
+
+        forEach($info['xAxis']['categories'] as $cat){
+            $info['a'][] = $cat;
+        }
         
         $info['series'][0]['name'] = 'Tokyo';
         $info['series'][0]['data'][0] = 7.0;
