@@ -52,14 +52,14 @@ $locales = $fireapp->get_locales();
         var from = $( "#fecha_from" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
-            numberOfMonths: 3
+            numberOfMonths: 1
         }).on( "change", function() {
             to.datepicker( "option", "minDate", getDate( this ) );
         })
         var to = $( "#fecha_to" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
-            numberOfMonths: 3
+            numberOfMonths: 1
         }).on( "change", function() {
             from.datepicker( "option", "maxDate", getDate( this ) );
         });
