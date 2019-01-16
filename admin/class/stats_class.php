@@ -53,6 +53,7 @@ class Stats extends Core{
         $to = strtotime($to) + 86400;        
         $dif_tiempo = round(($to - $from)/86400);
         $aux_from = $from;
+        $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         
         $infos['a'] = $dif_tiempo;
         
@@ -75,7 +76,8 @@ class Stats extends Core{
             $infos['t'] = 2;
             
             while($to > $aux_from){
-                $info['xAxis']['categories'][] = date("m", $aux_from);
+                $aux_mes = intval(date("m", $aux_from)) - 1;
+                $info['xAxis']['categories'][] = $mes[$aux_mes];
                 $aux_from = strtotime('+1 month', $aux_from);
             }
             
@@ -87,25 +89,12 @@ class Stats extends Core{
             $infos['t'] = 3;
             
             while($to > $aux_from){
-                $info['xAxis']['categories'][] = date("y", $aux_from);
+                $info['xAxis']['categories'][] = date("Y", $aux_from);
                 $aux_from = strtotime('+1 Year', $aux_from);
             }
         }
         
-        /*
-        $info['xAxis']['categories'][0] = 'Ene';
-        $info['xAxis']['categories'][1] = 'Feb';
-        $info['xAxis']['categories'][2] = 'Mar';
-        $info['xAxis']['categories'][3] = 'Abr';
-        $info['xAxis']['categories'][4] = 'May';
-        $info['xAxis']['categories'][5] = 'Jun';
-        $info['xAxis']['categories'][6] = 'Jul';
-        $info['xAxis']['categories'][7] = 'Ago';
-        $info['xAxis']['categories'][8] = 'Sep';
-        $info['xAxis']['categories'][9] = 'Oct';
-        $info['xAxis']['categories'][10] = 'Nov';
-        $info['xAxis']['categories'][11] = 'Dic';
-        */
+        
         
         $info['chart']['type'] = 'line';
         $info['subtitle']['text'] = 'Graficos en tiempo real';
