@@ -25,7 +25,7 @@ class Stats extends Core{
     public function get_series($infos, $name){
         $aux['name'] = $name;
         foreach($infos['fecha'] as $fecha){
-                $aux['data'][] = rand(10, 20);
+                $aux['data'][] = rand(10, 2000);
         }
         return $aux;
     }
