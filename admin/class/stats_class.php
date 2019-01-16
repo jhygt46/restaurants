@@ -50,12 +50,10 @@ class Stats extends Core{
         $res = $this->con->sql($sql);
         
         $from = strtotime($from);
-        $to = strtotime($to);
-        $to2 = $to + 86400;
+        $to = strtotime($to) + 86400;
         
-        $info['atime_01'] = date("Y-m-d", $from);
-        $info['atime_02'] = date("Y-m-d", $to);
-        $info['atime_03'] = date("Y-m-d", $to2);
+        $info['atime_01'] = date("Y-m-d H:i:s", $from);
+        $info['atime_02'] = date("Y-m-d H:i:s", $to);
         
         
         $info['chart']['type'] = 'line';
