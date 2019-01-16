@@ -22,13 +22,7 @@ class Stats extends Core{
         }
         
     }
-    public function get_series($infos, $name){
-        $aux['name'] = $name;
-        foreach($infos['fecha'] as $fecha){
-                $aux['data'][] = rand(10, 2000);
-        }
-        return $aux;
-    }
+    
     public function get_stats(){
         
         $tipo = $_POST['tipo'];
@@ -111,10 +105,6 @@ class Stats extends Core{
             
         }
 
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
-        
         $info['chart']['type'] = 'line';
         $info['subtitle']['text'] = 'Graficos en tiempo real';
         $info['yAxis']['title']['text'] = null;
@@ -122,10 +112,24 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
+        
+        foreach($infos['fecha'] as $fecha){
+            $info['a_fecha'] = $fecha;
+        }
+        
         return $info;
         
     }
-   
+    public function get_series($infos, $name){
+        $aux['name'] = $name;
+        foreach($infos['fecha'] as $fecha){
+                $aux['data'][] = rand(10, 2000);
+        }
+        return $aux;
+    }
     
 }
 // QUE ME DEVUELTA CATEGORIA Y SUS VALORES
