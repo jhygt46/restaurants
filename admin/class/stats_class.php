@@ -32,7 +32,7 @@ class Stats extends Core{
         for($i=0; $i<count($locales); $i++){
             $info[$locales[$i]['id_loc']] = $_POST['local-'.$locales[$i]['id_loc']];
         }
-        
+        $info['POST'] = $_POST;
         
         
         $info['chart']['type'] = 'line';
