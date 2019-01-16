@@ -108,13 +108,8 @@ class Stats extends Core{
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
-        //$info['total'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '2019-02-01 00:00:00');
-        
-        for($i=0; $i<count($pedidos); $i++){
-            
-            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
-            
-        }
+        $info['total'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '2019-02-01 00:00:00');
+
         
         /*
         for($i=0; $i<$pedidos['count']; $i++){
