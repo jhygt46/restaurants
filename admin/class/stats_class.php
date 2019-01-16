@@ -117,7 +117,7 @@ class Stats extends Core{
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
         foreach($infos['fecha'] as $fecha){
-            $info['a_fecha'] = $fecha;
+            $info['a_fecha'][] = $fecha;
         }
         
         return $info;
