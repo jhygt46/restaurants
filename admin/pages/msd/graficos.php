@@ -37,6 +37,8 @@ $locales = $fireapp->get_locales();
             }
         });
         
+        console.log(data);
+        
         $.ajax({
             url: "ajax/index.php",
             type: "POST",
