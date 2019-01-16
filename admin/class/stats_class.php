@@ -48,6 +48,7 @@ class Stats extends Core{
         
         $info['sql'] = $sql;
         $info['res'] = $this->con->sql($sql);
+        return $info;
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
