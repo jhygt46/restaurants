@@ -51,17 +51,21 @@ class Stats extends Core{
         
         $from = strtotime($from);
         $to = strtotime($to) + 86400;        
-        $dif_tiempo = ($to - $from)/86400;
+        $dif_tiempo = round(($to - $from)/86400);
         
-        if($dif_tiempo < 31){
+        $info['a'] = $dif_tiempo;
+        
+        if($dif_tiempo <= 31){
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en dias';
+            
         }
-        if($dif_tiempo >= 31 && $dif_tiempo < 548){
+        if($dif_tiempo > 31 && $dif_tiempo < 548){
             // MOSTRAR MESES
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en meses';
+            
         }
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
@@ -69,23 +73,22 @@ class Stats extends Core{
             $info['title']['text'] = 'Ventas en a&ntilde;s';
         }
         
-        $info['subtitle']['text'] = 'Graficos en tiempo real';
-        
-        $info['chart']['type'] = 'line';
-        $info['title']['text'] = 'Monthly Average Temperature';
-        $info['subtitle']['text'] = 'Source: WorldClimate.com';
-        $info['xAxis']['categories'][0] = 'Jan';
+        $info['xAxis']['categories'][0] = 'Ene';
         $info['xAxis']['categories'][1] = 'Feb';
         $info['xAxis']['categories'][2] = 'Mar';
-        $info['xAxis']['categories'][3] = 'Apr';
+        $info['xAxis']['categories'][3] = 'Abr';
         $info['xAxis']['categories'][4] = 'May';
         $info['xAxis']['categories'][5] = 'Jun';
         $info['xAxis']['categories'][6] = 'Jul';
-        $info['xAxis']['categories'][7] = 'Aug';
+        $info['xAxis']['categories'][7] = 'Ago';
         $info['xAxis']['categories'][8] = 'Sep';
         $info['xAxis']['categories'][9] = 'Oct';
         $info['xAxis']['categories'][10] = 'Nov';
-        $info['xAxis']['categories'][11] = 'Dec';
+        $info['xAxis']['categories'][11] = 'Dic';
+        
+        
+        $info['chart']['type'] = 'line';
+        $info['subtitle']['text'] = 'Graficos en tiempo real';
         $info['yAxis']['title']['text'] = null;
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
