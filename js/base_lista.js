@@ -754,6 +754,7 @@ function paso_4(){
         success: function(info){
 
             var data = JSON.parse(info);
+            console.log(data);
             if(data.op == 1){
 
                 document.getElementById("enviar_cotizacion").disabled = false;
