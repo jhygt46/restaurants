@@ -60,6 +60,7 @@ class Stats extends Core{
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en dias';
             $infos['t'] = 1;
+            $aux_from = $from;
             while($to > $aux_from){
                 $infos['aux'][] = $aux_from;
                 $aux_from = $aux_from + 86400;
