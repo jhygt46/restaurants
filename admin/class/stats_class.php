@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-require_once 'mysql_class.php';
+require_once($path."class/core_class.php");
 
-class Stats{
+class Stats extends Core{
     
     public $con = null;
     public $id_gir = null;
