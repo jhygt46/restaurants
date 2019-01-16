@@ -62,7 +62,7 @@ class Stats extends Core{
             $infos['t'] = 1;
             $aux_from = $from;
             while($to > $aux_from){
-                $infos['aux'][] = $aux_from;
+                $infos['aux'][] = date("d", $aux_from);
                 $aux_from = $aux_from + 86400;
             }
             
