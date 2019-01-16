@@ -52,6 +52,7 @@ class Stats extends Core{
         $from = strtotime($from);
         $to = strtotime($to) + 86400;        
         $dif_tiempo = round(($to - $from)/86400);
+        $aux_from = $from;
         
         $infos['a'] = $dif_tiempo;
         
@@ -60,9 +61,9 @@ class Stats extends Core{
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en dias';
             $infos['t'] = 1;
-            $aux_from = $from;
+            
             while($to > $aux_from){
-                $infos['aux'][] = date("d", $aux_from);
+                $info['xAxis']['categories'][] = date("d", $aux_from);
                 $aux_from = $aux_from + 86400;
             }
             
@@ -73,12 +74,22 @@ class Stats extends Core{
             $info['title']['text'] = 'Ventas en meses';
             $infos['t'] = 2;
             
+            while($to > $aux_from){
+                $info['xAxis']['categories'][] = date("m", strtotime('+1 month', $aux_from));
+                $aux_from = strtotime('+1 month', $aux_from);
+            }
+            
         }
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en a&ntilde;s';
             $infos['t'] = 3;
+            
+            while($to > $aux_from){
+                $info['xAxis']['categories'][] = date("y", strtotime('+1 Year', $aux_from));
+                $aux_from = strtotime('+1 Year', $aux_from);
+            }
         }
         
         $info['xAxis']['categories'][0] = 'Ene';
