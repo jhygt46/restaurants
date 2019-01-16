@@ -80,6 +80,7 @@ $locales = $fireapp->get_locales();
         
     });
 
+
 </script>
 <div class="pagina">
     <div class="title">
