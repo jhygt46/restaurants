@@ -65,8 +65,8 @@ $locales = $fireapp->get_locales();
                     </label>
                     <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
-                        <span><p><?php echo $locales['resultado'][$i]['nombre']; ?>:</p></span>
-                        <input id="local-<?php echo $locales['resultado'][$i]['id_loc']; ?>" type="checkbox" class="checkbox" value="1">
+                        <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
+                        <input id="local-<?php echo $locales[$i]['id_loc']; ?>" type="checkbox" class="checkbox" value="1">
                     </label>
                     <?php } ?>
                     <label>
