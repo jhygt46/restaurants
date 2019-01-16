@@ -36,7 +36,7 @@ class Stats extends Core{
                 $aux = explode("-", $locales[$i]);
                 $aux2[] = "id_loc='".$aux[1]."'";
             }
-            $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2);
+            $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2).")";
         }
         if(count($locales) == 1){
             $aux = explode("-", $locales[0]);
