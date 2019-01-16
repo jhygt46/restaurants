@@ -35,7 +35,7 @@ $locales = $fireapp->get_locales();
         var send = { accion: 'get_stats', locales: JSON.stringify(locales) };
         
         $.ajax({
-            url: "ajax/index.php",
+            url: "ajax/stats.php",
             type: "POST",
             data: send,
             success: function(data){
