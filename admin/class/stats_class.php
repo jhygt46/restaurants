@@ -111,17 +111,28 @@ class Stats extends Core{
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
-        /*
+        
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 1', $pedidos);
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
-        */
-        foreach($pedidos['resultado'] as $pedido){
-            for($i=0; $i<count($infos['fecha']); $i++){
-                $info['series'][$i] = $info['series'][$i] + 1;
+        
+
+        
+        for($i=0; $i<$pedidos['count']; $i++){
+            for($j=0; $j<count($infos['fecha']); $j++){
+                
+                
+                
             }
         }
         return $info;
+        
+    }
+    public function get_data_pedidos($pedidos){
+        
+        for($i=0; $i<$pedidos['count']; $i++){
+            
+        }
         
     }
     public function get_series($infos, $name){
