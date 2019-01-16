@@ -110,7 +110,7 @@ class Stats extends Core{
         
         //$info['total'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '2019-02-01 00:00:00');
         
-        for($i=0; $i<$pedidos['count']; $i++){
+        for($i=0; $i<count($pedidos); $i++){
             
             $info['pedido_fecha'][] = strtotime($pedidos[$i]['fecha']);
             
