@@ -28,8 +28,16 @@ class Stats extends Core{
         
         $tipo = $_POST['tipo'];
         $locales = json_decode($_POST['locales']);
-        $info['locales'] = $locales;
         
+        if(count($locales) > 1){
+            for($i=0; $i<count($locales); $i++){
+                $aux = explode("-", $locales[$i]);
+                $aux2[] = "id_loc='".$aux[1]."'";
+            }
+            $sql = "SELECT * FROM pedidos_aux WHERE ".implode("OR", $aux2);
+        }
+        
+        $info['sql'] = $sql;
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
