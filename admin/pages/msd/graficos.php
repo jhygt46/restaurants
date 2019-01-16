@@ -40,6 +40,7 @@ $locales = $fireapp->get_locales();
             data: send,
             success: function(data){
                 console.log(data);
+                Highcharts.chart('container', data);
             },
             error: function(e){}
         });
