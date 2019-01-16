@@ -58,7 +58,7 @@ class Stats extends Core{
         if($dif_tiempo <= 50){
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
-            $info['title']['text'] = 'Ventas en dias';
+            $info['subtitle']['text'] = 'Tiempo Real en dias';
             $infos['t'] = 1;
             
             while($to > $aux_from){
@@ -71,7 +71,7 @@ class Stats extends Core{
         if($dif_tiempo > 50 && $dif_tiempo < 548){
             // MOSTRAR MESES
             $info['chart']['type'] = 'line';
-            $info['title']['text'] = 'Ventas en meses';
+            $info['subtitle']['text'] = 'Tiempo Real en meses';
             $infos['t'] = 2;
             
             while($to > $aux_from){
@@ -85,7 +85,7 @@ class Stats extends Core{
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
             $info['chart']['type'] = 'line';
-            $info['title']['text'] = 'Ventas en a&ntilde;s';
+            $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
             $infos['t'] = 3;
             
             while($to > $aux_from){
@@ -96,18 +96,20 @@ class Stats extends Core{
             
         }
         
+        
         $info['chart']['type'] = 'line';
-        $info['subtitle']['text'] = 'Graficos en tiempo real';
         $info['yAxis']['title']['text'] = null;
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
         if($tipo == 0){
+            $info['title']['text'] = 'Total Ventas';
             $info['series'][] = $this->get_series($infos, 'Diegomez');
             $info['series'][] = $this->get_series($infos, 'Buena Nelson');
         }
         if($tipo == 1){
+            $info['title']['text'] = 'Total Buena Nelson';
             $info['series'][] = $this->get_series($infos, 'Buena Enestor');
             $info['series'][] = $this->get_series($infos, 'Buena Diego');
         }
