@@ -33,6 +33,8 @@ class Stats extends Core{
             $info[$locales[$i]['id_loc']] = $_POST['local-'.$locales[$i]['id_loc']];
         }
         
+        
+        
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
         $info['subtitle']['text'] = 'Source: WorldClimate.com';
