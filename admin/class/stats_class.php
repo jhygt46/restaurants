@@ -118,7 +118,7 @@ class Stats extends Core{
         
         //foreach($infos['fecha'] as $fecha){
             foreach($pedidos['resultado'] as $pedido){
-                $info['a_pedidos'][] = $pedido;
+                $info['a_pedidos'][] = $pedido->{'fecha'};
             }
         //}
         
