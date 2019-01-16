@@ -26,8 +26,12 @@ class Stats extends Core{
     
     public function get_stats(){
         
-        $tipo = $_POST["tipo"];
-        $giros = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$id_gir."'");
+        $tipo = $_POST['tipo'];
+        $locales = $this->get_locales();
+        
+        for($i=0; $i<count($locales); $i++){
+            $info[$locales[$i]['id_loc']] = $_POST['local-'.$locales[$i]['id_loc']];
+        }
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
