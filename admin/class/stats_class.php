@@ -103,10 +103,14 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
+        if($tipo == 1){
+            $info['series'][] = $this->get_series($infos, 'Diegomez');
+            $info['series'][] = $this->get_series($infos, 'Buena Nelson');
+        }
+        if($tipo == 2){
+            $info['series'][] = $this->get_series($infos, 'Buena Enestor');
+            $info['series'][] = $this->get_series($infos, 'Buena Diego');
+        }
         
         $info['total'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '2019-02-01 00:00:00');
 
