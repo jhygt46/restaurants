@@ -52,7 +52,7 @@ $locales = $fireapp->get_locales();
 
     $(document).ready(function(){
          
-        var dateFormat = "yy/mm/dd";
+        var dateFormat = "YY/mm/dd";
         var from = $( "#fecha_from" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
