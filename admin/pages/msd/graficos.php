@@ -25,30 +25,21 @@ $locales = $fireapp->get_locales();
 
     function stats(that){
         
-        var data = new FormData();
-        data.append('accion', 'get_stats');
-        
+        var locales = new Array();  
         $(that).parents('form').find('input').each(function(){
             if($(this).attr('type') == "checkbox" && $(this).is(':checked')){
-                data.append($(this).attr('id'), "1");
-            }
-            if($(this).attr('type') == "checkbox" && !$(this).is(':checked')){
-                data.append($(this).attr('id'), "0");
+                locales.push($(this).attr('id'));
             }
         });
         
-        console.log(data);
+        var send = { accion: 'get_stats', locales: JSON.stringify(locales) };
         
         $.ajax({
             url: "ajax/index.php",
             type: "POST",
-            contentType: false,
-            data: data,
-            processData: false,
-            cache: false,
+            data: send,
             success: function(data){
                 console.log(data);
-                Highcharts.chart('container', data);
             },
             error: function(e){}
         });
