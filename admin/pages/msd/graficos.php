@@ -22,18 +22,17 @@ $sub_titulo = "Configurar Grafico";
 
 $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
-    
-    $id = $_GET["id"];
-    $that = $fireapp->get_giro($id);
-    
-}
+$locales = $fireapp->get_locales();
+
+echo "<pre>";
+print_r($locales);
+echo "</pre>";
 
 ?>
 <script>
 
     function stats(that){
-        var send = {accion: 'get_stats', grafico: 0};
+        var send = { accion: 'get_stats', grafico: 0 };
         $.ajax({
             url: "ajax/stats.php",
             type: "POST",
@@ -69,13 +68,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
-                        <span><p>Nombre del Giro:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="" require="" placeholder="" />
+                        <span><p>Tipo de Grafico:</p></span>
+                        <select id="tipo"><option value="0">Categoria</option><option value="1">Promocion</option></select>
                     </label>
+                    <?php for($i=0; $i<$locales['count']; $i++){ ?>
                     <label class="clearfix">
-                        <span><p>Dominio del Giro:</p></span>
-                        <input id="dominio" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <span><p><?php echo $locales['resultado'][$i]['nombre']; ?>:</p></span>
+                        <input id="local-<?php echo $locales['resultado'][$i]['id_loc']; ?>" type="checkbox" class="checkbox" value="1">
                     </label>
+                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
                     </label>

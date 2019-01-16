@@ -6,10 +6,12 @@ require_once 'mysql_class.php';
 class Stats{
     
     public $con = null;
+    public $id_gir = null;
     
     public function __construct(){
         
         $this->con = new Conexion();
+        $this->id_gir = $_SESSION['user']['id_gir'];
         
     }
     public function process(){
@@ -23,6 +25,9 @@ class Stats{
     
     
     public function get_stats(){
+        
+        $tipo = $_POST["tipo"];
+        $giros = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$id_gir."'");
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
