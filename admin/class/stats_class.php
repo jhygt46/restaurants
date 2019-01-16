@@ -75,7 +75,7 @@ class Stats extends Core{
             $infos['t'] = 2;
             
             while($to > $aux_from){
-                $info['xAxis']['categories'][] = date("m", strtotime('+1 month', $aux_from));
+                $info['xAxis']['categories'][] = date("m", $aux_from);
                 $aux_from = strtotime('+1 month', $aux_from);
             }
             
@@ -87,7 +87,7 @@ class Stats extends Core{
             $infos['t'] = 3;
             
             while($to > $aux_from){
-                $info['xAxis']['categories'][] = date("y", strtotime('+1 Year', $aux_from));
+                $info['xAxis']['categories'][] = date("y", $aux_from);
                 $aux_from = strtotime('+1 Year', $aux_from);
             }
         }
