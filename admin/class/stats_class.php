@@ -34,7 +34,10 @@ class Stats extends Core{
                 $aux = explode("-", $locales[$i]);
                 $aux2[] = "id_loc='".$aux[1]."'";
             }
-            $sql = "SELECT * FROM pedidos_aux WHERE ".implode("OR", $aux2);
+            $sql = "SELECT * FROM pedidos_aux WHERE ".implode(" OR ", $aux2);
+        }else{
+            $aux = explode("-", $locales[0]);
+            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$aux[1]."'";
         }
         
         $info['sql'] = $sql;
