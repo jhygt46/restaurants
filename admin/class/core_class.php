@@ -164,7 +164,7 @@ class Core{
     }
     public function get_locales(){
         $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
-        return $giros['resultado'];
+        return $giros;
     }
     public function get_local($id_loc){
         $giros = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$this->id_gir."' AND id_loc='".$id_loc."' AND eliminado='0'");
