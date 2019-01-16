@@ -112,13 +112,15 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1', $pedidos);
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
-        foreach($infos['fecha'] as $fecha){
-            $info['a_fecha'][] = $fecha;
-        }
+        //foreach($infos['fecha'] as $fecha){
+            foreach($pedidos as $pedido){
+                $info['a_pedidos'][] = $pedido;
+            }
+        //}
         
         return $info;
         
@@ -126,7 +128,8 @@ class Stats extends Core{
     public function get_series($infos, $name){
         $aux['name'] = $name;
         foreach($infos['fecha'] as $fecha){
-                $aux['data'][] = rand(10, 2000);
+            $aux['data'][] = rand(10, 2000);
+            
         }
         return $aux;
     }
