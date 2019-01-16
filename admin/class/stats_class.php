@@ -53,24 +53,27 @@ class Stats extends Core{
         $to = strtotime($to) + 86400;        
         $dif_tiempo = round(($to - $from)/86400);
         
-        $info['a'] = $dif_tiempo;
+        $infos['a'] = $dif_tiempo;
         
         if($dif_tiempo <= 31){
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en dias';
+            $infos['t'] = 1;
             
         }
         if($dif_tiempo > 31 && $dif_tiempo < 548){
             // MOSTRAR MESES
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en meses';
+            $infos['t'] = 2;
             
         }
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en a&ntilde;s';
+            $infos['t'] = 3;
         }
         
         $info['xAxis']['categories'][0] = 'Ene';
@@ -122,7 +125,7 @@ class Stats extends Core{
         $info['series'][1]['data'][10] = 8.3;
         $info['series'][1]['data'][11] = 8.1;
         
-        return $info;
+        return $infos;
         
     }
    
