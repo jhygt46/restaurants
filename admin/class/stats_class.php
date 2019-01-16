@@ -46,7 +46,7 @@ class Stats extends Core{
             $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
         }
         
-        $info['sql'] = $from;
+        $info['from'] = $from;
         $info['to'] = $to;
         $info['sql'] = $this->con->sql($sql);
         
