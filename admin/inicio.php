@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/sweetalert.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="all">
     </head>
     <body>
         <div class="contenedor relative">
