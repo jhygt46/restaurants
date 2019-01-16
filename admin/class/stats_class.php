@@ -28,8 +28,8 @@ class Stats extends Core{
         
         $tipo = $_POST['tipo'];
         $locales = json_decode($_POST['locales']);
-        $from = $_POST['fecha_from'];
-        $to = $_POST['fecha_to'];
+        $from = $_POST['from'];
+        $to = $_POST['to'];
         
         if(count($locales) > 1){
             for($i=0; $i<count($locales); $i++){
