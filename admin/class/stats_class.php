@@ -49,7 +49,11 @@ class Stats extends Core{
         $sql = $sql." AND fecha > '".$from."' AND fecha < '".$to."'";
         $res = $this->con->sql($sql);
         
+        $from = strtotime($from);
+        $to = strtotime($to);
         
+        $info['atime_01'] = date("Y-m-d", $from);
+        $info['atime_02'] = date("Y-m-d", $to);
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
