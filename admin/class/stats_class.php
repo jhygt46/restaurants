@@ -28,6 +28,8 @@ class Stats extends Core{
         
         $tipo = $_POST['tipo'];
         $locales = json_decode($_POST['locales']);
+        $from = $_POST['fecha_from'];
+        $to = $_POST['fecha_to'];
         
         if(count($locales) > 1){
             for($i=0; $i<count($locales); $i++){
@@ -44,6 +46,8 @@ class Stats extends Core{
             $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
         }
         
+        $info['sql'] = $from;
+        $info['to'] = $to;
         $info['sql'] = $this->con->sql($sql);
         
         $info['chart']['type'] = 'line';
