@@ -36,16 +36,17 @@ class Stats extends Core{
                 $aux = explode("-", $locales[$i]);
                 $aux2[] = "id_loc='".$aux[1]."'";
             }
-            $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2).") AND DATE(fecha) BETWEEN '".$from."' AND '".$to."'";
+            $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2);
         }
         if(count($locales) == 1){
             $aux = explode("-", $locales[0]);
-            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$aux[1]."' AND DATE(fecha) BETWEEN '".$from."' AND '".$to."'";
+            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$aux[1]."'";
         }
         if(count($locales) == 0){
-            $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."' AND DATE(fecha) BETWEEN '".$from."' AND '".$to."'";
+            $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
         }
         
+        $sql = $sql." AND fecha > '".$from."' AND fecha < '".$to."'";
         $info['sql'] = $sql;
         $info['res'] = $this->con->sql($sql);
         return $info;
