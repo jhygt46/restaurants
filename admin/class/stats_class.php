@@ -92,6 +92,7 @@ class Stats extends Core{
             }
         }
         
+        /*
         $info['xAxis']['categories'][0] = 'Ene';
         $info['xAxis']['categories'][1] = 'Feb';
         $info['xAxis']['categories'][2] = 'Mar';
@@ -104,7 +105,7 @@ class Stats extends Core{
         $info['xAxis']['categories'][9] = 'Oct';
         $info['xAxis']['categories'][10] = 'Nov';
         $info['xAxis']['categories'][11] = 'Dic';
-        
+        */
         
         $info['chart']['type'] = 'line';
         $info['subtitle']['text'] = 'Graficos en tiempo real';
@@ -141,7 +142,7 @@ class Stats extends Core{
         $info['series'][1]['data'][10] = 8.3;
         $info['series'][1]['data'][11] = 8.1;
         
-        return $infos;
+        return $info;
         
     }
    
