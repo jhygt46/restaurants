@@ -34,8 +34,8 @@ $locales = $fireapp->get_locales();
         
         var from = $('#fecha_from').val();
         var to = $('#fecha_to').val();
-        
-        var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to };
+        var tipo $('#tipo').val();
+        var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to, tipo: tipo };
         
         $.ajax({
             url: "ajax/stats.php",

@@ -103,8 +103,6 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        $info['tipo'] = $tipo;
-        
         if($tipo == 1){
             $info['series'][] = $this->get_series($infos, 'Diegomez');
             $info['series'][] = $this->get_series($infos, 'Buena Nelson');
