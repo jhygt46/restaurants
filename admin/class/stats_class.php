@@ -25,7 +25,7 @@ class Stats extends Core{
     
     public function get_stats(){
         
-        $tipo = $_POST['tipo'];
+        $tipo = intval($_POST['tipo']);
         $locales = json_decode($_POST['locales']);
         $from = $_POST['from'];
         $to = $_POST['to'];
@@ -103,13 +103,11 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        $info['tipo'] = $tipo;
-        
-        if($tipo == 1){
+        if($tipo == 0){
             $info['series'][] = $this->get_series($infos, 'Diegomez');
             $info['series'][] = $this->get_series($infos, 'Buena Nelson');
         }
-        if($tipo == 2){
+        if($tipo == 1){
             $info['series'][] = $this->get_series($infos, 'Buena Enestor');
             $info['series'][] = $this->get_series($infos, 'Buena Diego');
         }
