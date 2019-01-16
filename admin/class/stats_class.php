@@ -112,7 +112,7 @@ class Stats extends Core{
         
         for($i=0; $i<count($pedidos); $i++){
             
-            $info['pedido_fecha'][] = strtotime($pedidos[$i]['fecha']);
+            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             
         }
         
@@ -130,10 +130,13 @@ class Stats extends Core{
     public function pedidos_total_fecha($pedidos, $fecha_ini, $fecha_fin){
         
         $total = 0;
-        for($i=0; $i<$pedidos['count']; $i++){
-            if(strtotime($pedidos[$i]['fecha']) >= strtotime($fecha_ini) && strtotime($pedidos[$i]['fecha']) < strtotime($fecha_fin)){
+        for($i=0; $i<count($pedidos); $i++){
+            
+            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
+            if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
                 $total = $total + $pedidos[$i]['total'];
             }
+            
         }
         return $total;
         
