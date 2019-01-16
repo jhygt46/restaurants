@@ -22,8 +22,13 @@ class Stats extends Core{
         }
         
     }
-    
-    
+    public function get_series($infos, $name){
+        $aux['name'] = $name;
+        foreach($infos['fecha'] as $fecha){
+                $aux['data'][] = rand(10, 20);
+        }
+        return $aux;
+    }
     public function get_stats(){
         
         $tipo = $_POST['tipo'];
@@ -63,6 +68,7 @@ class Stats extends Core{
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("d", $aux_from);
+                $infos['fecha'][] = date("Y-m-d", $aux_from);
                 $aux_from = $aux_from + 86400;
             }
             
@@ -76,6 +82,7 @@ class Stats extends Core{
             while($to > $aux_from){
                 $aux_mes = intval(date("m", $aux_from)) - 1;
                 $info['xAxis']['categories'][] = $mes[$aux_mes];
+                $infos['fecha'][] = date("Y-m", $aux_from);
                 $aux_from = strtotime('+1 month', $aux_from);
             }
             
@@ -88,11 +95,25 @@ class Stats extends Core{
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("Y", $aux_from);
+                $infos['fecha'][] = date("Y", $aux_from);
                 $aux_from = strtotime('+1 Year', $aux_from);
             }
+            
         }
         
-        
+        if($infos['t'] == 1){
+            
+        }
+        if($infos['t'] == 2){
+            
+        }
+        if($infos['t'] == 3){
+            
+        }
+
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
         $info['chart']['type'] = 'line';
         $info['subtitle']['text'] = 'Graficos en tiempo real';
@@ -100,38 +121,6 @@ class Stats extends Core{
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
-
-        forEach($info['xAxis']['categories'] as $cat){
-            $info['a'][] = $cat;
-        }
-        
-        $info['series'][0]['name'] = 'Tokyo';
-        $info['series'][0]['data'][0] = 7.0;
-        $info['series'][0]['data'][1] = 7.2;
-        $info['series'][0]['data'][2] = 7.3;
-        $info['series'][0]['data'][3] = 7.8;
-        $info['series'][0]['data'][4] = 7.2;
-        $info['series'][0]['data'][5] = 7.1;
-        $info['series'][0]['data'][6] = 7.9;
-        $info['series'][0]['data'][7] = 7.5;
-        $info['series'][0]['data'][8] = 7.7;
-        $info['series'][0]['data'][9] = 7.9;
-        $info['series'][0]['data'][10] = 7.3;
-        $info['series'][0]['data'][11] = 7.1;
-        
-        $info['series'][1]['name'] = 'London';
-        $info['series'][1]['data'][0] = 8.0;
-        $info['series'][1]['data'][1] = 8.2;
-        $info['series'][1]['data'][2] = 8.3;
-        $info['series'][1]['data'][3] = 8.8;
-        $info['series'][1]['data'][4] = 8.2;
-        $info['series'][1]['data'][5] = 8.1;
-        $info['series'][1]['data'][6] = 8.9;
-        $info['series'][1]['data'][7] = 8.5;
-        $info['series'][1]['data'][8] = 8.7;
-        $info['series'][1]['data'][9] = 8.9;
-        $info['series'][1]['data'][10] = 8.3;
-        $info['series'][1]['data'][11] = 8.1;
         
         return $info;
         
