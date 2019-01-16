@@ -46,6 +46,36 @@ $locales = $fireapp->get_locales();
 
     }
 
+    $(document).ready(function(){
+         
+        var dateFormat = "mm/dd/yy";
+        var from = $( "#fecha_from" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3
+        }).on( "change", function() {
+            to.datepicker( "option", "minDate", getDate( this ) );
+        })
+        var to = $( "#fecha_to" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3
+        }).on( "change", function() {
+            from.datepicker( "option", "maxDate", getDate( this ) );
+        });
+ 
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+            return date;
+        }
+        
+    });
+
 </script>
 <div class="pagina">
     <div class="title">
@@ -70,7 +100,15 @@ $locales = $fireapp->get_locales();
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
-                        <select id="tipo"><option value="0">Categoria</option><option value="1">Promocion</option></select>
+                        <select id="tipo"><option value="0">Ventas Totales</option><option value="1">Promocion</option></select>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Fecha Inicio:</p></span>
+                        <input id="fecha_from" class="inputs" type="text" value="" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Fecha Fin:</p></span>
+                        <input id="fecha_to" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
                     <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
