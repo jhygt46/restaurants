@@ -47,14 +47,29 @@ class Stats extends Core{
         }
         
         $sql = $sql." AND fecha > '".$from."' AND fecha < '".$to."'";
-        $res = $this->con->sql($sql);
+        $pedidos = $this->con->sql($sql);
         
         $from = strtotime($from);
-        $to = strtotime($to) + 86400;
+        $to = strtotime($to) + 86400;        
+        $dif_tiempo = ($to - $from)/86400;
         
-        $info['atime_01'] = date("Y-m-d H:i:s", $from);
-        $info['atime_02'] = date("Y-m-d H:i:s", $to);
+        if($dif_tiempo < 31){
+            // MOSTRAR DIAS
+            $info['chart']['type'] = 'line';
+            $info['title']['text'] = 'Ventas en dias';
+        }
+        if($dif_tiempo >= 31 && $dif_tiempo < 548){
+            // MOSTRAR MESES
+            $info['chart']['type'] = 'line';
+            $info['title']['text'] = 'Ventas en meses';
+        }
+        if($dif_tiempo >= 548){
+            // MOSTRAR AÑOS
+            $info['chart']['type'] = 'line';
+            $info['title']['text'] = 'Ventas en a&ntilde;s';
+        }
         
+        $info['subtitle']['text'] = 'Graficos en tiempo real';
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
