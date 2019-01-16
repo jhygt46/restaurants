@@ -44,7 +44,7 @@ class Stats extends Core{
             $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
         }
         
-        $info['sql'] = $sql;
+        $info['sql'] = $this->con->sql($sql);
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
