@@ -27,12 +27,8 @@ class Stats extends Core{
     public function get_stats(){
         
         $tipo = $_POST['tipo'];
-        $locales = $this->get_locales();
-        
-        for($i=0; $i<count($locales); $i++){
-            $info[$locales[$i]['id_loc']] = $_POST['local-'.$locales[$i]['id_loc']];
-        }
-        $info['POST'] = $_POST;
+        $locales = json_decode($_POST['locales']);
+        $info['locales'] = $locales;
         
         
         $info['chart']['type'] = 'line';
