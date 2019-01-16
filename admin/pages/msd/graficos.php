@@ -52,18 +52,20 @@ $locales = $fireapp->get_locales();
 
     $(document).ready(function(){
          
-        var dateFormat = "YY/mm/dd";
+        var dateFormat = "mm/dd/yy";
         var from = $( "#fecha_from" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
-            numberOfMonths: 1
+            numberOfMonths: 1,
+            dateFormat: 'yy-mm-dd'
         }).on( "change", function() {
             to.datepicker( "option", "minDate", getDate( this ) );
         })
         var to = $( "#fecha_to" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
-            numberOfMonths: 1
+            numberOfMonths: 1,
+            dateFormat: 'yy-mm-dd'
         }).on( "change", function() {
             from.datepicker( "option", "maxDate", getDate( this ) );
         });
@@ -79,7 +81,6 @@ $locales = $fireapp->get_locales();
         }
         
     });
-
 
 </script>
 <div class="pagina">
