@@ -24,10 +24,7 @@ $locales = $fireapp->get_locales();
 <script>
 
     function stats(that){
-        
-        var data = new FormData();
-        data.append('accion', 'get_stats');
-        
+                
         $(that).parents('form').find('input').each(function(){
             if($(this).attr('type') == "checkbox" && $(this).is(':checked')){
                 data.append($(this).attr('id'), "1");
@@ -37,17 +34,17 @@ $locales = $fireapp->get_locales();
             }
         });
         
+        var send = { accion: 'get_stats' };
         $.ajax({
             url: "ajax/stats.php",
             type: "POST",
-            data: data,
+            data: send,
             success: function(data){
                 console.log(data);
                 Highcharts.chart('container', data);
             },
             error: function(e){}
         });
-        
     }
 
 </script>
