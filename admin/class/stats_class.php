@@ -55,14 +55,18 @@ class Stats extends Core{
         
         $infos['a'] = $dif_tiempo;
         
-        if($dif_tiempo <= 31){
+        if($dif_tiempo <= 50){
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en dias';
             $infos['t'] = 1;
+            while($to > $aux_from){
+                $infos['aux'][] = $aux_from;
+                $aux_from = $aux_from + 86400;
+            }
             
         }
-        if($dif_tiempo > 31 && $dif_tiempo < 548){
+        if($dif_tiempo > 50 && $dif_tiempo < 548){
             // MOSTRAR MESES
             $info['chart']['type'] = 'line';
             $info['title']['text'] = 'Ventas en meses';
