@@ -20,10 +20,6 @@ $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $locales = $fireapp->get_locales();
 
-echo "<pre>";
-print_r($locales);
-echo "</pre>";
-
 ?>
 <script>
 
@@ -67,7 +63,7 @@ echo "</pre>";
                         <span><p>Tipo de Grafico:</p></span>
                         <select id="tipo"><option value="0">Categoria</option><option value="1">Promocion</option></select>
                     </label>
-                    <?php for($i=0; $i<$locales['count']; $i++){ ?>
+                    <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
                         <span><p><?php echo $locales['resultado'][$i]['nombre']; ?>:</p></span>
                         <input id="local-<?php echo $locales['resultado'][$i]['id_loc']; ?>" type="checkbox" class="checkbox" value="1">
