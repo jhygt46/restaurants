@@ -104,7 +104,7 @@ class Stats extends Core{
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
         
-        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1', $pedidos);
+        $info['series'][] = $this->get_series($infos, 'Buena Nelson 1');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
