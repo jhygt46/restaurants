@@ -1,9 +1,5 @@
 <?php
 session_start();
-unset($_SESSION['user']['id_gir']);
-unset($_SESSION['user']['id_cat']);
-
-
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
