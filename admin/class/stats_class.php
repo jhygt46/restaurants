@@ -46,7 +46,8 @@ class Stats extends Core{
         }
         
         $sql = $sql." AND fecha > '".$from."' AND fecha < '".$to."'";
-        $pedidos = $this->con->sql($sql);
+        $aux_pedidos = $this->con->sql($sql);
+        $pedidos = $aux_pedidos['resultado'];
         
         $from = strtotime($from);
         $to = strtotime($to) + 86400;        
@@ -95,16 +96,6 @@ class Stats extends Core{
             
         }
         
-        if($infos['t'] == 1){
-            
-        }
-        if($infos['t'] == 2){
-            
-        }
-        if($infos['t'] == 3){
-            
-        }
-
         $info['chart']['type'] = 'line';
         $info['subtitle']['text'] = 'Graficos en tiempo real';
         $info['yAxis']['title']['text'] = null;
@@ -112,27 +103,33 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
+        
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 1', $pedidos);
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 2');
         $info['series'][] = $this->get_series($infos, 'Buena Nelson 3');
         
-
+        $info['total'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '2019-02-01 00:00:00');
         
+        /*
         for($i=0; $i<$pedidos['count']; $i++){
             for($j=0; $j<count($infos['fecha']); $j++){
-                
-                
-                
+
             }
         }
+        */
+        
         return $info;
         
     }
-    public function get_data_pedidos($pedidos){
+    public function pedidos_total_fecha($pedidos, $fecha_ini, $fecha_fin){
         
+        $total = 0;
         for($i=0; $i<$pedidos['count']; $i++){
-            
+            if(strtotime($pedidos[$i]['fecha']) >= strtotime($fecha_ini) && strtotime($pedidos[$i]['fecha']) < strtotime($fecha_fin)){
+                $total = $total + $pedidos[$i]['total'];
+            }
         }
+        return $total;
         
     }
     public function get_series($infos, $name){
