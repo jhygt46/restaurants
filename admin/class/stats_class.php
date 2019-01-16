@@ -51,9 +51,12 @@ class Stats extends Core{
         
         $from = strtotime($from);
         $to = strtotime($to);
+        $to2 = $to + 86400;
         
         $info['atime_01'] = date("Y-m-d", $from);
         $info['atime_02'] = date("Y-m-d", $to);
+        $info['atime_03'] = date("Y-m-d", $to2);
+        
         
         $info['chart']['type'] = 'line';
         $info['title']['text'] = 'Monthly Average Temperature';
