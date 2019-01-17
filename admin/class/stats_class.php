@@ -135,14 +135,14 @@ class Stats extends Core{
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
+            $auxs['fecha_pedido'] = date("Y-m-d", $fecha_pedido);
+            $auxs['fecha_ini'] = date("Y-m-d", strtotime($fecha_ini));
+            $auxs['fecha_fin'] = date("Y-m-d", $fecha_fin);
+            $aux[] = $auxs;
+            unset($auxs);
+            
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < $fecha_fin){
-                //$total = $total + $pedidos[$i]['total'];
-                $auxs['id'] = $pedidos[$i]['id_ped'];
-                $auxs['fecha'] = $fecha_pedido;
-                $auxs['f_ini'] = strtotime($fecha_ini);
-                $auxs['dif'] = strtotime($fecha_fin) - strtotime($fecha_ini);
-                $aux[] = $auxs;
-                unset($auxs);
+                $total = $total + $pedidos[$i]['total'];
             }
             
         }
