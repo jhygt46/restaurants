@@ -121,8 +121,6 @@ class Stats extends Core{
             $info['series'][] = $this->get_series($infos, 'Buena Enestor');
             $info['series'][] = $this->get_series($infos, 'Buena Diego');
         }
-
-        $info['locales'][] = 
         
         /*
         $info['total_dia'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 day');
