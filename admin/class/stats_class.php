@@ -32,14 +32,12 @@ class Stats extends Core{
         
         if(count($locales) > 1){
             for($i=0; $i<count($locales); $i++){
-                $aux = explode("-", $locales[$i]);
-                $aux2[] = "id_loc='".$aux[1]."'";
+                $aux2[] = "id_loc='".$locales[$i]->{'id_loc'}."'";
             }
             $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2).")";
         }
         if(count($locales) == 1){
-            $aux = explode("-", $locales[0]);
-            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$aux[1]."'";
+            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$locales[0]->{'id_loc'}."'";
         }
         if(count($locales) == 0){
             $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
