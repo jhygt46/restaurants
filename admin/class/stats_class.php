@@ -105,27 +105,26 @@ class Stats extends Core{
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
-            
-            $aux['name'] = $name;
-            foreach($infos['fecha'] as $fecha){
-                $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day');
+            for($j=0; $j<2; $j++){
+                $aux['name'] = $name;
+                foreach($infos['fecha'] as $fecha){
+                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day');
+                }
+                $info['series'][] = $aux;
+                unset($aux);
             }
-            $info['series'][] = $aux;
-            unset($aux);
-            
         }
         if($tipo == 1){
             $info['title']['text'] = 'Total Buena Nelson';
             $info['series'][] = $this->get_series($infos, 'Buena Enestor');
             $info['series'][] = $this->get_series($infos, 'Buena Diego');
         }
-        
+
+        /*
         $info['total_dia'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 day');
         $info['total_mes'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 month');
         $info['total_ano'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 year');
 
-        
-        /*
         for($i=0; $i<$pedidos['count']; $i++){
             for($j=0; $j<count($infos['fecha']); $j++){
 
