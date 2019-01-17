@@ -107,20 +107,8 @@ class Stats extends Core{
             $info['title']['text'] = 'Total Ventas';            
             for($j=0; $j<count($locales); $j++){
                 $aux['name'] = $locales[$j]->{'nombre'};
-                if($infos['tipo'] == 1){
-                    foreach($infos['fecha'] as $fecha){
-                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day', $locales[$j]->{'id_loc'});
-                    }
-                }
-                if($infos['tipo'] == 2){
-                    foreach($infos['fecha'] as $fecha){
-                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 month', $locales[$j]->{'id_loc'});
-                    }
-                }
-                if($infos['tipo'] == 3){
-                    foreach($infos['fecha'] as $fecha){
-                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 year', $locales[$j]->{'id_loc'});
-                    }
+                foreach($infos['fecha'] as $fecha){
+                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
                 }
                 $info['series'][] = $aux;
                 unset($aux);
