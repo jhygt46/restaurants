@@ -146,7 +146,7 @@ class Stats extends Core{
             }
             
         }
-        return $total;
+        return $aux;
         
     }
     public function get_series($infos, $name){
