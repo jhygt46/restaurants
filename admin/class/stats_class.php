@@ -62,7 +62,7 @@ class Stats extends Core{
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("d", $aux_from);
-                $infos['fecha'][] = date("Y-m-d", $aux_from);
+                $infos['fecha'][] = $aux_from;
                 $aux_from = $aux_from + 86400;
             }
             
@@ -77,7 +77,7 @@ class Stats extends Core{
             while($to > $aux_from){
                 $aux_mes = intval(date("m", $aux_from)) - 1;
                 $info['xAxis']['categories'][] = $mes[$aux_mes];
-                $infos['fecha'][] = date("Y-m", $aux_from);
+                $infos['fecha'][] = $aux_from;
                 $aux_from = strtotime('+1 month', $aux_from);
             }
             
@@ -91,7 +91,7 @@ class Stats extends Core{
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("Y", $aux_from);
-                $infos['fecha'][] = date("Y", $aux_from);
+                $infos['fecha'][] = $aux_from;
                 $aux_from = strtotime('+1 Year', $aux_from);
             }
             
@@ -108,9 +108,22 @@ class Stats extends Core{
             $info['title']['text'] = 'Total Ventas';            
             for($j=0; $j<count($locales); $j++){
                 $aux['name'] = $locales[$j]->{'nombre'};
-                foreach($infos['fecha'] as $fecha){
-                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
+                if($infos['tipo'] == 1){
+                    foreach($infos['fecha'] as $fecha){
+                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day', $locales[$j]->{'id_loc'});
+                    }
                 }
+                if($infos['tipo'] == 2){
+                    foreach($infos['fecha'] as $fecha){
+                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 month', $locales[$j]->{'id_loc'});
+                    }
+                }
+                if($infos['tipo'] == 3){
+                    foreach($infos['fecha'] as $fecha){
+                        $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 year', $locales[$j]->{'id_loc'});
+                    }
+                }
+                
                 $info['series'][] = $aux;
                 unset($aux);
             }
@@ -134,8 +147,8 @@ class Stats extends Core{
         for($i=0; $i<count($pedidos); $i++){
             
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
-            $fecha_fin = strtotime($intervalo, strtotime($fecha_ini));            
-            if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < $fecha_fin){
+            $fecha_fin = strtotime($intervalo, $fecha_ini);            
+            if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
                 if($id_loc == $pedidos[$i]['id_loc']){
                     $total = $total + $pedidos[$i]['total'];
                 }
