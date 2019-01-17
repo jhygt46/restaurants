@@ -123,17 +123,7 @@ class Stats extends Core{
             $info['series'][] = $this->get_series($infos, 'Buena Diego');
         }
         
-        /*
-        $info['total_dia'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 day');
-        $info['total_mes'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 month');
-        $info['total_ano'] = $this->pedidos_total_fecha($pedidos, '2019-01-01 00:00:00', '1 year');
 
-        for($i=0; $i<$pedidos['count']; $i++){
-            for($j=0; $j<count($infos['fecha']); $j++){
-
-            }
-        }
-        */
         
         return $info;
         
@@ -147,9 +137,9 @@ class Stats extends Core{
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
-                
-                $total = $total + $pedidos[$i]['total'];
-                
+                if($id_loc == $pedidos[$i]['id_loc']){
+                    $total = $total + $pedidos[$i]['total'];
+                }
             }
             
         }
