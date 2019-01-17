@@ -128,18 +128,20 @@ class Stats extends Core{
     }
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
         
-        $total = [];
+        $total = 0;
+        $aux = [];
         for($i=0; $i<count($pedidos); $i++){
             
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
-                $total[] = $pedidos[$i]['total'];
+                //$total = $total + $pedidos[$i]['total'];
+                $aux[] = $pedidos[$i]['id_ped'];
             }
             
         }
-        return $total;
+        return $aux;
         
     }
     public function get_series($infos, $name){
