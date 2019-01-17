@@ -104,7 +104,6 @@ class Stats extends Core{
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
         if($tipo == 0){
-            
             $info['title']['text'] = 'Total Ventas';            
             for($j=0; $j<count($locales); $j++){
                 $aux['name'] = $locales[$j]->{'nombre'};
@@ -123,12 +122,11 @@ class Stats extends Core{
                         $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 year', $locales[$j]->{'id_loc'});
                     }
                 }
-                
                 $info['series'][] = $aux;
                 unset($aux);
             }
-            
         }
+        
         if($tipo == 1){
             $info['title']['text'] = 'Total Buena Nelson';
             $info['series'][] = $this->get_series($infos, 'Buena Enestor');
