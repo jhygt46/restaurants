@@ -105,10 +105,10 @@ class Stats extends Core{
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
-            for($j=0; $j<count($locales); $j++){
+            for($i=0; $i<count($locales); $i++){
                 $aux['name'] = $locales[$i]['nombre'];
                 foreach($infos['fecha'] as $fecha){
-                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day') + $j*1500*rand(10, 1000);
+                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day') + ($i+1)*1500*rand(10, 1000);
                 }
                 $info['series'][] = $aux;
                 unset($aux);
