@@ -105,8 +105,10 @@ class Stats extends Core{
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
-            $info['series'][] = $this->get_series($infos, 'Diegomez');
-            $info['series'][] = $this->get_series($infos, 'Buena Nelson');
+            for($i=0; $i<count($infos['fecha']); $i++){
+                $info['series'][$i] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day');
+            }
+            
         }
         if($tipo == 1){
             $info['title']['text'] = 'Total Buena Nelson';
