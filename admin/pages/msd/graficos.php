@@ -107,6 +107,7 @@ $locales = $fireapp->get_locales();
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
                         <select id="tipo">
+                            <option label="Select your city">Select your city</option>
                             <option value="0">Ventas Totales</option>
                             <option value="1">Cantidad de Despachos Domicilio</option>
                             <option value="2">Cantidad Retiro Local</option>
