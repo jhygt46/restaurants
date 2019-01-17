@@ -135,7 +135,7 @@ class Stats extends Core{
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
-            if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
+            if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < $fecha_fin){
                 //$total = $total + $pedidos[$i]['total'];
                 $auxs['id'] = $pedidos[$i]['id_ped'];
                 $auxs['fecha'] = $fecha_pedido;
