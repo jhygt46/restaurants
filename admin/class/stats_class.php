@@ -105,8 +105,8 @@ class Stats extends Core{
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
-            for($j=0; $j<4; $j++){
-                $aux['name'] = $name;
+            for($j=0; $j<count($locales); $j++){
+                $aux['name'] = $locales[$i]['nombre'];
                 foreach($infos['fecha'] as $fecha){
                     $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day') + $j*1500*rand(10, 1000);
                 }
