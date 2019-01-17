@@ -142,9 +142,7 @@ class Stats extends Core{
     public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc, $tipo){
         
         $total = 0;
-        $aux = [];
         for($i=0; $i<count($pedidos); $i++){
-            
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_ini);            
             if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
@@ -152,7 +150,6 @@ class Stats extends Core{
                     $total = $total + 1;
                 }
             }
-            
         }
         return $total;
         
@@ -160,9 +157,7 @@ class Stats extends Core{
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
         
         $total = 0;
-        $aux = [];
         for($i=0; $i<count($pedidos); $i++){
-            
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_ini);            
             if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
@@ -170,17 +165,9 @@ class Stats extends Core{
                     $total = $total + $pedidos[$i]['total'];
                 }
             }
-            
         }
         return $total;
         
-    }
-    public function get_series($infos, $name){
-        $aux['name'] = $name;
-        foreach($infos['fecha'] as $fecha){
-            $aux['data'][] = rand(10, 2000);
-        }
-        return $aux;
     }
     
 }
