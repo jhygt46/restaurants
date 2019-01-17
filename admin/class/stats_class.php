@@ -108,7 +108,7 @@ class Stats extends Core{
             for($j=0; $j<count($locales); $j++){
                 $info['locales'][] = $locales[$j];
                 //$aux['name'] = $locales[$j]['nombre'];
-                $aux['name'] = $locales[$j]['nombre'];
+                $aux['name'] = $locales[$j]->{'nombre'};
                 foreach($infos['fecha'] as $fecha){
                     $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day') + $j*1500*rand(10, 1000);
                 }
