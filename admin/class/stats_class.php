@@ -107,8 +107,6 @@ class Stats extends Core{
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
             for($j=0; $j<count($locales); $j++){
-                //$info['locales'][] = $locales[$j];
-                //$aux['name'] = $locales[$j]['nombre'];
                 $aux['name'] = $locales[$j]->{'nombre'};
                 foreach($infos['fecha'] as $fecha){
                     $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day', $locales[$j]->{'id_loc'});
@@ -130,14 +128,14 @@ class Stats extends Core{
     }
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
         
-        $total = 0;
+        $total = [];
         for($i=0; $i<count($pedidos); $i++){
             
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
-                $total = $total + $pedidos[$i]['total'];
+                $total[] = $pedidos[$i]['total'];
             }
             
         }
