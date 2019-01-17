@@ -140,7 +140,7 @@ class Stats extends Core{
                 $auxs['id'] = $pedidos[$i]['id_ped'];
                 $auxs['fecha'] = $fecha_pedido;
                 $auxs['f_ini'] = strtotime($fecha_ini);
-                $auxs['f_fin'] = strtotime($fecha_fin);
+                $auxs['dif'] = strtotime($fecha_fin) - strtotime($fecha_ini);
                 $aux[] = $auxs;
                 unset($auxs);
             }
