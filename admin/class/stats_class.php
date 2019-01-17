@@ -57,7 +57,8 @@ class Stats extends Core{
             // MOSTRAR DIAS
             $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en dias';
-            $infos['t'] = 1;
+            $infos['tipo'] = 1;
+            $lapse = "1 day";
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("d", $aux_from);
@@ -70,7 +71,8 @@ class Stats extends Core{
             // MOSTRAR MESES
             $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en meses';
-            $infos['t'] = 2;
+            $infos['tipo'] = 2;
+            $lapse = "1 month";
             
             while($to > $aux_from){
                 $aux_mes = intval(date("m", $aux_from)) - 1;
@@ -84,7 +86,8 @@ class Stats extends Core{
             // MOSTRAR AÑOS
             $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
-            $infos['t'] = 3;
+            $infos['tipo'] = 3;
+            $lapse = "1 year";
             
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("Y", $aux_from);
@@ -94,26 +97,24 @@ class Stats extends Core{
             
         }
         
-        
         $info['chart']['type'] = 'line';
         $info['yAxis']['title']['text'] = null;
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        $info['pedido'] = $pedidos;
-        $info['sql'] = $sql;
-        
         if($tipo == 0){
-            $info['title']['text'] = 'Total Ventas';
+            
+            $info['title']['text'] = 'Total Ventas';            
             for($j=0; $j<count($locales); $j++){
                 $aux['name'] = $locales[$j]->{'nombre'};
                 foreach($infos['fecha'] as $fecha){
-                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day', $locales[$j]->{'id_loc'});
+                    $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
                 }
                 $info['series'][] = $aux;
                 unset($aux);
             }
+            
         }
         if($tipo == 1){
             $info['title']['text'] = 'Total Buena Nelson';
