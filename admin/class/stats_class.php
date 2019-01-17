@@ -101,13 +101,13 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
-        $info['pedido'] = $pedidos;
-        $info['sql'] = $sql;
+        //$info['pedido'] = $pedidos;
+        //$info['sql'] = $sql;
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
             for($j=0; $j<count($locales); $j++){
-                $info['locales'][] = $locales[$j];
+                //$info['locales'][] = $locales[$j];
                 //$aux['name'] = $locales[$j]['nombre'];
                 $aux['name'] = $locales[$j]->{'nombre'};
                 foreach($infos['fecha'] as $fecha){
