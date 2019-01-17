@@ -104,6 +104,7 @@ class Stats extends Core{
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
         $info['pedido'] = $pedidos;
+        $info['sql'] = $sql;
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
