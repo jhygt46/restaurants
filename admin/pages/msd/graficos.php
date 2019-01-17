@@ -28,7 +28,7 @@ $locales = $fireapp->get_locales();
         var locales = new Array();  
         $(that).parents('form').find('input').each(function(){
             if($(this).attr('type') == "checkbox" && $(this).is(':checked')){
-                locales.push($(this).attr('id'));
+                locales.push({id_loc: $(this).attr('id'), nombre: $(this).attr('nombre')});
             }
         });
         
@@ -119,7 +119,7 @@ $locales = $fireapp->get_locales();
                     <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
                         <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
-                        <input id="local-<?php echo $locales[$i]['id_loc']; ?>" type="checkbox" class="checkbox" value="1">
+                        <input id="local-<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox" value="1">
                     </label>
                     <?php } ?>
                     <label>
