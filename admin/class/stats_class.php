@@ -133,7 +133,7 @@ class Stats extends Core{
         for($i=0; $i<count($pedidos); $i++){
             
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
-            $fecha_fin = strtotime($intervalo, $fecha_ini);
+            $fecha_fin = strtotime($intervalo, strtotime($fecha_ini));
             
             $auxs['fecha_pedido'] = date("Y-m-d", $fecha_pedido);
             $auxs['fecha_ini'] = date("Y-m-d", strtotime($fecha_ini));
@@ -146,7 +146,7 @@ class Stats extends Core{
             }
             
         }
-        return $aux;
+        return $total;
         
     }
     public function get_series($infos, $name){
