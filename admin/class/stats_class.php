@@ -133,7 +133,7 @@ class Stats extends Core{
         $total = 0;
         for($i=0; $i<count($pedidos); $i++){
             
-            $fecha_pedido = strtotime($pedidos[$i]->{'fecha'});
+            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_pedido);
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
