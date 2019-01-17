@@ -103,6 +103,8 @@ class Stats extends Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
+        $info['pedido'] = $pedidos;
+        
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
             for($j=0; $j<count($locales); $j++){
@@ -147,7 +149,7 @@ class Stats extends Core{
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
                 
-                    $total = $total + $pedidos[$i]['total'];
+                $total = $total + $pedidos[$i]['total'];
                 
             }
             
