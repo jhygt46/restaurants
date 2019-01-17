@@ -111,13 +111,23 @@ class Stats extends Core{
                 unset($aux);
             }
         }
-        
         if($tipo == 1){
-            $info['title']['text'] = 'Total Pedidos On-line';          
+            $info['title']['text'] = 'Total Pedidos Despacho Domicilio';          
             for($j=0; $j<count($locales); $j++){
                 $aux['name'] = $locales[$j]->{'nombre'};
                 foreach($infos['fecha'] as $fecha){
-                    $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
+                    $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'}, 1);
+                }
+                $info['series'][] = $aux;
+                unset($aux);
+            }
+        }
+        if($tipo == 2){
+            $info['title']['text'] = 'Total Pedidos Retiro Local';          
+            for($j=0; $j<count($locales); $j++){
+                $aux['name'] = $locales[$j]->{'nombre'};
+                foreach($infos['fecha'] as $fecha){
+                    $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'}, 0);
                 }
                 $info['series'][] = $aux;
                 unset($aux);
@@ -129,7 +139,7 @@ class Stats extends Core{
         return $info;
         
     }
-    public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
+    public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc, $tipo){
         
         $total = 0;
         $aux = [];
@@ -138,7 +148,7 @@ class Stats extends Core{
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
             $fecha_fin = strtotime($intervalo, $fecha_ini);            
             if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
-                if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == 1){
+                if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == $tipo){
                     $total = $total + 1;
                 }
             }

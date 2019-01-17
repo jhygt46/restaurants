@@ -106,7 +106,11 @@ $locales = $fireapp->get_locales();
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
-                        <select id="tipo"><option value="0">Ventas Totales</option><option value="1">Promocion</option></select>
+                        <select id="tipo">
+                            <option value="0">Ventas Totales</option>
+                            <option value="1">Cantidad de Despachos Domicilio</option>
+                            <option value="2">Cantidad Retiro Local</option>
+                        </select>
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha Inicio:</p></span>
