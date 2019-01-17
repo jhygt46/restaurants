@@ -137,7 +137,12 @@ class Stats extends Core{
             
             if($fecha_pedido >= strtotime($fecha_ini) && $fecha_pedido < strtotime($fecha_fin)){
                 //$total = $total + $pedidos[$i]['total'];
-                $aux[] = $pedidos[$i]['id_ped'];
+                $auxs['id'] = $pedidos[$i]['id_ped'];
+                $auxs['fecha'] = $fecha_pedido;
+                $auxs['f_ini'] = strtotime($fecha_ini);
+                $auxs['f_fin'] = strtotime($fecha_fin);
+                $aux[] = $auxs;
+                unset($auxs);
             }
             
         }
