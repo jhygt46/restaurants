@@ -105,9 +105,13 @@ class Stats extends Core{
         
         if($tipo == 0){
             $info['title']['text'] = 'Total Ventas';
-            for($i=0; $i<count($infos['fecha']); $i++){
-                $info['series'][$i] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day');
+            
+            $aux['name'] = $name;
+            foreach($infos['fecha'] as $fecha){
+                $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, '1 day');
             }
+            $info['series'][] = $aux;
+            unset($aux);
             
         }
         if($tipo == 1){
@@ -152,7 +156,6 @@ class Stats extends Core{
         $aux['name'] = $name;
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = rand(10, 2000);
-            
         }
         return $aux;
     }
