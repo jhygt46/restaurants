@@ -55,7 +55,6 @@ class Stats extends Core{
         
         if($dif_tiempo <= 50){
             // MOSTRAR DIAS
-            $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en dias';
             $infos['tipo'] = 1;
             $lapse = "1 day";
@@ -69,7 +68,6 @@ class Stats extends Core{
         }
         if($dif_tiempo > 50 && $dif_tiempo < 548){
             // MOSTRAR MESES
-            $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en meses';
             $infos['tipo'] = 2;
             $lapse = "1 month";
@@ -84,7 +82,6 @@ class Stats extends Core{
         }
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
-            $info['chart']['type'] = 'line';
             $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
             $infos['tipo'] = 3;
             $lapse = "1 year";
@@ -116,14 +113,38 @@ class Stats extends Core{
         }
         
         if($tipo == 1){
-            $info['title']['text'] = 'Total Buena Nelson';
-            $info['series'][] = $this->get_series($infos, 'Buena Enestor');
-            $info['series'][] = $this->get_series($infos, 'Buena Diego');
+            $info['title']['text'] = 'Total Pedidos On-line';          
+            for($j=0; $j<count($locales); $j++){
+                $aux['name'] = $locales[$j]->{'nombre'};
+                foreach($infos['fecha'] as $fecha){
+                    $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
+                }
+                $info['series'][] = $aux;
+                unset($aux);
+            }
         }
         
 
         
         return $info;
+        
+    }
+    public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
+        
+        $total = 0;
+        $aux = [];
+        for($i=0; $i<count($pedidos); $i++){
+            
+            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
+            $fecha_fin = strtotime($intervalo, $fecha_ini);            
+            if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
+                if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == 1){
+                    $total = $total + 1;
+                }
+            }
+            
+        }
+        return $total;
         
     }
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
