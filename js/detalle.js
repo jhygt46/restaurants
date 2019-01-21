@@ -1,6 +1,7 @@
 $(document).ready(function(){
     
     render_items(carro);
+    console.log(carro);
     
     var total_process = 0;
     for(var i=0, ilen=carro.length; i<ilen; i++){
