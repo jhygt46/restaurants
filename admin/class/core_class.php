@@ -344,6 +344,7 @@ class Core{
     public function set_web_pedido(){
        
         $info['BUE'];
+        return $info;
         
         $pedido = json_decode($_POST['pedido']);
         $carro = $pedido->{'carro'};
