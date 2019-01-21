@@ -70,7 +70,7 @@ function render_items(carro, promos){
         }
     }
     for(var i=0, ilen=promos.length; i<ilen; i++){
-        console.log(promos[i]);
+        $('.lista_de_productos').append("<div>PROMOO</div>");
         for(var j=0, jlen=carro.length; j<jlen; j++){
             if(carro[j].hasOwnProperty('promo')){
                 if(carro[j].promo == i){
