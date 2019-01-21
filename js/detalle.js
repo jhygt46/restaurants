@@ -65,7 +65,9 @@ function create_item(item){
 
 function render_items(carro){
     for(var i=0, ilen=carro.length; i<ilen; i++){
-        $('.lista_de_productos').append(create_item(carro[i]));
+        if(!carro.hasOwnProperty('promo')){
+            $('.lista_de_productos').append(create_item(carro[i]));
+        }
     }
 }
 
