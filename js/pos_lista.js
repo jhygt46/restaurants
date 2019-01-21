@@ -983,9 +983,7 @@ function get_pedido_blank(){
     return [pedido_obj()];
 }
 function guardar_pedido(index){
-    
-    console.log("GUARDAR PEDIDO: "+index);
-    
+        
     var pedidos = get_pedidos();
     var send = { pedido: JSON.stringify(pedidos[index]) };
     
@@ -995,9 +993,9 @@ function guardar_pedido(index){
         data: send,
         success: function(data){
             
-            console.log(data);
+            var info = JSON.parse(data);
+            console.log(info);
             if(pedidos[index].id_ped == 0){
-                var info = JSON.parse(data);
                 pedidos[index].id_ped = info.id_ped;
             }
             set_pedidos(pedidos);

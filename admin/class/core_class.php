@@ -377,7 +377,6 @@ class Core{
             $info['db_update'] = $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
-        $info['sql'] = $aux_local;
         /*
         $id_mot = intval($pedido->{'id_mot'});
         if($id_mot == 0 && $id_mot_aux != 0){
