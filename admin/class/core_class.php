@@ -391,6 +391,7 @@ class Core{
         }
         */
         $info['id_ped'] = $id_ped;
+        $info['pedido_code'] = $code;
         return $info;
         
     }

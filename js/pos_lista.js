@@ -1001,6 +1001,7 @@ function guardar_pedido(index){
             //console.log(info);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
+                pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
             }
             listar_pedidos();
