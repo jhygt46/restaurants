@@ -64,19 +64,20 @@ function create_item(item){
 }
 
 function render_items(carro, promos){
-    for(var i=0, ilen=carro.length; i<ilen; i++){
-        if(!carro[i].hasOwnProperty('promo')){
-            $('.lista_de_productos').append(create_item(carro[i]));
-        }
-    }
+    
     for(var i=0, ilen=promos.length; i<ilen; i++){
-        $('.lista_de_productos').append("<div>PROMOO</div>");
+        $('.lista_de_productos').append("<div style='text-align: center; font-size: 26px; padding-top: 10px'>PROMOO</div>");
         for(var j=0, jlen=carro.length; j<jlen; j++){
             if(carro[j].hasOwnProperty('promo')){
                 if(carro[j].promo == i){
                     $('.lista_de_productos').append(create_item(carro[j]));
                 }
             }
+        }
+    }
+    for(var i=0, ilen=carro.length; i<ilen; i++){
+        if(!carro[i].hasOwnProperty('promo')){
+            $('.lista_de_productos').append(create_item(carro[i]));
         }
     }
 }
