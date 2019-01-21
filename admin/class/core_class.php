@@ -347,6 +347,8 @@ class Core{
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
         
+        $id_ped = intval($pedido->{'id_pep'});
+        
         $id_ped = intval($pedido->{'id_ped'});
         $despacho = intval($pedido->{'despacho'});
         $estado = intval($pedido->{'estado'});

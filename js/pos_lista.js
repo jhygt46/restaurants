@@ -1013,10 +1013,8 @@ function guardar_pedido(index){
     
 }
 function pedido_obj(){
-    return { 
+    return {
         id_ped: 0,
-        nombre: '',
-        telefono: '',
         pedido_code: '', 
         tipo: 0,
         estado: 0,
@@ -1030,15 +1028,8 @@ function pedido_obj(){
         pre_palitos: 0,
         pre_soya: 0,
         pre_teriyaki: 0,
-        verify_despacho: 0,
-        direccion: '',
-        lat: '',
-        lng: '',
-        calle: '',
-        num: '',
-        depto: '',
-        comuna: '',
         id_mot: 0,
+        pep: { id_pep: 0, code: '', nombre: '', telefono: '', direccion: '', lat: 0, lng: 0, calle: '', num: '', depto: '', comuna: '', verificado: 0 }
     };
 }
 function change_despacho(that){
