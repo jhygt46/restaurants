@@ -908,9 +908,9 @@ function done_pedido(){
         console.log("CREAR NUEVO");
         var obj = pedido_obj();
         obj.id_ped = 0;
-        
-        obj.nombre = $('#nombre').val();
-        obj.telefono = $('#telefono').val();
+                
+        obj.pep.nombre = $('#nombre').val();
+        obj.pep.telefono = $('#telefono').val();
         obj.despacho = $('#despacho').val();
         
         obj.direccion = $('#direccion').val();
@@ -958,10 +958,7 @@ function nuevo(data){
     
 }
 function add_pedido(obj){
-    
-    console.log("ADD PEDIDO");
-    console.log(obj);
-    
+        
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
