@@ -284,7 +284,7 @@ function html_home_pedidos(obj, index){
     btn_open.onclick = function(){ ver_comanda(index) };
     
     var btn_carro = create_element_class('btn_carro');
-    btn_carro.onclick = function(){ ver_detalle_carro(index) };
+    btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
     
     Div.appendChild(p_cont);
     Div.appendChild(p_num);
@@ -611,7 +611,9 @@ function proceso(pedido){
     return true;
     
 }
-function ver_detalle_carro(index){
+function ver_detalle_carro(index, that){
+    
+    set_pedido(index, that);
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
