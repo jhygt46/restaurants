@@ -995,7 +995,7 @@ function guardar_pedido(index){
         data: send,
         success: function(data){
             
-            console.log(JSON.parse(data));
+            console.log(data);
             if(pedidos[index].id_ped == 0){
                 var info = JSON.parse(data);
                 pedidos[index].id_ped = info.id_ped;
