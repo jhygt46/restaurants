@@ -12,6 +12,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
-echo json_encode($core->set_web_pedido());
+echo $core->set_web_pedido();
 
 ?>
