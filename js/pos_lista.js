@@ -983,7 +983,9 @@ function get_pedido_blank(){
     return [pedido_obj()];
 }
 function guardar_pedido(index){
-        
+    
+    console.log("GUARDAR PEDIDO: "+index);
+    
     var pedidos = get_pedidos();
     var send = { pedido: JSON.stringify(pedidos[index]) };
     
