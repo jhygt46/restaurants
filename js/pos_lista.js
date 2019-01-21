@@ -905,7 +905,6 @@ function done_pedido(){
     }
     if(crear_nuevo == 1){
         
-        console.log("CREAR NUEVO");
         var obj = pedido_obj();
         obj.id_ped = 0;
                 
@@ -925,7 +924,7 @@ function done_pedido(){
         
         obj.id_mot = $('#id_mot').val();
         
-        add_pedido(obj);
+        //add_pedido(obj);
         guardar_pedido(0);
         
     }
