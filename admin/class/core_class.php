@@ -343,7 +343,8 @@ class Core{
     }
     public function set_web_pedido(){
         
-        return "BUENA NELSON";
+        $info['BUENA'] = "NELSON";
+        return $info;
         
         $pedido = json_decode($_POST['pedido']);
         $carro = $pedido->{'carro'};
