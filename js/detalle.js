@@ -14,14 +14,14 @@ $(document).ready(function(){
         //console.log("cate: "+get_categoria(promos[i].id_cae).precio);
     }
     
-    /*
+    
     console.log(carro);
     console.log(promos);
     
     console.log(costo);
     console.log(total_process);
     console.log(total);
-    */
+    
    
     var diff = costo + total_process - total; 
     if(diff > 0){
