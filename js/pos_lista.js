@@ -31,8 +31,8 @@ function add_carro_producto(id_pro){
     
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
-    categorias_base(0);
     listar_pedidos();
+    categorias_base(0);
 
 }
 function add_carro_promocion(id_cae){
@@ -66,8 +66,8 @@ function add_carro_promocion(id_cae){
     }
 
     set_pedidos(pedidos);
-    categorias_base(0);
     listar_pedidos();
+    categorias_base(0);
     
 }
 function get_preguntas(id_pre){
