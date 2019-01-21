@@ -1,6 +1,6 @@
 $(document).ready(function(){
     
-    render_items(carro);
+    render_items(carro, promos);
     
     var total_process = 0;
     for(var i=0, ilen=carro.length; i<ilen; i++){
@@ -63,10 +63,20 @@ function create_item(item){
     
 }
 
-function render_items(carro){
+function render_items(carro, promos){
     for(var i=0, ilen=carro.length; i<ilen; i++){
         if(!carro[i].hasOwnProperty('promo')){
             $('.lista_de_productos').append(create_item(carro[i]));
+        }
+    }
+    for(var i=0, ilen=promos.length; i<ilen; i++){
+        console.log(promos[i]);
+        for(var j=0, jlen=carro.length; j<jlen; j++){
+            if(carro[j].hasOwnProperty('promo')){
+                if(carro[j].promo == i){
+                    console.log(carro[j]);
+                }
+            }
         }
     }
 }
