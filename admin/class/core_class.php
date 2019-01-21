@@ -372,9 +372,8 @@ class Core{
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
                 $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
-                $info['db_pedidos'] = $insert;
             }
-            $info['db_update'] = $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
         /*
@@ -391,7 +390,7 @@ class Core{
             }
         }
         */
-        
+        $info['id_ped'] = $id_ped;
         return $info;
         
     }
