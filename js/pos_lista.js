@@ -31,6 +31,7 @@ function add_carro_producto(id_pro){
     
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
+    guardar_pedido(seleccionado);
     listar_pedidos();
     categorias_base(0);
 
@@ -66,6 +67,7 @@ function add_carro_promocion(id_cae){
     }
 
     set_pedidos(pedidos);
+    guardar_pedido(seleccionado);
     listar_pedidos();
     categorias_base(0);
     
