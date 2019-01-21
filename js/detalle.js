@@ -74,7 +74,7 @@ function render_items(carro, promos){
         for(var j=0, jlen=carro.length; j<jlen; j++){
             if(carro[j].hasOwnProperty('promo')){
                 if(carro[j].promo == i){
-                    console.log(carro[j]);
+                    $('.lista_de_productos').append(create_item(carro[j]));
                 }
             }
         }
