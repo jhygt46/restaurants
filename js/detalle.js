@@ -65,7 +65,7 @@ function create_item(item){
 
 function render_items(carro){
     for(var i=0, ilen=carro.length; i<ilen; i++){
-        if(!carro.hasOwnProperty('promo')){
+        if(!carro[i].hasOwnProperty('promo')){
             $('.lista_de_productos').append(create_item(carro[i]));
         }
     }
