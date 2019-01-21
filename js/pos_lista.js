@@ -999,6 +999,7 @@ function guardar_pedido(index){
                 pedidos[index].id_ped = info.id_ped;
             }
             set_pedidos(pedidos);
+            listar_pedidos();
             
         }, error: function(e){
             console.log(e);
