@@ -702,7 +702,7 @@ function promo_restantes(producto, j, tiene_pregunta){
     var pedidos = get_pedidos();
     var carro = pedidos[seleccionado].carro[j];
     
-    if(carro.preguntas){
+    if(carro.preguntas !== undefined){
     
         var Pregunta = document.createElement('div');
         Pregunta.className = 'pregunta material-icons';
