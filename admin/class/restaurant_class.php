@@ -126,7 +126,7 @@ class Rest{
 
             $puser = json_decode($_POST['puser']);
             $info['aux_puser'] = $puser;
-            
+            return $info;
             $puser_id = $puser['id_puser'];
             $puser_code = $puser['code'];
             $puser_tel = $puser['telefono'];
