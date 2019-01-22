@@ -79,12 +79,12 @@ if(isset($_GET['code'])){
             </div>
             <?php } ?>            
             <div class="contacto padding_01 borbottom">
-                <div class="txtcen font_02"><?php echo $pep['nombre']; ?></div>
-                <div class="txtcen font_03"><?php echo $pep['telefono']; ?></div>
+                <div class="txtcen font_02"><?php echo $info['puser']['nombre']; ?></div>
+                <div class="txtcen font_03"><?php echo $info['puser']['telefono']; ?></div>
                 <?php 
                     if($despacho == 0){
                 ?>
-                    <div class="txtcen font_03 strong pddtop_01">Retiro Local Providencia</div>
+                    <div class="txtcen font_03 strong pddtop_01">Retiro Local</div>
                 <?php } ?>
                     
                 <?php 

@@ -291,7 +291,7 @@ class Core{
             $aux_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
             $info['pep'] = $aux_pep['resultado'][0];
             
-            $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][0]['id_puser']."'");
+            $sql_puser = $this->con->sql("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][0]['id_puser']."'");
             $info['puser'] = $sql_puser['resultado'][0];
             
             if($sql['resultado'][0]['despacho'] == 1 && $sql['resultado'][0]['id_pdir'] != 0){
