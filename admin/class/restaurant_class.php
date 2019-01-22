@@ -226,8 +226,8 @@ class Rest{
             curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            $mail_nodejs = json_encode(curl_exec($ch));
-            $info['mail'] = $mail_nodejs;
+            $mail_nodejs = json_decode(curl_exec($ch));
+            $info['mail'] = ($mail_nodejs->{'op'} == 1) ? true : false ;
             curl_close($ch);
             
         }else{
