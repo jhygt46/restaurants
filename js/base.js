@@ -9,7 +9,9 @@ $(document).ready(function(){
         var newString = new libphonenumber.AsYouType('CL').input(val_old);
         $(this).focus().val('').val(newString);
     });
-    console.log(get_puser());
+    var init_puser = get_puser();
+    $('.pedido_nombre').val(init_puser.nombre);
+    $('.pedido_telefono').val(init_puser.telefono);
     
 });
 
