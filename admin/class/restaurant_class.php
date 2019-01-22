@@ -126,7 +126,7 @@ class Rest{
 
             $puser = json_decode($_POST['puser']);
             
-            $puser_id = $puser['id_puser'];
+            $puser_id = json_decode($puser['id_puser']);
             $puser_code = $puser['code'];
             $puser_tel = $puser['telefono'];
             $puser_nom = $puser['nombre'];
@@ -174,6 +174,8 @@ class Rest{
                 $pdir_id = $insert_pdir['insert_id'];
                 
             }
+            
+            
             
             $pre_gengibre = $aux_pedido->{'pre_gengibre'};
             $pre_wasabi = $aux_pedido->{'pre_wasabi'};
