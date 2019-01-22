@@ -121,10 +121,11 @@ class Rest{
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
         //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
         
+        $puser = json_decode($_POST['puser']);
+        $info['post_puser'] = $puser;
+        
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
-            $puser = json_decode($_POST['puser']);
-            
             $puser_id = $puser['id_puser'];
             $puser_code = $puser['code'];
             $puser_tel = $puser['telefono'];
@@ -141,7 +142,7 @@ class Rest{
             $despacho = $aux_pedido->{'despacho'};
             
             $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$puser_id."' AND codigo='".$puser_code."' AND telefono='".$puser_tel."'");
-            $info['sql_puser'] = $sql_puser;
+            
             if($sql_puser['count'] == 0){
                 
                 $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
