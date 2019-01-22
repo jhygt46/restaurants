@@ -9,6 +9,8 @@ $(document).ready(function(){
         var newString = new libphonenumber.AsYouType('CL').input(val_old);
         $(this).focus().val('').val(newString);
     });
+    console.log(get_puser());
+    
 });
 
 var menu = 0;
