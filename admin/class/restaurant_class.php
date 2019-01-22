@@ -110,18 +110,12 @@ class Rest{
     
     public function enviar_pedido(){
         
-        $info['op'] = 1;
-        
-        $puser = json_decode($_POST['puser']);
-        $info['data_puser'] = $puser;        
+        $info['op'] = 1;        
 
         $aux_pedido = json_decode($_POST['pedido']);
-        $info['pedido'] = $aux_pedido;
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
-        //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
-   
-        
+
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
             $puser = json_decode($_POST['puser']);
@@ -174,9 +168,7 @@ class Rest{
                 $pdir_id = $insert_pdir['insert_id'];
                 
             }
-            
-            
-            
+
             $pre_gengibre = $aux_pedido->{'pre_gengibre'};
             $pre_wasabi = $aux_pedido->{'pre_wasabi'};
             $pre_embarazadas = $aux_pedido->{'pre_embarazadas'};
