@@ -138,6 +138,8 @@ class Rest{
             $lat = $aux_pedido->{'lat'};
             $lng = $aux_pedido->{'lng'};
             
+            $despacho = $aux_pedido->{'despacho'};
+            
             $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$puser_id."' AND codigo='".$puser_code."' AND telefono='".$puser_tel."'");
             if($sql_puser['count'] == 0){
                 
@@ -147,8 +149,8 @@ class Rest{
                 $info['set_puser'] = 1;
                 $info['puser']['id_puser'] = $puser_id;
                 $info['puser']['code'] = $puser_code;
-                $info['puser']['nombre'] = $puser_nom;
-                $info['puser']['telefono'] = $puser_tel;
+                $info['puser']['nombre'] = $nombre;
+                $info['puser']['telefono'] = $telefono;
                 
             }
             $dir = false;
@@ -165,7 +167,7 @@ class Rest{
                 }
                 
             }    
-            if(!$dir){
+            if(!$dir && $despacho == 1){
                 
                 $insert_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$puser_id."')");
                 $pdir_id = $insert_pdir['insert_id'];
@@ -179,7 +181,7 @@ class Rest{
             $pre_soya = $aux_pedido->{'pre_soya'};
             $pre_teriyaki = $aux_pedido->{'pre_teriyaki'};
             $comentarios = $aux_pedido->{'comentarios'};
-            $despacho = $aux_pedido->{'despacho'};
+            
             $costo = $aux_pedido->{'costo'};
             $total = $aux_pedido->{'total'};
             $verify_despacho = 0;
