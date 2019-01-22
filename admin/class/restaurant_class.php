@@ -114,14 +114,11 @@ class Rest{
         
         $puser = json_decode($_POST['puser']);
         $info['data_puser'] = $puser;        
-        $info['set_puser'] = 1;
-        
-        
-        
+
         $aux_pedido = json_decode($_POST['pedido']);
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
-        $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
+        //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
             
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
@@ -144,7 +141,7 @@ class Rest{
             if($sql_puser['count'] == 0){
                 
                 $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono) VALUES ('".$puser_code."', '".$puser_nom."', '".$puser_tel."')");
+                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono) VALUES ('".$puser_code."', '".$nombre."', '".$telefono."')");
                 $puser_id = $insert_puser['insert_id'];
                 $info['set_puser'] = 1;
                 $info['puser']['id_puser'] = $puser_id;
@@ -153,11 +150,11 @@ class Rest{
                 $info['puser']['telefono'] = $puser_tel;
                 
             }
+            $dir = false;
             if($sql_puser['count'] == 1){
                 
                 $sql_pdir = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_puser='".$puser_id."'");
                 $list_pdir = $sql_pdir['resultado'];
-                $dir = false;
                 
                 for($i=0; $i<$sql_pdir['count']; $i++){
                     if($list_pdir[$i]['lat'] == $lat && $list_pdir[$i]['lng'] == $lng){
@@ -165,10 +162,12 @@ class Rest{
                         $dir = true;
                     }
                 }
-                if(!$dir){
-                    $insert_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$puser_id."')");
-                    $pdir_id = $insert_pdir['insert_id'];
-                }
+                
+            }    
+            if(!$dir){
+                
+                $insert_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$puser_id."')");
+                $pdir_id = $insert_pdir['insert_id'];
                 
             }
             
