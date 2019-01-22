@@ -761,9 +761,7 @@ function paso_4(){
     pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
     pedido.comentarios = $('#pedido_comentarios').val();
     
-    var puser = get_puser();
-    
-    var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(puser) };
+    var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(get_puser()) };
     
     $.ajax({
         url: "ajax/index.php",

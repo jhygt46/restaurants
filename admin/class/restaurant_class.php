@@ -125,8 +125,9 @@ class Rest{
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
             $puser = json_decode($_POST['puser']);
+            $info['aux_puser'] = $puser;
             
-            $puser_id = json_decode($puser['id_puser']);
+            $puser_id = $puser['id_puser'];
             $puser_code = $puser['code'];
             $puser_tel = $puser['telefono'];
             $puser_nom = $puser['nombre'];
