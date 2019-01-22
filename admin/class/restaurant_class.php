@@ -151,6 +151,8 @@ class Rest{
             $dir = false;
             if($sql_puser['count'] == 1){
                 
+                $this->con->sql("UPDATE pedidos_usuarios SET cont=cont+1 WHERE id_puser='".$puser_id."'");
+                
                 $sql_pdir = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_puser='".$puser_id."'");
                 $list_pdir = $sql_pdir['resultado'];
                 
