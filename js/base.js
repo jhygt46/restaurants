@@ -6,7 +6,7 @@ $(document).ready(function(){
     $('.cantcart_num').html(cantidad);
     $("#pedido_telefono").keyup(function(){
         var val_old = $(this).val();
-        var newString = new libphonenumber.AsYouType('US').input(val_old);
+        var newString = new libphonenumber.AsYouType('CL').input(val_old);
         $(this).focus().val('').val(newString);
     });
 });
