@@ -112,6 +112,16 @@ class Rest{
         
         $info['op'] = 1;
         
+        $puser = json_decode($_POST['puser']);
+        $info['data_puser'] = $puser;        
+        $info['set_puser'] = 1;
+        
+        $info['puser']['id_puser'] = 1;
+        $info['puser']['code'] = "AdhR7hTs4pSD71U6sGbW";
+        $info['puser']['nombre'] = "DIEGO GOMEZ";
+        $info['puser']['telefono'] = "+56966166923";
+        
+        
         $aux_pedido = json_decode($_POST['pedido']);
         $key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
         
@@ -145,6 +155,8 @@ class Rest{
             $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             $info['lat'] = $loc_gir['resultado'][0]['lat'];
             $info['lng'] = $loc_gir['resultado'][0]['lng'];
+            
+            $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono) VALUES ('', '')");
             
             $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (nombre, telefono, direccion, lat, lng, calle, num, depto, comuna) VALUES ('".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."')");
             $id_pep = $aux_pep['insert_id'];

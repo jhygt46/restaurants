@@ -973,17 +973,19 @@ function nuevo(data){
     obj.id_mot = data.id_mot;
     obj.verificado = data.verificado;
     
-    obj.pep.id_pep = data.nombre;
-    obj.pep.code = data.nombre;
-    obj.pep.nombre = data.nombre;
-    obj.pep.telefono = data.telefono;
-    obj.pep.direccion = data.direccion;
-    obj.pep.calle = data.calle;
-    obj.pep.num = data.num;
-    obj.pep.depto = data.depto;
-    obj.pep.lat = data.lat;
-    obj.pep.lng = data.lng;
-    obj.pep.verificado = data.verificado;
+    obj.puser.id_puser = data.id_puser;
+    obj.puser.code = data.user_code;
+    obj.puser.nombre = data.nombre;
+    obj.puser.telefono = data.telefono;
+    
+    obj.pdir.id_pdir = data.id_pdir;
+    obj.pdir.direccion = data.direccion;
+    obj.pdir.calle = data.calle;
+    obj.pdir.num = data.num;
+    obj.pdir.depto = data.depto;
+    obj.pdir.lat = data.lat;
+    obj.pdir.lng = data.lng;
+    obj.pdir.verificado = data.verificado;
 
     add_pedido(obj);
     listar_pedidos();

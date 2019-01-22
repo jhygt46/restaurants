@@ -506,12 +506,28 @@ function set_cantidad(n){
     cantidad = cantidad + n;
     $('.cantcart_num').html(cantidad);
 }
+
+function get_puser(){
+    return JSON.parse(localStorage.getItem("p_user")) || { id_puser: 0, code: '', nombre: '', telefono: '' };
+}
+function set_puser(puser){
+    localStorage.setItem("p_user", JSON.stringify(puser));
+}
+function get_pdir(){
+    return JSON.parse(localStorage.getItem("p_dir")) || { id_pdir: 0, direccion: '', calle: '', num: '', depto: '', lat: 0, lng: 0, verificado: 0 };
+}
+function set_pdir(pdir){
+    localStorage.setItem("p_dir", JSON.stringify(pdir));
+}
+// BORRAR //
 function get_pep(){
     return JSON.parse(localStorage.getItem("pep")) || { id_pep: 0, pep_code: '' };
 }
 function set_pep(pep){
     localStorage.setItem("pep", JSON.stringify(pep));
 }
+// BORRAR //
+
 function get_carro(){
     return JSON.parse(localStorage.getItem("carro")) || [];
 }
@@ -745,7 +761,9 @@ function paso_4(){
     pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
     pedido.comentarios = $('#pedido_comentarios').val();
     
-    var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()) };
+    var puser = get_puser();
+    
+    var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: puser };
     
     $.ajax({
         url: "ajax/index.php",
@@ -757,6 +775,10 @@ function paso_4(){
             console.log(data);
             if(data.op == 1){
 
+                if(data.set_puser == 1){
+                    set_puser(data.puser);
+                }
+                
                 document.getElementById("enviar_cotizacion").disabled = false;
 
                 pedido.id_ped = data.id_ped;
