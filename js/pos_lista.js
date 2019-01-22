@@ -924,7 +924,7 @@ function done_pedido(){
         
         obj.id_mot = $('#id_mot').val();
         
-        //add_pedido(obj);
+        add_pedido(obj);
         guardar_pedido(0);
         
     }
@@ -932,6 +932,27 @@ function done_pedido(){
     $('.p1').hide();
     $('.pop_up').hide();
     
+}
+function pedido_obj(){
+    return {
+        id_ped: 0,
+        pedido_code: '', 
+        tipo: 0,
+        estado: 0,
+        fecha: Math.round(new Date().getTime()/1000),
+        despacho: null,
+        carro: [],  
+        promos: [], 
+        pre_wasabi: 0,
+        pre_gengibre: 0,
+        pre_embarazadas: 0,
+        pre_palitos: 0,
+        pre_soya: 0,
+        pre_teriyaki: 0,
+        id_mot: 0,
+        verificado: 0,
+        pep: { id_pep: 0, code: '', nombre: '', telefono: '', direccion: '', lat: 0, lng: 0, calle: '', num: '', depto: '', comuna: '', verificado: 0 }
+    };
 }
 function nuevo(data){
 
@@ -941,8 +962,6 @@ function nuevo(data){
     obj.tipo = 1;
     obj.estado = 0;
     obj.despacho = data.despacho;
-    obj.nombre = data.nombre;
-    obj.telefono = data.telefono;
     obj.carro = data.carro;
     obj.promos = data.promos;
     obj.pre_wasabi = data.pre_wasabi;
@@ -951,7 +970,21 @@ function nuevo(data){
     obj.pre_palitos = data.pre_palitos;
     obj.pre_soya = data.pre_soya;
     obj.pre_teriyaki = data.pre_teriyaki;
-    obj.verify_despacho = data.verify_despacho;
+    obj.id_mot = data.id_mot;
+    obj.verificado = data.verificado;
+    
+    obj.pep.id_pep = data.nombre;
+    obj.pep.code = data.nombre;
+    obj.pep.nombre = data.nombre;
+    obj.pep.telefono = data.telefono;
+    obj.pep.direccion = data.direccion;
+    obj.pep.calle = data.calle;
+    obj.pep.num = data.num;
+    obj.pep.depto = data.depto;
+    obj.pep.lat = data.lat;
+    obj.pep.lng = data.lng;
+    obj.pep.verificado = data.verificado;
+
     add_pedido(obj);
     listar_pedidos();
     
@@ -1008,26 +1041,7 @@ function guardar_pedido(index){
     });
     
 }
-function pedido_obj(){
-    return {
-        id_ped: 0,
-        pedido_code: '', 
-        tipo: 0,
-        estado: 0,
-        fecha: Math.round(new Date().getTime()/1000),
-        despacho: null,
-        carro: [],  
-        promos: [], 
-        pre_wasabi: 0,
-        pre_gengibre: 0,
-        pre_embarazadas: 0,
-        pre_palitos: 0,
-        pre_soya: 0,
-        pre_teriyaki: 0,
-        id_mot: 0,
-        pep: { id_pep: 0, code: '', nombre: '', telefono: '', direccion: '', lat: 0, lng: 0, calle: '', num: '', depto: '', comuna: '', verificado: 0 }
-    };
-}
+
 function change_despacho(that){
     var value = $(that).val();
     var t_despacho = $(that).parents('.data_info').find('.t_despacho');
