@@ -116,7 +116,7 @@ class Rest{
         $info['data_puser'] = $puser;        
 
         $aux_pedido = json_decode($_POST['pedido']);
-        $info['pedido'] = $aux_pedido;
+        
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
         //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";

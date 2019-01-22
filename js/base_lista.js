@@ -764,6 +764,7 @@ function paso_4(){
     var puser = get_puser();
     
     var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(puser) };
+    console.log(send);
     
     $.ajax({
         url: "ajax/index.php",
