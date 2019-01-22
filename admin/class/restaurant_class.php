@@ -112,20 +112,14 @@ class Rest{
         
         $info['op'] = 1;
         
-        $puser = json_decode($_POST['puser']);
-        $info['data_puser'] = $puser;        
-
         $aux_pedido = json_decode($_POST['pedido']);
-        
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
-        //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
-        
-        $puser = json_decode($_POST['puser']);
-        $info['post_puser'] = $puser;
-        
+
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
+            $puser = json_decode($_POST['puser']);
+            
             $puser_id = $puser['id_puser'];
             $puser_code = $puser['code'];
             $puser_tel = $puser['telefono'];
