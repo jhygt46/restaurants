@@ -120,7 +120,7 @@ class Rest{
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
         //$key = "AIzaSyDNFkwj6toPpKFK0PakVNbcFeA8BE8mHZI";
-        return $info;
+   
         
         if(strlen($nombre) > 2 && strlen($telefono) == 12){
 
