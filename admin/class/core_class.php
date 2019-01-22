@@ -277,6 +277,7 @@ class Core{
         $info['op'] = false;
         $host = ($_SERVER["HTTP_HOST"] == "localhost") ? "www.izusushi.cl" : $_SERVER["HTTP_HOST"] ;
         $sql = $this->con->sql("SELECT * FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
+        $info['a_sql'] = $sql;
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['css_base'] = $path."/css/reset.css";
         $info['css_detalle'] = $path."/css/css_detalle_01.css";
