@@ -84,7 +84,7 @@ if(isset($_GET['code'])){
                 <?php 
                     if($despacho == 0){
                 ?>
-                    <div class="txtcen font_03 strong pddtop_01">Retiro Local</div>
+                    <div class="txtcen font_03 strong pddtop_01">Retiro Local <?php echo $info['local']; ?></div>
                 <?php } ?>
                     
                 <?php 
