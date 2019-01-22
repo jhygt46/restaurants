@@ -4,6 +4,11 @@ $(document).ready(function(){
     //set_pedido(null);
     cantidad = get_carro().length;
     $('.cantcart_num').html(cantidad);
+    $("#pedido_telefono").keyup(function(){
+        var val_old = $(this).val();
+        var newString = new libphonenumber.AsYouType('US').input(val_old);
+        $(this).focus().val('').val(newString);
+    });
 });
 
 var menu = 0;
@@ -29,12 +34,7 @@ $(document).click(function (e) {
         hide_modal();
     }
 });
-$("#pedido_telefono").keyup(function(){
-    console.log("KEY UP TELEFONO");
-    var val_old = $(this).val();
-    var newString = new libphonenumber.AsYouType('US').input(val_old);
-    $(this).focus().val('').val(newString);
-});
+
 
 function inicio(){
     
