@@ -280,7 +280,8 @@ class Core{
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['css_base'] = $path."/css/reset.css";
         $info['css_detalle'] = $path."/css/css_detalle_01.css";
-            
+        $info['sql'] = $sql;
+        
         if($sql['count'] == 1){
         
             $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
