@@ -291,10 +291,14 @@ class Core{
             $aux_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
             $info['pep'] = $aux_pep['resultado'][0];
             
-            $info['puser'] = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][0]['id_puser']."'");
+            $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][0]['id_puser']."'");
+            $info['puser'] = $sql_puser['resultado'][0];
+            
             if($sql['resultado'][0]['despacho'] == 1 && $sql['resultado'][0]['id_pdir'] != 0){
-                $info['pdir'] = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][0]['id_pdir']."'");
+                $sql_pdir = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][0]['id_pdir']."'");
+                $info['pdir'] = $sql_pdir['resultado'][0];
             }
+            
             $info['carro'] = $sql['resultado'][0]['carro'];
             $info['promos'] = $sql['resultado'][0]['promos'];
             
