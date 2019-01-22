@@ -10,8 +10,8 @@ $(document).ready(function(){
         $(this).focus().val('').val(newString);
     });
     var init_puser = get_puser();
-    $('.pedido_nombre').val(init_puser.nombre);
-    $('.pedido_telefono').val(init_puser.telefono);
+    $('#pedido_nombre').val(init_puser.nombre);
+    $('#pedido_telefono').val(init_puser.telefono);
     
 });
 
