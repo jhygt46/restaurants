@@ -29,7 +29,8 @@ $(document).click(function (e) {
         hide_modal();
     }
 });
-$("#pedido_telefono").keyup(function () {
+$("#pedido_telefono").keyup(function(){
+    console.log("KEY UP TELEFONO");
     var val_old = $(this).val();
     var newString = new libphonenumber.AsYouType('US').input(val_old);
     $(this).focus().val('').val(newString);
