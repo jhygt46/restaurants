@@ -140,8 +140,6 @@ class Rest{
             
             $despacho = $aux_pedido->{'despacho'};
             $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$puser_id."' AND codigo='".$puser_code."' AND telefono='".$puser_tel."'");
-            $info['sql_puser'] = $sql_puser;
-            exit;
             
             if($sql_puser['count'] == 0){
                 

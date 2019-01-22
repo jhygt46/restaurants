@@ -746,7 +746,7 @@ function move_marker(lat, lng){
 }
 function paso_4(){
     
-    document.getElementById("enviar_cotizacion").disabled = true;
+    //document.getElementById("enviar_cotizacion").disabled = true;
     
     var pedido = get_pedido();
     pedido.nombre = $('#pedido_nombre').val();
@@ -779,7 +779,7 @@ function paso_4(){
                     set_puser(data.puser);
                 }
                 
-                document.getElementById("enviar_cotizacion").disabled = false;
+                //document.getElementById("enviar_cotizacion").disabled = false;
 
                 pedido.id_ped = data.id_ped;
                 pedido.pedido_code = data.pedido_code;
