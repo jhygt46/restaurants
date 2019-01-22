@@ -808,7 +808,7 @@ function paso_4(){
                 document.getElementById("enviar_cotizacion").disabled = false;
             }
         }, error: function(e){
-            console.log(e);
+            alert("En estos momentos no podemos atenderlo.. por favor intente mas tarde");
         }
     });
     
