@@ -28,8 +28,12 @@ class Rest{
         if($accion == "get_pedido"){
             return $this->get_pedido();
         }
+        if($accion == "get_pedido"){
+            return $this->get_pedido();
+        }
         
     }
+    
     public function crear_dominio(){
         
         $res = $_POST["g-recaptcha-response"]; 

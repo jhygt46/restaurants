@@ -16,11 +16,8 @@ $login = new Login();
 if($_POST['accion'] == "login"){
     $data = $login->login_back();
 }
-if($_POST['accion'] == "recuperar"){
-    $data = $login->enviar_clave();
-}
-if($_POST['accion'] == "resetpass"){
-    $data = $login->crear_password();
+if($_POST['accion'] == "recuperar_password"){
+    $data = $login->recuperar_password();
 }
 
 echo json_encode($data);

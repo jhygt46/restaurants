@@ -10,7 +10,27 @@ class Login {
     public function __construct(){
         $this->con = new Conexion();
     }
-
+    public function recuperar_password(){
+        
+        $id = $_POST['id'];
+        $code = $_POST['code'];
+        $pass1 = $_POST['pass1'];
+        $pass2 = $_POST['pass2'];
+        
+        if(isset($id) && is_numeric($id) && $id != 0){
+        
+            $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id."'");
+            if($user['resultado'][0]['mailcode'] == $code && $pass1 == $pass2 && strlen($pass1) >= 8 && strlen($code) == 20){
+                $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."', mailcode='' WHERE id_user='".$id."'");
+                $info['op'] = 1;
+                $info['user'] = $user['resultado'][0]['correo'];
+                $info['url'] = "http://www.izusushi.cl/admin";
+            }
+        
+        }
+        return $info;
+        
+    }
     public function login_back(){
         
         if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
