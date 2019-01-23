@@ -8,7 +8,7 @@ $(document).ready(function(){
         var pass2 = $('#pass2').val();
         
         $.ajax({
-            url: "admin/ajax/login_back.php",
+            url: "../../../admin/ajax/login_back.php",
             type: "POST",
             data: "accion=recuperar_password&id="+id+"&code="+code+"&pass1="+pass1+"&pass2="+pass2,
             success: function(data){
