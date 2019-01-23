@@ -16,7 +16,7 @@ $(document).ready(function(){
                 if(data.op == 1){
                     $('.msg').html("Se ha creado su Contrase&ntilde;a con Exito");
                     setTimeout(function () {
-                        $(location).attr('href', data.url+'?correo='+data.correo);
+                        //$(location).attr('href', data.url+'?correo='+data.correo);
                     }, 3000);
                 }
             },
