@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="images/fire.ico" />
         <script type="text/javascript" src="../../../admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="../../../admin/js/login.js"></script>
+        <script type="text/javascript" src="../../../admin/js/password.js"></script>
         <link rel="stylesheet" href="../../../admin/css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="../../../admin/css/login.css" type="text/css" media="all">
     </head>
