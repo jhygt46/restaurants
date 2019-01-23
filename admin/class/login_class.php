@@ -16,6 +16,7 @@ class Login {
         $code = $_POST['code'];
         $pass1 = $_POST['pass1'];
         $pass2 = $_POST['pass2'];
+        $info['post'] = $_POST;
         
         if(isset($id) && is_numeric($id) && $id != 0){
         
