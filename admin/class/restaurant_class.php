@@ -139,7 +139,7 @@ class Rest{
             if($sql_puser['count'] == 0){
                 
                 $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono) VALUES ('".$puser_code."', '".$nombre."', '".$telefono."')");
+                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, count) VALUES ('".$puser_code."', '".$nombre."', '".$telefono."', '1')");
                 $puser_id = $insert_puser['insert_id'];
                 $info['set_puser'] = 1;
                 $info['puser']['id_puser'] = $puser_id;
