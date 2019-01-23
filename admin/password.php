@@ -8,8 +8,8 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
-        <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="all">
-        <link rel="stylesheet" href="../../../css/login.css" type="text/css" media="all">
+        <link rel="stylesheet" href="../../../admin/css/reset.css" type="text/css" media="all">
+        <link rel="stylesheet" href="../../../admin/css/login.css" type="text/css" media="all">
     </head>
     <body>
         <input type='hidden' id='id' value='<?php echo $_GET["id"]; ?>'>
