@@ -24,7 +24,7 @@ class Login {
             if($user['resultado'][0]['mailcode'] == $code && $pass1 == $pass2 && strlen($pass1) >= 8 && strlen($code) == 20){
                 $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."', mailcode='' WHERE id_user='".$id."'");
                 $info['op'] = 1;
-                $info['user'] = $user['resultado'][0]['correo'];
+                $info['correo'] = $user['resultado'][0]['correo'];
                 $info['url'] = "http://www.izusushi.cl/admin";
             }
         
