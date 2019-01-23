@@ -28,6 +28,50 @@ class Rest{
         if($accion == "get_pedido"){
             return $this->get_pedido();
         }
+        if($accion == "enviar_contacto"){
+            return $this->enviar_contacto();
+        }
+        
+    }
+    
+    public function enviar_contacto(){
+        
+        $res = $_POST["g-recaptcha-response"]; 
+        if(isset($res) && $res){ 
+            
+            $secret = "6Lf8j3sUAAAAAP6pYvdgk9qiWoXCcKKXGsKFQXH4";
+            $v = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$_POST["g-recaptcha-response"]."&remoteip=".$_SERVER["REMOTE_ADDR"]); 
+            $data = json_decode(($v)); 
+            if($data->{'success'}){ 
+                
+                $email = $_POST["email"];
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                    $send['email'] = $email;
+                    $send['nombre'] = $_POST["nombre"];
+                    $send['telefono'] = $_POST["telefono"];
+                    $send['asunto'] = $_POST["asunto"];
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_contacto');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                    curl_exec($ch);
+
+                }else{
+                    header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
+                    exit;
+                }
+                
+            }else{ 
+                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+                exit;
+            } 
+            
+        }else{ 
+            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+            exit; 
+        }
         
     }
     
