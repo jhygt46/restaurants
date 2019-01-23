@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../../../admin/css/login.css" type="text/css" media="all">
     </head>
     <body>
-        <input type='hidden' id='id' value='<?php echo $_GET["id"]; ?>'>
+        <input type='hidden' id='id' value='<?php echo $_GET["id_user"]; ?>'>
         <input type='hidden' id='code' value='<?php echo $_GET["code"]; ?>'>    
         <table cellspacing='0' cellpadding='0' border='0' width='100%' height='100%'>
             <tr>
