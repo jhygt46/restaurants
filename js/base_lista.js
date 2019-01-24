@@ -520,6 +520,7 @@ function set_pdir(pdir){
     localStorage.setItem("p_dir", JSON.stringify(pdir));
 }
 
+
 // BORRAR //
 function get_pep(){
     return JSON.parse(localStorage.getItem("pep")) || { id_pep: 0, pep_code: '' };
