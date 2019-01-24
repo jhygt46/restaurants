@@ -77,8 +77,8 @@ if(isset($_GET['code'])){
             </div>
             <?php } ?>            
             <div class="contacto padding_01 borbottom">
-                <div class="txtcen font_02"><?php echo $info['puser']['nombre']; ?></div>
-                <div class="txtcen font_03"><?php echo $info['puser']['telefono']; ?></div>
+                <div class="txtcen font_02"><?php echo $info['pep']['nombre'];  ?><?php /* echo $info['puser']['nombre']; */ ?></div>
+                <div class="txtcen font_03"><?php echo $info['pep']['telefono'];  ?><?php /* echo $info['puser']['telefono']; */ ?></div>
                 <?php 
                     if($despacho == 0){
                 ?>
