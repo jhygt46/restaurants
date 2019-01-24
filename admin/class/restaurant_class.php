@@ -181,11 +181,12 @@ class Rest{
             
             $despacho = $aux_pedido->{'despacho'};
             $sql_puser = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$puser_id."' AND codigo='".$puser_code."' AND telefono='".$puser_tel."'");
+            $dir = false;
             
             if($sql_puser['count'] == 0){
                 
                 $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, count) VALUES ('".$puser_code."', '".$nombre."', '".$telefono."', '1')");
+                $insert_puser = $this->con->sql("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont) VALUES ('".$puser_code."', '".$nombre."', '".$telefono."', '1')");
                 $puser_id = $insert_puser['insert_id'];
                 $info['set_puser'] = 1;
                 $info['puser']['id_puser'] = $puser_id;
@@ -194,7 +195,7 @@ class Rest{
                 $info['puser']['telefono'] = $telefono;
                 
             }
-            $dir = false;
+            
             if($sql_puser['count'] == 1){
                 
                 $this->con->sql("UPDATE pedidos_usuarios SET cont=cont+1 WHERE id_puser='".$puser_id."'");
