@@ -508,7 +508,7 @@ function set_cantidad(n){
 }
 
 function get_puser(){
-    return JSON.parse(localStorage.getItem("p_user")) || { id_puser: 0, code: '', nombre: '', telefono: '' };
+    return JSON.parse(localStorage.getItem("p_user")) || { id_puser: 0, code: '', nombre: '', telefono: '+56 9 ' };
 }
 function set_puser(puser){
     localStorage.setItem("p_user", JSON.stringify(puser));
