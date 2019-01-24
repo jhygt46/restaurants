@@ -7,13 +7,11 @@ $core = new Core();
 if(isset($_GET['code'])){
     
     $info = $core->ver_detalle($_GET['code']);
+
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
     
-    
-    if($_GET['info'] == 1){
-        echo "<pre>";
-        print_r($info);
-        echo "</pre>";
-    }
     if($info['op']){
         
         $id_ped = $info["id_ped"];
