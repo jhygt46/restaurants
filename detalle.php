@@ -77,8 +77,8 @@ if(isset($_GET['code'])){
             </div>
             <?php } ?>            
             <div class="contacto padding_01 borbottom">
-                <div class="txtcen font_02"><?php echo $info['pep']['nombre'];  ?><?php /* echo $info['puser']['nombre']; */ ?></div>
-                <div class="txtcen font_03"><?php echo $info['pep']['telefono'];  ?><?php /* echo $info['puser']['telefono']; */ ?></div>
+                <div class="txtcen font_02"><?php echo $info['puser']['nombre']; ?></div>
+                <div class="txtcen font_03"><?php echo $info['puser']['telefono']; ?></div>
                 <?php 
                     if($despacho == 0){
                 ?>
@@ -100,35 +100,6 @@ if(isset($_GET['code'])){
             </div>
         </div>
         
-        
-        
-        
-        
-        
-        
-        
-        <!--
-        <div class="lista_de_productos"></div>
-        <div class="info_cliente">
-            <div class="direccion"><?php echo $info["direccion"]; ?></div>
-            <?php if($info["depto"] != ""){ ?><div class="depto">Departamento: <?php echo $info["depto"]; ?></div><?php } ?>
-            <div class="nombre"><?php echo $pedido->{'nombre'}; ?></div>
-            <div class="telefono"><?php echo $pedido->{'telefono'}; ?></div>
-        </div>
-        <?php if($preguntas->{'wasabi'} == 1 || $preguntas->{'gengibre'} == 1 || $preguntas->{'embarazadas'} == 1 || $preguntas->{'palitos'} > 0){ ?>
-        <div class="info_cliente">
-            <?php if($preguntas->{'wasabi'} == 1){ ?><div class="wasabi">Wasabi</div><?php } ?>
-            <?php if($preguntas->{'gengibre'} == 1){ ?><div class="wasabi">Gengibre</div><?php } ?>
-            <?php if($preguntas->{'embarazadas'} == 1){ ?><div class="wasabi">Embarazada</div><?php } ?>
-            <?php if($preguntas->{'palitos'} > 0){ ?><div class="wasabi">Palitos: <?php echo $preguntas->{'palitos'}; ?></div><?php } ?>
-        </div>
-        <?php } ?>
-        <div class="info_cliente">
-            <div class="wasabi">Costo Despacho: $<?php echo $info["costo"]; ?></div>
-            <div class="wasabi">Costo Pedido: $<?php echo $info["total"]; ?></div>
-            <div class="wasabi">Total: $<?php $total = $info["total"] + $info["costo"]; echo $total; ?></div>
-        </div>
-        -->
     </body>
 </html>
 

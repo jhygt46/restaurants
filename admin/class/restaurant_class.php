@@ -57,6 +57,8 @@ class Rest{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     curl_exec($ch);
+                    
+                    header("Location: http://www.misitiodelivery.cl?contacto=1");
 
                 }else{
                     header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
