@@ -117,9 +117,6 @@ class Rest{
                                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                                 curl_exec($ch);
 
-                                $info['op'] = 1;
-                                $info['mensaje'] = "FELICITACIONES";
-
                                 curl_close($ch);
                                 header("Location: http://www.misitiodelivery.cl?realizado=1");
                                 exit;
