@@ -106,7 +106,6 @@ class Rest{
                                 $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, mailcode, fecha_creado, admin, eliminado) VALUES ('".$correo."', '".$mailcode."', now(), '1', '0')");
                                 $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
 
-                                $send['dominio'] = $dominio;
                                 $send['correo'] = $correo;
                                 $send['id'] = $usuarios['insert_id'];
                                 $send['code'] = $mailcode;
