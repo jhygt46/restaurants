@@ -25,6 +25,7 @@
                     <div class="modal_perfil cont_modal vhalign">
                         <div class="relative">
                             <div class="close" onclick="closes(this)"></div>
+                            <a href="?accion=logout"></a>
                         </div>
                     </div>
                     <div class="modal_error cont_modal vhalign">
