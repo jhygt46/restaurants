@@ -16,7 +16,6 @@ class Login {
         $code = $_POST['code'];
         $pass1 = $_POST['pass1'];
         $pass2 = $_POST['pass2'];
-        $info['post'] = $_POST;
         
         if(isset($id) && is_numeric($id) && $id != 0){
         
@@ -24,7 +23,6 @@ class Login {
             if($user['resultado'][0]['mailcode'] == $code && $pass1 == $pass2 && strlen($pass1) >= 8 && strlen($code) == 20){
                 $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."', mailcode='' WHERE id_user='".$id."'");
                 $info['op'] = 1;
-                $info['user'] = $user['resultado'][0]['correo'];
                 $info['url'] = "http://35.185.64.95/admin";
             }
         
