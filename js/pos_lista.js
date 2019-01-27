@@ -909,8 +909,8 @@ function done_pedido(){
         var obj = pedido_obj();
         obj.id_ped = 0;
                 
-        obj.pep.nombre = $('#nombre').val();
-        obj.pep.telefono = $('#telefono').val();
+        obj.nombre = $('#nombre').val();
+        obj.telefono = $('#telefono').val();
         obj.despacho = $('#despacho').val();
         
         obj.direccion = $('#direccion').val();
