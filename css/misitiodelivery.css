@@ -94,12 +94,11 @@ html body .contenedor .p_empezar .cont_contenido form .acciones {
   padding-top: 18px;
 }
 html body .contenedor .p_empezar .cont_contenido form .acciones input {
-  width: 180px;
   background: #900;
   padding: 12px;
   color: #fff;
   border: 0px;
-  font-size: 14px;
+  font-size: 18px;
 }
 html body .contenedor .p_empezar .cont_contenido form .acciones .mes_gratis {
   font-size: 18px;
