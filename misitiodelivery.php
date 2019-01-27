@@ -50,11 +50,11 @@
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Dominio"; } ?></h3>
                     <input type="hidden" name="accion" value="crear_dominio" />
                     <div class="input">
-                        <input type="text" name="dominio" placeholder="www.tusitio.cl" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
+                        <input type="url" name="dominio" placeholder="www.tusitio.cl" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
                     </div>
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 2){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Correo"; } ?></h3>
                     <div class="input">
-                        <input type="text" name="correo" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 2){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
+                        <input type="email" name="correo" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 2){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
                     </div>
                     <h6><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 3){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "reCAPTCHA"; } ?></h6>
                     <div class="g-recaptcha" data-sitekey="6Lf8j3sUAAAAAFEPARLhuiWamomIvm35UBCqf65R"></div>
@@ -104,11 +104,11 @@
                     </div>
                     <h3><?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Correo"; } ?></h3>
                     <div class="input">
-                        <input type="text" name="email" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
+                        <input type="email" name="email" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
                     </div>
                     <h3>Telefono</h3>
                     <div class="input">
-                        <input type="text" name="telefono" value="+56 9 " />
+                        <input type="tel" name="telefono" value="+56 9 " />
                     </div>
                     <h3>Asunto</h3>
                     <div class="input">
