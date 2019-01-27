@@ -3,7 +3,11 @@
 if($_POST["accion"] == "verificar_dominio_online"){
     die("X403-Y202-Z703");
 }
-
+if($_GET["accion"] == "server"){
+    echo "<pre>";
+    print_r($_SERVER);
+    echo "</pre>";
+}
 
 date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');

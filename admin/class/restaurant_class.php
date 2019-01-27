@@ -61,17 +61,17 @@ class Rest{
                     header("Location: http://www.misitiodelivery.cl?contacto=1");
 
                 }else{
-                    header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
+                    header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=1&error=Correo+Incorrecto");
                     exit;
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+                header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+            header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
             exit; 
         }
         
