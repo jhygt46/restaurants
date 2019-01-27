@@ -1,7 +1,4 @@
 <?php 
-
-    echo "1";
-    exit;
     
     $list[0]['back'] = "#fff";
     $list[0]['img'] = "http://www.mikasushi.cl/images/logos/www.mikasushi.cl.jpg";
