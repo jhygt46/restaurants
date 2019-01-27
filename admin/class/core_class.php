@@ -422,14 +422,10 @@ class Core{
         $cookie_code = $_COOKIE['CODE'];
         
         $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
-        $info['sql_local'] = $aux_local;
         if($aux_local['count'] == 1){
             
             $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
-            $info['sql_pedidos'] = $sql;
             for($i=0; $i<$sql['count']; $i++){
-
-                $id_pep = $sql['resultado'][$i]['id_pep'];
 
                 $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
                 $res['pedido_code'] = $sql['resultado'][$i]['code'];
@@ -447,24 +443,26 @@ class Core{
                 $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
                 $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
 
-                $sql2 = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$id_pep."'");
+                $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
                 $res['nombre'] = $sql2['resultado'][0]['nombre'];
                 $res['telefono'] = $sql2['resultado'][0]['telefono'];
 
                 if($res['despacho'] == 1){
 
-                    $res['direccion'] = $sql2['resultado'][0]['direccion'];
-                    $res['lat'] = $sql2['resultado'][0]['lat'];
-                    $res['lng'] = $sql2['resultado'][0]['lng'];
-                    $res['calle'] = $sql2['resultado'][0]['calle'];
-                    $res['num'] = $sql2['resultado'][0]['num'];
-                    $res['depto'] = $sql2['resultado'][0]['depto'];
-                    $res['comuna'] = $sql2['resultado'][0]['num'];
+                    $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
+                    
+                    $res['direccion'] = $sql3['resultado'][0]['direccion'];
+                    $res['lat'] = $sql3['resultado'][0]['lat'];
+                    $res['lng'] = $sql3['resultado'][0]['lng'];
+                    $res['calle'] = $sql3['resultado'][0]['calle'];
+                    $res['num'] = $sql3['resultado'][0]['num'];
+                    $res['depto'] = $sql3['resultado'][0]['depto'];
+                    $res['comuna'] = $sql3['resultado'][0]['num'];
 
                 }
 
 
-                $aux[] = $res;
+                $info[] = $res;
                 unset($res);
 
             }
