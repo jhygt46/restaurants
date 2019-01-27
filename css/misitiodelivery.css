@@ -38,6 +38,7 @@ html body .contenedor .cont_btns .botones li {
   color: #fff;
   width: 90px;
   padding: 6px 0px;
+  cursor: pointer;
 }
 html body .contenedor .cont_btns .botones li.selected {
   background: #fff;
