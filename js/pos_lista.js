@@ -952,7 +952,6 @@ function pedido_obj(){
         pre_teriyaki: 0,
         id_mot: 0,
         verificado: 0,
-        pep: { id_pep: 0, code: '', nombre: '', telefono: '', direccion: '', lat: 0, lng: 0, calle: '', num: '', depto: '', comuna: '', verificado: 0 }
     };
 }
 function nuevo(data){
@@ -976,19 +975,15 @@ function nuevo(data){
     obj.id_mot = data.id_mot;
     obj.verificado = data.verificado;
     
-    obj.puser.id_puser = data.id_puser;
-    obj.puser.code = data.user_code;
-    obj.puser.nombre = data.nombre;
-    obj.puser.telefono = data.telefono;
-    
-    obj.pdir.id_pdir = data.id_pdir;
-    obj.pdir.direccion = data.direccion;
-    obj.pdir.calle = data.calle;
-    obj.pdir.num = data.num;
-    obj.pdir.depto = data.depto;
-    obj.pdir.lat = data.lat;
-    obj.pdir.lng = data.lng;
-    obj.pdir.verificado = data.verificado;
+    obj.nombre = data.nombre;
+    obj.telefono = data.telefono;
+
+    obj.direccion = data.direccion;
+    obj.calle = data.calle;
+    obj.num = data.num;
+    obj.depto = data.depto;
+    obj.lat = data.lat;
+    obj.lng = data.lng;
 
     add_pedido(obj);
     listar_pedidos();
