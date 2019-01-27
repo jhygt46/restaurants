@@ -416,49 +416,56 @@ class Core{
         $aux = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'");
         return $aux;
     }
-    public function get_ultimos_pedidos($id_loc, $id_ped){
+    public function get_ultimos_pedidos($id_ped){
         
-        $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
-        for($i=0; $i<$sql['count']; $i++){
+        $id_loc = $_COOKIE['ID'];
+        $cookie_code = $_COOKIE['CODE'];
+        
+        $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
+        if($aux_local['count'] == 1){
             
-            $id_pep = $sql['resultado'][$i]['id_pep'];
-            
-            $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
-            $res['pedido_code'] = $sql['resultado'][$i]['code'];
-            $res['tipo'] = $sql['resultado'][$i]['tipo'];
-            $res['estado'] = $sql['resultado'][$i]['estado'];
-            $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
-            $res['despacho'] = $sql['resultado'][$i]['despacho'];
-            $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
-            $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
-            $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
-            $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
-            $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
-            $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
-            $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
-            $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
-            $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
-            
-            $sql2 = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$id_pep."'");
-            $res['nombre'] = $sql2['resultado'][0]['nombre'];
-            $res['telefono'] = $sql2['resultado'][0]['telefono'];
-            
-            if($res['despacho'] == 1){
-                
-                $res['direccion'] = $sql2['resultado'][0]['direccion'];
-                $res['lat'] = $sql2['resultado'][0]['lat'];
-                $res['lng'] = $sql2['resultado'][0]['lng'];
-                $res['calle'] = $sql2['resultado'][0]['calle'];
-                $res['num'] = $sql2['resultado'][0]['num'];
-                $res['depto'] = $sql2['resultado'][0]['depto'];
-                $res['comuna'] = $sql2['resultado'][0]['num'];
-                
+            $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
+            for($i=0; $i<$sql['count']; $i++){
+
+                $id_pep = $sql['resultado'][$i]['id_pep'];
+
+                $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
+                $res['pedido_code'] = $sql['resultado'][$i]['code'];
+                $res['tipo'] = $sql['resultado'][$i]['tipo'];
+                $res['estado'] = $sql['resultado'][$i]['estado'];
+                $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
+                $res['despacho'] = $sql['resultado'][$i]['despacho'];
+                $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
+                $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
+                $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
+                $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
+                $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
+                $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
+                $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
+                $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
+                $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
+
+                $sql2 = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$id_pep."'");
+                $res['nombre'] = $sql2['resultado'][0]['nombre'];
+                $res['telefono'] = $sql2['resultado'][0]['telefono'];
+
+                if($res['despacho'] == 1){
+
+                    $res['direccion'] = $sql2['resultado'][0]['direccion'];
+                    $res['lat'] = $sql2['resultado'][0]['lat'];
+                    $res['lng'] = $sql2['resultado'][0]['lng'];
+                    $res['calle'] = $sql2['resultado'][0]['calle'];
+                    $res['num'] = $sql2['resultado'][0]['num'];
+                    $res['depto'] = $sql2['resultado'][0]['depto'];
+                    $res['comuna'] = $sql2['resultado'][0]['num'];
+
+                }
+
+
+                $aux[] = $res;
+                unset($res);
+
             }
-            
-            
-            $aux[] = $res;
-            unset($res);
-            
         }
         return $aux;
         

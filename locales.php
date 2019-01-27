@@ -40,7 +40,7 @@ if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
 }
 
 $info = $core->get_data('www.izusushi.cl');
-$pedidos = $core->get_ultimos_pedidos($id_loc, null);
+$pedidos = $core->get_ultimos_pedidos(null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
 
 ?>

@@ -12,6 +12,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
-echo json_encode($core->get_ultimos_pedidos(14, $_POST["id_ped"]));
+echo json_encode($core->get_ultimos_pedidos($_POST["id_ped"]));
 
 ?>
