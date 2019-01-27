@@ -86,7 +86,7 @@
                     <?php for($i=0; $i<count($list); $i++){ ?>
                     <li>
                         <div style="background: <?php echo $list[$i]['back']; ?>" class="foto"><a target="_blank" href="<?php echo $list[$i]['link']; ?>"><img src="<?php echo $list[$i]['img']; ?>" alt="" /></a></div>
-                        <div class="info"><a target="_blank" style="color: #000; text-decoration: none" href="<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['nombre']; ?></a></div>
+                        <div class="info"><a target="_blank" style="color: #000; text-decoration: none" href="<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['nombre']; ?><br/><?php echo $list[$i]['link']; ?></a></div>
                     </li>
                     <?php } ?>
                 </ul>
