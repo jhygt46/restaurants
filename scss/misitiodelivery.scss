@@ -1,0 +1,275 @@
+html {
+    height: 100%;
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        background: #1F242C;
+        .contenedor{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            .logo{
+                width: 270px;
+                text-align: center;
+                margin: 0 auto;
+                padding-top: 10px;
+                font-size: 36px;
+                color: #fff;
+            }
+            .cont_btns{
+                display: block;
+                width: 100%;
+                top: 60px;
+                position: absolute;
+                .botones{
+                    width: 270px;
+                    margin: 0 auto;
+                    background: rgba(255, 255, 255, 0.3);
+                    li{
+                        float: left;
+                        text-align: center;
+                        font-size: 18px;
+                        color: #fff;
+                        width: 90px;
+                        padding: 6px 0px;
+                    }
+                    li.selected{
+                        background: #fff;
+                        color: #1F242C;
+                    }
+                }
+            }
+            .contenido{
+                position: absolute;
+                background: rgba(255, 255, 255, 0);
+                overflow-y: auto;
+            }
+            .p_empezar{
+                max-width: 460px;
+                height: calc(100% - 140px);
+                top: 130px;
+                width: 94%;
+                left: 3%;
+                .cont_contenido{
+                    padding: 3%;
+                    font-family: 'Lato', sans-serif;
+                    h1{
+                        color: #fff;
+                        font-size: 24px;
+                        text-align: left;
+                    }
+                    h2{
+                        color: #fff;
+                        font-size: 18px;
+                        text-align: left;
+                    }
+                    form{
+                        padding-top: 20px;
+                        h3{
+                            font-size: 21px;
+                            color: #fff;
+                            padding-top: 10px;
+                        }
+                        .input{
+                            width: 100%;
+                            input{
+                                width: 100%;
+                                height: 44px;
+                                padding: 6px;
+                            }
+                        }
+                        h6{
+                            font-size: 21px;
+                            color: #fff;
+                            padding-top: 18px;
+                        }
+                        .acciones{
+                            padding-top: 18px;
+                            input{
+                                width: 180px;
+                                background: #900;
+                                padding: 12px;
+                                color: #fff;
+                                border: 0px;
+                                font-size: 14px;
+                            }
+                            .mes_gratis{
+                                font-size: 18px;
+                                color: #fff;
+                                padding-top: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+            .p_clientes{
+                height: calc(100% - 130px);
+                top: 120px;
+                display: none;
+                width: 94%;
+                left: 3%;
+                .cont_contenido{
+                    padding: 0 2% 2% 2%;
+                    font-family: 'Lato', sans-serif;
+                    .lista_clientes{
+                        max-width: 500px;
+                        margin: 0 auto;
+                        li{
+                            margin-bottom: 4px;
+                            height: 100px;
+                            background: #ddd;
+                            position: relative;
+                            .foto{
+                                position: absolute;
+                                width: 146px;
+                                top: 2px;
+                                left: 2px;
+                                text-align: center;
+                                height: 96px;
+                                img{
+                                    height: 100%;
+                                    max-width: 100%;
+                                }
+                            }
+                            .info{
+                                width: calc(100% - 157px);
+                                position: absolute;
+                                left: 155px;
+                                top: 2px;
+                                height: 81px;
+                                font-size: 35px;
+                                padding-top: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+            .p_contacto{
+                max-width: 500px;
+                height: calc(100% - 140px);
+                top: 130px;
+                width: 94%;
+                display: none;
+                .cont_contenido{
+                    padding: 0 3% 3% 3%;
+                    font-family: 'Lato', sans-serif;
+                    h1{
+                        color: #fff;
+                        font-size: 24px;
+                        text-align: center;
+                    }
+                    h2{
+                        color: #fff;
+                        font-size: 18px;
+                        text-align: center;
+                    }
+                    form{
+                        h3{
+                            font-size: 18px;
+                            color: #fff;
+                            padding-top: 8px;
+                        }
+                        .input{
+                            width: 100%;
+                            input{
+                                width: 100%;
+                                height: 36px;
+                                padding: 6px;
+                            }
+                        }
+                        h6{
+                            font-size: 21px;
+                            color: #fff;
+                            padding-top: 8px;
+                        }
+                        .acciones{
+                            padding-top: 18px;
+                            input{
+                                width: 180px;
+                                background: #900;
+                                padding: 12px;
+                                color: #fff;
+                                border: 0px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    html {
+        body {
+            .contenedor{
+                .logo{
+                }
+                .cont_btns{
+                    .botones{
+                        li{}
+                        li.selected{}
+                    }
+                }
+                .contenido{
+                    .cont_contenido{
+                        h1{}
+                        h2{}
+                        form{
+                            h3{}
+                            .input{
+                                input{}
+                            }
+                            h6{}
+                            .acciones{
+                                input{}
+                                .mes_gratis{}
+                            }
+                        }
+                    }
+                }
+                .p_empezar{}
+                .telefono{ display: none }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 800px) {
+    html {
+        body {
+            .contenedor{
+                .logo{
+                }
+                .cont_btns{
+                    .botones{
+                        li{}
+                        li.selected{}
+                    }
+                }
+                .contenido{
+                    .cont_contenido{
+                        h1{}
+                        h2{}
+                        form{
+                            h3{}
+                            .input{
+                                input{}
+                            }
+                            h6{}
+                            .acciones{
+                                input{}
+                                .mes_gratis{}
+                            }
+                        }
+                    }
+                }
+                .p_empezar{}
+                .telefono{ display: none }
+            }
+        }
+    }
+}
+
+

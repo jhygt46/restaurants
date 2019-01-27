@@ -40,8 +40,8 @@ html body .contenedor .cont_btns .botones li {
   padding: 6px 0px;
 }
 html body .contenedor .cont_btns .botones li.selected {
-  background: #fee;
-  color: #f99;
+  background: #fff;
+  color: #1F242C;
 }
 html body .contenedor .contenido {
   position: absolute;
@@ -210,4 +210,4 @@ html body .contenedor .p_contacto .cont_contenido form .acciones input {
   }
 }
 
-/*# sourceMappingURL=template.css.map */
+/*# sourceMappingURL=misitiodelivery.css.map */
