@@ -1,0 +1,213 @@
+html {
+  height: 100%;
+}
+html body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background: #1F242C;
+}
+html body .contenedor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+html body .contenedor .logo {
+  width: 270px;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10px;
+  font-size: 36px;
+  color: #fff;
+}
+html body .contenedor .cont_btns {
+  display: block;
+  width: 100%;
+  top: 60px;
+  position: absolute;
+}
+html body .contenedor .cont_btns .botones {
+  width: 270px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.3);
+}
+html body .contenedor .cont_btns .botones li {
+  float: left;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  width: 90px;
+  padding: 6px 0px;
+}
+html body .contenedor .cont_btns .botones li.selected {
+  background: #fee;
+  color: #f99;
+}
+html body .contenedor .contenido {
+  position: absolute;
+  background: rgba(255, 255, 255, 0);
+  overflow-y: auto;
+}
+html body .contenedor .p_empezar {
+  max-width: 460px;
+  height: calc(100% - 140px);
+  top: 130px;
+  width: 94%;
+  left: 3%;
+}
+html body .contenedor .p_empezar .cont_contenido {
+  padding: 3%;
+  font-family: "Lato", sans-serif;
+}
+html body .contenedor .p_empezar .cont_contenido h1 {
+  color: #fff;
+  font-size: 24px;
+  text-align: left;
+}
+html body .contenedor .p_empezar .cont_contenido h2 {
+  color: #fff;
+  font-size: 18px;
+  text-align: left;
+}
+html body .contenedor .p_empezar .cont_contenido form {
+  padding-top: 20px;
+}
+html body .contenedor .p_empezar .cont_contenido form h3 {
+  font-size: 21px;
+  color: #fff;
+  padding-top: 10px;
+}
+html body .contenedor .p_empezar .cont_contenido form .input {
+  width: 100%;
+}
+html body .contenedor .p_empezar .cont_contenido form .input input {
+  width: 100%;
+  height: 44px;
+  padding: 6px;
+}
+html body .contenedor .p_empezar .cont_contenido form h6 {
+  font-size: 21px;
+  color: #fff;
+  padding-top: 18px;
+}
+html body .contenedor .p_empezar .cont_contenido form .acciones {
+  padding-top: 18px;
+}
+html body .contenedor .p_empezar .cont_contenido form .acciones input {
+  width: 180px;
+  background: #900;
+  padding: 12px;
+  color: #fff;
+  border: 0px;
+  font-size: 14px;
+}
+html body .contenedor .p_empezar .cont_contenido form .acciones .mes_gratis {
+  font-size: 18px;
+  color: #fff;
+  padding-top: 4px;
+}
+html body .contenedor .p_clientes {
+  height: calc(100% - 130px);
+  top: 120px;
+  display: none;
+  width: 94%;
+  left: 3%;
+}
+html body .contenedor .p_clientes .cont_contenido {
+  padding: 0 2% 2% 2%;
+  font-family: "Lato", sans-serif;
+}
+html body .contenedor .p_clientes .cont_contenido .lista_clientes {
+  max-width: 500px;
+  margin: 0 auto;
+}
+html body .contenedor .p_clientes .cont_contenido .lista_clientes li {
+  margin-bottom: 4px;
+  height: 100px;
+  background: #ddd;
+  position: relative;
+}
+html body .contenedor .p_clientes .cont_contenido .lista_clientes li .foto {
+  position: absolute;
+  width: 146px;
+  top: 2px;
+  left: 2px;
+  text-align: center;
+  height: 96px;
+}
+html body .contenedor .p_clientes .cont_contenido .lista_clientes li .foto img {
+  height: 100%;
+  max-width: 100%;
+}
+html body .contenedor .p_clientes .cont_contenido .lista_clientes li .info {
+  width: calc(100% - 157px);
+  position: absolute;
+  left: 155px;
+  top: 2px;
+  height: 81px;
+  font-size: 35px;
+  padding-top: 10px;
+}
+html body .contenedor .p_contacto {
+  max-width: 500px;
+  height: calc(100% - 140px);
+  top: 130px;
+  width: 94%;
+  display: none;
+}
+html body .contenedor .p_contacto .cont_contenido {
+  padding: 0 3% 3% 3%;
+  font-family: "Lato", sans-serif;
+}
+html body .contenedor .p_contacto .cont_contenido h1 {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+html body .contenedor .p_contacto .cont_contenido h2 {
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+html body .contenedor .p_contacto .cont_contenido form h3 {
+  font-size: 18px;
+  color: #fff;
+  padding-top: 8px;
+}
+html body .contenedor .p_contacto .cont_contenido form .input {
+  width: 100%;
+}
+html body .contenedor .p_contacto .cont_contenido form .input input {
+  width: 100%;
+  height: 36px;
+  padding: 6px;
+}
+html body .contenedor .p_contacto .cont_contenido form h6 {
+  font-size: 21px;
+  color: #fff;
+  padding-top: 8px;
+}
+html body .contenedor .p_contacto .cont_contenido form .acciones {
+  padding-top: 18px;
+}
+html body .contenedor .p_contacto .cont_contenido form .acciones input {
+  width: 180px;
+  background: #900;
+  padding: 12px;
+  color: #fff;
+  border: 0px;
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 800px) {
+  html body .contenedor .telefono {
+    display: none;
+  }
+}
+@media only screen and (max-width: 800px) {
+  html body .contenedor .telefono {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=template.css.map */

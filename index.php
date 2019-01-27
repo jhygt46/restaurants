@@ -5,7 +5,7 @@ if($_POST["accion"] == "verificar_dominio_online"){
 }
 
 if($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl"){
-    require('../web/misitiodelivery/index.php');
+    require('misitiodelivery.php');
     exit;
 }
 
