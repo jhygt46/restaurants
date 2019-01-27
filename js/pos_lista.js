@@ -957,6 +957,8 @@ function pedido_obj(){
 }
 function nuevo(data){
 
+    console.log(data);
+
     var obj = pedido_obj();
     obj.id_ped = data.id_ped;
     obj.pedido_code = data.pedido_code;
