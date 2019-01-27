@@ -448,9 +448,8 @@ class Core{
                 $res['telefono'] = $sql2['resultado'][0]['telefono'];
 
                 if($res['despacho'] == 1){
-
-                    $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
                     
+                    $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
                     $res['direccion'] = $sql3['resultado'][0]['direccion'];
                     $res['lat'] = $sql3['resultado'][0]['lat'];
                     $res['lng'] = $sql3['resultado'][0]['lng'];
@@ -458,9 +457,7 @@ class Core{
                     $res['num'] = $sql3['resultado'][0]['num'];
                     $res['depto'] = $sql3['resultado'][0]['depto'];
                     $res['comuna'] = $sql3['resultado'][0]['num'];
-
                 }
-
 
                 $info[] = $res;
                 unset($res);
