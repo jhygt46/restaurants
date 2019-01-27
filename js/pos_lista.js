@@ -172,8 +172,8 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             var info = JSON.parse(data);
-            console.log(info);
-            //nuevo(info[0]);
+            //console.log(info);
+            nuevo(info[0]);
         }, error: function(e){
             console.log(e);
         }
