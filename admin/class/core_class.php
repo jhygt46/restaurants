@@ -426,6 +426,7 @@ class Core{
         if($aux_local['count'] == 1){
             
             $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
+            $info['sql_pedidos'] = $sql;
             for($i=0; $i<$sql['count']; $i++){
 
                 $id_pep = $sql['resultado'][$i]['id_pep'];
