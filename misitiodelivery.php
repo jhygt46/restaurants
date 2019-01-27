@@ -4,11 +4,13 @@
     $list[0]['img'] = "http://www.mikasushi.cl/images/logos/www.mikasushi.cl.jpg";
     $list[0]['nombre'] = "MikaSushi";
     $list[0]['link'] = "www.mikasushi.cl";
+    $list[0]['proto'] = "http";
     
     $list[1]['back'] = "#000";
     $list[1]['img'] = "http://www.runasushi.cl/images/logos/www.runasushi.cl.jpg";
     $list[1]['nombre'] = "RunaSushi";
     $list[1]['link'] = "www.runasushi.cl";
+    $list[1]['proto'] = "http";
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -86,7 +88,7 @@
                     <?php for($i=0; $i<count($list); $i++){ ?>
                     <li>
                         <div style="background: <?php echo $list[$i]['back']; ?>" class="foto"><a target="_blank" href="<?php echo $list[$i]['link']; ?>"><img src="<?php echo $list[$i]['img']; ?>" alt="" /></a></div>
-                        <div class="info"><a target="_blank" style="display: block; color: #000; text-decoration: none" href="<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['nombre']; ?></a><a target="_blank" style="display: block; color: #000; text-decoration: none; font-size: 16px" href="<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['link']; ?></a></div>
+                        <div class="info"><a target="_blank" style="display: block; color: #000; text-decoration: none" href="<?php echo $list[$i]['proto']; ?>:<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['nombre']; ?></a><a target="_blank" style="display: block; color: #000; text-decoration: none; font-size: 20px" href="<?php echo $list[$i]['proto']; ?>:<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['link']; ?></a></div>
                     </li>
                     <?php } ?>
                 </ul>
