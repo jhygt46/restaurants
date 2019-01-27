@@ -422,6 +422,7 @@ class Core{
         $cookie_code = $_COOKIE['CODE'];
         
         $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
+        $info['sql_local'] = $aux_local;
         if($aux_local['count'] == 1){
             
             $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
@@ -467,7 +468,7 @@ class Core{
 
             }
         }
-        return $aux;
+        return $info;
         
     }
     public function socket_code($id_loc, $id_gir){
