@@ -3,12 +3,12 @@
     $list[0]['back'] = "#fff";
     $list[0]['img'] = "http://www.mikasushi.cl/images/logos/www.mikasushi.cl.jpg";
     $list[0]['nombre'] = "MikaSushi";
-    $list[0]['link'] = "http://www.mikasushi.cl";
+    $list[0]['link'] = "www.mikasushi.cl";
     
     $list[1]['back'] = "#000";
     $list[1]['img'] = "http://www.runasushi.cl/images/logos/www.runasushi.cl.jpg";
     $list[1]['nombre'] = "RunaSushi";
-    $list[1]['link'] = "http://www.runasushi.cl";
+    $list[1]['link'] = "www.runasushi.cl";
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
