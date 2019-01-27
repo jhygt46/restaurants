@@ -13,11 +13,11 @@ html body .contenedor {
   height: 100%;
 }
 html body .contenedor .logo {
-  width: 270px;
+  width: 300px;
   text-align: center;
   margin: 0 auto;
   padding-top: 10px;
-  font-size: 36px;
+  font-size: 42px;
   color: #fff;
 }
 html body .contenedor .cont_btns {
