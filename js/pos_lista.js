@@ -49,7 +49,6 @@ function add_carro_promocion(id_cae){
     if(promo.categorias){
         for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
             pedido.carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad), promo: num_promo });
-            seleccionar_productos_categoria_promo(i);
         }
     }
     if(promo.productos){
@@ -67,7 +66,6 @@ function add_carro_promocion(id_cae){
             }
         }
     }
-
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
     listar_pedidos();
