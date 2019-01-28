@@ -371,6 +371,9 @@ class Core{
         $pre_soya = intval($pedido->{'pre_soya'});
         $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
         
+        $ocultar = intval($pedido->{'ocultar'});
+        $eliminar = intval($pedido->{'eliminar'});
+        
         $id_loc = $_COOKIE['ID'];
         $cookie_code = $_COOKIE['CODE'];
         
@@ -386,7 +389,7 @@ class Core{
                 $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
             }
-            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', ocultar='".$ocultar."', eliminar='".$eliminar."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
         
@@ -442,8 +445,8 @@ class Core{
                 $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
                 $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
                 $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
-                $res['eliminado'] = 0;
-                $res['ocultar'] = 0;
+                $res['eliminado'] = $sql['resultado'][$i]['eliminado'];
+                $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
 
                 $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
                 $res['nombre'] = $sql2['resultado'][0]['nombre'];
