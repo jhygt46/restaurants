@@ -609,6 +609,10 @@ function proceso(pedido){
     return true;
     
 }
+function delete_promo(i){
+    var pedidos = get_pedidos();
+    console.log(pedidos[seleccionado]);
+}
 function ver_detalle_carro(index, that){
     
     set_pedido(index, that);
@@ -634,8 +638,8 @@ function ver_detalle_carro(index, that){
             promo_info = create_element_class_inner('promo_info', promo.nombre);
             promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promo.precio), "$"));
             promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
-            promo_delete.setAttribute('promo-pos', i);
-            promo_delete.onclick = function(){ delete_promo(this) };
+            //promo_delete.setAttribute('promo-pos', i);
+            promo_delete.onclick = function(){ delete_promo(i) };
             
             process_carro_promo.appendChild(promo_info);
             process_carro_promo.appendChild(promo_precio);
@@ -1041,8 +1045,8 @@ function guardar_pedido(index){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
-                listar_pedidos();
             }
+            listar_pedidos();
             
         }, error: function(e){
             console.log(e);
@@ -1050,7 +1054,6 @@ function guardar_pedido(index){
     });
     
 }
-
 function change_despacho(that){
     var value = $(that).val();
     var t_despacho = $(that).parents('.data_info').find('.t_despacho');
