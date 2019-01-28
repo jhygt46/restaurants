@@ -999,6 +999,7 @@ function add_pedido(obj){
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
+    console.log(pedidos);
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             aux.push(pedidos[i]);
