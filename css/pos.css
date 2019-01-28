@@ -120,14 +120,14 @@ body {
     height: 16px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .btn_pedido{
-    width: 50%;
+    width: 49%;
     float: left;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .btn_pedido .btn_ped{
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: 8px 1%;
+    padding: 8px 0px;
     color: #fff;
     font-size: 14px;
 }
