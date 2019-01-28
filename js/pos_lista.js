@@ -69,7 +69,7 @@ function add_carro_promocion(id_cae){
         }
     }
     if(tiene_categorias){
-        proceso(pedido);
+        console.log("TIENE CATEGORIAS");
     }else{
         if(tiene_preguntas){
             console.log("TIENE PREGUNTAS");
