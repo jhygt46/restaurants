@@ -10,6 +10,7 @@ var catalogo = 0;
 var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempos = { retiro: 1500, despacho: 3600 };
+var time = new Date().getTime();
 
 function actualizar_seleccionado(){}
 function add_carro_producto(id_pro){
@@ -142,7 +143,6 @@ function modificar_horas(){
     setTimeout(modificar_horas, 6000);
     
 }
-
 function socket_init(){
     
     var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
@@ -157,8 +157,6 @@ function socket_init(){
     });
     
 }
-var time = new Date().getTime();
-
 function agregar_pedido(id){
     
     console.log("AGREGAR PEDIDO");
@@ -356,7 +354,6 @@ function seleccionar_productos_categoria_promo(i){
     $('.p3 .data_info').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
 }
-
 function confirmar_productos_promo(that){
     
     var info = $(that).parents('.nuevo_pedido').find('.data_info');
