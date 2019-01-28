@@ -124,10 +124,10 @@ body {
     float: left;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .btn_pedido .btn_ped{
-    width: 88%;
+    width: 98%;
     margin: 0 auto;
     text-align: center;
-    padding: 8px 2%;
+    padding: 8px 1%;
     color: #fff;
     font-size: 14px;
 }
