@@ -609,6 +609,14 @@ function proceso(pedido){
     return true;
     
 }
+function delete_pro_carro(i){
+    var pedidos = get_pedidos();
+    pedidos[seleccionado].carro.splice(i, 1);
+    set_pedidos(pedidos);
+    guardar_pedido(seleccionado);
+    ver_detalle_carro(seleccionado, null);
+    listar_pedidos();
+}
 function delete_promo(that){
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
