@@ -612,6 +612,8 @@ function proceso(pedido){
 function delete_promo(i){
     var pedidos = get_pedidos();
     pedidos[seleccionado].promos.splice(i, 1);
+    console.log(pedidos[seleccionado].promos);
+    console.log(i);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
     listar_pedidos();
