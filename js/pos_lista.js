@@ -623,11 +623,12 @@ function delete_promo(that){
     }
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
+    ver_detalle_carro(seleccionado, null);
     listar_pedidos();
 }
 function ver_detalle_carro(index, that){
     
-    set_pedido(index, that);
+    if(that !== null){ set_pedido(index, that) }
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
