@@ -613,7 +613,7 @@ function delete_promo(that){
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
-    for(var j=0, jlen = pedidos[seleccionado].carro.length; j<jlen; j++){
+    for(var j=0; j < pedidos[seleccionado].carro.length; j++){
         if(pedidos[seleccionado].carro[j].promo == i){
             pedidos[seleccionado].carro.splice(j, 1);
             jlen = jlen - 1;
