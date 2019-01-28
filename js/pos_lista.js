@@ -49,7 +49,7 @@ function add_carro_promocion(id_cae){
     if(promo.categorias){
         for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
             pedido.carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad), promo: num_promo });
-            tiene_categorias = true;
+            proceso(pedido);
         }
     }
     if(promo.productos){
@@ -59,7 +59,6 @@ function add_carro_promocion(id_cae){
                 var item_carro = { id_pro: parseInt(promo.productos[i].id_pro), promo: num_promo };
                 if(producto.preguntas){
                     item_carro.preguntas = [];
-                    tiene_preguntas = true;
                     for(var k=0, klen=producto.preguntas.length; k<klen; k++){
                         item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
                     }
@@ -68,13 +67,7 @@ function add_carro_promocion(id_cae){
             }
         }
     }
-    if(tiene_categorias){
-        proceso(pedido);
-    }else{
-        if(tiene_preguntas){
-            console.log("TIENE PREGUNTAS");
-        }
-    }
+
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
     listar_pedidos();
