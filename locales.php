@@ -130,16 +130,15 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                     </div>
                                 </div>
                                 <div class="preguntas">
-                                    <div class="pregunta clearfix" style="padding-top: 20px">
+                                    <div class="pregunta clearfix">
                                         <div class="pre_nom">Repartidor</div>
-                                        <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                        <div class="pre_check"><input type="checkbox" id="pre_wasabi" /></div>
                                     </div>
-                                    <div class="pregunta clearfix" style="padding-top: 20px">
-                                        <div class="pre_nom">Repartidor</div>
-                                        <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                    <div class="pregunta clearfix">
+                                        <div class="pre_nom">Cancelar</div>
+                                        <div class="pre_check"><input type="checkbox" id="cancelar" /></div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="n_submit">
