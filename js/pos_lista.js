@@ -225,7 +225,9 @@ function listar_pedidos(){
     var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
+            if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
+                $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
+            }
         }
     }
 }
@@ -958,7 +960,9 @@ function pedido_obj(){
         lat: 0,
         lng: 0,
         costo: 0,
-        total: 0
+        total: 0,
+        eliminado: 0,
+        ocultar: 0
     };
 }
 function nuevo(data){
@@ -1108,6 +1112,22 @@ function cambiar_hora(index, n, that){
         }
     });
     
+}
+function eliminar_pedido(){
+    var pedidos = get_pedidos();
+    pedidos[seleccionado].eliminado = 1;
+    listar_pedidos();
+    set_pedidos(pedidos);
+    $('.p1').hide();
+    $('.pop_up').hide();
+}
+function ocultar_pedido(){
+    var pedidos = get_pedidos();
+    pedidos[seleccionado].ocultar = 1;
+    listar_pedidos();
+    set_pedidos(pedidos);
+    $('.p1').hide();
+    $('.pop_up').hide();
 }
 var formatNumber = {
     separador: ".", // separador para los miles
