@@ -1031,15 +1031,12 @@ function guardar_pedido(index){
         success: function(data){
             
             var info = JSON.parse(data);
-            console.log(pedidos);
-            console.log(pedidos[index]);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
                 listar_pedidos();
             }
-
             
         }, error: function(e){
             console.log(e);
