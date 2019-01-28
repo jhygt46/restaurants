@@ -1053,12 +1053,15 @@ function guardar_pedido(index){
 function change_despacho(that){
     var value = $(that).val();
     var t_despacho = $(that).parents('.data_info').find('.t_despacho');
+    var t_repartidor = $(that).parents('.data_info').find('.t_repartidor');
     
     if(value == 0){
         t_despacho.hide();
+        t_repartidor.hide();
     }
     if(value == 1){
         t_despacho.show();
+        t_repartidor.show();
     }
 }
 function cambiar_estado(index, n, that){
