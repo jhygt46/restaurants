@@ -609,11 +609,11 @@ function proceso(pedido){
     return true;
     
 }
-function delete_promo(i){
+function delete_promo(that){
     var pedidos = get_pedidos();
+    var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
     console.log(pedidos[seleccionado].promos);
-    console.log(i);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
     listar_pedidos();
@@ -643,7 +643,7 @@ function ver_detalle_carro(index, that){
             promo_info = create_element_class_inner('promo_info', promo.nombre);
             promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promo.precio), "$"));
             promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
-            //promo_delete.setAttribute('promo-pos', i);
+            promo_delete.setAttribute('promo-pos', i);
             promo_delete.onclick = function(){ delete_promo(i) };
             
             process_carro_promo.appendChild(promo_info);
