@@ -132,7 +132,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                 <div class="preguntas">
                                     <div class="pregunta clearfix">
                                         <div class="pre_nom">Repartidor</div>
-                                        <div class="pre_check"><input type="checkbox" id="pre_wasabi" /></div>
+                                        <div class="pre_check"><select><option value="0">Seleccionar</option><option value="1">Juan</option><option value="1">Maximiliano</option></select></div>
                                     </div>
                                     <div class="pregunta clearfix">
                                         <div class="pre_nom">Cancelar</div>
