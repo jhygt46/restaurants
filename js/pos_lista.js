@@ -852,10 +852,12 @@ function ver_pedido(index, that){
     if(pedido.despacho == 0){
         $('#despacho option[value=0]').attr('selected', 'selected');
         $('.t_despacho').hide();
+        $('.t_repartidor').hide();
     }
     if(pedido.despacho == 1){
         $('#despacho option[value=1]').attr('selected', 'selected');
         $('.t_despacho').show();
+        $('.t_repartidor').show();
     }
     
     if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
