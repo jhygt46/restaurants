@@ -119,6 +119,14 @@ body {
     width: 16px;
     height: 16px;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pre_nom{
+    width: 70%;
+    float: left;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pre_check{
+    width: 30%;
+    float: left;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo{
     
 }
