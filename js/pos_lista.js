@@ -615,7 +615,7 @@ function delete_promo(that){
     pedidos[seleccionado].promos.splice(i, 1);
     for(var j=0, jlen = pedidos[seleccionado].carro.length; j<jlen; j++){
         if(pedidos[seleccionado].carro[j].promo == i){
-            pedidos[seleccionado].carro[j].splice(j, 1);
+            pedidos[seleccionado].carro.splice(j, 1);
             jlen = jlen - 1;
         }
     }
