@@ -611,7 +611,10 @@ function proceso(pedido){
 }
 function delete_promo(i){
     var pedidos = get_pedidos();
-    console.log(pedidos[seleccionado]);
+    pedidos[seleccionado].promos.splice(i, 1);
+    set_pedidos(pedidos);
+    guardar_pedido(seleccionado);
+    listar_pedidos();
 }
 function ver_detalle_carro(index, that){
     
