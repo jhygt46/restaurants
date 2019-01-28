@@ -40,8 +40,6 @@ function add_carro_promocion(id_cae){
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
     var promo = get_categoria(id_cae);
-    var tiene_categorias = false;
-    var tiene_preguntas = false;
     
     pedido.promos.push({ id_cae: id_cae });
     var num_promo = pedido.promos.length - 1;
