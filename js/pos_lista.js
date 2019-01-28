@@ -906,6 +906,8 @@ function done_pedido(){
     }
     if(crear_nuevo == 1){
         
+        console.log("NUEVO");
+        
         var obj = pedido_obj();
         obj.id_ped = 0;
                 
@@ -952,11 +954,19 @@ function pedido_obj(){
         pre_teriyaki: 0,
         id_mot: 0,
         verificado: 0,
+        nombre: '',
+        telefono: '',
+        direccion: '',
+        calle: '',
+        num: '',
+        depto: '',
+        lat: 0,
+        lng: 0,
+        costo: 0,
+        total: 0
     };
 }
 function nuevo(data){
-
-    console.log(data);
 
     var obj = pedido_obj();
     obj.id_ped = data.id_ped;
