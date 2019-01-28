@@ -11,9 +11,7 @@ var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempos = { retiro: 1500, despacho: 3600 };
 
-function actualizar_seleccionado(){
-    
-}
+function actualizar_seleccionado(){}
 function add_carro_producto(id_pro){
 
     var pedidos = get_pedidos();
@@ -1037,13 +1035,11 @@ function guardar_pedido(index){
         success: function(data){
             
             var info = JSON.parse(data);
-            //console.log(info);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
             }
-            listar_pedidos();
             
         }, error: function(e){
             console.log(e);
