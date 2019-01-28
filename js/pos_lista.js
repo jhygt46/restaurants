@@ -1039,7 +1039,9 @@ function guardar_pedido(index){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
+                listar_pedidos();
             }
+
             
         }, error: function(e){
             console.log(e);
