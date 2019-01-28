@@ -645,7 +645,7 @@ function ver_detalle_carro(index, that){
             promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promo.precio), "$"));
             promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
             promo_delete.setAttribute('promo-pos', i);
-            promo_delete.onclick = function(){ delete_promo(i) };
+            promo_delete.onclick = function(){ delete_promo(this) };
             
             process_carro_promo.appendChild(promo_info);
             process_carro_promo.appendChild(promo_precio);
