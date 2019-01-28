@@ -225,6 +225,7 @@ function listar_pedidos(){
     var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
+            console.log(pedidos[i]);
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
                 $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
             }
