@@ -372,7 +372,7 @@ class Core{
         $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
         
         $ocultar = intval($pedido->{'ocultar'});
-        $eliminar = intval($pedido->{'eliminar'});
+        $eliminado = intval($pedido->{'eliminado'});
         
         $id_loc = $_COOKIE['ID'];
         $cookie_code = $_COOKIE['CODE'];
@@ -389,7 +389,7 @@ class Core{
                 $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
             }
-            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', ocultar='".$ocultar."', eliminar='".$eliminar."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
         
@@ -427,7 +427,7 @@ class Core{
         $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
         if($aux_local['count'] == 1){
             
-            $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."' AND eliminado='0'") ;
+            $sql = ($id_ped == null) ? $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' ORDER BY id_ped DESC") : $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND id_ped='".$id_ped."'") ;
             for($i=0; $i<$sql['count']; $i++){
 
                 $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
