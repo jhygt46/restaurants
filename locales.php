@@ -129,14 +129,17 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                         <div class="pre_check"><select id="pre_palitos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
                                     </div>
                                 </div>
-                                <div class="preguntas clearfix" style="padding-top: 20px">
-                                    <div class="pre_nom">Repartidor</div>
-                                    <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                <div class="preguntas">
+                                    <div class="pregunta clearfix" style="padding-top: 20px">
+                                        <div class="pre_nom">Repartidor</div>
+                                        <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                    </div>
+                                    <div class="pregunta clearfix" style="padding-top: 20px">
+                                        <div class="pre_nom">Repartidor</div>
+                                        <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
+                                    </div>
                                 </div>
-                                <div class="preguntas clearfix" style="padding-top: 20px">
-                                    <div class="pre_nom">Repartidor</div>
-                                    <div class="pre_check"><select id="id_mot"><option value="0">Ninguno</option><?php for($i=0; $i<count($info['motos']); $i++){ ?><option value="<?php echo $info['motos'][$i]['id_mot']; ?>" <?php echo ($i == 0) ? "selected" : "" ; ?>><?php echo $info['motos'][$i]['nombre']; ?></option><?php } ?></select></div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="n_submit">
