@@ -613,9 +613,12 @@ function delete_promo(that){
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
-    for(var j=0; j < pedidos[seleccionado].carro.length; j++){
-        if(pedidos[seleccionado].carro[j].promo == i){
-            pedidos[seleccionado].carro.splice(j, 1);
+    var carro = pedidos[seleccionado].carro;
+    pedidos[seleccionado].carro = [];
+    
+    for(var j=0; j < carro.length; j++){
+        if(!carro[j].hasOwnProperty('promo') && carro[j].promo != i){
+           pedidos[seleccionado].carro.push(carro[j]); 
         }
     }
     set_pedidos(pedidos);
