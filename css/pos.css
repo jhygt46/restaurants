@@ -123,6 +123,12 @@ body {
     width: 33.33%;
     float: left;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .preguntas .pregunta .btn_pedido .btn_ped{
+    width: 90%;
+    margin: 0 auto;
+    background: #fcc;
+    height: 28px;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .pro_cat_promo{
     
 }
