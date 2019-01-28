@@ -1117,16 +1117,16 @@ function cambiar_hora(index, n, that){
 function eliminar_pedido(){
     var pedidos = get_pedidos();
     pedidos[seleccionado].eliminado = 1;
-    listar_pedidos();
     set_pedidos(pedidos);
+    listar_pedidos();
     $('.p1').hide();
     $('.pop_up').hide();
 }
 function ocultar_pedido(){
     var pedidos = get_pedidos();
     pedidos[seleccionado].ocultar = 1;
-    listar_pedidos();
     set_pedidos(pedidos);
+    listar_pedidos();
     $('.p1').hide();
     $('.pop_up').hide();
 }
