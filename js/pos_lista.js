@@ -612,8 +612,6 @@ function proceso(pedido){
 function delete_promo(that){
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
-    console.log(pedidos[seleccionado]);
-    console.log(i);
     pedidos[seleccionado].promos.splice(i, 1);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
