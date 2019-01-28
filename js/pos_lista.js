@@ -31,6 +31,7 @@ function add_carro_producto(id_pro){
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
+    mostrar_pregunta(pedido.carro.length - 1);
     listar_pedidos();
 
 }
