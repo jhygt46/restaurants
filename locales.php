@@ -134,9 +134,10 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                     </div>
                                 </div>
                                 <div class="preguntas">
-                                    <div class="pregunta clearfix" style="padding-bottom: 4px">
-                                        <div class="pre_nom">Ocultar</div>
-                                        <div class="pre_check"><input type="checkbox" id="cancelar" /></div>
+                                    <div class="pregunta clearfix">
+                                        <div class="btn_pedido">Boton 1</div>
+                                        <div class="btn_pedido">Boton 2</div>
+                                        <div class="btn_pedido">Boton 3</div>
                                     </div>
                                 </div>
                             </div>
