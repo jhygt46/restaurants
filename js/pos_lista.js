@@ -225,7 +225,7 @@ function get_producto(id_pro){
 }
 function listar_pedidos(){
     $('.lista_pedidos').html('');
-    var pedidos = get_pedidos_false();
+    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             console.log(pedidos[i]);
@@ -1053,7 +1053,7 @@ function add_pedido(obj){
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
-    if(pedidos.length > 0){
+    if(pedidos !== null){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             aux.push(pedidos[i]);
         }
