@@ -362,16 +362,16 @@ class Core{
         $despacho = intval($pedido->{'despacho'});
         $estado = intval($pedido->{'estado'});
         
-        $nombre = intval($pedido->{'nombre'});
-        $telefono = intval($pedido->{'telefono'});
+        $nombre = $pedido->{'nombre'};
+        $telefono = $pedido->{'telefono'};
         
-        $direccion = intval($pedido->{'direccion'});
-        $calle = intval($pedido->{'calle'});
-        $num = intval($pedido->{'num'});
-        $depto = intval($pedido->{'depto'});
-        $comuna = intval($pedido->{'comuna'});
-        $lat = intval($pedido->{'lat'});
-        $lng = intval($pedido->{'lng'});
+        $direccion = $pedido->{'direccion'};
+        $calle = $pedido->{'calle'};
+        $num = $pedido->{'num'};
+        $depto = $pedido->{'depto'};
+        $comuna = $pedido->{'comuna'};
+        $lat = $pedido->{'lat'};
+        $lng = $pedido->{'lng'};
         
         $pre_gengibre = intval($pedido->{'pre_gengibre'});
         $pre_wasabi = intval($pedido->{'pre_wasabi'});
