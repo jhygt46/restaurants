@@ -161,9 +161,7 @@ function socket_init(){
     
 }
 function agregar_pedido(id){
-    
-    console.log("AGREGAR PEDIDO");
-    
+
     var send = { id_ped: id };
     $.ajax({
         url: "ajax/get_pedido.php",
@@ -171,7 +169,8 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             var info = JSON.parse(data);
-            //console.log(info);
+            var x = document.getElementById("myAudio"); 
+            x.play();
             nuevo(info[0]);
         }, error: function(e){
             console.log(e);
