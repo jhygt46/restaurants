@@ -485,13 +485,17 @@ function confirmar_pregunta_productos(that){
                 $('.pop_up').hide();
                 $('.p4').hide();
                 
+                var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
-                    //if(tiene_pregunta(pedidos[seleccionado].carro[m])){
-                        console.log(pedidos[seleccionado].carro[m]);
-                        console.log(tiene_pregunta(pedidos[seleccionado].carro[m]));
-                    //}
+                    if(tiene_pregunta(pedidos[seleccionado].carro[m])){
+                        t_pregunta = m;
+                    }
                 }
-                //ver_detalle_carro(seleccionado, null);
+                if(t_pregunta >= 0){
+                    mostrar_pregunta(t_pregunta);
+                }else{
+                    ver_detalle_carro(seleccionado, null);
+                }
                 
             }
         });
