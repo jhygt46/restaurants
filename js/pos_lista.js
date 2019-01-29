@@ -3,6 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
+    gmap_input();
 });
 var seleccionado = 0;
 var categoria = 0;
@@ -1200,4 +1201,8 @@ var formatNumber = {
         this.simbol = simbol ||'';
         return this.formatear(num);
     }
+}
+function gmap_input(){
+    var input = document.getElementById('direccion');
+    var searchBox = new google.maps.places.SearchBox(input);
 }
