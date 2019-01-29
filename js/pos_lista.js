@@ -486,12 +486,12 @@ function confirmar_pregunta_productos(that){
                 $('.p4').hide();
                 
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
-                    if(tiene_pregunta(pedidos[seleccionado].carro[m])){
+                    //if(tiene_pregunta(pedidos[seleccionado].carro[m])){
                         console.log("TIENE PREGUNTA carro: "+m);
-                    }
+                    //}
                 }
-                
                 //ver_detalle_carro(seleccionado, null);
+                
             }
         });
     });
