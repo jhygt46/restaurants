@@ -889,7 +889,8 @@ function ver_pedido(index, that){
     if(index == -1){
         
         var pedidos = get_pedidos();
-        pedidos.push(pedido_obj());
+        var pedido = pedido_obj();
+        pedidos.push(pedido);
         seleccionado = pedidos.length - 1;
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
         crear_nuevo = 1;
