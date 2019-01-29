@@ -162,9 +162,7 @@ function socket_init(){
 }
 function agregar_pedido(id){
 
-    document.getElementById("myAudio").play().catch(function() {
-        console.log("PLAY MP3");
-    });
+    
 
     var send = { id_ped: id };
     $.ajax({
@@ -172,8 +170,13 @@ function agregar_pedido(id){
         type: "POST",
         data: send,
         success: function(data){
+            
+            document.getElementById("myAudio").play().catch(function() {
+                console.log("PLAY MP3");
+            });
             var info = JSON.parse(data);
             nuevo(info[0]);
+            
         }, error: function(e){
             console.log(e);
         }
