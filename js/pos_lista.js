@@ -976,7 +976,6 @@ function done_pedido(){
         obj.id_mot = $('#id_mot').val();
         
         add_pedido(obj);
-        guardar_pedido(0);
         
     }
     
@@ -1053,13 +1052,15 @@ function add_pedido(obj){
         
     var aux = [];
     aux.push(obj);
+    var pedidos = get_pedidos();
     if(pedidos !== null){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             aux.push(pedidos[i]);
         }
     }
-    seleccionado = 0;
     set_pedidos(aux);
+    seleccionado = 0;
+    guardar_pedido(seleccionado);
     
 }
 function set_pedidos(pedidos){
