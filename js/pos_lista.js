@@ -892,6 +892,7 @@ function ver_pedido(index, that){
         var pedido = pedido_obj();
         pedidos.push(pedido);
         seleccionado = pedidos.length - 1;
+        set_pedidos(pedidos);
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
         crear_nuevo = 1;
     
@@ -1219,6 +1220,7 @@ function gmap_input(){
         if(places.length == 1){
             
             var pedidos = get_pedidos();
+            console.log();
             pedidos[seleccionado].lat = places[0].geometry.location.lat();
             pedidos[seleccionado].lng = places[0].geometry.location.lng();
             pedidos[seleccionado].direccion = places[0].formatted_address;
