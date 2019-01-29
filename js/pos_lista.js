@@ -484,7 +484,8 @@ function confirmar_pregunta_productos(that){
                 set_pedidos(pedidos);
                 $('.pop_up').hide();
                 $('.p4').hide();
-                ver_detalle_carro(seleccionado, null);
+                console.log(tiene_pregunta(pedidos[seleccionado].carro));
+                //ver_detalle_carro(seleccionado, null);
             }
         });
     });
