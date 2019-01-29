@@ -870,13 +870,16 @@ function np_close(that){
 }
 function ver_pedido(index, that){
     
-    // MOSTRAR INDEX
-    var pedidos, pedido;
+    $('#nombre').val("");
+    $('#telefono').val("");
+    $('#direccion').val("");
+    $('#depto').val("");
+    
     if(index >= 0){
         
         set_pedido(index, that);
-        pedidos = get_pedidos();
-        pedido = pedidos[index];
+        var pedidos = get_pedidos();
+        var pedido = pedidos[index];
         if(pedido.id_ped == 0){
             $('.p1 .n_title').html("PEDIDO AUN NO GUARDADO");
         }
@@ -885,6 +888,8 @@ function ver_pedido(index, that){
         }
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
+        $('#direccion').val(pedido.direccion);
+        $('#depto').val(pedido.depto);
         
     }
     if(index == -1){
