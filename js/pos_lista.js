@@ -483,6 +483,7 @@ function confirmar_pregunta_productos(that){
                 var pedidos = get_pedidos();
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
                 set_pedidos(pedidos);
+                guardar_pedido(seleccionado);
                 $('.pop_up').hide();
                 $('.p4').hide();
                 
