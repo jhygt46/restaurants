@@ -3,7 +3,6 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
-
 });
 var seleccionado = 0;
 var categoria = 0;
@@ -1204,14 +1203,7 @@ var formatNumber = {
 }
 function gmap_input(){
     
-    //var input = document.getElementById('direccion');
-    //var searchBox = new google.maps.places.SearchBox(input);
-    
-    var map = new google.maps.Map(document.getElementById('direccion'), {
-        center: {lat: -33.428066, lng: -70.616695},
-        zoom: 13,
-        mapTypeId: 'roadmap',
-        disableDefaultUI: true
-    });
+    var input = document.getElementById('direccion');
+    var searchBox = new google.maps.places.SearchBox(input);
     
 }
