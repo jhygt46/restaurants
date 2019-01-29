@@ -383,7 +383,6 @@ function confirmar_productos_promo(that){
         var pedidos = get_pedidos();
         var aux_promo = pedidos[seleccionado].carro[carro_pos].promo;
         pedidos[seleccionado].carro.splice(carro_pos, 1);
-        
         for(var i=0, ilen=arr.length; i<ilen; i++){
             for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
                 
@@ -402,6 +401,7 @@ function confirmar_productos_promo(that){
         }
         set_pedidos(pedidos);
         if(proceso(pedidos[seleccionado])){
+            console.log("BUSCAR PREGUNTAS");
             $('.pop_up').hide();
             $('.p3').hide();
         }
