@@ -358,11 +358,20 @@ class Core{
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
         
-        $id_ped = intval($pedido->{'id_pep'});
-        
         $id_ped = intval($pedido->{'id_ped'});
         $despacho = intval($pedido->{'despacho'});
         $estado = intval($pedido->{'estado'});
+        
+        $nombre = intval($pedido->{'nombre'});
+        $telefono = intval($pedido->{'telefono'});
+        
+        $direccion = intval($pedido->{'direccion'});
+        $calle = intval($pedido->{'calle'});
+        $num = intval($pedido->{'num'});
+        $depto = intval($pedido->{'depto'});
+        $comuna = intval($pedido->{'comuna'});
+        $lat = intval($pedido->{'lat'});
+        $lng = intval($pedido->{'lng'});
         
         $pre_gengibre = intval($pedido->{'pre_gengibre'});
         $pre_wasabi = intval($pedido->{'pre_wasabi'});
@@ -374,6 +383,9 @@ class Core{
         $ocultar = intval($pedido->{'ocultar'});
         $eliminado = intval($pedido->{'eliminado'});
         
+        $nombre = intval($pedido->{'costo'});
+        $telefono = intval($pedido->{'total'});
+        
         $id_loc = $_COOKIE['ID'];
         $cookie_code = $_COOKIE['CODE'];
         
@@ -381,19 +393,21 @@ class Core{
         if($aux_local['count'] == 1){
             
             if($id_ped > 0){
-                $sql_pedido = $this->con->sql("SELECT code FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                $sql_pedido = $this->con->sql("SELECT code, id_puser, id_pdir FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 $code = $sql_pedido['resultado'][0]['code'];
+                $this->con->sql("UPDATE pedidos_usuarios SET nombre='".$nombre."', telefono='".$telefono."' WHERE id_puser='".$sql_pedido['resultado'][0]['id_puser']."'");
+                $this->con->sql("UPDATE pedidos_direccion SET direccion='".$direccion."', calle='".$calle."', num='".$num."', depto='".$depto."', comuna='".$comuna."', lat='".$lat."', lng='".$lng."' WHERE id_pdir='".$sql_pedido['resultado'][0]['id_pdir']."'");
             }
             if($id_ped == 0){
+                $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono) VALUES ('".$nombre."', '".$telefono."') ");
+                $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."')");
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc) VALUES ('0', now(), '".$code."', '".$id_loc."')");
+                $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc, id_puser, id_pdir) VALUES ('0', now(), '".$code."', '".$id_loc."', '".$sql_puser['insert_id']."', '".$sql_pdir['insert_id']."')");
                 $id_ped = $insert['insert_id'];
             }
-            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
-
+            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            
         }
-        
-        
         
         /*
         $id_mot = intval($pedido->{'id_mot'});
