@@ -383,8 +383,8 @@ class Core{
         $ocultar = intval($pedido->{'ocultar'});
         $eliminado = intval($pedido->{'eliminado'});
         
-        $nombre = intval($pedido->{'costo'});
-        $telefono = intval($pedido->{'total'});
+        $costo = intval($pedido->{'costo'});
+        $total = intval($pedido->{'total'});
         
         $id_loc = $_COOKIE['ID'];
         $cookie_code = $_COOKIE['CODE'];
@@ -400,7 +400,7 @@ class Core{
             }
             if($id_ped == 0){
                 $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono) VALUES ('".$nombre."', '".$telefono."') ");
-                $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."')");
+                $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$sql_puser['insert_id']."')");
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
                 $insert = $this->con->sql("INSERT INTO pedidos_aux (tipo, fecha, code, id_loc, id_puser, id_pdir) VALUES ('0', now(), '".$code."', '".$id_loc."', '".$sql_puser['insert_id']."', '".$sql_pdir['insert_id']."')");
                 $id_ped = $insert['insert_id'];
