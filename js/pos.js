@@ -242,36 +242,7 @@ function done_pedido(){
     }
     
 }
-function nuevo(data){
-        
-    var obj = pedido_obj();
-    obj.id_ped = data.id_ped;
-    obj.pedido_code = data.pedido_code;
-    obj.tipo = 1;
-    obj.despacho = data.despacho;
-    obj.carro = data.carro;
-    obj.promos = data.promos;
-    obj.pre_wasabi = data.pre_wasabi;
-    obj.pre_gengibre = data.pre_gengibre;
-    obj.pre_embarazadas = data.pre_embarazadas;
-    obj.pre_palitos = data.pre_palitos;
-    obj.pre_soya = data.pre_soya;
-    obj.pre_teriyaki = data.pre_teriyaki;
-    obj.verify_despacho = data.verify_despacho;
-    add_pedido(obj);
-    listar_pedidos();
-    
-}
-function add_pedido(obj){
-    
-    var aux = [];
-    aux.push(obj);
-    for(var i=0, ilen=pedidos.length; i<ilen; i++){
-        aux.push(pedidos[i]);
-    }
-    pedidos = aux;
-    
-}
+
 function rm_pedido(n){
     pedidos.splice(n, 1);
 }
