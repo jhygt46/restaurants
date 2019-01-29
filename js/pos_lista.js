@@ -883,22 +883,15 @@ function ver_pedido(index, that){
         if(pedido.id_ped > 0){
             $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
         }
+        $('#nombre').val(pedido.nombre);
+        $('#telefono').val(pedido.telefono);
         
     }
     if(index == -1){
-        
-        var pedidos = get_pedidos();
         var pedido = pedido_obj();
-        pedidos.push(pedido);
-        seleccionado = pedidos.length - 1;
-        set_pedidos(pedidos);
+        add_pedido(pedido);
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
-    
     }
-    
-    $('#nombre').val(pedido.nombre);
-    $('#telefono').val(pedido.telefono);
-    
     if(pedido.despacho == 0){
         $('#despacho option[value=0]').attr('selected', 'selected');
         $('.t_despacho').hide();
@@ -1025,14 +1018,13 @@ function add_pedido(obj){
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
-    if(pedidos !== null){
+    if(pedidos.length > 0){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             aux.push(pedidos[i]);
         }
     }
     set_pedidos(aux);
     seleccionado = 0;
-    guardar_pedido(seleccionado);
     
 }
 function set_pedidos(pedidos){
