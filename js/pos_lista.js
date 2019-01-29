@@ -1053,7 +1053,7 @@ function add_pedido(obj){
     var aux = [];
     aux.push(obj);
     var pedidos = get_pedidos();
-    if(pedidos !== null){
+    if(pedidos.length > 0){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             aux.push(pedidos[i]);
         }
