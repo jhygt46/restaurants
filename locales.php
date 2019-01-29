@@ -70,7 +70,6 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
     </head>
     <body>
         <audio id="myAudio">
-            <source src="http://www.miisitiodelivery.cl/audio/nuevo.ogg" type="audio/ogg">
             <source src="http://www.miisitiodelivery.cl/audio/nuevo.mp3" type="audio/mpeg">
             Tu navegador no soporta el audio.
         </audio>
