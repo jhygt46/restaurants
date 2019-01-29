@@ -395,8 +395,8 @@ class Core{
             if($id_ped > 0){
                 $sql_pedido = $this->con->sql("SELECT code, id_puser, id_pdir FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 $code = $sql_pedido['resultado'][0]['code'];
-                $this->con->sql("UPDATE pedidos_usuarios SET nombre='".$nombre."', telefono='".$telefono."' WHERE id_puser='".$sql_pedido['resultado'][0]['id_puser']."'");
-                $this->con->sql("UPDATE pedidos_direccion SET direccion='".$direccion."', calle='".$calle."', num='".$num."', depto='".$depto."', comuna='".$comuna."', lat='".$lat."', lng='".$lng."' WHERE id_pdir='".$sql_pedido['resultado'][0]['id_pdir']."'");
+                $info['mod_user'] = $this->con->sql("UPDATE pedidos_usuarios SET nombre='".$nombre."', telefono='".$telefono."' WHERE id_puser='".$sql_pedido['resultado'][0]['id_puser']."'");
+                $info['mod_dire'] = $this->con->sql("UPDATE pedidos_direccion SET direccion='".$direccion."', calle='".$calle."', num='".$num."', depto='".$depto."', comuna='".$comuna."', lat='".$lat."', lng='".$lng."' WHERE id_pdir='".$sql_pedido['resultado'][0]['id_pdir']."'");
             }
             if($id_ped == 0){
                 $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono) VALUES ('".$nombre."', '".$telefono."') ");

@@ -1086,6 +1086,7 @@ function guardar_pedido(index){
         success: function(data){
             
             var info = JSON.parse(data);
+            console.log(info);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
