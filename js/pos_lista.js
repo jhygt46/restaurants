@@ -633,6 +633,7 @@ function delete_pro_carro(i){
     listar_pedidos();
 }
 function delete_promo(that){
+    
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
@@ -640,7 +641,7 @@ function delete_promo(that){
     pedidos[seleccionado].carro = [];
     
     for(var j=0; j < carro.length; j++){
-        if(!carro[j].hasOwnProperty('promo') && carro[j].promo != i){
+        if(!carro[j].hasOwnProperty('promo') || carro[j].promo != i){
            pedidos[seleccionado].carro.push(carro[j]); 
         }
     }
@@ -648,6 +649,7 @@ function delete_promo(that){
     guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
+    
 }
 function ver_detalle_carro(index, that){
     
