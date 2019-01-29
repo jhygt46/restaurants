@@ -15,8 +15,8 @@ if($_SESSION['user']['info']['id_user'] > 0){
     if($user_local['count'] == 1){
         
         $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
-        setcookie('CODE', $code_cookie, time()+10800);
-        setcookie('ID', $id_loc, time()+10800);
+        setcookie('CODE', $code_cookie, time()+50400);
+        setcookie('ID', $id_loc, time()+50400);
         $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
         $code_verificado = true;
         session_destroy();
