@@ -401,7 +401,7 @@ function confirmar_productos_promo(that){
         }
         set_pedidos(pedidos);
         if(proceso(pedidos[seleccionado])){
-            console.log("BUSCAR PREGUNTAS");
+            
             $('.pop_up').hide();
             $('.p3').hide();
         }
@@ -482,10 +482,7 @@ function confirmar_pregunta_productos(that){
                 var pedidos = get_pedidos();
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
                 set_pedidos(pedidos);
-                
-                $('.pop_up').hide();
                 $('.p4').hide();
-                
             }
         });
     });
