@@ -888,7 +888,9 @@ function ver_pedido(index, that){
     }
     if(index == -1){
         
-        pedido = pedido_obj();
+        var pedidos = get_pedidos();
+        pedidos.push(pedido_obj());
+        seleccionado = pedidos.length - 1;
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
         crear_nuevo = 1;
     
