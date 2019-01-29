@@ -46,12 +46,21 @@ body {
     top: 32px;
     left: 5.2%;
 }
-.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info{
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n1{
     width: 96%;
     margin: 0 2%;
     height: calc(100% - 95px);
     top: 50px;
     background: #ddd;
+    position: absolute;
+    overflow-y: auto;   
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n2{
+    width: 100%;
+    margin: 0px;
+    height: calc(100% - 60px);
+    top: 50px;
+    /*background: #ddd;*/
     position: absolute;
     overflow-y: auto;   
 }

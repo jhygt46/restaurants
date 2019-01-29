@@ -75,7 +75,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                     <div class="p1 nuevo_pedido vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
-                        <div class="n_info">
+                        <div class="n_info n1">
                             <div class="data_info">
                                 <div class="nom_tel clearfix">
                                     <div class="nom">
@@ -148,7 +148,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                     <div class="p2 nuevo_pedido vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
-                        <div class="n_info">
+                        <div class="n_info n2">
                             <div class="data_info"></div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
                         <div class="n_stitle"></div>
-                        <div class="n_info">
+                        <div class="n_info n1">
                             <div class="data_info"></div>
                         </div>
                         <div class="n_submit">
@@ -167,7 +167,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
                         <div class="n_stitle"></div>
-                        <div class="n_info">
+                        <div class="n_info n1">
                             <div class="data_info"></div>
                         </div>
                         <div class="n_submit">
