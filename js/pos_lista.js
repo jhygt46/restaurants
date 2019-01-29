@@ -639,14 +639,19 @@ function delete_promo(that){
     var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
+
     var carro = pedidos[seleccionado].carro;
     pedidos[seleccionado].carro = [];
     
     for(var j=0; j < carro.length; j++){
         if(!carro[j].hasOwnProperty('promo') || carro[j].promo != i){
+           if(carro[j].promo > i){
+               carro[j].promo = carro[j].promo - 1;
+           }
            pedidos[seleccionado].carro.push(carro[j]); 
         }
     }
+    
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
