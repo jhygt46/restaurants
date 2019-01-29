@@ -931,56 +931,26 @@ function nuevo_pedido(){
 }
 function done_pedido(){
 
-    //if(crear_nuevo == 0){
-        
-        var pedidos = get_pedidos();
-        pedidos[seleccionado].nombre = $('#nombre').val();
-        pedidos[seleccionado].telefono = $('#telefono').val();
-        pedidos[seleccionado].despacho = $('#despacho').val();
-        pedidos[seleccionado].direccion = $('#direccion').val();
-        pedidos[seleccionado].depto = $('#depto').val();
-        
-        pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
-        
-        pedidos[seleccionado].id_mot = $('#id_mot').val();
-        
-        set_pedidos(pedidos);
-        guardar_pedido(seleccionado);
-        
-    //}
-    /*
-    if(crear_nuevo == 1){
-        
-        console.log("NUEVO");
-        
-        var obj = pedido_obj();
-        obj.id_ped = 0;
-                
-        obj.nombre = $('#nombre').val();
-        obj.telefono = $('#telefono').val();
-        obj.despacho = $('#despacho').val();
-        
-        obj.direccion = $('#direccion').val();
-        obj.depto = $('#depto').val();
-        
-        obj.pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
-        obj.pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
-        obj.pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
-        obj.pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
-        obj.pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
-        obj.pre_palitos = $('#pre_palitos').val();
-        
-        obj.id_mot = $('#id_mot').val();
-        
-        add_pedido(obj);
-        
-    }
-    */
+    var pedidos = get_pedidos();
+    pedidos[seleccionado].nombre = $('#nombre').val();
+    pedidos[seleccionado].telefono = $('#telefono').val();
+    pedidos[seleccionado].despacho = $('#despacho').val();
+    pedidos[seleccionado].direccion = $('#direccion').val();
+    pedidos[seleccionado].depto = $('#depto').val();
+
+    pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+    pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+    pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
+    pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
+    pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
+    pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
+
+    pedidos[seleccionado].id_mot = $('#id_mot').val();
+
+    set_pedidos(pedidos);
+    guardar_pedido(seleccionado);
+    listar_pedidos();
+
     $('.p1').hide();
     $('.pop_up').hide();
     
