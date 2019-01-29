@@ -883,7 +883,6 @@ function ver_pedido(index, that){
         if(pedido.id_ped > 0){
             $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
         }
-        crear_nuevo = 0;
         
     }
     if(index == -1){
@@ -894,7 +893,6 @@ function ver_pedido(index, that){
         seleccionado = pedidos.length - 1;
         set_pedidos(pedidos);
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
-        crear_nuevo = 1;
     
     }
     
@@ -933,9 +931,8 @@ function nuevo_pedido(){
 }
 function done_pedido(){
 
-    if(crear_nuevo == 0){
+    //if(crear_nuevo == 0){
         
-        console.log("MODIFICAR EXISTENTE");
         var pedidos = get_pedidos();
         pedidos[seleccionado].nombre = $('#nombre').val();
         pedidos[seleccionado].telefono = $('#telefono').val();
@@ -955,7 +952,8 @@ function done_pedido(){
         set_pedidos(pedidos);
         guardar_pedido(seleccionado);
         
-    }
+    //}
+    /*
     if(crear_nuevo == 1){
         
         console.log("NUEVO");
@@ -982,7 +980,7 @@ function done_pedido(){
         add_pedido(obj);
         
     }
-    
+    */
     $('.p1').hide();
     $('.pop_up').hide();
     
