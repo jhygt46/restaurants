@@ -484,7 +484,13 @@ function confirmar_pregunta_productos(that){
                 set_pedidos(pedidos);
                 $('.pop_up').hide();
                 $('.p4').hide();
-                console.log(tiene_pregunta(pedidos[seleccionado].carro));
+                
+                for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
+                    if(tiene_pregunta(pedidos[seleccionado].carro[m])){
+                        console.log("TIENE PREGUNTA carro: "+m);
+                    }
+                }
+                
                 //ver_detalle_carro(seleccionado, null);
             }
         });
