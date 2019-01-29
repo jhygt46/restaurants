@@ -169,8 +169,11 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             var info = JSON.parse(data);
-            var x = document.getElementById("myAudio"); 
-            x.play();
+            var media = document.getElementById("myAudio");
+            const playPromise = media.play();
+            if (playPromise !== null){
+                playPromise.catch(() => { media.play(); })
+            }
             nuevo(info[0]);
         }, error: function(e){
             console.log(e);
