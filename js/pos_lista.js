@@ -225,10 +225,8 @@ function get_producto(id_pro){
 }
 function listar_pedidos(){
     $('.lista_pedidos').html('');
-    var aux_pedidos = get_pedidos();
-    console.log(pedidos);
-    console.log(aux_pedidos);
-    if(pedidos.length > 0){
+    var pedidos = get_pedidos_false();
+    if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             console.log(pedidos[i]);
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
