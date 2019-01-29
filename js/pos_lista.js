@@ -400,6 +400,7 @@ function confirmar_productos_promo(that){
             }
         }
         set_pedidos(pedidos);
+        guardar_pedido(seleccionado);
         if(proceso(pedidos[seleccionado])){
             
             $('.pop_up').hide();
