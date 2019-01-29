@@ -55,7 +55,6 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_pos"]; ?>" media="all" />
         <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places" async defer></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_pos_lista"]; ?>" type="text/javascript"></script>
@@ -224,5 +223,6 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                 </div>
             </div>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places" async defer></script>
     </body>
 </html>
