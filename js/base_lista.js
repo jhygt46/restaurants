@@ -839,7 +839,6 @@ function open_socket(code){
     socket.on('pedido-'+code, function(data){
 
         var pedido = get_pedido();
-        console.log(data);
         var info = JSON.parse(data.estado);
 
         if(info.accion == 0){

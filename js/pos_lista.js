@@ -1149,7 +1149,7 @@ function cambiar_total(index, total){
     
     var pedidos = get_pedidos();
     var data = { accion: 3, total: total };
-    var send = { pedido_code: pedidos[index].pedido_code, estado: data };
+    var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     
     $.ajax({
         url: "http://35.196.220.197/cambiar_estado",
