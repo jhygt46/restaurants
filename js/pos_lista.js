@@ -1163,6 +1163,7 @@ function cambiar_total(index, total){
     });
     
 }
+
 function eliminar_pedido(){
     var pedidos = get_pedidos();
     pedidos[seleccionado].eliminado = 1;
