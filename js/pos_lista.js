@@ -1252,3 +1252,49 @@ function gmap_input(){
         }
     });
 }
+function eliminar(id, accion, aux){
+    var msg = {
+        title: accion+ "Pedido #"+id, 
+        text: "Esta seguro que desea esta accion", 
+        confirm: "Si, deseo eliminarlo",
+        id: id,
+        aux: aux
+    };
+    confirm(msg);
+}
+function confirm(message){
+    
+    swal({   
+        title: message['title'],   
+        text: message['text'],   
+        type: "error",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: message['confirm'],   
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+    }, function(isConfirm){
+        
+        if(isConfirm){
+            
+            var pedidos = get_pedidos();
+            if(message['aux'] == 0){
+                pedidos[seleccionado].ocultar = 1;
+            }
+            if(message['aux'] == 1){
+                pedidos[seleccionado].eliminado = 1;
+            }
+            set_pedidos(pedidos);
+            guardar_pedido(seleccionado);
+            
+            swal({
+                title: 'Felicidades',
+                text: 'La accion ha sido realizada',
+                type: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    });
+    
+}
