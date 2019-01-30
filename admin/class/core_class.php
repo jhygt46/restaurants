@@ -531,6 +531,7 @@ class Core{
             $info['css_color'] = $path."/css/".$sql['resultado'][0]['style_color'];
             $info['css_font_size'] = $path."/css/".$sql['resultado'][0]['style_modal'];
             $info['css_pos'] = $path."/css/pos.css";
+            $info['css_sweet'] = $path."/css/sweetalert.css";
             
             $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
             $info['js_data'] = $path."/js/data/".$info["code"].".js";
@@ -540,6 +541,8 @@ class Core{
             $info['js_base_lista'] = $path."/js/base_lista.js";
             $info['js_pos'] = $path."/js/pos.js";
             $info['js_pos_lista'] = $path."/js/pos_lista.js";
+            
+            $info['js_sweet'] = $path."/css/sweetalert.min.js";
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
