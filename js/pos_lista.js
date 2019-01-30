@@ -268,13 +268,15 @@ function html_home_pedidos(obj, index){
         });
     }
     
+    var pedidos = get_pedidos();
+    pedidos[index].total = total;
+    set_pedidos(pedidos);
+    
     if(seleccionado == index){
         var Div = create_element_class('pedido seleccionado');
     }else{
         var Div = create_element_class('pedido');
     }
-    
-    console.log(obj);
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_estado = create_element_class_inner('p_estado', 'Abierto');
