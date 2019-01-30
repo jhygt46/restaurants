@@ -1252,12 +1252,13 @@ function gmap_input(){
         }
     });
 }
-function eliminar(id, accion, aux){
+function eliminar(accion, aux){
+    var pedidos = get_pedidos();
+    var id = pedidos[seleccionado].id_ped;
     var msg = {
-        title: accion+" Pedido #"+id, 
+        title: accion+" el Pedido #"+id, 
         text: "Esta seguro que desea esta accion", 
         confirm: "Si, deseo eliminarlo",
-        id: id,
         aux: aux
     };
     confirm(msg);

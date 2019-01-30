@@ -141,8 +141,8 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                 </div>
                                 <div class="preguntas">
                                     <div class="pregunta clearfix">
-                                        <div onclick="eliminar_pedido()" class="btn_pedido" style="padding-right: 1%"><div style="background: #f00" class="btn_ped">Eliminar</div></div>
-                                        <div onclick="ocultar_pedido()" class="btn_pedido" style="padding-left: 1%"><div style="background: #000" class="btn_ped">Ocultar</div></div>
+                                        <div onclick="eliminar('Eliminar', 1)" class="btn_pedido" style="padding-right: 1%"><div style="background: #f00" class="btn_ped">Eliminar</div></div>
+                                        <div onclick="eliminar('Ocultar', 0)" class="btn_pedido" style="padding-left: 1%"><div style="background: #000" class="btn_ped">Ocultar</div></div>
                                     </div>
                                 </div>
                             </div>
