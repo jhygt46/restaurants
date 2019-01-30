@@ -1036,6 +1036,7 @@ function nuevo(data){
     obj.depto = data.depto;
     obj.lat = data.lat;
     obj.lng = data.lng;
+    obj.comuna = data.comuna;
 
     add_pedido(obj);
     listar_pedidos();
