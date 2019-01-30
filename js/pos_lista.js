@@ -273,6 +273,10 @@ function html_home_pedidos(obj, index){
         });
     }
     
+    if(pedidos[index].despacho == 0){
+        pedidos[index].costo = 0;
+    }
+    
     var aux_total = total + parseInt(pedidos[index].costo);
     if(pedidos[index].total != total){ 
         cambiar_total(seleccionado, aux_total);
