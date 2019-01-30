@@ -282,9 +282,6 @@ function html_home_pedidos(obj, index){
     }
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
-    if(costo > 0){
-        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
-    }
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };
@@ -298,9 +295,13 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
     
+    if(costo > 0){
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
+        Div.appendChild(p_estado);
+    }
+    
     Div.appendChild(p_cont);
     Div.appendChild(p_num);
-    Div.appendChild(p_estado);
     Div.appendChild(p_precio);
     Div.appendChild(btn_mod);
     Div.appendChild(btn_open);
