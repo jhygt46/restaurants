@@ -272,6 +272,8 @@ function html_home_pedidos(obj, index){
     pedidos[index].total = total;
     set_pedidos(pedidos);
     
+    console.log(pedidos);
+    
     var costo = parseInt(pedidos[index].costo);
     var aux_total = total + costo;
     
@@ -280,7 +282,7 @@ function html_home_pedidos(obj, index){
     }else{
         var Div = create_element_class('pedido');
     }
-    
+    var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
@@ -294,12 +296,8 @@ function html_home_pedidos(obj, index){
     
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
-    
-    if(costo > 0){
-        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
-        Div.appendChild(p_estado);
-    }
-    
+
+    Div.appendChild(p_estado);
     Div.appendChild(p_cont);
     Div.appendChild(p_num);
     Div.appendChild(p_precio);
