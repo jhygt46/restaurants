@@ -1001,6 +1001,8 @@ function nuevo(data){
     obj.despacho = data.despacho;
     obj.carro = data.carro;
     obj.promos = data.promos;
+    obj.total = data.total;
+    obj.costo = data.costo;
     obj.pre_wasabi = data.pre_wasabi;
     obj.pre_gengibre = data.pre_gengibre;
     obj.pre_embarazadas = data.pre_embarazadas;
