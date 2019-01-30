@@ -1296,6 +1296,10 @@ function confirm(message){
                 timer: 1500,
                 showConfirmButton: false
             });
+            
+            $('.p1').hide();
+            $('.pop_up').hide();
+            
         }
     });
     
