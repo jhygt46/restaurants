@@ -284,8 +284,13 @@ function html_home_pedidos(obj, index){
     }
     
     Div.setAttribute('pos', index);
+    if(pedidos[index].tipo == 0){
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
+    }
+    if(pedidos[index].tipo == 1){
+        var p_estado = create_element_class_inner('p_estado', '');
+    }
     
-    var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_nom = create_element_class_inner('p_nom', obj.nombre);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
