@@ -542,7 +542,7 @@ class Core{
             $info['js_pos'] = $path."/js/pos.js";
             $info['js_pos_lista'] = $path."/js/pos_lista.js";
             
-            $info['js_sweet'] = $path."/css/sweetalert.min.js";
+            $info['js_sweet'] = $path."/js/sweetalert.min.js";
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
