@@ -251,6 +251,7 @@ function html_home_pedidos(obj, index){
     
     var total = 0;
     var pro, cat, carro, promos;
+    var pedidos = get_pedidos();
     
     if(obj.carro){
         obj.carro.forEach(function(carro_item, index){
@@ -268,18 +269,19 @@ function html_home_pedidos(obj, index){
         });
     }
     
-    var pedidos = get_pedidos();
-    pedidos[index].total = total;
-    set_pedidos(pedidos);
-        
-    var costo = parseInt(pedidos[index].costo);
-    var aux_total = total + costo;
+    var aux_total = total + parseInt(pedidos[index].costo);
+    if(pedidos[index].total != total){ 
+        cambiar_total(seleccionado, aux_total);
+        pedidos[index].total = total;
+        set_pedidos(pedidos);
+    }
     
     if(seleccionado == index){
         var Div = create_element_class('pedido seleccionado');
     }else{
         var Div = create_element_class('pedido');
     }
+    
     var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
@@ -1163,7 +1165,6 @@ function cambiar_total(index, total){
     });
     
 }
-
 function eliminar_pedido(){
     var pedidos = get_pedidos();
     pedidos[seleccionado].eliminado = 1;
