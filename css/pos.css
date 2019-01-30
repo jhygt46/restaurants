@@ -428,8 +428,8 @@ body {
     right: 78px;
     width: 30px;
     height: 30px;
-    background: #ccc;
     z-index: 1;
+    background: #ccc url("../admin/images/icons-set.png") no-repeat;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
