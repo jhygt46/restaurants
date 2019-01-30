@@ -1293,7 +1293,7 @@ function confirm(message){
                 title: 'Felicidades',
                 text: 'La accion ha sido realizada',
                 type: 'success',
-                timer: 1500,
+                timer: 1000,
                 showConfirmButton: false
             });
             
