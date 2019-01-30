@@ -410,7 +410,8 @@ body {
     right: 10px;
     width: 30px;
     height: 30px;
-    background: #000;
+    background: #ccc url("../admin/images/icons-set.png") no-repeat;
+    background-position: -476px -575px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_open{
@@ -419,7 +420,8 @@ body {
     right: 44px;
     width: 30px;
     height: 30px;
-    background: #00f;
+    background: #ccc url("../admin/images/icons-set.png") no-repeat;
+    background-position: -476px -575px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_carro{
@@ -430,7 +432,7 @@ body {
     height: 30px;
     z-index: 1;
     background: #ccc url("../admin/images/icons-set.png") no-repeat;
-    background-position: -112px -329px;
+    background-position: -476px -575px;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
