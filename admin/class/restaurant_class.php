@@ -55,8 +55,8 @@ class Rest{
     }
     public function get_moto($id_mot){
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE id_mot='".$id_mot."' AND eliminado='0'");
-        $res['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
-        $res['code'] = $sql_motos['resultado'][$i]['uid'];
+        $res['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
+        $res['code'] = $sql_motos['resultado'][0]['uid'];
         $res['pedidos'] = [];
         return $res;
     }
