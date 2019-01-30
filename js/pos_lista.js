@@ -284,6 +284,7 @@ function html_home_pedidos(obj, index){
     
     var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
+    var p_nom = create_element_class_inner('p_nom', obj.nombre);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };
@@ -300,6 +301,7 @@ function html_home_pedidos(obj, index){
     Div.appendChild(p_estado);
     Div.appendChild(p_cont);
     Div.appendChild(p_num);
+    Div.appendChild(p_nom);
     Div.appendChild(p_precio);
     Div.appendChild(btn_mod);
     Div.appendChild(btn_open);
