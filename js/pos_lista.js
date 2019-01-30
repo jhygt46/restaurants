@@ -169,9 +169,14 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             
+            /*
             document.getElementById("myAudio").play().catch(function() {
                 console.log("PLAY MP3");
             });
+            */
+            
+            var aud = new Audio('../audios/Ba-dum-tss.mp3');
+            aud.play();
             var info = JSON.parse(data);
             nuevo(info[0]);
             
