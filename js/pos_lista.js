@@ -185,15 +185,15 @@ function set_pedido(index, that){
     
     console.log(index);
     seleccionado = index;
-    var count = 0;
+    var pos = -1;
     categorias_base(0);
     $(that).parents('.lista_pedidos').find('.pedido').each(function(){
-        if(count == index){
+        pos = $(this).attr('pos');
+        if(pos == index){
             $(this).addClass('seleccionado');
         }else{
             $(this).removeClass('seleccionado');
         }
-        count++;
     });
     
 }
@@ -282,6 +282,8 @@ function html_home_pedidos(obj, index){
     }else{
         var Div = create_element_class('pedido');
     }
+    
+    Div.setAttribute('pos', index);
     
     var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
