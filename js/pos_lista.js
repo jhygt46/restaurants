@@ -282,7 +282,7 @@ function html_home_pedidos(obj, index){
         var Div = create_element_class('pedido');
     }
     
-    var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(costo), "$"));
+    var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
