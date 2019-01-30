@@ -284,10 +284,10 @@ function html_home_pedidos(obj, index){
     }
     
     Div.setAttribute('pos', index);
-    if(pedidos[index].despacho == 0){
+    if(pedidos[index].despacho == 1){
         var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     }
-    if(pedidos[index].despacho == 1){
+    if(pedidos[index].despacho == 0){
         var p_estado = create_element_class_inner('p_estado', '');
     }
     
