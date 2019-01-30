@@ -1214,5 +1214,6 @@ function aux_nuevo(){
     $('#pedido_teriyaki').attr('checked', false);
     $('#pedido_palitos option[value=0]').attr('selected', 'selected');
     $('#pedido_comentarios').val('');
+    $('#pac-input').val("");
     // VOLVER A LA NORMALIDAD
 }
