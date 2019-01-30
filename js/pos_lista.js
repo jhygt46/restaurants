@@ -271,9 +271,7 @@ function html_home_pedidos(obj, index){
     var pedidos = get_pedidos();
     pedidos[index].total = total;
     set_pedidos(pedidos);
-    
-    console.log(pedidos);
-    
+        
     var costo = parseInt(pedidos[index].costo);
     var aux_total = total + costo;
     
