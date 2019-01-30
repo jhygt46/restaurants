@@ -1266,12 +1266,12 @@ function eliminar(accion, aux, accion2){
 function confirm(message){
     
     swal({   
-        title: message['title'],   
-        text: message['text'],   
-        type: "error",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: message['confirm'],   
+        title: message['title'],
+        text: message['text'],
+        type: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: message['confirm'],
         closeOnConfirm: false,
         showLoaderOnConfirm: true
     }, function(isConfirm){
@@ -1293,7 +1293,7 @@ function confirm(message){
                 title: 'Felicidades',
                 text: 'La accion ha sido realizada',
                 type: 'success',
-                timer: 2000,
+                timer: 1500,
                 showConfirmButton: false
             });
         }
