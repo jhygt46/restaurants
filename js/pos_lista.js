@@ -169,14 +169,7 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             
-            /*
-            document.getElementById("myAudio").play().catch(function() {
-                console.log("PLAY MP3");
-            });
-            */
-            
-            var aud = new Audio('../audios/Ba-dum-tss.mp3');
-            aud.play();
+            sound();
             var info = JSON.parse(data);
             nuevo(info[0]);
             
@@ -186,6 +179,11 @@ function agregar_pedido(id){
     });
     
 }
+function sound(){
+    var aud = new Audio('../audios/Ba-dum-tss.mp3');
+    aud.play();       
+}
+
 function set_pedido(index, that){
     
     console.log(index);
