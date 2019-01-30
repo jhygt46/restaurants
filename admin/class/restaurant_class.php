@@ -34,6 +34,9 @@ class Rest{
         if($accion == "get_motos"){
             return $this->get_motos();
         }
+        if($accion == "get_moto"){
+            return $this->get_motos();
+        }
         if($accion == "get_pedidos_moto"){
             return $this->get_pedidos_moto();
         }
@@ -58,7 +61,8 @@ class Rest{
         return $res;
     }
     public function get_pedidos_moto(){
-        
+        $sql_pedidos = $this->con->sql("SELECT fecha, pedido_code FROM pedidos_aux WHERE id_mot='".$id_mot."'");
+        return $sql_pedidos['resultado'];
     }
     public function enviar_contacto(){
         
