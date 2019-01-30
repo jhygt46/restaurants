@@ -72,7 +72,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
     </head>
     <body>
         <audio id="myAudio">
-            <source src="http://www.misitiodelivery.cl/audios/Boo.mp3" type="audio/mpeg">
+            <source src="http://www.misitiodelivery.cl/audios/Ba-dum-tss.mp3" type="audio/mpeg">
             Tu navegador no soporta el audio.
         </audio>
         <div class="contenedor">
