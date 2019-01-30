@@ -392,9 +392,9 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_nom{
     position: absolute;
-    top: 18px;
+    top: 19px;
     left: 10px;
-    font-size: 12px;
+    font-size: 13px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_estado{
