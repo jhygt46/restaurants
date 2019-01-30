@@ -162,8 +162,6 @@ function socket_init(){
 }
 function agregar_pedido(id){
 
-    
-
     var send = { id_ped: id };
     $.ajax({
         url: "ajax/get_pedido.php",
@@ -232,7 +230,6 @@ function listar_pedidos(){
     var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            console.log(pedidos[i]);
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
                 $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
             }
@@ -272,11 +269,12 @@ function html_home_pedidos(obj, index){
     }
     
     if(seleccionado == index){
-        categorias_base(index);
         var Div = create_element_class('pedido seleccionado');
     }else{
         var Div = create_element_class('pedido');
     }
+    
+    console.log(obj);
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.id_ped);
     var p_estado = create_element_class_inner('p_estado', 'Abierto');
