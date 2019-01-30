@@ -35,7 +35,7 @@ class Rest{
             return $this->get_motos();
         }
         if($accion == "get_moto"){
-            return $this->get_motos($_POST["id_mot"]);
+            return $this->get_moto($_POST["id_mot"]);
         }
         if($accion == "get_pedidos_moto"){
             return $this->get_pedidos_moto();
