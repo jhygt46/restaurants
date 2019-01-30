@@ -390,6 +390,13 @@ body {
     font-size: 14px;
     z-index: 1;
 }
+.pedidos .contenido .lista_pedidos .pedido .p_nom{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    font-size: 12px;
+    z-index: 1;
+}
 .pedidos .contenido .lista_pedidos .pedido .p_estado{
     position: absolute;
     bottom: 25px;
