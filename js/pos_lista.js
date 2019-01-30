@@ -1254,7 +1254,7 @@ function gmap_input(){
 }
 function eliminar(id, accion, aux){
     var msg = {
-        title: accion+ "Pedido #"+id, 
+        title: accion+" Pedido #"+id, 
         text: "Esta seguro que desea esta accion", 
         confirm: "Si, deseo eliminarlo",
         id: id,
@@ -1286,6 +1286,7 @@ function confirm(message){
             }
             set_pedidos(pedidos);
             guardar_pedido(seleccionado);
+            listar_pedidos();
             
             swal({
                 title: 'Felicidades',
