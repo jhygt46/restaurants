@@ -392,14 +392,14 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_estado{
     position: absolute;
-    top: 22px;
+    bottom: 25px;
     left: 10px;
-    font-size: 14px;
+    font-size: 12px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_precio{
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     left: 10px;
     font-size: 20px;
     z-index: 1;
