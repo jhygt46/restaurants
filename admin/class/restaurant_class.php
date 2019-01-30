@@ -31,9 +31,35 @@ class Rest{
         if($accion == "enviar_contacto"){
             return $this->enviar_contacto();
         }
+        if($accion == "get_motos"){
+            return $this->get_motos();
+        }
+        if($accion == "get_pedidos_moto"){
+            return $this->get_pedidos_moto();
+        }
         
     }
-    
+    public function get_motos(){
+        $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE eliminado='0'");
+        for($i=0; $i<$sql_motos['count']; $i++){
+            $res['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
+            $res['code'] = $sql_motos['resultado'][$i]['uid'];
+            $res['pedidos'] = [];
+            $motos[] = $res;
+            unset($res);
+        }
+        return $motos;
+    }
+    public function get_moto($id_mot){
+        $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE id_mot='".$id_mot."' AND eliminado='0'");
+        $res['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
+        $res['code'] = $sql_motos['resultado'][$i]['uid'];
+        $res['pedidos'] = [];
+        return $res;
+    }
+    public function get_pedidos_moto(){
+        
+    }
     public function enviar_contacto(){
         
         $res = $_POST["g-recaptcha-response"]; 

@@ -181,9 +181,9 @@ function agregar_pedido(id){
 }
 function sound(){
     var aud = new Audio('../audios/Ba-dum-tss.mp3');
-    aud.play();       
+    aud.play();
+    setTimeout(sound, 1000);
 }
-
 function set_pedido(index, that){
     
     console.log(index);
