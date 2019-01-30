@@ -411,7 +411,7 @@ body {
     width: 30px;
     height: 30px;
     background: #ccc url("../admin/images/icons-set.png") no-repeat;
-    background-position: -476px -575px;
+    background-position: -177px -382px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_open{
@@ -421,7 +421,7 @@ body {
     width: 30px;
     height: 30px;
     background: #ccc url("../admin/images/icons-set.png") no-repeat;
-    background-position: -476px -575px;
+    background-position: 3px -479px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_carro{
