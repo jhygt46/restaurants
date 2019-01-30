@@ -183,6 +183,7 @@ function agregar_pedido(id){
 }
 function set_pedido(index, that){
     
+    console.log(index);
     seleccionado = index;
     var count = 0;
     categorias_base(0);
