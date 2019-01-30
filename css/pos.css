@@ -430,6 +430,7 @@ body {
     height: 30px;
     z-index: 1;
     background: #ccc url("../admin/images/icons-set.png") no-repeat;
+    background-position: -112px -329px;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
