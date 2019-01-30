@@ -1131,7 +1131,7 @@ function cambiar_hora(index, n, that){
     set_pedidos(pedidos);
     
     var data = { accion: 1, fecha: pedidos[index].fecha };
-        
+    
     var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     $.ajax({
         url: "http://35.196.220.197/cambiar_estado",
@@ -1139,6 +1139,24 @@ function cambiar_hora(index, n, that){
         data: send,
         success: function(data){
 
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+    
+}
+function cambiar_total(index, total){
+    
+    var pedidos = get_pedidos();
+    var data = { accion: 3, total: total };
+    var send = { pedido_code: pedidos[index].pedido_code, estado: data };
+    
+    $.ajax({
+        url: "http://35.196.220.197/cambiar_total",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
         }, error: function(e){
             console.log(e);
         }

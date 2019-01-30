@@ -847,12 +847,16 @@ function open_socket(code){
             set_pedido(pedido);
         }
         if(info.accion == 1){
-            var pedido = get_pedido();
             pedido.fecha = info.fecha;
             set_pedido(pedido);
         }
         if(info.accion == 2){
             move_marker(info.lat, info.lng);
+        }
+        if(info.accion == 3){
+            $('.paso_04 .pedido_final .total').html("Total: "+formatNumber.new(parseInt(info.total), "$"));
+            pedido.total = info.total;
+            set_pedido(pedido);
         }
         
     });
