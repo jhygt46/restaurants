@@ -51,7 +51,7 @@ class Rest{
                 $aux['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
                 $aux['code'] = $sql_motos['resultado'][$i]['uid'];
                 $aux['pedidos'] = [];
-                $res['moto'][] = $aux;
+                $res['motos'][] = $aux;
                 unset($aux);
             }
         }
