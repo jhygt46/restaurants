@@ -74,7 +74,12 @@ class Rest{
         $res['sql'] = $sql_pedidos;
         if($sql_pedidos['count'] > 0){
             $res['op'] = 1;
-            $res['pedidos'] = $sql_pedidos['resultado'];
+            for($i=0; $i<$sql_pedido['count']; $i++){
+                $aux['fecha'] = strtotime($sql_pedidos['resultado'][$i]['fecha']);
+                $aux['code'] = $sql_pedidos['resultado'][$i]['code'];
+                $res['pedidos'][] = $aux;
+                unset($aux);
+            }
         }
         return $res;
     }
