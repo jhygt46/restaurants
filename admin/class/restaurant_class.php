@@ -71,6 +71,7 @@ class Rest{
     public function get_pedidos_moto(){
         $sql_pedidos = $this->con->sql("SELECT fecha, pedido_code FROM pedidos_aux WHERE id_mot='".$id_mot."'");
         $res['op'] = 2;
+        $res['sql'] = $sql_pedidos;
         if($sql_pedidos['count'] > 0){
             $res['op'] = 1;
             $res['pedidos'] = $sql_pedidos['resultado'];
