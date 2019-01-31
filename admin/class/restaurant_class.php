@@ -74,7 +74,7 @@ class Rest{
         if($sql_pedidos['count'] > 0){
             $res['op'] = 1;
             for($i=0; $i<$sql_pedidos['count']; $i++){
-                $aux['fecha'] = strtotime($sql_pedidos['resultado'][$i]['fecha']);
+                $aux['fecha'] = strtotime($sql_pedidos['resultado'][$i]['fecha']) * 1000;
                 $aux['code'] = $sql_pedidos['resultado'][$i]['code'];
                 $res['pedidos'][] = $aux;
                 unset($aux);
