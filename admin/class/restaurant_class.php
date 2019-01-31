@@ -44,23 +44,29 @@ class Rest{
     }
     public function get_motos(){
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE eliminado='0'");
-        for($i=0; $i<$sql_motos['count']; $i++){
-            $res['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
-            $res['code'] = $sql_motos['resultado'][$i]['uid'];
-            $res['pedidos'] = [];
-            $motos[] = $res;
-            unset($res);
+        $res['op'] = 2;
+        if($sql_motos['count'] > 0){
+            $res['op'] = 1;
+            for($i=0; $i<$sql_motos['count']; $i++){
+                $aux['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
+                $aux['code'] = $sql_motos['resultado'][$i]['uid'];
+                $aux['pedidos'] = [];
+                $res['moto'][] = $aux;
+                unset($aux);
+            }
         }
-        return $motos;
+        return $res;
     }
     public function get_moto($id_mot){
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE id_mot='".$id_mot."' AND eliminado='0'");
+        $res['op'] = 2;
         if($sql_motos['count'] == 1){
-            $res['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
-            $res['code'] = $sql_motos['resultado'][0]['uid'];
-            $res['pedidos'] = [];
-            return $res;
+            $res['op'] = 1;
+            $res['moto']['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
+            $res['moto']['code'] = $sql_motos['resultado'][0]['uid'];
+            $res['moto']['pedidos'] = [];
         }
+        return $res;
     }
     public function get_pedidos_moto(){
         $sql_pedidos = $this->con->sql("SELECT fecha, pedido_code FROM pedidos_aux WHERE id_mot='".$id_mot."'");
