@@ -55,10 +55,12 @@ class Rest{
     }
     public function get_moto($id_mot){
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE id_mot='".$id_mot."' AND eliminado='0'");
-        $res['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
-        $res['code'] = $sql_motos['resultado'][0]['uid'];
-        $res['pedidos'] = [];
-        return $res;
+        if($sql_motos['count'] == 1){
+            $res['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
+            $res['code'] = $sql_motos['resultado'][0]['uid'];
+            $res['pedidos'] = [];
+            return $res;
+        }
     }
     public function get_pedidos_moto(){
         $sql_pedidos = $this->con->sql("SELECT fecha, pedido_code FROM pedidos_aux WHERE id_mot='".$id_mot."'");
