@@ -134,10 +134,40 @@ class Guardar extends Core{
         }
         
     }
+    public function copy_image($path, $image, $ext){
+        
+        $file = $path.$image.'.'.$ext;
+        $file_aux = $path.$image.'_2.'.$ext;
+        $data = getimagesize($file);
+        $destino = imagecreatetruecolor($data[0], $data[1]);
+
+        $info['file'] = $file;
+        $info['file_aux'] = $file_aux;
+        $info['data'] = $data;
+        
+        if($data['mime'] == "image/jpeg"){
+            $origen = imagecreatefromjpeg($file);
+            imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
+            header('Content-Type: image/jpeg');
+            imagejpeg($destino, $file_aux);
+            imagedestroy($destino);
+        }
+        if($data['mime'] == "image/png"){
+            $origen = imagecreatefrompng($file);
+            imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
+            header('Content-Type: image/png');
+            imagepng($destino, $file_aux);
+            imagedestroy($destino);
+        }
+
+        unlink($file);
+        return $info;
+
+    }
     public function ingresarimagen($filepath, $filename, $i){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "png", "gif", "ico");
+        $file_formats = array("jpg", "png", "ico");
         //$filepath = "/var/www/html/restaurants/images/logos/";
 
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
@@ -149,7 +179,8 @@ class Guardar extends Core{
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
-                    if (move_uploaded_file($tmp, $filepath . $imagename)){
+                    if (move_uploaded_file($tmp, $filepath.$imagename)){
+                        $info['copy'] = $this->copy_image($filepath, $filename, $extension);
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
                         $info['image'] = $imagename;
@@ -563,24 +594,47 @@ class Guardar extends Core{
     }
     private function crear_usuario(){
         
+        $list_loc = $fireapp->get_locales();
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
-        
+        $tipo = $_POST['tipo'];
+        $giro = $_POST['giro'];
+
         if($id == 0){
-            $aux = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo) VALUES ('".$nombre."', now(), '".$correo."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Usuario creado exitosamente";
-            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$aux['insert_id']."', '".$this->id_gir."')");
+            $is_correo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo." AND eliminado='0'");
+            if($is_correo['count'] == 0){
+                $user = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo) VALUES ('".$nombre."', now(), '".$correo."')");
+                $id = $user['insert_id'];
+            }
         }
-        if($id > 0){
-            $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."' WHERE id_user='".$id."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Usuarios modificado exitosamente";
+        if($tipo == 1){
+            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$this->id_gir."')");
+            $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
+            $this->con->sql("UPDATE fw_usuarios SET tipo='1' WHERE id_user='".$id."'");
         }
-        
+        if($tipo == 2){
+            $id_gir = $this->id_gir;
+            if($this->id_user == 1){
+                $id_gir = $giro;
+            }
+            $this->con->sql("DELETE fw_usuarios_giros WHERE id_user='".$id."' AND id_gir='".$id_gir."'");
+            $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
+            $this->con->sql("UPDATE fw_usuarios SET tipo='2' WHERE id_user='".$id."'");
+            foreach($list_loc as $value){
+                $loc = $_POST['local-'.$value['id_gir']];
+                if(isset($loc) && $loc >0){
+                    $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$loc."')");
+                }
+            }
+        }
+        if($tipo == 3 && $this->admin == 1 && $this->id_user == 1){
+            $this->con->sql("UPDATE fw_usuarios SET admin='1' WHERE id_user='".$id."'");
+        }
+        $info['op'] = 1;
+        $info['mensaje'] = "Usuarios modificado exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "base/usuarios.php";
+        $info['page'] = "msd/usuarios.php";
         return $info;
         
     }
@@ -593,7 +647,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Usuario ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "base/usuarios.php";
+        $info['page'] = "msd/usuarios.php";
 
         return $info;
         

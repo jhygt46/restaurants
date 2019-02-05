@@ -1,27 +1,25 @@
 <?php
+session_start();
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/admin_responsive/";
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
 }else{
-    $path = "/var/www/html/admin_responsive/";
+    $path = "/var/www/html/restaurants/";
 }
 
-require_once($path."class/new_core_class.php");
+require_once($path."admin/class/new_core_class.php");
 $fireapp = new Core();
 $inicio = $fireapp->inicio();
 /*
-$inicio['user'] = 1 // SUPER ADMIN
-$inicio['user'] = 2 // ADMIN
-$inicio['user'] = 3 // NORMAL
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 */
 if($inicio['user'] == 1){
 ?>
 <div class="pagina">
     <div class="title">
-        <h1>Bienvenido Diegomez</h1>
-        <ul class="clearfix">
-            <li class="back" onclick="backurl()"></li>
-        </ul>
+        <h1>Bienvenidos a MiSitioDelivery</h1>
     </div>
     <hr>
 </div>

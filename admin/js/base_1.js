@@ -25,6 +25,8 @@ function form_responsive(w){
 function open_perfil(){
     $('.modals').show();
     $('.modal_perfil').show();
+    $('.modal_error').hide();
+    $('.modal_loading').hide();
 }
 function menu_toggle(){
 

@@ -55,24 +55,35 @@ class Core{
         $this->id_cat = $id_cat;
         $_SESSION['user']['id_cat'] = $id_cat;
     }
+    public function inicio(){
+
+        $info['id_user'] = $_SESSION['user']['info']['id_user'];
+        $info['admin'] = $_SESSION['user']['info']['admin'];
+        return $info;
+
+    }
     public function is_giro($id_gir){
-        if($this->admin == 0){
-            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
-            if($count['count'] == 1){
-                $this->id_gir = $id_gir;
-                $_SESSION['user']['id_gir'] = $id_gir;
-            }else{
-                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+        if(isset($id_gir) && is_numeric($id_gir) && $id_gir > 0){
+            if($this->admin == 0){
+                $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
+                if($count['count'] == 1){
+                    $this->id_gir = $id_gir;
+                    $_SESSION['user']['id_gir'] = $id_gir;
+                }else{
+                    die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                }
             }
-        }
-        if($this->admin == 1){
-            $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
-            if(($count['count'] == 1 && $this->id_user > 1) || $this->id_user == 1){
-                $this->id_gir = $id_gir;
-                $_SESSION['user']['id_gir'] = $id_gir;
-            }else{
-                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+            if($this->admin == 1){
+                $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
+                if($count['count'] == 1 || $this->id_user == 1){
+                    $this->id_gir = $id_gir;
+                    $_SESSION['user']['id_gir'] = $id_gir;
+                }else{
+                    die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                }
             }
+        }else{
+            die("NO TIENE GIRO ASIGNADO");
         }
     }
     public function is_catalogo($id_cat){
@@ -126,6 +137,10 @@ class Core{
         if($this->admin == 1 && $this->id_user == 1){ $giros = $this->con->sql("SELECT id_gir, nombre, dominio FROM giros WHERE eliminado='0'"); }
         return $giros['resultado'];
     }
+    public function get_giros(){
+        $giros = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE eliminado='0'");
+        return $giros['resultado'];
+    }
     public function get_giro(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $giros['resultado'][0];
@@ -151,7 +166,7 @@ class Core{
         return $usuarios['resultado'];
     }
     public function get_usuario($id){
-        $usuarios = $this->con->sql("SELECT id_user, nombre, correo FROM fw_usuarios WHERE id_user='".$id."' AND id_org='".$this->id_org."' AND eliminado='0'");
+        $usuarios = $this->con->sql("SELECT id_user, nombre, correo, tipo FROM fw_usuarios WHERE id_user='".$id."' AND eliminado='0'");
         return $usuarios['resultado'][0];
     }
     public function get_catalogos(){

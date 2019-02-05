@@ -20,15 +20,68 @@ body {
                 max-height: 550px;
                 background: #999;
                 border-radius: 25px;
-                .close{
-                    position: absolute;
-                    width: 40px;
-                    height: 40px;
-                    background: #ccc url('../images/icons-set.png') no-repeat;
-                    background-position: -112px -329px;
-                    top: -10px;
-                    right: -10px;
-                    border-radius: 20px;
+                .cont_relative{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    .close{
+                        position: absolute;
+                        width: 40px;
+                        height: 40px;
+                        background: #ccc url('../images/icons-set.png') no-repeat;
+                        background-position: -112px -329px;
+                        top: -10px;
+                        right: -10px;
+                        border-radius: 20px;
+                        z-index: 2;
+                    }
+                    .mo_content{
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 1;
+                        top: 0px;
+                        left: 0px;
+                        overflow-y: auto;
+                        .mo_cont{
+                            width: 100%;
+                            ul{
+                                li{
+                                    width: 50%;
+                                    float: left;
+                                    height: 200px;
+                                }
+                                .foto{
+                                    img{
+                                        width: 90%;
+                                        height: 90%;
+                                        padding: 5%;
+                                    }
+                                }
+                                .info{
+                                    .cont_info{
+                                        height: 85%;
+                                        width: 85%;
+                                        margin: 15% 15% 0 0%;
+                                        h2{
+                                            font-size: 18px;
+                                            padding-top: 20px;
+                                        }
+                                        h3{
+                                            font-size: 14px;
+                                        }
+                                        a{
+                                            display: block;
+                                            margin-top: 30px;
+                                            text-decoration: none;
+                                            color: #000;
+                                            font-size: 18px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -304,6 +357,27 @@ body {
 .pagina{
     .cont_pagina{
         .cont_pag{
+            .lista_items_graficos{
+                position: relative;
+                height: 240px;
+                .titulo_items_graficos{
+                    left: 0px;
+                    width: 110px;
+                    padding-right: 5px;
+                    cursor: pointer;
+                    h1{
+                        font-size: 24px;
+                    }
+                    h2{
+                        font-size: 14px;
+                    }
+                }
+                .grafico{
+                    height: 200px;
+                    right: 0px;
+                    width: calc(100% - 115px);
+                }
+            }
             .lista_items{
                 .titulo_items{
                     font-size: 28px;
@@ -325,7 +399,6 @@ body {
                             margin: 0 auto;
                             cursor: pointer;
                             .item_image{
-                                background: #bbb;
                                 height: 100px;
                             }
                             .item_ttl{

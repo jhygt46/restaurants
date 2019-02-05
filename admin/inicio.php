@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
+$fireapp = new Core();
+$inicio = $fireapp->inicio();
+$core_class_iniciada = 1;
+
+?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
         <title></title>
@@ -23,9 +38,23 @@
                 <div class="relative">
                     
                     <div class="modal_perfil cont_modal vhalign">
-                        <div class="relative">
+                        <div class="cont_relative">
                             <div class="close" onclick="closes(this)"></div>
-                            <a href="?accion=logout">LOGOUT</a>
+                            <div class="mo_content">
+                                <div class="mo_cont">
+                                    <ul class="clearfix">
+                                        <li class="foto"><img src="images/no-user.png" alt="" /></li>
+                                        <li class="info">
+                                            <div class="cont_info">
+                                                <h2>Diego Gomez B</h2>
+                                                <h3>diegomez13@hotmail.com</h3>
+                                                <a href="?accion=logout">Salir</a>
+                                            </div>
+                                        </li>
+                                    </ul> 
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal_error cont_modal vhalign">
@@ -64,9 +93,9 @@
                                         <div class="texto">Mi Cuenta</div>
                                     </div>
                                     <ul class="bloque_lista">
-                                        <li onclick="navlink('pages/msd/inicio.php')">Inicio<p class="valign">3</p></li>
-                                        <li onclick="navlink('pages/msd/giros.php')">Crear Giros</li>
-                                        <li onclick="navlink('pages/msd/graficos.php')">Graficos</li>
+                                        <li onclick="navlink('pages/msd/ver_giro.php')">Inicio<p class="valign">3</p></li>
+                                        <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/giros.php')">Crear Giros</li><?php } ?>
+                                        <li onclick="navlink('pages/msd/usuarios.php')">Usuarios<p class="valign">2</p></li>
                                     </ul>
                                 </div>
                                 
@@ -77,7 +106,7 @@
                         <div class="cont_contenido relative">
                             <div class="html">
                                 
-                                <?php //require 'pages/msd/inicio.php'; ?>
+                                <?php require 'pages/msd/ver_giro.php'; ?>
                                 
                             </div>
                         </div>
