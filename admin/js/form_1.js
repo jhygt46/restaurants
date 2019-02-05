@@ -107,7 +107,8 @@ function form(that){
             data: data,
             processData: false,
             cache: false,
-            success: function(data){
+            success: function(datas){
+                var data = JSON.parse(datas);
                 if(data != null){
                     console.log(data);
                     if(data.reload)

@@ -144,7 +144,7 @@ class Guardar extends Core{
         $info['file'] = $file;
         $info['file_aux'] = $file_aux;
         $info['data'] = $data;
-        
+
         if($data['mime'] == "image/jpeg"){
             $origen = imagecreatefromjpeg($file);
             imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
@@ -301,6 +301,7 @@ class Guardar extends Core{
         $detalle_prods = $_POST['detalle_prods'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
+        $info['image'] = $image;
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }
