@@ -161,7 +161,8 @@ class Guardar extends Core{
         }
 
         unlink($file);
-        return $info;
+        rename($file_aux, $file);
+        return $file_aux;
 
     }
     public function ingresarimagen($filepath, $filename, $i){
@@ -178,12 +179,12 @@ class Guardar extends Core{
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
-                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    $tmp = $_FILES['file_image'.$i]['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        $info['copy'] = $this->copy_image($filepath, $filename, $extension);
+                        $info['image'] = $this->copy_image($filepath, $filename, $extension);
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
-                        $info['image'] = $imagename;
+                        //$info['image'] = $imagename;
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -301,7 +302,6 @@ class Guardar extends Core{
         $detalle_prods = $_POST['detalle_prods'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
-        $info['image'] = $image;
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }
@@ -310,7 +310,7 @@ class Guardar extends Core{
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "apps/categorias.php?parent_id=".$parent_id;
+        $info['page'] = "msd/configurar_categoria.php?parent_id=".$parent_id;
         return $info;
         
     }
