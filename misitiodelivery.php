@@ -53,7 +53,7 @@
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Dominio"; } ?></h3>
                     <input type="hidden" name="accion" value="crear_dominio" />
                     <div class="input">
-                        <input type="url" name="dominio" placeholder="www.tusitio.cl" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
+                        <input type="text" name="dominio" placeholder="www.tusitio.cl" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
                     </div>
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 2){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Correo"; } ?></h3>
                     <div class="input">

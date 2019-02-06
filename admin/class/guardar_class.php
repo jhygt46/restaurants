@@ -205,6 +205,7 @@ class Guardar extends Core{
     }
     private function configurar_footer(){
         
+        $this->con_cambios();
         $texto = $_POST['texto'];        
         $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
         
@@ -299,7 +300,8 @@ class Guardar extends Core{
         $mostar_prods = $_POST['mostrar_prods'];
         $ocultar = $_POST['ocultar'];
         $detalle_prods = $_POST['detalle_prods'];
-        
+        $this->con_cambios();
+
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
@@ -320,7 +322,8 @@ class Guardar extends Core{
         $id = $_POST['id'];
         $parent_id = $_POST['parent_id'];
         $list = $this->get_preguntas();
-        
+        $this->con_cambios();
+
         for($i=0; $i<count($list); $i++){
             $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
             if($pre == 0){
@@ -457,15 +460,14 @@ class Guardar extends Core{
     }
     private function crear_pagina(){
         
-        $this->con_cambios();
-        
         $id_pag = $_POST['id'];
         $nombre = $_POST['nombre'];
         $titulo = $_POST['titulo'];
         $subtitulo = $_POST['subtitulo'];
         $html = $_POST['html'];
         $tipo = $_POST['pagina'];
-        
+        $this->con_cambios();
+
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/paginas/', null, 0);
 
         if($id_pag == 0){
@@ -494,7 +496,8 @@ class Guardar extends Core{
         
         $id_cat = $_POST['id'];
         $nombre = $_POST['nombre'];
-        
+        $this->con_cambios();
+
         if($id_cat == 0){
             $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir, eliminado) VALUES ('".$nombre."', now(), '".$this->id_gir."', '0')");
             $info['op'] = 1;
@@ -535,7 +538,8 @@ class Guardar extends Core{
         $lat = $_POST['lat'];
         $lng = $_POST['lng'];
         $code = bin2hex(openssl_random_pseudo_bytes(10));
-        
+        $this->con_cambios();
+
         if($id_loc == 0){
             $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
             $info['op'] = 1;
@@ -691,6 +695,7 @@ class Guardar extends Core{
         $precio = $_POST['precio'];
         $parent_id = $_POST['parent_id'];
         $tipo = $_POST['tipo'];
+        $this->con_cambios();
 
         if($id_cae == 0){
             $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, descripcion, descripcion_sub, precio) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$descripcion."', '".$descripcion_sub."', '".$precio."')");
@@ -714,6 +719,7 @@ class Guardar extends Core{
         $id_ing = $_POST['id_ing'];
         $nombre = $_POST['nombre'];
         $parent_id = $_POST['parent_id'];
+        $this->con_cambios();
 
         if($id_ing == 0){
             $info['db'] = $this->con->sql("INSERT INTO ingredientes (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$id."')");
@@ -727,7 +733,7 @@ class Guardar extends Core{
         }
                 
         $info['reload'] = 1;
-        $info['page'] = "apps/ingredientes.php?id=".$id."&parent_id=".$parent_id;
+        $info['page'] = "msd/ingredientes.php?id=".$id."&parent_id=".$parent_id;
         return $info;
         
     }
@@ -735,12 +741,13 @@ class Guardar extends Core{
                 
         $id = explode("/", $_POST['id']);
         $this->con->sql("UPDATE categorias SET eliminado='1' WHERE id_cae='".$id[1]."'");
-        
+        $this->con_cambios();
+
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Categoria ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/categorias.php?id=".$id[0]."&parent_id=".$id[2];
+        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[2];
 
         return $info;
         
@@ -749,16 +756,18 @@ class Guardar extends Core{
                 
         $id = explode("/", $_POST['id']);
         $this->con->sql("UPDATE ingredientes SET eliminado='1' WHERE id_ing='".$id[1]."'");
-        
+        $this->con_cambios();
+
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Ingredientes ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/ingredientes.php?id=".$id[0]."&parent_id=".$id[2];
+        $info['page'] = "msd/ingredientes.php?id=".$id[0]."&parent_id=".$id[2];
 
         return $info;
         
     }
+    /*
     private function crear_promociones(){
 
         $id_prm = $_POST['id_prm'];
@@ -781,20 +790,6 @@ class Guardar extends Core{
         return $info;
         
     }
-    private function eliminar_pagina(){
-                
-        $id = $_POST['id'];
-        $this->con->sql("UPDATE paginas SET eliminado='1' WHERE id_pag='".$id."'");
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Pagina ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
-
-        return $info;
-        
-    }
     private function eliminar_promociones(){
                 
         $id = explode("/", $_POST['id']);
@@ -809,6 +804,22 @@ class Guardar extends Core{
         return $info;
         
     }
+    */
+    private function eliminar_pagina(){
+                
+        $id = $_POST['id'];
+        $this->con->sql("UPDATE paginas SET eliminado='1' WHERE id_pag='".$id."'");
+        $this->con_cambios();
+        $info['tipo'] = "success";
+        $info['titulo'] = "Eliminado";
+        $info['texto'] = "Pagina ".$_POST["nombre"]." Eliminado";
+        $info['reload'] = 1;
+        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+
+        return $info;
+        
+    }
+    
     public function asignar_prods_promocion(){
         
         $id_cae = $_POST['id_cae'];
@@ -852,16 +863,17 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
+        $this->con_cambios();
         
         if($tipo == 0){
             if($id_pro == 0){
                 $pro = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
                 $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$pro['insert_id']."')");
-                $info['db1'] = $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
+                $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
             }
             if($id_pro > 0){
                 $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."'");
-                $info['db2'] = $this->con->sql("UPDATE productos_precio SET precio='".$precio."' WHERE id_cat='".$this->id_cat."' AND id_pro='".$id_pro."'");
+                $this->con->sql("UPDATE productos_precio SET precio='".$precio."' WHERE id_cat='".$this->id_cat."' AND id_pro='".$id_pro."'");
             }
         }
         if($tipo == 1){
@@ -869,7 +881,7 @@ class Guardar extends Core{
             for($i=0; $i<count($all_prods); $i++){
                 $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
                 if($pro == 1){
-                    $info['db1'] = $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
+                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
                 }
             }
         }
@@ -898,12 +910,13 @@ class Guardar extends Core{
                 
         $id = explode("/", $_POST['id']);
         $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[1]."' AND id_cae='".$id[0]."'");
+        $this->con_cambios();
 
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Producto ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/crear_productos.php?id=".$id[0];
+        $info['page'] = "msd/crear_productos.php?id=".$id[0];
 
         return $info;
         
@@ -914,6 +927,7 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         $mostrar = $_POST['mostrar'];
         $cantidad = $_POST['cantidad'];
+        $this->con_cambios();
 
         if($id_pre > 0){
             $this->con->sql("UPDATE preguntas SET nombre='".$nombre."', mostrar='".$mostrar."' WHERE id_pre='".$id_pre."'");
@@ -949,7 +963,8 @@ class Guardar extends Core{
         
         $id_lin = $_POST['id'];
         $nombre = $_POST['nombre'];
-        
+        $this->con_cambios();
+
         if($id_lin > 0){
             $this->con->sql("UPDATE lista_ingredientes SET nombre='".$nombre."' WHERE id_lin='".$id_lin."'");
             $info['op'] = 1;
@@ -984,12 +999,13 @@ class Guardar extends Core{
                 
         $id = explode("/", $_POST['id']);
         $this->con->sql("DELETE FROM preguntas WHERE id_pre='".$id[1]."' AND id_cat='".$id[0]."'");
-
+        $this->con_cambios();
+        
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Preguntas ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/preguntas.php?id=".$id[0];
+        $info['page'] = "msd/preguntas.php?id=".$id[0];
 
         return $info;
         
