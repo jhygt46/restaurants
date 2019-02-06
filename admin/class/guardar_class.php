@@ -464,16 +464,25 @@ class Guardar extends Core{
         $titulo = $_POST['titulo'];
         $subtitulo = $_POST['subtitulo'];
         $html = $_POST['html'];
+        $pagina = $_POST['pagina'];
         
+        $image = $this->ingresarimagen('/var/www/html/restaurants/images/paginas/', null, 0);
+
         if($id_pag == 0){
-            $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$this->id_gir."')");
+            $aux_page = $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, pagina, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$pagina."', '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas creado exitosamente";
+            if($image['op'] == 1){
+                $this->con->sql("UPDATE paginas SET image='".$image['image']."' WHERE id_pag='".$aux_page["insert_id"]."'");
+            }
         }
         if($id_pag > 0){
-            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', titulo='".$titulo."', subtitulo='".$subtitulo."', html='".$html."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', titulo='".$titulo."', subtitulo='".$subtitulo."', html='".$html."', pagina='".$pagina."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas modificado exitosamente";
+            if($image['op'] == 1){
+                $this->con->sql("UPDATE paginas SET image='".$image['image']."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            }
         }
         
         $info['reload'] = 1;
