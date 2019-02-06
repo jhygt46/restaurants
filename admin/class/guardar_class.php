@@ -169,7 +169,6 @@ class Guardar extends Core{
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "png", "ico");
-        //$filepath = "/var/www/html/restaurants/images/logos/";
 
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
