@@ -101,7 +101,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Pagina:</p></span>
-                        <select id="pagina" onchange="ver_paginas()">
+                        <select id="tipo" onchange="ver_paginas()">
                             <option value="0">Nueva</option>
                             <option value="1">Pagina 1</option>
                             <option value="2">Pagina 2</option>
