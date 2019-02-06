@@ -72,6 +72,15 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                         <input id="subtitulo" class="inputs" type="text" value="<?php echo $that['subtitulo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Tipo:</p></span>
+                        <select id="tipo">
+                            <option value="0">Nuevo</option>
+                            <option value="1">Pagina 1</option>
+                            <option value="2">Pagina 2</option>
+                            <option value="3">Pagina 3</option>
+                        </select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>HTML:</p></span>
                         <TEXTAREA id="html"><?php echo $that['html']; ?></TEXTAREA>
                     </label>
