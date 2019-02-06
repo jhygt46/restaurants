@@ -108,15 +108,12 @@ function form(that){
             processData: false,
             cache: false,
             success: function(data){
-
                 console.log(data);
                 if(data != null){
-                    console.log(data);
-                    if(data.reload)
+                    if(data.reload == 1)
                         navlink('pages/'+data.page);
                     if(data.op != null)
                         mensaje(data.op, data.mensaje);
-                    
                 }
             },
             error: function(e){

@@ -418,7 +418,7 @@ class Guardar extends Core{
             }
 
             $info['reload'] = 1;
-            $info['page'] = "base/giros.php";
+            $info['page'] = "msd/giros.php";
             return $info;
         
         }
@@ -450,7 +450,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/zonas_locales.php?id_loc=".$id[0];
+        $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
 
         return $info;
         
@@ -470,10 +470,11 @@ class Guardar extends Core{
 
         if($id_pag == 0){
             $aux_page = $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, pagina, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$pagina."', '".$this->id_gir."')");
+            $info['db'] = $aux_page;
             $info['op'] = 1;
             $info['mensaje'] = "Paginas creado exitosamente";
             if($image['op'] == 1){
-                $this->con->sql("UPDATE paginas SET image='".$image['image']."' WHERE id_pag='".$aux_page["insert_id"]."'");
+                $this->con->sql("UPDATE paginas SET image='".$image['image']."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
             }
         }
         if($id_pag > 0){
@@ -486,7 +487,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "msd/ver_giro.php;
         return $info;
         
     }
