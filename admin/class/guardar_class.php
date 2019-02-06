@@ -181,10 +181,10 @@ class Guardar extends Core{
                     $imagename = $filename.".".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        $info['image'] = $this->copy_image($filepath, $filename, $extension);
+                        $this->copy_image($filepath, $filename, $extension);
                         $info['op'] = 1;
                         $info['mensaje'] = "Imagen subida";
-                        //$info['image'] = $imagename;
+                        $info['image'] = $imagename;
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
