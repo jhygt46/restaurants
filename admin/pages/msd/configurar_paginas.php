@@ -38,6 +38,12 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 }
 
 ?>
+<script>
+    function ver_paginas(){
+        var pagina = $('#pagina').val();
+        console.log(pagina);
+    }
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -72,9 +78,9 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                         <input id="subtitulo" class="inputs" type="text" value="<?php echo $that['subtitulo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p>Tipo:</p></span>
-                        <select id="tipo">
-                            <option value="0">Nuevo</option>
+                        <span><p>Pagina:</p></span>
+                        <select id="pagina" onchange="ver_paginas()">
+                            <option value="0">Nueva</option>
                             <option value="1">Pagina 1</option>
                             <option value="2">Pagina 2</option>
                             <option value="3">Pagina 3</option>
