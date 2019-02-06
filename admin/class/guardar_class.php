@@ -302,18 +302,16 @@ class Guardar extends Core{
         $detalle_prods = $_POST['detalle_prods'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
-        $info['image'] = $image;
-
         if($image['op'] == 1){
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }
-        
+
         $this->con->sql("UPDATE categorias SET detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
         $info['reload'] = 1;
-        $info['page'] = "msd/configurar_categoria.php?parent_id=".$parent_id;
+        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
@@ -470,7 +468,6 @@ class Guardar extends Core{
         $tipo = $_POST['pagina'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/paginas/', null, 0);
-        $info['image'] = $image;
 
         if($id_pag == 0){
             $aux_page = $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, tipo, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$tipo."', '".$this->id_gir."')");
