@@ -18,6 +18,9 @@ $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 /* CONFIG PAGE */
 
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
 $id_gir = 0;
 $titulo = "GIRO NO SELECIONADO";
