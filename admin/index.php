@@ -2,7 +2,7 @@
     session_start();
     
     if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
-        $location = 'https://www.misitiodelivery.cl/admin';
+        $location = 'http://www.misitiodelivery.cl/admin';
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
         exit;
