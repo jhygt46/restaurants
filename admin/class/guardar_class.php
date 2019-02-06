@@ -487,7 +487,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php;
+        $info['page'] = "msd/ver_giro.php";
         return $info;
         
     }
