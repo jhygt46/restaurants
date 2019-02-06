@@ -1,11 +1,5 @@
 <?php
     session_start();
-    
-    echo "<pre>";
-    print_r($_SERVER);
-    echo "</pre>";
-    exit;
-
 
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $_SERVER['HTTP_HOST'] != "www.misitiodelivery.cl") {
         $location = 'http://www.misitiodelivery.cl/admin';
