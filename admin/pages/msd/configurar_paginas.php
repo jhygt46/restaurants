@@ -40,7 +40,12 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 ?>
 <script>
 
-    var htmls = [{ html: true, image: true, data: '' }, { html: true, image: true, data: '' }, { html: false, image: true, data: '' }, { html: true, image: false, data: '' }];
+    var htmls = [
+        { html: true, image: true, data: '' }, 
+        { html: true, image: true, data: '<div>BUENA NELSON</div>' }, 
+        { html: true, image: true, data: '<div>BUENA ERNESTOR</div>' }, 
+        { html: true, image: true, data: '<div>BUENA BUENA</div>' }
+    ];
     function ver_paginas(){
 
         var pagina = $('#pagina').val();
