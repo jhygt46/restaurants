@@ -103,8 +103,9 @@ function form(that){
         $.ajax({
             url: "ajax/index.php",
             type: "POST",
-            contentType: "application/json",
+            contentType: false,
             data: data,
+            dataType: 'json',
             processData: false,
             cache: false,
             success: function(data){
