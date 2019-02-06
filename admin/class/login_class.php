@@ -61,9 +61,17 @@ class Login {
                     $pass = $user['resultado'][0]['pass'];
                     if($pass == md5($_POST['pass'])){
                         
-                        $ses['info']['id_user'] = $user['resultado'][0]['id_user'];
+                        $id_user = $user['resultado'][0]['id_user'];
+
+                        $ses['info']['id_user'] = $id_user;
                         $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                         $ses['info']['admin'] = $user['resultado'][0]['admin'];
+
+                        if($user['resultado'][0]['admin'] == 0){
+                            $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
+                            $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
+                        }
+
                         $_SESSION['user'] = $ses;
                         
                         $info['op'] = 1;
