@@ -39,9 +39,12 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 
 ?>
 <script>
+
+    var htmls = ['BUENA', 'NELSON', '.COM'];
+
     function ver_paginas(){
         var pagina = $('#pagina').val();
-        console.log(pagina);
+        $('#html').val(htmls[pagina]);
     }
 </script>
 <div class="pagina">
