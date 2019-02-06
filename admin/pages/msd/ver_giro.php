@@ -39,7 +39,7 @@ $giro = $fireapp->get_giro();
 $catalogos = $fireapp->get_catalogos();
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
-$titulo = $giro['nombre'];
+$titulo = ($giro['nombre'] != "") ? $giro['nombre'] : 'Bienvenido' ;
 
 $diff = $num_cats - $mis_cats;
 
