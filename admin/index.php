@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $_SERVER['HTTP_HOST'] != "www.misitiodelivery.cl") {
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $_SERVER['HTTP_HOST'] != "www.misitiodelivery.cl" && $_SERVER['HTTP_HOST'] != "localhost") {
         $location = 'http://www.misitiodelivery.cl/admin';
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
