@@ -467,6 +467,7 @@ class Guardar extends Core{
         $tipo = $_POST['pagina'];
         
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/paginas/', null, 0);
+        $info['image'] = $image;
 
         if($id_pag == 0){
             $aux_page = $this->con->sql("INSERT INTO paginas (nombre, titulo, subtitulo, html, tipo, id_gir) VALUES ('".$nombre."', '".$titulo."', '".$subtitulo."', '".$html."', '".$tipo."', '".$this->id_gir."')");
