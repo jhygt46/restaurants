@@ -151,7 +151,7 @@ class Rest{
                                 $code = bin2hex(openssl_random_pseudo_bytes(10));
                                 $mailcode = bin2hex(openssl_random_pseudo_bytes(10));
                                 $giros = $this->con->sql("INSERT INTO giros (dominio, code, catalogo, fecha_creado, eliminado) VALUES ('".$dominio."', '".$code."', '1', now(), '0')"); 
-                                $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, mailcode, fecha_creado, admin, eliminado) VALUES ('".$correo."', '".$mailcode."', now(), '1', '0')");
+                                $usuarios = $this->con->sql("INSERT INTO fw_usuarios (correo, mailcode, fecha_creado, admin, eliminado) VALUES ('".$correo."', '".$mailcode."', now(), '0', '0')");
                                 $this->con->sql("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES ('".$giros['insert_id']."', '".$usuarios['insert_id']."')");
 
                                 $send['dominio'] = $dominio;
