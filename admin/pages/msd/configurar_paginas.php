@@ -40,12 +40,26 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 ?>
 <script>
 
-    var htmls = ['THIS', 'BUENA', 'NELSON', '.COM'];
+    var htmls = [{ html: true, image: true, data: '' }, { html: true, image: true, data: '' }, { html: false, image: true, data: '' }, { html: true, image: false, data: '' }];
     function ver_paginas(){
+
         var pagina = $('#pagina').val();
-        $('#html').val(htmls[pagina]);
+        var info = htmls[pagina];
+
+        if(info.html){
+            $('#html').val(info.data);
+            $('.divHtml').show();
+        }else{
+            $('.divHtml').hide();
+        }
+        if(info.image){
+            $('.divImage').show();
+        }else{
+            $('.divImage').hide();
+        }
+
     }
-    
+
 </script>
 <div class="pagina">
     <div class="title">
@@ -89,7 +103,11 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                             <option value="3">Pagina 3</option>
                         </select>
                     </label>
-                    <label class="clearfix">
+                    <label class="divImage clearfix">
+                        <span><p>Imagen:</p></span>
+                        <input id="file_image" type="file" />
+                    </label>
+                    <label class="divHtml clearfix">
                         <span><p>HTML:</p></span>
                         <TEXTAREA id="html"><?php echo $that['html']; ?></TEXTAREA>
                     </label>
