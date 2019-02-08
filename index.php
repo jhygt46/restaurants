@@ -1,6 +1,8 @@
 <?php
 
-die("X403-Y202-Z703");
+if($_POST["accion"] == "verificar_dominio_online"){
+    die("X403-Y202-Z703");
+}
 
 if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") && !isset($_GET["param_dom"])){
     require('misitiodelivery.php');
