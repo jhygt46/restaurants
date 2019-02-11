@@ -1,15 +1,12 @@
 <?php
 
-if($_POST["accion"] == "verificar_dominio_online"){
-    die("X403-Y202-Z703");
-}
+date_default_timezone_set('America/Santiago');
 
 if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") && !isset($_GET["param_dom"])){
     require('misitiodelivery.php');
     exit;
 }
 
-date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
 
@@ -17,24 +14,26 @@ if(isset($_GET['param_dom'])){
     $info = $core->get_data($_GET['param_dom']);
 }else{
     if($_SERVER["HTTP_HOST"] == "localhost"){
-        $info = $core->get_data('www.mikasushi.cl');
+        $info = $core->get_data('www.izusushi.cl');
     }else{
         $info = $core->get_data();
     }
+}
+
+if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
+    $location = 'https://'.$_SERVER['HTTP_HOST'].'/admin';
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $location);
+    exit;
 }
 
 $locales = json_decode($info['lista_locales']);
 
 if($info['id_gir'] != 0){
 
-    //$dif = round((time() - strtotime($info['ultima_actualizacion'])) / 3600);
-    //if($info['con_cambios'] == 1){
-        $data = $core->get_web_js_data2($info['id_gir']);
-
-    //}
-    
-    
-    
+    if($info['con_cambios'] == 1){
+        $core->get_web_js_data2($info['id_gir']);
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -353,6 +352,6 @@ if($info['id_gir'] != 0){
     </body>
 </html>
 
-<?php } exit; ?>
+<?php } ?>
 
 
