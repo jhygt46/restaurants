@@ -94,7 +94,7 @@ if($info['id_gir'] != 0){
             <div class="pagina">
                 <div class="cont_pagina">
                     <div class="header <?php echo ($info["header_fixed"] == 1) ? 'fixed' : ''; ?>">
-                        <div class="header_logo vhalign"><img src="http://<?php echo $info["dominio"]; ?>/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
+                        <div class="header_logo vhalign"><img src="<?php echo $info["dominio"]; ?>/images/logos/<?php echo $info["logo"]; ?>" alt="" /></div>
                         <div class="menu_right valign" onclick="open_carro()"><div class="shop material-icons">shopping_cart</div><div class="cantcart"><div class="cantcart_num vhalign"></div></div></div>
                     </div>
                     <div class="contenido">
@@ -209,7 +209,7 @@ if($info['id_gir'] != 0){
                                                         <div class="stitle"><?php echo $locales[$i]->{'direccion'}; ?></div>
                                                     </div>
                                                     <div class="local_mapa" onclick="map_local(<?php echo $locales[$i]->{'id_loc'}; ?>, <?php echo $locales[$i]->{'lat'}; ?>, <?php echo $locales[$i]->{'lng'}; ?>)">
-                                                        <div class="icon_mapa" style="background: url('http://<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>
+                                                        <div class="icon_mapa" style="background: url('<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>
                                                     </div>
                                                 </div>
                                                 <div id="lmap-<?php echo $locales[$i]->{'id_loc'}; ?>" class="lmap"></div>
