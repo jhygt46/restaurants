@@ -64,7 +64,7 @@ if($info['id_gir'] != 0){
         
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["dominio"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         
-        <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
+        <!--<script src="http://35.196.220.197/socket.io/socket.io.js"></script>-->
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.4.2/libphonenumber-js.min.js" type="text/javascript"></script>
