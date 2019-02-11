@@ -531,6 +531,7 @@ class Core{
             $info['lista_locales'] = $sql['resultado'][0]['lista_locales'];
             $info['con_cambios'] = $sql['resultado'][0]['con_cambios'];
             $info['desde'] = $sql['resultado'][0]['desde'];
+            $info['ssl'] = $sql['resultado'][0]['ssl'];
             
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
             $info['pedido_gengibre'] = $sql['resultado'][0]['pedido_gengibre'];
