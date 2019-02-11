@@ -21,7 +21,7 @@ if(isset($_GET['param_dom'])){
 }
 
 if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
-    $location = 'https://'.$_SERVER['HTTP_HOST'].'/admin';
+    $location = 'https://'.$_SERVER['HTTP_HOST'];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $location);
     exit;
