@@ -2,36 +2,40 @@
 
 date_default_timezone_set('America/Santiago');
 
-if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") && !isset($_GET["param_dom"])){
-    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")){
-        $location = 'https://'.$_SERVER['HTTP_HOST'];
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $location);
-        exit;
+if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl")){
+    
+    if(!isset($_GET["param_dom"])){
+        if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")){
+            $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $location);
+            exit;
+        }else{
+            require('misitiodelivery.php');
+            exit;
+        }
     }else{
-        require('misitiodelivery.php');
-        exit;
+        require('admin/class/core_class.php');
+        $core = new Core();
+        $info = $core->get_data($_GET['param_dom']);
     }
-}
 
-require('admin/class/core_class.php');
-$core = new Core();
-
-if(isset($_GET['param_dom'])){
-    $info = $core->get_data($_GET['param_dom']);
 }else{
+
+    require('admin/class/core_class.php');
+    $core = new Core();
     if($_SERVER["HTTP_HOST"] == "localhost"){
         $info = $core->get_data('www.izusushi.cl');
     }else{
         $info = $core->get_data();
     }
-}
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
+        $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $location);
+        exit;
+    }
 
-if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
-    $location = 'https://'.$_SERVER['HTTP_HOST'];
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location: ' . $location);
-    exit;
 }
 
 $locales = json_decode($info['lista_locales']);
