@@ -3,8 +3,15 @@
 date_default_timezone_set('America/Santiago');
 
 if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") && !isset($_GET["param_dom"])){
-    require('misitiodelivery.php');
-    exit;
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")){
+        $location = 'https://'.$_SERVER['HTTP_HOST'];
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $location);
+        exit;
+    }else{
+        require('misitiodelivery.php');
+        exit;
+    }
 }
 
 require('admin/class/core_class.php');
