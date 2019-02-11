@@ -517,7 +517,7 @@ class Core{
         
         if($sql['count'] == 1){
             
-            $info['dominio'] = $dominio;
+            $info['ssl'] = $sql['resultado'][0]['ssl'];
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
@@ -531,7 +531,11 @@ class Core{
             $info['lista_locales'] = $sql['resultado'][0]['lista_locales'];
             $info['con_cambios'] = $sql['resultado'][0]['con_cambios'];
             $info['desde'] = $sql['resultado'][0]['desde'];
-            $info['ssl'] = $sql['resultado'][0]['ssl'];
+            if($info['ssl'] == 1){
+                $info['dominio'] = "https://".$dominio;
+            }else{
+                $info['dominio'] = "http://".$dominio;
+            }
             
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
             $info['pedido_gengibre'] = $sql['resultado'][0]['pedido_gengibre'];
