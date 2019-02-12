@@ -540,7 +540,7 @@ class Core{
                     $info['dominio'] = "http://".$dominio;
                 }
             }else{
-                $info['dominio'] = "https://www.misitiodelivery.cl";
+                $info['dominio'] = "https://misitiodelivery.cl";
             }
             
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
