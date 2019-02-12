@@ -94,7 +94,7 @@ class Core{
                 $this->id_cat = $id_cat;
                 $_SESSION['user']['id_cat'] = $id_cat;
             }else{
-                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                die("ERROR A3: NO PUEDE SELECCIONAR EL CATALOGO");
             }
         }
         if($this->admin == 1){
@@ -103,7 +103,7 @@ class Core{
                 $this->id_cat = $id_cat;
                 $_SESSION['user']['id_cat'] = $id_cat;
             }else{
-                die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                die("ERROR A4: NO PUEDE SELECCIONAR EL CATALOGO");
             }
         }
         
