@@ -70,7 +70,7 @@ class Core{
                     $this->id_gir = $id_gir;
                     $_SESSION['user']['id_gir'] = $id_gir;
                 }else{
-                    die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                    die("ERROR A1: NO PUEDE SELECCIONAR EL GIRO");
                 }
             }
             if($this->admin == 1){
@@ -79,7 +79,7 @@ class Core{
                     $this->id_gir = $id_gir;
                     $_SESSION['user']['id_gir'] = $id_gir;
                 }else{
-                    die("ERROR: NO PUEDE SELECCIONAR EL GIRO");
+                    die("ERROR A2: NO PUEDE SELECCIONAR EL GIRO");
                 }
             }
         }else{
