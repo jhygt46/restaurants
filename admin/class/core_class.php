@@ -99,7 +99,7 @@ class Core{
         }
         if($this->admin == 1){
             $count = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2  WHERE t2.id_cat='".$id_cat."' AND t2.id_gir=t1.id_gir AND t1.id_user='".$this->id_user."'");
-            if($count['count'] == 1){
+            if($count['count'] == 1 || $this->id_user == 1){
                 $this->id_cat = $id_cat;
                 $_SESSION['user']['id_cat'] = $id_cat;
             }else{
