@@ -534,14 +534,13 @@ class Core{
             $info['desde'] = $sql['resultado'][0]['desde'];
             
             if($info['dns'] == 1){
-                $info['dominio'] = $dominio;
+                if($info['ssl'] == 1){
+                    $info['dominio'] = "https://".$dominio;
+                }else{
+                    $info['dominio'] = "http://".$dominio;
+                }
             }else{
-                $info['dominio'] = "www.misitiodelivery.cl";
-            }
-            if($info['ssl'] == 1){
-                $info['dominio'] = "https://".$info['dominio'];
-            }else{
-                $info['dominio'] = "http://".$info['dominio'];
+                $info['dominio'] = "https://www.misitiodelivery.cl";
             }
             
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
