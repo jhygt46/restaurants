@@ -36,6 +36,24 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 
 $list = $fireapp->get_locales();
 $giro = $fireapp->get_giro();
+
+if($giro['dns'] == 0){
+    // CURL
+    $data['test'] = 'Dw7k2s_hKi5sqPs8';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://'.$giro['dominio']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    $resp = curl_exec($ch);
+    
+    curl_close($ch);
+    if($resp == 'hjS3r5gYa6ib_5Ps'){
+        $giro['dns'] = 1;
+        $fireapp->set_giro_dns();
+    }
+
+}
+
 $catalogos = $fireapp->get_catalogos();
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
@@ -164,15 +182,27 @@ function init_chart(){
             <div class="lista_items">
                 <div class="titulo_items"><h1><?php echo $catalogos[$i]['nombre']; ?></h1><h2>Crea el arbol de Productos para este catalogo</h2></div>
                 <div class="items_list clearfix">
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/categorias.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuicon.png" alt="" /></div><div class="item_ttl">CARTA</div></div></div>
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/preguntas.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menupreguntas.png" alt="" /></div><div class="item_ttl">PREGUNTAS</div></div></div>
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/ingredientes.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuingredientes.png" alt="" /></div><div class="item_ttl">LISTA<br>INGREDIENTES</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/categorias.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuicon.png" alt="" /></div><div class="item_ttl">CARTA</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/preguntas.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menupreguntas.png" alt="" /></div><div class="item_ttl">PREGUNTAS</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/ingredientes.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuingredientes.png" alt="" /></div><div class="item_ttl">LISTA<br>INGREDIENTES</div></div></div>
                 </div>
             </div>
             
         </div>
     </div>
     <?php } ?>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="lista_items">
+                <div class="titulo_items"><h1>Sitio Web</h1><?php if($giro["dns"] == 0){ ?><h2>Sube tu sitio ahora mismo</h2><?php }else{ ?><h2>Agregale seguridad a tu sitio web</h2><?php } ?></div>
+                <div class="items_list clearfix">
+                    <div class="list_item wi_01"><div class="cont_item"><a href="https://www.google.cl" target="_blank" style="text-decoration: none"><div class="item_image"><img src="images/web_temp.png" alt="" /></div><div class="item_ttl"><?php if($giro["dns"] == 0){ ?>SITIO TEMPORAL<?php }else{ ?>VISITAR SITIO<?php } ?></div></a></div></div>
+                    <?php if($giro["dns"] == 0){ ?><div class="list_item wi_02"><div class="dns_item"><div class="cont_dns"><h1>ns-cloud-e1.googledomains.com</h1><h1>ns-cloud-e2.googledomains.com</h1><h1>ns-cloud-e3.googledomains.com</h1><h1>ns-cloud-e4.googledomains.com</h1></div></div><div class="dns_info">CAMBIA TUS DNS</div></div><?php } ?>
+                    <?php if($giro["dns"] == 1){ ?><div class="list_item wi_01"><div class="cont_item"><a href="https://www.google.cl" target="_blank" style="text-decoration: none"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">SEGURIDAD HTTPS</div></a></div></div><?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
@@ -204,9 +234,9 @@ function init_chart(){
             <div class="lista_items">
                 <div class="titulo_items"><h1>CONFIGURACION</h1><h2>Configuracion del Sistema y Sitio Web</h2></div>
                 <div class="items_list clearfix">
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/configurar_giro.php')"><div class="item_image"><img src="images/configbase.png" alt="" /></div><div class="item_ttl">Sitio Web</div></div></div>
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/configurar_estilos.php')"><div class="item_image"><img src="images/configstyle.png" alt="" /></div><div class="item_ttl">Estilos</div></div></div>
-                    <div class="list_item"><div class="cont_item" onclick="navlink('pages/msd/configurar_paginas.php')"><div class="item_image"><img src="images/configpages.png" alt="" /></div><div class="item_ttl">Paginas</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_giro.php')"><div class="item_image"><img src="images/configbase.png" alt="" /></div><div class="item_ttl">Sitio Web</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_estilos.php')"><div class="item_image"><img src="images/configstyle.png" alt="" /></div><div class="item_ttl">Estilos</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_paginas.php')"><div class="item_image"><img src="images/configpages.png" alt="" /></div><div class="item_ttl">Paginas</div></div></div>
                 </div>
             </div>
         </div>

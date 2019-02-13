@@ -367,8 +367,6 @@ body .relative {
 }
 .pagina .cont_pagina .cont_pag .lista_items .items_list .list_item {
   float: left;
-  width: 33.33%;
-  min-width: 90px;
 }
 .pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .cont_item {
   width: 90px;
@@ -382,6 +380,40 @@ body .relative {
   padding-top: 5px;
   text-align: center;
   font-size: 15px;
+  text-decoration: none;
+  color: #000;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .dns_item {
+  width: 90%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .dns_item .cont_dns {
+  width: 190px;
+  background: #fff;
+  height: 95px;
+  padding-top: 5px;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .dns_item .cont_dns h1 {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .dns_info {
+  font-size: 15px;
+  color: #000;
+  padding-top: 5px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .wi_01 {
+  width: 33.33%;
+  min-width: 90px;
+}
+.pagina .cont_pagina .cont_pag .lista_items .items_list .wi_02 {
+  width: 66.66%;
+  min-width: 180px;
 }
 
 .pagina .cont_pagina .cont_pag form .form_titulo .titulo {

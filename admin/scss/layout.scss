@@ -392,8 +392,6 @@ body {
                 .items_list{
                     .list_item{
                         float: left;
-                        width: 33.33%;
-                        min-width: 90px;
                         .cont_item{
                             width: 90px; 
                             margin: 0 auto;
@@ -404,9 +402,43 @@ body {
                             .item_ttl{
                                 padding-top: 5px;
                                 text-align: center;
-                                font-size: 15px
+                                font-size: 15px;
+                                text-decoration: none;
+                                color: #000;
                             }
                         }
+                        .dns_item{
+                            width: 90%;
+                            margin: 0 auto;
+                            cursor: pointer;
+                            .cont_dns{
+                                width: 190px;
+                                background: #fff;
+                                height: 95px;
+                                padding-top: 5px;
+                                h1{
+                                    display: block;
+                                    font-size: 16px;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                        .dns_info{
+                            font-size: 15px;
+                            color: #000;
+                            padding-top: 5px;
+                            width: 90%;
+                            margin: 0 auto;
+                            text-align: left;
+                        }
+                    }
+                    .wi_01{
+                        width: 33.33%;
+                        min-width: 90px;
+                    }
+                    .wi_02{
+                        width: 66.66%;
+                        min-width: 180px;
                     }
                 }
             }
