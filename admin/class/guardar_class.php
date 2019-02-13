@@ -257,6 +257,8 @@ class Guardar extends Core{
         $pedido_palitos = $_POST['pedido_palitos'];
         $pedido_comentarios = $_POST['pedido_comentarios'];
         
+        $pedido_minimo = $_POST['pedido_minimo'];
+
         $pedido_01_titulo = $_POST['titulo_01'];
         $pedido_01_subtitulo = $_POST['subtitulo_01'];
         $pedido_02_titulo = $_POST['titulo_02'];
@@ -280,7 +282,7 @@ class Guardar extends Core{
         }
         
         // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
         
         // MODIFICAR TITULO
         $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
@@ -289,7 +291,7 @@ class Guardar extends Core{
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "msd/ver_giro.php";
         return $info;
         
     }

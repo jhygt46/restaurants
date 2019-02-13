@@ -56,6 +56,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="file_image" type="file" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Pedido Minimo:</p></span>
+                        <input id="pedido_minimo" type="text" class="inputs" value="<?php echo $that['pedido_minimo']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
                         <span><p>Titulo #1:</p></span>
                         <input id="titulo_01" type="text" class="inputs" value="<?php echo $that['pedido_01_titulo']; ?>" require="" placeholder="" />
                     </label>
