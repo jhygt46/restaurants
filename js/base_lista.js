@@ -694,10 +694,13 @@ function paso_2(){
 
     var total = parseInt(get_pedido().total);
     var pedido_minimo = parseInt(data.config.pedido_minimo);
-    
+
+    console.log("total: "+total);
+    console.log("pedido minimo: "+pedido_minimo);
+
+    paso = 2;
     if(proceso(true, true) && cantidad > 0){
-        paso = 2;
-        if(total >= pedido_minimo){
+        //if(total >= pedido_minimo){
             if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){        
                 show_modal('paso_02');
             }else{
@@ -708,10 +711,10 @@ function paso_2(){
                     show_despacho();
                 }
             }
-        }else{
-            alert("PEDIDO MINIMO "+pedido_minimo);
-            paso = 1;
-        }
+        //}else{
+            //alert("PEDIDO MINIMO "+pedido_minimo);
+            //paso = 1;
+        //}
     }
     
 }
