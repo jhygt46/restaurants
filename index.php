@@ -111,11 +111,8 @@ if($info['id_gir'] != 0){
                 <div class="cont_modals">
                     <div class="modal vhalign hide modal_pagina">
                         <div class="cont_modal">
-                            <div class="titulo"><div class="cont_titulo valign"><h1></h1><h2></h2></div></div>
                             <div onclick="close_that(this)" class="close material-icons">close</div>
-                            <div class="cont_info">
-                                <div class="info_modal"></div>
-                            </div>
+                            <div class="cont_info" style="background: none"></div>
                         </div>
                     </div>
                     <div class="modal vhalign hide modal_carta">

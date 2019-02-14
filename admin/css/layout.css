@@ -497,6 +497,18 @@ body .relative {
   color: #fff;
   font-size: 15px;
 }
+.pagina .cont_pagina .cont_pag form fieldset.normal label .btn_borrar {
+  width: 84%;
+  float: left;
+}
+.pagina .cont_pagina .cont_pag form fieldset.normal label .btn_borrar .btn {
+  background: #900;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 0px;
+  width: 100px;
+  text-align: center;
+}
 .pagina .cont_pagina .cont_pag form fieldset.normal .arbol {
   display: block;
   padding: 0 5%;
@@ -583,6 +595,17 @@ body .relative {
   background: #333;
   color: #fff;
   font-size: 15px;
+}
+.pagina .cont_pagina .cont_pag form fieldset.resp label .btn_borrar {
+  width: 100%;
+}
+.pagina .cont_pagina .cont_pag form fieldset.resp label .btn_borrar .btn {
+  background: #900;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 0px;
+  width: 100px;
+  text-align: center;
 }
 .pagina .cont_pagina .cont_pag form fieldset.resp .arbol {
   display: block;

@@ -29,6 +29,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     $list_lin = $fireapp->get_lista_ingredientes();
     
     $id_pro = $_GET["id_pro"];
+    $that = $fireapp->get_producto($id_pro);
     
     $pre_prod = $fireapp->get_preguntas_pro($id_pro);
     $lin_prod = $fireapp->get_lista_ingredientes_pro($id_pro);
@@ -86,7 +87,11 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                             <?php } ?>
                         </div>
                     </label>
-                    <label>
+                    <label class="clearfix">
+                        <span><p>Accion:</p></span>
+                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_productos', '<?php echo $$that['id_pro']; ?>', 'Producto', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
+                    </label>
+                    <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
                 </fieldset>

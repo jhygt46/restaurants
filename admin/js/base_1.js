@@ -80,5 +80,5 @@ function navlink(href){
     return false;
 }
 function topscroll(){
-    $('html, body').animate({ scrollTop: 0 }, 500);
+    $('.cont_contenido').animate({ scrollTop: 0 }, 500);
 }

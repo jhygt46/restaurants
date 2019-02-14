@@ -206,7 +206,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <div class="nombre"><?php echo $numero; ?> / <?php echo $nombre; ?></div>
                         <a title="Modificar" class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_pro=<?php echo $id_n; ?>')"></a>
                         <a title="Configurar Producto" class="icono ic7" onclick="navlink('pages/msd/configurar_producto.php?id_pro=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
-                        <a title="Configurar Producto" class="icono ic12" onclick="navlink('pages/msd/producto_ingredientes.php?id_pro=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
+                        <!--<a title="Configurar Producto" class="icono ic12" onclick="navlink('pages/msd/producto_ingredientes.php?id_pro=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a>-->
                     </div>
                 </div>
                 <?php } ?>

@@ -683,7 +683,7 @@ class Core{
     }
     public function get_config($id_gir){
         
-        $aux_config = $this->con->sql("SELECT retiro_local, despacho_domicilio, desde FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        $aux_config = $this->con->sql("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
         $aux = $aux_config['resultado'][0];
         return $aux;
         
@@ -692,7 +692,7 @@ class Core{
     
         $giro = $this->con->sql("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir");
         
-        $aux_pagina = $this->con->sql("SELECT id_pag, nombre, titulo, subtitulo, html FROM paginas WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        $aux_pagina = $this->con->sql("SELECT id_pag, nombre, imagen, html FROM paginas WHERE id_gir='".$id_gir."' AND eliminado='0'");
         $info['paginas'] = $aux_pagina['resultado'];
         
         $info['config'] = $this->get_config($id_gir);

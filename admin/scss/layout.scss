@@ -530,6 +530,18 @@ body {
                                 font-size: 15px;
                             }
                         }
+                        .btn_borrar{
+                            width: 84%;
+                            float: left;
+                            .btn{
+                                background: #900;
+                                color: #fff;
+                                font-size: 16px;
+                                padding: 5px 0px;
+                                width: 100px;
+                                text-align: center;
+                            }
+                        }
                     }
                     .arbol{
                         display: block;
@@ -617,6 +629,16 @@ body {
                                 background: #333;
                                 color: #fff;
                                 font-size: 15px;
+                            }
+                        }.btn_borrar{
+                            width: 100%;
+                            .btn{
+                                background: #900;
+                                color: #fff;
+                                font-size: 16px;
+                                padding: 5px 0px;
+                                width: 100px;
+                                text-align: center;
                             }
                         }
                     }

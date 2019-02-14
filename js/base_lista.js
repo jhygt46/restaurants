@@ -617,12 +617,11 @@ function borrar_carro(){
     localStorage.setItem("carro_promos", null);
 }
 function ver_pagina(id){
-    
+
     for(var i=0, ilen=data.paginas.length; i<ilen; i++){
         if(data.paginas[i].id_pag == id){
-            $('.modal_pagina .titulo h1').html(data.paginas[i].titulo);
-            $('.modal_pagina .titulo h2').html(data.paginas[i].subtitulo);
-            $('.modal_pagina .info_modal').html(data.paginas[i].html);
+            var html = data.paginas[i].html.replace("#FOTO#", data.paginas[i].imagen);
+            $('.modal_pagina .cont_info').html(html);
             show_modal('modal_pagina');
         }
     }
@@ -693,17 +692,25 @@ function proceso(categorias, preguntas){
 }
 function paso_2(){
 
-    paso = 2;
+    var total = parseInt(get_pedido().total);
+    var pedido_minimo = parseInt(data.config.pedido_minimo);
+    
     if(proceso(true, true) && cantidad > 0){
-        if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){            
-            show_modal('paso_02');
+        paso = 2;
+        if(total >= pedido_minimo){
+            if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){        
+                show_modal('paso_02');
+            }else{
+                if(data.config.retiro_local == 1){
+                    show_modal('paso_02a');
+                }
+                if(data.config.despacho_domicilio == 1){
+                    show_despacho();
+                }
+            }
         }else{
-            if(data.config.retiro_local == 1){
-                show_modal('paso_02a');
-            }
-            if(data.config.despacho_domicilio == 1){
-                show_despacho();
-            }
+            alert("PEDIDO MINIMO "+pedido_minimo);
+            paso = 1;
         }
     }
     

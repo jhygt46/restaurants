@@ -42,7 +42,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 
     var htmls = [
         { html: true, image: true, data: '' }, 
-        { html: true, image: true, data: '<div>BUENA NELSON</div>' }, 
+        { html: true, image: true, data: '<div style="width: 100%; min-height: 100%; background: url(/restaurants/images/paginas/#FOTO#) no-repeat; border-radius: 10px"><div style="font-size: 26px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 70px">#TITULO</div><div style="font-size: 14px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 117px">#DESCRIPCION</div></div>' },
         { html: true, image: true, data: '<div>BUENA ERNESTOR</div>' }, 
         { html: true, image: true, data: '<div>BUENA BUENA</div>' }
     ];
@@ -90,14 +90,6 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Titulo:</p></span>
-                        <input id="titulo" class="inputs" type="text" value="<?php echo $that['titulo']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Subtitulo:</p></span>
-                        <input id="subtitulo" class="inputs" type="text" value="<?php echo $that['subtitulo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Pagina:</p></span>

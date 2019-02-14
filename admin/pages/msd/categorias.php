@@ -17,9 +17,7 @@ $sub_titulo1 = "Ingresar Categoria";
 $sub_titulo2 = "Modificar Categoria";
 $accion = "crear_categoria";
 
-$eliminaraccion = "eliminar_categoria";
 $id_list = "id_cae";
-$eliminarobjeto = "Categoria";
 $page_mod = "pages/msd/categorias.php";
 /* CONFIG PAGE */
 
