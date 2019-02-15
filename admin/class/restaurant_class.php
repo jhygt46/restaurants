@@ -210,7 +210,8 @@ class Rest{
         $nombre = $aux_pedido->{'nombre'};
         $telefono = str_replace(" ", "", $aux_pedido->{'telefono'});
 
-        if(strlen($nombre) > 2 && strlen($telefono) == 12){
+        if(strlen($nombre) > 2){
+        if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
 
             $puser = json_decode($_POST['puser']);
             
@@ -328,10 +329,14 @@ class Rest{
             curl_close($ch);
             
         }else{
-            
             $info['op'] = 2;
-            $info['mensaje'] = "Error: debe completar todos los campos";
-            
+            $info['tipo'] = 2;
+            $info['mensaje'] = "Error: numero telefonico invalido";
+        }
+        }else{
+            $info['op'] = 2;
+            $info['tipo'] = 1;
+            $info['mensaje'] = "Error: debe ingresar su nombre";
         }
         
         return $info;

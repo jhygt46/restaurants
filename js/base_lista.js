@@ -759,72 +759,94 @@ function move_marker(lat, lng){
 function paso_4(){
     
     document.getElementById("enviar_cotizacion").disabled = true;
-    
-    var pedido = get_pedido();
-    pedido.nombre = $('#pedido_nombre').val();
-    pedido.telefono = $('#pedido_telefono').val();
-    pedido.depto = $('#pedido_depto').val();
+    var nombre = $('#pedido_nombre').val();
+    var telefono = $('#pedido_telefono').val();
 
-    pedido.pre_gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
-    pedido.pre_wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
-    pedido.pre_embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
-    pedido.pre_palitos = $('#pedido_palitos').val();
-    pedido.pre_soya = ($('#pedido_soya').is(':checked') ? 1 : 0 );
-    pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
-    pedido.comentarios = $('#pedido_comentarios').val();
-    
-    var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(get_puser()) };
-    
-    $.ajax({
-        url: "ajax/index.php",
-        type: "POST",
-        data: send,
-        success: function(info){
+    if(nombre.length > 2){
+        if(telefono.length >= 12 && telefono.length <= 14){
+            
+            var pedido = get_pedido();
+            pedido.nombre = nombre;
+            pedido.telefono = telefono;
+            pedido.depto = $('#pedido_depto').val();
 
-            var data = JSON.parse(info);
-            //console.log(data);
-            if(data.op == 2){
-                alert(data.mensaje);
-            }
-            if(data.op == 1){
+            pedido.pre_gengibre = ($('#pedido_gengibre').is(':checked') ? 1 : 0 );
+            pedido.pre_wasabi = ($('#pedido_wasabi').is(':checked') ? 1 : 0 );
+            pedido.pre_embarazadas = ($('#pedido_embarazadas').is(':checked') ? 1 : 0 );
+            pedido.pre_palitos = $('#pedido_palitos').val();
+            pedido.pre_soya = ($('#pedido_soya').is(':checked') ? 1 : 0 );
+            pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
+            pedido.comentarios = $('#pedido_comentarios').val();
+            
+            var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(get_puser()) };
+            
+            $.ajax({
+                url: "ajax/index.php",
+                type: "POST",
+                data: send,
+                success: function(info){
 
-                if(data.set_puser == 1){
-                    set_puser(data.puser);
+                    var data = JSON.parse(info);
+                    //console.log(data);
+                    if(data.op == 2){
+                        alert(data.mensaje);
+                        if(data.tipo == 1){
+
+                        }
+                        if(data.tipo == 2){
+                            
+                        }
+                    }
+                    if(data.op == 1){
+
+                        if(data.set_puser == 1){
+                            set_puser(data.puser);
+                        }
+                        
+                        document.getElementById("enviar_cotizacion").disabled = false;
+
+                        pedido.id_ped = data.id_ped;
+                        pedido.pedido_code = data.pedido_code;
+                        pedido.fecha = data.fecha;
+                        pedido.lat = data.lat;
+                        pedido.lng = data.lng;
+                        pedido.estado = estados[0];
+                        
+                        if(pedido.despacho == 0){
+                            pedido.time = tiempo_retiro;
+                            $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puedes venir a buscarlo");
+                        }
+                        if(pedido.despacho == 1){
+                            pedido.time = tiempo_despacho;
+                            $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
+                        }                
+                        
+                        $('.pedido_mensaje').show();
+                        
+                        show_modal_4(pedido);
+                        set_pedido(pedido);
+                        time();
+                        paso = 1;
+
+                    }else{
+                        document.getElementById("enviar_cotizacion").disabled = false;
+                        document.getElementById("enviar_cotizacion").disabled = false;
+                    }
+                }, error: function(e){
+                    alert("En estos momentos no podemos atenderlo.. por favor intente mas tarde");
                 }
-                
-                document.getElementById("enviar_cotizacion").disabled = false;
+            });
 
-                pedido.id_ped = data.id_ped;
-                pedido.pedido_code = data.pedido_code;
-                pedido.fecha = data.fecha;
-                pedido.lat = data.lat;
-                pedido.lng = data.lng;
-                pedido.estado = estados[0];
-                
-                if(pedido.despacho == 0){
-                    pedido.time = tiempo_retiro;
-                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puedes venir a buscarlo");
-                }
-                if(pedido.despacho == 1){
-                    pedido.time = tiempo_despacho;
-                    $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
-                }                
-                
-                $('.pedido_mensaje').show();
-                
-                show_modal_4(pedido);
-                set_pedido(pedido);
-                time();
-                paso = 1;
-
-            }else{
-                document.getElementById("enviar_cotizacion").disabled = false;
-                document.getElementById("enviar_cotizacion").disabled = false;
-            }
-        }, error: function(e){
-            alert("En estos momentos no podemos atenderlo.. por favor intente mas tarde");
-        }
-    });
+        }else{
+            document.getElementById("enviar_cotizacion").disabled = false;
+            $('#pedido_telefono').css({ border: '1px solid #900' });
+            alert("Deve ingresar nombre");
+        }  
+    }else{
+        document.getElementById("enviar_cotizacion").disabled = false;
+        $('#pedido_nombre').css({ border: '1px solid #900' });
+        alert("Deve ingresar telefono valido");
+    }
     
 }
 function time(){
