@@ -840,12 +840,12 @@ function paso_4(){
         }else{
             document.getElementById("enviar_cotizacion").disabled = false;
             $('#pedido_telefono').css({ border: '1px solid #900' });
-            alert("Deve ingresar nombre");
+            alert("Debe ingresar numero telefono valido");
         }  
     }else{
         document.getElementById("enviar_cotizacion").disabled = false;
         $('#pedido_nombre').css({ border: '1px solid #900' });
-        alert("Deve ingresar telefono valido");
+        alert("Debe ingresar nombre valido");
     }
     
 }
