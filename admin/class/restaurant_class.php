@@ -330,12 +330,10 @@ class Rest{
             
         }else{
             $info['op'] = 2;
-            $info['tipo'] = 2;
             $info['mensaje'] = "Error: numero telefonico invalido";
         }
         }else{
             $info['op'] = 2;
-            $info['tipo'] = 1;
             $info['mensaje'] = "Error: debe ingresar su nombre";
         }
         

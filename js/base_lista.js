@@ -787,18 +787,13 @@ function paso_4(){
                 success: function(info){
 
                     var data = JSON.parse(info);
-                    //console.log(data);
                     if(data.op == 2){
                         alert(data.mensaje);
-                        if(data.tipo == 1){
-
-                        }
-                        if(data.tipo == 2){
-                            
-                        }
                     }
                     if(data.op == 1){
 
+                        $('#pedido_nombre').css({ border: '0px' });
+                        $('#pedido_telefono').css({ border: '0px' });
                         if(data.set_puser == 1){
                             set_puser(data.puser);
                         }
