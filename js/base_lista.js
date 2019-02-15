@@ -760,7 +760,7 @@ function paso_4(){
     
     document.getElementById("enviar_cotizacion").disabled = true;
     var nombre = $('#pedido_nombre').val();
-    var telefono = $('#pedido_telefono').val();
+    var telefono = $('#pedido_telefono').val().replace(" ", "");
 
     console.log(telefono.length);
 
