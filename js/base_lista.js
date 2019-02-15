@@ -766,7 +766,7 @@ function paso_4(){
     console.log(telefono.length);
 
     if(nombre.length > 2){
-        if(telefono.length >= 12 && telefono.length <= 14){
+        if(telefono.length >= 14 && telefono.length <= 16){
             
             var pedido = get_pedido();
             pedido.nombre = nombre;
