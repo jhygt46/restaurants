@@ -838,7 +838,7 @@ function paso_4(){
         }else{
             document.getElementById("enviar_cotizacion").disabled = false;
             $('#pedido_telefono').css({ border: '1px solid #900' });
-            alert("Debe ingresar numero telefono valido");
+            alert("Debe ingresar numero  de telefono valido");
         }  
     }else{
         document.getElementById("enviar_cotizacion").disabled = false;

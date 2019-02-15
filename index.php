@@ -33,7 +33,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     }else{
         $info = $core->get_data();
     }
-    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1 && !isset($_GET['ssl'])) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
