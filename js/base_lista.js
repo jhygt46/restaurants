@@ -782,7 +782,10 @@ function paso_4(){
         success: function(info){
 
             var data = JSON.parse(info);
-            console.log(data);
+            //console.log(data);
+            if(data.op == 2){
+                alert(data.mensaje);
+            }
             if(data.op == 1){
 
                 if(data.set_puser == 1){
