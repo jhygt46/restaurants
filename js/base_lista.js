@@ -762,6 +762,7 @@ function paso_4(){
     var nombre = $('#pedido_nombre').val();
     var telefono = $('#pedido_telefono').val().replace(" ", "");
 
+    console.log(telefono);
     console.log(telefono.length);
 
     if(nombre.length > 2){
