@@ -12,6 +12,7 @@ $fireapp = new Core();
 $inicio = $fireapp->inicio();
 $core_class_iniciada = 1;
 
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
@@ -105,8 +106,16 @@ $core_class_iniciada = 1;
                     <div class="contenido">
                         <div class="cont_contenido relative">
                             <div class="html">
+
+                                <?php 
                                 
-                                <?php require 'pages/msd/ver_giro.php'; ?>
+                                if($inicio['admin'] == 0){
+                                    require 'pages/msd/ver_giro.php'; 
+                                }
+                                if($inicio['admin'] == 1){
+                                    require 'pages/msd/giros.php'; 
+                                }
+                                ?>
                                 
                             </div>
                         </div>
