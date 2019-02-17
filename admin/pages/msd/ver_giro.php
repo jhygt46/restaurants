@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
 if(core_class_iniciada != 1){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
