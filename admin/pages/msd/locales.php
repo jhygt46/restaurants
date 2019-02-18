@@ -196,10 +196,10 @@ function crear_llamado(map){
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <a class="icono ic7" onclick="navlink('pages/msd/configurar_local.php?id_cae=<?php echo $id_n; ?>&nombre=<?php echo $nombre; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
-                        <!--<a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>-->
                         <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_loc=<?php echo $id; ?>')"></a>
                         <a class="icono ic4" onclick="navlink('pages/msd/zonas_locales.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic13" onclick="navlink('pages/msd/crear_repartidor.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic14" onclick="navlink('pages/msd/crear_horario.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
