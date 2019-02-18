@@ -9,6 +9,10 @@ $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 
 $local = $core->local($id_loc);
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 echo "<pre>";
 print_r($local);
 echo "</pre>";
@@ -22,7 +26,7 @@ if($local['op'] == 1){
     $code_verificado = true;
     session_destroy();
 }else{
-    die("ERROR: CONTACTARSE CON EL ADMINISTRADOR");
+    die("ERROR 1: CONTACTARSE CON EL ADMINISTRADOR");
 }
 
 
@@ -30,7 +34,7 @@ if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
     if(!$code_verificado){
         $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
         if($exist['count'] == 0){
-            die("ERROR: CONTACTARSE CON EL ADMINISTRADOR");
+            die("ERROR 2: CONTACTARSE CON EL ADMINISTRADOR");
         }
     }
 }
