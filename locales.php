@@ -7,7 +7,11 @@ $core = new Core();
 
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
-
+/*
+echo "<pre>";
+print_r($local);
+echo "</pre>";
+*/
 if(!isset($_COOKIE['CODE'])){
     
     if($local['op'] == 1){
