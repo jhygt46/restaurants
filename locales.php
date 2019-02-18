@@ -8,6 +8,11 @@ $core = new Core();
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
 
+if($id_loc != $_COOKIE['ID']){
+    unset($_COOKIE['ID']);
+    unset($_COOKIE['CODE']);
+}
+
 if(!isset($_COOKIE['CODE'])){
     
     if($local['op'] == 1){
