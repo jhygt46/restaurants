@@ -57,8 +57,12 @@ class Core{
     }
     public function inicio(){
 
-        $info['id_user'] = $_SESSION['user']['info']['id_user'];
-        $info['admin'] = $_SESSION['user']['info']['admin'];
+        $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$this->id_user."'");
+        
+        $info['id_user'] = $this->id_user;
+        $info['admin'] = $this->admin;
+        $info['nombre'] = $user['resultado'][0]['nombre'];
+        $info['correo'] = $user['resultado'][0]['correo'];
         return $info;
 
     }

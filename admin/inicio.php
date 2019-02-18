@@ -11,8 +11,11 @@ require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 $inicio = $fireapp->inicio();
 $core_class_iniciada = 1;
-
-
+/*
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
+*/
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
@@ -47,8 +50,8 @@ $core_class_iniciada = 1;
                                         <li class="foto"><img src="images/no-user.png" alt="" /></li>
                                         <li class="info">
                                             <div class="cont_info">
-                                                <h2>Diego Gomez B</h2>
-                                                <h3>diegomez13@hotmail.com</h3>
+                                                <h2><?php echo $inicio['nombre']; ?></h2>
+                                                <h3><?php echo $inicio['correo']; ?></h3>
                                                 <a href="?accion=logout">Salir</a>
                                             </div>
                                         </li>
