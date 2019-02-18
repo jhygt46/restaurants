@@ -57,7 +57,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <script src="<?php echo $info["js_sweet"]; ?>" type="text/javascript"></script>
         <script> 
             var local_code = '<?php echo $code; ?>';
-            var dominio = '<?php echo $local['dominio']; ?>';
+            var dominio = 'http://<?php echo $local['dominio']; ?>';
             var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
         </script>
         <style>
