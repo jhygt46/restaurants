@@ -4,39 +4,30 @@ date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
 $core = new Core();
-//$core->is_local($_GET['id_loc']);
+
 $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
+$local = $core->local($id_loc);
 
-if($_SESSION['user']['info']['id_user'] > 0){
-    
-    $id_user = $_SESSION['user']['info']['id_user'];
-    $user_local = $core->con->sql("SELECT * FROM fw_usuarios_locales WHERE id_loc='".$id_loc."' AND id_user='".$id_user."'");
-    if($user_local['count'] == 1){
-        
-        $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
-        setcookie('CODE', $code_cookie, time()+50400);
-        setcookie('ID', $id_loc, time()+50400);
-        $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
-        $code_verificado = true;
-        session_destroy();
-        
-    }
-    if($user_local['count'] == 0){
-        die("NO TIENE LOS PERMISOS NECESARIOS PARA INGRESAR AL PUNTO DE VENTA");
-    }
-
+if($local['op'] == 1){
+    $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
+    setcookie('CODE', $code_cookie, time()+50400);
+    setcookie('ID', $id_loc, time()+50400);
+    $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
+    $code_verificado = true;
+    session_destroy();
+}else{
+    die("ERROR: CONTACTARSE CON EL ADMINISTRADOR");
 }
 
+
 if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
-    
     if(!$code_verificado){
         $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
         if($exist['count'] == 0){
-            die("BUENA NELSON.COM #2");
+            die("ERROR: CONTACTARSE CON EL ADMINISTRADOR");
         }
     }
-    
 }
 
 $info = $core->get_data('www.izusushi.cl');
