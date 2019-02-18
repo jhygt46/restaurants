@@ -9,7 +9,9 @@ $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 
 $local = $core->local($id_loc);
-die("BUEE");
+echo "<pre>";
+print_r($local);
+echo "</pre>";
 
 
 if($local['op'] == 1){

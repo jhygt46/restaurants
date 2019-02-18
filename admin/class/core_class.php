@@ -58,6 +58,9 @@ class Core{
     public function local($id_loc){
         
         $loc = $this->con->sql("SELECT id_gir FROM locales WHERE id_loc='".$id_loc."'");
+        return $loc;
+
+        /*
         $id_gir = $loc['resultado'][0]['id_gir'];
         $user_local = $core->con->sql("SELECT * FROM fw_usuarios_locales WHERE id_loc='".$id_loc."' AND id_user='".$this->id_user."'");
         
@@ -65,8 +68,8 @@ class Core{
         if($this->id_user == 1 || ($this->admin == 0 && $this->id_gir == $id_gir) || $user_local['count'] == 1){
             $info['op'] = 1;
         }
-
         return $info;
+        */
 
     }
     public function inicio(){
