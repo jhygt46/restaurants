@@ -59,7 +59,7 @@ class Core{
         
         $loc = $this->con->sql("SELECT id_gir FROM locales WHERE id_loc='".$id_loc."'");
         $id_gir = $loc['resultado'][0]['id_gir'];
-
+        
         $user_local = $this->con->sql("SELECT * FROM fw_usuarios_locales WHERE id_loc='".$id_loc."' AND id_user='".$this->id_user."'");
 
         $info['op'] = 2;

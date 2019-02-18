@@ -7,16 +7,7 @@ $core = new Core();
 
 $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
-
 $local = $core->local($id_loc);
-
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-echo "<pre>";
-print_r($local);
-echo "</pre>";
-
 
 if($local['op'] == 1){
     $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
@@ -39,7 +30,7 @@ if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
     }
 }
 
-$info = $core->get_data('www.izusushi.cl');
+$info = $core->get_data();
 $pedidos = $core->get_ultimos_pedidos(null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
 
