@@ -141,6 +141,7 @@ function crear_llamado(map){
                     <input id="lat" type="hidden" value="<?php echo $lat; ?>" />
                     <input id="lng" type="hidden" value="<?php echo $lng; ?>" />
                     <input id="address" type="hidden" value="<?php echo $that['direccion']; ?>" />
+                    <?php if(count($catalogos)==1){ ?><input id="id_cat" type="hidden" value="<?php echo $catalogos[0]["id_cat"]; ?>" /><?php } ?>
                     <label class="clearfix">
                         <span><p>Nombre del Local:</p></span>
                         <input id="nombre" type="text" class="inputs" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
@@ -157,6 +158,7 @@ function crear_llamado(map){
                         <span><p>Mapa:</p></span>
                         <div class="map" id="input_gmap"></div>
                     </label>
+                    <?php if(count($catalogos)>1){ ?>
                     <label class="clearfix">
                         <span><p>Catalogo:</p></span>
                         <select id="id_cat">
@@ -166,6 +168,7 @@ function crear_llamado(map){
                             <?php } ?>
                         </select>
                     </label>
+                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
