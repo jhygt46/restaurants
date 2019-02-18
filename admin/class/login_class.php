@@ -76,6 +76,9 @@ class Login {
                         
                         $info['op'] = 1;
                         $info['message'] = "Ingreso Exitoso";
+
+                        unset($_COOKIE['ID']);
+                        unset($_COOKIE['CODE']);
                         
                     }else{
                         $intentos = $user['resultado'][0]['intentos'] + 1;
