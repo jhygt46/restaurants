@@ -7,9 +7,9 @@ $core = new Core();
 
 $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
-die("BUEE");
-$local = $core->local($id_loc);
 
+$local = $core->local($id_loc);
+die("BUEE");
 
 
 if($local['op'] == 1){
