@@ -9,6 +9,8 @@ $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
 
+exit;
+
 if($local['op'] == 1){
     $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
     setcookie('CODE', $code_cookie, time()+50400);
