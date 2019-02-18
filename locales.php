@@ -29,7 +29,7 @@ if(!isset($_COOKIE['CODE'])){
     
 }
 
-$info = $core->get_data();
+$info = $core->get_data($local['dominio']);
 $pedidos = $core->get_ultimos_pedidos(null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
 
