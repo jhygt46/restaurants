@@ -7,9 +7,10 @@ $core = new Core();
 
 $code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
+die("BUEE");
 $local = $core->local($id_loc);
 
-exit;
+
 
 if($local['op'] == 1){
     $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
