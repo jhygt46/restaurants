@@ -872,7 +872,8 @@ function ver_comanda(index){
     if(proceso(pedido)){
     
         var code = pedido.pedido_code;
-        window.open("/detalle.php?code="+code, 'Imprimir Ctrl+P').focus();
+        console.log("dominio: "+dominio);
+        window.open(dominio+"/ver/"+code, 'Imprimir Ctrl+P').focus();
     
     }
 }
