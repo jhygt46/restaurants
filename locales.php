@@ -5,33 +5,28 @@ date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
 
-$code_verificado = false;
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
 
-echo "<pre>";
-print_r($local);
-echo "<pre>";
-
-if($local['op'] == 1){
-    $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
-    setcookie('CODE', $code_cookie, time()+50400);
-    setcookie('ID', $id_loc, time()+50400);
-    $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
-    $code_verificado = true;
-    session_destroy();
-}else{
-    die("ERROR 1: CONTACTARSE CON EL ADMINISTRADOR");
-}
-
-
-if(isset($_COOKIE['CODE']) && strlen($_COOKIE['CODE']) == 60){
-    if(!$code_verificado){
-        $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
-        if($exist['count'] == 0){
-            die("ERROR 2: CONTACTARSE CON EL ADMINISTRADOR");
-        }
+if(!isset($_COOKIE['CODE'])){
+    
+    if($local['op'] == 1){
+        $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
+        setcookie('CODE', $code_cookie, time()+50400);
+        setcookie('ID', $id_loc, time()+50400);
+        $core->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$id_loc."'");
+        session_destroy();
+    }else{
+        die("ERROR 1: CONTACTARSE CON EL ADMINISTRADOR");
     }
+
+}else{
+    
+    $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
+    if($exist['count'] == 0){
+        die("ERROR 2: CONTACTARSE CON EL ADMINISTRADOR");
+    }
+    
 }
 
 $info = $core->get_data();
