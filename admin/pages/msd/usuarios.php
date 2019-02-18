@@ -104,8 +104,8 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Giro:</p></span>
                         <select id="giro">
                             <option value="0">Seleccione</option>
-                            <?php foreach($list_giros as $value){ ?>
-                                <option value="<?php echo $value['id_gir']; ?>"><?php echo $value['dominio']; ?></option>
+                            <?php foreach($list_giros as $value){ $check = ''; if($id_gir == $value['id_gir']){ $check = 'checked="checked"'; } ?>
+                                <option value="<?php echo $value['id_gir']; ?>" <?php echo $check; ?>><?php echo $value['dominio']; ?></option>
                             <?php } ?>
                         </select>
                     </label>
