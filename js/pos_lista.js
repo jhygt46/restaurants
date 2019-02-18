@@ -262,8 +262,8 @@ function html_home_pedidos(obj, index){
         obj.carro.forEach(function(carro_item, index){
             if(carro_item.id_pro && carro_item.promo === undefined){
                 pro = get_producto(carro_item.id_pro);
-                total = total + parseInt(pro.precio);
                 console.log(pro);
+                total = total + parseInt(pro.precio);
             }
         });
     }
