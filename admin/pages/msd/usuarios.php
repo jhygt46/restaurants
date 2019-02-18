@@ -49,8 +49,10 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         var value = $('#tipo').val();
         if(value == 2){
             $('.locales').show();
+            $('.giros').hide();
         }else{
             $('.locales').hide();
+            $('.giros').show();
         }
     }
 </script>
@@ -100,7 +102,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         </div>
                     </label>
                     <?php if($id_user_admin == 1){ ?>
-                    <label class="clearfix">
+                    <label class="giros clearfix">
                         <span><p>Giro:</p></span>
                         <select id="giro">
                             <option value="0">Seleccione</option>
@@ -109,6 +111,8 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                             <?php } ?>
                         </select>
                     </label>
+                    <?php }else{ ?>
+                    <div class="giros"></div>
                     <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
