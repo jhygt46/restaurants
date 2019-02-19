@@ -12,7 +12,7 @@ $fireapp = new Core();
 
 
 /* CONFIG PAGE */
-$titulo = "Repartidores";
+$titulo = "Repartidores de ".$_GET["nombre"];
 $titulo_list = "Mis Repartidores";
 $sub_titulo1 = "Ingresar Repartidor";
 $sub_titulo2 = "Modificar Repartidor";
@@ -27,7 +27,7 @@ $page_mod = "pages/msd/crear_repartidor.php";
 $id_mot = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $fireapp->get_repartidores();
+$list = $fireapp->get_repartidores($_GET["id_loc"]);
 
 if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
 

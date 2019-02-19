@@ -363,12 +363,12 @@ class Core{
         return $info;
         
     }
-    public function get_repartidores(){
-        $reps = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+    public function get_repartidores($id_loc){
+        $reps = $this->con->sql("SELECT * FROM motos t1, motos_locales t2, locales t3 WHERE t3.id_gir='".$this->id_gir."' AND t3.id_loc='".$id_loc."' AND t3.id_loc=t2.id_loc AND t2.id_mot=t1.id_mot");
         return $reps['resultado'];
     }
-    public function get_repartidor($id_mot){
-        $rep = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+    public function get_repartidor($id_loc, $id_mot){
+        $rep = $this->con->sql("SELECT * FROM motos t1, motos_locales t2, locales t3 WHERE t1.id_mot='".$id_mot."' AND t3.id_gir='".$this->id_gir."' AND t3.id_loc='".$id_loc."' AND t3.id_loc=t2.id_loc AND t2.id_mot=t1.id_mot");
         return $rep['resultado'][0];
     }
     public function get_horarios(){
