@@ -77,7 +77,7 @@ $('#tipo').change(function(){
                         <span><p>Tipo:</p></span>
                         <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
                     </label>
-                    <div class="existente">
+                    <div class="existente" style="display: none">
                         <label class="clearfix">
                             <span><p>Tipo:</p></span>
                             <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
