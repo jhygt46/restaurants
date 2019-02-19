@@ -30,6 +30,14 @@ $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores($_GET["id_loc"]);
 $list_reps_giro = $fireapp->get_repartidores_giro();
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
+echo "<pre>";
+print_r($list_reps_giro);
+echo "</pre>";
+
 if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
 
     $id_mot = $_GET["id_mot"];
@@ -79,8 +87,13 @@ $('#tipo').change(function(){
                     </label>
                     <div class="existente" style="display: none">
                         <label class="clearfix">
-                            <span><p>Tipo:</p></span>
-                            <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
+                            <span><p>Repartidor:</p></span>
+                            <select id="repartidor">
+                                <option value="0">Seleccionar</option>
+                                <?php for($i=0; $i<4; $i++){ ?>
+                                <option value="">BUE</option>
+                                <?php } ?>
+                            </select>
                         </label>
                     </div>
                     <div class="nuevo">
