@@ -30,20 +30,10 @@ $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores($_GET["id_loc"]);
 $list_reps_giro = $fireapp->get_repartidores_giro();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
-echo "<pre>";
-print_r($list_reps_giro);
-echo "</pre>";
-
 if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
-
     $id_mot = $_GET["id_mot"];
     $that = $fireapp->get_repartidor($id_mot);
     $sub_titulo = $sub_titulo2;
-
 }
 
 function in_arr($arr, $id){
@@ -57,17 +47,17 @@ function in_arr($arr, $id){
 
 ?>
 <script>
-$('#tipo').change(function(){
-    if($(this).val() == 0){
-        $('.existente').hide();
-        $('.nuevo').show();
-    }
-    if($(this).val() == 1){
-        $('.existente').show();
-        $('.nuevo').hide();
-    }
-});
-    </script>
+    $('#tipo').change(function(){
+        if($(this).val() == 0){
+            $('.existente').hide();
+            $('.nuevo').show();
+        }
+        if($(this).val() == 1){
+            $('.existente').show();
+            $('.nuevo').hide();
+        }
+    });
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
