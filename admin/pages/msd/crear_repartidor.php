@@ -28,6 +28,15 @@ $id_mot = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores($_GET["id_loc"]);
+$list_no = $fireapp->get_no_repartidores($_GET["id_loc"]);
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
+echo "<pre>";
+print_r($list_no);
+echo "</pre>";
 
 if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
 
@@ -68,7 +77,7 @@ $('#tipo').change(function(){
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Producto Existente</option><option value="2">Producto Existente Externo</option></select>
+                        <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
                     </label>
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
