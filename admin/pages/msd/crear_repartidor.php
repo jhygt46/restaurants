@@ -35,13 +35,16 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
     $that = $fireapp->get_repartidor($id_mot);
     $sub_titulo = $sub_titulo2;
 
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
-
 }
 
 ?>
+<script>
+$('#tipo').change(function(){
+    if($(this).val() == 0){
+
+    }
+});
+    </script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -63,6 +66,10 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id_mot; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
+                    <label class="clearfix">
+                        <span><p>Tipo:</p></span>
+                        <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Producto Existente</option><option value="2">Producto Existente Externo</option></select>
+                    </label>
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
