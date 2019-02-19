@@ -117,7 +117,18 @@ class Guardar extends Core{
         if($_POST['accion'] == "crear_lista_ingredientes"){
             return $this->crear_lista_ingredientes();
         }
-        
+        if($_POST['accion'] == "crear_repartidor"){
+            return $this->crear_repartidor();
+        }
+        if($_POST['accion'] == "crear_horario"){
+            return $this->crear_horario();
+        }
+        if($_POST['accion'] == "eliminar_repartidor"){
+            return $this->eliminar_repartidor();
+        }
+        if($_POST['accion'] == "eliminar_horario"){
+            return $this->eliminar_horario();
+        }
     }
     private function ordercat(){
         

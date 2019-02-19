@@ -363,30 +363,19 @@ class Core{
         return $info;
         
     }
-    public function add_pedido_moto($id_mot, $id_ped, $code){
-        
-        $data['id_mot'] = $id_mot;
-        $data['id_ped'] = $id_ped;
-        $data['code'] = $code;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/add_pedido_moto');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        $info['db_h'] = curl_exec($ch);
-        curl_close($ch);
-        
+    public function get_repartidores(){
+        $reps = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $reps['resultado'];
     }
-    public function rm_pedido_moto($id_mot, $id_ped){
-        
-        $data['id_mot'] = $id_mot;
-        $data['id_ped'] = $id_ped;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/rm_pedido_moto');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        $info['db_h'] = curl_exec($ch);
-        curl_close($ch);
-        
+    public function get_repartidor($id_mot){
+        $rep = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."'");
+        return $rep['resultado'][0];
+    }
+    public function get_horarios(){
+
+    }
+    public function get_horario($id_hor){
+
     }
     public function set_web_pedido(){
                 
@@ -606,7 +595,7 @@ class Core{
             
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
             
-            $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info['id_gir']."'");
+            $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info["id_gir"]."'");
             $info['motos'] = $sql_motos['resultado'];
             
         }
