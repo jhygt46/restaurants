@@ -369,7 +369,7 @@ class Core{
     }
     public function get_repartidor($id_mot){
         $rep = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
-        return $rep;
+        return $rep['resultado'][0];
     }
     public function get_horarios(){
 
