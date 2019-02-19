@@ -24,7 +24,7 @@ $eliminarobjeto = "Repartidor";
 $page_mod = "pages/msd/crear_repartidor.php";
 /* CONFIG PAGE */
 
-$id_pag = 0;
+$id_mot = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores();
@@ -34,6 +34,10 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
     $id_mot = $_GET["id_mot"];
     $that = $fireapp->get_repartidor($id_mot);
     $sub_titulo = $sub_titulo2;
+
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
 
 }
 

@@ -368,8 +368,8 @@ class Core{
         return $reps['resultado'];
     }
     public function get_repartidor($id_mot){
-        $rep = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."'");
-        return $rep['resultado'][0];
+        $rep = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $rep;
     }
     public function get_horarios(){
 
