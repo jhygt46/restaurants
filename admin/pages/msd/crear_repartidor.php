@@ -46,6 +46,14 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
 
 }
 
+function in_arr($arr, $id){
+    for($i=0; $i<count($arr); $i++){
+        if($arr[$i]['id_mot'] == $id){
+            return true;
+        }
+    }
+    return false;
+}
 
 ?>
 <script>
@@ -90,9 +98,9 @@ $('#tipo').change(function(){
                             <span><p>Repartidor:</p></span>
                             <select id="repartidor">
                                 <option value="0">Seleccionar</option>
-                                <?php for($i=0; $i<4; $i++){ ?>
-                                <option value="">BUE</option>
-                                <?php } ?>
+                                <?php for($i=0; $i<count($list_reps_giro); $i++){ if(!in_arr($list, $list_reps_giro[$i]['id_mot'])){ ?>
+                                <option value="<?php echo $list_reps_giro[$i]['id_mot']; ?>"><?php echo $list_reps_giro[$i]['nombre']; ?></option>
+                                <?php }} ?>
                             </select>
                         </label>
                     </div>
