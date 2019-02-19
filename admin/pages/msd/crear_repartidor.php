@@ -43,7 +43,12 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
 <script>
 $('#tipo').change(function(){
     if($(this).val() == 0){
-
+        $('.existente').hide();
+        $('.nuevo').show();
+    }
+    if($(this).val() == 1){
+        $('.existente').show();
+        $('.nuevo').hide();
     }
 });
     </script>
@@ -72,10 +77,22 @@ $('#tipo').change(function(){
                         <span><p>Tipo:</p></span>
                         <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
                     </label>
-                    <label class="clearfix">
-                        <span><p>Nombre:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-                    </label>
+                    <div class="existente">
+                        <label class="clearfix">
+                            <span><p>Tipo:</p></span>
+                            <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Repartidor Existente</option></select>
+                        </label>
+                    </div>
+                    <div class="nuevo">
+                        <label class="clearfix">
+                            <span><p>Nombre:</p></span>
+                            <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        </label>
+                        <label class="clearfix">
+                            <span><p>Correo:</p></span>
+                            <input id="correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                        </label>
+                    </div>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
