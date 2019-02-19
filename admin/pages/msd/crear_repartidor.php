@@ -38,39 +38,11 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 }
 
 ?>
-<script>
-
-    var htmls = [
-        { html: true, image: true, data: '' }, 
-        { html: true, image: true, data: '<div style="width: 100%; min-height: 100%; background: url(/restaurants/images/paginas/#FOTO#) no-repeat; border-radius: 10px"><div style="font-size: 26px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 70px">#TITULO</div><div style="font-size: 14px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 117px">#DESCRIPCION</div></div>' },
-        { html: true, image: true, data: '<div>BUENA ERNESTOR</div>' }, 
-        { html: true, image: true, data: '<div>BUENA BUENA</div>' }
-    ];
-    function ver_paginas(){
-
-        var pagina = $('#tipo').val();
-        var info = htmls[pagina];
-
-        if(info.html){
-            $('#html').val(info.data);
-            $('.divHtml').show();
-        }else{
-            $('.divHtml').hide();
-        }
-        if(info.image){
-            $('.divImage').show();
-        }else{
-            $('.divImage').hide();
-        }
-
-    }
-
-</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/locales.php')"></li>
         </ul>
     </div>
     <hr>
