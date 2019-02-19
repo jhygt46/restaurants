@@ -12,27 +12,27 @@ $fireapp = new Core();
 
 
 /* CONFIG PAGE */
-$titulo = "Paginas del Menu";
-$titulo_list = "Mis Paginas";
-$sub_titulo1 = "Ingresar Pagina";
-$sub_titulo2 = "Modificar Paginas";
-$accion = "crear_pagina";
+$titulo = "Horarios de Atencion";
+$titulo_list = "Mis Horarios";
+$sub_titulo1 = "Ingresar Horario";
+$sub_titulo2 = "Modificar Horario";
+$accion = "crear_horario";
 
-$eliminaraccion = "eliminar_pagina";
-$id_list = "id_pag";
-$eliminarobjeto = "Pagina";
-$page_mod = "pages/msd/configurar_paginas.php";
+$eliminaraccion = "eliminar_horario";
+$id_list = "id_hor";
+$eliminarobjeto = "Horario";
+$page_mod = "pages/msd/crear_horario.php";
 /* CONFIG PAGE */
 
 $id_pag = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $fireapp->get_paginas();
+$list = $fireapp->get_horarios();
 
-if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0){
+if(isset($_GET["id_hor"]) && is_numeric($_GET["id_hor"]) && $_GET["id_hor"] != 0){
 
-    $id_pag = $_GET["id_pag"];
-    $that = $fireapp->get_pagina($id_pag);
+    $id_hor = $_GET["id_hor"];
+    $that = $fireapp->get_horario($id_hor);
     $sub_titulo = $sub_titulo2;
 
 }
@@ -57,28 +57,11 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id_pag; ?>" />
+                    <input id="id" type="hidden" value="<?php echo $id_hor; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Pagina:</p></span>
-                        <select id="tipo" onchange="ver_paginas()">
-                            <option value="0">Nueva</option>
-                            <option value="1">Pagina 1</option>
-                            <option value="2">Pagina 2</option>
-                            <option value="3">Pagina 3</option>
-                        </select>
-                    </label>
-                    <label class="divImage clearfix">
-                        <span><p>Imagen:</p></span>
-                        <input id="file_image" type="file" style="padding-top: 7px" />
-                    </label>
-                    <label class="divHtml clearfix">
-                        <span><p>HTML:</p></span>
-                        <TEXTAREA id="html"><?php echo $that['html']; ?></TEXTAREA>
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
