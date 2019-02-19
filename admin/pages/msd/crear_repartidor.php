@@ -30,6 +30,8 @@ $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores($_GET["id_loc"]);
 $list_no = $fireapp->get_no_repartidores($_GET["id_loc"]);
 
+echo "BUENA BUENA";
+
 echo "<pre>";
 print_r($list);
 echo "</pre>";
