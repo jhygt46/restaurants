@@ -38,6 +38,7 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
 
 }
 
+
 ?>
 <script>
 $('#tipo').change(function(){
