@@ -28,17 +28,7 @@ $id_mot = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_repartidores($_GET["id_loc"]);
-$list_no = $fireapp->get_no_repartidores($_GET["id_loc"]);
-
-echo "BUENA BUENA";
-
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
-echo "<pre>";
-print_r($list_no);
-echo "</pre>";
+$list_reps_giro = $fireapp->get_repartidores_giro();
 
 if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
 
