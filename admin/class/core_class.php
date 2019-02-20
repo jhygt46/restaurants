@@ -371,15 +371,17 @@ class Core{
         $reps = $this->con->sql("SELECT id_mot, nombre FROM motos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $reps['resultado'];
     }
-    public function get_repartidor($id_loc, $id_mot){
-        $rep = $this->con->sql("SELECT * FROM motos t1, motos_locales t2, locales t3 WHERE t1.id_mot='".$id_mot."' AND t3.id_gir='".$this->id_gir."' AND t3.id_loc='".$id_loc."' AND t3.id_loc=t2.id_loc AND t2.id_mot=t1.id_mot");
+    public function get_repartidor($id_mot){
+        $rep = $this->con->sql("SELECT t1.id_mot, t1.nombre, t1.correo, t1.uid FROM motos t1, motos_locales t2, locales t3 WHERE t1.id_mot='".$id_mot."' AND t3.id_gir='".$this->id_gir."' AND t3.id_loc=t2.id_loc AND t2.id_mot=t1.id_mot");
         return $rep['resultado'][0];
     }
-    public function get_horarios(){
-
+    public function get_horarios($id_loc){
+        $hrs = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND id_loc='".$id_loc."' AND eliminado='0'");
+        return $hrs['resultado'];
     }
-    public function get_horario($id_hor){
-
+    public function get_horario($id_loc, $id_hor){
+        $hrs = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND id_loc='".$id_loc."' AND id_hor='".$id_hor."'");
+        return $hrs['resultado'][0];
     }
     public function set_web_pedido(){
                 

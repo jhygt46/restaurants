@@ -13,6 +13,16 @@ if(isset($_GET['code'])){
         $id_ped = $info["id_ped"];
         $pep = $info['pep'];
         
+        if($_GET['code'] == "19c63d81166eb5c291e8"){
+            echo "<pre>";
+            print_r($pep);
+            echo "</pre>";
+
+            echo "<pre>";
+            print_r($info);
+            echo "</pre>";
+        }
+
         $despacho = $info['despacho'];
         $total = $info['total'];
         

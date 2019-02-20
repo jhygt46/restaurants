@@ -457,6 +457,18 @@ class Guardar extends Core{
         return $info;
         
     }
+    private function eliminar_repartidor(){
+
+        $id = explode("/", $_POST['id']);
+        $info['db'] = $this->con->sql("DELETE FROM motos_locales WHERE id_loc='".$id[0]."' AND id_mot='".$id[1]."'");
+        $info['tipo'] = "success";
+        $info['titulo'] = "Eliminado";
+        $info['texto'] = "Repartidor ".$_POST["nombre"]." Eliminado";
+        $info['reload'] = 1;
+        $info['page'] = "msd/crear_repartidor.php?id_mot=".$id[1]."&id_loc=".$id[0]."&nombre=".$id[2];
+        return $info;
+
+    }
     private function eliminar_tramos(){
         
         $id = explode("/", $_POST['id']);
@@ -502,6 +514,65 @@ class Guardar extends Core{
         $info['page'] = "msd/ver_giro.php";
         return $info;
         
+    }
+    private function crear_horario(){
+
+        $id_hor = $_POST['id'];
+        $id_loc = $_POST['id_loc'];
+        $loc_nombre = $_POST['loc_nombre'];
+
+        $dia_ini = $_POST['dia_ini'];
+        $dia_fin = $_POST['dia_fin'];
+
+        $hora_ini = $_POST['hora_ini'];
+        $min_ini = $_POST['min_ini'];
+
+        $hora_fin = $_POST['hora_fin'];
+        $min_fin = $_POST['min_fin'];
+
+        if($id_hor == 0){
+            $info['db'] = $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$id_loc."', '".$this->id_gir."')");
+            $info['op'] = 1;
+            $info['mensaje'] = "Horario creado exitosamente";
+        }
+        if($id_hor > 0){
+            $info['db'] = $this->con->sql("UPDATE horarios SET dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
+            $info['op'] = 1;
+            $info['mensaje'] = "Horario modificado exitosamente";
+        }
+        
+        $info['reload'] = 1;
+        $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
+        return $info;
+
+
+    }
+    private function crear_repartidor(){
+
+        $tipo = $_POST['tipo'];
+        $id_loc = $_POST['id_loc'];
+        $loc_nombre = $_POST['loc_nombre'];
+
+        if($tipo == 0){
+            $nombre = $_POST['nombre'];
+            $correo = $_POST['correo'];
+            $uid = bin2hex(openssl_random_pseudo_bytes(10));
+            $aux_mot = $this->con->sql("INSERT INTO motos (nombre, correo, uid, id_gir, eliminado) VALUES ('".$nombre."', '".$correo."', '".$uid."', '".$this->id_gir."', '0')");
+            $id_mot = $aux_mot['insert_id'];
+            $info['mensaje'] = "Repartidor asociado exitosamente";
+        }
+        if($tipo == 1){
+            $id_mot = $_POST['repartidor'];
+            $info['mensaje'] = "Repartidor asociado exitosamente";
+        }
+
+        $info['db'] = $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
+
+        $info['op'] = 1;
+        $info['reload'] = 1;
+        $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
+        return $info;
+
     }
     private function crear_catalogo(){
         
@@ -662,6 +733,20 @@ class Guardar extends Core{
         $info['page'] = "msd/usuarios.php";
         return $info;
         
+    }
+    private function eliminar_horario(){
+
+        $id = explode("/", $_POST['id']);
+        $this->con->sql("UPDATE horarios SET eliminado='1' WHERE id_hor='".$id[0]."'");
+        
+        $info['tipo'] = "success";
+        $info['titulo'] = "Eliminado";
+        $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
+        $info['reload'] = 1;
+        $info['page'] = "msd/crear_horario.php?id_loc=".$id[1]."&nombre=".$id[2];
+
+        return $info;
+
     }
     private function eliminar_usuario(){
                 

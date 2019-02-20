@@ -14,26 +14,20 @@ $fireapp = new Core();
 /* CONFIG PAGE */
 $titulo = "Repartidores de ".$_GET["nombre"];
 $titulo_list = "Mis Repartidores";
-$sub_titulo1 = "Ingresar Repartidor";
-$sub_titulo2 = "Modificar Repartidor";
+$sub_titulo = "Ingresar Repartidor";
 $accion = "crear_repartidor";
 
-$eliminaraccion = "eliminar_repartidor";
 $id_list = "id_mot";
-$eliminarobjeto = "Repartidor";
-$page_mod = "pages/msd/crear_repartidor.php";
 /* CONFIG PAGE */
 
-$id_mot = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$sub_titulo = $sub_titulo1;
-$list = $fireapp->get_repartidores($_GET["id_loc"]);
 $list_reps_giro = $fireapp->get_repartidores_giro();
 
-if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0){
-    $id_mot = $_GET["id_mot"];
-    $that = $fireapp->get_repartidor($id_mot);
-    $sub_titulo = $sub_titulo2;
+if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
+    
+    $id_loc = $_GET["id_loc"];
+    $list = $fireapp->get_repartidores($id_loc);
+
 }
 
 function in_arr($arr, $id){
@@ -77,7 +71,8 @@ function in_arr($arr, $id){
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id_mot; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
+                    <input id="loc_nombre" type="hidden" value="<?php echo $_GET["nombre"]; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
@@ -130,8 +125,9 @@ function in_arr($arr, $id){
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_mot=<?php echo $id; ?>')"></a>
+                        <!--<a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_mot=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>&nombre=<?php echo $_GET["nombre"]; ?>')"></a>-->
+                        <a class="icono ic7" onclick="navlink('pages/msd/configurar_repartidor.php?id_mot=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>&nombre=<?php echo $_GET["nombre"]; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>

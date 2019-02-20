@@ -515,6 +515,15 @@ body .relative {
   width: 100px;
   text-align: center;
 }
+.pagina .cont_pagina .cont_pag form fieldset.normal label .btn_info {
+  width: 84%;
+  float: left;
+}
+.pagina .cont_pagina .cont_pag form fieldset.normal label .btn_info .info {
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 4px;
+}
 .pagina .cont_pagina .cont_pag form fieldset.normal .arbol {
   display: block;
   padding: 0 5%;
@@ -612,6 +621,13 @@ body .relative {
   padding: 5px 0px;
   width: 100px;
   text-align: center;
+}
+.pagina .cont_pagina .cont_pag form fieldset.resp label .btn_info {
+  width: 100%;
+}
+.pagina .cont_pagina .cont_pag form fieldset.resp label .btn_info .info {
+  font-size: 16px;
+  font-weight: bold;
 }
 .pagina .cont_pagina .cont_pag form fieldset.resp .arbol {
   display: block;
