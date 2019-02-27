@@ -766,6 +766,7 @@ function show_modal_locales(){
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
             var lrs = get_horarios_local(id, 1);
+            /*
             console.log(lrs);
             if(lrs < custom_min){
                 $(this).find('.local_info').find('.alert').html("En "+lrs+" minutos cierra este local");
@@ -773,6 +774,7 @@ function show_modal_locales(){
             }else{
                 $(this).find('.local_info').find('.alert').css({ display: 'none' });
             }
+            */
         });
         
         $('.modal').hide();
