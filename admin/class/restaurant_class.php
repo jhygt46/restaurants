@@ -248,7 +248,6 @@ class Rest{
             if($sql_puser['count'] == 1){
                 
                 $this->con->sql("UPDATE pedidos_usuarios SET cont=cont+1 WHERE id_puser='".$puser_id."'");
-                
                 $sql_pdir = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_puser='".$puser_id."'");
                 $list_pdir = $sql_pdir['resultado'];
                 
@@ -280,13 +279,10 @@ class Rest{
             $verify_despacho = 0;
             
             $id_loc = $aux_pedido->{'id_loc'};
-            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
+            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             $info['lat'] = $loc_gir['resultado'][0]['lat'];
             $info['lng'] = $loc_gir['resultado'][0]['lng'];
             
-            $aux_pep = $this->con->sql("INSERT INTO pedidos_persona_posicion (nombre, telefono, direccion, lat, lng, calle, num, depto, comuna) VALUES ('".$nombre."', '".$telefono."', '".$direccion."', '".$lat."', '".$lng."', '".$calle."', '".$num."', '".$depto."', '".$comuna."')");
-            $id_pep = $aux_pep['insert_id'];
-
             if($despacho == 1){
                 $aux_verify = $this->get_info_despacho($lat, $lng);
                 if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
@@ -300,7 +296,7 @@ class Rest{
             $fecha_stgo = $datetime->format('Y-m-d H:i:s');
             
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, id_pep, costo, total, id_puser, id_pdir) VALUES ('".$pedido_code."', '".$fecha_stgo."', '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$id_pep."', '".$costo."', '".$total."', '".$puser_id."', '".$pdir_id."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir) VALUES ('".$pedido_code."', '".$fecha_stgo."', '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$costo."', '".$total."', '".$puser_id."', '".$pdir_id."')");
             $id_ped = $pedido_sql['insert_id'];
             
             $info['op'] = 1;

@@ -312,12 +312,12 @@ class Core{
         
         $info['op'] = false;
         $host = ($_SERVER["HTTP_HOST"] == "localhost") ? "www.izusushi.cl" : $_SERVER["HTTP_HOST"] ;
-        $sql = $this->con->sql("SELECT t1.id_loc, t3.code, t1.id_ped, t1.id_pep, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
+        $sql = $this->con->sql("SELECT t1.id_loc, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$host."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
         $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $info['css_base'] = $path."/css/reset.css";
         $info['css_detalle'] = $path."/css/css_detalle_01.css";
         
-        $local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$sql['resultado'][0]['id_loc']."'");
+        $local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$sql["resultado"][0]["id_loc"]."'");
         $info['local'] = $local['resultado'][0]['nombre'];
         
         if($sql['count'] == 1){
@@ -326,10 +326,6 @@ class Core{
             $info['js_data'] = $path."/js/data/".$sql['resultado'][0]['code'].".js";
             $info['js_detalle'] = $path."/js/detalle.js";
 
-            $info['id_ped'] = $sql['resultado'][0]['id_ped'];
-            $aux_pep = $this->con->sql("SELECT * FROM pedidos_persona_posicion WHERE id_pep='".$sql['resultado'][0]['id_pep']."'");
-            $info['pep'] = $aux_pep['resultado'][0];
-            
             $sql_puser = $this->con->sql("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][0]['id_puser']."'");
             $info['puser'] = $sql_puser['resultado'][0];
             
@@ -600,9 +596,10 @@ class Core{
             $info['pedido_04_subtitulo'] = $sql['resultado'][0]['pedido_04_subtitulo'];
             
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
-            
+            /*
             $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info["id_gir"]."'");
             $info['motos'] = $sql_motos['resultado'];
+            */
             
         }
         
@@ -614,6 +611,17 @@ class Core{
 
         return $info;
         
+    }
+    public function in_horario(){
+
+        $aux = $this->con->sql("SELECT * FROM locales WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        $info = $aux['resultado'][0];
+        for($i=0; $i<$aux['count']; $i++){
+            $horarios = $this->con->sql("SELECT * FROM horarios WHERE id_loc='".$aux["resultado"][$i]["id_loc"]."'");
+            $info['grs'] = $horarios['resultado'];
+        }
+        return $info;
+
     }
     public function get_info_catalogo($id_cat){
         
@@ -701,15 +709,27 @@ class Core{
         return $aux;
         
     }
+    public function get_locales_js($id_gir){
+
+        $aux_sql = $this->con->sql("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        for($i=0; $i<$aux_sql['count']; $i++){
+            $horarios = $this->con->sql("SELECT * FROM horarios WHERE id_loc='".$aux_sql["resultado"][$i]["id_loc"]."'");
+            $locales['grs'] = $horarios['resultado'];
+            $locales['info'] = $aux_sql['resultado'][$i];
+            $loc[] = $locales;
+            unset($locales);
+        }
+        return $loc;
+        
+    }
     public function get_web_js_data2($id_gir){
     
         $giro = $this->con->sql("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir='".$id_gir."' AND t1.id_gir=t2.id_gir");
         
         $aux_pagina = $this->con->sql("SELECT id_pag, nombre, imagen, html FROM paginas WHERE id_gir='".$id_gir."' AND eliminado='0'");
         $info['paginas'] = $aux_pagina['resultado'];
-        
         $info['config'] = $this->get_config($id_gir);
-        
+        $info['locales'] = $this->get_locales_js($id_gir);
         for($i=0; $i<$giro['count']; $i++){
             $info['catalogos'][] = $this->get_info_catalogo($giro['resultado'][$i]['id_cat']);
         }

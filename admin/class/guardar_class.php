@@ -530,13 +530,15 @@ class Guardar extends Core{
         $hora_fin = $_POST['hora_fin'];
         $min_fin = $_POST['min_fin'];
 
+        $tipo = $_POST['tipo'];
+
         if($id_hor == 0){
-            $info['db'] = $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$id_loc."', '".$this->id_gir."')");
+            $info['db'] = $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$tipo."', '".$id_loc."', '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Horario creado exitosamente";
         }
         if($id_hor > 0){
-            $info['db'] = $this->con->sql("UPDATE horarios SET dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
+            $info['db'] = $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
             $info['op'] = 1;
             $info['mensaje'] = "Horario modificado exitosamente";
         }
@@ -544,7 +546,6 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
         return $info;
-
 
     }
     private function crear_repartidor(){
@@ -612,7 +613,7 @@ class Guardar extends Core{
     }
     private function crear_locales(){
         
-        $id_loc = $_POST['id_loc'];
+        $id_loc = $_POST['id'];
         $id_cat = $_POST['id_cat'];
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];

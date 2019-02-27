@@ -312,8 +312,16 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   padding: 10px;
 }
 .paso_02 .cont_direccion .direccion_opciones .dir_op {
-  margin-bottom: 10px;
-  padding: 10px;
+  position: relative;
+  height: 60px;
+  margin-bottom: 4px;
+}
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir {
+  padding-left: 15px;
+}
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .alert {
+  color: #d00;
+  font-size: 13px;
 }
 .paso_02a .cont_direccion .direccion_op1 {
   padding: 10px;
@@ -322,15 +330,15 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   margin-bottom: 10px;
 }
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info {
-  width: calc(100% - 40px);
+  width: calc(100% - 50px);
   padding-top: 10px;
   padding-bottom: 10px;
-}
-.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title {
   padding-left: 10px;
 }
-.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle {
-  padding-left: 10px;
+.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .alert {
+  color: #D00;
+  font-size: 13px;
+  display: none;
 }
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa {
   width: 40px;

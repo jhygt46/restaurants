@@ -653,6 +653,135 @@ function tooglemenu(){
     if(menu == 1)
         hidemenu();
 }
+function ver_locales_y_despacho(){
+
+    var aux = [false, false];
+    var fecha = new Date();
+    var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
+    var hora = fecha.getHours() * 60 + fecha.getMinutes();
+    var hrs = {};
+
+    for(var i=0, ilen=data.locales.length; i<ilen; i++){
+        if(data.locales[i].grs){
+            for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
+                hrs = data.locales[i].grs[j];
+                if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
+                    hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
+                    hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+                    if(hr_inicio <= hora && hr_fin >= hora){
+                        if(hrs.tipo == 1 || hrs.tipo == 0){
+                            aux[0] = true;
+                        }
+                        if(hrs.tipo == 2 || hrs.tipo == 0){
+                            aux[1] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return aux;
+
+}
+function get_horarios_local(id, tipo){
+    
+    console.log(id+"/"+tipo);
+
+    var fecha = new Date();
+    var dia = fecha.getDay();
+    var hora = fecha.getHours() * 60 + fecha.getMinutes();
+    var hrs = {};
+    var hr_inicio = 0;
+    var hr_fin = 0;
+    var mayor = 0;
+    var next_close = 0;
+
+    for(var i=0, ilen=data.locales.length; i<ilen; i++){
+        if(data.locales[i].info.id_loc == id && (data.locales[i].info.tipo == tipo || data.locales[i].info.tipo == 0)){
+            if(data.locales[i].grs){
+                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
+                    hrs = data.locales[i].grs[j];
+                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
+                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
+                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+                        if(hr_inicio <= hora && hr_fin >= hora){
+                            next_close = hr_fin - hora;
+                            if(next_close > mayor){
+                                mayor = next_close;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return mayor;
+}
+function ver_paso_2(){
+    
+    var retiro = 0;
+    var despacho = 0;
+    var aux = ver_locales_y_despacho();
+
+    var total = parseInt(get_pedido().total);
+    var pedido_minimo = parseInt(data.config.pedido_minimo);
+    if(!aux[0]){
+        // NO HAY RETIRO EN LOCAL
+        $('.paso_02').find('.rlocal').find('.alert').show();
+        $('.paso_02').find('.rlocal').find('.stitle').hide();
+    }else{
+        // RETIRO EN LOCAL NORMAL
+        $('.paso_02').find('.rlocal').find('.alert').hide();
+        $('.paso_02').find('.rlocal').find('.stitle').show();
+    }
+
+    if(aux[1]){
+        if(total < pedido_minimo){
+            $('.paso_02').find('.cdesp').find('.alert').show();
+            $('.paso_02').find('.cdesp').find('.stitle').hide();
+            $('.paso_02').find('.cdesp').find('.alert').html("Pedido minimo: "+formatNumber.new(parseInt(pedido_minimo), "$"));
+        }else{
+            $('.paso_02').find('.cdesp').find('.alert').hide();
+            $('.paso_02').find('.cdesp').find('.stitle').show();
+        }
+    }else{
+        // NO HAY DESPACHO
+        $('.paso_02').find('.cdesp').find('.alert').show();
+        $('.paso_02').find('.cdesp').find('.stitle').hide();
+        $('.paso_02').find('.cdesp').find('.alert').html("No hay Despacho");
+    }
+
+    $('.modal').hide();
+    $('.modals, .paso_02').show();
+
+}
+function show_modal_locales(){
+    
+    var aux = ver_locales_y_despacho();
+    if(aux[0]){
+
+        var custom_min = 60;
+        var tiempo = 0;
+        $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
+            var id = $(this).attr('id');
+            var lrs = get_horarios_local(id, 1);
+            console.log(lrs);
+            if(lrs < custom_min){
+                $(this).find('.local_info').find('.alert').html("En "+lrs+" minutos cierra este local");
+                $(this).find('.local_info').find('.alert').css({ display: 'block' });
+            }else{
+                $(this).find('.local_info').find('.alert').css({ display: 'none' });
+            }
+        });
+        
+        $('.modal').hide();
+        $('.modals, .paso_02a').show();
+        modal = 1;
+
+    }
+
+}
 function show_modal(clase){
     $('.modal').hide();
     $('.modals, .'+clase).show();
@@ -690,31 +819,21 @@ function proceso(categorias, preguntas){
     return true;
     
 }
+
 function paso_2(){
-
-    var total = parseInt(get_pedido().total);
-    var pedido_minimo = parseInt(data.config.pedido_minimo);
-
-    console.log("total: "+total);
-    console.log("pedido minimo: "+pedido_minimo);
 
     paso = 2;
     if(proceso(true, true) && cantidad > 0){
-        //if(total >= pedido_minimo){
-            if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){        
-                show_modal('paso_02');
-            }else{
-                if(data.config.retiro_local == 1){
-                    show_modal('paso_02a');
-                }
-                if(data.config.despacho_domicilio == 1){
-                    show_despacho();
-                }
+        if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){
+            ver_paso_2();
+        }else{
+            if(data.config.retiro_local == 1){
+                show_modal_locales();
             }
-        //}else{
-            //alert("PEDIDO MINIMO "+pedido_minimo);
-            //paso = 1;
-        //}
+            if(data.config.despacho_domicilio == 1){
+                show_despacho();
+            }
+        }
     }
     
 }
@@ -896,14 +1015,18 @@ function open_socket(code){
     });
     
 }
-function show_locales(){
-    show_modal('paso_02a');
-}
 function show_despacho(){
-    if(map_init == 0){
-        initMap();
+
+    var total = parseInt(get_pedido().total);
+    var pedido_minimo = parseInt(data.config.pedido_minimo);
+
+    if(total >= pedido_minimo){
+        if(map_init == 0){
+            initMap();
+        }
+        show_modal('paso_02b');
     }
-    show_modal('paso_02b');
+    
 }
 var formatNumber = {
     separador: ".", // separador para los miles

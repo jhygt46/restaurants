@@ -472,10 +472,15 @@ body {
         .direccion_opciones {
             padding: 10px;
             .dir_op {
-                margin-bottom: 10px;
-                padding: 10px;
-                .title {}
-                .stitle {}
+                position: relative;
+                height: 60px;
+                margin-bottom: 4px;
+                .codir{
+                    padding-left: 15px;
+                    .title {}
+                    .stitle {}
+                    .alert { color: #d00; font-size: 13px }
+                }
             }
             .dir_op_select {
             }
@@ -490,14 +495,20 @@ body {
                 margin-bottom: 10px;
                 .cont_local{
                     .local_info {
-                        width: calc(100% - 40px);
+                        width: calc(100% - 50px);
                         padding-top: 10px;
                         padding-bottom: 10px;
+                        padding-left: 10px;
                         .title {
-                            padding-left: 10px;
+                            
                         }
                         .stitle {
-                            padding-left: 10px;
+
+                        }
+                        .alert{
+                            color: #D00;
+                            font-size: 13px;
+                            display: none;
                         }
                     }
                     .local_mapa {

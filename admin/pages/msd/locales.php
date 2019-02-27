@@ -136,7 +136,7 @@ function crear_llamado(map){
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
+                    <input id="id" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <input id="lat" type="hidden" value="<?php echo $lat; ?>" />
                     <input id="lng" type="hidden" value="<?php echo $lng; ?>" />

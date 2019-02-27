@@ -33,6 +33,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     }else{
         $info = $core->get_data();
     }
+
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1 && !isset($_GET['ssl'])) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         header('HTTP/1.1 301 Moved Permanently');
@@ -42,10 +43,13 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 
 }
 
-$locales = json_decode($info['lista_locales']);
-
+if($info['id_gir'] == 0){
+    require('misitiodelivery.php');
+    exit;
+}
 if($info['id_gir'] != 0){
 
+    $locales = json_decode($info['lista_locales']);
     if($info['con_cambios'] == 1){
         $core->get_web_js_data2($info['id_gir']);
     }
@@ -68,7 +72,7 @@ if($info['id_gir'] != 0){
         
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["dominio"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         
-        <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
+        <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.4.2/libphonenumber-js.min.js" type="text/javascript"></script>
@@ -162,7 +166,7 @@ if($info['id_gir'] != 0){
                             <div class="sub_total">
                                 <div class="cont_subtotal">
                                     <ul class="total_detalle valign">
-                                        <li class="paso_01_sub_total">Pedido: $12.900</li>
+                                        <li class="paso_01_sub_total"></li>
                                     </ul>
                                 </div>
                             </div>
@@ -181,8 +185,8 @@ if($info['id_gir'] != 0){
                                 <div class="info_modal">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
-                                            <div class="dir_op" onclick="show_modal('paso_02a')"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div></div>
-                                            <div class="dir_op" onclick="show_despacho()"><div class="title">Despacho a Domicilio</div><div class="stitle">Desde $<?php echo $info["desde"]; ?></div></div>
+                                            <div class="rlocal dir_op" onclick="show_modal_locales()"><div class="codir valign"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div><div class="alert">No hay locales disponibles</div></div></div>
+                                            <div class="cdesp dir_op" onclick="show_despacho()"><div class="codir valign"><div class="title">Despacho a Domicilio</div><div class="stitle">Desde $<?php echo $info["desde"]; ?></div><div class="alert"></div></div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -203,11 +207,12 @@ if($info['id_gir'] != 0){
                                     <div class="cont_direccion">
                                         <div class="direccion_op1">
                                             <?php for($i=0; $i<count($locales); $i++){ ?>
-                                            <div class="dir_locales">
+                                            <div class="dir_locales" id="<?php echo $locales[$i]->{'id_loc'}; ?>">
                                                 <div class="cont_local clearfix">
                                                     <div class="local_info" onclick="select_local(<?php echo $locales[$i]->{'id_loc'}; ?>, '<?php echo $locales[$i]->{'nombre'}; ?>', '<?php echo $locales[$i]->{'direccion'}; ?>')">
                                                         <div class="title"><?php echo $locales[$i]->{'nombre'}; ?></div>
                                                         <div class="stitle"><?php echo $locales[$i]->{'direccion'}; ?></div>
+                                                        <div class="alert">Atencion: solo faltan 15 minutos para el cierre</div>
                                                     </div>
                                                     <div class="local_mapa" onclick="map_local(<?php echo $locales[$i]->{'id_loc'}; ?>, <?php echo $locales[$i]->{'lat'}; ?>, <?php echo $locales[$i]->{'lng'}; ?>)">
                                                         <div class="icon_mapa" style="background: url('<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>

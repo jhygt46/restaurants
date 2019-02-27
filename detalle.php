@@ -9,20 +9,7 @@ if(isset($_GET['code'])){
     $info = $core->ver_detalle($_GET['code']);
     
     if($info['op']){
-        
-        $id_ped = $info["id_ped"];
-        $pep = $info['pep'];
-        
-        if($_GET['code'] == "19c63d81166eb5c291e8"){
-            echo "<pre>";
-            print_r($pep);
-            echo "</pre>";
-
-            echo "<pre>";
-            print_r($info);
-            echo "</pre>";
-        }
-
+    
         $despacho = $info['despacho'];
         $total = $info['total'];
         
@@ -96,8 +83,8 @@ if(isset($_GET['code'])){
                     
                 ?>
                 <div class="txtcen font_03 strong pddtop_01">Despacho a Domicilio</div>
-                <div class="txtcen font_03"><?php echo $pep['calle']; ?> <?php echo $pep['num']; ?> <?php if($pep['depto'] != ""){ ?>Depto: <?php echo $pep['depto']; ?><?php } ?></div>
-                <div class="txtcen font_04"><?php echo $pep['comuna']; ?></div>
+                <div class="txtcen font_03"><?php echo $info['pdir']['calle']; ?> <?php echo $info['pdir']['num']; ?> <?php if($info['pdir']['depto'] != ""){ ?>Depto: <?php echo $info['pdir']['depto']; ?><?php } ?></div>
+                <div class="txtcen font_04"><?php echo $info['pdir']['comuna']; ?></div>
                 <?php } ?>
             </div>
             <div class="total padding_01 borbottom">

@@ -27,7 +27,7 @@ $page_mod = "pages/msd/crear_horario.php";
 $id_hor = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+$dias = ["", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
@@ -71,7 +71,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Dia Inicio:</p></span>
                         <select id="dia_ini">
-                            <?php for($i=0; $i<count($dias); $i++){ $s=''; if($that['dia_ini'] == $i){ $s='selected'; } ?>
+                            <?php for($i=1; $i<count($dias); $i++){ $s=''; if($that['dia_ini'] == $i){ $s='selected'; } ?>
                             <option value="<?php echo $i; ?>" <?php echo $s; ?>><?php echo $dias[$i]; ?></option>
                             <?php } ?>
                         </select>
@@ -79,7 +79,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Dia Fin:</p></span>
                         <select id="dia_fin">
-                        <?php for($i=0; $i<count($dias); $i++){ $s=''; if($that['dia_fin'] == $i){ $s='selected'; } ?>
+                        <?php for($i=1; $i<count($dias); $i++){ $s=''; if($that['dia_fin'] == $i){ $s='selected'; } ?>
                             <option value="<?php echo $i; ?>" <?php echo $s; ?>><?php echo $dias[$i]; ?></option>
                             <?php } ?>
                         </select>
@@ -87,8 +87,8 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Hora Inicio:</p></span>
                         <select id="hora_ini" style="width: 41%">
-                            <?php for($i=0; $i<34; $i++){ $s=''; if($that['hora_ini'] == $i){ $s='selected'; } $j = $i; if($i> 24){ $j = $i - 24; } ?>
-                                <option value="<?php echo $j; ?>" <?php echo $s; ?>><?php echo $j; ?> hrs</option>
+                            <?php for($i=0; $i<34; $i++){ $s=''; if($that['hora_ini'] == $i){ $s='selected'; } $j = $i; $m = $i; if($i> 24){ $j = $i - 24; } ?>
+                                <option value="<?php echo $m; ?>" <?php echo $s; ?>><?php echo $j; ?> hrs</option>
                             <?php } ?>
                         </select>
                         <select id="min_ini" style="width: 41%; margin-left: 2%">
@@ -100,14 +100,22 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Hora Fin:</p></span>
                         <select id="hora_fin" style="width: 41%">
-                            <?php for($i=0; $i<34; $i++){ $s=''; if($that['hora_fin'] == $i){ $s='selected'; } $j = $i; if($i> 24){ $j = $i - 24; } ?>
-                                <option value="<?php echo $j; ?>" <?php echo $s; ?>><?php echo $j; ?> hrs</option>
+                            <?php for($i=0; $i<34; $i++){ $s=''; if($that['hora_fin'] == $i){ $s='selected'; } $j = $i; $m = $i; if($i> 24){ $j = $i - 24; } ?>
+                                <option value="<?php echo $m; ?>" <?php echo $s; ?>><?php echo $j; ?> hrs</option>
                             <?php } ?>
                         </select>
                         <select id="min_fin" style="width: 41%; margin-left: 2%">
                             <?php for($i=0; $i<60; $i++){ $s=''; if($that['min_fin'] == $i){ $s='selected'; } ?>
                                 <option value="<?php echo $i; ?>" <?php echo $s; ?>><?php echo $i; ?> min</option>
                             <?php } ?>
+                        </select>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Tipo:</p></span>
+                        <select id="tipo">
+                            <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Ambas</option>
+                            <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Solo Retiro</option>
+                            <option value="2" <?php if($that['tipo'] == 2){ echo "selected"; } ?>>Solo Despacho</option>
                         </select>
                     </label>
                     <label>
