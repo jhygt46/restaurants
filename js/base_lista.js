@@ -989,6 +989,8 @@ function time(){
 }
 function open_socket(code){
     
+    console.log("SOCKET CONNECT");
+
     var socket = io.connect('https://www.izusushi.cl:443', { 'forceNew': true });
     socket.on('pedido-'+code, function(data){
 
