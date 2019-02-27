@@ -989,7 +989,7 @@ function time(){
 }
 function open_socket(code){
     
-    var socket = io.connect('www.izusushi.cl:443', { 'forceNew': true });
+    var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
     socket.on('pedido-'+code, function(data){
 
         var pedido = get_pedido();
