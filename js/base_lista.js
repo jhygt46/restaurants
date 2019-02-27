@@ -989,12 +989,8 @@ function time(){
 }
 function open_socket(code){
     
-    console.log("SOCKET CONNECT");
-
-    var socket = io.connect('https://www.izusushi.cl', { 'forceNew': true });
+    var socket = io.connect('www.izusushi.cl:443', { 'forceNew': true });
     socket.on('pedido-'+code, function(data){
-
-        console.log("SOCKET");
 
         var pedido = get_pedido();
         var info = JSON.parse(data.estado);
