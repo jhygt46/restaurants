@@ -35,13 +35,6 @@ if(!isset($_COOKIE['CODE'])){
 }
 
 $info = $core->get_data($local['dominio']);
-
-if($_GET["info"] == 1){
-    echo "<pre>";
-    print_r($info['motos']);
-    echo "</pre>";
-}
-
 $pedidos = $core->get_ultimos_pedidos(null);
 $code = $core->socket_code($id_loc, $info['id_gir']);
 
@@ -119,8 +112,8 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                                         <div class="pre_check" style="width: 30%">
                                             <select id="id_mot">
                                                 <option value="0">Sin Asignar</option>
-                                                <?php for($i=0; $i<50; $i++){ ?>
-                                                    <option value="1">Juan</option>
+                                                <?php for($i=0; $i<count($info['motos']); $i++){ ?>
+                                                    <option value="<?php echo $info['motos'][$i]['id_mot']; ?>"><?php echo $info['motos'][$i]['nombre']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
