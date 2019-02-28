@@ -661,26 +661,30 @@ function ver_locales_y_despacho(){
     var hora = fecha.getHours() * 60 + fecha.getMinutes();
     var hrs = {};
 
-    console.log(data.locales);
-
-    for(var i=0, ilen=data.locales.length; i<ilen; i++){
-        if(data.locales[i].grs){
-            for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
-                hrs = data.locales[i].grs[j];
-                if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
-                    hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
-                    hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
-                    if(hr_inicio <= hora && hr_fin >= hora){
-                        if(hrs.tipo == 1 || hrs.tipo == 0){
-                            aux[0] = true;
-                        }
-                        if(hrs.tipo == 2 || hrs.tipo == 0){
-                            aux[1] = true;
+    if(data.locales){
+        for(var i=0, ilen=data.locales.length; i<ilen; i++){
+            if(data.locales[i].grs){
+                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
+                    hrs = data.locales[i].grs[j];
+                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
+                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
+                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+                        if(hr_inicio <= hora && hr_fin >= hora){
+                            if(hrs.tipo == 1 || hrs.tipo == 0){
+                                aux[0] = true;
+                            }
+                            if(hrs.tipo == 2 || hrs.tipo == 0){
+                                aux[1] = true;
+                            }
                         }
                     }
                 }
+            }else{
+                aux[0] = true;
             }
         }
+    }else{
+        alert("NO TIENE LOCALES CREADOS");
     }
 
     return aux;
