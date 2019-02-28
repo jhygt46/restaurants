@@ -45,6 +45,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <title><?php echo $info["titulo"]; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />

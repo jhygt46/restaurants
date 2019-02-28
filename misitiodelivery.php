@@ -17,7 +17,7 @@
     <title>MiSitioDelivery</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='shortcut icon' type='image/x-icon' href='misitiodelivery.ico' />
+    <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
     <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" src="js/misitiodelivery.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pattaya|Lato" rel="stylesheet">
