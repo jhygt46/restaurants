@@ -1,8 +1,5 @@
 $(document).ready(function(){
     
-    window.print();
-    window.close();
-
     render_items(carro, promos);
     
     var total_process = 0;
@@ -20,7 +17,8 @@ $(document).ready(function(){
     if(diff > 0){
         $('.verificar').append('<div>ERROR: TOTAL ENVIADO ES MENOR: ($'+diff+')</div>')
     }
-    
+    window.print();
+    window.close();
     
 });
 
