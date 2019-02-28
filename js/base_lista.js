@@ -837,11 +837,9 @@ function paso_2(){
         }else{
             if(data.config.retiro_local == 1){
                 show_modal_locales();
-                console.log("FLAG 1");
             }
             if(data.config.despacho_domicilio == 1){
                 show_despacho();
-                console.log("FLAG 2");
             }
             
         }

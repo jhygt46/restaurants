@@ -148,9 +148,10 @@ function modificar_horas(){
 }
 function socket_init(){
     
-    var socket = io.connect('https://www.izusushi.cl', { 'forceNew': true });
+    var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
     socket.on('local-'+local_code, function(id_ped) {
         agregar_pedido(id_ped);
+        console.log("ADD");
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();
@@ -1135,7 +1136,7 @@ function cambiar_estado(index, n, that){
             type: "POST",
             data: send,
             success: function(data){
-                
+                console.log(data);
             }, error: function(e){
                 console.log(e);
             }
@@ -1162,7 +1163,7 @@ function cambiar_hora(index, n, that){
         type: "POST",
         data: send,
         success: function(data){
-
+            console.log(data);
         }, error: function(e){
             console.log(e);
         }
@@ -1180,7 +1181,7 @@ function cambiar_total(index, total){
         type: "POST",
         data: send,
         success: function(data){
-            
+            console.log(data);
         }, error: function(e){
             console.log(e);
         }
