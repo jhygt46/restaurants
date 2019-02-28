@@ -148,7 +148,7 @@ function modificar_horas(){
 }
 function socket_init(){
     
-    var socket = io.connect('http://35.196.220.197:80', { 'forceNew': true });
+    var socket = io.connect('https://www.izusushi.cl', { 'forceNew': true });
     socket.on('local-'+local_code, function(id_ped) {
         agregar_pedido(id_ped);
     });
@@ -1131,7 +1131,7 @@ function cambiar_estado(index, n, that){
         
         var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
         $.ajax({
-            url: "http://35.196.220.197/cambiar_estado",
+            url: "https://www.izusushi.cl/cambiar_estado",
             type: "POST",
             data: send,
             success: function(data){
@@ -1158,7 +1158,7 @@ function cambiar_hora(index, n, that){
     
     var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     $.ajax({
-        url: "http://35.196.220.197/cambiar_estado",
+        url: "https://www.izusushi.cl/cambiar_estado",
         type: "POST",
         data: send,
         success: function(data){
@@ -1176,7 +1176,7 @@ function cambiar_total(index, total){
     var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     
     $.ajax({
-        url: "http://35.196.220.197/cambiar_estado",
+        url: "https://www.izusushi.cl/cambiar_estado",
         type: "POST",
         data: send,
         success: function(data){
