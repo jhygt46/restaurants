@@ -828,18 +828,17 @@ function paso_2(){
     if(proceso(true, true) && cantidad > 0){
         if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){
             ver_paso_2();
-            console.log("FLAG 2");
         }else{
             if(data.config.retiro_local == 1){
                 show_modal_locales();
+                console.log("FLAG 1");
             }
             if(data.config.despacho_domicilio == 1){
                 show_despacho();
+                console.log("FLAG 2");
             }
-            console.log("FLAG 3");
+            
         }
-    }else{
-        console.log("FLAG 1");
     }
     
 }
