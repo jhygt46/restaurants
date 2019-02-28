@@ -101,25 +101,25 @@ class Rest{
                     $send['asunto'] = $_POST["asunto"];
 
                     $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/mail_contacto');
+                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_contacto');
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     curl_exec($ch);
                     
-                    header("Location: http://www.misitiodelivery.cl?contacto=1");
+                    header("Location: https://misitiodelivery.cl?contacto=1");
 
                 }else{
-                    header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=1&error=Correo+Incorrecto");
+                    header("Location: https://misitiodelivery.cl?contacto=0&tipo=1&error=Correo+Incorrecto");
                     exit;
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
+                header("Location: https://misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
+            header("Location: https://misitiodelivery.cl?contacto=0&tipo=2&error=Error+reCAPTCHA");
             exit; 
         }
         
@@ -167,36 +167,36 @@ class Rest{
                                 curl_exec($ch);
 
                                 curl_close($ch);
-                                header("Location: http://www.misitiodelivery.cl?realizado=1");
+                                header("Location: https://misitiodelivery.cl?realizado=1");
                                 exit;
                                 
                             }else{
-                                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
+                                header("Location: https://misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
                                 exit;
                             }
 
                         }else{
-                            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
+                            header("Location: https://misitiodelivery.cl?realizado=0&tipo=1&error=Dominio+Existente");
                             exit;
                         }
 
                     }else{
-                        header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Existente");
+                        header("Location: https://misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Existente");
                         exit;
                     }
 
                 }else{
-                    header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
+                    header("Location: https://misitiodelivery.cl?realizado=0&tipo=2&error=Correo+Incorrecto");
                     exit;
                 }
                 
             }else{ 
-                header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+                header("Location: https://misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
                 exit;
             } 
             
         }else{ 
-            header("Location: http://www.misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
+            header("Location: https://misitiodelivery.cl?realizado=0&tipo=3&error=Error+reCAPTCHA");
             exit; 
         }
         
@@ -317,7 +317,7 @@ class Rest{
             $pedido['telefono'] = $telefono;
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'http://35.196.220.197/enviar_local');
+            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
             $mail_nodejs = json_decode(curl_exec($ch));
