@@ -759,6 +759,7 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var aux = ver_locales_y_despacho();
+    console.log(aux);
     if(aux[0]){
 
         var custom_min = 60;
