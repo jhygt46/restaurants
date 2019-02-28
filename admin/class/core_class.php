@@ -596,10 +596,9 @@ class Core{
             $info['pedido_04_subtitulo'] = $sql['resultado'][0]['pedido_04_subtitulo'];
             
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
-            /*
+            
             $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info["id_gir"]."'");
             $info['motos'] = $sql_motos['resultado'];
-            */
             
         }
         

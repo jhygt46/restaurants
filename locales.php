@@ -38,7 +38,7 @@ $info = $core->get_data($local['dominio']);
 
 if($_GET["info"] == 1){
     echo "<pre>";
-    print_r($info);
+    print_r($info['motos']);
     echo "</pre>";
 }
 
