@@ -13,16 +13,6 @@ $(document).ready(function(){
         total_process = total_process + parseInt(get_categoria(promos[i].id_cae).precio);
         console.log("cate: "+get_categoria(promos[i].id_cae).precio);
     }
-    
-    
-    console.log(carro);
-    console.log(promos);
-    
-    console.log(costo);
-    console.log(total_process);
-    console.log(total);
-    
-   
     var diff = costo + total_process - total; 
     if(diff > 0){
         $('.verificar').append('<div>ERROR: TOTAL ENVIADO ES MENOR: ($'+diff+')</div>')
