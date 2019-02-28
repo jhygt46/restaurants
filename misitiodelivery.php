@@ -1,16 +1,16 @@
 <?php 
     
     $list[0]['back'] = "#fff";
-    $list[0]['img'] = "http://www.mikasushi.cl/images/logos/www.mikasushi.cl.jpg";
+    $list[0]['img'] = "https://www.mikasushi.cl/images/logos/www.mikasushi.cl.jpg";
     $list[0]['nombre'] = "MikaSushi";
     $list[0]['link'] = "www.mikasushi.cl";
-    $list[0]['proto'] = "http";
+    $list[0]['proto'] = "https";
     
     $list[1]['back'] = "#000";
-    $list[1]['img'] = "http://www.runasushi.cl/images/logos/www.runasushi.cl.jpg";
+    $list[1]['img'] = "https://www.runasushi.cl/images/logos/www.runasushi.cl.jpg";
     $list[1]['nombre'] = "RunaSushi";
     $list[1]['link'] = "www.runasushi.cl";
-    $list[1]['proto'] = "http";
+    $list[1]['proto'] = "https";
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -49,7 +49,7 @@
                 <?php if($_GET["realizado"] == 0 || !isset($_GET["realizado"])){ ?>
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
                 <h2>Ingresando s&oacute;lo 2 simples datos</h2>
-                <form onsubmit="return send()" action="http://35.185.64.95/ajax/index.php" method="post">
+                <form onsubmit="return send()" action="https://misitiodelivery.cl/ajax/index.php" method="post">
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Dominio"; } ?></h3>
                     <input type="hidden" name="accion" value="crear_dominio" />
                     <div class="input">
@@ -78,7 +78,7 @@
         <div class="telefono" style="width: 273px; height: 530px; position: absolute; top: 110px">
             <div style="width: 100%; height: 100%; position: relative">
                 <img style="position: absolute; z-index: 1; width: 273px; height: 530px" src="images/celular.png" alt="" />
-                <iframe style="position: absolute; z-index: 2; width: 241px; height: 430px; border: 0px; padding: 52px 16px 0px 16px" src="http://www.mikasushi.cl"></iframe>
+                <iframe style="position: absolute; z-index: 2; width: 241px; height: 430px; border: 0px; padding: 52px 16px 0px 16px" src="https://www.mikasushi.cl"></iframe>
             </div>
         </div>
         
@@ -99,7 +99,7 @@
         <div class="contenido p_contacto halign" <?php if(isset($_GET["contacto"])){ echo "style='display: block'"; } ?>>
             <div class="cont_contenido">
                 <?php if($_GET["contacto"] == 0 || !isset($_GET["contacto"])){ ?>
-                <form onsubmit="return send2()" action="http://35.185.64.95/ajax/index.php" method="post">
+                <form onsubmit="return send2()" action="https://misitiodelivery.cl/ajax/index.php" method="post">
                     <h3>Nombre</h3>
                     <input type="hidden" name="accion" value="enviar_contacto" />
                     <div class="input">
