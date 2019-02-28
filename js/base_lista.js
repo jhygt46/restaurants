@@ -661,6 +661,8 @@ function ver_locales_y_despacho(){
     var hora = fecha.getHours() * 60 + fecha.getMinutes();
     var hrs = {};
 
+    console.log(data.locales);
+
     for(var i=0, ilen=data.locales.length; i<ilen; i++){
         if(data.locales[i].grs){
             for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
@@ -759,7 +761,6 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var aux = ver_locales_y_despacho();
-    console.log(aux);
     if(aux[0]){
 
         var custom_min = 60;
