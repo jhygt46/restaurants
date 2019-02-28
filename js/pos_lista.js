@@ -976,17 +976,13 @@ function done_pedido(){
     
      var id_mot = $('#id_mot').val();
     if(id_mot !== pedidos[seleccionado].id_mot){
-        console.log("DISTINTO");
-        console.log(pedidos[seleccionado].id_mot);
-        console.log(id_mot);
-        if(id_mot == 0){
-
+        if(Number.isInteger(id_mot) && id_mot != 0){
+            actualizar_pedidos_moto(id_mot);
         }
-        if(id_mot > 0){
-
+        if(Number.isInteger(pedidos[seleccionado].id_mot)){
+            actualizar_pedidos_moto(pedidos[seleccionado].id_mot);
         }
     }
-
 
     pedidos[seleccionado].id_mot = $('#id_mot').val();
 
@@ -996,6 +992,22 @@ function done_pedido(){
 
     $('.p1').hide();
     $('.pop_up').hide();
+    
+}
+function actualizar_pedidos_moto(id_mot){
+                
+    var sends = { id_mot: id_mot };
+    var link = "https://www.izusushi.cl/actualizar_pedidos_moto";
+    $.ajax({
+        type: "POST",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'text/plain' },
+        dataType: "json",
+        url: link,
+        data: sends,
+        success: function (data) {
+        }, error: function(err){
+        }
+    });
     
 }
 function pedido_obj(){
