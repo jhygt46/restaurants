@@ -43,7 +43,7 @@ if(isset($_GET['code'])){
         <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
         
     </head>
-    <body onload="//window.print()">
+    <body onload="window.print()" onfocus="window.close()">
         
         <div class="detalle">
             
