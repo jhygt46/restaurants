@@ -44,8 +44,10 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 }
 
 if($info['id_gir'] == 0){
-    require('misitiodelivery.php');
+
+    header('Location: https://misitiodelivery.cl');
     exit;
+
 }
 if($info['id_gir'] != 0){
 
