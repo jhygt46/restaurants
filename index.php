@@ -1,7 +1,7 @@
 <?php
 
 if($_POST["test"] == "Dw7k2s_hKi5sqPs8"){
-    die("hjS3r5gYa6ib_5Ps");
+    die("hjS3r%mDs-5gYa6ib_5Ps");
 }
 
 date_default_timezone_set('America/Santiago');
