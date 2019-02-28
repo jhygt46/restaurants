@@ -41,13 +41,7 @@ if(isset($_GET['code'])){
         <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
         <script src="<?php echo $info["js_detalle"]; ?>" type="text/javascript"></script>
-        <script type="text/javascript">
-            var document_focus = false; // var we use to monitor document focused status.
-            // Now our event handlers.
-            $(document).focus(function() { document_focus = true; console.log("FOCUS"); });
-            $(document).ready(function() { window.print(); });
-            setInterval(function() { if (document_focus === true) { window.close(); }  }, 500);
-        </script>
+
     </head>
     <body>
         <div class="detalle">

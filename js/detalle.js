@@ -1,5 +1,8 @@
 $(document).ready(function(){
     
+    window.print();
+    window.close();
+
     render_items(carro, promos);
     
     var total_process = 0;
