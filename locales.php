@@ -50,7 +50,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_pos"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["css_sweet"]; ?>" media="all" />
-        <script src="http://35.196.220.197/socket.io/socket.io.js"></script>
+        <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_pos_lista"]; ?>" type="text/javascript"></script>
