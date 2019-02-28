@@ -44,7 +44,7 @@ if(isset($_GET['code'])){
         <script type="text/javascript">
             var document_focus = false; // var we use to monitor document focused status.
             // Now our event handlers.
-            $(document).focus(function() { document_focus = true; });
+            $(document).focus(function() { document_focus = true; console.log("FOCUS"); });
             $(document).ready(function() { window.print(); });
             setInterval(function() { if (document_focus === true) { window.close(); }  }, 500);
         </script>
