@@ -1,11 +1,7 @@
 <?php
 session_start();
-/*
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-*/
-if(core_class_iniciada != 1){
+
+if(!isset($core_class_iniciada)){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
         $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
@@ -17,10 +13,9 @@ if(core_class_iniciada != 1){
     $fireapp = new Core();
 
 }
-/* CONFIG PAGE */
+
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
-/* CONFIG PAGE */
 
 $id_gir = 0;
 $titulo = "GIRO NO SELECIONADO";

@@ -110,6 +110,9 @@ if($inicio["exit"] == 1){
                         <div class="cont_contenido relative">
                             <div class="html">
                                 <?php
+
+                                    echo $inicio['pagina'];
+
                                     if($inicio['pagina'] == "giros"){
                                         require 'pages/msd/giros.php';
                                     }
