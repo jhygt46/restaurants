@@ -183,7 +183,8 @@ function agregar_pedido(id){
 
 function sound(){
     var aud = new Audio('audios/Ba-dum-tss.mp3');
-    aud.play();
+    var play = aud.play();
+    console.log(play);
 }
 
 function set_pedido(index, that){

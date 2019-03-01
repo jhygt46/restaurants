@@ -68,10 +68,6 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         </style>
     </head>
     <body>
-        <audio id="myAudio">
-            <source src="/audios/Ba-dum-tss.mp3" type="audio/mpeg">
-            Tu navegador no soporta el audio.
-        </audio>
         <div class="contenedor">
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
