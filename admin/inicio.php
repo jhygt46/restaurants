@@ -8,9 +8,13 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
-$inicio = $fireapp->inicio();
+$core = new Core();
+$inicio = $core->inicio();
 $core_class_iniciada = 1;
+
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">

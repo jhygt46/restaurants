@@ -66,10 +66,24 @@ class Login {
                         $ses['info']['id_user'] = $id_user;
                         $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                         $ses['info']['admin'] = $user['resultado'][0]['admin'];
-
-                        if($user['resultado'][0]['admin'] == 0){
+                        
+                        if($ses['info']['admin'] == 1 && $user['resultado'][0]['re_venta'] == 1){
+                            $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
+                        }
+                        if($ses['info']['admin'] == 0){
                             $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
-                            $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
+                            if($aux_gir['count'] == 1){
+                                $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
+                            }else{
+                                $aux_loc = $this->con->sql("SELECT id_loc FROM fw_usuarios_locales WHERE id_user='".$id_user."'");
+                                if($aux_loc['count'] == 1){
+                                    $info['punto_venta'] = 1;
+                                    $info['punto_id'] = $aux_loc['resultado'][0]['id_loc'];
+                                }
+                                if($aux_loc['count'] > 1){
+                                    $ses['info']['punto_venta'] = 1;
+                                }
+                            }
                         }
 
                         $_SESSION['user'] = $ses;
@@ -81,6 +95,7 @@ class Login {
                         unset($_COOKIE['CODE']);
                         
                     }else{
+
                         $intentos = $user['resultado'][0]['intentos'] + 1;
                         $this->con->sql("UPDATE fw_usuarios SET intentos='".$intentos."' WHERE id_user='".$user['resultado'][0]['id_user']."'");
                         if($intentos > 5){
