@@ -73,14 +73,21 @@ class Core{
     public function inicio(){
 
         $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$this->id_user."'");
-        
-        $info['id_user'] = $this->id_user;
-        $info['admin'] = $this->admin;
-        $info['punto_venta'] = $this->punto_venta;
-        $info['id_gir'] = $this->id_gir;
         $info['nombre'] = $user['resultado'][0]['nombre'];
         $info['correo'] = $user['resultado'][0]['correo'];
-        $info['re_venta'] = $user['resultado'][0]['re_venta'];
+
+        if($this->admin == 0){
+            if($this->id_gir > 0){
+                $info['require'] = "pages/msd/ver_giro.php";
+            }else{
+                $info['exit'] = 1;
+                $info['location'] = "https://misitiodelivery.cl/local/16";
+            }
+        }
+        if($this->admin == 1){
+            $info['require'] = "pages/msd/giros.php";
+        }
+        
         return $info;
 
     }

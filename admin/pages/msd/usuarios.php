@@ -112,7 +112,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         </select>
                     </label>
                     <?php }else{ ?>
-                    <div class="giros"></div>
+                        <div class="giros"></div>
                     <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>

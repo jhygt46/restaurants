@@ -11,11 +11,10 @@ require_once($path."admin/class/core_class.php");
 $core = new Core();
 $inicio = $core->inicio();
 $core_class_iniciada = 1;
-/*
-echo "<pre>";
-print_r($inicio);
-echo "</pre>";
-*/
+
+if($inicio["exit"] == 1){
+    header("Location: ".$inicio["location"]);
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
@@ -109,33 +108,9 @@ echo "</pre>";
                     <div class="contenido">
                         <div class="cont_contenido relative">
                             <div class="html">
-
                                 <?php 
-                                
-                                if($inicio['admin'] == 0){
-                                    if($inicio['id_gir'] > 0){
-                                        require 'pages/msd/ver_giro.php';
-                                    }else{
-                                        if($inicio['punto_venta'] == 1){
-                                            require 'pages/msd/punto_ventas.php';
-                                        }
-                                    }
-                                }
-                                if($inicio['admin'] == 1){
-                                    if($inicio['id_user'] == 1){
-                                        require 'pages/msd/giros.php'; 
-                                    }else{
-                                        if($inicio['re_venta'] == 0){
-                                            require 'pages/msd/giros.php'; 
-                                        }
-                                        if($inicio['re_venta'] == 1){
-                                            require 'pages/msd/giros.php';
-                                        }
-                                    }
-                                }
-
+                                    require $inicio["require"];
                                 ?>
-                                
                             </div>
                         </div>
                     </div>
