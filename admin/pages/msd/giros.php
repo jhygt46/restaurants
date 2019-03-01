@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($core_class_iniciada != 1){
+if(core_class_iniciada != 1){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
         $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
