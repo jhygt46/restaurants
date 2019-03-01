@@ -113,7 +113,7 @@ if($inicio["exit"] == 1){
                         <div class="cont_contenido relative">
                             <div class="html">
                                 <?php 
-                                    require $inicio["require"];
+                                    require_once($inicio["require"]);
                                 ?>
                             </div>
                         </div>
