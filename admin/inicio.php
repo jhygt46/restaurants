@@ -12,6 +12,10 @@ $core = new Core();
 $inicio = $core->inicio();
 $core_class_iniciada = 1;
 
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
+
 if($inicio["exit"] == 1){
     header("Location: ".$inicio["location"]);
 }
