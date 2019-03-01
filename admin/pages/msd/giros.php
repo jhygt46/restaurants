@@ -36,10 +36,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $sub_titulo = $sub_titulo2;
     $that = $fireapp->get_giro($_GET["id"]);
-    echo "BUENA NELSON";
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
     $id = $_GET["id"];
     
 }
@@ -68,11 +64,11 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre del Giro:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="" require="" placeholder="" />
+                        <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Dominio del Giro:</p></span>
-                        <input id="dominio" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="dominio" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
