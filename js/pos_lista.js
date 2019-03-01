@@ -184,8 +184,12 @@ function agregar_pedido(id){
 
 function sound(){
     var aud = new Audio('audios/Ba-dum-tss.mp3');
-    var play = aud.play();
-    console.log(play);
+    var playPromise = aud.play();
+
+    if (playPromise !== null){
+        playPromise.catch(() => { aud.play(); })
+    }
+
 }
 
 function set_pedido(index, that){
