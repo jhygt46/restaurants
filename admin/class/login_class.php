@@ -67,9 +67,6 @@ class Login {
                         $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                         $ses['info']['admin'] = $user['resultado'][0]['admin'];
                         
-                        if($ses['info']['admin'] == 1 && $user['resultado'][0]['re_venta'] == 1){
-                            $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
-                        }
                         if($ses['info']['admin'] == 0){
                             $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
                             if($aux_gir['count'] == 1){

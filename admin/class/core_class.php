@@ -18,6 +18,7 @@ class Core{
         $this->admin = $_SESSION['user']['info']['admin'];
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
+        $this->punto_venta = $_SESSION['user']['info']['punto_venta'];
         //echo $_SERVER['PHP_SELF'];
     }
     public function seguridad_if($arr){
@@ -75,8 +76,11 @@ class Core{
         
         $info['id_user'] = $this->id_user;
         $info['admin'] = $this->admin;
+        $info['punto_venta'] = $this->punto_venta;
+        $info['id_gir'] = $this->id_gir;
         $info['nombre'] = $user['resultado'][0]['nombre'];
         $info['correo'] = $user['resultado'][0]['correo'];
+        $info['re_venta'] = $user['resultado'][0]['re_venta'];
         return $info;
 
     }
