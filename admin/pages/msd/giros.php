@@ -14,6 +14,8 @@ if(!isset($core_class_iniciada)){
 
 }
 
+echo "BUENA NELSON";
+
 $list = $fireapp->get_giros_user();
 
 /* CONFIG PAGE */
