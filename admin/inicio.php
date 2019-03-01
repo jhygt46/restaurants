@@ -11,11 +11,11 @@ require_once($path."admin/class/core_class.php");
 $core = new Core();
 $inicio = $core->inicio();
 $core_class_iniciada = 1;
-
+/*
 echo "<pre>";
 print_r($inicio);
 echo "</pre>";
-
+*/
 if($inicio["exit"] == 1){
     header("Location: ".$inicio["location"]);
 }
@@ -114,6 +114,7 @@ if($inicio["exit"] == 1){
                             <div class="html">
                                 <?php 
                                     require_once($inicio["require"]);
+                                    echo $inicio["require"];
                                 ?>
                             </div>
                         </div>
