@@ -8,8 +8,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$core = new Core();
-$inicio = $core->inicio();
+$fireapp = new Core();
+$inicio = $fireapp->inicio();
 $core_class_iniciada = 1;
 
 if($inicio["exit"] == 1){

@@ -14,9 +14,8 @@ if(!isset($core_class_iniciada)){
 
 }
 
-echo "0";
 $list = $fireapp->get_giros_user();
-echo "1";
+
 /* CONFIG PAGE */
 $titulo = "Empresa";
 $titulo_list = "Mis Empresas";
@@ -40,7 +39,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     $id = $_GET["id"];
     
 }
-echo "3";
+
 ?>
 <div class="pagina">
     <div class="title">
