@@ -75,7 +75,8 @@ class Core{
         $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$this->id_user."'");
         $info['nombre'] = $user['resultado'][0]['nombre'];
         $info['correo'] = $user['resultado'][0]['correo'];
-
+        $info['admin'] = $this->admin;
+        
         if($this->admin == 0){
             if($this->id_gir > 0){
                 $info['pagina'] = "ver_giro";
