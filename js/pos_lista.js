@@ -3,6 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
+    sound();
 });
 var seleccionado = 0;
 var categoria = 0;
