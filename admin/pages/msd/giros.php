@@ -36,6 +36,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $sub_titulo = $sub_titulo2;
     $that = $fireapp->get_giro($_GET["id"]);
+    echo "BUENA NELSON";
     echo "<pre>";
     print_r($that);
     echo "</pre>";
