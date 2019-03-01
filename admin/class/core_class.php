@@ -78,16 +78,16 @@ class Core{
 
         if($this->admin == 0){
             if($this->id_gir > 0){
-                $info['require'] = "pages/msd/ver_giro.php";
+                $info['pagina'] = "ver_giro";
             }else{
                 $info['exit'] = 1;
                 $info['location'] = "https://misitiodelivery.cl/local/16";
             }
         }
         if($this->admin == 1){
-            $info['require'] = "pages/msd/giros.php";
+            $info['pagina'] = "giros";
         }
-        
+
         return $info;
 
     }

@@ -11,11 +11,7 @@ require_once($path."admin/class/core_class.php");
 $core = new Core();
 $inicio = $core->inicio();
 $core_class_iniciada = 1;
-/*
-echo "<pre>";
-print_r($inicio);
-echo "</pre>";
-*/
+
 if($inicio["exit"] == 1){
     header("Location: ".$inicio["location"]);
 }
@@ -112,8 +108,13 @@ if($inicio["exit"] == 1){
                     <div class="contenido">
                         <div class="cont_contenido relative">
                             <div class="html">
-                                <?php 
-                                    require_once("'".$inicio["require"]."'");
+                                <?php
+                                    if($inicio['pagina'] == "giros"){
+                                        require 'pages/msd/giros.php';
+                                    }
+                                    if($inicio['pagina'] == "ver_giro"){
+                                        require 'pages/msd/ver_giro.php';
+                                    }
                                 ?>
                             </div>
                         </div>
