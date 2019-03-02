@@ -16,6 +16,7 @@ class Guardar extends Core{
         $this->con = new Conexion();
         $this->id_user = $_SESSION['user']['info']['id_user'];
         $this->admin = $_SESSION['user']['info']['admin'];
+        $this->re_venta = $_SESSION['user']['info']['re_venta'];
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
     }
@@ -697,7 +698,15 @@ class Guardar extends Core{
         $correo = $_POST['correo'];
         $tipo = $_POST['tipo'];
         $giro = $_POST['giro'];
+        $id_gir = 0;
 
+        if($this->admin == 0){
+            $id_gir = $this->id_gir;
+        }
+        if($this->admin == 1 && $this->re_venta == 0){
+            $id_gir = $giro;
+        }
+        
         if($id == 0){
             $is_correo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo." AND eliminado='0'");
             if($is_correo['count'] == 0){
@@ -706,18 +715,12 @@ class Guardar extends Core{
             }
         }
         if($tipo == 1){
-            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$this->id_gir."')");
+            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$id_gir."')");
             $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
-            $this->con->sql("UPDATE fw_usuarios SET tipo='1' WHERE id_user='".$id."'");
         }
         if($tipo == 2){
-            $id_gir = $this->id_gir;
-            if($this->id_user == 1){
-                $id_gir = $giro;
-            }
             $this->con->sql("DELETE fw_usuarios_giros WHERE id_user='".$id."' AND id_gir='".$id_gir."'");
             $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
-            $this->con->sql("UPDATE fw_usuarios SET tipo='2' WHERE id_user='".$id."'");
             foreach($list_loc as $value){
                 $loc = $_POST['local-'.$value['id_gir']];
                 if(isset($loc) && $loc >0){
@@ -725,8 +728,11 @@ class Guardar extends Core{
                 }
             }
         }
-        if($tipo == 3 && $this->admin == 1 && $this->id_user == 1){
+        if($tipo == 3 && $this->admin == 1 && ($this->re_venta == 1 || $this->id_user == 1)){
             $this->con->sql("UPDATE fw_usuarios SET admin='1' WHERE id_user='".$id."'");
+        }
+        if($tipo == 4 && $this->id_user == 1){
+            $this->con->sql("UPDATE fw_usuarios SET admin='1', re_venta='1' WHERE id_user='".$id."'");
         }
         $info['op'] = 1;
         $info['mensaje'] = "Usuarios modificado exitosamente";

@@ -33,9 +33,6 @@ $list_giros = $fireapp->get_giros();
 $inicio = $fireapp->inicio();
 $m_locales = false;
 
-$id_user_admin = $_SESSION['user']['info']['id_user'];
-$id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
-
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
@@ -91,11 +88,14 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Tipo:</p></span>
                         <select id="tipo" onchange="ver_locales()">
                             <option value="1">Administrador</option>
-                            <?php if($id_gir != 0){ ?>
+                            <?php if($inicio["id_gir"] != 0){ ?>
                                 <option value="2">Solo Punto de Venta</option>
                             <?php } ?>
-                            <?php if($id_user_admin == 1){ ?>
+                            <?php if($inicio["id_user"] == 1 || $inicio["re_venta"] == 1){ ?>
                                 <option value="3">Vendedor</option>
+                            <?php } ?>
+
+                            <?php if($inicio["id_user"] == 1){ ?>    
                                 <option value="4">Reclutador</option>
                             <?php } ?>
                             
@@ -112,12 +112,12 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                             <?php } ?>
                         </div>
                     </label>
-                    <?php if($id_user_admin == 1){ ?>
+                    <?php if($inicio["admin"] == 1 && $inicio["re_venta"] == 0){ ?>
                     <label class="giros clearfix">
                         <span><p>Giro:</p></span>
                         <select id="giro">
                             <option value="0">Seleccione</option>
-                            <?php foreach($list_giros as $value){ $check = ''; if($id_gir == $value['id_gir']){ $check = 'selected'; } ?>
+                            <?php foreach($list_giros as $value){ $check = ''; if($inicio["id_gir"] == $value['id_gir']){ $check = 'selected'; } ?>
                                 <option value="<?php echo $value['id_gir']; ?>" <?php echo $check; ?>><?php echo $value['dominio']; ?></option>
                             <?php } ?>
                         </select>
