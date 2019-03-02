@@ -723,9 +723,8 @@ class Guardar extends Core{
             $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
             foreach($list_loc as $value){
                 $loc = $_POST['local-'.$value['id_loc']];
-                $info['loc'][] = 'local-'.$value['id_gir'];
-                if(isset($loc) && $loc > 0){
-                    $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$loc."')");
+                if(isset($loc) && $loc == 1){
+                    $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$value["id_loc"]."')");
                 }
             }
         }
