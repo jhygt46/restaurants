@@ -199,8 +199,33 @@ class Core{
         return $sql['resultado'];
     }
     public function get_usuarios(){
-        $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-        return $usuarios['resultado'];
+
+        if($this->id_user == 1){
+            if($this->id_gir == 0){
+                $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE admin='1' AND eliminado='0'");
+                return $usuarios['resultado'];
+            }
+            if($this->id_gir > 0){
+                $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
+                return $usuarios['resultado'];
+            }
+        }
+
+        if($this->admin == 1 && $this->re_venta == 1){
+            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_aux_user='".$this->id_user."' AND eliminado='0'");
+            return $usuarios['resultado'];
+        }
+        if($this->admin == 1 && $this->re_venta == 0){
+            if($this->id_gir > 0){
+                $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
+                return $usuarios['resultado'];
+            }
+        }
+        if($this->admin == 0 && $this->id_gir > 0){
+            $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
+            return $usuarios['resultado'];
+        }
+
     }
     public function get_usuario($id){
         $usuarios = $this->con->sql("SELECT id_user, nombre, correo, tipo FROM fw_usuarios WHERE id_user='".$id."' AND eliminado='0'");
