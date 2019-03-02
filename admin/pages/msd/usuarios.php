@@ -33,10 +33,6 @@ $list_giros = $fireapp->get_giros();
 $inicio = $fireapp->inicio();
 $m_locales = false;
 
-echo "<pre>";
-print_r($inicio);
-echo "</pre>";
-
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
@@ -96,8 +92,10 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo" onchange="ver_locales()">
-                            <option value="1">Administrador</option>
-                            <?php if($inicio["id_gir"] != 0){ ?>
+                            <?php if($inicio["re_venta"] == 0){ ?>    
+                                <option value="1">Administrador</option>
+                            <?php } ?>
+                            <?php if($inicio["id_gir"] != 0 && $inicio["re_venta"] == 0){ ?>
                                 <option value="2">Solo Punto de Venta</option>
                             <?php } ?>
                             <?php if($inicio["id_user"] == 1 || $inicio["re_venta"] == 1){ ?>
