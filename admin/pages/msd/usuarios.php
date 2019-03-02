@@ -33,10 +33,6 @@ $list_giros = $fireapp->get_giros();
 $inicio = $fireapp->inicio();
 $m_locales = false;
 
-echo "<pre>";
-print_r($inicio);
-echo "</pre>";
-
 $id_user_admin = $_SESSION['user']['info']['id_user'];
 $id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
 
