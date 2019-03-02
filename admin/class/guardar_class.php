@@ -724,7 +724,7 @@ class Guardar extends Core{
             foreach($list_loc as $value){
                 $loc = $_POST['local-'.$value['id_loc']];
                 if(isset($loc) && $loc == 1){
-                    $info['db'] = $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$value["id_loc"]."')");
+                    $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$value["id_loc"]."')");
                 }
             }
         }
