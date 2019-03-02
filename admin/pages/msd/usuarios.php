@@ -45,12 +45,17 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
 <script>
     function ver_locales(){
         var value = $('#tipo').val();
+        if(value == 1){
+            $('.locales').hide();
+            $('.giros').show();
+        }
         if(value == 2){
             $('.locales').show();
             $('.giros').hide();
-        }else{
+        }
+        if(value == 3 || value == 4){
+            $('.giros').hide();
             $('.locales').hide();
-            $('.giros').show();
         }
     }
 </script>
