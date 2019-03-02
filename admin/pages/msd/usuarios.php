@@ -30,7 +30,12 @@ $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_usuarios();
 $list_loc = $fireapp->get_locales();
 $list_giros = $fireapp->get_giros();
+$inicio = $fireapp->inicio();
 $m_locales = false;
+
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
 
 $id_user_admin = $_SESSION['user']['info']['id_user'];
 $id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
@@ -88,7 +93,17 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-<select id="tipo" onchange="ver_locales()"><option value="1">Administrador</option><?php if($id_gir != 0){ ?><option value="2">Solo Punto de Venta</option><?php } ?><?php if($id_user_admin == 1){ ?><option value="3">Re-Vendedor</option><?php } ?></select>
+                        <select id="tipo" onchange="ver_locales()">
+                            <option value="1">Administrador</option>
+                            <?php if($id_gir != 0){ ?>
+                                <option value="2">Solo Punto de Venta</option>
+                            <?php } ?>
+                            <?php if($id_user_admin == 1){ ?>
+                                <option value="3">Vendedor</option>
+                                <option value="4">Reclutador</option>
+                            <?php } ?>
+                            
+                        </select>
                     </label>
                     <label class="locales clearfix" style="display:<?php if($m_locales){?>block<?php }else{ ?>none<?php } ?>">
                         <span><p>Locales:</p></span>
