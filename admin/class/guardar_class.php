@@ -721,6 +721,7 @@ class Guardar extends Core{
         if($tipo == 2){
             $this->con->sql("DELETE fw_usuarios_giros WHERE id_user='".$id."' AND id_gir='".$id_gir."'");
             $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
+            $info['lc'] = $list_loc;
             foreach($list_loc as $value){
                 $loc = $_POST['local-'.$value['id_gir']];
                 $info['loc'][] = 'local-'.$value['id_gir'];
