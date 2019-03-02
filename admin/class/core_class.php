@@ -210,7 +210,6 @@ class Core{
                 return $usuarios['resultado'];
             }
         }
-
         if($this->admin == 1 && $this->re_venta == 1){
             $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_aux_user='".$this->id_user."' AND eliminado='0'");
             return $usuarios['resultado'];

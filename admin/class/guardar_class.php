@@ -729,7 +729,7 @@ class Guardar extends Core{
             }
         }
         if($tipo == 3 && $this->admin == 1 && ($this->re_venta == 1 || $this->id_user == 1)){
-            $this->con->sql("UPDATE fw_usuarios SET admin='1' WHERE id_user='".$id."'");
+            $this->con->sql("UPDATE fw_usuarios SET admin='1', id_aux_user='".$this->id_user."' WHERE id_user='".$id."'");
         }
         if($tipo == 4 && $this->id_user == 1){
             $this->con->sql("UPDATE fw_usuarios SET admin='1', re_venta='1' WHERE id_user='".$id."'");
