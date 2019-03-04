@@ -119,7 +119,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                             <?php } ?>
                         </div>
                     </label>
-                    <?php if($inicio["admin"] == 1 && $inicio["re_venta"] == 0){ ?>
+                    <?php if($inicio["id_user"] == 1){ ?>
                     <label class="giros clearfix">
                         <span><p>Giro:</p></span>
                         <select id="giro">
