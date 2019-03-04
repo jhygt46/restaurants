@@ -96,7 +96,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                             <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>   
                                 <option value="1">Administrador</option>
                             <?php } ?>
-                            <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>
+                            <?php if($inicio["id_gir"] != 0){ ?>
                                 <option value="2">Solo Punto de Venta</option>
                             <?php } ?>
                             <?php if($inicio["id_user"] == 1 || ($inicio["admin"] == 1 || $inicio["re_venta"] == 1)){ ?>
