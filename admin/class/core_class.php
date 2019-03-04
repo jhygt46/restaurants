@@ -223,7 +223,9 @@ class Core{
         if($this->admin == 0 && $this->id_gir > 0){
             $usr_1 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
             $usr_2 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_locales t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-            return array_unique(array_merge($usr_1['resultado'], $usr_2['resultado']));
+            $res['usr_1'] = $usr_1;
+            $res['usr_2'] = $usr_2;
+            return $res;
         }
 
     }
