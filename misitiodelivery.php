@@ -75,7 +75,7 @@
             </div>
         </div>
         
-        <div class="telefono" style="width: 273px; height: 530px; position: absolute; top: 110px">
+        <div class="telefono" style="width: 273px; height: 530px; position: absolute; top: 110px" <?php if(isset($_GET["contacto"])){ echo "style='display: none'"; } ?>>
             <div style="width: 100%; height: 100%; position: relative">
                 <img style="position: absolute; z-index: 1; width: 273px; height: 530px" src="images/celular.png" alt="" />
                 <iframe style="position: absolute; z-index: 2; width: 241px; height: 430px; border: 0px; padding: 52px 16px 0px 16px" src="https://www.mikasushi.cl"></iframe>
