@@ -1,8 +1,4 @@
 <?php
 session_start();
-
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
+$_SESSION['user']['id_gir'] = 0;
 ?>
