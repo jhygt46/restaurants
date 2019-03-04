@@ -93,16 +93,15 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo" onchange="ver_locales()">
-                            <?php if($inicio["id_gir"] != 0){ ?>   
+                            <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>   
                                 <option value="1">Administrador</option>
                             <?php } ?>
-                            <?php if($inicio["id_gir"] != 0 && $inicio["re_venta"] == 0){ ?>
+                            <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>
                                 <option value="2">Solo Punto de Venta</option>
                             <?php } ?>
-                            <?php if($inicio["id_user"] == 1 || $inicio["re_venta"] == 1){ ?>
+                            <?php if($inicio["id_user"] == 1 || ($inicio["admin"] == 1 || $inicio["re_venta"] == 1)){ ?>
                                 <option value="3">Vendedor</option>
                             <?php } ?>
-
                             <?php if($inicio["id_user"] == 1){ ?>    
                                 <option value="4">Reclutador</option>
                             <?php } ?>
