@@ -700,10 +700,10 @@ class Guardar extends Core{
         $giro = $_POST['giro'];
         $id_gir = 0;
 
-        if($this->admin == 0){
+        if($this->id_user != 1){
             $id_gir = $this->id_gir;
         }
-        if($this->admin == 1 && $this->re_venta == 0){
+        if($this->id_user == 1){
             $id_gir = $giro;
         }
         
@@ -715,8 +715,10 @@ class Guardar extends Core{
             }
         }
         if($tipo == 1){
-            $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$id_gir."')");
-            $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
+            if($id_gir != 0){
+                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$id_gir."')");
+                $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
+            }
         }
         if($tipo == 2){
             $this->con->sql("DELETE fw_usuarios_giros WHERE id_user='".$id."' AND id_gir='".$id_gir."'");
