@@ -17,9 +17,10 @@ $(document).ready(function(){
     if(diff > 0){
         $('.verificar').append('<div>ERROR: TOTAL ENVIADO ES MENOR: ($'+diff+')</div>')
     }
+    /*
     window.print();
     window.close();
-    
+    */
 });
 
 function create_item(item){
