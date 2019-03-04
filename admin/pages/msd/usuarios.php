@@ -45,6 +45,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
 <script>
     function ver_locales(){
         var value = $('#tipo').val();
+        console.log(value);
         if(value == 1){
             $('.locales').hide();
             $('.giros').show();
