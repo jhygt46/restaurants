@@ -691,7 +691,7 @@ class Guardar extends Core{
         
     }
     private function crear_usuario(){
-        
+
         $list_loc = $this->get_locales();
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
