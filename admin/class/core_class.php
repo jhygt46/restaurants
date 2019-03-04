@@ -222,7 +222,7 @@ class Core{
         }
         if($this->admin == 0 && $this->id_gir > 0){
             $usr_1 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-            $usr_2 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_locales t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
+            $usr_2 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_locales t2, locales t3 WHERE t3.id_gir='".$this->id_gir."' AND t3.id_loc=t2.id_loc AND t2.id_user=t1.id_user AND t1.eliminado='0'");
             $res['usr_1'] = $usr_1;
             $res['usr_2'] = $usr_2;
             return $res;
