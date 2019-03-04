@@ -33,10 +33,6 @@ $list_giros = $fireapp->get_giros();
 $inicio = $fireapp->inicio();
 $m_locales = false;
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
