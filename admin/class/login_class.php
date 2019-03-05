@@ -70,7 +70,7 @@ class Login {
 
                 if($user['count'] == 0){
                     $info['op'] = 2;
-                    $info['message'] = "Error: Usuario no existe";
+                    $info['message'] = "Error: Correo o Contraseña invalida";
                 }
 
                 if($user['count'] == 1){
@@ -112,6 +112,8 @@ class Login {
                         // 2 ERRAR
                         // 3 PEDIR PASSWORD
                         $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('2', now(), '".$id_user."')");
+                        $info['op'] = 2;
+                        $info['message'] = "Error: Correo o Contraseña invalida";
 
                     }
 
@@ -124,7 +126,7 @@ class Login {
         
         }else{
             $info['op'] = 2;
-            $info['message'] = "Error: Correo invalido";
+            $info['message'] = "Error: Correo o Contraseña invalida";
         }
         
         return $info;  
