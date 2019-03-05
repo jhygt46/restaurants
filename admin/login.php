@@ -1,3 +1,23 @@
+<?php
+
+if($_GET["paso"] == "nueva"){
+    if($_SERVER["HTTP_HOST"] == "localhost"){
+        $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+    }else{
+        $path = "/var/www/html/restaurants/";
+    }
+
+    require_once($path."admin/class/core_class.php");
+    $fireapp = new Core();
+    $data = $fireapp->is_pass($_GET["id_user"], $_GET["code"]);
+
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+
+}
+?>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
         <title></title>
