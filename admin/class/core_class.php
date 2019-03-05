@@ -361,7 +361,7 @@ class Core{
 
         $is = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id_user."' AND mailcode='".$code."'");
         if($is['count'] == 0){
-            header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
+            //header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
         }
 
     }
