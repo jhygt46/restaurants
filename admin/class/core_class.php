@@ -351,17 +351,14 @@ class Core{
         return $polygons['resultado'];
     }
     public function is_pass($id_user, $code){
-        
-        $ret['id_user'] = $id_user;
-        $ret['code'] = $code;
 
-        echo "<pre>";
-        print_r($ret);
-        echo "</pre>";
-
-        $is = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id_user."' AND mailcode='".$code."'");
-        if($is['count'] == 0){
-            //header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
+        if($id_user != "" || $code != ""){
+            $is = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id_user."' AND mailcode='".$code."'");
+            if($is['count'] == 0){
+                header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
+            }
+        }else{
+            header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
         }
 
     }
