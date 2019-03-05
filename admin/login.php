@@ -11,10 +11,6 @@ if($_GET["paso"] == "nueva"){
     $fireapp = new Core();
     $data = $fireapp->is_pass($_GET["id_user"], $_GET["code"]);
 
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-
 }
 ?>
 
