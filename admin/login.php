@@ -19,15 +19,15 @@
                     <div class='contlogin'>
                         <div class='us'>
                             <div class='txt'>Correo</div>
-                            <div class='input'><input type='text' class='user' value=''></div>
+                            <div class='input'><input type='text' id='user' value=''></div>
                         </div>
                         <div class='pa'>
                             <div class='txt'>Contrase&ntilde;a</div>
-                            <div class='input'><input type='password' class='pass'></div>
+                            <div class='input'><input type='password' id='pass'></div>
                         </div>
                         <div class='button clearfix'>
                             <div class='msg'></div>
-                            <div class='btn'><input type='button' id='entrar' value='Entrar'></div>
+                            <div class='btn'><input type='button' id='login' value='Entrar'></div>
                         </div>
                     </div>
                     <div class='ltpass'><a href='?paso=recuperar'>No tiene contrase&ntilde;a?</a></div>
@@ -38,11 +38,11 @@
                     <div class='contlogin'>
                         <div class='us'>
                             <div class='txt'>Correo</div>
-                            <div class='input'><input type='text' class='user' value=''></div>
+                            <div class='input'><input type='text' id='correo' value=''></div>
                         </div>
                         <div class='button clearfix'>
                             <div class='msg'></div>
-                            <div class='btn'><input type='button' id='entrar' value='Entrar'></div>
+                            <div class='btn'><input type='button' id='recuperar' value='Entrar'></div>
                         </div>
                     </div>
                     <div class='ltpass'><a href='?paso=login'>Deseo ingresar</a></div>

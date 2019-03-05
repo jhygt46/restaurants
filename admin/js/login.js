@@ -1,22 +1,45 @@
 $(document).ready(function(){
 
-    $('#entrar').click(function(){
+    $('#login').click(function(){
         
         var btn = $(this);
         btn.prop( "disabled", true );
-        
         var user = $('#user').val();
         var pass = $('#pass').val();
-        var tipo = $('#accion').val();
-        var accion = 'login';
+        $.ajax({
+            url: "ajax/login_back.php",
+            type: "POST",
+            data: "accion=login&user="+user+"&pass="+pass,
+            success: function(data){
+                if(data.op == 1){
+                    bien(data.message);
+                    setTimeout(function () {
+                        $(location).attr('href','');
+                    }, 2000);
+                }
+                if(data.op == 2){
+                    mal(data.message);
+                    btn.prop("disabled", false );
+                }
+            },
+            error: function(e){
+                btn.prop("disabled", false );
+            }
+        });
+
+    });
+
+    $('#recuperar').click(function(){
         
-        if(tipo == 1){ accion = 'login'; }
-        if(tipo == 2){ accion = 'recuperar'; }
+        var btn = $(this);
+        btn.prop("disabled", true );
+        
+        var correo = $('#correo').val();
         
         $.ajax({
             url: "ajax/login_back.php",
             type: "POST",
-            data: "accion="+accion+"&user="+user+"&pass="+pass,
+            data: "accion=recuperar_password&user="+correo,
             success: function(data){
 
                 if(data.op == 1){
@@ -27,43 +50,15 @@ $(document).ready(function(){
                 }
                 if(data.op == 2){
                     mal(data.message);
-                    btn.prop( "disabled", false );
+                    btn.prop("disabled", false );
                 }
             },
             error: function(e){
-                btn.prop( "disabled", false );
+                btn.prop("disabled", false );
             }
         });
 
     });
-    
-    /*
-    $('.ltpass a').click(function(){
-        
-        $('.msg').html("");
-        
-        $('#user').css("border-color", "#ccc");
-        $('#pass').css("border-color", "#ccc");
-    
-        $('#user').css("background-color", "#fcfcfc");
-        $('#pass').css("background-color", "#fcfcfc");
-        
-        var tipo = $('#accion').val();
-        if(tipo == "1"){
-            $('#accion').val("2");
-            $('.pa').hide();
-            $(this).html("Desea Ingresar");
-        }
-        if(tipo == "2"){
-            $('#accion').val("1");
-            $('.pa').show();
-            $(this).html("Perdio su contrase&ntilde;a?");
-        }
-
-        return false;
-        
-    });
-    */
 
 });
 
@@ -101,44 +96,25 @@ function mal(msg){
     login2();
     login3();
     login4();
-    
 }
 function login1(){
-    
     $(".login").animate({
         'padding-left': '+=15px'
-    }, 200, function() {
-        // Animation complete.
-    });
-    
+    }, 200);
 }
-
 function login2(){
-    
     $(".login").animate({
         'padding-left': '-=30px'
-    }, 200, function() {
-        // Animation complete.
-    });
-    
+    }, 200);
 }
 function login3(){
-    
     $(".login").animate({
         'padding-left': '+=30px'
-    }, 200, function() {
-        // Animation complete.
-    });
-    
+    }, 200);
 }
-
 function login4(){
-    
     $(".login").animate({
         'padding-left': '-=15px'
-    }, 200, function() {
-        // Animation complete.
-    });
-    
+    }, 200);
 }
 
