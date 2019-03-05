@@ -47,6 +47,25 @@
                     </div>
                     <div class='ltpass'><a href='?paso=login'>Deseo ingresar</a></div>
                 <?php } ?>
+                <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
+                    <div class='titulo'>NUEVA CONTRASEÑA</div>
+                    <div class='titulo2'>MI SITIO DELIVERY</div>
+                    <div class='contlogin'>
+                        <div class='us'>
+                            <div class='txt'>Password</div>
+                            <div class='input'><input type='text' id='pass_01' value=''></div>
+                        </div>
+                        <div class='us'>
+                            <div class='txt'>Confirmar</div>
+                            <div class='input'><input type='text' id='pass_02' value=''></div>
+                        </div>
+                        <div class='button clearfix'>
+                            <div class='msg'></div>
+                            <div class='btn'><input type='button' id='recuperar' value='Entrar'></div>
+                        </div>
+                    </div>
+                    <div class='ltpass'><a href='?paso=login'>Deseo ingresar</a></div>
+                <?php } ?>
             </div>
         </div>
     </body>

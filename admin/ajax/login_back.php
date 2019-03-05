@@ -19,6 +19,9 @@ if($_POST['accion'] == "login"){
 if($_POST['accion'] == "recuperar_password"){
     $data = $login->recuperar_password();
 }
+if($_POST['accion'] == "nueva_password"){
+    $data = $login->nueva_password();
+}
 
 echo json_encode($data);
 

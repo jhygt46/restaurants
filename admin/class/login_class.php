@@ -29,9 +29,9 @@ class Login {
                 // CURL 
                 $send['correo'] = $user;
                 $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
-                $send['id'] = $db_user['resultado'][0]['id_user'];
+                $send['id'] = $id_user;
 
-                $this->con->sql("UPDATE fw_usuarios SET code='".$send["code"]."' WHERE id_user='".$send["id"]."'");
+                $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
 
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
@@ -56,6 +56,43 @@ class Login {
         }
 
         return $info; 
+
+    }
+    public function nueva_password(){
+
+        $id= $_POST['id'];
+        $code= $_POST['code'];
+        $pass_01 = $_POST['pass_01'];
+        $pass_02 = $_POST['pass_02'];
+
+        $aux = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id."' AND mailcode='".$code."'");
+        if($aux['count'] == 1){
+            $maildate = strtotime($aux['resultado'][0]['maildate']) + 7200;
+            $now = time();
+            if($now < $maildate){
+                if(strlen($pass_01) >= 8){
+                    if($pass_01 == $pass_02){
+                        $this->con->sql("UPDATE fw_usuarios SET maildate='', mailcode='', pass='".md5($pass_01)."' WHERE id_user='".$id."'");
+                        $info['op'] = 1;
+                        $info['url'] = "";
+                    }else{
+                        $info['op'] = 2;
+                        $info['message'] = "Error:";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['message'] = "Error:";
+                }
+            }else{
+                $info['op'] = 2;
+                $info['message'] = "Error:";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['message'] = "Error:";
+        }
+
+        return $info;
 
     }
     public function login_back(){
