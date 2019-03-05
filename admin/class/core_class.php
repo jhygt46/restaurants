@@ -352,8 +352,8 @@ class Core{
     }
     public function is_pass($id_user, $code){
         $is = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id_user."' AND mailcode='".$code."'");
-        if($id['count'] == 0){
-            die("Error: no puede generar la contraseña");
+        if($is['count'] == 0){
+            header("Location: https://misitiodelivery.cl/admin");
         }
     }
     public function ver_detalle($code){

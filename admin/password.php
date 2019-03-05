@@ -9,7 +9,9 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
-$fireapp->is_pass($_GET["id_user"], $_GET["code"]);
+$is = $fireapp->is_pass($_GET["id_user"], $_GET["code"]);
+$is['op'] = 1;
+
 
 ?>
 
