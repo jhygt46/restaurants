@@ -7,6 +7,9 @@ body {
     background: #FAFAFA;
     display:block;
 }
+.cont_login {
+    position: relative;
+}
 .login {
     width: 427px;
 }
