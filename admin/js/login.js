@@ -60,6 +60,41 @@ $(document).ready(function(){
 
     });
 
+    $('#nueva').click(function(){
+        
+        var btn = $(this);
+        btn.prop("disabled", true );
+        
+        var pass_01 = $('#pass_01').val();
+        var pass_02 = $('#pass_02').val();
+        var id = $('#id_user').val();;
+        var code = $('#code').val();;
+
+        $.ajax({
+            url: "ajax/login_back.php",
+            type: "POST",
+            data: "accion=nueva_password&pass_01="+pass_01+"&pass_02="+pass_02+"&id="+id+"&code="+code,
+            success: function(data){
+
+                if(data.op == 1){
+                    bien(data.message);
+                    setTimeout(function () {
+                        $(location).attr('href',"");
+                    }, 2000);
+                }
+                if(data.op == 2){
+                    mal(data.message);
+                    btn.prop("disabled", false);
+                }
+                
+            },
+            error: function(e){
+                btn.prop("disabled", false);
+            }
+        });
+
+    });
+
 });
 
 function bien(msg){

@@ -75,6 +75,7 @@ class Login {
                         $this->con->sql("UPDATE fw_usuarios SET maildate='', mailcode='', pass='".md5($pass_01)."' WHERE id_user='".$id."'");
                         $info['op'] = 1;
                         $info['url'] = "";
+                        $info['message'] = "Felicidades";
                     }else{
                         $info['op'] = 2;
                         $info['message'] = "Error:";
