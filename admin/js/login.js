@@ -37,6 +37,7 @@ $(document).ready(function(){
 
     });
     
+    /*
     $('.ltpass a').click(function(){
         
         $('.msg').html("");
@@ -62,6 +63,7 @@ $(document).ready(function(){
         return false;
         
     });
+    */
 
 });
 
