@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+}else{
+    $path = "/var/www/html/restaurants/";
+}
+
+require_once($path."admin/class/core_class.php");
+$fireapp = new Core();
+$fireapp->is_pass($_GET["id_user"], $_GET["code"]);
+
+?>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
         <title></title>
