@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="images/fire.ico" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
@@ -17,7 +16,7 @@
             <tr>
                 <td align='center' valign='middle'>
                     <div class='login'>
-                        <div class='titulo'></div>
+                        <div class='titulo'>MI SITIO DELIVERY</div>
                         <div class='contlogin'>
                             <div class='us'>
                                 <div class='txt'>Correo</div>

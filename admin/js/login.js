@@ -18,7 +18,7 @@ $(document).ready(function(){
             type: "POST",
             data: "accion="+accion+"&user="+user+"&pass="+pass,
             success: function(data){
-                console.log(data);
+
                 if(data.op == 1){
                     bien(data.message);
                     setTimeout(function () {
