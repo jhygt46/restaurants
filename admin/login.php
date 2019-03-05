@@ -1,12 +1,3 @@
-<?php
-
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
         <title></title>
@@ -60,8 +51,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
                     <div class='titulo'>NUEVA CONTRASEÑA</div>
                     <div class='titulo2'>MI SITIO DELIVERY</div>
                     <div class='contlogin'>
-                        <input type='text' id='id_user' value='<?php echo $_GET['id_user']; ?>'>
-                        <input type='text' id='code' value='<?php echo $_GET['code']; ?>'>
+                        <input type='hidden' id='id_user' value='<?php echo $_GET['id_user']; ?>'>
+                        <input type='hidden' id='code' value='<?php echo $_GET['code']; ?>'>
                         <div class='us'>
                             <div class='txt'>Password</div>
                             <div class='input'><input type='text' id='pass_01' value=''></div>
