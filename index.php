@@ -43,11 +43,6 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 
 }
 
-echo "<pre>";
-print_r($info);
-echo "</pre>";
-exit;
-
 if($info['id_gir'] == 0){
 
     header('Location: https://misitiodelivery.cl');
