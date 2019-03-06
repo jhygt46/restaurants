@@ -379,15 +379,18 @@ class Guardar extends Core{
     
     private function crear_giro(){
         
-        if($this->$admin == 1){
-        
-            $id = $_POST['id'];
-            $nombre = $_POST['nombre'];
-            $dominio = $_POST['dominio'];
-            $code = bin2hex(openssl_random_pseudo_bytes(10));
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $dominio = $_POST['dominio'];
+        $code = bin2hex(openssl_random_pseudo_bytes(10));
 
-            $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-            if($this->verificar_dominio($dominio)){
+        $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+        if($this->verificar_dominio($dominio)){
+            
+
+            $info['op'] = 1;
+            $info['mensaje'] = "Buena: Nelson";
+                /*
                 if($id == 0){
                     if($verificar_dominio['count'] == 0){
                         $sql = $this->con->sql("INSERT INTO giros (nombre, fecha_creado, dominio, catalogo, code, con_cambios, titulo, style_page, style_color, style_modal, font_family, font_css) VALUES ('".$nombre."', now(), '".$dominio."', '1', '".$code."', '1', '".$nombre."', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D')");
@@ -428,6 +431,7 @@ class Guardar extends Core{
                         }
                     }
                 }
+                */
 
             }else{
                 $info['op'] = 2;
@@ -438,7 +442,7 @@ class Guardar extends Core{
             $info['page'] = "msd/giros.php";
             return $info;
         
-        }
+        
         
     }
     private function eliminar_giro(){
