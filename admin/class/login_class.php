@@ -60,19 +60,18 @@ class Login {
     }
     public function nueva_password(){
 
-        $id= $_POST['id'];
-        $code= $_POST['code'];
+        $id = $_POST['id'];
+        $code = $_POST['code'];
         $pass_01 = $_POST['pass_01'];
         $pass_02 = $_POST['pass_02'];
 
+        $intentos = $this->con->sql("SELECT * FROM fw_acciones WHERE id_user='".$id."' AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
         $aux = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id."' AND mailcode='".$code."'");
         if($aux['count'] == 1){
-            $maildate = strtotime($aux['resultado'][0]['maildate']) + 7200;
-            $now = time();
-            if($now < $maildate){
+            if($intentos['count'] < 5){
                 if(strlen($pass_01) >= 8){
                     if($pass_01 == $pass_02){
-                        $this->con->sql("UPDATE fw_usuarios SET maildate='', mailcode='', pass='".md5($pass_01)."' WHERE id_user='".$id."'");
+                        $this->con->sql("UPDATE fw_usuarios SET mailcode='', pass='".md5($pass_01)."' WHERE id_user='".$id."'");
                         $info['op'] = 1;
                         $info['url'] = "";
                         $info['message'] = "Felicidades";
@@ -86,13 +85,18 @@ class Login {
                 }
             }else{
                 $info['op'] = 2;
-                $info['message'] = "Error: Problemas con el tiempo";
-            }
+                $info['message'] = "Demaciados intentos";
+            }    
         }else{
             $info['op'] = 2;
             $info['message'] = "Error: usuario y codigo";
-        }
+            
+            // 1 INGRESAR
+            // 2 ERRAR
+            // 3 PEDIR PASSWORD
+            $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('2', now(), '".$id."')");
 
+        }
         return $info;
 
     }
