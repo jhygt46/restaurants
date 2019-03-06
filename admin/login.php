@@ -23,12 +23,27 @@ if($_GET["paso"] == "nueva"){
         <link rel="shortcut icon" type="image/x-icon" href="images/fire.ico" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="/admin/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="/admin/js/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" href="/admin/css/login.css" type="text/css" media="all">
         <script>
-            $(document).ready(function(){
+
+            $(document).on('keypress',function(e){
+                if(e.which == 13){
+                    <?php if(!isset($_GET["paso"]) || $_GET["paso"] == "login"){ ?>
+                        btn_login();
+                    <?php } ?>
+                    <?php if(isset($_GET["paso"]) && $_GET["paso"] == "recuperar"){ ?>
+                        btn_recuperar();
+                    <?php } ?>
+                    <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
+                        btn_nueva();
+                    <?php } ?>
+                }
+            });
+
             <?php if(!isset($_GET["paso"]) || $_GET["paso"] == "login"){ ?>
-                $('#login').click(function(){
-                    var btn = $(this);
+                function btn_login(){
+                    var btn = $('#login');
                     btn.prop("disabled", true);
                     $.ajax({
                         url: "ajax/login_back.php",
@@ -43,18 +58,18 @@ if($_GET["paso"] == "nueva"){
                             }
                             if(data.op == 2){
                                 mal(data.message);
-                                btn.prop("disabled", false );
+                                btn.prop("disabled", false);
                             }
                         },
                         error: function(e){
-                            btn.prop("disabled", false );
+                            btn.prop("disabled", false);
                         }
                     });
-                });
+                }
             <?php } ?>
             <?php if(isset($_GET["paso"]) && $_GET["paso"] == "recuperar"){ ?>
-                $('#recuperar').click(function(){
-                    var btn = $(this);
+                function btn_recuperar(){
+                    var btn = $('#recuperar');
                     btn.prop("disabled", true );
                     $.ajax({
                         url: "ajax/login_back.php",
@@ -69,18 +84,18 @@ if($_GET["paso"] == "nueva"){
                             }
                             if(data.op == 2){
                                 mal(data.message);
-                                btn.prop("disabled", false );
+                                btn.prop("disabled", false);
                             }
                         },
                         error: function(e){
-                            btn.prop("disabled", false );
+                            btn.prop("disabled", false);
                         }
                     });
-                });
+                }
             <?php } ?>
             <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
-                $('#nueva').click(function(){
-                    var btn = $(this);
+                function btn_nueva(){
+                    var btn = $('#nueva');
                     btn.prop("disabled", true );
                     $.ajax({
                         url: "ajax/login_back.php",
@@ -102,9 +117,8 @@ if($_GET["paso"] == "nueva"){
                             btn.prop("disabled", false);
                         }
                     });
-                });
+                }
             <?php } ?>
-            });
             function bien(msg){
                 $('.msg').html(msg);
                 $('.msg').css("color", "#666");    
@@ -157,7 +171,6 @@ if($_GET["paso"] == "nueva"){
             <div class='login vhalign'>
                 <?php if(!isset($_GET["paso"]) || $_GET["paso"] == "login"){ ?>
                     <div class='titulo'>LOGIN</div>
-                    <div class='titulo2'>MI SITIO DELIVERY</div>
                     <div class='contlogin'>
                         <div class='us'>
                             <div class='txt'>Correo</div>
@@ -169,14 +182,13 @@ if($_GET["paso"] == "nueva"){
                         </div>
                         <div class='button clearfix'>
                             <div class='msg'></div>
-                            <div class='btn'><input type='button' id='login' value='Entrar'></div>
+                            <div class='btn'><input type='button' onclick="btn_login()" id='login' value='Entrar'></div>
                         </div>
                     </div>
                     <div class='ltpass'><a href='?paso=recuperar'>No tiene contrase&ntilde;a?</a></div>
                 <?php } ?>
                 <?php if(isset($_GET["paso"]) && $_GET["paso"] == "recuperar"){ ?>
                     <div class='titulo'>RECUPERAR</div>
-                    <div class='titulo2'>MI SITIO DELIVERY</div>
                     <div class='contlogin'>
                         <div class='us'>
                             <div class='txt'>Correo</div>
@@ -191,7 +203,6 @@ if($_GET["paso"] == "nueva"){
                 <?php } ?>
                 <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
                     <div class='titulo'>NUEVA CONTRASEÑA</div>
-                    <div class='titulo2'>MI SITIO DELIVERY</div>
                     <div class='contlogin'>
                         <input type='hidden' id='id_user' value='<?php echo $_GET['id_user']; ?>'>
                         <input type='hidden' id='code' value='<?php echo $_GET['code']; ?>'>
