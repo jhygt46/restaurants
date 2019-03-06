@@ -43,6 +43,7 @@ if($_GET["paso"] == "nueva"){
 
             <?php if(!isset($_GET["paso"]) || $_GET["paso"] == "login"){ ?>
                 function btn_login(){
+                    console.log("BTN LOGIN");
                     var btn = $('#login');
                     btn.prop("disabled", true);
                     $.ajax({
@@ -69,6 +70,7 @@ if($_GET["paso"] == "nueva"){
             <?php } ?>
             <?php if(isset($_GET["paso"]) && $_GET["paso"] == "recuperar"){ ?>
                 function btn_recuperar(){
+                    console.log("BTN RECUPERAR");
                     var btn = $('#recuperar');
                     btn.prop("disabled", true );
                     $.ajax({
@@ -95,6 +97,7 @@ if($_GET["paso"] == "nueva"){
             <?php } ?>
             <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
                 function btn_nueva(){
+                    console.log("BTN NUEVA");
                     var btn = $('#nueva');
                     btn.prop("disabled", true );
                     $.ajax({
@@ -216,7 +219,7 @@ if($_GET["paso"] == "nueva"){
                         </div>
                         <div class='button clearfix'>
                             <div class='msg'></div>
-                            <div class='btn'><input type='button' id='nueva' value='Entrar'></div>
+                            <div class='btn'><input type='button' onclick="btn_nueva()" id='nueva' value='Entrar'></div>
                         </div>
                     </div>
                 <?php } ?>
