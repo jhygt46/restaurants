@@ -61,7 +61,7 @@ if($_GET["paso"] == "nueva"){
                             <div class='btn'><input type='button' id='recuperar' value='Entrar'></div>
                         </div>
                     </div>
-                    <div class='ltpass'><a href='?paso=login'>Deseo ingresar</a></div>
+                    <div class='ltpass'><a href='/'>Deseo ingresar</a></div>
                 <?php } ?>
                 <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
                     <div class='titulo'>NUEVA CONTRASEÑA</div>
@@ -82,7 +82,6 @@ if($_GET["paso"] == "nueva"){
                             <div class='btn'><input type='button' id='nueva' value='Entrar'></div>
                         </div>
                     </div>
-                    <div class='ltpass'><a href='/'>Deseo ingresar</a></div>
                 <?php } ?>
             </div>
         </div>
