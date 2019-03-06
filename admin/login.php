@@ -101,7 +101,7 @@ if($_GET["paso"] == "nueva"){
                     var btn = $('#nueva');
                     btn.prop("disabled", true );
                     $.ajax({
-                        url: "ajax/login_back.php",
+                        url: "/admin/ajax/login_back.php",
                         type: "POST",
                         data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
                         success: function(data){
@@ -199,7 +199,7 @@ if($_GET["paso"] == "nueva"){
                         </div>
                         <div class='button clearfix'>
                             <div class='msg'></div>
-                            <div class='btn'><input type='button' id='recuperar' value='Entrar'></div>
+                            <div class='btn'><input type='button'  onclick="btn_recuperar()" id='recuperar' value='Entrar'></div>
                         </div>
                     </div>
                     <div class='ltpass'><a href='/admin'>Deseo ingresar</a></div>
