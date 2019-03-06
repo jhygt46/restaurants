@@ -78,19 +78,19 @@ class Login {
                         $info['message'] = "Felicidades";
                     }else{
                         $info['op'] = 2;
-                        $info['message'] = "Error:";
+                        $info['message'] = "Error: diferentes";
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['message'] = "Error:";
+                    $info['message'] = "Error: Password demaciado corta";
                 }
             }else{
                 $info['op'] = 2;
-                $info['message'] = "Error:";
+                $info['message'] = "Error: Problemas con el tiempo";
             }
         }else{
             $info['op'] = 2;
-            $info['message'] = "Error:";
+            $info['message'] = "Error: usuario y codigo";
         }
 
         return $info;
