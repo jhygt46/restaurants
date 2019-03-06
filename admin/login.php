@@ -1,6 +1,7 @@
 <?php
 
 if($_GET["paso"] == "nueva"){
+
     if($_SERVER["HTTP_HOST"] == "localhost"){
         $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
     }else{
@@ -22,9 +23,134 @@ if($_GET["paso"] == "nueva"){
         <link rel="shortcut icon" type="image/x-icon" href="images/fire.ico" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="/admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="/admin/js/login.js"></script>
-        <link rel="stylesheet" href="/admin/css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="/admin/css/login.css" type="text/css" media="all">
+        <script>
+            $(document).ready(function(){
+            <?php if(!isset($_GET["paso"]) || $_GET["paso"] == "login"){ ?>
+                $('#login').click(function(){
+                    var btn = $(this);
+                    btn.prop("disabled", true);
+                    $.ajax({
+                        url: "ajax/login_back.php",
+                        type: "POST",
+                        data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
+                        success: function(data){
+                            if(data.op == 1){
+                                bien(data.message);
+                                setTimeout(function () {
+                                    $(location).attr('href','');
+                                }, 2000);
+                            }
+                            if(data.op == 2){
+                                mal(data.message);
+                                btn.prop("disabled", false );
+                            }
+                        },
+                        error: function(e){
+                            btn.prop("disabled", false );
+                        }
+                    });
+                });
+            <?php } ?>
+            <?php if(isset($_GET["paso"]) && $_GET["paso"] == "recuperar"){ ?>
+                $('#recuperar').click(function(){
+                    var btn = $(this);
+                    btn.prop("disabled", true );
+                    $.ajax({
+                        url: "ajax/login_back.php",
+                        type: "POST",
+                        data: "accion=recuperar_password&user="+$('#correo').val(),
+                        success: function(data){
+                            if(data.op == 1){
+                                bien(data.message);
+                                setTimeout(function () {
+                                    $(location).attr('href',"");
+                                }, 2000);
+                            }
+                            if(data.op == 2){
+                                mal(data.message);
+                                btn.prop("disabled", false );
+                            }
+                        },
+                        error: function(e){
+                            btn.prop("disabled", false );
+                        }
+                    });
+                });
+            <?php } ?>
+            <?php if(isset($_GET["paso"]) && $_GET["paso"] == "nueva"){ ?>
+                $('#nueva').click(function(){
+                    var btn = $(this);
+                    btn.prop("disabled", true );
+                    $.ajax({
+                        url: "ajax/login_back.php",
+                        type: "POST",
+                        data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
+                        success: function(data){
+                            if(data.op == 1){
+                                bien(data.message);
+                                setTimeout(function () {
+                                    $(location).attr('href',"");
+                                }, 2000);
+                            }
+                            if(data.op == 2){
+                                mal(data.message);
+                                btn.prop("disabled", false);
+                            }     
+                        },
+                        error: function(e){
+                            btn.prop("disabled", false);
+                        }
+                    });
+                });
+            <?php } ?>
+            });
+            function bien(msg){
+                $('.msg').html(msg);
+                $('.msg').css("color", "#666");    
+                $('#user').css("border-color", "#ccc");
+                $('#pass').css("border-color", "#ccc");
+                $('#user').css("background-color", "#fcfcfc");
+                $('#pass').css("background-color", "#fcfcfc");
+            }
+            function mal(msg){   
+                $('#pass').val("");
+                $('.msg').html(msg);
+                $('.msg').css("color", "#E34A25");
+                $('#user').css("border-color", "#E34A25");
+                $('#pass').css("border-color", "#E34A25");
+                $('#user').css("background-color", "#FCEFEB");
+                $('#pass').css("background-color", "#FCEFEB");
+                login1();
+                login2();
+                login3();
+                login2();
+                login3();
+                login2();
+                login3();
+                login4();
+            }
+            function login1(){
+                $(".login").animate({
+                    'padding-left': '+=15px'
+                }, 200);
+            }
+            function login2(){
+                $(".login").animate({
+                    'padding-left': '-=30px'
+                }, 200);
+            }
+            function login3(){
+                $(".login").animate({
+                    'padding-left': '+=30px'
+                }, 200);
+            }
+            function login4(){
+                $(".login").animate({
+                    'padding-left': '-=15px'
+                }, 200);
+            }
+        </script>
     </head>
     <body>
         <div class="cont_login">
