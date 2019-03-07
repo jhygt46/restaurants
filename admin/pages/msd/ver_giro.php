@@ -34,7 +34,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 }
 
 $list = $fireapp->get_locales();
-$giro = $fireapp->get_giro();
+$giro = $fireapp->get_giro($id_gir);
 
 echo "<pre>";
 print_r($giro);
