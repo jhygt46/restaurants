@@ -36,12 +36,8 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 $list = $fireapp->get_locales();
 $giro = $fireapp->get_giro($id_gir);
 
-echo "<pre>";
-print_r($giro);
-echo "</pre>";
-
 if($giro['dns'] == 0){
-    // CURL
+    
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://'.$giro['dominio']);
@@ -50,9 +46,8 @@ if($giro['dns'] == 0){
     $resp = curl_exec($ch);
     
     curl_close($ch);
-    if($resp == 'hjS3r5gYa6ib_5Ps'){
-        //$giro['dns'] = 1;
-        //$fireapp->set_giro_dns();
+    if($resp == 'hjS3r%mDs-5gYa6ib_5Ps'){
+        $fireapp->set_giro_dns($id_gir);
     }
 
 }
@@ -60,7 +55,7 @@ if($giro['dns'] == 0){
 $catalogos = $fireapp->get_catalogos();
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
-$titulo = ($giro['nombre'] != "") ? $giro['nombre'] : 'Bienvenido' ;
+$titulo = ($giro['nombre'] != '') ? 'Bienvenido '.$giro['nombre'] : 'Bienvenido '.$giro['dominio'] ;
 
 $diff = $num_cats - $mis_cats;
 

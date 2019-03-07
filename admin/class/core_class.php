@@ -179,8 +179,8 @@ class Core{
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
-    public function set_giro_dns(){
-        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+    public function set_giro_dns($id_gir){
+        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$id_gir."' AND eliminado='0'");
     }
     public function get_ses_giro(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
