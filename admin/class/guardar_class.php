@@ -668,12 +668,16 @@ class Guardar extends Core{
         $aux = $this->con->sql("SELECT MIN(t3.precio) as min FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t3.eliminado='0' AND t2.eliminado='0'");
         $min = $aux['resultado'][0]['min'];
         
+        $info['db_01'] = $aux;
+
         if($min !== null){
             $this->con->sql("UPDATE giros SET despacho_domicilio='1', desde='".$min."' WHERE id_gir='".$this->id_gir."'");
         }else{
             $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
         }
         
+        $this->con_cambios();
+
         $info['reload'] = 1;
         $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
         return $info;
