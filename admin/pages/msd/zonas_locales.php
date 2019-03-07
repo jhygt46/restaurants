@@ -77,7 +77,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Precio:</p></span>
-                        <input id="correo" type="text" class="inputs" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
+                        <input id="precio" type="text" class="inputs" value="<?php echo $that['precio']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Mapa:</p></span>
