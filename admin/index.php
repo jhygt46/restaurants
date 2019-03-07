@@ -15,7 +15,7 @@
     }
     
     if(!isset($_SESSION['user']['info']['id_user'])){
-        include("login.php");
+        include("ingreso_login.php");
     }else{
         include("inicio.php");
     }
