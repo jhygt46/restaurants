@@ -33,7 +33,7 @@ body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_princi
   background-size: cover;
 }
 body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_01 {
-  background: linear-gradient(90deg, blue 0%, rgba(0, 0, 255, 0) 100%);
+  background: linear-gradient(90deg, white 0%, rgba(255, 255, 255, 0) 100%);
 }
 /* MODALS */
 body .contenedor .modals {
