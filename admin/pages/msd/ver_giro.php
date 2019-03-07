@@ -36,6 +36,10 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 $list = $fireapp->get_locales();
 $giro = $fireapp->get_giro();
 
+echo "<pre>";
+print_r($giro);
+echo "</pre>";
+
 if($giro['dns'] == 0){
     // CURL
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
@@ -59,19 +63,6 @@ $mis_cats = count($catalogos);
 $titulo = ($giro['nombre'] != "") ? $giro['nombre'] : 'Bienvenido' ;
 
 $diff = $num_cats - $mis_cats;
-
-if($diff == 0){
-    // LIST TODAS
-    if($num_cats == 1){
-        
-    }
-    if($num_cats > 1){
-        
-    }
-}
-if($diff > 0){
-    // OPCION CREAR
-}
 
 ?>
 <script>

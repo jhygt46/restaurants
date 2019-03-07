@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
@@ -10,11 +11,11 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/new_core_class.php");
 $fireapp = new Core();
 $inicio = $fireapp->inicio();
-/*
+
 echo "<pre>";
 print_r($_SESSION);
 echo "</pre>";
-*/
+
 if($inicio['user'] == 1){
 ?>
 <div class="pagina">
@@ -23,4 +24,6 @@ if($inicio['user'] == 1){
     </div>
     <hr>
 </div>
-<?php } ?>
+<?php }
+*/ 
+?>
