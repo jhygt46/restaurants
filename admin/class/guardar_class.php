@@ -619,13 +619,21 @@ class Guardar extends Core{
         $code = bin2hex(openssl_random_pseudo_bytes(10));
         $this->con_cambios();
 
+        $ses = $this->con->sql("SELECT * FROM ses_mail where correo='".$correo."'");
+        if($ses['count'] == 0){
+            $correo_ses = 0;
+        }
+        if($ses['count'] == 1){
+            $correo_ses = 1;
+        }
+
         if($id_loc == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
+            $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$correo_ses."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Local creado exitosamente";
         }
         if($id_loc > 0){
-            $info['db2'] = $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            $info['db2'] = $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo_ses='".$correo_ses."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Local modificado exitosamente";
         }
