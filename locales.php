@@ -5,6 +5,8 @@ date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
 
+exit;
+
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
 
