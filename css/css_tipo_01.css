@@ -35,9 +35,6 @@ body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_princi
 body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_01 {
   background: linear-gradient(45deg, white 0%, rgba(255, 255, 255, 0) 100%);
 }
-body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_02 {
-  background: linear-gradient(45deg, black 0%, rgba(0, 0, 0, 0) 100%);
-}
 /* MODALS */
 body .contenedor .modals {
   background: rgba(0, 0, 0, 0.75);
