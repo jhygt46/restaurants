@@ -60,7 +60,7 @@
                         <div class='btn'><input type='button' onclick="btn_login()" id='login' value='Entrar'></div>
                     </div>
                 </div>
-                <div class='ltpass'><a href='?paso=recuperar'>No tiene contrase&ntilde;a?</a></div>
+                <div class='ltpass'><a href='/recuperar'>No tiene contrase&ntilde;a?</a></div>
             </div>
         </div>
     </body>
