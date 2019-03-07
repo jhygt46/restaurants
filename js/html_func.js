@@ -7,23 +7,28 @@ function html_home_categorias(obj){
     Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
     Div.onclick = function(){ open_categoria(obj.id_cae) };
     
+    var Divbp = document.createElement('div');
+    Divbp.className = 'cont_bp prin_alpha_01';
+
     var Divnombre = document.createElement('div');
     Divnombre.innerHTML = obj.nombre;
     Divnombre.className = 'nombre';
-    Div.appendChild(Divnombre);
+    Divbp.appendChild(Divnombre);
     
     if(obj.descripcion){
         var Divdescripcion = document.createElement('div');
         Divdescripcion.innerHTML = obj.descripcion;
         Divdescripcion.className = 'descripcion';
-        Div.appendChild(Divdescripcion);
+        Divbp.appendChild(Divdescripcion);
     }
     if(obj.precio > 0){
         var Divprecio = document.createElement('div');
         Divprecio.innerHTML = formatNumber.new(parseInt(obj.precio), "$");
         Divprecio.className = 'precio';
-        Div.appendChild(Divprecio);
+        Divbp.appendChild(Divprecio);
     }
+
+    Div.appendChild(Divbp);
     return Div;
 
 }

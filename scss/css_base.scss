@@ -107,24 +107,28 @@ body {
                         margin: 0 auto;
                         display: block;
                         .botones_principales {
-                            position: relative;
                             display: block;
-                            .nombre {
-                                position: absolute;
-                                top: 10px;
-                                left: 10px;
-                            }
-                            .descripcion {
-                                position: absolute;
-                                top: 32px;
-                                left: 10px;
-                                line-height: 15px;
-                                padding-right: 26%;
-                            }
-                            .precio {
-                                position: absolute;
-                                left: 10px;
-                                bottom: 10px;
+                            .cont_bp{
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                .nombre {
+                                    position: absolute;
+                                    top: 10px;
+                                    left: 10px;
+                                }
+                                .descripcion {
+                                    position: absolute;
+                                    top: 32px;
+                                    left: 10px;
+                                    line-height: 15px;
+                                    padding-right: 26%;
+                                }
+                                .precio {
+                                    position: absolute;
+                                    left: 10px;
+                                    bottom: 10px;
+                                }
                             }
                         }
                     }
