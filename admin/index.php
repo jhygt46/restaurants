@@ -4,12 +4,13 @@ session_start();
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     require('class/core_class.php');
+    $core = new Core();
+    $info = $core->get_data('www.fireapp.cl');
 }else{
     require('/var/www/html/restaurants/admin/class/core_class.php');
+    $core = new Core();
+    $info = $core->get_data();
 }
-
-$core = new Core();
-$info = $core->get_data();
 
 echo "<pre>";
 print_r($info);
