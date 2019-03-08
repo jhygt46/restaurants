@@ -1,7 +1,7 @@
 <?php
 
 echo "<pre>";
-print_r($_SERVER);
+print_r($_SERVER["HTTP_HOST"]);
 echo "</pre>";
 
 if($_SERVER['HTTP_HOST'] != "localhost"){
