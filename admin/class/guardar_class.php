@@ -314,6 +314,7 @@ class Guardar extends Core{
         $mostar_prods = $_POST['mostrar_prods'];
         $ocultar = $_POST['ocultar'];
         $detalle_prods = $_POST['detalle_prods'];
+        $degradado = $_POST['degradado'];
         $this->con_cambios();
 
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
@@ -321,7 +322,7 @@ class Guardar extends Core{
             $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
         }
 
-        $this->con->sql("UPDATE categorias SET detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
+        $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
