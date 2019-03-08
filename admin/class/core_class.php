@@ -176,6 +176,7 @@ class Core{
         return $giros['resultado'];
     }
     public function get_giro($id_gir){
+        $id_gir = ($id_gir == null) ? $this->id_gir : $id_gir ;
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
