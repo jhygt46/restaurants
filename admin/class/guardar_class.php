@@ -514,6 +514,8 @@ class Guardar extends Core{
     }
     private function crear_horario(){
 
+        $this->con_cambios();
+
         $id_hor = $_POST['id'];
         $id_loc = $_POST['id_loc'];
         $loc_nombre = $_POST['loc_nombre'];
