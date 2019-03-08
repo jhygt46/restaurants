@@ -11,11 +11,11 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $core = new Core();
     $info = $core->get_data();
 }
-
+/*
 echo "<pre>";
 print_r($info);
 echo "</pre>";
-
+*/
 /*
 if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $_SERVER['HTTP_HOST'] != "www.misitiodelivery.cl" && $_SERVER['HTTP_HOST'] != "localhost") {
     $location = 'http://www.misitiodelivery.cl/admin';
