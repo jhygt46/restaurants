@@ -1,5 +1,5 @@
 // IMPRIME CATEGORIAS Y PAGINAS EN HOME //
-function html_home_categorias(obj){
+function html_home_categorias(obj, num){
     
     console.log(obj);
 
@@ -14,7 +14,7 @@ function html_home_categorias(obj){
 
     Div.onclick = function(){ open_categoria(obj.id_cae) };
     var Divbp = document.createElement('div');
-    
+
     if(obj.degradado == 0){
         Divbp.className = 'cont_bp';
     }else{
