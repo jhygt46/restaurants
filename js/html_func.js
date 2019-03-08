@@ -6,11 +6,20 @@ function html_home_categorias(obj){
     var Div = document.createElement('div');
     Div.className = 'botones_principales';
     
-    Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
+    if(obj.image === null){
+        Div.style.backgroundImage = 'url("'+dominio+'/images/base/cat_'+num+'.jpg")';
+    }else{
+        Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
+    }
+
     Div.onclick = function(){ open_categoria(obj.id_cae) };
-    
     var Divbp = document.createElement('div');
-    Divbp.className = 'cont_bp prin_alpha_01';
+    
+    if(obj.degradado == 0){
+        Divbp.className = 'cont_bp';
+    }else{
+        Divbp.className = 'cont_bp prin_alpha_'+obj.degradado;
+    }
 
     var Divnombre = document.createElement('div');
     Divnombre.innerHTML = obj.nombre;

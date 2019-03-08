@@ -68,9 +68,9 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         <span><p>Degradado:</p></span>
                         <select id="degradado">
                             <option value="0">No</option>
-                            <option value="1">Si</option>
-                            <option value="2">Si</option>
-                            <option value="2">Si</option>
+                            <option value="1">Blanco A1</option>
+                            <option value="2">Gris A1</option>
+                            <option value="3">Negro A1</option>
                         </select>
                     </label>
                     <label class="clearfix">

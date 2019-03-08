@@ -32,13 +32,13 @@ body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_princi
   margin-top: 5px;
   background-size: cover;
 }
-body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_01 {
+body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_1 {
   background: linear-gradient(90deg, white 0%, rgba(255, 255, 255, 0) 100%);
 }
-body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_02 {
+body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_2 {
   background: linear-gradient(90deg, gray 0%, rgba(128, 128, 128, 0) 100%);
 }
-body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_03 {
+body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_principales .prin_alpha_3 {
   background: linear-gradient(90deg, black 0%, rgba(0, 0, 0, 0) 100%);
 }
 /* MODALS */
