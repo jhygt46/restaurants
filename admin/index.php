@@ -2,7 +2,12 @@
 
 session_start();
 
-require('admin/class/core_class.php');
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    require('class/core_class.php');
+}else{
+    require('/var/www/html/restaurants/admin/class/core_class.php');
+}
+
 $core = new Core();
 $info = $core->get_data();
 

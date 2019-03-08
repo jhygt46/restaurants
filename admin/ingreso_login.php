@@ -1,11 +1,7 @@
 <?php
 
-echo "<pre>";
-print_r($_SERVER["HTTP_HOST"]);
-echo "</pre>";
-
 if($_SERVER['HTTP_HOST'] != "localhost"){
-    $path = "https://misitiodelivery.cl/admin/";
+    $path = "https://".$_SERVER["HTTP_HOST"]."/admin/";
     $recuperar = "https://misitiodelivery.cl/recuperar";
 }else{
     $path = "http://localhost/restaurants/admin/";
