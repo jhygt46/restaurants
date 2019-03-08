@@ -216,7 +216,7 @@ class Guardar extends Core{
 
     }
     private function configurar_footer(){
-        
+        /*
         $this->con_cambios();
         $texto = $_POST['texto'];        
         $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
@@ -235,7 +235,7 @@ class Guardar extends Core{
         }
 
         return $info;
-        
+        */
     }
     private function con_cambios(){
         $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
@@ -575,7 +575,7 @@ class Guardar extends Core{
 
     }
     private function crear_catalogo(){
-        
+        /*
         $id_cat = $_POST['id'];
         $nombre = $_POST['nombre'];
         $this->con_cambios();
@@ -592,12 +592,12 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "apps/catalogo_productos.php";
+        $info['page'] = "msd/catalogo_productos.php";
         return $info;
-        
+        */
     }
     private function eliminar_catalogo(){
-                
+        /*      
         $id = explode("/", $_POST['id']);
         $this->con->sql("UPDATE catalogo_productos SET eliminado='1' WHERE id_cat='".$id[1]."'");
         
@@ -608,7 +608,7 @@ class Guardar extends Core{
         $info['page'] = "apps/catalogo_productos.php?id=".$id[0];
 
         return $info;
-        
+        */
     }
     private function crear_locales(){
         
@@ -695,7 +695,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Local ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "apps/locales.php?id=".$id[0];
+        $info['page'] = "msd/locales.php?id=".$id[0];
 
         return $info;
         
@@ -882,44 +882,7 @@ class Guardar extends Core{
         return $info;
         
     }
-    /*
-    private function crear_promociones(){
-
-        $id_prm = $_POST['id_prm'];
-        $nombre = $_POST['nombre'];
-        $parent_id = $_POST['parent_id'];
-
-        if($id_prm == 0){
-            $this->con->sql("INSERT INTO promociones (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$this->id_cat."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Promocion creada exitosamente";
-        }
-        if($id_prm > 0){
-            $this->con->sql("UPDATE promociones SET nombre='".$nombre."' WHERE id_prm='".$id_prm."' AND id_cat='".$this->id_cat."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Promocion modificada exitosamente";
-        }
-                
-        $info['reload'] = 1;
-        $info['page'] = "apps/promociones.php?id=".$id."&parent_id=".$parent_id;
-        return $info;
-        
-    }
-    private function eliminar_promociones(){
-                
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE promociones SET eliminado='1' WHERE id_prm='".$id[1]."'");
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Promocion ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "apps/promociones.php?id=".$id[0]."&parent_id=".$id[2];
-
-        return $info;
-        
-    }
-    */
+    
     private function eliminar_pagina(){
                 
         $id = $_POST['id'];

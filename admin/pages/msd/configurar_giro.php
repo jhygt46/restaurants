@@ -17,10 +17,6 @@ $accion = "configurar_giro";
 
 $that = $fireapp->get_giro();
 
-echo "<pre>";
-print_r($that);
-echo "</pre>";
-
 $titulo = "Configuracion ".$that["nombre"];
 $css = $fireapp->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
