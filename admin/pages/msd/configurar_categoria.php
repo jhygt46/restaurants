@@ -65,6 +65,15 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         <select id="detalle_prods"><option value="0">No</option><option value="1" <?php echo($that['detalle_prods'] == 1)?'selected':''; ?>>Si</option></select>
                     </label>
                     <label class="clearfix">
+                        <span><p>Degradado:</p></span>
+                        <select id="degradado">
+                            <option value="0">No</option>
+                            <option value="1">Si</option>
+                            <option value="2">Si</option>
+                            <option value="2">Si</option>
+                        </select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Imagen:</p></span>
                         <input style="padding-top: 6px" id="file_image" type="file" />
                     </label>
