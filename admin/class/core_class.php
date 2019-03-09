@@ -658,9 +658,7 @@ class Core{
         }
         
         if($sql['count'] == 0){
-            
             $info['id_gir'] = 0;
-            
         }
 
         return $info;

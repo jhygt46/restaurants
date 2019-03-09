@@ -1,6 +1,11 @@
 <?php
-
 session_start();
+
+if($_GET["accion"] == "logout"){
+    session_destroy();
+    echo '<meta http-equiv="refresh" content="0; url=index.php">';
+    exit;
+}
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     require('class/core_class.php');
@@ -11,23 +16,17 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
     $core = new Core();
     $info = $core->get_data();
 }
-/*
-echo "<pre>";
-print_r($info);
-echo "</pre>";
-*/
-/*
-if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $_SERVER['HTTP_HOST'] != "www.misitiodelivery.cl" && $_SERVER['HTTP_HOST'] != "localhost") {
-    $location = 'http://www.misitiodelivery.cl/admin';
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location: ' . $location);
-    exit;
-}
 
-if($_GET["accion"] == "logout"){
-    session_destroy();
-    echo '<meta http-equiv="refresh" content="0; url=index.php">';
-    exit;
+if($info['id_gir'] == 0 && $_SERVER['HTTP_HOST'] != "misitiodelivery.cl"){
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: https://misitiodelivery.cl/admin');
+}
+if($info['id_gir'] > 0){
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1){
+        $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $location);
+    }
 }
     
 if(!isset($_SESSION['user']['info']['id_user'])){
@@ -35,5 +34,5 @@ if(!isset($_SESSION['user']['info']['id_user'])){
 }else{
     include("inicio.php");
 }
-*/
+
 ?>
