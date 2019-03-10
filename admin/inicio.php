@@ -1,14 +1,5 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
 $inicio = $fireapp->inicio();
 $core_class_iniciada = 1;
 
@@ -22,19 +13,19 @@ if($inicio["exit"] == 1){
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon/locales.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo $path; ?>/admin/images/favicon/locales.ico" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/sweetalert.min.js"></script>
-        <script type="text/javascript" src="js/base_1.js"></script>
-        <script type="text/javascript" src="js/form_1.js"></script>
-        <script type="text/javascript" src="js/maps.js"></script>
-        <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/sweetalert.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="all">
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/sweetalert.min.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/base_1.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/form_1.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/maps.js"></script>
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/reset.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/sweetalert.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/layout.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/jquery-ui.css" type="text/css" media="all">
     </head>
     <body>
         <div class="contenedor relative">

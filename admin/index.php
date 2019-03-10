@@ -8,20 +8,20 @@ if($_GET["accion"] == "logout"){
 }
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    require('class/core_class.php');
-    $core = new Core();
-    $info = $core->get_data('www.fireapp.cl');
+    $path = "C:/AppServ/www/restaurants";
 }else{
-    require('/var/www/html/restaurants/admin/class/core_class.php');
-    $core = new Core();
-    $info = $core->get_data();
+    $path = "/var/www/html/restaurants";
 }
 
-if($info['id_gir'] == 0 && $_SERVER['HTTP_HOST'] != "misitiodelivery.cl"){
+require($path."/admin/class/core_class.php");
+
+$core = new Core();
+$info = $core->get_data($_SERVER["HTTP_HOST"]);
+
+if($info['id_gir'] == 0){
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: https://misitiodelivery.cl/admin');
-}
-if($info['id_gir'] > 0){
+}else{
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1){
         $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
         header('HTTP/1.1 301 Moved Permanently');

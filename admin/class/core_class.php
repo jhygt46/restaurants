@@ -576,10 +576,8 @@ class Core{
         return $aux['resultado'][0]['code'];
         
     }
-    public function get_data($dom){
+    public function get_data($dominio){
         
-        $dominio = ($dom !== null) ? $dom : $_SERVER["HTTP_HOST"];
-        $path = ($_SERVER["HTTP_HOST"] == "localhost") ? "/restaurants" : "" ;
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
         
         if($sql['count'] == 1){
@@ -600,16 +598,18 @@ class Core{
             $info['con_cambios'] = $sql['resultado'][0]['con_cambios'];
             $info['desde'] = $sql['resultado'][0]['desde'];
             
-            if($info['dns'] == 1){
-                if($info['ssl'] == 1){
-                    $info['dominio'] = "https://".$dominio;
-                }else{
-                    $info['dominio'] = "http://".$dominio;
-                }
+            if($_SERVER["HTTP_HOST"] == "localhost"){
+                $path = "http://localhost/restaurants";
             }else{
-                $info['dominio'] = "https://misitiodelivery.cl";
+                if($info['ssl'] == 1){
+                    $path = "https://".$_SERVER["HTTP_HOST"];
+                }else{
+                    $path = "http://".$_SERVER["HTTP_HOST"];
+                }
             }
             
+            $info['path'] = $path;
+
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
             $info['pedido_gengibre'] = $sql['resultado'][0]['pedido_gengibre'];
             $info['pedido_embarazadas'] = $sql['resultado'][0]['pedido_embarazadas'];
