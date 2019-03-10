@@ -18,15 +18,10 @@ require($path."/admin/class/core_class.php");
 $core = new Core();
 $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
-if($info['id_gir'] == 0){
+if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1){
+    $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
     header('HTTP/1.1 301 Moved Permanently');
-    header('Location: https://misitiodelivery.cl/admin');
-}else{
-    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1){
-        $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $location);
-    }
+    header('Location: ' . $location);
 }
     
 if(!isset($_SESSION['user']['info']['id_user'])){
