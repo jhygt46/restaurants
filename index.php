@@ -1,10 +1,16 @@
 <?php
 
+date_default_timezone_set('America/Santiago');
+
 if($_POST["test"] == "Dw7k2s_hKi5sqPs8"){
     die("hjS3r%mDs-5gYa6ib_5Ps");
 }
 
-date_default_timezone_set('America/Santiago');
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = "C:/AppServ/www/restaurants";
+}else{
+    $path = "/var/www/html/restaurants";
+}
 
 if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl")){
     
@@ -15,26 +21,22 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
             header('Location: ' . $location);
             exit;
         }else{
-            require('misitiodelivery.php');
+            require($path.'/misitiodelivery.php');
             exit;
         }
     }else{
-        require('admin/class/core_class.php');
+        require($path.'/admin/class/core_class.php');
         $core = new Core();
         $info = $core->get_data($_GET['param_dom']);
     }
 
 }else{
 
-    require('admin/class/core_class.php');
+    require($path.'/admin/class/core_class.php');
     $core = new Core();
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        $info = $core->get_data('www.izusushi.cl');
-    }else{
-        $info = $core->get_data($_SERVER["HTTP_HOST"]);
-    }
+    $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
-    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1 && !isset($_GET['ssl'])) {
+    if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
@@ -43,18 +45,13 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 
 }
 
-if($info['id_gir'] == 0){
-
-    header('Location: https://misitiodelivery.cl');
-    exit;
-
-}
-if($info['id_gir'] != 0){
+if(isset($info['id_gir'])){
 
     $locales = json_decode($info['lista_locales']);
     if($info['con_cambios'] == 1){
         $core->get_web_js_data2($info['id_gir']);
     }
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -66,22 +63,22 @@ if($info['id_gir'] != 0){
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
         
-        <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_font_size"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_color"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_tipo"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_base"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/reset.css" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_font_size"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_color"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_tipo"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/css_base" media="all" />
         
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["dominio"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
-        <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.4.2/libphonenumber-js.min.js" type="text/javascript"></script>
-        <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_html_func"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_base"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_base_lista"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/html_func.js" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/base.js" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;

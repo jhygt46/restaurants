@@ -579,7 +579,6 @@ class Core{
     public function get_data($dominio){
         
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-        
         if($sql['count'] == 1){
             
             $info['ssl'] = $sql['resultado'][0]['ssl'];
@@ -599,17 +598,15 @@ class Core{
             $info['desde'] = $sql['resultado'][0]['desde'];
             
             if($_SERVER["HTTP_HOST"] == "localhost"){
-                $path = "http://localhost/restaurants";
+                $info['path'] = "http://localhost/restaurants";
             }else{
                 if($info['ssl'] == 1){
-                    $path = "https://".$_SERVER["HTTP_HOST"];
+                    $info['path'] = "https://".$_SERVER["HTTP_HOST"];
                 }else{
-                    $path = "http://".$_SERVER["HTTP_HOST"];
+                    $info['path'] = "http://".$_SERVER["HTTP_HOST"];
                 }
             }
             
-            $info['path'] = $path;
-
             $info['pedido_wasabi'] = $sql['resultado'][0]['pedido_wasabi'];
             $info['pedido_gengibre'] = $sql['resultado'][0]['pedido_gengibre'];
             $info['pedido_embarazadas'] = $sql['resultado'][0]['pedido_embarazadas'];
@@ -620,14 +617,14 @@ class Core{
             
             $info['css_reset'] = $path."/css/reset.css";
             $info['css_base'] = $path."/css/css_base.css";
-            $info['css_tipo'] = $path."/css/".$sql['resultado'][0]['style_page'];
-            $info['css_color'] = $path."/css/".$sql['resultado'][0]['style_color'];
-            $info['css_font_size'] = $path."/css/".$sql['resultado'][0]['style_modal'];
+            $info['css_tipo'] = $sql['resultado'][0]['style_page'];
+            $info['css_color'] = $sql['resultado'][0]['style_color'];
+            $info['css_font_size'] = $sql['resultado'][0]['style_modal'];
             $info['css_pos'] = $path."/css/pos.css";
             $info['css_sweet'] = $path."/css/sweetalert.css";
             
             $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
-            $info['js_data'] = $path."/js/data/".$info["code"].".js";
+            $info['js_data'] = $info["code"].".js";
             
             $info['js_html_func'] = $path."/js/html_func.js";
             $info['js_base'] = $path."/js/base.js";
@@ -655,10 +652,10 @@ class Core{
             $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info["id_gir"]."'");
             $info['motos'] = $sql_motos['resultado'];
             
-        }
-        
-        if($sql['count'] == 0){
-            $info['id_gir'] = 0;
+        }else{
+            if($dominio == "misitiodelivery.cl" || $dominio == "www.misitiodelivery.cl"){
+                $info['path'] = "https://misitiodelivery.cl";
+            }
         }
 
         return $info;
