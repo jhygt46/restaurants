@@ -75,7 +75,7 @@ if(isset($info['id_gir'])){
         <script src="<?php echo $info["path"]; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.4.2/libphonenumber-js.min.js" type="text/javascript"></script>
-        <script src="<?php echo $info["path"]; ?>/js/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info["path"]; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/html_func.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
