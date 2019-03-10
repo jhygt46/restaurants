@@ -31,7 +31,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     if($_SERVER["HTTP_HOST"] == "localhost"){
         $info = $core->get_data('www.izusushi.cl');
     }else{
-        $info = $core->get_data();
+        $info = $core->get_data($_SERVER["HTTP_HOST"]);
     }
 
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1 && !isset($_GET['ssl'])) {
