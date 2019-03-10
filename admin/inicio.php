@@ -1,6 +1,12 @@
 <?php
-    $inicio = $fireapp->inicio();
-    $core_class_iniciada = 1;
+
+$inicio = $core->inicio();
+$core_class_iniciada = 1;
+
+if($inicio["exit"] == 1){
+    header("Location: ".$inicio["location"]);
+}
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
