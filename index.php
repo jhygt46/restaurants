@@ -67,9 +67,9 @@ if(isset($info['id_gir'])){
         <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_font_size"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_color"]; ?>" media="all" />
         <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/<?php echo $info["css_tipo"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/css_base" media="all" />
+        <link rel="stylesheet" href="<?php echo $info["path"]; ?>/css/css_base.css" media="all" />
         
-        <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["dominio"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
+        <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["path"]; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
