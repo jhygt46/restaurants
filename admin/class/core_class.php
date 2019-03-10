@@ -615,24 +615,11 @@ class Core{
             $info['pedido_soya'] = $sql['resultado'][0]['pedido_soya'];
             $info['pedido_teriyaki'] = $sql['resultado'][0]['pedido_teriyaki'];
             
-            $info['css_reset'] = $path."/css/reset.css";
-            $info['css_base'] = $path."/css/css_base.css";
             $info['css_tipo'] = $sql['resultado'][0]['style_page'];
             $info['css_color'] = $sql['resultado'][0]['style_color'];
             $info['css_font_size'] = $sql['resultado'][0]['style_modal'];
-            $info['css_pos'] = $path."/css/pos.css";
-            $info['css_sweet'] = $path."/css/sweetalert.css";
-            
-            $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
+
             $info['js_data'] = $info["code"].".js";
-            
-            $info['js_html_func'] = $path."/js/html_func.js";
-            $info['js_base'] = $path."/js/base.js";
-            $info['js_base_lista'] = $path."/js/base_lista.js";
-            $info['js_pos'] = $path."/js/pos.js";
-            $info['js_pos_lista'] = $path."/js/pos_lista.js";
-            
-            $info['js_sweet'] = $path."/js/sweetalert.min.js";
             
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;

@@ -48,14 +48,14 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo $info["css_reset"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_pos"]; ?>" media="all" />
-        <link rel="stylesheet" href="<?php echo $info["css_sweet"]; ?>" media="all" />
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/reset.css" media="all" />
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/pos.css" media="all" />
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
-        <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_pos_lista"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info["js_sweet"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
         <script> 
             var local_code = '<?php echo $code; ?>';
             var dominio = '<?php echo $info['dominio']; ?>';
