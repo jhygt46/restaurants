@@ -600,7 +600,7 @@ class Core{
             if($_SERVER["HTTP_HOST"] == "localhost"){
                 $info['path'] = "http://localhost/restaurants";
             }else{
-                if($info['ssl'] == 1){
+                if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
                     $info['path'] = "https://".$_SERVER["HTTP_HOST"];
                 }else{
                     $info['path'] = "http://".$_SERVER["HTTP_HOST"];
