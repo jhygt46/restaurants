@@ -10,11 +10,11 @@ if(!isset($core_class_iniciada)){
     }
 
     require_once($path."admin/class/core_class.php");
-    $fireapp = new Core();
+    $core = new Core();
 
 }
 
-$list = $fireapp->get_giros_user();
+$list = $core->get_giros_user();
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
@@ -35,7 +35,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $sub_titulo = $sub_titulo2;
-    $that = $fireapp->get_giro($_GET["id"]);
+    $that = $core->get_giro($_GET["id"]);
     $id = $_GET["id"];
     
 }

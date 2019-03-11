@@ -10,7 +10,7 @@ if(!isset($core_class_iniciada)){
     }
 
     require_once($path."admin/class/core_class.php");
-    $fireapp = new Core();
+    $core = new Core();
 
 }
 
@@ -24,17 +24,17 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0){
     
     $id_gir = $_GET["id_gir"];
-    $fireapp->is_giro($id_gir);
+    $core->is_giro($id_gir);
     
 }else{
 
     $id_gir = $_SESSION["user"]['id_gir'];
-    $fireapp->is_giro($id_gir);
+    $core->is_giro($id_gir);
 
 }
 
-$list = $fireapp->get_locales();
-$giro = $fireapp->get_giro($id_gir);
+$list = $core->get_locales();
+$giro = $core->get_giro($id_gir);
 
 if($giro['dns'] == 0){
     
@@ -47,12 +47,12 @@ if($giro['dns'] == 0){
     
     curl_close($ch);
     if($resp == 'hjS3r%mDs-5gYa6ib_5Ps'){
-        $fireapp->set_giro_dns($id_gir);
+        $core->set_giro_dns($id_gir);
     }
 
 }
 
-$catalogos = $fireapp->get_catalogos();
+$catalogos = $core->get_catalogos();
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
 $titulo = ($giro['nombre'] != '') ? 'Bienvenido '.$giro['nombre'] : 'Bienvenido '.$giro['dominio'] ;
@@ -183,8 +183,8 @@ function init_chart(){
                 <div class="items_list clearfix">
                     <div class="list_item wi_01"><div class="cont_item"><a href="<?php if($giro["dns"] == 0){ ?>https://misitiodelivery.cl/view/<?php echo $giro["dominio"]; ?><?php }else{ ?>http<?php if($giro["ssl"] == 1){ echo "s"; } ?>://<?php echo $giro["dominio"]; ?><?php } ?>" target="_blank" style="text-decoration: none"><div class="item_image"><img src="images/web_temp.png" alt="" /></div><div class="item_ttl"><?php if($giro["dns"] == 0){ ?>SITIO TEMPORAL<?php }else{ ?>VISITAR SITIO<?php } ?></div></a></div></div>
                     <?php if($giro["dns"] == 0 && $giro["dns_letra"] != ""){ ?><div class="list_item wi_02"><div class="dns_item"><div class="cont_dns"><?php for($i=1; $i<=4; $i++){ ?><h1>ns-cloud-<?php echo $giro["dns_letra"].$i; ?>.googledomains.com</h1><?php } ?></div></div><div class="dns_info">CAMBIA TUS DNS</div></div><?php } ?>
-                    <?php if($giro["dns"] == 1 && $giro["ssl"] == 0){ ?><div class="list_item wi_01"><div class="cont_item"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">SEGURIDAD HTTPS</div></div></div><?php } ?>FOOTRER<?php } ?>
-                    <?php if($giro["dns"] == 1 && $giro["dns_letra"] != ""){ ?><div class="list_item wi_01"><div class="cont_item"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">CONFIGURACION</div></div></div><?php } ?>FOOTRER<?php } ?>
+                    <?php if($giro["dns"] == 1 && $giro["ssl"] == 0){ ?><div class="list_item wi_01"><div class="cont_item"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">SEGURIDAD HTTPS</div></div></div>FOOTRER<?php } ?>
+                    <?php if($giro["dns"] == 1 && $giro["dns_letra"] != ""){ ?><div class="list_item wi_01"><div class="cont_item"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">CONFIGURACION</div></div></div>FOOTRER<?php } ?>
                 </div>
             </div>
         </div>

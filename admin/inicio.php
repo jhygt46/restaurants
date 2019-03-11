@@ -1,7 +1,6 @@
 <?php
 
 $inicio = $core->inicio();
-$core_class_iniciada = 1;
 
 if($inicio["exit"] == 1){
     header("Location: ".$inicio["location"]);
@@ -67,7 +66,6 @@ if($inicio["exit"] == 1){
             </div>
             <div class="sitio">
                 <div class="relative">
-                    
                     <div class="menu_top">
                         <div class="relative">
                             <div class="btn_menu valign" onclick="menu_toggle()"></div>
