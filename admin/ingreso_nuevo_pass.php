@@ -1,20 +1,22 @@
 <?php
 
-if($_GET["paso"] == "nueva"){
-
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
+    if($_SERVER['HTTP_HOST'] == "localhost"){
+        $path = "C:/AppServ/www/restaurants";
     }else{
-        $path = "/var/www/html/restaurants/";
+        $path = "/var/www/html/restaurants";
     }
 
     require_once($path."admin/class/core_class.php");
-    $fireapp = new Core();
-    $data = $fireapp->is_pass($_GET["id_user"], $_GET["code"]);
+    $core = new Core();
+    $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
-}
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
+
+    $data = $core->is_pass($_GET["id_user"], $_GET["code"]);
+
 ?>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
         <title></title>

@@ -19,7 +19,7 @@
                 var btn = $('#login');
                 btn.prop("disabled", true);
                 $.ajax({
-                    url: "ajax/login_back.php",
+                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
                     type: "POST",
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){
@@ -60,7 +60,7 @@
                         <div class='btn'><input type='button' onclick="btn_login()" id='login' value='Entrar'></div>
                     </div>
                 </div>
-                <div class='ltpass'><a href='<?php echo $recuperar; ?>'>No tiene contrase&ntilde;a?</a></div>
+                <div class='ltpass'><a href='/recuperar'>No tiene contrase&ntilde;a?</a></div>
             </div>
         </div>
     </body>
