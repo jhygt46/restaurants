@@ -32,7 +32,9 @@ function add_carro_producto(id_pro){
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
-    mostrar_pregunta(pedido.carro.length - 1);
+    if(producto.preguntas){
+        mostrar_pregunta(pedido.carro.length - 1);
+    }
     listar_pedidos();
 
 }
@@ -550,8 +552,6 @@ function html_preguntas_producto(i){
     var html = document.createElement('div');
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
-    
-    console.log(carro[i]);
 
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
