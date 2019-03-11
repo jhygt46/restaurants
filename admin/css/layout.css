@@ -375,12 +375,13 @@ body .relative {
   float: left;
 }
 .pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .cont_item {
-  width: 90px;
-  margin: 0 auto;
+  width: 100%;
   cursor: pointer;
 }
 .pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .cont_item .item_image {
   height: 100px;
+  width: 90px;
+  margin: 0 auto;
 }
 .pagina .cont_pagina .cont_pag .lista_items .items_list .list_item .cont_item .item_ttl {
   padding-top: 5px;

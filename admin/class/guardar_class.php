@@ -216,26 +216,26 @@ class Guardar extends Core{
 
     }
     private function configurar_footer(){
-        /*
-        $this->con_cambios();
-        $texto = $_POST['texto'];        
-        $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
         
+        $this->con_cambios();
+        $texto = $_POST['html'];
+        $tipo = $_POST['tipo'];
+        $seguir = $_POST['seguir'];
+        $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
+
+        $info['reload'] = 1;
+        $info['page'] = ($seguir == 1) ? 'msd/configurar_footer.php?seguir=1' : 'msd/ver_giro.php' ;
+
         if($sql['estado']){
             $info['op'] = 1;
             $info['mensaje'] = "Footer modificado exitosamente";
-            $info['reload'] = 1;
-            $info['page'] = "apps/configurar_giro.php";
             $this->con_cambios();
         }else{
             $info['op'] = 2;
             $info['mensaje'] = "Se produjo un error: porfavor intente mas tarde";
-            $info['reload'] = 1;
-            $info['page'] = "apps/configurar_giro.php";
         }
-
         return $info;
-        */
+        
     }
     private function con_cambios(){
         $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
@@ -254,7 +254,7 @@ class Guardar extends Core{
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion de Estilos Modificado Exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $info['page'] = "msd/ver_giro.php";
         return $info;
         
     }

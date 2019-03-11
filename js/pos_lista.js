@@ -369,6 +369,8 @@ function mostrar_pregunta(i){
     
     var producto = get_producto(pedido.carro[i].id_pro);
 
+    console.log(producto);
+
     $('.pop_up').show();
     $('.p4').show();
 
@@ -547,6 +549,8 @@ function html_preguntas_producto(i){
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
     
+    console.log(carro[i]);
+
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
         var e_pregunta = document.createElement('div');
