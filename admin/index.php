@@ -19,7 +19,7 @@ $info = $core->get_data($_SERVER["HTTP_HOST"]);
 $core_class_iniciada = 1;
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    if($info['ssl'] == 0){
+    if($info['ssl'] == 0 && $_SERVER["HTTP_HOST"] != "localhost"){
         $location = 'https://misitiodelivery.cl/admin';
         header('HTTP/1.1 302 Moved Temporarily');
         header('Location: ' . $location);
