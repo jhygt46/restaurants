@@ -29,8 +29,6 @@ function add_carro_producto(id_pro){
         }
     }
     
-    console.log(producto);
-
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
     guardar_pedido(seleccionado);
@@ -371,13 +369,15 @@ function mostrar_pregunta(i){
     
     var producto = get_producto(pedido.carro[i].id_pro);
 
-    console.log(producto);
+    if(producto.preguntas){
 
-    $('.pop_up').show();
-    $('.p4').show();
+        $('.pop_up').show();
+        $('.p4').show();
 
-    $('.p4 .n_title').html(producto.nombre);
-    $('.p4 .data_info').html(html_preguntas_producto(i));
+        $('.p4 .n_title').html(producto.nombre);
+        $('.p4 .data_info').html(html_preguntas_producto(i));
+
+    }
 
 }
 function seleccionar_productos_categoria_promo(i){
