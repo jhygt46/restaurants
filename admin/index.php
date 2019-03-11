@@ -20,8 +20,8 @@ $core_class_iniciada = 1;
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
     if($info['ssl'] == 0){
-        $location = 'http://misitiodelivery.cl/admin';
-        header('HTTP/1.1 301 Moved Permanently');
+        $location = 'https://misitiodelivery.cl/admin';
+        header('HTTP/1.1 302 Moved Temporarily');
         header('Location: ' . $location);
     }
     if($info['ssl'] == 1){
