@@ -12,12 +12,12 @@
 
     if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
         if($info['ssl'] == 0){
-            $location = 'https://misitiodelivery.cl/recuperar';
+            $location = 'https://misitiodelivery.cl/passw/'.$_GET['id_user'].'/'.$_GET['code'];
             header('HTTP/1.1 302 Moved Temporarily');
             header('Location: ' . $location);
         }
         if($info['ssl'] == 1){
-            $location = 'https://'.$_SERVER['HTTP_HOST']."/recuperar";
+            $location = 'https://'.$_SERVER['HTTP_HOST'].'/passw/'.$_GET['id_user'].'/'.$_GET['code'];
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $location);
         }
@@ -31,11 +31,11 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/x-icon" href="images/fire.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo $info['path']; ?>/admin/images/fire.ico" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="/admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="/admin/js/ingreso_aux.js"></script>
-        <link rel="stylesheet" href="/admin/css/login.css" type="text/css" media="all">
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/ingreso_aux.js"></script>
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/login.css" type="text/css" media="all">
         <script>
 
             $(document).on('keypress',function(e){
