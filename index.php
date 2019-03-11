@@ -42,6 +42,12 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
         header('Location: ' . $location);
         exit;
     }
+    if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === "on") && $info['ssl'] == 0) {
+        $location = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        header('HTTP/1.1 302 Moved Temporarily');
+        header('Location: ' . $location);
+        exit;
+    }
 
 }
 
