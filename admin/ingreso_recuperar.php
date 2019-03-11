@@ -1,10 +1,18 @@
 <?php
 
-if($_SERVER['HTTP_HOST'] != "localhost"){
-    $path = "https://misitiodelivery.cl/admin/";
-}else{
-    $path = "http://localhost/restaurants/admin/";
-}
+    if($_SERVER['HTTP_HOST'] == "localhost"){
+        $path = "C:/AppServ/www/restaurants";
+    }else{
+        $path = "/var/www/html/restaurants";
+    }
+
+    require_once($path."admin/class/core_class.php");
+    $core = new Core();
+    $info = $core->get_data($_SERVER["HTTP_HOST"]);
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
+    exit;
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
@@ -66,7 +74,7 @@ if($_SERVER['HTTP_HOST'] != "localhost"){
                         <div class='btn'><input type='button'  onclick="btn_recuperar()" id='recuperar' value='Entrar'></div>
                     </div>
                 </div>
-                <div class='ltpass'><a href='<?php echo $path; ?>'>Deseo ingresar</a></div>
+                <div class='ltpass'><a href='/admin'>Deseo ingresar</a></div>
             </div>
         </div>
     </body>
