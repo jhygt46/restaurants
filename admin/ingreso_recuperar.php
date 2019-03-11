@@ -10,7 +10,6 @@
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
-
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
@@ -35,7 +34,7 @@
                 var btn = $('#recuperar');
                 btn.prop("disabled", true );
                 $.ajax({
-                    url: "ajax/login_back.php",
+                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
                     type: "POST",
                     data: "accion=recuperar_password&user="+$('#correo').val(),
                     success: function(data){

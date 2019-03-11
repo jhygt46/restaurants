@@ -10,8 +10,18 @@
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
-    
-
+    if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
+        if($info['ssl'] == 0){
+            $location = 'https://misitiodelivery.cl/recuperar';
+            header('HTTP/1.1 302 Moved Temporarily');
+            header('Location: ' . $location);
+        }
+        if($info['ssl'] == 1){
+            $location = 'https://'.$_SERVER['HTTP_HOST']."/recuperar";
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $location);
+        }
+    }
 
     $data = $core->is_pass($_GET["id_user"], $_GET["code"]);
 
@@ -39,7 +49,7 @@
                 var btn = $('#nueva');
                 btn.prop("disabled", true );
                 $.ajax({
-                    url: "/admin/ajax/login_back.php",
+                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
                     type: "POST",
                     data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
                     success: function(data){
