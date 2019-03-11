@@ -9,10 +9,7 @@
     require_once($path."/admin/class/core_class.php");
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
-    exit;
+
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">

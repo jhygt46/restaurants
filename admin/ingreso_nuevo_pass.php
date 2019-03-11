@@ -9,10 +9,10 @@
     require_once($path."/admin/class/core_class.php");
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
-    exit;
+
+    
+
+
     $data = $core->is_pass($_GET["id_user"], $_GET["code"]);
 
 ?>
