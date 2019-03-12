@@ -4,7 +4,6 @@ $(document).ready(function(){
     listar_pedidos();
     modificar_horas();
 });
-
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -184,7 +183,9 @@ function agregar_pedido(id){
     
 }
 
+var aud = new Audio('audios/Ba-dum-tss.mp3');
 function sound(){
+    aud.play();
     var playPromise = aud.play();
     if (playPromise !== null){
         playPromise.catch(() => { aud.play() })
