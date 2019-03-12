@@ -20,7 +20,7 @@ class Rest{
             return $this->enviar_pedido();
         }
         if($accion == "despacho_domicilio"){
-            return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
+            return $this->get_info_despacho($_POST["lat"], $_POST["lng"], $_POST["lng"]);
         }
         if($accion == "crear_dominio"){
             return $this->crear_dominio();
@@ -338,8 +338,6 @@ class Rest{
     }
     public function get_info_despacho($lat, $lng){
 
-        $info['aux'] = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
-
         $polygons = $this->get_polygons();
         $precio = 9999999;
         $info['op'] = 2;
@@ -366,9 +364,14 @@ class Rest{
         
     }
     public function get_polygons(){
-        $referer = (parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) == "localhost") ? "www.izusushi.cl" : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
+
+        $referer = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
+        if($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl"){
+            $referer = $_POST["referer"];
+        }
         $polygons = $this->con->sql("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0' AND t3.eliminado='0'");
         return $polygons['resultado'];
+        
     }
     public function pointOnVertex($point, $vertices) {
         foreach($vertices as $vertex) {
