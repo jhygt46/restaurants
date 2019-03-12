@@ -7,10 +7,6 @@ $core = new Core();
 if(isset($_GET['code'])){
     
     $info = $core->ver_detalle($_GET['code']);
-    
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
 
     if($info['op']){
     
