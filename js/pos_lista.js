@@ -879,12 +879,18 @@ function ver_comanda(index){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    
+    var url = "";
+
     if(proceso(pedido)){
     
         var code = pedido.pedido_code;
-        console.log("dominio: "+dominio);
-        window.open(dominio+"/ver/"+code, 'Imprimir Ctrl+P').focus();
+        if(ssl == 0){
+            url = "http://"+dominio;
+        }
+        if(ssl == 1){
+            url = "https://"+dominio;
+        }
+        window.open(url+"/ver/"+code, 'Imprimir Ctrl+P').focus();
     
     }
 }
