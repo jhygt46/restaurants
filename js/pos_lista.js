@@ -1290,13 +1290,15 @@ function gmap_input(){
                 }
             }
             var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: dominio };
-                
+            console.log(send);
+
             $.ajax({
                 url: "ajax/index.php",
                 type: "POST",
                 data: send,
                 success: function(datas){
-                    var data = JSON.parse(datas);                        
+                    var data = JSON.parse(datas);
+                    console.log(data);                      
                     if(data.op == 1){
                         pedidos[seleccionado].costo = data.precio;
                         set_pedidos(pedidos);
