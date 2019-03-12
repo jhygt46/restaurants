@@ -61,7 +61,7 @@ if(isset($_GET['code'])){
                 <?php if($info['pre_wasabi'] == 1){ ?><div class="txtcen font_04">Wasabi</div><?php } ?>
                 <?php if($info['pre_gengibre'] == 1){ ?><div class="txtcen font_04">Gengibre</div><?php } ?>
                 <?php if($info['pre_embarazadas'] == 1){ ?><div class="txtcen font_04">Embarazadas</div><?php } ?>
-                <?php if($info['pre_palitos'] == 1){ ?><div class="txtcen font_04">Palitos</div><?php } ?>
+                <?php if($info['pre_palitos'] > 0){ ?><div class="txtcen font_04">Palitos: <?php echo $info['pre_palitos']; ?></div><?php } ?>
                 <?php if($info['pre_soya'] == 1){ ?><div class="txtcen font_04">Soya</div><?php } ?>
                 <?php if($info['pre_teriyaki'] == 1){ ?><div class="txtcen font_04">Teriyaki</div><?php } ?>
                 <?php if($info['comentarios'] != ""){ ?><div style="padding-top: 10px" class="txtcen font_02"><?php echo $info['comentarios']; ?></div><?php } ?>
