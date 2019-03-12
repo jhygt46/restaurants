@@ -2,7 +2,7 @@
 session_start();
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants";
+    $path = "C:/AppServ/www/restaurants";
 }else{
     $path = "/var/www/html/restaurants";
 }
