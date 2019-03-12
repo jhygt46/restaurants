@@ -185,13 +185,16 @@ function agregar_pedido(id){
 }
 
 var aud = new Audio('audios/Ba-dum-tss.mp3');
-function sound(){    
+function sound(){
+    /*
     var playPromise = aud.play();
     console.log("playPromise");
     console.log(playPromise);
     if (playPromise !== null){
-        playPromise.catch(() => { aud.play(); })
+        playPromise.catch(() => { aud.play() })
     }
+    */
+    setTimeout(function(){aud.play.bind(aud)}, 100);
 }
 
 function set_pedido(index, that){
