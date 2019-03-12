@@ -51,16 +51,21 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id_cae" type="hidden" value="<?php echo $id_cae; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_locales', '<?php echo $id_loc; ?>', 'Local', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
-                    <!--
+                    <label class="clearfix">
+                        <span><p>Tiempo Retiro:</p></span>
+                        <input id="t_retiro" type="text" class="inputs" value="<?php echo $that['t_retiro']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Tiempo Despacho:</p></span>
+                        <input id="t_despacho" type="text" class="inputs" value="<?php echo $that['t_despacho']; ?>" require="" placeholder="" />
+                    </label>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
-                    -->
                 </fieldset>
             </form>
         </div>
