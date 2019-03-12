@@ -3,8 +3,8 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
-    setTimeout(sound, 1000);
 });
+
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -184,17 +184,11 @@ function agregar_pedido(id){
     
 }
 
-var aud = new Audio('audios/Ba-dum-tss.mp3');
 function sound(){
-    /*
     var playPromise = aud.play();
-    console.log("playPromise");
-    console.log(playPromise);
     if (playPromise !== null){
         playPromise.catch(() => { aud.play() })
     }
-    */
-    setTimeout(function(){aud.play.bind(aud)}, 100);
 }
 
 function set_pedido(index, that){
