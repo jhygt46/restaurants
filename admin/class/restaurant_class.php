@@ -337,7 +337,9 @@ class Rest{
         
     }
     public function get_info_despacho($lat, $lng){
-        
+
+        $info['aux'] = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
+
         $polygons = $this->get_polygons();
         $precio = 9999999;
         $info['op'] = 2;

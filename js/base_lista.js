@@ -1110,14 +1110,15 @@ function initMap(){
             
             if(num != 0){
                 
-                var send = {accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
+                var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
                 $.ajax({
                     url: "ajax/index.php",
                     type: "POST",
                     data: send,
                     success: function(datas){
                         
-                        var data = JSON.parse(datas);                        
+                        var data = JSON.parse(datas);
+                        console.log(data);                        
                         if(data.op == 1){
 
                             var pedido = get_pedido();
