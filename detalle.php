@@ -30,12 +30,19 @@ if(isset($_GET['code'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="<?php echo $info["js_jquery"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+
         <script>
             var catalogo = 0;
             var carro = <?php echo $info['carro']; ?>;
             var promos = <?php echo $info['promos']; ?>;
             var costo = <?php echo $costo; ?>;
             var total = <?php echo $total; ?>;
+            <?php if($_GET["t"] == 2){ ?>
+            $(document).ready(function(){
+                window.print();
+                window.close();
+            });
+            <?php } ?>
         </script>
         
         <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
