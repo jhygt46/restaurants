@@ -57,7 +57,11 @@ if(isset($info['id_gir'])){
     if($info['con_cambios'] == 1){
         $core->get_web_js_data2($info['id_gir']);
     }
-
+    if($_SERVER["HTTP_HOST"] == "www.fireapp.cl"){
+        echo "<pre>";
+        print_r($info);
+        echo "</pre>";
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -79,13 +83,13 @@ if(isset($info['id_gir'])){
         
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info["path"]; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
-        <script type="text/javascript"> var dominio = "<?php echo $info["dominio"]; ?>"; </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.4.2/libphonenumber-js.min.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/html_func.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
         <script>
+            var dominio = "<?php echo $info["dominio"]; ?>";
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$local['estados'][$i]."'";  } ?> ];
         </script>
         <style>
