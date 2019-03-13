@@ -602,7 +602,8 @@ class Core{
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
             $info['estados'] = $sql['resultado'][0]['estados'];
-            
+            $info['dominio'] = $dominio;
+
             if($sql['resultado'][0]['favicon'] != ""){
                 $info['favicon'] = $sql['resultado'][0]['favicon'];
             }
