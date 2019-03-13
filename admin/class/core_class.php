@@ -58,9 +58,10 @@ class Core{
     }
     public function local($id_loc){
         
-        $loc = $this->con->sql("SELECT t1.id_gir, t2.dominio FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
+        $loc = $this->con->sql("SELECT t1.id_gir, t2.dominio, t1.estados FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
         $id_gir = $loc['resultado'][0]['id_gir'];
         $info['dominio'] = $loc['resultado'][0]['dominio'];
+        $info['estados'] = $loc['resultado'][0]['estados'];
         $user_local = $this->con->sql("SELECT * FROM fw_usuarios_locales WHERE id_loc='".$id_loc."' AND id_user='".$this->id_user."'");
 
         $info['op'] = 2;
