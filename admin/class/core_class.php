@@ -601,7 +601,7 @@ class Core{
             $info['id_gir'] = $sql['resultado'][0]['id_gir'];            
             $info['titulo'] = $sql['resultado'][0]['titulo'];
             $info['logo'] = $sql['resultado'][0]['logo'];
-            $info['estados'] = $sql['resultado'][0]['estados'];
+            $info['estados'] = explode(",",$sql['resultado'][0]['estados']);
             $info['dominio'] = "";
 
             if($sql['resultado'][0]['favicon'] != ""){
