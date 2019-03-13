@@ -229,7 +229,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                     </div>
                 </div>
                 <div class="configuracion">
-                    <div><img src="" alt="" /></div>
+                    <div><img src="images/local_config.jpg" alt="" /></div>
                 </div>
             </div>
         </div>
