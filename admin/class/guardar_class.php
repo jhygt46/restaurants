@@ -620,7 +620,7 @@ class Guardar extends Core{
         $sonido = $_POST['sonido'];
         $id_loc = $_POST['id_loc'];
 
-        $this->con->sql("UPDATE locales SET sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
+        $info['db'] = $this->con->sql("UPDATE locales SET sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
 
         $info['op'] = 1;
         $info['mensaje'] = "Local editado exitosamente";

@@ -49,7 +49,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id_cae" type="hidden" value="<?php echo $id_cae; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
