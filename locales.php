@@ -60,7 +60,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
             var local_code = '<?php echo $code; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
-            var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$local['estados'][$i]."'";  } ?> ];
+            var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
         </script>
         <style>
