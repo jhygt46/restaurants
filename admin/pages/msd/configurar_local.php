@@ -56,6 +56,35 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_locales', '<?php echo $id_loc; ?>', 'Local', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
                     <label class="clearfix">
+                        <span><p>Sonido:</p></span>
+                        <select id="sonido">
+                            <option value="Applause.mp3">Applause</option>
+                            <option value="Aww.mp3">Aww</option>
+                            <option value="Ba-dum-tss.mp3">Ba-dum-tss</option>
+                            <option value="Beep.mp3">Beep</option>
+                            <option value="Beep_set.mp3">Beep_set</option>
+                            <option value="Boo.mp3">Boo</option>
+                            <option value="Breaking_glass.mp3">Breaking_glass</option>
+                            <option value="City.mp3">City</option>
+                            <option value="Crash.mp3">Crash.mp3</option>
+                            <option value="DJ.mp3">DJ</option>
+                            <option value="Fail.mp3">Fail</option>
+                            <option value="Gunshot.mp3">Gunshot</option>
+                            <option value="Happy_Birthday.mp3">Happy_Birthday</option>
+                            <option value="Heartbeat.mp3">Heartbeat</option>
+                            <option value="Ka-ching.mp3">Ka-ching</option>
+                            <option value="Keyboard.mp3">Keyboard</option>
+                            <option value="Laugh_track.mp3">Laugh_track</option>
+                            <option value="Nooo.mp3">Nooo</option>
+                            <option value="Rain_and_thunder.mp3">Rain_and_thunder</option>
+                            <option value="Shutter.mp3">Shutter</option>
+                            <option value="Whip.mp3">Whip</option>
+                            <option value="White_noise.mp3">White_noise</option>
+                            <option value="Yeehaw.mp3">Yeehaw</option>
+                            <option value="Yes.mp3">Yes</option>
+                        </select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Tiempo Retiro:</p></span>
                         <input id="t_retiro" type="text" class="inputs" value="<?php echo $that['t_retiro']; ?>" require="" placeholder="" />
                     </label>
