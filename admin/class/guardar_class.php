@@ -40,6 +40,9 @@ class Guardar extends Core{
         if($_POST['accion'] == "crear_locales"){
             return $this->crear_locales();
         }
+        if($_POST['accion'] == "crear_locales"){
+            return $this->configurar_local();
+        }
         if($_POST['accion'] == "crear_locales_tramos"){
             return $this->crear_locales_tramos();
         }
@@ -609,6 +612,22 @@ class Guardar extends Core{
 
         return $info;
         */
+    }
+    private function configurar_local(){
+
+        $t_retiro = $_POST['t_retiro'];
+        $t_despacho = $_POST['t_despacho'];
+        $sonido = $_POST['sonido'];
+        $id_loc = $_POST['id_loc'];
+
+        $this->con->sql("UPDATE locales SET sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
+
+        $info['op'] = 1;
+        $info['mensaje'] = "Local editado exitosamente";
+        $info['reload'] = 1;
+        $info['page'] = "msd/ver_giro.php";
+        return $info;
+
     }
     private function crear_locales(){
         
