@@ -54,8 +54,6 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
-        <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
         <script> 
             var local_code = '<?php echo $code; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';
@@ -64,6 +62,8 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
         </script>
+        <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;
