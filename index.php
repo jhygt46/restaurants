@@ -61,6 +61,7 @@ if(isset($info['id_gir'])){
         echo "<pre>";
         print_r($info);
         echo "</pre>";
+        exit;
     }
 ?>
 
