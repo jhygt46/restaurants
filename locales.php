@@ -228,7 +228,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                         <div class="lista_productos"></div>
                     </div>
                 </div>
-                <div class="configuracion">
+                <div class="configuracion" style="width: 64px; float: left; margin-left: 6px; position: relative">
                     <div><img src="images/local_config.jpg" alt="" /></div>
                 </div>
             </div>
