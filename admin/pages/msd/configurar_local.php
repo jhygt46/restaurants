@@ -61,7 +61,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <select id="sonido">
                             <option value="">Seleccionar</option>
                             <?php for($i=0; $i<count($sonidos); $i++){ ?>
-                            <option value="<?php echo $sonidos[$i]; ?>.mp3" <?php if($sonidos[$i] == $that["sonido"]){ ?>selected<?php } ?>><?php echo $sonidos[$i]; ?></option>
+                            <option value="<?php echo $sonidos[$i]; ?>" <?php if($sonidos[$i] == $that["sonido"]){ ?>selected<?php } ?>><?php echo $sonidos[$i]; ?></option>
                             <?php } ?>
                         </select>
                     </label>
