@@ -279,15 +279,18 @@ class Rest{
             $verify_despacho = 0;
             
             $id_loc = $aux_pedido->{'id_loc'};
-            $loc_gir = $this->con->sql("SELECT t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
+            $loc_gir = $this->con->sql("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             $info['lat'] = $loc_gir['resultado'][0]['lat'];
             $info['lng'] = $loc_gir['resultado'][0]['lng'];
+            $info['tiempo'] = $loc_gir['resultado'][0]['t_retiro'];
+            
             
             if($despacho == 1){
                 $aux_verify = $this->get_info_despacho($lat, $lng);
                 if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
                     $verify_despacho = 1;
                 }
+                $info['tiempo'] = $loc_gir['resultado'][0]['t_despacho'];
             }
             
             $tz_object = new DateTimeZone('America/Santiago');
