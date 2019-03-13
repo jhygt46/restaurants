@@ -769,8 +769,6 @@ function show_modal_locales(){
     var aux = ver_locales_y_despacho();
     if(aux[0]){
 
-        var custom_min = 60;
-        var tiempo = 0;
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
             var lrs = get_horarios_local(id, 1);
@@ -855,7 +853,6 @@ function paso_3(){
 var map_socket, markers;
 function show_modal_4(pedido){
     
-    var tiempo = (pedido.despacho == 0) ? tiempo_retiro : tiempo_despacho ;
     var punto = { lat: parseFloat(pedido.lat), lng: parseFloat(pedido.lng) };
     
     map_socket = new google.maps.Map(document.getElementById('mapa_posicion'), {
