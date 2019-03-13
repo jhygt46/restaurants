@@ -115,6 +115,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <span><p>Comentarios:</p></span>
                         <input id="pedido_comentarios" type="checkbox" class="checkbox" value="1" <?php if($that['pedido_comentarios'] == 1){ ?> checked="checked"<?php } ?>>
                     </label>
+                    <label class="clearfix">
+                        <span><p>Estados</p></span>
+                        <input id="estados" type="text" class="inputs" value="<?php echo $that['estados']; ?>" require="" placeholder="" />
+                    </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>

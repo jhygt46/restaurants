@@ -282,7 +282,9 @@ class Guardar extends Core{
         $pedido_03_subtitulo = $_POST['subtitulo_03'];
         $pedido_04_titulo = $_POST['titulo_04'];
         $pedido_04_subtitulo = $_POST['subtitulo_04'];
-        
+
+        $estados = $_POST['estados'];
+
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         $this->con_cambios();
         
@@ -297,7 +299,7 @@ class Guardar extends Core{
         }
         
         // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
         
         // MODIFICAR TITULO
         $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
@@ -619,10 +621,9 @@ class Guardar extends Core{
         $t_despacho = $_POST['t_despacho'];
         $sonido = $_POST['sonido'];
         $pos = $_POST['pos'];
-        $estados = $_POST['estados'];
         $id_loc = $_POST['id_loc'];
 
-        $this->con->sql("UPDATE locales SET estados='".$estados."', pos='".$pos."', sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
+        $this->con->sql("UPDATE locales SET pos='".$pos."', sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
 
         $info['op'] = 1;
         $info['mensaje'] = "Local editado exitosamente";
