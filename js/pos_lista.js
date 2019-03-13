@@ -8,7 +8,7 @@ var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
 var crear_nuevo = 0;
-var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
+//var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var tiempos = { retiro: 1500, despacho: 3600 };
 var time = new Date().getTime();
 
