@@ -942,11 +942,11 @@ function paso_4(){
                         pedido.estado = estados[0];
                         
                         if(pedido.despacho == 0){
-                            pedido.time = tiempo_retiro;
+                            pedido.time = data.t_retiro;
                             $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos puedes venir a buscarlo");
                         }
                         if(pedido.despacho == 1){
-                            pedido.time = tiempo_despacho;
+                            pedido.time = data.t_despacho;
                             $('.pedido_mensaje').html(pedido.nombre+" tu pedido fue recibido correctamente. En "+pedido.time+" minutos estaremos alla");
                         }                
                         
