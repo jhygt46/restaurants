@@ -57,12 +57,14 @@ if(isset($info['id_gir'])){
     if($info['con_cambios'] == 1){
         $core->get_web_js_data2($info['id_gir']);
     }
+    /*
     if($_SERVER["HTTP_HOST"] == "www.fireapp.cl"){
         echo "<pre>";
         print_r($info);
         echo "</pre>";
         exit;
     }
+    */
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
