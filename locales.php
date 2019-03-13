@@ -55,6 +55,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
         <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script>
+            var aud = new Audio('audios/'.$local['sonido'].'.mp3');
             var local_code = '<?php echo $code; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
