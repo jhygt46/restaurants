@@ -625,7 +625,7 @@ class Guardar extends Core{
         $info['op'] = 1;
         $info['mensaje'] = "Local editado exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php";
+        $info['page'] = "msd/locales.php";
         return $info;
 
     }
