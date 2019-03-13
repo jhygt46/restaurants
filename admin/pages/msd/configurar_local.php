@@ -20,6 +20,7 @@ $id_cae = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
+$sonidos = ["Applause", "Aww", "Ba-dum-tss", "Beep", "Beep_set", "Boo", "Breaking_glass", "City", "Crash", "DJ", "Fail", "Gunshot", "Happy_Birthday", "Heartbeat", "Ka-ching", "Keyboard", "Laugh_track", "Nooo", "Rain_and_thunder", "Shutter", "Whip", "White_noise", "Yeehaw", "Yes"];
 
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
@@ -58,30 +59,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Sonido:</p></span>
                         <select id="sonido">
-                            <option value="Applause.mp3">Applause</option>
-                            <option value="Aww.mp3">Aww</option>
-                            <option value="Ba-dum-tss.mp3">Ba-dum-tss</option>
-                            <option value="Beep.mp3">Beep</option>
-                            <option value="Beep_set.mp3">Beep_set</option>
-                            <option value="Boo.mp3">Boo</option>
-                            <option value="Breaking_glass.mp3">Breaking_glass</option>
-                            <option value="City.mp3">City</option>
-                            <option value="Crash.mp3">Crash.mp3</option>
-                            <option value="DJ.mp3">DJ</option>
-                            <option value="Fail.mp3">Fail</option>
-                            <option value="Gunshot.mp3">Gunshot</option>
-                            <option value="Happy_Birthday.mp3">Happy_Birthday</option>
-                            <option value="Heartbeat.mp3">Heartbeat</option>
-                            <option value="Ka-ching.mp3">Ka-ching</option>
-                            <option value="Keyboard.mp3">Keyboard</option>
-                            <option value="Laugh_track.mp3">Laugh_track</option>
-                            <option value="Nooo.mp3">Nooo</option>
-                            <option value="Rain_and_thunder.mp3">Rain_and_thunder</option>
-                            <option value="Shutter.mp3">Shutter</option>
-                            <option value="Whip.mp3">Whip</option>
-                            <option value="White_noise.mp3">White_noise</option>
-                            <option value="Yeehaw.mp3">Yeehaw</option>
-                            <option value="Yes.mp3">Yes</option>
+                            <option value="">Seleccionar</option>
+                            <?php for($i=0; $i<count($sonidos); $i++){ ?>
+                            <option value="<?php echo $sonidos[$i]; ?>.mp3" <?php if($sonidos[$i] == $that["sonido"]){ ?>selected<?php } ?>><?php echo $sonidos[$i]; ?></option>
+                            <?php } ?>
                         </select>
                     </label>
                     <label class="clearfix">

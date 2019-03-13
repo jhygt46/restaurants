@@ -40,7 +40,7 @@ class Guardar extends Core{
         if($_POST['accion'] == "crear_locales"){
             return $this->crear_locales();
         }
-        if($_POST['accion'] == "crear_locales"){
+        if($_POST['accion'] == "configurar_local"){
             return $this->configurar_local();
         }
         if($_POST['accion'] == "crear_locales_tramos"){
