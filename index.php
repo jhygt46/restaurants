@@ -85,6 +85,9 @@ if(isset($info['id_gir'])){
         <script src="<?php echo $info["path"]; ?>/js/html_func.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
+        <script>
+            var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$local['estados'][$i]."'";  } ?> ];
+        </script>
         <style>
             body{
                 font-family: <?php echo $info["font"]['css']; ?>;
