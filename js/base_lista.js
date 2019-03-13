@@ -936,7 +936,7 @@ function paso_4(){
                         pedido.fecha = data.fecha;
                         pedido.lat = data.lat;
                         pedido.lng = data.lng;
-                        pedido.estado = estados[0];
+                        pedido.estado = "Enviado";
                         
                         if(pedido.despacho == 0){
                             pedido.time = data.t_retiro;
