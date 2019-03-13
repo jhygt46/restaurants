@@ -26,9 +26,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     
     $id_loc = $_GET["id_loc"];
     $that = $fireapp->get_local($id_loc);
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
 
 }
 
