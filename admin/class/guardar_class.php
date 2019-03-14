@@ -1016,7 +1016,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Producto ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id[0];
+        $info['page'] = "msd/crear_productos.php?id=".$id[0]."&parent_id=".$id[2];
 
         return $info;
         

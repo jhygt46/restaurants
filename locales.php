@@ -184,6 +184,17 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                             <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
                         </div>
                     </div>
+                    <div class="p5 nuevo_pedido vhalign" style="display: none">
+                        <div class="np_close" onclick="np_close(this)"></div>
+                        <div class="n_title"></div>
+                        <div class="n_stitle"></div>
+                        <div class="n_info n1">
+                            <div class="data_info"></div>
+                        </div>
+                        <div class="n_submit">
+                            <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -229,7 +240,7 @@ $code = $core->socket_code($id_loc, $info['id_gir']);
                     </div>
                 </div>
                 <div class="configuracion" style="width: 64px; float: left; margin-left: 6px; position: relative">
-                    <div><img src="images/local_config.jpg" alt="" /></div>
+                    <div onclick="ver_motos_mapa()"><img src="images/local_config.jpg" alt="" /></div>
                     <div><img src="images/local_config.jpg" alt="" /></div>
                 </div>
             </div>

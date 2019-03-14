@@ -364,23 +364,24 @@ function html_home_pedidos(obj, index){
     return Div;
     
 }
-function mostrar_pregunta(i){
+function ver_motos_mapa(){
+        console.log("moto_mapa");
+        $('.pop_up').show();
+        $('.p5').show();
+        $('.p5 .n_title').html("MOTOS EN EL MAPA");
+        $('.p5 .data_info').html();
     
+}
+function mostrar_pregunta(i){
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-    
     var producto = get_producto(pedido.carro[i].id_pro);
-
     if(producto.preguntas){
-
         $('.pop_up').show();
         $('.p4').show();
-
         $('.p4 .n_title').html(producto.nombre);
         $('.p4 .data_info').html(html_preguntas_producto(i));
-
     }
-
 }
 function seleccionar_productos_categoria_promo(i){
     
