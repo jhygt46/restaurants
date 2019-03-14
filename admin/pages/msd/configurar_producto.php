@@ -24,6 +24,7 @@ $id_cae = 0;
 $hijos = false;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
+$id_cae = (isset($_GET["id"]))? $_GET["id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0){
@@ -92,7 +93,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
-                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_productos', '<?php echo $that['id_pro']; ?>/<?php echo $that['id_pro']; ?>', 'Producto', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
+                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_productos', '<?php echo $that['id_pro']; ?>/<?php echo $id_cae; ?>/<?php echo $parent_id; ?>', 'Producto', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>

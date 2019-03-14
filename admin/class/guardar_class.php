@@ -1009,14 +1009,14 @@ class Guardar extends Core{
     private function eliminar_productos(){
                 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[1]."' AND id_cae='".$id[0]."'");
+        $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[0]."' AND id_cae='".$id[1]."'");
         $this->con_cambios();
 
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Producto ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id[0]."&parent_id=".$id[2];
+        $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
 
         return $info;
         
