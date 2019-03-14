@@ -16,10 +16,6 @@ $sub_titulo1 = "Modificar Configuracion";
 $accion = "configurar_producto";
 /* CONFIG PAGE */
 
-echo "id_pro: ".$_GET["id_pro"]."<br/>";
-echo "id: ".$_GET["id"]."<br/>";
-echo "parent_id: ".$_GET["parent_id"]."<br/>";
-
 $id_cae = 0;
 $hijos = false;
 $sub_titulo = $sub_titulo1;
@@ -37,6 +33,14 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     
     $pre_prod = $fireapp->get_preguntas_pro($id_pro);
     $lin_prod = $fireapp->get_lista_ingredientes_pro($id_pro);
+
+    echo "<pre>";
+    print_r($pre_prod);
+    echo "</pre>";
+    
+    echo "<pre>";
+    print_r($lin_prod);
+    echo "</pre>";
     
 }
 
