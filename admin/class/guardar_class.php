@@ -877,14 +877,14 @@ class Guardar extends Core{
     private function eliminar_categoria(){
                 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE categorias SET eliminado='1' WHERE id_cae='".$id[1]."'");
+        $this->con->sql("UPDATE categorias SET eliminado='1' WHERE id_cae='".$id[0]."'");
         $this->con_cambios();
 
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Categoria ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[2];
+        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
 
         return $info;
         

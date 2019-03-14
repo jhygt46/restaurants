@@ -79,7 +79,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
-                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_categoria', '<?php echo $id_cae; ?>', 'Categoria', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
+                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_categoria', '<?php echo $id_cae; ?>/<?php echo $parent_id; ?>', 'Categoria', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
