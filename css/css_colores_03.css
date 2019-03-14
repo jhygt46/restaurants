@@ -1,10 +1,10 @@
 /* MENU LEFT */
 body .contenedor .menu_left {
   background: #fff;
-  border-right: 1px solid #ED030C;
+  border-right: 1px solid #2A3132;
 }
 body .contenedor .menu_left .cont_menu_left .btn_toogle {
-  color: #ED030C;
+  color: #2A3132;
 }
 body .contenedor .menu_left .cont_menu_left .menu_info ul li {
   border-bottom: 1px solid #ddd;
@@ -12,11 +12,11 @@ body .contenedor .menu_left .cont_menu_left .menu_info ul li {
 
 /* PAGINA */
 body .contenedor .pagina .cont_pagina .header {
-  background: #000;
-  border-bottom: 1px solid #ED030C;
+  background: #90AFC5;
+  border-bottom: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .shop {
-  color: #ED030C;
+  color: #2A3132;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .cantcart {
   background: #fff;
@@ -25,8 +25,8 @@ body .contenedor .pagina .cont_pagina .header .menu_right .cantcart .cantcart_nu
   color: #000;
 }
 body .contenedor .pagina .cont_pagina .footer {
-  background: #000;
-  border-top: 1px solid #ED030C;
+  background: #90AFC5;
+  border-top: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .contenido {
   background: #e8e8e8;
