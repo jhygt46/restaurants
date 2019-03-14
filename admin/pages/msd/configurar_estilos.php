@@ -10,9 +10,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/core_class.php");
 $fireapp = new Core();
 
-
 /* CONFIG PAGE */
-
 $sub_titulo = "Modificar Configuracion";
 $accion = "configurar_estilos";
 /* CONFIG PAGE */
