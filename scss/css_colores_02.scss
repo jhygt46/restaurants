@@ -207,7 +207,7 @@ body {
                         .descripcion {}
                     }
                     .categoria {
-                        background: $modal_carta_categoria;
+                        background: $modal_carta_producto;
                         .detalle_pro {
                             .nombre_pro {}
                             .precio_pro {}
@@ -224,10 +224,12 @@ body {
                 }
                 .lista_categorias {
                     .producto {
+                        background: $modal_carta_categoria;
                         .nombre {}
                         .descripcion {}
                     }
                     .categoria {
+                        background: $modal_carta_categoria;
                         .nombre {}
                         .descripcion {}
                         .precio {}
