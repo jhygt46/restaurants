@@ -198,6 +198,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 }
 .modal_productos_promo .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item {
   margin-top: 2px;
+  padding: 8px 4px;
 }
 .modal_productos_promo .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_select {
   float: left;

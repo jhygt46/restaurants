@@ -25,6 +25,8 @@ $modal_carta_categoria: #ccc;
 $modal_preguntas_opciones: #ccc;
 $modal_preguntas_selected: #999;
 
+// MODAL PRODUCTOS PROMO //
+$modal_pro_pro_background: #ccc;
 
 // OTROS //
 $menu-left-border-bottom: #ddd;
@@ -149,6 +151,7 @@ body {
             .info_modal{
                 .pro_cat_promo {
                     .pro_cat_item {
+                        background: $modal_pro_pro_background;
                         .pro_cat_item_select {
                             .select_promo {}
                         }
