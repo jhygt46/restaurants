@@ -225,12 +225,8 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   font-size: 20px;
 }
 .modal_pregunta_productos .cont_modal .cont_info .info_modal .s_pregunta .e_pregunta .v_pregunta .n_pregunta {
-  background: #ccc;
   padding: 6px;
   font-size: 14px;
-}
-.modal_pregunta_productos .cont_modal .cont_info .info_modal .s_pregunta .e_pregunta .v_pregunta .selected {
-  background: #999;
 }
 .modal_pregunta_productos .cont_modal .cont_info .info_modal .s_pregunta .e_pregunta .titulo_v_pregunta {
   margin-top: 4px;

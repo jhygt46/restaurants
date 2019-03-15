@@ -343,13 +343,10 @@ body {
                         }
                         .v_pregunta {
                             .n_pregunta {
-                                background: #ccc;
                                 padding: 6px;
                                 font-size: 14px;
                             }
-                            .selected {
-                                background: #999;
-                            }
+                            .selected {}
                         }
                         .titulo_v_pregunta {
                             margin-top: 4px;

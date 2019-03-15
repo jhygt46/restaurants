@@ -22,6 +22,8 @@ $modal_carta_producto: #ccc;
 $modal_carta_categoria: #ccc;
 
 // MODAL PREGUNTAS //
+$modal_preguntas_opciones: #ccc;
+$modal_preguntas_selected: #999;
 
 
 // OTROS //
@@ -175,8 +177,12 @@ body {
                     .e_pregunta {
                         .pregunta_titulo {}
                         .v_pregunta {
-                            .n_pregunta {}
-                            .selected {}
+                            .n_pregunta {
+                                background: $modal_preguntas_opciones;
+                            }
+                            .selected {
+                                background: $modal_preguntas_selected;
+                            }
                         }
                         .titulo_v_pregunta {}
                     }
