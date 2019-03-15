@@ -11,9 +11,15 @@ $text-color: #000;
 // MODAL //
 $background-modal: #eee;
 $background-modal-titulo: #f5f5f5;
+$background-modal-footer: #f5f5f5;
 $modal-titulo-border-bottom: #999;
 $modal-close-background: #888;
 $modal-close-icon: #000;
+$modal-footer-border-top: #999;
+
+// MODAL CARTA // 
+$modal_carta_producto: #ccc;
+$modal_carta_categoria: #ccc;
 
 // OTROS //
 $menu-left-border-bottom: #ddd;
@@ -112,6 +118,8 @@ body {
                             .info_modal {}
                         }
                         .acciones {
+                            background: $background-modal-footer;
+                            border-top: 1px solid $modal-footer-border-top;
                             .confirmar{
                             }
                         }
@@ -177,7 +185,73 @@ body {
         }
     }
 }
-
+.modal_carta {
+    .cont_modal {
+        .titulo {
+            .cont_titulo {
+                h1 {}
+                h2 {}
+            }
+        }
+        .close{}
+        .cont_info {
+            .info_modal{
+                .lista_productos {
+                    .producto {
+                        background: $modal_carta_producto;
+                        .nombre {}
+                        .descripcion {}
+                    }
+                    .categoria {
+                        background: $modal_carta_categoria;
+                        .detalle_pro {
+                            .nombre_pro {}
+                            .precio_pro {}
+                        }
+                        .nombre {}
+                        .descripcion {}
+                        .info {
+                            .info_cont {
+                                .info_01 {}
+                                .info_02 {}
+                            }
+                        }
+                    }
+                }
+                .lista_categorias {
+                    .producto {
+                        .nombre {}
+                        .descripcion {}
+                    }
+                    .categoria {
+                        .nombre {}
+                        .descripcion {}
+                        .precio {}
+                        .listado {
+                            .prod_item {
+                                .prod_i_nom {}
+                                .prod_i_pre {}
+                            }
+                        }
+                    }
+                }
+                .lista_promociones {
+                    .promocion_categoria {
+                        .pro_titulo {}
+                        .item_pro_cat{
+                            .item_pro_cat_cant {}
+                            .item_pro_cat_nom {}
+                        }
+                    }
+                    .promocion_producto {
+                        .pro_titulo {}
+                        .item_pro_pro{}
+                    }
+                }
+            }
+        }
+    }
+}
 .modal_carro {
     .cont_modal {
         .titulo {

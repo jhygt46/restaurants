@@ -78,8 +78,6 @@ body .contenedor .modals .cont_modals .modal .cont_modal .sub_total .cont_subtot
 body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
   text-align: center;
   height: 38px;
-  background: #d0d0d0;
-  border-top: 1px solid #999;
   bottom: 0px;
   left: 0px;
   padding-top: 13px;
@@ -103,7 +101,6 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   font-size: 10px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_productos .categoria {
-  background: #ccc;
   margin-bottom: 6px;
   padding: 6px;
 }
@@ -135,7 +132,6 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   padding: 10px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .producto {
-  background: #ccc;
   margin-bottom: 6px;
   padding: 6px;
 }
@@ -146,7 +142,6 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   font-size: 10px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoria {
-  background: #ccc;
   margin-bottom: 6px;
   padding: 6px;
   position: relative;

@@ -94,12 +94,8 @@ body {
                             height: $modal-header-height;
                             text-align: center;
                             .cont_titulo{
-                                h1{
-                                    
-                                }
-                                h2{
-                                    
-                                }
+                                h1{}
+                                h2{}
                             }
                         }
                         .close {
@@ -130,8 +126,6 @@ body {
                         .acciones {
                             text-align: center;
                             height: 38px;
-                            background: #d0d0d0;
-                            border-top: 1px solid #999;
                             bottom: 0px;
                             left: 0px;
                             padding-top: 13px;
@@ -178,7 +172,6 @@ body {
                         }
                     }
                     .categoria {
-                        background: #ccc;
                         margin-bottom: 6px;
                         padding: 6px;
                         .detalle_pro {
@@ -216,7 +209,6 @@ body {
                 .lista_categorias {
                     padding: 10px;
                     .producto {
-                        background: #ccc;
                         margin-bottom: 6px;
                         padding: 6px;
                         .nombre {
@@ -227,7 +219,6 @@ body {
                         }
                     }
                     .categoria {
-                        background: #ccc;
                         margin-bottom: 6px;
                         padding: 6px;
                         position: relative;
@@ -255,7 +246,7 @@ body {
                                     padding-right: 2%;
                                     font-size: 12px;
                                 }
-                                .prod_i_pre {;
+                                .prod_i_pre {
                                     width: 20%;
                                     text-align: right;
                                     font-size: 16px;
