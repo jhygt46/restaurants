@@ -1,26 +1,38 @@
-$background-color: #000;
-$primary-color: #ED030C;
+// HOME //
+$background-header: #000;
+$background-contenido: #e8e8e8;
+$background-footer: #000;
+$lineas-color: #ED030C;
+$icons-color: #ED030C;
 $background-cant-cart: #fff;
+$background-menu-left: #fff;
 $text-color: #000;
-$menu-left-background: #fff;
-$menu-left-border-bottom: #ddd;
-$contenido-color: #e8e8e8;
-$modal-background: #eee;
-$modal-titulo-background: #f5f5f5;
+
+// MODAL //
+$background-modal: #eee;
+$background-modal-titulo: #f5f5f5;
+$modal-titulo-border-bottom: #999;
 $modal-close-background: #888;
 $modal-close-icon: #000;
+
+// OTROS //
+$menu-left-border-bottom: #ddd;
+
+
+
 $modal-paso01-promo: #f5f5f5;
 $modal-paso01-restantes: #f5f5f5;
 
 /* MENU LEFT */
 body {
+    color: $text-color;
     .contenedor {
         .menu_left {
-            background: $menu-left-background;
-            border-right: 1px solid $primary-color;
+            background: $background-menu-left;
+            border-right: 1px solid $lineas-color;
             .cont_menu_left {
                 .btn_toogle {
-                    color: $primary-color;
+                    color: $icons-color;
                 }
                 .menu_info {
                     h1 {}
@@ -41,27 +53,25 @@ body {
         .pagina {
             .cont_pagina {
                 .header {
-                    background: $background-color;
-                    border-bottom: 1px solid $primary-color;
+                    background: $background-header;
+                    border-bottom: 1px solid $lineas-color;
                     .header_logo {
                         img {}
                     }
                     .menu_right {
-                        .shop { color: $primary-color; }
+                        .shop { color: $icons-color; }
                         .cantcart {
                             background: $background-cant-cart;
-                            .cantcart_num{
-                                color: $text-color;
-                            }
+                            .cantcart_num{}
                         }
                     }
                 }
                 .footer {
-                    background: $background-color;
-                    border-top: 1px solid $primary-color;
+                    background: $background-footer;
+                    border-top: 1px solid $lineas-color;
                 }
                 .contenido {
-                    background: $contenido-color;
+                    background: $background-contenido;
                     .cont_contenido {
                         .botones_principales {
                             .nombre {}
@@ -85,7 +95,8 @@ body {
                 .modal {
                     .cont_modal {
                         .titulo {
-                            background: $modal-titulo-background;
+                            background: $background-modal-titulo;
+                            border-bottom: 1px solid $modal-titulo-border-bottom;
                             .cont_titulo{
                                 h1{}
                                 h2{}
@@ -97,7 +108,7 @@ body {
                             font-size: 34px;
                         }
                         .cont_info {
-                            background: $modal-background;
+                            background: $background-modal;
                             .info_modal {}
                         }
                         .acciones {

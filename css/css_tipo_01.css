@@ -52,7 +52,6 @@ body .contenedor .modals .cont_modals .modal {
   max-height: 580px;
 }
 body .contenedor .modals .cont_modals .modal .cont_modal .titulo {
-  border-bottom: 1px solid #999;
   height: 80px;
   text-align: center;
 }
