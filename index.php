@@ -127,7 +127,7 @@ if(isset($info['id_gir'])){
                     <div class="modal vhalign hide modal_pagina">
                         <div class="cont_modal">
                             <div onclick="close_that(this)" class="close material-icons">close</div>
-                            <div class="cont_info" style="background: none"></div>
+                            <div class="cont_info"></div>
                         </div>
                     </div>
                     <div class="modal vhalign hide modal_carta">

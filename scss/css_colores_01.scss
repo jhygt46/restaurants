@@ -32,13 +32,14 @@ $modal_pro_pro_background: #ccc;
 // MODAL CARRO //
 $modal-paso01-promo: #f5f5f5;
 $modal-paso01-restantes: #f5f5f5;
-
 $modal-paso02-dir-opcion: #ccc;
 $modal-paso02-dir-opcion-selected: #fcc;
-
 $modal-paso02a-local: #ccc;
-
 $modal-paso03-preguntas-background: #ddd;
+
+// MODAL PAGINA //
+$modal_pagina_background: #e8e8e8;
+
 
 /* MENU LEFT */
 body {
@@ -267,6 +268,20 @@ body {
                     }
                 }
             }
+        }
+    }
+}
+.modal_pagina {
+    .cont_modal {
+        .titulo {
+            .cont_titulo {
+                h1 {}
+                h2 {}
+            }
+        }
+        .close {}
+        .cont_info {
+            .info_modal {}
         }
     }
 }
