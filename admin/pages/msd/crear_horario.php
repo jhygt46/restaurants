@@ -135,7 +135,13 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                 </ul>
             </div>
             <div class="listado_items">
-                <?php 
+                <?php
+
+                echo "<pre>";
+                print_r($list);
+                echo "</pre>";
+                
+
                 for($i=0; $i<count($list); $i++){
                     $id = $list[$i][$id_list];
                     
