@@ -137,10 +137,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
             <div class="listado_items">
                 <?php
 
-                echo "<pre>";
-                print_r($list);
-                echo "</pre>";
-
                 for($i=0; $i<count($list); $i++){
                     $id = $list[$i][$id_list];
                     
@@ -191,9 +187,9 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                             break;  
                     }
 
-                    $list[$i]['min_ini'] = (strlen($list[$i]['min_ini']) == 1) ? "0".$list[$i]['min_ini'] : $list[$i]['min_ini'];
-                    $list[$i]['min_fin'] = (strlen($list[$i]['min_fin']) == 1) ? "0".$list[$i]['min_ini'] : $list[$i]['min_ini'];
-                    
+                    echo "min_ini: ".strlen($list[$i]['min_ini']);
+                    echo "min_fin: ".strlen($list[$i]['min_fin']);
+
                     $hora_ini = $list[$i]['hora_ini'].":".$list[$i]['min_ini'];
                     $hora_fin = $list[$i]['hora_fin'].":".$list[$i]['min_fin'];
                     $nombre = "De ".$dia_ini." a ".$dia_fin." desde las ".$hora_ini." hasta ".$hora_fin;
