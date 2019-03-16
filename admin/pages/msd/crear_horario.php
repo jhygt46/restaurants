@@ -191,6 +191,8 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                             break;  
                     }
 
+                    $list[$i]['min_ini'] = (strlen($list[$i]['min_ini']) == 1) ? "0".$list[$i]['min_ini'] : $list[$i]['min_ini'];
+                    $list[$i]['min_fin'] = (strlen($list[$i]['min_fin']) == 1) ? "0".$list[$i]['min_ini'] : $list[$i]['min_ini'];
                     
                     $hora_ini = $list[$i]['hora_ini'].":".$list[$i]['min_ini'];
                     $hora_fin = $list[$i]['hora_fin'].":".$list[$i]['min_fin'];
