@@ -17,6 +17,7 @@ $modal-titulo-border-bottom: #999;
 $modal-close-background: #888;
 $modal-close-icon: #000;
 $modal-footer-border-top: #999;
+$background-modal-subtotal: #999;
 
 // MODAL CARTA // 
 $modal_carta_producto: #ccc;
@@ -127,6 +128,9 @@ body {
                         .cont_info {
                             background: $background-modal;
                             .info_modal {}
+                        }
+                        .sub_total{
+                            background: $background-modal-subtotal;
                         }
                         .acciones {
                             background: $background-modal-footer;
