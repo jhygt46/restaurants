@@ -140,9 +140,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     $id = $list[$i][$id_list];
                     
                     switch ($list[$i]['dia_ini']) {   
-                        case 0:
-                            $dia_ini = "Domingo";
-                            break;  
                         case 1:
                             $dia_ini = "Lunes";
                             break;
@@ -161,11 +158,11 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         case 6:
                             $dia_ini = "Sabado";
                             break;
+                        case 7:
+                            $dia_ini = "Domingo";
+                            break;  
                     }
                     switch ($list[$i]['dia_fin']) {   
-                        case 0:
-                            $dia_fin = "Domingo";
-                            break;  
                         case 1:
                             $dia_fin = "Lunes";
                             break;
@@ -184,10 +181,13 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         case 6:
                             $dia_fin = "Sabado";
                             break;
+                        case 7:
+                            $dia_fin = "Domingo";
+                            break;  
                     }
 
-                    $hora_ini = "12:00";
-                    $hora_fin = "23:30"; 
+                    $hora_ini = $list[$i]['hora_ini'];
+                    $hora_fin = $list[$i]['hora_fin'];
                     $nombre = "De ".$dia_ini." a ".$dia_fin." desde las ".$hora_ini." hasta ".$hora_fin;
 
                 ?>

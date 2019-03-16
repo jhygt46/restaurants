@@ -81,6 +81,9 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .paso_02 .cont_direccion .direccion_opciones .dir_op {
   background: #ccc;
 }
+.paso_02 .cont_direccion .direccion_opciones .dir_op .alert {
+  color: #d00;
+}
 .paso_02 .cont_direccion .direccion_opciones .selected {
   background: #fcc;
 }
