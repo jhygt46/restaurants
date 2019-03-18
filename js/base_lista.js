@@ -315,7 +315,7 @@ function select_pregunta(that){
     if(cantidad > 1 && !$(that).hasClass('selected') && diff > 0){
         $(that).addClass('selected');
     }
-    
+    alert("PRUEBA");
 }
 function process_carro(){
 
