@@ -307,16 +307,13 @@ function select_pregunta(that){
 
     if($(that).hasClass('selected')){
         $(that).removeClass('selected');
-        $(that).css({ color: '#000' });
     }
     if(cantidad == 1 && !$(that).hasClass('selected')){
         parent.find('.selected').eq(0).removeClass('selected');
         $(that).addClass('selected');
-        $(that).css({ color: '#fff' });
     }
     if(cantidad > 1 && !$(that).hasClass('selected') && diff > 0){
         $(that).addClass('selected');
-        $(that).css({ color: '#fff' });
     }
     
 }
