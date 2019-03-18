@@ -15,7 +15,7 @@ body .contenedor .menu_left .cont_menu_left .menu_info ul li {
 
 /* PAGINA */
 body .contenedor .pagina .cont_pagina .header {
-  background: #336B87;
+  background: #fff;
   border-bottom: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .shop {
@@ -25,7 +25,7 @@ body .contenedor .pagina .cont_pagina .header .menu_right .cantcart {
   background: #90AFC5;
 }
 body .contenedor .pagina .cont_pagina .footer {
-  background: #336B87;
+  background: #fff;
   border-top: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .contenido {
