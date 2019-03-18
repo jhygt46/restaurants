@@ -1,35 +1,35 @@
 /* MENU LEFT */
 body {
-  color: #000;
+  color: #2A3132;
 }
 body .contenedor .menu_left {
-  background: #fff;
-  border-right: 1px solid #003B46;
+  background: #90AFC5;
+  border-right: 1px solid #2A3132;
 }
 body .contenedor .menu_left .cont_menu_left .btn_toogle {
-  color: #003B46;
+  color: #2A3132;
 }
 body .contenedor .menu_left .cont_menu_left .menu_info ul li {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #336B87;
 }
 
 /* PAGINA */
 body .contenedor .pagina .cont_pagina .header {
-  background: #fff;
-  border-bottom: 1px solid #003B46;
+  background: #336B87;
+  border-bottom: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .shop {
-  color: #003B46;
+  color: #2A3132;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .cantcart {
-  background: #C4DFE6;
+  background: #90AFC5;
 }
 body .contenedor .pagina .cont_pagina .footer {
-  background: #fff;
-  border-top: 1px solid #003B46;
+  background: #336B87;
+  border-top: 1px solid #2A3132;
 }
 body .contenedor .pagina .cont_pagina .contenido {
-  background: #C4DFE6;
+  background: #90AFC5;
 }
 /* MODALS */
 body .contenedor .modals .cont_modals .modal .cont_modal .titulo {
