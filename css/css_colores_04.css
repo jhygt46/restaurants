@@ -4,10 +4,10 @@ body {
 }
 body .contenedor .menu_left {
   background: #fff;
-  border-right: 1px solid #46211A;
+  border-right: 1px solid #003B46;
 }
 body .contenedor .menu_left .cont_menu_left .btn_toogle {
-  color: #46211A;
+  color: #003B46;
 }
 body .contenedor .menu_left .cont_menu_left .menu_info ul li {
   border-bottom: 1px solid #ddd;
@@ -16,20 +16,20 @@ body .contenedor .menu_left .cont_menu_left .menu_info ul li {
 /* PAGINA */
 body .contenedor .pagina .cont_pagina .header {
   background: #fff;
-  border-bottom: 1px solid #46211A;
+  border-bottom: 1px solid #003B46;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .shop {
-  color: #46211A;
+  color: #003B46;
 }
 body .contenedor .pagina .cont_pagina .header .menu_right .cantcart {
-  background: #BA5536;
+  background: #66A5AD;
 }
 body .contenedor .pagina .cont_pagina .footer {
   background: #fff;
-  border-top: 1px solid #46211A;
+  border-top: 1px solid #003B46;
 }
 body .contenedor .pagina .cont_pagina .contenido {
-  background: #BA5536;
+  background: #C4DFE6;
 }
 /* MODALS */
 body .contenedor .modals .cont_modals .modal .cont_modal .titulo {
