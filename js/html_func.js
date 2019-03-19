@@ -497,27 +497,19 @@ function html_preguntas_producto(i){
                 
                 var n_pregunta = document.createElement('div');
                 if(carro[i].preguntas[k].valores[m].seleccionados){
-                    
-                    console.log(carro[i].preguntas[k].valores[m].seleccionados);
-                    console.log(carro[i].preguntas[k].valores[m].valores[n]);
-                    
-                    if(carro[i].preguntas[k].valores[m].seleccionados == carro[i].preguntas[k].valores[m].valores[n]){
-                        n_pregunta.className = 'n_pregunta selected';
-                    }else{
-                        n_pregunta.className = 'n_pregunta';
-                    }
-                    /*
+
                     if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
                         n_pregunta.className = 'n_pregunta selected';
                         console.log("selected option");
                     }else{
                         n_pregunta.className = 'n_pregunta';
+                        console.log("option "+carro[i].preguntas[k].valores[m].valores[n]);
                     }
-                    */
 
                 }else{
                     n_pregunta.className = 'n_pregunta';
                 }
+
                 n_pregunta.innerHTML = carro[i].preguntas[k].valores[m].valores[n];
                 n_pregunta.onclick = function(){ select_pregunta(this) };
                 v_pregunta.appendChild(n_pregunta);
