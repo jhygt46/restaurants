@@ -500,7 +500,8 @@ function html_preguntas_producto(i){
                     
                     console.log(carro[i].preguntas[k].valores[m].seleccionados);
                     console.log(carro[i].preguntas[k].valores[m].valores[n]);
-                    
+                    console.log("indexof: "+carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]));
+
                     if(carro[i].preguntas[k].valores[m].seleccionados == carro[i].preguntas[k].valores[m].valores[n]){
                         n_pregunta.className = 'n_pregunta selected';
                     }else{
