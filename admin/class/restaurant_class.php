@@ -20,7 +20,7 @@ class Rest{
             return $this->enviar_pedido();
         }
         if($accion == "despacho_domicilio"){
-            return $this->get_info_despacho($_POST["lat"], $_POST["lng"], $_POST["lng"]);
+            return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
         if($accion == "crear_dominio"){
             return $this->crear_dominio();
