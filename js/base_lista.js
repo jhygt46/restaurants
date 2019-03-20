@@ -833,7 +833,7 @@ function paso_2(){
     paso = 2;
     console.log("init paso 2");
     if(proceso(true, true) && cantidad > 0){
-        console.log("proceso true");
+        console.log(data.config);
         if(data.config.retiro_local == 1 && data.config.despacho_domicilio == 1){
             ver_paso_2();
             console.log("ver_paso_2");
