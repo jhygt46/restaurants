@@ -463,6 +463,16 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
+function ver_array(arr, value){
+    arr.forEach(function(item, index){
+        console.log(item);
+        if(item == value){
+            return true;
+        }
+    });
+    console.log("return false");
+    return false;
+}
 function html_preguntas_producto(i){
     
     var carro = get_carro();
@@ -497,10 +507,12 @@ function html_preguntas_producto(i){
                 
                 var n_pregunta = document.createElement('div');
                 if(carro[i].preguntas[k].valores[m].seleccionados){
-
+                    /*
                     console.log(carro[i].preguntas[k].valores[m].seleccionados);
                     console.log(carro[i].preguntas[k].valores[m].valores[n]);
                     console.log(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]));
+                    */
+                    console.log(ver_array(carro[i].preguntas[k].valores[m].seleccionados, (carro[i].preguntas[k].valores[m].valores[n]));
 
                     if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
                         n_pregunta.className = 'n_pregunta selected';
