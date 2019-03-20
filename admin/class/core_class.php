@@ -529,7 +529,7 @@ class Core{
     public function get_usuarios_puser($id_gir){
 
         $user = $this->con->sql("SELECT t1.id_puser, t2.nombre, t2.telefono FROM pedidos_aux t1, pedidos_usuarios t2 WHERE t1.id_gir='".$id_gir."' AND t1.id_puser=t2.id_puser");
-        //return $user["resultado"];
+        return $user["resultado"];
 
     }
     public function get_graficos(){
