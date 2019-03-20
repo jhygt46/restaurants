@@ -512,7 +512,7 @@ function html_preguntas_producto(i){
                     console.log(carro[i].preguntas[k].valores[m].valores[n]);
                     console.log(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]));
                     */
-                    console.log(ver_array(carro[i].preguntas[k].valores[m].seleccionados, (carro[i].preguntas[k].valores[m].valores[n]));
+                    console.log(ver_array(carro[i].preguntas[k].valores[m].seleccionados, carro[i].preguntas[k].valores[m].valores[n]));
 
                     if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
                         n_pregunta.className = 'n_pregunta selected';
