@@ -24,6 +24,14 @@ body {
     height: 100%;
     width: 100%;
 }
+.contenedor .pop_up .cont_pop_up .map{
+    width: 90%;
+    max-width: 860px;
+    height: 80%;
+    max-height: 560px;
+    background: #fff;
+    border-radius: 12px;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido{
     width: 90%;
     max-width: 360px;
