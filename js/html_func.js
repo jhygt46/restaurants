@@ -498,6 +498,9 @@ function html_preguntas_producto(i){
                 
                 var n_pregunta = document.createElement('div');
                 if(carro[i].preguntas[k].valores[m].seleccionados){
+                    
+                    console.log(carro[i].preguntas[k].valores[m].seleccionados);
+                    console.log(carro[i].preguntas[k].valores[m].valores[n]);
 
                     if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
                         n_pregunta.className = 'n_pregunta selected';
