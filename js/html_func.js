@@ -464,14 +464,11 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
 }
 function ver_array(arr, value){
-    arr.forEach(function(item, index){
-        console.log(item);
-        if(item == value){
-            return true;
-        }
-    });
-    console.log("return false");
-    return false;
+    
+    for(var i=0, ilen=arr.length; i<ilen; i++){
+        console.log(arr[0]+"-"+value);
+    }
+
 }
 function html_preguntas_producto(i){
     
