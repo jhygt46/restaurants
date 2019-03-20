@@ -526,6 +526,14 @@ class Core{
         return $info;
         
     }
+    public function get_usuarios_buena(){
+
+        $user = $this->con->sql("SELECT t2.nombre, t2.telefono FROM pedidos_aux t1, pedidos_usuarios t2 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_puser=t2.id_puser");
+        echo "<pre>";
+        print_r($user);
+        echo "</pre>";
+
+    }
     public function get_graficos(){
         
         $aux = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'");
