@@ -109,8 +109,8 @@ $motos = $core->get_repartidores_local($id_loc);
                                 </div>
                                 <div class="preguntas">
                                     <div class="pregunta t_repartidor clearfix" style="padding-bottom: 10px">
-                                        <div class="pre_nom" style="width: 70%">Repartidor</div>
-                                        <div class="pre_check" style="width: 30%">
+                                        <div class="pre_nom" style="width: 50%">Repartidor</div>
+                                        <div class="pre_check" style="width: 50%">
                                             <select id="id_mot">
                                                 <option value="0">Sin Asignar</option>
                                                 <?php for($i=0; $i<count($motos); $i++){ ?>

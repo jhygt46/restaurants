@@ -1020,8 +1020,9 @@ function done_pedido(){
     pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
 
     
-     var id_mot = $('#id_mot').val();
+    var id_mot = $('#id_mot').val();
     if(id_mot !== pedidos[seleccionado].id_mot){
+        console.log("DIFERENCIA MOTO");
         if(Number.isInteger(id_mot) && id_mot != 0){
             actualizar_pedidos_moto(id_mot);
         }
