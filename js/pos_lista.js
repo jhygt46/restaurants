@@ -1020,9 +1020,6 @@ function done_pedido(){
     pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
     pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
 
-    console.log("PEDIDO SELECCIONADO");
-    console.log(pedidos[seleccionado]);
-
     var id_mot = $('#id_mot').val();
     if(id_mot !== pedidos[seleccionado].id_mot){
         
@@ -1039,7 +1036,7 @@ function done_pedido(){
             }
             // ADD PEDIDO A MOTO
             pedidos[seleccionado].id_mot = id_mot;
-            add_pedido_moto(id_mot, pedidos[seleccionado].local_code);
+            add_pedido_moto(id_mot, pedidos[seleccionado].pedido_code);
         }
         
     }
