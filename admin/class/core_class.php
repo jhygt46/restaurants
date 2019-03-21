@@ -434,6 +434,10 @@ class Core{
         $reps = $this->con->sql("SELECT t1.id_mot, t1.nombre FROM motos t1, motos_locales t2, locales t3 WHERE t3.id_gir='".$this->id_gir."' AND t3.id_loc='".$id_loc."' AND t3.id_loc=t2.id_loc AND t2.id_mot=t1.id_mot");
         return $reps['resultado'];
     }
+    public function get_repartidores_local($id_loc){
+        $reps = $this->con->sql("SELECT t1.id_mot, t1.nombre FROM motos t1, motos_locales t2 WHERE t2.id_loc='".$id_loc."' AND t2.id_mot=t1.id_mot");
+        return $reps['resultado'];
+    }
     public function get_repartidores_giro(){
         $reps = $this->con->sql("SELECT id_mot, nombre FROM motos WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         return $reps['resultado'];
@@ -665,9 +669,6 @@ class Core{
             $info['pedido_04_subtitulo'] = $sql['resultado'][0]['pedido_04_subtitulo'];
             
             $info['ultima_actualizacion'] = $sql['resultado'][0]['ultima_actualizacion'];
-            
-            $sql_motos = $this->con->sql("SELECT * FROM motos WHERE id_gir='".$info["id_gir"]."'");
-            $info['motos'] = $sql_motos['resultado'];
             
         }else{
             if($dominio == "misitiodelivery.cl" || $dominio == "www.misitiodelivery.cl"){

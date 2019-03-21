@@ -72,11 +72,11 @@ class Rest{
             $res['moto']['code'] = $sql_motos['resultado'][0]['uid'];
             $res['moto']['pedidos'] = [];
             $sql_locales = $this->con->sql("SELECT t2.code FROM motos_locales t1, locales t2 WHERE t1.id_mot='".$res["moto"]["id_mot"]."' AND t1.id_loc=t2.id_loc AND t2.eliminado='0'");
-                if($sql_locales['count'] > 0){
-                    for($j=0; $j<$sql_locales['count']; $j++){
-                        $res['moto']['locales'][] = $sql_locales['resultado'][$j]['code'];
-                    }
+            if($sql_locales['count'] > 0){
+                for($j=0; $j<$sql_locales['count']; $j++){
+                    $res['moto']['locales'][] = $sql_locales['resultado'][$j]['code'];
                 }
+            }
         }
         return $res;
     }
