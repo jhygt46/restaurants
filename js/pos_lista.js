@@ -944,6 +944,7 @@ function np_close(that){
     $(that).parent().hide();
     
 }
+
 function ver_pedido(index, that){
     
     $('#nombre').val("");
@@ -1019,16 +1020,25 @@ function done_pedido(){
     pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
     pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
 
-    
     var id_mot = $('#id_mot').val();
     if(id_mot !== pedidos[seleccionado].id_mot){
-        console.log("DIFERENCIA MOTO");
-        if(Number.isInteger(id_mot) && id_mot != 0){
-            actualizar_pedidos_moto(id_mot);
+        
+        if(id_mot == 0){
+            if(pedidos[seleccionado].id_mot > 0){
+                // BORRAR PEDIDO DE MOTO
+                borrar_pedido_moto(id_mot, pedidos[seleccionado].id_ped);
+            }
         }
-        if(Number.isInteger(pedidos[seleccionado].id_mot)){
-            actualizar_pedidos_moto(pedidos[seleccionado].id_mot);
+        if(id_mot > 0){
+            if(pedidos[seleccionado].id_mot > 0){
+                // BORRAR PEDIDO DE MOTO
+                borrar_pedido_moto(id_mot, pedidos[seleccionado].id_ped);
+            }
+            // ADD PEDIDO A MOTO
+            pedidos[seleccionado].id_mot = id_mot;
+            add_pedido_moto(id_mot, pedidos[seleccionado].local_code);
         }
+        
     }
 
     pedidos[seleccionado].id_mot = $('#id_mot').val();
@@ -1041,21 +1051,32 @@ function done_pedido(){
     $('.pop_up').hide();
     
 }
-function actualizar_pedidos_moto(id_mot){
-                
-    var sends = { id_mot: id_mot };
-    var link = "https://www.izusushi.cl/actualizar_pedidos_moto";
+
+function borrar_pedido_moto(id_mot, id_ped){     
+    var sends = { id_mot: id_mot, id_ped: id_ped };
+    var link = "https://www.izusushi.cl/borrar_pedido_moto";
     $.ajax({
         type: "POST",
         headers: { 'Accept': 'application/json', 'Content-Type': 'text/plain' },
         dataType: "json",
         url: link,
         data: sends,
-        success: function (data) {
-        }, error: function(err){
-        }
+        success: function (data){},
+        error: function(err){}
     });
-    
+}
+function add_pedido_moto(id_mot, code){
+    var sends = { id_mot: id_mot, code: code };
+    var link = "https://www.izusushi.cl/add_pedido_moto";
+    $.ajax({
+        type: "POST",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'text/plain' },
+        dataType: "json",
+        url: link,
+        data: sends,
+        success: function (data){},
+        error: function(err){}
+    });
 }
 function pedido_obj(){
     return {

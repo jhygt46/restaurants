@@ -37,20 +37,30 @@ class Rest{
         if($accion == "get_moto"){
             return $this->get_moto($_POST["id_mot"]);
         }
-        if($accion == "get_pedidos_moto"){
-            return $this->get_pedidos_moto($_POST["id_mot"]);
+        if($accion == "get_pedido_moto"){
+            return $this->get_pedido_moto($_POST["id_mot"], $_POST["id_ped"]);
         }
         
     }
     public function get_motos(){
+
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE eliminado='0'");
         $res['op'] = 2;
         if($sql_motos['count'] > 0){
             $res['op'] = 1;
             for($i=0; $i<$sql_motos['count']; $i++){
+                
                 $aux['id_mot'] = $sql_motos['resultado'][$i]['id_mot'];
                 $aux['code'] = $sql_motos['resultado'][$i]['uid'];
-                $aux['pedidos'] = [];
+                
+                $aux_pedidos = $this->get_pedidos_moto($aux['id_mot']);
+                if($aux_pedidos['op'] == 1){
+                    $aux['pedidos'] = $aux_pedidos['pedidos'];
+                }
+                if($aux_pedidos['op'] == 2){
+                    $aux['pedidos'] = [];
+                }
+
                 $sql_locales = $this->con->sql("SELECT t2.code FROM motos_locales t1, locales t2 WHERE t1.id_mot='".$aux["id_mot"]."' AND t1.id_loc=t2.id_loc AND t2.eliminado='0'");
                 if($sql_locales['count'] > 0){
                     for($j=0; $j<$sql_locales['count']; $j++){
@@ -61,16 +71,28 @@ class Rest{
                 unset($aux);
             }
         }
+
         return $res;
+
     }
     public function get_moto($id_mot){
+
         $sql_motos = $this->con->sql("SELECT id_mot, uid FROM motos WHERE id_mot='".$id_mot."' AND eliminado='0'");
         $res['op'] = 2;
         if($sql_motos['count'] == 1){
+
             $res['op'] = 1;
             $res['moto']['id_mot'] = $sql_motos['resultado'][0]['id_mot'];
             $res['moto']['code'] = $sql_motos['resultado'][0]['uid'];
-            $res['moto']['pedidos'] = [];
+
+            $aux_pedidos = $this->get_pedidos_moto($res['moto']['id_mot']);
+            if($aux_pedidos['op'] == 1){
+                $res['moto']['pedidos'] = $aux_pedidos['pedidos'];
+            }
+            if($aux_pedidos['op'] == 2){
+                $res['moto']['pedidos'] = [];
+            }
+
             $sql_locales = $this->con->sql("SELECT t2.code FROM motos_locales t1, locales t2 WHERE t1.id_mot='".$res["moto"]["id_mot"]."' AND t1.id_loc=t2.id_loc AND t2.eliminado='0'");
             if($sql_locales['count'] > 0){
                 for($j=0; $j<$sql_locales['count']; $j++){
@@ -78,19 +100,31 @@ class Rest{
                 }
             }
         }
+
         return $res;
+
     }
-    public function get_pedidos_moto($id_mot){
-        $sql_pedidos = $this->con->sql("SELECT fecha, code FROM pedidos_aux WHERE id_mot='".$id_mot."'");
+    private function get_pedidos_moto($id_mot){
+        $sql_pedidos = $this->con->sql("SELECT fecha, code FROM pedidos_aux WHERE id_mot='".$id_mot."' AND fecha > DATE_ADD(NOW(), INTERVAL -2 HOUR)");
         $res['op'] = 2;
         if($sql_pedidos['count'] > 0){
             $res['op'] = 1;
             for($i=0; $i<$sql_pedidos['count']; $i++){
+                $aux['id_ped'] = $sql_pedidos['resultado'][$i]['id_ped'];
                 $aux['fecha'] = strtotime($sql_pedidos['resultado'][$i]['fecha']) * 1000;
                 $aux['code'] = $sql_pedidos['resultado'][$i]['code'];
                 $res['pedidos'][] = $aux;
                 unset($aux);
             }
+        }
+        return $res;
+    }
+    private function get_pedido_moto($id_mot, $id_ped){
+        $sql_pedidos = $this->con->sql("SELECT t1.code FROM pedidos_aux t1, motos_locales t2 WHERE t1.id_ped='".$id_ped."' AND t1.id_loc=t2.id_loc AND t2.id_mot='".$id_mot."'");
+        $res['op'] = 2;
+        if($sql_pedidos['count'] == 1){
+            $res['op'] = 1;
+            $res['code'] = $sql_pedidos['resultado'][0]['code'];
         }
         return $res;
     }
