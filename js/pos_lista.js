@@ -1053,23 +1053,19 @@ function done_pedido(){
 }
 
 function borrar_pedido_moto(id_mot, id_ped){
-    console.log("BORRAR PEDIDO MOTO");
-    console.log(id_mot+"-"+id_ped);
     var sends = { id_mot: id_mot, id_ped: id_ped };
-    var link = "https://www.izusushi.cl/borrar_pedido_moto";
+    var link = "https://www.izusushi.cl/rm_pedido_moto";
     $.ajax({
         type: "POST",
         headers: { 'Accept': 'application/json', 'Content-Type': 'text/plain' },
         dataType: "json",
         url: link,
         data: sends,
-        success: function (data){ console.log(data); },
+        success: function (data){},
         error: function(err){}
     });
 }
 function add_pedido_moto(id_mot, code){
-    console.log("ADD PEDIDO MOTO");
-    console.log(id_mot+"-"+code);
     var sends = { id_mot: id_mot, code: code };
     var link = "https://www.izusushi.cl/add_pedido_moto";
     $.ajax({
@@ -1078,7 +1074,7 @@ function add_pedido_moto(id_mot, code){
         dataType: "json",
         url: link,
         data: sends,
-        success: function (data){ console.log(data); },
+        success: function (data){},
         error: function(err){}
     });
 }
