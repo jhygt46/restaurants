@@ -4,6 +4,7 @@ $(document).ready(function(){
     listar_pedidos();
     modificar_horas();
 });
+
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -11,8 +12,24 @@ var crear_nuevo = 0;
 var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 //var tiempos = { retiro: 1500, despacho: 3600 };
 var time = new Date().getTime();
+var map_socket, markers;
 
-function actualizar_seleccionado(){}
+function init_map(lat, lng){
+    
+    var punto = { lat: lat, lng: lng };
+    map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
+        center: punto,
+        zoom: 17,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true
+    });
+    var local_marker = new google.maps.Marker({
+        map: map_socket,
+        title: 'Local',
+        position: punto
+    });
+
+}
 function add_carro_producto(id_pro){
 
     var pedidos = get_pedidos();
@@ -154,6 +171,10 @@ function socket_init(){
     socket.on('local-'+local_code, function(id_ped) {
         agregar_pedido(id_ped);
         console.log("ADD");
+    });
+    socket.on('map-'+local_code, function(moto) {
+        console.log(moto);
+        console.log("MOTO");
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();
@@ -365,11 +386,13 @@ function html_home_pedidos(obj, index){
     
 }
 function ver_motos_mapa(){
-    console.log("moto_mapa");
+    
+    // INICIAR MAPA
     $('.pop_up').show();
     $('.p5').show();
     $('.p5 .n_title').html("MOTOS EN EL MAPA");
     $('.p5 .data_info').html();
+
 }
 function ver_opciones_pos(){
     console.log("opciones pos");
@@ -1286,7 +1309,6 @@ function gmap_input(){
         if(places.length == 1){
             
             var pedidos = get_pedidos();
-            console.log();
             pedidos[seleccionado].lat = places[0].geometry.location.lat();
             pedidos[seleccionado].lng = places[0].geometry.location.lng();
             pedidos[seleccionado].direccion = places[0].formatted_address;
