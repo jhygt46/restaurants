@@ -1026,7 +1026,7 @@ function done_pedido(){
         if(id_mot == 0){
             if(pedidos[seleccionado].id_mot > 0){
                 // BORRAR PEDIDO DE MOTO
-                borrar_pedido_moto(id_mot, pedidos[seleccionado].pedido_code);
+                borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
             }
         }
         if(id_mot > 0){
