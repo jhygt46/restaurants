@@ -388,6 +388,8 @@ function html_home_pedidos(obj, index){
 function ver_motos_mapa(){
     
     // INICIAR MAPA
+    console.log("ver mapa");
+    console.log(motos);
     $('.pop_up').show();
     $('.p5').show();
     $('.p5 .n_title').html("MOTOS EN EL MAPA");
@@ -395,11 +397,13 @@ function ver_motos_mapa(){
 
 }
 function ver_opciones_pos(){
+
     console.log("opciones pos");
     $('.pop_up').show();
     $('.p6').show();
     $('.p6 .n_title').html("OPCIONES POS");
     $('.p6 .data_info').html();
+
 }
 function mostrar_pregunta(i){
     var pedidos = get_pedidos();

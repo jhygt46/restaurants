@@ -63,6 +63,7 @@ $motos = $core->get_repartidores_local($id_loc);
             var tiempos = { retiro: <?php echo $local['t_retiro']; ?>, despacho: <?php echo $local['t_despacho']; ?> };
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
+            var motos = <?php if($motos != null){ echo json_encode($motos); }else{ echo '[]'; } ?>;
         </script>
         <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
