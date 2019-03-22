@@ -567,6 +567,7 @@ class Core{
                 $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
                 $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
                 $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
+                $res['id_mot'] = $sql['resultado'][$i]['id_mot'];
                 $res['eliminado'] = $sql['resultado'][$i]['eliminado'];
                 $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
                 $res['costo'] = $sql['resultado'][$i]['costo'];
