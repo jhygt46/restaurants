@@ -991,6 +991,7 @@ function ver_pedido(index, that){
     if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
     if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
     $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
+    console.log(pedido.id_mot);
     $('#id_mot option[value='+pedido.id_mot+']').attr('selected', 'selected');
     
     $('.pop_up').show();
