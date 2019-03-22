@@ -30,7 +30,7 @@ function init_map(lat, lng){
     });
     for(var i=0, ilen=motos.length; i<ilen; i++){
         markers.push(new google.maps.Marker({
-            map: null,
+            map: map_socket,
             title: motos[i].nombre,
             position: { lat: 0, lng: 0 }
         }))
