@@ -28,6 +28,14 @@ function init_map(lat, lng){
         title: 'Local',
         position: punto
     });
+    for(var i=0, ilen=motos.length; i<ilen; i++){
+        markers.push(new google.maps.Marker({
+            map: null,
+            title: motos[i].nombre,
+            position: { lat: 0, lng: 0 }
+        }))
+        motos[i].fecha = new Date().getTime();
+    }
 
 }
 function add_carro_producto(id_pro){
@@ -173,9 +181,22 @@ function socket_init(){
         console.log("ADD");
     });
     socket.on('map-'+local_code, function(moto) {
+        
         var info = JSON.parse(moto.info);
         console.log(info);
         console.log(motos);
+        for(var i=0, ilen=motos.length; i<ilen; i++){
+            if(motos[i].id_mot == info.id_mot){
+                markers[i].setMap(map_socket);
+                markers[i].setPosition(new google.maps.LatLng(info.lat,info.lng));
+                motos[i].fecha = new Date().getTime();
+            }
+            var tiempo = motos[i].fecha - new Date().getTime();
+            if(tiempo > 600000){
+                markers[i].setMap(null);
+            }
+        }
+
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();
