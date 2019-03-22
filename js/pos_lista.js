@@ -173,8 +173,9 @@ function socket_init(){
         console.log("ADD");
     });
     socket.on('map-'+local_code, function(moto) {
-        console.log(moto);
-        console.log("MOTO");
+        var info = JSON.parse(moto.info);
+        console.log(info);
+        console.log(motos);
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();
