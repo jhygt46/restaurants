@@ -49,6 +49,7 @@ echo "</pre>";
 
 ?>
 <script>
+    labelIndex = 0;
     iniciar_mapa();
     renderMarkers_mod(<?php echo $that['poligono']; ?>);
 </script>
