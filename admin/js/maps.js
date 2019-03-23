@@ -37,7 +37,6 @@ function addMarker(location, map) {
         marker.setMap(null);
         bermudaTriangle.setMap(null);
         renderMarkers();
-        
     });
     
     marker.addListener('dragend', function() {
@@ -70,14 +69,11 @@ function renderMarkers(){
 
 }
 function renderMarkers_mod(posiciones){
-
     if(posiciones !== undefined){
-
         posiciones.forEach(function(item) {
             addMarker({lat: item.lat, lng: item.lng}, map);
         });
         renderMarkers();
-        
     }
 }
 function setnull(){

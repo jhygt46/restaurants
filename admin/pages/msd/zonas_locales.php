@@ -43,6 +43,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
 
 }
 
+echo "<pre>";
+print_r($that['poligono']);
+echo "</pre>";
+
 ?>
 <script>
     iniciar_mapa();
