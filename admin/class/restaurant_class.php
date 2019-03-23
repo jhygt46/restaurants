@@ -396,7 +396,10 @@ class Rest{
                 $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
             }
             $is = $this->pointInPolygon($lat." ".$lng, $poli);
-            $info['is'][] = $is;
+            $aux['lat'] = $lat;
+            $aux['lng'] = $lng;
+            $aux['poli'] = $poli;
+            $aux['is'] = $is;
             if($is == "inside"){
                 if($precio > $polygon['precio']){
                     $info['op'] = 1;
@@ -405,7 +408,8 @@ class Rest{
                     $precio = $polygon['precio'];
                 }
             }
-            
+            $info['tramos'][] = $aux;
+            unset($aux);
         }
         return $info;
         
