@@ -16,6 +16,8 @@ var map_socket, markers;
 
 function init_map(){
     
+    var lat = 0;
+    var lng = 0;
     var punto = { lat: lat, lng: lng };
     map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
         center: punto,
