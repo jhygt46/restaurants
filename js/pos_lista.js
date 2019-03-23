@@ -3,6 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
+    init_map();
 });
 
 var seleccionado = 0;
@@ -30,7 +31,7 @@ function init_map(lat, lng){
     });
     for(var i=0, ilen=motos.length; i<ilen; i++){
         markers.push(new google.maps.Marker({
-            map: map_socket,
+            map: null,
             title: motos[i].nombre,
             position: { lat: 0, lng: 0 }
         }))
