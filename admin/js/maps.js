@@ -19,6 +19,13 @@ function iniciar_mapa() {
     });
     
 }
+function testmarker(lat, lng){
+    var marker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        label: 'BUE',
+        map: map
+    });
+}
 function addMarker(location, map) {
     
     var marker = new google.maps.Marker({
