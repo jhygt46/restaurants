@@ -190,7 +190,9 @@ $motos = $core->get_repartidores_local($id_loc);
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
                         <div class="n_info n1">
-                            <div class="data_info"></div>
+                            <div id="mapa_motos" style="height: 300px; width: 400px">
+                            
+                            </div>
                         </div>
                     </div>
                     <div class="p6 nuevo_pedido vhalign" style="display: none">
@@ -254,6 +256,6 @@ $motos = $core->get_repartidores_local($id_loc);
                 </div>
             </div>
         </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places&callback=init_map"></script>
     </body>
 </html>
