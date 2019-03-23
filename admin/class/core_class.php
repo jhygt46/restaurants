@@ -351,10 +351,7 @@ class Core{
         return $pagina['resultado'][0];
     }
     public function get_polygons(){
-        $referer = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
-        if($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl"){
-            $referer = $_POST["referer"];
-        }
+        $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
         $polygons = $this->con->sql("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio='".$referer."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado='0' AND t3.eliminado='0'");
         return $polygons['resultado'];
     }
