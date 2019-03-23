@@ -384,6 +384,7 @@ class Rest{
     public function get_info_despacho($lat, $lng){
 
         $polygons = $this->get_polygons();
+        $info['polygons'] = $polygons;
         $precio = 9999999;
         $info['op'] = 2;
 
