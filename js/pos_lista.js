@@ -3,7 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
-    init_map();
+    init_map(0, 0);
 });
 
 var seleccionado = 0;
