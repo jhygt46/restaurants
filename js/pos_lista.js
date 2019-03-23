@@ -3,7 +3,6 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
-    init_map(0, 0);
 });
 
 var seleccionado = 0;
@@ -15,7 +14,7 @@ var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
 var time = new Date().getTime();
 var map_socket, markers;
 
-function init_map(lat, lng){
+function init_map(){
     
     var punto = { lat: lat, lng: lng };
     map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
