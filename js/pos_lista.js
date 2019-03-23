@@ -17,8 +17,7 @@ var map_socket;
 
 function init_map(){
     
-    var punto = { lat: local_lat, lng: local_lng };
-    console.log(punto);
+    var punto = { lat: parseFloat(local_lat), lng: parseFloat(local_lng) };
 
     map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
         center: punto,
