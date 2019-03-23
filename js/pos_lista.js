@@ -24,7 +24,7 @@ function init_map(){
         center: punto,
         zoom: 17,
         mapTypeId: 'roadmap',
-        disableDefaultUI: true
+        disableDefaultUI: false
     });
     var local_marker = new google.maps.Marker({
         map: map_socket,
