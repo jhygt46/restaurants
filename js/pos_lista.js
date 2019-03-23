@@ -25,16 +25,20 @@ function init_map(){
         mapTypeId: 'roadmap',
         disableDefaultUI: false
     });
+    var icon_local = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
     var local_marker = new google.maps.Marker({
         map: map_socket,
         title: 'Local',
-        position: punto
+        position: punto,
+        icon: icon_local
     });
+    var icon_moto = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
     for(var i=0, ilen=motos.length; i<ilen; i++){
         markers.push(new google.maps.Marker({
             map: null,
             title: motos[i].nombre,
-            position: { lat: 0, lng: 0 }
+            position: { lat: 0, lng: 0 },
+            icon: icon_moto
         }))
         motos[i].fecha = new Date().getTime();
     }
