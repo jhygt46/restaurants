@@ -190,7 +190,7 @@ $motos = $core->get_repartidores_local($id_loc);
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
                         <div class="n_info n1">
-                            <div id="mapa_motos" style="height: 300px; width: 400px">
+                            <div id="mapa_motos" style="height: 100%; width: 100%">
                             
                             </div>
                         </div>
