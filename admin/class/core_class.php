@@ -599,8 +599,8 @@ class Core{
     }
     public function socket_code($id_loc, $id_gir){
         
-        $aux = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' && id_gir='".$id_gir."'");
-        return $aux['resultado'][0]['code'];
+        $aux = $this->con->sql("SELECT lat, lng, code FROM locales WHERE id_loc='".$id_loc."' && id_gir='".$id_gir."'");
+        return $aux['resultado'][0];
         
     }
     public function get_data($dominio){

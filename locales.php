@@ -36,7 +36,7 @@ if(!isset($_COOKIE['CODE'])){
 
 $info = $core->get_data($local['dominio']);
 $pedidos = $core->get_ultimos_pedidos(null);
-$code = $core->socket_code($id_loc, $info['id_gir']);
+$info_local = $core->socket_code($id_loc, $info['id_gir']);
 $motos = $core->get_repartidores_local($id_loc);
 
 ?>
@@ -57,7 +57,9 @@ $motos = $core->get_repartidores_local($id_loc);
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
-            var local_code = '<?php echo $code; ?>';
+            var local_code = '<?php echo $info_local['code']; ?>';
+            var local_lat = '<?php echo $info_local['lat']; ?>';
+            var local_lng = '<?php echo $info_local['lng']; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
             var tiempos = { retiro: <?php echo $local['t_retiro']; ?>, despacho: <?php echo $local['t_despacho']; ?> };

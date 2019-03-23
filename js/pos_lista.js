@@ -17,9 +17,7 @@ var map_socket;
 
 function init_map(){
     
-    var lat = 0;
-    var lng = 0;
-    var punto = { lat: lat, lng: lng };
+    var punto = { lat: local_lat, lng: local_lng };
     map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
         center: punto,
         zoom: 17,
@@ -186,8 +184,7 @@ function socket_init(){
     socket.on('map-'+local_code, function(moto) {
         
         var info = JSON.parse(moto.info);
-        console.log(info);
-        console.log(motos);
+        console.log("EMIT MAP");
         for(var i=0, ilen=motos.length; i<ilen; i++){
             if(motos[i].id_mot == info.id_mot){
                 markers[i].setMap(map_socket);
