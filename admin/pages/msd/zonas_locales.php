@@ -8,7 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Tramos";
@@ -30,21 +30,21 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
     $id_loc = $_GET["id_loc"];
-    $list = $fireapp->get_local_tramos($id_loc);
+    $list = $core->get_local_tramos($id_loc);
     $id_lot = 0;
     
     if(isset($_GET["id_lot"]) && is_numeric($_GET["id_lot"]) && $_GET["id_lot"] != 0){
         
         $sub_titulo = $sub_titulo2;
         $id_lot = $_GET["id_lot"];
-        $that = $fireapp->get_local_tramo($id_lot);
+        $that = $core->get_local_tramo($id_lot);
         
     }
 
 }
 
 echo "<pre>";
-print_r($that['poligono']);
+print_r($core->get_info_despacho(-33.456397, -70.611704));
 echo "</pre>";
 
 ?>
