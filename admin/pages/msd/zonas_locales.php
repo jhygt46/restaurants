@@ -42,16 +42,16 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     }
 
 }
-
+/*
 echo "<pre>";
-print_r($core->get_info_despacho(-33.439834, -70.6169143));
+print_r($core->get_info_despacho(-33.43457716115334, -70.601704));
 echo "</pre>";
-
+*/
 ?>
 <script>
     labelIndex = 0;
     iniciar_mapa();
-    testmarker(-33.439834, -70.6169143);
+    testmarker(-33.43457716115334, -70.601704);
     renderMarkers_mod(<?php echo $that['poligono']; ?>);
 </script>
 <div class="pagina">
