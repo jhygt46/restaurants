@@ -8,11 +8,11 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require($path."/admin/class/core_class.php");
 $core = new Core();
-/*
+
 echo "<pre>";
-print_r($core->get_info_despacho($_GET["lat"], $_GET["lng"]));
+print_r($core->get_polygons());
 echo "</pre>";
- */
+
 class pointLocation{
 
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
@@ -80,7 +80,7 @@ class pointLocation{
 
         $coordinates = explode(" ", $pointString);
         return array("x" => $coordinates[0], "y" => $coordinates[1]);
-        
+
     }
  
 }
