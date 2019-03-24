@@ -379,8 +379,8 @@ class Core{
                     $info['nombre'] = $polygon['nombre'];
                     $precio = $polygon['precio'];
                 }
-                $info['tramos'][] = $aux;
             }
+            $info['tramos'][] = $aux;
             unset($aux);
         }
         return $info;
