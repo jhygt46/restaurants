@@ -54,6 +54,7 @@ class pointLocation{
             } 
         } 
         // If the number of edges we passed through is odd, then it's in the polygon. 
+        return $intersections;
         if ($intersections % 2 != 0) {
             return "inside";
         } else {
@@ -99,7 +100,6 @@ foreach($poligons as $polygon){
         $poli[] = $punto->{"lat"}." ".$punto->{"lng"};
     }
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
-    echo "";
     echo $is."<br/>";
 
 }
