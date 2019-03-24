@@ -114,9 +114,9 @@ foreach($poligons as $polygon){
         $vertices_y[] = $punto->{"lng"};
     }
     if (is_in_polygon($points_polygon, $vertices_x, $vertices_y, $lng, $lat)){
-        echo "Is in polygon!";
+        echo "SI<br/>";
     }else{
-        echo "Is not in polygon";
+        echo "NO<br/>";
     }
 }
 
