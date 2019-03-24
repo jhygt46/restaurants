@@ -9,10 +9,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require($path."/admin/class/core_class.php");
 $core = new Core();
 
-echo "<pre>";
-print_r($core->get_polygons());
-echo "</pre>";
-
 class pointLocation{
 
     var $pointOnVertex = true; // Check if the point sits exactly on one of the vertices?
@@ -86,10 +82,23 @@ class pointLocation{
 }
 
 $pointLocation = new pointLocation();
+$poligons = $core->get_polygons();
+$lat = $_GET['lat'];
+$lng = $_GET['lng'];
 
+/*
 $points = array("50 70","70 40","-20 30","100 10","-10 -10","40 -20","110 -20");
 $polygon = array("-50 30","50 70","100 50","80 10","110 -10","110 -30","-20 -50","-30 -40","10 -10","-10 10","-30 -20","-50 30");
+*/
 
-foreach($points as $key => $point) {
-    echo "point " . ($key+1) . " ($point): " . $pointLocation->pointInPolygon($point, $polygon) . "<br>";
+foreach($poligons as $polygon){
+
+    $poli = [];
+    $puntos = json_decode($polygon['poligono']);
+    foreach($puntos as $punto){
+        $poli[] = $punto->{"lat"}." ".$punto->{"lng"};
+    }
+    $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
+    echo $is."<br/>";
+    
 }
