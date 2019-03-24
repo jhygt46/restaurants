@@ -95,6 +95,6 @@ foreach($poligons as $polygon){
         $poli[] = $punto->{"lat"}." ".$punto->{"lng"};
     }
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
-    echo $is."<br/>";
+    echo $polygon['nombre'].">> ".$is."<br/>";
 
 }
