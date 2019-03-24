@@ -54,7 +54,7 @@ class pointLocation{
             } 
         } 
         // If the number of edges we passed through is odd, then it's in the polygon. 
-        return $intersections;
+        
         if ($intersections % 2 != 0) {
             return "inside";
         } else {
@@ -87,10 +87,6 @@ $poligons = $core->get_polygons();
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
 
-/*
-$points = array("50 70","70 40","-20 30","100 10","-10 -10","40 -20","110 -20");
-$polygon = array("-50 30","50 70","100 50","80 10","110 -10","110 -30","-20 -50","-30 -40","10 -10","-10 10","-30 -20","-50 30");
-
 foreach($poligons as $polygon){
 
     $poli = [];
@@ -99,44 +95,6 @@ foreach($poligons as $polygon){
         $poli[] = $punto->{"lat"}." ".$punto->{"lng"};
     }
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
-    echo $polygon['nombre'].": ".$is."<br/>";
+    echo $is."<br/>";
 
 }
-*/
-
-foreach($poligons as $polygon){
-    $vertices_x = [];
-    $vertices_y = [];
-    $puntos = json_decode($polygon['poligono']);
-    $points_polygon = count($puntos);
-    foreach($puntos as $punto){
-        $vertices_x[] = $punto->{"lat"};
-        $vertices_y[] = $punto->{"lng"};
-    }
-    if (is_in_polygon($points_polygon, $vertices_x, $vertices_y, $lng, $lat)){
-        echo "SI<br/>";
-    }else{
-        echo "NO<br/>";
-    }
-}
-
-
-function is_in_polygon($points_polygon, $vertices_x, $vertices_y, $longitude_x, $latitude_y){
-    $i = $j = $c = $point = 0;
-    for ($i = 0, $j = $points_polygon ; $i < $points_polygon; $j = $i++) {
-        $point = $i;
-        if($point == $points_polygon)
-            $point = 0;
-            if ( (($vertices_y[$point]  >  $latitude_y != ($vertices_y[$j] > $latitude_y)) && ($longitude_x < ($vertices_x[$j] - $vertices_x[$point]) * ($latitude_y - $vertices_y[$point]) / ($vertices_y[$j] - $vertices_y[$point]) + $vertices_x[$point]) ) )
-                $c = !$c;
-    }
-    return $c;
-}
-
-
-
-
-
-
-
-
