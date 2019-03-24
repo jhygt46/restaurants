@@ -29,7 +29,7 @@ class pointLocation{
         }
  
         // Check if the point sits exactly on a vertex
-        if ($this->pointOnVertex == true and $this->pointOnVertex($point, $vertices) == true) {
+        if ($this->pointOnVertex == true && $this->pointOnVertex($point, $vertices) == true) {
             return "vertex";
         }
  
@@ -40,10 +40,10 @@ class pointLocation{
         for ($i=1; $i < $vertices_count; $i++) {
             $vertex1 = $vertices[$i-1]; 
             $vertex2 = $vertices[$i];
-            if ($vertex1['y'] == $vertex2['y'] and $vertex1['y'] == $point['y'] and $point['x'] > min($vertex1['x'], $vertex2['x']) and $point['x'] < max($vertex1['x'], $vertex2['x'])) { // Check if point is on an horizontal polygon boundary
+            if ($vertex1['y'] == $vertex2['y'] && $vertex1['y'] == $point['y'] && $point['x'] > min($vertex1['x'], $vertex2['x']) && $point['x'] < max($vertex1['x'], $vertex2['x'])) { // Check if point is on an horizontal polygon boundary
                 return "boundary";
             }
-            if ($point['y'] > min($vertex1['y'], $vertex2['y']) and $point['y'] <= max($vertex1['y'], $vertex2['y']) and $point['x'] <= max($vertex1['x'], $vertex2['x']) and $vertex1['y'] != $vertex2['y']) { 
+            if ($point['y'] > min($vertex1['y'], $vertex2['y']) && $point['y'] <= max($vertex1['y'], $vertex2['y']) && $point['x'] <= max($vertex1['x'], $vertex2['x']) && $vertex1['y'] != $vertex2['y']) { 
                 $xinters = ($point['y'] - $vertex1['y']) * ($vertex2['x'] - $vertex1['x']) / ($vertex2['y'] - $vertex1['y']) + $vertex1['x']; 
                 if ($xinters == $point['x']) { // Check if point is on the polygon boundary (other than horizontal)
                     return "boundary";
@@ -99,6 +99,7 @@ foreach($poligons as $polygon){
         $poli[] = $punto->{"lat"}." ".$punto->{"lng"};
     }
     $is = $pointLocation->pointInPolygon($lat." ".$lng, $poli);
+    echo "";
     echo $is."<br/>";
-    
+
 }
