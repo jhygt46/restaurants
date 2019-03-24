@@ -366,9 +366,6 @@ class Core{
                 $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
             }
             $is = $this->pointInPolygon($lat." ".$lng, $poli);
-            //$aux['lat'] = $lat;
-            //$aux['lng'] = $lng;
-            //$aux['poli'] = $poli;
             $aux['is'] = $is;
             $aux['nombre'] = $polygon['nombre'];
             if($is == "inside"){
@@ -377,6 +374,8 @@ class Core{
                     $info['id_loc'] = intval($polygon['id_loc']);
                     $info['precio'] = intval($polygon['precio']);
                     $info['nombre'] = $polygon['nombre'];
+                    $info['lat'] = $lat;
+                    $info['lng'] = $lng;
                     $precio = $polygon['precio'];
                 }
             }
