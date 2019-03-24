@@ -90,8 +90,7 @@ $lng = $_GET['lng'];
 /*
 $points = array("50 70","70 40","-20 30","100 10","-10 -10","40 -20","110 -20");
 $polygon = array("-50 30","50 70","100 50","80 10","110 -10","110 -30","-20 -50","-30 -40","10 -10","-10 10","-30 -20","-50 30");
-*/
-/*
+
 foreach($poligons as $polygon){
 
     $poli = [];
@@ -104,17 +103,23 @@ foreach($poligons as $polygon){
 
 }
 */
-$vertices_x = array(37.628134, 37.629867, 37.62324, 37.622424);    // x-coordinates of the vertices of the polygon
-$vertices_y = array(-77.458334,-77.449021,-77.445416,-77.457819); // y-coordinates of the vertices of the polygon
-$points_polygon = count($vertices_x);  // number vertices = number of points in a self-closing polygon
-$longitude_x = $_GET["lat"];  // x-coordinate of the point to test
-$latitude_y = $_GET["lng"];    // y-coordinate of the point to test
 
-if (is_in_polygon($points_polygon, $vertices_x, $vertices_y, $longitude_x, $latitude_y)){
-    echo "Is in polygon!";
-}else{
-    echo "Is not in polygon";
+foreach($poligons as $polygon){
+    $vertices_x = [];
+    $vertices_y = [];
+    $puntos = json_decode($polygon['poligono']);
+    $points_polygon = count($puntos);
+    foreach($puntos as $punto){
+        $vertices_x[] = $punto->{"lat"};
+        $vertices_y[] = $punto->{"lng"};
+    }
+    if (is_in_polygon($points_polygon, $vertices_x, $vertices_y, $lng, $lat)){
+        echo "Is in polygon!";
+    }else{
+        echo "Is not in polygon";
+    }
 }
+
 
 function is_in_polygon($points_polygon, $vertices_x, $vertices_y, $longitude_x, $latitude_y){
     $i = $j = $c = $point = 0;
