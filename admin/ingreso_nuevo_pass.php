@@ -80,11 +80,11 @@
                     <input type='hidden' id='code' value='<?php echo $_GET['code']; ?>'>
                     <div class='us'>
                         <div class='txt'>Password</div>
-                        <div class='input'><input type='text' id='pass_01' value=''></div>
+                        <div class='input'><input type='password' id='pass_01' value=''></div>
                     </div>
                     <div class='us'>
                         <div class='txt'>Password</div>
-                        <div class='input'><input type='text' id='pass_02' value=''></div>
+                        <div class='input'><input type='password' id='pass_02' value=''></div>
                     </div>
                     <div class='button clearfix'>
                         <div class='msg'></div>
