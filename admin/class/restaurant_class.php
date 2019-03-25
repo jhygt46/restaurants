@@ -178,16 +178,16 @@ class Rest{
             $data = json_decode(($v)); 
             if($data->{'success'}){ 
                 
-                $correo = $_POST["correo"];
+                $correo = $_POST["correo_msd"];
                 if(filter_var($correo, FILTER_VALIDATE_EMAIL)) {
 
                     $validar_correo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo."' AND eliminado='0'");
                     if($validar_correo['count'] == 0){
 
-                        $dominio_val = explode(".", $_POST["dominio"]);
+                        $dominio_val = explode(".", $_POST["dominio_msd"]);
                         if(count($dominio_val) == 3 && $dominio_val[0] == "www" && strlen($dominio_val[1]) > 1 && strlen($dominio_val[2]) > 1){
 
-                            $dominio = $_POST["dominio"];
+                            $dominio = $_POST["dominio_msd"];
                             $validar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."' AND eliminado='0'");
                             if($validar_dominio['count'] == 0){
 
