@@ -56,7 +56,7 @@
                         if(data.op == 1){
                             bien(data.message);
                             setTimeout(function () {
-                                $(location).attr('href',"");
+                                $(location).attr("href","https://misitiodelivery.cl/admin");
                             }, 2000);
                         }
                         if(data.op == 2){
