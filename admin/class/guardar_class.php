@@ -283,6 +283,7 @@ class Guardar extends Core{
         $pedido_04_titulo = $_POST['titulo_04'];
         $pedido_04_subtitulo = $_POST['subtitulo_04'];
 
+        $mapcode = $_POST['mapcode'];
         $estados = $_POST['estados'];
 
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
@@ -299,11 +300,10 @@ class Guardar extends Core{
         }
         
         // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET mapcode='".$mapcode."', estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
         
         // MODIFICAR TITULO
         $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
-        
         
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
