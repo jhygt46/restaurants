@@ -49,11 +49,11 @@
                 <div class='contlogin'>
                     <div class='us'>
                         <div class='txt'>Correo</div>
-                        <div class='input'><input type='text' id='user' value=''></div>
+                        <div class='input'><input type='text' name="login_usuario" id='user' value=''></div>
                     </div>
                     <div class='pa'>
                         <div class='txt'>Contrase&ntilde;a</div>
-                        <div class='input'><input type='password' id='pass'></div>
+                        <div class='input'><input type='password' name="login_password" id='pass'></div>
                     </div>
                     <div class='button clearfix'>
                         <div class='msg'></div>

@@ -74,18 +74,18 @@ class Login {
                         $this->con->sql("UPDATE fw_usuarios SET mailcode='', pass='".md5($pass_01)."' WHERE id_user='".$id."'");
                         $info['op'] = 1;
                         $info['url'] = "";
-                        $info['message'] = "Felicidades";
+                        $info['message'] = "Felicidades! se ha creado su password";
                     }else{
                         $info['op'] = 2;
-                        $info['message'] = "Error: diferentes";
+                        $info['message'] = "Error: password diferentes";
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['message'] = "Error: Password demaciado corta";
+                    $info['message'] = "Error: assword debe tener mas de 8 caracteres";
                 }
             }else{
                 $info['op'] = 2;
-                $info['message'] = "Demaciados intentos";
+                $info['message'] = "Error: Demaciados intentos";
             }    
         }else{
             $info['op'] = 2;
