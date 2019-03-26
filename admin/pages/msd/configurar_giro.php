@@ -91,6 +91,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <span><p>Subtitulo #4:</p></span>
                         <input id="subtitulo_04" type="text" class="inputs" value="<?php echo $that['pedido_04_subtitulo']; ?>" require="" placeholder="" />
                     </label>
+                    <label class="clearfix" style="margin-top: 0px">
+                        <span><p>Google Maps Code:</p></span>
+                        <input id="mapcode" type="text" class="inputs" value="<?php echo $that['mapcode']; ?>" require="" placeholder="" />
+                    </label>
                     <label class="clearfix">
                         <span><p>Gengibre:</p></span>
                         <input id="pedido_gengibre" type="checkbox" class="checkbox" value="1" <?php if($that['pedido_gengibre'] == 1){ ?>checked="checked"<?php } ?>>
