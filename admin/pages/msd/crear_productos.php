@@ -131,19 +131,19 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <div id="tipo-0">
                         <label class="clearfix">
                             <span><p>Numero:</p></span>
-                            <input id="numero" class="inputs" type="text" value="<?php echo $that["numero"]; ?>" require="" placeholder="" />
+                            <input id="numero" name="producto_numero" class="inputs" type="text" value="<?php echo $that["numero"]; ?>" require="" placeholder="" />
                         </label>
                         <label class="clearfix">
                             <span><p>Nombre:</p></span>
-                            <input id="nombre" class="inputs" type="text" value="<?php echo $that["nombre"]; ?>" require="" placeholder="" />
+                            <input id="nombre" name="producto_nombre" class="inputs" type="text" value="<?php echo $that["nombre"]; ?>" require="" placeholder="" />
                         </label>
                         <label class="clearfix">
                             <span><p>Descripcion:</p></span>
-                            <input id="descripcion" class="inputs" type="text" value="<?php echo $that["descripcion"]; ?>" require="" placeholder="" />
+                            <input id="descripcion" name="producto_descripcion" class="inputs" type="text" value="<?php echo $that["descripcion"]; ?>" require="" placeholder="" />
                         </label>
                         <label class="clearfix">
                             <span><p>Precio:</p></span>
-                            <input id="precio" class="inputs" type="text" value="<?php echo $that["precio"]; ?>" require="" placeholder="" />
+                            <input id="precio" name="producto_precio" class="inputs" type="text" value="<?php echo $that["precio"]; ?>" require="" placeholder="" />
                         </label>
                     </div>
                     
@@ -173,7 +173,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     <div id="tipo-2" style="display: none">
                         <label class="clearfix">
                             <span><p>Buscar:</p></span>
-                            <input id="buscar" class="inputs" type="text" value="" require="" placeholder="" />
+                            <input id="buscar" name="producto_buscar" class="inputs" type="text" value="" require="" placeholder="" />
                         </label>
                     </div>
 
