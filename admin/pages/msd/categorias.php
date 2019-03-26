@@ -91,7 +91,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="<?php echo $that["nombre"]; ?>" require="" placeholder="" />
+                        <input id="nombre" name="categoria_nombre" class="inputs" type="text" value="<?php echo $that["nombre"]; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Descripcion Inicio:</p></span>
