@@ -23,6 +23,7 @@ $background-modal-subtotal: #ddd;
 $modal_carta_producto: #ccc;
 $modal_carta_categoria: #ccc;
 $modal_carta_promocion: #ccc;
+$modal_carta_categoriaopen: #ccc;
 
 // MODAL PREGUNTAS //
 $modal_preguntas_opciones: #ccc;
@@ -248,6 +249,18 @@ body {
                     }
                     .categoria {
                         background: $modal_carta_categoria;
+                        .nombre {}
+                        .descripcion {}
+                        .precio {}
+                        .listado {
+                            .prod_item {
+                                .prod_i_nom {}
+                                .prod_i_pre {}
+                            }
+                        }
+                    }
+                    .categoriaopen {
+                        background: $modal_carta_categoriaopen;
                         .nombre {}
                         .descripcion {}
                         .precio {}

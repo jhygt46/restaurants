@@ -72,6 +72,9 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoria {
   background: #ccc;
 }
+.modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoriaopen {
+  background: #ccc;
+}
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion {
   background: #ccc;
 }
