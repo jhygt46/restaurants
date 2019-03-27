@@ -74,6 +74,7 @@ function create_html_categorias(obj){
     
     if(obj.mostrar_prods == 1){
         
+        Div.className = 'categoriaopen';
         var listado = document.createElement('div');
         listado.className = 'listado';
         

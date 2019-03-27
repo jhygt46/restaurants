@@ -251,6 +251,41 @@ body {
                             }
                         }
                     }
+                    .categoriaopen {
+                        margin-bottom: 6px;
+                        padding: 13px;
+                        position: relative;
+                        background-size: cover;
+                        .nombre {
+                            font-size: 24px;
+                        }
+                        .descripcion {
+                            font-size: 13px;
+                        }
+                        .precio {
+                            position: absolute;
+                            top: 4px;
+                            right: 4px;
+                            font-size: 28px;
+                        }
+                        .listado {
+                            padding: 6px 0px 0px 0px;
+                            .prod_item {
+                                font-size: 14px;
+                                padding-top: 2px;
+                                .prod_i_nom {
+                                    width: 78%;
+                                    padding-right: 2%;
+                                    font-size: 12px;
+                                }
+                                .prod_i_pre {
+                                    width: 20%;
+                                    text-align: right;
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
                     .promocion{
                         margin-bottom: 6px;
                         padding: 13px;
