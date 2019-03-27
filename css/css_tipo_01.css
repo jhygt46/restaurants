@@ -168,11 +168,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   width: 78%;
   padding-right: 2%;
   font-size: 12px;
+  float: left;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoria .listado .prod_item .prod_i_pre {
   width: 20%;
   text-align: right;
   font-size: 16px;
+  float: left;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoriaopen {
   margin-bottom: 6px;
@@ -203,11 +205,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   width: 78%;
   padding-right: 2%;
   font-size: 12px;
+  float: left;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .categoriaopen .listado .prod_item .prod_i_pre {
   width: 20%;
   text-align: right;
   font-size: 16px;
+  float: left;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion {
   margin-bottom: 6px;
@@ -238,11 +242,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   width: 78%;
   padding-right: 2%;
   font-size: 12px;
+  float: left;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion .listado .prod_item .prod_i_pre {
   width: 20%;
   text-align: right;
   font-size: 16px;
+  float: left;
 }
 
 .modal_productos_promo .cont_modal .cont_info .info_modal {
