@@ -60,15 +60,6 @@ body {
                                 .descripcion {}
                                 .precio {}
                             }
-                            .prin_alpha_1 {
-                                background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-                            }
-                            .prin_alpha_2 {
-                                background: linear-gradient(90deg, rgba(128,128,128,1) 0%, rgba(128,128,128,0) 100%);
-                            }
-                            .prin_alpha_3 {
-                                background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-                            }
                         }
                     }
                     .padding_cont_f1 {}
@@ -138,8 +129,6 @@ body {
         }
     }
 }
-
-
 .modal_carta {
     .cont_modal {
         .titulo {
@@ -713,4 +702,13 @@ body {
             }
         }
     }
+}
+.prin_alpha_1 {
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+.prin_alpha_2 {
+    background: linear-gradient(90deg, rgba(128,128,128,1) 0%, rgba(128,128,128,0) 100%);
+}
+.prin_alpha_3 {
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 }
