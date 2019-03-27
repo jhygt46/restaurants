@@ -22,6 +22,7 @@ $background-modal-subtotal: #ddd;
 // MODAL CARTA // 
 $modal_carta_producto: #ccc;
 $modal_carta_categoria: #ccc;
+$modal_carta_promocion: #ccc;
 
 // MODAL PREGUNTAS //
 $modal_preguntas_opciones: #ccc;
@@ -258,18 +259,17 @@ body {
                             }
                         }
                     }
-                }
-                .lista_promociones {
-                    .promocion_categoria {
-                        .pro_titulo {}
-                        .item_pro_cat{
-                            .item_pro_cat_cant {}
-                            .item_pro_cat_nom {}
+                    .promocion {
+                        background: $modal_carta_promocion;
+                        .nombre {}
+                        .descripcion {}
+                        .precio {}
+                        .listado {
+                            .prod_item {
+                                .prod_i_nom {}
+                                .prod_i_pre {}
+                            }
                         }
-                    }
-                    .promocion_producto {
-                        .pro_titulo {}
-                        .item_pro_pro{}
                     }
                 }
             }
