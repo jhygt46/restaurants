@@ -193,8 +193,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   position: absolute;
   right: 0px;
   width: 50px;
-  height: 50px;
-  background: #0f0;
+  font-size: 18px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion {
   margin-bottom: 6px;

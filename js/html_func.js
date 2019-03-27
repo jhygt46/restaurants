@@ -115,7 +115,7 @@ function create_html_categorias(obj){
                 
                 p_precio = document.createElement('div');
                 p_precio.className = 'prod_i_pre valign';
-                p_precio.innerHTML = aux.precio;
+                p_precio.innerHTML = formatNumber.new(parseInt(aux.precio), "$");
                 producto.appendChild(p_precio);
 
                 listado.appendChild(producto);
