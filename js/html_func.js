@@ -54,12 +54,10 @@ function html_paginas(pagina){
 
 // HTML MODALS //
 function create_html_categorias(obj){
-    
-    console.log(obj);
+
 
     var Div = document.createElement('div');
     Div.className = 'categoria';
-
     Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
 
     var Divm = document.createElement('div');
@@ -97,16 +95,26 @@ function create_html_categorias(obj){
 
                 aux = get_producto(obj.productos[i]);
                 producto = document.createElement('div');
-                producto.className = 'prod_item clearfix';
+                producto.className = 'prod_item';
                 producto.onclick = function(){ add_carro_producto(aux.id_pro) };
                 
                 p_nombre = document.createElement('div');
                 p_nombre.className = 'prod_i_nom';
-                p_nombre.innerHTML = aux.nombre;
+                
+                p_nombre_ttl = document.createElement('div');
+                p_nombre_ttl.className = 'prod_i_ttl';
+                p_nombre_ttl.innerHTML = aux.nombre;
+                p_nombre.appendChild(p_nombre_ttl);
+
+                p_nombre_sttl = document.createElement('div');
+                p_nombre_sttl.className = 'prod_i_sttl';
+                p_nombre_sttl.innerHTML = aux.descripcion;
+                p_nombre.appendChild(p_nombre_sttl);
+
                 producto.appendChild(p_nombre);
                 
                 p_precio = document.createElement('div');
-                p_precio.className = 'prod_i_pre';
+                p_precio.className = 'prod_i_pre valign';
                 p_precio.innerHTML = aux.precio;
                 producto.appendChild(p_precio);
 
