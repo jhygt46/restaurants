@@ -218,14 +218,15 @@ body {
                     }
                     .categoria {
                         margin-bottom: 6px;
-                        padding: 6px;
+                        width: 100%;
+                        height: 70px;
                         position: relative;
                         background-size: cover;
                         .nombre {
-                            font-size: 20px;
+                            font-size: 24px;
                         }
                         .descripcion {
-                            font-size: 10px;
+                            font-size: 13px;
                         }
                         .precio {
                             position: absolute;
