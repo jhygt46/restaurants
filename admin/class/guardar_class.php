@@ -112,6 +112,9 @@ class Guardar extends Core{
         if($_POST['accion'] == "ordercat"){
             return $this->ordercat();
         }
+        if($_POST['accion'] == "orderprods"){
+            return $this->orderprods();
+        }
         if($_POST['accion'] == "configurar_producto"){
             return $this->configurar_producto();
         }
@@ -141,6 +144,12 @@ class Guardar extends Core{
             $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
         }
         
+    }
+    private function orderprods(){
+        $values = $_POST['values'];
+        for($i=0; $i<count($values); $i++){
+            $this->con->sql("UPDATE productos SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_gir='".$this->id_gir."'");
+        }
     }
     public function refresh(){
         

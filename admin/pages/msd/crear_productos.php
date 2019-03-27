@@ -86,7 +86,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             $(this).find('.l_item').each(function(){
                 order.push($(this).attr('rel'));
             });
-            var send = {accion: 'ordercat', values: order};
+            var send = { accion: 'orderprods', values: order };
             $.ajax({
                 url: "ajax/index.php",
                 type: "POST",
