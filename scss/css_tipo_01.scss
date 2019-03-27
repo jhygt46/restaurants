@@ -248,23 +248,26 @@ body {
                                 .prod_item {
                                     display: block;
                                     position: relative;
+                                    padding-bottom: 6px;
+                                    border-bottom: 1px solid #ccc;
                                     .prod_i_nom{
                                         display: block;
-                                        width: calc(100% - 50px);
+                                        width: calc(100% - 75px);
                                         .prod_i_ttl{
                                             display: block;
-                                            font-size: 22px;
+                                            font-size: 18px;
                                         }
                                         .prod_i_sttl{
                                             display: block;
-                                            font-size: 14px;
+                                            font-size: 12px;
                                         }
                                     }
                                     .prod_i_pre{
                                         position: absolute;
                                         right: 0px;
-                                        width: 50px;
-                                        font-size: 18px;
+                                        width: 75px;
+                                        font-size: 17px;
+                                        text-align: right;
                                     }
                                 }
                             }
