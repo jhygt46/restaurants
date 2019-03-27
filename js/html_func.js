@@ -63,7 +63,12 @@ function create_html_categorias(obj){
     Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
 
     var Divm = document.createElement('div');
-    Divm.className = 'cont_fondo prin_alpha_1';
+
+    if(obj.degradado == 0){
+        Divm.className = 'cont_fondo';
+    }else{
+        Divm.className = 'cont_fondo prin_alpha_'+obj.degradado;
+    }
 
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
