@@ -808,7 +808,7 @@ class Core{
             if($categorias['resultado'][$i]['tipo'] == 0){
                 
                 $aux_categoria['tipo'] = 0;
-                $prods_sql = $this->con->sql("SELECT * FROM cat_pros t1, productos t2, productos_precio t3 WHERE t1.id_cae='".$categorias['resultado'][$i]['id_cae']."' AND t1.id_pro=t2.id_pro AND t1.id_pro=t3.id_pro AND t3.id_cat='".$id_cat."'");
+                $prods_sql = $this->con->sql("SELECT * FROM cat_pros t1, productos t2, productos_precio t3 WHERE t1.id_cae='".$categorias['resultado'][$i]['id_cae']."' AND t1.id_pro=t2.id_pro AND t1.id_pro=t3.id_pro AND t3.id_cat='".$id_cat."' ORDER BY t2.orders");
                 for($j=0; $j<$prods_sql['count']; $j++){
                     $aux_categoria['productos'][] = $prods_sql['resultado'][$j]['id_pro'];
                     if(!in_array($prods_sql['resultado'][$j]['id_pro'], $aux_prods)){
