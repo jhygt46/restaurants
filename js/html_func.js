@@ -175,7 +175,7 @@ function create_html_producto(id, detalle){
 function create_html_promocion(obj){
     
     var Div = document.createElement('div');
-    Div.className = 'categoria';
+    Div.className = 'promocion';
     Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     
     Div.style.backgroundImage = 'url("'+dominio+'/images/categorias/'+obj.image+'")';
