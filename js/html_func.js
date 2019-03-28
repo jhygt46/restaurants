@@ -218,7 +218,7 @@ function create_html_promocion(obj){
     
     var Precio = document.createElement('div');
     Precio.className = 'precio';
-    Precio.innerHTML = '$'+obj.precio;
+    Precio.innerHTML = formatNumber.new(parseInt(obj.precio), "$");
     Divm.appendChild(Precio);
     
     if(obj.mostrar_prods == 1){
