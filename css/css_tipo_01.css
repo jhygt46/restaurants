@@ -86,14 +86,18 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_productos .producto .nombre {
   font-size: 16px;
+  padding-right: 60px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_productos .producto .descripcion {
   font-size: 10px;
+  padding-right: 60px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_productos .producto .precio {
   position: absolute;
   right: 10px;
   font-size: 16px;
+  width: 60px;
+  text-align: right;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias {
   padding: 10px;
