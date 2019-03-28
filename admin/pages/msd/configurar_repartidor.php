@@ -57,7 +57,7 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>GPS Config:</p></span>
-                        <div class="btn_info"><div class="info">https://www.izusushi.cl/cambiar_posicion?lat=%LAT&lng=%LON&uid=<?php echo $uid; ?></div></div>
+                        <div class="btn_info"><div class="info">https://www.izusushi.cl/cambiar_posicion?lat=%LAT&lng=%LON&id=<?php echo $id_mot; ?>&uid=<?php echo $uid; ?></div></div>
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
