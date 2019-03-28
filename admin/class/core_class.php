@@ -395,6 +395,7 @@ class Core{
         return $polygons['resultado'];
         
     }
+    
     public function pointOnVertex($point, $vertices) {
         foreach($vertices as $vertex) {
             if ($point == $vertex) {

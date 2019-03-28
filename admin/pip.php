@@ -82,8 +82,6 @@ class pointLocation{
  
 }
 
-echo "HOLA";
-
 $pointLocation = new pointLocation();
 $poligons = $core->get_polygons();
 $lat = $_GET['lat'];
