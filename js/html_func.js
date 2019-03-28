@@ -153,6 +153,7 @@ function create_html_producto(id, detalle){
         Div.appendChild(precio);
         
     }
+    /*
     if(detalle == 1){
         
         var Div = document.createElement('div');
@@ -187,7 +188,7 @@ function create_html_producto(id, detalle){
         Div.appendChild(Info);
         
     }
-    
+    */
     return Div;
     
 }

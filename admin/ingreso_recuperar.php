@@ -51,6 +51,7 @@
                     type: "POST",
                     data: "accion=recuperar_password&user="+$('#correo').val(),
                     success: function(data){
+                        console.log(data);
                         if(data.op == 1){
                             bien(data.message);
                             setTimeout(function () {
@@ -63,6 +64,7 @@
                         }
                     },
                     error: function(e){
+                        console.log(e);
                         btn.prop("disabled", false);
                     }
                 });
