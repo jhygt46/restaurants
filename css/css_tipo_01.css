@@ -214,12 +214,12 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion .cont_fondo .precio {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 13px;
+  right: 13px;
   font-size: 28px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion .cont_fondo .listado {
-  padding: 6px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
 }
 .modal_carta .cont_modal .cont_info .info_modal .lista_categorias .promocion .cont_fondo .listado .prod_item {
   font-size: 14px;
