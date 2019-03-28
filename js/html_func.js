@@ -134,23 +134,23 @@ function create_html_producto(id, detalle){
     if(detalle == 0){
         
         var Div = document.createElement('div');
-        Div.className = 'categoria';
+        Div.className = 'producto';
         Div.onclick = function(){ add_carro_producto(aux.id_pro) };
         
-        var detalle = document.createElement('div');
-        detalle.className = 'detalle_pro clearfix';
-        
         var nombre = document.createElement('div');
-        nombre.className = 'nombre_pro';
+        nombre.className = 'nombre';
         nombre.innerHTML = aux.numero + " " + aux.nombre;
-        detalle.appendChild(nombre);
+        Div.appendChild(nombre);
+
+        var descripcion = document.createElement('div');
+        descripcion.className = 'descripcion';
+        descripcion.innerHTML = aux.descripcion;
+        Div.appendChild(descripcion);
         
         var precio = document.createElement('div');
-        precio.className = 'precio_pro';
+        precio.className = 'precio';
         precio.innerHTML = formatNumber.new(parseInt(aux.precio), "$");
-        detalle.appendChild(precio);
-        
-        Div.appendChild(detalle);
+        Div.appendChild(precio);
         
     }
     if(detalle == 1){

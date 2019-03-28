@@ -147,49 +147,19 @@ body {
         .cont_info {
             .info_modal{
                 .lista_productos{
-                    padding: 10px;
+                    margin: 10px;
+                    background: #ccc;
                     .producto {
-                        margin-bottom: 6px;
-                        padding: 6px;
+                        position: relative;
                         .nombre {
                             font-size: 16px;
                         }
                         .descripcion {
                             font-size: 10px;
                         }
-                    }
-                    .categoria {
-                        margin-bottom: 6px;
-                        padding: 6px;
-                        .detalle_pro {
-                            .nombre_pro {
-                                width: calc(100% - 70px);
-                                font-size: 13px;
-                            }
-                            .precio_pro {
-                                width: 70px;
-                                text-align: right;
-                                font-size: 16px;
-                            }
-                        }
-                        .nombre {
-                            font-size: 16px;
-                        }
-                        .descripcion {
-                            font-size: 10px;
-                        }
-                        .info {
-                            .info_cont {
-                                .info_01 {
-                                    width: calc(100% - 30px);
-                                    font-size: 12px;
-                                    padding-top: 9px;
-                                }
-                                .info_02 {
-                                    width: 30px;
-                                    font-size: 30px;
-                                }
-                            }
+                        .precio{
+                            position: absolute;
+                            right: 10px;
                         }
                     }
                 }
