@@ -148,7 +148,7 @@ function create_html_producto(id, detalle){
         Div.appendChild(descripcion);
         
         var precio = document.createElement('div');
-        precio.className = 'precio';
+        precio.className = 'precio valign';
         precio.innerHTML = formatNumber.new(parseInt(aux.precio), "$");
         Div.appendChild(precio);
         
