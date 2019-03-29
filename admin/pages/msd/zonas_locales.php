@@ -51,7 +51,7 @@ echo "</pre>";
 <script>
     labelIndex = 0;
     iniciar_mapa();
-    //testmarker(-33.434577, -70.601704);
+    testmarker(-33.450599, -70.6124045);
     renderMarkers_mod(<?php echo $that['poligono']; ?>);
 </script>
 <div class="pagina">
