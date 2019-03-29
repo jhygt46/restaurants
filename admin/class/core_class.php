@@ -357,7 +357,7 @@ class Core{
         $polygons = $this->get_polygons();
         $precio = 9999999;
         $info['op'] = 2;
-
+        $info['polygons'] = $polygons;
         foreach($polygons as $polygon){
 
             $lats = [];
