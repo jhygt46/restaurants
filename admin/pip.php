@@ -84,6 +84,7 @@ class pointLocation{
 
 $pointLocation = new pointLocation();
 $poligons = $core->get_polygons();
+print_r($poligons);
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
 
