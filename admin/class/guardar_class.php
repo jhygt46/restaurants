@@ -139,6 +139,7 @@ class Guardar extends Core{
     }
     private function ordercat(){
         
+        $this->con_cambios();
         $values = $_POST['values'];
         for($i=0; $i<count($values); $i++){
             $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
@@ -146,11 +147,14 @@ class Guardar extends Core{
         
     }
     private function orderprods(){
+        
+        $this->con_cambios();
         $id_cae = $_POST['id_cae'];
         $values = $_POST['values'];
         for($i=0; $i<count($values); $i++){
             $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
         }
+        
     }
     public function refresh(){
         
