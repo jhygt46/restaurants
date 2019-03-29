@@ -386,28 +386,44 @@ class Rest{
         $polygons = $this->get_polygons();
         $precio = 9999999;
         $info['op'] = 2;
-
+        $info['test'] = 1;
+        $info['polygons'] = $polygons;
         foreach($polygons as $polygon){
 
-            $poli = [];
+            $lats = [];
+            $lngs = [];
             $puntos = json_decode($polygon['poligono']);
             foreach($puntos as $punto){
-                $poli[] = $punto->{'lat'}." ".$punto->{'lng'};
+                $lats[] = $punto->{'lat'};
+                $lngs[] = $punto->{'lng'};
             }
-            $is = $this->pointInPolygon($lat." ".$lng, $poli);
-            if($is == "inside"){
+            $is = $this->is_in_polygon($lats, $lngs, $lat, $lng);
+            if($is){
                 if($precio > $polygon['precio']){
                     $info['op'] = 1;
                     $info['id_loc'] = intval($polygon['id_loc']);
                     $info['precio'] = intval($polygon['precio']);
                     $info['nombre'] = $polygon['nombre'];
+                    $info['lat'] = $lat;
+                    $info['lng'] = $lng;
                     $precio = $polygon['precio'];
                 }
             }
-            unset($aux);
         }
         return $info;
         
+    }
+    function is_in_polygon($vertices_x, $vertices_y, $longitude_x, $latitude_y){
+        $points_polygon = count($vertices_x) - 1;
+        $i = $j = $c = $point = 0;
+        for ($i = 0, $j = $points_polygon ; $i < $points_polygon; $j = $i++) {
+            $point = $i;
+            if( $point == $points_polygon )
+                $point = 0;
+            if ( (($vertices_y[$point]  >  $latitude_y != ($vertices_y[$j] > $latitude_y)) && ($longitude_x < ($vertices_x[$j] - $vertices_x[$point]) * ($latitude_y - $vertices_y[$point]) / ($vertices_y[$j] - $vertices_y[$point]) + $vertices_x[$point]) ) )
+                $c = !$c;
+        }
+        return $c;
     }
     public function get_polygons(){
 
