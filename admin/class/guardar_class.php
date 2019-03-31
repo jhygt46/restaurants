@@ -724,7 +724,7 @@ class Guardar extends Core{
     }
     private function eliminar_locales(){
                 
-        $id_loc = $_POST['id_loc'];
+        $id_loc = $_POST['id'];
         $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");
         
         $info['tipo'] = "success";
