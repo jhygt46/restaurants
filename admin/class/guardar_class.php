@@ -724,14 +724,14 @@ class Guardar extends Core{
     }
     private function eliminar_locales(){
                 
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id[1]."'");
+        $id_loc = $_POST['id_loc'];
+        $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");
         
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Local ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/locales.php?id=".$id[0];
+        $info['page'] = "msd/locales.php;
 
         return $info;
         
