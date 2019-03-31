@@ -125,8 +125,8 @@ function in_arr($arr, $id){
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic8" onclick="navlink('pages/msd/configurar_repartidor_app.php?id_mot=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>&nombre=<?php echo $_GET["nombre"]; ?>')"></a>
                         <a class="icono ic7" onclick="navlink('pages/msd/configurar_repartidor.php?id_mot=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>&nombre=<?php echo $_GET["nombre"]; ?>')"></a>
+                        <a class="icono ic15" onclick="navlink('pages/msd/configurar_repartidor_app.php?id_mot=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>&nombre=<?php echo $_GET["nombre"]; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
