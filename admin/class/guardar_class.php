@@ -731,7 +731,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Local ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/locales.php;
+        $info['page'] = "msd/locales.php";
 
         return $info;
         
