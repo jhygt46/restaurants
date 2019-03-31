@@ -98,6 +98,7 @@ if(isset($info['id_gir'])){
         </style>
 </head>
     <body>
+        <div>HAY PROBLEMAS</div>
         <div class="contenedor">
             <div class="menu_left">
                 <div class="cont_menu_left">
