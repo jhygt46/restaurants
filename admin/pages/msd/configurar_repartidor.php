@@ -56,9 +56,12 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
                         <div class="btn_info"><div class="info">GPS Logger</div></div>
                     </label>
                     <label class="clearfix">
-                        <span><p>GPS Config:</p></span>
+                        <span><p>URL App:</p></span>
                         <div class="btn_info"><div class="info">https://www.izusushi.cl/cambiar_posicion?lat=%LAT&lng=%LON&id=<?php echo $id_mot; ?>&uid=<?php echo $uid; ?></div></div>
                     </label>
+                    <div>
+                        BUENA NELSON 1
+                    </div>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_repartidor', '<?php echo $id_loc; ?>/<?php echo $id_mot; ?>/<?php echo $_GET['nombre']; ?>', 'Repartidor', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
