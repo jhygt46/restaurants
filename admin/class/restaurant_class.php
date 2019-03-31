@@ -322,11 +322,13 @@ class Rest{
             $verify_despacho = 0;
             
             $id_loc = $aux_pedido->{'id_loc'};
-            $loc_gir = $this->con->sql("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
+            $loc_gir = $this->con->sql("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped FROM locales t1, giros t2 WHERE t1.id_loc='".$id_loc."' AND t1.id_gir=t2.id_gir");
             $info['lat'] = $loc_gir['resultado'][0]['lat'];
             $info['lng'] = $loc_gir['resultado'][0]['lng'];
             $info['t_retiro'] = $loc_gir['resultado'][0]['t_retiro'];
             $info['t_despacho'] = $loc_gir['resultado'][0]['t_despacho'];
+            $num_ped = $loc_gir['resultado'][0]['num_ped'] + 1;
+            $id_gir = $loc_gir['resultado'][0]['id_gir'];
             
             if($despacho == 1){
                 $aux_verify = $this->get_info_despacho($lat, $lng);
@@ -340,10 +342,14 @@ class Rest{
             $datetime->setTimezone($tz_object);
             $fecha_stgo = $datetime->format('Y-m-d H:i:s');
             
+
+
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir) VALUES ('".$pedido_code."', '".$fecha_stgo."', '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$costo."', '".$total."', '".$puser_id."', '".$pdir_id."')");
+            $pedido_sql = $this->con->sql("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir) VALUES ('".$num_ped."', '".$pedido_code."', '".$fecha_stgo."', '".$despacho."', '1', '".$id_loc."', '".$_POST['carro']."', '".$_POST['promos']."', '".$verify_despacho."', '".$pre_gengibre."', '".$pre_wasabi."', '".$pre_embarazadas."', '".$pre_palitos."', '".$pre_teriyaki."', '".$pre_soya."', '".$comentarios."', '".$costo."', '".$total."', '".$puser_id."', '".$pdir_id."')");
             $id_ped = $pedido_sql['insert_id'];
             
+            $this->con->sql("UPDATE giros SET num_ped='".$num_ped."' WHERE id_gir='".$id_gir."'");
+
             $info['op'] = 1;
             $info['id_ped'] = $id_ped;
             $info['pedido_code'] = $pedido_code;
