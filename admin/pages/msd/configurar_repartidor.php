@@ -61,7 +61,7 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>App Paso 1:</p></span>
-                        <div class="btn_info"><img src="../images/app_paso_01.jpg" /></div>
+                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_01.jpg" /></div>
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
