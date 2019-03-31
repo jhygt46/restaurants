@@ -52,34 +52,6 @@ if(isset($_GET["id_mot"]) && is_numeric($_GET["id_mot"]) && $_GET["id_mot"] != 0
                 </div>
                 <fieldset class="<?php echo $class; ?>">
                     <label class="clearfix">
-                        <span><p>GPS App:</p></span>
-                        <div class="btn_info"><div class="info">GPS Logger</div></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>URL App:</p></span>
-                        <div class="btn_info"><div class="info">https://www.izusushi.cl/cambiar_posicion?lat=%LAT&lng=%LON&id=<?php echo $id_mot; ?>&uid=<?php echo $uid; ?></div></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>App Paso 1:</p></span>
-                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_01.jpg" /></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>App Paso 2:</p></span>
-                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_02.jpg" /></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>App Paso 3:</p></span>
-                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_03.jpg" /></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>App Paso 4:</p></span>
-                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_04.jpg" /></div>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>App Paso 5:</p></span>
-                        <div class="btn_info"><div class="info">Abrir Aplicacion</div><img src="../images/app_paso_05.jpg" /></div>
-                    </label>
-                    <label class="clearfix">
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_repartidor', '<?php echo $id_loc; ?>/<?php echo $id_mot; ?>/<?php echo $_GET['nombre']; ?>', 'Repartidor', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
