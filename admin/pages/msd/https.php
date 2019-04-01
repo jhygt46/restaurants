@@ -9,7 +9,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."/admin/class/core_class.php");
 $fireapp = new Core();
-
+$class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 /* CONFIG PAGE */
 $titulo = "Certificado SSL";
