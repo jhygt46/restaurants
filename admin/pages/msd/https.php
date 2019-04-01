@@ -47,7 +47,7 @@ $accion = "solicitar_ssl";
                     </label>
                     <label class="clearfix">
                         <span><p>Solicitar Certificado:</p></span>
-                        <select id="tipo" onchange="ver_paginas()">
+                        <select id="solicitud">
                             <option value="0">No</option>
                             <option value="1">Si, deseo contratarlo</option>
                         </select>

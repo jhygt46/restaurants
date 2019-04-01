@@ -136,6 +136,9 @@ class Guardar extends Core{
         if($_POST['accion'] == "eliminar_horario"){
             return $this->eliminar_horario();
         }
+        if($_POST['accion'] == "solicitar_ssl"){
+            return $this->solicitar_ssl();
+        }
     }
     private function ordercat(){
         
@@ -256,6 +259,11 @@ class Guardar extends Core{
     }
     private function con_cambios(){
         $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
+    }
+    private function solicitar_ssl(){
+
+        
+
     }
     private function configurar_estilos(){
         
