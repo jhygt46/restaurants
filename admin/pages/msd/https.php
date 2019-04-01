@@ -45,6 +45,13 @@ $accion = "solicitar_ssl";
                         <span><p>Costo Mensual:</p></span>
                         <div class="btn_info"><div class="info">$1.990</div></div>
                     </label>
+                    <label class="clearfix">
+                        <span><p>Solicitar Certificado:</p></span>
+                        <select id="tipo" onchange="ver_paginas()">
+                            <option value="0">No</option>
+                            <option value="1">Si, deseo contratarlo</option>
+                        </select>
+                    </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
