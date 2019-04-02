@@ -1005,7 +1005,8 @@ function ver_pedido(index, that){
     $('#telefono').val("");
     $('#direccion').val("");
     $('#depto').val("");
-    
+    $('.t_direcciones').hide();
+
     if(index >= 0){
         
         set_pedido(index, that);
@@ -1032,11 +1033,13 @@ function ver_pedido(index, that){
         $('#despacho option[value=0]').attr('selected', 'selected');
         $('.t_despacho').hide();
         $('.t_repartidor').hide();
+        $('.t_direcciones').hide();
     }
     if(pedido.despacho == 1){
         $('#despacho option[value=1]').attr('selected', 'selected');
         $('.t_despacho').show();
         $('.t_repartidor').show();
+        $('.t_direcciones').show();
     }
     
     if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
@@ -1397,6 +1400,7 @@ function get_users_pedido(){
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
                 $('.mensaje').html('Usuario encontrado, direcciones: '+data.cantidad);
+                $('.t_direcciones').show();
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
             }
         }, error: function(e){
