@@ -1018,6 +1018,7 @@ function ver_pedido(index, that){
         if(pedido.id_ped > 0){
             $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
         }
+        $('.p1 .n_stitle').html("");
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
         $('#direccion').val(pedido.direccion);
