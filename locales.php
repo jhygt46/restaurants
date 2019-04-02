@@ -101,6 +101,9 @@ $motos = $core->get_repartidores_local($id_loc);
                                         <select id="despacho" onchange="change_despacho(this)"><option value="1">Despacho Domicilio</option><option value="0">Retiro Local</option></select>
                                     </div>
                                 </div>
+                                <div class="nom_tel t_direcciones">
+                                    
+                                </div>
                                 <div class="nom_tel t_despacho clearfix">
                                     <div class="direccion">
                                         <span>Direccion: </span>

@@ -370,6 +370,25 @@ function promo_nombre(promocion){
     
 }
 
+// PUNTO DE VENTA //
+function html_pedidos_direcciones(direcciones){
+
+    var Div = document.createElement('div');
+    Div.className = 'pedido_direcciones';
+
+    for(var i=0, ilen=direcciones.length; i<ilen; i++){
+
+        var div = document.createElement('div');
+        div.className = 'pedido_direccion';
+        div.onclick = function(){ console.log('buena nelson') };
+        Div.appendChild(div);
+        console.log(direcciones[i]);
+
+    }
+
+    return Div;
+
+}
 
 // PROMO DETALLE //
 function imprimir_promo_modal(categoria){
