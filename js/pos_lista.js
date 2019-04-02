@@ -1033,13 +1033,11 @@ function ver_pedido(index, that){
         $('#despacho option[value=0]').attr('selected', 'selected');
         $('.t_despacho').hide();
         $('.t_repartidor').hide();
-        $('.t_direcciones').hide();
     }
     if(pedido.despacho == 1){
         $('#despacho option[value=1]').attr('selected', 'selected');
         $('.t_despacho').show();
         $('.t_repartidor').show();
-        $('.t_direcciones').show();
     }
     
     if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
@@ -1259,14 +1257,17 @@ function change_despacho(that){
     var value = $(that).val();
     var t_despacho = $(that).parents('.data_info').find('.t_despacho');
     var t_repartidor = $(that).parents('.data_info').find('.t_repartidor');
+    var t_direcciones = $(that).parents('.data_info').find('.t_direcciones');
     
     if(value == 0){
         t_despacho.hide();
         t_repartidor.hide();
+        t_direcciones.hide();
     }
     if(value == 1){
         t_despacho.show();
         t_repartidor.show();
+        t_direcciones.show();
     }
 }
 function cambiar_estado(index, n, that){
