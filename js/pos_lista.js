@@ -716,7 +716,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
 }
 function select_pdir(that){
-    console.log($(that).attr('pdir'));
+    var pdir = $(that).attr('pdir');
 }
 function html_pedidos_direcciones(direcciones){
 
@@ -1151,6 +1151,8 @@ function pedido_obj(){
         pre_soya: 0,
         pre_teriyaki: 0,
         id_mot: 0,
+        id_puser: 0,
+        id_pdir: 0,
         verificado: 0,
         nombre: '',
         telefono: '',
@@ -1187,9 +1189,11 @@ function nuevo(data){
     obj.id_mot = data.id_mot;
     obj.verificado = data.verificado;
     
+    obj.id_puser = data.id_puser;
     obj.nombre = data.nombre;
     obj.telefono = data.telefono;
 
+    obj.id_pdir = data.id_pdir;
     obj.direccion = data.direccion;
     obj.calle = data.calle;
     obj.num = data.num;
@@ -1402,8 +1406,13 @@ function get_users_pedido(){
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
                 $('.n_stitle').html('Usuario encontrado, direcciones: '+data.cantidad);
-                $('.t_direcciones').show();
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
+                var pedidos = get_pedidos();
+                pedidos[seleccionado].id_puser = data.id_puser;
+                pedidos[seleccionado].nombre = data.nombre;
+                pedidos[seleccionado].telefono = data.telefono;
+                set_pedidos(pedidos);
+                guardar_pedido(seleccionado);
             }
         }, error: function(e){
             $('.n_stitle').html('Error de comunicacion');

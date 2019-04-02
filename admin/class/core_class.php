@@ -680,6 +680,8 @@ class Core{
                 $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
                 $res['costo'] = $sql['resultado'][$i]['costo'];
                 $res['total'] = $sql['resultado'][$i]['total'];
+                $res['id_puser'] = $sql['resultado'][$i]['id_puser'];
+                $res['id_pdir'] = $sql['resultado'][$i]['id_pdir'];
 
                 $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
                 $res['nombre'] = $sql2['resultado'][0]['nombre'];
