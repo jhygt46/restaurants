@@ -1386,7 +1386,7 @@ function telefono_keyup(e){
 }
 function get_users_pedido(){
 
-    $('.mensaje').html('Buscando..');
+    $('.n_stitle').html('Buscando..');
     var telefono = $('#telefono').val();
     var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
     $.ajax({
@@ -1396,16 +1396,16 @@ function get_users_pedido(){
         success: function(datas){
             var data = JSON.parse(datas);
             if(data.cantidad == 0){
-                $('.mensaje').html('No se encontro registro');
+                $('.n_stitle').html('No se encontro registro');
             }
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
-                $('.mensaje').html('Usuario encontrado, direcciones: '+data.cantidad);
+                $('.n_stitle').html('Usuario encontrado, direcciones: '+data.cantidad);
                 $('.t_direcciones').show();
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
             }
         }, error: function(e){
-            $('.mensaje').html('Error de comunicacion');
+            $('.n_stitle').html('Error de comunicacion');
         }
     });
 
