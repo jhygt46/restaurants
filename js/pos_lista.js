@@ -715,8 +715,8 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function select_pdir(that, id){
-    console.log(id);
+function select_pdir(that){
+    console.log($(that).attr('pdir'));
 }
 function html_pedidos_direcciones(direcciones){
 
@@ -729,8 +729,8 @@ function html_pedidos_direcciones(direcciones){
         var div = document.createElement('div');
         div.className = 'pedido_direccion';
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        pdir = direcciones[i].id_pdir;
-        div.onclick = function(){ select_pdir(this, pdir) };
+        div.setAttribute('pdir', direcciones[i].id_pdir);
+        div.onclick = function(){ select_pdir(this) };
         Div.appendChild(div);
 
     }
