@@ -715,7 +715,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function select_pdir(id){
+function select_pdir(this, id){
     console.log(id);
 }
 function html_pedidos_direcciones(direcciones){
@@ -728,7 +728,7 @@ function html_pedidos_direcciones(direcciones){
         var div = document.createElement('div');
         div.className = 'pedido_direccion';
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        div.onclick = function(){ select_pdir(direcciones[i].id_pdir) };
+        div.onclick = function(){ select_pdir(this, direcciones[i].id_pdir) };
         Div.appendChild(div);
 
     }
