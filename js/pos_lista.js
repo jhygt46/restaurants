@@ -1005,7 +1005,7 @@ function ver_pedido(index, that){
     $('#telefono').val("");
     $('#direccion').val("");
     $('#depto').val("");
-    $('.t_direcciones').hide();
+    $('.t_direcciones').html("");
 
     if(index >= 0){
         
