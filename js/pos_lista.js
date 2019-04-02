@@ -1351,9 +1351,9 @@ var formatNumber = {
 }
 function telefono_keyup(e){
 
-        var len = e.value.length;
-        if(len >= 8){
-            console.log("BUENA NELSON MAYOR A 8");
+        var len = e.value;
+        if(len.length >= 8){
+            console.log("BUENA NELSON MAYOR "+len[0]+"/"+len[1]+"/"+len[2]+"/"+len[3]);
         }
 
 }
