@@ -730,7 +730,6 @@ function html_pedidos_direcciones(direcciones){
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
         div.onclick = function(){ select_pdir(direcciones[i].id_pdir) };
         Div.appendChild(div);
-        console.log(direcciones[i]);
 
     }
 
