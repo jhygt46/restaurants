@@ -1396,7 +1396,7 @@ function get_users_pedido(){
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
                 $('.mensaje').html('Usuario encontrado, direcciones: '+data.cantidad);
-                $('.t_direcciones').append(html_pedidos_direcciones(data.direcciones));
+                $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
             }
         }, error: function(e){
             $('.mensaje').html('Error de comunicacion');
