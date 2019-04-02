@@ -91,7 +91,7 @@ $motos = $core->get_repartidores_local($id_loc);
                                     </div>
                                     <div class="tel">
                                         <span>Telefono: </span>
-                                        <input id="telefono" type="tel" />
+                                        <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
                                     </div>
                                 </div>
                                 <div class="nom_tel clearfix">

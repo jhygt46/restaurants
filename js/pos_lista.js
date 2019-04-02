@@ -1349,6 +1349,29 @@ var formatNumber = {
         return this.formatear(num);
     }
 }
+function telefono_keyup(e){
+
+        var len = e.value.length;
+        console.log(len);
+
+}
+function get_users_pedido(){
+
+    var telefono = $('#telefono').val();
+    var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
+    $.ajax({
+        url: "ajax/index.php",
+        type: "POST",
+        data: send,
+        success: function(datas){
+            var data = JSON.parse(datas);
+            console.log(data);
+        }, error: function(e){
+            alert("Se produjo un error: intente mas tarde");
+        }
+    });
+
+}
 function gmap_input(){
     
     var input = document.getElementById('direccion');

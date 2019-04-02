@@ -261,6 +261,7 @@ class Guardar extends Core{
         $this->con->sql("UPDATE giros SET con_cambios='1' WHERE id_gir='".$this->id_gir."'");
     }
     private function solicitar_ssl(){
+        
         $solicitud = $_POST["solicitud"];
         if($solicitud == 0){
             $this->con->sql("UPDATE giros SET solicitar_ssl='0' WHERE id_gir='".$this->id_gir."'");
@@ -273,6 +274,7 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "msd/ver_giro.php";
         return $info;
+        
     }
     private function configurar_estilos(){
         

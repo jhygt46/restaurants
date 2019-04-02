@@ -22,6 +22,9 @@ class Rest{
         if($accion == "despacho_domicilio"){
             return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
+        if($accion == "get_users_pedido"){
+            return $this->get_users_pedido($_POST["telefono"]);
+        }
         if($accion == "crear_dominio"){
             return $this->crear_dominio();
         }
@@ -37,6 +40,31 @@ class Rest{
         if($accion == "get_moto"){
             return $this->get_moto($_POST["id_mot"]);
         }
+        
+    }
+    public function get_users_pedido($telefono){
+
+        $telefono = $_POST["telefono"];
+        $referer = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
+        if($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl"){
+            $referer = $_POST["referer"];
+        }
+        $usuario = $this->con->sql("SELECT t1.nombre, t2.id_pdir, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio='".$referer."' AND t3.id_gir=t1.id_gir AND t1.telefono='".$telefono."' AND t1.id_puser=t2.id_puser");
+        for($i=0; $i<$usuario["count"]; $i++){
+
+            $info['nombre'] = $usuario['resultado'][$i]['nombre'];
+
+            $aux_dir["id_pdir"] = $usuario['resultado'][$i]['id_pdir'];
+            $aux_dir["calle"] = $usuario['resultado'][$i]['calle'];
+            $aux_dir["num"] = $usuario['resultado'][$i]['num'];
+            $aux_dir["depto"] = $usuario['resultado'][$i]['depto'];
+            $aux_dir["lat"] = $usuario['resultado'][$i]['lat'];
+            $aux_dir["lng"] = $usuario['resultado'][$i]['lng'];
+            
+            $info['direcciones'][] = $aux_dir;
+            unset($aux_dir);
+        }
+        return $info;
         
     }
     public function get_motos(){
