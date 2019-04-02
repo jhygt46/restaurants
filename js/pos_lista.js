@@ -1353,13 +1353,13 @@ function telefono_keyup(e){
 
     var len = e.value;
     if(len.length >= 12){
-        console.log("MAS IGUAL 12");
         get_users_pedido();
     }
 
 }
 function get_users_pedido(){
 
+    $('.mensaje').val('Buscando..');
     var telefono = $('#telefono').val();
     var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
     $.ajax({
@@ -1368,9 +1368,15 @@ function get_users_pedido(){
         data: send,
         success: function(datas){
             var data = JSON.parse(datas);
-            console.log(data);
+            if(data.cantidad == 0){
+                $('.mensaje').val('No se encontro registro');
+            }
+            if(data.cantidad > 0){
+                $('#nombre').val(data.nombre);
+                $('.mensaje').val('Usuario encontrado, direcciones: '+data.cantidad);
+            }
         }, error: function(e){
-            alert("Se produjo un error: intente mas tarde");
+            $('.mensaje').val('Error de comunicacion');
         }
     });
 

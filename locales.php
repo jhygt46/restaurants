@@ -82,6 +82,7 @@ $motos = $core->get_repartidores_local($id_loc);
                     <div class="p1 nuevo_pedido vhalign" style="display: none">
                         <div class="np_close" onclick="np_close(this)"></div>
                         <div class="n_title"></div>
+                        <div class="mensaje"></div>
                         <div class="n_info n1">
                             <div class="data_info">
                                 <div class="nom_tel clearfix">
