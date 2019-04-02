@@ -1351,16 +1351,16 @@ var formatNumber = {
 }
 function telefono_keyup(e){
 
-        var len = e.value;
-        console.log(len);
-        console.log(len.length);
-        if(len.length >= 8){
-            if(len[0] == "+" && len[0] == "5" && len[0] == "6" && len[0] == "9" && len.length == 12){
-                get_users_pedido();
-                console.log("BUENA NELSON");
-            }
-        }
-
+    var len = e.value;
+    if(len.length >= 6){
+        console.log("MAS IGUAL 6");
+        //get_users_pedido();
+    }
+    if(len.length >= 12){
+        console.log("MAS IGUAL 12");
+        //get_users_pedido();
+    }
+    
 }
 function get_users_pedido(){
 
