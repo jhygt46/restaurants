@@ -89,6 +89,7 @@ $motos = $core->get_repartidores_local($id_loc);
                                     <div class="nom">
                                         <span>Nombre: </span>
                                         <input id="nombre" type="text" />
+                                        <input id="id_puser" type="hidden" />
                                     </div>
                                     <div class="tel">
                                         <span>Telefono: </span>

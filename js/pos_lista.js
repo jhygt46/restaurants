@@ -1001,6 +1001,7 @@ function np_close(that){
 
 function ver_pedido(index, that){
     
+    $('#id_puser').val("");
     $('#nombre').val("");
     $('#telefono').val("");
     $('#direccion').val("");
@@ -1019,6 +1020,7 @@ function ver_pedido(index, that){
             $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
         }
         $('.p1 .n_stitle').html("");
+        $('#id_puser').val(pedido.id_puser);
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
         $('#direccion').val(pedido.direccion);
@@ -1063,6 +1065,7 @@ function nuevo_pedido(){
 function done_pedido(){
 
     var pedidos = get_pedidos();
+    pedidos[seleccionado].id_puser = $('#id_puser').val();
     pedidos[seleccionado].nombre = $('#nombre').val();
     pedidos[seleccionado].telefono = $('#telefono').val();
     pedidos[seleccionado].despacho = $('#despacho').val();
@@ -1405,14 +1408,9 @@ function get_users_pedido(){
             }
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
+                $('#id_puser').val(data.id_puser);
                 $('.n_stitle').html('Usuario encontrado, direcciones: '+data.cantidad);
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
-                var pedidos = get_pedidos();
-                pedidos[seleccionado].id_puser = data.id_puser;
-                pedidos[seleccionado].nombre = data.nombre;
-                pedidos[seleccionado].telefono = data.telefono;
-                set_pedidos(pedidos);
-                guardar_pedido(seleccionado);
             }
         }, error: function(e){
             $('.n_stitle').html('Error de comunicacion');
