@@ -715,7 +715,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function select_pdir(this, id){
+function select_pdir(that, id){
     console.log(id);
 }
 function html_pedidos_direcciones(direcciones){
