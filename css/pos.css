@@ -629,6 +629,8 @@ body {
 }
 .categorias .contenido .lista_productos .producto{
     padding: 15px 5px;
+    background: #ccc;
+    margin-bottom: 5px;
 }
 ::-webkit-scrollbar {
     width: 5px;
