@@ -728,7 +728,8 @@ function html_pedidos_direcciones(direcciones){
         var div = document.createElement('div');
         div.className = 'pedido_direccion';
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        div.onclick = function(){ select_pdir(this, direcciones[i].id_pdir) };
+        console.log(direcciones[i].id_pdir);
+        div.onclick = function(){ select_pdir(this) };
         Div.appendChild(div);
 
     }
