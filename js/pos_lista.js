@@ -1352,15 +1352,11 @@ var formatNumber = {
 function telefono_keyup(e){
 
     var len = e.value;
-    if(len.length >= 6){
-        console.log("MAS IGUAL 6");
-        //get_users_pedido();
-    }
     if(len.length >= 12){
         console.log("MAS IGUAL 12");
-        //get_users_pedido();
+        get_users_pedido();
     }
-    
+
 }
 function get_users_pedido(){
 

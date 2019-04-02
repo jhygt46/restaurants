@@ -627,6 +627,9 @@ body {
     padding: 68px 8px 8px 8px;
     min-height: calc(100% - 76px);
 }
+.categorias .contenido .lista_productos .producto{
+    padding: 15px 5px;
+}
 ::-webkit-scrollbar {
     width: 5px;
     height: 0px;
