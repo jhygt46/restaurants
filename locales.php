@@ -110,6 +110,12 @@ $motos = $core->get_repartidores_local($id_loc);
                                         <span>Direccion: </span>
                                         <input id="direccion" type="text" />
                                         <input id="id_pdir" type="hidden" />
+                                        <input id="lat" type="hidden" />
+                                        <input id="lng" type="hidden" />
+                                        <input id="num" type="hidden" />
+                                        <input id="calle" type="hidden" />
+                                        <input id="comuna" type="hidden" />
+                                        <input id="costo" type="hidden" />
                                     </div>
                                     <div class="depto">
                                         <span>Depto: </span>

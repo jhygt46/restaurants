@@ -718,52 +718,33 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
 }
 function select_pdir(that){
     
-    var id_pdir = $(that).attr('id_pdir');
-    $(that).parent().find('.pedido_direccion').each(function(){
+    var lat = $(that).attr('lat');
+    var lng = $(that).attr('lng');
 
-        if($(this).hasClass('selected') && $(this).attr('id_pdir') != id_pdir){
-            $(this).removeClass('selected');
-        }
-        if($(this).attr('id_pdir') == id_pdir){
+    var send = { accion: 'despacho_domicilio', lat: lat, lng: lng, referer: dominio };
             
-            $(this).addClass('selected');
-            var pedidos = get_pedidos();
-            var send = { accion: 'despacho_domicilio', lat: $(that).attr('lat'), lng: $(that).attr('lng'), referer: dominio };
-            
-            $.ajax({
-                url: "ajax/index.php",
-                type: "POST",
-                data: send,
-                success: function(datas){
-                    var data = JSON.parse(datas);
-                    console.log(data);
-                    if(data.op == 1){
-                        pedidos[seleccionado].id_pdir = id_pdir;
-                        pedidos[seleccionado].calle = $(that).attr('calle');
-                        pedidos[seleccionado].num = $(that).attr('num');
-                        pedidos[seleccionado].depto = $(that).attr('depto');
-                        pedidos[seleccionado].lat = $(that).attr('lat');
-                        pedidos[seleccionado].lng = $(that).attr('lng');
-                        pedidos[seleccionado].comuna = $(that).attr('comuna');
-                        pedidos[seleccionado].costo = data.precio;
-                        set_pedidos(pedidos);
-                        guardar_pedido(seleccionado);
-                        $('.t_direcciones').html("");
-                        $('#direccion').val($(that).attr('calle')+" "+$(that).attr('num'));
-                        $('#depto').val($(that).attr('depto'));
-                        $('#despacho option[value=1]').attr('selected', 'selected');
-                        $('.t_despacho').show();
-                        $('.t_repartidor').show();
-                    }else{
-                        alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
-                    }
-                }, error: function(e){
-                    alert("Se produjo un error: intente mas tarde");
-                }
-            });
+    $.ajax({
+        url: "ajax/index.php",
+        type: "POST",
+        data: send,
+        success: function(datas){
+            var data = JSON.parse(datas);
+            if(data.op == 1){
+                
+                $('.t_direcciones').html("");
+                $('#id_pdir').val($(that).attr('id_pdir'));
+                $('#direccion').val($(that).attr('direccion'));
+                $('#depto').val($(that).attr('depto'));
+                $('#costo').val(data.precio);
+                $('.t_despacho').show();
+                $('.t_repartidor').show();
 
+            }else{
+                alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
+            }
+        }, error: function(e){
+            alert("Se produjo un error: intente mas tarde");
         }
-
     });
 
 }
@@ -779,6 +760,7 @@ function html_pedidos_direcciones(direcciones){
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
         
         div.setAttribute('id_pdir', direcciones[i].id_pdir);
+        div.setAttribute('direccion', direcciones[i].direccion);
         div.setAttribute('calle', direcciones[i].calle);
         div.setAttribute('num', direcciones[i].num);
         div.setAttribute('depto', direcciones[i].depto);
@@ -1121,12 +1103,28 @@ function nuevo_pedido(){
 }
 function done_pedido(){
 
+    if($('#despacho').val() == 1 && $('#costo').val() == -1){
+        $('.p1 .n_stitle').html("NO SE PUEDE GUARDAR");
+        return null;
+    }
+
     var pedidos = get_pedidos();
+    pedidos[seleccionado].id_puser = $('#id_puser').val();
     pedidos[seleccionado].nombre = $('#nombre').val();
     pedidos[seleccionado].telefono = $('#telefono').val();
+
     pedidos[seleccionado].despacho = $('#despacho').val();
+    
+    pedidos[seleccionado].id_pdir = $('#id_pdir').val();
     pedidos[seleccionado].direccion = $('#direccion').val();
     pedidos[seleccionado].depto = $('#depto').val();
+    pedidos[seleccionado].lat = $('#lat').val();
+    pedidos[seleccionado].lng = $('#lng').val();
+    pedidos[seleccionado].calle = $('#calle').val();
+    pedidos[seleccionado].num = $('#num').val();
+    pedidos[seleccionado].comuna = $('#comuna').val();
+
+    pedidos[seleccionado].costo = $('#costo').val();
 
     pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
     pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
@@ -1221,7 +1219,7 @@ function pedido_obj(){
         depto: '',
         lat: 0,
         lng: 0,
-        costo: 0,
+        costo: -1,
         total: 0,
         eliminado: 0,
         ocultar: 0
@@ -1464,12 +1462,8 @@ function get_users_pedido(){
                 $('.n_stitle').html('No se encontro registro');
             }
             if(data.cantidad > 0){
+                $('#id_puser').val(data.id_puser);
                 $('#nombre').val(data.nombre);
-                var pedidos = get_pedidos();
-                pedidos[seleccionado].id_puser = data.id_puser;
-                pedidos[seleccionado].nombre = data.nombre;
-                pedidos[seleccionado].telefono = data.telefono;
-                set_pedidos(pedidos);
                 $('.n_stitle').html('Usuario encontrado, direcciones: '+data.cantidad);
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
             }
@@ -1491,20 +1485,20 @@ function gmap_input(){
         }
         if(places.length == 1){
             
-            var pedidos = get_pedidos();
-            pedidos[seleccionado].lat = places[0].geometry.location.lat();
-            pedidos[seleccionado].lng = places[0].geometry.location.lng();
-            pedidos[seleccionado].direccion = places[0].formatted_address;
-            
+            $('#lat').val(places[0].geometry.location.lat());
+            $('#lng').val(places[0].geometry.location.lng());
+            $('#direccion').val(places[0].formatted_address);
+            $('#id_pdir').val(0);
+
             for(var i=0; i<places[0].address_components.length; i++){
                 if(places[0].address_components[i].types[0] == "street_number"){
-                    pedidos[seleccionado].num = places[0].address_components[i].long_name;
+                    $('#num').val(places[0].address_components[i].long_name);
                 }
                 if(places[0].address_components[i].types[0] == "route"){
-                    pedidos[seleccionado].calle = places[0].address_components[i].long_name;
+                    $('#calle').val(places[0].address_components[i].long_name);
                 }
                 if(places[0].address_components[i].types[0] == "locality"){
-                    pedidos[seleccionado].comuna = places[0].address_components[i].long_name;
+                    $('#comuna').val(places[0].address_components[i].long_name);
                 }
             }
             var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: dominio };
@@ -1515,13 +1509,9 @@ function gmap_input(){
                 type: "POST",
                 data: send,
                 success: function(datas){
-                    var data = JSON.parse(datas);
-                    console.log(data);                      
+                    var data = JSON.parse(datas);                   
                     if(data.op == 1){
-                        pedidos[seleccionado].id_pdir = 0;
-                        pedidos[seleccionado].costo = data.precio;
-                        set_pedidos(pedidos);
-                        guardar_pedido(seleccionado);
+                        $('#costo').val(data.precio);
                     }else{
                         alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                     }
