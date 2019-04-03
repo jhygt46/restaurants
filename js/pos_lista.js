@@ -728,6 +728,7 @@ function select_pdir(that){
             $(this).addClass('selected');
             var pedidos = get_pedidos();
             var send = { accion: 'despacho_domicilio', lat: $(that).attr('lat'), lng: $(that).attr('lat'), referer: dominio };
+            console.log(send);
             $.ajax({
                 url: "ajax/index.php",
                 type: "POST",
