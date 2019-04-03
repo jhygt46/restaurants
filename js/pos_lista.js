@@ -749,6 +749,8 @@ function select_pdir(that){
                         set_pedidos(pedidos);
                         guardar_pedido(seleccionado);
                         $('.t_direcciones').html("");
+                        $('#direccion').val($(that).attr('calle')+" "+$(that).attr('num'));
+                        $('#depto').val($(that).attr('depto'));
                     }else{
                         alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                     }
