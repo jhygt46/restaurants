@@ -1063,7 +1063,8 @@ function ver_pedido(index, that){
     $('#direccion').val("");
     $('#depto').val("");
     $('.t_direcciones').html("");
-    document.getElementById("telefono").focus();
+    $('#telefono').focus();
+    console.log("telefono focus");
 
     if(index >= 0){
         
