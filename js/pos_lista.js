@@ -748,6 +748,7 @@ function select_pdir(that){
                         pedidos[seleccionado].costo = data.precio;
                         set_pedidos(pedidos);
                         guardar_pedido(seleccionado);
+                        $('.t_direcciones').html("");
                     }else{
                         alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                     }
