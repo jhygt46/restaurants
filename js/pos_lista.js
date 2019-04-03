@@ -3,6 +3,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos();
     modificar_horas();
+    gmap_input();
 });
 
 var seleccionado = 0;
