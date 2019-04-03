@@ -1199,7 +1199,7 @@ function pedido_obj(){
         tipo: 0,
         estado: 0,
         fecha: Math.round(new Date().getTime()/1000),
-        despacho: null,
+        despacho: 1,
         carro: [],  
         promos: [], 
         pre_wasabi: 0,
