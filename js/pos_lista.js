@@ -1449,6 +1449,7 @@ function telefono_keyup(e){
 }
 function get_users_pedido(){
 
+    $('.t_direcciones').html("");
     $('.n_stitle').html('Buscando..');
     var telefono = $('#telefono').val();
     var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
