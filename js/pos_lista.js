@@ -243,7 +243,6 @@ function sound(){
 
 function set_pedido(index, that){
     
-    console.log(index);
     seleccionado = index;
     var pos = -1;
     categorias_base(0);
@@ -741,9 +740,11 @@ function select_pdir(that){
 
             }else{
                 alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
+                $('#costo').val(-1);
             }
         }, error: function(e){
             alert("Se produjo un error: intente mas tarde");
+            $('#costo').val(-1);
         }
     });
 
@@ -1038,13 +1039,7 @@ function np_close(that){
 }
 
 function ver_pedido(index, that){
-    
-    $('#telefono').focus();
-    $('#id_puser').val("");
-    $('#nombre').val("");
-    $('#telefono').val("+569");
-    $('#direccion').val("");
-    $('#depto').val("");
+
     $('.t_direcciones').html("");
 
     if(index >= 0){
@@ -1052,43 +1047,76 @@ function ver_pedido(index, that){
         set_pedido(index, that);
         var pedidos = get_pedidos();
         var pedido = pedidos[index];
-        if(pedido.id_ped == 0){
-            $('.p1 .n_title').html("PEDIDO AUN NO GUARDADO");
-        }
-        if(pedido.id_ped > 0){
-            $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
-        }
-        $('.p1 .n_stitle').html("");
+
+        $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
+        $('#id_ped').val(pedido.id_puser);
+        
         $('#id_puser').val(pedido.id_puser);
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
+
+        $('#id_pdir').val(pedido.id_pdir);
         $('#direccion').val(pedido.direccion);
         $('#depto').val(pedido.depto);
+        $('#calle').val(pedido.calle);
+        $('#num').val(pedido.num);
+        $('#comuna').val(pedido.comuna);
+        $('#lat').val(pedido.lat);
+        $('#lng').val(pedido.lng);
+        $('#costo').val(pedido.costo);
+
+        if(pedido.despacho == 0){
+            $('#despacho option[value=0]').attr('selected', 'selected');
+            $('.t_despacho').hide();
+            $('.t_repartidor').hide();
+        }
+        if(pedido.despacho == 1){
+            $('#despacho option[value=1]').attr('selected', 'selected');
+            $('.t_despacho').show();
+            $('.t_repartidor').show();
+        }
+
+        if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
+        if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
+        if(pedido.pre_embarazadas == 1){ $('#pre_embarazadas').attr('checked', 'checked') }else{ $('#pre_embarazadas').attr('checked', '') }
+        if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
+        if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
+        $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
+        $('#id_mot option[value='+pedido.id_mot+']').attr('selected', 'selected');
         
     }
     if(index == -1){
-        var pedido = pedido_obj();
-        add_pedido(pedido);
+
         $('.p1 .n_title').html("Ingresar Nuevo Pedido");
-    }
-    if(pedido.despacho == 0){
-        $('#despacho option[value=0]').attr('selected', 'selected');
-        $('.t_despacho').hide();
-        $('.t_repartidor').hide();
-    }
-    if(pedido.despacho == 1){
+        $('#id_ped').val(0);
+        
+        $('#id_puser').val(0);
+        $('#nombre').val("");
+        $('#telefono').val("+569");
+
+        $('#id_pdir').val(0);
+        $('#direccion').val("");
+        $('#depto').val("");
+        $('#calle').val("");
+        $('#num').val(0);
+        $('#comuna').val("");
+        $('#lat').val(0);
+        $('#lng').val(0);
+        $('#costo').val(0);
+
         $('#despacho option[value=1]').attr('selected', 'selected');
         $('.t_despacho').show();
         $('.t_repartidor').show();
+
+        $('#pre_wasabi').attr('checked', '');
+        $('#pre_gengibre').attr('checked', '');
+        $('#pre_embarazadas').attr('checked', '');
+        $('#pre_soya').attr('checked', '');
+        $('#pre_teriyaki').attr('checked', '');
+        $('#pre_palitos option[value=0]').attr('selected', 'selected');
+        $('#id_mot option[value=0]').attr('selected', 'selected');
+
     }
-    
-    if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
-    if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
-    if(pedido.pre_embarazadas == 1){ $('#pre_embarazadas').attr('checked', 'checked') }else{ $('#pre_embarazadas').attr('checked', '') }
-    if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
-    if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
-    $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
-    $('#id_mot option[value='+pedido.id_mot+']').attr('selected', 'selected');
     
     $('.pop_up').show();
     $('.p1').show();
@@ -1108,6 +1136,10 @@ function done_pedido(){
         return null;
     }
 
+    var id_ped = $('#id_ped').val();
+    console.log(id_ped);
+
+    /*
     var pedidos = get_pedidos();
     pedidos[seleccionado].id_puser = $('#id_puser').val();
     pedidos[seleccionado].nombre = $('#nombre').val();
@@ -1162,6 +1194,8 @@ function done_pedido(){
 
     $('.p1').hide();
     $('.pop_up').hide();
+
+    */
     
 }
 
@@ -1514,9 +1548,11 @@ function gmap_input(){
                         $('#costo').val(data.precio);
                     }else{
                         alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
+                        $('#costo').val(-1);
                     }
                 }, error: function(e){
                     alert("Se produjo un error: intente mas tarde");
+                    $('#costo').val(-1);
                 }
             });
             
