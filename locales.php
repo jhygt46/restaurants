@@ -86,20 +86,20 @@ $motos = $core->get_repartidores_local($id_loc);
                         <div class="n_info n1">
                             <div class="data_info">
                                 <div class="nom_tel clearfix">
+                                    <div class="tel">
+                                        <span>Telefono: </span>
+                                        <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
+                                    </div>
                                     <div class="nom">
                                         <span>Nombre: </span>
                                         <input id="nombre" type="text" />
                                         <input id="id_puser" type="hidden" />
                                     </div>
-                                    <div class="tel">
-                                        <span>Telefono: </span>
-                                        <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
-                                    </div>
                                 </div>
                                 <div class="nom_tel clearfix">
                                     <div class="tipo">
                                         <span>Tipo: </span>
-                                        <select id="despacho" onchange="change_despacho(this)"><option value="1">Despacho Domicilio</option><option value="0">Retiro Local</option></select>
+                                        <select id="despacho" onchange="change_despacho(this)"><option value="0">Retiro Local</option><option value="1" selected>Despacho Domicilio</option></select>
                                     </div>
                                 </div>
                                 <div class="nom_tel t_direcciones">
