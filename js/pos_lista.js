@@ -1159,7 +1159,9 @@ function done_pedido(){
             pre_soya: p_soya,
             pre_teriyaki: p_teriyaki,
             pre_palitos: $('#pre_palitos').val(),
-            id_mot: $('#id_mot').val()
+            id_mot: $('#id_mot').val(),
+            carro: [],
+            promos: []
         }
 
         nuevo(obj);
@@ -1360,8 +1362,8 @@ function guardar_pedido(index){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
+                listar_pedidos();
             }
-            listar_pedidos();
             
         }, error: function(e){
             console.log(e);
