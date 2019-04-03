@@ -1140,7 +1140,6 @@ function done_pedido(){
         var p_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
 
         var obj = {
-
             id_puser: $('#id_puser').val(),
             nombre: $('#nombre').val(),
             telefono: $('#telefono').val(),
@@ -1154,14 +1153,13 @@ function done_pedido(){
             lat: $('#lat').val(),
             lng: $('#lng').val(),
             costo: $('#costo').val(),
-            pre_wasabi = p_wasabi,
-            pre_gengibre = p_gengibre,
-            pre_embarazadas = p_embarazadas,
-            pre_soya = p_soya,
-            pre_teriyaki = p_teriyaki,
-            pre_palitos = $('#pre_palitos').val(),
-            id_mot = $('#id_mot').val()
-
+            pre_wasabi: p_wasabi,
+            pre_gengibre: p_gengibre,
+            pre_embarazadas: p_embarazadas,
+            pre_soya: p_soya,
+            pre_teriyaki: p_teriyaki,
+            pre_palitos: $('#pre_palitos').val(),
+            id_mot: $('#id_mot').val()
         }
 
         nuevo(obj);
