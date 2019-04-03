@@ -1065,6 +1065,7 @@ function ver_pedido(index, that){
     $('.t_direcciones').html("");
     $('#telefono').focus();
     console.log("telefono focus");
+    $("#telefono").hide();
 
     if(index >= 0){
         
