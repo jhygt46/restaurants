@@ -752,6 +752,8 @@ function select_pdir(that){
                         $('#direccion').val($(that).attr('calle')+" "+$(that).attr('num'));
                         $('#depto').val($(that).attr('depto'));
                         $('#despacho option[value=1]').attr('selected', 'selected');
+                        $('.t_despacho').show();
+                        $('.t_repartidor').show();
                     }else{
                         alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                     }
