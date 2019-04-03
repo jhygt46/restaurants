@@ -734,7 +734,8 @@ function select_pdir(that){
                 type: "POST",
                 data: send,
                 success: function(datas){
-                    var data = JSON.parse(datas);                    
+                    var data = JSON.parse(datas);
+                    console.log(data);
                     if(data.op == 1){
                         pedidos[seleccionado].id_pdir = 0;
                         pedidos[seleccionado].calle = $(that).attr('calle');
