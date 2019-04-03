@@ -1049,7 +1049,7 @@ function ver_pedido(index, that){
         var pedido = pedidos[index];
 
         $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
-        $('#id_ped').val(pedido.id_puser);
+        $('#id_ped').val(pedido.id_ped);
         
         $('#id_puser').val(pedido.id_puser);
         $('#nombre').val(pedido.nombre);
@@ -1118,13 +1118,6 @@ function ver_pedido(index, that){
 
     }
     
-    $('.pop_up').show();
-    $('.p1').show();
-    
-}
-function nuevo_pedido(){
-    
-    $('#nombre').val('');
     $('.pop_up').show();
     $('.p1').show();
     
