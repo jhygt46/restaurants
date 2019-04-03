@@ -738,7 +738,7 @@ function select_pdir(that){
                     var data = JSON.parse(datas);
                     console.log(data);
                     if(data.op == 1){
-                        pedidos[seleccionado].id_pdir = 0;
+                        pedidos[seleccionado].id_pdir = id_pdir;
                         pedidos[seleccionado].calle = $(that).attr('calle');
                         pedidos[seleccionado].num = $(that).attr('num');
                         pedidos[seleccionado].depto = $(that).attr('depto');
