@@ -1060,7 +1060,7 @@ function ver_pedido(index, that){
     $('#telefono').focus();
     $('#id_puser').val("");
     $('#nombre').val("");
-    $('#telefono').val("");
+    $('#telefono').val("+569");
     $('#direccion').val("");
     $('#depto').val("");
     $('.t_direcciones').html("");
