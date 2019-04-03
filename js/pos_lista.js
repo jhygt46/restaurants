@@ -720,7 +720,7 @@ function select_pdir(that){
     var id_pdir = $(that).attr('id_pdir');
     $(that).parent().find('.pedido_direccion').each(function(){
 
-        if($(this).hasClass('selected') && $(this).attr('pdir') != pdir){
+        if($(this).hasClass('selected') && $(this).attr('id_pdir') != id_pdir){
             $(this).removeClass('selected');
         }
         if($(this).attr('id_pdir') == id_pdir){
