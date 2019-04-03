@@ -422,8 +422,6 @@ class Rest{
         $polygons = $this->get_polygons();
         $precio = 9999999;
         $info['op'] = 2;
-        $info['aux_lat'] = $lat;
-        $info['aux_lng'] = $lng;
         foreach($polygons as $polygon){
 
             $lats = [];
