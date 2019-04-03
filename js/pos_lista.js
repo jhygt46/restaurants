@@ -1057,15 +1057,13 @@ function np_close(that){
 
 function ver_pedido(index, that){
     
+    $('#telefono').focus();
     $('#id_puser').val("");
     $('#nombre').val("");
     $('#telefono').val("");
     $('#direccion').val("");
     $('#depto').val("");
     $('.t_direcciones').html("");
-    $('#telefono').focus();
-    console.log("telefono focus");
-    $("#telefono").hide();
 
     if(index >= 0){
         
