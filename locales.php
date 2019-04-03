@@ -109,6 +109,7 @@ $motos = $core->get_repartidores_local($id_loc);
                                     <div class="direccion">
                                         <span>Direccion: </span>
                                         <input id="direccion" type="text" />
+                                        <input id="id_pdir" type="hidden" />
                                     </div>
                                     <div class="depto">
                                         <span>Depto: </span>

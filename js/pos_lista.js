@@ -716,11 +716,50 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
 }
 function select_pdir(that){
-    var pdir = $(that).attr('pdir');
+    
+    var id_pdir = $(that).attr('id_pdir');
+    $(that).parent().find('.pedido_direccion').each(function(){
+
+        if($(this).hasClass('selected') && $(this).attr('pdir') != pdir){
+            $(this).removeClass('selected');
+        }
+        if($(this).attr('id_pdir') == id_pdir){
+            
+            $(this).addClass('selected');
+            var pedidos = get_pedidos();
+            var send = { accion: 'despacho_domicilio', lat: $(that).attr('lat'), lng: $(that).attr('lat'), referer: dominio };
+            $.ajax({
+                url: "ajax/index.php",
+                type: "POST",
+                data: send,
+                success: function(datas){
+                    var data = JSON.parse(datas);                    
+                    if(data.op == 1){
+                        pedidos[seleccionado].id_pdir = 0;
+                        pedidos[seleccionado].calle = $(that).attr('calle');
+                        pedidos[seleccionado].num = $(that).attr('num');
+                        pedidos[seleccionado].depto = $(that).attr('depto');
+                        pedidos[seleccionado].lat = $(that).attr('lat');
+                        pedidos[seleccionado].lng = $(that).attr('lng');
+                        pedidos[seleccionado].comuna = $(that).attr('comuna');
+                        pedidos[seleccionado].costo = data.precio;
+                        set_pedidos(pedidos);
+                        guardar_pedido(seleccionado);
+                    }else{
+                        alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
+                    }
+                }, error: function(e){
+                    alert("Se produjo un error: intente mas tarde");
+                }
+            });
+
+        }
+
+    });
+
 }
 function html_pedidos_direcciones(direcciones){
 
-    var pdir = 0;
     var Div = document.createElement('div');
     Div.className = 'pedido_direcciones';
 
@@ -729,7 +768,15 @@ function html_pedidos_direcciones(direcciones){
         var div = document.createElement('div');
         div.className = 'pedido_direccion';
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        div.setAttribute('pdir', direcciones[i].id_pdir);
+        
+        div.setAttribute('id_pdir', direcciones[i].id_pdir);
+        div.setAttribute('calle', direcciones[i].calle);
+        div.setAttribute('num', direcciones[i].num);
+        div.setAttribute('depto', direcciones[i].depto);
+        div.setAttribute('lat', direcciones[i].lat);
+        div.setAttribute('lng', direcciones[i].lng);
+        div.setAttribute('comuna', direcciones[i].comuna);
+
         div.onclick = function(){ select_pdir(this) };
         Div.appendChild(div);
 
@@ -1065,7 +1112,6 @@ function nuevo_pedido(){
 function done_pedido(){
 
     var pedidos = get_pedidos();
-    pedidos[seleccionado].id_puser = $('#id_puser').val();
     pedidos[seleccionado].nombre = $('#nombre').val();
     pedidos[seleccionado].telefono = $('#telefono').val();
     pedidos[seleccionado].despacho = $('#despacho').val();
@@ -1408,7 +1454,11 @@ function get_users_pedido(){
             }
             if(data.cantidad > 0){
                 $('#nombre').val(data.nombre);
-                $('#id_puser').val(data.id_puser);
+                var pedidos = get_pedidos();
+                pedidos[seleccionado].id_puser = data.id_puser;
+                pedidos[seleccionado].nombre = data.nombre;
+                pedidos[seleccionado].telefono = data.telefono;
+                set_pedidos(pedidos);
                 $('.n_stitle').html('Usuario encontrado, direcciones: '+data.cantidad);
                 $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
             }
@@ -1457,6 +1507,7 @@ function gmap_input(){
                     var data = JSON.parse(datas);
                     console.log(data);                      
                     if(data.op == 1){
+                        pedidos[seleccionado].id_pdir = 0;
                         pedidos[seleccionado].costo = data.precio;
                         set_pedidos(pedidos);
                         guardar_pedido(seleccionado);
