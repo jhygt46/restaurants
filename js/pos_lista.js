@@ -1163,6 +1163,7 @@ function done_pedido(){
             pre_teriyaki: p_teriyaki,
             pre_palitos: $('#pre_palitos').val(),
             id_mot: $('#id_mot').val(),
+            tipo: 0,
             carro: [],
             promos: []
         }
