@@ -732,8 +732,11 @@ function ver_paso_2(){
     var despacho = 0;
     var aux = ver_locales_y_despacho();
 
+    console.log(aux);
+
     var total = parseInt(get_pedido().total);
     var pedido_minimo = parseInt(data.config.pedido_minimo);
+
     if(!aux[0]){
         // NO HAY RETIRO EN LOCAL
         $('.paso_02').find('.rlocal').find('.alert').show();
