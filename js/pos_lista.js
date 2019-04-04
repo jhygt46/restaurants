@@ -1051,7 +1051,7 @@ function ver_pedido(index, that){
         var pedidos = get_pedidos();
         var pedido = pedidos[index];
 
-        $('.p1 .n_title').html("Pedido #"+pedido.id_ped);
+        $('.p1 .n_title').html("Pedido #"+pedido.num_ped);
         $('#id_ped').val(pedido.id_ped);
         
         $('#id_puser').val(pedido.id_puser);
