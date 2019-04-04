@@ -1131,6 +1131,9 @@ function done_pedido(){
     }
 
     var id_ped = $('#id_ped').val();
+
+    console.log(id_ped);
+
     if(id_ped == 0){
 
         var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
