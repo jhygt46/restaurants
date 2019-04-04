@@ -760,6 +760,8 @@ function html_pedidos_direcciones(direcciones){
         div.className = 'pedido_direccion';
         div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
         
+        console.log(direcciones[i]);
+
         div.setAttribute('id_pdir', direcciones[i].id_pdir);
         div.setAttribute('direccion', direcciones[i].direccion);
         div.setAttribute('calle', direcciones[i].calle);
