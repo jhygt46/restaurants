@@ -1338,6 +1338,7 @@ function add_pedido(obj){
     set_pedidos(aux);
     seleccionado = 0;
     guardar_pedido(seleccionado);
+    listar_pedidos();
     
 }
 function set_pedidos(pedidos){
