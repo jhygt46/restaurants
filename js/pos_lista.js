@@ -1293,7 +1293,7 @@ function nuevo(data){
     var obj = pedido_obj();
     obj.id_ped = data.id_ped;
     obj.pedido_code = data.pedido_code;
-    obj.tipo = 0;
+    obj.tipo = data.tipo;
     obj.estado = 0;
     obj.despacho = data.despacho;
     obj.carro = data.carro;
