@@ -642,11 +642,11 @@ class Core{
                 $num_ped = $sql_gir["resultado"][0]["num_ped"] + 1;
                 $this->con->sql("UPDATE giros SET num_ped='".$num_ped."' WHERE id_gir='".$aux_local["resultado"][0]["id_gir"]."'");
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $insert = $this->con->sql("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_puser, id_pdir) VALUES ('".$num_ped."', '0', now(), '".$code."', '".$id_loc."', '".$id_puser."', '".$id_pdir."')");
+                $insert = $this->con->sql("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc) VALUES ('".$num_ped."', '0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
             }
-
-            $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            
+            $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."', id_pdir='".$id_pdir."', carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             $info['id_ped'] = $id_ped;
             $info['num_ped'] = $num_ped;
             $info['pedido_code'] = $code;
