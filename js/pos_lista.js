@@ -1213,10 +1213,10 @@ function done_pedido(){
         pedidos[seleccionado].id_mot = $('#id_mot').val();
         set_pedidos(pedidos);
         guardar_pedido(seleccionado);
-        listar_pedidos();
 
     }
 
+    listar_pedidos();
     $('.p1').hide();
     $('.pop_up').hide();
     
