@@ -679,6 +679,7 @@ class Core{
             for($i=0; $i<$sql['count']; $i++){
 
                 $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
+                $res['num_ped'] = $sql['resultado'][$i]['num_ped'];
                 $res['pedido_code'] = $sql['resultado'][$i]['code'];
                 $res['tipo'] = $sql['resultado'][$i]['tipo'];
                 $res['estado'] = $sql['resultado'][$i]['estado'];
