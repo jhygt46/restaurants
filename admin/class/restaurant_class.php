@@ -384,11 +384,13 @@ class Rest{
 
             $info['op'] = 1;
             $info['id_ped'] = $id_ped;
+            $info['num_ped'] = $num_ped;
             $info['pedido_code'] = $pedido_code;
             $info['fecha'] = time();
             
             $pedido['local_code'] = $loc_gir['resultado'][0]['code'];
             $pedido['id_ped'] = $id_ped;
+            $pedido['num_ped'] = $num_ped;
             
             $pedido['correo'] = $loc_gir['resultado'][0]['correo'];
             $pedido['accion'] = 'enviar_pedido_local';

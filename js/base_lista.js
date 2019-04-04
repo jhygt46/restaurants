@@ -869,11 +869,11 @@ function show_modal_4(pedido){
     
     markers = new google.maps.Marker({
         map: map_socket,
-        title: 'PEDIDO #'+pedido.id_ped,
+        title: 'PEDIDO #'+pedido.num_ped,
         position: punto
     });
     
-    $('.paso_04 .titulo h1').html("Pedido #"+pedido.id_ped);
+    $('.paso_04 .titulo h1').html("Pedido #"+pedido.num_ped);
     $('.pedido_final .estado h2').html(pedido.estado);
     $('.pedido_final .total').html("Total: "+formatNumber.new(parseInt(pedido.total + pedido.costo), "$"));
     show_modal('paso_04');
@@ -934,6 +934,7 @@ function paso_4(){
                         document.getElementById("enviar_cotizacion").disabled = false;
 
                         pedido.id_ped = data.id_ped;
+                        pedido.num_ped = data.num_ped;
                         pedido.pedido_code = data.pedido_code;
                         pedido.fecha = data.fecha;
                         pedido.lat = data.lat;
