@@ -376,7 +376,7 @@ if(isset($info['id_gir'])){
                 </div>
             </div>
         </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $info['mapcode']; ?>&libraries=places" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $info['mapcode']; ?>" async defer></script>
     </body>
 </html>
 
