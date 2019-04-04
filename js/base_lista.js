@@ -894,9 +894,6 @@ function paso_4(){
     var nombre = $('#pedido_nombre').val();
     var telefono = $('#pedido_telefono').val();
 
-    console.log(telefono);
-    console.log(telefono.length);
-
     if(nombre.length > 2){
         if(telefono.length >= 11 && telefono.length <= 16){
             
@@ -941,7 +938,7 @@ function paso_4(){
                         pedido.fecha = data.fecha;
                         pedido.lat = data.lat;
                         pedido.lng = data.lng;
-                        pedido.estado = "Enviado";
+                        pedido.estado = estados[0];
                         
                         if(pedido.despacho == 0){
                             pedido.time = data.t_retiro;
