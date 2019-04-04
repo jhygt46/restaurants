@@ -1163,7 +1163,6 @@ function done_pedido(){
             pre_teriyaki: p_teriyaki,
             pre_palitos: $('#pre_palitos').val(),
             id_mot: $('#id_mot').val(),
-            tipo: 0,
             carro: [],
             promos: []
         }
@@ -1291,7 +1290,7 @@ function nuevo(data){
     var obj = pedido_obj();
     obj.id_ped = data.id_ped;
     obj.pedido_code = data.pedido_code;
-    obj.tipo = 1;
+    obj.tipo = 0;
     obj.estado = 0;
     obj.despacho = data.despacho;
     obj.carro = data.carro;
