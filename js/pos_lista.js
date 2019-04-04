@@ -1143,6 +1143,7 @@ function done_pedido(){
         var p_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
 
         var obj = {
+            id_ped: 0,
             id_puser: $('#id_puser').val(),
             nombre: $('#nombre').val(),
             telefono: $('#telefono').val(),
