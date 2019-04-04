@@ -49,7 +49,7 @@ class Rest{
         if($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl"){
             $referer = $_POST["referer"];
         }
-        $usuario = $this->con->sql("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio='".$referer."' AND t3.id_gir=t1.id_gir AND t1.telefono='".$telefono."' AND t1.id_puser=t2.id_puser");
+        $usuario = $this->con->sql("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio='".$referer."' AND t3.id_gir=t1.id_gir AND t1.telefono='".$telefono."' AND t1.id_puser=t2.id_puser");
         $info['cantidad'] = 0;
         if($usuario["count"] > 0){
             $info['id_puser'] = $usuario['resultado'][0]['id_puser'];
@@ -57,9 +57,11 @@ class Rest{
             $info['cantidad'] = $usuario["count"];
             for($i=0; $i<$usuario["count"]; $i++){    
                 $aux_dir["id_pdir"] = $usuario['resultado'][$i]['id_pdir'];
+                $aux_dir["direccion"] = $usuario['resultado'][$i]['direccion'];
                 $aux_dir["calle"] = $usuario['resultado'][$i]['calle'];
                 $aux_dir["num"] = $usuario['resultado'][$i]['num'];
                 $aux_dir["depto"] = $usuario['resultado'][$i]['depto'];
+                $aux_dir["comuna"] = $usuario['resultado'][$i]['comuna'];
                 $aux_dir["lat"] = $usuario['resultado'][$i]['lat'];
                 $aux_dir["lng"] = $usuario['resultado'][$i]['lng'];
                 $info['direcciones'][] = $aux_dir;
