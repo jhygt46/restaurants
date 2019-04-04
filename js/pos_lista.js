@@ -1257,6 +1257,7 @@ function add_pedido_moto(id_mot, code){
 function pedido_obj(){
     return {
         id_ped: 0,
+        num_ped: 0,
         pedido_code: '', 
         tipo: 0,
         estado: 0,
@@ -1292,6 +1293,7 @@ function nuevo(data){
 
     var obj = pedido_obj();
     obj.id_ped = data.id_ped;
+    obj.num_ped = data.num_ped;
     obj.pedido_code = data.pedido_code;
     obj.tipo = data.tipo;
     obj.estado = 0;
@@ -1369,6 +1371,7 @@ function guardar_pedido(index){
             console.log(pedidos[index]);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
+                pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
                 listar_pedidos();
