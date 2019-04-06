@@ -692,81 +692,85 @@ function get_horarios_local(id, tipo){
 }
 
 function info_locales(){
-
-
-
-}
-function info_despacho(){
-
-    
-
-}
-function ver_locales_y_despacho(){
-
-    var aux = [true, true];
     var fecha = new Date();
-    var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
-    var hora = fecha.getHours() * 60 + fecha.getMinutes();
-    /*
-    if(data.locales){
+    if(data.locales !== null){
         for(var i=0, ilen=data.locales.length; i<ilen; i++){
-            if(data.locales[i].grs !== null){
-                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
-                    hrs = data.locales[i].grs[j];
-                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
-                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
-                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+            if(data.locales[i].horarios !== null){
+                var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
+                var hora = fecha.getHours() * 60 + fecha.getMinutes();
+                for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
+                    if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
+                        var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
+                        var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
                         if(hr_inicio <= hora && hr_fin >= hora){
-                            if(hrs.tipo == 1 || hrs.tipo == 0){
-                                aux[0] = true;
-                            }
-                            if(hrs.tipo == 2 || hrs.tipo == 0){
-                                aux[1] = true;
+                            if(data.locales[i].horarios[j].tipo == 1 || data.locales[i].horarios[j].tipo == 0){
+                                return true;
                             }
                         }
                     }
                 }
             }else{
-                aux[0] = true;
+                return true;
             }
         }
-    }else{
-        alert("NO TIENE LOCALES CREADOS");
     }
-    */
-    return aux;
-
 }
+function info_despacho(){
+    var fecha = new Date();
+    if(data.locales !== null){
+        for(var i=0, ilen=data.locales.length; i<ilen; i++){
+            if(data.locales[i].horarios !== null){
+                var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
+                var hora = fecha.getHours() * 60 + fecha.getMinutes();
+                for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
+                    if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
+                        var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
+                        var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
+                        if(hr_inicio <= hora && hr_fin >= hora){
+                            if(data.locales[i].horarios[j].tipo == 2 || data.locales[i].horarios[j].tipo == 0){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }else{
+                return true;
+            }
+        }
+    }
+}
+
 function ver_paso_2(){
     
-    var retiro = 0;
-    var despacho = 0;
-    var aux = ver_locales_y_despacho();
+    var info_locales = info_locales();
+    var info_despacho = info_despacho();
 
     var total = parseInt(get_pedido().total);
     var pedido_minimo = parseInt(data.config.pedido_minimo);
 
-    if(!aux[0]){
-        // NO HAY RETIRO EN LOCAL
-        $('.paso_02').find('.rlocal').find('.alert').show();
-        $('.paso_02').find('.rlocal').find('.stitle').hide();
-    }else{
+    if(info_locales){
         // RETIRO EN LOCAL NORMAL
         $('.paso_02').find('.rlocal').find('.alert').hide();
         $('.paso_02').find('.rlocal').find('.stitle').show();
+    }else{
+        // NO HAY RETIRO EN LOCAL
+        $('.paso_02').find('.rlocal').find('.alert').show();
+        $('.paso_02').find('.rlocal').find('.stitle').hide();
     }
 
-    if(aux[1]){
+    if(info_despacho){
         if(total < pedido_minimo){
+            // NO HAY DESPACHO X PEDIDO MINIMO
             $('.paso_02').find('.cdesp').find('.alert').show();
             $('.paso_02').find('.cdesp').find('.stitle').hide();
             $('.paso_02').find('.cdesp').find('.alert').html("Pedido minimo: "+formatNumber.new(parseInt(pedido_minimo), "$"));
         }else{
+            // DESPACHO NORMAL
             $('.paso_02').find('.cdesp').find('.alert').hide();
             $('.paso_02').find('.cdesp').find('.stitle').show();
         }
     }else{
-        // NO HAY DESPACHO
+        // NO HAY DESPACHO X HORARIO
         $('.paso_02').find('.cdesp').find('.alert').show();
         $('.paso_02').find('.cdesp').find('.stitle').hide();
         $('.paso_02').find('.cdesp').find('.alert').html("No hay Despacho");
@@ -778,12 +782,13 @@ function ver_paso_2(){
 }
 function show_modal_locales(){
     
-    var aux = ver_locales_y_despacho();
-    if(aux[0]){
+    var info_locales = info_locales();
+
+    if(info_locales){
 
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
-            var lrs = get_horarios_local(id, 1);
+            //var lrs = get_horarios_local(id, 1);
             /*
             console.log(lrs);
             if(lrs < custom_min){
