@@ -912,9 +912,16 @@ class Core{
 
         $aux_sql = $this->con->sql("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir='".$id_gir."' AND eliminado='0'");
         for($i=0; $i<$aux_sql['count']; $i++){
-            $horarios = $this->con->sql("SELECT * FROM horarios WHERE id_loc='".$aux_sql["resultado"][$i]["id_loc"]."'");
-            $locales['grs'] = $horarios['resultado'];
-            $locales['info'] = $aux_sql['resultado'][$i];
+            
+            $locales['id_loc'] = $aux_sql['resultado'][$i]['id_loc'];
+            $locales['nombre'] = $aux_sql['resultado'][$i]['nombre'];
+            $locales['direccion'] = $aux_sql['resultado'][$i]['direccion'];
+            $locales['lat'] = $aux_sql['resultado'][$i]['lat'];
+            $locales['lng'] = $aux_sql['resultado'][$i]['lng'];
+            
+            $horarios = $this->con->sql("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc='".$aux_sql["resultado"][$i]["id_loc"]."' AND id_gir='".$id_gir."' AND eliminado='0'");
+            $locales['horarios'] = $horarios['resultado'];
+
             $loc[] = $locales;
             unset($locales);
         }

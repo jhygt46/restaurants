@@ -655,43 +655,7 @@ function tooglemenu(){
     if(menu == 1)
         hidemenu();
 }
-function ver_locales_y_despacho(){
 
-    var aux = [false, false];
-    var fecha = new Date();
-    var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
-    var hora = fecha.getHours() * 60 + fecha.getMinutes();
-    var hrs = {};
-
-    if(data.locales){
-        for(var i=0, ilen=data.locales.length; i<ilen; i++){
-            if(data.locales[i].grs){
-                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
-                    hrs = data.locales[i].grs[j];
-                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
-                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
-                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
-                        if(hr_inicio <= hora && hr_fin >= hora){
-                            if(hrs.tipo == 1 || hrs.tipo == 0){
-                                aux[0] = true;
-                            }
-                            if(hrs.tipo == 2 || hrs.tipo == 0){
-                                aux[1] = true;
-                            }
-                        }
-                    }
-                }
-            }else{
-                aux[0] = true;
-            }
-        }
-    }else{
-        alert("NO TIENE LOCALES CREADOS");
-    }
-
-    return aux;
-
-}
 function get_horarios_local(id, tipo){
     
     console.log(id+"/"+tipo);
@@ -726,13 +690,59 @@ function get_horarios_local(id, tipo){
     }
     return mayor;
 }
+
+function info_locales(){
+
+    
+
+}
+function info_despacho(){
+
+    
+
+}
+function ver_locales_y_despacho(){
+
+    var aux = [false, false];
+    var fecha = new Date();
+    var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
+    var hora = fecha.getHours() * 60 + fecha.getMinutes();
+    var hrs = {};
+
+    if(data.locales){
+        for(var i=0, ilen=data.locales.length; i<ilen; i++){
+            if(data.locales[i].grs !== null){
+                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
+                    hrs = data.locales[i].grs[j];
+                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
+                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
+                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+                        if(hr_inicio <= hora && hr_fin >= hora){
+                            if(hrs.tipo == 1 || hrs.tipo == 0){
+                                aux[0] = true;
+                            }
+                            if(hrs.tipo == 2 || hrs.tipo == 0){
+                                aux[1] = true;
+                            }
+                        }
+                    }
+                }
+            }else{
+                aux[0] = true;
+            }
+        }
+    }else{
+        alert("NO TIENE LOCALES CREADOS");
+    }
+
+    return aux;
+
+}
 function ver_paso_2(){
     
     var retiro = 0;
     var despacho = 0;
     var aux = ver_locales_y_despacho();
-
-    console.log(aux);
 
     var total = parseInt(get_pedido().total);
     var pedido_minimo = parseInt(data.config.pedido_minimo);
