@@ -742,13 +742,13 @@ function info_despacho(){
 
 function ver_paso_2(){
     
-    var info_locales = info_locales();
-    var info_despacho = info_despacho();
+    var info_loc = info_locales();
+    var info_desp = info_despacho();
 
     var total = parseInt(get_pedido().total);
     var pedido_minimo = parseInt(data.config.pedido_minimo);
 
-    if(info_locales){
+    if(info_loc){
         // RETIRO EN LOCAL NORMAL
         $('.paso_02').find('.rlocal').find('.alert').hide();
         $('.paso_02').find('.rlocal').find('.stitle').show();
@@ -758,7 +758,7 @@ function ver_paso_2(){
         $('.paso_02').find('.rlocal').find('.stitle').hide();
     }
 
-    if(info_despacho){
+    if(info_desp){
         if(total < pedido_minimo){
             // NO HAY DESPACHO X PEDIDO MINIMO
             $('.paso_02').find('.cdesp').find('.alert').show();
@@ -782,9 +782,9 @@ function ver_paso_2(){
 }
 function show_modal_locales(){
     
-    var info_locales = info_locales();
+    var info_loc = info_locales();
 
-    if(info_locales){
+    if(info_loc){
 
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
