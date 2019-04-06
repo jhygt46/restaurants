@@ -693,7 +693,7 @@ function get_horarios_local(id, tipo){
 
 function info_locales(){
 
-    
+
 
 }
 function info_despacho(){
@@ -703,12 +703,11 @@ function info_despacho(){
 }
 function ver_locales_y_despacho(){
 
-    var aux = [false, false];
+    var aux = [true, true];
     var fecha = new Date();
     var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
     var hora = fecha.getHours() * 60 + fecha.getMinutes();
-    var hrs = {};
-
+    /*
     if(data.locales){
         for(var i=0, ilen=data.locales.length; i<ilen; i++){
             if(data.locales[i].grs !== null){
@@ -734,7 +733,7 @@ function ver_locales_y_despacho(){
     }else{
         alert("NO TIENE LOCALES CREADOS");
     }
-
+    */
     return aux;
 
 }
