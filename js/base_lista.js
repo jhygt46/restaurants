@@ -681,7 +681,7 @@ function get_horarios(id, tipo){
                     }
                 }
             }else{
-                mayor = -1;
+                mayor = 999999;
             }
         }
     }
