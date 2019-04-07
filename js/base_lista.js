@@ -665,6 +665,8 @@ function get_horarios(id, tipo){
     var mayor = 0;
     var next_close = 0;
 
+    var objeto = { open: false, time: 0 };
+
     for(var i=0, ilen=data.locales.length; i<ilen; i++){
         if(data.locales[i].id_loc == id){
             if(data.locales[i].horarios !== null){
@@ -673,19 +675,22 @@ function get_horarios(id, tipo){
                         var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
                         var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
                         if(hr_inicio <= hora && hr_fin >= hora){
+                            objeto.open = true;
                             next_close = hr_fin - hora;
                             if(next_close > mayor){
                                 mayor = next_close;
+                                objeto.time = next_close;
                             }
                         }
                     }
                 }
             }else{
-                mayor = 10000;
+                objeto.open = true;
+                objeto.time = 10000;
             }
         }
     }
-    return mayor;
+    return objeto;
 }
 
 function info_locales(){
@@ -789,22 +794,26 @@ function show_modal_locales(){
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
 
-            console.log(hr_local);
+            var open = hr_local.open;
+            var time = hr_local.time;
 
+            console.log(open+"/"+time);
+            /*
             if(hr_local < custom_min){
-                /*
+                
                 if(hr_local == 0){
                     $(this).find('.local_info').find('.alert').html("Local cerrado");
                 }
                 if(hr_local > 0){
                     $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
                 }
-                */
+                
                 $(this).find('.local_info').find('.alert').css({ display: 'block' });
             }else{
                 $(this).find('.local_info').find('.alert').css({ display: 'none' });
             }
-            
+            */
+
         });
         
         $('.modal').hide();
