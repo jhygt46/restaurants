@@ -663,20 +663,17 @@ function get_horarios_local(id, tipo){
     var fecha = new Date();
     var dia = fecha.getDay();
     var hora = fecha.getHours() * 60 + fecha.getMinutes();
-    var hrs = {};
-    var hr_inicio = 0;
-    var hr_fin = 0;
+
     var mayor = 0;
     var next_close = 0;
 
     for(var i=0, ilen=data.locales.length; i<ilen; i++){
-        if(data.locales[i].info.id_loc == id && (data.locales[i].info.tipo == tipo || data.locales[i].info.tipo == 0)){
-            if(data.locales[i].grs){
-                for(var j=0, jlen=data.locales[i].grs.length; j<jlen; j++){
-                    hrs = data.locales[i].grs[j];
-                    if(hrs.dia_ini <= dia && hrs.dia_fin >= dia){
-                        hr_inicio = hrs.hora_ini * 60 + parseInt(hrs.min_ini);
-                        hr_fin = hrs.hora_fin * 60 + parseInt(hrs.min_fin);
+        if(data.locales[i].id_loc == id && (data.locales[i].tipo == tipo || data.locales[i].tipo == 0)){
+            if(data.locales[i].horarios !== null){
+                for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
+                    if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
+                        var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
+                        var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
                         if(hr_inicio <= hora && hr_fin >= hora){
                             next_close = hr_fin - hora;
                             if(next_close > mayor){
@@ -788,7 +785,8 @@ function show_modal_locales(){
 
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
-            //var lrs = get_horarios_local(id, 1);
+            var lrs = get_horarios_local(id, 1);
+            console.log(lrs);
             /*
             console.log(lrs);
             if(lrs < custom_min){

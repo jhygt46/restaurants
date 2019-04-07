@@ -746,6 +746,9 @@ class Guardar extends Core{
         $id_loc = $_POST['id'];
         $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");
         
+        $aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='1'");
+        $this->con->sql("UPDATE giros SET lista_locales='".json_encode($aux["resultado"])."' WHERE id_gir='".$this->id_gir."'");
+
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Local ".$_POST["nombre"]." Eliminado";
