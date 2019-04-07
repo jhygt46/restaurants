@@ -790,6 +790,7 @@ function show_modal_locales(){
             var hr_local = get_horarios(id, 1);
 
             if(hr_local < custom_min){
+                
                 /*
                 if(hr_local > 0){
                     $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
@@ -798,6 +799,7 @@ function show_modal_locales(){
                     $(this).find('.local_info').find('.alert').html("Local cerrado");
                 }
                 */
+
                 $(this).find('.local_info').find('.alert').css({ display: 'block' });
             }else{
                 $(this).find('.local_info').find('.alert').css({ display: 'none' });

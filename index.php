@@ -223,7 +223,7 @@ if(isset($info['id_gir'])){
                                                     <div class="local_info" onclick="select_local(<?php echo $locales[$i]->{'id_loc'}; ?>, '<?php echo $locales[$i]->{'nombre'}; ?>', '<?php echo $locales[$i]->{'direccion'}; ?>')">
                                                         <div class="title"><?php echo $locales[$i]->{'nombre'}; ?></div>
                                                         <div class="stitle"><?php echo $locales[$i]->{'direccion'}; ?></div>
-                                                        <div class="alert">Atencion: solo faltan 15 minutos para el cierre</div>
+                                                        <div class="alert"></div>
                                                     </div>
                                                     <div class="local_mapa" onclick="map_local(<?php echo $locales[$i]->{'id_loc'}; ?>, <?php echo $locales[$i]->{'lat'}; ?>, <?php echo $locales[$i]->{'lng'}; ?>)">
                                                         <div class="icon_mapa" style="background: url('<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>
