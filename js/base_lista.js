@@ -666,11 +666,8 @@ function get_horarios(id, tipo){
     var next_close = 0;
 
     for(var i=0, ilen=data.locales.length; i<ilen; i++){
-        console.log(data.locales[i].id_loc + "/" + id);
         if(data.locales[i].id_loc == id){
-            console.log("2");
             if(data.locales[i].horarios !== null){
-                console.log("3");
                 for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
                     if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
                         var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
@@ -684,8 +681,7 @@ function get_horarios(id, tipo){
                     }
                 }
             }else{
-                console.log("4");
-                mayor = 999999;
+                mayor = 100000;
             }
         }
     }
@@ -792,6 +788,7 @@ function show_modal_locales(){
 
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
+            console.log("hr_local: "+hr_local);
             //var hr_despacho = get_horarios(id, 2);
 
             if(hr_local < custom_min){
