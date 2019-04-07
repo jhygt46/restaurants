@@ -787,7 +787,7 @@ function show_modal_locales(){
             var id = $(this).attr('id');
             var lrs = get_horarios_local(id, 1);
             console.log(lrs);
-            console.log("3");
+            console.log("3 BUENA");
             /*
             console.log(lrs);
             if(lrs < custom_min){
