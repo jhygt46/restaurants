@@ -780,13 +780,14 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var info_loc = info_locales();
-
+    console.log("1");
     if(info_loc){
-
+        console.log("2");
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
             var lrs = get_horarios_local(id, 1);
             console.log(lrs);
+            console.log("3");
             /*
             console.log(lrs);
             if(lrs < custom_min){
