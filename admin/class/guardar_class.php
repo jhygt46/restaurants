@@ -696,9 +696,8 @@ class Guardar extends Core{
             $info['mensaje'] = "Local modificado exitosamente";
         }
         
-        $aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."'");
-        $this->con->sql("UPDATE giros SET retiro_local='1', lista_locales='".json_encode($aux['resultado'])."' WHERE id_gir='".$this->id_gir."'");
-        
+        $this->locales_giro();
+
         $info['reload'] = 1;
         $info['page'] = "msd/locales.php";
         return $info;
@@ -741,13 +740,27 @@ class Guardar extends Core{
         return $info;
         
     }
+    private function locales_giro(){
+
+        $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='1'");
+        for($i=0; $i<$sql_aux["count"]; $i++){
+            $aux["id_loc"] = $sql_aux["resultado"][$i]["id_loc"];
+            $aux["lat"] = $sql_aux["resultado"][$i]["lat"];
+            $aux["lng"] = $sql_aux["resultado"][$i]["lng"];
+            $aux["nombre"] = $sql_aux["resultado"][$i]["nombre"];
+            $aux["direccion"] = $sql_aux["resultado"][$i]["direccion"];
+            $resultado[] = $aux;
+            unset($aux);
+        }
+        $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado)."' WHERE id_gir='".$this->id_gir."'");
+
+    }
     private function eliminar_locales(){
                 
         $id_loc = $_POST['id'];
         $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");
         
-        $aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='1'");
-        $this->con->sql("UPDATE giros SET lista_locales='".json_encode($aux["resultado"])."' WHERE id_gir='".$this->id_gir."'");
+        $this->locales_giro();
 
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
