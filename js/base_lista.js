@@ -690,6 +690,7 @@ function get_horarios(id, tipo){
 
 function info_locales(){
     var fecha = new Date();
+    console.log("INFO LOCALES 0");
     if(data.locales !== null){
         console.log("INFO LOCALES 1");
         for(var i=0, ilen=data.locales.length; i<ilen; i++){
