@@ -667,7 +667,7 @@ function get_horarios(id, tipo){
 
     for(var i=0, ilen=data.locales.length; i<ilen; i++){
         console.log(data.locales[i]);
-        if(data.locales[i].id_loc == id && (data.locales[i].tipo == tipo || data.locales[i].tipo == 0)){
+        if(data.locales[i].id_loc == id){
             console.log("2");
             if(data.locales[i].horarios !== null){
                 console.log("3");
