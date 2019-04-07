@@ -681,7 +681,7 @@ function get_horarios(id, tipo){
                     }
                 }
             }else{
-                mayor = 100000;
+                mayor = 10000;
             }
         }
     }
@@ -690,23 +690,17 @@ function get_horarios(id, tipo){
 
 function info_locales(){
     var fecha = new Date();
-    console.log(data.locales);
     if(data.locales !== null){
-        console.log("INFO LOCALES 1");
         for(var i=0, ilen=data.locales.length; i<ilen; i++){
             if(data.locales[i].horarios !== null){
-                console.log("INFO LOCALES 2");
                 var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
                 var hora = fecha.getHours() * 60 + fecha.getMinutes();
                 for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
                     if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
                         var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
                         var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
-                        console.log("INFO LOCALES 3");
                         if(hr_inicio <= hora && hr_fin >= hora){
-                            console.log("INFO LOCALES 4");
                             if(data.locales[i].horarios[j].tipo == 1 || data.locales[i].horarios[j].tipo == 0){
-                                console.log("INFO LOCALES 5");
                                 return true;
                             }
                         }
@@ -786,7 +780,6 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var info_loc = info_locales();
-    console.log(info_loc);
     var custom_min = 60;
 
     if(info_loc){
@@ -795,19 +788,16 @@ function show_modal_locales(){
 
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
+            
             console.log(hr_local);
 
             if(hr_local < custom_min){
-                
-                /*
-                if(hr_local > 0){
-                    $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
-                }
                 if(hr_local == 0){
                     $(this).find('.local_info').find('.alert').html("Local cerrado");
                 }
-                */
-
+                if(hr_local > 0){
+                    $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
+                }
                 $(this).find('.local_info').find('.alert').css({ display: 'block' });
             }else{
                 $(this).find('.local_info').find('.alert').css({ display: 'none' });
