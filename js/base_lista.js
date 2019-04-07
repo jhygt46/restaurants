@@ -656,9 +656,7 @@ function tooglemenu(){
         hidemenu();
 }
 
-function get_horarios_local(id, tipo){
-    
-    console.log(id+"/"+tipo);
+function get_horarios(id, tipo){
 
     var fecha = new Date();
     var dia = fecha.getDay();
@@ -786,8 +784,11 @@ function show_modal_locales(){
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
 
             var id = $(this).attr('id');
-            var lrs = get_horarios_local(id, 1);
-            console.log(lrs);
+            var hr_local = get_horarios(id, 1);
+            var hr_despacho = get_horarios(id, 2);
+
+            console.log("hr local: "+hr_local);
+            console.log("hr despacho: "+hr_despacho);
 
             /*
             console.log(lrs);
