@@ -671,6 +671,7 @@ function get_horarios(id, tipo){
         if(data.locales[i].id_loc == id){
             if(data.locales[i].horarios !== null){
                 for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
+                    console.log(data.locales[i].horarios[j].dia_ini+"/"+dia+"/"+data.locales[i].horarios[j].dia_fin);
                     if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
                         var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
                         var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
