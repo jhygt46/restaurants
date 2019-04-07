@@ -788,10 +788,10 @@ function show_modal_locales(){
 
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
+            console.log(hr_local);
 
             if(hr_local < custom_min){
                 
-                console.log(hr_local);
                 /*
                 if(hr_local > 0){
                     $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
