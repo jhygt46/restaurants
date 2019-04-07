@@ -791,10 +791,10 @@ function show_modal_locales(){
             //var hr_despacho = get_horarios(id, 2);
 
             if(hr_local < custom_min){
-                $(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
-                $(this).find('.local_info').find('.alert').css({ display: 'block' });
+                //$(this).find('.local_info').find('.alert').html("En "+hr_local+" minutos cierra este local");
+                //$(this).find('.local_info').find('.alert').css({ display: 'block' });
             }else{
-                $(this).find('.local_info').find('.alert').css({ display: 'none' });
+                //$(this).find('.local_info').find('.alert').css({ display: 'none' });
             }
             
         });
