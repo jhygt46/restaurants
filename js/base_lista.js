@@ -680,6 +680,8 @@ function get_horarios(id, tipo){
                         }
                     }
                 }
+            }else{
+                mayor = -1;
             }
         }
     }
@@ -778,6 +780,7 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var info_loc = info_locales();
+    var custom_min = 30;
 
     if(info_loc){
 
@@ -785,20 +788,15 @@ function show_modal_locales(){
 
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
-            var hr_despacho = get_horarios(id, 2);
+            //var hr_despacho = get_horarios(id, 2);
 
-            console.log("hr local: "+hr_local);
-            console.log("hr despacho: "+hr_despacho);
-
-            /*
-            console.log(lrs);
-            if(lrs < custom_min){
+            if(hr_local < custom_min){
                 $(this).find('.local_info').find('.alert').html("En "+lrs+" minutos cierra este local");
                 $(this).find('.local_info').find('.alert').css({ display: 'block' });
             }else{
                 $(this).find('.local_info').find('.alert').css({ display: 'none' });
             }
-            */
+            
         });
         
         $('.modal').hide();
