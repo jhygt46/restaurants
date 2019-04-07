@@ -691,16 +691,21 @@ function get_horarios(id, tipo){
 function info_locales(){
     var fecha = new Date();
     if(data.locales !== null){
+        console.log("INFO LOCALES 1");
         for(var i=0, ilen=data.locales.length; i<ilen; i++){
             if(data.locales[i].horarios !== null){
+                console.log("INFO LOCALES 2");
                 var dia = fecha.getDay() > 0 ? fecha.getDay() : 7 ;
                 var hora = fecha.getHours() * 60 + fecha.getMinutes();
                 for(var j=0, jlen=data.locales[i].horarios.length; j<jlen; j++){
                     if(data.locales[i].horarios[j].dia_ini <= dia && data.locales[i].horarios[j].dia_fin >= dia){
                         var hr_inicio = data.locales[i].horarios[j].hora_ini * 60 + parseInt(data.locales[i].horarios[j].min_ini);
                         var hr_fin = data.locales[i].horarios[j].hora_fin * 60 + parseInt(data.locales[i].horarios[j].min_fin);
+                        console.log("INFO LOCALES 3");
                         if(hr_inicio <= hora && hr_fin >= hora){
+                            console.log("INFO LOCALES 4");
                             if(data.locales[i].horarios[j].tipo == 1 || data.locales[i].horarios[j].tipo == 0){
+                                console.log("INFO LOCALES 5");
                                 return true;
                             }
                         }
