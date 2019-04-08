@@ -785,7 +785,7 @@ function ver_paso_2(){
 function show_modal_locales(){
     
     var info_loc = info_locales();
-    var custom_min = 60;
+    var custom_min = 30;
 
     if(info_loc){
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){

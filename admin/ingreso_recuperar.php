@@ -46,6 +46,7 @@
                 
                 var btn = $('#recuperar');
                 btn.prop("disabled", true );
+                console.log("RECUPERAR");
                 $.ajax({
                     url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
                     type: "POST",
