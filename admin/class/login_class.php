@@ -17,6 +17,9 @@ class Login {
         $id_user = $db_user["resultado"][0]["id_user"];
         $intentos = $this->con->sql("SELECT * FROM fw_acciones WHERE id_user='".$id_user."' AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
 
+        $info['op'] = 1;
+        $info['message'] = "Correo Enviado";
+
         if($intentos['count'] < 3){
 
             if($db_user['count'] == 1){
@@ -33,9 +36,8 @@ class Login {
 
                 $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
 
-                $info['op'] = 1;
-                $info['message'] = "Correo Enviado";
                 
+
                 /*
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
