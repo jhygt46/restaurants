@@ -12,43 +12,49 @@ class Login {
     }
     public function recuperar_password(){
         
-        $user = $_POST['user'];
-        $db_user = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$user."' AND eliminado='0'");
-        $id_user = $db_user["resultado"][0]["id_user"];
-        $intentos = $this->con->sql("SELECT * FROM fw_acciones WHERE id_user='".$id_user."' AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
+        if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
 
-        if($intentos['count'] < 1){
+            $user = $_POST['user'];
+            $db_user = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$user."' AND eliminado='0'");
+            $id_user = $db_user["resultado"][0]["id_user"];
+            $intentos = $this->con->sql("SELECT * FROM fw_acciones WHERE id_user='".$id_user."' AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
 
-            if($db_user['count'] == 1){
-                
-                $info['op'] = 1;
-                $info['message'] = "Correo Enviado";
-                // 1 INGRESAR
-                // 2 ERRAR
-                // 3 PEDIR PASSWORD
-                $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('3', now(), '".$id_user."')");
+            if($intentos['count'] < 1){
 
-                // CURL 
-                $send['correo'] = $user;
-                $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
-                $send['id'] = $id_user;
-                $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                $info['mail'] = json_decode(curl_exec($ch));
-                curl_close($ch);
-                
+                if($db_user['count'] == 1){
+                    
+                    $info['op'] = 1;
+                    $info['message'] = "Correo Enviado";
+                    // 1 INGRESAR
+                    // 2 ERRAR
+                    // 3 PEDIR PASSWORD
+                    $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('3', now(), '".$id_user."')");
+
+                    // CURL 
+                    $send['correo'] = $user;
+                    $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
+                    $send['id'] = $id_user;
+                    $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
+                    
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                    curl_exec($ch);
+                    curl_close($ch);
+                    
+                }else{
+                    $info['op'] = 2;
+                    $info['message'] = "Error: con correo";
+                }
+
             }else{
                 $info['op'] = 2;
-                $info['message'] = "Error: con correo";
+                $info['message'] = "Error: El correo ya ha sido enviado";
             }
-
         }else{
             $info['op'] = 2;
-            $info['message'] = "Error: El correo ya ha sido enviado";
+            $info['message'] = "Error: debe ingresar correo valido";
         }
         return $info; 
 

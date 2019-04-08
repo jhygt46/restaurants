@@ -155,8 +155,9 @@ class Guardar extends Core{
         $id_cae = $_POST['id_cae'];
         $values = $_POST['values'];
         for($i=0; $i<count($values); $i++){
-            $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+            $info['db'][] = $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
         }
+        return $info;
         
     }
     public function refresh(){
