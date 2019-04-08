@@ -91,7 +91,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 url: "ajax/index.php",
                 type: "POST",
                 data: send,
-                success: function(data){},
+                success: function(data){ console.log(data); },
                 error: function(e){}
             });
         }
