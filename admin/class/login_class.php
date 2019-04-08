@@ -19,6 +19,8 @@ class Login {
 
         $info['op'] = 1;
         $info['message'] = "Correo Enviado";
+        $info['intentos'] = $intentos;
+        $info['db_user'] = $db_user;
 
         if($intentos['count'] < 3){
 
