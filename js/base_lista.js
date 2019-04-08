@@ -786,13 +786,14 @@ function show_modal_locales(){
     
     var info_loc = info_locales();
     var custom_min = 60;
-    
+
     if(info_loc){
         $('.paso_02a .direccion_op1').find('.dir_locales').each(function(){
             var id = $(this).attr('id');
             var hr_local = get_horarios(id, 1);
             var open = hr_local.open;
             var time = hr_local.time;
+            console.log(id+") "+open+" - "+time);
             if(open){
                 if(time < custom_min){
                     $(this).find('.local_info').find('.alert').html("En "+time+" minutos cierra este local");
