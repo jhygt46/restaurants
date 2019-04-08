@@ -19,13 +19,13 @@ class Login {
 
         $info['op'] = 1;
         $info['message'] = "Correo Enviado";
-        $info['intentos'] = $intentos['count'];
-        $info['db_user'] = $db_user['count'];
 
-        if($intentos['count'] < 3){
+        if($intentos['count'] < 1){
 
+            $info['op'] = 2;
             if($db_user['count'] == 1){
                 
+                $info['op'] = 3;
                 // 1 INGRESAR
                 // 2 ERRAR
                 // 3 PEDIR PASSWORD
@@ -35,10 +35,7 @@ class Login {
                 $send['correo'] = $user;
                 $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
                 $send['id'] = $id_user;
-
                 $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
-
-                
 
                 /*
                 $ch = curl_init();
@@ -48,19 +45,15 @@ class Login {
                 curl_exec($ch);
                 curl_close($ch);
                 */
-
             }else{
-
                 $info['op'] = 2;
                 $info['message'] = "Error: con correo";
-
             }
 
         }else{
             $info['op'] = 2;
             $info['message'] = "Error: El correo ya ha sido enviado";
         }
-
         return $info; 
 
     }
