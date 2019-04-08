@@ -33,15 +33,16 @@ class Login {
 
                 $this->con->sql("UPDATE fw_usuarios SET pass='', mailcode='".$send["code"]."' WHERE id_user='".$send["id"]."'");
 
+                $info['op'] = 1;
+                $info['message'] = "Correo Enviado";
+
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                curl_exec($ch);
+                $info['data'] = curl_exec($ch);
                 curl_close($ch);
 
-                $info['op'] = 1;
-                $info['message'] = "Correo Enviado";
 
             }else{
 
