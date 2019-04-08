@@ -54,10 +54,12 @@
                     success: function(data){
                         console.log(data);
                         if(data.op == 1){
+                            localStorage.setItem('correo', $('#correo').val());
+                            $('#correo').val('');
                             bien(data.message);
                             setTimeout(function () {
-                                $(location).attr('href',"");
-                            }, 2000);
+                                $(location).attr("href","/admin");
+                            }, 5000);
                         }
                         if(data.op == 2){
                             mal(data.message);
