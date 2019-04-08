@@ -17,15 +17,12 @@ class Login {
         $id_user = $db_user["resultado"][0]["id_user"];
         $intentos = $this->con->sql("SELECT * FROM fw_acciones WHERE id_user='".$id_user."' AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
 
-        $info['op'] = 1;
-        $info['message'] = "Correo Enviado";
-
         if($intentos['count'] < 1){
 
-            $info['op'] = 2;
             if($db_user['count'] == 1){
                 
-                $info['op'] = 3;
+                $info['op'] = 1;
+                $info['message'] = "Correo Enviado";
                 // 1 INGRESAR
                 // 2 ERRAR
                 // 3 PEDIR PASSWORD
