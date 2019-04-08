@@ -40,7 +40,7 @@ class Login {
                 curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                $info['data'] = curl_exec($ch);
+                curl_exec($ch);
                 curl_close($ch);
 
 
