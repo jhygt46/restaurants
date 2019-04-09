@@ -196,14 +196,14 @@ if(isset($info['id_gir'])){
                                 <div class="info_modal">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
-                                            <div class="rlocal dir_op" onclick="show_modal_locales()" style="background: url('/images/retiro.jpg')">
+                                            <div class="rlocal dir_op" onclick="show_modal_locales()" style="background: url('/images/retiro_01.jpg')">
                                                 <div class="codir prin_alpha_1">
                                                     <div class="title">Retiro en Local</div>
                                                     <div class="stitle">Sin Costo</div>
                                                     <div class="alert"></div>
                                                 </div>
                                             </div>
-                                            <div class="cdesp dir_op" onclick="show_despacho()" style="background: url('/images/despacho.jpg')">
+                                            <div class="cdesp dir_op" onclick="show_despacho()" style="background: url('/images/despacho_01.jpg')">
                                                 <div class="codir prin_alpha_1">
                                                     <div class="title">Despacho a Domicilio</div>
                                                     <div class="stitle">Desde $<?php echo $info["desde"]; ?></div>
