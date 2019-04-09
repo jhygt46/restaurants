@@ -196,7 +196,7 @@ if(isset($info['id_gir'])){
                                 <div class="info_modal">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
-                                            <div class="rlocal dir_op" onclick="show_modal_locales()">
+                                            <div class="rlocal dir_op" onclick="show_modal_locales()" style="background: url('')">
                                                 <div class="codir prin_alpha_1">
                                                     <div class="title">Retiro en Local</div>
                                                     <div class="stitle">Sin Costo</div>
