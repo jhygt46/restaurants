@@ -334,17 +334,23 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 .paso_02 .cont_direccion .direccion_opciones .dir_op {
   margin-bottom: 10px;
   background-size: cover;
+  height: 100px;
 }
 .paso_02 .cont_direccion .direccion_opciones .dir_op .codir {
-  padding: 25px 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
-.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .title {
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .cont_info_dir {
+  left: 20px;
+}
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .cont_info_dir .title {
   font-size: 24px;
 }
-.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .stitle {
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .cont_info_dir .stitle {
   font-size: 13px;
 }
-.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .alert {
+.paso_02 .cont_direccion .direccion_opciones .dir_op .codir .cont_info_dir .alert {
   font-size: 13px;
 }
 .paso_02a .cont_direccion .direccion_op1 {

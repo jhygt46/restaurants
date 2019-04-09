@@ -474,11 +474,17 @@ body {
             .dir_op {
                 margin-bottom: 10px;
                 background-size: cover;
+                height: 100px;
                 .codir{
-                    padding: 25px 20px;
-                    .title { font-size: 24px }
-                    .stitle { font-size: 13px }
-                    .alert { font-size: 13px }
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    .cont_info_dir {
+                        left: 20px;
+                        .title { font-size: 24px }
+                        .stitle { font-size: 13px }
+                        .alert { font-size: 13px }
+                    }
                 }
             }
             .dir_op_select {
