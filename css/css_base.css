@@ -223,12 +223,6 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .modal_carta .cont_modal .cont_info .info_modal .lista_promociones .promocion_categoria .item_pro_cat .item_pro_cat_nom {
   float: left;
 }
-.modal_productos_promo .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_select {
-  float: left;
-}
-.modal_productos_promo .cont_modal .cont_info .info_modal .pro_cat_promo .pro_cat_item .pro_cat_item_nombre {
-  float: left;
-}
 .paso_01 .process_carro .process_carro_promo {
   position: relative;
 }
