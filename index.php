@@ -250,7 +250,7 @@ if(isset($info['id_gir'])){
                                     <div class="cont_direccion">
                                         <div class="direccion_op2">
                                             <input type="text" id="pac-input" placeholder="Ingrese su direccion y numero" />
-                                            <div id="map_direccion" style="height: calc(100% - 133px)"></div>
+                                            <div id="map_direccion" style="height: 100%"></div>
                                         </div>
                                     </div>
                                 </div>

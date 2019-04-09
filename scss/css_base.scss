@@ -507,7 +507,7 @@ body {
         }
     }
     .info_modal {
-        height: 100%;
+        height: calc(100% - 133px);
     }
 }
 .paso_03 {
