@@ -473,11 +473,9 @@ body {
         .direccion_opciones {
             padding: 10px;
             .dir_op {
-                position: relative;
-                height: 60px;
                 margin-bottom: 4px;
                 .codir{
-                    padding-left: 15px;
+                    padding: 15px 10px;
                     .title {}
                     .stitle {}
                     .alert { font-size: 13px }

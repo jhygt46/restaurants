@@ -333,12 +333,10 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   padding: 10px;
 }
 .paso_02 .cont_direccion .direccion_opciones .dir_op {
-  position: relative;
-  height: 60px;
   margin-bottom: 4px;
 }
 .paso_02 .cont_direccion .direccion_opciones .dir_op .codir {
-  padding-left: 15px;
+  padding: 15px 10px;
 }
 .paso_02 .cont_direccion .direccion_opciones .dir_op .codir .alert {
   font-size: 13px;

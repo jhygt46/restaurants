@@ -196,8 +196,20 @@ if(isset($info['id_gir'])){
                                 <div class="info_modal">
                                     <div class="cont_direccion">
                                         <div class="direccion_opciones">
-                                            <div class="rlocal dir_op" onclick="show_modal_locales()"><div class="codir valign"><div class="title">Retiro en Local</div><div class="stitle">Sin Costo</div><div class="alert">No hay locales disponibles</div></div></div>
-                                            <div class="cdesp dir_op" onclick="show_despacho()"><div class="codir valign"><div class="title">Despacho a Domicilio</div><div class="stitle">Desde $<?php echo $info["desde"]; ?></div><div class="alert"></div></div></div>
+                                            <div class="rlocal dir_op" onclick="show_modal_locales()">
+                                                <div class="codir prin_alpha_1">
+                                                    <div class="title">Retiro en Local</div>
+                                                    <div class="stitle">Sin Costo</div>
+                                                    <div class="alert"></div>
+                                                </div>
+                                            </div>
+                                            <div class="cdesp dir_op" onclick="show_despacho()">
+                                                <div class="codir prin_alpha_1">
+                                                    <div class="title">Despacho a Domicilio</div>
+                                                    <div class="stitle">Desde $<?php echo $info["desde"]; ?></div>
+                                                    <div class="alert"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
