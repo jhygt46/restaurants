@@ -458,10 +458,10 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
             producto = get_producto(categoria.productos[i]);
             
             pro_cat_item = document.createElement('div');
-            pro_cat_item.className = 'pro_cat_item clearfix';
+            pro_cat_item.className = 'pro_cat_item';
             
             pro_cat_item_select = document.createElement('div');
-            pro_cat_item_select.className = 'pro_cat_item_select';
+            pro_cat_item_select.className = 'pro_cat_item_select valign';
             
             select = document.createElement("select");
             select.id = categoria.productos[i];
@@ -481,6 +481,11 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
             pro_cat_item_nombre.className = 'pro_cat_item_nombre';
             pro_cat_item_nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
             pro_cat_item.appendChild(pro_cat_item_nombre);
+
+            pro_cat_item_descripcion = document.createElement('div');
+            pro_cat_item_descripcion.className = 'pro_cat_item_descripcion';
+            pro_cat_item_descripcion.innerHTML = producto.descripcion;
+            pro_cat_item.appendChild(pro_cat_item_descripcion);
 
             html.appendChild(pro_cat_item);
             

@@ -301,18 +301,22 @@ body {
                     .pro_cat_item {
                         margin-top: 2px;
                         padding: 8px 4px;
+                        position: relative;
                         .pro_cat_item_select {
-                            float: left;
                             width: 40px;
+                            left: 0px;
                             .select_promo {
                                 width: 100%;
+                                height: 30px;
                             }
                         }
                         .pro_cat_item_nombre {
-                            width: calc(100% - 50px);
-                            padding-left: 10px;
+                            padding-left: 50px;
                             font-size: 16px;
-                            padding-top: 0px;
+                        }
+                        .pro_cat_item_descripcion {
+                            padding-left: 50px;
+                            font-size: 10px;
                         }
                     }
                 }
