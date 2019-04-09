@@ -83,10 +83,10 @@ body .contenedor .pagina .cont_pagina .contenido .cont_contenido .botones_princi
 }
 
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title {
-  font-size: 17px;
+  font-size: 24px;
 }
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle {
-  font-size: 11px;
+  font-size: 12px;
 }
 .paso_03 .cont_final .block_preguntas h1 {
   font-size: 12px;
