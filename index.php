@@ -225,10 +225,8 @@ if(isset($info['id_gir'])){
                                                         <div class="stitle"><?php echo $locales[$i]->{'direccion'}; ?></div>
                                                         <div class="alert"></div>
                                                     </div>
-                                                    <div class="local_mapa" onclick="map_local(<?php echo $locales[$i]->{'id_loc'}; ?>, <?php echo $locales[$i]->{'lat'}; ?>, <?php echo $locales[$i]->{'lng'}; ?>)">
-                                                        <div style="width: 100%; height: 100%; position: relative">
-                                                        <div class="icon_mapa valign" style="background: url('<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>
-                                                        </div>
+                                                    <div class="local_mapa valign" onclick="map_local(<?php echo $locales[$i]->{'id_loc'}; ?>, <?php echo $locales[$i]->{'lat'}; ?>, <?php echo $locales[$i]->{'lng'}; ?>)">
+                                                        <div class="icon_mapa" style="background: url('<?php echo $info["dominio"]; ?>/images/google-maps.png') no-repeat"></div>
                                                     </div>
                                                 </div>
                                                 <div id="lmap-<?php echo $locales[$i]->{'id_loc'}; ?>" class="lmap"></div>

@@ -495,11 +495,11 @@ body {
             .dir_locales{
                 margin-bottom: 10px;
                 .cont_local{
+                    position: relative;
                     .local_info {
+                        display: block;
                         width: calc(100% - 50px);
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        padding-left: 10px;
+                        padding: 10px;
                         .title {
                             
                         }
@@ -513,9 +513,9 @@ body {
                         }
                     }
                     .local_mapa {
-                        width: 40px;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
+                        right: 10px;
+                        width: 30px;
+                        height: 30px;
                         .icon_mapa {
                             width: 30px;
                             height: 30px;

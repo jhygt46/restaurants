@@ -275,17 +275,11 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones {
 .paso_02a .cont_direccion {
   height: 100%;
 }
-.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info {
-  float: left;
-}
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .title {
   display: block;
 }
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_info .stitle {
   display: block;
-}
-.paso_02a .cont_direccion .direccion_op1 .dir_locales .cont_local .local_mapa {
-  float: left;
 }
 .paso_02a .cont_direccion .direccion_op1 .dir_locales .lmap {
   display: none;
