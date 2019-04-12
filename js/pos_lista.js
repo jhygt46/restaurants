@@ -14,7 +14,7 @@ var crear_nuevo = 0;
 //var tiempos = { retiro: 1500, despacho: 3600 };
 var time = new Date().getTime();
 var markers = [];
-var map_socket;
+var map_socket, socket;
 
 function init_map(){
     
@@ -182,7 +182,7 @@ function modificar_horas(){
 }
 function socket_init(){
     
-    var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
+    socket = io.connect('https://www.izusushi.cl', { 'secure': true });
     socket.on('local-'+local_code, function(id_ped) {
         agregar_pedido(id_ped);
         console.log("ADD");
@@ -1361,7 +1361,6 @@ function guardar_pedido(index){
     var send = { pedido: JSON.stringify(pedidos[index]) };
     
     socket.emit('cocina-pos-'+local_code, { carro: JSON.stringify(pedidos[index].carro), promos: JSON.stringify(pedidos[index].promos) });
-    console.log('emit');
 
     $.ajax({
         url: "ajax/set_pedido.php",
