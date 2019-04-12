@@ -187,10 +187,10 @@ function socket_init(){
         agregar_pedido(id_ped);
         console.log("ADD");
     });
+    
     socket.on('map-'+local_code, function(moto) {
         
         var info = JSON.parse(moto.info);
-        console.log("EMIT MAP");
         for(var i=0, ilen=motos.length; i<ilen; i++){
             if(motos[i].id_mot == info.id_mot){
                 markers[i].setMap(map_socket);
@@ -1356,10 +1356,13 @@ function get_pedido_blank(){
     return [pedido_obj()];
 }
 function guardar_pedido(index){
-        
+     
     var pedidos = get_pedidos();
     var send = { pedido: JSON.stringify(pedidos[index]) };
     
+    socket.emit('cocina-pos-'+local_code, { carro: JSON.stringify(pedidos[index].carro), promos: JSON.stringify(pedidos[index].promos) });
+    console.log('emit');
+
     $.ajax({
         url: "ajax/set_pedido.php",
         type: "POST",
