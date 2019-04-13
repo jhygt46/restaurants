@@ -9,7 +9,8 @@ function socket_init(){
         console.log(id_ped);
     });
     socket.on('cocina-pos-'+local_code, function(data) {
-        console.log("alert");
+        console.log("data");
+        console.log(data);
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();

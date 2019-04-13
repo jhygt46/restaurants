@@ -666,6 +666,8 @@ class Core{
             $send['hash'] = 'hash';
             $send['local_code'] = $aux_local['resultado'][0]['code'];;
             $send['id_ped'] = $id_ped;
+            $send['carro'] = $carro;
+            $send['promos'] = $promos;
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
@@ -673,20 +675,6 @@ class Core{
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
             curl_exec($ch);
             curl_close($ch);
-            
-            /*
-            $pedido['local_code'] = $aux_local['resultado'][0]['code'];
-            $pedido['id_ped'] = $id_ped;
-            //$pedido['carro'] = $carro;
-            //$pedido['promos'] = $promos;
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            curl_exec($ch);
-            curl_close($ch);
-            */
 
             $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."', id_pdir='".$id_pdir."', carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             $info['id_ped'] = $id_ped;
