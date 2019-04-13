@@ -1359,9 +1359,6 @@ function guardar_pedido(index){
      
     var pedidos = get_pedidos();
     var send = { pedido: JSON.stringify(pedidos[index]) };
-    
-    //socket.emit('cocina-'+local_code, { carro: JSON.stringify(pedidos[index].carro), promos: JSON.stringify(pedidos[index].promos) });
-    socket.emit('cocina-'+local_code, { id_ped: 99999 });
 
     $.ajax({
         url: "ajax/set_pedido.php",
