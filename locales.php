@@ -28,6 +28,9 @@ if(!isset($_COOKIE['CODE'])){
 }else{
     
     $exist = $core->con->sql("SELECT * FROM locales WHERE cookie_code='".$_COOKIE["CODE"]."' AND id_loc='".$id_loc."'");
+    echo "<pre>";
+    print_r($exist);
+    echo "</pre>";
     if($exist['count'] == 0){
         die("ERROR 2: CONTACTARSE CON EL ADMINISTRADOR");
     }
