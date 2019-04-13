@@ -180,6 +180,7 @@ class Rest{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     curl_exec($ch);
+                    curl_close($ch);
                     
                     header("Location: https://misitiodelivery.cl?contacto=1");
 

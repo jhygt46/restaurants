@@ -662,6 +662,18 @@ class Core{
 
             }
             
+            $send['accion'] = 'enviar_cocina_local';
+            $send['hash'] = 'hash';
+            $send['local_code'] = $aux_local['resultado'][0]['code'];;
+            $send['id_ped'] = $id_ped;
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+            curl_exec($ch);
+            curl_close($ch);
+            
             /*
             $pedido['local_code'] = $aux_local['resultado'][0]['code'];
             $pedido['id_ped'] = $id_ped;
