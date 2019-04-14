@@ -56,8 +56,8 @@ function agregar_pedido(id){
     */
 
 }
-function ver_mas(){
-    console.log("VER MAS");
+function ver_mas(id){
+    console.log(id);
 }
 function createDiv(id, num_ped){
 
@@ -72,14 +72,14 @@ function createDiv(id, num_ped){
     txt.className = 'txt valign';
     txt.innerHTML = 'Pedido: '+num_ped;
     txt.onclick = function(){
-        ver_mas();
+        ver_mas(id);
     }
     titulo.appendChild(txt);
 
     var ver = document.createElement("div");
     ver.className = 'ver valign';
     ver.onclick = function(){
-        ver_mas();
+        ver_mas(id);
     }
     titulo.appendChild(ver);
 
