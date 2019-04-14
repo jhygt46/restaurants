@@ -62,7 +62,7 @@ function add_carro_producto(id_pro){
     
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado);
     if(producto.preguntas){
         mostrar_pregunta(pedido.carro.length - 1);
     }
@@ -100,7 +100,7 @@ function add_carro_promocion(id_cae){
         }
     }
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado);
     listar_pedidos();
     categorias_base(0);
     if(tiene_cats >= 0){
@@ -500,7 +500,7 @@ function confirmar_productos_promo(that){
             }
         }
         set_pedidos(pedidos);
-        guardar_pedido(seleccionado);
+        //guardar_pedido(seleccionado);
         if(proceso(pedidos[seleccionado])){
             
             $('.pop_up').hide();
@@ -583,7 +583,7 @@ function confirmar_pregunta_productos(that){
                 var pedidos = get_pedidos();
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
                 set_pedidos(pedidos);
-                guardar_pedido(seleccionado);
+                //guardar_pedido(seleccionado);
                 $('.pop_up').hide();
                 $('.p4').hide();
                 
@@ -794,7 +794,7 @@ function delete_pro_carro(i){
     var pedidos = get_pedidos();
     pedidos[seleccionado].carro.splice(i, 1);
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
 }
@@ -817,7 +817,7 @@ function delete_promo(that){
     }
     
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
     
@@ -1002,22 +1002,17 @@ function tiene_pregunta(carro){
 }
 function ver_comanda(index){
     
-    var pedidos = get_pedidos();
-    var pedido = pedidos[index];
-    var url = "";
-
-    if(proceso(pedido)){
-    
-        var code = pedido.pedido_code;
-        if(ssl == 0){
-            url = "http://"+dominio;
-        }
-        if(ssl == 1){
-            url = "https://"+dominio;
-        }
-        window.open(url+"/ver/"+code, 'Imprimir Ctrl+P').focus();
-    
+    // 0 ver comanda
+    // 1 imprimir y cerrar comanda
+    // 2 enviar cocina
+    var tipo = 0;
+    if(tipo == 0 || tipo == 1){
+        guardar_pedido_y_abrir_comanda(index, tipo);
     }
+    if(tipo == 2){
+        guardar_pedido(index);
+    }
+    
 }
 function html_home_categorias(obj){
     
@@ -1339,7 +1334,7 @@ function add_pedido(obj){
     }
     set_pedidos(aux);
     seleccionado = 0;
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado);
     listar_pedidos();
     
 }
@@ -1367,8 +1362,6 @@ function guardar_pedido(index){
         success: function(data){
             
             var info = JSON.parse(data);
-            console.log(info);
-            console.log(pedidos[index]);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
@@ -1377,6 +1370,43 @@ function guardar_pedido(index){
                 listar_pedidos();
             }
             
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+    
+}
+function guardar_pedido_y_abrir_comanda(index, tipo){
+     
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
+    var send = { pedido: JSON.stringify(pedido) };
+    var aux = "";
+    
+    $.ajax({
+        url: "ajax/set_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
+            var url = "";
+            if(tipo == 0){
+                aux = "ver";
+            }
+            if(tipo == 1){
+                aux = "prt";
+            }
+            if(proceso(pedido)){
+                var code = pedido.pedido_code;
+                if(ssl == 0){
+                    url = "http://"+dominio;
+                }
+                if(ssl == 1){
+                    url = "https://"+dominio;
+                }
+                window.open(url+"/"+aux+"/"+code, 'Imprimir Ctrl+P').focus();
+            }
+
         }, error: function(e){
             console.log(e);
         }
@@ -1627,7 +1657,7 @@ function confirm(message){
                 pedidos[seleccionado].eliminado = 1;
             }
             set_pedidos(pedidos);
-            guardar_pedido(seleccionado);
+            //guardar_pedido(seleccionado);
             listar_pedidos();
             
             swal({
