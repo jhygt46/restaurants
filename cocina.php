@@ -26,6 +26,7 @@ echo "</pre>";
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/pos.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
         <script>
             var local_code = '70a8a435b6619e2af425';
