@@ -36,6 +36,14 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
                     <div class="titulo">BUENA NELSON</div>
                     <div class="detalle"></div>
                 </div>
+                <div class="pedido" id="2">
+                    <div class="titulo">BUENA NELSON</div>
+                    <div class="detalle"></div>
+                </div>
+                <div class="pedido" id="3">
+                    <div class="titulo">BUENA NELSON</div>
+                    <div class="detalle"></div>
+                </div>
             </div>
         </div>
     </body>
