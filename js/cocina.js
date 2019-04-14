@@ -56,7 +56,9 @@ function agregar_pedido(id){
     */
 
 }
-
+function ver_mas(){
+    console.log("VER MAS");
+}
 function createDiv(id, num_ped){
 
     var html = document.createElement('div');
@@ -69,12 +71,16 @@ function createDiv(id, num_ped){
     var txt = document.createElement("div");
     txt.className = 'txt valign';
     txt.innerHTML = 'Pedido: '+num_ped;
-    txt.onclick = function(){ console.log(this); };
+    txt.onclick = function(){
+        ver_mas();
+    }
     titulo.appendChild(txt);
 
     var ver = document.createElement("div");
     ver.className = 'ver valign';
-    ver.onclick = function(){ console.log("VER"); };
+    ver.onclick = function(){
+        ver_mas();
+    }
     titulo.appendChild(ver);
 
     var borrar = document.createElement("div");

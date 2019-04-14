@@ -60,6 +60,7 @@ html body .contenedor .pop_up {
   width: 100%;
   height: 100%;
   display: none;
+  background: #ddd;
 }
 
 /*# sourceMappingURL=cocina.css.map */
