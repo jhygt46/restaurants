@@ -57,6 +57,11 @@ function agregar_pedido(id){
 
 }
 function ver_mas(id){
+    console.log("VER MAS");
+    console.log(id);
+}
+function borrar_mas(id){
+    console.log("BORRAR MAS");
     console.log(id);
 }
 function createDiv(id, num_ped){
@@ -85,7 +90,9 @@ function createDiv(id, num_ped){
 
     var borrar = document.createElement("div");
     borrar.className = 'borrar valign';
-    borrar.onclick = function(){ $(this).parents('.pedido').remove(); };
+    borrar.onclick = function(){
+        borrar_mas(id);
+    }
     titulo.appendChild(borrar);
 
     html.appendChild(titulo);
