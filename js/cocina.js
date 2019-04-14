@@ -24,8 +24,7 @@ function ver(that){
     console.log(id);
 }
 function borrar(that){
-    var id = $(that).parents('.pedido').attr('id');
-    console.log(id);
+    var pedido = $(that).parents('.pedido').remove();
 }
 function modificar_pedido(info){
 
