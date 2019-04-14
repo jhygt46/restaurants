@@ -1,7 +1,6 @@
 $(document).ready(function(){
     socket_init();
     $('.lista_pedidos').prepend(createDiv(1, 13405));
-
 });
 
 function socket_init(){
@@ -31,13 +30,12 @@ function borrar(id){
 }
 function modificar_pedido(info){
 
-    console.log("MOD PEDIDO POS");
-    console.log(info);
+    $('.lista_pedidos').prepend(createDiv(2, 13406));
 
 }
 function agregar_pedido(id){
 
-    console.log("ADD PEDIDO: "+id);
+    $('.lista_pedidos').prepend(createDiv(3, 13407));
 
     /*
     var send = { id_ped: id };
@@ -61,7 +59,8 @@ function ver_mas(that){
     console.log("VER MAS "+id);
 }
 function borrar_mas(that){
-    $(that).parents('.pedido').remove();
+    var id = $(that).parents('.pedido').attr('id');
+    console.log("BORRAR MAS "+id);
 }
 function createDiv(id, num_ped){
 
