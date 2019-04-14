@@ -56,13 +56,12 @@ function agregar_pedido(id){
     */
 
 }
-function ver_mas(id){
-    console.log("VER MAS");
-    console.log(id);
+function ver_mas(that){
+    var id = $(that).parents('.pedido').attr('id');
+    console.log("VER MAS "+id);
 }
-function borrar_mas(id){
-    console.log("BORRAR MAS");
-    console.log(id);
+function borrar_mas(that){
+    $(that).parents('.pedido').remove();
 }
 function createDiv(id, num_ped){
 
