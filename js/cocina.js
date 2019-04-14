@@ -79,7 +79,7 @@ function createDiv(id, num_ped){
 
     var borrar = document.createElement("div");
     borrar.className = 'borrar valign';
-    borrar.onclick = function(){ $(that).parents('.pedido').remove(); };
+    borrar.onclick = function(){ $(this).parents('.pedido').remove(); };
     titulo.appendChild(borrar);
 
     html.appendChild(titulo);
