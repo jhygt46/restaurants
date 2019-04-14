@@ -1,6 +1,19 @@
-<?php 
-$info['path'] = 'http://localhost/restaurants';
-$info['titulo'] = 'Cocina Bue';
+<?php
+session_start();
+date_default_timezone_set('America/Santiago');
+
+require('admin/class/core_class.php');
+$core = new Core();
+
+$id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
+$local = $core->local($id_loc);
+
+$info = $core->get_data($local['dominio']);
+
+echo "<pre>";
+print_r($info);
+echo "</pre>";
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
