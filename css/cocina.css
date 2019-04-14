@@ -28,6 +28,23 @@ html body .contenedor .lista_pedidos .pedido .titulo {
   width: 100%;
   background: #ccc;
   height: 40px;
+  position: relative;
+}
+html body .contenedor .lista_pedidos .pedido .titulo h1 {
+  left: 5px;
+  background: #ddd;
+}
+html body .contenedor .lista_pedidos .pedido .titulo .ver {
+  width: 30px;
+  height: 30px;
+  right: 5px;
+  background: #999;
+}
+html body .contenedor .lista_pedidos .pedido .titulo .borrar {
+  width: 30px;
+  height: 30px;
+  right: 40px;
+  background: #666;
 }
 html body .contenedor .lista_pedidos .pedido .detalle {
   width: 100%;
