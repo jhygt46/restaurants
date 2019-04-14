@@ -32,7 +32,7 @@ html body .contenedor .lista_pedidos .pedido .titulo {
 }
 html body .contenedor .lista_pedidos .pedido .titulo h1 {
   left: 5px;
-  width: 120px;
+  width: 125px;
   font-size: 18px;
 }
 html body .contenedor .lista_pedidos .pedido .titulo .ver {
@@ -44,7 +44,7 @@ html body .contenedor .lista_pedidos .pedido .titulo .ver {
 html body .contenedor .lista_pedidos .pedido .titulo .borrar {
   width: 25px;
   height: 25px;
-  right: 40px;
+  right: 35px;
   background: #666;
 }
 html body .contenedor .lista_pedidos .pedido .detalle {
