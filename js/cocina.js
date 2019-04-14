@@ -69,17 +69,17 @@ function createDiv(id, num_ped){
     var txt = document.createElement("div");
     txt.className = 'txt valign';
     txt.innerHTML = 'Pedido: '+num_ped;
-    txt.onclick = ver(id);
+    txt.onclick = function(){ console.log(this); };
     titulo.appendChild(txt);
 
     var ver = document.createElement("div");
     ver.className = 'ver valign';
-    ver.onclick = ver(id);
+    ver.onclick = function(){ console.log("VER"); };
     titulo.appendChild(ver);
 
     var borrar = document.createElement("div");
     borrar.className = 'borrar valign';
-    borrar.onclick = borrar(id);
+    borrar.onclick = function(){ console.log("BORRAR") };
     titulo.appendChild(borrar);
 
     html.appendChild(titulo);
