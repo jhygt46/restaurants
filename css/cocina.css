@@ -1,0 +1,44 @@
+html {
+  height: 100%;
+}
+html body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+html body .contenedor {
+  height: 100%;
+  position: relative;
+}
+html body .contenedor .lista_pedidos {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+html body .contenedor .lista_pedidos .pedido {
+  width: 200px;
+  float: left;
+}
+html body .contenedor .lista_pedidos .pedido .titulo {
+  width: 100%;
+  background: #ccc;
+  height: 40px;
+}
+html body .contenedor .lista_pedidos .pedido .detalle {
+  width: 100%;
+  background: #ddd;
+  height: 140px;
+}
+html body .contenedor .pop_up {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=cocina.css.map */

@@ -19,7 +19,7 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/reset.css" media="all" />
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/pos.css" media="all" />
+        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
@@ -29,6 +29,14 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
         </script>
     </head>
     <body>
-        <div class="contenedor"></div>
+        <div class="contenedor">
+            <div class="pop_up"></div>
+            <div class="lista_pedidos clearfix">
+                <div class="pedido" id="1">
+                    <div class="titulo">BUENA NELSON</div>
+                    <div class="detalle"></div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
