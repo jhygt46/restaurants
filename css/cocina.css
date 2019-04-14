@@ -33,6 +33,7 @@ html body .contenedor .lista_pedidos .pedido .titulo {
 html body .contenedor .lista_pedidos .pedido .titulo h1 {
   left: 5px;
   background: #ddd;
+  width: 120px;
 }
 html body .contenedor .lista_pedidos .pedido .titulo .ver {
   width: 30px;

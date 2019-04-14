@@ -33,11 +33,11 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
             <div class="pop_up"></div>
             <div class="lista_pedidos clearfix">
                 <div class="pedido" id="1">
-                    <div class="titulo"><h1 class="valign">BUENA NELSON</h1><div class="ver valign"></div><div class="borrar valign"></div></div>
+                    <div class="titulo"><h1 class="valign">Pedido: 13405</h1><div class="ver valign"></div><div class="borrar valign"></div></div>
                     <div class="detalle"></div>
                 </div>
                 <div class="pedido" id="2">
-                    <div class="titulo"><h1 class="valign">BUENA NELSON</h1><div class="ver valign"></div><div class="borrar valign"></div></div>
+                    <div class="titulo"><h1 class="valign">Pedido: 13406</h1><div class="ver valign"></div><div class="borrar valign"></div></div>
                     <div class="detalle"></div>
                 </div>
             </div>
