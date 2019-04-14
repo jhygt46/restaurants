@@ -21,12 +21,13 @@ function socket_init(){
     });
     
 }
-function ver(that){
-    var id = $(that).parents('.pedido').attr('id');
+function ver(id){
+    //var id = $(that).parents('.pedido').attr('id');
     console.log(id);
 }
-function borrar(that){
-    var pedido = $(that).parents('.pedido').remove();
+function borrar(id){
+    //$(that).parents('.pedido').remove();
+    console.log(id);
 }
 function modificar_pedido(info){
 
@@ -68,17 +69,17 @@ function createDiv(id, num_ped){
     var txt = document.createElement("div");
     txt.className = 'txt valign';
     txt.innerHTML = 'Pedido: '+num_ped;
-    txt.onclick = function(){ ver(this) };
+    txt.onclick = function(){ ver(id) };
     titulo.appendChild(txt);
 
     var ver = document.createElement("div");
     ver.className = 'ver valign';
-    ver.onclick = function(){ ver(this) };
+    ver.onclick = function(){ ver(id) };
     titulo.appendChild(ver);
 
     var borrar = document.createElement("div");
     borrar.className = 'borrar valign';
-    borrar.onclick = function(){ borrar(this) };
+    borrar.onclick = function(){ borrar(id) };
     titulo.appendChild(borrar);
 
     html.appendChild(titulo);
