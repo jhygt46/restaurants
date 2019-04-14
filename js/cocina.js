@@ -77,14 +77,14 @@ function createDiv(id, num_ped){
     txt.className = 'txt valign';
     txt.innerHTML = 'Pedido: '+num_ped;
     txt.onclick = function(){
-        ver_mas(id);
+        ver_mas(this);
     }
     titulo.appendChild(txt);
 
     var ver = document.createElement("div");
     ver.className = 'ver valign';
     ver.onclick = function(){
-        ver_mas(id);
+        ver_mas(this);
     }
     titulo.appendChild(ver);
 
