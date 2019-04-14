@@ -19,6 +19,14 @@ function socket_init(){
     });
     
 }
+function ver(that){
+    var id = $(that).parents('.pedido').attr('id');
+    console.log(id);
+}
+function borrar(that){
+    var id = $(that).parents('.pedido').attr('id');
+    console.log(id);
+}
 function modificar_pedido(info){
 
     console.log("MOD PEDIDO POS");
