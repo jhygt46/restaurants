@@ -62,7 +62,7 @@ function add_carro_producto(id_pro){
     
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
-    //guardar_pedido(seleccionado);
+    guardar_pedido(seleccionado);
     if(producto.preguntas){
         mostrar_pregunta(pedido.carro.length - 1);
     }
@@ -100,7 +100,7 @@ function add_carro_promocion(id_cae){
         }
     }
     set_pedidos(pedidos);
-    //guardar_pedido(seleccionado);
+    guardar_pedido(seleccionado);
     listar_pedidos();
     categorias_base(0);
     if(tiene_cats >= 0){
@@ -500,7 +500,7 @@ function confirmar_productos_promo(that){
             }
         }
         set_pedidos(pedidos);
-        //guardar_pedido(seleccionado);
+        guardar_pedido(seleccionado);
         if(proceso(pedidos[seleccionado])){
             
             $('.pop_up').hide();
@@ -583,7 +583,7 @@ function confirmar_pregunta_productos(that){
                 var pedidos = get_pedidos();
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
                 set_pedidos(pedidos);
-                //guardar_pedido(seleccionado);
+                guardar_pedido(seleccionado);
                 $('.pop_up').hide();
                 $('.p4').hide();
                 
@@ -794,7 +794,7 @@ function delete_pro_carro(i){
     var pedidos = get_pedidos();
     pedidos[seleccionado].carro.splice(i, 1);
     set_pedidos(pedidos);
-    //guardar_pedido(seleccionado);
+    guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
 }
@@ -817,7 +817,7 @@ function delete_promo(that){
     }
     
     set_pedidos(pedidos);
-    //guardar_pedido(seleccionado);
+    guardar_pedido(seleccionado);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
     
@@ -1334,7 +1334,7 @@ function add_pedido(obj){
     }
     set_pedidos(aux);
     seleccionado = 0;
-    //guardar_pedido(seleccionado);
+    guardar_pedido(seleccionado);
     listar_pedidos();
     
 }
@@ -1657,7 +1657,7 @@ function confirm(message){
                 pedidos[seleccionado].eliminado = 1;
             }
             set_pedidos(pedidos);
-            //guardar_pedido(seleccionado);
+            guardar_pedido(seleccionado);
             listar_pedidos();
             
             swal({
