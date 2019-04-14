@@ -7,11 +7,11 @@ $core = new Core();
 
 $id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
 $local = $core->local($id_loc);
-
 $info = $core->get_data($local['dominio']);
+$info_local = $core->socket_code($id_loc, $info['id_gir']);
 
 echo "<pre>";
-print_r($info);
+print_r($info_local);
 echo "</pre>";
 
 ?>
