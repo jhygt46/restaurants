@@ -1,5 +1,7 @@
 $(document).ready(function(){
     socket_init();
+    $('.lista_pedidos').appendChild(createDiv(1, 13405));
+
 });
 
 function socket_init(){
@@ -51,5 +53,40 @@ function agregar_pedido(id){
         }
     });
     */
+
+}
+
+function createDiv(id, num_ped){
+
+    var html = document.createElement('div');
+    html.className = 'pedido';
+    html.setAttribute('id', id);
+
+    var titulo = document.createElement("div");
+    titulo.className = 'titulo';
+    
+    var txt = document.createElement("div");
+    txt.className = 'txt valign';
+    txt.innerHTML = 'Pedido: '+num_ped;
+    txt.onclick = function(){ ver(this) };
+    titulo.appendChild(txt);
+
+    var ver = document.createElement("div");
+    ver.className = 'ver valign';
+    ver.onclick = function(){ ver(this) };
+    titulo.appendChild(ver);
+
+    var borrar = document.createElement("div");
+    borrar.className = 'borrar valign';
+    borrar.onclick = function(){ borrar(this) };
+    titulo.appendChild(borrar);
+
+    html.appendChild(titulo);
+
+    var detalle = document.createElement("div");
+    detalle.className = 'detalle';
+    html.appendChild(detalle);
+
+    return html;
 
 }
