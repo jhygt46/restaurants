@@ -91,7 +91,7 @@ function createDiv(id, num_ped){
     var borrar = document.createElement("div");
     borrar.className = 'borrar valign';
     borrar.onclick = function(){
-        borrar_mas(id);
+        borrar_mas(this);
     }
     titulo.appendChild(borrar);
 
