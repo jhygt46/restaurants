@@ -43,8 +43,11 @@ function agregar_pedido(id){
         success: function(data){
             
             var info = JSON.parse(data);
-            console.log(info);
-            $('.lista_pedidos').prepend(createDiv(3, 13407));
+            console.log(info.id_ped);
+            console.log(info.num_ped);
+            console.log(JSON.parse(info.carro));
+            console.log(JSON.parse(info.promos));
+            $('.lista_pedidos').prepend(createDiv(info.id_ped, info.num_ped));
             
         }, error: function(e){
             console.log(e);

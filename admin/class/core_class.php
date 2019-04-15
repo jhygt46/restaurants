@@ -699,7 +699,9 @@ class Core{
     }
     public function get_cocina($id_ped){
 
-        $sql = $this->con->sql("SELECT carro, promos FROM pedidos_aux WHERE id_ped='".$id_ped."'");
+        $sql = $this->con->sql("SELECT id_ped, num_ped, carro, promos FROM pedidos_aux WHERE id_ped='".$id_ped."'");
+        $info["id_ped"] = $sql["resultado"][0]["id_ped"];
+        $info["num_ped"] = $sql["resultado"][0]["num_ped"];
         $info["carro"] = $sql["resultado"][0]["carro"];
         $info["promos"] = $sql["resultado"][0]["promos"];
         return $info;
