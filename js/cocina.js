@@ -3,6 +3,8 @@ $(document).ready(function(){
     //$('.lista_pedidos').prepend(createDiv(1, 13405));
 });
 
+var pedidos = [];
+
 function socket_init(){
     
     var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
@@ -30,7 +32,18 @@ function borrar(id){
 }
 function modificar_pedido(info){
 
-    $('.lista_pedidos').prepend(createDiv(2, 13406));
+    console.log(info);
+    //$('.lista_pedidos').prepend(createDiv(2, 13406));
+
+}
+
+function listar_pedidos(){
+
+    $('.lista_pedidos').html('');
+    pedidos.forEach(function(valor){
+        console.log(valor);
+        $('.lista_pedidos').prepend(createDiv(valor.id_ped, valor.num_ped));
+    });
 
 }
 function agregar_pedido(id){
@@ -43,11 +56,9 @@ function agregar_pedido(id){
         success: function(data){
             
             var info = JSON.parse(data);
-            console.log(info.id_ped);
-            console.log(info.num_ped);
-            console.log(JSON.parse(info.carro));
-            console.log(JSON.parse(info.promos));
-            $('.lista_pedidos').prepend(createDiv(info.id_ped, info.num_ped));
+            var aux = { id_ped: info.id_ped, num_ped: num_ped, carro: JSON.parse(info.carro), promos: JSON.parse(info.promos) }
+            pedidos.push(aux);
+            listar_pedidos();
             
         }, error: function(e){
             console.log(e);
