@@ -22,14 +22,6 @@ function socket_init(){
     });
     
 }
-function ver(id){
-    //var id = $(that).parents('.pedido').attr('id');
-    console.log(id);
-}
-function borrar(id){
-    //$(that).parents('.pedido').remove();
-    console.log(id);
-}
 function modificar_pedido(info){
 
     if(in_arr(pedidos, info.id_ped)){
@@ -127,6 +119,18 @@ function createDiv(valor){
 
     var detalle = document.createElement("div");
     detalle.className = 'detalle';
+
+    for(var i=0, ilen=valor.carro.length; i<ilen; i++){
+
+        console.log(valor.carro[i]);
+        var lista = document.createElement("div");
+        lista.className = 'lista';
+        lista.innerHTML = 'carro';
+        detalle.appendChild(lista);
+
+    }
+
+
     html.appendChild(detalle);
 
     return html;
