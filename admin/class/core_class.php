@@ -697,6 +697,14 @@ class Core{
         $aux = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'");
         return $aux;
     }
+    public function get_cocina($id_ped){
+
+        $sql = $this->con->sql("SELECT carro, promos FROM pedidos_aux WHERE id_ped='".$id_ped."'");
+        $info["carro"] = $sql["resultado"][0]["carro"];
+        $info["promos"] = $sql["resultado"][0]["promos"];
+        return $info;
+
+    }
     public function get_ultimos_pedidos($id_ped){
         
         $id_loc = $_COOKIE['ID'];

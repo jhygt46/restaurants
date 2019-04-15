@@ -35,23 +35,21 @@ function modificar_pedido(info){
 }
 function agregar_pedido(id){
 
-    $('.lista_pedidos').prepend(createDiv(3, 13407));
-
-    /*
     var send = { id_ped: id };
     $.ajax({
-        url: "ajax/get_pedido.php",
+        url: "ajax/get_cocina.php",
         type: "POST",
         data: send,
         success: function(data){
             
             var info = JSON.parse(data);
+            console.log(info);
+            $('.lista_pedidos').prepend(createDiv(3, 13407));
             
         }, error: function(e){
             console.log(e);
         }
     });
-    */
 
 }
 function ver_mas(that){
