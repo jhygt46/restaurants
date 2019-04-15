@@ -1,6 +1,6 @@
 $(document).ready(function(){
     socket_init();
-    $('.lista_pedidos').prepend(createDiv(1, 13405));
+    //$('.lista_pedidos').prepend(createDiv(1, 13405));
 });
 
 function socket_init(){
