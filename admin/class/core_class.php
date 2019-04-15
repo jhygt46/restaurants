@@ -634,11 +634,12 @@ class Core{
             
             if($id_ped > 0){
 
-                $sql_pedido = $this->con->sql("SELECT carro, promos, code, borrados FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                $sql_pedido = $this->con->sql("SELECT carro, promos, code, borrados, num_ped FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 $code = $sql_pedido['resultado'][0]['code'];
                 $db_carro = $sql_pedido['resultado'][0]['carro'];
                 $db_promos = $sql_pedido['resultado'][0]['promos'];
                 $db_borrados = $sql_pedido['resultado'][0]['borrados'];
+                $num_ped = $sql_pedido['resultado'][0]['num_ped'];
 
                 $info['db_carro'] = $db_carro;
                 $info['db_promos'] = $db_promos;
@@ -666,6 +667,7 @@ class Core{
             $send['hash'] = 'hash';
             $send['local_code'] = $aux_local['resultado'][0]['code'];;
             $send['id_ped'] = $id_ped;
+            $send['num_ped'] = $num_ped;
             $send['carro'] = $carro;
             $send['promos'] = $promos;
 

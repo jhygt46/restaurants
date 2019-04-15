@@ -55,15 +55,7 @@ function in_arr(arr, id_ped){
     }
     return false;
 }
-function listar_pedidos(){
 
-    $('.lista_pedidos').html('');
-    pedidos.forEach(function(valor){
-        console.log(valor);
-        $('.lista_pedidos').prepend(createDiv(valor.id_ped, valor.num_ped));
-    });
-
-}
 function agregar_pedido(id){
 
     var send = { id_ped: id };
@@ -92,18 +84,26 @@ function borrar_mas(that){
     var id = $(that).parents('.pedido').attr('id');
     console.log("BORRAR MAS "+id);
 }
-function createDiv(id, num_ped){
+function listar_pedidos(){
+
+    $('.lista_pedidos').html('');
+    pedidos.forEach(function(valor){
+        $('.lista_pedidos').prepend(createDiv(valor));
+    });
+
+}
+function createDiv(valor){
 
     var html = document.createElement('div');
     html.className = 'pedido';
-    html.setAttribute('id', id);
+    html.setAttribute('id', valor.id_ped);
 
     var titulo = document.createElement("div");
     titulo.className = 'titulo';
     
     var txt = document.createElement("div");
     txt.className = 'txt valign';
-    txt.innerHTML = 'Pedido: '+num_ped;
+    txt.innerHTML = 'Pedido: '+valor.num_ped;
     txt.onclick = function(){
         ver_mas(this);
     }
