@@ -32,11 +32,29 @@ function borrar(id){
 }
 function modificar_pedido(info){
 
-    console.log(info);
-    //$('.lista_pedidos').prepend(createDiv(2, 13406));
+    if(in_arr(pedidos, info.id_ped)){
+        for(var i=0, ilen=pedidos.length; i<ilen; i++){
+            if(pedidos[i].id_ped == info.id_ped){
+                pedidos[i].carro = info.carro;
+                pedidos[i].promos = info.promos;
+                listar_pedidos();
+            }
+        }
+    }else{
+        pedidos.push({ id_ped: info.id_ped, num_ped: info.num_ped, carro: info.carro, promos: info.promos });
+        listar_pedidos();
+    }
 
 }
+function in_arr(arr, id_ped){
 
+    for(var i=0, ilen=arr.length; i<ilen; i++){
+        if(arr[i].id_ped == id_ped){
+            return true;
+        }
+    }
+    return false;
+}
 function listar_pedidos(){
 
     $('.lista_pedidos').html('');
