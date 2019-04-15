@@ -56,7 +56,7 @@ function agregar_pedido(id){
         success: function(data){
             
             var info = JSON.parse(data);
-            var aux = { id_ped: info.id_ped, num_ped: num_ped, carro: JSON.parse(info.carro), promos: JSON.parse(info.promos) }
+            var aux = { id_ped: info.id_ped, num_ped: info.num_ped, carro: JSON.parse(info.carro), promos: JSON.parse(info.promos) }
             pedidos.push(aux);
             listar_pedidos();
             
