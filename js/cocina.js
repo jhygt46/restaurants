@@ -120,14 +120,15 @@ function createDiv(valor){
     var detalle = document.createElement("div");
     detalle.className = 'detalle';
 
-    for(var i=0, ilen=valor.promos.length; i<ilen; i++){
+    console.log(valor.promos);
+    console.log(valor.carro);
 
+    /*
+    for(var i=0, ilen=valor.promos.length; i<ilen; i++){
         for(var j=0, jlen=valor.carro.length; j<jlen; j++){
             if(valor.carro[j].promo == i){
-
             }
         }
-
     }
 
     for(var i=0, ilen=valor.carro.length; i<ilen; i++){
@@ -138,7 +139,7 @@ function createDiv(valor){
             detalle.appendChild(lista);
         }
     }
-
+    */
 
 
     html.appendChild(detalle);
