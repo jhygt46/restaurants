@@ -3,6 +3,7 @@ $(document).ready(function(){
 });
 
 var pedidos = [];
+var catalogo = 0; 
 
 function socket_init(){
     
