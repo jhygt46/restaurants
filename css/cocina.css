@@ -57,8 +57,11 @@ html body .contenedor .lista_pedidos .pedido .detalle .promocion {
   padding-top: 10px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_titulo {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
+}
+html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto {
+  padding-bottom: 6px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto .titulo_producto {
   font-size: 14px;
@@ -70,6 +73,9 @@ html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto
 html body .contenedor .lista_pedidos .pedido .detalle .restantes {
   display: block;
   padding-top: 10px;
+}
+html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto {
+  padding-bottom: 6px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto .titulo_producto {
   font-size: 14px;
