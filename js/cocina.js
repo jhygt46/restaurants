@@ -125,7 +125,7 @@ function createDiv(valor){
             promocion.appendChild(promo_titulo);
             for(var j=0, jlen=valor.carro.length; j<jlen; j++){
                 if(valor.carro[j].promo == i){
-                    var producto = get_producto(valor.carro[i].id_pro);
+                    var producto = get_producto(valor.carro[j].id_pro);
                     var promo_producto = create_element_class_inner('promo_producto', producto.nombre);
                     promocion.appendChild(promo_producto);
                 }
