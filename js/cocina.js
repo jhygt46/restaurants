@@ -80,7 +80,7 @@ function listar_pedidos(){
     
     $('.lista_pedidos').html('');
     pedidos.sort(function (a, b){
-        return (b.num_ped - a.num_ped);
+        return (a.num_ped - b.num_ped);
     })
     pedidos.forEach(function(valor){
         $('.lista_pedidos').prepend(createDiv(valor));
