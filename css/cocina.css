@@ -60,15 +60,17 @@ html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_titulo {
   font-size: 14px;
   font-weight: bold;
 }
-html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto {
-  font-size: 14px;
+html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto .pregunta {
+  font-size: 13px;
+  font-style: italic;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .restantes {
   display: block;
   padding-top: 10px;
 }
-html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto {
-  font-size: 14px;
+html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto .pregunta {
+  font-size: 13px;
+  font-style: italic;
 }
 html body .contenedor .pop_up {
   position: fixed;

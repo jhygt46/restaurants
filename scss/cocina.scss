@@ -54,14 +54,26 @@ html {
                                 font-weight: bold;
                             }
                             .promo_producto{
-                                font-size: 14px;
+                                .titulo_producto{
+
+                                }
+                                .pregunta{
+                                    font-size: 13px;
+                                    font-style: italic;
+                                }
                             }
                         }
                         .restantes{
                             display: block;
                             padding-top: 10px;
                             .restante_producto{
-                                font-size: 14px;
+                                .titulo_producto{
+
+                                }
+                                .pregunta{
+                                    font-size: 13px;
+                                    font-style: italic;
+                                }
                             }
                         }
                     }
