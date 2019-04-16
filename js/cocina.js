@@ -77,10 +77,15 @@ function borrar_mas(that){
     console.log("BORRAR MAS "+id);
 }
 function listar_pedidos(){
+    
     $('.lista_pedidos').html('');
+    pedidos.sort(function (a, b){
+        return (b.num_ped - a.num_ped);
+    })
     pedidos.forEach(function(valor){
         $('.lista_pedidos').prepend(createDiv(valor));
     });
+
 }
 function create_element_class(clase){
     var Div = document.createElement('div');

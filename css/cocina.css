@@ -23,6 +23,7 @@ html body .contenedor .lista_pedidos .pedido {
   width: 280px;
   float: left;
   margin-right: 5px;
+  margin-bottom: 5px;
 }
 html body .contenedor .lista_pedidos .pedido .titulo {
   width: 100%;
