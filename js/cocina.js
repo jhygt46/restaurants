@@ -120,19 +120,28 @@ function createDiv(valor){
     var detalle = document.createElement("div");
     detalle.className = 'detalle';
 
-    for(var i=0, ilen=valor.carro.length; i<ilen; i++){
+    for(var i=0, ilen=valor.promos.length; i<ilen; i++){
 
-        console.log(valor.carro[i]);
-        var lista = document.createElement("div");
-        lista.className = 'lista';
-        lista.innerHTML = 'carro';
-        detalle.appendChild(lista);
+        for(var j=0, jlen=valor.carro.length; j<jlen; j++){
+            if(valor.carro[j].promo == i){
+
+            }
+        }
 
     }
 
+    for(var i=0, ilen=valor.carro.length; i<ilen; i++){
+        if(!valor.carro[i].hasOwnProperty('promo')){
+            var lista = document.createElement("div");
+            lista.className = 'lista';
+            lista.innerHTML = valor.carro[i].id_pro;
+            detalle.appendChild(lista);
+        }
+    }
+
+
 
     html.appendChild(detalle);
-
     return html;
 
 }
