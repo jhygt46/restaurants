@@ -126,9 +126,23 @@ function createDiv(valor){
             for(var j=0, jlen=valor.carro.length; j<jlen; j++){
                 if(valor.carro[j].promo == i){
                     var producto = get_producto(valor.carro[j].id_pro);
-                    console.log(producto);
-                    console.log(valor.carro[j]);
-                    var promo_producto = create_element_class_inner('promo_producto', producto.nombre);
+                    var promo_producto = create_element_class('promo_producto');
+                    var titulo_producto = create_element_class_inner('titulo_producto', producto.nombre);
+                    promo_producto.appendChild(titulo_producto);
+                    if(valor.carro[j].preguntas){
+                        for(var f=0, flen=valor.carro[j].preguntas.length; f<flen; f++){
+                            for(var k=0, klen=valor.carro[j].preguntas[f].valores.length; k<klen; k++){
+                                var pregunta = create_element_class('pregunta');
+                                pregunta.innerHTML = valor.carro[j].preguntas[f].valores[k].nombre+": ";
+                                if(valor.carro[j].preguntas[f].valores[k].seleccionados !== undefined){
+                                    pregunta.innerHTML += valor.carro[j].preguntas[f].valores[k].seleccionados.join('/');
+                                }else{
+                                    pregunta.innerHTML += '<b>No Definido</b>';
+                                }
+                                promo_producto.appendChild(pregunta);
+                            }
+                        }
+                    }
                     promocion.appendChild(promo_producto);
                 }
             }
@@ -141,9 +155,25 @@ function createDiv(valor){
         for(var i=0, ilen=valor.carro.length; i<ilen; i++){
             if(!valor.carro[i].hasOwnProperty('promo')){
                 var producto = get_producto(valor.carro[i].id_pro);
-                console.log(producto);
-                console.log(valor.carro[i]);
-                var res_producto = create_element_class_inner('restante_producto', producto.nombre);
+                var res_producto = create_element_class('restante_producto');
+                var titulo_producto = create_element_class_inner('titulo_producto', producto.nombre);
+                res_producto.appendChild(titulo_producto);
+
+                if(valor.carro[j].preguntas){
+                    for(var f=0, flen=valor.carro[j].preguntas.length; f<flen; f++){
+                        for(var k=0, klen=valor.carro[j].preguntas[f].valores.length; k<klen; k++){
+                            var pregunta = create_element_class('pregunta');
+                            pregunta.innerHTML = valor.carro[j].preguntas[f].valores[k].nombre+": ";
+                            if(valor.carro[j].preguntas[f].valores[k].seleccionados !== undefined){
+                                pregunta.innerHTML += valor.carro[j].preguntas[f].valores[k].seleccionados.join('/');
+                            }else{
+                                pregunta.innerHTML += '<b>No Definido</b>';
+                            }
+                            res_producto.appendChild(pregunta);
+                        }
+                    }
+                }
+
                 restantes.appendChild(res_producto);
             }
         }
