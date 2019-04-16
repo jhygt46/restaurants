@@ -123,23 +123,26 @@ function createDiv(valor){
     console.log(valor.promos);
     console.log(valor.carro);
 
-    /*
-    for(var i=0, ilen=valor.promos.length; i<ilen; i++){
-        for(var j=0, jlen=valor.carro.length; j<jlen; j++){
-            if(valor.carro[j].promo == i){
+    if(valor.promos !== undefined){
+        for(var i=0, ilen=valor.promos.length; i<ilen; i++){
+            for(var j=0, jlen=valor.carro.length; j<jlen; j++){
+                if(valor.carro[j].promo == i){
+                }
             }
         }
     }
 
-    for(var i=0, ilen=valor.carro.length; i<ilen; i++){
-        if(!valor.carro[i].hasOwnProperty('promo')){
-            var lista = document.createElement("div");
-            lista.className = 'lista';
-            lista.innerHTML = valor.carro[i].id_pro;
-            detalle.appendChild(lista);
+    if(valor.carro !== undefined){
+        for(var i=0, ilen=valor.carro.length; i<ilen; i++){
+            if(!valor.carro[i].hasOwnProperty('promo')){
+                var lista = document.createElement("div");
+                lista.className = 'lista';
+                lista.innerHTML = valor.carro[i].id_pro;
+                detalle.appendChild(lista);
+            }
         }
     }
-    */
+    
 
 
     html.appendChild(detalle);
