@@ -43,9 +43,16 @@ html {
                         }
                     }
                     .detalle{
-                        width: 100%;
+                        width: calc(100% - 20px);
                         background: #ddd;
-                        height: 140px;
+                        padding: 10px;
+                        .promocion{
+                            display: block;
+                        }
+                        .restantes{
+                            display: block;
+                            padding-top: 10px;
+                        }
                     }
                 }
             }

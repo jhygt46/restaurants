@@ -48,9 +48,16 @@ html body .contenedor .lista_pedidos .pedido .titulo .borrar {
   background: #666;
 }
 html body .contenedor .lista_pedidos .pedido .detalle {
-  width: 100%;
+  width: calc(100% - 20px);
   background: #ddd;
-  height: 140px;
+  padding: 10px;
+}
+html body .contenedor .lista_pedidos .pedido .detalle .promocion {
+  display: block;
+}
+html body .contenedor .lista_pedidos .pedido .detalle .restantes {
+  display: block;
+  padding-top: 10px;
 }
 html body .contenedor .pop_up {
   position: fixed;
