@@ -121,12 +121,12 @@ function createDiv(valor){
         for(var i=0, ilen=valor.promos.length; i<ilen; i++){
             var promocion = create_element_class('promocion');
             var categoria = get_categoria(valor.promos[i].id_cae);
-            console.log(categoria);
-            var promo_titulo = create_element_class_inner('promo_titulo', 'Titulo BUE');
+            var promo_titulo = create_element_class_inner('promo_titulo', categoria.nombre);
             promocion.appendChild(promo_titulo);
             for(var j=0, jlen=valor.carro.length; j<jlen; j++){
                 if(valor.carro[j].promo == i){
-                    var promo_producto = create_element_class_inner('promo_producto', 'Producto: '+valor.carro[j].id_pro);
+                    var producto = get_producto(valor.carro[i].id_pro);
+                    var promo_producto = create_element_class_inner('promo_producto', producto.nombre);
                     promocion.appendChild(promo_producto);
                 }
             }
@@ -139,8 +139,7 @@ function createDiv(valor){
         for(var i=0, ilen=valor.carro.length; i<ilen; i++){
             if(!valor.carro[i].hasOwnProperty('promo')){
                 var producto = get_producto(valor.carro[i].id_pro);
-                console.log(producto);
-                var res_producto = create_element_class_inner('restante_producto', 'Producto: '+valor.carro[i].id_pro);
+                var res_producto = create_element_class_inner('restante_producto', producto.nombre);
                 restantes.appendChild(res_producto);
             }
         }
