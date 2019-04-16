@@ -1,6 +1,5 @@
 $(document).ready(function(){
     socket_init();
-    //$('.lista_pedidos').prepend(createDiv(1, 13405));
 });
 
 var pedidos = [];
@@ -77,12 +76,10 @@ function borrar_mas(that){
     console.log("BORRAR MAS "+id);
 }
 function listar_pedidos(){
-
     $('.lista_pedidos').html('');
     pedidos.forEach(function(valor){
         $('.lista_pedidos').prepend(createDiv(valor));
     });
-
 }
 function create_element_class(clase){
     var Div = document.createElement('div');
