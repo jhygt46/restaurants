@@ -48,10 +48,19 @@ html {
                         padding: 10px;
                         .promocion{
                             display: block;
+                            .promo_titulo{
+                                font-size: 16px;
+                            }
+                            .promo_producto{
+                                font-size: 12px;
+                            }
                         }
                         .restantes{
                             display: block;
                             padding-top: 10px;
+                            .restante_producto{
+                                font-size: 12px;
+                            }
                         }
                     }
                 }
