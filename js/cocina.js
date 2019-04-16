@@ -119,11 +119,13 @@ function createDiv(valor){
     if(valor.promos !== undefined){
         for(var i=0, ilen=valor.promos.length; i<ilen; i++){
             var promocion = create_element_class('promocion');
-            var promo_titulo = create_element_class('promo_titulo', 'Titulo BUE');
+            var categoria = get_categoria(valor.promos[i].id_cae);
+            console.log(categoria);
+            var promo_titulo = create_element_class_inner('promo_titulo', 'Titulo BUE');
             promocion.appendChild(promo_titulo);
             for(var j=0, jlen=valor.carro.length; j<jlen; j++){
                 if(valor.carro[j].promo == i){
-                    var promo_producto = create_element_class('promo_producto', 'Producto: '+valor.carro[j].id_pro);
+                    var promo_producto = create_element_class_inner('promo_producto', 'Producto: '+valor.carro[j].id_pro);
                     promocion.appendChild(promo_producto);
                 }
             }
@@ -135,7 +137,9 @@ function createDiv(valor){
         var restantes = create_element_class('restantes');
         for(var i=0, ilen=valor.carro.length; i<ilen; i++){
             if(!valor.carro[i].hasOwnProperty('promo')){
-                var res_producto = create_element_class('promo_producto', 'Producto: '+valor.carro[i].id_pro);
+                var producto = get_producto(valor.carro[i].id_pro);
+                console.log(producto);
+                var res_producto = create_element_class_inner('restante_producto', 'Producto: '+valor.carro[i].id_pro);
                 restantes.appendChild(res_producto);
             }
         }
@@ -145,4 +149,20 @@ function createDiv(valor){
     html.appendChild(detalle);
     return html;
 
+}
+function get_categoria(id_cae){
+    var categorias = data.catalogos[catalogo].categorias;
+    for(var i=0, ilen=categorias.length; i<ilen; i++){
+        if(categorias[i].id_cae == id_cae){
+            return categorias[i];
+        }
+    }
+}
+function get_producto(id_pro){
+    var productos = data.catalogos[catalogo].productos;
+    for(var i=0, ilen=productos.length; i<ilen; i++){
+        if(productos[i].id_pro == id_pro){
+            return productos[i];
+        }
+    }
 }
