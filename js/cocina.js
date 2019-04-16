@@ -159,13 +159,13 @@ function createDiv(valor){
                 var titulo_producto = create_element_class_inner('titulo_producto', producto.nombre);
                 res_producto.appendChild(titulo_producto);
 
-                if(valor.carro[j].preguntas){
-                    for(var f=0, flen=valor.carro[j].preguntas.length; f<flen; f++){
-                        for(var k=0, klen=valor.carro[j].preguntas[f].valores.length; k<klen; k++){
+                if(valor.carro[i].preguntas){
+                    for(var f=0, flen=valor.carro[i].preguntas.length; f<flen; f++){
+                        for(var k=0, klen=valor.carro[i].preguntas[f].valores.length; k<klen; k++){
                             var pregunta = create_element_class('pregunta');
-                            pregunta.innerHTML = valor.carro[j].preguntas[f].valores[k].nombre+": ";
-                            if(valor.carro[j].preguntas[f].valores[k].seleccionados !== undefined){
-                                pregunta.innerHTML += valor.carro[j].preguntas[f].valores[k].seleccionados.join('/');
+                            pregunta.innerHTML = valor.carro[i].preguntas[f].valores[k].nombre+": ";
+                            if(valor.carro[i].preguntas[f].valores[k].seleccionados !== undefined){
+                                pregunta.innerHTML += valor.carro[i].preguntas[f].valores[k].seleccionados.join('/');
                             }else{
                                 pregunta.innerHTML += '<b>No Definido</b>';
                             }
