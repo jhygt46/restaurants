@@ -69,6 +69,7 @@ html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto .pregunta {
   font-size: 12px;
   font-style: italic;
+  background: #eee;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .restantes {
   display: block;
@@ -83,6 +84,7 @@ html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_produ
 html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto .pregunta {
   font-size: 13px;
   font-style: italic;
+  background: #eee;
 }
 html body .contenedor .pop_up {
   position: fixed;
