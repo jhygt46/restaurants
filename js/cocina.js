@@ -126,6 +126,8 @@ function createDiv(valor){
             for(var j=0, jlen=valor.carro.length; j<jlen; j++){
                 if(valor.carro[j].promo == i){
                     var producto = get_producto(valor.carro[j].id_pro);
+                    console.log(producto);
+                    console.log(valor.carro[j]);
                     var promo_producto = create_element_class_inner('promo_producto', producto.nombre);
                     promocion.appendChild(promo_producto);
                 }
@@ -139,6 +141,8 @@ function createDiv(valor){
         for(var i=0, ilen=valor.carro.length; i<ilen; i++){
             if(!valor.carro[i].hasOwnProperty('promo')){
                 var producto = get_producto(valor.carro[i].id_pro);
+                console.log(producto);
+                console.log(valor.carro[i]);
                 var res_producto = create_element_class_inner('restante_producto', producto.nombre);
                 restantes.appendChild(res_producto);
             }

@@ -57,17 +57,18 @@ html body .contenedor .lista_pedidos .pedido .detalle .promocion {
   padding-top: 10px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_titulo {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: bold;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_producto {
-  font-size: 12px;
+  font-size: 14px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .restantes {
   display: block;
   padding-top: 10px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .restantes .restante_producto {
-  font-size: 12px;
+  font-size: 14px;
 }
 html body .contenedor .pop_up {
   position: fixed;
