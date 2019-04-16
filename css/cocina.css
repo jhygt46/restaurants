@@ -50,10 +50,11 @@ html body .contenedor .lista_pedidos .pedido .titulo .borrar {
 html body .contenedor .lista_pedidos .pedido .detalle {
   width: calc(100% - 20px);
   background: #ddd;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion {
   display: block;
+  padding-top: 10px;
 }
 html body .contenedor .lista_pedidos .pedido .detalle .promocion .promo_titulo {
   font-size: 16px;

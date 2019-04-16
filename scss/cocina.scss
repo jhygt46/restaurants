@@ -45,9 +45,10 @@ html {
                     .detalle{
                         width: calc(100% - 20px);
                         background: #ddd;
-                        padding: 10px;
+                        padding: 0px 10px 10px 10px;
                         .promocion{
                             display: block;
+                            padding-top: 10px;
                             .promo_titulo{
                                 font-size: 16px;
                             }
