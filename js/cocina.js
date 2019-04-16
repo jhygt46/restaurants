@@ -135,8 +135,8 @@ function createDiv(valor){
         var restantes = create_element_class('restantes');
         for(var i=0, ilen=valor.carro.length; i<ilen; i++){
             if(!valor.carro[i].hasOwnProperty('promo')){
-                var promo_producto = create_element_class('promo_producto', 'Producto: '+valor.carro[i].id_pro);
-                restantes.appendChild(promo_producto);
+                var res_producto = create_element_class('promo_producto', 'Producto: '+valor.carro[i].id_pro);
+                restantes.appendChild(res_producto);
             }
         }
         detalle.appendChild(restantes);
