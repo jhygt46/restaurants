@@ -130,11 +130,13 @@ function createDiv(valor){
         ver_mas(this);
     }
     titulo.appendChild(txt);
+    /*
     var ver = create_element_class('ver valign');
     ver.onclick = function(){
         ver_mas(this);
     }
     titulo.appendChild(ver);
+    */
     var borrar = create_element_class('borrar valign');
     borrar.onclick = function(){
         borrar_mas(this);
