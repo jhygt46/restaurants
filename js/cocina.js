@@ -75,7 +75,12 @@ function ver_mas(that){
 }
 function borrar_mas(that){
     var id = $(that).parents('.pedido').attr('id');
-    console.log("BORRAR MAS "+id);
+    $('.lista_pedidos').find('.pedido').each(function(){
+        if($(this).attr('id') == id){
+            $(this).remove();
+            console.log("REMOVE "+id);
+        }
+    });
 }
 function listar_pedidos(){
     
