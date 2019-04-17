@@ -96,14 +96,14 @@ function listar_pedidos(){
 
     for(var i=0; i<cant; i++){
         arrheight[i] = 0;
-        arrwidth[i] = i * 280;
+        arrwidth[i] = i * widthDiv;
     }
 
     pedidos_html.each(function(){
 
         var i = cont % cant;
         var top = arrheight[i] + 10;
-        var left = arrwidth[i];
+        var left = arrwidth[i] + (i + 1) * 10;
         var divheight = $(this).height() + 10;
 
         $(this).css({ top: top+'px', left: left+'px' });
