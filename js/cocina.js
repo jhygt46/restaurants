@@ -108,7 +108,7 @@ function listar_pedidos(){
 
         $(this).css({ top: top+'px', left: left+'px' });
 
-        arrheight[i] = arrheight[i] + divheight;
+        arrheight[i] = arrheight[i] + divheight + 10;
         cont++;
 
     });
