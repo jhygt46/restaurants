@@ -1,5 +1,6 @@
 $(document).ready(function(){
     socket_init();
+    window.addEventListener("resize", listar_pedidos);
 });
 
 var pedidos = [];
