@@ -103,7 +103,7 @@ function listar_pedidos(){
 
         var i = cont % cant;
         var top = arrheight[i];
-        var top = arrheight[i];
+        var left = arrwidth[i];
         var divheight = $(this).height();
 
         $(this).css({ top: top+'px', left: left+'px' });
