@@ -87,7 +87,7 @@ function listar_pedidos(){
     });
     var pedidos_html = $('.lista_pedidos').find('.pedido');
     console.log(window.innerWidth);
-    console.log(pedidos_html.eq(0).clientWidth);
+    console.log(pedidos_html.eq(0).innerWidth);
     //console.log(window.innerHeight);
 
 }
