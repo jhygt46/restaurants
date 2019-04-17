@@ -86,7 +86,9 @@ function listar_pedidos(){
         $('.lista_pedidos').prepend(createDiv(valor));
     });
     var pedidos_html = $('.lista_pedidos').find('.pedido');
-    console.log(pedidos_html);
+    console.log(window.innerWidth);
+    console.log(pedidos_html.eq(0).clientWidth);
+    //console.log(window.innerHeight);
 
 }
 function createDiv(valor){
