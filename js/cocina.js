@@ -76,6 +76,7 @@ function ver_mas(that){
 function borrar_mas(that){
     var id = $(that).parents('.pedido').attr('id');
     for(var i=0, ilen=pedidos.length; i<ilen; i++){
+        console.log(pedidos[i]);
         if(pedidos[i].id_ped == id){
             pedidos.splice(i, 1);
             listar_pedidos();
