@@ -89,7 +89,7 @@ function listar_pedidos(){
     var pedidos_html = $('.lista_pedidos').find('.pedido');
     
     var width = window.innerWidth;
-    var widthDiv = pedidos_html.eq(0).width() + 20;    
+    var widthDiv = pedidos_html.eq(0).width() + 10;    
     var cant = Math.floor(width/widthDiv);
     var arrheight = [];
     var arrwidth = [];
