@@ -90,7 +90,7 @@ function listar_pedidos(){
     
     var width = window.innerWidth;
     var widthDiv = pedidos_html.eq(0).width() + 10;    
-    var cant = Math.floor(width/(widthDiv + 20));
+    var cant = Math.floor(width/(widthDiv + 15));
     var arrheight = [];
     var arrwidth = [];
     var cont = 0;
