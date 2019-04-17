@@ -86,9 +86,18 @@ function listar_pedidos(){
         $('.lista_pedidos').prepend(createDiv(valor));
     });
     var pedidos_html = $('.lista_pedidos').find('.pedido');
-    console.log(window.innerWidth);
-    console.log(pedidos_html.eq(0).width());
-    //console.log(window.innerHeight);
+    
+    var width = window.innerWidth;
+    var widthDiv = pedidos_html.eq(0).width();
+    
+    var cant = Math.round(width/widthDiv);
+    console.log(cant);
+
+    pedidos_html.each(function(){
+
+
+
+    });
 
 }
 function createDiv(valor){
