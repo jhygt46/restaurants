@@ -472,7 +472,7 @@ body {
     width: 30px;
     height: 30px;
     background: url("../admin/images/icons-set.png") no-repeat;
-    background-position: 3px -479px;
+    background-position: -415px -479px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_carro{

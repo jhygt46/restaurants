@@ -10,8 +10,6 @@ var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
 var crear_nuevo = 0;
-//var estados = ['Enviado', 'Recepcionado', 'Preparando', 'Empaque', 'Despacho'];
-//var tiempos = { retiro: 1500, despacho: 3600 };
 var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
@@ -1002,9 +1000,9 @@ function tiene_pregunta(carro){
 }
 function ver_comanda(index){
     
-    // 0 ver comanda
-    // 1 imprimir y cerrar comanda
-    // 2 enviar cocina
+    console.log(tipo_comanda);
+    console.log(enviar_cocina);
+
     var tipo = 0;
     if(tipo == 0 || tipo == 1){
         guardar_pedido_y_abrir_comanda(index, tipo);

@@ -770,7 +770,7 @@ class Core{
     }
     public function socket_code($id_loc, $id_gir){
         
-        $aux = $this->con->sql("SELECT lat, lng, code FROM locales WHERE id_loc='".$id_loc."' && id_gir='".$id_gir."'");
+        $aux = $this->con->sql("SELECT lat, lng, code, tipo_comanda, enviar_cocina FROM locales WHERE id_loc='".$id_loc."' && id_gir='".$id_gir."'");
         return $aux['resultado'][0];
         
     }

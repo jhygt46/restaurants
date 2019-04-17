@@ -58,10 +58,13 @@ $motos = $core->get_repartidores_local($id_loc);
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
             var local_code = '<?php echo $info_local['code']; ?>';
+            var tipo_comanda = '<?php echo $info_local['tipo_comanda']; ?>';
+            var enviar_cocina = '<?php echo $info_local['enviar_cocina']; ?>';
             var local_lat = '<?php echo $info_local['lat']; ?>';
             var local_lng = '<?php echo $info_local['lng']; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
+            var guardar = '<?php echo $info_local['guardar']; ?>';
             var tiempos = { retiro: <?php echo $local['t_retiro']; ?>, despacho: <?php echo $local['t_despacho']; ?> };
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
