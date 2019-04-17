@@ -85,18 +85,9 @@ function listar_pedidos(){
     pedidos.forEach(function(valor){
         $('.lista_pedidos').prepend(createDiv(valor));
     });
+    var pedidos_html = $('.lista_pedidos').find('.pedido');
+    console.log(pedidos_html);
 
-}
-function create_element_class(clase){
-    var Div = document.createElement('div');
-    Div.className = clase;
-    return Div;
-}
-function create_element_class_inner(clase, value){
-    var Div = document.createElement('div');
-    Div.className = clase;
-    Div.innerHTML = value;
-    return Div;
 }
 function createDiv(valor){
 
@@ -204,4 +195,15 @@ function get_producto(id_pro){
             return productos[i];
         }
     }
+}
+function create_element_class(clase){
+    var Div = document.createElement('div');
+    Div.className = clase;
+    return Div;
+}
+function create_element_class_inner(clase, value){
+    var Div = document.createElement('div');
+    Div.className = clase;
+    Div.innerHTML = value;
+    return Div;
 }
