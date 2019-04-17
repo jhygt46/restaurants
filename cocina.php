@@ -31,7 +31,7 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
     <body>
         <div class="contenedor">
             <div class="pop_up"></div>
-            <div class="lista_pedidos clearfix">
+            <div class="lista_pedidos">
                 
             </div>
         </div>

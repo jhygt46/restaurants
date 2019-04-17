@@ -88,14 +88,28 @@ function listar_pedidos(){
     var pedidos_html = $('.lista_pedidos').find('.pedido');
     
     var width = window.innerWidth;
-    var widthDiv = pedidos_html.eq(0).width();
-    
-    var cant = Math.round(width/widthDiv);
-    console.log(cant);
+    var widthDiv = pedidos_html.eq(0).width();    
+    var cant = Math.floor(width/widthDiv);
+    var arrheight = [];
+    var arrwidth = [];
+    var cont = 0;
+
+    for(var i=0; i<cant; i++){
+        arrheight[i] = 0;
+        arrwidth[i] = i * 280;
+    }
 
     pedidos_html.each(function(){
 
+        var i = cont % cant;
+        var top = arrheight[i];
+        var top = arrheight[i];
+        var divheight = $(this).height();
 
+        $(this).css({ top: top+'px', left: left+'px' });
+
+        arrheight[i] = arrheight[i] + divheight;
+        cont++;
 
     });
 
