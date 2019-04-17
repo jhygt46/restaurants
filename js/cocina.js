@@ -102,13 +102,13 @@ function listar_pedidos(){
     pedidos_html.each(function(){
 
         var i = cont % cant;
-        var top = arrheight[i];
+        var top = arrheight[i] + 10;
         var left = arrwidth[i];
-        var divheight = $(this).height();
+        var divheight = $(this).height() + 10;
 
         $(this).css({ top: top+'px', left: left+'px' });
 
-        arrheight[i] = arrheight[i] + divheight + 10;
+        arrheight[i] = arrheight[i] + divheight;
         cont++;
 
     });
