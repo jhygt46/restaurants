@@ -660,10 +660,8 @@ class Core{
                 }
             }
 
-            $info['db_carro'] = $carro;
-
             if($sql_carro == ""){
-                if($carro != ""){
+                if(count($carro) > 0){
                     $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
