@@ -579,7 +579,6 @@ class Core{
     public function set_web_pedido(){
                 
         $pedido = json_decode($_POST['pedido']);
-        $info['data'] = $pedido;
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
         
@@ -644,13 +643,16 @@ class Core{
             $id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
+            $num_ped = $pedido_sql["resultado"][0]['num_ped'];
 
             if($id_puser == 0){
                 if($nombre != "" && $telefono != ""){
                     $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES ('".$nombre."', '".$telefono."', '".$id_gir."')");
                     $id_puser = $sql_puser["insert_id"];
-                    $info['db_puser'] = $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");            
+                    $info['db_puser'] = $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
+            }else{
+                $info['db_puser'] = $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             }
 
             if($id_pdir == 0){
@@ -659,6 +661,8 @@ class Core{
                     $id_pdir = $sql_pdir["insert_id"];
                     $info['db_pdir'] = $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
+            }else{
+                $info['db_pdir'] = $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             }
 
             if($sql_carro == ""){
