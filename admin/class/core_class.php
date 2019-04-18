@@ -579,6 +579,7 @@ class Core{
     public function set_web_pedido(){
                 
         $pedido = json_decode($_POST['pedido']);
+        $info['data'] = $pedido;
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
         
