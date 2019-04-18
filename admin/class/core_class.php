@@ -653,7 +653,7 @@ class Core{
                 }
             }
 
-            if($id_pdir == 0 && $id_puser > 0){
+            if($id_pdir == 0){
                 if($direccion != "" && $depto != ""){
                     $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
                     $id_pdir = $sql_pdir["insert_id"];
@@ -663,7 +663,7 @@ class Core{
 
             if($sql_carro == ""){
                 if(count($carro) > 0){
-                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', total='".$total."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
                         $send['hash'] = 'hash';
@@ -682,7 +682,7 @@ class Core{
                 }
             }
 
-            $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
 
