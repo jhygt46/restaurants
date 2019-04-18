@@ -660,6 +660,9 @@ class Core{
                 }
             }
 
+            $info["db1"] = $sql_carro;
+            $info["db2"] = $carro;
+
             if($sql_carro == ""){
                 if($carro != "[]"){
                     $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
