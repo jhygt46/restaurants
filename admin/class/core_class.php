@@ -639,12 +639,12 @@ class Core{
             }
 
             $pedido_sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
-            $id_puser = $pedido_sql["resultado"][0]['id_puser'];
-            $id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
+            //$id_puser = $pedido_sql["resultado"][0]['id_puser'];
+            //$id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
-
+            
             $info['data'] = $pedido;
 
             if($id_puser == 0){
