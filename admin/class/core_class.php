@@ -616,72 +616,72 @@ class Core{
         $cookie_code = $_COOKIE['CODE'];
         
         $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
+        $id_gir = $aux_local["resultado"][0]["id_gir"];
+        $local_code = $aux_local['resultado'][0]['code'];
+        $enviar_cocina = $aux_local['resultado'][0]['enviar_cocina'];
+
         if($aux_local['count'] == 1){
             
-            if($id_puser > 0){
-                $sql_puser = $this->con->sql("UPDATE pedidos_usuarios SET nombre='".$nombre."' WHERE id_puser='".$id_puser."'");
-            }
-
-            if($id_puser == 0){
-                $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES ('".$nombre."', '".$telefono."', '".$aux_local["resultado"][0]["id_gir"]."') ");
-                $id_puser = $sql_puser["insert_id"];
-            }
-
-            if($id_pdir == 0){
-                $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
-                $id_pdir = $sql_pdir["insert_id"];
-            }
-            
-            if($id_ped > 0){
-
-                $sql_pedido = $this->con->sql("SELECT carro, promos, code, borrados, num_ped FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
-                $code = $sql_pedido['resultado'][0]['code'];
-                $db_carro = $sql_pedido['resultado'][0]['carro'];
-                $db_promos = $sql_pedido['resultado'][0]['promos'];
-                $db_borrados = $sql_pedido['resultado'][0]['borrados'];
-                $num_ped = $sql_pedido['resultado'][0]['num_ped'];
-
-                $info['db_carro'] = $db_carro;
-                $info['db_promos'] = $db_promos;
-                $info['carro'] = $carro;
-                $info['promos'] = $promos;
-
-                $borrados = 0;
-                $db_borrados = $db_borrados + $borrados;
-                $this->con->sql("UPDATE pedidos_aux SET borrados='".$borrados."' WHERE id_ped='".$id_ped."'");
-
-            }
-
             if($id_ped == 0){
 
-                $sql_gir = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$aux_local["resultado"][0]["id_gir"]."'");
+                $sql_gir = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."'");
                 $num_ped = $sql_gir["resultado"][0]["num_ped"] + 1;
-                $this->con->sql("UPDATE giros SET num_ped='".$num_ped."' WHERE id_gir='".$aux_local["resultado"][0]["id_gir"]."'");
+                $this->con->sql("UPDATE giros SET num_ped='".$num_ped."' WHERE id_gir='".$id_gir."'");
+                
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
                 $insert = $this->con->sql("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc) VALUES ('".$num_ped."', '0', now(), '".$code."', '".$id_loc."')");
                 $id_ped = $insert['insert_id'];
 
+                $info['id_ped'] = $id_ped;
+                $info['num_ped'] = $num_ped;
+                $info['pedido_code'] = $code;
+
             }
-            
-            $send['accion'] = 'enviar_cocina_local';
-            $send['hash'] = 'hash';
-            $send['local_code'] = $aux_local['resultado'][0]['code'];;
-            $send['id_ped'] = $id_ped;
-            $send['num_ped'] = $num_ped;
-            $send['carro'] = $carro;
-            $send['promos'] = $promos;
 
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-            curl_exec($ch);
-            curl_close($ch);
+            $pedido_sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $id_puser = $pedido_sql["resultado"][0]['id_puser'];
+            $id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
+            $sql_carro = $pedido_sql["resultado"][0]['carro'];
+            $sql_promos = $pedido_sql["resultado"][0]['promos'];
 
-            $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."', id_pdir='".$id_pdir."', carro='".json_encode($carro)."', promos='".json_encode($promos)."', despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
-            $info['id_ped'] = $id_ped;
-            $info['num_ped'] = $num_ped;
-            $info['pedido_code'] = $code;
+            if($id_puser == 0){
+                if($nombre != "" && $telefono != ""){
+                    $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES ('".$nombre."', '".$telefono."', '".$id_gir."')");
+                    $id_puser = $sql_puser["insert_id"];
+                    $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");            
+                }
+            }
+
+            if($id_pdir == 0 && $id_puser > 0){
+                if($direccion != "" && $depto != ""){
+                    $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
+                    $id_pdir = $sql_pdir["insert_id"];
+                    $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                }
+            }
+
+            if($sql_carro == ""){
+                if($carro != ""){
+                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    if($enviar_cocina == 1){
+                        $send['accion'] = 'enviar_cocina_local';
+                        $send['hash'] = 'hash';
+                        $send['local_code'] = $local_code;
+                        $send['id_ped'] = $id_ped;
+                        $send['num_ped'] = $num_ped;
+                        $send['carro'] = $carro;
+                        $send['promos'] = $promos;
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                        curl_exec($ch);
+                        curl_close($ch);
+                    }
+                }
+            }
+
+            $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', total='".$total."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
 

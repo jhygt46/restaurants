@@ -59,7 +59,6 @@ $motos = $core->get_repartidores_local($id_loc);
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
             var local_code = '<?php echo $info_local['code']; ?>';
             var tipo_comanda = '<?php echo $info_local['tipo_comanda']; ?>';
-            var enviar_cocina = '<?php echo $info_local['enviar_cocina']; ?>';
             var local_lat = '<?php echo $info_local['lat']; ?>';
             var local_lng = '<?php echo $info_local['lng']; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';

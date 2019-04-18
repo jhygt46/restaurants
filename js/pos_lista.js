@@ -60,7 +60,7 @@ function add_carro_producto(id_pro){
     
     pedido.carro.push(item_carro);
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado, false);
     if(producto.preguntas){
         mostrar_pregunta(pedido.carro.length - 1);
     }
@@ -98,7 +98,7 @@ function add_carro_promocion(id_cae){
         }
     }
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado, false);
     listar_pedidos();
     categorias_base(0);
     if(tiene_cats >= 0){
@@ -364,7 +364,7 @@ function html_home_pedidos(obj, index){
     btn_mod.onclick = function(){ ver_pedido(index, this) };
     
     var btn_open = create_element_class('btn_open');
-    btn_open.onclick = function(){ ver_comanda(index) };
+    btn_open.onclick = function(){ guardar_pedido(index, true) };
     
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
@@ -498,7 +498,7 @@ function confirmar_productos_promo(that){
             }
         }
         set_pedidos(pedidos);
-        guardar_pedido(seleccionado);
+        //guardar_pedido(seleccionado, false);
         if(proceso(pedidos[seleccionado])){
             
             $('.pop_up').hide();
@@ -581,7 +581,7 @@ function confirmar_pregunta_productos(that){
                 var pedidos = get_pedidos();
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
                 set_pedidos(pedidos);
-                guardar_pedido(seleccionado);
+                //guardar_pedido(seleccionado, false);
                 $('.pop_up').hide();
                 $('.p4').hide();
                 
@@ -792,7 +792,7 @@ function delete_pro_carro(i){
     var pedidos = get_pedidos();
     pedidos[seleccionado].carro.splice(i, 1);
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado, false);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
 }
@@ -815,7 +815,7 @@ function delete_promo(that){
     }
     
     set_pedidos(pedidos);
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado, false);
     ver_detalle_carro(seleccionado, null);
     listar_pedidos();
     
@@ -998,20 +998,6 @@ function tiene_pregunta(carro){
     }
     return false;
 }
-function ver_comanda(index){
-    
-    console.log(tipo_comanda);
-    console.log(enviar_cocina);
-
-    var tipo = 0;
-    if(tipo == 0 || tipo == 1){
-        guardar_pedido_y_abrir_comanda(index, tipo);
-    }
-    if(tipo == 2){
-        guardar_pedido(index);
-    }
-    
-}
 function html_home_categorias(obj){
     
     var Div = create_element_class('categoria');
@@ -1127,8 +1113,6 @@ function done_pedido(){
 
     var id_ped = $('#id_ped').val();
 
-    console.log(id_ped);
-
     if(id_ped == 0){
 
         var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
@@ -1211,7 +1195,7 @@ function done_pedido(){
 
         pedidos[seleccionado].id_mot = $('#id_mot').val();
         set_pedidos(pedidos);
-        guardar_pedido(seleccionado);
+        guardar_pedido(seleccionado, false);
 
     }
 
@@ -1332,7 +1316,7 @@ function add_pedido(obj){
     }
     set_pedidos(aux);
     seleccionado = 0;
-    guardar_pedido(seleccionado);
+    //guardar_pedido(seleccionado, false);
     listar_pedidos();
     
 }
@@ -1348,7 +1332,7 @@ function get_pedidos(){
 function get_pedido_blank(){
     return [pedido_obj()];
 }
-function guardar_pedido(index){
+function guardar_pedido(index, open){
      
     var pedidos = get_pedidos();
     var send = { pedido: JSON.stringify(pedidos[index]) };
@@ -1359,13 +1343,21 @@ function guardar_pedido(index){
         data: send,
         success: function(data){
             
-            var info = JSON.parse(data);
             if(pedidos[index].id_ped == 0){
+                var info = JSON.parse(data);
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
                 set_pedidos(pedidos);
                 listar_pedidos();
+            }
+
+            if(open){
+                if(tipo_comanda == 0 || tipo_comanda == 1){
+                    if(proceso(pedido)){
+                        window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
+                    }
+                }
             }
             
         }, error: function(e){
@@ -1374,42 +1366,23 @@ function guardar_pedido(index){
     });
     
 }
-function guardar_pedido_y_abrir_comanda(index, tipo){
-     
-    var pedidos = get_pedidos();
-    var pedido = pedidos[index];
-    var send = { pedido: JSON.stringify(pedido) };
-    var aux = "";
-    
-    $.ajax({
-        url: "ajax/set_pedido.php",
-        type: "POST",
-        data: send,
-        success: function(data){
-            
-            var url = "";
-            if(tipo == 0){
-                aux = "ver";
-            }
-            if(tipo == 1){
-                aux = "prt";
-            }
-            if(proceso(pedido)){
-                var code = pedido.pedido_code;
-                if(ssl == 0){
-                    url = "http://"+dominio;
-                }
-                if(ssl == 1){
-                    url = "https://"+dominio;
-                }
-                window.open(url+"/"+aux+"/"+code, 'Imprimir Ctrl+P').focus();
-            }
+function get_url(pedido){
 
-        }, error: function(e){
-            console.log(e);
-        }
-    });
-    
+    if(tipo_comanda == 0){
+        var aux = "ver";
+    }
+    if(tipo_comanda == 1){
+        var aux = "prt";
+    }
+    var code = pedido.pedido_code;
+    if(ssl == 0){
+        var url = 'http://'+dominio;
+    }
+    if(ssl == 1){
+        var url = 'https://'+dominio;
+    }
+    return url+'/'+aux+'/'+code;
+
 }
 function change_despacho(that){
     var value = $(that).val();
@@ -1655,7 +1628,7 @@ function confirm(message){
                 pedidos[seleccionado].eliminado = 1;
             }
             set_pedidos(pedidos);
-            guardar_pedido(seleccionado);
+            guardar_pedido(seleccionado, false);
             listar_pedidos();
             
             swal({
