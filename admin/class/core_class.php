@@ -664,10 +664,10 @@ class Core{
             $aux_promos = json_encode($promos);
 
             $info["db1"] = $aux_carro;
-            $info["db2"] = $aux_carro.length();
+            $info["db2"] = count($aux_carro);
 
             if($sql_carro == ""){
-                if($aux_carro.length() > 0){
+                if(count($aux_carro) > 0){
                     $this->con->sql("UPDATE pedidos_aux SET carro='".$aux_carro."', promos='".$aux_promos."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
