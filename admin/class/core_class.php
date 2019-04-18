@@ -731,13 +731,13 @@ class Core{
                 if($sql['resultado'][$i]['carro'] == ""){
                     $res['carro'] = [];
                 }else{
-                    $res['carro'] = json_decode($sql['resultado'][$i]['carro'];
+                    $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
                 }
 
                 if($sql['resultado'][$i]['promos'] == ""){
                     $res['promos'] = [];
                 }else{
-                    $res['promos'] = json_decode($sql['resultado'][$i]['promos'];
+                    $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
                 }
 
                 $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
