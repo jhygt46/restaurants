@@ -727,8 +727,19 @@ class Core{
                 $res['estado'] = $sql['resultado'][$i]['estado'];
                 $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
                 $res['despacho'] = $sql['resultado'][$i]['despacho'];
-                $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
-                $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
+
+                if($sql['resultado'][$i]['carro'] == ""){
+                    $res['carro'] = [];
+                }else{
+                    $res['carro'] = json_decode($sql['resultado'][$i]['carro'];
+                }
+
+                if($sql['resultado'][$i]['promos'] == ""){
+                    $res['promos'] = [];
+                }else{
+                    $res['promos'] = json_decode($sql['resultado'][$i]['promos'];
+                }
+
                 $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
                 $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
                 $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
