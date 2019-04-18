@@ -37,12 +37,7 @@ if(isset($_GET['code'])){
             var promos = <?php echo $info['promos']; ?>;
             var costo = <?php echo $costo; ?>;
             var total = <?php echo $total; ?>;
-            <?php if($_GET["t"] == 2){ ?>
-            $(document).ready(function(){
-                window.print();
-                window.close();
-            });
-            <?php } ?>
+            var t = <?php echo $_GET["t"]; ?>;
         </script>
         
         <link rel="stylesheet" href="<?php echo $info["css_detalle"]; ?>" media="all" />
