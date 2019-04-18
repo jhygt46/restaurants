@@ -660,12 +660,15 @@ class Core{
                 }
             }
 
-            $info["db1"] = $sql_carro;
-            $info["db2"] = $carro;
+            $aux_carro = json_encode($carro);
+            $aux_promos = json_encode($promos);
+
+            $info["db1"] = $aux_carro;
+            $info["db2"] = $aux_carro.length();
 
             if($sql_carro == ""){
-                if($carro != "[]"){
-                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                if($aux_carro.length() > 0){
+                    $this->con->sql("UPDATE pedidos_aux SET carro='".$aux_carro."', promos='".$aux_promos."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
                         $send['hash'] = 'hash';
