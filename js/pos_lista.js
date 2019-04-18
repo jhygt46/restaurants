@@ -1335,7 +1335,8 @@ function get_pedido_blank(){
 function guardar_pedido(index, open){
      
     var pedidos = get_pedidos();
-    var send = { pedido: JSON.stringify(pedidos[index]) };
+    var pedido = pedidos[index];
+    var send = { pedido: JSON.stringify(pedido) };
 
     $.ajax({
         url: "ajax/set_pedido.php",
