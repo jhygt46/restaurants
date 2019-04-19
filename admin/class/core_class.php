@@ -655,13 +655,19 @@ class Core{
                     $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
             }
+            if($id_puser > 0 && $sql_id_puser == 0){
+                $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            }
 
             if($id_pdir == 0 && $sql_id_pdir == 0){
                 if($direccion != ""){
                     $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
                     $id_pdir = $sql_pdir["insert_id"];
-                    $info['db_pdir'] = $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
+            }
+            if($id_pdir > 0 && $sql_id_pdir == 0){
+                $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             }
 
             if($sql_carro == ""){
