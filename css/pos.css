@@ -429,7 +429,7 @@ body {
     top: 0px;
     left: 0px;
     height: 100%;
-    width: 125px;
+    width: calc(100% - 108px);
     z-index: 2;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_num{
@@ -462,7 +462,7 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_alert{
     position: absolute;
-    top: 71px;
+    top: 72px;
     left: 10px;
     font-size: 14px;
     z-index: 1;
