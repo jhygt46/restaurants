@@ -329,7 +329,7 @@ function html_home_pedidos(obj, index){
         });
     }
 
-    if(total >= obj.total){
+    if(total > obj.total){
         var total_dif = total - obj.total;
         obj.alert = "Existe un diferencia de "+total_dif;
     }
