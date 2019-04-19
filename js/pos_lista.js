@@ -329,6 +329,9 @@ function html_home_pedidos(obj, index){
         });
     }
     
+    console.log(obj);
+    console.log(total);
+
     if(pedidos[index].despacho == 0){
         pedidos[index].costo = 0;
     }
