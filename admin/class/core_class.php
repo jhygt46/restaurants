@@ -639,27 +639,27 @@ class Core{
             }
 
             $pedido_sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
-            //$id_puser = $pedido_sql["resultado"][0]['id_puser'];
-            //$id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
+            $sql_id_puser = $pedido_sql["resultado"][0]['id_puser'];
+            $sql_id_pdir = $pedido_sql["resultado"][0]['id_pdir'];
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
-            
+
             $info['data'] = $pedido;
 
-            if($id_puser == 0){
-                if($nombre != "" && $telefono != ""){
+            if($id_puser == 0 && $sql_id_puser == 0){
+                if(strlen($telefono) == 12 || strlen($telefono) == 13){
                     $sql_puser = $this->con->sql("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES ('".$nombre."', '".$telefono."', '".$id_gir."')");
                     $id_puser = $sql_puser["insert_id"];
-                    //$info['db_puser_new'] = $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $this->con->sql("UPDATE pedidos_aux SET id_puser='".$id_puser."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
             }
 
-            if($id_pdir == 0){
-                if($direccion != "" && $depto != ""){
+            if($id_pdir == 0 && $sql_id_pdir == 0){
+                if($direccion != ""){
                     $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
                     $id_pdir = $sql_pdir["insert_id"];
-                    //$info['db_pdir_new'] = $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
             }
 
