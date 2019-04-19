@@ -1348,13 +1348,16 @@ function guardar_pedido(index, open){
             var info = JSON.parse(data);
             console.log(info);
 
-            console.log('ALERT: '+info.alert);
+            //console.log('ALERT: '+info.alert);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
             }
-            pedidos[index].carro = JSON.parse(info.carro);
+            //pedidos[index].carro = JSON.parse(info.carro);
+            console.log(pedidos[index].carro);
+            console.log(info.carro);
+            console.log(JSON.parse(info.carro));
             set_pedidos(pedidos);
             listar_pedidos();
 

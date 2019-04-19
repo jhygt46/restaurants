@@ -647,9 +647,9 @@ class Core{
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
 
             if($sql_carro == ""){
-                $info['carro'] = "[]";
+                $info['carro'] = [];
             }else{
-                $info['carro'] = $pedido_sql["resultado"][0]['carro'];
+                $info['carro'] = json_decode($sql_carro);
             }
 
             if($id_puser == 0 && $sql_id_puser == 0){
