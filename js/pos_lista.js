@@ -328,9 +328,11 @@ function html_home_pedidos(obj, index){
             total = total + parseInt(cat.precio);
         });
     }
-    
-    console.log(obj.total);
-    console.log(total);
+
+    if(total >= obj.total){
+        var total_dif = total - obj.total;
+        obj.alert = "Existe un diferencia de "+total_dif;
+    }
 
     if(pedidos[index].despacho == 0){
         pedidos[index].costo = 0;
