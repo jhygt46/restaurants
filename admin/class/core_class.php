@@ -645,8 +645,7 @@ class Core{
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
-
-            $info['data'] = $pedido;
+            $info['carro'] = $pedido_sql["resultado"][0]['carro'];
 
             if($id_puser == 0 && $sql_id_puser == 0){
                 if(strlen($telefono) == 12 || strlen($telefono) == 13){
@@ -673,6 +672,7 @@ class Core{
             if($sql_carro == ""){
                 if(count($carro) > 0){
                     $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', total='".$total."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $info['carro'] = $carro;
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
                         $send['hash'] = 'hash';
