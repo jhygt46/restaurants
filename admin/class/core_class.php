@@ -645,7 +645,12 @@ class Core{
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
-            $info['carro'] = $pedido_sql["resultado"][0]['carro'];
+
+            if($sql_carro == ""){
+                $info['carro'] = [];
+            }else{
+                $info['carro'] = $pedido_sql["resultado"][0]['carro'];
+            }
 
             if($id_puser == 0 && $sql_id_puser == 0){
                 if(strlen($telefono) == 12 || strlen($telefono) == 13){
