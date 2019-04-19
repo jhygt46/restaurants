@@ -620,6 +620,7 @@ class Core{
         $id_gir = $aux_local["resultado"][0]["id_gir"];
         $local_code = $aux_local['resultado'][0]['code'];
         $enviar_cocina = $aux_local['resultado'][0]['enviar_cocina'];
+        $info['alert'] = '';
 
         if($aux_local['count'] == 1){
             

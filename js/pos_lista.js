@@ -356,6 +356,7 @@ function html_home_pedidos(obj, index){
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.num_ped);
     var p_nom = create_element_class_inner('p_nom', obj.nombre);
+    var p_alert = create_element_class_inner('p_alert', "mensaje alerta");
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };
@@ -374,6 +375,7 @@ function html_home_pedidos(obj, index){
     Div.appendChild(p_num);
     Div.appendChild(p_nom);
     Div.appendChild(p_precio);
+    Div.appendChild(p_alert);
     Div.appendChild(btn_mod);
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
@@ -1238,6 +1240,7 @@ function pedido_obj(){
         num_ped: 0,
         pedido_code: '', 
         tipo: 0,
+        alert: '',
         estado: 0,
         fecha: Math.round(new Date().getTime()/1000),
         despacho: 1,
@@ -1274,6 +1277,7 @@ function nuevo(data){
     obj.num_ped = data.num_ped;
     obj.pedido_code = data.pedido_code;
     obj.tipo = data.tipo;
+    obj.alert = data.alert;
     obj.estado = 0;
     obj.despacho = data.despacho;
     obj.carro = data.carro;
@@ -1346,18 +1350,14 @@ function guardar_pedido(index, open){
         success: function(data){
             
             var info = JSON.parse(data);
-            console.log(info);
 
-            //console.log('ALERT: '+info.alert);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
             }
             pedidos[index].carro = info.carro;
-            
-            //console.log(pedidos[index].carro);
-            //console.log(info.carro);
+            pedidos[index].alert = info.alert;
 
             set_pedidos(pedidos);
             listar_pedidos();
