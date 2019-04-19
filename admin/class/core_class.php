@@ -647,7 +647,7 @@ class Core{
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
 
             if($sql_carro == ""){
-                $info['carro'] = [];
+                $info['carro'] = "[]";
             }else{
                 $info['carro'] = $pedido_sql["resultado"][0]['carro'];
             }
