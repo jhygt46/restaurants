@@ -690,6 +690,11 @@ class Core{
                     }
                 }
             }
+            if($sql_carro != ""){
+                $cant_1 = count(json_decode($sql_carro));
+                $cant_2 = count($carro);
+                $info['cant'] = $cant_1."/".$cant_2;
+            }
 
             $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
