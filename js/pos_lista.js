@@ -1345,17 +1345,16 @@ function guardar_pedido(index, open){
         data: send,
         success: function(data){
             
-            console.log("GUARDAR PEDIDO");
-            console.log(JSON.parse(data));
+            var info = JSON.parse(data);
 
             if(pedidos[index].id_ped == 0){
-                var info = JSON.parse(data);
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
-                set_pedidos(pedidos);
-                listar_pedidos();
             }
+            pedidos[index].carro = info.carro;
+            set_pedidos(pedidos);
+            listar_pedidos();
 
             if(open){
                 if(tipo_comanda == 0 || tipo_comanda == 1){
