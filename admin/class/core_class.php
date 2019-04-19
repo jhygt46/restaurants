@@ -693,7 +693,7 @@ class Core{
             if($sql_carro != ""){
                 $cant_1 = count(json_decode($sql_carro));
                 $cant_2 = count($carro);
-                if($cant_2 < $cant_1){
+                if($cant_2 != $cant_1){
                     $info['alert'] = 'no se efectuaron los cambios';
                 }
             }
