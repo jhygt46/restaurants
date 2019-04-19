@@ -341,9 +341,17 @@ function html_home_pedidos(obj, index){
     }
     
     if(seleccionado == index){
-        var Div = create_element_class('pedido seleccionado');
+        if(obj.alert == ''){
+            var Div = create_element_class('pedido pedido_h1 seleccionado');
+        }else{
+            var Div = create_element_class('pedido pedido_h2 seleccionado');
+        }
     }else{
-        var Div = create_element_class('pedido');
+        if(obj.alert == ''){
+            var Div = create_element_class('pedido pedido_h1');
+        }else{
+            var Div = create_element_class('pedido pedido_h2');
+        }
     }
     
     Div.setAttribute('pos', index);
@@ -356,7 +364,7 @@ function html_home_pedidos(obj, index){
     
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.num_ped);
     var p_nom = create_element_class_inner('p_nom', obj.nombre);
-    var p_alert = create_element_class_inner('p_alert', "mensaje alerta");
+    var p_alert = create_element_class_inner('p_alert', obj.alert);
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };

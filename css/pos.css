@@ -411,9 +411,14 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido{
     position: relative;
-    height: 80px;
     background: #eee;
     margin-bottom: 8px;
+}
+.pedidos .contenido .lista_pedidos .pedido_h1{
+    height: 80px;
+}
+.pedidos .contenido .lista_pedidos .pedido_h2{
+    height: 95px;
 }
 .pedidos .contenido .lista_pedidos .seleccionado{
     background: #c99;
@@ -443,17 +448,25 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_estado{
     position: absolute;
-    bottom: 25px;
+    top: 40px;
     left: 10px;
     font-size: 12px;
     z-index: 1;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_precio{
     position: absolute;
-    bottom: 5px;
+    top: 50px;
     left: 10px;
     font-size: 20px;
     z-index: 1;
+}
+.pedidos .contenido .lista_pedidos .pedido .p_alert{
+    position: absolute;
+    top: 71px;
+    left: 10px;
+    font-size: 14px;
+    z-index: 1;
+    color: #900;
 }
 .pedidos .contenido .lista_pedidos .pedido .btn_mod{
     position: absolute;
