@@ -378,7 +378,7 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
 
-    if(obj.alert == '' || obj.alert === undefined){
+    if(obj.alert != '' && obj.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
         Div.appendChild(p_alert);
     }
