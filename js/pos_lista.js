@@ -1347,6 +1347,8 @@ function guardar_pedido(index, open){
             
             var info = JSON.parse(data);
             console.log(info);
+
+            console.log('ALERT: '+info.alert);
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
