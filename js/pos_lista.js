@@ -1352,7 +1352,9 @@ function guardar_pedido(index, open){
                 pedidos[index].num_ped = info.num_ped;
                 pedidos[index].pedido_code = info.pedido_code;
             }
-            pedidos[index].carro = info.carro;
+            //pedidos[index].carro = info.carro;
+            console.log(pedidos[index].carro);
+            console.log(info.carro);
             set_pedidos(pedidos);
             listar_pedidos();
 
