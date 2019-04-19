@@ -492,7 +492,7 @@ class Core{
     public function ver_detalle($code){
         
         $info['op'] = false;
-        $sql = $this->con->sql("SELECT t1.id_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$_SERVER["HTTP_HOST"]."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
+        $sql = $this->con->sql("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code='".$code."' AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio='".$_SERVER["HTTP_HOST"]."' AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ");
 
         if($_SERVER["HTTP_HOST"] == "localhost"){
             $path = "http://localhost/restaurants";
@@ -660,7 +660,7 @@ class Core{
                 if($direccion != ""){
                     $sql_pdir = $this->con->sql("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES ('".$direccion."', '".$calle."', '".$num."', '".$depto."', '".$comuna."', '".$lat."', '".$lng."', '".$id_puser."')");
                     $id_pdir = $sql_pdir["insert_id"];
-                    $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                    $info['db_pdir'] = $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                 }
             }
 
