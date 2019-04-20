@@ -317,16 +317,14 @@ function create_element_class_inner(clase, value){
     Div.innerHTML = value;
     return Div;
 }
-function html_home_pedidos(obj, index){
-    
+function get_precio_carro(obj){
+
     var total = 0;
-    var pro, cat, carro, promos;
-    var pedidos = get_pedidos();
     
     if(obj.carro){
-        obj.carro.forEach(function(carro_item, index){
+        obj.carro.forEach(function(carro_item){
             if(carro_item.id_pro && carro_item.promo === undefined){
-                pro = get_producto(carro_item.id_pro);
+                var pro = get_producto(carro_item.id_pro);
                 if(pro !== undefined){ 
                     total = total + parseInt(pro.precio); 
                 }
@@ -335,28 +333,30 @@ function html_home_pedidos(obj, index){
     }
 
     if(obj.promos){
-        obj.promos.forEach(function(promo_item, index){
-            cat = get_categoria(promo_item.id_cae);
+        obj.promos.forEach(function(promo_item){
+            var cat = get_categoria(promo_item.id_cae);
             total = total + parseInt(cat.precio);
         });
     }
-    if(pedidos[index].despacho == 0){
-        pedidos[index].costo = 0;
+    
+    return total;
+
+}
+function html_home_pedidos(obj, index){
+    
+    var sub_total = get_precio_carro(obj);
+    var pedidos = get_pedidos();
+
+    if(obj.despacho == 0){
+        obj.costo = 0;
     }
 
-    var aux_total = parseInt(total) + parseInt(pedidos[index].costo);
+    var total = parseInt(sub_total) + parseInt(obj.costo);
 
-    /*
-    if(total > obj.total){
-        var total_dif = parseInt(total) - parseInt(obj.total);
+    if(sub_total != obj.total){
+        var total_dif = sub_total - parseInt(obj.total);
         obj.alert = "Existe un diferencia de $"+formatNumber.new(total_dif, "$");
     }
-    if(pedidos[index].total != total){ 
-        cambiar_total(seleccionado, aux_total);
-        pedidos[index].total = total;
-        set_pedidos(pedidos);
-    }
-    */
 
     if(seleccionado == index){
         if(obj.alert == '' || obj.alert === undefined){
@@ -374,7 +374,7 @@ function html_home_pedidos(obj, index){
     
     Div.setAttribute('pos', index);
     if(pedidos[index].despacho == 1){
-        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(obj.costo), "$"));
     }
     if(pedidos[index].despacho == 0){
         var p_estado = create_element_class_inner('p_estado', '');
@@ -383,7 +383,7 @@ function html_home_pedidos(obj, index){
     var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.num_ped);
     var p_nom = create_element_class_inner('p_nom', obj.nombre);
     
-    var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(aux_total), "$"));
+    var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index, this) };
     
