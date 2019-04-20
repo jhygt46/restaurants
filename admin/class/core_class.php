@@ -647,7 +647,7 @@ class Core{
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
             $mod_despacho = $pedido_sql["resultado"][0]['mod_despacho'];
-            $sql_despacho = $pedido_sql["resultado"][0]['despacho'];
+            $sql_tipo = $pedido_sql["resultado"][0]['tipo'];
 
             if($sql_carro == ""){
                 $info['carro'] = [];
@@ -678,7 +678,7 @@ class Core{
             }
 
             if(count($carro) > 0){
-                if($sql_carro == "" || ($mod_despacho == 0 && $sql_despacho == 1)){
+                if($sql_carro == "" || ($mod_despacho == 0 && $sql_tipo == 1)){
                     $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', mod_despacho='1', total='".$total."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     $info['carro'] = $carro;
                     if($enviar_cocina == 1){
