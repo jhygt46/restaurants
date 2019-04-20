@@ -344,14 +344,13 @@ function html_home_pedidos(obj, index){
         pedidos[index].costo = 0;
     }
 
+    var aux_total = parseInt(total) + parseInt(pedidos[index].costo);
+
+    /*
     if(total > obj.total){
         var total_dif = parseInt(total) - parseInt(obj.total);
         obj.alert = "Existe un diferencia de $"+formatNumber.new(total_dif, "$");
     }
-    
-    var aux_total = parseInt(total) + parseInt(pedidos[index].costo);
-
-    /*
     if(pedidos[index].total != total){ 
         cambiar_total(seleccionado, aux_total);
         pedidos[index].total = total;
