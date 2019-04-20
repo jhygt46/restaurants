@@ -62,7 +62,7 @@ function add_carro_producto(id_pro){
         cambiar_total(seleccionado, aux_total);
     }
 
-    pedidos[seleccionado].total = pedidos[seleccionado].total + producto.precio;
+    pedidos[seleccionado].total = pedidos[seleccionado].total + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
@@ -108,7 +108,7 @@ function add_carro_promocion(id_cae){
         cambiar_total(seleccionado, aux_total);
     }
 
-    pedidos[seleccionado].total = pedidos[seleccionado].total + promo.precio;
+    pedidos[seleccionado].total = pedidos[seleccionado].total + parseInt(promo.precio);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
     listar_pedidos();
@@ -828,7 +828,7 @@ function delete_pro_carro(i){
         var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
-    pedidos[seleccionado].total + pedidos[seleccionado].total - producto.precio;
+    pedidos[seleccionado].total = pedidos[seleccionado].total - parseInt(producto.precio);
     pedidos[seleccionado].carro.splice(i, 1);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
@@ -858,7 +858,7 @@ function delete_promo(that, precio){
         cambiar_total(seleccionado, aux_total);
     }
 
-    pedidos[seleccionado].total = pedidos[seleccionado].total - precio;
+    pedidos[seleccionado].total = pedidos[seleccionado].total - parseInt(precio);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
     ver_detalle_carro(seleccionado, null);
