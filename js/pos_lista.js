@@ -58,8 +58,7 @@ function add_carro_producto(id_pro){
     }
     
     if(pedidos[seleccionado].tipo == 1){
-        var aux_total = pedidos[seleccionado].total + producto.precio + pedidos[seleccionado].costo;
-        console.log(aux_total);
+        var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
 
@@ -105,7 +104,7 @@ function add_carro_promocion(id_cae){
     }
 
     if(pedidos[seleccionado].tipo == 1){
-        var aux_total = pedidos[seleccionado].total + promo.precio + pedidos[seleccionado].costo;
+        var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
 
@@ -826,7 +825,7 @@ function delete_pro_carro(i){
     var pedidos = get_pedidos();
     var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
     if(pedidos[seleccionado].tipo == 1){
-        var aux_total = pedidos[seleccionado].total - producto.precio + pedidos[seleccionado].costo;
+        var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
     pedidos[seleccionado].total + pedidos[seleccionado].total - producto.precio;
@@ -855,7 +854,7 @@ function delete_promo(that, precio){
     }
 
     if(pedidos[seleccionado].tipo == 1){
-        var aux_total = pedidos[seleccionado].total - precio + pedidos[seleccionado].costo;
+        var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
 
