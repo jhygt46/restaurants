@@ -355,7 +355,7 @@ function html_home_pedidos(obj, index){
 
     if(sub_total != obj.total){
         var total_dif = sub_total - parseInt(obj.total);
-        obj.alert = "Existe un diferencia de $"+formatNumber.new(total_dif, "$");
+        obj.alert = "Existe un diferencia de "+formatNumber.new(total_dif, "$");
     }
 
     if(seleccionado == index){
@@ -1400,7 +1400,7 @@ function guardar_pedido(index, open){
             }
             pedidos[index].carro = info.carro;
             pedidos[index].alert = info.alert;
-
+            pedidos[index].total = get_precio_carro(pedidos[index]);
 
             if(pedidos[index].tipo == 1){
                 var aux_total = parseInt(pedidos[index].total) + parseInt(pedidos[index].costo);
