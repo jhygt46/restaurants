@@ -56,12 +56,12 @@ function add_carro_producto(id_pro){
             item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
         }
     }
-    
+    /*
     if(pedidos[seleccionado].tipo == 1){
         var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
-        cambiar_total(seleccionado, aux_total);
+        //cambiar_total(seleccionado, aux_total);
     }
-
+    */
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
     set_pedidos(pedidos);
@@ -102,12 +102,12 @@ function add_carro_promocion(id_cae){
             }
         }
     }
-
+    /*
     if(pedidos[seleccionado].tipo == 1){
         var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
-
+    */
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
@@ -823,10 +823,12 @@ function proceso(pedido){
 function delete_pro_carro(i){
     var pedidos = get_pedidos();
     var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
+    /*
     if(pedidos[seleccionado].tipo == 1){
         var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
+    */
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio);
     pedidos[seleccionado].carro.splice(i, 1);
     set_pedidos(pedidos);
@@ -851,12 +853,12 @@ function delete_promo(that, precio){
            pedidos[seleccionado].carro.push(carro[j]); 
         }
     }
-
+    /*
     if(pedidos[seleccionado].tipo == 1){
         var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(precio) + parseInt(pedidos[seleccionado].costo);
         cambiar_total(seleccionado, aux_total);
     }
-
+    */
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(precio);
     set_pedidos(pedidos);
     //guardar_pedido(seleccionado, false);
@@ -1398,6 +1400,12 @@ function guardar_pedido(index, open){
             }
             pedidos[index].carro = info.carro;
             pedidos[index].alert = info.alert;
+
+
+            if(pedidos[index].tipo == 1){
+                var aux_total = parseInt(pedidos[index].total) + parseInt(pedidos[index].costo);
+                cambiar_total(index, aux_total);
+            }
 
             set_pedidos(pedidos);
             listar_pedidos();
