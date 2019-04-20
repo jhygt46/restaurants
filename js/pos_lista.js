@@ -349,8 +349,9 @@ function html_home_pedidos(obj, index){
         obj.alert = "Existe un diferencia de $"+formatNumber.new(total_dif, "$");
     }
     
-    /*
     var aux_total = total + parseInt(pedidos[index].costo);
+
+    /*
     if(pedidos[index].total != total){ 
         cambiar_total(seleccionado, aux_total);
         pedidos[index].total = total;
