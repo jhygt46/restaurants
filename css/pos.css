@@ -500,7 +500,7 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
-    bottom: 8px;
+    top: 48px;
     right: 10px;
     width: 114px;
     background: #000;
@@ -528,7 +528,7 @@ body {
 }
 .pedidos .contenido .lista_pedidos .pedido .t_tiempo{
     position: absolute;
-    bottom: 8px;
+    top: 48px;
     right: 130px;
     width: 80px;
     background: #000;
