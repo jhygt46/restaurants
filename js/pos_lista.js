@@ -328,12 +328,12 @@ function html_home_pedidos(obj, index){
             total = total + parseInt(cat.precio);
         });
     }
-
+    /*
     if(total > obj.total){
         var total_dif = parseInt(total) - parseInt(obj.total);
         obj.alert = "Existe un diferencia de "+formatNumber.new(total_dif, "$");
     }
-
+    */
     if(pedidos[index].despacho == 0){
         pedidos[index].costo = 0;
     }
