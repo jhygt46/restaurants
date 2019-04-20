@@ -1410,7 +1410,7 @@ function guardar_pedido(index, open){
             set_pedidos(pedidos);
             listar_pedidos();
 
-            if(open && info.alert != ''){
+            if(open){
                 if(tipo_comanda == 0 || tipo_comanda == 1){
                     if(proceso(pedido)){
                         window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
