@@ -646,6 +646,8 @@ class Core{
             $sql_carro = $pedido_sql["resultado"][0]['carro'];
             $sql_promos = $pedido_sql["resultado"][0]['promos'];
             $num_ped = $pedido_sql["resultado"][0]['num_ped'];
+            $mod_despacho = $pedido_sql["resultado"][0]['mod_despacho'];
+            $sql_despacho = $pedido_sql["resultado"][0]['despacho'];
 
             if($sql_carro == ""){
                 $info['carro'] = [];
@@ -675,9 +677,9 @@ class Core{
                 $this->con->sql("UPDATE pedidos_aux SET id_pdir='".$id_pdir."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
             }
 
-            if($sql_carro == ""){
-                if(count($carro) > 0){
-                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', total='".$total."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            if(count($carro) > 0){
+                if($sql_carro == "" || ($mod_despacho == 0 && $sql_despacho == 1)){
+                    $this->con->sql("UPDATE pedidos_aux SET carro='".json_encode($carro)."', mod_despacho='1', total='".$total."', promos='".json_encode($promos)."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
                     $info['carro'] = $carro;
                     if($enviar_cocina == 1){
                         $send['accion'] = 'enviar_cocina_local';
@@ -694,13 +696,12 @@ class Core{
                         curl_exec($ch);
                         curl_close($ch);
                     }
-                }
-            }
-            if($sql_carro != ""){
-                $cant_1 = count(json_decode($sql_carro));
-                $cant_2 = count($carro);
-                if($cant_2 != $cant_1){
-                    $info['alert'] = 'no se efectuaron los cambios';
+                }else{
+                    $cant_1 = count(json_decode($sql_carro));
+                    $cant_2 = count($carro);
+                    if($cant_2 != $cant_1){
+                        $info['alert'] = 'no se efectuaron los cambios';
+                    }
                 }
             }
 
