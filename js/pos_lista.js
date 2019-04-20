@@ -59,6 +59,7 @@ function add_carro_producto(id_pro){
     
     if(pedidos[seleccionado].tipo == 1){
         var aux_total = pedidos[seleccionado].total + producto.precio + pedidos[seleccionado].costo;
+        console.log(aux_total);
         cambiar_total(seleccionado, aux_total);
     }
 
