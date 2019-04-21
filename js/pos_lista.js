@@ -1379,6 +1379,52 @@ function get_pedidos(){
 function get_pedido_blank(){
     return [pedido_obj()];
 }
+function eliminar_pedido(){
+    
+    var pedidos = get_pedidos();
+    var send = { id: pedidos[seleccionado].id_ped, tipo: 1 };
+
+    $.ajax({
+        url: "ajax/del_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
+            pedidos[seleccionado].eliminado = 1;
+            set_pedidos(pedidos);
+            listar_pedidos();
+            $('.p1').hide();
+            $('.pop_up').hide();
+            
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+
+}
+function ocultar_pedido(){
+
+    var pedidos = get_pedidos();
+    var send = { id: pedidos[seleccionado].id_ped, tipo: 2 };
+
+    $.ajax({
+        url: "ajax/del_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
+            pedidos[seleccionado].ocultar = 1;
+            set_pedidos(pedidos);
+            listar_pedidos();
+            $('.p1').hide();
+            $('.pop_up').hide();
+            
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+
+}
 function guardar_pedido(index, open){
      
     var pedidos = get_pedidos();
