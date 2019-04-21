@@ -15,9 +15,8 @@ function socket_init(){
     socket.on('cocina-pos-'+local_code, function(info) {
         modificar_pedido(info);
     });
-    socket.on('cocina-rm-'+local_code, function(id) {
-        console.log(id);
-        borrar_pedido(id);
+    socket.on('cocina-rm-'+local_code, function(info) {
+        borrar_pedido(info.id_ped);
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();
