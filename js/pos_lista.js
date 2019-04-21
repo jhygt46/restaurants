@@ -1390,6 +1390,7 @@ function eliminar_pedido(){
         data: send,
         success: function(data){
             
+            console.log("data");
             console.log(data);
 
             pedidos[seleccionado].eliminado = 1;
@@ -1729,16 +1730,12 @@ function confirm(message){
     }, function(isConfirm){
         
         if(isConfirm){
-            
-            console.log("BORRAR");
 
             if(message['aux'] == 0){
                 ocultar_pedido();
-                console.log("pedido ocultar");
             }
             if(message['aux'] == 1){
                 eliminar_pedido();
-                console.log("pedido borrar");
             }
             
             swal({
