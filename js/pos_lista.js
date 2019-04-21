@@ -1390,6 +1390,8 @@ function eliminar_pedido(){
         data: send,
         success: function(data){
             
+            console.log(data);
+
             pedidos[seleccionado].eliminado = 1;
             set_pedidos(pedidos);
             listar_pedidos();
@@ -1413,6 +1415,8 @@ function ocultar_pedido(){
         data: send,
         success: function(data){
             
+            console.log(data);
+
             pedidos[seleccionado].ocultar = 1;
             set_pedidos(pedidos);
             listar_pedidos();

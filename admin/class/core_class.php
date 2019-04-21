@@ -585,8 +585,13 @@ class Core{
         $id_loc = $_COOKIE['ID'];
         $cookie_code = $_COOKIE['CODE'];
         
+        $info['id_ped'] = $id_ped;
+        $info['tipo'] = $tipo;
+
         $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
         if($aux_local['count'] == 1){
+
+            $info['BUE'] = "ENTRO";
 
             if($tipo == 1){
                 $this->con->sql("UPDATE pedidos_aux SET eliminado='1' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
@@ -606,6 +611,8 @@ class Core{
             }
             
         }
+
+        return $info;
 
     }
     public function set_web_pedido(){
