@@ -16,7 +16,7 @@ function socket_init(){
         modificar_pedido(info);
     });
     socket.on('cocina-rm-'+local_code, function(id) {
-        console.log("BUE: "+id);
+        console.log(id);
         borrar_pedido(id);
     });
     socket.on('connect', function() {
