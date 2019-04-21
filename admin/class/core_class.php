@@ -577,6 +577,37 @@ class Core{
         $hrs = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND id_loc='".$id_loc."' AND id_hor='".$id_hor."'");
         return $hrs['resultado'][0];
     }
+    public function del_pedido(){
+
+        $id_ped = $_POST['id'];
+        $tipo = $_POST['tipo'];
+
+        $id_loc = $_COOKIE['ID'];
+        $cookie_code = $_COOKIE['CODE'];
+        
+        $aux_local = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND cookie_code='".$cookie_code."'");
+        if($aux_local['count'] == 1){
+
+            if($tipo == 1){
+                $this->con->sql("UPDATE pedidos_aux SET eliminado='1' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+                $send['accion'] = 'borrar_cocina_local';
+                $send['hash'] = 'hash';
+                $send['local_code'] = $local_code;
+                $send['id_ped'] = $id_ped;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/borrar_cocina');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                curl_exec($ch);
+                curl_close($ch);
+            }
+            if($tipo == 2){
+                $this->con->sql("UPDATE pedidos_aux SET ocultar='1' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");    
+            }
+            
+        }
+
+    }
     public function set_web_pedido(){
                 
         $pedido = json_decode($_POST['pedido']);
@@ -705,7 +736,7 @@ class Core{
                 }
             }
 
-            $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."', ocultar='".$ocultar."', eliminado='".$eliminado."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
+            $this->con->sql("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped='".$id_ped."' AND id_loc='".$id_loc."'");
 
         }
 
