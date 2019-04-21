@@ -55,6 +55,8 @@ function borrar_pedido(id){
     for(var i=0, ilen=pedidos.length; i<ilen; i++){
         if(pedidos[i].id_ped == id){
             pedidos.splice(i, 1);
+            i--;
+            ilen--;
             listar_pedidos();
         }
     }
