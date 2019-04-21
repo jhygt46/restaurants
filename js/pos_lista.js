@@ -1730,16 +1730,12 @@ function confirm(message){
         
         if(isConfirm){
             
-            var pedidos = get_pedidos();
             if(message['aux'] == 0){
-                pedidos[seleccionado].ocultar = 1;
+                ocultar_pedido();
             }
             if(message['aux'] == 1){
-                pedidos[seleccionado].eliminado = 1;
+                eliminar_pedido();
             }
-            set_pedidos(pedidos);
-            guardar_pedido(seleccionado, false);
-            listar_pedidos();
             
             swal({
                 title: 'Felicidades',
