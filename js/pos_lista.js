@@ -1390,9 +1390,6 @@ function eliminar_pedido(){
         data: send,
         success: function(data){
             
-            console.log("data");
-            console.log(data);
-
             pedidos[seleccionado].eliminado = 1;
             set_pedidos(pedidos);
             listar_pedidos();
