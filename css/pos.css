@@ -652,9 +652,14 @@ body {
     min-height: calc(100% - 76px);
 }
 .categorias .contenido .lista_productos .producto{
-    padding: 15px 5px;
+    height: 64px;
     background: #ccc;
     margin-bottom: 5px;
+    position: relative;
+}
+.categorias .contenido .lista_productos .producto .nombre{
+    padding: 0px 10px;
+    font-size: 18px;
 }
 ::-webkit-scrollbar {
     width: 5px;

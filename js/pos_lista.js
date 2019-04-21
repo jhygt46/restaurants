@@ -160,7 +160,7 @@ function html_home_productos(obj){
     
     var Div = create_element_class('producto');
     Div.onclick = function(){ add_carro_producto(obj.id_pro); };
-    var Divnombre = create_element_class_inner('nombre', obj.nombre);
+    var Divnombre = create_element_class_inner('nombre valign', obj.nombre);
     Div.appendChild(Divnombre);
     return Div;
     
