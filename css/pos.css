@@ -643,7 +643,8 @@ body {
     margin-bottom: 8px;
 }
 .categorias .contenido .lista_categorias .categoria .nombre{
-    
+    font-size: 18px;
+    padding: 0px 10px;
 }
 .categorias .contenido .lista_productos{
     background: #ddd;

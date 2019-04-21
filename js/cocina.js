@@ -15,6 +15,9 @@ function socket_init(){
     socket.on('cocina-pos-'+local_code, function(info) {
         modificar_pedido(info);
     });
+    socket.on('cocina-rm-'+local_code, function(info) {
+        borrar_pedido(id);
+    });
     socket.on('connect', function() {
         $('.alert_socket').hide();
     });
@@ -48,7 +51,14 @@ function in_arr(arr, id_ped){
     }
     return false;
 }
-
+function borrar_pedido(id){
+    for(var i=0, ilen=pedidos.length; i<ilen; i++){
+        if(pedidos[i].id_ped == id){
+            pedidos.splice(i, 1);
+            listar_pedidos();
+        }
+    }
+}
 function agregar_pedido(id){
 
     var send = { id_ped: id };

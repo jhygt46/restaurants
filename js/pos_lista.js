@@ -1051,7 +1051,7 @@ function html_home_categorias(obj){
     if(obj.tipo == 1){
         Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     }
-    var Divnombre = create_element_class_inner('nombre', obj.nombre);
+    var Divnombre = create_element_class_inner('nombre valign', obj.nombre);
     Div.appendChild(Divnombre);
     return Div;
     
