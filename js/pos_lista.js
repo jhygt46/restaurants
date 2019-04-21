@@ -1706,7 +1706,7 @@ function gmap_input(){
 }
 function eliminar(accion, aux, accion2){
     var pedidos = get_pedidos();
-    var id = pedidos[seleccionado].id_ped;
+    var id = pedidos[seleccionado].num_ped;
     var msg = {
         title: accion+" el Pedido #"+id, 
         text: "Esta seguro que desea esta accion", 
@@ -1730,11 +1730,15 @@ function confirm(message){
         
         if(isConfirm){
             
+            console.log("BORRAR");
+
             if(message['aux'] == 0){
                 ocultar_pedido();
+                console.log("pedido ocultar");
             }
             if(message['aux'] == 1){
                 eliminar_pedido();
+                console.log("pedido borrar");
             }
             
             swal({
