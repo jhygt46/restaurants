@@ -1580,6 +1580,7 @@ function cambiar_total(index, total){
     });
     
 }
+/*
 function eliminar_pedido(){
     var pedidos = get_pedidos();
     pedidos[seleccionado].eliminado = 1;
@@ -1596,6 +1597,7 @@ function ocultar_pedido(){
     $('.p1').hide();
     $('.pop_up').hide();
 }
+*/
 var formatNumber = {
     separador: ".", // separador para los miles
     sepDecimal: ',', // separador para los decimales
