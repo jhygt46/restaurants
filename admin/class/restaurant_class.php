@@ -430,12 +430,12 @@ class Rest{
         $id_loc = $_POST["id_loc"];
         $mensaje = $_POST["mensaje"];
         $info["op"] = 2;
-        $pedido = $this->con->sql("SELECT * FROM locales t1, pedidos_aux t2 WHERE t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
+        $pedidos = $this->con->sql("SELECT * FROM locales t1, pedidos_aux t2 WHERE t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
         
-        if($pedido["count"] == 1){
+        if($pedidos["count"] == 1){
 
             $info["op"] = 1;
-            $pedido['local_code'] = $pedido['resultado'][0]['local_code'];
+            $pedido['local_code'] = $pedidos['resultado'][0]['local_code'];
             $pedido['mensaje'] = $mensaje;
             $pedido['accion'] = "enviar_mensaje_local";
             $pedido['hash'] = "hash";
