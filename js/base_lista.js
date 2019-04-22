@@ -921,9 +921,9 @@ function send_chat(){
         data: send,
         success: function(info){
             var data = JSON.parse(info);
-            if(data.op == 1){
-                $('#texto_chat').val("");
-            }
+            console.log(data);
+            $('#texto_chat').val("");
+            
         }, error: function(e){}
     });
 
