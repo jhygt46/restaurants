@@ -498,6 +498,16 @@ body {
     background: url("../admin/images/icons-set.png") no-repeat;
     background-position: -476px -575px;
 }
+.pedidos .contenido .lista_pedidos .pedido .btn_chat{
+    position: absolute;
+    top: 10px;
+    right: 114px;
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+    background: url("../admin/images/icons-set.png") no-repeat;
+    background-position: -656px -235px;
+}
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;
     top: 48px;

@@ -396,6 +396,9 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
 
+    var btn_chat = create_element_class('btn_chat');
+    btn_chat.onclick = function(){ ver_detalle_carro(index, this) };
+
     if(obj.alert != '' && obj.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
         Div.appendChild(p_alert);
@@ -409,6 +412,7 @@ function html_home_pedidos(obj, index){
     Div.appendChild(btn_mod);
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
+    Div.appendChild(btn_chat);
     
     if(obj.tipo == 1){
         
