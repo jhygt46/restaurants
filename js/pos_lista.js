@@ -397,7 +397,8 @@ function html_home_pedidos(obj, index){
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
 
     var btn_chat = create_element_class('btn_chat');
-    btn_chat.onclick = function(){ ver_detalle_carro(index, this) };
+    btn_chat.onclick = function(){ abrir_chat(index, this) };
+    var chat_num = create_element_class('chat_num');
 
     if(obj.alert != '' && obj.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
@@ -413,6 +414,7 @@ function html_home_pedidos(obj, index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     Div.appendChild(btn_chat);
+    Div.appendChild(chat_num);
     
     if(obj.tipo == 1){
         
