@@ -439,7 +439,7 @@ class Rest{
             $pedido['accion'] = "enviar_mensaje_local";
             $pedido['hash'] = "hash";
             $info["op"] = 1;
-            $info["pedido"] = $pedido;
+            $info["pedidos"] = $pedidos;
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_chat');
@@ -449,7 +449,7 @@ class Rest{
             curl_close($ch);
 
         }
-        
+
         return $info;
 
     }
