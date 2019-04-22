@@ -678,19 +678,28 @@ body {
                 height: 100px;
                 .mensajes{
                     width: calc(100% - 80px);
-                    height: 100px;
-                    background: #fff;
+                    height: 70px;
+                    background: #ddd;
                     position: absolute;
                     left: 0px;
+                    top: 0px;
                 }
                 .enviar{
                     width: 80px;
                     right: 0px;
                     font-size: 14px;
                     color: #fff;
-                    background: #ccc;
-                    padding: 8px 0px;
+                    background: #999;
+                    padding: 7px 0px;
                     text-align: center;
+                }
+                .entrada{
+                    width: calc(100% - 80px);
+                    background: #fff;
+                    position: absolute;
+                    left: 0px;
+                    top: 70px;
+                    height: 30px;
                 }
             }
         }
