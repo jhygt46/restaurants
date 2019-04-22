@@ -514,12 +514,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   height: 100px;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes {
-  width: calc(100% - 80px);
-  height: 70px;
-  background: #ddd;
+  width: calc(100% - 85px);
+  height: 68px;
+  background: #fff;
   position: absolute;
   left: 0px;
   top: 0px;
+  border: 1px solid #ccc;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .enviar {
   width: 80px;
@@ -531,12 +532,13 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   text-align: center;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .entrada {
-  width: calc(100% - 80px);
+  width: calc(100% - 85px);
   background: #fff;
   position: absolute;
   left: 0px;
-  top: 70px;
+  top: 72px;
   height: 30px;
+  border: 1px solid #ccc;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .entrada input {
   width: 100%;
