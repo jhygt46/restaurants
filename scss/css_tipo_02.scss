@@ -675,21 +675,21 @@ body {
                     background: #ddd;
                     padding: 2%;
                 }
-                .pedido_chat{
-                    margin: 15px;
-                    position: relative;
-                    .mensajes{
-                        width: calc(100% - 80px);
-                        height: 200px;
-                        background: #fff;
-                        position: absolute;
-                        left: 0px;
-                    }
-                    .enviar{
-                        width: 80px;
-                        height: 30px;
-                        right: 0px;
-                    }
+            }
+            .pedido_chat{
+                margin: 15px;
+                position: relative;
+                .mensajes{
+                    width: calc(100% - 80px);
+                    height: 200px;
+                    background: #fff;
+                    position: absolute;
+                    left: 0px;
+                }
+                .enviar{
+                    width: 80px;
+                    height: 30px;
+                    right: 0px;
                 }
             }
         }

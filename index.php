@@ -379,9 +379,6 @@ if(isset($info['id_gir'])){
                                         </div>
                                         <div class="posicion" id="mapa_posicion"></div>
                                         <div class="total"></div>
-                                        <div class="chat">
-
-                                        </div>
                                     </div>
                                     <div class="pedido_chat">
                                         <div class="mensajes"></div>
