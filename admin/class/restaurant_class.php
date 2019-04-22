@@ -429,10 +429,12 @@ class Rest{
         $id_ped = $_POST["id_ped"];
         $id_loc = $_POST["id_loc"];
         $mensaje = $_POST["mensaje"];
-
+        $info["op"] = 2;
         $pedido = $this->con->sql("SELECT * FROM locales t1, pedidos_aux t2 WHERE t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
+        
         if($pedido["count"] == 1){
 
+            $info["op"] = 1;
             $pedido['local_code'] = $pedido['resultado'][0]['local_code'];
             $pedido['mensaje'] = $mensaje;
             $pedido['accion'] = "enviar_mensaje_local";
@@ -442,8 +444,7 @@ class Rest{
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_chat');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            $mail_nodejs = json_decode(curl_exec($ch));
-            $info['mail'] = ($mail_nodejs->{'op'} == 1) ? true : false ;
+            curl_exec($ch);
             curl_close($ch);
 
         }
