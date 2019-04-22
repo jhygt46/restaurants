@@ -382,7 +382,7 @@ if(isset($info['id_gir'])){
                                     </div>
                                     <div class="pedido_chat">
                                         <div class="mensajes"></div>
-                                        <div class="enviar valign"></div>
+                                        <div class="enviar valign">Enviar</div>
                                     </div>
                                     
                                 </div>
