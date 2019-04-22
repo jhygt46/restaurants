@@ -40,7 +40,9 @@ class Rest{
         if($accion == "get_moto"){
             return $this->get_moto($_POST["id_mot"]);
         }
-        
+        if($accion == "enviar_chat"){
+            return $this->enviar_chat();
+        }
     }
     public function get_users_pedido($telefono){
 
@@ -421,6 +423,31 @@ class Rest{
         
         return $info;
         
+    }
+    public function enviar_chat(){
+
+        $id_ped = $_POST["id_ped"];
+        $id_loc = $_POST["id_loc"];
+        $mensaje = $_POST["mensaje"];
+
+        $pedido = $this->con->sql("SELECT * FROM locales t1, pedidos_aux t2 WHERE t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
+        if($pedido["count"] == 1){
+
+            $pedido['local_code'] = $pedido['resultado'][0]['local_code'];
+            $pedido['mensaje'] = $mensaje;
+            $pedido['accion'] = "enviar_mensaje_local";
+            $pedido['hash'] = "hash";
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_chat');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
+            $mail_nodejs = json_decode(curl_exec($ch));
+            $info['mail'] = ($mail_nodejs->{'op'} == 1) ? true : false ;
+            curl_close($ch);
+
+        }
+
     }
     public function get_info_despacho($lat, $lng){
 

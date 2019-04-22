@@ -197,7 +197,10 @@ function socket_init(){
         agregar_pedido(id_ped);
         console.log("ADD");
     });
-    
+    socket.on('enviar-chat-'+local_code, function(info) {
+        console.log("ENVIAR CHAT");
+        console.log(info);
+    });
     socket.on('map-'+local_code, function(moto) {
         
         var info = JSON.parse(moto.info);
