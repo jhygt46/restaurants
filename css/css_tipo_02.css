@@ -485,7 +485,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   padding: 2%;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat {
-  margin: 0px 25px;
+  margin: 10px 25px 20px 25px;
   position: relative;
   height: 100px;
 }
