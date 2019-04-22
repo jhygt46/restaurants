@@ -682,18 +682,20 @@ body {
                 height: 100px;
                 .mensajes{
                     width: calc(100% - 80px);
-                    height: 100px;
+                    height: 68px;
                     background: #fff;
                     position: absolute;
                     left: 0px;
+                    top: 0px;
+                    border: 1px solid #ccc;
                 }
                 .enviar{
-                    width: 80px;
+                    width: 72px;
                     right: 0px;
                     font-size: 14px;
                     color: #fff;
-                    background: #ccc;
-                    padding: 7px 0px;
+                    background: #999;
+                    padding: 9px 0px;
                     text-align: center;
                 }
                 .entrada{
@@ -701,10 +703,12 @@ body {
                     background: #fff;
                     position: absolute;
                     left: 0px;
-                    top: 70px;
+                    top: 72px;
                     height: 30px;
+                    border: 1px solid #ccc;
                     input{
-                        width: 100%;
+                        padding: 0% 1%;
+                        width: 98%;
                         height: 100%;
                         border: 0px;
                         background: none;

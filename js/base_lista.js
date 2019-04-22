@@ -910,6 +910,23 @@ function move_marker(lat, lng){
     map_socket.panTo( new google.maps.LatLng( lat, lng ) );
     
 }
+function send_chat(){
+
+    var pedido = get_pedido();
+    var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, mensaje: $('#texto_chat').val() };
+    console.log(send);
+
+    $.ajax({
+        url: "ajax/index.php",
+        type: "POST",
+        data: send,
+        success: function(info){
+            var data = JSON.parse(info);
+            console.log(data);
+        }, error: function(e){}
+    });
+
+}
 function paso_4(){
     
     document.getElementById("enviar_cotizacion").disabled = true;
