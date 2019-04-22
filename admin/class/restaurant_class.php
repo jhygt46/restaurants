@@ -444,7 +444,7 @@ class Rest{
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_chat');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
-            curl_exec($ch);
+            $info["mail_nodejs"] = json_decode(curl_exec($ch));
             curl_close($ch);
 
         }
