@@ -434,12 +434,10 @@ class Rest{
 
         if($pedidos["count"] == 1){
 
-            $pedido['local_code'] = $pedidos['resultado'][0]['local_code'];
+            $pedido['local_code'] = $pedidos['resultado'][0]['code'];
             $pedido['mensaje'] = $mensaje;
             $pedido['accion'] = "enviar_mensaje_local";
             $pedido['hash'] = "hash";
-            $info["op"] = 1;
-            $info["pedidos"] = $pedidos;
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_chat');
