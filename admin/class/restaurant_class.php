@@ -449,6 +449,8 @@ class Rest{
 
         }
 
+        return $info;
+
     }
     public function get_info_despacho($lat, $lng){
 
