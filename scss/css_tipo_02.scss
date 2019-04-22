@@ -679,17 +679,22 @@ body {
             .pedido_chat{
                 margin: 15px;
                 position: relative;
+                height: 100px;
                 .mensajes{
                     width: calc(100% - 80px);
-                    height: 200px;
+                    height: 100px;
                     background: #fff;
                     position: absolute;
                     left: 0px;
                 }
                 .enviar{
                     width: 80px;
-                    height: 30px;
                     right: 0px;
+                    font-size: 14px;
+                    color: #fff;
+                    background: #ccc;
+                    padding: 8px 0px;
+                    text-align: center;
                 }
             }
         }
