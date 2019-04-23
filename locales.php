@@ -223,6 +223,14 @@ $motos = $core->get_repartidores_local($id_loc);
                             <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
                         </div>
                     </div>
+                    <div class="p7 chat vhalign" style="display: none">
+                        <div class="np_close" onclick="np_close(this)"></div>
+                        <div class="n_title"></div>
+                        <div class="n_stitle"></div>
+                        <div class="n_info n1">
+                            <div class="data_info"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
