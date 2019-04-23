@@ -688,14 +688,15 @@ body {
                 .enviar{
                     width: 72px;
                     right: 0px;
-                    font-size: 14px;
-                    color: #fff;
                     background: #999;
-                    padding: 0px 0px;
-                    text-align: center;
                     top: 72px;
                     height: 32px;
                     position: absolute;
+                    .enviar_txt{
+                        position: absolute;
+                        font-size: 14px;
+                        color: #fff;
+                    }
                 }
                 .entrada{
                     width: calc(100% - 80px);
