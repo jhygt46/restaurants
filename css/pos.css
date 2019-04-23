@@ -77,6 +77,30 @@ body {
     height: 32px;
     display: block;
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .input_text{
+    width: calc(100% - 80px);
+    height: 30px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .input_text input{
+    width: 98%;
+    height: 100%;
+    padding: 0% 1%;
+    border: 0px;
+    background: none;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .enviar{
+    width: 72px;
+    float: left;
+    height: 30px;
+    background: #ccc;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .enviar .txt{
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info{
 
 }
