@@ -190,6 +190,14 @@ function modificar_horas(){
     setTimeout(modificar_horas, 6000);
     
 }
+function abrir_chat(index, that){
+
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
+    console.log(pedido.mensaje);
+    console.log(pedido.mensaje_cont);
+
+}
 function socket_init(){
     
     socket = io.connect('https://www.izusushi.cl', { 'secure': true });
