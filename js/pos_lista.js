@@ -194,8 +194,7 @@ function abrir_chat(index, that){
 
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    console.log(pedido.mensaje);
-    console.log(pedido.mensaje_cont);
+    console.log(pedido);
 
 }
 function socket_init(){
