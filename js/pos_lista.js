@@ -199,7 +199,12 @@ function abrir_chat(index, that){
 
     $('.pop_up').show();
     $('.p7').show();
-    $('.p7 .n_title').html("CHAT JUANITO");
+    $('.p7 .n_title').html("CHAT "+pedidos[index].nombre);
+
+    for(var i=0, ilen=pedidos[index].mensajes.length; i<ilen; i++){
+        console.log(pedidos[index].mensajes[i]);
+    }
+    
     $('.p7 .data_info').html();
 
 }
