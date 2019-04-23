@@ -66,6 +66,12 @@ body {
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .conversacion{
     height: calc(100% - 32px);
     display: block;
+    overflow-y: auto;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .conversacion .cont_conversacion{
+    display: block;
+    padding: 2%;
+    height: 1400px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada{
     height: 32px;
