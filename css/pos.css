@@ -507,7 +507,6 @@ body {
     z-index: 1;
     background: url("../admin/images/icons-set.png") no-repeat;
     background-position: -656px -235px;
-    display: none;
 }
 .pedidos .contenido .lista_pedidos .pedido .chat_num{
     position: absolute;
@@ -520,7 +519,6 @@ body {
     background: rgba(0,0,0,0.7);
     text-align: center;
     font-size: 11px;
-    display: none;
 }
 .pedidos .contenido .lista_pedidos .pedido .p_opciones{
     position: absolute;

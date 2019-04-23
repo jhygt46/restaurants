@@ -197,15 +197,24 @@ function socket_init(){
         agregar_pedido(id_ped);
         console.log("ADD");
     });
-    socket.on('enviar-chat-'+local_code, function(info) {
+    socket.on('enviar-chat-'+local_code, function(info){
+
         var id_ped = info.id_ped;
         var mensaje = info.mensaje;
+        var nombre = info.nombre;
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].id_ped == id_ped){
-                console.log(pedidos[i]);
-                console.log(mensaje);
+                if(!pedidos[i].hasOwnProperty('mensajes')){
+                    pedidos[i].mensajes = [];
+                    pedidos[i].mensajes_cont = 0;
+                }
+                pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
+                pedidos[i].mensajes.push({ nombre: nombre, mensaje: mensaje });
+                set_pedidos(pedidos);
+                listar_pedidos();
             }
         }
+
     });
     socket.on('map-'+local_code, function(moto) {
         
@@ -405,10 +414,11 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
 
-    var btn_chat = create_element_class('btn_chat');
-    btn_chat.onclick = function(){ abrir_chat(index, this) };
-    var chat_num = create_element_class('chat_num');
-
+    if(obj.hasOwnProperty('mensajes')){
+        var btn_chat = create_element_class('btn_chat');
+        btn_chat.onclick = function(){ abrir_chat(index, this) };
+        var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
+    }
     if(obj.alert != '' && obj.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
         Div.appendChild(p_alert);
