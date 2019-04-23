@@ -915,6 +915,7 @@ function send_chat(){
     var pedido = get_pedido();
     var mensaje = $('#texto_chat').val();
     var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, mensaje: mensaje };
+    var nombre = 'Diego';
 
     $.ajax({
         url: "ajax/index.php",
@@ -923,7 +924,7 @@ function send_chat(){
         success: function(info){
             var data = JSON.parse(info);
             $('#texto_chat').val("");
-            $(".info_mensajes").prepend("<div class='chat1'>"+mensaje+"</div>")
+            $(".info_mensajes").prepend("<div class='chat1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>")
             
         }, error: function(e){}
     });
