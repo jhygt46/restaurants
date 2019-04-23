@@ -206,7 +206,6 @@ function abrir_chat(index, that){
         console.log(pedidos[index].mensajes[i]);
     }
     
-    $('.p7 .data_info').html();
 
 }
 function socket_init(){
@@ -214,15 +213,10 @@ function socket_init(){
     socket = io.connect('https://www.izusushi.cl', { 'secure': true });
     socket.on('local-'+local_code, function(id_ped) {
         agregar_pedido(id_ped);
-        console.log("ADD");
     });
     socket.on('enviar-chat-'+local_code, function(info){
-
-        console.log("CHAT ENVIADO");
-
         var id_ped = info.id_ped;
         var mensaje = info.mensaje;
-        var nombre = info.nombre;
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].id_ped == id_ped){
                 if(!pedidos[i].hasOwnProperty('mensajes')){
@@ -230,16 +224,13 @@ function socket_init(){
                     pedidos[i].mensajes_cont = 0;
                 }
                 pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
-                pedidos[i].mensajes.push({ nombre: nombre, mensaje: mensaje });
+                pedidos[i].mensajes.push({ tipo: 0, mensaje: mensaje });
                 set_pedidos(pedidos);
                 listar_pedidos();
-                console.log("CHAT GUARDAR");
             }
         }
-
     });
     socket.on('map-'+local_code, function(moto) {
-        
         var info = JSON.parse(moto.info);
         for(var i=0, ilen=motos.length; i<ilen; i++){
             if(motos[i].id_mot == info.id_mot){
@@ -252,7 +243,6 @@ function socket_init(){
                 markers[i].setMap(null);
             }
         }
-
     });
     socket.on('connect', function() {
         $('.alert_socket').hide();

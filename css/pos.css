@@ -63,8 +63,16 @@ body {
     position: absolute;
     overflow-y: auto;   
 }
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .conversacion{
+    height: calc(100% - 32px);
+    display: block;
+}
+.contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada{
+    height: 32px;
+    display: block;
+}
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info{
-    
+
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .data_info .nom_tel{
     padding: 10px 10px 0px 10px;

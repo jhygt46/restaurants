@@ -228,7 +228,8 @@ $motos = $core->get_repartidores_local($id_loc);
                         <div class="n_title"></div>
                         <div class="n_stitle"></div>
                         <div class="n_info n1">
-                            <div class="data_info"></div>
+                            <div class="conversacion"></div>
+                            <div class="entrada"></div>
                         </div>
                     </div>
                 </div>
