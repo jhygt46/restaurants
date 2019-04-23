@@ -193,9 +193,9 @@ function modificar_horas(){
 function abrir_chat(index, that){
 
     var pedidos = get_pedidos();
-    var pedido = pedidos[index];
-    console.log(pedido.mensajes);
-    console.log(pedido.mensajes_cont);
+    pedidos[index].mensajes_cont = 0;
+    set_pedidos(pedidos);
+    listar_pedidos();
 
 }
 function socket_init(){
@@ -425,12 +425,14 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
 
-    if(obj.hasOwnProperty('mensajes')){
-        var btn_chat = create_element_class('btn_chat');
-        btn_chat.onclick = function(){ abrir_chat(index, this) };
-        var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
-        Div.appendChild(btn_chat);
-        Div.appendChild(chat_num);
+    if(obj.hasOwnProperty('mensajes_cont')){
+        if(obj.mensajes_cont > 0){
+            var btn_chat = create_element_class('btn_chat');
+            btn_chat.onclick = function(){ abrir_chat(index, this) };
+            var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
+            Div.appendChild(btn_chat);
+            Div.appendChild(chat_num);
+        }
     }
     if(obj.alert != '' && obj.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
