@@ -514,7 +514,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   height: 100px;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes {
-  width: calc(100% - 80px);
+  width: 100%;
   height: 68px;
   background: #fff;
   position: absolute;
