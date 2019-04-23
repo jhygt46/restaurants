@@ -438,6 +438,7 @@ class Rest{
             $pedido['mensaje'] = $mensaje;
             $pedido['accion'] = "enviar_mensaje_local";
             $pedido['hash'] = "hash";
+            $pedido['id_ped'] = $id_ped;
             $info['pedido'] = $pedido;
             $info['op'] = 1;
 
