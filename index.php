@@ -380,7 +380,8 @@ if(isset($info['id_gir'])){
                                         <div class="posicion" id="mapa_posicion"></div>
                                         <div class="total"></div>
                                     </div>
-                                    <div class="pedido_chat">
+
+                                    <div class="pedido_chat" style="display: none">
                                         <div class="mensajes">
                                             <div class="info_mensajes"></div>
                                         </div>
