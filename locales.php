@@ -228,7 +228,7 @@ $motos = $core->get_repartidores_local($id_loc);
                         <div class="n_title"></div>
                         <div class="n_stitle"></div>
                         <div class="n_info n1">
-                            <div class="conversacion"></div>
+                            <div class="conversacion"><div class="cont_conversacion"></div></div>
                             <div class="entrada clearfix">
                                 <div class="input_text"><input type="text" id="" /></div>
                                 <div class="enviar"><div class="txt vhalign">Enviar</div></div>

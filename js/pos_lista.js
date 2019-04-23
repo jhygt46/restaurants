@@ -201,9 +201,14 @@ function abrir_chat(index, that){
     $('.p7').show();
     $('.p7 .n_title').html(pedidos[index].nombre);
     $('.p7 .n_stitle').html("Conversacion en tiempo real");
-
+    $('.p7 .cont_conversacion').html("");
     for(var i=0, ilen=pedidos[index].mensajes.length; i<ilen; i++){
-        console.log(pedidos[index].mensajes[i]);
+        if(pedidos[index].mensajes[i].tipo == 0){
+            $('.p7 .cont_conversacion').prepend("<div class='chat_1'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+        }
+        if(pedidos[index].mensajes[i].tipo == 1){
+            $('.p7 .cont_conversacion').prepend("<div class='chat_2'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+        }
     }
     
 
