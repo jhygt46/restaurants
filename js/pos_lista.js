@@ -235,12 +235,9 @@ function socket_init(){
                 listar_pedidos();
             }
         }
-        if($('.p7').is(':visible')){
-            console.log("VISIBLE");
-        }else{
-            console.log("NO VISIBLE");
+        if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
+            console.log("ADD "+mensaje);
         }
-        console.log("id: "+$('.p7').attr('id'));
 
     });
     socket.on('map-'+local_code, function(moto) {
