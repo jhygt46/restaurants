@@ -501,7 +501,14 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes {
   width: 100%;
-  height: 300px;
+}
+.paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .chat_1 {
+  display: block;
+  margin-right: 20%;
+}
+.paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .chat_2 {
+  display: block;
+  margin-left: 20%;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .enviar {
   width: 72px;

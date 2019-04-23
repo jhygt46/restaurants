@@ -913,7 +913,8 @@ function move_marker(lat, lng){
 function send_chat(){
 
     var pedido = get_pedido();
-    var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, mensaje: $('#texto_chat').val() };
+    var mensaje = $('#texto_chat').val();
+    var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, mensaje: mensaje };
 
     $.ajax({
         url: "ajax/index.php",
@@ -921,8 +922,8 @@ function send_chat(){
         data: send,
         success: function(info){
             var data = JSON.parse(info);
-            console.log(data);
             $('#texto_chat').val("");
+            $(".info_mensajes").prepend("<div class='chat1'>"+mensaje+"</div>")
             
         }, error: function(e){}
     });
