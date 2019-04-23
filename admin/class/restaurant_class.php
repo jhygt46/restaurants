@@ -439,7 +439,6 @@ class Rest{
             $pedido['accion'] = "enviar_mensaje_local";
             $pedido['hash'] = "hash";
             $pedido['id_ped'] = $id_ped;
-            $info['pedido'] = $pedido;
             $info['op'] = 1;
 
             $ch = curl_init();

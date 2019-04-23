@@ -198,8 +198,14 @@ function socket_init(){
         console.log("ADD");
     });
     socket.on('enviar-chat-'+local_code, function(info) {
-        console.log("ENVIAR CHAT");
-        console.log(info);
+        var id_ped = info.id_ped;
+        var mensaje = info.mensaje;
+        for(var i=0, ilen=pedidos.length; i<ilen; i++){
+            if(pedidos[i].id_ped == id_ped){
+                console.log(pedidos[i]);
+                console.log(mensaje);
+            }
+        }
     });
     socket.on('map-'+local_code, function(moto) {
         
