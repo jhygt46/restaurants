@@ -502,8 +502,8 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   width: 72px;
   right: 0px;
   background: #999;
-  top: 72px;
-  height: 32px;
+  top: 73px;
+  height: 30px;
   position: absolute;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .enviar .enviar_txt {
