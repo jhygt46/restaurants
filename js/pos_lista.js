@@ -207,6 +207,8 @@ function socket_init(){
     });
     socket.on('enviar-chat-'+local_code, function(info){
 
+        console.log("CHAT ENVIADO");
+
         var id_ped = info.id_ped;
         var mensaje = info.mensaje;
         var nombre = info.nombre;
@@ -220,6 +222,7 @@ function socket_init(){
                 pedidos[i].mensajes.push({ nombre: nombre, mensaje: mensaje });
                 set_pedidos(pedidos);
                 listar_pedidos();
+                console.log("CHAT GUARDAR");
             }
         }
 
