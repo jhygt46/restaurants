@@ -521,7 +521,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
   left: 0px;
   top: 0px;
   border: 1px solid #ccc;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes {
   width: 100%;
@@ -529,10 +529,19 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .chat_1 {
   display: block;
   margin-right: 20%;
+  text-align: right;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .chat_2 {
   display: block;
   margin-left: 20%;
+  text-align: left;
+}
+.paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .nom {
+  font-weight: bold;
+  display: block;
+}
+.paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .msg {
+  display: block;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .enviar {
   width: 72px;

@@ -688,16 +688,25 @@ body {
                     left: 0px;
                     top: 0px;
                     border: 1px solid #ccc;
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     .info_mensajes{
                         width: 100%;
                         .chat_1{
                             display: block;
                             margin-right: 20%;
+                            text-align: right;
                         }
                         .chat_2{
                             display: block;
                             margin-left: 20%;
+                            text-align: left;
+                        }
+                        .nom{
+                            font-weight: bold;
+                            display: block;
+                        }
+                        .msg{
+                            display: block;
                         }
                     }
                 }
