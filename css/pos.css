@@ -76,12 +76,14 @@ body {
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada{
     height: 32px;
     display: block;
+    background: #fff;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .input_text{
-    width: calc(100% - 80px);
+    width: calc(100% - 76px);
     height: 30px;
     border: 1px solid #ccc;
     float: left;
+    background: #fff;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .input_text input{
     width: 98%;
@@ -95,6 +97,8 @@ body {
     float: left;
     height: 30px;
     background: #ccc;
+    position: relative;
+    margin-left: 2px;
 }
 .contenedor .pop_up .cont_pop_up .nuevo_pedido .n_info .entrada .enviar .txt{
     position: absolute;
