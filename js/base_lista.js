@@ -924,7 +924,7 @@ function send_chat(){
         success: function(info){
             var data = JSON.parse(info);
             $('#texto_chat').val("");
-            $(".info_mensajes").prepend("<div class='chat1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>")
+            $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>")
             
         }, error: function(e){}
     });
