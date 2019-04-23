@@ -199,6 +199,7 @@ function abrir_chat(index, that){
 
     $('.pop_up').show();
     $('.p7').show();
+    $('.p7').attr('id', pedidos[index].id_ped);
     $('.p7 .n_title').html(pedidos[index].nombre);
     $('.p7 .n_stitle').html("Conversacion en tiempo real");
     $('.p7 .cont_conversacion').html("");
@@ -234,6 +235,13 @@ function socket_init(){
                 listar_pedidos();
             }
         }
+        if($('.p7').is(':visible')){
+            console.log("VISIBLE");
+        }else{
+            console.log("NO VISIBLE");
+        }
+        console.log("id: "+$('.p7').attr('id'));
+
     });
     socket.on('map-'+local_code, function(moto) {
         var info = JSON.parse(moto.info);
