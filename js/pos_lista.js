@@ -246,7 +246,9 @@ function socket_init(){
                     pedidos[i].mensajes = [];
                     pedidos[i].mensajes_cont = 0;
                 }
-                pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
+                if(!$('.p7').is(':visible') || id_ped == $('.p7').attr('id')){
+                    pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
+                }
                 pedidos[i].mensajes.push({ tipo: 0, mensaje: mensaje });
                 set_pedidos(pedidos);
                 listar_pedidos();
