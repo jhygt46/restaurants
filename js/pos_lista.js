@@ -6,6 +6,9 @@ $(document).ready(function(){
     gmap_input();
 });
 
+var aud1 = new Audio('audios/Ba-dum-tss.mp3');
+var aud2 = new Audio('audios/Aww.mp3');
+
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -249,6 +252,7 @@ function socket_init(){
                 if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
                     pedidos[i].mensajes_cont = 0;
                 }else{
+                    sound(aud2);
                     pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
                 }
                 pedidos[i].mensajes.push({ tipo: 0, mensaje: mensaje });
@@ -292,7 +296,7 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             
-            sound();
+            sound(aud1);
             var info = JSON.parse(data);
             nuevo(info[0]);
             
@@ -303,8 +307,7 @@ function agregar_pedido(id){
     
 }
 
-var aud = new Audio('audios/Ba-dum-tss.mp3');
-function sound(){
+function sound(aud){
     aud.play();
     var playPromise = aud.play();
     if (playPromise !== null){
