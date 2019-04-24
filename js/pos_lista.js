@@ -214,6 +214,25 @@ function abrir_chat(index, that){
     
 
 }
+function send_chat(){
+
+    var mensaje = $("#texto_chat").val();
+    var data = { accion: 5, mensaje: mensaje };
+        
+    var send = { pedido_code: pedidos[seleccionado].pedido_code, estado: JSON.stringify(data) };
+    $.ajax({
+        url: "https://www.izusushi.cl/cambiar_estado",
+        type: "POST",
+        data: send,
+        success: function(data){
+            console.log("BUE");
+            console.log(data);
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+
+}
 function socket_init(){
     
     socket = io.connect('https://www.izusushi.cl', { 'secure': true });
