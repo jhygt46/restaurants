@@ -258,7 +258,7 @@ function socket_init(){
             }
         }
         if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-            $('.p7 .cont_conversacion').prepend("<div class='chat_2'><div class='nom'>"+pedidos[index].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
+            $('.p7 .cont_conversacion').prepend("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
         }
     });
     socket.on('map-'+local_code, function(moto) {
