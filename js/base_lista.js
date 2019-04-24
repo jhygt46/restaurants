@@ -913,6 +913,7 @@ function move_marker(lat, lng){
 function send_chat(){
 
     var pedido = get_pedido();
+    console.log(pedido);
     var mensaje = $('#texto_chat').val();
     var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, code: pedido.code, mensaje: mensaje };
     var nombre = 'Diego';
