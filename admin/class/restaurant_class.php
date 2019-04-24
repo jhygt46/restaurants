@@ -428,8 +428,10 @@ class Rest{
 
         $id_ped = $_POST["id_ped"];
         $id_loc = $_POST["id_loc"];
+        $code = $_POST["code"];
         $mensaje = $_POST["mensaje"];
-        $pedidos = $this->con->sql("SELECT t1.code FROM locales t1, pedidos_aux t2 WHERE t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
+
+        $pedidos = $this->con->sql("SELECT t1.code FROM locales t1, pedidos_aux t2 WHERE t2.code='".$code."' AND t2.id_ped='".$id_ped."' AND t2.id_loc='".$id_loc."' AND t2.id_loc=t1.id_loc");
         $info["op"] = 2;
 
         if($pedidos["count"] == 1){
