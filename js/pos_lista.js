@@ -206,6 +206,7 @@ function abrir_chat(index, that){
             $('.p7 .cont_conversacion').append("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+pedidos[index].mensajes[i].mensaje+"</div></div>");
         }
     }
+    $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
 
 }
 function send_chat(){
@@ -223,6 +224,7 @@ function send_chat(){
             $('.cont_conversacion').append("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+mensaje+"</div></div>");
             $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
             pedidos[seleccionado].mensajes.push({ tipo: 1, mensaje: mensaje });
+            $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
         }, error: function(e){
             console.log(e);
         }
@@ -252,6 +254,7 @@ function socket_init(){
         }
         if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
             $('.p7 .cont_conversacion').append("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
+            $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
         }
     });
     socket.on('map-'+local_code, function(moto) {
