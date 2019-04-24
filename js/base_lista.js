@@ -926,6 +926,7 @@ function send_chat(){
             if(data.op == 1){
                 $('#texto_chat').val("");
                 $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>");
+                $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
             }
         }, error: function(e){}
     });
