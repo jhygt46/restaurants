@@ -925,7 +925,7 @@ function send_chat(){
             var data = JSON.parse(info);
             if(data.op == 1){
                 $('#texto_chat').val("");
-                $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>");
+                $(".info_mensajes").append("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>");
                 $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
             }
         }, error: function(e){}
