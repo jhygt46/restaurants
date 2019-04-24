@@ -544,7 +544,7 @@ body .contenedor .modals .cont_modals .modal .cont_modal .acciones .confirmar {
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .mensajes .info_mensajes .msg {
   display: block;
-  font-size: 18px;
+  font-size: 16px;
 }
 .paso_04 .cont_modal .info_modal .pedido_chat .enviar {
   width: 72px;

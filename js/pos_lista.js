@@ -192,6 +192,8 @@ function modificar_horas(){
 }
 function abrir_chat(index, that){
 
+    set_pedido(index, that);
+
     var pedidos = get_pedidos();
     pedidos[index].mensajes_cont = 0;
     set_pedidos(pedidos);
@@ -205,13 +207,12 @@ function abrir_chat(index, that){
     $('.p7 .cont_conversacion').html("");
     for(var i=0, ilen=pedidos[index].mensajes.length; i<ilen; i++){
         if(pedidos[index].mensajes[i].tipo == 0){
-            $('.p7 .cont_conversacion').append("<div class='chat_1'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+            $('.p7 .cont_conversacion').append("<div class='chat_2'><div class='nom'>"+pedidos[index].nombre+": </div><div class='msg'>"+pedidos[index].mensajes[i].mensaje+"</div></div>");
         }
         if(pedidos[index].mensajes[i].tipo == 1){
-            $('.p7 .cont_conversacion').append("<div class='chat_2'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+            $('.p7 .cont_conversacion').append("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+pedidos[index].mensajes[i].mensaje+"</div></div>");
         }
     }
-    
 
 }
 function send_chat(){
@@ -226,8 +227,9 @@ function send_chat(){
         data: send,
         success: function(data){
             $("#texto_chat").val("");
-            $('.cont_conversacion').append('<div class="chat_1">'+mensaje+'</div>');
+            $('.cont_conversacion').append("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+mensaje+"</div></div>");
             $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
+            pedidos[seleccionado].mensajes.push({ tipo: 1, mensaje: mensaje });
         }, error: function(e){
             console.log(e);
         }
@@ -256,7 +258,7 @@ function socket_init(){
             }
         }
         if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-            $('.p7 .cont_conversacion').prepend('<div class="chat_1">'+mensaje+'</div>');
+            $('.p7 .cont_conversacion').prepend("<div class='chat_2'><div class='nom'>"+pedidos[index].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
         }
     });
     socket.on('map-'+local_code, function(moto) {
