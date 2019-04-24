@@ -205,10 +205,10 @@ function abrir_chat(index, that){
     $('.p7 .cont_conversacion').html("");
     for(var i=0, ilen=pedidos[index].mensajes.length; i<ilen; i++){
         if(pedidos[index].mensajes[i].tipo == 0){
-            $('.p7 .cont_conversacion').prepend("<div class='chat_1'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+            $('.p7 .cont_conversacion').append("<div class='chat_1'>"+pedidos[index].mensajes[i].mensaje+"</div>");
         }
         if(pedidos[index].mensajes[i].tipo == 1){
-            $('.p7 .cont_conversacion').prepend("<div class='chat_2'>"+pedidos[index].mensajes[i].mensaje+"</div>");
+            $('.p7 .cont_conversacion').append("<div class='chat_2'>"+pedidos[index].mensajes[i].mensaje+"</div>");
         }
     }
     
@@ -225,8 +225,9 @@ function send_chat(){
         type: "POST",
         data: send,
         success: function(data){
-            console.log("BUE");
-            console.log(data);
+            $("#texto_chat").val("");
+            $('.cont_conversacion').append('<div class="chat_1">'+mensaje+'</div>');
+            $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
         }, error: function(e){
             console.log(e);
         }
