@@ -1079,7 +1079,7 @@ function open_socket(code){
     
 }
 function chat_local(mensaje){
-    $(".info_mensajes").append("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+mensaje+"</div></div>");
+    $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+mensaje+"</div></div>");
     $(".mensajes").scrollTop($(".info_mensajes").outerHeight());
 }
 function show_despacho(){
