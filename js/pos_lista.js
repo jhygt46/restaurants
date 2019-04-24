@@ -56,16 +56,9 @@ function add_carro_producto(id_pro){
             item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
         }
     }
-    /*
-    if(pedidos[seleccionado].tipo == 1){
-        var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio) + parseInt(pedidos[seleccionado].costo);
-        //cambiar_total(seleccionado, aux_total);
-    }
-    */
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
     set_pedidos(pedidos);
-    //guardar_pedido(seleccionado, false);
     if(producto.preguntas){
         mostrar_pregunta(pedido.carro.length - 1);
     }
@@ -258,7 +251,7 @@ function socket_init(){
             }
         }
         if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-            $('.p7 .cont_conversacion').prepend("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
+            $('.p7 .cont_conversacion').append("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
         }
     });
     socket.on('map-'+local_code, function(moto) {
