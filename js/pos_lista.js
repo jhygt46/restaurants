@@ -217,7 +217,7 @@ function abrir_chat(index, that){
 function send_chat(){
 
     var mensaje = $("#texto_chat").val();
-    var data = { accion: 5, mensaje: mensaje };
+    var data = { accion: 4, mensaje: mensaje };
         
     var send = { pedido_code: pedidos[seleccionado].pedido_code, estado: JSON.stringify(data) };
     $.ajax({
@@ -255,9 +255,8 @@ function socket_init(){
             }
         }
         if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-            console.log("ADD "+mensaje);
+            $('.p7 .cont_conversacion').prepend('<div class="chat_1">'+mensaje+'</div>');
         }
-
     });
     socket.on('map-'+local_code, function(moto) {
         var info = JSON.parse(moto.info);

@@ -924,7 +924,7 @@ function send_chat(){
         success: function(info){
             var data = JSON.parse(info);
             $('#texto_chat').val("");
-            $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>")
+            $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>"+nombre+"</div><div class='msg'>"+mensaje+"</div></div>");
             
         }, error: function(e){}
     });
@@ -1069,9 +1069,15 @@ function open_socket(code){
             pedido.total = info.total;
             set_pedido(pedido);
         }
+        if(info.accion == 4){
+            chat_local(info.mensaje);
+        }
         
     });
     
+}
+function chat_local(mensaje){
+    $(".info_mensajes").prepend("<div class='chat_1'><div class='nom'>Local: </div><div class='msg'>"+mensaje+"</div></div>");
 }
 function show_despacho(){
 
