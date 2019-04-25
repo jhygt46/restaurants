@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/misitiodelivery.css" media="all" />
     <style>
         body{
-            font-family: 'Pattaya', sans-serif;
+            font-family: 'Lato', sans-serif;
         }
     </style>
     <script>
@@ -34,8 +34,8 @@
 </head>
 <body>
     <div class="contenedor">
-        
-        <div class="logo">MiSitioDelivery.cl</div>
+
+        <div class="logo">MiSitioDelivery</div>
         <div class="cont_btns">
             <ul class="botones clearfix">
                 <li onclick="go_pagina(0)" <?php if(!isset($_GET["contacto"])){ echo "class='selected'"; } ?>>Empezar</li>
@@ -44,6 +44,7 @@
             </ul>
         </div>
         
+        <!--
         <div class="contenido p_empezar" <?php if(isset($_GET["contacto"])){ echo "style='display: none'"; } ?>>
             <div class="cont_contenido">
                 <?php if($_GET["realizado"] == 0 || !isset($_GET["realizado"])){ ?>
@@ -122,6 +123,7 @@
                 <?php } ?>
             </div>
         </div>
+        -->
     </div>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
