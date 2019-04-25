@@ -43,7 +43,7 @@ html body .contenedor .empezar {
   min-width: 320px;
   width: 60%;
   margin: 25px auto 25px auto;
-  background-image: linear-gradient(to bottom, gainsboro, #f0f0f0, gainsboro);
+  background-image: linear-gradient(to bottom, gainsboro, #f0f0f0);
 }
 html body .contenedor .clientes {
   display: none;

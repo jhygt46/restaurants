@@ -1,6 +1,5 @@
 function go_pagina(i){
     
-    $('.contenido').hide();
     $('.botones').find('li').each(function(index){
         if(i == index){
             $(this).addClass('selected');
@@ -8,12 +7,23 @@ function go_pagina(i){
             $(this).removeClass('selected');
         }
     });
-    $('.empezar').hide();
-    $('.clientes').hide();
+    
     $('.contacto').hide();
-    if(i == 0){ $('.empezar').show() }
-    if(i == 1){ $('.clientes').show() }
-    if(i == 2){ $('.contacto').show() }
+    if(i == 0){
+        $('.empezar').show();
+        $('.clientes').hide();
+        $('.contacto').hide();
+    }
+    if(i == 1){
+        $('.empezar').hide();
+        $('.clientes').show();
+        $('.contacto').hide();
+    }
+    if(i == 2){
+        $('.empezar').hide();
+        $('.clientes').hide();
+        $('.contacto').show();
+    }
     
 }
 function validar_email(email){
