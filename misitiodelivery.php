@@ -44,7 +44,9 @@
             </ul>
         </div>
 
-        <div class="contenido"></div>
+        <div class="empezar">EMPEZAR</div>
+        <div class="clientes">CLIENTES</div>
+        <div class="contacto">CONTACTO</div>
 
         <!--
         <div class="contenido p_empezar" <?php if(isset($_GET["contacto"])){ echo "style='display: none'"; } ?>>

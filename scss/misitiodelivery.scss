@@ -37,12 +37,29 @@ html{
                     }
                 }
             }
-            .contenido{
+            .empezar{
                 display: block;
-                width: 300px;
+                min-width: 300px;
+                width: 60%;
                 height: 400px;
                 margin: 25px auto 25px auto;
-                background: #ccc;
+                background: #ddd;
+            }
+            .clientes{
+                display: none;
+                min-width: 300px;
+                width: 60%;
+                height: 400px;
+                margin: 25px auto 25px auto;
+                background: #ddd;
+            }
+            .contacto{
+                display: none;
+                min-width: 300px;
+                width: 60%;
+                height: 400px;
+                margin: 25px auto 25px auto;
+                background: #ddd;
             }
         }
     }

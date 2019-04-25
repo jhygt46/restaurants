@@ -38,12 +38,29 @@ html body .contenedor .cont_btns .botones li.selected {
   background: #fff;
   color: #666;
 }
-html body .contenedor .contenido {
+html body .contenedor .empezar {
   display: block;
-  width: 300px;
+  min-width: 300px;
+  width: 60%;
   height: 400px;
   margin: 25px auto 25px auto;
-  background: #ccc;
+  background: #ddd;
+}
+html body .contenedor .clientes {
+  display: none;
+  min-width: 300px;
+  width: 60%;
+  height: 400px;
+  margin: 25px auto 25px auto;
+  background: #ddd;
+}
+html body .contenedor .contacto {
+  display: none;
+  min-width: 300px;
+  width: 60%;
+  height: 400px;
+  margin: 25px auto 25px auto;
+  background: #ddd;
 }
 
 /*
