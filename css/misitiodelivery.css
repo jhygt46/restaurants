@@ -40,7 +40,7 @@ html body .contenedor .cont_btns .botones li.selected {
 }
 html body .contenedor .empezar {
   display: block;
-  min-width: 300px;
+  min-width: 330px;
   width: 60%;
   height: 400px;
   margin: 25px auto 25px auto;
@@ -48,7 +48,7 @@ html body .contenedor .empezar {
 }
 html body .contenedor .clientes {
   display: none;
-  min-width: 300px;
+  min-width: 330px;
   width: 60%;
   height: 400px;
   margin: 25px auto 25px auto;
@@ -56,22 +56,53 @@ html body .contenedor .clientes {
 }
 html body .contenedor .contacto {
   display: none;
-  min-width: 300px;
+  min-width: 330px;
   width: 60%;
   height: 400px;
   margin: 25px auto 25px auto;
   background: #ddd;
 }
 html body .contenedor .form {
-  padding: 10px;
+  padding: 25px 15px 10px 15px;
+  font-family: "Lato", sans-serif;
+  display: block;
 }
 html body .contenedor .form h1 {
-  font-size: 22px;
+  font-size: 20px;
   color: #666;
 }
 html body .contenedor .form h2 {
   font-size: 16px;
   color: #666;
+}
+html body .contenedor .form form {
+  display: block;
+  padding-top: 10px;
+}
+html body .contenedor .form form h3 {
+  font-size: 14px;
+  color: #666;
+  padding-top: 8px;
+}
+html body .contenedor .form form .input input {
+  width: 100%;
+  height: 35px;
+}
+html body .contenedor .form form .acciones {
+  padding-top: 10px;
+}
+html body .contenedor .form form .acciones .btn_empezar {
+  background: #900;
+  padding: 10px;
+  color: #fff;
+  border: 0px;
+  font-size: 14px;
+  cursor: pointer;
+}
+html body .contenedor .form form .acciones .mes_gratis {
+  font-size: 18px;
+  color: #666;
+  padding-top: 4px;
 }
 
 /*
