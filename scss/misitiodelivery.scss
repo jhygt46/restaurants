@@ -39,30 +39,27 @@ html{
             }
             .empezar{
                 display: block;
-                min-width: 330px;
+                min-width: 320px;
                 width: 60%;
-                height: 400px;
                 margin: 25px auto 25px auto;
-                background: #ddd;
+                background-image: linear-gradient(to bottom, rgba(220,220,220,1), rgba(240,240,240,1), rgba(220,220,220,1));
             }
             .clientes{
                 display: none;
-                min-width: 330px;
+                min-width: 320px;
                 width: 60%;
-                height: 400px;
                 margin: 25px auto 25px auto;
                 background: #ddd;
             }
             .contacto{
                 display: none;
-                min-width: 330px;
+                min-width: 320px;
                 width: 60%;
-                height: 400px;
                 margin: 25px auto 25px auto;
                 background: #ddd;
             }
             .form{
-                padding: 25px 15px 10px 15px;
+                padding: 20px 10px 20px 10px;
                 font-family: 'Lato', sans-serif;
                 display: block;
                 h1{
