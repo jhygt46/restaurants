@@ -1,46 +1,42 @@
-html{
-    body {
-        margin: 0px;
-        padding: 0px;
-        background: #eee;
-        .contenedor{
-            display: block;
-            .logo{
-                width: 300px;
-                text-align: center;
-                margin: 0 auto;
-                padding-top: 10px;
-                font-size: 42px;
-                color: #fff;
-            }
-            .cont_btns{
-                display: block;
-                width: 300px;
-                margin: 0 auto;
-                .botones{
-                    width: 300px;
-                    margin: 0 auto;
-                    background: rgba(255, 255, 255, 0.3);
-                    li{
-                        float: left;
-                        text-align: center;
-                        font-size: 18px;
-                        color: #fff;
-                        width: 100px;
-                        padding: 6px 0px;
-                        cursor: pointer;
-                    }
-                    li.selected{
-                        background: #fff;
-                        color: #1F242C;
-                    }
-                }
-            }
-        }
-    }
+html body {
+  margin: 0px;
+  padding: 0px;
+  background: #eee;
 }
-
-
+html body .contenedor {
+  display: block;
+}
+html body .contenedor .logo {
+  width: 300px;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10px;
+  font-size: 42px;
+  color: #fff;
+}
+html body .contenedor .cont_btns {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+}
+html body .contenedor .cont_btns .botones {
+  width: 300px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.3);
+}
+html body .contenedor .cont_btns .botones li {
+  float: left;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  width: 100px;
+  padding: 6px 0px;
+  cursor: pointer;
+}
+html body .contenedor .cont_btns .botones li.selected {
+  background: #fff;
+  color: #1F242C;
+}
 
 /*
 html {
@@ -318,3 +314,4 @@ html {
 }
 */
 
+/*# sourceMappingURL=misitiodelivery.css.map */
