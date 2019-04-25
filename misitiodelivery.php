@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/misitiodelivery.css" media="all" />
     <style>
         body{
-            font-family: 'Lato', sans-serif;
+            font-family: 'Pattaya', sans-serif;
         }
     </style>
     <script>
@@ -43,7 +43,7 @@
                 <li onclick="go_pagina(2)" <?php if(isset($_GET["contacto"])){ echo "class='selected'"; } ?>>Contacto</li>
             </ul>
         </div>
-        
+
         <!--
         <div class="contenido p_empezar" <?php if(isset($_GET["contacto"])){ echo "style='display: none'"; } ?>>
             <div class="cont_contenido">
