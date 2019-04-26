@@ -48,8 +48,7 @@ function send(){
     if(validar_email(correo)){
         if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
             if(telefono.length == 12 || telefono.length == 13){
-                //return true;
-                console.log("BUE");
+                return true;
             }else{
                 console.log("telefono invalido");
             }
@@ -68,8 +67,7 @@ function send2(){
     if(validar_email(correo)){
         if(telefono.length == 12 || telefono.length == 13){
             if(nombre != ""){
-                //return true;
-                console.log("BUEE");
+                return true;
             }else{
                 console.log("nombre vacio");
             }
