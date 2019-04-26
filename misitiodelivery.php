@@ -70,7 +70,33 @@
         </div>
         <div class="clientes">CLIENTES</div>
         <div class="contacto">
-            
+            <div class="form">
+                <h1>Formulario de Contacto</h1>
+                <form onsubmit="return send2()" action="https://misitiodelivery.cl/ajax/index.php" method="post">
+                    <h3>Nombre</h3>
+                    <input type="hidden" name="accion" value="enviar_contacto" />
+                    <div class="input">
+                        <input type="text" name="nombre" placeholder="Diego" />
+                    </div>
+                    <h3><?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Correo"; } ?></h3>
+                    <div class="input">
+                        <input type="email" name="email" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 1){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
+                    </div>
+                    <h3>Telefono</h3>
+                    <div class="input">
+                        <input type="tel" name="telefono" value="+56 9 " />
+                    </div>
+                    <h3>Asunto</h3>
+                    <div class="input">
+                        <TextArea name="asunto" style="width: 100%; height: 80px; padding: 10px"></TextArea>
+                    </div>
+                    <h3><?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 2){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "reCAPTCHA"; } ?></h3>
+                    <div class="g-recaptcha" data-sitekey="6Lf8j3sUAAAAAFEPARLhuiWamomIvm35UBCqf65R"></div>
+                    <div class="acciones">
+                        <input type="submit" value="Enviar Solicitud" class="empezar" />
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!--

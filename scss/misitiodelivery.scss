@@ -41,6 +41,7 @@ html{
                 display: block;
                 min-width: 320px;
                 width: 70%;
+                max-width: 700px;
                 margin: 25px auto 25px auto;
                 background: #eee url('../images/mika_mano.png') no-repeat;
                 background-size: auto;
@@ -58,7 +59,12 @@ html{
                 display: none;
                 min-width: 320px;
                 width: 70%;
+                max-width: 700px;
                 margin: 25px auto 25px auto;
+                background: #eee url('../images/mika_mano.png') no-repeat;
+                background-size: auto;
+                background-position-x: right;
+                background-position-y: top;
             }
             .form{
                 padding: 40px 20px 40px 20px;
