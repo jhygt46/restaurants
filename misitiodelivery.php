@@ -58,6 +58,10 @@
                     <div class="input">
                         <input type="email" name="correo_msd" placeholder="tucorreo@gmail.com" <?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 2){ echo "style='border: 2px solid #933; background: #fdd'"; } ?> />
                     </div>
+                    <h3>Telefono</h3>
+                    <div class="input">
+                        <input type="tel" name="telefono" value="+569" />
+                    </div>
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 3){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "reCAPTCHA"; } ?></h3>
                     <div class="g-recaptcha" data-sitekey="6Lf8j3sUAAAAAFEPARLhuiWamomIvm35UBCqf65R"></div>
                     <div class="acciones">
