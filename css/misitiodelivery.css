@@ -38,34 +38,54 @@ html body .contenedor .cont_btns .botones li.selected {
   background: #fff;
   color: #666;
 }
+@media only screen and (min-width: 610px) {
+  html body .contenedor .form {
+    margin: 0px;
+  }
+  html body .contenedor .empezar {
+    background: #eee url("../images/mika_mano.png") no-repeat;
+    background-size: auto;
+    background-position-x: right;
+    background-position-y: top;
+  }
+  html body .contenedor .contacto {
+    background: #eee url("../images/mika_mano.png") no-repeat;
+    background-size: auto;
+    background-position-x: right;
+    background-position-y: top;
+  }
+}
+@media only screen and (max-width: 610px) {
+  html body .contenedor .form {
+    margin: 0px auto;
+  }
+  html body .contenedor .empezar {
+    background: #eee;
+  }
+  html body .contenedor .contacto {
+    background: #eee;
+  }
+}
 html body .contenedor .empezar {
   display: block;
   min-width: 320px;
-  width: 70%;
+  width: 90%;
   max-width: 700px;
   margin: 25px auto 25px auto;
-  background: #eee url("../images/mika_mano.png") no-repeat;
-  background-size: auto;
-  background-position-x: right;
-  background-position-y: top;
 }
 html body .contenedor .clientes {
   display: none;
   min-width: 320px;
-  width: 70%;
+  width: 90%;
   margin: 25px auto 25px auto;
   background: #ddd;
 }
 html body .contenedor .contacto {
   display: none;
   min-width: 320px;
-  width: 70%;
+  width: 90%;
   max-width: 700px;
   margin: 25px auto 25px auto;
-  background: #eee url("../images/mika_mano.png") no-repeat;
-  background-size: auto;
-  background-position-x: right;
-  background-position-y: top;
 }
 html body .contenedor .form {
   padding: 40px 8px 40px 8px;

@@ -37,34 +37,54 @@ html{
                     }
                 }
             }
+            @media only screen and (min-width: 610px){
+                .form{
+                    margin: 0px;
+                }
+                .empezar{
+                    background: #eee url('../images/mika_mano.png') no-repeat;
+                    background-size: auto;
+                    background-position-x: right;
+                    background-position-y: top;
+                }
+                .contacto{
+                    background: #eee url('../images/mika_mano.png') no-repeat;
+                    background-size: auto;
+                    background-position-x: right;
+                    background-position-y: top;
+                }
+            }
+            @media only screen and (max-width: 610px){
+                .form{
+                    margin: 0px auto;
+                }
+                .empezar{
+                    background: #eee;
+                }
+                .contacto{
+                    background: #eee;
+                }
+            }
             .empezar{
                 display: block;
                 min-width: 320px;
-                width: 70%;
+                width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
-                background: #eee url('../images/mika_mano.png') no-repeat;
-                background-size: auto;
-                background-position-x: right;
-                background-position-y: top;
             }
             .clientes{
                 display: none;
                 min-width: 320px;
-                width: 70%;
+                width: 90%;
                 margin: 25px auto 25px auto;
                 background: #ddd;
             }
             .contacto{
                 display: none;
                 min-width: 320px;
-                width: 70%;
+                width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
-                background: #eee url('../images/mika_mano.png') no-repeat;
-                background-size: auto;
-                background-position-x: right;
-                background-position-y: top;
             }
             .form{
                 padding: 40px 8px 40px 8px;
