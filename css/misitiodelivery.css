@@ -68,11 +68,10 @@ html body .contenedor .contacto {
   background-position-y: top;
 }
 html body .contenedor .form {
-  padding: 40px 0px 40px 0px;
+  padding: 40px 8px 40px 8px;
   font-family: "Lato", sans-serif;
   display: block;
   width: 303px;
-  background-image: linear-gradient(to right, #e6e6e6, rgba(230, 230, 230, 0));
 }
 html body .contenedor .form h1 {
   font-size: 20px;
