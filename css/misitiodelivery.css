@@ -41,28 +41,32 @@ html body .contenedor .cont_btns .botones li.selected {
 html body .contenedor .empezar {
   display: block;
   min-width: 320px;
-  width: 60%;
+  width: 70%;
   margin: 25px auto 25px auto;
-  background-image: linear-gradient(to bottom, gainsboro, #f0f0f0);
+  background: #eee url("../images/mika_mano.png") no-repeat;
+  background-size: auto;
+  background-position-x: right;
+  background-position-y: top;
 }
 html body .contenedor .clientes {
   display: none;
   min-width: 320px;
-  width: 60%;
+  width: 70%;
   margin: 25px auto 25px auto;
   background: #ddd;
 }
 html body .contenedor .contacto {
   display: none;
   min-width: 320px;
-  width: 60%;
+  width: 70%;
   margin: 25px auto 25px auto;
-  background: #ddd;
 }
 html body .contenedor .form {
-  padding: 20px 10px 20px 10px;
+  padding: 40px 20px 40px 20px;
   font-family: "Lato", sans-serif;
   display: block;
+  width: 303px;
+  background-image: linear-gradient(to right, #e6e6e6, rgba(230, 230, 230, 0));
 }
 html body .contenedor .form h1 {
   font-size: 20px;

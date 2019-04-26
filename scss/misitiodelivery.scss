@@ -40,28 +40,32 @@ html{
             .empezar{
                 display: block;
                 min-width: 320px;
-                width: 60%;
+                width: 70%;
                 margin: 25px auto 25px auto;
-                background-image: linear-gradient(to bottom, rgba(220,220,220,1), rgba(240,240,240,1));
+                background: #eee url('../images/mika_mano.png') no-repeat;
+                background-size: auto;
+                background-position-x: right;
+                background-position-y: top;
             }
             .clientes{
                 display: none;
                 min-width: 320px;
-                width: 60%;
+                width: 70%;
                 margin: 25px auto 25px auto;
                 background: #ddd;
             }
             .contacto{
                 display: none;
                 min-width: 320px;
-                width: 60%;
+                width: 70%;
                 margin: 25px auto 25px auto;
-                background: #ddd;
             }
             .form{
-                padding: 20px 10px 20px 10px;
+                padding: 40px 20px 40px 20px;
                 font-family: 'Lato', sans-serif;
                 display: block;
+                width: 303px;
+                background-image: linear-gradient(to right, rgba(230,230,230,1), rgba(230,230,230,0));
                 h1{
                     font-size: 20px;
                     color: #666;

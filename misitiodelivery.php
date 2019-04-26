@@ -44,6 +44,7 @@
             </ul>
         </div>
         <div class="empezar">
+            <?php if($_GET["realizado"] == 0 || !isset($_GET["realizado"])){ ?>
             <div class="form">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
                 <h2>Ingresando s&oacute;lo 2 simples datos</h2>
@@ -65,9 +66,12 @@
                     </div>
                 </form>
             </div>
+            <?php } ?>
         </div>
         <div class="clientes">CLIENTES</div>
-        <div class="contacto">CONTACTO</div>
+        <div class="contacto">
+            
+        </div>
 
         <!--
         <div class="contenido p_empezar" <?php if(isset($_GET["contacto"])){ echo "style='display: none'"; } ?>>
