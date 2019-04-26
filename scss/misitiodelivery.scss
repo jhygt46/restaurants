@@ -71,6 +71,26 @@ html{
                 width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
+                .form{
+                    min-height: 400px;
+                    padding: 20px 8px 0px 8px;
+                    h1{
+
+                    }
+                    h2{
+
+                    }
+                    form{
+                        h3{
+                            padding-top: 8px;
+                        }
+                        .input{
+                            input{
+                                height: 35px;
+                            }
+                        }
+                    }
+                }
             }
             .clientes{
                 display: none;
@@ -85,9 +105,27 @@ html{
                 width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
+                .form{
+                    padding: 20px 8px 0px 8px;
+                    h1{
+                        
+                    }
+                    h2{
+
+                    }
+                    form{
+                        h3{
+                            padding-top: 6px;
+                        }
+                        .input{
+                            input{
+                                height: 30px;
+                            }
+                        }
+                    }
+                }
             }
             .form{
-                padding: 40px 8px 40px 8px;
                 font-family: 'Lato', sans-serif;
                 display: block;
                 width: 303px;
@@ -105,12 +143,10 @@ html{
                     h3{
                         font-size: 14px;
                         color: #666;
-                        padding-top: 8px;
                     }
                     .input{
                         input{
                             width: 100%;
-                            height: 35px;
                         }
                     }
                     .g-recaptcha{
@@ -119,12 +155,17 @@ html{
                     .acciones{
                         padding-top: 10px;
                         .btn_empezar{
-                            background: #900;
                             padding: 10px;
                             color: #fff;
                             border: 0px;
                             font-size: 14px;
                             cursor: pointer;
+                        }
+                        .btn_color_1{
+                            background: #900;
+                        }
+                        .btn_color_2{
+                            background: #666;
                         }
                         .mes_gratis{
                             font-size: 18px;
@@ -138,7 +179,16 @@ html{
     }
 }
 
-
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+}
+::-webkit-scrollbar-track-piece {
+    background: #eee
+}
+::-webkit-scrollbar-thumb {
+    background: #888
+}
 
 /*
 html {

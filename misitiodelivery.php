@@ -61,7 +61,7 @@
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 3){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "reCAPTCHA"; } ?></h3>
                     <div class="g-recaptcha" data-sitekey="6Lf8j3sUAAAAAFEPARLhuiWamomIvm35UBCqf65R"></div>
                     <div class="acciones">
-                        <input type="submit" value="Empezar Prueba Gratis" class="btn_empezar" />
+                        <input type="submit" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
                         <div class="mes_gratis">30 dias gratis</div>
                     </div>
                 </form>
@@ -88,12 +88,12 @@
                     </div>
                     <h3>Asunto</h3>
                     <div class="input">
-                        <TextArea name="asunto" style="width: 100%; height: 80px; padding: 10px"></TextArea>
+                        <TextArea name="asunto" style="width: 100%; height: 60px; padding: 4px"></TextArea>
                     </div>
                     <h3><?php if(isset($_GET["contacto"]) && $_GET["contacto"] == 0 && $_GET["tipo"] == 2){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "reCAPTCHA"; } ?></h3>
                     <div class="g-recaptcha" data-sitekey="6Lf8j3sUAAAAAFEPARLhuiWamomIvm35UBCqf65R"></div>
                     <div class="acciones">
-                        <input type="submit" value="Enviar Solicitud" class="empezar" />
+                        <input type="submit" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                     </div>
                 </form>
             </div>
