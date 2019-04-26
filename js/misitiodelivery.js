@@ -8,7 +8,7 @@ function go_pagina(i){
         }
     });
     
-    $('.contacto').hide();
+    $('.video').hide();
     if(i == 0){
         $('.empezar').show();
         $('.clientes').hide();
@@ -25,6 +25,16 @@ function go_pagina(i){
         $('.contacto').show();
     }
     
+}
+function playvideo(){
+    var myVideo = document.getElementById("video1");
+    if (myVideo.paused){
+        $('.playvideo').html("Pausar Video");
+        myVideo.play(); 
+    }else{
+        $('.playvideo').html("Reproducir Video");
+        myVideo.pause();
+    }
 }
 function validar_email(email){
     var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;

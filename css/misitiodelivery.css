@@ -2,6 +2,7 @@ html body {
   margin: 0px;
   padding: 0px;
   background: #eee;
+  font-family: "Pattaya", sans-serif;
 }
 html body .contenedor {
   display: block;
@@ -66,12 +67,28 @@ html body .contenedor .cont_btns .botones li.selected {
     background: #eee;
   }
 }
+html body .contenedor .video {
+  width: 90%;
+  max-width: 700px;
+  margin: 20px auto 10px auto;
+}
+html body .contenedor .playvideo {
+  width: 160px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  background: #666;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+}
 html body .contenedor .empezar {
   display: block;
   min-width: 320px;
   width: 90%;
   max-width: 700px;
   margin: 25px auto 25px auto;
+  font-family: "Lato", sans-serif;
 }
 html body .contenedor .empezar .form {
   min-height: 400px;
@@ -87,8 +104,43 @@ html body .contenedor .clientes {
   display: none;
   min-width: 320px;
   width: 90%;
+  max-width: 400px;
   margin: 25px auto 25px auto;
+  font-family: "Lato", sans-serif;
+}
+html body .contenedor .clientes .lista_clientes {
+  width: 100%;
+  margin: 0 auto;
+}
+html body .contenedor .clientes .lista_clientes li {
+  margin-bottom: 4px;
+  height: 100px;
+  position: relative;
   background: #ddd;
+}
+html body .contenedor .clientes .lista_clientes li .foto {
+  position: absolute;
+  width: 146px;
+  top: 2px;
+  left: 2px;
+  text-align: center;
+  height: 96px;
+}
+html body .contenedor .clientes .lista_clientes li .foto a {
+  display: block;
+}
+html body .contenedor .clientes .lista_clientes li .foto a img {
+  height: 100%;
+  max-width: 100%;
+}
+html body .contenedor .clientes .lista_clientes li .info {
+  width: calc(100% - 162px);
+  position: absolute;
+  left: 160px;
+  top: 2px;
+  height: 81px;
+  font-size: 35px;
+  padding-top: 12px;
 }
 html body .contenedor .contacto {
   display: none;
@@ -96,6 +148,7 @@ html body .contenedor .contacto {
   width: 90%;
   max-width: 700px;
   margin: 25px auto 25px auto;
+  font-family: "Lato", sans-serif;
 }
 html body .contenedor .contacto .form {
   padding: 20px 8px 0px 8px;
@@ -107,7 +160,6 @@ html body .contenedor .contacto .form form .input input {
   height: 30px;
 }
 html body .contenedor .form {
-  font-family: "Lato", sans-serif;
   display: block;
   width: 303px;
 }
@@ -134,17 +186,19 @@ html body .contenedor .form form .acciones {
   padding-top: 10px;
 }
 html body .contenedor .form form .acciones .btn_empezar {
-  padding: 10px;
+  padding: 10px 0px;
   color: #fff;
   border: 0px;
   font-size: 14px;
   cursor: pointer;
+  width: 180px;
+  text-align: center;
 }
 html body .contenedor .form form .acciones .btn_color_1 {
   background: #900;
 }
 html body .contenedor .form form .acciones .btn_color_2 {
-  background: #666;
+  background: #900;
 }
 html body .contenedor .form form .acciones .mes_gratis {
   font-size: 18px;

@@ -3,6 +3,7 @@ html{
         margin: 0px;
         padding: 0px;
         background: #eee;
+        font-family: 'Pattaya', sans-serif;
         .contenedor{
             display: block;
             .logo{
@@ -65,12 +66,28 @@ html{
                     background: #eee;
                 }
             }
+            .video{
+                width: 90%;
+                max-width: 700px;
+                margin: 20px auto 10px auto;
+            }
+            .playvideo{
+                width: 160px;
+                margin: 0 auto;
+                text-align: center;
+                padding: 10px;
+                background: #666;
+                font-size: 18px;
+                color: #fff;
+                cursor: pointer;
+            }
             .empezar{
                 display: block;
                 min-width: 320px;
                 width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
+                font-family: 'Lato', sans-serif;
                 .form{
                     min-height: 400px;
                     padding: 20px 8px 0px 8px;
@@ -96,8 +113,43 @@ html{
                 display: none;
                 min-width: 320px;
                 width: 90%;
+                max-width: 400px;
                 margin: 25px auto 25px auto;
-                background: #ddd;
+                font-family: 'Lato', sans-serif;
+                .lista_clientes{
+                    width: 100%;
+                    margin: 0 auto;
+                    li{
+                        margin-bottom: 4px;
+                        height: 100px;
+                        position: relative;
+                        background: #ddd;
+                        .foto{
+                            position: absolute;
+                            width: 146px;
+                            top: 2px;
+                            left: 2px;
+                            text-align: center;
+                            height: 96px;
+                            a{
+                                display: block;
+                                img{
+                                    height: 100%;
+                                    max-width: 100%;
+                                }
+                            }
+                        }
+                        .info{
+                            width: calc(100% - 162px);
+                            position: absolute;
+                            left: 160px;
+                            top: 2px;
+                            height: 81px;
+                            font-size: 35px;
+                            padding-top: 12px;
+                        }
+                    }
+                }
             }
             .contacto{
                 display: none;
@@ -105,6 +157,7 @@ html{
                 width: 90%;
                 max-width: 700px;
                 margin: 25px auto 25px auto;
+                font-family: 'Lato', sans-serif;
                 .form{
                     padding: 20px 8px 0px 8px;
                     h1{
@@ -126,7 +179,6 @@ html{
                 }
             }
             .form{
-                font-family: 'Lato', sans-serif;
                 display: block;
                 width: 303px;
                 h1{
@@ -155,17 +207,19 @@ html{
                     .acciones{
                         padding-top: 10px;
                         .btn_empezar{
-                            padding: 10px;
+                            padding: 10px 0px;
                             color: #fff;
                             border: 0px;
                             font-size: 14px;
                             cursor: pointer;
+                            width: 180px;
+                            text-align: center;
                         }
                         .btn_color_1{
                             background: #900;
                         }
                         .btn_color_2{
-                            background: #666;
+                            background: #900;
                         }
                         .mes_gratis{
                             font-size: 18px;
