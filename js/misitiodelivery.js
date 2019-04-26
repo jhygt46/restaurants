@@ -41,12 +41,18 @@ function validar_email(email){
     return regex.test(email) ? true : false;
 }
 function send(){
-    var dom = $("input[name*='dominio']").val();
-    var correo = $("input[name*='correo']").val();
+    var dom = $("input[name*='dominio_msd']").val();
+    var correo = $("input[name*='correo_msd']").val();
+    var telefono = $("input[name*='telefono_msd']").val();
     var dominio = dom.split(".");
     if(validar_email(correo)){
         if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
-            return true;
+            if(telefono.length == 12 || telefono.length == 13){
+                //return true;
+                console.log("BUE");
+            }else{
+                console.log("telefono invalido");
+            }
         }else{
             console.log("dominio invalido");
         }
@@ -60,10 +66,15 @@ function send2(){
     var correo = $("input[name*='email']").val();
     var telefono = $("input[name*='telefono']").val();
     if(validar_email(correo)){
-        if(nombre != "" && telefono != "+569"){
-            return true;
+        if(telefono.length == 12 || telefono.length == 13){
+            if(nombre != ""){
+                //return true;
+                console.log("BUEE");
+            }else{
+                console.log("nombre vacio");
+            }
         }else{
-            console.log("dominio invalido");
+            console.log("telefono invalido");
         }
     }else{
         console.log("correo invalido");
