@@ -36,7 +36,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 $list = $core->get_locales();
 $giro = $core->get_giro($id_gir);
 
-if($giro['dns'] == 0){
+if($giro['dns'] == 0 && false){
     
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
     $ch = curl_init();
