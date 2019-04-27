@@ -130,7 +130,7 @@ function init_chart(){
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="backurl()"></li>
+            <!--<li class="back" onclick="backurl()"></li>-->
         </ul>
     </div>
     <hr>
