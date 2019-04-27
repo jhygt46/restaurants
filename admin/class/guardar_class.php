@@ -1007,6 +1007,7 @@ class Guardar extends Core{
 
         $id_pro = $_POST['id_pro'];
         $id_cae = $_POST['id'];
+        $parent_id = $_POST['parent_id'];
         $tipo = $_POST['tipo'];
         
         $numero = $_POST['numero'];
@@ -1039,19 +1040,10 @@ class Guardar extends Core{
             
         }
         
-        /*
-        $this->get_inputs($id_cae);
-        $inputs = $this->show_inputs();
-        
-        
-        for($i=0; $i<count($inputs); $i++){
-            $this->con->sql("UPDATE productos SET ".$inputs[$i]['campo']."='".$_POST[$inputs[$i]['campo']]."' WHERE id_pro='".$id_pro."'");
-        }
-        */
         $info['op'] = 1;
         $info['mensaje'] = "Producto modificado exitosamente";
         $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?id=".$id_cae;
+        $info['page'] = "msd/crear_productos.php?id=".$id_cae."&parent_id=".$parent_id;
         
         return $info;
         

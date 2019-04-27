@@ -121,6 +121,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
                     <input id="id_pro" type="hidden" value="<?php echo $id_pro; ?>" />
+                    <input id="parent_id" type="hidden" value="<?php echo $parent_id; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     
                     <label class="clearfix">
