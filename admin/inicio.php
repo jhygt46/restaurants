@@ -86,9 +86,9 @@ if($inicio["exit"] == 1){
                                         <div class="texto">Mi Cuenta</div>
                                     </div>
                                     <ul class="bloque_lista">
-                                        <li onclick="navlink('pages/msd/ver_giro.php')">Inicio<p class="valign">3</p></li>
+                                        <li onclick="navlink('pages/msd/ver_giro.php')">Inicio<!--<p class="valign">3</p>--></li>
                                         <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/giros.php')">Crear Giros</li><?php } ?>
-                                        <li onclick="navlink('pages/msd/usuarios.php')">Usuarios<p class="valign">2</p></li>
+                                        <li onclick="navlink('pages/msd/usuarios.php')">Usuarios</li>
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/panel.php')">Panel de Control</li><?php } ?>
                                     </ul>
                                 </div>
