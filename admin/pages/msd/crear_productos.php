@@ -126,7 +126,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Producto Existente</option><option value="2">Producto Existente Externo</option></select>
+                        <select id="tipo"><option value="0">Ingresar Nuevo</option><option value="1">Producto Existente</option><!--<option value="2">Producto Existente Externo</option>--></select>
                     </label>
                     
                     <div id="tipo-0">

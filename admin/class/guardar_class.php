@@ -1036,9 +1036,6 @@ class Guardar extends Core{
                 }
             }
         }
-        if($tipo == 2){
-            
-        }
         
         $info['op'] = 1;
         $info['mensaje'] = "Producto modificado exitosamente";
