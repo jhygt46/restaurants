@@ -23,7 +23,7 @@
         }
     }
 
-    $data = $core->is_pass($_GET["id_user"], $_GET["code"]);
+    $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
@@ -55,6 +55,7 @@
                     success: function(data){
                         if(data.op == 1){
                             bien(data.message);
+                            localStorage.setItem("mail_nuevo", "<?php echo $correo; ?>");
                             setTimeout(function () {
                                 $(location).attr("href","https://misitiodelivery.cl/admin");
                             }, 2000);

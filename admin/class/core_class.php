@@ -484,6 +484,9 @@ class Core{
             if($is['count'] == 0){
                 header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
             }
+            if($is['count'] == 1){
+                return $is['resultado'][0]['correo'];
+            }
         }else{
             header("Location: https://misitiodelivery.cl/admin/?paso=recuperar");
         }

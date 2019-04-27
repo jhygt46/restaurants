@@ -13,6 +13,7 @@
                 if(e.which == 13){
                     btn_login();
                 }
+                $('#user').val(localStorage.getItem("mail_nuevo"));
             });
             function btn_login(){
 
