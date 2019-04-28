@@ -805,11 +805,9 @@ body {
     .title{
         margin-top: 10px;
         position: relative;
-        height: 42px;
         h1{
-            position: absolute;
-            top: 0px;
-            left: 0px;
+            display: block;
+            padding-right: 30px;
             font-weight: bold;
             font-size: 32px;
             text-shadow: 1px 1px 0px rgba(150, 150, 150, 1);

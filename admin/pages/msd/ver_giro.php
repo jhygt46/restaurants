@@ -44,7 +44,6 @@ if($giro['dns'] == 0 && false){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
     $resp = curl_exec($ch);
-    
     curl_close($ch);
     if($resp == 'hjS3r%mDs-5gYa6ib_5Ps'){
         $core->set_giro_dns($id_gir);
