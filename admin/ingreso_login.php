@@ -9,11 +9,13 @@
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/ingreso_aux.js"></script>
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/login.css" type="text/css" media="all">
         <script>
+            $(document).ready(function(){
+                $('#user').val(localStorage.getItem("mail_nuevo"));
+            });
             $(document).on('keypress',function(e){
                 if(e.which == 13){
                     btn_login();
                 }
-                $('#user').val(localStorage.getItem("mail_nuevo"));
             });
             function btn_login(){
 
