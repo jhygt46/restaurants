@@ -36,13 +36,14 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0)
 $list = $core->get_locales();
 $giro = $core->get_giro($id_gir);
 
-if($giro['dns'] == 0 && false){
+if($giro['dns'] == 0){
     
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://'.$giro['dominio']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 200);
     $resp = curl_exec($ch);
     curl_close($ch);
     if($resp == 'hjS3r%mDs-5gYa6ib_5Ps'){
@@ -183,7 +184,6 @@ function init_chart(){
                     <div class="list_item wi_01"><div class="cont_item"><a href="<?php if($giro["dns"] == 0){ ?>https://misitiodelivery.cl/view/<?php echo $giro["dominio"]; ?><?php }else{ ?>http<?php if($giro["ssl"] == 1){ echo "s"; } ?>://<?php echo $giro["dominio"]; ?><?php } ?>" target="_blank" style="text-decoration: none"><div class="item_image"><img src="images/web_temp.png" alt="" /></div><div class="item_ttl"><?php if($giro["dns"] == 0){ ?>SITIO TEMPORAL<?php }else{ ?>VISITAR SITIO<?php } ?></div></a></div></div>
                     <?php if($giro["dns"] == 0 && $giro["dns_letra"] != ""){ ?><div class="list_item wi_02"><div class="dns_item"><div class="cont_dns"><?php for($i=1; $i<=4; $i++){ ?><h1>ns-cloud-<?php echo $giro["dns_letra"].$i; ?>.googledomains.com</h1><?php } ?></div></div><div class="dns_info">CAMBIA TUS DNS</div></div><?php } ?>
                     <?php if($giro["dns"] == 1 && $giro["ssl"] == 0){ ?><div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/https.php')"><div class="item_image"><img src="images/https.png" alt="" /></div><div class="item_ttl">SEGURIDAD HTTPS</div></div></div><?php } ?>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_giro.php')"><div class="item_image"><img src="images/configbase.png" alt="" /></div><div class="item_ttl">CONFIGURACION</div></div></div>
                 </div>
             </div>
         </div>
@@ -219,9 +219,9 @@ function init_chart(){
             <div class="lista_items">
                 <div class="titulo_items"><h1>CONFIGURACION</h1><h2>Configuracion del Sistema y Sitio Web</h2></div>
                 <div class="items_list clearfix">
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_footer.php')"><div class="item_image"><img src="images/configfooter.png" alt="" /></div><div class="item_ttl">Footer</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_giro.php')"><div class="item_image"><img src="images/configbase.png" alt="" /></div><div class="item_ttl">Configuracion</div></div></div>
                     <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_estilos.php')"><div class="item_image"><img src="images/configstyle.png" alt="" /></div><div class="item_ttl">Estilos</div></div></div>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_paginas.php')"><div class="item_image"><img src="images/configpages.png" alt="" /></div><div class="item_ttl">Paginas</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_contenido.php')"><div class="item_image"><img src="images/configpages.png" alt="" /></div><div class="item_ttl">Contenido</div></div></div>
                 </div>
             </div>
         </div>
