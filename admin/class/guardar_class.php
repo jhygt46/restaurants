@@ -326,7 +326,7 @@ class Guardar extends Core{
         $foto_logo = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio'], 0);
         $foto_favicon = $this->ingresarimagen('/var/www/html/restaurants/images/favicon/', $giro['resultado'][0]['dominio'], 1);
         
-        $info['foto_logo'] = $foto_logo;
+        $info['foto'] = $foto_logo;
 
         if($foto_logo['op'] == 1){
             $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo['image']."' WHERE id_gir='".$this->id_gir."'");
