@@ -195,7 +195,7 @@ class Guardar extends Core{
 
         unlink($file);
         rename($file_aux, $file);
-        return $file_aux;
+        return $info;
 
     }
     public function ingresarimagen($filepath, $filename, $i){
