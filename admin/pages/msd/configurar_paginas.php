@@ -70,7 +70,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/configurar_contenido.php')"></li>
         </ul>
     </div>
     <hr>

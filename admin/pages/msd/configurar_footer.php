@@ -42,7 +42,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/configurar_contenido.php')"></li>
         </ul>
     </div>
     <hr>
