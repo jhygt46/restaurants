@@ -198,10 +198,92 @@ class Guardar extends Core{
         return $info;
 
     }
+    public function uploadfavIcon($filename, $i){
+        $filepath = '/var/www/html/restaurants/images/favicon/';
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("ico");
+        $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
+        $size = $_FILES['file_image'.$i]['size'];
+        if (strlen($name)){
+            $extension = substr($name, strrpos($name, '.')+1);
+            if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
+                if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
+                    $imagename = $filename.".".$extension;
+                    $tmp = $_FILES['file_image'.$i]['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                        $data = getimagesize($filepath.$imagename);
+                        $info['data'] = $data;
+                        if($data['mime'] == 'image/png'){
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Imagen subida";
+                            $info['image'] = $imagename;
+                        }
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
+    public function uploadLogo($filename, $i){
+        $filepath = '/var/www/html/restaurants/images/logos/';
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("png");
+        $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
+        $size = $_FILES['file_image'.$i]['size'];
+        if (strlen($name)){
+            $extension = substr($name, strrpos($name, '.')+1);
+            if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
+                if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
+                    $imagename = $filename.".".$extension;
+                    $tmp = $_FILES['file_image'.$i]['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                        $data = getimagesize($filepath.$imagename);
+                        if($data[0] == 260 && $data[1] == 100){
+                            if($data['mime'] == 'image/png'){
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename;
+                            }else{
+                                unlink($filepath.$imagename);
+                            }
+                        }else{
+                            unlink($filepath.$imagename);
+                        }
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+    }
     public function ingresarimagen($filepath, $filename, $i){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "png", "ico");
+        $file_formats = array("jpg", "jpeg");
 
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
@@ -323,8 +405,8 @@ class Guardar extends Core{
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         $this->con_cambios();
         
-        $foto_logo = $this->ingresarimagen('/var/www/html/restaurants/images/logos/', $giro['resultado'][0]['dominio'], 0);
-        $foto_favicon = $this->ingresarimagen('/var/www/html/restaurants/images/favicon/', $giro['resultado'][0]['dominio'], 1);
+        $foto_logo = $this->uploadLogo($giro['resultado'][0]['dominio'], 0);
+        $foto_favicon = $this->uploadfavIcon($giro['resultado'][0]['dominio'], 1);
         
         $info['foto'] = $foto_logo;
 
@@ -360,7 +442,9 @@ class Guardar extends Core{
 
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
         if($image['op'] == 1){
-            $this->con->sql("UPDATE categorias SET image='".$image['image']."' WHERE id_cae='".$id_cae."'");
+            $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
+            unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
+            $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
         }
 
         $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");

@@ -23,6 +23,10 @@ function render_pagina(){
         }
     }
 
+    $('.botones_principales').each(function(){
+        console.log($(this));
+    });
+
 }
 function close_that(that){
     $('.modals').hide();

@@ -1,7 +1,6 @@
 $(document).ready(function(){
     render_pagina();
     borrar_carro();
-    //set_pedido(null);
     cantidad = get_carro().length;
     $('.cantcart_num').html(cantidad);
     $("#pedido_telefono").keyup(function(){
@@ -35,29 +34,3 @@ $(document).click(function (e) {
         hide_modal();
     }
 });
-
-
-function inicio(){
-    
-    var pedido = get_pedido();
-    var carro = get_carro();
-    
-    set_pedido(null);
-    borrar_carro();
-    
-    if(pedido.id_ped == 0){
-        //set_pedido(null);
-        //borrar_carro();
-        console.log("NO TIENE PEDIDO");
-    }
-    if(pedido.id_ped > 0){
-        if(pedido.fecha){
-            console.log("MOSTRAR PEDIDO");
-        }else{
-            console.log("BORRAR PEDIDO");
-        }
-    }
-    
-    
-    
-}
