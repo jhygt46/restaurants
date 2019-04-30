@@ -14,7 +14,9 @@ $(document).ready(function(){
     
 });
 
-$(window).resize(btn_prin);
+$(window).resize(function(){
+    btn_prin();
+});
 
 var menu = 0;
 var modal = 0;
