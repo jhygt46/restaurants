@@ -23,11 +23,14 @@ function render_pagina(){
         }
     }
 
+    btn_prin();
+
+}
+function btn_prin(){
     $('.botones_principales').each(function(){
         var height = $(this).width() * 3 / 10;
-        console.log(height);
+        $(this).css({ height: height+'px'});
     });
-
 }
 function close_that(that){
     $('.modals').hide();

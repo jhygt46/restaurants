@@ -14,6 +14,8 @@ $(document).ready(function(){
     
 });
 
+$(window).resize(btn_prin);
+
 var menu = 0;
 var modal = 0;
 var paso = 1;
