@@ -24,7 +24,8 @@ function render_pagina(){
     }
 
     $('.botones_principales').each(function(){
-        console.log($(this));
+        var height = $(this).width() * 3 / 10;
+        console.log(height);
     });
 
 }
