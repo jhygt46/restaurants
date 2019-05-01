@@ -181,8 +181,8 @@ class Guardar extends Core{
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
-                    if(move_uploaded_file($tmp, $filepath.$imagename_new)){
-                        $data = getimagesize($filepath.$imagename_new);
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                        $data = getimagesize($filepath.$imagename);
                         $info['data'] = $data;
                         /*
                         if($data['mime'] == 'image/png'){
