@@ -59,8 +59,8 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <span><p>Alto Categoria-Productos:</p></span>
                         <select id="alto">
                             <?php
-                                $sel = '';
                                 for($i=15; $i<41; $i++){
+                                    $sel = '';
                                     if($i == $that['alto']){ $sel='selected'; }
                                     echo '<option value="'.$i.'" '.$sel.'>'.$i.'</option>';
                                 }
