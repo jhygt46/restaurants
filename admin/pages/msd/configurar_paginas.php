@@ -102,7 +102,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     </label>
                     <label class="divImage clearfix">
                         <span><p>Imagen:</p></span>
-                        <input id="file_image" type="file" style="padding-top: 7px" />
+                        <input id="file_image0" type="file" style="padding-top: 7px" />
                     </label>
                     <label class="divHtml clearfix">
                         <span><p>HTML:</p></span>
