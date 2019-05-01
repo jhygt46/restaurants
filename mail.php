@@ -10,7 +10,6 @@ require($path.'/admin/class/core_class.php');
 
 $core = new Core();
 $list_fotos = $core->get_fotos_categoria();
-echo "COUNT: ".count($list_fotos)."<br/><br/><br/>";
 
 $directorio = opendir("images/categorias"); //ruta actual
 while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro sucesivamente
@@ -20,7 +19,7 @@ while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro suc
             if(foto_categoria($list_fotos, $archivo)){
                 echo $archivo." SI<br/>";
             }else{
-                echo $archivo." BORRAR<br/>";
+                unlink($archivo);
             }
         }
     }
