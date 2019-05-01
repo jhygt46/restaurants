@@ -259,7 +259,7 @@ class Guardar extends Core{
         $size = $_FILES['file_image'.$i]['size'];
 
         if (strlen($name)){
-            $extension = substr($name, strrpos($name, '.')+1);
+            $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
@@ -281,7 +281,7 @@ class Guardar extends Core{
                                 $info['image'] = $imagename_new;
                                 $info['image_resp'] = $imagename;
                             }
-                            unlink($filepath.$imagename);
+                            //unlink($filepath.$imagename);
 
                     }else{
                         $info['op'] = 2;
