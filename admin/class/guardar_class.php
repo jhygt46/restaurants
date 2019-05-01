@@ -174,7 +174,7 @@ class Guardar extends Core{
         $file_formats = array("ico", "ICO");
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
-        if (strlen($name)){
+        if(strlen($name)){
             $extension = substr($name, strrpos($name, '.')+1);
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
@@ -216,7 +216,7 @@ class Guardar extends Core{
         $file_formats = array("png", "PNG");
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
-        if (strlen($name)){
+        if(strlen($name)){
             $extension = substr($name, strrpos($name, '.')+1);
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
@@ -402,6 +402,7 @@ class Guardar extends Core{
         $foto_logo = $this->uploadLogo($giro['resultado'][0]['dominio'], 0);
         $foto_favicon = $this->uploadfavIcon($giro['resultado'][0]['dominio'], 1);
         
+        $info['files'] = $_FILES;
         $info['fl'] = $foto_logo;
         $info['ff'] = $foto_favicon;
 
