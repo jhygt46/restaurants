@@ -17,7 +17,7 @@ while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro suc
         if(foto_categoria($list_fotos, $archivo)){
             echo $archivo."<br/>";
         }else{
-            unlink($archivo);
+            //unlink($archivo);
         }
     }
 }

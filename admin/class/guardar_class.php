@@ -266,7 +266,7 @@ class Guardar extends Core{
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
-                if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
+                if ($size < (200 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
@@ -439,7 +439,7 @@ class Guardar extends Core{
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
-            unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
+            @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
             $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
         }
 
