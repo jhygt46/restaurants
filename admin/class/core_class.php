@@ -478,7 +478,7 @@ class Core{
     // PIP //
 
     public function get_fotos_categoria(){
-        $sql = $this->con->sql("SELECT image FROM categorias WHERE image IS NOT NULL AND elimiando='0'");
+        $sql = $this->con->sql("SELECT image, eliminado FROM categorias WHERE image IS NOT NULL");
         return $sql['resultado'];
     }
     public function is_pass($id_user, $code){

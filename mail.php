@@ -28,7 +28,7 @@ while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro suc
 
 function foto_categoria($arr, $foto){
     for($i=0; $i<count($arr); $i++){
-        if($arr[$i]['image'] == $foto){
+        if($arr[$i]['image'] == $foto || $arr[$i]['eliminado'] == 1){
             return true;
         }
     }
