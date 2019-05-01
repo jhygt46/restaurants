@@ -610,26 +610,29 @@ class Guardar extends Core{
         $this->con_cambios();
 
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/paginas/', null, 0);
+        $info['db_image'] = $image;
 
         if($id_pag == 0){
             $aux_page = $this->con->sql("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES ('".$nombre."', '".$html."', '".$tipo."', '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas creado exitosamente";
             if($image['op'] == 1){
-                $this->con->sql("UPDATE paginas SET imagen='".$image['image']."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
+                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
             }
         }
         if($id_pag > 0){
+            $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."'");
             $this->con->sql("UPDATE paginas SET nombre='".$nombre."', html='".$html."', tipo='".$tipo."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Paginas modificado exitosamente";
             if($image['op'] == 1){
-                $this->con->sql("UPDATE paginas SET imagen='".$image['image']."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+                @unlink('/var/www/html/restaurants/images/paginas/'.$pagina['resultado'][0]['imagen']);
+                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
             }
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php";
+        $info['page'] = "msd/configurar_paginas.php";
         return $info;
         
     }
