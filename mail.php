@@ -18,9 +18,9 @@ while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro suc
         $file = explode(".", $archivo);
         if($file[1] == "jpg"){
             if(foto_categoria($list_fotos, $archivo)){
-                echo $archivo." SI";
+                echo $archivo." SI<br/>";
             }else{
-                echo $archivo." BORRAR";
+                echo $archivo." BORRAR<br/>";
             }
         }
     }
