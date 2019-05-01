@@ -10,10 +10,7 @@ require($path.'/admin/class/core_class.php');
 
 $core = new Core();
 $list_fotos = $core->get_fotos_categoria();
-
-echo "<pre>";
-print_r($list_fotos);
-echo "</pre>";
+echo count($list_fotos);
 
 $directorio = opendir("images/categorias"); //ruta actual
 while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro sucesivamente
