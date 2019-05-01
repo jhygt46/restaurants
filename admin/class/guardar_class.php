@@ -167,41 +167,11 @@ class Guardar extends Core{
         }
         
     }
-    public function copy_image($path, $image, $ext){
-        
-        $file = $path.$image.'.'.$ext;
-        $file_aux = $path.$image.'_2.'.$ext;
-        $data = getimagesize($file);
-        $destino = imagecreatetruecolor($data[0], $data[1]);
-
-        $info['file'] = $file;
-        $info['file_aux'] = $file_aux;
-        $info['data'] = $data;
-
-        if($data['mime'] == "image/jpeg"){
-            $origen = imagecreatefromjpeg($file);
-            imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
-            header('Content-Type: image/jpeg');
-            imagejpeg($destino, $file_aux);
-            imagedestroy($destino);
-        }
-        if($data['mime'] == "image/png"){
-            $origen = imagecreatefrompng($file);
-            imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
-            header('Content-Type: image/png');
-            imagepng($destino, $file_aux);
-            imagedestroy($destino);
-        }
-
-        unlink($file);
-        rename($file_aux, $file);
-        return $info;
-
-    }
+    
     public function uploadfavIcon($filename, $i){
         $filepath = '/var/www/html/restaurants/images/favicon/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("ico");
+        $file_formats = array("ico", "ICO");
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
         if (strlen($name)){
@@ -224,7 +194,7 @@ class Guardar extends Core{
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                    $info['mensaje'] = "Imagen sobrepasa los 20KB establecidos";
                 }
             }else{
                 $info['op'] = 2;
@@ -240,7 +210,7 @@ class Guardar extends Core{
     public function uploadLogo($filename, $i){
         $filepath = '/var/www/html/restaurants/images/logos/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("png");
+        $file_formats = array("png", "PNG");
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
         if (strlen($name)){
@@ -268,7 +238,7 @@ class Guardar extends Core{
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                    $info['mensaje'] = "Imagen sobrepasa los 20KB establecidos";
                 }
             }else{
                 $info['op'] = 2;
@@ -283,7 +253,7 @@ class Guardar extends Core{
     public function ingresarimagen($filepath, $filename, $i){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg");
+        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
 
         $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
         $size = $_FILES['file_image'.$i]['size'];
@@ -293,12 +263,26 @@ class Guardar extends Core{
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."_2.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        $info['image_info'] = $this->copy_image($filepath, $filename, $extension);
-                        $info['op'] = 1;
-                        $info['mensaje'] = "Imagen subida";
-                        $info['image'] = $imagename;
+                        
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+                                $width = 500;
+                                $height = $width * 3 / 10;
+                                $destino = imagecreatetruecolor($width, $height);
+                                $origen = imagecreatefromjpeg($filepath.$imagename);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagejpeg($destino, $imagename_new);
+                                imagedestroy($destino);
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+                                $info['image_resp'] = $imagename;
+                            }
+                            unlink($filepath.$imagename);
+
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -441,6 +425,7 @@ class Guardar extends Core{
         $this->con_cambios();
 
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
+        $info['image_up'] = $image;
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
