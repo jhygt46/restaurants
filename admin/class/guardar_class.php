@@ -179,15 +179,18 @@ class Guardar extends Core{
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
-                    if(move_uploaded_file($tmp, $filepath.$imagename)){
-                        $data = getimagesize($filepath.$imagename);
+                    if(move_uploaded_file($tmp, $filepath.$imagename_new)){
+                        $data = getimagesize($filepath.$imagename_new);
                         $info['data'] = $data;
+                        /*
                         if($data['mime'] == 'image/png'){
                             $info['op'] = 1;
                             $info['mensaje'] = "Imagen subida";
                             $info['image'] = $imagename;
                         }
+                        */
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -218,19 +221,21 @@ class Guardar extends Core{
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
-                    if(move_uploaded_file($tmp, $filepath.$imagename)){
-                        $data = getimagesize($filepath.$imagename);
+                    if(move_uploaded_file($tmp, $filepath.$imagename_new)){
+                        $data = getimagesize($filepath.$imagename_new);
                         if($data[0] == 260 && $data[1] == 100){
                             if($data['mime'] == 'image/png'){
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
-                                $info['image'] = $imagename;
+                                @unlink($filepath.$imagename);
+                                rename($filepath.$imagename_new, $filepath.$imagename);
                             }else{
-                                unlink($filepath.$imagename);
+                                unlink($filepath.$imagename_new);
                             }
                         }else{
-                            unlink($filepath.$imagename);
+                            unlink($filepath.$imagename_new);
                         }
                     }else{
                         $info['op'] = 2;
@@ -263,7 +268,7 @@ class Guardar extends Core{
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."_2.".$extension;
+                    $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image'.$i]['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
                         
@@ -280,7 +285,7 @@ class Guardar extends Core{
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
                                 $info['image'] = $imagename_new;
-                                
+
                             }else{
                                 $info['op'] = 2;
                                 $info['mensaje'] = "La imagen no es jpg";
@@ -397,13 +402,11 @@ class Guardar extends Core{
         $foto_logo = $this->uploadLogo($giro['resultado'][0]['dominio'], 0);
         $foto_favicon = $this->uploadfavIcon($giro['resultado'][0]['dominio'], 1);
         
-        $info['foto'] = $foto_logo;
-
         if($foto_logo['op'] == 1){
-            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo['image']."' WHERE id_gir='".$this->id_gir."'");
+            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo["image"]."' WHERE id_gir='".$this->id_gir."'");
         }
         if($foto_favicon['op'] == 1){
-            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$foto_favicon['image']."' WHERE id_gir='".$this->id_gir."'");
+            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$foto_favicon["image"]."' WHERE id_gir='".$this->id_gir."'");
         }
         
         // MODIFICAR PEDIDOS
@@ -430,7 +433,6 @@ class Guardar extends Core{
         $this->con_cambios();
 
         $image = $this->ingresarimagen('/var/www/html/restaurants/images/categorias/', null, 0);
-        $info['image_up'] = $image;
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
