@@ -274,7 +274,7 @@ class Guardar extends Core{
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
                                 imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
-                                imagejpeg($destino, $imagename_new);
+                                imagejpeg($destino, $filepath.$imagename_new);
                                 imagedestroy($destino);
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
