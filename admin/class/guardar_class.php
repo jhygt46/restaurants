@@ -402,6 +402,9 @@ class Guardar extends Core{
         $foto_logo = $this->uploadLogo($giro['resultado'][0]['dominio'], 0);
         $foto_favicon = $this->uploadfavIcon($giro['resultado'][0]['dominio'], 1);
         
+        $info['fl'] = $foto_logo;
+        $info['ff'] = $foto_favicon;
+
         if($foto_logo['op'] == 1){
             $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo["image"]."' WHERE id_gir='".$this->id_gir."'");
         }
