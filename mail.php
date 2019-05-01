@@ -1,3 +1,22 @@
+<?php
+
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = "C:/AppServ/www/restaurants";
+}else{
+    $path = "/var/www/html/restaurants";
+}
+
+require($path.'/admin/class/core_class.php');
+
+$core = new Core();
+$list_fotos = $core->get_fotos_categoria();
+
+echo "<pre>";
+print_r($list_fotos);
+echo "</pre>";
+
+?>
+
 
 <div style="width: 100%">
     <div style="width: 610px; margin: 0 auto">

@@ -269,6 +269,7 @@ class Guardar extends Core{
                         
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
+
                                 $width = 500;
                                 $height = $width * 3 / 10;
                                 $destino = imagecreatetruecolor($width, $height);
@@ -279,8 +280,12 @@ class Guardar extends Core{
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
                                 $info['image'] = $imagename_new;
-                                $info['image_resp'] = $imagename;
+                                
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg";
                             }
+
                             unlink($filepath.$imagename);
 
                     }else{
