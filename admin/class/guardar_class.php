@@ -168,19 +168,19 @@ class Guardar extends Core{
         
     }
     
-    public function uploadfavIcon($filename, $i){
+    public function uploadfavIcon($filename){
         $filepath = '/var/www/html/restaurants/images/favicon/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("ico", "ICO");
-        $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
-        $size = $_FILES['file_image'.$i]['size'];
+        $name = $_FILES['file_image1']['name']; // filename to get file's extension
+        $size = $_FILES['file_image1']['size'];
         if(strlen($name)){
             $extension = substr($name, strrpos($name, '.')+1);
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
-                    $tmp = $_FILES['file_image'.$i]['tmp_name'];
+                    $tmp = $_FILES['file_image1']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                         $data = getimagesize($filepath.$imagename);
                         $info['data'] = $data;
@@ -210,19 +210,19 @@ class Guardar extends Core{
         return $info;
 
     }
-    public function uploadLogo($filename, $i){
+    public function uploadLogo($filename){
         $filepath = '/var/www/html/restaurants/images/logos/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("png", "PNG");
-        $name = $_FILES['file_image'.$i]['name']; // filename to get file's extension
-        $size = $_FILES['file_image'.$i]['size'];
+        $name = $_FILES['file_image0']['name']; // filename to get file's extension
+        $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
             $extension = substr($name, strrpos($name, '.')+1);
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
-                    $tmp = $_FILES['file_image'.$i]['tmp_name'];
+                    $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename_new)){
                         $data = getimagesize($filepath.$imagename_new);
                         if($data[0] == 260 && $data[1] == 100){
@@ -397,20 +397,17 @@ class Guardar extends Core{
         $estados = $_POST['estados'];
 
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+        $dominio = $giro['resultado'][0]['dominio'];
         $this->con_cambios();
         
-        $foto_logo = $this->uploadLogo($giro['resultado'][0]['dominio'], 0);
-        $foto_favicon = $this->uploadfavIcon($giro['resultado'][0]['dominio'], 1);
+        $foto_logo = $this->uploadLogo($dominio);
+        $foto_favicon = $this->uploadfavIcon($dominio);
         
-        $info['files'] = $_FILES;
-        $info['fl'] = $foto_logo;
-        $info['ff'] = $foto_favicon;
-
         if($foto_logo['op'] == 1){
-            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$foto_logo["image"]."' WHERE id_gir='".$this->id_gir."'");
+            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
         }
         if($foto_favicon['op'] == 1){
-            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$foto_favicon["image"]."' WHERE id_gir='".$this->id_gir."'");
+            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir='".$this->id_gir."'");
         }
         
         // MODIFICAR PEDIDOS

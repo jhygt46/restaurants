@@ -85,7 +85,7 @@ function form(that){
             var inputFileImage = document.getElementById($(this).attr('id'));
             for(var i=0; i<inputFileImage.files.length; i++){
                 var file = inputFileImage.files[i];
-                data.append($(this).attr('id')+i, file);
+                data.append($(this).attr('id'), file);
             }
         }
     });
