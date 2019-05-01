@@ -56,6 +56,18 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="file_image1" type="file" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Alto Categoria-Productos:</p></span>
+                        <select id="alto">
+                            <?php
+                                $sel = '';
+                                for($i=15; $i<41; $i++){
+                                    if($i == $that['alto']){ $sel='selected'; }
+                                    echo '<option value="'.$i.'" '.$sel.'>'.$i.'</option>';
+                                }
+                            ?>
+                        </select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Pedido Minimo:</p></span>
                         <input id="pedido_minimo" type="text" class="inputs" value="<?php echo $that['pedido_minimo']; ?>" require="" placeholder="" />
                     </label>

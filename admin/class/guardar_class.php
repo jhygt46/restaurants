@@ -447,6 +447,7 @@ class Guardar extends Core{
 
         $mapcode = $_POST['mapcode'];
         $estados = $_POST['estados'];
+        $alto = $_POST['alto'];
 
         $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
         $dominio = $giro['resultado'][0]['dominio'];
@@ -454,9 +455,6 @@ class Guardar extends Core{
         
         $foto_logo = $this->uploadLogo($dominio);
         $foto_favicon = $this->uploadfavIcon($dominio);
-        
-        $info['fl'] = $foto_logo;
-        $info['ff'] = $foto_favicon;
 
         if($foto_logo['op'] == 1){
             $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
@@ -466,7 +464,7 @@ class Guardar extends Core{
         }
         
         // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET mapcode='".$mapcode."', estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."' WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET mapcode='".$mapcode."', estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."', alto='".$alto."' WHERE id_gir='".$this->id_gir."'");
         
         // MODIFICAR TITULO
         $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
