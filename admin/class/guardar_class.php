@@ -281,7 +281,7 @@ class Guardar extends Core{
                                 $info['image'] = $imagename_new;
                                 $info['image_resp'] = $imagename;
                             }
-                            //unlink($filepath.$imagename);
+                            unlink($filepath.$imagename);
 
                     }else{
                         $info['op'] = 2;
