@@ -181,16 +181,16 @@ class Guardar extends Core{
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image1']['tmp_name'];
-                    if(move_uploaded_file($tmp, $filepath.$imagename)){
-                        $data = getimagesize($filepath.$imagename);
-                        $info['data'] = $data;
-                        /*
-                        if($data['mime'] == 'image/png'){
+                    if(move_uploaded_file($tmp, $filepath.$imagename_new)){
+                        $data = getimagesize($filepath.$imagename_new);
+                        if($data['mime'] == 'image/vnd.microsoft.icon'){
                             $info['op'] = 1;
                             $info['mensaje'] = "Imagen subida";
-                            $info['image'] = $imagename;
+                            @unlink($filepath.$imagename);
+                            rename($filepath.$imagename_new, $filepath.$imagename);
+                        }else{
+                            unlink($filepath.$imagename_new);
                         }
-                        */
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
