@@ -49,11 +49,11 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <label class="clearfix">
                         <span><p>Logo:</p></span>
-                        <input id="file_image" type="file" />
+                        <input id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
                         <span><p>Favicon:</p></span>
-                        <input id="file_image" type="file" />
+                        <input id="file_image1" type="file" />
                     </label>
                     <label class="clearfix">
                         <span><p>Pedido Minimo:</p></span>
