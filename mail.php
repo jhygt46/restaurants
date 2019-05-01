@@ -16,19 +16,30 @@ print_r($list_fotos);
 echo "</pre>";
 
 $directorio = opendir("images/categorias"); //ruta actual
-while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
-{
-    if (is_dir($archivo))//verificamos si es o no un directorio
-    {
-        echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
-    }else{
-        echo $archivo . "<br />";
+while ($archivo = readdir($directorio)){ //obtenemos un archivo y luego otro sucesivamente
+    if(!is_dir($archivo)){ //verificamos si es o no un directorio
+        $file = explode(".", $archivo);
+        if($file[1] == "jpg"){
+            if(foto_categoria($list_fotos, $archivo)){
+                echo $archivo." SI";
+            }else{
+                echo $archivo." BORRAR";
+            }
+        }
     }
 }
 
+function foto_categoria($arr, $foto){
+    for($i=0; $i<count($arr); $i++){
+        if($arr[$i]['image'] == $foto){
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
 ?>
-
-
 <div style="width: 100%">
     <div style="width: 610px; margin: 0 auto">
         <div style="display: block; height: 300px"><a href="https://misitiodelivery.cl" target="_blank" style=""><img src="https://misitiodelivery.cl/images/mail_01.jpg" alt="" /></a></div>
