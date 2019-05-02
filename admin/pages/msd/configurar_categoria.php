@@ -75,7 +75,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Imagen:</p></span>
-                        <input style="padding-top: 6px" id="file_image" type="file" />
+                        <input style="padding-top: 6px" id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
