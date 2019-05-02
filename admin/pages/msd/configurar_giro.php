@@ -48,7 +48,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="titulo" type="text" class="inputs" value="<?php echo $that['titulo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p>Logo:</p></span>
+                        <span><p>Logo: (260x100)</p></span>
                         <input id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
@@ -62,7 +62,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                                 for($i=15; $i<41; $i++){
                                     $sel = '';
                                     if($i == $that['alto']){ $sel='selected'; }
-                                    echo '<option value="'.$i.'" '.$sel.'>'.$i.'</option>';
+                                    echo '<option value="'.$i.'" '.$sel.'>'.$i.'%</option>';
                                 }
                             ?>
                         </select>

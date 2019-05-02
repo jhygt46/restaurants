@@ -8,7 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
@@ -22,17 +22,18 @@ $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $id_cae = (isset($_GET["id"]))? $_GET["id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
+$alto = 500 * $core->get_alto() / 100;
 
 if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0){
     
-    $list_pre = $fireapp->get_preguntas();
-    $list_lin = $fireapp->get_lista_ingredientes();
+    $list_pre = $core->get_preguntas();
+    $list_lin = $core->get_lista_ingredientes();
     
     $id_pro = $_GET["id_pro"];
-    $that = $fireapp->get_producto($id_pro);
+    $that = $core->get_producto($id_pro);
     
-    $pre_prod = $fireapp->get_preguntas_pro($id_pro);
-    $lin_prod = $fireapp->get_lista_ingredientes_pro($id_pro);
+    $pre_prod = $core->get_preguntas_pro($id_pro);
+    $lin_prod = $core->get_lista_ingredientes_pro($id_pro);
     
 }
 
@@ -62,7 +63,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                     <input id="id_pro" type="hidden" value="<?php echo $id_pro; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
-                        <span><p>Imagen:</p></span>
+                        <span><p>Imagen: (500x<?php echo $alto; ?>)</p></span>
                         <input style="padding-top: 6px" id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
