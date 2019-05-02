@@ -1024,9 +1024,8 @@ class Core{
     }
     public function get_config($id_gir){
         
-        $aux_config = $this->con->sql("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
-        $aux = $aux_config['resultado'][0];
-        return $aux;
+        $aux_config = $this->con->sql("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        return $aux_config['resultado'][0];
         
     }
     public function get_locales_js($id_gir){
