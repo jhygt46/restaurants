@@ -24,12 +24,11 @@ function render_pagina(){
     }
 
     btn_prin();
-
+    
 }
 function btn_prin(){
-    console.log(data.config);
     $('.botones_principales').each(function(){
-        var height = $(this).width() * 28 / 100;
+        var height = $(this).width() * data.config.alto / 100;
         $(this).css({ height: height+'px'});
     });
 }
