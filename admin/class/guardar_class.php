@@ -487,6 +487,7 @@ class Guardar extends Core{
         $this->con_cambios();
 
         $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 28);
+        $info['image'] = $image;
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
