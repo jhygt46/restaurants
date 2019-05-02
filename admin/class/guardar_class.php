@@ -490,7 +490,7 @@ class Guardar extends Core{
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
-            $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
+            $info['db_1'] = $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
         }
 
         $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
