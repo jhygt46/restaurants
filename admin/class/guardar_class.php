@@ -276,7 +276,7 @@ class Guardar extends Core{
                             if($data['mime'] == "image/jpeg"){
 
                                 $width = 500;
-                                $height = $width * $alto / 10;
+                                $height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
                                 imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
@@ -486,7 +486,7 @@ class Guardar extends Core{
         $degradado = $_POST['degradado'];
         $this->con_cambios();
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 3);
+        $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 28);
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
@@ -509,7 +509,7 @@ class Guardar extends Core{
         $parent_id = $_POST['parent_id'];
         $this->con_cambios();
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, 3);
+        $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, 28);
         if($image['op'] == 1){
             $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."'");
             @unlink('/var/www/html/restaurants/images/productos/'.$productos['resultado'][0]['image']);

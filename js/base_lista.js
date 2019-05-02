@@ -27,8 +27,9 @@ function render_pagina(){
 
 }
 function btn_prin(){
+    console.log(data.config);
     $('.botones_principales').each(function(){
-        var height = $(this).width() * 2.75 / 10;
+        var height = $(this).width() * 28 / 100;
         $(this).css({ height: height+'px'});
     });
 }
