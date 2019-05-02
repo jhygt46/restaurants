@@ -1022,6 +1022,12 @@ class Core{
         return $info;
         
     }
+    public function get_alto(){
+        
+        $alto = $this->con->sql("SELECT alto FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        return $alto['resultado'][0]['alto'];
+        
+    }
     public function get_config($id_gir){
         
         $aux_config = $this->con->sql("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");

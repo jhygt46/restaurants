@@ -8,7 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
@@ -20,11 +20,12 @@ $id_cae = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
+$alto = 500 * $core->get_alto() / 100;
 
 if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
     
     $id_cae = $_GET["id_cae"];
-    $that = $fireapp->get_categoria($id_cae);
+    $that = $core->get_categoria($id_cae);
     
 }
 
@@ -74,7 +75,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         </select>
                     </label>
                     <label class="clearfix">
-                        <span><p>Imagen:</p></span>
+                        <span><p>Imagen: (500x<?php echo $alto; ?>)</p></span>
                         <input style="padding-top: 6px" id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
