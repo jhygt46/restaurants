@@ -1024,7 +1024,7 @@ class Core{
     }
     public function get_alto(){
         
-        $alto = $this->con->sql("SELECT alto FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
+        $alto = $this->con->sql("SELECT alto FROM giros WHERE id_gir='".$this->id_gir."'");
         return $alto['resultado'][0]['alto'];
         
     }
