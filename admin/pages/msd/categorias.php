@@ -28,8 +28,10 @@ $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 if(isset($_GET["parent_id"])){
     $parent_id = $_GET["parent_id"];
     $that_2 = $fireapp->get_categoria($parent_id);
+    $titulo = "Categoria ".$that_2["nombre"];
 }else{
     $parent_id = 0;
+    $titulo = "Categorias";
 }
 
 if(isset($_GET['id_cat'])){ $fireapp->is_catalogo($_GET['id_cat']); }
@@ -73,7 +75,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
 </script>
 <div class="pagina">
     <div class="title">
-        <h1><?php echo $titulo; ?> <?php echo $that_2["nombre"]; ?></h1>
+        <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
             <?php if($parent_id > 0){ ?>
             <li class="back" onclick="navlink('pages/msd/categorias.php?parent_id=<?php echo $p_id; ?>')"></li>
