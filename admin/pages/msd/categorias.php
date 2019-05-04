@@ -25,7 +25,7 @@ $id_cae = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 
-if(isset($_GET["parent_id"])){
+if(isset($_GET["parent_id"]) && $_GET["parent_id"] > 0){
     $parent_id = $_GET["parent_id"];
     $that_2 = $fireapp->get_categoria($parent_id);
     $titulo = "Categoria ".$that_2["nombre"];
