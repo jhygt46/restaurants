@@ -24,6 +24,14 @@ $page_mod = "pages/msd/categorias.php";
 $id_cae = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
+
+if(isset($_GET["parent_id"])){
+    $parent_id = $_GET["parent_id"];
+    $that_2 = $fireapp->get_categoria($parent_id);
+}else{
+    $parent_id = 0;
+}
+
 if(isset($_GET['id_cat'])){ $fireapp->is_catalogo($_GET['id_cat']); }
 $list = $fireapp->get_categorias();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
@@ -65,7 +73,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
 </script>
 <div class="pagina">
     <div class="title">
-        <h1><?php echo $titulo; ?></h1>
+        <h1><?php echo $titulo; ?> <?php echo $that_2["nombre"]; ?></h1>
         <ul class="clearfix">
             <?php if($parent_id > 0){ ?>
             <li class="back" onclick="navlink('pages/msd/categorias.php?parent_id=<?php echo $p_id; ?>')"></li>

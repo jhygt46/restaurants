@@ -485,9 +485,9 @@ class Guardar extends Core{
         $detalle_prods = $_POST['detalle_prods'];
         $degradado = $_POST['degradado'];
         $this->con_cambios();
-        $info['alto'] = $this->get_alto();
+        $alto = $this->get_alto();
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 28);
+        $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
         if($image['op'] == 1){
             $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
@@ -509,8 +509,9 @@ class Guardar extends Core{
         $id = $_POST['id'];
         $parent_id = $_POST['parent_id'];
         $this->con_cambios();
+        $alto = $this->get_alto();
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, 28);
+        $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
         if($image['op'] == 1){
             $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."'");
             @unlink('/var/www/html/restaurants/images/productos/'.$productos['resultado'][0]['image']);
