@@ -146,6 +146,13 @@ function imprimir_categoria_modal(categorias){
 }
 
 // ADD PRODUCTOS Y PROMOCION //
+
+function add_carro_producto_aux(that){
+    var id = $(that).attr('id');
+    console.log(id);
+}
+
+
 function add_carro_producto(id_pro){
     
     var producto = get_producto(id_pro);

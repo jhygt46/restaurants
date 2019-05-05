@@ -99,7 +99,8 @@ function create_html_categorias(obj){
 
                 producto = document.createElement('div');
                 producto.className = 'prod_item';
-                producto.onclick = function(){ add_carro_producto(aux.id_pro) };
+                producto.setAttribute('id', aux.id_pro);
+                producto.onclick = function(){ add_carro_producto_aux(this) };
                 
                 p_nombre = document.createElement('div');
                 p_nombre.className = 'prod_i_nom';
