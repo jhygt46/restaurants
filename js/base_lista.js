@@ -149,7 +149,7 @@ function imprimir_categoria_modal(categorias){
 
 function add_carro_producto_aux(that){
     var id = $(that).attr('id');
-    console.log(id);
+    add_carro_producto(id);
 }
 
 

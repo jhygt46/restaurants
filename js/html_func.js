@@ -94,8 +94,6 @@ function create_html_categorias(obj){
             for(var i=0, ilen=obj.productos.length; i<ilen; i++){
 
                 aux = get_producto(obj.productos[i]);
-                console.log("aux");
-                console.log(aux);
 
                 producto = document.createElement('div');
                 producto.className = 'prod_item';
