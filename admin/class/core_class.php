@@ -333,7 +333,7 @@ class Core{
         return $aux;
     }
     public function get_productos_categoria($id_cae){
-        $productos = $this->con->sql("SELECT * FROM productos t1, cat_pros t2 WHERE t2.id_cae='".$id_cae."' AND t2.id_pro=t1.id_pro AND t1.eliminado='0'");
+        $productos = $this->con->sql("SELECT * FROM productos t1, cat_pros t2 WHERE t2.id_cae='".$id_cae."' AND t2.id_pro=t1.id_pro AND t1.eliminado='0' ORDER BY t2.orders");
         return $productos['resultado'];
     }
     public function get_productos(){
