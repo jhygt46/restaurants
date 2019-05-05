@@ -309,11 +309,16 @@ function promo_restantes(producto, j, tiene_pregunta){
     
     var Nombre = document.createElement('div');
     Nombre.className = 'restantes_detalle_nombre';
+    Nombre.innerHTML = producto.nombre;
+    console.log(producto);
+    
+    /*
     if(producto.nombre_carro != ""){
         Nombre.innerHTML = producto.nombre;
     }else{
         Nombre.innerHTML = producto.nombre_carro;
     }
+    */
     Div.appendChild(Nombre);
     
     var Acciones = document.createElement('div');
