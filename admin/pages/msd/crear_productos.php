@@ -139,6 +139,10 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                             <input id="nombre" name="producto_nombre" class="inputs" type="text" value="<?php echo $that["nombre"]; ?>" require="" placeholder="" />
                         </label>
                         <label class="clearfix">
+                            <span><p>Nombre Carro:</p></span>
+                            <input id="nombre_carro" name="producto_nombre_carro" class="inputs" type="text" value="<?php echo $that["nombre_carro"]; ?>" require="" placeholder="" />
+                        </label>
+                        <label class="clearfix">
                             <span><p>Descripcion:</p></span>
                             <input id="descripcion" name="producto_descripcion" class="inputs" type="text" value="<?php echo $that["descripcion"]; ?>" require="" placeholder="" />
                         </label>

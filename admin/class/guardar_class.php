@@ -1159,6 +1159,7 @@ class Guardar extends Core{
         
         $numero = $_POST['numero'];
         $nombre = $_POST['nombre'];
+        $nombre_carro = $_POST['nombre_carro'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
         $this->con_cambios();
@@ -1168,12 +1169,12 @@ class Guardar extends Core{
 
         if($tipo == 0){
             if($id_pro == 0){
-                $pro = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
+                $pro = $this->con->sql("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$nombre_carro."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
                 $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$pro['insert_id']."', '".$orders."')");
                 $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
             }
             if($id_pro > 0){
-                $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."'");
+                $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', nombre_carro='".$nombre_carro."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."'");
                 $this->con->sql("UPDATE productos_precio SET precio='".$precio."' WHERE id_cat='".$this->id_cat."' AND id_pro='".$id_pro."'");
             }
         }
