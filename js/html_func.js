@@ -304,6 +304,9 @@ function pregunta(carro){
 }
 function promo_restantes(producto, j, tiene_pregunta){
     
+    console.log("RESTANTES");
+    console.log(producto);
+
     var Div = document.createElement('div');
     Div.className = 'restantes_detalle_item clearfix';
     

@@ -1163,10 +1163,13 @@ class Guardar extends Core{
         $precio = $_POST['precio'];
         $this->con_cambios();
         
+        $sql_prod = $this->con->sql("SELECT * FROM cat_pros WHERE id_cae='".$id_cae."'");
+        $orders = $sql_prod["count"];
+
         if($tipo == 0){
             if($id_pro == 0){
                 $pro = $this->con->sql("INSERT INTO productos (numero, nombre, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
-                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$pro['insert_id']."')");
+                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$pro['insert_id']."', '".$orders."')");
                 $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
             }
             if($id_pro > 0){
@@ -1179,7 +1182,7 @@ class Guardar extends Core{
             for($i=0; $i<count($all_prods); $i++){
                 $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
                 if($pro == 1){
-                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."')");
+                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."', '".$orders."')");
                 }
             }
         }
