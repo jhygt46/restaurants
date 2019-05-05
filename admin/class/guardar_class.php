@@ -1028,8 +1028,11 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
         $this->con_cambios();
 
+        $sql_cae = $this->con->sql("SELECT * FROM categorias WHERE parent_id='".$parent_id."'");
+        $orders = $sql_cae["count"];
+
         if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, descripcion, descripcion_sub, precio) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$descripcion."', '".$descripcion_sub."', '".$precio."')");
+            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, descripcion, descripcion_sub, precio, orders) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$descripcion."', '".$descripcion_sub."', '".$precio."', '".$orders."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }

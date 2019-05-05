@@ -23,7 +23,6 @@ $page_mod = "pages/msd/categorias.php";
 
 $id_cae = 0;
 $sub_titulo = $sub_titulo1;
-$parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 
 if(isset($_GET["parent_id"]) && $_GET["parent_id"] > 0){
     $parent_id = $_GET["parent_id"];
