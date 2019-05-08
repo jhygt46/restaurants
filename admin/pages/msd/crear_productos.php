@@ -165,10 +165,15 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                                         }
                                     }
                                     if($mostrar){
+
+                                        $nombre_x = $all_prods[$i]['nombre'];
+                                        if($all_prods[$i]['nombre_carro'] != ""){
+                                            $nombre_x = $all_prods[$i]['nombre_carro'];
+                                        }
                                 ?>
                                     <div class="clearfix">
                                         <input style="float: left; width: 20px; height: 20px; margin-top: 4px" id="prod-<?php echo $all_prods[$i]['id_pro']; ?>" type="checkbox" value="1" <?php echo $check; ?> />
-                                        <div style="float: left; padding-left: 10px; font-size: 18px"><?php echo $all_prods[$i]['numero']; ?> / <?php echo $all_prods[$i]['nombre_carro']; ?></div>
+                                        <div style="float: left; padding-left: 10px; font-size: 18px"><?php echo $nombre_x; ?></div>
                                     </div>
                                 <?php }} ?>
                             </div>
