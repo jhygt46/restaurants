@@ -25,6 +25,10 @@ $page_mod = "pages/msd/crear_productos.php";
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $all_prods = $fireapp->get_productos();
 
+echo "<pre>";
+print_r($all_prods);
+echo "</pre>";
+
 $id = 0;
 $id_pro = 0;
 $sub_titulo = $sub_titulo1;
