@@ -129,15 +129,15 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
-    console.log(categorias);
+    //console.log(categorias);
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
     for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].tipo == 0){
+        if(categorias[i].tipo == 0 && categorias[i].ocultar == 0){
             html.appendChild(create_html_categorias(categorias[i]));
         }
-        if(categorias[i].tipo == 1){
+        if(categorias[i].tipo == 1 && categorias[i].ocultar == 0){
             html.appendChild(create_html_promocion(categorias[i]));
         }
     }
