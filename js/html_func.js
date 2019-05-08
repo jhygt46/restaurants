@@ -450,7 +450,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
     var producto;
     var pro_cat_item, pro_cat_item_select, pro_cat_item_nombre, select, option;
-    
+    console.log(categoria);
     
     if(categoria.productos){
         
@@ -485,7 +485,9 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
             
             pro_cat_item_nombre = document.createElement('div');
             pro_cat_item_nombre.className = 'pro_cat_item_nombre';
+
             pro_cat_item_nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
+
             pro_cat_item.appendChild(pro_cat_item_nombre);
 
             pro_cat_item_descripcion = document.createElement('div');
