@@ -268,7 +268,22 @@ function promo_carros(producto, j){
     
     var Nombre = document.createElement('div');
     Nombre.className = 'promo_detalle_nombre';
-    Nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
+
+
+    if(producto.nombre_carro != ""){
+        if(producto.numero > 0){
+            Nombre.innerHTML = producto.numero + '.- ' + producto.nombre_carro;
+        }else{
+            Nombre.innerHTML = producto.nombre_carro;
+        }
+    }else{
+        if(producto.numero > 0){
+            Nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
+        }else{
+            Nombre.innerHTML = producto.nombre;
+        }
+    }
+    
     Div.appendChild(Nombre);
     
     var Acciones = document.createElement('div');
