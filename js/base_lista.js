@@ -129,6 +129,7 @@ function imprimir_productos_modal(id){
 }
 function imprimir_categoria_modal(categorias){
     
+    console.log(categoria);
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
