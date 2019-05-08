@@ -485,6 +485,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
             
             pro_cat_item_nombre = document.createElement('div');
             pro_cat_item_nombre.className = 'pro_cat_item_nombre';
+            
             if(producto.nombre_carro != ""){
                 if(producto.numero > 0){
                     pro_cat_item_nombre.innerHTML = producto.numero + '.- ' + producto.nombre_carro;
