@@ -208,12 +208,18 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
+                    $nombre_carro = $list[$i]['nombre_carro'];
                     $numero = $list[$i]['numero'];
+
+                    $nombre_mostrar = $nombre;
+                    if($nombre_carro != ""){
+                        $nombre_mostrar = $nombre_carro;
+                    }
 
                 ?>
                 <div class="l_item" rel="<?php echo $id_n; ?>">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $numero; ?> / <?php echo $nombre; ?></div>
+                        <div class="nombre"><?php echo $nombre_mostrar; ?></div>
                         <a title="Modificar" class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>&id_pro=<?php echo $id_n; ?>')"></a>
                         <a title="Configurar Producto" class="icono ic7" onclick="navlink('pages/msd/configurar_producto.php?id_pro=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a>
                         <!--<a title="Configurar Producto" class="icono ic12" onclick="navlink('pages/msd/producto_ingredientes.php?id_pro=<?php echo $id_n; ?>&id=<?php echo $id; ?>&parent_id=<?php echo $parent_id; ?>')"></a>-->
