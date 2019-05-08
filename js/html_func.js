@@ -71,13 +71,17 @@ function create_html_categorias(obj){
     var Nombre = document.createElement('div');
     Nombre.className = 'nombre';
     Nombre.innerHTML = obj.nombre;
-    Nombre.onclick = function(){ open_categoria(obj.id_cae) };
+    if(obj.mostrar_prods == 0){
+        Nombre.onclick = function(){ open_categoria(obj.id_cae) };
+    }
     Divm.appendChild(Nombre);
     
     var Descripcion = document.createElement('div');
     Descripcion.className = 'descripcion';
     Descripcion.innerHTML = obj.descripcion;
-    Descripcion.onclick = function(){ open_categoria(obj.id_cae) };
+    if(obj.mostrar_prods == 0){
+        Descripcion.onclick = function(){ open_categoria(obj.id_cae) };
+    }
     Divm.appendChild(Descripcion);
     
     if(obj.mostrar_prods == 1){
