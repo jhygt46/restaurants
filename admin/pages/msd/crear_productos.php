@@ -211,9 +211,18 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                     $nombre_carro = $list[$i]['nombre_carro'];
                     $numero = $list[$i]['numero'];
 
-                    $nombre_mostrar = $nombre;
                     if($nombre_carro != ""){
-                        $nombre_mostrar = $nombre_carro;
+                        if($numero > 0){
+                            $nombre_mostrar = $numero.".- ".$nombre_carro;
+                        }else{
+                            $nombre_mostrar = $nombre_carro;
+                        }
+                    }else{
+                        if($numero > 0){
+                            $nombre_mostrar = $numero.".- ".$nombre;
+                        }else{
+                            $nombre_mostrar = $nombre;
+                        }
                     }
 
                 ?>
