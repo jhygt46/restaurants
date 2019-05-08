@@ -1200,6 +1200,7 @@ class Guardar extends Core{
                 
         $id = explode("/", $_POST['id']);
         $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[0]."' AND id_cae='".$id[1]."'");
+        $this->con->sql("UPDATE productos SET eliminado='1' WHERE id_pro='".$id[0]."' AND id_gir='".$this->id_gir."'");
         $this->con_cambios();
 
         $info['tipo'] = "success";
