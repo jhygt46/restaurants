@@ -1247,7 +1247,7 @@ class Guardar extends Core{
         }
         
         $info['reload'] = 1;
-        $info['page'] = "msd/preguntas.php;
+        $info['page'] = "msd/preguntas.php";
         return $info;
         
     }
@@ -1297,7 +1297,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Preguntas ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/preguntas.php;
+        $info['page'] = "msd/preguntas.php";
 
         return $info;
         
