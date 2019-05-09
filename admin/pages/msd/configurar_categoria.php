@@ -72,6 +72,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                             <option value="1" <?php echo($that['degradado'] == 1)?'selected':''; ?>>Blanco A1</option>
                             <option value="2" <?php echo($that['degradado'] == 2)?'selected':''; ?>>Gris A1</option>
                             <option value="3" <?php echo($that['degradado'] == 3)?'selected':''; ?>>Negro A1</option>
+                            <option value="4" <?php echo($that['degradado'] == 4)?'selected':''; ?>>Blanco A2</option>
                         </select>
                     </label>
                     <label class="clearfix">
