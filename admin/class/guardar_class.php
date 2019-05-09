@@ -1297,7 +1297,7 @@ class Guardar extends Core{
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Preguntas ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/preguntas.php?id=".$id[0];
+        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
 
         return $info;
         
