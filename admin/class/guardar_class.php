@@ -255,6 +255,63 @@ class Guardar extends Core{
         }
         return $info;
     }
+    public function uploadsubCategoria($filepath, $filename){
+
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+
+        $name = $_FILES['file_image0']['name'];
+        $size = $_FILES['file_image0']['size'];
+
+        if (strlen($name)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            if (in_array($extension, $file_formats)){
+                if ($size < (200 * 1024)){
+                    $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if (move_uploaded_file($tmp, $filepath.$imagename)){
+                        
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+
+                                $width = $data[0];
+                                $height = $data[1];
+                                $destino = imagecreatetruecolor($width, $height);
+                                $origen = imagecreatefromjpeg($filepath.$imagename);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagejpeg($destino, $filepath.$imagename_new);
+                                imagedestroy($destino);
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg";
+                            }
+
+                            unlink($filepath.$imagename);
+
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
     public function uploadCategoria($filepath, $filename, $alto){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
@@ -484,12 +541,19 @@ class Guardar extends Core{
         $ocultar = $_POST['ocultar'];
         $detalle_prods = $_POST['detalle_prods'];
         $degradado = $_POST['degradado'];
+
         $this->con_cambios();
         $alto = $this->get_alto();
+        $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
+        if($categoria['resultado'][0]['parent_id'] == 0){
+            $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
+        }
+        if($categoria['resultado'][0]['parent_id'] > 0){
+            $image = $this->uploadsubCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
+        }
+        
         if($image['op'] == 1){
-            $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
             $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
         }
