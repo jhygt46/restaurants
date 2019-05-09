@@ -294,9 +294,22 @@ function mostrar_pregunta(i){
     
     var carro = get_carro();
     var producto = get_producto(carro[i].id_pro);
-
     show_modal('modal_pregunta_productos');
-    $('.modal_pregunta_productos .titulo h1').html(producto.nombre); 
+
+    if(producto.nombre_carro != ""){
+        if(producto.numero > 0){
+            $('.modal_pregunta_productos .titulo h1').html(producto.numero + '.- ' + producto.nombre_carro);
+        }else{
+            $('.modal_pregunta_productos .titulo h1').html(producto.nombre_carro);
+        }
+    }else{
+        if(producto.numero > 0){
+            $('.modal_pregunta_productos .titulo h1').html(producto.numero + '.- ' + producto.nombre);
+        }else{
+            $('.modal_pregunta_productos .titulo h1').html(producto.nombre);
+        }
+    }
+
     $('.modal_pregunta_productos .info_modal').html('');
     $('.modal_pregunta_productos .info_modal').html(html_preguntas_producto(i));
 
