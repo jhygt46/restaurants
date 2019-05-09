@@ -1123,6 +1123,7 @@ class Guardar extends Core{
         $parent_id = $_POST['parent_id'];
         $precio = $_POST['precio'];
         $values = $this->list_arbol_cats_prods();
+        $this->con_cambios();
         
         $this->con->sql("UPDATE categorias SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
         $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
