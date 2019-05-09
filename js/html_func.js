@@ -145,7 +145,11 @@ function create_html_producto(id, detalle){
         
         var nombre = document.createElement('div');
         nombre.className = 'nombre';
-        nombre.innerHTML = aux.numero + " " + aux.nombre;
+        if(aux.numero > 0){
+            nombre.innerHTML = aux.numero + '.- ' + aux.nombre;
+        }else{
+            nombre.innerHTML = aux.nombre;
+        }
         Div.appendChild(nombre);
 
         var descripcion = document.createElement('div');
