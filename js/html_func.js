@@ -467,7 +467,6 @@ function imprimir_promo_modal(categoria){
     
 }
 
-
 // PREGUNTAS PRODUCTOS //
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
@@ -515,20 +514,19 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
                 }else{
                     pro_cat_item_nombre.innerHTML = producto.nombre_carro;
                 }
+                pro_cat_item.appendChild(pro_cat_item_nombre);
             }else{
                 if(producto.numero > 0){
                     pro_cat_item_nombre.innerHTML = producto.numero + '.- ' + producto.nombre;
                 }else{
                     pro_cat_item_nombre.innerHTML = producto.nombre;
                 }
-            }
-            
-            pro_cat_item.appendChild(pro_cat_item_nombre);
-
-            pro_cat_item_descripcion = document.createElement('div');
-            pro_cat_item_descripcion.className = 'pro_cat_item_descripcion';
-            pro_cat_item_descripcion.innerHTML = producto.descripcion;
-            pro_cat_item.appendChild(pro_cat_item_descripcion);
+                pro_cat_item.appendChild(pro_cat_item_nombre);
+                pro_cat_item_descripcion = document.createElement('div');
+                pro_cat_item_descripcion.className = 'pro_cat_item_descripcion';
+                pro_cat_item_descripcion.innerHTML = producto.descripcion;
+                pro_cat_item.appendChild(pro_cat_item_descripcion);
+            }            
 
             html.appendChild(pro_cat_item);
             
