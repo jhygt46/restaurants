@@ -921,7 +921,7 @@ class Guardar extends Core{
             $info['mensaje'] = "Local modificado exitosamente";
         }
         
-        $this->locales_giro();
+        $info['locales'] = $this->locales_giro();
 
         $info['reload'] = 1;
         $info['page'] = "msd/locales.php";
@@ -977,7 +977,7 @@ class Guardar extends Core{
             $resultado[] = $aux;
             unset($aux);
         }
-        $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado)."' WHERE id_gir='".$this->id_gir."'");
+        return $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado)."' WHERE id_gir='".$this->id_gir."'");
 
     }
     private function eliminar_locales(){
