@@ -155,20 +155,20 @@ class Guardar extends Core{
         $id_cae = $_POST['id_cae'];
         $values = $_POST['values'];
         for($i=0; $i<count($values); $i++){
-            $info['db'][] = $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+            $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
         }
-        return $info;
         
     }
     public function refresh(){
-        
+
         if($this->id_gir > 0){
             $this->get_web_js_data2($this->id_gir);
         }
-        
+
     }
     
     public function uploadfavIcon($filename){
+
         $filepath = '/var/www/html/restaurants/images/favicon/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("ico", "ICO");
@@ -211,6 +211,7 @@ class Guardar extends Core{
 
     }
     public function uploadLogo($filename){
+
         $filepath = '/var/www/html/restaurants/images/logos/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("png", "PNG");
@@ -254,15 +255,14 @@ class Guardar extends Core{
             $info['mensaje'] =  "No ha seleccionado una imagen";
         }
         return $info;
+
     }
     public function uploadsubCategoria($filepath, $filename){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
-
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
-
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)){
@@ -271,10 +271,8 @@ class Guardar extends Core{
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-
                                 $width = $data[0];
                                 $height = $data[1];
                                 $destino = imagecreatetruecolor($width, $height);
@@ -285,14 +283,11 @@ class Guardar extends Core{
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
                                 $info['image'] = $imagename_new;
-
                             }else{
                                 $info['op'] = 2;
                                 $info['mensaje'] = "La imagen no es jpg";
                             }
-
                             unlink($filepath.$imagename);
-
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -316,10 +311,8 @@ class Guardar extends Core{
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
-
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
-
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)){
@@ -328,10 +321,8 @@ class Guardar extends Core{
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-
                                 $width = 500;
                                 $height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
@@ -342,14 +333,11 @@ class Guardar extends Core{
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
                                 $info['image'] = $imagename_new;
-
                             }else{
                                 $info['op'] = 2;
                                 $info['mensaje'] = "La imagen no es jpg";
                             }
-
                             unlink($filepath.$imagename);
-
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -373,10 +361,8 @@ class Guardar extends Core{
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
-
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
-
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
@@ -385,7 +371,6 @@ class Guardar extends Core{
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
-                        
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
                                 $destino = imagecreatetruecolor($data[0], $data[1]);
@@ -401,7 +386,6 @@ class Guardar extends Core{
                                 $info['mensaje'] = "La imagen no es jpg";
                             }
                             unlink($filepath.$imagename);
-
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -428,14 +412,11 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
         $seguir = $_POST['seguir'];
         $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
-
         $info['reload'] = 1;
         $info['page'] = ($seguir == 1) ? 'msd/configurar_footer.php?seguir=1' : 'msd/ver_giro.php' ;
-
         if($sql['estado']){
             $info['op'] = 1;
             $info['mensaje'] = "Footer modificado exitosamente";
-            $this->con_cambios();
         }else{
             $info['op'] = 2;
             $info['mensaje'] = "Se produjo un error: porfavor intente mas tarde";
@@ -514,10 +495,10 @@ class Guardar extends Core{
         $foto_favicon = $this->uploadfavIcon($dominio);
 
         if($foto_logo['op'] == 1){
-            $info['foto_logo'] = $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
+            $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
         }
         if($foto_favicon['op'] == 1){
-            $info['foto_favicon'] = $this->con->sql("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir='".$this->id_gir."'");
+            $this->con->sql("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir='".$this->id_gir."'");
         }
         
         // MODIFICAR PEDIDOS
@@ -544,7 +525,7 @@ class Guardar extends Core{
 
         $this->con_cambios();
         $alto = $this->get_alto();
-        $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."'");
+        $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
 
         if($categoria['resultado'][0]['parent_id'] == 0){
             $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
@@ -555,10 +536,10 @@ class Guardar extends Core{
         
         if($image['op'] == 1){
             @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
-            $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."'");
+            $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
         }
 
-        $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."'");
+        $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
         $info['op'] = 1;
         $info['mensaje'] = "Configuracion modificado exitosamente";
         
@@ -577,9 +558,9 @@ class Guardar extends Core{
 
         $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
         if($image['op'] == 1){
-            $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."'");
+            $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
             @unlink('/var/www/html/restaurants/images/productos/'.$productos['resultado'][0]['image']);
-            $this->con->sql("UPDATE productos SET image='".$image["image"]."' WHERE id_pro='".$id_pro."'");
+            $this->con->sql("UPDATE productos SET image='".$image["image"]."' WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
         }
 
         $list = $this->get_preguntas();
@@ -597,10 +578,10 @@ class Guardar extends Core{
         for($i=0; $i<count($list_ing); $i++){
             $lin = $_POST['lista_ing-'.$list_ing[$i]['id_lin']];
             if($lin == 0){
-                $info['db_0'][] = $this->con->sql("DELETE FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."' AND id_lin='".$list_ing[$i]['id_lin']."'");
+                $this->con->sql("DELETE FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."' AND id_lin='".$list_ing[$i]['id_lin']."'");
             }
             if($lin == 1){
-                $info['db_1'][] = $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
+                $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
             }
         }
         
@@ -701,12 +682,12 @@ class Guardar extends Core{
     private function eliminar_repartidor(){
 
         $id = explode("/", $_POST['id']);
-        $info['db'] = $this->con->sql("DELETE FROM motos_locales WHERE id_loc='".$id[0]."' AND id_mot='".$id[1]."'");
+        $this->con->sql("DELETE FROM motos WHERE id_mot='".$id[1]."' AND id_gir='".$this->id_gir."'");
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Repartidor ".$_POST["nombre"]." Eliminado";
         $info['reload'] = 1;
-        $info['page'] = "msd/crear_repartidor.php?id_mot=".$id[1]."&id_loc=".$id[0]."&nombre=".$id[2];
+        $info['page'] = "msd/crear_repartidor.php?id_loc=".$id[0]."&nombre=".$id[2];
         return $info;
 
     }
@@ -815,23 +796,28 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
         $id_loc = $_POST['id_loc'];
         $loc_nombre = $_POST['loc_nombre'];
+        $sqllocales = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
 
-        if($tipo == 0){
-            $nombre = $_POST['nombre'];
-            $correo = $_POST['correo'];
-            $uid = bin2hex(openssl_random_pseudo_bytes(10));
-            $aux_mot = $this->con->sql("INSERT INTO motos (nombre, correo, uid, id_gir, eliminado) VALUES ('".$nombre."', '".$correo."', '".$uid."', '".$this->id_gir."', '0')");
-            $id_mot = $aux_mot['insert_id'];
-            $info['mensaje'] = "Repartidor asociado exitosamente";
+        if($sqllocales['count'] == 1){
+            if($tipo == 0){
+                $nombre = $_POST['nombre'];
+                $correo = $_POST['correo'];
+                $uid = bin2hex(openssl_random_pseudo_bytes(10));
+                $aux_mot = $this->con->sql("INSERT INTO motos (nombre, correo, uid, id_gir, eliminado) VALUES ('".$nombre."', '".$correo."', '".$uid."', '".$this->id_gir."', '0')");
+                $id_mot = $aux_mot['insert_id'];
+                $info['mensaje'] = "Repartidor ingresado exitosamente";
+            }
+            if($tipo == 1){
+                $id_mot = $_POST['repartidor'];
+                $info['mensaje'] = "Repartidor asociado exitosamente";
+            }
+            $info['op'] = 1;
+            $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
         }
-        if($tipo == 1){
-            $id_mot = $_POST['repartidor'];
-            $info['mensaje'] = "Repartidor asociado exitosamente";
-        }
-
-        $info['db'] = $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
-
-        $info['op'] = 1;
+        
         $info['reload'] = 1;
         $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
         return $info;
@@ -1052,8 +1038,24 @@ class Guardar extends Core{
     private function eliminar_horario(){
 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE horarios SET eliminado='1' WHERE id_hor='".$id[0]."'");
+        $this->con->sql("UPDATE horarios SET eliminado='1' WHERE id_hor='".$id[0]."' AND id_gir='".$this->id_gir."'");
         
+        $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
+        $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
+        
+        if($h_retiro['count'] == 0){
+            $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_retiro['count'] > 0){
+            $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_despacho['count'] == 0){
+            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_despacho['count'] > 0){
+            $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
+        }
+
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
