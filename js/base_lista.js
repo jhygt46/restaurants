@@ -314,6 +314,9 @@ function mostrar_pregunta(i){
     $('.modal_pregunta_productos .info_modal').html(html_preguntas_producto(i));
 
 }
+function topscroll(){
+    $('.cont_contenido').animate({ scrollTop: 0 }, 500);
+}
 function seleccionar_productos_categoria_promo(i){
     
     var carros = get_carro();

@@ -779,16 +779,32 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
 
         if($id_hor == 0){
-            $info['db'] = $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$tipo."', '".$id_loc."', '".$this->id_gir."')");
+            $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$tipo."', '".$id_loc."', '".$this->id_gir."')");
             $info['op'] = 1;
             $info['mensaje'] = "Horario creado exitosamente";
         }
         if($id_hor > 0){
-            $info['db'] = $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
+            $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
             $info['op'] = 1;
             $info['mensaje'] = "Horario modificado exitosamente";
         }
         
+        $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
+        $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
+        
+        if($h_retiro['count'] == 0){
+            $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_retiro['count'] > 0){
+            $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_despacho['count'] == 0){
+            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
+        }
+        if($h_despacho['count'] > 0){
+            $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
+        }
+
         $info['reload'] = 1;
         $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
         return $info;
