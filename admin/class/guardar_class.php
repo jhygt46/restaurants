@@ -967,7 +967,7 @@ class Guardar extends Core{
     }
     private function locales_giro(){
 
-        $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='1'");
+        $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='0'");
         for($i=0; $i<$sql_aux["count"]; $i++){
             $aux["id_loc"] = $sql_aux["resultado"][$i]["id_loc"];
             $aux["lat"] = $sql_aux["resultado"][$i]["lat"];
@@ -977,7 +977,7 @@ class Guardar extends Core{
             $resultado[] = $aux;
             unset($aux);
         }
-        return $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado)."' WHERE id_gir='".$this->id_gir."'");
+        return $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado, JSON_UNESCAPED_UNICODE)."' WHERE id_gir='".$this->id_gir."'");
 
     }
     private function eliminar_locales(){
