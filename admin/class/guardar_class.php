@@ -150,14 +150,16 @@ class Guardar extends Core{
         
     }
     private function orderprods(){
-        
-        $this->con_cambios();
+
         $id_cae = $_POST['id_cae'];
         $values = $_POST['values'];
-        for($i=0; $i<count($values); $i++){
-            $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+        $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+        if($sqlcat['count'] == 1){
+            $this->con_cambios();
+            for($i=0; $i<count($values); $i++){
+                $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+            }
         }
-        
     }
     public function refresh(){
 
@@ -411,16 +413,19 @@ class Guardar extends Core{
         $texto = $_POST['html'];
         $tipo = $_POST['tipo'];
         $seguir = $_POST['seguir'];
+
         $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
-        $info['reload'] = 1;
-        $info['page'] = ($seguir == 1) ? 'msd/configurar_footer.php?seguir=1' : 'msd/ver_giro.php' ;
-        if($sql['estado']){
+        if($sql['estado'] == true){
             $info['op'] = 1;
             $info['mensaje'] = "Footer modificado exitosamente";
-        }else{
+        }
+        if($sql['estado'] == false){
             $info['op'] = 2;
             $info['mensaje'] = "Se produjo un error: porfavor intente mas tarde";
         }
+
+        $info['reload'] = 1;
+        $info['page'] = 'msd/ver_giro.php';
         return $info;
         
     }
@@ -682,7 +687,7 @@ class Guardar extends Core{
     private function eliminar_repartidor(){
 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("DELETE FROM motos WHERE id_mot='".$id[1]."' AND id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE motos SET eliminado='1' WHERE id_mot='".$id[1]."' AND id_gir='".$this->id_gir."'");
         $info['tipo'] = "success";
         $info['titulo'] = "Eliminado";
         $info['texto'] = "Repartidor ".$_POST["nombre"]." Eliminado";
@@ -694,52 +699,21 @@ class Guardar extends Core{
     private function eliminar_tramos(){
         
         $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE locales_tramos SET eliminado='1' WHERE id_lot='".$id[1]."'");
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
-
+        $sqllocales = $this->con->sql("SELECT * FROM locales_tramos t1, locales t2 WHERE t1.id_lot='".$id[1]."' AND t1.id_loc=t2.id_loc AND t2.id_gir='".$this->id_gir."'");
+        if($sqllocales['count'] == 1){
+            $this->con->sql("UPDATE locales_tramos SET eliminado='1' WHERE id_lot='".$id[1]."'");        
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
+        }else{
+            //XSS
+        }
         return $info;
         
     }
-    private function crear_pagina(){
-        
-        $id_pag = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $html = $_POST['html'];
-        $tipo = $_POST['pagina'];
-        $this->con_cambios();
-
-        $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
-        $info['db_image'] = $image;
-
-        if($id_pag == 0){
-            $aux_page = $this->con->sql("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES ('".$nombre."', '".$html."', '".$tipo."', '".$this->id_gir."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Paginas creado exitosamente";
-            if($image['op'] == 1){
-                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
-            }
-        }
-        if($id_pag > 0){
-            $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."'");
-            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', html='".$html."', tipo='".$tipo."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Paginas modificado exitosamente";
-            if($image['op'] == 1){
-                @unlink('/var/www/html/restaurants/images/paginas/'.$pagina['resultado'][0]['imagen']);
-                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
-            }
-        }
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/configurar_paginas.php";
-        return $info;
-        
-    }
+    
     private function crear_horario(){
 
         $this->con_cambios();
@@ -765,7 +739,7 @@ class Guardar extends Core{
             $info['mensaje'] = "Horario creado exitosamente";
         }
         if($id_hor > 0){
-            $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."'");
+            $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Horario modificado exitosamente";
         }
@@ -1381,6 +1355,41 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "msd/preguntas.php";
 
+        return $info;
+        
+    }
+    private function crear_pagina(){
+        
+        $id_pag = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $html = $_POST['html'];
+        $tipo = $_POST['pagina'];
+        $this->con_cambios();
+
+        $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
+        $info['db_image'] = $image;
+
+        if($id_pag == 0){
+            $aux_page = $this->con->sql("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES ('".$nombre."', '".$html."', '".$tipo."', '".$this->id_gir."')");
+            $info['op'] = 1;
+            $info['mensaje'] = "Paginas creado exitosamente";
+            if($image['op'] == 1){
+                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
+            }
+        }
+        if($id_pag > 0){
+            $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."'");
+            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', html='".$html."', tipo='".$tipo."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            $info['op'] = 1;
+            $info['mensaje'] = "Paginas modificado exitosamente";
+            if($image['op'] == 1){
+                @unlink('/var/www/html/restaurants/images/paginas/'.$pagina['resultado'][0]['imagen']);
+                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            }
+        }
+        
+        $info['reload'] = 1;
+        $info['page'] = "msd/configurar_paginas.php";
         return $info;
         
     }
