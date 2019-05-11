@@ -911,17 +911,17 @@ class Guardar extends Core{
         }
 
         if($id_loc == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$correo_ses."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
+            $this->con->sql("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$correo_ses."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
             $info['op'] = 1;
             $info['mensaje'] = "Local creado exitosamente";
         }
         if($id_loc > 0){
-            $info['db2'] = $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo_ses='".$correo_ses."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo_ses='".$correo_ses."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Local modificado exitosamente";
         }
         
-        $info['locales'] = $this->locales_giro();
+        $this->locales_giro();
 
         $info['reload'] = 1;
         $info['page'] = "msd/locales.php";
@@ -967,7 +967,7 @@ class Guardar extends Core{
     }
     private function locales_giro(){
 
-        $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' WHERE eliminado='0'");
+        $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
         for($i=0; $i<$sql_aux["count"]; $i++){
             $aux["id_loc"] = $sql_aux["resultado"][$i]["id_loc"];
             $aux["lat"] = $sql_aux["resultado"][$i]["lat"];
@@ -977,7 +977,7 @@ class Guardar extends Core{
             $resultado[] = $aux;
             unset($aux);
         }
-        return $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado, JSON_UNESCAPED_UNICODE)."' WHERE id_gir='".$this->id_gir."'");
+        $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado, JSON_UNESCAPED_UNICODE)."' WHERE id_gir='".$this->id_gir."'");
 
     }
     private function eliminar_locales(){
