@@ -869,6 +869,7 @@ class Core{
             $info['mapcode'] = $sql['resultado'][0]['mapcode'];
             $info['dominio'] = "";
             $info['url'] = $dominio;
+            $info['host'] = $_SERVER["HTTP_HOST"];
 
             if($sql['resultado'][0]['favicon'] != ""){
                 $info['favicon'] = $sql['resultado'][0]['favicon'];

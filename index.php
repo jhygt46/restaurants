@@ -90,6 +90,7 @@ if(isset($info['id_gir'])){
         <script>
             var dominio = "<?php echo $info["dominio"]; ?>";
             var referer = "<?php echo $info["url"]; ?>";
+            var host = "<?php echo $_SERVER["host"]; ?>";
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
         </script>
         <style>
