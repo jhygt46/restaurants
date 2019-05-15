@@ -89,6 +89,7 @@ if(isset($info['id_gir'])){
         <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
         <script>
             var dominio = "<?php echo $info["dominio"]; ?>";
+            var referer = "<?php echo $info["url"]; ?>";
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
         </script>
         <style>
