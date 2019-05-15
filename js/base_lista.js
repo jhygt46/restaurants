@@ -1192,10 +1192,11 @@ function initMap(){
             }
             
             if(num != 0){
-                console.log(host);
+                
+                var url = (host == 1) ? '../ajax/index.php' : 'ajax/index.php' ;
                 var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: referer};
                 $.ajax({
-                    url: "ajax/index.php",
+                    url: url,
                     type: "POST",
                     data: send,
                     success: function(datas){

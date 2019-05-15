@@ -28,7 +28,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
         require($path.'/admin/class/core_class.php');
         $core = new Core();
         $info = $core->get_data($_GET['param_dom']);
-        $host = "misitiodelivery.cl";
+        $host = 1;
     }
 
 }else{
@@ -36,7 +36,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     require($path.'/admin/class/core_class.php');
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
-    $host = $_SERVER["HTTP_HOST"];
+    $host = 0;
 
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
