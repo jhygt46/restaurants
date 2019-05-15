@@ -458,10 +458,7 @@ class Rest{
     }
     public function get_info_despacho($lat, $lng){
 
-        return "BUE";
-
         $polygons = $this->get_polygons();
-        $info['pol'] = $polygons;
         $precio = 9999999;
         $info['op'] = 2;
         foreach($polygons as $polygon){
