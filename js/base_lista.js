@@ -1193,7 +1193,7 @@ function initMap(){
             
             if(num != 0){
                 
-                var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
+                var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: referer};
                 $.ajax({
                     url: "ajax/index.php",
                     type: "POST",

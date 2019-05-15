@@ -28,6 +28,11 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
         require($path.'/admin/class/core_class.php');
         $core = new Core();
         $info = $core->get_data($_GET['param_dom']);
+        
+        echo "<pre>";
+        print_r($info);
+        echo "</pre>";
+
     }
 
 }else{
