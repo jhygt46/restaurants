@@ -868,6 +868,7 @@ class Core{
             $info['estados'] = explode(",",$sql['resultado'][0]['estados']);
             $info['mapcode'] = $sql['resultado'][0]['mapcode'];
             $info['dominio'] = "";
+            $info['url'] = $dominio;
 
             if($sql['resultado'][0]['favicon'] != ""){
                 $info['favicon'] = $sql['resultado'][0]['favicon'];
