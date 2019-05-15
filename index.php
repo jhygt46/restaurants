@@ -28,11 +28,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
         require($path.'/admin/class/core_class.php');
         $core = new Core();
         $info = $core->get_data($_GET['param_dom']);
-        
-        echo "<pre>";
-        print_r($info);
-        echo "</pre>";
-
+        $dominio = $_GET['param_dom'];
     }
 
 }else{
@@ -40,6 +36,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     require($path.'/admin/class/core_class.php');
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
+    $dominio = $_SERVER["HTTP_HOST"];
 
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -93,7 +90,7 @@ if(isset($info['id_gir'])){
         <script src="<?php echo $info["path"]; ?>/js/base.js" type="text/javascript"></script>
         <script src="<?php echo $info["path"]; ?>/js/base_lista.js" type="text/javascript"></script>
         <script>
-            var dominio = "<?php echo $info["dominio"]; ?>";
+            var dominio = "<?php echo $dominio; ?>";
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
         </script>
         <style>
