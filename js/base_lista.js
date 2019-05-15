@@ -1199,7 +1199,7 @@ function initMap(){
                     type: "POST",
                     data: send,
                     success: function(datas){
-                        
+                        console.log(datas);
                         var data = JSON.parse(datas);
                         console.log(data);                        
                         if(data.op == 1){

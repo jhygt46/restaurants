@@ -421,7 +421,7 @@ class Guardar extends Core{
         }
         if($sql['estado'] == false){
             $info['op'] = 2;
-            $info['mensaje'] = "Se produjo un error: porfavor intente mas tarde";
+            $info['mensaje'] = "Se produjo un error: recuerde que no puede ocupar comillas simples ''";
         }
 
         $info['reload'] = 1;

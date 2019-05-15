@@ -1023,6 +1023,20 @@ class Core{
         return $info;
         
     }
+    public function get_zona_nombre(){
+
+        $id_zon = $_GET['id_zon'];
+        $sqlzonas = $this->con->sql("SELECT * FROM zonas WHERE id_zon='".$id_zon."'");
+        return $sqlzonas['resultado'][0]['nombre'];
+
+    }
+    public function get_zona(){
+
+        $id_zon = $_GET['id_zon'];
+        $sqlzonas = $this->con->sql("SELECT t3.id_pts as id, t3.lat, t3.lng, t2.orden FROM zonas_puntos t2, zz_puntos t3 WHERE t2.id_zon='".$id_zon."' AND t2.id_pts=t3.id_pts ORDER BY t2.orden ASC");
+        return $sqlzonas['resultado'];
+
+    }
     public function get_alto(){
         
         $alto = $this->con->sql("SELECT alto FROM giros WHERE id_gir='".$this->id_gir."'");
