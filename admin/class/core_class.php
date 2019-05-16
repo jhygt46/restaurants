@@ -235,9 +235,9 @@ class Core{
         }
 
     }
-    public function get_usuarios_giro(){
+    public function get_usuarios_local($id_loc){
 
-        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc='".$id_loc."', id_gir='".$this->id_gir."' AND eliminado='0'");
         return $usuarios;
 
     }

@@ -27,10 +27,7 @@ $page_mod = "pages/msd/usuarios_giro.php";
 $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $core->get_usuarios_giro();
-echo "<pre>";
-print_r($list);
-echo "</pre>";
+$list = $core->get_usuarios_local($_GET["id_loc"]);
 $m_locales = false;
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
