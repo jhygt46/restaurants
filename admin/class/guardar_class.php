@@ -659,12 +659,12 @@ class Guardar extends Core{
 
             }else{
                 $info['op'] = 2;
-                $info['mensaje'] = "Error: Dominio Invalido";
+                $info['mensaje'] = "Error 1: Dominio Invalido";
             }
 
         }else{
             $info['op'] = 2;
-            $info['mensaje'] = "Error: Dominio Invalido";
+            $info['mensaje'] = "Error 2: Dominio Invalido";
         }
 
         $info['reload'] = 1;
