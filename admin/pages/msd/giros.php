@@ -115,6 +115,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <div class="nombre"><?php if($dns_letra == ""){ echo "<p style='font-weight: bold; color: #900; font-size: 17px'>Falta crear zona DNS para ".$dominio."</p>"; }else{ echo $nombre; } ?></div>
                         <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>')"></a>
                         <a class="icono ic3" onclick="navlink('pages/msd/ver_informe.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic16" onclick="navlink('pages/msd/usuarios.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic2" onclick="navlink('pages/msd/ver_giro.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                     </div>
                 </div>
