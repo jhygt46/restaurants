@@ -90,7 +90,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Correo:</p></span>
                         <input id="correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
-                    <label>
+                    <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select>
                             <option value="0">Punto de Venta</option>
