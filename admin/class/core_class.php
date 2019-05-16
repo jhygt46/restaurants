@@ -236,8 +236,8 @@ class Core{
 
     }
     public function get_usuarios_local($id_loc){
-        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc='".$id_loc."', id_gir='".$this->id_gir."' AND eliminado='0'");
-        return $usuarios;
+        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+        return $usuarios['resultado'];
     }
     public function get_usuario($id){
         $usuarios = $this->con->sql("SELECT id_user, nombre, correo, tipo FROM fw_usuarios WHERE id_user='".$id."' AND eliminado='0'");
