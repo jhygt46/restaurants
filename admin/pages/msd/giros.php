@@ -71,6 +71,14 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <input id="dominio" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Correo Electronico:</p></span>
+                        <input id="correo" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Telefono:</p></span>
+                        <input id="telefono" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
                         <span><p>Pagina:</p></span>
                         <input id="item_pagina" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
