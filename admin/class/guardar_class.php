@@ -615,11 +615,12 @@ class Guardar extends Core{
         if($this->verificar_dominio($dominio)){
             
             $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-            if($verificar_dominio['count'] == 0){
-                
-                $id = $_POST['id'];
-                $nombre = $_POST['nombre'];
+            $id = $_POST['id'];
 
+            if($verificar_dominio['count'] == 0 || ($verificar_dominio['count'] == 1 && $id == $verificar_dominio['resultado'][0]['id_gir'])){
+                
+                
+                $nombre = $_POST['nombre'];
                 $item_pagina = $_POST['item_pagina'];
                 $item_pos = $_POST['item_pos'];
                 $item_cocina = $_POST['item_cocina'];
