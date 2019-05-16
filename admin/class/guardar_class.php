@@ -971,11 +971,11 @@ class Guardar extends Core{
 
         $id = $_POST['id'];
         $id_loc = $_POST['id_loc'];
-        $nombre = $_POST['nombre'];
-        $correo = $_POST['correo'];
-        $tipo = $_POST['tipo'];
-        $pass1 = $_POST['pass1'];
-        $pass2 = $_POST['pass2'];
+        $nombre = $_POST['v_nombre'];
+        $correo = $_POST['v_correo'];
+        $tipo = $_POST['v_tipo'];
+        $pass1 = $_POST['v_pass1'];
+        $pass2 = $_POST['v_pass2'];
 
         $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
         if($sqlloc["count"] == 1){
