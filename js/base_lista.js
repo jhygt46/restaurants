@@ -946,11 +946,12 @@ function send_chat(){
 
     var pedido = get_pedido();
     var mensaje = $('#texto_chat').val();
+    var url = (host == 1) ? '../ajax/index.php' : 'ajax/index.php' ;
     var send = { accion: 'enviar_chat', id_ped: pedido.id_ped, id_loc: pedido.id_loc, code: pedido.pedido_code, mensaje: mensaje };
     var nombre = 'Diego';
 
     $.ajax({
-        url: "ajax/index.php",
+        url: url,
         type: "POST",
         data: send,
         success: function(info){
@@ -986,16 +987,16 @@ function paso_4(){
             pedido.pre_teriyaki = ($('#pedido_teriyaki').is(':checked') ? 1 : 0 );
             pedido.comentarios = $('#pedido_comentarios').val();
             
+            var url = (host == 1) ? '../ajax/index.php' : 'ajax/index.php' ;
             var send = { accion: 'enviar_pedido', pedido: JSON.stringify(pedido), carro: JSON.stringify(get_carro()), promos: JSON.stringify(get_promos()), puser: JSON.stringify(get_puser()) };
             
             $.ajax({
-                url: "ajax/index.php",
+                url: url,
                 type: "POST",
                 data: send,
                 success: function(info){
 
                     var data = JSON.parse(info);
-                    console.log(data.tiempo);
                     if(data.op == 2){
                         alert(data.mensaje);
                     }
@@ -1075,16 +1076,11 @@ function time(){
 }
 function open_socket(code){
     
-    console.log("open-socket");
-
     var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
     socket.on('pedido-'+code, function(data){
 
-        console.log("send-socket");
-
         var pedido = get_pedido();
         var info = JSON.parse(data.estado);
-        console.log(info);
 
         if(info.accion == 0){
             $('.pedido_final .estado h2').html(info.estado);
@@ -1200,9 +1196,8 @@ function initMap(){
                     type: "POST",
                     data: send,
                     success: function(datas){
-                        console.log(datas);
-                        var data = JSON.parse(datas);
-                        console.log(data);                        
+
+                        var data = JSON.parse(datas);                      
                         if(data.op == 1){
 
                             var pedido = get_pedido();
