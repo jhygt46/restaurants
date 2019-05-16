@@ -30,11 +30,19 @@ $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios_local($_GET["id_loc"]);
 $m_locales = false;
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
     $that = $core->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
+
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
 
 }
 ?>
@@ -62,26 +70,26 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
-                        <input id="v_nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="v_nombre" name="v_nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Correo:</p></span>
-                        <input id="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                        <input id="v_correo" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="v_tipo">
-                            <option value="0">Punto de Venta</option>
-                            <option value="1">Cocina</option>
+                        <select id="v_tipo" name="v_tipo">
+                            <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Punto de Venta</option>
+                            <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Cocina</option>
                         </select>
                     </label>
                     <label class="clearfix">
                         <span><p>Password:</p></span>
-                        <input id="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
+                        <input id="v_pass1" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Confirmacion Password:</p></span>
-                        <input id="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
+                        <input id="v_pass2" name="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
