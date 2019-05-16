@@ -140,7 +140,7 @@ class Login {
                             if($user['resultado'][0]['tipo'] == 1){
                                 
                                 // COCINA
-                                $info['op'] = 3;
+                                $info['op'] = 4;
                                 $info['url'] = 'cocina.php';
                                 $info['message'] = "Ingreso Exitoso Cocina";
                                 $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
