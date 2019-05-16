@@ -16,21 +16,18 @@ $titulo = "Usuarios";
 $titulo_list = "Mis Usuarios";
 $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
-$accion = "crear_usuario";
+$accion = "crear_usuarios_giro";
 
 $eliminaraccion = "eliminar_usuario";
 $id_list = "id_user";
 $eliminarobjeto = "Usuario";
-$page_mod = "pages/msd/usuarios.php";
+$page_mod = "pages/msd/usuarios_giro.php";
 /* CONFIG PAGE */
 
 $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_usuarios();
-$list_loc = $fireapp->get_locales();
-$list_giros = $fireapp->get_giros();
-$inicio = $fireapp->inicio();
 $m_locales = false;
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
@@ -38,34 +35,14 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
     $id_user = $_GET["id_user"];
     $that = $fireapp->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
-    if($that['tipo'] == 2){ $m_locales = true; }
 
 }
 ?>
-<script>
-    function ver_locales(){
-        var value = $('#tipo').val();
-        console.log(value);
-        if(value == 1){
-            $('.locales').hide();
-            $('.giros').show();
-        }
-        if(value == 2){
-            $('.locales').show();
-            $('.giros').hide();
-        }
-        if(value == 3 || value == 4){
-            $('.giros').hide();
-            $('.locales').hide();
-        }
-    }
-</script>
-
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/locales.php')"></li>
         </ul>
     </div>
     <hr>
@@ -95,6 +72,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <select>
                             <option value="0">Punto de Venta</option>
                             <option value="1">Cocina</option>
+                            <option value="2">Administrador</option>
                         </select>
                     </label>
                     <label class="clearfix">
