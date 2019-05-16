@@ -36,6 +36,12 @@
                             mal(data.message);
                             btn.prop("disabled", false);
                         }
+                        if(data.op == 3){
+                            bien(data.message);
+                            setTimeout(function () {
+                                $(location).attr('href','/'+data.url);
+                            }, 2000);
+                        }
                     },
                     error: function(e){
                         btn.prop("disabled", false);

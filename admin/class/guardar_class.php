@@ -977,30 +977,42 @@ class Guardar extends Core{
         $pass1 = $_POST['v_pass1'];
         $pass2 = $_POST['v_pass2'];
 
+        $sqlcorreo = $this->con->sql("SELECT * FROM fw_usuarios WHERE corre='".$correo."'");
         $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+        
         if($sqlloc["count"] == 1){
             if($id == 0){
-                if($pass1 == $pass2){
-                    if(strlen($pass1) > 7){
-                        $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES ('".$nombre."', now(), '".$correo."', '".md5($pass1)."', '".$tipo."', '0', '".$id_loc."', '".$this->id_gir."')");
-                        $info['op'] = 1;
+                if($sqlcorreo["count"] == 0){
+                    if($pass1 == $pass2){
+                        if(strlen($pass1) > 7){
+                            $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES ('".$nombre."', now(), '".$correo."', '".md5($pass1)."', '".$tipo."', '0', '".$id_loc."', '".$this->id_gir."')");
+                            $info['op'] = 1;
+                        }else{
+                            $info['op'] = 2;
+                            $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                        }
                     }else{
                         $info['op'] = 2;
-                        $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                        $info['mensaje'] = "Password diferentes";
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Password diferentes";
+                    $info['mensaje'] = "Correo Existente";
                 }
             }
             if($id > 0){
-                if($pass1 == $pass2 && strlen($pass1) > 7){
-                    $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."' WHERE id_user='".$id."'");
+                if($sqlcorreo["count"] == 0 || ($sqlcorreo["count"] == 1 && $sqlcorreo['resultado'][0]['id_user'] == $id)){
+                    if($pass1 == $pass2 && strlen($pass1) > 7){
+                        $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."' WHERE id_user='".$id."'");
+                    }else{
+                        $this->con->sql("UPDATE fw_usuarios SET tipo='".$tipo."', nombre='".$nombre."', correo='".$correo."', id_loc='".$id_loc."' WHERE id_user='".$id."'");
+                    }
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Usuario modificado exitosamente";
                 }else{
-                    $this->con->sql("UPDATE fw_usuarios SET tipo='".$tipo."', nombre='".$nombre."', correo='".$correo."', id_loc='".$id_loc."' WHERE id_user='".$id."'");
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Correo Existente";
                 }
-                $info['op'] = 1;
-                $info['mensaje'] = "Usuario modificado exitosamente";
             }
         }else{
             $info['op'] = 2;

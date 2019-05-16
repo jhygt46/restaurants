@@ -123,31 +123,55 @@ class Login {
 
                     if($pass == md5($_POST['pass'])){
 
-                        $ses['info']['id_user'] = $id_user;
-                        $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
-                        $ses['info']['admin'] = $user['resultado'][0]['admin'];
-                        $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
-                        $ses['id_gir'] = 0;
-                        
-                        // 1 INGRESAR
-                        // 2 ERRAR
-                        // 3 PEDIR PASSWORD
-                        $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('1', now(), '".$id_user."')");
+                        if($user['resultado'][0]['id_loc'] > 0){
 
-                        if($ses['info']['admin'] == 0){
-                            $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
-                            if($aux_gir['count'] == 1){
-                                $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
+                            if($user['resultado'][0]['tipo'] == 0){
+                                // PUNTO DE VENTA
+                                $info['op'] = 3;
+                                $info['url'] = 'locales';
+                                $info['message'] = "Ingreso Exitoso Punto de Venta";
+                                $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
+                                setcookie('CODE', $code_cookie, time()+50400);
+                                setcookie('ID', $user['resultado'][0]['id_loc'], time()+50400);
+                                $this->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
+
                             }
+                            if($user['resultado'][0]['tipo'] == 1){
+                                // COCINA
+                                $info['op'] = 3;
+                                $info['url'] = 'cocina';
+                                $info['message'] = "Ingreso Exitoso Cocina";
+                                $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
+                                setcookie('SCODE', $aux_sql["resultado"][0]["code"], time()+50400);
+
+                            }
+
+                        }else{
+
+                            $ses['info']['id_user'] = $id_user;
+                            $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
+                            $ses['info']['admin'] = $user['resultado'][0]['admin'];
+                            $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
+
+                            // 1 INGRESAR
+                            // 2 ERRAR
+                            // 3 PEDIR PASSWORD
+                            $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('1', now(), '".$id_user."')");
+                            if($ses['info']['admin'] == 0){
+                                $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
+                                if($aux_gir['count'] == 1){
+                                    $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
+                                }
+                            }else{
+                                $ses['id_gir'] = 0;
+                            }
+
+                            $_SESSION['user'] = $ses;
+                            
+                            $info['op'] = 1;
+                            $info['message'] = "Ingreso Exitoso";
+                            
                         }
-
-                        $_SESSION['user'] = $ses;
-                        
-                        $info['op'] = 1;
-                        $info['message'] = "Ingreso Exitoso";
-
-                        unset($_COOKIE['ID']);
-                        unset($_COOKIE['CODE']);
                         
                     }else{
 
