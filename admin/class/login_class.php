@@ -126,23 +126,25 @@ class Login {
                         if($user['resultado'][0]['id_loc'] > 0){
 
                             if($user['resultado'][0]['tipo'] == 0){
+                                
                                 // PUNTO DE VENTA
                                 $info['op'] = 3;
                                 $info['url'] = 'locales2.php';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
-                                setcookie('CODE', $code_cookie, time()+50400);
-                                setcookie('ID', $user['resultado'][0]['id_loc'], time()+50400);
+                                $info['code'] = $code_cookie;
+                                $info['id'] = $user['resultado'][0]['id_loc'];
                                 $this->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
 
                             }
                             if($user['resultado'][0]['tipo'] == 1){
+                                
                                 // COCINA
                                 $info['op'] = 3;
                                 $info['url'] = 'cocina.php';
                                 $info['message'] = "Ingreso Exitoso Cocina";
                                 $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
-                                setcookie('SCODE', $aux_sql["resultado"][0]["code"], time()+50400);
+                                $info['code'] = $aux_sql["resultado"][0]["code"];
 
                             }
 
