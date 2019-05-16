@@ -1007,6 +1007,8 @@ class Guardar extends Core{
             $info['mensaje'] = "Error: ";
         }
 
+        $info['reload'] = 1;
+        $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
         return $info;
 
     }
