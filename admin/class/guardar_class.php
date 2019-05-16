@@ -625,11 +625,13 @@ class Guardar extends Core{
                 $item_pos = $_POST['item_pos'];
                 $item_cocina = $_POST['item_cocina'];
                 $item_grafico = $_POST['item_grafico'];
+                $dns_letra = $_POST['dns_letra'];
+                
 
                 if($id == 0){
                     
                     $code = bin2hex(openssl_random_pseudo_bytes(10));
-                    $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
+                    $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
                     $id_gir = $giro_sql["insert_id"];
 
                     $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");            
@@ -646,7 +648,7 @@ class Guardar extends Core{
                     $sql_cliente = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$id."'");
                     if($sql_cliente['count'] == 1 || $this->id_user == 1){
                         
-                        $giro_sql = $this->con->sql("UPDATE giros SET item_grafico='".$item_grafico."', item_pos='".$item_pos."', item_cocina='".$item_cocina."', item_pagina='".$item_pagina."', nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
+                        $giro_sql = $this->con->sql("UPDATE giros SET dns_letra='".$dns_letra."', item_grafico='".$item_grafico."', item_pos='".$item_pos."', item_cocina='".$item_cocina."', item_pagina='".$item_pagina."', nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
                         $info['op'] = 1;
                         $info['mensaje'] = "Giro modificado exitosamente";
 
