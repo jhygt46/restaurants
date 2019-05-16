@@ -70,6 +70,22 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                         <span><p>Dominio del Giro:</p></span>
                         <input id="dominio" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
                     </label>
+                    <label class="clearfix">
+                        <span><p>Pagina:</p></span>
+                        <input id="item_pagina" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Punto de Venta:</p></span>
+                        <input id="item_pos" type="checkbox" class="checkbox" value="1" <?php if($that['item_pos'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Cocina:</p></span>
+                        <input id="item_cocina" type="checkbox" class="checkbox" value="1" <?php if($that['item_cocina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Graficos:</p></span>
+                        <input id="item_grafico" type="checkbox" class="checkbox" value="1" <?php if($that['item_grafico'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>

@@ -825,7 +825,6 @@ function show_modal_locales(){
             var hr_local = get_horarios(id, 1);
             var open = hr_local.open;
             var time = hr_local.time;
-            console.log(id+") "+open+" - "+time);
             if(open){
                 if(time < custom_min){
                     $(this).find('.local_info').find('.alert').html("En "+time+" minutos cierra este local");
