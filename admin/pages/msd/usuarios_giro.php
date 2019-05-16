@@ -30,19 +30,11 @@ $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios_local($_GET["id_loc"]);
 $m_locales = false;
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
     $that = $core->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
-
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
 
 }
 ?>
@@ -118,7 +110,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>')"></a>
+                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>&id_loc=<?php echo $_GET['id_loc']; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
