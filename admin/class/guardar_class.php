@@ -52,6 +52,9 @@ class Guardar extends Core{
         if($_POST['accion'] == "crear_usuario"){
             return $this->crear_usuario();
         }
+        if($_POST['accion'] == "crear_usuarios_local"){
+            return $this->crear_usuarios_local();
+        }
         if($_POST['accion'] == "eliminar_usuario"){
             return $this->eliminar_usuario();
         }
@@ -964,6 +967,50 @@ class Guardar extends Core{
         return $info;
         
     }
+    private function crear_usuarios_local(){
+
+        $id = $_POST['id'];
+        $id_loc = $_POST['id_loc'];
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+        $tipo = $_POST['tipo'];
+        $pass1 = $_POST['pass1'];
+        $pass2 = $_POST['pass2'];
+
+        $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+        if($sqlloc["count"] == 1){
+            if($id == 0){
+                if($pass1 == $pass2){
+                    if(strlen($pass1) > 7){
+                        $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES ('".$nombre."', now(), '".$correo."', '".md5($pass1)."', '".$tipo."', '0', '".$id_loc."', '".$this->id_gir."')");
+                        $info['op'] = 1;
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Password diferentes";
+                }
+            }
+            if($id > 0){
+                if($pass1 == $pass2 && strlen($pass1) > 7){
+                    $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."' WHERE id_user='".$id."'");
+                }else{
+                    $this->con->sql("UPDATE fw_usuarios SET tipo='".$tipo."', nombre='".$nombre."', correo='".$correo."', id_loc='".$id_loc."' WHERE id_user='".$id."'");
+                }
+                $info['op'] = 1;
+                $info['mensaje'] = "Usuario modificado exitosamente";
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Error: ";
+        }
+
+        return $info;
+
+    }
+
     private function crear_usuario(){
 
         $list_loc = $this->get_locales();

@@ -16,9 +16,9 @@ $titulo = "Usuarios";
 $titulo_list = "Mis Usuarios";
 $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
-$accion = "crear_usuarios_giro";
+$accion = "crear_usuarios_local";
 
-$eliminaraccion = "eliminar_usuario";
+$eliminaraccion = "eliminar_usuario_giro";
 $id_list = "id_user";
 $eliminarobjeto = "Usuario";
 $page_mod = "pages/msd/usuarios_giro.php";
@@ -58,6 +58,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                 </div>
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id_user; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $_GET["id_loc"]; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
