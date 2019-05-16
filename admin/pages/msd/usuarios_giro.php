@@ -70,11 +70,11 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
-                        <input id="v_nombre" name="v_nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="v_nombre" autocomplete="off" name="v_nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Correo:</p></span>
-                        <input id="v_correo" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                        <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
@@ -85,11 +85,11 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     </label>
                     <label class="clearfix">
                         <span><p>Password:</p></span>
-                        <input id="v_pass1" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
+                        <input id="v_pass1" autocomplete="off" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Confirmacion Password:</p></span>
-                        <input id="v_pass2" name="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
+                        <input id="v_pass2" autocomplete="off" name="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
