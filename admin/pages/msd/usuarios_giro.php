@@ -72,7 +72,6 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <select>
                             <option value="0">Punto de Venta</option>
                             <option value="1">Cocina</option>
-                            <option value="2">Administrador</option>
                         </select>
                     </label>
                     <label class="clearfix">
