@@ -90,48 +90,21 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Correo:</p></span>
                         <input id="correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
-                    <label class="clearfix">
+                    <label>
                         <span><p>Tipo:</p></span>
-                        <select id="tipo" onchange="ver_locales()">
-                            <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>   
-                                <option value="1">Administrador</option>
-                            <?php } ?>
-                            <?php if($inicio["id_gir"] != 0){ ?>
-                                <option value="2">Solo Punto de Venta</option>
-                            <?php } ?>
-                            <?php if($inicio["id_user"] == 1 || ($inicio["admin"] == 1 || $inicio["re_venta"] == 1)){ ?>
-                                <option value="3">Vendedor</option>
-                            <?php } ?>
-                            <?php if($inicio["id_user"] == 1){ ?>    
-                                <option value="4">Reclutador</option>
-                            <?php } ?>
-                            
+                        <select>
+                            <option value="0">Punto de Venta</option>
+                            <option value="1">Cocina</option>
                         </select>
                     </label>
-                    <label class="locales clearfix" style="display:<?php if($m_locales){?>block<?php }else{ ?>none<?php } ?>">
-                        <span><p>Locales:</p></span>
-                        <div class="perfil_preguntas">
-                            <?php foreach($list_loc as $value){ ?>
-                                <div class="clearfix">
-                                    <input style="margin-top: 4px; width: 18px; height: 18px; float: left" id="local-<?php echo $value['id_loc']; ?>" <?php echo $checked; ?> type="checkbox" value="1" />
-                                    <div style="font-size: 18px; padding-left: 4px; float: left" class='detail'><?php echo $value['nombre']; ?></div>
-                                </div>
-                            <?php } ?>
-                        </div>
+                    <label class="clearfix">
+                        <span><p>Password:</p></span>
+                        <input id="pass1" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
-                    <?php if($inicio["id_user"] == 1){ ?>
-                    <label class="giros clearfix">
-                        <span><p>Giro:</p></span>
-                        <select id="giro">
-                            <option value="0">Seleccione</option>
-                            <?php foreach($list_giros as $value){ $check = ''; if($inicio["id_gir"] == $value['id_gir']){ $check = 'selected'; } ?>
-                                <option value="<?php echo $value['id_gir']; ?>" <?php echo $check; ?>><?php echo $value['dominio']; ?></option>
-                            <?php } ?>
-                        </select>
+                    <label class="clearfix">
+                        <span><p>Confirmacion Password:</p></span>
+                        <input id="pass2" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
-                    <?php }else{ ?>
-                        <div class="giros"></div>
-                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
