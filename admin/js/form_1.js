@@ -58,6 +58,10 @@ function form(that){
             }
         }
         
+        if($(this).attr('type') == "password"){
+            data.append($(this).attr('id'), $(this).val());
+            //inputs.push($(this));
+        }
         if($(this).attr('type') == "text"){
             data.append($(this).attr('id'), $(this).val());
             //inputs.push($(this));
