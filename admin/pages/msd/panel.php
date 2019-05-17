@@ -16,7 +16,7 @@ $list_correos = $core->get_correos_no_ses();
 ?>
 <div class="pagina">
     <div class="title">
-        <h1><?php echo $titulo; ?></h1>
+        <h1>Pendientes</h1>
         <ul class="clearfix">
             <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
         </ul>
@@ -25,7 +25,7 @@ $list_correos = $core->get_correos_no_ses();
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
-                <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
+                <div class="titulo"><h1>Dominios sin DNS</h1></div>
                 <ul class="opts clearfix">
                     <li class="opt">1</li>
                     <li class="opt">2</li>
@@ -51,7 +51,7 @@ $list_correos = $core->get_correos_no_ses();
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
-                <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
+                <div class="titulo"><h1>Correos no SES</h1></div>
                 <ul class="opts clearfix">
                     <li class="opt">1</li>
                     <li class="opt">2</li>
