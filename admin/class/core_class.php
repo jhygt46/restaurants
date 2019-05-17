@@ -783,65 +783,64 @@ class Core{
     }
     public function get_ultimos_pedidos_pos($id_loc){
 
-            $sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ORDER BY id_ped DESC");
-            for($i=0; $i<$sql['count']; $i++){
+        $sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ORDER BY id_ped DESC");
+        for($i=0; $i<$sql['count']; $i++){
 
-                $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
-                $res['num_ped'] = $sql['resultado'][$i]['num_ped'];
-                $res['pedido_code'] = $sql['resultado'][$i]['code'];
-                $res['tipo'] = $sql['resultado'][$i]['tipo'];
-                $res['estado'] = $sql['resultado'][$i]['estado'];
-                $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
-                $res['despacho'] = $sql['resultado'][$i]['despacho'];
+            $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
+            $res['num_ped'] = $sql['resultado'][$i]['num_ped'];
+            $res['pedido_code'] = $sql['resultado'][$i]['code'];
+            $res['tipo'] = $sql['resultado'][$i]['tipo'];
+            $res['estado'] = $sql['resultado'][$i]['estado'];
+            $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
+            $res['despacho'] = $sql['resultado'][$i]['despacho'];
 
-                if($sql['resultado'][$i]['carro'] == ""){
-                    $res['carro'] = [];
-                }else{
-                    $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
-                }
-
-                if($sql['resultado'][$i]['promos'] == ""){
-                    $res['promos'] = [];
-                }else{
-                    $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
-                }
-
-                $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
-                $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
-                $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
-                $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
-                $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
-                $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
-                $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
-                $res['id_mot'] = $sql['resultado'][$i]['id_mot'];
-                $res['eliminado'] = $sql['resultado'][$i]['eliminado'];
-                $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
-                $res['costo'] = $sql['resultado'][$i]['costo'];
-                $res['total'] = $sql['resultado'][$i]['total'];
-                $res['id_puser'] = $sql['resultado'][$i]['id_puser'];
-                $res['id_pdir'] = $sql['resultado'][$i]['id_pdir'];
-
-                $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
-                $res['nombre'] = $sql2['resultado'][0]['nombre'];
-                $res['telefono'] = $sql2['resultado'][0]['telefono'];
-
-                if($res['despacho'] == 1){
-                    
-                    $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
-                    $res['direccion'] = $sql3['resultado'][0]['direccion'];
-                    $res['lat'] = $sql3['resultado'][0]['lat'];
-                    $res['lng'] = $sql3['resultado'][0]['lng'];
-                    $res['calle'] = $sql3['resultado'][0]['calle'];
-                    $res['num'] = $sql3['resultado'][0]['num'];
-                    $res['depto'] = $sql3['resultado'][0]['depto'];
-                    $res['comuna'] = $sql3['resultado'][0]['num'];
-                }
-
-                $info[] = $res;
-                unset($res);
-
+            if($sql['resultado'][$i]['carro'] == ""){
+                $res['carro'] = [];
+            }else{
+                $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
             }
-        
+
+            if($sql['resultado'][$i]['promos'] == ""){
+                $res['promos'] = [];
+            }else{
+                $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
+            }
+
+            $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
+            $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
+            $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
+            $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
+            $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
+            $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
+            $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
+            $res['id_mot'] = $sql['resultado'][$i]['id_mot'];
+            $res['eliminado'] = $sql['resultado'][$i]['eliminado'];
+            $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
+            $res['costo'] = $sql['resultado'][$i]['costo'];
+            $res['total'] = $sql['resultado'][$i]['total'];
+            $res['id_puser'] = $sql['resultado'][$i]['id_puser'];
+            $res['id_pdir'] = $sql['resultado'][$i]['id_pdir'];
+
+            $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
+            $res['nombre'] = $sql2['resultado'][0]['nombre'];
+            $res['telefono'] = $sql2['resultado'][0]['telefono'];
+
+            if($res['despacho'] == 1){
+                
+                $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
+                $res['direccion'] = $sql3['resultado'][0]['direccion'];
+                $res['lat'] = $sql3['resultado'][0]['lat'];
+                $res['lng'] = $sql3['resultado'][0]['lng'];
+                $res['calle'] = $sql3['resultado'][0]['calle'];
+                $res['num'] = $sql3['resultado'][0]['num'];
+                $res['depto'] = $sql3['resultado'][0]['depto'];
+                $res['comuna'] = $sql3['resultado'][0]['num'];
+            }
+
+            $info[] = $res;
+            unset($res);
+
+        }
         return $info;
         
     }
