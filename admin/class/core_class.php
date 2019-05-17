@@ -767,8 +767,15 @@ class Core{
 
     }
     public function get_graficos(){
-        
         $aux = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'");
+        return $aux;
+    }
+    public function get_dominios_sin_dns(){
+        $aux = $this->con->sql("SELECT dominio FROM giros WHERE dns='0'");
+        return $aux;
+    }
+    public function get_correos_no_ses(){
+        $aux = $this->con->sql("SELECT correo FROM locales WHERE correo_ses='0'");
         return $aux;
     }
     public function get_cocina($id_ped){
