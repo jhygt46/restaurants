@@ -993,6 +993,8 @@ class Guardar extends Core{
                             $info['op'] = 2;
                             $info['mensaje'] = "Password debe tener al menos 8 caracteres";
                             $info['strlen'] = strlen($pass1);
+                            $info['pass1'] = $pass1;
+                            $info['pass1'] = $_POST;
                         }
                     }else{
                         $info['op'] = 2;
