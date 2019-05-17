@@ -923,12 +923,7 @@ class Core{
     }
     public function get_data_pos($id, $code){
 
-        $info['db_a'] = strlen($code);
-        $info['db_b'] = (is_int($id)) ? 1 : 0 ;
-        $info['db_c'] = (strpos($code, ' ')) ? 1 : 0 ;
-        $info['id'] = $id;
-
-        if(is_int($id) && strlen($code) == 60 && !strpos($code, ' ')){
+        if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ')){
 
             $sql = $this->con->sql("SELECT t2.estado, t2.t_retiro, t2.despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
             if($sql['count'] == 1){
