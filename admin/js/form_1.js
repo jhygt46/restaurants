@@ -215,6 +215,28 @@ function eliminar(accion, id, tipo, name){
     confirm(msg);
         
 }
+function add_ses(id, correo){
+    var msg = {
+        title: "Correo Agregado a SES", 
+        text: "Desea cambiar el estado del correo "+correo, 
+        confirm: "Si, deseo cambiarlo",
+        name: correo,
+        accion: 'add_ses',
+        id: id,
+    };
+    confirm2(msg);   
+}
+function add_dns(id, dominio){
+    var msg = {
+        title: "Dns Agregada en Google", 
+        text: "Desea cambiar el estado del dominio "+dominio, 
+        confirm: "Si, deseo cambiarlo",
+        name: dominio,
+        accion: 'add_dns',
+        id: id,
+    };
+    confirm2(msg);   
+}
 
 function confirm(message){
     
@@ -222,6 +244,54 @@ function confirm(message){
         title: message['title'],   
         text: message['text'],   
         type: "error",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: message['confirm'],   
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+    }, function(isConfirm){
+
+        if(isConfirm){
+            
+            var send = {accion: message['accion'], id: message['id'], nombre: message['name']};
+            console.log(send);
+            
+            $.ajax({
+                url: "ajax/index.php",
+                type: "POST",
+                data: send,
+                success: function(data){
+                    
+                    console.log(data);
+                    setTimeout(function(){  
+                        swal({
+                            title: data.titulo,
+                            text: data.texto,
+                            type: data.tipo,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                        if(data.reload)
+                            navlink('pages/'+data.page);
+                    }, 10);
+
+                }, error: function(e){
+                    console.log(e);
+                }
+            });
+ 
+        }
+        
+    });
+    
+}
+
+function confirm2(message){
+    
+    swal({   
+        title: message['title'],   
+        text: message['text'],   
+        type: "warnig",   
         showCancelButton: true,   
         confirmButtonColor: "#DD6B55",   
         confirmButtonText: message['confirm'],   
