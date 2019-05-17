@@ -925,7 +925,7 @@ class Core{
 
         if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ') && !strpos($code, ';')){
 
-            $sql = $this->con->sql("SELECT t2.estados, t1.t_retiro, t1.despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+            $sql = $this->con->sql("SELECT t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
             $info['sql'] = $sql;
             if($sql['count'] == 1){
 
