@@ -65,7 +65,7 @@
                         }
                         if(data.op == 4){
                             bien(data.message);
-                            setCookie('code', data.code, 16);
+                            setCookie('ccode', data.code, 16);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);

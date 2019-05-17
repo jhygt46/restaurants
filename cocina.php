@@ -3,7 +3,7 @@ date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
 $core = new Core();
-if(!isset($_COOKIE["code"])){ die("<meta http-equiv='refresh' content='0; url=".$_SERVER["HTTP_HOST"]."/admin'>"); }
+if(!isset($_COOKIE["ccode"])){ die("<meta http-equiv='refresh' content='0; url=".$_SERVER["HTTP_HOST"]."/admin'>"); }
 $tipo = $_GET["tipo"];
 
 ?>
