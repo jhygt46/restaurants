@@ -943,7 +943,7 @@ class Core{
                 $info['dominio'] = $data['dominio'];
                 $info['t_retiro'] = $data['t_retiro'];
                 $info['t_despacho'] = $data['t_despacho'];
-                $info['estados'] = $data['estados'];
+                $info['estados'] = explode(",", $data['estados']);
 
                 $info['font']['family'] = $data['font_family'];
                 $info['font']['css'] = $data['font_css'];
