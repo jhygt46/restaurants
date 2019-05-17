@@ -923,37 +923,41 @@ class Core{
     }
     public function get_data_pos($id, $code){
 
-        $sql = $this->con->sql("SELECT t2.estado, t2.t_retiro, t2.despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
-        if($sql['count'] == 1){
+        if(is_integer($id) && strlen($code) == 60 && strpos($code, ' ') !== false){
 
-            $data = $sql['resultado'][0];
-            $info['pedidos'] = $this->get_ultimos_pedidos_pos($data['id_loc']);
-            $info['motos'] = $this->get_repartidores_local($data['id_loc']);
+            $sql = $this->con->sql("SELECT t2.estado, t2.t_retiro, t2.despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+            if($sql['count'] == 1){
 
-            $info['code'] = $data['code'];
-            $info['nombre'] = $data['nombre'];
-            $info['tipo_comanda'] = $data['tipo_comanda'];
-            $info['sonido'] = $data['sonido'];
-            $info['ssl'] = $data['ssl'];
-            $info['lat'] = $data['lat'];
-            $info['lng'] = $data['lng'];
-            $info['js_data'] = $info['code'].".js";
-            $info['dominio'] = $data['dominio'];
-            $info['t_retiro'] = $data['t_retiro'];
-            $info['t_despacho'] = $data['t_despacho'];
-            $info['estados'] = $data['estados'];
+                $data = $sql['resultado'][0];
+                $info['pedidos'] = $this->get_ultimos_pedidos_pos($data['id_loc']);
+                $info['motos'] = $this->get_repartidores_local($data['id_loc']);
 
-            $info['font']['family'] = $data['font_family'];
-            $info['font']['css'] = $data['font_css'];
+                $info['code'] = $data['code'];
+                $info['nombre'] = $data['nombre'];
+                $info['tipo_comanda'] = $data['tipo_comanda'];
+                $info['sonido'] = $data['sonido'];
+                $info['ssl'] = $data['ssl'];
+                $info['lat'] = $data['lat'];
+                $info['lng'] = $data['lng'];
+                $info['js_data'] = $info['code'].".js";
+                $info['dominio'] = $data['dominio'];
+                $info['t_retiro'] = $data['t_retiro'];
+                $info['t_despacho'] = $data['t_despacho'];
+                $info['estados'] = $data['estados'];
 
-            if($_SERVER["HTTP_HOST"] == "localhost"){
-                $info['path'] = "http://localhost/restaurants";
-            }else{
-                if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
-                    $info['path'] = "https://".$_SERVER["HTTP_HOST"];
+                $info['font']['family'] = $data['font_family'];
+                $info['font']['css'] = $data['font_css'];
+
+                if($_SERVER["HTTP_HOST"] == "localhost"){
+                    $info['path'] = "http://localhost/restaurants";
                 }else{
-                    $info['path'] = "http://".$_SERVER["HTTP_HOST"];
+                    if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
+                        $info['path'] = "https://".$_SERVER["HTTP_HOST"];
+                    }else{
+                        $info['path'] = "http://".$_SERVER["HTTP_HOST"];
+                    }
                 }
+                
             }
         }
         return $info;
