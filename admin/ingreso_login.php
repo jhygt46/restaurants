@@ -21,7 +21,7 @@
                 var expires = "";
                 if(hour){
                     var date = new Date();
-                    date.setTime(date.getTime() + (hour*60*60*1000));
+                    date.setTime(date.getTime() + (hour*60*1000));
                     expires = "; expires=" + date.toUTCString();
                 }
                 document.cookie = name + "=" + (value || "")  + expires + "; path=/";
@@ -57,15 +57,15 @@
                         }
                         if(data.op == 3){
                             bien(data.message);
-                            setCookie('id', data.id, 16);
-                            setCookie('code', data.code, 16);
+                            setCookie('id', data.id, 1);
+                            setCookie('code', data.code, 1);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                         if(data.op == 4){
                             bien(data.message);
-                            setCookie('code', data.code, 16);
+                            setCookie('code', data.code, 1);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
