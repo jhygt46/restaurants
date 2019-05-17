@@ -857,6 +857,12 @@ class Core{
         return $aux['resultado'][0];
         
     }
+    public function get_data_pos($id, $code){
+
+        $sql = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.code='".$code."' AND t1.id_gir=t2.id_gir");
+        return ($sql["count"] == 1) ? $sql["resultado"][0] : null;
+
+    }
     public function get_data($dominio){
         
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
