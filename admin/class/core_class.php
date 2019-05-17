@@ -939,7 +939,7 @@ class Core{
                 $info['ssl'] = $data['ssl'];
                 $info['lat'] = $data['lat'];
                 $info['lng'] = $data['lng'];
-                $info['js_data'] = $info['js_data'].".js";
+                $info['js_data'] = $data['js_data'].".js";
                 $info['dominio'] = $data['dominio'];
                 $info['t_retiro'] = $data['t_retiro'];
                 $info['t_despacho'] = $data['t_despacho'];
