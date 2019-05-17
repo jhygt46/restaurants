@@ -1,5 +1,10 @@
 <?php
+session_start();
 date_default_timezone_set('America/Santiago');
+
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
 
 require('admin/class/core_class.php');
 $core = new Core();
