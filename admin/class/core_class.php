@@ -976,7 +976,7 @@ class Core{
 
                 }else{
                     echo "HOLA";
-                    include "../suspendido.html";
+                    include "../suspendido.php";
                     exit;
                 }
 
