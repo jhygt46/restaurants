@@ -21,7 +21,7 @@ $motos = $core->get_repartidores_local($id_loc);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><?php echo $info["titulo"]; ?></title>
+        <title><?php echo $info["nombre"]; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
@@ -35,8 +35,8 @@ $motos = $core->get_repartidores_local($id_loc);
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
-            var local_code = '<?php echo $info_local['code']; ?>';
-            var tipo_comanda = '<?php echo $info_local['tipo_comanda']; ?>';
+            var local_code = '<?php echo $info['code']; ?>';
+            var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
             var local_lat = '<?php echo $info_local['lat']; ?>';
             var local_lng = '<?php echo $info_local['lng']; ?>';
             var dominio = '<?php echo $local['dominio']; ?>';

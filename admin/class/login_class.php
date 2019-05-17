@@ -155,10 +155,6 @@ class Login {
                             $ses['info']['admin'] = $user['resultado'][0]['admin'];
                             $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
 
-                            // 1 INGRESAR
-                            // 2 ERRAR
-                            // 3 PEDIR PASSWORD
-                            $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('1', now(), '".$id_user."')");
                             if($ses['info']['admin'] == 0){
                                 $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
                                 if($aux_gir['count'] == 1){
@@ -174,6 +170,12 @@ class Login {
                             $info['message'] = "Ingreso Exitoso";
                             
                         }
+
+                        // 1 INGRESAR
+                        // 2 ERRAR
+                        // 3 PEDIR PASSWORD
+                        $this->con->sql("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES ('1', now(), '".$id_user."')");
+                            
                         
                     }else{
 

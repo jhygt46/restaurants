@@ -859,8 +859,14 @@ class Core{
     }
     public function get_data_pos($id, $code){
 
-        $sql = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
-        return ($sql["count"] == 1) ? $sql["resultado"][0] : $sql ;
+        $sql = $this->con->sql("SELECT t1.code, t1.nombre, tipo_comanda, t1.sonido FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+        if($sql['count'] == 1){
+            $info['code'] = $sql['resultado'][0]['code'];
+            $info['nombre'] = $sql['resultado'][0]['nombre'];
+            $info['tipo_comanda'] = $sql['resultado'][0]['tipo_comanda'];
+            $info['sonido'] = $sql['resultado'][0]['sonido'];
+        }
+        return $info;
 
     }
     public function get_data($dominio){
