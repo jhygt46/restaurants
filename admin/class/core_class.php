@@ -942,35 +942,41 @@ class Core{
             $sql = $this->con->sql("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
             if($sql['count'] == 1){
 
-                $data = $sql['resultado'][0];
-                $info['pedidos'] = $this->get_ultimos_pedidos_pos($id);
-                $info['motos'] = $this->get_repartidores_local($id);
+                if($sql['resultado'][0]['item_pos'] == 1){
 
-                $info['item_pos'] = $data['item_pos'];
-                $info['code'] = $data['code'];
-                $info['nombre'] = $data['nombre'];
-                $info['tipo_comanda'] = $data['tipo_comanda'];
-                $info['sonido'] = $data['sonido'];
-                $info['ssl'] = $data['ssl'];
-                $info['lat'] = $data['lat'];
-                $info['lng'] = $data['lng'];
-                $info['js_data'] = $data['js_data'].".js";
-                $info['dominio'] = $data['dominio'];
-                $info['t_retiro'] = $data['t_retiro'];
-                $info['t_despacho'] = $data['t_despacho'];
-                $info['estados'] = explode(",", $data['estados']);
+                    $data = $sql['resultado'][0];
+                    $info['pedidos'] = $this->get_ultimos_pedidos_pos($id);
+                    $info['motos'] = $this->get_repartidores_local($id);
 
-                $info['font']['family'] = $data['font_family'];
-                $info['font']['css'] = $data['font_css'];
+                    $info['code'] = $data['code'];
+                    $info['nombre'] = $data['nombre'];
+                    $info['tipo_comanda'] = $data['tipo_comanda'];
+                    $info['sonido'] = $data['sonido'];
+                    $info['ssl'] = $data['ssl'];
+                    $info['lat'] = $data['lat'];
+                    $info['lng'] = $data['lng'];
+                    $info['js_data'] = $data['js_data'].".js";
+                    $info['dominio'] = $data['dominio'];
+                    $info['t_retiro'] = $data['t_retiro'];
+                    $info['t_despacho'] = $data['t_despacho'];
+                    $info['estados'] = explode(",", $data['estados']);
 
-                if($_SERVER["HTTP_HOST"] == "localhost"){
-                    $info['path'] = "http://localhost/restaurants";
-                }else{
-                    if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
-                        $info['path'] = "https://".$_SERVER["HTTP_HOST"];
+                    $info['font']['family'] = $data['font_family'];
+                    $info['font']['css'] = $data['font_css'];
+
+                    if($_SERVER["HTTP_HOST"] == "localhost"){
+                        $info['path'] = "http://localhost/restaurants";
                     }else{
-                        $info['path'] = "http://".$_SERVER["HTTP_HOST"];
+                        if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
+                            $info['path'] = "https://".$_SERVER["HTTP_HOST"];
+                        }else{
+                            $info['path'] = "http://".$_SERVER["HTTP_HOST"];
+                        }
                     }
+
+                }else{
+                    include "../suspendido.html";
+                    exit;
                 }
 
             }else{
@@ -980,6 +986,7 @@ class Core{
                 if($info['ssl'] == 1){
                     die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>");
                 }
+                
             }
         }
         return $info;
