@@ -958,6 +958,14 @@ class Core{
                     }
                 }
 
+            }else{
+                if($info['ssl'] == 0){
+                    die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
+                }
+                if($info['ssl'] == 1){
+                    die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>");
+                }
+                
             }
         }
         return $info;
