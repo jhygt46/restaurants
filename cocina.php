@@ -1,15 +1,14 @@
 <?php
 date_default_timezone_set('America/Santiago');
 
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
-
-exit;
+$http = "http://";
+if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === "on"){
+    $http = "https://";
+}
 
 require('admin/class/core_class.php');
 $core = new Core();
-if(!isset($_COOKIE["ccode"])){ die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>"); }
+if(!isset($_COOKIE["ccode"])){ die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>"); }
 $tipo = $_GET["tipo"];
 
 ?>
