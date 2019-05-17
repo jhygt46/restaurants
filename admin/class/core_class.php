@@ -940,12 +940,13 @@ class Core{
         if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ') && !strpos($code, ';')){
 
             $sql = $this->con->sql("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
-            if($sql['count'] == 1 && $sql['resultado'][0]['item_pos'] == 1){
+            if($sql['count'] == 1){
 
                 $data = $sql['resultado'][0];
                 $info['pedidos'] = $this->get_ultimos_pedidos_pos($id);
                 $info['motos'] = $this->get_repartidores_local($id);
 
+                $info['item_pos'] = $data['item_pos'];
                 $info['code'] = $data['code'];
                 $info['nombre'] = $data['nombre'];
                 $info['tipo_comanda'] = $data['tipo_comanda'];
@@ -979,7 +980,6 @@ class Core{
                 if($info['ssl'] == 1){
                     die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>");
                 }
-                
             }
         }
         return $info;
