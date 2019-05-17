@@ -141,7 +141,7 @@ class Login {
                                 
                                 // COCINA
                                 $info['op'] = 4;
-                                $info['url'] = 'cocina/1';
+                                $info['url'] = 'ccn/1';
                                 $info['message'] = "Ingreso Exitoso Cocina";
                                 $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
                                 $info['ccn'] = $aux_sql["resultado"][0]["code"];
