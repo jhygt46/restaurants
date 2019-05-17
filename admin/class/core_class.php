@@ -781,6 +781,70 @@ class Core{
         return $info;
 
     }
+    public function get_ultimos_pedidos_pos($id_loc){
+
+            $sql = $this->con->sql("SELECT * FROM pedidos_aux WHERE id_loc='".$id_loc."' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ORDER BY id_ped DESC");
+            for($i=0; $i<$sql['count']; $i++){
+
+                $res['id_ped'] = $sql['resultado'][$i]['id_ped'];
+                $res['num_ped'] = $sql['resultado'][$i]['num_ped'];
+                $res['pedido_code'] = $sql['resultado'][$i]['code'];
+                $res['tipo'] = $sql['resultado'][$i]['tipo'];
+                $res['estado'] = $sql['resultado'][$i]['estado'];
+                $res['fecha'] = strtotime($sql['resultado'][$i]['fecha']);
+                $res['despacho'] = $sql['resultado'][$i]['despacho'];
+
+                if($sql['resultado'][$i]['carro'] == ""){
+                    $res['carro'] = [];
+                }else{
+                    $res['carro'] = json_decode($sql['resultado'][$i]['carro']);
+                }
+
+                if($sql['resultado'][$i]['promos'] == ""){
+                    $res['promos'] = [];
+                }else{
+                    $res['promos'] = json_decode($sql['resultado'][$i]['promos']);
+                }
+
+                $res['pre_wasabi'] = $sql['resultado'][$i]['pre_wasabi'];
+                $res['pre_gengibre'] = $sql['resultado'][$i]['pre_gengibre'];
+                $res['pre_embarazadas'] = $sql['resultado'][$i]['pre_embarazadas'];
+                $res['pre_palitos'] = $sql['resultado'][$i]['pre_palitos'];
+                $res['pre_soya'] = $sql['resultado'][$i]['pre_soya'];
+                $res['pre_teriyaki'] = $sql['resultado'][$i]['pre_teriyaki'];
+                $res['verify_despacho'] = $sql['resultado'][$i]['verify_despacho'];
+                $res['id_mot'] = $sql['resultado'][$i]['id_mot'];
+                $res['eliminado'] = $sql['resultado'][$i]['eliminado'];
+                $res['ocultar'] = $sql['resultado'][$i]['ocultar'];
+                $res['costo'] = $sql['resultado'][$i]['costo'];
+                $res['total'] = $sql['resultado'][$i]['total'];
+                $res['id_puser'] = $sql['resultado'][$i]['id_puser'];
+                $res['id_pdir'] = $sql['resultado'][$i]['id_pdir'];
+
+                $sql2 = $this->con->sql("SELECT * FROM pedidos_usuarios WHERE id_puser='".$sql['resultado'][$i]['id_puser']."'");
+                $res['nombre'] = $sql2['resultado'][0]['nombre'];
+                $res['telefono'] = $sql2['resultado'][0]['telefono'];
+
+                if($res['despacho'] == 1){
+                    
+                    $sql3 = $this->con->sql("SELECT * FROM pedidos_direccion WHERE id_pdir='".$sql['resultado'][$i]['id_pdir']."'");
+                    $res['direccion'] = $sql3['resultado'][0]['direccion'];
+                    $res['lat'] = $sql3['resultado'][0]['lat'];
+                    $res['lng'] = $sql3['resultado'][0]['lng'];
+                    $res['calle'] = $sql3['resultado'][0]['calle'];
+                    $res['num'] = $sql3['resultado'][0]['num'];
+                    $res['depto'] = $sql3['resultado'][0]['depto'];
+                    $res['comuna'] = $sql3['resultado'][0]['num'];
+                }
+
+                $info[] = $res;
+                unset($res);
+
+            }
+        
+        return $info;
+        
+    }
     public function get_ultimos_pedidos($id_ped){
         
         $id_loc = $_COOKIE['ID'];
@@ -859,12 +923,38 @@ class Core{
     }
     public function get_data_pos($id, $code){
 
-        $sql = $this->con->sql("SELECT t1.code, t1.nombre, tipo_comanda, t1.sonido FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+        $sql = $this->con->sql("SELECT t2.estado, t2.t_retiro, t2.despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
         if($sql['count'] == 1){
-            $info['code'] = $sql['resultado'][0]['code'];
-            $info['nombre'] = $sql['resultado'][0]['nombre'];
-            $info['tipo_comanda'] = $sql['resultado'][0]['tipo_comanda'];
-            $info['sonido'] = $sql['resultado'][0]['sonido'];
+
+            $data = $sql['resultado'][0];
+            $info['pedidos'] = $this->get_ultimos_pedidos_pos($data['id_loc']);
+            $info['motos'] = $this->get_repartidores_local($data['id_loc']);
+
+            $info['code'] = $data['code'];
+            $info['nombre'] = $data['nombre'];
+            $info['tipo_comanda'] = $data['tipo_comanda'];
+            $info['sonido'] = $data['sonido'];
+            $info['ssl'] = $data['ssl'];
+            $info['lat'] = $data['lat'];
+            $info['lng'] = $data['lng'];
+            $info['js_data'] = $info['code'].".js";
+            $info['dominio'] = $data['dominio'];
+            $info['t_retiro'] = $data['t_retiro'];
+            $info['t_despacho'] = $data['t_despacho'];
+            $info['estados'] = $data['estados'];
+
+            $info['font']['family'] = $data['font_family'];
+            $info['font']['css'] = $data['font_css'];
+
+            if($_SERVER["HTTP_HOST"] == "localhost"){
+                $info['path'] = "http://localhost/restaurants";
+            }else{
+                if($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl"){
+                    $info['path'] = "https://".$_SERVER["HTTP_HOST"];
+                }else{
+                    $info['path'] = "http://".$_SERVER["HTTP_HOST"];
+                }
+            }
         }
         return $info;
 

@@ -37,21 +37,20 @@ $motos = $core->get_repartidores_local($id_loc);
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
             var local_code = '<?php echo $info['code']; ?>';
             var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
-            var local_lat = '<?php echo $info_local['lat']; ?>';
-            var local_lng = '<?php echo $info_local['lng']; ?>';
-            var dominio = '<?php echo $local['dominio']; ?>';
+            var local_lat = '<?php echo $info['lat']; ?>';
+            var local_lng = '<?php echo $info['lng']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
-            var guardar = '<?php echo $info_local['guardar']; ?>';
-            var tiempos = { retiro: <?php echo $local['t_retiro']; ?>, despacho: <?php echo $local['t_despacho']; ?> };
+            var dominio = '<?php echo $info['dominio']; ?>';
+            var tiempos = { retiro: <?php echo $info['t_retiro']; ?>, despacho: <?php echo $info['t_despacho']; ?> };
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
-            var pedidos = <?php if($pedidos != null){ echo json_encode($pedidos); }else{ echo '[]'; } ?>;
-            var motos = <?php if($motos != null){ echo json_encode($motos); }else{ echo '[]'; } ?>;
+            var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
+            var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
         </script>
         <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
         <style>
             body{
-                font-family: <?php echo $info["font"]['css']; ?>;
+                font-family: '<?php echo $info["font"]['css']; ?>';
             }
         </style>
     </head>
