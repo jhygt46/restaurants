@@ -992,6 +992,7 @@ class Guardar extends Core{
                         }else{
                             $info['op'] = 2;
                             $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                            $info['strlen'] = strlen($pass1);
                         }
                     }else{
                         $info['op'] = 2;
@@ -1022,7 +1023,6 @@ class Guardar extends Core{
             $info['mensaje'] = "Error: ";
         }
 
-        
         $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
         return $info;
 
