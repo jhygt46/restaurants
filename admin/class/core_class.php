@@ -929,9 +929,12 @@ class Core{
             }
             die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>"); 
         }else{
-            $sql = $this->con->sql("SELECT * FROM locales WHERE code='".$ccn."'");
+            $sql = $this->con->sql("SELECT code FROM locales WHERE code='".$ccn."'");
             if($sql["count"] == 0){
                 die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>");
+            }
+            if($sql["count"] == 1){
+                return $sql["resultado"][0]["code"];
             }
         }
     }
