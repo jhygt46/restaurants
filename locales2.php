@@ -5,11 +5,6 @@ date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
 $info = $core->get_data_pos($_COOKIE["id"], $_COOKIE["code"]);
-
-echo "<pre>";
-print_r($info["pedidos"]);
-echo "</pre>";
-
 $tipo = $_GET["tipo"];
 
 ?>
