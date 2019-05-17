@@ -1,14 +1,8 @@
 <?php
-date_default_timezone_set('America/Santiago');
-
-$http = "http://";
-if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === "on"){
-    $http = "https://";
-}
-
+//date_default_timezone_set('America/Santiago');
 require('admin/class/core_class.php');
 $core = new Core();
-if(!isset($_COOKIE["ccode"])){ die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>"); }
+$code = $core->cocina($_COOKIE["ccn"]);
 $tipo = $_GET["tipo"];
 
 ?>
@@ -26,7 +20,7 @@ $tipo = $_GET["tipo"];
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
         <script>
-            var local_code = '<?php echo $_COOKIE["code"]; ?>';
+            var local_code = '<?php echo $code; ?>';
         </script>
     </head>
     <body>

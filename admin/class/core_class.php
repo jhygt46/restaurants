@@ -921,12 +921,26 @@ class Core{
         return $aux['resultado'][0];
         
     }
+    public function cocina($ccn){
+        if(!isset($ccn)){
+            $http = "http://";
+            if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === "on"){
+                $http = "https://";
+            }
+            die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>"); 
+        }else{
+            $sql = $this->con->sql("SELECT * FROM locales WHERE code='".$ccn."'");
+            if($sql["count"] == 0){
+                die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>");
+            }
+        }
+    }
     public function get_data_pos($id, $code){
 
         if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ') && !strpos($code, ';')){
 
-            $sql = $this->con->sql("SELECT t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
-            if($sql['count'] == 1){
+            $sql = $this->con->sql("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+            if($sql['count'] == 1 && $sql['resultado'][0]['item_pos'] == 1){
 
                 $data = $sql['resultado'][0];
                 $info['pedidos'] = $this->get_ultimos_pedidos_pos($id);
