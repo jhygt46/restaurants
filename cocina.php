@@ -3,15 +3,8 @@ date_default_timezone_set('America/Santiago');
 
 require('admin/class/core_class.php');
 $core = new Core();
-
-
-echo "HOLA";
-exit;
-/*
-$id_loc = (is_numeric($_GET["id_loc"])) ? $_GET["id_loc"] : 0 ;
-$local = $core->local($id_loc);
-$info = $core->get_data($local['dominio']);
-$info_local = $core->socket_code($id_loc, $info['id_gir']);
+if(!isset($_COOKIE["code"])){ die("<meta http-equiv='refresh' content='0; url=".$_SERVER["HTTP_HOST"]."/admin'>"); }
+$tipo = $_GET["tipo"];
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -28,7 +21,7 @@ $info_local = $core->socket_code($id_loc, $info['id_gir']);
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
         <script>
-            var local_code = '<?php echo $info_local['code']; ?>';
+            var local_code = '<?php echo $_COOKIE["code"]; ?>';
         </script>
     </head>
     <body>
