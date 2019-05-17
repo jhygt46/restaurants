@@ -1,6 +1,12 @@
 <?php
 date_default_timezone_set('America/Santiago');
 
+echo "<pre>";
+print_r($_SERVER);
+echo "</pre>";
+
+exit;
+
 require('admin/class/core_class.php');
 $core = new Core();
 if(!isset($_COOKIE["ccode"])){ die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>"); }
