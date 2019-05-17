@@ -10,21 +10,8 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require_once($path."admin/class/core_class.php");
 $core = new Core();
 
-$dominios = $core->get_dominios_sin_dns();
-$correos = $core->get_correos_no_ses();
-
-echo "<pre>";
-print_r($dominios);
-echo "</pre>";
-
-echo "<pre>";
-print_r($correos);
-echo "</pre>";
-
-$titulo = "Pendientes Panel";
-$eliminaraccion = "eliminar_usuario";
-$id_list = "id_user";
-$eliminarobjeto = "Usuario";
+$list_dominio = $core->get_dominios_sin_dns();
+$list_correos = $core->get_correos_no_ses();
 
 ?>
 <div class="pagina">
@@ -46,14 +33,39 @@ $eliminarobjeto = "Usuario";
             </div>
             <div class="listado_items">
                 <?php 
-                for($i=0; $i<count($list); $i++){
-                    $id = $list[$i][$id_list];
-                    $nombre = $list[$i]['nombre'];
+                for($i=0; $i<count($list_dominio); $i++){
+                    $id = $list_dominio[$i]['id_gir'];
                     $dominio = $list[$i]['dominio'];
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $nombre; ?></div>
+                        <div class="nombre"><?php echo $dominio; ?></div>
+                        <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>')"></a>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="list_titulo clearfix">
+                <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
+                <ul class="opts clearfix">
+                    <li class="opt">1</li>
+                    <li class="opt">2</li>
+                </ul>
+            </div>
+            <div class="listado_items">
+                <?php 
+                for($i=0; $i<count($list_correos); $i++){
+                    $id = $list_correos[$i]['id_loc'];
+                    $correo = $list_correos[$i]['correo'];
+                ?>
+                <div class="l_item">
+                    <div class="detalle_item clearfix">
+                        <div class="nombre"><?php echo $correo; ?></div>
                         <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
                         <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>')"></a>
                     </div>

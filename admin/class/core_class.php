@@ -771,11 +771,11 @@ class Core{
         return $aux;
     }
     public function get_dominios_sin_dns(){
-        $aux = $this->con->sql("SELECT dominio FROM giros WHERE dns='0'");
+        $aux = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE dns='0'");
         return $aux;
     }
     public function get_correos_no_ses(){
-        $aux = $this->con->sql("SELECT correo FROM locales WHERE correo_ses='0'");
+        $aux = $this->con->sql("SELECT id_loc, correo FROM locales WHERE correo_ses='0'");
         return $aux;
     }
     public function get_cocina($id_ped){
