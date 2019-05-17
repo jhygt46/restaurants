@@ -859,7 +859,7 @@ class Core{
     }
     public function get_data_pos($id, $code){
 
-        $sql = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.code='".$code."' AND t1.id_gir=t2.id_gir");
+        $sql = $this->con->sql("SELECT * FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
         return ($sql["count"] == 1) ? $sql["resultado"][0] : $sql ;
 
     }
