@@ -40,7 +40,7 @@ $list_correos = $core->get_correos_no_ses();
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $dominio; ?></div>
-                        <a class="icono ic17" onclick="add_dns('<?php echo $id; ?>')"></a>
+                        <a class="icono ic17" onclick="add_dns('<?php echo $id; ?>', '<?php echo $dominio; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
@@ -65,7 +65,7 @@ $list_correos = $core->get_correos_no_ses();
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $correo; ?></div>
-                        <a class="icono ic17" onclick="add_ses('<?php echo $id; ?>')"></a>
+                        <a class="icono ic17" onclick="add_ses('<?php echo $id; ?>', '<?php echo $correo; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
