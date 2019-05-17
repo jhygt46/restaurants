@@ -926,6 +926,7 @@ class Core{
         $info['db_a'] = strlen($code);
         $info['db_b'] = (is_int($id)) ? 1 : 0 ;
         $info['db_c'] = (strpos($code, ' ')) ? 1 : 0 ;
+        $info['id'] = $id;
 
         if(is_int($id) && strlen($code) == 60 && !strpos($code, ' ')){
 
