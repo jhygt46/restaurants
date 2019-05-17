@@ -921,6 +921,9 @@ class Core{
         return $aux['resultado'][0];
         
     }
+    public function get_data_pos_ses(){
+
+    }
     public function get_data_pos($id, $code){
 
         if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ') && !strpos($code, ';')){

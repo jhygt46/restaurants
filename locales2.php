@@ -2,10 +2,6 @@
 session_start();
 date_default_timezone_set('America/Santiago');
 
-echo "<pre>";
-print_r($_COOKIE);
-echo "</pre>";
-
 require('admin/class/core_class.php');
 $core = new Core();
 $info = $core->get_data_pos($_COOKIE["id"], $_COOKIE["code"]);

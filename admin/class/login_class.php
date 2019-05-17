@@ -129,7 +129,7 @@ class Login {
                                 
                                 // PUNTO DE VENTA
                                 $info['op'] = 3;
-                                $info['url'] = 'locales2.php';
+                                $info['url'] = 'pos/1';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
                                 $info['code'] = $code_cookie;
@@ -141,7 +141,7 @@ class Login {
                                 
                                 // COCINA
                                 $info['op'] = 4;
-                                $info['url'] = 'cocina.php';
+                                $info['url'] = 'cocina/1';
                                 $info['message'] = "Ingreso Exitoso Cocina";
                                 $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
                                 $info['code'] = $aux_sql["resultado"][0]["code"];
