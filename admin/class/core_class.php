@@ -925,7 +925,7 @@ class Core{
 
         if(is_numeric($id) && strlen($code) == 60 && !strpos($code, ' ') && !strpos($code, ';')){
 
-            $sql = $this->con->sql("SELECT t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
+            $sql = $this->con->sql("SELECT t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc='".$id."' AND t1.cookie_code='".$code."' AND t1.id_gir=t2.id_gir");
             if($sql['count'] == 1){
 
                 $data = $sql['resultado'][0];
@@ -939,7 +939,7 @@ class Core{
                 $info['ssl'] = $data['ssl'];
                 $info['lat'] = $data['lat'];
                 $info['lng'] = $data['lng'];
-                $info['js_data'] = $info['code'].".js";
+                $info['js_data'] = $info['js_data'].".js";
                 $info['dominio'] = $data['dominio'];
                 $info['t_retiro'] = $data['t_retiro'];
                 $info['t_despacho'] = $data['t_despacho'];
