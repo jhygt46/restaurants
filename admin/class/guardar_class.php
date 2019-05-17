@@ -979,7 +979,8 @@ class Guardar extends Core{
 
         $sqlcorreo = $this->con->sql("SELECT * FROM fw_usuarios WHERE corre='".$correo."'");
         $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
-        
+        $info['reload'] = 0;
+
         if($sqlloc["count"] == 1){
             if($id == 0){
                 if($sqlcorreo["count"] == 0){
@@ -987,6 +988,7 @@ class Guardar extends Core{
                         if(strlen($pass1) > 7){
                             $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES ('".$nombre."', now(), '".$correo."', '".md5($pass1)."', '".$tipo."', '0', '".$id_loc."', '".$this->id_gir."')");
                             $info['op'] = 1;
+                            $info['reload'] = 1;
                         }else{
                             $info['op'] = 2;
                             $info['mensaje'] = "Password debe tener al menos 8 caracteres";
@@ -1009,6 +1011,7 @@ class Guardar extends Core{
                     }
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuario modificado exitosamente";
+                    $info['reload'] = 1;
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Correo Existente";
@@ -1019,7 +1022,7 @@ class Guardar extends Core{
             $info['mensaje'] = "Error: ";
         }
 
-        $info['reload'] = 1;
+        
         $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
         return $info;
 
