@@ -66,7 +66,6 @@ $list_correos = $core->get_correos_no_ses();
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $correo; ?></div>
                         <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
