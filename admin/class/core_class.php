@@ -206,34 +206,13 @@ class Core{
         return $sql['resultado'];
     }
     public function get_usuarios(){
-
         if($this->id_user == 1){
-            if($this->id_gir == 0){
-                $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE admin='1' AND eliminado='0'");
-                return $usuarios['resultado'];
-            }
-            if($this->id_gir > 0){
-                $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-                return $usuarios['resultado'];
-            }
-        }
-        if($this->admin == 1 && $this->re_venta == 1){
+            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE eliminado='0'");
+            return $usuarios['resultado'];
+        }else{
             $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_aux_user='".$this->id_user."' AND eliminado='0'");
             return $usuarios['resultado'];
         }
-        if($this->admin == 1 && $this->re_venta == 0){
-            if($this->id_gir > 0){
-                $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-                return $usuarios['resultado'];
-            }
-        }
-        if($this->admin == 0 && $this->id_gir > 0){
-            $usr_1 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$this->id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-            $usr_2 = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_locales t2, locales t3 WHERE t3.id_gir='".$this->id_gir."' AND t3.id_loc=t2.id_loc AND t2.id_user=t1.id_user AND t1.eliminado='0'");
-            $res = array_merge($usr_1['resultado'], $usr_2['resultado']);
-            return $res;
-        }
-
     }
     public function get_usuarios_local($id_loc){
         $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
