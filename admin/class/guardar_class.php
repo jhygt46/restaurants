@@ -1056,50 +1056,22 @@ class Guardar extends Core{
 
     private function crear_usuario(){
 
-        $list_loc = $this->get_locales();
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
         $tipo = $_POST['tipo'];
-        $giro = $_POST['giro'];
-        $id_gir = 0;
-
-        if($this->id_user != 1){
-            $id_gir = $this->id_gir;
-        }
-        if($this->id_user == 1){
-            $id_gir = $giro;
-        }
         
         if($id == 0){
-            $is_correo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo." AND eliminado='0'");
-            if($is_correo['count'] == 0){
-                $user = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo) VALUES ('".$nombre."', now(), '".$correo."')");
-                $id = $user['insert_id'];
-            }
+            $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo) VALUES ('".$nombre."', '".$correo."')");
+            $id = $sql["insert_id"];
         }
-        if($tipo == 1){
-            if($id_gir != 0){
-                $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id."', '".$id_gir."')");
-                $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
-            }
-        }
-        if($tipo == 2){
-            $this->con->sql("DELETE fw_usuarios_giros WHERE id_user='".$id."' AND id_gir='".$id_gir."'");
-            $this->con->sql("DELETE fw_usuarios_locales WHERE id_user='".$id."'");
-            foreach($list_loc as $value){
-                $loc = $_POST['local-'.$value['id_loc']];
-                if(isset($loc) && $loc == 1){
-                    $this->con->sql("INSERT INTO fw_usuarios_locales (id_user, id_loc) VALUES ('".$id."', '".$value["id_loc"]."')");
-                }
-            }
-        }
-        if($tipo == 3 && $this->admin == 1 && ($this->re_venta == 1 || $this->id_user == 1)){
+        if($tipo == 0 && $this->admin == 1 && ($this->re_venta == 1 || $this->id_user == 1)){
             $this->con->sql("UPDATE fw_usuarios SET admin='1', id_aux_user='".$this->id_user."' WHERE id_user='".$id."'");
         }
-        if($tipo == 4 && $this->id_user == 1){
+        if($tipo == 1 && $this->id_user == 1){
             $this->con->sql("UPDATE fw_usuarios SET admin='1', re_venta='1' WHERE id_user='".$id."'");
         }
+        
         $info['op'] = 1;
         $info['mensaje'] = "Usuarios modificado exitosamente";
         $info['reload'] = 1;

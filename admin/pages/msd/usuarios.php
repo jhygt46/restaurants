@@ -28,38 +28,16 @@ $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_usuarios();
-$list_loc = $fireapp->get_locales();
-$list_giros = $fireapp->get_giros();
 $inicio = $fireapp->inicio();
-$m_locales = false;
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
     $that = $fireapp->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
-    if($that['tipo'] == 2){ $m_locales = true; }
 
 }
 ?>
-<script>
-    function ver_locales(){
-        var value = $('#tipo').val();
-        console.log(value);
-        if(value == 1){
-            $('.locales').hide();
-            $('.giros').show();
-        }
-        if(value == 2){
-            $('.locales').show();
-            $('.giros').hide();
-        }
-        if(value == 3 || value == 4){
-            $('.giros').hide();
-            $('.locales').hide();
-        }
-    }
-</script>
 
 <div class="pagina">
     <div class="title">
@@ -92,46 +70,15 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="tipo" onchange="ver_locales()">
-                            <?php if($inicio["id_user"] == 1 || $inicio["id_gir"] != 0){ ?>   
-                                <option value="1">Administrador</option>
-                            <?php } ?>
-                            <?php if($inicio["id_gir"] != 0){ ?>
-                                <option value="2">Solo Punto de Venta</option>
-                            <?php } ?>
+                        <select id="tipo">
                             <?php if($inicio["id_user"] == 1 || ($inicio["admin"] == 1 || $inicio["re_venta"] == 1)){ ?>
-                                <option value="3">Vendedor</option>
+                                <option value="0">Vendedor</option>
                             <?php } ?>
                             <?php if($inicio["id_user"] == 1){ ?>    
-                                <option value="4">Reclutador</option>
-                            <?php } ?>
-                            
-                        </select>
-                    </label>
-                    <label class="locales clearfix" style="display:<?php if($m_locales){?>block<?php }else{ ?>none<?php } ?>">
-                        <span><p>Locales:</p></span>
-                        <div class="perfil_preguntas">
-                            <?php foreach($list_loc as $value){ ?>
-                                <div class="clearfix">
-                                    <input style="margin-top: 4px; width: 18px; height: 18px; float: left" id="local-<?php echo $value['id_loc']; ?>" <?php echo $checked; ?> type="checkbox" value="1" />
-                                    <div style="font-size: 18px; padding-left: 4px; float: left" class='detail'><?php echo $value['nombre']; ?></div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </label>
-                    <?php if($inicio["id_user"] == 1){ ?>
-                    <label class="giros clearfix">
-                        <span><p>Giro:</p></span>
-                        <select id="giro">
-                            <option value="0">Seleccione</option>
-                            <?php foreach($list_giros as $value){ $check = ''; if($inicio["id_gir"] == $value['id_gir']){ $check = 'selected'; } ?>
-                                <option value="<?php echo $value['id_gir']; ?>" <?php echo $check; ?>><?php echo $value['dominio']; ?></option>
+                                <option value="1">Reclutador</option>
                             <?php } ?>
                         </select>
                     </label>
-                    <?php }else{ ?>
-                        <div class="giros"></div>
-                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
