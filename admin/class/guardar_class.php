@@ -161,7 +161,7 @@ class Guardar extends Core{
     }
     private function add_dns(){
         $id = $_POST['id'];
-        $this->con->sql("UPDATE locales SET dns='1' WHERE id_gir='".$id."'");
+        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$id."'");
         $info['tipo'] = "success";
         $info['titulo'] = "Modificado";
         $info['texto'] = "Dominio ".$_POST["nombre"]." modificado";
