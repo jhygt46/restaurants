@@ -224,7 +224,7 @@ function add_ses(id, correo){
         accion: 'add_ses',
         id: id,
     };
-    confirm2(msg);   
+    confirm_warning(msg);   
 }
 function add_dns(id, dominio){
     var msg = {
@@ -235,7 +235,7 @@ function add_dns(id, dominio){
         accion: 'add_dns',
         id: id,
     };
-    confirm(msg);   
+    confirm_warning(msg);
 }
 
 function confirm(message){
@@ -286,12 +286,12 @@ function confirm(message){
     
 }
 
-function confirm2(message){
+function confirm_warning(message){
     
     swal({   
         title: message['title'],   
         text: message['text'],   
-        type: "warnig",   
+        type: "warning",   
         showCancelButton: true,   
         confirmButtonColor: "#DD6B55",   
         confirmButtonText: message['confirm'],   
