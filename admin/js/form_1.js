@@ -235,7 +235,7 @@ function add_dns(id, dominio){
         accion: 'add_dns',
         id: id,
     };
-    confirm2(msg);   
+    confirm(msg);   
 }
 
 function confirm(message){
