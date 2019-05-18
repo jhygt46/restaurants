@@ -80,24 +80,12 @@ class Core{
     public function inicio(){
 
         $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$this->id_user."'");
+        $info['id_user'] = $this->id_user;
         $info['nombre'] = $user['resultado'][0]['nombre'];
         $info['correo'] = $user['resultado'][0]['correo'];
         $info['re_venta'] = $user['resultado'][0]['re_venta'];
-        $info['admin'] = $this->admin;
-        $info['id_user'] = $this->id_user;
-        $info['id_gir'] = (isset($this->id_gir)) ? $this->id_gir : 0 ;
-        
-        if($this->admin == 0){
-            if($this->id_gir > 0){
-                $info['pagina'] = "ver_giro";
-            }else{
-                $info['exit'] = 1;
-                $info['location'] = "https://misitiodelivery.cl/local/16";
-            }
-        }
-        if($this->admin == 1){
-            $info['pagina'] = "giros";
-        }
+        $info['admin'] = $user['resultado'][0]['admin'];
+        $info['id_aux_user'] = $user['resultado'][0]['id_aux_user'];
 
         return $info;
 
