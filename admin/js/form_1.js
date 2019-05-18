@@ -217,7 +217,7 @@ function eliminar(accion, id, tipo, name){
 }
 function add_ses(id, correo){
     var msg = {
-        title: "Correo Agregado a SES", 
+        title: "Correo agregado a SES", 
         text: "Desea cambiar el estado del correo "+correo, 
         confirm: "Si, deseo cambiarlo",
         name: correo,
@@ -228,7 +228,7 @@ function add_ses(id, correo){
 }
 function add_dns(id, dominio){
     var msg = {
-        title: "Dns Agregada en Google", 
+        title: "Dns agregada en Google", 
         text: "Desea cambiar el estado del dominio "+dominio, 
         confirm: "Si, deseo cambiarlo",
         name: dominio,
@@ -262,7 +262,6 @@ function confirm(message){
                 data: send,
                 success: function(data){
                     
-                    console.log(data);
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,

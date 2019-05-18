@@ -142,7 +142,34 @@ class Guardar extends Core{
         if($_POST['accion'] == "solicitar_ssl"){
             return $this->solicitar_ssl();
         }
+        if($_POST['accion'] == "add_ses"){
+            return $this->add_ses();
+        }
+        if($_POST['accion'] == "add_dns"){
+            return $this->add_dns();
+        }
     }
+    private function add_ses(){
+        $id = $_POST['id'];
+        $this->con->sql("UPDATE locales SET correo_ses='1' WHERE id_loc='".$id."'");
+        $info['tipo'] = "success";
+        $info['titulo'] = "Modificado";
+        $info['texto'] = "Correo ".$_POST["nombre"]." modificado";
+        $info['reload'] = 1;
+        $info['page'] = "msd/panel.php";
+        return $info;
+    }
+    private function add_dns(){
+        $id = $_POST['id'];
+        $this->con->sql("UPDATE locales SET dns='1' WHERE id_gir='".$id."'");
+        $info['tipo'] = "success";
+        $info['titulo'] = "Modificado";
+        $info['texto'] = "Dominio ".$_POST["nombre"]." modificado";
+        $info['reload'] = 1;
+        $info['page'] = "msd/panel.php";
+        return $info;
+    }
+
     private function ordercat(){
         
         $this->con_cambios();
