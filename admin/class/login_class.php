@@ -154,18 +154,16 @@ class Login {
                             $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                             $ses['info']['admin'] = $user['resultado'][0]['admin'];
                             $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
+                            $ses['id_gir'] = 0;
 
                             if($ses['info']['admin'] == 0){
                                 $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");
                                 if($aux_gir['count'] == 1){
                                     $ses['id_gir'] = $aux_gir['resultado'][0]['id_gir'];
                                 }
-                            }else{
-                                $ses['id_gir'] = 0;
                             }
 
                             $_SESSION['user'] = $ses;
-                            
                             $info['op'] = 1;
                             $info['message'] = "Ingreso Exitoso";
                             
