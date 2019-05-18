@@ -80,7 +80,7 @@ class Core{
     public function inicio(){
 
         $user = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$this->id_user."'");
-        $info['id_user'] = $this->id_user;
+        $info['id_user'] = $user['resultado'][0]['id_user'];
         $info['nombre'] = $user['resultado'][0]['nombre'];
         $info['correo'] = $user['resultado'][0]['correo'];
         $info['re_venta'] = $user['resultado'][0]['re_venta'];
