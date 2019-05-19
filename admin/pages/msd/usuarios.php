@@ -71,7 +71,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo">
-                            <?php if($inicio["id_user"] == 1 || ($inicio["admin"] == 1 || $inicio["re_venta"] == 1)){ ?>
+                            <?php if($inicio["id_user"] == 1 || $inicio["re_venta"] == 1){ ?>
                                 <option value="0">Vendedor</option>
                             <?php } ?>
                             <?php if($inicio["id_user"] == 1){ ?>    
