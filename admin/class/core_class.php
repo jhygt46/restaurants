@@ -90,15 +90,17 @@ class Core{
         return $info;
 
     }
-    public function is_giro($id_gir){
-        if(isset($id_gir) && is_numeric($id_gir) && $id_gir > 0){
+    public function is_giro(){
+
+        if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0){
+            $id_gir = $_GET["id_gir"];
             if($this->admin == 0){
                 $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
                 if($count['count'] == 1){
                     $this->id_gir = $id_gir;
                     $_SESSION['user']['id_gir'] = $id_gir;
                 }else{
-                    die("ERROR A1: NO PUEDE SELECCIONAR EL GIRO");
+                    die("ERROR A306");
                 }
             }
             if($this->admin == 1){
@@ -107,12 +109,11 @@ class Core{
                     $this->id_gir = $id_gir;
                     $_SESSION['user']['id_gir'] = $id_gir;
                 }else{
-                    die("ERROR A2: NO PUEDE SELECCIONAR EL GIRO");
+                    die("ERROR A307");
                 }
             }
-        }else{
-            die("NO TIENE GIRO ASIGNADO");
         }
+
     }
     public function is_catalogo($id_cat){
                 
@@ -174,8 +175,8 @@ class Core{
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
         return $giros['resultado'][0];
     }
-    public function set_giro_dns($id_gir){
-        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$id_gir."' AND eliminado='0'");
+    public function set_giro_dns(){
+        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
     }
     public function get_ses_giro(){
         $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."' AND eliminado='0'");

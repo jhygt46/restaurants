@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 if(!isset($core_class_iniciada)){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
@@ -14,6 +12,8 @@ if(!isset($core_class_iniciada)){
 
 }
 
+$core->is_giro();
+
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 
@@ -21,20 +21,8 @@ $id_gir = 0;
 $titulo = "GIRO NO SELECIONADO";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 
-if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0){
-    
-    $id_gir = $_GET["id_gir"];
-    $core->is_giro($id_gir);
-    
-}else{
-
-    $id_gir = $_SESSION["user"]['id_gir'];
-    $core->is_giro($id_gir);
-
-}
-
 $list = $core->get_locales();
-$giro = $core->get_giro($id_gir);
+$giro = $core->get_giro();
 
 if($giro['dns'] == 0){
     
@@ -47,7 +35,7 @@ if($giro['dns'] == 0){
     $resp = curl_exec($ch);
     curl_close($ch);
     if($resp == 'hjS3r%mDs-5gYa6ib_5Ps'){
-        $core->set_giro_dns($id_gir);
+        $core->set_giro_dns();
     }
 
 }

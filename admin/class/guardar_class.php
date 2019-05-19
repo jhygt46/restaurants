@@ -688,7 +688,7 @@ class Guardar extends Core{
                             $info['op'] = 2;
                             $info['mensaje'] = "Error: Permisos";
                         }
-                        
+
                     }
                 }else{
                     $info['op'] = 2;
@@ -709,7 +709,7 @@ class Guardar extends Core{
 
     }
     private function eliminar_giro(){
-        
+        /*
         $sql = $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$this->id_gir."'");
         if($sql['estado']){
             $info['tipo'] = "success";
@@ -723,7 +723,7 @@ class Guardar extends Core{
             $info['texto'] = "Giro ".$_POST["nombre"]." no pudo ser eliminado";
         }
         return $info;
-        
+        */
     }
     private function eliminar_repartidor(){
 

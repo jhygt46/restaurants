@@ -43,9 +43,6 @@ if($core->admin == 1){
     <div class="pagina">
         <div class="title">
             <h1><?php echo $titulo; ?></h1>
-            <ul class="clearfix">
-                <li class="back" onclick="backurl()"></li>
-            </ul>
         </div>
         <hr>
         <div class="cont_pagina">
