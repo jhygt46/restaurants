@@ -20,9 +20,6 @@ if($core->id_user == 1){
     <div class="pagina">
         <div class="title">
             <h1>Pendientes</h1>
-            <ul class="clearfix">
-                <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
-            </ul>
         </div>
         <hr>
         <div class="cont_pagina">
