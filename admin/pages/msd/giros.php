@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 if(!isset($core_class_iniciada)){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
@@ -8,7 +6,6 @@ if(!isset($core_class_iniciada)){
     }else{
         $path = "/var/www/html/restaurants/";
     }
-
     require_once($path."admin/class/core_class.php");
     $core = new Core();
 
@@ -16,7 +13,6 @@ if(!isset($core_class_iniciada)){
 
 if($core->admin == 1){
 
-    
     $list = $core->get_giros_user();
 
     /* CONFIG PAGE */
@@ -131,4 +127,4 @@ if($core->admin == 1){
             </div>
         </div>
     </div>
-<?php } ?>
+<?php }else{ die("ERROR: #1204"); } ?>

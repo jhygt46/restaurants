@@ -10,6 +10,8 @@ class Guardar extends Core{
     public $admin = null;
     public $id_gir = null;
     public $id_cat = null;
+    public $re_venta = null;
+    public $id_aux_user = null;
     
     public function __construct(){
         
@@ -19,6 +21,7 @@ class Guardar extends Core{
         $this->re_venta = $_SESSION['user']['info']['re_venta'];
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
+        $this->id_aux_user = $_SESSION['user']['id_aux_user'];
     }
     public function process(){
         
@@ -641,63 +644,63 @@ class Guardar extends Core{
     private function crear_giro(){
         
         $dominio = $_POST['dominio'];
-        
-        if($this->verificar_dominio($dominio)){
+        if($this->admin == 1){
+
+            if($this->verificar_dominio($dominio)){
             
-            $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-            $id = $_POST['id'];
-
-            if($verificar_dominio['count'] == 0 || ($verificar_dominio['count'] == 1 && $id == $verificar_dominio['resultado'][0]['id_gir'])){
-                
-                
-                $nombre = $_POST['nombre'];
-                $item_pagina = $_POST['item_pagina'];
-                $item_pos = $_POST['item_pos'];
-                $item_cocina = $_POST['item_cocina'];
-                $item_grafico = $_POST['item_grafico'];
-                $dns_letra = $_POST['dns_letra'];
-                
-
-                if($id == 0){
+                $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
+                $id = $_POST['id'];
+    
+                if($verificar_dominio['count'] == 0 || ($verificar_dominio['count'] == 1 && $id == $verificar_dominio['resultado'][0]['id_gir'])){
                     
-                    $code = bin2hex(openssl_random_pseudo_bytes(10));
-                    $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
-                    $id_gir = $giro_sql["insert_id"];
-
-                    $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");            
-                    if($this->admin == 1){
-                        $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$id_gir."')");
-                    }
-
-                    $info['op'] = 1;
-                    $info['mensaje'] = "Giro creado exitosamente";
-
-                }
-                if($id > 0){
-
-                    $sql_cliente = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$id."'");
-                    if($sql_cliente['count'] == 1 || $this->id_user == 1){
+                    $nombre = $_POST['nombre'];
+                    $item_pagina = $_POST['item_pagina'];
+                    $item_pos = $_POST['item_pos'];
+                    $item_cocina = $_POST['item_cocina'];
+                    $item_grafico = $_POST['item_grafico'];
+                    $dns_letra = $_POST['dns_letra'];
+    
+                    if($id == 0){
                         
-                        $giro_sql = $this->con->sql("UPDATE giros SET dns_letra='".$dns_letra."', item_grafico='".$item_grafico."', item_pos='".$item_pos."', item_cocina='".$item_cocina."', item_pagina='".$item_pagina."', nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
+                        $code = bin2hex(openssl_random_pseudo_bytes(10));
+                        $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
+                        $id_gir = $giro_sql["insert_id"];
+                        $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
+                        $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$id_gir."')");
+                        if($this->id_aux_user > 0){
+                            $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_aux_user."', '".$id_gir."')");
+                        }
                         $info['op'] = 1;
-                        $info['mensaje'] = "Giro modificado exitosamente";
-
-                    }else{
-                        // ERROR DE PERMISOS
-                        $info['op'] = 2;
-                        $info['mensaje'] = "Error: Permisos";
+                        $info['mensaje'] = "Giro creado exitosamente";
+    
                     }
+                    if($id > 0){
 
+                        $sql_cliente = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$id."'");
+                        if($sql_cliente['count'] == 1 || $this->id_user == 1){
+                            
+                            $giro_sql = $this->con->sql("UPDATE giros SET dns_letra='".$dns_letra."', item_grafico='".$item_grafico."', item_pos='".$item_pos."', item_cocina='".$item_cocina."', item_pagina='".$item_pagina."', nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Giro modificado exitosamente";
+    
+                        }else{
+                            // ERROR DE PERMISOS
+                            $info['op'] = 2;
+                            $info['mensaje'] = "Error: Permisos";
+                        }
+                        
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Error 1: Dominio Invalido";
                 }
-
             }else{
                 $info['op'] = 2;
-                $info['mensaje'] = "Error 1: Dominio Invalido";
+                $info['mensaje'] = "Error 2: Dominio Invalido";
             }
-
         }else{
             $info['op'] = 2;
-            $info['mensaje'] = "Error 2: Dominio Invalido";
+            $info['mensaje'] = "Error 3:";
         }
 
         $info['reload'] = 1;
@@ -1071,7 +1074,7 @@ class Guardar extends Core{
         if($tipo == 1 && $this->id_user == 1){
             $this->con->sql("UPDATE fw_usuarios SET admin='1', re_venta='1' WHERE id_user='".$id."'");
         }
-        
+
         $info['op'] = 1;
         $info['mensaje'] = "Usuarios modificado exitosamente";
         $info['reload'] = 1;
