@@ -14,6 +14,11 @@ if(!isset($core_class_iniciada)){
 
 }
 
+echo $core->id_user."<br/>";
+echo $core->admin."<br/>";
+echo $core->re_venta."<br/>";
+exit;
+
 $list = $core->get_giros_user();
 
 /* CONFIG PAGE */
