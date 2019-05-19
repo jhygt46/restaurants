@@ -645,23 +645,17 @@ class Guardar extends Core{
         
         $dominio = $_POST['dominio'];
         if($this->admin == 1){
-
             if($this->verificar_dominio($dominio)){
-            
                 $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
                 $id = $_POST['id'];
-    
                 if($verificar_dominio['count'] == 0 || ($verificar_dominio['count'] == 1 && $id == $verificar_dominio['resultado'][0]['id_gir'])){
-                    
                     $nombre = $_POST['nombre'];
                     $item_pagina = $_POST['item_pagina'];
                     $item_pos = $_POST['item_pos'];
                     $item_cocina = $_POST['item_cocina'];
                     $item_grafico = $_POST['item_grafico'];
                     $dns_letra = $_POST['dns_letra'];
-    
                     if($id == 0){
-                        
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
                         $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
                         $id_gir = $giro_sql["insert_id"];
@@ -672,42 +666,35 @@ class Guardar extends Core{
                         }
                         $info['op'] = 1;
                         $info['mensaje'] = "Giro creado exitosamente";
-    
                     }
                     if($id > 0){
-
                         $sql_cliente = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$id."'");
                         if($sql_cliente['count'] == 1 || $this->id_user == 1){
-                            
                             $giro_sql = $this->con->sql("UPDATE giros SET dns_letra='".$dns_letra."', item_grafico='".$item_grafico."', item_pos='".$item_pos."', item_cocina='".$item_cocina."', item_pagina='".$item_pagina."', nombre='".$nombre."', dominio='".$dominio."' WHERE id_gir='".$id."'");
                             $info['op'] = 1;
                             $info['mensaje'] = "Giro modificado exitosamente";
-    
                         }else{
-                            // ERROR DE PERMISOS
                             $info['op'] = 2;
                             $info['mensaje'] = "Error: Permisos";
                         }
-
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Error 1: Dominio Invalido";
+                    $info['mensaje'] = "Error: Dominio Invalido";
                 }
             }else{
                 $info['op'] = 2;
-                $info['mensaje'] = "Error 2: Dominio Invalido";
+                $info['mensaje'] = "Error: Dominio Invalido";
             }
         }else{
             $info['op'] = 2;
-            $info['mensaje'] = "Error 3:";
+            $info['mensaje'] = "Error B301";
         }
-
         $info['reload'] = 1;
         $info['page'] = "msd/giros.php";
         return $info;
-
     }
+
     private function eliminar_giro(){
         /*
         $sql = $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$this->id_gir."'");
