@@ -151,46 +151,104 @@ class Guardar extends Core{
         if($_POST['accion'] == "add_dns"){
             return $this->add_dns();
         }
+        if($_POST['accion'] == "add_dns"){
+            return $this->add_ssl();
+        }
     }
     private function add_ses(){
-        $id = $_POST['id'];
-        $this->con->sql("UPDATE locales SET correo_ses='1' WHERE id_loc='".$id."'");
-        $info['tipo'] = "success";
-        $info['titulo'] = "Modificado";
-        $info['texto'] = "Correo ".$_POST["nombre"]." modificado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/panel.php";
+
+        $id_loc = $_POST['id'];
+
+        if($this->id_user == 1 && is_numeric($id_loc)){
+            
+            $sql = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."'");
+
+            $this->con->sql("UPDATE locales SET correo_ses='1' WHERE id_loc='".$id_loc."'");
+            $this->con->sql("INSERT INTO ses_mail (correo) VALUES ('".$sql["resultado"][0]["correo"]."')");
+
+            $info['tipo'] = "success";
+            $info['titulo'] = "Modificado";
+            $info['texto'] = "Correo ".$sql["resultado"][0]["correo"]." agregado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/panel.php";
+
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "ERROR";
+            $info['texto'] = "Correo ".$sql["resultado"][0]["correo"]." no pudo ser agragado";
+
+        }
         return $info;
+
     }
     private function add_dns(){
-        $id = $_POST['id'];
-        $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$id."'");
-        $info['tipo'] = "success";
-        $info['titulo'] = "Modificado";
-        $info['texto'] = "Dominio ".$_POST["nombre"]." modificado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/panel.php";
-        return $info;
-    }
 
-    private function ordercat(){
-        
-        $this->con_cambios();
-        $values = $_POST['values'];
-        for($i=0; $i<count($values); $i++){
-            $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
+        $id_gir = $_POST['id'];
+
+        if($this->id_user == 1 && is_numeric($id_gir)){
+
+            $this->con->sql("UPDATE giros SET dns='1' WHERE id_gir='".$id_gir."'");
+            $info['tipo'] = "success";
+            $info['titulo'] = "DNS";
+            $info['texto'] = "DNS configurada";
+            $info['reload'] = 1;
+            $info['page'] = "msd/panel.php";
+
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "ERROR";
+            $info['texto'] = "DNS no ha sido configurada";
+
+        }
+
+        return $info;
+
+    }
+    private function add_ssl(){
+
+        $id_gir = $_POST['id'];
+
+        if($this->id_user == 1 && is_numeric($id_gir)){
+
+            $this->con->sql("UPDATE giros SET ssl='1' WHERE id_gir='".$id_gir."'");
+            $info['tipo'] = "success";
+            $info['titulo'] = "SSL";
+            $info['texto'] = "ssl configurada";
+            $info['reload'] = 1;
+            $info['page'] = "msd/panel.php";
+
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "SSL";
+            $info['texto'] = "ssl no ha sido configurada";
+
         }
         
+        return $info;
+        
+    }
+    private function ordercat(){
+        if(isset($this->id_cat) && is_numeric($this->id_cat)){
+            $this->con_cambios();
+            $values = $_POST['values'];
+            for($i=0; $i<count($values); $i++){
+                $this->con->sql("UPDATE categorias SET orders='".$i."' WHERE id_cae='".$values[$i]."' AND id_cat='".$this->id_cat."'");
+            }
+        }
     }
     private function orderprods(){
-
-        $id_cae = $_POST['id_cae'];
-        $values = $_POST['values'];
-        $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
-        if($sqlcat['count'] == 1){
-            $this->con_cambios();
-            for($i=0; $i<count($values); $i++){
-                $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+        if(isset($this->id_cat) && is_numeric($this->id_cat)){
+            $id_cae = $_POST['id_cae'];
+            $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+            if($sqlcat['count'] == 1){
+                $this->con_cambios();
+                $values = $_POST['values'];
+                for($i=0; $i<count($values); $i++){
+                    $this->con->sql("UPDATE cat_pros SET orders='".$i."' WHERE id_pro='".$values[$i]."' AND id_cae='".$id_cae."'");
+                }
             }
         }
     }
@@ -201,7 +259,6 @@ class Guardar extends Core{
         }
 
     }
-    
     public function uploadfavIcon($filename){
 
         $filepath = '/var/www/html/restaurants/images/favicon/';
@@ -442,23 +499,33 @@ class Guardar extends Core{
     }
     private function configurar_footer(){
         
-        $this->con_cambios();
-        $texto = $_POST['html'];
-        $tipo = $_POST['tipo'];
-        $seguir = $_POST['seguir'];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
-        if($sql['estado'] == true){
-            $info['op'] = 1;
-            $info['mensaje'] = "Footer modificado exitosamente";
-        }
-        if($sql['estado'] == false){
+            $this->con_cambios();
+            $texto = $_POST['html'];
+            $tipo = $_POST['tipo'];
+            $seguir = $_POST['seguir'];
+
+            $sql = $this->con->sql("UPDATE giros SET footer_html='".$texto."' WHERE id_gir='".$this->id_gir."'");
+            if($sql['estado'] == true){
+                $info['op'] = 1;
+                $info['mensaje'] = "Footer modificado exitosamente";
+            }
+            if($sql['estado'] == false){
+                $info['op'] = 2;
+                $info['mensaje'] = "Se produjo un error: recuerde que no puede ocupar comillas simples ''";
+            }
+
+            $info['reload'] = 1;
+            $info['page'] = 'msd/ver_giro.php';
+
+        }else{
+
             $info['op'] = 2;
-            $info['mensaje'] = "Se produjo un error: recuerde que no puede ocupar comillas simples ''";
+            $info['mensaje'] = "Error";
+
         }
 
-        $info['reload'] = 1;
-        $info['page'] = 'msd/ver_giro.php';
         return $info;
         
     }
@@ -467,166 +534,212 @@ class Guardar extends Core{
     }
     private function solicitar_ssl(){
         
-        $solicitud = $_POST["solicitud"];
-        if($solicitud == 0){
-            $this->con->sql("UPDATE giros SET solicitar_ssl='0' WHERE id_gir='".$this->id_gir."'");
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $solicitud = $_POST["solicitud"];
+            if($solicitud == 0){
+                $this->con->sql("UPDATE giros SET solicitar_ssl='0' WHERE id_gir='".$this->id_gir."'");
+            }
+            if($solicitud == 1){
+                $this->con->sql("UPDATE giros SET solicitar_ssl='1' WHERE id_gir='".$this->id_gir."'");
+            }
+            $info['op'] = 1;
+            $info['mensaje'] = "Solicitud enviada con exito";
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php";
+
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
         }
-        if($solicitud == 1){
-            $this->con->sql("UPDATE giros SET solicitar_ssl='1' WHERE id_gir='".$this->id_gir."'");
-        }
-        $info['op'] = 1;
-        $info['mensaje'] = "Solicitud enviada con exito";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php";
         return $info;
         
     }
     private function configurar_estilos(){
         
-        $font_family = $_POST['font-family'];
-        $font_css = $_POST['font-css'];
-        $css_page = $_POST['css_page'];
-        $css_color = $_POST['css_color'];
-        $css_modal = $_POST['css_modal'];
-        $this->con_cambios();
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $font_family = $_POST['font-family'];
+            $font_css = $_POST['font-css'];
+            $css_page = $_POST['css_page'];
+            $css_color = $_POST['css_color'];
+            $css_modal = $_POST['css_modal'];
+            $this->con_cambios();
+            
+            $this->con->sql("UPDATE giros SET font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_page."', style_color='".$css_color."', style_modal='".$css_modal."' WHERE id_gir='".$this->id_gir."'");
+            
+            $info['op'] = 1;
+            $info['mensaje'] = "Configuracion de Estilos Modificado Exitosamente";
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
         
-        $this->con->sql("UPDATE giros SET font_family='".$font_family."', font_css='".$font_css."', style_page='".$css_page."', style_color='".$css_color."', style_modal='".$css_modal."' WHERE id_gir='".$this->id_gir."'");
-        
-        $info['op'] = 1;
-        $info['mensaje'] = "Configuracion de Estilos Modificado Exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php";
+        }
         return $info;
         
     }
     private function configurar_giro(){
         
-        $titulo = $_POST['titulo'];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $titulo = $_POST['titulo'];
+            
+            $pedido_wasabi = $_POST['pedido_wasabi'];
+            $pedido_gengibre = $_POST['pedido_gengibre'];
+            $pedido_soya = $_POST['pedido_soya'];
+            $pedido_teriyaki = $_POST['pedido_teriyaki'];
+            $pedido_palitos = $_POST['pedido_palitos'];
+            $pedido_comentarios = $_POST['pedido_comentarios'];
+            
+            $pedido_minimo = $_POST['pedido_minimo'];
+
+            $pedido_01_titulo = $_POST['titulo_01'];
+            $pedido_01_subtitulo = $_POST['subtitulo_01'];
+            $pedido_02_titulo = $_POST['titulo_02'];
+            $pedido_02_subtitulo = $_POST['subtitulo_02'];
+            $pedido_03_titulo = $_POST['titulo_03'];
+            $pedido_03_subtitulo = $_POST['subtitulo_03'];
+            $pedido_04_titulo = $_POST['titulo_04'];
+            $pedido_04_subtitulo = $_POST['subtitulo_04'];
+
+            $mapcode = $_POST['mapcode'];
+            $estados = $_POST['estados'];
+            $alto = $_POST['alto'];
+
+            $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
+            $dominio = $giro['resultado'][0]['dominio'];
+            $this->con_cambios();
+            
+            $foto_logo = $this->uploadLogo($dominio);
+            $foto_favicon = $this->uploadfavIcon($dominio);
+
+            if($foto_logo['op'] == 1){
+                $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
+            }
+            if($foto_favicon['op'] == 1){
+                $this->con->sql("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir='".$this->id_gir."'");
+            }
+            
+            // MODIFICAR PEDIDOS
+            $this->con->sql("UPDATE giros SET mapcode='".$mapcode."', estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."', alto='".$alto."' WHERE id_gir='".$this->id_gir."'");
+            
+            // MODIFICAR TITULO
+            $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
+            
+            $info['op'] = 1;
+            $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
         
-        $pedido_wasabi = $_POST['pedido_wasabi'];
-        $pedido_gengibre = $_POST['pedido_gengibre'];
-        $pedido_soya = $_POST['pedido_soya'];
-        $pedido_teriyaki = $_POST['pedido_teriyaki'];
-        $pedido_palitos = $_POST['pedido_palitos'];
-        $pedido_comentarios = $_POST['pedido_comentarios'];
-        
-        $pedido_minimo = $_POST['pedido_minimo'];
-
-        $pedido_01_titulo = $_POST['titulo_01'];
-        $pedido_01_subtitulo = $_POST['subtitulo_01'];
-        $pedido_02_titulo = $_POST['titulo_02'];
-        $pedido_02_subtitulo = $_POST['subtitulo_02'];
-        $pedido_03_titulo = $_POST['titulo_03'];
-        $pedido_03_subtitulo = $_POST['subtitulo_03'];
-        $pedido_04_titulo = $_POST['titulo_04'];
-        $pedido_04_subtitulo = $_POST['subtitulo_04'];
-
-        $mapcode = $_POST['mapcode'];
-        $estados = $_POST['estados'];
-        $alto = $_POST['alto'];
-
-        $giro = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$this->id_gir."'");
-        $dominio = $giro['resultado'][0]['dominio'];
-        $this->con_cambios();
-        
-        $foto_logo = $this->uploadLogo($dominio);
-        $foto_favicon = $this->uploadfavIcon($dominio);
-
-        if($foto_logo['op'] == 1){
-            $this->con->sql("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir='".$this->id_gir."'");
         }
-        if($foto_favicon['op'] == 1){
-            $this->con->sql("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir='".$this->id_gir."'");
-        }
-        
-        // MODIFICAR PEDIDOS
-        $this->con->sql("UPDATE giros SET mapcode='".$mapcode."', estados='".$estados."', pedido_minimo='".$pedido_minimo."', titulo='".$titulo."', pedido_comentarios='".$pedido_comentarios."', pedido_palitos='".$pedido_palitos."', pedido_teriyaki='".$pedido_teriyaki."', pedido_soya='".$pedido_soya."', pedido_wasabi='".$pedido_wasabi."', pedido_gengibre='".$pedido_gengibre."', alto='".$alto."' WHERE id_gir='".$this->id_gir."'");
-        
-        // MODIFICAR TITULO
-        $this->con->sql("UPDATE giros SET pedido_01_titulo='".$pedido_01_titulo."', pedido_01_subtitulo='".$pedido_01_subtitulo."', pedido_02_titulo='".$pedido_02_titulo."', pedido_02_subtitulo='".$pedido_02_subtitulo."', pedido_03_titulo='".$pedido_03_titulo."', pedido_03_subtitulo='".$pedido_03_subtitulo."', pedido_04_titulo='".$pedido_04_titulo."', pedido_04_subtitulo='".$pedido_04_subtitulo."' WHERE id_gir='".$this->id_gir."'");
-        
-        $info['op'] = 1;
-        $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php";
         return $info;
         
     }
     private function configurar_categoria(){
         
-        $id_cae = $_POST['id_cae'];
-        $parent_id = $_POST['parent_id'];
-        $mostar_prods = $_POST['mostrar_prods'];
-        $ocultar = $_POST['ocultar'];
-        $detalle_prods = $_POST['detalle_prods'];
-        $degradado = $_POST['degradado'];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
 
-        $this->con_cambios();
-        $alto = $this->get_alto();
-        $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+                $id_cae = $_POST['id_cae'];
+                $parent_id = $_POST['parent_id'];
+                $mostar_prods = $_POST['mostrar_prods'];
+                $ocultar = $_POST['ocultar'];
+                $detalle_prods = $_POST['detalle_prods'];
+                $degradado = $_POST['degradado'];
 
-        if($categoria['resultado'][0]['parent_id'] == 0){
-            $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
-        }
-        if($categoria['resultado'][0]['parent_id'] > 0){
-            $image = $this->uploadsubCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
-        }
+                $this->con_cambios();
+                $alto = $this->get_alto();
+                $categoria = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+
+                if($categoria['resultado'][0]['parent_id'] == 0){
+                    $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
+                }
+                if($categoria['resultado'][0]['parent_id'] > 0){
+                    $image = $this->uploadsubCategoria('/var/www/html/restaurants/images/categorias/', null);
+                }
+                
+                if($image['op'] == 1){
+                    @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
+                    $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+                }
+
+                $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+                $info['op'] = 1;
+                $info['mensaje'] = "Configuracion modificado exitosamente";
+                
+                $info['reload'] = 1;
+                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+            
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+            
+            }
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
         
-        if($image['op'] == 1){
-            @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['resultado'][0]['image']);
-            $this->con->sql("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
         }
 
-        $this->con->sql("UPDATE categorias SET degradado='".$degradado."', detalle_prods='".$detalle_prods."', ocultar='".$ocultar."', mostrar_prods='".$mostar_prods."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
-        $info['op'] = 1;
-        $info['mensaje'] = "Configuracion modificado exitosamente";
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
         return $info;
         
     }
     private function configurar_producto(){
         
-        $id_pro = $_POST['id_pro'];
-        $id = $_POST['id'];
-        $parent_id = $_POST['parent_id'];
-        $this->con_cambios();
-        $alto = $this->get_alto();
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
-        if($image['op'] == 1){
-            $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
-            @unlink('/var/www/html/restaurants/images/productos/'.$productos['resultado'][0]['image']);
-            $this->con->sql("UPDATE productos SET image='".$image["image"]."' WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
-        }
+            $id_pro = $_POST['id_pro'];
+            $id = $_POST['id'];
+            $parent_id = $_POST['parent_id'];
+            $this->con_cambios();
+            $alto = $this->get_alto();
 
-        $list = $this->get_preguntas();
-        for($i=0; $i<count($list); $i++){
-            $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
-            if($pre == 0){
-                $this->con->sql("DELETE FROM preguntas_productos WHERE id_pro='".$id_pro."' AND id_pre='".$list[$i]['id_pre']."'");
+            $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
+            if($image['op'] == 1){
+                $productos = $this->con->sql("SELECT * FROM productos WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
+                @unlink('/var/www/html/restaurants/images/productos/'.$productos['resultado'][0]['image']);
+                $this->con->sql("UPDATE productos SET image='".$image["image"]."' WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
             }
-            if($pre == 1){
-                $this->con->sql("INSERT INTO preguntas_productos (id_pro, id_pre) VALUES ('".$id_pro."', '".$list[$i]['id_pre']."')");
+
+            $list = $this->get_preguntas();
+            for($i=0; $i<count($list); $i++){
+                $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
+                if($pre == 0){
+                    $this->con->sql("DELETE FROM preguntas_productos WHERE id_pro='".$id_pro."' AND id_pre='".$list[$i]['id_pre']."'");
+                }
+                if($pre == 1){
+                    $this->con->sql("INSERT INTO preguntas_productos (id_pro, id_pre) VALUES ('".$id_pro."', '".$list[$i]['id_pre']."')");
+                }
             }
+            
+            $list_ing = $this->get_lista_ingredientes();
+            for($i=0; $i<count($list_ing); $i++){
+                $lin = $_POST['lista_ing-'.$list_ing[$i]['id_lin']];
+                if($lin == 0){
+                    $this->con->sql("DELETE FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."' AND id_lin='".$list_ing[$i]['id_lin']."'");
+                }
+                if($lin == 1){
+                    $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
+                }
+            }
+            
+            $info['op'] = 1;
+            $info['mensaje'] = "Configuracion Modificada Exitosamente";
+            $info['reload'] = 1;
+            $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
+
         }
-        
-        $list_ing = $this->get_lista_ingredientes();
-        for($i=0; $i<count($list_ing); $i++){
-            $lin = $_POST['lista_ing-'.$list_ing[$i]['id_lin']];
-            if($lin == 0){
-                $this->con->sql("DELETE FROM lista_ingredientes_productos WHERE id_pro='".$id_pro."' AND id_lin='".$list_ing[$i]['id_lin']."'");
-            }
-            if($lin == 1){
-                $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
-            }
-        }
-        
-        $info['op'] = 1;
-        $info['mensaje'] = "Configuracion Modificada Exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
         return $info;
         
     }
@@ -644,17 +757,18 @@ class Guardar extends Core{
     private function crear_giro(){
         
         $dominio = $_POST['dominio'];
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $item_pagina = $_POST['item_pagina'];
+        $item_pos = $_POST['item_pos'];
+        $item_cocina = $_POST['item_cocina'];
+        $item_grafico = $_POST['item_grafico'];
+        $dns_letra = $_POST['dns_letra'];
+
         if($this->admin == 1){
             if($this->verificar_dominio($dominio)){
-                $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-                $id = $_POST['id'];
+                $verificar_dominio = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");        
                 if($verificar_dominio['count'] == 0 || ($verificar_dominio['count'] == 1 && $id == $verificar_dominio['resultado'][0]['id_gir'])){
-                    $nombre = $_POST['nombre'];
-                    $item_pagina = $_POST['item_pagina'];
-                    $item_pos = $_POST['item_pos'];
-                    $item_cocina = $_POST['item_cocina'];
-                    $item_grafico = $_POST['item_grafico'];
-                    $dns_letra = $_POST['dns_letra'];
                     if($id == 0){
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
                         $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
@@ -694,23 +808,39 @@ class Guardar extends Core{
         $info['page'] = "msd/giros.php";
         return $info;
     }
-
     private function eliminar_giro(){
-        /*
-        $sql = $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$this->id_gir."'");
-        if($sql['estado']){
-            $info['tipo'] = "success";
-            $info['titulo'] = "Eliminado";
-            $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
-            $info['reload'] = 1;
-            $info['page'] = "base/giros.php";
+
+        $id_gir = $_POST['id'];
+        $nombre = $_POST['nombre'];
+
+        if($this->admin == 1){
+            $sqlugc = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$id_gir."'");
+            if($sqlugc['count'] == 1){
+                $sql = $this->con->sql("UPDATE giros SET eliminado='1' WHERE id_gir='".$id_gir."'");
+                if($sql['estado']){
+                    $info['tipo'] = "success";
+                    $info['titulo'] = "Eliminado";
+                    $info['texto'] = "Giro ".$nombre." Eliminado";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/giros.php";
+                }else{
+                    $info['tipo'] = "error";
+                    $info['titulo'] = "Error";
+                    $info['texto'] = "Giro ".$nombre." no pudo ser eliminado";
+                }
+            }else{
+                $info['tipo'] = "error";
+                $info['titulo'] = "Error";
+                $info['texto'] = "Giro ".$nombre." no pudo ser eliminado";
+            }
         }else{
             $info['tipo'] = "error";
             $info['titulo'] = "Error";
-            $info['texto'] = "Giro ".$_POST["nombre"]." no pudo ser eliminado";
+            $info['texto'] = "Giro ".$nombre." no pudo ser eliminado";
         }
+
         return $info;
-        */
+        
     }
     private function eliminar_repartidor(){
 
@@ -1148,12 +1278,12 @@ class Guardar extends Core{
         $orders = $sql_cae["count"];
 
         if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, descripcion, descripcion_sub, precio, orders) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$descripcion."', '".$descripcion_sub."', '".$precio."', '".$orders."')");
+            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, id_gir, descripcion, descripcion_sub, precio, orders) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$this->id_gir."', '".$descripcion."', '".$descripcion_sub."', '".$precio."', '".$orders."')");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria creada exitosamente";
         }
         if($id_cae > 0){
-            $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."', descripcion='".$descripcion."', descripcion_sub='".$descripcion_sub."', precio='".$precio."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."'");
+            $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."', descripcion='".$descripcion."', descripcion_sub='".$descripcion_sub."', precio='".$precio."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
             $info['op'] = 1;
             $info['mensaje'] = "Categoria modificada exitosamente";
         }

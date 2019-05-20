@@ -167,7 +167,7 @@ class Core{
         return $giros['resultado'];
     }
     public function get_giros(){
-        $giros = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE eliminado='0'");
+        $giros = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE eliminado='0' ORDER BY id_gir DESC");
         return $giros['resultado'];
     }
     public function get_giro($id_gir){

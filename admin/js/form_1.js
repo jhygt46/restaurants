@@ -237,6 +237,17 @@ function add_dns(id, dominio){
     };
     confirm_warning(msg);
 }
+function add_ssl(id, dominio){
+    var msg = {
+        title: "Solicitud SSL", 
+        text: "Desea cambiar el estado del dominio "+dominio, 
+        confirm: "Si, deseo cambiarlo",
+        name: dominio,
+        accion: 'add_ssl',
+        id: id,
+    };
+    confirm_warning(msg);
+}
 
 function confirm(message){
     
