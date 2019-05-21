@@ -27,7 +27,8 @@ $page_mod = "pages/msd/usuarios.php";
 $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $fireapp->get_usuarios();
+$id_gir = (isset($_GET["id_gir"]))? $_GET["id_gir"] : 0 ;
+$list = $fireapp->get_usuarios_admin($id_gir);
 
 echo "<pre>";
 print_r($list);

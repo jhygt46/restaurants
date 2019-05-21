@@ -196,7 +196,7 @@ class Core{
     }
     public function get_usuarios(){
         if($this->id_user == 1){
-            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_user<>'".$this->id_user."' AND admin='1' AND eliminado='0'");
+            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_user<>'".$this->id_user."' AND re_venta='1' AND admin='1' AND eliminado='0'");
             return $usuarios['resultado'];
         }else{
             if($this->re_venta == 1){
@@ -205,8 +205,12 @@ class Core{
             }
         }
     }
+    public function get_usuarios_admin($id_gir){
+        $usuarios = $this->con->sql("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir='".$id_gir."' AND t2.id_user=t1.id_user AND t1.eliminado='0'");
+        return $usuarios['resultado'];
+    }
     public function get_usuarios_local($id_loc){
-        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+        $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE admin='0' AND id_loc='".$id_loc."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
         return $usuarios['resultado'];
     }
     public function get_usuario($id){
