@@ -134,7 +134,7 @@ class Login {
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
                                 $info['code'] = $code_cookie;
                                 $info['id'] = $user['resultado'][0]['id_loc'];
-                                $this->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
+                                $this->con->sql("UPDATE locales SET cookie_code='".$code_cookie."' WHERE id_loc='".$user["resultado"][0]["id_loc"]."' AND id_gir='".$user["resultado"][0]["id_gir"]."'");
 
                             }
                             if($user['resultado'][0]['tipo'] == 1){
@@ -143,7 +143,7 @@ class Login {
                                 $info['op'] = 4;
                                 $info['url'] = 'ccn/1';
                                 $info['message'] = "Ingreso Exitoso Cocina";
-                                $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."'");
+                                $aux_sql = $this->con->sql("SELECT code FROM locales WHERE id_loc='".$user["resultado"][0]["id_loc"]."' AND id_gir='".$user["resultado"][0]["id_gir"]."'");
                                 $info['ccn'] = $aux_sql["resultado"][0]["code"];
 
                             }

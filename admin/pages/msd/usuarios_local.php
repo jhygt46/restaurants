@@ -18,10 +18,10 @@ $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
 $accion = "crear_usuarios_local";
 
-$eliminaraccion = "eliminar_usuario_giro";
+$eliminaraccion = "eliminar_usuario_local";
 $id_list = "id_user";
 $eliminarobjeto = "Usuario";
-$page_mod = "pages/msd/usuarios_giro.php";
+$page_mod = "pages/msd/usuarios_local.php";
 /* CONFIG PAGE */
 
 $id_user = 0;

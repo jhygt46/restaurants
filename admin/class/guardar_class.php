@@ -55,11 +55,20 @@ class Guardar extends Core{
         if($_POST['accion'] == "crear_usuario"){
             return $this->crear_usuario();
         }
+        if($_POST['accion'] == "crear_usuario_admin"){
+            return $this->crear_usuario_admin();
+        }
         if($_POST['accion'] == "crear_usuarios_local"){
             return $this->crear_usuarios_local();
         }
         if($_POST['accion'] == "eliminar_usuario"){
             return $this->eliminar_usuario();
+        }
+        if($_POST['accion'] == "eliminar_usuario_admin"){
+            return $this->eliminar_usuario_admin();
+        }
+        if($_POST['accion'] == "eliminar_usuario_local"){
+            return $this->eliminar_usuario_local();
         }
         if($_POST['accion'] == "asignar_rubro"){
             return $this->asignar_rubro();
@@ -1287,6 +1296,52 @@ class Guardar extends Core{
         return $info;
         
     }
+    private function crear_usuario_admin(){
+
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+
+        $sqlcorreo = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo."'");
+        $sqlgirocliente = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$this->id_gir."'");
+
+        if($sqlgirocliente["count"] == 1){
+
+            if($id == 0){
+                if($sqlcorreo["count"] == 0){
+                    $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin) VALUES ('".$nombre."', '".$correo."', now(), '0')");
+                    $id_user = $sql["insert_id"];
+                    $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id_user."', '".$this->id_gir."')");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Usuario creado exitosamente";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/giros.php";
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Error: ";
+                }
+            }
+            if($id > 0){
+                if($sqlcorreo["count"] == 0 || ($sqlcorreo["count"] == 1 && $id == $sqlcorreo["resultado"][0]["id_user"])){
+                    $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user='".$id."'");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Usuario modificado exitosamente";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/giros.php";
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Error: ";
+                }
+            }
+
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Error: ";
+        }
+
+        return $info;
+
+    }
     private function crear_usuarios_local(){
 
         $id = $_POST['id'];
@@ -1454,6 +1509,79 @@ class Guardar extends Core{
             if($this->re_venta == 1 && $sql['resultado'][0]['id_aux_user'] == $this->id_user){
                 $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
             }
+
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Usuario ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/usuarios.php";
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Usuario ".$nombre." no pudo ser eliminado";
+
+        }
+
+        return $info;
+        
+    }
+    private function eliminar_usuario_admin(){
+                
+        $id = $_POST['id'];
+
+        if($this->admin == 1){
+
+            $sql = $this->con->sql("SELECT t2.id_gir, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2  WHERE t1.id_user='".$id."' AND t1.id_user=t2.id_user"); 
+            $nombre = $sql["resultado"][0]["nombre"];
+
+            if($sql["count"] == 1){
+
+                $sql2 = $this->con->sql("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user='".$this->id_user."' AND id_gir='".$sql["resultado"][0]["id_gir"]."'");
+                if($sql2["count"] == 1){
+
+                    $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
+                    $info['tipo'] = "success";
+                    $info['titulo'] = "Eliminado";
+                    $info['texto'] = "Usuario ".$nombre." Eliminado";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/usuarios.php";
+
+                }else{
+
+                    $info['tipo'] = "error";
+                    $info['titulo'] = "Error";
+                    $info['texto'] = "Usuario ".$nombre." no pudo ser eliminado";
+    
+                }
+
+            }else{
+
+                $info['tipo'] = "error";
+                $info['titulo'] = "Error";
+                $info['texto'] = "Usuario ".$nombre." no pudo ser eliminado";
+
+            }
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Usuario no pudo ser eliminado";
+
+        }
+
+        return $info;
+        
+    }
+    private function eliminar_usuario_local(){
+                
+        $id = $_POST['id'];
+        $id_loc = $_POST['id_loc'];
+
+        $sql = $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE t1.id_user='".$id."' AND admin='0' AND id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'"); 
+        if($sql["estado"]){
 
             $info['tipo'] = "success";
             $info['titulo'] = "Eliminado";

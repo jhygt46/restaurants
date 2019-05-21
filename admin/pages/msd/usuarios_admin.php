@@ -8,17 +8,18 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
+$core->is_giro();
 
 /* CONFIG PAGE */
 $titulo = "Usuarios ".$_GET["nombre"];
 $titulo_list = "Mis Usuarios";
 $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
-$accion = "crear_usuario";
+$accion = "crear_usuario_admin";
 
-$eliminaraccion = "eliminar_usuario";
+$eliminaraccion = "eliminar_usuario_admin";
 $id_list = "id_user";
 $eliminarobjeto = "Usuario";
 $page_mod = "pages/msd/usuarios.php";
@@ -27,19 +28,14 @@ $page_mod = "pages/msd/usuarios.php";
 $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$id_gir = (isset($_GET["id_gir"]))? $_GET["id_gir"] : 0 ;
-$list = $fireapp->get_usuarios_admin($id_gir);
+$list = $core->get_usuarios_admin();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
-$inicio = $fireapp->inicio();
+$inicio = $core->inicio();
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
-    $that = $fireapp->get_usuario($id_user);
+    $that = $core->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
 
 }
@@ -73,17 +69,6 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Correo:</p></span>
                         <input id="correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Tipo:</p></span>
-                        <select id="tipo">
-                            <?php if($inicio["id_user"] == 1 || $inicio["re_venta"] == 1){ ?>
-                                <option value="0">Vendedor</option>
-                            <?php } ?>
-                            <?php if($inicio["id_user"] == 1){ ?>    
-                                <option value="1">Reclutador</option>
-                            <?php } ?>
-                        </select>
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
