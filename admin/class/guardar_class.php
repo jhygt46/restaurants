@@ -722,7 +722,7 @@ class Guardar extends Core{
                     $this->con->sql("INSERT INTO preguntas_productos (id_pro, id_pre) VALUES ('".$id_pro."', '".$list[$i]['id_pre']."')");
                 }
             }
-            
+            /*
             $list_ing = $this->get_lista_ingredientes();
             for($i=0; $i<count($list_ing); $i++){
                 $lin = $_POST['lista_ing-'.$list_ing[$i]['id_lin']];
@@ -733,12 +733,17 @@ class Guardar extends Core{
                     $this->con->sql("INSERT INTO lista_ingredientes_productos (id_pro, id_lin) VALUES ('".$id_pro."', '".$list_ing[$i]['id_lin']."')");
                 }
             }
-            
+            */
             $info['op'] = 1;
             $info['mensaje'] = "Configuracion Modificada Exitosamente";
             $info['reload'] = 1;
             $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
 
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+        
         }
         return $info;
         
@@ -753,7 +758,6 @@ class Guardar extends Core{
         }
         
     }
-    
     private function crear_giro(){
         
         $dominio = $_POST['dominio'];
@@ -844,37 +848,61 @@ class Guardar extends Core{
     }
     private function eliminar_repartidor(){
 
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE motos SET eliminado='1' WHERE id_mot='".$id[1]."' AND id_gir='".$this->id_gir."'");
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Repartidor ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_repartidor.php?id_loc=".$id[0]."&nombre=".$id[2];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id = explode("/", $_POST['id']);
+            $nombre = $_POST["nombre"];
+
+            $this->con->sql("UPDATE motos SET eliminado='1' WHERE id_mot='".$id[1]."' AND id_gir='".$this->id_gir."'");
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Repartidor ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/crear_repartidor.php?id_loc=".$id[0]."&nombre=".$id[2];
+        
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Repartidor ".$nombre." no pudo ser eliminado";
+
+        }
         return $info;
 
     }
     private function eliminar_tramos(){
         
-        $id = explode("/", $_POST['id']);
-        $sqllocales = $this->con->sql("SELECT * FROM locales_tramos t1, locales t2 WHERE t1.id_lot='".$id[1]."' AND t1.id_loc=t2.id_loc AND t2.id_gir='".$this->id_gir."'");
-        if($sqllocales['count'] == 1){
-            $this->con->sql("UPDATE locales_tramos SET eliminado='1' WHERE id_lot='".$id[1]."'");        
-            $info['tipo'] = "success";
-            $info['titulo'] = "Eliminado";
-            $info['texto'] = "Giro ".$_POST["nombre"]." Eliminado";
-            $info['reload'] = 1;
-            $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id = explode("/", $_POST['id']);
+            $nombre = $_POST["nombre"];
+
+            $sqllocales = $this->con->sql("SELECT * FROM locales_tramos t1, locales t2 WHERE t1.id_lot='".$id[1]."' AND t1.id_loc=t2.id_loc AND t2.id_gir='".$this->id_gir."'");
+            if($sqllocales['count'] == 1){
+                $this->con->sql("UPDATE locales_tramos SET eliminado='1' WHERE id_lot='".$id[1]."'");        
+                $info['tipo'] = "success";
+                $info['titulo'] = "Eliminado";
+                $info['texto'] = "Tramo ".$nombre." Eliminado";
+                $info['reload'] = 1;
+                $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
+            }else{
+                $info['tipo'] = "error";
+                $info['titulo'] = "Error";
+                $info['texto'] = "Tramo ".$nombre." no pudo ser eliminado";
+            }
+
         }else{
-            //XSS
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Tramo ".$nombre." no pudo ser eliminado";
+
         }
+
         return $info;
         
     }
-    
     private function crear_horario(){
-
-        $this->con_cambios();
 
         $id_hor = $_POST['id'];
         $id_loc = $_POST['id_loc'];
@@ -891,35 +919,55 @@ class Guardar extends Core{
 
         $tipo = $_POST['tipo'];
 
-        if($id_hor == 0){
-            $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$tipo."', '".$id_loc."', '".$this->id_gir."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Horario creado exitosamente";
-        }
-        if($id_hor > 0){
-            $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Horario modificado exitosamente";
-        }
-        
-        $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
-        $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
-        
-        if($h_retiro['count'] == 0){
-            $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_retiro['count'] > 0){
-            $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_despacho['count'] == 0){
-            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_despacho['count'] > 0){
-            $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
-        }
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            
+            $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            if($sqlloc['count'] == 1){
+                
+                $this->con_cambios();
+                if($id_hor == 0){
+                    $this->con->sql("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES ('".$dia_ini."', '".$dia_fin."', '".$hora_ini."', '".$hora_fin."', '".$min_ini."', '".$min_fin."', '".$tipo."', '".$id_loc."', '".$this->id_gir."')");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Horario creado exitosamente";
+                }
+                if($id_hor > 0){
+                    $this->con->sql("UPDATE horarios SET tipo='".$tipo."', dia_ini='".$dia_ini."', dia_fin='".$dia_fin."', hora_ini='".$hora_ini."', hora_fin='".$hora_fin."', min_ini='".$min_ini."', min_fin='".$min_fin."' WHERE id_hor='".$id_hor."' AND id_gir='".$this->id_gir."'");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Horario modificado exitosamente";
+                }
+                
+                $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
+                $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
+                
+                if($h_retiro['count'] == 0){
+                    $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
+                }
+                if($h_retiro['count'] > 0){
+                    $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
+                }
+                if($h_despacho['count'] == 0){
+                    $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
+                }
+                if($h_despacho['count'] > 0){
+                    $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
+                }
+    
+                $info['reload'] = 1;
+                $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
 
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error: Dominio Invalido";
+    
+            }
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error: Dominio Invalido";
+
+        }
         return $info;
 
     }
@@ -928,68 +976,121 @@ class Guardar extends Core{
         $tipo = $_POST['tipo'];
         $id_loc = $_POST['id_loc'];
         $loc_nombre = $_POST['loc_nombre'];
-        $sqllocales = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
 
-        if($sqllocales['count'] == 1){
-            if($tipo == 0){
-                $nombre = $_POST['nombre'];
-                $correo = $_POST['correo'];
-                $uid = bin2hex(openssl_random_pseudo_bytes(10));
-                $aux_mot = $this->con->sql("INSERT INTO motos (nombre, correo, uid, id_gir, eliminado) VALUES ('".$nombre."', '".$correo."', '".$uid."', '".$this->id_gir."', '0')");
-                $id_mot = $aux_mot['insert_id'];
-                $info['mensaje'] = "Repartidor ingresado exitosamente";
-            }
-            if($tipo == 1){
-                $id_mot = $_POST['repartidor'];
-                $info['mensaje'] = "Repartidor asociado exitosamente";
-            }
-            $info['op'] = 1;
-            $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
-        }else{
-            $info['op'] = 2;
-            $info['mensaje'] = "Error";
-        }
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $sqllocales = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            if($sqllocales['count'] == 1){
+
+                if($tipo == 0){
+
+                    $nombre = $_POST['nombre'];
+                    $correo = $_POST['correo'];
+                    $uid = bin2hex(openssl_random_pseudo_bytes(10));
+                    $aux_mot = $this->con->sql("INSERT INTO motos (nombre, correo, uid, id_gir) VALUES ('".$nombre."', '".$correo."', '".$uid."', '".$this->id_gir."')");
+                    $id_mot = $aux_mot['insert_id'];
+                    
+                    $info['op'] = 1;
+                    $info['reload'] = 1;
+                    $info['mensaje'] = "Repartidor ingresado exitosamente";
+
+                    $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
+
+                }
+                if($tipo == 1){
+
+                    $id_mot = $_POST['repartidor'];
+                    $ins_mot = $this->con->sql("SELECT * FROM motos WHERE id_mot='".$id_mot."' AND id_gir='".$this->id_gir."'");
+                    if($ins_mot["count"] == 1){
+                        
+                        $info['op'] = 1;
+                        $info['reload'] = 1;
+                        $info['mensaje'] = "Repartidor asociado exitosamente";
+                        $this->con->sql("INSERT INTO motos_locales (id_mot, id_loc) VALUES ('".$id_mot."', '".$id_loc."')");
+                    
+                    }else{
+
+                        $info['op'] = 2;
+                        $info['mensaje'] = "Error";
         
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
+                    }
+                    
+                }
+
+                $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
+            
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+
+            }
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error: Dominio Invalido";
+
+        }
         return $info;
 
     }
     private function crear_catalogo(){
-        /*
-        $id_cat = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $this->con_cambios();
-
-        if($id_cat == 0){
-            $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir, eliminado) VALUES ('".$nombre."', now(), '".$this->id_gir."', '0')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Catalogo creado exitosamente";
-        }
-        if($id_cat > 0){
-            $info['db2'] = $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Catalogo modificado exitosamente";
-        }
         
-        $info['reload'] = 1;
-        $info['page'] = "msd/catalogo_productos.php";
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id_cat = $_POST['id'];
+            $nombre = $_POST['nombre'];
+            $this->con_cambios();
+
+            if($id_cat == 0){
+                $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('".$nombre."', now(), '".$this->id_gir."')");
+                $info['op'] = 1;
+                $info['mensaje'] = "Catalogo creado exitosamente";
+            }
+            if($id_cat > 0){
+                $this->con->sql("UPDATE catalogo_productos SET nombre='".$nombre."' WHERE id_cat='".$id_cat."' AND id_gir='".$this->id_gir."'");
+                $info['op'] = 1;
+                $info['mensaje'] = "Catalogo modificado exitosamente";
+            }
+            
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
+        }
         return $info;
-        */
+        
     }
     private function eliminar_catalogo(){
-        /*      
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE catalogo_productos SET eliminado='1' WHERE id_cat='".$id[1]."'");
         
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Catalogo ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "apps/catalogo_productos.php?id=".$id[0];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id = explode("/", $_POST['id']);
+            $nombre = $_POST["nombre"];
+
+            $this->con->sql("UPDATE catalogo_productos SET eliminado='1' WHERE id_cat='".$id[1]."' AND id_gir='".$this->id_gir."'");
+            
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Catalogo ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php?id=".$id[0];
+        
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Catalogo ".$nombre." no pudo ser eliminado";
+
+        }
 
         return $info;
-        */
+        
     }
     private function configurar_local(){
 
@@ -999,12 +1100,22 @@ class Guardar extends Core{
         $pos = $_POST['pos'];
         $id_loc = $_POST['id_loc'];
 
-        $this->con->sql("UPDATE locales SET pos='".$pos."', sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."'");
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        $info['op'] = 1;
-        $info['mensaje'] = "Local editado exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/locales.php";
+            $this->con->sql("UPDATE locales SET pos='".$pos."', sonido='".$sonido."', t_retiro='".$t_retiro."', t_despacho='".$t_despacho."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+
+            $info['op'] = 1;
+            $info['mensaje'] = "Local editado exitosamente";
+            $info['reload'] = 1;
+            $info['page'] = "msd/locales.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+        
+        }
+
         return $info;
 
     }
@@ -1017,32 +1128,51 @@ class Guardar extends Core{
         $direccion = $_POST['direccion'];
         $lat = $_POST['lat'];
         $lng = $_POST['lng'];
-        $code = bin2hex(openssl_random_pseudo_bytes(10));
-        $this->con_cambios();
 
-        $ses = $this->con->sql("SELECT * FROM ses_mail where correo='".$correo."'");
-        if($ses['count'] == 0){
-            $correo_ses = 0;
-        }
-        if($ses['count'] == 1){
-            $correo_ses = 1;
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $this->con_cambios();
+            $code = bin2hex(openssl_random_pseudo_bytes(10));
+            $ses = $this->con->sql("SELECT * FROM ses_mail where correo='".$correo."'");
+            $catalgo = $this->con->sql("SELECT * FROM catalogo_productos where id_cat='".$id_cat."' AND id_gir='".$this->id_gir."' AND eliminado='0'");
+            if($catalgo['count'] == 1){
+
+                if($ses['count'] == 0){
+                    $correo_ses = 0;
+                }
+                if($ses['count'] == 1){
+                    $correo_ses = 1;
+                }
+
+                if($id_loc == 0){
+                    $this->con->sql("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$correo_ses."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Local creado exitosamente";
+                }
+                if($id_loc > 0){
+                    $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo_ses='".$correo_ses."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Local modificado exitosamente";
+                }
+                
+                $this->locales_giro();
+                $info['reload'] = 1;
+                $info['page'] = "msd/locales.php";
+            
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+    
+            }
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
         }
 
-        if($id_loc == 0){
-            $this->con->sql("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_gir, id_cat) VALUES ('".$nombre."', '".$correo_ses."', '".$direccion."', '".$lat."', '".$lng."', '".$code."', now(), '".$correo."', '".$this->id_gir."', '".$id_cat."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Local creado exitosamente";
-        }
-        if($id_loc > 0){
-            $this->con->sql("UPDATE locales SET nombre='".$nombre."', correo_ses='".$correo_ses."', correo='".$correo."', lat='".$lat."', lng='".$lng."', direccion='".$direccion."', id_cat='".$id_cat."' WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Local modificado exitosamente";
-        }
-        
-        $this->locales_giro();
-
-        $info['reload'] = 1;
-        $info['page'] = "msd/locales.php";
         return $info;
         
     }
@@ -1054,38 +1184,59 @@ class Guardar extends Core{
         $precio = $_POST['precio'];
         $pol = $_POST['posiciones'];
         
-        if($id_lot == 0){
-            $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc, eliminado) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."', '0')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Tramo creado exitosamente";
-        }
-        if($id_lot > 0){
-            $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Tramo modificado exitosamente";
-        }
-        
-        $aux = $this->con->sql("SELECT MIN(t3.precio) as min FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t3.eliminado='0' AND t2.eliminado='0'");
-        $min = $aux['resultado'][0]['min'];
-        
-        $info['db_01'] = $aux;
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        if($min !== null){
-            $this->con->sql("UPDATE giros SET despacho_domicilio='1', desde='".$min."' WHERE id_gir='".$this->id_gir."'");
+            $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            if($sqlloc['count'] == 1){
+
+                if($id_lot == 0){
+                    $this->con->sql("INSERT INTO locales_tramos (nombre, precio, poligono, id_loc, eliminado) VALUES ('".$nombre."', '".$precio."', '".$pol."', '".$id_loc."', '0')");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Tramo creado exitosamente";
+                }
+                if($id_lot > 0){
+                    $this->con->sql("UPDATE locales_tramos SET nombre='".$nombre."', precio='".$precio."', poligono='".$pol."' WHERE id_lot='".$id_lot."'");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Tramo modificado exitosamente";
+                }
+                
+                $aux = $this->con->sql("SELECT MIN(t3.precio) as min FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir='".$this->id_gir."' AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t3.eliminado='0' AND t2.eliminado='0'");
+                $min = $aux['resultado'][0]['min'];
+                
+                $info['db_01'] = $aux;
+    
+                if($min !== null){
+                    $this->con->sql("UPDATE giros SET despacho_domicilio='1', desde='".$min."' WHERE id_gir='".$this->id_gir."'");
+                }else{
+                    $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
+                }
+                
+                $this->con_cambios();
+    
+                $info['reload'] = 1;
+                $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
+
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+    
+            }
+
         }else{
-            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
-        }
-        
-        $this->con_cambios();
 
-        $info['reload'] = 1;
-        $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
+        }
+
         return $info;
         
     }
     private function locales_giro(){
 
         $sql_aux = $this->con->sql("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir='".$this->id_gir."' AND eliminado='0'");
+        
         for($i=0; $i<$sql_aux["count"]; $i++){
             $aux["id_loc"] = $sql_aux["resultado"][$i]["id_loc"];
             $aux["lat"] = $sql_aux["resultado"][$i]["lat"];
@@ -1095,22 +1246,44 @@ class Guardar extends Core{
             $resultado[] = $aux;
             unset($aux);
         }
+
         $this->con->sql("UPDATE giros SET lista_locales='".json_encode($resultado, JSON_UNESCAPED_UNICODE)."' WHERE id_gir='".$this->id_gir."'");
 
     }
     private function eliminar_locales(){
                 
         $id_loc = $_POST['id'];
-        $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");
-        
-        $this->locales_giro();
+        $nombre = $_POST["nombre"];
 
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Local ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/locales.php";
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
+            $sqlloc = $this->con->sql("SELECT * FROM locales WHERE id_loc='".$id_loc."' AND id_gir='".$this->id_gir."'");
+            if($sqlloc['count'] == 1){
+
+                $this->con->sql("UPDATE locales SET eliminado='1' WHERE id_loc='".$id_loc."'");    
+                $this->locales_giro();
+
+                $info['tipo'] = "success";
+                $info['titulo'] = "Eliminado";
+                $info['texto'] = "Local ".$nombre." Eliminado";
+                $info['reload'] = 1;
+                $info['page'] = "msd/locales.php";
+
+            }else{
+
+                $info['tipo'] = "error";
+                $info['titulo'] = "Error";
+                $info['texto'] = "Local ".$nombre." no pudo ser eliminado";
+    
+            }
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Local ".$nombre." no pudo ser eliminado";
+
+        }
         return $info;
         
     }
@@ -1135,7 +1308,9 @@ class Guardar extends Core{
                         if(strlen($pass1) > 7){
                             $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES ('".$nombre."', now(), '".$correo."', '".md5($pass1)."', '".$tipo."', '0', '".$id_loc."', '".$this->id_gir."')");
                             $info['op'] = 1;
+                            $info['mensaje'] = "Usuario creado exitosamente";
                             $info['reload'] = 1;
+                            $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
                         }else{
                             $info['op'] = 2;
                             $info['mensaje'] = "Password debe tener al menos 8 caracteres";
@@ -1151,14 +1326,16 @@ class Guardar extends Core{
             }
             if($id > 0){
                 if($sqlcorreo["count"] == 0 || ($sqlcorreo["count"] == 1 && $sqlcorreo['resultado'][0]['id_user'] == $id)){
+                    
                     if($pass1 == $pass2 && strlen($pass1) > 7){
                         $this->con->sql("UPDATE fw_usuarios SET pass='".md5($pass1)."' WHERE id_user='".$id."'");
-                    }else{
-                        $this->con->sql("UPDATE fw_usuarios SET tipo='".$tipo."', nombre='".$nombre."', correo='".$correo."', id_loc='".$id_loc."' WHERE id_user='".$id."'");
                     }
+                    $this->con->sql("UPDATE fw_usuarios SET tipo='".$tipo."', nombre='".$nombre."', correo='".$correo."' WHERE id_user='".$id."'");
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuario modificado exitosamente";
                     $info['reload'] = 1;
+                    $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
+
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Correo Existente";
@@ -1169,11 +1346,10 @@ class Guardar extends Core{
             $info['mensaje'] = "Error: ";
         }
 
-        $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
+        
         return $info;
 
     }
-
     private function crear_usuario(){
 
         $id = $_POST['id'];
@@ -1181,50 +1357,84 @@ class Guardar extends Core{
         $correo = $_POST['correo'];
         $tipo = $_POST['tipo'];
         
-        if($id == 0){
-            $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo) VALUES ('".$nombre."', '".$correo."')");
-            $id = $sql["insert_id"];
-        }
-        if($tipo == 0 && $this->admin == 1 && ($this->re_venta == 1 || $this->id_user == 1)){
-            $this->con->sql("UPDATE fw_usuarios SET admin='1', id_aux_user='".$this->id_user."' WHERE id_user='".$id."'");
-        }
-        if($tipo == 1 && $this->id_user == 1){
-            $this->con->sql("UPDATE fw_usuarios SET admin='1', re_venta='1' WHERE id_user='".$id."'");
-        }
+        if($this->re_venta == 1 || $this->id_user == 1){
 
-        $info['op'] = 1;
-        $info['mensaje'] = "Usuarios modificado exitosamente";
+            $sqluser = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo."'");
+            if($sqluser['count'] == 0 || ($sqluser['count'] == 1 && $id == $sqluser['resultado'][0]['id_user'])){
+
+                if($id > 0){
+                    $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user=''");
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Usuarios modificado exitosamente";
+                }
+                if($id == 0){
+                    if($tipo == 0){
+                        $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, id_aux_user) VALUES ('".$nombre."', '".$correo."', '1', '".$this->id_user."')");
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Usuarios agregado exitosamente";
+                    }
+                    if($tipo == 1 && $this->id_user == 1){
+                        $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, re_venta) VALUES ('".$nombre."', '".$correo."', '1', '1')");    
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Usuarios agregado exitosamente";
+                    }
+                }
+
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Correo Existente";
+
+            }
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Correo Existente";
+
+        }
         $info['reload'] = 1;
         $info['page'] = "msd/usuarios.php";
+
         return $info;
         
     }
     private function eliminar_horario(){
 
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE horarios SET eliminado='1' WHERE id_hor='".$id[0]."' AND id_gir='".$this->id_gir."'");
-        
-        $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
-        $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
-        
-        if($h_retiro['count'] == 0){
-            $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_retiro['count'] > 0){
-            $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_despacho['count'] == 0){
-            $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
-        }
-        if($h_despacho['count'] > 0){
-            $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
-        }
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_horario.php?id_loc=".$id[1]."&nombre=".$id[2];
+            $id = explode("/", $_POST['id']);
+            $this->con->sql("UPDATE horarios SET eliminado='1' WHERE id_hor='".$id[0]."' AND id_gir='".$this->id_gir."'");
+            
+            $h_retiro = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='1')");
+            $h_despacho = $this->con->sql("SELECT * FROM horarios WHERE id_gir='".$this->id_gir."' AND eliminado='0' AND (tipo='0' OR tipo='2')");
+            
+            if($h_retiro['count'] == 0){
+                $this->con->sql("UPDATE giros SET retiro_local='0' WHERE id_gir='".$this->id_gir."'");
+            }
+            if($h_retiro['count'] > 0){
+                $this->con->sql("UPDATE giros SET retiro_local='1' WHERE id_gir='".$this->id_gir."'");
+            }
+            if($h_despacho['count'] == 0){
+                $this->con->sql("UPDATE giros SET despacho_domicilio='0' WHERE id_gir='".$this->id_gir."'");
+            }
+            if($h_despacho['count'] > 0){
+                $this->con->sql("UPDATE giros SET despacho_domicilio='1' WHERE id_gir='".$this->id_gir."'");
+            }
+
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/crear_horario.php?id_loc=".$id[1]."&nombre=".$id[2];
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Local ".$nombre." no pudo ser eliminado";
+
+        }
 
         return $info;
 
@@ -1232,19 +1442,38 @@ class Guardar extends Core{
     private function eliminar_usuario(){
                 
         $id = $_POST['id'];
-        $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Usuario ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/usuarios.php";
+        $nombre = $_POST['nombre'];
+
+        if($this->re_venta == 1 || $this->id_user == 1){
+
+            $sql = $this->con->sql("SELECT * FROM fw_usuarios WHERE id_user='".$id."'");
+            
+            if($this->id_user == 1){
+                $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
+            }
+            if($this->re_venta == 1 && $sql['resultado'][0]['id_aux_user'] == $this->id_user){
+                $this->con->sql("UPDATE fw_usuarios SET eliminado='1' WHERE id_user='".$id."'");
+            }
+
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Usuario ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/usuarios.php";
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Usuario ".$nombre." no pudo ser eliminado";
+
+        }
 
         return $info;
         
     }
     private function asignar_rubro(){
-        
+        /*
         $id_gir = $_POST['id'];
         $nombre = $_POST['nombre'];
         $this->con->sql("DELETE FROM palabra_giros WHERE id_gir='".$id_gir."'");
@@ -1261,7 +1490,7 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "base/configurar_giro.php?id=".$id_gir."&nombre=".$nombre;
         return $info;
-        
+        */
     }
     private function crear_categoria(){
 
@@ -1272,29 +1501,41 @@ class Guardar extends Core{
         $precio = $_POST['precio'];
         $parent_id = $_POST['parent_id'];
         $tipo = $_POST['tipo'];
-        $this->con_cambios();
 
-        $sql_cae = $this->con->sql("SELECT * FROM categorias WHERE parent_id='".$parent_id."'");
-        $orders = $sql_cae["count"];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        if($id_cae == 0){
-            $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, id_gir, descripcion, descripcion_sub, precio, orders) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$this->id_gir."', '".$descripcion."', '".$descripcion_sub."', '".$precio."', '".$orders."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Categoria creada exitosamente";
-        }
-        if($id_cae > 0){
-            $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."', descripcion='".$descripcion."', descripcion_sub='".$descripcion_sub."', precio='".$precio."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Categoria modificada exitosamente";
-        }
+            if($id_cae == 0){
+
+                $sql_cae = $this->con->sql("SELECT * FROM categorias WHERE parent_id='".$parent_id."'");
+                $orders = $sql_cae["count"];
+    
+                $this->con->sql("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, id_gir, descripcion, descripcion_sub, precio, orders) VALUES ('".$nombre."', '".$parent_id."', '".$tipo."', '".$this->id_cat."', '".$this->id_gir."', '".$descripcion."', '".$descripcion_sub."', '".$precio."', '".$orders."')");
+                $info['op'] = 1;
+                $info['mensaje'] = "Categoria creada exitosamente";
                 
-        $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+            }
+            if($id_cae > 0){
+                $this->con->sql("UPDATE categorias SET nombre='".$nombre."', tipo='".$tipo."', descripcion='".$descripcion."', descripcion_sub='".$descripcion_sub."', precio='".$precio."' WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+                $info['op'] = 1;
+                $info['mensaje'] = "Categoria modificada exitosamente";
+            }
+            
+            $this->con_cambios();
+            $info['reload'] = 1;
+            $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
+        }
         return $info;
         
     }
     private function crear_ingredientes(){
 
+        /*
         $id = $_POST['id'];
         $id_ing = $_POST['id_ing'];
         $nombre = $_POST['nombre'];
@@ -1315,25 +1556,37 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "msd/ingredientes.php?id=".$id."&parent_id=".$parent_id;
         return $info;
+        */
         
     }
     private function eliminar_categoria(){
                 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE categorias SET eliminado='1' WHERE id_cae='".$id[0]."'");
-        $this->con_cambios();
+        $nombre = $_POST["nombre"];
 
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Categoria ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
+            $this->con->sql("UPDATE categorias SET eliminado='1' WHERE id_cae='".$id[0]."' AND id_gir='".$this->id_gir."'");
+            $this->con_cambios();
+
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Categoria ".$_POST["nombre"]." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Categoria ".$nombre." no pudo ser eliminado";
+
+        }
         return $info;
         
     }
     private function eliminar_ingredientes(){
-                
+        /*
         $id = explode("/", $_POST['id']);
         $this->con->sql("UPDATE ingredientes SET eliminado='1' WHERE id_ing='".$id[1]."'");
         $this->con_cambios();
@@ -1345,55 +1598,85 @@ class Guardar extends Core{
         $info['page'] = "msd/ingredientes.php?id=".$id[0]."&parent_id=".$id[2];
 
         return $info;
-        
+        */
     }
-    
     private function eliminar_pagina(){
                 
         $id = $_POST['id'];
-        $this->con->sql("UPDATE paginas SET eliminado='1' WHERE id_pag='".$id."'");
-        $this->con_cambios();
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Pagina ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        $nombre = $_POST["nombre"];
 
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $this->con->sql("UPDATE paginas SET eliminado='1' WHERE id_pag='".$id."' AND id_gir='".$this->id_gir."'");
+            $this->con_cambios();
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Pagina ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
+        
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Pagina ".$nombre." no pudo ser eliminado";
+
+        }
         return $info;
         
     }
-    
     public function asignar_prods_promocion(){
         
         $id_cae = $_POST['id_cae'];
         $parent_id = $_POST['parent_id'];
         $precio = $_POST['precio'];
-        $values = $this->list_arbol_cats_prods();
-        $this->con_cambios();
-        
-        $this->con->sql("UPDATE categorias SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
-        $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
-        $this->con->sql("DELETE FROM promocion_productos WHERE id_cae='".$id_cae."'");
-        
-        for($i=0; $i<count($values); $i++){
 
-            $value = $values[$i];
-            if($value['id_cae'] !== null){
-                $cae_val = $_POST['sel-cae-'.$value['id_cae']];
-                if($cae_val > 0){
-                    $this->con->sql("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES ('".$id_cae."', '".$value['id_cae']."', '".$cae_val."')");
-                }
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+            if($sqlcat['count'] == 1){
+
+                $this->con_cambios();
+                $this->con->sql("UPDATE categorias SET precio='".$precio."' WHERE id_cae='".$id_cae."'");
+                $this->con->sql("DELETE FROM promocion_categoria WHERE id_cae1='".$id_cae."'");
+                $this->con->sql("DELETE FROM promocion_productos WHERE id_cae='".$id_cae."'");
+                
+                $values = $this->list_arbol_cats_prods();
+
+                for($i=0; $i<count($values); $i++){
+
+                    $value = $values[$i];
+                    if($value['id_cae'] !== null){
+                        $cae_val = $_POST['sel-cae-'.$value['id_cae']];
+                        if($cae_val > 0){
+                            $this->con->sql("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES ('".$id_cae."', '".$value['id_cae']."', '".$cae_val."')");
+                        }
+                    }
+                    if($value['id_pro'] !== null){
+                        $pro_val = $_POST['sel-pro-'.$value['id_pro']];
+                        if($pro_val > 0){
+                            $this->con->sql("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES ('".$id_cae."', '".$value['id_pro']."', '".$pro_val."')");
+                        }
+                    }
+                    
+                }      
+                $info['reload'] = 1;
+                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+    
             }
-            if($value['id_pro'] !== null){
-                $pro_val = $_POST['sel-pro-'.$value['id_pro']];
-                if($pro_val > 0){
-                    $this->con->sql("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES ('".$id_cae."', '".$value['id_pro']."', '".$pro_val."')");
-                }
-            }
-            
-        }      
-        $info['reload'] = 1;
-        $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
+        }
+
         return $info;
         
     }
@@ -1409,52 +1692,93 @@ class Guardar extends Core{
         $nombre_carro = $_POST['nombre_carro'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
-        $this->con_cambios();
-        
-        $sql_prod = $this->con->sql("SELECT * FROM cat_pros WHERE id_cae='".$id_cae."'");
-        $orders = $sql_prod["count"];
 
-        if($tipo == 0){
-            if($id_pro == 0){
-                $pro = $this->con->sql("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, fecha_creado, id_gir, eliminado) VALUES ('".$numero."', '".$nombre."', '".$nombre_carro."', '".$descripcion."', now(), '".$this->id_gir."', '0')");
-                $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$pro['insert_id']."', '".$orders."')");
-                $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
-            }
-            if($id_pro > 0){
-                $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', nombre_carro='".$nombre_carro."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."'");
-                $this->con->sql("UPDATE productos_precio SET precio='".$precio."' WHERE id_cat='".$this->id_cat."' AND id_pro='".$id_pro."'");
-            }
-        }
-        if($tipo == 1){
-            $all_prods = $this->get_productos();
-            for($i=0; $i<count($all_prods); $i++){
-                $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
-                if($pro == 1){
-                    $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$all_prods[$i]['id_pro']."', '".$orders."')");
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+        
+            $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id_cae."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+            if($sqlcat['count'] == 1){
+
+                $sql_prod = $this->con->sql("SELECT * FROM cat_pros WHERE id_cae='".$id_cae."'");
+                $orders = $sql_prod["count"];
+                $this->con_cambios();
+
+                if($tipo == 0){
+                    if($id_pro == 0){
+                        $pro = $this->con->sql("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, fecha_creado, id_gir) VALUES ('".$numero."', '".$nombre."', '".$nombre_carro."', '".$descripcion."', now(), '".$this->id_gir."')");
+                        $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$pro['insert_id']."', '".$orders."')");
+                        $this->con->sql("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES ('".$this->id_cat."', '".$pro['insert_id']."', '".$precio."')");    
+                    }
+                    if($id_pro > 0){
+                        $this->con->sql("UPDATE productos SET numero='".$numero."', nombre='".$nombre."', nombre_carro='".$nombre_carro."', descripcion='".$descripcion."' WHERE id_pro='".$id_pro."' AND id_gir='".$this->id_gir."'");
+                        $this->con->sql("UPDATE productos_precio SET precio='".$precio."' WHERE id_cat='".$this->id_cat."' AND id_pro='".$id_pro."'");
+                    }
                 }
+                if($tipo == 1){
+                    $all_prods = $this->get_productos();
+                    for($i=0; $i<count($all_prods); $i++){
+                        $pro = $_POST['prod-'.$all_prods[$i]['id_pro']];
+                        if($pro == 1){
+                            $this->con->sql("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES ('".$id_cae."', '".$all_prods[$i]["id_pro"]."', '".$orders."')");
+                        }
+                    }
+                }
+                
+                $info['op'] = 1;
+                $info['mensaje'] = "Producto modificado exitosamente";
+                $info['reload'] = 1;
+                $info['page'] = "msd/crear_productos.php?id=".$id_cae."&parent_id=".$parent_id;
+
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+    
             }
+        
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
         }
-        
-        $info['op'] = 1;
-        $info['mensaje'] = "Producto modificado exitosamente";
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id_cae."&parent_id=".$parent_id;
-        
+
         return $info;
         
     }
     private function eliminar_productos(){
                 
         $id = explode("/", $_POST['id']);
-        $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[0]."' AND id_cae='".$id[1]."'");
-        $this->con->sql("UPDATE productos SET eliminado='1' WHERE id_pro='".$id[0]."' AND id_gir='".$this->id_gir."'");
-        $this->con_cambios();
+        $nombre = $_POST["nombre"];
 
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Producto ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $sqlcat = $this->con->sql("SELECT * FROM categorias WHERE id_cae='".$id[1]."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+            if($sqlcat['count'] == 1){
+
+                $this->con->sql("DELETE FROM cat_pros WHERE id_pro='".$id[0]."' AND id_cae='".$id[1]."'");
+                $this->con->sql("UPDATE productos SET eliminado='1' WHERE id_pro='".$id[0]."' AND id_gir='".$this->id_gir."'");
+                $this->con_cambios();
+
+                $info['tipo'] = "success";
+                $info['titulo'] = "Eliminado";
+                $info['texto'] = "Producto ".$nombre." Eliminado";
+                $info['reload'] = 1;
+                $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
+            
+            }else{
+
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+    
+            }
+        
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Producto ".$nombre." no pudo ser eliminado";
+
+        }
 
         return $info;
         
@@ -1465,40 +1789,50 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         $mostrar = $_POST['mostrar'];
         $cantidad = $_POST['cantidad'];
-        $this->con_cambios();
 
-        if($id_pre > 0){
-            $this->con->sql("UPDATE preguntas SET nombre='".$nombre."', mostrar='".$mostrar."' WHERE id_pre='".$id_pre."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Pregunta modificada exitosamente";
-        }
-        if($id_pre == 0){
-            $aux = $this->con->sql("INSERT INTO preguntas (nombre, mostrar, id_cat) VALUES ('".$nombre."', '".$mostrar."', '".$this->id_cat."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Pregunta creada exitosamente";
-            $id_pre = $aux['insert_id'];
-        }
-        
-        $this->con->sql("DELETE FROM preguntas_valores WHERE id_pre='".$id_pre."'");
-        for($i=0; $i<$cantidad; $i++){
-            
-            $cant = $_POST["cant-".$i];
-            $valores = $_POST["valores-".$i];
-            $nombre = $_POST["nombre-".$i];
-            $valores_json = json_encode(explode(",", $valores), JSON_UNESCAPED_UNICODE);
-            if($cant > 0){
-                $this->con->sql("INSERT INTO preguntas_valores (cantidad, nombre, valores, id_pre) VALUES ('".$cant."', '".$nombre."', '".$valores_json."', '".$id_pre."')");
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $this->con_cambios();
+            if($id_pre > 0){
+                $this->con->sql("UPDATE preguntas SET nombre='".$nombre."', mostrar='".$mostrar."' WHERE id_pre='".$id_pre."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+                $info['op'] = 1;
+                $info['mensaje'] = "Pregunta modificada exitosamente";
+            }
+            if($id_pre == 0){
+                $aux = $this->con->sql("INSERT INTO preguntas (nombre, mostrar, id_cat, id_gir) VALUES ('".$nombre."', '".$mostrar."', '".$this->id_cat."', '".$this->id_gir."')");
+                $info['op'] = 1;
+                $info['mensaje'] = "Pregunta creada exitosamente";
+                $id_pre = $aux['insert_id'];
+            }
+
+            $this->con->sql("DELETE FROM preguntas_valores WHERE id_pre='".$id_pre."'");
+            for($i=0; $i<$cantidad; $i++){
+                
+                $cant = $_POST["cant-".$i];
+                $valores = $_POST["valores-".$i];
+                $nombre = $_POST["nombre-".$i];
+                $valores_json = json_encode(explode(",", $valores), JSON_UNESCAPED_UNICODE);
+                if($cant > 0){
+                    $this->con->sql("INSERT INTO preguntas_valores (cantidad, nombre, valores, id_pre) VALUES ('".$cant."', '".$nombre."', '".$valores_json."', '".$id_pre."')");
+                }
+                
             }
             
+            $info['reload'] = 1;
+            $info['page'] = "msd/preguntas.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
         }
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/preguntas.php";
+
         return $info;
         
     }
     private function crear_lista_ingredientes(){
-        
+        /*
         $id_lin = $_POST['id'];
         $nombre = $_POST['nombre'];
         $this->con_cambios();
@@ -1531,19 +1865,31 @@ class Guardar extends Core{
         $info['reload'] = 1;
         $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
         return $info;
-        
+        */
     }
     private function eliminar_preguntas(){
                 
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("DELETE FROM preguntas WHERE id_pre='".$id[1]."' AND id_cat='".$id[0]."'");
-        $this->con_cambios();
-        
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Preguntas ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/preguntas.php";
+        $id = $_POST['id'];
+        $nombre = $_POST["nombre"];
+
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $this->con->sql("UPDATE preguntas SET eliminado='1' WHERE id_pre='".$id."' AND id_cat='".$this->id_cat."' AND id_gir='".$this->id_gir."'");
+            $this->con_cambios();
+            
+            $info['tipo'] = "success";
+            $info['titulo'] = "Eliminado";
+            $info['texto'] = "Preguntas ".$nombre." Eliminado";
+            $info['reload'] = 1;
+            $info['page'] = "msd/preguntas.php";
+            
+        }else{
+
+            $info['tipo'] = "error";
+            $info['titulo'] = "Error";
+            $info['texto'] = "Pregunta ".$nombre." no pudo ser eliminado";
+
+        }
 
         return $info;
         
@@ -1554,34 +1900,44 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         $html = $_POST['html'];
         $tipo = $_POST['pagina'];
-        $this->con_cambios();
 
-        $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
-        $info['db_image'] = $image;
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-        if($id_pag == 0){
-            $aux_page = $this->con->sql("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES ('".$nombre."', '".$html."', '".$tipo."', '".$this->id_gir."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Paginas creado exitosamente";
-            if($image['op'] == 1){
-                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
+            $this->con_cambios();
+
+            $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
+            $info['db_image'] = $image;
+
+            if($id_pag == 0){
+                $aux_page = $this->con->sql("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES ('".$nombre."', '".$html."', '".$tipo."', '".$this->id_gir."')");
+                $info['op'] = 1;
+                $info['mensaje'] = "Paginas creado exitosamente";
+                if($image['op'] == 1){
+                    $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$aux_page["insert_id"]."' AND id_gir='".$this->id_gir."'");
+                }
             }
-        }
-        if($id_pag > 0){
-            $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."'");
-            $this->con->sql("UPDATE paginas SET nombre='".$nombre."', html='".$html."', tipo='".$tipo."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Paginas modificado exitosamente";
-            if($image['op'] == 1){
-                @unlink('/var/www/html/restaurants/images/paginas/'.$pagina['resultado'][0]['imagen']);
-                $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+            if($id_pag > 0){
+                $pagina = $this->con->sql("SELECT * FROM paginas WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+                $this->con->sql("UPDATE paginas SET nombre='".$nombre."', html='".$html."', tipo='".$tipo."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+                $info['op'] = 1;
+                $info['mensaje'] = "Paginas modificado exitosamente";
+                if($image['op'] == 1){
+                    @unlink('/var/www/html/restaurants/images/paginas/'.$pagina['resultado'][0]['imagen']);
+                    $this->con->sql("UPDATE paginas SET imagen='".$image["image"]."' WHERE id_pag='".$id_pag."' AND id_gir='".$this->id_gir."'");
+                }
             }
+            
+            $info['reload'] = 1;
+            $info['page'] = "msd/preguntas.php";
+
+        }else{
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
         }
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/configurar_paginas.php";
+
         return $info;
         
-    }
-    
+    }   
 }

@@ -27,7 +27,7 @@ $alto = 500 * $core->get_alto() / 100;
 if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0){
     
     $list_pre = $core->get_preguntas();
-    $list_lin = $core->get_lista_ingredientes();
+    //$list_lin = $core->get_lista_ingredientes();
     
     $id_pro = $_GET["id_pro"];
     $that = $core->get_producto($id_pro);
@@ -77,6 +77,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                             <?php } ?>
                         </div>
                     </label>
+                    <!--
                     <label class="clearfix">
                         <span><p>Lista de Ingredientes:</p></span>
                         <div class="perfil_preguntas">
@@ -88,6 +89,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                             <?php } ?>
                         </div>
                     </label>
+                    -->
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_productos', '<?php echo $that['id_pro']; ?>/<?php echo $id_cae; ?>/<?php echo $parent_id; ?>', 'Producto', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>

@@ -196,11 +196,13 @@ class Core{
     }
     public function get_usuarios(){
         if($this->id_user == 1){
-            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_user<>'".$this->id_user."' AND eliminado='0'");
+            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_user<>'".$this->id_user."' AND admin='1' AND eliminado='0'");
             return $usuarios['resultado'];
         }else{
-            $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_aux_user='".$this->id_user."' AND eliminado='0'");
-            return $usuarios['resultado'];
+            if($this->re_venta == 1){
+                $usuarios = $this->con->sql("SELECT id_user, nombre FROM fw_usuarios WHERE id_aux_user='".$this->id_user."' AND re_venta='0' AND eliminado='0'");
+                return $usuarios['resultado'];
+            }
         }
     }
     public function get_usuarios_local($id_loc){
