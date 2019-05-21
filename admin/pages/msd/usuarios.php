@@ -12,7 +12,7 @@ $fireapp = new Core();
 
 
 /* CONFIG PAGE */
-$titulo = "Usuarios";
+$titulo = "Usuarios Administradores";
 $titulo_list = "Mis Usuarios";
 $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
@@ -28,6 +28,11 @@ $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $fireapp->get_usuarios();
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 $inicio = $fireapp->inicio();
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
