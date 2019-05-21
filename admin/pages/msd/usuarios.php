@@ -73,15 +73,15 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Correo:</p></span>
                         <input id="correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
+                    <?php if($inicio["id_user"] == 1){ ?>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo">
-                            <?php if($inicio["id_user"] == 1){ ?>
-                                <option value="0">Vendedor</option> 
-                                <option value="1">Reclutador</option>
-                            <?php } ?>
+                            <option value="0">Vendedor</option> 
+                            <option value="1">Reclutador</option>
                         </select>
                     </label>
+                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
