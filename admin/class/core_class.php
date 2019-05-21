@@ -112,6 +112,10 @@ class Core{
                     die("ERROR A307");
                 }
             }
+        }else{
+            if($this->id_gir == 0){
+                die("ERROR A308");
+            }
         }
 
     }
