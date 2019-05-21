@@ -12,7 +12,7 @@ $fireapp = new Core();
 
 
 /* CONFIG PAGE */
-$titulo = "Usuarios";
+$titulo = "Usuarios ".$_GET["nombre"];
 $titulo_list = "Mis Usuarios";
 $sub_titulo1 = "Ingresar Usuario";
 $sub_titulo2 = "Modificar Usuario";
