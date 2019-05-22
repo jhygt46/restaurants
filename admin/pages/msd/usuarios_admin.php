@@ -9,6 +9,10 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
+$inicio = $core->inicio();
+
+if($inicio['id_user'] == 1 || $inicio['re_venta'] == 1){
+
 $core->is_giro();
 
 /* CONFIG PAGE */
@@ -29,7 +33,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios_admin();
 
-$inicio = $core->inicio();
+
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
@@ -44,7 +48,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/giros.php')"></li>
         </ul>
     </div>
     <hr>
@@ -104,3 +108,5 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         </div>
     </div>
 </div>
+
+<?php }else{ die("ERROR: #A909"); } ?>
