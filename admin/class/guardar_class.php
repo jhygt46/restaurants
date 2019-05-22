@@ -21,7 +21,7 @@ class Guardar extends Core{
         $this->re_venta = $_SESSION['user']['info']['re_venta'];
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
-        $this->id_aux_user = $_SESSION['user']['id_aux_user'];
+        $this->id_aux_user = $_SESSION['user']['info']['id_aux_user'];
     }
     public function process(){
         
@@ -786,11 +786,10 @@ class Guardar extends Core{
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
                         $giro_sql = $this->con->sql("INSERT INTO giros (nombre, dominio, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, fecha_creado, eliminado) VALUES ('".$nombre."', '".$dominio."', '".$code."', '".$dns_letra."', '".$item_grafico."', '".$item_pos."', '".$item_cocina."', '".$item_pagina."', '1', now(), '0')"); 
                         $id_gir = $giro_sql["insert_id"];
-                        $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
+                        $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
                         $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$id_gir."')");
-                        $info['id_aux_user'] = $this->id_aux_user;
                         if($this->id_aux_user > 0){
-                            $info['db2'] = $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_aux_user."', '".$id_gir."')");
+                            $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_aux_user."', '".$id_gir."')");
                         }
                         $info['op'] = 1;
                         $info['mensaje'] = "Giro creado exitosamente";

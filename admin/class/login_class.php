@@ -165,7 +165,6 @@ class Login {
                             }
 
                             $_SESSION['user'] = $ses;
-                            $info['ses'] = $ses;
                             $info['op'] = 1;
                             $info['message'] = "Ingreso Exitoso";
                             

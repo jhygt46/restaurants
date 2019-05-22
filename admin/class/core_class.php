@@ -22,7 +22,7 @@ class Core{
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
         $this->re_venta = $_SESSION['user']['info']['re_venta'];
-        $this->id_aux_user = $_SESSION['user']['id_aux_user'];
+        $this->id_aux_user = $_SESSION['user']['info']['id_aux_user'];
     }
     public function seguridad_if($arr){
         
