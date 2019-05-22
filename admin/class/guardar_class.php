@@ -1420,7 +1420,7 @@ class Guardar extends Core{
             if($sqluser['count'] == 0 || ($sqluser['count'] == 1 && $id == $sqluser['resultado'][0]['id_user'])){
 
                 if($id > 0){
-                    $info['db1'] = $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user=''");
+                    $info['db1'] = $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user='".$id."'");
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuarios modificado exitosamente";
                 }
