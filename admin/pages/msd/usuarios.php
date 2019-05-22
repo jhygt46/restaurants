@@ -8,7 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 
 /* CONFIG PAGE */
@@ -27,13 +27,13 @@ $page_mod = "pages/msd/usuarios.php";
 $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $fireapp->get_usuarios();
-$inicio = $fireapp->inicio();
+$list = $core->get_usuarios();
+$inicio = $core->inicio();
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
     $id_user = $_GET["id_user"];
-    $that = $fireapp->get_usuario($id_user);
+    $that = $core->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
 
 }
@@ -72,8 +72,8 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo">
-                            <option value="0">Vendedor</option> 
-                            <option value="1">Reclutador</option>
+                            <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Vendedor</option> 
+                            <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Reclutador</option>
                         </select>
                     </label>
                     <?php } ?>
