@@ -751,7 +751,7 @@ class Core{
         return $aux;
     }
     public function get_dominios_sin_dns(){
-        $aux = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE dns_letra='0'");
+        $aux = $this->con->sql("SELECT id_gir, dominio FROM giros WHERE IS NOT NULL");
         return $aux['resultado'];
     }
     public function get_correos_no_ses(){
