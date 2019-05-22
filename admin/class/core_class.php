@@ -220,7 +220,7 @@ class Core{
         return $usuarios['resultado'];
     }
     public function get_usuario($id){
-        $usuarios = $this->con->sql("SELECT id_user, nombre, correo, tipo FROM fw_usuarios WHERE id_user='".$id."' AND eliminado='0'");
+        $usuarios = $this->con->sql("SELECT id_user, nombre, correo, id_aux_user FROM fw_usuarios WHERE id_user='".$id."' AND eliminado='0'");
         return $usuarios['resultado'][0];
     }
     public function get_catalogos(){

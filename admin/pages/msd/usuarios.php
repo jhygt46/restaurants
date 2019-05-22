@@ -36,10 +36,6 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
     $that = $core->get_usuario($id_user);
     $sub_titulo = $sub_titulo2;
 
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
-
 }
 ?>
 
@@ -76,8 +72,8 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo">
-                            <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Vendedor</option> 
-                            <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Reclutador</option>
+                            <option value="0" <?php if($that['id_aux_user'] == 0){ echo "selected"; } ?>>Vendedor</option> 
+                            <option value="1" <?php if($that['id_aux_user'] > 0){ echo "selected"; } ?>>Reclutador</option>
                         </select>
                     </label>
                     <?php } ?>
