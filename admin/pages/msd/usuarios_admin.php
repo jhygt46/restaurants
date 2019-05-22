@@ -11,6 +11,10 @@ require_once($path."admin/class/core_class.php");
 $core = new Core();
 $inicio = $core->inicio();
 
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
+
 if($inicio['id_user'] == 1 || $inicio['re_venta'] == 1){
 
 $core->is_giro();
