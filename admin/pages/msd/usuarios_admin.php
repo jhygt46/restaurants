@@ -21,7 +21,7 @@ $accion = "crear_usuario_admin";
 $eliminaraccion = "eliminar_usuario_admin";
 $id_list = "id_user";
 $eliminarobjeto = "Usuario";
-$page_mod = "pages/msd/usuarios.php";
+$page_mod = "pages/msd/usuarios_admin.php";
 /* CONFIG PAGE */
 
 $id_user = 0;

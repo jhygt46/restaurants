@@ -11,9 +11,6 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 
 }
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
 
 $core->is_giro();
 

@@ -1315,7 +1315,7 @@ class Guardar extends Core{
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuario creado exitosamente";
                     $info['reload'] = 1;
-                    $info['page'] = "msd/giros.php";
+                    $info['page'] = "msd/usuarios_admin.php";
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error: ";
@@ -1327,7 +1327,7 @@ class Guardar extends Core{
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuario modificado exitosamente";
                     $info['reload'] = 1;
-                    $info['page'] = "msd/giros.php";
+                    $info['page'] = "msd/usuarios_admin.php";
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error: ";
