@@ -9,7 +9,6 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
-
 $core->is_giro();
 
 /* CONFIG PAGE */

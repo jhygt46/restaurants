@@ -11,9 +11,7 @@ require_once($path."admin/class/core_class.php");
 $core = new Core();
 $inicio = $core->inicio();
 
-if($inicio['id_user'] != 1 || $inicio['re_venta'] == 0){
-    die("ERROR: #A980");
-}
+if($inicio['id_user'] == 1 || $inicio['re_venta'] == 1){
 
 /* CONFIG PAGE */
 $titulo = "Usuarios Administradores";
@@ -116,3 +114,5 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         </div>
     </div>
 </div>
+
+<?php }else{ die("ERROR: #A908"); } ?>
