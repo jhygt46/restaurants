@@ -12,7 +12,7 @@ if(!isset($core_class_iniciada)){
 
 }
 echo "<pre>";
-print_r($core->inicio());
+print_r($_SESSION);
 echo "</pre>";
 
 $core->is_giro();
