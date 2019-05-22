@@ -12,6 +12,7 @@ class Guardar extends Core{
     public $id_cat = null;
     public $re_venta = null;
     public $id_aux_user = null;
+    public $debug = 1;
     
     public function __construct(){
         
@@ -1411,25 +1412,26 @@ class Guardar extends Core{
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
         $tipo = $_POST['tipo'];
-        
+        $info['tipo'] = $tipo;
+
         if($this->re_venta == 1 || $this->id_user == 1){
 
             $sqluser = $this->con->sql("SELECT * FROM fw_usuarios WHERE correo='".$correo."'");
             if($sqluser['count'] == 0 || ($sqluser['count'] == 1 && $id == $sqluser['resultado'][0]['id_user'])){
 
                 if($id > 0){
-                    $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user=''");
+                    $info['db1'] = $this->con->sql("UPDATE fw_usuarios SET nombre='".$nombre."', correo='".$correo."' WHERE id_user=''");
                     $info['op'] = 1;
                     $info['mensaje'] = "Usuarios modificado exitosamente";
                 }
                 if($id == 0){
                     if($tipo == 0){
-                        $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, id_aux_user) VALUES ('".$nombre."', '".$correo."', '1', '".$this->id_user."')");
+                        $info['db2'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, id_aux_user) VALUES ('".$nombre."', '".$correo."', '1', '".$this->id_user."')");
                         $info['op'] = 1;
                         $info['mensaje'] = "Usuarios agregado exitosamente";
                     }
                     if($tipo == 1 && $this->id_user == 1){
-                        $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, re_venta) VALUES ('".$nombre."', '".$correo."', '1', '1')");    
+                        $info['db3'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, re_venta) VALUES ('".$nombre."', '".$correo."', '1', '1')");    
                         $info['op'] = 1;
                         $info['mensaje'] = "Usuarios agregado exitosamente";
                     }
@@ -1438,14 +1440,14 @@ class Guardar extends Core{
             }else{
 
                 $info['op'] = 2;
-                $info['mensaje'] = "Correo Existente";
+                $info['mensaje'] = "Error: #A397";
 
             }
 
         }else{
 
             $info['op'] = 2;
-            $info['mensaje'] = "Correo Existente";
+            $info['mensaje'] = "Error: #A398";
 
         }
         $info['reload'] = 1;
