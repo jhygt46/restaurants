@@ -1426,12 +1426,12 @@ class Guardar extends Core{
                 }
                 if($id == 0){
                     if($tipo == 0){
-                        $info['db2'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, id_aux_user) VALUES ('".$nombre."', '".$correo."', '1', '".$this->id_user."')");
+                        $info['db2'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, fecha_creado, id_aux_user) VALUES ('".$nombre."', '".$correo."', '1', now(), '".$this->id_user."')");
                         $info['op'] = 1;
                         $info['mensaje'] = "Usuarios agregado exitosamente";
                     }
                     if($tipo == 1 && $this->id_user == 1){
-                        $info['db3'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, re_venta) VALUES ('".$nombre."', '".$correo."', '1', '1')");    
+                        $info['db3'] = $this->con->sql("INSERT INTO fw_usuarios (nombre, correo, admin, fecha_creado, re_venta) VALUES ('".$nombre."', '".$correo."', '1', now(), '1')");    
                         $info['op'] = 1;
                         $info['mensaje'] = "Usuarios agregado exitosamente";
                     }
