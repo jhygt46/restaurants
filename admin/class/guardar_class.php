@@ -1309,7 +1309,7 @@ class Guardar extends Core{
 
             if($id == 0){
                 if($sqlcorreo["count"] == 0){
-                    $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin) VALUES ('".$nombre."', '".$correo."', now(), '0')");
+                    $sql = $this->con->sql("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin) VALUES ('".$nombre."', now(), '".$correo."', '0')");
                     $id_user = $sql["insert_id"];
                     $this->con->sql("INSERT INTO fw_usuarios_giros (id_user, id_gir) VALUES ('".$id_user."', '".$this->id_gir."')");
                     $info['op'] = 1;
