@@ -777,7 +777,7 @@ class Guardar extends Core{
         $item_pos = $_POST['item_pos'];
         $item_cocina = $_POST['item_cocina'];
         $item_grafico = $_POST['item_grafico'];
-        $dns_letra = $_POST['dns_letra'];
+        $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
 
         if($this->admin == 1){
             if($this->verificar_dominio($dominio)){
