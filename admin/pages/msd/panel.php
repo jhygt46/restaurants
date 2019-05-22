@@ -12,7 +12,7 @@ $core = new Core();
 
 if($core->id_user == 1){
 
-    $list_dominio = $core->get_dominios_sin_dns();
+    //$list_dominio = $core->get_dominios_sin_dns();
     $list_correos = $core->get_correos_no_ses();
     $list_ssl_sol = $core->get_ssl_sol();
 
@@ -22,7 +22,7 @@ if($core->id_user == 1){
             <h1>Pendientes</h1>
         </div>
         <hr>
-        <?php if(count($list_dominio) > 0){ ?>
+        <?php /* if(count($list_dominio) > 0){ ?>
             <div class="cont_pagina">
                 <div class="cont_pag">
                     <div class="list_titulo clearfix">
@@ -48,7 +48,7 @@ if($core->id_user == 1){
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } */ ?>
 
         <?php if(count($list_correos) > 0){ ?>
             <div class="cont_pagina">
