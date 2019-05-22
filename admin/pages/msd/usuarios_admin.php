@@ -9,15 +9,9 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
-$inicio = $core->inicio();
-
-echo "<pre>";
-print_r($inicio);
-echo "</pre>";
-
-if($inicio['id_user'] == 1 || $inicio['re_venta'] == 1){
 
 $core->is_giro();
+$inicio = $core->inicio();
 
 /* CONFIG PAGE */
 $titulo = "Usuarios ".$_GET["nombre"];
@@ -112,5 +106,3 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         </div>
     </div>
 </div>
-
-<?php }else{ die("ERROR: #A909"); } ?>
