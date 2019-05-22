@@ -789,6 +789,7 @@ class Guardar extends Core{
                         $id_gir = $giro_sql["insert_id"];
                         $info['db1'] = $this->con->sql("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalogo 01', now(), '".$id_gir."')");
                         $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_user."', '".$id_gir."')");
+                        $info['p'] = $this;
                         if($this->id_aux_user > 0){
                             $info['db2'] = $this->con->sql("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES ('".$this->id_aux_user."', '".$id_gir."')");
                         }
