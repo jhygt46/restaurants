@@ -9,7 +9,11 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 
 require_once($path."admin/class/core_class.php");
 $core = new Core();
+$inicio = $core->inicio();
 
+echo "<pre>";
+print_r($inicio);
+echo "</pre>";
 
 /* CONFIG PAGE */
 $titulo = "Usuarios Administradores";
@@ -28,7 +32,7 @@ $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios();
-$inicio = $core->inicio();
+
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
 
