@@ -11,6 +11,10 @@ if(!isset($core_class_iniciada)){
 
 }
 
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
 if($core->admin == 1){
 
     $list = $core->get_giros_user();
