@@ -154,6 +154,7 @@ class Login {
                             $ses['info']['nombre'] = $user['resultado'][0]['nombre'];
                             $ses['info']['admin'] = $user['resultado'][0]['admin'];
                             $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
+                            $ses['info']['id_aux_user'] = $user['resultado'][0]['id_aux_user'];
                             $ses['id_gir'] = 0;
 
                             if($ses['info']['admin'] == 0){

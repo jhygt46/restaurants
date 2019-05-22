@@ -13,6 +13,7 @@ class Core{
     public $id_cat = null;
     public $require = [];
     public $pointOnVertex = true;
+    public $id_aux_user = null;
 
     public function __construct(){
         $this->con = new Conexion();
@@ -21,7 +22,7 @@ class Core{
         $this->id_gir = $_SESSION['user']['id_gir'];
         $this->id_cat = $_SESSION['user']['id_cat'];
         $this->re_venta = $_SESSION['user']['info']['re_venta'];
-        //echo $_SERVER['PHP_SELF'];
+        $this->id_aux_user = $_SESSION['user']['id_aux_user'];
     }
     public function seguridad_if($arr){
         
