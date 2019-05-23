@@ -1,9 +1,7 @@
 <?php
 
 require_once "/var/www/html/config/config.php";
-echo $db_user;
-
-//$mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
+$mysqli = new mysqli($db_host[0], $db_user[0], $db_password[0], "easyapps");
 
 //$stmt = $mysqli->prepare("INSERT INTO ztest (name, age) VALUES (?, ?)");
 //$stmt->bind_param("si", "Diego", 20);
