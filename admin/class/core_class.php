@@ -989,7 +989,9 @@ class Core{
     public function get_data($dominio){
         
         $sql = $this->con->sql("SELECT * FROM giros WHERE dominio='".$dominio."'");
-        $info['favicon'] = "misitiodelivery.ico";
+        //$info['favicon'] = "misitiodelivery.ico";
+        $info['favicon'] = "favicon";
+        $info['sql'] = $sql;
 
         if($sql['count'] == 1){
             
