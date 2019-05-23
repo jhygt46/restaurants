@@ -17,7 +17,7 @@ $stmt->bind_param("i", $a);
 $stmt->execute();
 $stmt->store_result();
 
-echo $stmt["num_rows"];
+echo $stmt->{"num_rows"};
 
 $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
