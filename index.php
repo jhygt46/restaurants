@@ -28,13 +28,14 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 
 }else{
 
-    echo "A1";
     require($path.'/admin/class/core_class.php');
-    echo "A2";
     $core = new Core();
-    echo "A3";
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
-    echo "A4";
+
+    echo "<pre>";
+    print_r($info);
+    echo "</pre>";
+
     $host = 0;
 
     if ((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") && $info['ssl'] == 1) {
