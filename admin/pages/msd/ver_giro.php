@@ -7,11 +7,8 @@ if(!isset($core_class_iniciada)){
 }
 
 $core->is_giro();
-
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
-
-$id_gir = 0;
 $titulo = "GIRO NO SELECIONADO";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 

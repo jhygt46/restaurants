@@ -10,15 +10,12 @@ $stmt->execute();
 $stmt->close();
 */
 
-$a = 1;
+$a = 4;
 
-$stmt = $mysqli->prepare("SELECT * FROM zonas_puntos WHERE id_zon=?");
+$stmt = $mysqli->prepare("SELECT * FROM preguntas WHERE id_pre=?");
 $stmt->bind_param("i", $a);
 $stmt->execute();
-$stmt->store_result();
-
-echo $stmt->{"num_rows"};
-
+//$stmt->store_result();
 $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
