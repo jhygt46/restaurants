@@ -32,6 +32,8 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
 
+    echo $_SERVER["HTTP_HOST"];
+
     echo "<pre>";
     print_r($info);
     echo "</pre>";
