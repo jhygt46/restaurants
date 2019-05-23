@@ -44,7 +44,7 @@ function foto_categoria($arr, $foto){
     return false;
 }
 
-*/
+
 ?>
 <div style="width: 100%">
     <div style="width: 610px; margin: 0 auto">
