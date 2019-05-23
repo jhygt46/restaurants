@@ -1,4 +1,20 @@
 <?php
+
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path = "C:/AppServ/www/restaurants";
+}else{
+    $path = "/var/www/html/restaurants";
+}
+
+require($path.'/admin/class/mysql_class.php');
+
+$con = new Conexion();
+$giros = $con->sql("SELECT * FROM giros");
+
+echo "<pre>";
+print_r($giros);
+echo "</pre>";
+
 /*
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "C:/AppServ/www/restaurants";
