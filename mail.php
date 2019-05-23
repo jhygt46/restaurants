@@ -9,12 +9,18 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 require($path.'/admin/class/mysql_class.php');
 
 $con = new Conexion();
-$giros = $con->sql("SELECT * FROM giros");
+//$giros = $con->sql("SELECT * FROM giros");
+
+$giros = $con->prepare("SELECT * FROM giros WHERE id_gir = ?");
+$giros->bind_param("i", 1);
+$giros->execute();
+$result = $giros->get_result();
 
 echo "<pre>";
-print_r($giros);
+print_r($result);
 echo "</pre>";
 
+exit;
 /*
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "C:/AppServ/www/restaurants";
