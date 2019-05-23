@@ -1,20 +1,12 @@
 <?php
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = "C:/AppServ/www/restaurants";
-}else{
-    $path = "/var/www/html/restaurants";
-}
+$path_cf = "/var/www/html/config/config.php";
+$mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
-require($path.'/admin/class/mysql_class.php');
-
-$con = new Conexion();
-//$giros = $con->sql("SELECT * FROM giros");
-
-$giros = $con->prepare("SELECT * FROM giros WHERE id_gir = ?");
-$giros->bind_param("i", 1);
-$giros->execute();
-$result = $giros->get_result();
+$giros = $mysqli->prepare("SELECT * FROM giros WHERE id_gir = ?");
+$mysqli->bind_param("i", 1);
+$mysqli->execute();
+$result = $mysqli->get_result();
 
 echo "<pre>";
 print_r($result);
