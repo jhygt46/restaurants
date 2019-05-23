@@ -4,7 +4,8 @@ require_once "/var/www/html/config/config.php";
 $mysqli = new mysqli($db_host[0], $db_user[0], $db_password[0], "easyapps");
 
 $stmt = $mysqli->prepare("INSERT INTO ztest (name, age) VALUES (?, ?)");
-$stmt->bind_param("si", $b = "Diego", $a = 20);
+$stmt->bind_param("s", $b = "Diego");
+$stmt->bind_param("i", $a = 20);
 $stmt->execute();
 $stmt->close();
 
