@@ -4,17 +4,11 @@ $path_cf = "/var/www/html/config/config.php";
 require_once $path_cf;
 $mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
+$stmt = $mysqli->prepare("INSERT INTO ztest (name, age) VALUES (?, ?)");
+$stmt->bind_param("si", "Diego", 20);
+$stmt->execute();
+$stmt->close();
 
-$giros = $mysqli->prepare("SELECT * FROM giros WHERE id_gir = ?");
-$giros->bind_param("i", 1);
-/*
-$mysqli->execute();
-$result = $mysqli->get_result();
-
-echo "<pre>";
-print_r($result);
-echo "</pre>";
-*/
 exit;
 /*
 if($_SERVER['HTTP_HOST'] == "localhost"){
