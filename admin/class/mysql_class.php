@@ -30,8 +30,10 @@ class Conexion {
         $this->usuario = $db_user;
         $this->password = $db_password;
         $this->base_datos = $db_database;
-        $this->conn = new mysqli("localhost", $this->usuario[0], $this->password[0], $this->base_datos[0]);
+        $this->conn = new mysqli($this->host[0], $this->usuario[0], $this->password[0], $this->base_datos[0]);
         
+        echo $this->host[0];
+
     }
 
     public function sql($sql){
