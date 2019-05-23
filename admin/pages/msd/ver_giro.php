@@ -12,6 +12,17 @@ if(!isset($core_class_iniciada)){
 
 }
 
+$core->con->prepare("SELECT id_gir, dominio FROM giros WHERE id_gir = ?");
+$core->con->bind_param("i", 9);
+$core->con->execute();
+$result = $core->con->get_result();
+while($row = $result->fetch_assoc()) {
+    echo "<pre>";
+    print_r($row);
+    echo "</pre>";
+}
+exit;
+
 $core->is_giro();
 
 $titulo_list = "Aplicaciones";
