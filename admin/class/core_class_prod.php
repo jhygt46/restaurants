@@ -33,6 +33,12 @@ class Core{
                 $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
                 $sql->bind_param("ii", $_GET["id_gir"], $this->id_user);
                 $sql->execute();
+                $sql->store_result();
+
+                if($sql["num_rows"] == 1){
+
+                }
+
                 $sql->close();
 
                 $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
