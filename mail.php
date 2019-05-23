@@ -2,7 +2,10 @@
 
 $path_cf = "/var/www/html/config/config.php";
 require_once $path_cf;
-$mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
+
+echo $db_user;
+
+//$mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
 //$stmt = $mysqli->prepare("INSERT INTO ztest (name, age) VALUES (?, ?)");
 //$stmt->bind_param("si", "Diego", 20);
