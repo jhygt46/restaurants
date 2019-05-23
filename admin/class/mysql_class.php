@@ -1,6 +1,15 @@
 <?php
 
-require_once "/var/www/html/config/config.php";
+if($_SERVER['HTTP_HOST'] == "localhost"){
+    $path_db = $_SERVER['DOCUMENT_ROOT']."/restaurants/admin/db_config.php";
+    $path_cf = $_SERVER['DOCUMENT_ROOT']."/config/config.php";
+}else{
+    $path_db = $_SERVER['DOCUMENT_ROOT']."/admin/db_config.php";
+    $path_cf = "/var/www/html/config/config.php";
+}
+
+require_once $path_db;
+require_once $path_cf;
 
 class Conexion {
     
@@ -21,8 +30,8 @@ class Conexion {
         $this->usuario = $db_user;
         $this->password = $db_password;
         $this->base_datos = $db_database;
-        $this->con = new mysqli($this->host, $this->usuario, $this->password, $this->base_datos);
-
+        $this->conn = new mysqli($this->host[0], $this->usuario[0], $this->password[0], $this->base_datos[0]);
+        
     }
 
     public function sql($sql){
