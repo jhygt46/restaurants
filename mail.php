@@ -9,11 +9,10 @@ $mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 //$stmt->execute();
 //$stmt->close();
 
-echo "<pre>";
-print_r($mysqli);
-echo "</pre>";
-
 exit;
+
+
+
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "C:/AppServ/www/restaurants";
