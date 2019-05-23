@@ -13,10 +13,17 @@ $stmt->close();
 $stmt = $mysqli->prepare("SELECT * FROM ztest WHERE age=?");
 $stmt->bind_param("i", $a = 20);
 $stmt->execute();
-$result = $stmt->get_result()->fetch_assoc();
+$result1 = $stmt->get_result()->fetch_assoc();
+$result2 = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
 echo "<pre>";
-print_r($result);
+print_r($result1);
 echo "</pre>";
+
+echo "<pre>";
+print_r($result2);
+echo "</pre>";
+
 $stmt->close();
 
 exit;
