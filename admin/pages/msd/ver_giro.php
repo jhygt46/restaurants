@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($core_class_iniciada)){
 
     if($_SERVER['HTTP_HOST'] == "localhost"){
@@ -11,17 +12,6 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 
 }
-
-$core->con->prepare("SELECT id_gir, dominio FROM giros WHERE id_gir = ?");
-$core->con->bind_param("i", 9);
-$core->con->execute();
-$result = $core->con->get_result();
-
-echo "<pre>";
-print_r($result);
-echo "</pre>";
-
-exit;
 
 $core->is_giro();
 
