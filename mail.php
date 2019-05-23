@@ -15,6 +15,7 @@ $a = 20;
 $stmt = $mysqli->prepare("SELECT * FROM ztest WHERE age=?");
 $stmt->bind_param("i", $a);
 $stmt->execute();
+$stmt->store_result();
 
 echo "<pre>";
 print_r($stmt);
