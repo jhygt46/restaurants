@@ -10,9 +10,9 @@ $stmt->execute();
 $stmt->close();
 */
 
-$a = 20;
+$a = 1;
 
-$stmt = $mysqli->prepare("SELECT * FROM ztest WHERE age=?");
+$stmt = $mysqli->prepare("SELECT * FROM zonas_puntos WHERE id_zon=?");
 $stmt->bind_param("i", $a);
 $stmt->execute();
 $stmt->store_result();
