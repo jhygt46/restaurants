@@ -28,8 +28,13 @@ class Core{
     public function is_giro(){
 
         if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0){
-            $id_gir = $_GET["id_gir"];
             if($this->admin == 0){
+
+                $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
+                $sql->bind_param("ii", $_GET["id_gir"], $this->id_user);
+                $sql->execute();
+                $sql->close();
+
                 $count = $this->con->sql("SELECT * FROM fw_usuarios_giros WHERE id_gir='".$id_gir."' AND id_user='".$this->id_user."'");
                 if($count['count'] == 1){
                     $this->id_gir = $id_gir;
