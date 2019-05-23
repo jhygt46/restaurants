@@ -10,8 +10,10 @@ $stmt->execute();
 $stmt->close();
 */
 
+$a = 20;
+
 $stmt = $mysqli->prepare("SELECT * FROM ztest WHERE age=?");
-$stmt->bind_param("i", $a = 20);
+$stmt->bind_param("i", $a);
 $stmt->execute();
 
 echo "<pre>";
