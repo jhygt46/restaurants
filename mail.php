@@ -15,7 +15,7 @@ $a = 1;
 $stmt = $mysqli->prepare("SELECT * FROM zonas_puntos WHERE id_zon=?");
 $stmt->bind_param("i", $a);
 $stmt->execute();
-$stmt->store_result();
+//$stmt->store_result();
 
 echo "<pre>";
 print_r($stmt);
