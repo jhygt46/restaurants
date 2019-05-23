@@ -4,9 +4,10 @@ $path_cf = "/var/www/html/config/config.php";
 require_once $path_cf;
 $mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
-/*
+
 $giros = $mysqli->prepare("SELECT * FROM giros WHERE id_gir = ?");
 $mysqli->bind_param("i", 1);
+/*
 $mysqli->execute();
 $result = $mysqli->get_result();
 
