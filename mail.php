@@ -1,6 +1,7 @@
 <?php
 
 $path_cf = "/var/www/html/config/config.php";
+require_once $path_cf;
 $mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
 $giros = $mysqli->prepare("SELECT * FROM giros WHERE id_gir = ?");
