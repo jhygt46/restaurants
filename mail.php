@@ -6,7 +6,7 @@ $mysqli = new mysqli("localhost", $db_user, $db_password, "easyapps");
 
 
 $giros = $mysqli->prepare("SELECT * FROM giros WHERE id_gir = ?");
-$mysqli->bind_param("i", 1);
+$giros->bind_param("i", 1);
 /*
 $mysqli->execute();
 $result = $mysqli->get_result();
