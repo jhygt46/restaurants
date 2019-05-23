@@ -156,6 +156,7 @@ class Login {
                             $ses['info']['re_venta'] = $user['resultado'][0]['re_venta'];
                             $ses['info']['id_aux_user'] = $user['resultado'][0]['id_aux_user'];
                             $ses['id_gir'] = 0;
+                            $ses['id_cat'] = 0;
 
                             if($ses['info']['admin'] == 0){
                                 $aux_gir = $this->con->sql("SELECT id_gir FROM fw_usuarios_giros WHERE id_user='".$id_user."'");

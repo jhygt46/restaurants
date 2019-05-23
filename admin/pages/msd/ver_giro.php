@@ -6,12 +6,6 @@ if(!isset($core_class_iniciada)){
 
 }
 
-echo "<pre>";
-print_r($core);
-echo "</pre>";
-
-exit;
-
 $core->is_giro();
 
 $titulo_list = "Aplicaciones";
