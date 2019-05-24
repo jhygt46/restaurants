@@ -108,7 +108,7 @@ class Core{
         $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
         $sql->bind_param("ii", $this->id_gir, $this->eliminado);
         $sql->execute();
-        $result = $sql->get_result();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sql->free_result();
         $sql->close();
         return $result;
