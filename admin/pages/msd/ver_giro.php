@@ -14,9 +14,10 @@ $titulo = "GIRO NO SELECIONADO";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 //$list = $core->get_locales();
 echo "A3";
+exit;
 $giro = $core->get_giro();
 echo "A4";
-exit;
+
 
 if($giro['dns'] == 0){
     
