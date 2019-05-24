@@ -48,7 +48,7 @@ class Core{
         }
         if($this->admin == 1){
             $id_gir = 134;
-            $sql = $mysqli->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
+            $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
             $sql->bind_param("ii", $id_gir, $this->id_user);
             $sql->execute();
             $sql->store_result();
