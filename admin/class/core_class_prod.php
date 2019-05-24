@@ -69,8 +69,8 @@ class Core{
     }
     public function get_locales(){
 
-        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_gir=? AND eliminado=?");
-        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_gir=? AND eliminado='0'");
+        $sql->bind_param("i", $this->id_gir);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         $sql->free_result();
