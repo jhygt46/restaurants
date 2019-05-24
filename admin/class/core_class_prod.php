@@ -57,6 +57,7 @@ class Core{
                 }else{
                     die("ERROR: #A102");
                 }
+                $sql->free_result();
                 $sql->close();
             }
         }else{
@@ -72,19 +73,20 @@ class Core{
         $sql->bind_param("ii", $this->id_gir, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
+        $sql->free_result();
+        $sql->close();
         return $result;
 
     }
     public function get_giro(){
 
-        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_gir=? AND eliminado=?");
+        $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
         $sql->bind_param("ii", $this->id_gir, $this->eliminado);
         $sql->execute();
-        
-        $id_gir = ($id_gir == null) ? $this->id_gir : $id_gir ;
-        $giros = $this->con->sql("SELECT * FROM giros WHERE id_gir='".$id_gir."' AND eliminado='0'");
-        return $giros['resultado'][0];
+        $result = $sql->get_result();
+        $sql->free_result();
+        $sql->close();
+        return $result;
 
     }
 

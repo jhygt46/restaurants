@@ -15,6 +15,10 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 $list = $core->get_locales();
 $giro = $core->get_giro();
 
+echo "<pre>";
+print_r($giro);
+echo "</pre>";
+
 if($giro['dns'] == 0){
     
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
