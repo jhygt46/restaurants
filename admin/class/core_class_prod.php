@@ -131,7 +131,25 @@ class Core{
         }
 
     }
+    public function set_giro_dns(){
+        
+        $sql= $this->con->prepare("UPDATE giros SET dns='1' WHERE id=? AND eliminado=?");
+        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql->execute();
+        $sql->close();
+    
+    }
+    public function get_catalogos(){
 
+        $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?");
+        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sql->free_result();
+        $sql->close();
+        return $result;
+
+    }
 
 }
 ?>
