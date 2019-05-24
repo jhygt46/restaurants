@@ -6,7 +6,12 @@ if(!isset($core_class_iniciada)){
 
 }
 
-$core->is_giro();
+$is = $core->is_giro();
+echo "<pre>";
+print_r($is);
+echo "</pre>";
+exit;
+
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 $titulo = "GIRO NO SELECIONADO";
@@ -15,11 +20,7 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 $list = $core->get_locales();
 $giro = $core->get_giro();
 
-echo "<pre>";
-print_r($giro);
-echo "</pre>";
 
-exit;
 
 if($giro['dns'] == 0){
     
