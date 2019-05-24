@@ -78,6 +78,31 @@ class Core{
         return $result;
 
     }
+    public function get_giros_user(){
+        
+        if($this->admin == 1 && $this->id_user > 1){
+
+            $sql = $this->con->prepare("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user=? AND t1.id_gir=t2.id_gir AND t2.eliminado=? ORDER BY dns_letra");
+            $sql->bind_param("ii", $this->id_user, $this->eliminado);
+            $sql->execute();
+            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            $sql->free_result();
+            $sql->close();
+
+        }
+        if($this->admin == 1 && $this->id_user == 1){
+
+            $sql = $this->con->prepare("SELECT id_gir, nombre, dominio, dns_letra FROM giros WHERE eliminado=? ORDER BY dns_letra");
+            $sql->bind_param("i", $this->eliminado);
+            $sql->execute();
+            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            $sql->free_result();
+            $sql->close();
+        
+        }
+        return $result;
+        
+    }
     public function get_giro(){
 
         $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
