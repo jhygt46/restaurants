@@ -5,8 +5,10 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 
 }
-
-$is = $core->is_giro();
+echo "A1";
+$core->is_giro();
+echo "A2";
+exit;
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 $titulo = "GIRO NO SELECIONADO";
