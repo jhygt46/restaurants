@@ -7,11 +7,6 @@ if(!isset($core_class_iniciada)){
 }
 
 $is = $core->is_giro();
-echo "<pre>";
-print_r($is);
-echo "</pre>";
-exit;
-
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 $titulo = "GIRO NO SELECIONADO";
