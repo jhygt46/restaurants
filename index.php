@@ -1,5 +1,10 @@
 <?php
+
 date_default_timezone_set('America/Santiago');
+
+if($_POST["test"] == "Dw7k2s_hKi5sqPs8"){
+    die("hjS3r%mDs-5gYa6ib_5Ps");
+}
 
 if($_SERVER['HTTP_HOST'] == "localhost"){
     $path = "C:/AppServ/www/restaurants";

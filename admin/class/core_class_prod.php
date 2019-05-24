@@ -16,7 +16,12 @@ class Core{
 
     public function __construct(){
 
-        $this->con = new mysqli($this->host, $this->usuario, $this->password, $this->base_datos);
+        global $db_host;
+        global $db_user;
+        global $db_password;
+        global $db_database;
+
+        $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         $this->id_user = $_SESSION['user']['info']['id_user'];
         $this->admin = $_SESSION['user']['info']['admin'];
         $this->re_venta = $_SESSION['user']['info']['re_venta'];
