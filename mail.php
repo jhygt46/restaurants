@@ -16,9 +16,13 @@ $stmt = $mysqli->prepare("SELECT * FROM preguntas WHERE id_pre=?");
 $stmt->bind_param("i", $a);
 $stmt->execute();
 //$stmt->store_result();
-$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$result1 = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$result2 = $stmt->get_result()->fetch_row();
 echo "<pre>";
-print_r($result);
+print_r($result1);
+echo "</pre>";
+echo "<pre>";
+print_r($result2);
 echo "</pre>";
 $stmt->close();
 
