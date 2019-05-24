@@ -17,7 +17,7 @@ $stmt->bind_param("i", $a);
 $stmt->execute();
 //$stmt->store_result();
 //$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-$result = $stmt->get_result()->fetch_row();
+$result = $stmt->get_result()->fetch_array();
 echo "<pre>";
 print_r($result);
 echo "</pre>";
