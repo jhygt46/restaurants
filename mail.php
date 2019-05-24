@@ -10,14 +10,14 @@ $stmt->execute();
 $stmt->close();
 */
 
-$a = 4;
+$id_user = 134;
+$id_gir = 126;
 
-$stmt = $mysqli->prepare("SELECT * FROM preguntas WHERE id_pre=?");
-$stmt->bind_param("i", $a);
+$stmt = $mysqli->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
+$stmt->bind_param("ii", $id_gir, $id_user);
 $stmt->execute();
 //$stmt->store_result();
-//$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-$result = $stmt->get_result();
+$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 
 //$result = $stmt->get_result()->fetch_row();

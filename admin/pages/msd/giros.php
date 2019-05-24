@@ -3,7 +3,6 @@ if(!isset($core_class_iniciada)){
 
     require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
     $core = new Core();
-    echo "b1";
 
 }
 
