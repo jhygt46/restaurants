@@ -69,7 +69,7 @@ class Core{
     }
     public function get_locales(){
 
-        if($sql = $this->con->prepare("SELECT * FROM locales WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, nombre, code FROM locales WHERE id_gir=? AND eliminado=?")){
             $sql->bind_param("ii", $this->id_gir, $this->eliminado);
             $sql->execute();
             $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -118,6 +118,20 @@ class Core{
         return $result;
 
     }
+    public function get_giro_id($id_gir){
+
+        if($this->admin == 1){
+            $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
+            $sql->bind_param("ii", $id_gir, $this->eliminado);
+            $sql->execute();
+            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $sql->free_result();
+            $sql->close();
+            return $result;
+        }
+
+    }
+
 
 }
 ?>

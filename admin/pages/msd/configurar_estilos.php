@@ -8,16 +8,16 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 /* CONFIG PAGE */
 $sub_titulo = "Modificar Configuracion";
 $accion = "configurar_estilos";
 /* CONFIG PAGE */
 
-$that = $fireapp->get_giro();
+$that = $core->get_giro();
 $titulo = "Configuracion ".$that["nombre"];
-$css = $fireapp->get_css();
+$css = $core->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 ?>

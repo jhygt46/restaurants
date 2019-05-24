@@ -8,7 +8,7 @@ if($_SERVER['HTTP_HOST'] == "localhost"){
 }
 
 require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Locales";
@@ -23,10 +23,10 @@ $eliminarobjeto = "Local";
 $page_mod = "pages/msd/locales.php";
 /* CONFIG PAGE */
 
-$giro = $fireapp->get_giro();
+$giro = $core->get_giro();
 $titulo = $titulo." de ".$giro['nombre'];
-$list = $fireapp->get_locales();
-$catalogos = $fireapp->get_catalogos();
+$list = $core->get_locales();
+$catalogos = $core->get_catalogos();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 $id_loc = 0;
@@ -37,7 +37,7 @@ $lng = -70.620346;
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
     $id_loc = $_GET["id_loc"];
-    $that = $fireapp->get_local($id_loc);
+    $that = $core->get_local($id_loc);
     $sub_titulo = $sub_titulo2;
     $lat = $that["lat"];
     $lng = $that["lng"];

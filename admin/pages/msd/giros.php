@@ -1,7 +1,7 @@
 <?php
 if(!isset($core_class_iniciada)){
 
-    require_once("/var/www/html/restaurants/admin/class/core_class.php");
+    require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
     $core = new Core();
 
 }
@@ -23,14 +23,14 @@ if($core->admin == 1){
     $page_mod = "pages/msd/giros.php";
     /* CONFIG PAGE */
 
-    $id = 0;
+    $id_gir = 0;
     $sub_titulo = $sub_titulo1;
     $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-    if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
+    if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0){
         
         $sub_titulo = $sub_titulo2;
-        $that = $core->get_giro($_GET["id"]);
-        $id = $_GET["id"];
+        $id_gir = $_GET["id_gir"];
+        $that = $core->get_giro_id($id_gir);
         
     }
 
@@ -51,7 +51,7 @@ if($core->admin == 1){
                         </ul>
                     </div>
                     <fieldset class="<?php echo $class; ?>">
-                        <input id="id" type="hidden" value="<?php echo $id; ?>" />
+                        <input id="id" type="hidden" value="<?php echo $id_gir; ?>" />
                         <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                         <label class="clearfix">
                             <span><p>Nombre del Giro:</p></span>
@@ -108,7 +108,7 @@ if($core->admin == 1){
                     <div class="l_item">
                         <div class="detalle_item clearfix">
                             <div class="nombre"><?php if($dns_letra == ""){ echo "<p style='font-weight: bold; color: #900; font-size: 17px'>Falta crear zona DNS para ".$dominio."</p>"; }else{ echo $nombre; } ?></div>
-                            <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id=<?php echo $id; ?>')"></a>
+                            <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_gir=<?php echo $id; ?>')"></a>
                             <a class="icono ic3" onclick="navlink('pages/msd/ver_informe.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                             <a class="icono ic16" onclick="navlink('pages/msd/usuarios_admin.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                             <a class="icono ic2" onclick="navlink('pages/msd/ver_giro.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
