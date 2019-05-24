@@ -32,38 +32,34 @@ class Core{
     }
     public function is_giro(){
 
-        if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] > 0){
-            if($this->admin == 0){
-                $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
-                $sql->bind_param("ii", $_GET["id_gir"], $this->id_user);
-                $sql->execute();
-                $sql->store_result();
-                if($sql->{"num_rows"} == 1){
-                    $this->id_gir = $_GET["id_gir"];
-                    $_SESSION['user']['id_gir'] = $_GET["id_gir"];
-                }else{
-                    die("ERROR: #A101");
-                }
-                $sql->close();
+        $id_gir = intval($_GET["id_gir"]); 
+        if($this->admin == 0){
+            $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
+            $sql->bind_param("ii", $id_gir, $this->id_user);
+            $sql->execute();
+            $sql->store_result();
+            if($sql->{"num_rows"} == 1){
+                $this->id_gir = $id_gir;
+                $_SESSION['user']['id_gir'] = $id_gir;
+            }else{
+                die("ERROR: #A101");
             }
-            if($this->admin == 1){
-                $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
-                $sql->bind_param("ii", $_GET["id_gir"], $this->id_user);
-                $sql->execute();
-                $sql->store_result();
-                if($sql->{"num_rows"} == 1 || $this->id_user == 1){
-                    $this->id_gir = $_GET["id_gir"];
-                    $_SESSION['user']['id_gir'] = $_GET["id_gir"];
-                }else{
-                    die("ERROR: #A102");
-                }
-                $sql->free_result();
-                $sql->close();
+            $sql->close();
+        }
+        if($this->admin == 1){
+            $id_gir = 134;
+            $sql = $mysqli->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
+            $sql->bind_param("ii", $id_gir, $this->id_user);
+            $sql->execute();
+            $sql->store_result();
+            if($sql->{"num_rows"} == 1 || $this->id_user == 1){
+                $this->id_gir = $id_gir;
+                $_SESSION['user']['id_gir'] = $id_gir;
+            }else{
+                die("ERROR: #A102");
             }
-        }else{
-            if($this->id_gir == 0){
-                die("ERROR: #A103");
-            }
+            $sql->free_result();
+            $sql->close();
         }
 
     }

@@ -14,6 +14,11 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 
 $list = $core->get_locales();
 $giro = $core->get_giro();
+
+echo "<pre>";
+print_r($giro);
+echo "</pre>";
+
 exit;
 
 if($giro['dns'] == 0){
