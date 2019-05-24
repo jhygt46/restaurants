@@ -44,15 +44,15 @@ class Core{
             }else{
                 die("ERROR: #A101");
             }
+            $sql->free_result();
             $sql->close();
         }
-        if($this->admin == 1){
-            $id_gir = 134;
+        if($this->admin == 1 && $this->id_user > 1){
             $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_gir=? AND id_user=?");
             $sql->bind_param("ii", $id_gir, $this->id_user);
             $sql->execute();
             $sql->store_result();
-            if($sql->{"num_rows"} == 1 || $this->id_user == 1){
+            if($sql->{"num_rows"} == 1){
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }else{
@@ -60,6 +60,10 @@ class Core{
             }
             $sql->free_result();
             $sql->close();
+        }
+        if($this->admin == 1 && $this->id_user == 1){
+            $this->id_gir = $id_gir;
+            $_SESSION['user']['id_gir'] = $id_gir;
         }
 
     }
