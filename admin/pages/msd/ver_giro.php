@@ -19,6 +19,8 @@ echo "<pre>";
 print_r($giro);
 echo "</pre>";
 
+exit;
+
 if($giro['dns'] == 0){
     
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
