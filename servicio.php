@@ -78,10 +78,10 @@ function get_info_catalogo($id_cat, $con){
 		$aux_categoria['descripcion_sub'] = $row['descripcion_sub'];
 		$aux_categoria['precio'] = $row['precio'];
 		$aux_categoria['degradado'] = $row['degradado'];
+		$aux_categoria['tipo'] = $row['tipo'];
 
 		if($row['tipo'] == 0){
 
-			$aux_categoria['tipo'] = 0;
 			$sqlpro = $con->prepare("SELECT * FROM cat_pros t1, productos t2, productos_precio t3 WHERE t1.id_cae=? AND t1.id_pro=t2.id_pro AND t1.id_pro=t3.id_pro AND t3.id_cat=? ORDER BY t1.orders");
 			$sqlpro->bind_param("ii", $row['id_cae'], $id_cat);
 			$sqlpro->execute();
@@ -113,7 +113,6 @@ function get_info_catalogo($id_cat, $con){
 		}
    		if($tipo == 1){
 
-			$aux_categoria['tipo'] = 1;
 			$sqlpc = $con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?");
 			$sqlpc->bind_param("ii", $row['id_cae']);
 			$sqlpc->execute();
