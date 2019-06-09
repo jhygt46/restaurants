@@ -85,7 +85,6 @@ class Rest{
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE eliminado=?");
         $sql->bind_param("i", $this->eliminado);
         $sql->execute();
-        $sql->store_result();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         if($sql->{"num_rows"} > 0){
             
