@@ -9,6 +9,11 @@ class Login {
     public $eliminado = 0;
     public function __construct(){
         
+        global $db_host;
+        global $db_user;
+        global $db_password;
+        global $db_database;
+
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         
     }
