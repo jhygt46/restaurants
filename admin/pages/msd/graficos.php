@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Graficos";
@@ -18,7 +11,7 @@ $sub_titulo = "Configurar Grafico";
 
 $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$locales = $fireapp->get_locales();
+$locales = $core->get_locales();
 
 ?>
 <script>

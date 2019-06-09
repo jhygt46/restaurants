@@ -1,29 +1,24 @@
 <?php
 
-    if($_SERVER['HTTP_HOST'] == "localhost"){
-        $path = "C:/AppServ/www/restaurants";
-    }else{
-        $path = "/var/www/html/restaurants";
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
+
+$info = $core->get_data($_SERVER["HTTP_HOST"]);
+
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
+    if($info['ssl'] == 0){
+        $location = 'https://misitiodelivery.cl/passw/'.$_GET['id_user'].'/'.$_GET['code'];
+        header('HTTP/1.1 302 Moved Temporarily');
+        header('Location: ' . $location);
     }
-
-    require_once($path."/admin/class/core_class.php");
-    $core = new Core();
-    $info = $core->get_data($_SERVER["HTTP_HOST"]);
-
-    if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-        if($info['ssl'] == 0){
-            $location = 'https://misitiodelivery.cl/passw/'.$_GET['id_user'].'/'.$_GET['code'];
-            header('HTTP/1.1 302 Moved Temporarily');
-            header('Location: ' . $location);
-        }
-        if($info['ssl'] == 1){
-            $location = 'https://'.$_SERVER['HTTP_HOST'].'/passw/'.$_GET['id_user'].'/'.$_GET['code'];
-            header('HTTP/1.1 301 Moved Permanently');
-            header('Location: ' . $location);
-        }
+    if($info['ssl'] == 1){
+        $location = 'https://'.$_SERVER['HTTP_HOST'].'/passw/'.$_GET['id_user'].'/'.$_GET['code'];
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $location);
     }
+}
 
-    $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
+$correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">

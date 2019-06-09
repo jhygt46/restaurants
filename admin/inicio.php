@@ -83,7 +83,7 @@
                                     </div>
                                     <ul class="bloque_lista">
                                         <li onclick="navlink('pages/msd/ver_giro.php')">Inicio<!--<p class="valign">3</p>--></li>
-                                        <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/giros.php')">Crear Giros</li><?php } ?>
+                                        <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/giros.php')">Giros</li><?php } ?>
                                         <?php if($inicio['re_venta'] == 1 || $inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/usuarios.php')">Usuarios</li><?php } ?>
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/panel.php')">Panel de Control</li><?php } ?>
                                     </ul>

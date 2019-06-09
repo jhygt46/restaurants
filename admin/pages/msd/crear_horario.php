@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 $loc_nombre = $_GET["nombre"];
 /* CONFIG PAGE */
@@ -32,12 +25,12 @@ $dias = ["", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Dom
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
     $id_loc = $_GET["id_loc"];
-    $list = $fireapp->get_horarios($id_loc);
+    $list = $core->get_horarios($id_loc);
     
     if(isset($_GET["id_hor"]) && is_numeric($_GET["id_hor"]) && $_GET["id_hor"] != 0){
 
         $id_hor = $_GET["id_hor"];
-        $that = $fireapp->get_horario($id_loc, $id_hor);
+        $that = $core->get_horario($id_loc, $id_hor);
         $sub_titulo = $sub_titulo2;
 
     }

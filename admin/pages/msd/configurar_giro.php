@@ -1,22 +1,14 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
-/* CONFIG PAGE */
 
+/* CONFIG PAGE */
 $sub_titulo = "Establecer Configuracion";
 $accion = "configurar_giro";
 /* CONFIG PAGE */
 
 $that = $core->get_giro();
-
 $titulo = "Configuracion ".$that["nombre"];
 $css = $core->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;

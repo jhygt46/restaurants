@@ -1,9 +1,8 @@
 <?php
-session_start();
 
-require_once("../../class/core_class.php");
-$fireapp = new Core();
-//$fireapp->seguridad_exit(array(48));
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
+$core->is_catalogo();
 
 /* CONFIG PAGE */
 $titulo = "Preguntas";
@@ -20,16 +19,15 @@ $page_mod = "pages/msd/preguntas.php";
 
 $id_pre = 0;
 $sub_titulo = $sub_titulo1;
-if(isset($_GET['id_cat'])){ $fireapp->is_catalogo($_GET['id_cat']); }
-$list = $fireapp->get_preguntas();
+$list = $core->get_preguntas();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $cantidad = 1;
 
 if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0){
 
     $id_pre = $_GET["id_pre"];
-    $that = $fireapp->get_pregunta($id_pre);
-    $that_valores = $fireapp->get_pregunta_valores($id_pre);
+    $that = $core->get_pregunta($id_pre);
+    $that_valores = $core->get_pregunta_valores($id_pre);
     $sub_titulo = $sub_titulo2;
     $cantidad = (count($that_valores)>0) ? count($that_valores)+1 : 1 ;
     

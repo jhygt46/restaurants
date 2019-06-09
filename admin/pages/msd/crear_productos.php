@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 $titulo = "Productos";
 $titulo_list = "Lista de Productos";
@@ -23,7 +16,7 @@ $page_mod = "pages/msd/crear_productos.php";
 /* CONFIG PAGE */
 
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
-$all_prods = $fireapp->get_productos();
+$all_prods = $core->get_productos();
 
 $id = 0;
 $id_pro = 0;
@@ -33,15 +26,15 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
     
     $id = $_GET["id"];
-    $categoria = $fireapp->get_categoria_2($id);
+    $categoria = $core->get_categoria_2($id);
     $titulo = $titulo." de ".$categoria['nombre'];
-    $list = $fireapp->get_productos_categoria($id);
+    $list = $core->get_productos_categoria($id);
     
     if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0){
         
         $id_pro = $_GET["id_pro"];
         $sub_titulo = $sub_titulo2;
-        $that = $fireapp->get_producto($id_pro);
+        $that = $core->get_producto($id_pro);
         
     }
     

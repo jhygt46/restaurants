@@ -1,13 +1,6 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
 /* CONFIG PAGE */
@@ -37,7 +30,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
         
         $sub_titulo = $sub_titulo2;
         $id_lot = $_GET["id_lot"];
-        $that = $core->get_local_tramo($id_lot);
+        $that = $core->get_local_tramo($id_lot, $id_loc);
         
     }
 

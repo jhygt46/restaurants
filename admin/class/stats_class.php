@@ -1,22 +1,21 @@
 <?php
 session_start();
+require_once "/var/www/html/config/config.php";
 
-require_once($path."class/core_class.php");
-
-class Stats extends Core{
+class Stats{
     
     public $con = null;
     public $id_gir = null;
     
     public function __construct(){
         
-        $this->con = new Conexion();
+        $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         $this->id_gir = $_SESSION['user']['id_gir'];
         
     }
     public function process(){
-        
-        $accion = $_POST["accion"];        
+
+        $accion = $_POST["accion"];
         if($accion == "get_stats"){
             return $this->get_stats();
         }
@@ -44,7 +43,13 @@ class Stats extends Core{
         }
         
         $sql = $sql." AND fecha > '".$from."' AND fecha < '".$to."'";
-        $aux_pedidos = $this->con->sql($sql);
+        
+        if($aux_pedidos = $this->con->query($sql)){
+            while($row = $aux_pedidos->fetch_assoc()){
+                $pedidos[] = $row;
+            }
+        }
+
         $pedidos = $aux_pedidos['resultado'];
         
         $from = strtotime($from);
@@ -133,8 +138,6 @@ class Stats extends Core{
                 unset($aux);
             }
         }
-        
-
         
         return $info;
         

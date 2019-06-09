@@ -1,6 +1,6 @@
 <?php
 //date_default_timezone_set('America/Santiago');
-require('admin/class/core_class.php');
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 $code = $core->cocina($_COOKIE["ccn"]);
 $tipo = $_GET["tipo"];

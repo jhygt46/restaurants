@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Configuracion ".$_GET["nombre"];
@@ -25,7 +18,7 @@ $sonidos = ["Applause", "Aww", "Ba-dum-tss", "Beep", "Beep_set", "Boo", "Breakin
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
     $id_loc = $_GET["id_loc"];
-    $that = $fireapp->get_local($id_loc);
+    $that = $core->get_local($id_loc);
 
 }
 

@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 $titulo = "Promociones";
 $sub_titulo1 = "Seleccionar Categorias y/o Productos";
@@ -23,10 +16,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $that = null;
 if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
     $id_cae = $_GET["id_cae"];
-    $that = $fireapp->get_promocion($id_cae);
+    $that = $core->get_promocion($id_cae);
     
 }
-$arbol = $fireapp->get_arbol_productos($that);
+$arbol = $core->get_arbol_productos($that);
 
 
 ?>

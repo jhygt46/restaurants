@@ -1,13 +1,6 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
 
@@ -28,11 +21,6 @@ $id_user = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios_local($_GET["id_loc"]);
-
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 $m_locales = false;
 
 if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){

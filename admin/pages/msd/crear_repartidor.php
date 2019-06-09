@@ -1,15 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
-
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 /* CONFIG PAGE */
 $titulo = "Repartidores de ".$_GET["nombre"];
@@ -21,12 +13,12 @@ $id_list = "id_mot";
 /* CONFIG PAGE */
 
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$list_reps_giro = $fireapp->get_repartidores_giro();
+$list_reps_giro = $core->get_repartidores_giro();
 
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
     $id_loc = $_GET["id_loc"];
-    $list = $fireapp->get_repartidores($id_loc);
+    $list = $core->get_repartidores($id_loc);
 
 }
 

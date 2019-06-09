@@ -1,6 +1,6 @@
 <?php
 
-require('admin/class/core_class.php');
+require('admin/class/core_class_prod.php');
 $core = new Core();
 
 

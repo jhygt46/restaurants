@@ -1,14 +1,7 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
 
 /* CONFIG PAGE */
@@ -27,12 +20,12 @@ $page_mod = "pages/msd/configurar_paginas.php";
 $id_pag = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
-$list = $fireapp->get_paginas();
+$list = $core->get_paginas();
 
 if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0){
 
     $id_pag = $_GET["id_pag"];
-    $that = $fireapp->get_pagina($id_pag);
+    $that = $core->get_pagina($id_pag);
     $sub_titulo = $sub_titulo2;
 
 }

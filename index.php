@@ -1,15 +1,8 @@
 <?php
-
 date_default_timezone_set('America/Santiago');
 
 if($_POST["test"] == "Dw7k2s_hKi5sqPs8"){
     die("hjS3r%mDs-5gYa6ib_5Ps");
-}
-
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = "C:/AppServ/www/restaurants";
-}else{
-    $path = "/var/www/html/restaurants";
 }
 
 if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl")){
@@ -21,11 +14,11 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
             header('Location: ' . $location);
             exit;
         }else{
-            require($path.'/misitiodelivery.php');
+            require('/var/www/html/restaurants/misitiodelivery.php');
             exit;
         }
     }else{
-        require($path.'/admin/class/core_class.php');
+        require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
         $core = new Core();
         $info = $core->get_data($_GET['param_dom']);
         $host = 1;
@@ -33,7 +26,7 @@ if(($_SERVER["HTTP_HOST"] == "www.misitiodelivery.cl" || $_SERVER["HTTP_HOST"] =
 
 }else{
 
-    require($path.'/admin/class/core_class.php');
+    require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
     $core = new Core();
     $info = $core->get_data($_SERVER["HTTP_HOST"]);
     $host = 0;

@@ -1,14 +1,8 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
+$core = new Core();
 
-require_once($path."admin/class/core_class.php");
-$fireapp = new Core();
 if(isset($_GET['id_cat'])){ $fireapp->is_catalogo($_GET['id_cat']); }
 $list = $fireapp->get_lista_ingredientes();
 

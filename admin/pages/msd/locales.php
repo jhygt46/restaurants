@@ -1,13 +1,6 @@
 <?php
-session_start();
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
-    $path = $_SERVER['DOCUMENT_ROOT']."/restaurants/";
-}else{
-    $path = "/var/www/html/restaurants/";
-}
-
-require_once($path."admin/class/core_class.php");
+require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
 /* CONFIG PAGE */
@@ -113,8 +106,6 @@ function crear_llamado(map){
         searchBox.setBounds(map.getBounds()); 
     });
     
-    
-    
 }
 </script>
 <div class="pagina">
@@ -158,17 +149,14 @@ function crear_llamado(map){
                         <span><p>Mapa:</p></span>
                         <div class="map" id="input_gmap"></div>
                     </label>
-                    <?php if(count($catalogos)>1){ ?>
                     <label class="clearfix">
                         <span><p>Catalogo:</p></span>
                         <select id="id_cat">
-                            <option value="0">Seleccionar</option>
                             <?php for($i=0; $i<count($catalogos); $i++){ ?>
                                 <option value="<?php echo $catalogos[$i]["id_cat"]; ?>" <?php if($catalogos[$i]["id_cat"] == $that['id_cat']){ echo "selected"; } ?> ><?php echo $catalogos[$i]["nombre"]; ?></option>
                             <?php } ?>
                         </select>
                     </label>
-                    <?php } ?>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
