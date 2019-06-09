@@ -170,7 +170,6 @@ class Login {
             $sqlu->store_result();
 
             $info["n1"] = $sqlu->{"num_rows"};
-            $info["n2"] = $sqlu->num_rows;
 
             $res = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC);
             $sqlu->free_result();
