@@ -169,6 +169,7 @@ class Login {
             $sqlu->execute();
             $result = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
             $id_user = $result["id_user"];
+            $sqlu->store_result();
             $usuario = $sqlu->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
