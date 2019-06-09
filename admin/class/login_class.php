@@ -167,11 +167,8 @@ class Login {
             if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
                 if($sql->bind_param("ii", $_POST["user"], $this->eliminado)){
                     if($sql->execute()){
-                        $res = $sql->get_result();
-                        $sql->store_result();
-                        //$info["data"] = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $info["nr1"] = $sql->{"num_rows"};
-                        $info["nr2"] = $sql->num_rows; 
+                        $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                        $info["nr1"] = count($res); 
                     }else{
                         $info["error1"] = $sql->error;
                     }
