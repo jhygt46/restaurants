@@ -168,12 +168,10 @@ class Login {
             $sqlu->bind_param("si", $_POST["user"], $this->eliminado);
             $sqlu->execute();
             $res = $sqlu->get_result();
-            $info["a1"] = $res->{"num_rows"};
+            $usuario = $res->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
 
-
-            return $info;
 
             $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
             $sqla->bind_param("i", $id_user);
