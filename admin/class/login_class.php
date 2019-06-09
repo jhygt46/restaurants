@@ -168,7 +168,7 @@ class Login {
             $sqlu->bind_param("si", $_POST["user"], $this->eliminado);
             $sqlu->execute();
             $res = $sqlu->get_result();
-            $info["a1"] = $sqlu->{"num_rows"};
+            $info["a1"] = $res->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
 
