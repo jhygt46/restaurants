@@ -182,7 +182,7 @@ class Login {
 
             if($acciones < 5){
 
-                $info['a'] = 1;
+                $info['a'] = $usuario;
 
                 if($usuario == 0){
                     $info['op'] = 2;
@@ -191,7 +191,6 @@ class Login {
 
                 if($usuario == 1){
 
-                    $info['b'] = 1;
                     $pass = $result['pass'];
                     $id_user = $result['id_user'];
 
