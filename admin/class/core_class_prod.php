@@ -143,7 +143,7 @@ class Core{
     public function get_informe(){
 
         $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
-        $sqlgir->bind_param("ii" $this->id_gir, $this->eliminado);
+        $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlgir->execute();
         $result = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sqlgir->free_result();
@@ -153,7 +153,7 @@ class Core{
         // TIPO 1 POR WEB
         // TIPO 2 POR POS
         $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND eliminado=?");
-        $sqlped->bind_param("ii" $this->id_gir, $this->eliminado);
+        $sqlped->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlped->execute();
         $pedidos = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC);
         $sqlped->free_result();
