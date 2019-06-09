@@ -110,6 +110,7 @@ function get_info_catalogo($id_cat, $con){
 					unset($aux_productos);  
 				}
 			}
+
 		}
    		if($tipo == 1){
 
@@ -135,10 +136,10 @@ function get_info_catalogo($id_cat, $con){
 				$aux_categoria['productos'][] = $aux_prm_pro;
 				unset($aux_prm_pro);
 			}
-		}
+			$info['categorias'][] = $aux_categoria;
+			unset($aux_categoria);
 
-		$info['categorias'][] = $aux_categoria;
-		unset($aux_categoria);
+		}
 
 	}
 					        
