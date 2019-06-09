@@ -171,7 +171,7 @@ class Login {
 
             }else{
 
-                $info['err'] = $sqlu;
+                $info['err'] = $this->con->error;
 
             }
             
