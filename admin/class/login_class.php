@@ -167,7 +167,6 @@ class Login {
             $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
             $sqlu->bind_param("si", $_POST["user"], $this->eliminado);
             $sqlu->execute();
-            $sqlu->store_result();
             $info["a1"] = $sqlu->{"num_rows"};
             $res = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC);
             $sqlu->free_result();
