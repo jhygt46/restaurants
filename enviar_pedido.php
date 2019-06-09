@@ -140,24 +140,24 @@ function enviar_pedido($con){
 		$info['pedido_code'] = $pedido_code;
 		$info['fecha'] = time();
 
-		$pedido['local_code'] = $resultlg['code'];
-		$pedido['id_ped'] = $id_ped;
-		$pedido['num_ped'] = $num_ped;
-		$pedido['pedido_code'] = $pedido_code;
+		$pedido_m['local_code'] = $resultlg['code'];
+		$pedido_m['id_ped'] = $id_ped;
+		$pedido_m['num_ped'] = $num_ped;
+		$pedido_m['pedido_code'] = $pedido_code;
 		
-		$pedido['correo'] = $resultlg['correo'];
-		$pedido['accion'] = 'enviar_pedido_local';
-		$pedido['activar_envio'] = $resultlg['activar_envio'];
-		$pedido['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
-		$pedido['dominio'] = $resultlg['dominio'];
-		$pedido['nombre'] = $nombre;
-		$pedido['telefono'] = $telefono;
+		$pedido_m['correo'] = $resultlg['correo'];
+		$pedido_m['accion'] = 'enviar_pedido_local';
+		$pedido_m['activar_envio'] = $resultlg['activar_envio'];
+		$pedido_m['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
+		$pedido_m['dominio'] = $resultlg['dominio'];
+		$pedido_m['nombre'] = $nombre;
+		$pedido_m['telefono'] = $telefono;
 		$info['pedido'] = $pedido;
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
 		$info['email'] = curl_exec($ch);
 		curl_close($ch);
 
