@@ -112,7 +112,7 @@ function get_info_catalogo($id_cat, $con){
 			}
 
 		}
-   		if($tipo == 1){
+   		if($row['tipo'] == 1){
 
 			$sqlpc = $con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?");
 			$sqlpc->bind_param("ii", $row['id_cae']);
@@ -136,14 +136,14 @@ function get_info_catalogo($id_cat, $con){
 				$aux_categoria['productos'][] = $aux_prm_pro;
 				unset($aux_prm_pro);
 			}
-			$info['categorias'][] = $aux_categoria;
-			unset($aux_categoria);
 
 		}
+		$info['categorias'][] = $aux_categoria;
+		unset($aux_categoria);
 
 	}
 					        
-	//$info['preguntas'] = get_info_preguntas($id_cat, $con);        
+	$info['preguntas'] = get_info_preguntas($id_cat, $con);        
 	return $info;
 	      
 }
