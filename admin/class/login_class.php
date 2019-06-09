@@ -164,6 +164,16 @@ class Login {
 
         if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
             
+
+            $sql = $con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
+	        $sql->bind_param("ii", $_POST["user"], $this->eliminado);
+	        $sql->execute();
+	        $res = $sql->get_result();
+	        $info['num'] = $res->{'num_rows'};
+            $info['res'] = $res;
+            return $info;
+
+
             $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
             $sqlu->bind_param("ii", $_POST["user"], $this->eliminado);
             $sqlu->execute();
