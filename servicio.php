@@ -89,29 +89,30 @@ function get_info_catalogo($id_cat, $con){
 			while($rowp = $resultpro->fetch_assoc()){
 				$aux_categoria['productos'][] = $rowp['id_pro'];
 				if(!in_array($rowp['id_pro'], $aux_prods)){
-						$aux_productos['id_pro'] = $rowp['id_pro'];
-						$aux_productos['nombre'] = $rowp['nombre'];
-						$aux_productos['nombre_carro'] = $rowp['nombre_carro'];
-						$aux_productos['numero'] = $rowp['numero'];
-						$aux_productos['descripcion'] = $rowp['descripcion'];
-						$aux_productos['precio'] = $rowp['precio'];
-						$aux_prods[] = $rowp['id_pro'];
+					$aux_productos['id_pro'] = $rowp['id_pro'];
+					$aux_productos['nombre'] = $rowp['nombre'];
+					$aux_productos['nombre_carro'] = $rowp['nombre_carro'];
+					$aux_productos['numero'] = $rowp['numero'];
+					$aux_productos['descripcion'] = $rowp['descripcion'];
+					$aux_productos['precio'] = $rowp['precio'];
+					$aux_prods[] = $rowp['id_pro'];
 
-				$sqlppr = $con->prepare("SELECT * FROM preguntas_productos WHERE id_pro=?");
-						$sqlppr->bind_param("i", $rowp['id_pro']);
-						$sqlppr->execute();
+					$sqlppr = $con->prepare("SELECT * FROM preguntas_productos WHERE id_pro=?");
+					$sqlppr->bind_param("i", $rowp['id_pro']);
+					$sqlppr->execute();
 
-				$resultppr = $sqlppr->get_result();
+					$resultppr = $sqlppr->get_result();
 
 					while($rowpr = $resultppr->fetch_assoc()){
 						$aux_productos['preguntas'][] = $rowpr['id_pre'];
-				}
-							$info['productos'][] = $aux_productos;
-						unset($aux_productos);  
 					}
+					$info['productos'][] = $aux_productos;
+					unset($aux_productos);  
+				}
 			}
 		}
    		if($tipo == 1){
+
 			$aux_categoria['tipo'] = 1;
 			$sqlpc = $con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?");
 			$sqlpc->bind_param("ii", $row['id_cae']);
@@ -142,7 +143,7 @@ function get_info_catalogo($id_cat, $con){
 
 	}
 					        
-	$info['preguntas'] = get_info_preguntas($id_cat, $con);        
+	//$info['preguntas'] = get_info_preguntas($id_cat, $con);        
 	return $info;
 	      
 }
