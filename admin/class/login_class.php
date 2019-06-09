@@ -170,7 +170,7 @@ class Login {
 	        $sql->execute();
             $res = $sql->get_result();
 
-            $info['sql'] = $res->{'num_rows'};           
+            $info['sql'] = $res;           
             return $info;
 
 
