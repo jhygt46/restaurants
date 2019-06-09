@@ -168,8 +168,10 @@ class Login {
                 if($sql->bind_param("ii", $_POST["user"], $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
-                        $info["data"] = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $info["nr1"] = $sql->{"num_rows"}; 
+                        $sql->store_result();
+                        //$info["data"] = $res->fetch_all(MYSQLI_ASSOC)[0];
+                        $info["nr1"] = $sql->{"num_rows"};
+                        $info["nr2"] = $sql->num_rows; 
                     }else{
                         $info["error1"] = $sql->error;
                     }
