@@ -164,32 +164,15 @@ class Login {
 
         if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
             
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
-                if($sql->bind_param("ii", $_POST["user"], $this->eliminado)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        $info["res"] = $res; 
-                    }else{
-                        $info["error1"] = $sql->error;
-                    }
-                }else{
-                    $info["error2"] = $sql->error;
-                }
-            }else{
-                $info["error3"] = $this->con->error;
-            }
-     
-            return $info;
-
             $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
             $sqlu->bind_param("ii", $_POST["user"], $this->eliminado);
             $sqlu->execute();
-            $res = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $res = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC);
             $num = $sqlu->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
 
-            $info['num'] = $num;
+            $info['res'] = $res;
             return $info;
 
             $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
