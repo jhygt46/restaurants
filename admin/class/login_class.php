@@ -182,6 +182,8 @@ class Login {
 
             if($acciones < 5){
 
+                $info['a'] = 1;
+
                 if($usuario == 0){
                     $info['op'] = 2;
                     $info['message'] = "Error: Correo o Contraseña invalida";
@@ -189,6 +191,7 @@ class Login {
 
                 if($usuario == 1){
 
+                    $info['b'] = 1;
                     $pass = $result['pass'];
                     $id_user = $result['id_user'];
 
