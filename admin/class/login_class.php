@@ -168,7 +168,6 @@ class Login {
             $sqlu->bind_param("ii", $_POST["user"], $this->eliminado);
             $sqlu->execute();
             $res = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-            $sqlu->store_result();
             $num = $sqlu->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
