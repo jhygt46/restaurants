@@ -167,21 +167,21 @@ class Login {
             $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
             $sqlu->bind_param("ii", $_POST["user"], $this->eliminado);
             $sqlu->execute();
-            $result = $sqlu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $res = $sql->get_result();
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+            $usuario = $res->{"num_rows"};
             $id_user = $result["id_user"];
-            $sqlu->store_result();
-            $usuario = $sqlu->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
 
-            $info['result'] = $result;
-            $info['sqlu'] = $sqlu;
+            $info['num'] = $usuario;
             return $info;
 
             $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
             $sqla->bind_param("i", $id_user);
             $sqla->execute();
-            $acciones = $sqla->{"num_rows"};
+            $res = $sql->get_result();
+            $acciones = $res->{"num_rows"};
             $sqla->free_result();
             $sqla->close();
 
