@@ -257,7 +257,7 @@ function get_data($id, $con){
 		$info['estados'] = explode(",",$result['estados']);
 		$info['mapcode'] = $result['mapcode'];
 		$info['dominio'] = "";
-		$info['url'] = $dominio;
+		$info['url'] = $result['dominio'];
 
 		if($result['favicon'] != ""){ $info['favicon'] = $result['favicon']; }
 													                
