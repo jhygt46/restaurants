@@ -173,6 +173,10 @@ class Login {
             $sqlu->free_result();
             $sqlu->close();
 
+            $info['result'] = $result;
+            $info['sqlu'] = $sqlu;
+            return $info;
+
             $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
             $sqla->bind_param("i", $id_user);
             $sqla->execute();
