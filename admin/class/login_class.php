@@ -172,7 +172,8 @@ class Login {
             $sql->store_result();
 
             //$info['res'] = $res;
-            $info['num'] = $sql;
+            $info['sql'] = $sql;
+            $info['con'] = $this->con;
             
             return $info;
 
