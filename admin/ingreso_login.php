@@ -45,6 +45,7 @@
                     type: "POST",
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){
+                        console.log(data);
                         if(data.op == 1){
                             bien(data.message);
                             setTimeout(function () {
