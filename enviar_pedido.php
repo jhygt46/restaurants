@@ -150,8 +150,8 @@ function enviar_pedido($con){
 		$pedido_m['activar_envio'] = $resultlg['activar_envio'];
 		$pedido_m['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
 		$pedido_m['dominio'] = $resultlg['dominio'];
-		$pedido_m['nombre'] = $nombre;
-		$pedido_m['telefono'] = $telefono;
+		$pedido_m['nombre'] = $pedido["nombre"];
+		$pedido_m['telefono'] = $pedido["telefono"];
 		$info['pedido'] = $pedido_m;
 
 		$ch = curl_init();
