@@ -115,7 +115,7 @@ function get_info_catalogo($id_cat, $con){
    		if($row['tipo'] == 1){
 
 			$sqlpc = $con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?");
-			$sqlpc->bind_param("ii", $row['id_cae']);
+			$sqlpc->bind_param("i", $row['id_cae']);
 			$sqlpc->execute();
 			$resultpc = $sqlpc->get_result();
 
