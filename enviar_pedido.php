@@ -152,7 +152,8 @@ function enviar_pedido($con){
 		$pedido['dominio'] = $resultlg['dominio'];
 		$pedido['nombre'] = $nombre;
 		$pedido['telefono'] = $telefono;
-		
+		$info['pedido'] = $pedido;
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
