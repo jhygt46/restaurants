@@ -170,7 +170,9 @@ class Login {
 	        $sql->execute();
             $res = $sql->get_result();
 
-            $info['sql'] = $res;           
+            $info['res'] = $res;
+            $info['sql'] = $sql;
+            $info['con'] = $this->con;         
             return $info;
 
 
