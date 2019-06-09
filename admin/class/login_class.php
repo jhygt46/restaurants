@@ -171,8 +171,8 @@ class Login {
             $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
             $sql->store_result();
 
-            $info['res'] = $res;
-            $info['num2'] = $sql->{'num_rows'};
+            //$info['res'] = $res;
+            $info['num'] = $sql;
             
             return $info;
 
