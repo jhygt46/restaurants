@@ -91,11 +91,12 @@ class Rest{
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE eliminado=?");
         $sql->bind_param("i", $this->eliminado);
         $sql->execute();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        
-        if($sql->{"num_rows"} > 0){
-            
+        $res = $sql->get_result();
+
+	    if($res->{'num_rows'} > 0){
+
             $res['op'] = 1;
+            $result = $res->fetch_all(MYSQLI_ASSOC);
             for($i=0; $i<count($result); $i++){
                 
                 $aux['id_mot'] = $result[$i]['id_mot'];
@@ -128,9 +129,12 @@ class Rest{
             }
 
         }
-        if($sql->{"num_rows"} == 0){
+        if($res->{'num_rows'} == 0){
+
             $res['op'] = 2;
+
         }
+
         $sql->free_result();
         $sql->close();
         return $res;
