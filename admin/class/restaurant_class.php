@@ -95,7 +95,7 @@ class Rest{
 
 	    if($res->{'num_rows'} > 0){
 
-            $res['op'] = 1;
+            $resu['op'] = 1;
             $result = $res->fetch_all(MYSQLI_ASSOC);
             for($i=0; $i<count($result); $i++){
                 
@@ -121,7 +121,7 @@ class Rest{
                     }
                 }
 
-                $res['motos'][] = $aux;
+                $resu['motos'][] = $aux;
                 unset($aux);
 
                 $sqlml->free_result();
@@ -131,13 +131,13 @@ class Rest{
         }
         if($res->{'num_rows'} == 0){
 
-            $res['op'] = 2;
+            $resu['op'] = 2;
 
         }
 
         $sql->free_result();
         $sql->close();
-        return $res;
+        return $resu;
 
     }
     public function get_moto($id_mot){
