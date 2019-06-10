@@ -117,7 +117,7 @@ class Rest{
                 if($res2->{"num_rows"} > 0){
                     $result2 = $res2->fetch_all(MYSQLI_ASSOC);
                     for($j=0; $j<count($result2); $j++){
-                        $aux['locales'][] = $result[$j]['code'];
+                        $aux['locales'][] = $result2[$j]['code'];
                     }
                 }
 
