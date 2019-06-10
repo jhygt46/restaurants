@@ -82,7 +82,9 @@ class Rest{
     }
     public function get_motos(){
 
-        return [{i: 1}];
+        $info['a'] = 1;
+        $info['b'] = 3;
+        return $info;
 
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE eliminado=?");
         $sql->bind_param("i", $this->eliminado);
