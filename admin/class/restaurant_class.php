@@ -5,8 +5,14 @@ class Rest{
     
     public $con = null;
     public $eliminado = 0;
+
     public function __construct(){
         
+        global $db_host;
+        global $db_user;
+        global $db_password;
+        global $db_database;
+
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         
     }
@@ -81,10 +87,6 @@ class Rest{
         
     }
     public function get_motos(){
-
-        $info['a'] = 1;
-        $info['b'] = 3;
-        return $info;
 
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE eliminado=?");
         $sql->bind_param("i", $this->eliminado);
