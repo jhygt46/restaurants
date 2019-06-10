@@ -92,7 +92,7 @@ class Rest{
         $sql->bind_param("i", $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        
         if($sql->{"num_rows"} > 0){
             
             $res['op'] = 1;
