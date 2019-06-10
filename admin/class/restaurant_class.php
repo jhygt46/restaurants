@@ -189,25 +189,26 @@ class Rest{
         $sql->bind_param("i", $id_mot);
         $sql->execute();
         $sql->store_result();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        $res = $sql->get_result();
 
-        if($sql->{"num_rows"} > 0){
-            $res['op'] = 1;
+        if($res->{"num_rows"} > 0){
+            $resu['op'] = 1;
+            $result = $res->fetch_all(MYSQLI_ASSOC);
             for($i=0; $i<count($result); $i++){
                 $aux['id_ped'] = $result[$i]['id_ped'];
                 $aux['fecha'] = strtotime($result[$i]['fecha']) * 1000;
                 $aux['code'] = $result[$i]['code'];
-                $res['pedidos'][] = $aux;
+                $resu['pedidos'][] = $aux;
                 unset($aux);
             }
         }
-        if($sql->{"num_rows"} == 0){
-            $res['op'] = 2;
+        if($res->{"num_rows"} == 0){
+            $resu['op'] = 2;
         }
 
         $sql->free_result();
         $sql->close();
-        return $res;
+        return $resu;
 
     }
     private function get_pedido_moto($id_mot, $id_ped){
