@@ -188,24 +188,23 @@ class Rest{
         $sql = $this->con->prepare("SELECT fecha, code FROM pedidos_aux WHERE id_mot=? AND fecha > DATE_ADD(NOW(), INTERVAL -2 HOUR)");
         $sql->bind_param("i", $id_mot);
         $sql->execute();
-        $sql->store_result();
         $res = $sql->get_result();
-
-        if($res->{"num_rows"} > 0){
-            $resu['op'] = 1;
-            $result = $res->fetch_all(MYSQLI_ASSOC);
-            for($i=0; $i<count($result); $i++){
-                $aux['id_ped'] = $result[$i]['id_ped'];
-                $aux['fecha'] = strtotime($result[$i]['fecha']) * 1000;
-                $aux['code'] = $result[$i]['code'];
-                $resu['pedidos'][] = $aux;
-                unset($aux);
+        if(!is_null($res->{"num_rows"})){
+            if($res->{"num_rows"} > 0){
+                $resu['op'] = 1;
+                $result = $res->fetch_all(MYSQLI_ASSOC);
+                for($i=0; $i<count($result); $i++){
+                    $aux['id_ped'] = $result[$i]['id_ped'];
+                    $aux['fecha'] = strtotime($result[$i]['fecha']) * 1000;
+                    $aux['code'] = $result[$i]['code'];
+                    $resu['pedidos'][] = $aux;
+                    unset($aux);
+                }
+            }
+            if($res->{"num_rows"} == 0){
+                $resu['op'] = 2;
             }
         }
-        if($res->{"num_rows"} == 0){
-            $resu['op'] = 2;
-        }
-
         $sql->free_result();
         $sql->close();
         return $resu;
