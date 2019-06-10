@@ -113,10 +113,10 @@ class Rest{
                 $sqlml = $this->con->prepare("SELECT t2.code FROM motos_locales t1, locales t2 WHERE t1.id_mot=? AND t1.id_loc=t2.id_loc AND t2.eliminado=?");
                 $sqlml->bind_param("ii", $result[$i]['id_mot'], $this->eliminado);
                 $sqlml->execute();
-                $sqlml->store_result();
-                $result = $sqlml->get_result()->fetch_all(MYSQLI_ASSOC);
-                if($sqlml->{"num_rows"} > 0){
-                    for($j=0; $j<count($result); $j++){
+                $res2 = $sqlml->get_result();
+                if($res2->{"num_rows"} > 0){
+                    $result2 = $res2->fetch_all(MYSQLI_ASSOC);
+                    for($j=0; $j<count($result2); $j++){
                         $aux['locales'][] = $result[$j]['code'];
                     }
                 }
