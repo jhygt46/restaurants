@@ -29,6 +29,32 @@ class Core{
         $this->id_cat = ($_SESSION['user']['id_cat']) ? $_SESSION['user']['id_cat'] : 0 ;
         
     }
+    public function verificar(){
+
+        $host = $_POST["host"];
+        $code = $_POST["code"];
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $port = $_SERVER['SERVER_PORT'];
+
+        $sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=? AND t2.code=?");
+        $sqlgir->bind_param("sis", $host, $this->eliminado, $code);
+        $sqlgir->execute();
+        $res = $sqlgir->get_result();
+        $ret = false;
+        
+        if($res->{'num_rows'} == 1){
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+            if($ip == $result["ip"] && $port == "443"){
+                $ret = true;
+            }
+        }
+
+        $sqlgir->free_result();
+        $sqlgir->close();
+        return $ret;
+
+    }
     public function is_giro(){
 
         $id_gir = intval($_GET["id_gir"]);
@@ -738,35 +764,62 @@ class Core{
         return $loc;
         
     }
-    public function get_web_js_data_remote($host){
+    public function get_web_js_data_remote(){
         
-        $eliminado = 0;
-        $sqlgiro = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=? AND eliminado=?");
-        $sqlgiro->bind_param("si", $host, $eliminado);
-        $sqlgiro->execute();
-        $id_gir = $sqlgiro->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];
-        $sqlgiro->free_result();
-        $sqlgiro->close();
+        if($this->verificar()){
 
-        $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?");
-        $sql->bind_param("ii", $id_gir, $eliminado);
-        $sql->execute();
-        $result = $sql->get_result();
+            $host = $_POST["host"];
+            $eliminado = 0;
 
-        while($row = $result->fetch_assoc()){
-            $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
+            if($sqlgiro = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=? AND eliminado=?")){
+                
+                $sqlgiro->bind_param("si", $host, $eliminado);
+                $sqlgiro->execute();		
+                $id_gir = $sqlgiro->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];
+                $sqlgiro->free_result();
+                $sqlgiro->close();
+
+                $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?");
+                $sql->bind_param("ii", $id_gir, $eliminado);
+                $sql->execute();
+                $result = $sql->get_result();
+
+                $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
+                while($row = $result->fetch_assoc()){
+                    $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
+                    $info['op'] = 1;
+                }
+                $sql->free_result();
+                $sql->close();
+
+                $info['data']['paginas'] = $this->get_paginas_web($id_gir);
+                $info['data']['config'] = $this->get_config($id_gir);
+                $info['data']['locales'] = $this->get_locales_js($id_gir);
+                $info['info'] = $this->get_data($id_gir);
+                $info['polygons'] = $this->get_polygons($id_gir);
+                return json_encode($info);
+
+            }else{
+                
+                $error = $this->con->errno.' '.$this->con->error;
+                echo $error;
+
+            }
+            
         }
 
+    }
+    function get_polygons($id_gir){
+
+        $eliminado = 0;
+        $sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
+        $sql->bind_param("iii", $id_gir, $eliminado, $eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         $sql->free_result();
         $sql->close();
-
-        $info['data']['paginas'] = $this->get_paginas_web($id_gir);
-        $info['data']['config'] = $this->get_config($id_gir);
-        $info['data']['locales'] = $this->get_locales_js($id_gir);
-        $info['info'] = $this->get_data($host);
-
-        return json_encode($info);
-
+        return $result;
+                    
     }
     public function get_info_catalogo($id_cat){
         
@@ -915,7 +968,7 @@ class Core{
         
     }
     public function get_web_js_data2($id_gir){
-        
+        /*
         $sql = $this->con->prepare("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t1.eliminado=?");
         $sql->bind_param("ii", $id_gir, $this->eliminado);
         $sql->execute();
@@ -944,7 +997,7 @@ class Core{
         $sqlmod->bind_param("ii", $id_gir, $this->eliminado);
         $sqlmod->execute();
         $sqlmod->close();
-
+        */
     }
     public function ver_detalle($code){
         

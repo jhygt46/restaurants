@@ -1,5 +1,11 @@
 <?php
 
+require_once "/var/www/html/restaurants/admin/class/core_class_prod.php";
+$core = new Core();
+echo $core->get_web_js_data_remote();
+
+
+/*
 require_once "/var/www/html/config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
 
@@ -313,3 +319,4 @@ function get_data($id, $con){
 	return $info;
 			        
 }
+*/
