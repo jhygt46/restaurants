@@ -55,12 +55,12 @@ class Rest{
         $sql = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio=? AND t3.id_gir=t1.id_gir AND t1.telefono=? AND t1.id_puser=t2.id_puser");
         $sql->bind_param("ss", $referer, $telefono);
         $sql->execute();
-        $sql->store_result();
+        $res = $sql->get_result();
         $info['cantidad'] = 0;
 
-        if($sql->{"num_rows"} > 0){
+        if($res->{"num_rows"} > 0){
 
-            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            $result = $res->fetch_all(MYSQLI_ASSOC);
             $info['id_puser'] = $result[0]['id_puser'];
             $info['nombre'] = $result[0]['nombre'];
             $info['cantidad'] = $sql->{"num_rows"};
@@ -145,42 +145,44 @@ class Rest{
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE id_mot=? AND eliminado=?");
         $sql->bind_param("ii", $id_mot, $this->eliminado);
         $sql->execute();
-        $sql->store_result();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-        if($sql->{"num_rows"} == 1){
+        $res = $sql->get_result();
+        
+        if($res->{"num_rows"} == 1){
 
-            $res['op'] = 1;
-            $res['moto']['id_mot'] = $result['id_mot'];
-            $res['moto']['code'] = $result['uid'];
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
 
-            $aux_pedidos = $this->get_pedidos_moto($res['moto']['id_mot']);
+            $resu['op'] = 1;
+            $resu['moto']['id_mot'] = $result['id_mot'];
+            $resu['moto']['code'] = $result['uid'];
+
+            $aux_pedidos = $this->get_pedidos_moto($result['id_mot']);
             if($aux_pedidos['op'] == 1){
-                $res['moto']['pedidos'] = $aux_pedidos['pedidos'];
+                $resu['moto']['pedidos'] = $aux_pedidos['pedidos'];
             }
             if($aux_pedidos['op'] == 2){
-                $res['moto']['pedidos'] = [];
+                $resu['moto']['pedidos'] = [];
             }
 
             $sqlml = $this->con->prepare("SELECT t2.code FROM motos_locales t1, locales t2 WHERE t1.id_mot=? AND t1.id_loc=t2.id_loc AND t2.eliminado=?");
             $sqlml->bind_param("ii", $result['id_mot'], $this->eliminado);
             $sqlml->execute();
-            $sqlml->store_result();
-            $result = $sqlml->get_result()->fetch_all(MYSQLI_ASSOC);
-            if($sqlml->{"num_rows"} > 0){
-                for($j=0; $j<count($result); $j++){
-                    $res['moto']['locales'][] = $result[$j]['code'];
+            $res2 = $sqlml->get_result();
+            if($res2->{"num_rows"} > 0){
+                $result2 = $res2->fetch_all(MYSQLI_ASSOC);
+                for($j=0; $j<count($result2); $j++){
+                    $resu['moto']['locales'][] = $result2[$j]['code'];
                 }
             }
             $sqlml->free_result();
             $sqlml->close();
 
         }
-        if($sql->{"num_rows"} == 0){
-            $res['op'] = 2;
+        if($res->{"num_rows"} == 0){
+            $resu['op'] = 2;
         }
         $sql->free_result();
         $sql->close();
-        return $res;
+        return $resu;
 
     }
     private function get_pedidos_moto($id_mot){
@@ -215,19 +217,18 @@ class Rest{
         $sql = $this->con->prepare("SELECT t1.code FROM pedidos_aux t1, motos_locales t2 WHERE t1.id_ped=? AND t1.id_loc=t2.id_loc AND t2.id_mot=?");
         $sql->bind_param("ii", $id_ped, $id_mot);
         $sql->execute();
-        $sql->store_result();
-        $code = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["code"];
-        if($sql->{"num_rows"} == 1){
-            $res['op'] = 1;
-            $res['code'] = $code;
+        $res = $sql->get_result();
+        if($res->{"num_rows"} == 1){
+            $resu['op'] = 1;
+            $resu['code'] = $res->fetch_all(MYSQLI_ASSOC)[0]["code"];
         }
-        if($sql->{"num_rows"} == 0){
-            $res['op'] = 2;
+        if($res->{"num_rows"} == 0){
+            $resu['op'] = 2;
         }
         $sql->free_result();
         $sql->close();
 
-        return $res;
+        return $resu;
 
     }
     public function enviar_contacto(){
