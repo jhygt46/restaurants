@@ -176,7 +176,7 @@ class Login {
             $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
             $sqla->bind_param("i", $id_user);
             $sqla->execute();
-            $res = $sql->get_result();
+            $res = $sqla->get_result();
             $acciones = $res->{"num_rows"};
             $sqla->free_result();
             $sqla->close();
