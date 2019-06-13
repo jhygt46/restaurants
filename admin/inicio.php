@@ -75,7 +75,6 @@
                     <div class="menu_left">
                         <div class="cont_menu relative">
                             <div class="menu">
-                                
                                 <div class="bloque">
                                     <div class="titulo" onclick="open_bloque(this)">
                                         <div class="icono ic1"></div>
@@ -88,7 +87,6 @@
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/panel.php')">Panel de Control</li><?php } ?>
                                     </ul>
                                 </div>
-                                
                             </div>                            
                         </div>
                     </div>
