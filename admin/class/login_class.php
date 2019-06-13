@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 date_default_timezone_set('America/Santiago');
 require_once "/var/www/html/config/config.php";
