@@ -177,7 +177,7 @@ class Guardar{
     }
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
-        $sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, now(), ?)");
+        $sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)");
         $sqlipd->bind_param("iiiis", $id_des, $this->id_user, $id_loc, $id_gir, $txt);
         $sqlipd->execute();
         $sqlipd->close();
