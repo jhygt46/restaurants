@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_GET["accion"] == "logout"){
+if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     session_destroy();
     echo '<meta http-equiv="refresh" content="0; url=index.php">';
     exit;
