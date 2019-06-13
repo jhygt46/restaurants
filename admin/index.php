@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     session_destroy();
