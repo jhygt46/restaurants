@@ -62,8 +62,8 @@ class Core{
             $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
             $sql->bind_param("ii", $id_gir, $this->id_user);
             $sql->execute();
-            $sql->store_result();
-            if($sql->{"num_rows"} == 1){
+            $res = $sql->get_result();
+            if($res->{"num_rows"} == 1){
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }else{
