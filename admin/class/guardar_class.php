@@ -15,6 +15,11 @@ class Guardar{
     
     public function __construct(){
         
+        global $db_host;
+        global $db_user;
+        global $db_password;
+        global $db_database;
+
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
         $this->admin = (isset($_SESSION['user']['info']['admin'])) ? NULL : 0 ;

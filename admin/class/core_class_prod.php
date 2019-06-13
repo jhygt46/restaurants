@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once "/var/www/html/config/config.php";
 
 class Core{
