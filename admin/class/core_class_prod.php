@@ -99,7 +99,7 @@ class Core{
         $id_cat = intval($_GET["id_cat"]);
         if($this->admin == 0){
 
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t1.eliminado=?")){
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t2.eliminado=?")){
                 $sql->bind_param("iii", $id_cat, $this->id_user, $this->eliminado);
                 $sql->execute();
                 $sql->store_result();
@@ -155,8 +155,8 @@ class Core{
         return $res;
     }
     public function get_categorias(){
-        $sql = $this->con->prepare("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat=? ORDER BY t1.orders");
-        $sql->bind_param("i", $this->id_cat);
+        $sql = $this->con->prepare("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat=? AND t1.eliminado=? ORDER BY t1.orders");
+        $sql->bind_param("ii", $this->id_cat, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $this->process_categorias($result, 'id_cae');
