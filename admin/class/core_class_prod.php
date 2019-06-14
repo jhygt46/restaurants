@@ -98,7 +98,7 @@ class Core{
         
         if($_GET["id_cat"] > 0 && $this->id_gcat != $_GET["id_cat"]){
 
-            $id_cat = intval($_GET["id_cat"]);
+            $id_cat = $_GET["id_cat"];
             if($this->admin == 0){
 
                 if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t2.eliminado=?")){
