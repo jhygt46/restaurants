@@ -57,8 +57,8 @@ class Core{
     }
     public function is_giro(){
 
-        if($this->id_gir != $_GET["id_gir"]){
-            
+        if($_GET["id_gir"] > 0 && $this->id_gir != $_GET["id_gir"]){
+
             $id_gir = $_GET["id_gir"];
             if($this->admin == 0){
                 $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?");
