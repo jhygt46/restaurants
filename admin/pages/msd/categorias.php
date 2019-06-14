@@ -36,6 +36,7 @@ for($i=0; $i<count($list); $i++){
     }
 }
 
+$that = ["nombre" => "", "descripcion" => "", "descripcion_sub" => "", "precio" => 0, "tipo" => 0];
 if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
 
     $id_cae = $_GET["id_cae"];
