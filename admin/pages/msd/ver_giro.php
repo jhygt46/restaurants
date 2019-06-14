@@ -15,7 +15,7 @@ $titulo = "GIRO NO SELECIONADO";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 $list = $core->get_locales();
 $giro = $core->get_giro();
-/*
+
 if($giro['dns'] == 0){
     
     $data['test'] = 'Dw7k2s_hKi5sqPs8';
@@ -31,11 +31,8 @@ if($giro['dns'] == 0){
     }
 
 }
-*/
+
 $catalogos = $core->get_catalogos();
-echo "<pre>";
-print_r($catalogos);
-echo "</pre>";
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
 $titulo = ($giro['nombre'] != '') ? 'Bienvenido '.$giro['nombre'] : 'Bienvenido '.$giro['dominio'] ;
