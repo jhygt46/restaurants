@@ -188,7 +188,7 @@ function crear_llamado(map){
                         <a class="icono ic4" onclick="navlink('pages/msd/zonas_locales.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic13" onclick="navlink('pages/msd/crear_repartidor.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic14" onclick="navlink('pages/msd/crear_horario.php?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic16" onclick="navlink('pages/msd/usuarios_giro.php?id_loc=<?php echo $id; ?>')"></a>
+                        <a class="icono ic16" onclick="navlink('pages/msd/usuarios_local.php?id_loc=<?php echo $id; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
