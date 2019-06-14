@@ -28,9 +28,6 @@ if(isset($_GET["parent_id"]) && $_GET["parent_id"] > 0){
 }
 
 $list = $core->get_categorias();
-echo "<pre>";
-print_r($list);
-echo "</pre>";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 for($i=0; $i<count($list); $i++){
