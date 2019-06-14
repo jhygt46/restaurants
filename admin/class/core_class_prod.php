@@ -112,7 +112,7 @@ class Core{
                 $sql->free_result();
                 $sql->close();
             }else{
-                echo $this->con->error;
+                echo "ERROR: ".$this->con->error;
             }
 
         }
