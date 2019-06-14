@@ -137,6 +137,30 @@ class Core{
         }
         
     }
+    public function process_categorias($cats, $id){
+        $res = [];
+        for($i=0; $i<count($cats); $i++){
+            if(count($res) == 0){
+                $res[] = $cats[$i];
+            }else{
+                $repeat = false;
+                for($j=0; $j<count($res); $j++){
+                    if($res[$j][$id] == $cats[$i][$id]){
+                        $repeat = true;
+                    }
+                }
+                if(!$repeat){ $res[] = $cats[$i]; }
+            }
+        }
+        return $res;
+    }
+    public function get_categorias(){
+        $sql = $this->con->prepare("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat=? AND t1.eliminado=? ORDER BY t1.orders");
+        $sql->bind_param("ii", $this->id_cat, $this->eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $this->process_categorias($result, 'id_cae');
+    }
     public function get_locales(){
 
         if($sql = $this->con->prepare("SELECT id_loc, nombre, code FROM locales WHERE id_gir=? AND eliminado=?")){
