@@ -3169,7 +3169,7 @@ class Guardar{
                     $info['op'] = 1;
                     $info['mensaje'] = "Paginas creado exitosamente";
                     $info['reload'] = 1;
-                    $info['page'] = "msd/preguntas.php";
+                    $info['page'] = "msd/configurar_contenido.php";
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error: D301";
@@ -3206,7 +3206,7 @@ class Guardar{
                     $info['op'] = 1;
                     $info['mensaje'] = "Paginas modificado exitosamente";
                     $info['reload'] = 1;
-                    $info['page'] = "msd/preguntas.php";
+                    $info['page'] = "msd/configurar_contenido.php";
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error: D302";
