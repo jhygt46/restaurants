@@ -155,8 +155,8 @@ class Core{
         return $res;
     }
     public function get_categorias(){
-        $sql = $this->con->prepare("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat=? AND t1.eliminado=? ORDER BY t1.orders");
-        $sql->bind_param("ii", $this->id_cat, $this->eliminado);
+        $sql = $this->con->prepare("SELECT DISTINCT t1.id_cae, t1.nombre, t1.parent_id, t2.id_pro, t1.tipo FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae WHERE t1.id_cat=? ORDER BY t1.orders");
+        $sql->bind_param("i", $this->id_cat);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $this->process_categorias($result, 'id_cae');
