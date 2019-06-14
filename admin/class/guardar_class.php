@@ -1061,7 +1061,7 @@ class Guardar{
                                 $info['mensaje'] = "Giro creado exitosamente";
                             }else{
                                 $info['op'] = 2;
-                                $info['mensaje'] = "Error: ";
+                                $info['mensaje'] = "Error: B2";
                                 $this->registrar(6, 0, 0, 'Giros: err ingreso');
                             }
 
@@ -1078,7 +1078,7 @@ class Guardar{
                         }else{
 
                             $info['op'] = 2;
-                            $info['mensaje'] = "Error: ";
+                            $info['mensaje'] = "Error: B1";
                             $this->registrar(6, 0, 0, 'Giros: err ingreso');
 
                         }
@@ -1099,14 +1099,14 @@ class Guardar{
                                 $info['mensaje'] = "Giro modificado exitosamente";
                             }else{
                                 $info['op'] = 2;
-                                $info['mensaje'] = "Error: Permisos";
+                                $info['mensaje'] = "Error: Permisos A2";
                                 $this->registrar(6, 0, 0, 'update giros');
                             }
                             $sqlugi->close();
                             
                         }else{
                             $info['op'] = 2;
-                            $info['mensaje'] = "Error: Permisos";
+                            $info['mensaje'] = "Error: Permisos A1";
                             $this->registrar(7, 0, 0, 'update user error');
                         }
 
@@ -1114,16 +1114,16 @@ class Guardar{
 
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Error:";
+                    $info['mensaje'] = "Error: F03";
                     $this->registrar(7, 0, 0, 'mod dominio exist');
                 }
             }else{
                 $info['op'] = 2;
-                $info['mensaje'] = "Error:";
+                $info['mensaje'] = "Error: F02";
             }
         }else{
             $info['op'] = 2;
-            $info['mensaje'] = "Error:";
+            $info['mensaje'] = "Error: F01";
             $this->registrar(4, 0, 0, 'crear giro');
         }
 
