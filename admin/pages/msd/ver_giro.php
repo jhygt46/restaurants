@@ -31,6 +31,9 @@ if($giro['dns'] == 0){
 }
 
 $catalogos = $core->get_catalogos();
+echo "<pre>";
+print_r($catalogos);
+echo "</pre>";
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
 $titulo = ($giro['nombre'] != '') ? 'Bienvenido '.$giro['nombre'] : 'Bienvenido '.$giro['dominio'] ;
