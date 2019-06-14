@@ -118,18 +118,21 @@ class Core{
         }
         if($this->admin == 1){
 
-            $sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t1.eliminado=?");
-            $sql->bind_param("iii", $id_cat, $this->id_user, $this->eliminado);
-            $sql->execute();
-            $sql->store_result();
-            if($sql->{"num_rows"} == 1){
-                $this->id_cat = $id_cat;
-                $_SESSION['user']['id_cat'] = $id_cat;
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t1.eliminado=?")){
+                $sql->bind_param("iii", $id_cat, $this->id_user, $this->eliminado);
+                $sql->execute();
+                $sql->store_result();
+                if($sql->{"num_rows"} == 1){
+                    $this->id_cat = $id_cat;
+                    $_SESSION['user']['id_cat'] = $id_cat;
+                }else{
+                    die("ERROR: #A101");
+                }
+                $sql->free_result();
+                $sql->close();
             }else{
-                die("ERROR: #A101");
+                echo $this->con->error;
             }
-            $sql->free_result();
-            $sql->close();
 
         }
         
