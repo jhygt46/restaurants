@@ -8,6 +8,8 @@ if(!isset($core_class_iniciada)){
 
 }
 
+echo $core->id_gir;
+
 $core->is_giro();
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
