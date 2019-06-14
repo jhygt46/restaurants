@@ -3145,7 +3145,7 @@ class Guardar{
         $id_pag = $_POST['id'];
         $nombre = $_POST['nombre'];
         $html = $_POST['html'];
-        $tipo = $_POST['pagina'];
+        $tipo = $_POST['tipo'];
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
