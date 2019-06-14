@@ -393,6 +393,15 @@ class Core{
         return $result;
         
     }
+    public function get_pregunta($id_pre){
+        $sql = $this->con->prepare("SELECT * FROM preguntas WHERE id_pre=? AND id_cat=? AND eliminado=?");
+        $sql->bind_param("iii", $id_pre, $this->id_cat, $this->eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        $sql->free_result();
+        $sql->close();
+        return $result;
+    }
     public function get_preguntas_pro($id_pro){
         
         $sql = $this->con->prepare("SELECT * FROM preguntas_productos t1, productos t2 WHERE t2.id_pro=? AND t2.id_pro=t1.id_pro AND t2.id_gir=? AND t2.eliminado=?");
