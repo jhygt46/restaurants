@@ -3172,7 +3172,7 @@ class Guardar{
                     $info['page'] = "msd/preguntas.php";
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Error";
+                    $info['mensaje'] = "Error: D301";
                     $this->registrar(6, 0, 0, 'Error Sql: (ins pagina)');
                 }
                 $sql->close();
@@ -3209,7 +3209,7 @@ class Guardar{
                     $info['page'] = "msd/preguntas.php";
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Error";
+                    $info['mensaje'] = "Error: D302";
                     $this->registrar(6, 0, 0, 'Error Sql: (update pagina)');
                 }
                 $sqlupa->close();
@@ -3219,7 +3219,7 @@ class Guardar{
         }else{
 
             $info['op'] = 2;
-            $info['mensaje'] = "Error";
+            $info['mensaje'] = "Error: D303";
             $this->registrar(2, 0, 0, 'crear pagina');
 
         }
