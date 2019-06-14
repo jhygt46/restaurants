@@ -118,7 +118,7 @@ class Core{
         }
         if($this->admin == 1){
 
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t1.eliminado=?")){
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes t1, catalogo_productos t2 WHERE t2.id_cat=? AND t2.id_gir=t1.id_gir AND t1.id_user=? AND t2.eliminado=?")){
                 $sql->bind_param("iii", $id_cat, $this->id_user, $this->eliminado);
                 $sql->execute();
                 $sql->store_result();
@@ -131,7 +131,7 @@ class Core{
                 $sql->free_result();
                 $sql->close();
             }else{
-                echo $this->con->error;
+                echo "ERROR: ".$this->con->error;
             }
 
         }
