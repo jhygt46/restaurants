@@ -1036,10 +1036,10 @@ class Guardar{
                 $sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?");
                 $sql->bind_param("s", $dominio);
                 $sql->execute();
-                $sql->store_result();
-                $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                $res = $sql->get_result();
+                $result = $res->fetch_all(MYSQLI_ASSOC)[0];
 
-                if($sql->{"num_rows"} == 0 || ($sql->{"num_rows"} == 1 && $id == $result["id_gir"])){
+                if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $result["id_gir"])){
                     
                     if($id == 0){
 
