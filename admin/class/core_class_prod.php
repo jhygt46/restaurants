@@ -122,7 +122,7 @@ class Core{
                 $sql->bind_param("iii", $id_cat, $this->id_user, $this->eliminado);
                 $sql->execute();
                 $res = $sql->get_result();
-                if($res->{"num_rows"} == 1 && $this->id_user == 1){
+                if($res->{"num_rows"} == 1 || $this->id_user == 1){
                     $this->id_cat = $id_cat;
                     $_SESSION['user']['id_cat'] = $id_cat;
                 }else{
