@@ -402,6 +402,15 @@ class Core{
         $sql->close();
         return $result;
     }
+    public function get_pregunta_valores($id_pre){
+        $sql = $this->con->prepare("SELECT * FROM preguntas_valores WHERE id_pre=?");
+        $sql->bind_param("i", $id_pre);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sql->free_result();
+        $sql->close();
+        return $result;
+    }
     public function get_preguntas_pro($id_pro){
         
         $sql = $this->con->prepare("SELECT * FROM preguntas_productos t1, productos t2 WHERE t2.id_pro=? AND t2.id_pro=t1.id_pro AND t2.id_gir=? AND t2.eliminado=?");
