@@ -3043,11 +3043,8 @@ class Guardar{
 
                     $sqlipv = $this->con->prepare("INSERT INTO preguntas_valores (cantidad, nombre, valores, id_pre) VALUES (?, ?, ?, ?)");
                     $sqlipv->bind_param("issi", $cant, $nombre, $valores_json, $id_pre);
-                    $sqlipv->execute();
                     if(!$sqlipv->execute()){
                         $this->registrar(6, 0, 0, 'Error Sql: (ins preguntas valores)');
-                    }else{
-                        $info['id_prv'][] = $this->con->insert_id;
                     }
                     $sqlipv->close();
 

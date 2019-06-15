@@ -29,7 +29,7 @@ if(isset($_GET["id_pre"]) && is_numeric($_GET["id_pre"]) && $_GET["id_pre"] != 0
     $that = $core->get_pregunta($id_pre);
     $that_valores = $core->get_pregunta_valores($id_pre);
     $sub_titulo = $sub_titulo2;
-    $cantidad = (count($that_valores)>0) ? count($that_valores) : 1 ;
+    $cantidad = (count($that_valores)>0) ? count($that_valores)+1 : 1 ;
 
     echo $cantidad;
     echo "<pre>";
