@@ -57,7 +57,8 @@ class Core{
     }
     public function is_giro(){
 
-        if($this->id_gir != $_GET["id_gir"] && $this->id_gir > 0){
+        
+        if(isset($_GET["id_gir"]) && $_GET["id_gir"] > 0 && $this->id_gir != $_GET["id_gir"]){
 
             $id_gir = $_GET["id_gir"];
             if($this->admin == 0){
@@ -92,9 +93,8 @@ class Core{
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }
-        }else{
-            die("ERROR: #A103");
         }
+        
     }
     public function is_catalogo(){
         
