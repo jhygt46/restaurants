@@ -27,6 +27,9 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     
     $pre_prod = $core->get_preguntas_pro($id_pro);
     //$lin_prod = $core->get_lista_ingredientes_pro($id_pro);
+    echo "<pre>";
+    print_r($pre_prod);
+    echo "</pre>";
     
 }
 
@@ -70,19 +73,6 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                             <?php } ?>
                         </div>
                     </label>
-                    <!--
-                    <label class="clearfix">
-                        <span><p>Lista de Ingredientes:</p></span>
-                        <div class="perfil_preguntas">
-                            <?php foreach($list_lin as $value){ $checked = ''; for($i=0; $i<count($lin_prod); $i++){ if($value['id_lin'] == $lin_prod[$i]['id_lin']){ $checked="checked='checked'"; } } ?>
-                                <div class="clearfix">
-                                    <input style="margin-top: 4px; width: 18px; height: 18px; float: left" id="lista_ing-<?php echo $value['id_lin']; ?>" <?php echo $checked; ?> type="checkbox" value="1" />
-                                    <div style="font-size: 18px; padding-left: 4px; float: left" class='detail'><?php echo $value['nombre']; ?></div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </label>
-                    -->
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_productos', '<?php echo $that['id_pro']; ?>/<?php echo $id_cae; ?>/<?php echo $parent_id; ?>', 'Producto', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
