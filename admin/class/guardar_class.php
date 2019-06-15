@@ -944,6 +944,17 @@ class Guardar{
         return $info;
         
     }
+    private function get_preguntas(){
+
+        $sql = $this->con->prepare("SELECT id_pre, nombre, mostrar FROM preguntas WHERE id_cat=? AND id_gir=? AND eliminado=?");
+        $sql->bind_param("iii", $this->id_cat, $this->id_gir, $this->eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sql->free_result();
+        $sql->close();
+        return $result;
+
+    }
     private function configurar_producto(){
         
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
