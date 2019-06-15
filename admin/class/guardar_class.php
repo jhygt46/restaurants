@@ -2706,7 +2706,7 @@ class Guardar{
         return $info;
         
     }
-    public function asignar_prods_promocion(){
+    private function asignar_prods_promocion(){
         
         $id_cae = $_POST['id_cae'];
         $parent_id = $_POST['parent_id'];

@@ -867,13 +867,17 @@ class Core{
 
             }else{
                 
-                $error = $this->con->errno.' '.$this->con->error;
-                echo $error;
+                $info['op'] = 2;
+                $info['mensaje'] = $this->con->errno.' '.$this->con->error;
 
             }
             
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "ERROR: #s398";
         }
 
+        return $info;
     }
     function get_polygons($id_gir){
 
