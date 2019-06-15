@@ -425,7 +425,7 @@ class Core{
     public function get_preguntas_pro($id_pro){
         
         $sql = $this->con->prepare("SELECT * FROM preguntas_productos t1, productos t2 WHERE t2.id_pro=? AND t2.id_pro=t1.id_pro AND t2.id_gir=? AND t2.eliminado=?");
-        $sql->bind_param("iii", $this->id_pro, $this->id_gir, $this->eliminado);
+        $sql->bind_param("iii", $id_pro, $this->id_gir, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         $sql->free_result();
