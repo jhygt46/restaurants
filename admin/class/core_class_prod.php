@@ -57,7 +57,7 @@ class Core{
     }
     public function is_giro(){
 
-        if($_GET["id_gir"] > 0 && $this->id_gir != $_GET["id_gir"] && $this->id_gir > 0){
+        if($this->id_gir != $_GET["id_gir"] && $this->id_gir > 0){
 
             $id_gir = $_GET["id_gir"];
             if($this->admin == 0){
