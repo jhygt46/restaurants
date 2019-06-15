@@ -3046,6 +3046,8 @@ class Guardar{
                     $sqlipv->execute();
                     if(!$sqlipv->execute()){
                         $this->registrar(6, 0, 0, 'Error Sql: (ins preguntas valores)');
+                    }else{
+                        $info['id_prv'][] = $this->con->insert_id;
                     }
                     $sqlipv->close();
 
