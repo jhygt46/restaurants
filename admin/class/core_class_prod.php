@@ -393,6 +393,17 @@ class Core{
         return $result;
         
     }
+    public function get_usuarios_admin(){
+        if($this->id_gir != 0){
+            $sql = $this->con->prepare("SELECT t1.id_user, t1.nombre FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t2.id_gir=? AND t2.id_user=t1.id_user AND t1.eliminado=?");
+            $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+            $sql->execute();
+            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            $sql->free_result();
+            $sql->close();
+            return $result;
+        }
+    }
     public function get_pregunta($id_pre){
         $sql = $this->con->prepare("SELECT * FROM preguntas WHERE id_pre=? AND id_cat=? AND eliminado=?");
         $sql->bind_param("iii", $id_pre, $this->id_cat, $this->eliminado);
