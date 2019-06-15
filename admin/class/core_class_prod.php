@@ -92,6 +92,8 @@ class Core{
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }
+        }else{
+            die("ERROR: #A103");
         }
     }
     public function is_catalogo(){
