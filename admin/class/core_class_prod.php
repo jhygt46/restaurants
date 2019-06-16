@@ -32,7 +32,7 @@ class Core{
     public function verificar(){
 
         $host = $_POST["host"];
-        $code = $_POST["code"];
+        $code = substr($_POST["code"], 0, 40);
         $ret = false;
         $ip = $_SERVER['REMOTE_ADDR'];
         $port = $_SERVER['SERVER_PORT'];
