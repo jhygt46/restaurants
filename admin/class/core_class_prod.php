@@ -849,14 +849,19 @@ class Core{
                 if($sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?")){
 
                     if($sql->bind_param("ii", $id_gir, $this->eliminado)){
-                        
-                        $sql->execute();
-                        $result = $sql->get_result();
-                        $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
-                        while($row = $result->fetch_assoc()){
-                            $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
-                            $info['op'] = 1;
-                            
+
+                        if($sql->execute()){
+                            $result = $sql->get_result();
+                            $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
+                            while($row = $result->fetch_assoc()){
+                                $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
+                                $info['op'] = 1;
+                                
+                            }
+                        }else{
+
+                            $info['error3'] = $sql->error;
+
                         }
 
                     }else{
