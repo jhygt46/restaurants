@@ -851,14 +851,15 @@ class Core{
                 $sql->execute();
                 $result = $sql->get_result();
                 $info["result"] = $result;
-
+                return $info;
+                
                 $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
                 while($row = $result->fetch_assoc()){
                     $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
                     $info['op'] = 1;
                     
                 }
-                return $info;
+                
                 $sql->free_result();
                 $sql->close();
 
