@@ -851,7 +851,7 @@ class Core{
                 $sql->execute();
                 $result = $sql->get_result();
 
-                $info = ["data" => ["paginas" => [], "config" => [], "locales" => []], "info" => [], "polygons" => [], "op" => 2];
+                $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
                 while($row = $result->fetch_assoc()){
                     //$info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
                     $info['op'] = 1;
