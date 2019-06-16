@@ -37,7 +37,7 @@ class Core{
         $ip = $_SERVER['REMOTE_ADDR'];
         $port = $_SERVER['SERVER_PORT'];
 
-        $info['code1'] = $code;
+        $info['code1'] = "***".$code."***";
 
         if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sqlgir->bind_param("si", $host, $this->eliminado)){
@@ -48,12 +48,11 @@ class Core{
                         if($ip == $result["ip"] && $port == "443"){
                             $ret = true;
                         }
-                        $info["code2"] = $result["code"];
+                        $info["code2"] = "***".$result["code"]."***";
                     }
                 }
             }
         }
-        $info['ret'] = $ret;
         return json_encode($info);
 
         
