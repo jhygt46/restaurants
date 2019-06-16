@@ -846,22 +846,35 @@ class Core{
                 $sqlgiro->free_result();
                 $sqlgiro->close();
 
-                $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?");
-                $sql->bind_param("ii", $id_gir, $this->eliminado);
-                $sql->execute();
-                $result = $sql->get_result();
-                $info["result"] = $result;
-                return $info;
-                
-                $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
-                while($row = $result->fetch_assoc()){
-                    $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
-                    $info['op'] = 1;
-                    
+                if($sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?")){
+
+                    if($sql->bind_param("ii", $id_gir, $this->eliminado)){
+                        
+                        $sql->execute();
+                        $result = $sql->get_result();
+                        $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
+                        while($row = $result->fetch_assoc()){
+                            $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
+                            $info['op'] = 1;
+                            
+                        }
+
+                    }else{
+
+                        $info['error2'] = $sql->error;
+
+                    }
+
+                }else{
+
+                    $info['error1'] = $this->con->error;
+
                 }
+                
                 
                 $sql->free_result();
                 $sql->close();
+                return $info;
 
                 //$info['data']['paginas'] = $this->get_paginas_web($id_gir);
                 //$info['data']['config'] = $this->get_config($id_gir);
