@@ -832,11 +832,8 @@ class Core{
         
     }
     public function get_web_js_data_remote(){
-        
-        $verify = $this->verificar();
-        return $verify;
 
-        if($verify){
+        if($this->verificar()){
 
             $host = $_POST["host"];
             $eliminado = 0;
