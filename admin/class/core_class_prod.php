@@ -33,18 +33,20 @@ class Core{
 
         $host = $_POST["host"];
         $code = $_POST["code"];
-
+        $ret = false;
         $ip = $_SERVER['REMOTE_ADDR'];
         $port = $_SERVER['SERVER_PORT'];
 
-        $sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=? AND t2.code=?");
-        $sqlgir->bind_param("sis", $host, $this->eliminado, $code);
-        $sqlgir->execute();
-        $res = $sqlgir->get_result();
-        $ret = false;
-
-        return $res;
-
+        if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=? AND t2.code=?")){
+            $sqlgir->bind_param("sis", $host, $this->eliminado, $code);
+            $sqlgir->execute();
+            $res = $sqlgir->get_result();
+            return $res;
+        }else{
+            $error = $this->con->errno.' '.$this->con->error;
+            return $error;
+        }
+        
         if($res->{'num_rows'} == 1){
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             if($ip == $result["ip"] && $port == "443"){
