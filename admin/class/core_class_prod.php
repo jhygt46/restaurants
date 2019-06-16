@@ -42,14 +42,9 @@ class Core{
         $sqlgir->execute();
         $res = $sqlgir->get_result();
         $ret = false;
-        
-        echo "num_rows: ".$res->{'num_rows'}."<br/>";
 
         if($res->{'num_rows'} == 1){
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-            echo "<pre>";
-            print_r($result);
-            echo "</pre>";
             if($ip == $result["ip"] && $port == "443"){
                 $ret = true;
             }
