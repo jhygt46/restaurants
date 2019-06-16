@@ -43,6 +43,8 @@ class Core{
         $res = $sqlgir->get_result();
         $ret = false;
 
+        return $res;
+
         if($res->{'num_rows'} == 1){
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             if($ip == $result["ip"] && $port == "443"){
@@ -832,7 +834,10 @@ class Core{
     }
     public function get_web_js_data_remote(){
         
-        if($this->verificar()){
+        $verify = $this->verificar();
+        return $verify;
+
+        if($verify){
 
             $host = $_POST["host"];
             $eliminado = 0;
@@ -877,6 +882,7 @@ class Core{
         }
 
         return json_encode($info);
+
     }
     function get_polygons($id_gir){
 
