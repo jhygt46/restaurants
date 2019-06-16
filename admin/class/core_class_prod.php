@@ -846,13 +846,13 @@ class Core{
                 $sqlgiro->free_result();
                 $sqlgiro->close();
 
-                $info["id_gir"] = $id_gir;
-                return $info;
-
                 $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?");
                 $sql->bind_param("ii", $id_gir, $eliminado);
                 $sql->execute();
                 $result = $sql->get_result();
+
+                $info["result"] = $result;
+                return $info;
 
                 $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
                 while($row = $result->fetch_assoc()){
