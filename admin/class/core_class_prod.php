@@ -37,7 +37,7 @@ class Core{
         $ip = $_SERVER['REMOTE_ADDR'];
         $port = $_SERVER['SERVER_PORT'];
 
-        $info['code1'] = "***".substr($code, 40)."***";
+        $info['code1'] = "***".substr($code, 0, 40)."***";
 
         if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sqlgir->bind_param("si", $host, $this->eliminado)){
