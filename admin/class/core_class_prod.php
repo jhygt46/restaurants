@@ -852,8 +852,8 @@ class Core{
 
                         if($sql->execute()){
                             $info["bue"] = 1;
-                            /*
                             $result = $sql->get_result();
+                            /*
                             while($row = $result->fetch_assoc()){
                                 $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
                                 $info['op'] = 1;    
