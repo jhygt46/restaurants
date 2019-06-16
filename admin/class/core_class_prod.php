@@ -44,25 +44,23 @@ class Core{
         if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sqlgir->bind_param("si", $host, $this->eliminado)){
                 if($sqlgir->execute()){
-                    $info['res'] = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC);
-                }else{
-                    $info['err1'] = $sqlgir->error;
+                    $res = $sqlgir->get_result();
+                    if($res->{'num_rows'} == 1){
+                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                        if($ip == $result["ip"] && $port == "443"){
+                            $ret = true;
+                        }
+                        if($code == $result["code"]){
+                            $info["b"] = 1;
+                        }
+                    }
                 }
-            }else{
-                $info['err2'] = $sqlgir->error;
             }
-        }else{
-            $info['error'] = $this->con->errno.' '.$this->con->error;
         }
-        
+        $info['ret'] = $ret;
         return json_encode($info);
 
-        if($res->{'num_rows'} == 1){
-            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-            if($ip == $result["ip"] && $port == "443"){
-                $ret = true;
-            }
-        }
+        
 
         $sqlgir->free_result();
         $sqlgir->close();
