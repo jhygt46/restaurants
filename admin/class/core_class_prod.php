@@ -841,7 +841,7 @@ class Core{
             if($sqlgiro = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=? AND eliminado=?")){
                 
                 $info["test"] = "BUENA NELSON";
-
+                return $info;
                 $sqlgiro->bind_param("si", $host, $eliminado);
                 $sqlgiro->execute();		
                 $id_gir = $sqlgiro->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];

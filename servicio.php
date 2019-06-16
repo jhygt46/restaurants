@@ -2,7 +2,7 @@
 
 require_once "/var/www/html/restaurants/admin/class/core_class_prod.php";
 $core = new Core();
-echo $core->get_web_js_data_remote();
+echo json_encode($core->get_web_js_data_remote());
 
 
 /*
