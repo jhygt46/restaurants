@@ -41,7 +41,7 @@ class Core{
             $sqlgir->bind_param("sis", $host, $this->eliminado, $code);
             $sqlgir->execute();
             $res = $sqlgir->get_result();
-            return $res;
+            return json_encode($res);
         }else{
             $error = $this->con->errno.' '.$this->con->error;
             return $error;
