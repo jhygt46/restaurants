@@ -49,6 +49,8 @@ class Core{
             $info['error'] = $this->con->errno.' '.$this->con->error;
         }
         
+        return json_encode($info);
+
         if($res->{'num_rows'} == 1){
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             if($ip == $result["ip"] && $port == "443"){
