@@ -851,12 +851,11 @@ class Core{
                     if($sql->bind_param("ii", $id_gir, $this->eliminado)){
 
                         if($sql->execute()){
+                            $info["bue"] = 1;
                             $result = $sql->get_result();
-                            $info = ["data" => [], "info" => [], "polygons" => [], "op" => 2];
                             while($row = $result->fetch_assoc()){
                                 $info['data']['catalogos'][] = get_info_catalogo($row['id_cat'], $con);
-                                $info['op'] = 1;
-                                
+                                $info['op'] = 1;    
                             }
                         }else{
 
