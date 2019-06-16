@@ -44,8 +44,7 @@ class Core{
         if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=? AND t2.code=?")){
             if($sqlgir->bind_param("sis", $host, $this->eliminado, $code)){
                 if($sqlgir->execute()){
-                    $res = $sqlgir->get_result();
-                    $info['res'] = $res;
+                    $info['res'] = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC);
                 }else{
                     $info['err1'] = $sqlgir->error;
                 }
