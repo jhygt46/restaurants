@@ -857,11 +857,11 @@ class Core{
                                 $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat'], $con);
                                 $info['op'] = 1;    
                             }
-                            //$info['data']['paginas'] = $this->get_paginas_web($id_gir);
-                            //$info['data']['config'] = $this->get_config($id_gir);
-                            //$info['data']['locales'] = $this->get_locales_js($id_gir);
-                            //$info['info'] = $this->get_data($id_gir);
-                            //$info['polygons'] = $this->get_polygons($id_gir);
+                            $info['data']['paginas'] = $this->get_paginas_web($id_gir);
+                            $info['data']['config'] = $this->get_config($id_gir);
+                            $info['data']['locales'] = $this->get_locales_js($id_gir);
+                            $info['info'] = $this->get_data($id_gir);
+                            $info['polygons'] = $this->get_polygons($id_gir);
 
                         }else{
                             $info['error3'] = $sql->error;
