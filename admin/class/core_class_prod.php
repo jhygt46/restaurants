@@ -819,7 +819,7 @@ class Core{
                 $locales['lat'] = $row['lat'];
                 $locales['lng'] = $row['lng'];
 
-                $sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND t1.eliminado=?");
+                $sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND eliminado=?");
                 $sqlloc->bind_param("iii", $row["id_loc"], $id_gir, $eliminado);
                 $sqlloc->execute();
                 $locales['horarios'] = $sqlloc->get_result()->fetch_all(MYSQLI_ASSOC);
