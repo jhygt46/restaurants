@@ -700,13 +700,12 @@ class Core{
         $sql = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
         $sql->bind_param("s", $dominio);
         $sql->execute();
-        $sql->store_result();
+        $res = $sql->get_result();
 
         $info['favicon'] = "misitiodelivery.ico";
-        if($sql->{"num_rows"} == 1){
+        if($res->{"num_rows"} == 1){
             
-            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-            
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
 
             $info['ssl'] = $result['ssl'];
             $info['dns'] = $result['dns'];
