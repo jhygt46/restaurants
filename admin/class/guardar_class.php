@@ -1783,9 +1783,9 @@ class Guardar{
             $sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?");
             $sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado);
             $sqlloc->execute();
-            $sqlloc->store_result();
+            $res = $sqlloc->get_result();
 
-            if($sqlloc->{"num_rows"} == 1){
+            if($res->{"num_rows"} == 1){
 
                 if($id_lot == 0){
 
@@ -1852,7 +1852,7 @@ class Guardar{
                 }
 
             }
-            if($sqlloc->{"num_rows"} == 0){
+            if($res->{"num_rows"} == 0){
                 
                 $info['op'] = 2;
                 $info['mensaje'] = "Error";
