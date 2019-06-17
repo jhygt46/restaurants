@@ -701,7 +701,7 @@ class Core{
         $sql->bind_param("s", $dominio);
         $sql->execute();
         $res = $sql->get_result();
-
+        return $res;
         $info['favicon'] = "misitiodelivery.ico";
         if($res->{"num_rows"} == 1){
             
