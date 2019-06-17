@@ -806,27 +806,32 @@ class Core{
     public function get_locales_js($id_gir){
 
         $eliminado = 0;
-        $sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir=? AND t1.eliminado=?");
-        $sql->bind_param("ii", $id_gir, $eliminado);
-        $sql->execute();
-        $result = $sql->get_result();
+        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir=? AND t1.eliminado=?")){
+            
+            $sql->bind_param("ii", $id_gir, $eliminado);
+            $sql->execute();
+            $result = $sql->get_result();
 
-        while($row = $result->fetch_assoc()){
+            while($row = $result->fetch_assoc()){
 
-            $locales['id_loc'] = $row['id_loc'];
-            $locales['nombre'] = $row['nombre'];
-            $locales['direccion'] = $row['direccion'];
-            $locales['lat'] = $row['lat'];
-            $locales['lng'] = $row['lng'];
+                $locales['id_loc'] = $row['id_loc'];
+                $locales['nombre'] = $row['nombre'];
+                $locales['direccion'] = $row['direccion'];
+                $locales['lat'] = $row['lat'];
+                $locales['lng'] = $row['lng'];
 
-            $sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND t1.eliminado=?");
-            $sqlloc->bind_param("iii", $row["id_loc"], $id_gir, $eliminado);
-            $sqlloc->execute();
-            $locales['horarios'] = $sqlloc->get_result()->fetch_all(MYSQLI_ASSOC);
+                $sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND t1.eliminado=?");
+                $sqlloc->bind_param("iii", $row["id_loc"], $id_gir, $eliminado);
+                $sqlloc->execute();
+                $locales['horarios'] = $sqlloc->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            $loc[] = $locales;
-            unset($locales);
+                $loc[] = $locales;
+                unset($locales);
 
+            }
+
+        }else{
+            return $this->con->error;
         }
         return $loc;
         
