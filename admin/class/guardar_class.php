@@ -661,10 +661,28 @@ class Guardar{
     }
     private function con_cambios(){
 
+        $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
+        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql->execute();
+        $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        if($dns == 0){
+            $url = "http://35.192.157.227/?url=".$data["dominio"];
+        }
+        if($dns == 1){
+            if($data["ssl"] == 0){
+                $url = "http://".$data["dominio"];
+            }
+            if($data["ssl"] == 1){
+                $url = "https://".$data["dominio"];
+            }
+        }
+        $sql->free_result();
+        $sql->close();
+
         $send['accion'] = "xS3w1Dm8Po87Wltd";
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://35.192.157.227/?url=www.prueba.cl');
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
         $res = curl_exec($ch);
