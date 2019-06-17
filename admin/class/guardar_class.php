@@ -661,12 +661,23 @@ class Guardar{
     }
     private function con_cambios(){
 
+        $send['accion'] = "xS3w1Dm8Po87Wltd";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://35.192.157.227/?url=www.prueba.cl');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+        curl_exec($ch);
+        curl_close($ch);
+
+        /*
         $sql = $this->con->prepare("UPDATE giros SET con_cambios='1' WHERE id_gir=? AND eliminado=?");
         $sql->bind_param("ii", $this->id_gir, $this->eliminado);
         if(!$sql->execute()){
             $this->registrar(6, 0, 0, 'Con Cambios');
         }
         $sql->close();
+        */
 
     }
     private function solicitar_ssl(){
