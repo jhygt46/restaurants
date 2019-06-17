@@ -806,7 +806,7 @@ class Core{
     public function get_locales_js($id_gir){
 
         $eliminado = 0;
-        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir=? AND t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir=? AND eliminado=?")){
             
             $sql->bind_param("ii", $id_gir, $eliminado);
             $sql->execute();
