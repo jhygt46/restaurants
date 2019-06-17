@@ -695,13 +695,13 @@ class Core{
         return $result;
 
     }
-    public function get_data($dominio){
+    public function get_data($id_gir){
         
-        $sql = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
-        $sql->bind_param("s", $dominio);
+        $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=?");
+        $sql->bind_param("i", $id_gir);
         $sql->execute();
         $res = $sql->get_result();
-        return $res;
+
         $info['favicon'] = "misitiodelivery.ico";
         if($res->{"num_rows"} == 1){
             
