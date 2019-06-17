@@ -1835,7 +1835,7 @@ class Guardar{
 
                     $sqlug = $this->con->prepare("UPDATE giros SET despacho_domicilio='1', desde=? WHERE id_gir=? AND eliminado=?");
                     $sqlug->bind_param("iii", $min, $this->id_gir, $this->eliminado);
-                    if(!$sql->execute()){
+                    if(!$sqlug->execute()){
                         $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=1)');
                     }
                     $sqlug->close();
@@ -1844,7 +1844,7 @@ class Guardar{
 
                     $sqlug = $this->con->prepare("UPDATE giros SET despacho_domicilio='0' WHERE id_gir=? AND eliminado=?");
                     $sqlug->bind_param("ii", $this->id_gir, $this->eliminado);
-                    if(!$sql->execute()){
+                    if(!$sqlug->execute()){
                         $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0)');
                     }
                     $sqlug->close();
