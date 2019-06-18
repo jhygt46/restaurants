@@ -1637,7 +1637,10 @@ class Core{
     public function enviar_pedido(){
 
         if($this->verificar()){
+
             $info["verificado"] = 1;
+            $info["host"] = $_POST["host"];
+            
         }
 
         $pedido = $_POST['pedido'];
