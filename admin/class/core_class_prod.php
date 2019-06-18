@@ -1640,7 +1640,8 @@ class Core{
 
             $info["verificado"] = 1;
             $info["host"] = $_POST["host"];
-            
+            $info['server'] = $_SERVER;
+
         }
 
         $pedido = $_POST['pedido'];
@@ -1787,7 +1788,6 @@ class Core{
             $pedido_m['telefono'] = $pedido["telefono"];
     
             $info['pedido'] = $pedido_m;
-            $info['server'] = $_SERVER;
     
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
