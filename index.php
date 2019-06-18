@@ -1,4 +1,5 @@
 <?php
+/*
 date_default_timezone_set('America/Santiago');
 
 if($_POST["test"] == "Dw7k2s_hKi5sqPs8"){
@@ -401,6 +402,6 @@ if(isset($info['id_gir'])){
     </body>
 </html>
 
-<?php } ?>
+<?php */ } ?>
 
 

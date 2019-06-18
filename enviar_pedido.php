@@ -1,12 +1,15 @@
 <?php
-header('Content-type: text/json');
-header('Content-type: application/json');
 
+// NUEVO METODO
+require_once "/var/www/html/restaurants/admin/class/core_class_prod.php";
+$core = new Core();
+echo json_encode($core->enviar_pedido());
+
+/*
 require_once "/var/www/html/config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
 
 echo json_encode(enviar_pedido($con));
-
 
 function enviar_pedido($con){
 
@@ -105,15 +108,13 @@ function enviar_pedido($con){
 	$num_ped = $resultlg['num_ped'] + 1;
 	$id_gir = $resultlg['id_gir'];
 
-	/*
 	if($despacho == 1){
 		$aux_verify = $this->get_info_despacho($lat, $lng);
 		if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
 			$verify_despacho = 1;
 		}
 	}
-	*/
-
+	
 	$verify_despacho = 1;
 	$tz_object = new DateTimeZone('America/Santiago');
 	$datetime = new DateTime();
@@ -152,6 +153,7 @@ function enviar_pedido($con){
 		$pedido_m['dominio'] = $resultlg['dominio'];
 		$pedido_m['nombre'] = $pedido["nombre"];
 		$pedido_m['telefono'] = $pedido["telefono"];
+
 		$info['pedido'] = $pedido_m;
 
 		$ch = curl_init();
@@ -172,3 +174,4 @@ function enviar_pedido($con){
 	return $info;
 
 }
+*/
