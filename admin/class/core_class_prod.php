@@ -1636,6 +1636,10 @@ class Core{
     }
     public function enviar_pedido(){
 
+        if($this->verificar()){
+            $info["verificado"] = 1;
+        }
+
         $pedido = $_POST['pedido'];
         $puser = $_POST['puser'];
         $carro = $_POST['carro'];
