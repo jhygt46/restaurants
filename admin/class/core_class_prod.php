@@ -1634,6 +1634,39 @@ class Core{
         return $info;
         
     }
+    public function enviar_error(){
+
+        $aux_id_puser = $_POST['id_puser'];
+        $code = $_POST['code'];
+        $nombre = $_POST['nombre'];
+        $host = $_POST['host'];
+
+        $info['post'] = $_POST;
+
+        $sqlg = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
+        $sqlg->bind_param("s", $host);
+        $sqlg->execute();
+        $id_gir = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+
+        $info['id_gir'] = $id_gir;
+
+        $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
+        $sql->bind_param("is", $aux_id_puser, $code);
+        $sql->execute();
+        $res = $sql->get_result();
+
+        $info['res'] = $res;
+        $id_puser = ($res->{'num_rows'} == 1) ? $aux_id_puser : 0 ;
+
+        $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
+        $sqli->bind_param("sii", $nombre, $id_puser, $id_gir);
+        $sqli->execute();
+        $info['seg_web_id'] = $this->con->insert_id;
+        $sqli->close();
+
+        return $info;
+
+    }
     public function enviar_pedido(){
 
         if($this->verificar()){
@@ -1661,7 +1694,7 @@ class Core{
         $despacho = $pedido['despacho'];
     
         $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?");
-        $sql->bind_param("isi", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
+        $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
         $sql->execute();
         $res = $sql->get_result();
     
