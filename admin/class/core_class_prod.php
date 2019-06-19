@@ -1641,8 +1641,6 @@ class Core{
         $error = $_POST['error'];
         $host = $_POST['host'];
 
-        $info['post'] = $_POST;
-
         $sqlg = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
         $sqlg->bind_param("s", $host);
         $sqlg->execute();
@@ -1663,6 +1661,10 @@ class Core{
         $info['seg_web_id'] = $this->con->insert_id;
         $sqli->close();
         
+        $info['error'] = $error;
+        $info['id_puser'] = $id_puser;
+        $info['id_gir'] = $id_gir;
+
         return $info;
 
 
