@@ -1664,6 +1664,7 @@ class Core{
         $sqli->close();
         
         return $info;
+        
 
     }
     public function enviar_pedido(){
