@@ -1655,7 +1655,7 @@ class Core{
             if($sql->bind_param("is", $aux_id_puser, $code)){
                 
                 if($sql->execute()){
-                    $res = $sql->get_result();
+                    $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $info['res'] = $res;
                 }else{
                     $info['error'] = $sql->error;
