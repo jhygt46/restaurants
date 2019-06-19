@@ -1793,7 +1793,7 @@ class Core{
             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
-            $info['email'] = curl_exec($ch);
+            $info['email'] = json_decode(curl_exec($ch));
             curl_close($ch);
     
         }else{
