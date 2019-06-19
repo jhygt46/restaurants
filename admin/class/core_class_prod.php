@@ -1722,7 +1722,6 @@ class Core{
                                                 
         }
     
-        
         $eliminado = 0;
         $sqllg = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
         $sqllg->bind_param("iii", $pedido["id_loc"], $eliminado, $eliminado);
