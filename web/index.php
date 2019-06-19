@@ -10,7 +10,7 @@ if($_POST["tipo"] == 2){
     echo json_encode($core->enviar_pedido());
 }
 if($_POST["tipo"] == 3){
-    echo json_encode($core->enviar_error());
+    $core->enviar_error();
 }
 
 ?>

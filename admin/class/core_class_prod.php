@@ -1636,37 +1636,33 @@ class Core{
     }
     public function enviar_error(){
 
-        $aux_id_puser = $_POST['id_puser'];
-        $code = $_POST['code'];
         $error = $_POST['error'];
-        $host = $_POST['host'];
+        if($error !== null){
 
-        $sqlg = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
-        $sqlg->bind_param("s", $host);
-        $sqlg->execute();
-        $id_gir = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+            $host = $_POST['host'];
+            $sqlg = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
+            $sqlg->bind_param("s", $host);
+            if($sqlg->execute()){
 
-        $info['id_gir'] = $id_gir;
+                $id_gir = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+                $aux_id_puser = $_POST['id_puser'];
+                $code = $_POST['code'];
+                
+                $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
+                $sql->bind_param("is", $aux_id_puser, $code);
+                $sql->execute();
+                $sql->store_result();
 
-        $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
-        $sql->bind_param("is", $aux_id_puser, $code);
-        $sql->execute();
-        $sql->store_result();
+                $id_puser = ($sql->num_rows == 1) ? $aux_id_puser : 0 ;
 
-        $id_puser = ($sql->num_rows == 1) ? $aux_id_puser : 0 ;
+                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
+                $sqli->bind_param("sii", $error, $id_puser, $id_gir);
+                $sqli->execute();
+                $sqli->close();
 
-        $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
-        $sqli->bind_param("sii", $error, $id_puser, $id_gir);
-        $sqli->execute();
-        $info['seg_web_id'] = $this->con->insert_id;
-        $sqli->close();
-        
-        $info['error'] = $error;
-        $info['id_puser'] = $id_puser;
-        $info['id_gir'] = $id_gir;
-
-        return $info;
-
+            }
+            
+        }
 
     }
     public function enviar_pedido(){
