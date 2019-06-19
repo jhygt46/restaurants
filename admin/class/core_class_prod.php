@@ -1654,19 +1654,15 @@ class Core{
         $sql->bind_param("is", $aux_id_puser, $code);
         $sql->execute();
         $sql->store_result();
-        $info['num_rows'] = $sql->num_rows;
 
-        
-        
-        /*
-        $id_puser = ($res->{'num_rows'} == 1) ? $aux_id_puser : 0 ;
+        $id_puser = ($sql->num_rows == 1) ? $aux_id_puser : 0 ;
 
         $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
         $sqli->bind_param("sii", $nombre, $id_puser, $id_gir);
         $sqli->execute();
         $info['seg_web_id'] = $this->con->insert_id;
         $sqli->close();
-        */
+        
         return $info;
 
     }
