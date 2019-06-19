@@ -1650,24 +1650,13 @@ class Core{
 
         $info['id_gir'] = $id_gir;
 
-        if($sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?")){
+        $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
+        $sql->bind_param("is", $aux_id_puser, $code);
+        $sql->execute();
+        $sql->store_result();
+        $info['num_rows'] = $sql->num_rows;
 
-            if($sql->bind_param("is", $aux_id_puser, $code)){
-                
-                if($sql->execute()){
-                    $res = $sql->store_result();
-                    $info['res'] = $res->num_rows;
-                }else{
-                    $info['error'] = $sql->error;
-                }
-
-            }else{
-                $info['error'] = $sql->error;
-            }
-
-        }else{
-            $info['error'] = $this->con->error;
-        }
+        
         
         /*
         $id_puser = ($res->{'num_rows'} == 1) ? $aux_id_puser : 0 ;
