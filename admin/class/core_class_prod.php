@@ -1656,7 +1656,7 @@ class Core{
                 
                 if($sql->execute()){
                     $res = $sql->store_result();
-                    $info['res'] = $res;
+                    $info['res'] = $res->num_rows;
                 }else{
                     $info['error'] = $sql->error;
                 }
