@@ -1638,7 +1638,7 @@ class Core{
 
         $aux_id_puser = $_POST['id_puser'];
         $code = $_POST['code'];
-        $nombre = $_POST['nombre'];
+        $error = $_POST['error'];
         $host = $_POST['host'];
 
         $info['post'] = $_POST;
@@ -1650,12 +1650,25 @@ class Core{
 
         $info['id_gir'] = $id_gir;
 
-        $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
-        $sql->bind_param("is", $aux_id_puser, $code);
-        $sql->execute();
-        $res = $sql->get_result();
+        if($sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?")){
 
-        $info['res'] = $res;
+            if($sql->bind_param("is", $aux_id_puser, $code)){
+                
+                if($sql->execute()){
+                    $res = $sql->get_result();
+                }else{
+                    $info['error'] = $sql->error;
+                }
+
+            }else{
+                $info['error'] = $sql->error;
+            }
+
+        }else{
+            $info['error'] = $this->con->error;
+        }
+        
+        /*
         $id_puser = ($res->{'num_rows'} == 1) ? $aux_id_puser : 0 ;
 
         $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
@@ -1663,7 +1676,7 @@ class Core{
         $sqli->execute();
         $info['seg_web_id'] = $this->con->insert_id;
         $sqli->close();
-
+        */
         return $info;
 
     }
