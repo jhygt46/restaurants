@@ -205,7 +205,7 @@ class Login {
                                 
                                 // PUNTO DE VENTA
                                 $info['op'] = 3;
-                                $info['url'] = 'cocina/';
+                                $info['url'] = 'admin/cocina/';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
                                 $info['code'] = $code_cookie;
@@ -221,7 +221,7 @@ class Login {
                                 
                                 // COCINA
                                 $info['op'] = 4;
-                                $info['url'] = 'punto_de_venta/';
+                                $info['url'] = 'admin/punto_de_venta/';
                                 $info['message'] = "Ingreso Exitoso Cocina";
 
                                 $sqlsg = $this->con->prepare("SELECT code FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?");
