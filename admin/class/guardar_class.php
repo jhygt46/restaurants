@@ -2112,12 +2112,10 @@ class Guardar{
                         if($id > 0){
                             
                             if($pass1 == $pass2 && strlen($pass1) > 7){
-
                                 $sqluup = $this->con->prepare("UPDATE fw_usuarios SET pass=? WHERE id_user=? AND eliminado=?");
                                 $sqluup->bind_param("sii", md5($pass1), $id, $this->eliminado);
                                 $sqluup->execute();
                                 $sqluup->close();
-        
                             }
         
                             $sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=? WHERE id_user=? AND eliminado=?");
@@ -2130,45 +2128,35 @@ class Guardar{
                                 $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
 
                             }else{
-
                                 $info['op'] = 2;
                                 $info['mensaje'] = "Error: ";
                                 $this->registrar(6, 0, 0, 'mod user local');
-
                             }
                             $sqluus->close();
 
                         }
 
                     }else{
-
                         $info['op'] = 2;
                         $info['mensaje'] = "Error: ";
                         $this->registrar(7, 0, 0, 'mod correo exist');
-
                     }
 
                 }else{
-
                     $info['op'] = 2;
                     $info['mensaje'] = "Error: ";
                     $this->registrar(7, 0, 0, 'no local');
-    
                 }
 
             }else{
-
                 $info['op'] = 2;
                 $info['mensaje'] = "Error: ";
-
             }
 
         }else{
-
             $info['op'] = 2;
             $info['mensaje'] = "Error: ";
             $this->registrar(2, 0, 0, 'ins user local');
-
         }
         
         return $info;

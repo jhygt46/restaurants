@@ -18,13 +18,15 @@ class Rest{
     }
     public function get_info(){
         
-        $accion = $_POST["accion"];        
+        $accion = $_POST["accion"]; 
+        /*       
         if($accion == "enviar_pedido"){
             return $this->enviar_pedido();
         }
         if($accion == "despacho_domicilio"){
             return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
+        */
         if($accion == "get_users_pedido"){
             return $this->get_users_pedido($_POST["telefono"]);
         }
@@ -388,6 +390,7 @@ class Rest{
         }
         
     }
+    /*
     public function enviar_pedido(){
         
         $info['op'] = 1;        
@@ -568,6 +571,7 @@ class Rest{
         return $info;
         
     }
+    */
     public function enviar_chat(){
 
         $id_ped = $_POST["id_ped"];
@@ -610,6 +614,7 @@ class Rest{
         return $info;
 
     }
+    /*
     public function get_info_despacho($lat, $lng){
 
         $polygons = $this->get_polygons();
@@ -667,6 +672,7 @@ class Rest{
         return $result;
         
     }
+    */
     
 }
 // QUE ME DEVUELTA CATEGORIA Y SUS VALORES

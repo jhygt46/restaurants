@@ -1,7 +1,9 @@
 <?php
-//date_default_timezone_set('America/Santiago');
+
+date_default_timezone_set('America/Santiago');
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
+
 $code = $core->cocina($_COOKIE["ccn"]);
 $tipo = $_GET["tipo"];
 
@@ -26,9 +28,7 @@ $tipo = $_GET["tipo"];
     <body>
         <div class="contenedor">
             <div class="pop_up"></div>
-            <div class="lista_pedidos">
-                
-            </div>
+            <div class="lista_pedidos"></div>
         </div>
     </body>
 </html>
