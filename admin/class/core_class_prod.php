@@ -1191,21 +1191,15 @@ class Core{
         $sql = $this->con->prepare("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.cookie_code=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("iiii", $id, $code, $this->eliminado, $this->eliminado);
         $sql->execute();
-        $sql->store_result();
+        $res = $sql->get_result();
 
-        if($sql->{"num_rows"} == 0){
-
-            if($info['ssl'] == 0){
-                die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
-            }
-            if($info['ssl'] == 1){
-                die("<meta http-equiv='refresh' content='0; url=https://".$_SERVER["HTTP_HOST"]."/admin'>");
-            }
-
+        if($res->{"num_rows"} == 0){
+            die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
         }
-        if($sql->{"num_rows"} == 1){
+        
+        if($res->{"num_rows"} == 1){
 
-            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             $info['pedidos'] = $this->get_ultimos_pedidos_pos($id);
             $info['motos'] = $this->get_repartidores_local($id);
 
