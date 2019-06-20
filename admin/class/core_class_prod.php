@@ -1165,11 +1165,13 @@ class Core{
     public function cocina($ccn){
 
         if(!isset($ccn)){
+
             $http = "http://";
             if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === "on"){
                 $http = "https://";
             }
             die("<meta http-equiv='refresh' content='0; url=".$http.$_SERVER["HTTP_HOST"]."/admin'>"); 
+        
         }else{
 
             $sql = $this->con->prepare("SELECT code FROM locales WHERE code=? AND eliminado=?");
@@ -1196,7 +1198,7 @@ class Core{
         if($res->{"num_rows"} == 0){
             die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
         }
-        
+
         if($res->{"num_rows"} == 1){
 
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];

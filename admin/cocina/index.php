@@ -10,6 +10,10 @@ echo "<pre>";
 print_r($code);
 echo "</pre>";
 
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
+
 $tipo = $_GET["tipo"];
 
 ?>
