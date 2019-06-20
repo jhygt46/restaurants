@@ -5,6 +5,11 @@ require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
 $code = $core->cocina($_COOKIE["ccn"]);
+
+echo "<pre>";
+print_r($code);
+echo "</pre>";
+
 $tipo = $_GET["tipo"];
 
 ?>
@@ -18,7 +23,7 @@ $tipo = $_GET["tipo"];
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/reset.css" media="all" />
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
-        <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
         <script>

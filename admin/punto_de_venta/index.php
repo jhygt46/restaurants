@@ -21,7 +21,7 @@ $tipo = $_GET["tipo"];
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/pos.css" media="all" />
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
-        <script src="<?php echo $info['path']; ?>/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
