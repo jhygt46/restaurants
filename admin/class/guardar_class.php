@@ -2127,7 +2127,7 @@ class Guardar{
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Usuario modificado exitosamente";
                                 $info['reload'] = 1;
-                                $info['page'] = "msd/usuarios_giro.php?id_loc=".$id_loc;
+                                $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
 
                             }else{
 
