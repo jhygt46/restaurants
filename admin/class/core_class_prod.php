@@ -742,9 +742,7 @@ class Core{
             $info['css_tipo'] = $result['style_page'];
             $info['css_color'] = $result['style_color'];
             $info['css_font_size'] = $result['style_modal'];
-
             $info['js_data'] = $info["code"].".js";
-            
             $info['header_fixed'] = 1;
             $info['footer_fixed'] = 0;
             
@@ -752,11 +750,11 @@ class Core{
             $info['pedido_01_subtitulo'] = $result['pedido_01_subtitulo'];
             $info['pedido_02_titulo'] = $result['pedido_02_titulo'];
             $info['pedido_02_subtitulo'] = $result['pedido_02_subtitulo'];
-            
             $info['pedido_03_titulo'] = $result['pedido_03_titulo'];
             $info['pedido_03_subtitulo'] = $result['pedido_03_subtitulo'];
             $info['pedido_04_titulo'] = $result['pedido_04_titulo'];
             $info['pedido_04_subtitulo'] = $result['pedido_04_subtitulo'];
+            $info['item_pagina'] = $result['item_pagina'];
             
             $info['ultima_actualizacion'] = $result['ultima_actualizacion'];
 
