@@ -300,7 +300,7 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
-                $this->con_cambios();
+                $this->con_cambios(null);
                 $values = $_POST['values'];
                 for($i=0; $i<count($values); $i++){
                     $sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
@@ -330,7 +330,7 @@ class Guardar{
                 $sql->store_result();
                 if($sql->{"num_rows"} == 1){
 
-                    $this->con_cambios();
+                    $this->con_cambios(null);
                     $values = $_POST['values'];
                     for($i=0; $i<count($values); $i++){
 
@@ -620,7 +620,7 @@ class Guardar{
         
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-            $this->con_cambios();
+            $this->con_cambios(null);
 
             //$tipo = $_POST['tipo'];
             $texto = $_POST['html'];
@@ -659,10 +659,12 @@ class Guardar{
         return $info;
         
     }
-    private function con_cambios(){
+    private function con_cambios($id_gir){
+
+        $id = ($id_gir === null) ? $this->id_gir : $id_gir ;
 
         $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
-        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql->bind_param("ii", $id, $this->eliminado);
         $sql->execute();
         $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         if($dns == 0){
@@ -685,18 +687,9 @@ class Guardar{
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-        $res = curl_exec($ch);
+        curl_exec($ch);
         curl_close($ch);
-        return $res;
-
-        /*
-        $sql = $this->con->prepare("UPDATE giros SET con_cambios='1' WHERE id_gir=? AND eliminado=?");
-        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
-        if(!$sql->execute()){
-            $this->registrar(6, 0, 0, 'Con Cambios');
-        }
-        $sql->close();
-        */
+        return;
 
     }
     private function solicitar_ssl(){
@@ -757,7 +750,7 @@ class Guardar{
             $css_page = $_POST['css_page'];
             $css_color = $_POST['css_color'];
             $css_modal = $_POST['css_modal'];
-            $this->con_cambios();
+            $this->con_cambios(null);
             
             $sql = $this->con->prepare("UPDATE giros SET style_modal=?, style_color=?, style_page=?, font_css=?, font_family=? WHERE id_gir=? AND eliminado=?");
             $sql->bind_param("sssssii", $css_modal, $css_color, $css_page, $font_css, $font_family, $this->id_gir, $this->eliminado);
@@ -812,7 +805,7 @@ class Guardar{
             $estados = $_POST['estados'];
             $alto = $_POST['alto'];
 
-            $this->con_cambios();
+            $this->con_cambios(null);
 
             $sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
             $sql->bind_param("ii", $this->id_gir, $this->eliminado);
@@ -913,7 +906,7 @@ class Guardar{
                 $detalle_prods = $_POST['detalle_prods'];
                 $degradado = $_POST['degradado'];
 
-                $this->con_cambios();
+                $this->con_cambios(null);
                 $alto = $this->get_alto();
 
                 $sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
@@ -992,7 +985,7 @@ class Guardar{
             $id_pro = $_POST['id_pro'];
             $id = $_POST['id'];
             $parent_id = $_POST['parent_id'];
-            $this->con_cambios();
+            $this->con_cambios(null);
             $alto = $this->get_alto();
 
             $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
@@ -1138,6 +1131,7 @@ class Guardar{
                             if($sqlugi->execute()){
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Giro modificado exitosamente";
+                                $this->con_cambios($id);
                             }else{
                                 $info['op'] = 2;
                                 $info['mensaje'] = "Error: Permisos A2";
@@ -1347,7 +1341,7 @@ class Guardar{
 
             if($sql->{"num_rows"} == 1){
 
-                $this->con_cambios();
+                $this->con_cambios(null);
                 if($id_hor == 0){
 
                     $sqligir = $this->con->prepare("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -1549,7 +1543,7 @@ class Guardar{
                     $info['mensaje'] = "Catalogo creado exitosamente";
                     $info['reload'] = 1;
                     $info['page'] = "msd/ver_giro.php";
-                    $this->con_cambios();
+                    $this->con_cambios(null);
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error";
@@ -1567,7 +1561,7 @@ class Guardar{
                     $info['mensaje'] = "Catalogo modificado exitosamente";
                     $info['reload'] = 1;
                     $info['page'] = "msd/ver_giro.php";
-                    $this->con_cambios();
+                    $this->con_cambios(null);
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error";
@@ -1695,7 +1689,7 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-            $this->con_cambios();
+            $this->con_cambios(null);
             $code = bin2hex(openssl_random_pseudo_bytes(10));
 
             $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_cat=? AND id_gir=? AND eliminado=?");
@@ -1796,7 +1790,7 @@ class Guardar{
                         $info['mensaje'] = "Tramo creado exitosamente";
                         $info['reload'] = 1;
                         $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
-                        $this->con_cambios();
+                        $this->con_cambios(null);
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "Error";
@@ -1814,7 +1808,7 @@ class Guardar{
                         $info['mensaje'] = "Tramo modificado exitosamente";
                         $info['reload'] = 1;
                         $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
-                        $this->con_cambios();
+                        $this->con_cambios(null);
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "Error";
@@ -2579,7 +2573,7 @@ class Guardar{
                     $info['mensaje'] = "Categoria creada exitosamente";
                     $info['reload'] = 1;
                     $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                    $info['cambios'] = $this->con_cambios();
+                    $info['cambios'] = $this->con_cambios(null);
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error";
@@ -2597,7 +2591,7 @@ class Guardar{
                     $info['mensaje'] = "Categoria modificada exitosamente";
                     $info['reload'] = 1;
                     $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                    $info['cambios'] = $this->con_cambios();
+                    $info['cambios'] = $this->con_cambios(null);
                 }else{
                     $info['op'] = 2;
                     $info['mensaje'] = "Error";
@@ -2617,32 +2611,6 @@ class Guardar{
         return $info;
         
     }
-    private function crear_ingredientes(){
-
-        /*
-        $id = $_POST['id'];
-        $id_ing = $_POST['id_ing'];
-        $nombre = $_POST['nombre'];
-        $parent_id = $_POST['parent_id'];
-        $this->con_cambios();
-
-        if($id_ing == 0){
-            $info['db'] = $this->con->sql("INSERT INTO ingredientes (nombre, parent_id, id_cat) VALUES ('".$nombre."', '".$parent_id."', '".$id."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Ingrediente creada exitosamente";
-        }
-        if($id_ing > 0){
-            $this->con->sql("UPDATE ingredientes SET nombre='".$nombre."' WHERE id_ing='".$id_ing."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Ingrediente modificada exitosamente";
-        }
-                
-        $info['reload'] = 1;
-        $info['page'] = "msd/ingredientes.php?id=".$id."&parent_id=".$parent_id;
-        return $info;
-        */
-        
-    }
     private function eliminar_categoria(){
                 
         $id = explode("/", $_POST['id']);
@@ -2654,7 +2622,7 @@ class Guardar{
             $sql->bind_param("ii", $id[0], $this->id_gir);
             if($sql->execute()){
 
-                $this->con_cambios();
+                $this->con_cambios(null);
                 $info['tipo'] = "success";
                 $info['titulo'] = "Eliminado";
                 $info['texto'] = "Categoria ".$_POST["nombre"]." Eliminado";
@@ -2682,21 +2650,6 @@ class Guardar{
         return $info;
         
     }
-    private function eliminar_ingredientes(){
-        /*
-        $id = explode("/", $_POST['id']);
-        $this->con->sql("UPDATE ingredientes SET eliminado='1' WHERE id_ing='".$id[1]."'");
-        $this->con_cambios();
-
-        $info['tipo'] = "success";
-        $info['titulo'] = "Eliminado";
-        $info['texto'] = "Ingredientes ".$_POST["nombre"]." Eliminado";
-        $info['reload'] = 1;
-        $info['page'] = "msd/ingredientes.php?id=".$id[0]."&parent_id=".$id[2];
-
-        return $info;
-        */
-    }
     private function eliminar_pagina(){
                 
         $id = $_POST['id'];
@@ -2708,7 +2661,7 @@ class Guardar{
             $sql->bind_param("ii", $id, $this->id_gir);
             if($sql->execute()){
 
-                $this->con_cambios();
+                $this->con_cambios(null);
                 $info['tipo'] = "success";
                 $info['titulo'] = "Eliminado";
                 $info['texto'] = "Pagina ".$nombre." Eliminado";
@@ -2796,7 +2749,7 @@ class Guardar{
                         
                     }
 
-                    $this->con_cambios();
+                    $this->con_cambios(null);
                     $info['op'] = 1;
                     $info['mensaje'] = "Productos Asignados";
                     $info['reload'] = 1;
@@ -2927,7 +2880,7 @@ class Guardar{
                     }
                 }
                 
-                $this->con_cambios();
+                $this->con_cambios(null);
 
                 $info['op'] = 1;
                 $info['mensaje'] = "Producto modificado exitosamente";
@@ -2977,7 +2930,7 @@ class Guardar{
                 
                 if($sqldcp->execute() && $sqlup->execute()){
 
-                    $this->con_cambios();
+                    $this->con_cambios(null);
                     $info['tipo'] = "success";
                     $info['titulo'] = "Eliminado";
                     $info['texto'] = "Producto ".$nombre." Eliminado";
@@ -3029,7 +2982,7 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-            $this->con_cambios();
+            $this->con_cambios(null);
             if($id_pre > 0){
 
                 $sql = $this->con->prepare("UPDATE preguntas SET nombre=?, mostrar=? WHERE id_pre=? AND id_cat=? AND id_gir=? AND eliminado=?");
@@ -3104,42 +3057,6 @@ class Guardar{
         return $info;
         
     }
-    private function crear_lista_ingredientes(){
-        /*
-        $id_lin = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $this->con_cambios();
-
-        if($id_lin > 0){
-            $this->con->sql("UPDATE lista_ingredientes SET nombre='".$nombre."' WHERE id_lin='".$id_lin."'");
-            $info['op'] = 1;
-            $info['mensaje'] = "Lista de Ingredientes modificada exitosamente";
-        }
-        if($id_lin == 0){
-            $aux = $this->con->sql("INSERT INTO lista_ingredientes (nombre, id_cat, id_gir) VALUES ('".$nombre."', '".$this->id_cat."', '".$this->id_gir."')");
-            $info['op'] = 1;
-            $info['mensaje'] = "Lista de Ingredientes creada exitosamente";
-            $id_lin = $aux['insert_id'];
-        }
-        
-        $ingredientes = $this->get_ingredientes_base();
-        for($i=0; $i<count($ingredientes); $i++){
-            $id_ing = $ingredientes[$i]['id_ing'];
-            $valor = $_POST["ing-".$id_ing];
-            if($valor == ""){
-                $this->con->sql("DELETE FROM lista_precio_ingrediente WHERE id_ing='".$id_ing."' AND id_lin='".$id_lin."'");
-            }
-            if($valor >= 0 && $valor != ""){
-                $this->con->sql("DELETE FROM lista_precio_ingrediente WHERE id_ing='".$id_ing."' AND id_lin='".$id_lin."'");
-                $this->con->sql("INSERT INTO lista_precio_ingrediente (id_ing, id_lin, valor) VALUES ('".$id_ing."', '".$id_lin."', '".$valor."')");
-            }
-        }
-        
-        $info['reload'] = 1;
-        $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
-        return $info;
-        */
-    }
     private function eliminar_preguntas(){
                 
         $id = $_POST['id'];
@@ -3151,7 +3068,7 @@ class Guardar{
             $sql->bind_param("iii", $id, $this->id_cat, $this->id_gir);
             if($sql->execute()){
 
-                $this->con_cambios();
+                $this->con_cambios(null);
                 $info['tipo'] = "success";
                 $info['titulo'] = "Eliminado";
                 $info['texto'] = "Preguntas ".$nombre." Eliminado";
@@ -3189,7 +3106,7 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-            $this->con_cambios();
+            $this->con_cambios(null);
             $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
 
             if($id_pag == 0){
