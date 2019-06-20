@@ -1,5 +1,5 @@
 <?php
-
+/*
 require('admin/class/core_class_prod.php');
 $core = new Core();
 
@@ -101,4 +101,6 @@ if(isset($_GET['code'])){
     
     echo "<div style='display: block; text-align:center; padding-top: 200px; font-size: 28px'>NO SE ENCONTRO EL PEDIDO<div>";
     
-}} ?>
+}}
+*/
+?>

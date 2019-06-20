@@ -205,7 +205,7 @@ class Login {
                                 
                                 // PUNTO DE VENTA
                                 $info['op'] = 3;
-                                $info['url'] = 'pos/1';
+                                $info['url'] = 'cocina.';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
                                 $info['code'] = $code_cookie;

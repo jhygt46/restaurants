@@ -2073,10 +2073,10 @@ class Guardar{
                     $sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?");
                     $sqlus->bind_param("s", $correo);
                     $sqlus->execute();
-                    $sqlus->store_result();
-                    $result = $sqlus->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $res = $sqlus->get_result();
+                    $id_user = $res->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
 
-                    if($sqlus->{"num_rows"} == 0 || ($sqlus->{"num_rows"} == 1 && $id == $result["id_user"])){
+                    if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $id_user)){
                     
                         if($id == 0){
 
