@@ -207,12 +207,12 @@ class Login {
 
                             $info['data'] = ($res_glocal['ssl'] == 1) ? 'https://' : 'http://' ;
                             if($res_glocal['dns'] == 0){
-                                $info['data'] += $res_glocal['ip'];
+                                $info['data'] = $info['data'].$res_glocal['ip'];
                             }
                             if($res_glocal['dns'] == 1){
-                                $info['data'] += $res_glocal['dominio'];
+                                $info['data'] = $info['data'].$res_glocal['dominio'];
                             }
-                            $info['data'] += '/data/'.$res_glocal["giro_code"].'/index.js';
+                            $info['data'] = $info['data'].'/data/'.$res_glocal["giro_code"].'/index.js';
 
                             $sqlsg->free_result();
                             $sqlsg->close();
