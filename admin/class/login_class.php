@@ -199,12 +199,17 @@ class Login {
 
                         if($result['id_loc'] > 0){
 
-                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
                             $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $info['local_code'] = $res_glocal["local_code"];
-                            $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'/index.js';
+                            
+                            if($res_glocal['dns'] == 1 && $res_glocal['ssl'] == 1){
+                                $info['data'] = 'https://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
+                            }else{
+                                $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
+                            }
 
                             $sqlsg->free_result();
                             $sqlsg->close();
