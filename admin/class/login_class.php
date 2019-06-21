@@ -199,17 +199,21 @@ class Login {
 
                         if($result['id_loc'] > 0){
 
-                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t3.ip FROM locales t1, giros t2, server t3 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t2.id_ser=t3.id_ser");
                             $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $info['local_code'] = $res_glocal["local_code"];
-                            if($res_glocal['ssl'] == 0){
-                                $info['data'] = 'http://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
+
+                            $info['data'] = ($res_glocal['ssl'] == 1) ? 'https://' : 'http://' ;
+                            if($res_glocal['dns'] == 0){
+                                $info['data'] += $res_glocal['ip'];
                             }
-                            if($res_glocal['ssl'] == 1){
-                                $info['data'] = 'https://'.$res_glocal["giro_code"].'/data/'.$res_glocal["giro_code"].'/index.js';
+                            if($res_glocal['dns'] == 1){
+                                $info['data'] += $res_glocal['dominio'];
                             }
+                            $info['data'] += '/data/'.$res_glocal["giro_code"].'/index.js';
+
                             $sqlsg->free_result();
                             $sqlsg->close();
 

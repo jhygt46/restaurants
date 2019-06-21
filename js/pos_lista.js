@@ -288,6 +288,7 @@ function socket_init(){
         socket.on('disconnect', function() {
             $('.alert_socket').show();
         });
+        localStorage.setItem('local_code', '');
 
     }else{
         $(location).attr('href','/admin');
