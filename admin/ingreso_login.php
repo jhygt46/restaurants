@@ -60,7 +60,7 @@
                             bien(data.message);
                             setCookie('id', data.id, 16);
                             setCookie('user_code', data.user_code, 16);
-                            setCookie('url', data.url, 16);
+                            setCookie('data', data.data, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
