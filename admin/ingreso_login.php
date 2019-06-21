@@ -45,8 +45,6 @@
                     type: "POST",
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){
-                        
-                        console.log(data);
 
                         if(data.op == 1){
                             bien(data.message);
@@ -61,14 +59,17 @@
                         if(data.op == 3){
                             bien(data.message);
                             setCookie('id', data.id, 16);
-                            setCookie('code', data.code, 16);
+                            setCookie('user_code', data.user_code, 16);
+                            setCookie('url', data.url, 16);
+                            localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                         if(data.op == 4){
                             bien(data.message);
-                            setCookie('ccn', data.ccn, 16);
+                            setCookie('url', data.url, 16);
+                            localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);

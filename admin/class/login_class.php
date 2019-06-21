@@ -185,8 +185,6 @@ class Login {
 
             if($acciones < 5){
 
-                $info['a'] = $usuario;
-
                 if($usuario == 0){
                     $info['op'] = 2;
                     $info['message'] = "Error: Correo o Contraseña invalida";
@@ -201,6 +199,20 @@ class Login {
 
                         if($result['id_loc'] > 0){
 
+                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado");
+                            $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
+                            $sqlsg->execute();
+                            $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                            $info['local_code'] = $res_glocal["local_code"];
+                            if($res_glocal['ssl'] == 0){
+                                $info['url'] = 'http://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
+                            }
+                            if($res_glocal['ssl'] == 1){
+                                $info['url'] = 'https://'.$res_glocal["giro_code"].'/data/'.$res_glocal["giro_code"].'/index.js';
+                            }
+                            $sqlsg->free_result();
+                            $sqlsg->close();
+
                             if($result['tipo'] == 0){
                                 
                                 // PUNTO DE VENTA
@@ -208,11 +220,12 @@ class Login {
                                 $info['url'] = 'admin/punto_de_venta/';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
                                 $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
-                                $info['code'] = $code_cookie;
-                                $info['id'] = $result['id_loc'];
+                                
+                                $info['id'] = $result['id_user'];
+                                $info['user_code'] = $code_cookie;
 
-                                $sqlul = $this->con->prepare("UPDATE locales SET cookie_code=? WHERE id_loc=? AND id_gir=? AND eliminado=?");
-                                $sqlul->bind_param("siii", $code_cookie, $result['id_loc'], $result['id_gir'], $this->eliminado);
+                                $sqlul = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?");
+                                $sqlul->bind_param("sii", $code_cookie, $result['id_user'], $this->eliminado);
                                 $sqlul->execute();
                                 $sqlul->close();
 
@@ -223,13 +236,6 @@ class Login {
                                 $info['op'] = 4;
                                 $info['url'] = 'admin/cocina/';
                                 $info['message'] = "Ingreso Exitoso Cocina";
-
-                                $sqlsg = $this->con->prepare("SELECT code FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?");
-                                $sqlsg->bind_param("iii", $result['id_loc'], $result['id_gir'], $this->eliminado);
-                                $sqlsg->execute();
-                                $info['ccn'] = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0]["code"];
-                                $sqlsg->free_result();
-                                $sqlsg->close();
 
                             }
 

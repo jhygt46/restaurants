@@ -8,22 +8,32 @@ var catalogo = 0;
 
 function socket_init(){
     
-    var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
-    socket.on('cocina-'+local_code, function(id) {
-        agregar_pedido(id);
-    });
-    socket.on('cocina-pos-'+local_code, function(info) {
-        modificar_pedido(info);
-    });
-    socket.on('cocina-rm-'+local_code, function(info) {
-        borrar_pedido(info.id_ped);
-    });
-    socket.on('connect', function() {
-        $('.alert_socket').hide();
-    });
-    socket.on('disconnect', function() {
-        $('.alert_socket').show();
-    });
+    var code = localStorage.getItem("local_code");
+    if(code != ""){
+
+        var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
+        socket.on('cocina-'+code, function(id) {
+            agregar_pedido(id);
+        });
+        socket.on('cocina-pos-'+code, function(info) {
+            modificar_pedido(info);
+        });
+        socket.on('cocina-rm-'+code, function(info) {
+            borrar_pedido(info.id_ped);
+        });
+        socket.on('connect', function() {
+            $('.alert_socket').hide();
+        });
+        socket.on('disconnect', function() {
+            $('.alert_socket').show();
+        });
+        localStorage.setItem('local_code', '');
+
+    }else{
+
+        $(location).attr('href','/admin');
+        
+    }
     
 }
 function modificar_pedido(info){

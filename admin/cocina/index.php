@@ -1,22 +1,3 @@
-<?php
-
-date_default_timezone_set('America/Santiago');
-require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
-$core = new Core();
-
-$code = $core->cocina($_COOKIE["ccn"]);
-
-echo "<pre>";
-print_r($code);
-echo "</pre>";
-
-echo "<pre>";
-print_r($_COOKIE);
-echo "</pre>";
-
-$tipo = $_GET["tipo"];
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -28,7 +9,7 @@ $tipo = $_GET["tipo"];
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="<?php echo $info['path']; ?>/js/data/<?php echo $info["js_data"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $_COOKIE["url"]; ?>" type="text/javascript"></script>
         <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
         <script>
             var local_code = '<?php echo $code; ?>';
