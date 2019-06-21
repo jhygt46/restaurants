@@ -702,7 +702,7 @@ class Core{
         $sql->execute();
         $res = $sql->get_result();
 
-        $info['favicon'] = "misitiodelivery.ico";
+        //$info['favicon'] = "misitiodelivery.ico";
         if($res->{"num_rows"} == 1){
             
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
@@ -864,6 +864,15 @@ class Core{
                             $info['info'] = $this->get_data($id_gir);
                             $info['polygons'] = $this->get_polygons($id_gir);
                             $info['op'] = 1;
+                            $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
+                            
+                            if($info['info']['dns'] == 0){
+                                file_put_contents($ruta_file, "var data=".json_encode($info['data']));
+                            }
+                            if($info['info']['dns'] == 1 && file_exists($ruta_file)){
+                                unlink($ruta_file);
+                            }
+                            
 
                         }else{
                             $info['error3'] = $sql->error;
