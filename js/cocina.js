@@ -30,9 +30,7 @@ function socket_init(){
         localStorage.setItem('local_code', '');
 
     }else{
-
         $(location).attr('href','/admin');
-        
     }
     
 }

@@ -236,55 +236,62 @@ function send_chat(){
 }
 function socket_init(){
     
-    socket = io.connect('https://www.izusushi.cl', { 'secure': true });
-    socket.on('local-'+local_code, function(id_ped) {
-        agregar_pedido(id_ped);
-    });
-    socket.on('enviar-chat-'+local_code, function(info){
-        var id_ped = info.id_ped;
-        var mensaje = info.mensaje;
-        for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            if(pedidos[i].id_ped == id_ped){
-                if(!pedidos[i].hasOwnProperty('mensajes')){
-                    pedidos[i].mensajes = [];
-                    pedidos[i].mensajes_cont = 0;
+    var code = localStorage.getItem("local_code");
+    if(code != ""){
+
+        socket = io.connect('https://www.izusushi.cl', { 'secure': true });
+        socket.on('local-'+local_code, function(id_ped) {
+            agregar_pedido(id_ped);
+        });
+        socket.on('enviar-chat-'+local_code, function(info){
+            var id_ped = info.id_ped;
+            var mensaje = info.mensaje;
+            for(var i=0, ilen=pedidos.length; i<ilen; i++){
+                if(pedidos[i].id_ped == id_ped){
+                    if(!pedidos[i].hasOwnProperty('mensajes')){
+                        pedidos[i].mensajes = [];
+                        pedidos[i].mensajes_cont = 0;
+                    }
+                    if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
+                        pedidos[i].mensajes_cont = 0;
+                    }else{
+                        sound(aud2);
+                        pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
+                    }
+                    pedidos[i].mensajes.push({ tipo: 0, mensaje: mensaje });
+                    set_pedidos(pedidos);
+                    listar_pedidos();
                 }
-                if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-                    pedidos[i].mensajes_cont = 0;
-                }else{
-                    sound(aud2);
-                    pedidos[i].mensajes_cont = pedidos[i].mensajes_cont + 1;
+            }
+            if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
+                $('.p7 .cont_conversacion').append("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
+                $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
+            }
+        });
+        socket.on('map-'+local_code, function(moto) {
+            var info = JSON.parse(moto.info);
+            for(var i=0, ilen=motos.length; i<ilen; i++){
+                if(motos[i].id_mot == info.id_mot){
+                    markers[i].setMap(map_socket);
+                    markers[i].setPosition(new google.maps.LatLng(info.lat,info.lng));
+                    motos[i].fecha = new Date().getTime();
                 }
-                pedidos[i].mensajes.push({ tipo: 0, mensaje: mensaje });
-                set_pedidos(pedidos);
-                listar_pedidos();
+                var tiempo = motos[i].fecha - new Date().getTime();
+                if(tiempo > 600000){
+                    markers[i].setMap(null);
+                }
             }
-        }
-        if($('.p7').is(':visible') && id_ped == $('.p7').attr('id')){
-            $('.p7 .cont_conversacion').append("<div class='chat_2'><div class='nom'>"+pedidos[seleccionado].nombre+": </div><div class='msg'>"+mensaje+"</div></div>");
-            $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
-        }
-    });
-    socket.on('map-'+local_code, function(moto) {
-        var info = JSON.parse(moto.info);
-        for(var i=0, ilen=motos.length; i<ilen; i++){
-            if(motos[i].id_mot == info.id_mot){
-                markers[i].setMap(map_socket);
-                markers[i].setPosition(new google.maps.LatLng(info.lat,info.lng));
-                motos[i].fecha = new Date().getTime();
-            }
-            var tiempo = motos[i].fecha - new Date().getTime();
-            if(tiempo > 600000){
-                markers[i].setMap(null);
-            }
-        }
-    });
-    socket.on('connect', function() {
-        $('.alert_socket').hide();
-    });
-    socket.on('disconnect', function() {
-        $('.alert_socket').show();
-    });
+        });
+        socket.on('connect', function() {
+            $('.alert_socket').hide();
+        });
+        socket.on('disconnect', function() {
+            $('.alert_socket').show();
+        });
+
+    }else{
+        $(location).attr('href','/admin');
+    }
     
 }
 function agregar_pedido(id){

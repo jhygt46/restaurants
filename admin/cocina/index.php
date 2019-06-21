@@ -6,15 +6,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/reset.css" media="all" />
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/cocina.css" media="all" />
+        <link rel="stylesheet" href="/css/reset.css" media="all" />
+        <link rel="stylesheet" href="/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $_COOKIE["url"]; ?>" type="text/javascript"></script>
-        <script src="<?php echo $info['path']; ?>/js/cocina.js" type="text/javascript"></script>
-        <script>
-            var local_code = '<?php echo $code; ?>';
-        </script>
+        <script src="/js/cocina.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="contenedor">
