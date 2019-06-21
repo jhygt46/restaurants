@@ -22,7 +22,7 @@ $tipo = $_GET["tipo"];
         <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="<?php echo $_COOKIE["url"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
             var local_code = '<?php echo $info['code']; ?>';

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="<?php echo $_COOKIE["url"]; ?>" type="text/javascript"></script>
+        <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script src="/js/cocina.js" type="text/javascript"></script>
     </head>
     <body>
