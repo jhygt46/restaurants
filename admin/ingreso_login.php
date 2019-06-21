@@ -65,7 +65,7 @@
                             setCookie('data', data.data, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
-                                $(location).attr('href','/'+data.url);
+                                //$(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                         if(data.op == 4){
@@ -73,7 +73,7 @@
                             setCookie('url', data.url, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
-                                $(location).attr('href','/'+data.url);
+                                //$(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                     },
