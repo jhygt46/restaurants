@@ -5,7 +5,10 @@ require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
 $info = $core->get_data_pos($_COOKIE["id"], $_COOKIE["code"]);
-$tipo = $_GET["tipo"];
+
+echo "<pre>";
+print_r($info);
+echo "</pre>";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
