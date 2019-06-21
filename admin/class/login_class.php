@@ -205,10 +205,10 @@ class Login {
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $info['local_code'] = $res_glocal["local_code"];
                             if($res_glocal['ssl'] == 0){
-                                $info['url'] = 'http://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
+                                $info['data'] = 'http://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
                             }
                             if($res_glocal['ssl'] == 1){
-                                $info['url'] = 'https://'.$res_glocal["giro_code"].'/data/'.$res_glocal["giro_code"].'/index.js';
+                                $info['data'] = 'https://'.$res_glocal["giro_code"].'/data/'.$res_glocal["giro_code"].'/index.js';
                             }
                             $sqlsg->free_result();
                             $sqlsg->close();
