@@ -61,18 +61,23 @@
                             bien(data.message);
                             setCookie('id', data.id, 16);
                             setCookie('user_code', data.user_code, 16);
+                            setCookie('local_code', data.local_code, 16);
+                            setCookie('data', data.data, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
+
                         }
                         if(data.op == 4){
+
                             bien(data.message);
                             setCookie('data', data.data, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
+
                         }
                     },
                     error: function(e){

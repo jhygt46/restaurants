@@ -1207,15 +1207,21 @@ class Core{
         }
         return $ip;
     }
-    public function get_data_pos($id, $code){
+    public function get_data_pos(){
 
         $ip = $this->getUserIpAddr();
+        $id = $_COOKIE["id"];
+        $user_code = $_COOKIE["user_code"];
+        $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.cookie_code=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
-        $sql->bind_param("iiii", $id, $code, $this->eliminado, $this->eliminado);
+        $sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
+        $sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
+        return $res;
 
+        //$sql = $this->con->prepare("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.cookie_code=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+        
         if($res->{"num_rows"} == 0){
             die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
         }
