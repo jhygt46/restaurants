@@ -57,13 +57,13 @@
                             btn.prop("disabled", false);
                         }
                         if(data.op == 3){
-                            console.log(data);
+                            
                             bien(data.message);
                             setCookie('id', data.id, 16);
                             setCookie('user_code', data.user_code, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
-                                //$(location).attr('href','/'+data.url);
+                                $(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                         if(data.op == 4){
