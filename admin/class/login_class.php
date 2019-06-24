@@ -161,6 +161,18 @@ class Login {
         return $info;
 
     }
+    public function acciones(){
+
+        $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
+        $sqla->bind_param("i", $id_user);
+        $sqla->execute();
+        $res = $sqla->get_result();
+        $acciones = $res->{"num_rows"};
+        $sqla->free_result();
+        $sqla->close();
+        return $acciones;
+
+    }
     public function login_back(){
 
         if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
@@ -170,27 +182,21 @@ class Login {
             $sqlu->execute();
             $res = $sqlu->get_result();
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-            $usuario = $res->{"num_rows"};
+            $cant_user = $res->{"num_rows"};
             $sqlu->free_result();
             $sqlu->close();
 
-
-            $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
-            $sqla->bind_param("i", $id_user);
-            $sqla->execute();
-            $res = $sqla->get_result();
-            $acciones = $res->{"num_rows"};
-            $sqla->free_result();
-            $sqla->close();
+            $acciones = $this->acciones();
+            
 
             if($acciones < 5){
 
-                if($usuario == 0){
+                if($cant_user == 0){
                     $info['op'] = 2;
                     $info['message'] = "Error: Correo o Contraseña invalida";
                 }
 
-                if($usuario == 1){
+                if($cant_user == 1){
 
                     $pass = $result['pass'];
                     $id_user = $result['id_user'];
@@ -220,15 +226,24 @@ class Login {
                                 $info['op'] = 3;
                                 $info['url'] = 'admin/punto_de_venta/';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
-                                $code_cookie = bin2hex(openssl_random_pseudo_bytes(30));
+                                
+                                $code_cookie_user = bin2hex(openssl_random_pseudo_bytes(30));
+                                $code_cookie_local = bin2hex(openssl_random_pseudo_bytes(30));
                                 
                                 $info['id'] = $result['id_user'];
-                                $info['user_code'] = $code_cookie;
+                                $info['user_code'] = $code_cookie_user;
+                                $info['local_code'] = $code_cookie_local;
+                                $ip = $this->getUserIpAddr();
 
-                                $sqlul = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?");
-                                $sqlul->bind_param("sii", $code_cookie, $result['id_user'], $this->eliminado);
+                                $sqlul = $this->con->prepare("UPDATE locales SET cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?");
+                                $sqlul->bind_param("ssii", $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado);
                                 $sqlul->execute();
                                 $sqlul->close();
+
+                                $sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?");
+                                $sqluu->bind_param("sii", $code_cookie_user, $result['id_user'], $this->eliminado);
+                                $sqluu->execute();
+                                $sqluu->close();
 
                             }
                             if($result['tipo'] == 1){
@@ -311,6 +326,16 @@ class Login {
         
         return $info;  
         
+    }
+    public function getUserIpAddr(){
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
 }
