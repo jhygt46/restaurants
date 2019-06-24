@@ -1197,7 +1197,19 @@ class Core{
         }
 
     }
+    public function getUserIpAddr(){
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
     public function get_data_pos($id, $code){
+
+        $ip = $this->getUserIpAddr();
 
         $sql = $this->con->prepare("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.cookie_code=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("iiii", $id, $code, $this->eliminado, $this->eliminado);

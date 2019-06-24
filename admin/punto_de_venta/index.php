@@ -3,12 +3,15 @@
 date_default_timezone_set('America/Santiago');
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
+
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
+
 /*
 $info = $core->get_data_pos($_COOKIE["id"], $_COOKIE["code"]);
 
-echo "<pre>";
-print_r($info);
-echo "</pre>";
+
 */
 exit;
 ?>
