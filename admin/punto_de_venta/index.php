@@ -244,8 +244,8 @@ exit;
                     </div>
                 </div>
                 <div class="configuracion" style="width: 64px; float: left; margin-left: 6px; position: relative">
-                    <div onclick="ver_motos_mapa()"><img src="images/local_config.jpg" alt="" /></div>
-                    <div onclick="ver_opciones_pos()"><img src="images/local_config.jpg" alt="" /></div>
+                    <div onclick="ver_motos_mapa()"><img src="/images/local_config.jpg" alt="" /></div>
+                    <div onclick="ver_opciones_pos()"><img src="/images/local_config.jpg" alt="" /></div>
                 </div>
             </div>
         </div>
