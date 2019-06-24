@@ -240,7 +240,7 @@ class Login {
                                 if($sqlul->execute()){
                                     $info['loc']['ip'] = $ip;
                                     $info['loc']['cookie_code'] = $code_cookie_local;
-                                    $info['loc']['id'] = $res_glocal['id_loc'];
+                                    $info['loc']['res'] = $res_glocal;
                                     $info['loc']['eliminado'] = $this->eliminado;
                                 }
                                 $sqlul->close();
