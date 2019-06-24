@@ -1214,7 +1214,7 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t2.id_loc FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
+        $sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
         $sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
@@ -1229,14 +1229,16 @@ class Core{
             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             $info['pedidos'] = $this->get_ultimos_pedidos_pos($result['id_loc']);
             $info['motos'] = $this->get_repartidores_local($result['id_loc']);
+
+            $info['lat'] = $result['lat'];
+            $info['lng'] = $result['lng'];
             /*
             $info['code'] = $result['code'];
             $info['nombre'] = $result['nombre'];
             $info['tipo_comanda'] = $result['tipo_comanda'];
             $info['sonido'] = $result['sonido'];
             $info['ssl'] = $result['ssl'];
-            $info['lat'] = $result['lat'];
-            $info['lng'] = $result['lng'];
+            
             $info['js_data'] = $result['js_data'].".js";
             $info['dominio'] = $result['dominio'];
             $info['t_retiro'] = $result['t_retiro'];
