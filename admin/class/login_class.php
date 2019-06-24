@@ -205,7 +205,7 @@ class Login {
 
                         if($result['id_loc'] > 0){
 
-                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
                             $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -237,12 +237,7 @@ class Login {
 
                                 $sqlul = $this->con->prepare("UPDATE locales SET cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?");
                                 $sqlul->bind_param("ssii", $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado);
-                                if($sqlul->execute()){
-                                    $info['loc']['ip'] = $ip;
-                                    $info['loc']['cookie_code'] = $code_cookie_local;
-                                    $info['loc']['res'] = $res_glocal;
-                                    $info['loc']['eliminado'] = $this->eliminado;
-                                }
+                                $sqlul->execute();
                                 $sqlul->close();
 
                                 $sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?");
