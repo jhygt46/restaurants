@@ -41,7 +41,7 @@
                 var btn = $('#login');
                 btn.prop("disabled", true);
                 $.ajax({
-                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
+                    url: "/admin/ajax/login_back.php",
                     type: "POST",
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){
@@ -63,7 +63,7 @@
                             setCookie('user_code', data.user_code, 16);
                             localStorage.setItem('local_code', data.local_code);
                             setTimeout(function () {
-                                $(location).attr('href','/'+data.url);
+                                //$(location).attr('href','/'+data.url);
                             }, 2000);
                         }
                         if(data.op == 4){
