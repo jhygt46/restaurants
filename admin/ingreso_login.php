@@ -57,6 +57,7 @@
                             btn.prop("disabled", false);
                         }
                         if(data.op == 3){
+                            console.log(data);
                             bien(data.message);
                             setCookie('id', data.id, 16);
                             setCookie('user_code', data.user_code, 16);

@@ -237,7 +237,11 @@ class Login {
 
                                 $sqlul = $this->con->prepare("UPDATE locales SET cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?");
                                 $sqlul->bind_param("ssii", $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado);
-                                $sqlul->execute();
+                                if($sqlul->execute()){
+                                    $info['db'] = 1;
+                                }else{
+                                    $info['db'] = 2;
+                                }
                                 $sqlul->close();
 
                                 $sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?");
