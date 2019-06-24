@@ -19,9 +19,6 @@ exit;
         <title><?php echo $info["nombre"]; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
         <link rel="stylesheet" href="/css/reset.css" media="all" />
         <link rel="stylesheet" href="/css/pos.css" media="all" />
         <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
@@ -30,24 +27,19 @@ exit;
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
             //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
-            var local_code = '<?php echo $info['code']; ?>';
-            var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
-            var local_lat = '<?php echo $info['lat']; ?>';
-            var local_lng = '<?php echo $info['lng']; ?>';
-            var ssl = '<?php echo $info['ssl']; ?>';
-            var dominio = '<?php echo $info['dominio']; ?>';
-            var tiempos = { retiro: <?php echo $info['t_retiro']; ?>, despacho: <?php echo $info['t_despacho']; ?> };
-            var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
-            var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
-            var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
+            //var local_code = '<?php echo $info['code']; ?>';
+            //var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
+            //var local_lat = '<?php echo $info['lat']; ?>';
+            //var local_lng = '<?php echo $info['lng']; ?>';
+            //var ssl = '<?php echo $info['ssl']; ?>';
+            //var dominio = '<?php echo $info['dominio']; ?>';
+            //var tiempos = { retiro: <?php echo $info['t_retiro']; ?>, despacho: <?php echo $info['t_despacho']; ?> };
+            //var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
+            //var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
+            //var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
         </script>
         <script src="/js/pos_lista.js" type="text/javascript"></script>
         <script src="/js/sweetalert.min.js" type="text/javascript"></script>
-        <style>
-            body{
-                font-family: '<?php echo $info["font"]['css']; ?>';
-            }
-        </style>
     </head>
     <body>
         <div class="contenedor">
