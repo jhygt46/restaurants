@@ -22,9 +22,9 @@ exit;
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=<?php echo $info["font"]['family']; ?>" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/reset.css" media="all" />
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/pos.css" media="all" />
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/css/sweetalert.css" media="all" />
+        <link rel="stylesheet" href="/css/reset.css" media="all" />
+        <link rel="stylesheet" href="/css/pos.css" media="all" />
+        <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
@@ -41,8 +41,8 @@ exit;
             var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
             var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
         </script>
-        <script src="<?php echo $info['path']; ?>/js/pos_lista.js" type="text/javascript"></script>
-        <script src="<?php echo $info['path']; ?>/js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="/js/pos_lista.js" type="text/javascript"></script>
+        <script src="/js/sweetalert.min.js" type="text/javascript"></script>
         <style>
             body{
                 font-family: '<?php echo $info["font"]['css']; ?>';
