@@ -1483,9 +1483,7 @@ class Core{
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $sql->store_result();
-        $res = $sql->get_result();
-        
-        $info['res'] = $res->{'num_rows'};
+
         $info['sql'] = $sql->num_rows;
 
         $sql->close();
