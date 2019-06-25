@@ -1483,7 +1483,12 @@ class Core{
         $sql->execute();
         $res = $sql->get_result();
 
-        return $res;
+        $info['ip'] = $ip;
+        $info['id'] = $id;
+        $info['uc'] = $user_code;
+        $info['lc'] = $local_code;
+
+        return $info;
 
         /*
         $pedido = json_decode($_POST['pedido']);
