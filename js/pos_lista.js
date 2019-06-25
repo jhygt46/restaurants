@@ -259,10 +259,10 @@ function socket_init(){
 
         console.log("socket init: "+code);
         socket = io.connect('https://www.izusushi.cl', { 'secure': true });
-        socket.on('local-'+local_code, function(id_ped) {
+        socket.on('local-'+code, function(id_ped) {
             agregar_pedido(id_ped);
         });
-        socket.on('enviar-chat-'+local_code, function(info){
+        socket.on('enviar-chat-'+code, function(info){
             var id_ped = info.id_ped;
             var mensaje = info.mensaje;
             for(var i=0, ilen=pedidos.length; i<ilen; i++){
@@ -286,7 +286,7 @@ function socket_init(){
                 $(".conversacion").scrollTop($(".cont_conversacion").outerHeight());
             }
         });
-        socket.on('map-'+local_code, function(moto) {
+        socket.on('map-'+code, function(moto) {
             var info = JSON.parse(moto.info);
             for(var i=0, ilen=motos.length; i<ilen; i++){
                 if(motos[i].id_mot == info.id_mot){
