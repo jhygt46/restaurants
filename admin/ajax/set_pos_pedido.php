@@ -1,5 +1,5 @@
 <?php
-require_once "/var/www/html/restaurants/admin/class/guardar_class.php";
+require_once "/var/www/html/restaurants/admin/class/core_class_prod.php";
 
 header('Content-type: text/json');
 header('Content-type: application/json');
