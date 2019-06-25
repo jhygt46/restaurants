@@ -1,9 +1,10 @@
 $(document).ready(function(){
-    set_pedidos(pedidos);
-    socket_init();
-    listar_pedidos();
-    modificar_horas();
-    gmap_input();
+    console.log(pedidos);
+    //set_pedidos(pedidos);
+    //socket_init();
+    //listar_pedidos();
+    //modificar_horas();
+    //gmap_input();
 });
 
 var aud1 = new Audio('audios/Ba-dum-tss.mp3');

@@ -1,16 +1,8 @@
 <?php
 
-date_default_timezone_set('America/Santiago');
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
-
 $info = $core->get_data_pos();
-/*
-echo "<pre>";
-print_r($info);
-echo "</pre>";
-exit;
-*/
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -26,7 +18,7 @@ exit;
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
-            //var aud = new Audio('audios/<?php echo $local['sonido']; ?>.mp3');
+            var aud = new Audio('/audios/<?php echo $local['sonido']; ?>.mp3');
             //var local_code = '<?php echo $info['code']; ?>';
             //var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
             var local_lat = '<?php echo $info['lat']; ?>';
