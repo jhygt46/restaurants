@@ -1528,6 +1528,9 @@ function guardar_pedido(index, open){
         data: send,
         success: function(data){
             
+            console.log(data);
+
+            /*
             var info = JSON.parse(data);
 
             if(pedidos[index].id_ped == 0){
@@ -1554,6 +1557,7 @@ function guardar_pedido(index, open){
                     }
                 }
             }
+            */
             
         }, error: function(e){
             console.log(e);
