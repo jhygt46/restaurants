@@ -38,20 +38,21 @@ function listar_pedidos(n){
 function init_map(){
     
     var punto = { lat: parseFloat(local_lat), lng: parseFloat(local_lng) };
-
     map_socket = new google.maps.Map(document.getElementById('mapa_motos'), {
         center: punto,
         zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: false
     });
+
     var icon_local = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-    var local_marker = new google.maps.Marker({
+    new google.maps.Marker({
         map: map_socket,
         title: 'Local',
         position: punto,
         icon: icon_local
     });
+    
     var icon_moto = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
     for(var i=0, ilen=motos.length; i<ilen; i++){
         markers.push(new google.maps.Marker({
