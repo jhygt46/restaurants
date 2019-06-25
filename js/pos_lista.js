@@ -382,18 +382,6 @@ function get_producto(id_pro){
         }
     }
 }
-function listar_pedidos(n){
-    console.log(n);
-    $('.lista_pedidos').html('');
-    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
-    if(pedidos){
-        for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
-                $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
-            }
-        }
-    }
-}
 function create_element_class(clase){
     var Div = document.createElement('div');
     Div.className = clase;
