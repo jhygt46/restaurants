@@ -1232,6 +1232,7 @@ class Core{
 
             $info['lat'] = $result['lat'];
             $info['lng'] = $result['lng'];
+            $info['sonido'] = $result['sonido'];
             /*
             $info['code'] = $result['code'];
             $info['nombre'] = $result['nombre'];
