@@ -1479,8 +1479,8 @@ class Core{
         $local_code = $_COOKIE["local_code"];
 
 
-        $sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=?");
-        $sql->bind_param("iss", $id, $user_code, $local_code);
+        $sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=?");
+        $sql->bind_param("isss", $id, $user_code, $local_code, $ip);
         $sql->execute();
         $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sql->free_result();
