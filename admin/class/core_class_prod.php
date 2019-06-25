@@ -1482,10 +1482,11 @@ class Core{
         $sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=?");
         $sql->bind_param("isss", $id, $user_code, $local_code, $ip);
         $sql->execute();
-        $sql->store_result();
-        $info['res'] = $sql;
+        $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sql->free_result();
         $sql->close();
+
+        $info['res'] = $res;
 
         return $info;
 
