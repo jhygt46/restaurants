@@ -1475,7 +1475,7 @@ class Core{
 
         $ip = $this->getUserIpAddr();
         $id = intval($_COOKIE["id"]);
-        $user_code = $_COOKIE["user_code"];
+        $user_code = "a".$_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
 
