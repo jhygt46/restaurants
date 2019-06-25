@@ -1487,6 +1487,7 @@ class Core{
         $info['id'] = $id;
         $info['uc'] = $user_code;
         $info['lc'] = $local_code;
+        $info['res'] = $res;
 
         return $info;
 
