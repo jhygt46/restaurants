@@ -1481,13 +1481,13 @@ class Core{
         $sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
-        $res = $sql->get_result();
+        $sql->store_result();
 
         $info['ip'] = $ip;
         $info['id'] = $id;
         $info['uc'] = $user_code;
         $info['lc'] = $local_code;
-        $info['res'] = $res;
+        $info['sql'] = $sql;
 
         return $info;
 
