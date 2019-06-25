@@ -1,8 +1,5 @@
 $(document).ready(function(){
-    //console.log(pedidos);
-    //set_pedidos(pedidos);
     //socket_init();
-    listar_pedidos();
     listar_pedidos(pedidos);
     //modificar_horas();
     //gmap_input();
@@ -36,7 +33,7 @@ function listar_pedidos(n){
             }
         }
     }
-    
+
 }
 function init_map(){
     
