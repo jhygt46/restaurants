@@ -1478,10 +1478,14 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
+
         $sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=?");
         $sql->bind_param("i", $id);
         $sql->execute();
-        $res = $sql->get_result();
+        $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        $sql->free_result();
+        $sql->close();
+
 
         $info['ip'] = $ip;
         $info['id'] = $id;
