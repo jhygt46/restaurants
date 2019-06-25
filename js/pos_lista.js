@@ -257,6 +257,7 @@ function socket_init(){
     var code = localStorage.getItem("local_code");
     if(code != ""){
 
+        console.log("socket init: "+code);
         socket = io.connect('https://www.izusushi.cl', { 'secure': true });
         socket.on('local-'+local_code, function(id_ped) {
             agregar_pedido(id_ped);
