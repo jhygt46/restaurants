@@ -52,7 +52,7 @@ function init_map(){
         position: punto,
         icon: icon_local
     });
-    
+
     var icon_moto = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
     for(var i=0, ilen=motos.length; i<ilen; i++){
         markers.push(new google.maps.Marker({
@@ -307,7 +307,7 @@ function socket_init(){
         socket.on('disconnect', function() {
             $('.alert_socket').show();
         });
-        localStorage.setItem('local_code', '');
+        //localStorage.setItem('local_code', '');
 
     }else{
         $(location).attr('href','/admin');
