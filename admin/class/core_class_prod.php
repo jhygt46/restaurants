@@ -1478,8 +1478,8 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=? AND cookie_code=?");
-        $sql->bind_param("is", $id, $user_code);
+        $sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=?");
+        $sql->bind_param("i", $id);
         $sql->execute();
         $res = $sql->get_result();
 
