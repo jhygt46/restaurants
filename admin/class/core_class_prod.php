@@ -1485,7 +1485,7 @@ class Core{
 
         return $res;
 
-
+        /*
         $pedido = json_decode($_POST['pedido']);
         $carro = $pedido->{'carro'};
         $promos = $pedido->{'promos'};
@@ -1668,9 +1668,9 @@ class Core{
             $sqluep->close();
             
         }
-
         return $info;
-        
+        */
+
     }
     public function enviar_error(){
 
