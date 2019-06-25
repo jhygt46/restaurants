@@ -7,8 +7,8 @@ $(document).ready(function(){
     //gmap_input();
 });
 
-var aud1 = new Audio('audios/Ba-dum-tss.mp3');
-var aud2 = new Audio('audios/Aww.mp3');
+var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
+var aud2 = new Audio('/audios/Aww.mp3');
 
 var seleccionado = 0;
 var categoria = 0;
