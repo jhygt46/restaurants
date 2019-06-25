@@ -1474,7 +1474,7 @@ class Core{
     public function set_web_pedido(){
 
         $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
+        $id = intval($_COOKIE["id"]);
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
