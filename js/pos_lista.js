@@ -20,10 +20,15 @@ var markers = [];
 var map_socket, socket;
 
 function listar_pedidos(n){
-    console.log("BUE");
-    console.log(n);
+    
+    if(n !== undefined){
+        localStorage.setItem("pedidos", JSON.stringify(n));
+        var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
+    }else{
+        var pedidos = n;
+    }
+
     $('.lista_pedidos').html('');
-    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
@@ -31,6 +36,7 @@ function listar_pedidos(n){
             }
         }
     }
+    
 }
 function init_map(){
     
