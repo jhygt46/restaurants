@@ -1520,7 +1520,7 @@ function guardar_pedido(index, open){
      
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    var send = { accion: guardar_pedido, pedido: JSON.stringify(pedido) };
+    var send = { accion: 'guardar_pedido', pedido: JSON.stringify(pedido) };
 
     $.ajax({
         url: "/admin/ajax/set_pos_pedido.php",
