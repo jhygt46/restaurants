@@ -19,6 +19,19 @@ var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
 
+function listar_pedidos(n){
+    console.log("BUE");
+    console.log(n);
+    $('.lista_pedidos').html('');
+    var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
+    if(pedidos){
+        for(var i=0, ilen=pedidos.length; i<ilen; i++){
+            if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
+                $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
+            }
+        }
+    }
+}
 function init_map(){
     
     var punto = { lat: parseFloat(local_lat), lng: parseFloat(local_lng) };
@@ -370,10 +383,7 @@ function get_producto(id_pro){
     }
 }
 function listar_pedidos(n){
-
-
     console.log(n);
-
     $('.lista_pedidos').html('');
     var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
