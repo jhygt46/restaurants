@@ -368,7 +368,11 @@ function get_producto(id_pro){
         }
     }
 }
-function listar_pedidos(){
+function listar_pedidos(n){
+
+
+    console.log(n);
+
     $('.lista_pedidos').html('');
     var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     if(pedidos){
