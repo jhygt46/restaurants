@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //socket_init();
+    socket_init();
     listar_pedidos(pedidos);
     //modificar_horas();
     //gmap_input();
@@ -20,9 +20,9 @@ function listar_pedidos(n){
     
     if(n !== undefined){
         localStorage.setItem("pedidos", JSON.stringify(n));
-        var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
-    }else{
         var pedidos = n;
+    }else{
+        var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     }
 
     $('.lista_pedidos').html('');
