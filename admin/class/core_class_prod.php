@@ -1482,10 +1482,13 @@ class Core{
         $sql = $this->con->prepare("SELECT t1.id_user FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
+        $sql->store_result();
         $res = $sql->get_result();
-        $sql->close();
-
+        
         $info['res'] = $res;
+        $info['sql'] = $sql;
+
+        $sql->close();
 
         return $info;
 
