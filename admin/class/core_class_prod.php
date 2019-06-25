@@ -1233,7 +1233,7 @@ class Core{
             $info['lat'] = $result['lat'];
             $info['lng'] = $result['lng'];
             $info['sonido'] = $result['sonido'];
-            $info['estados'] = $result['estados'];
+            $info['estados'] = explode(",", $result['estados']);
             $info['t_retiro'] = $result['t_retiro'];
             $info['t_despacho'] = $result['t_despacho'];
             /*
