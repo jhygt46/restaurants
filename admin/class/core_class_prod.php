@@ -1214,7 +1214,7 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng, t2.sonido FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
+        $sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng, t2.sonido, t3.estados FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
         $sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
@@ -1233,6 +1233,7 @@ class Core{
             $info['lat'] = $result['lat'];
             $info['lng'] = $result['lng'];
             $info['sonido'] = $result['sonido'];
+            $info['estados'] = $result['estados'];
             /*
             $info['code'] = $result['code'];
             $info['nombre'] = $result['nombre'];
