@@ -1523,7 +1523,7 @@ function guardar_pedido(index, open){
     var send = { pedido: JSON.stringify(pedido) };
 
     $.ajax({
-        url: "ajax/set_pedido.php",
+        url: "/ajax/set_pedido.php",
         type: "POST",
         data: send,
         success: function(data){
