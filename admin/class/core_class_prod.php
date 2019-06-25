@@ -1485,8 +1485,8 @@ class Core{
         $sql->store_result();
         $res = $sql->get_result();
         
-        $info['res'] = $res;
-        $info['sql'] = $sql;
+        $info['res'] = $res->{'num_rows'};
+        $info['sql'] = $sql->num_rows;
 
         $sql->close();
 
