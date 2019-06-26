@@ -1475,8 +1475,6 @@ class Core{
     public function set_web_pedido(){
 
         $ip = $this->getUserIpAddr();
-        $info['ip'] = $ip;
-        return $info;
         $id = intval($_COOKIE["id"]);
         $user_code = "a".$_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
@@ -1485,6 +1483,9 @@ class Core{
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $sql->store_result();
+
+        $info['sql'] = $sql;
+        return $info;
 
         if($sql->num_rows == 1){
 
