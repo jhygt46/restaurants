@@ -1492,7 +1492,6 @@ class Core{
         }
         if($sql->num_rows == 1){
 
-            
             $pedido = json_decode($_POST['pedido']);
             $carro = $pedido->{'carro'};
             $promos = $pedido->{'promos'};
