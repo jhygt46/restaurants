@@ -1484,7 +1484,7 @@ class Core{
         $sql->execute();
         $sql->store_result();
 
-        $info['sql'] = $sql;
+        $info['sql'] = $sql->num_rows;
         return $info;
 
         if($sql->num_rows == 1){
