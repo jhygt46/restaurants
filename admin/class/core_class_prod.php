@@ -1475,73 +1475,58 @@ class Core{
     public function set_web_pedido(){
 
         $ip = $this->getUserIpAddr();
+        $info['ip'] = $ip;
+        return $info;
         $id = intval($_COOKIE["id"]);
         $user_code = "a".$_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t1.id_user FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $sql->store_result();
-        $count = $sql->num_rows;
-        $sql->close();
 
-        if($count == 1){
+        if($sql->num_rows == 1){
 
+            $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $pedido = json_decode($_POST['pedido']);
+            $carro = $pedido->{'carro'};
+            $promos = $pedido->{'promos'};
+            
+            $id_ped = intval($pedido->{'id_ped'});
+            $despacho = intval($pedido->{'despacho'});
+            $estado = intval($pedido->{'estado'});
+            
+            $id_puser = $pedido->{'id_puser'};
+            $nombre = $pedido->{'nombre'};
+            $telefono = $pedido->{'telefono'};
+            
+            $id_pdir = $pedido->{'id_pdir'};
+            $direccion = $pedido->{'direccion'};
+            $calle = $pedido->{'calle'};
+            $num = $pedido->{'num'};
+            $depto = $pedido->{'depto'};
+            $comuna = $pedido->{'comuna'};
+            $lat = $pedido->{'lat'};
+            $lng = $pedido->{'lng'};
+            
+            $pre_gengibre = intval($pedido->{'pre_gengibre'});
+            $pre_wasabi = intval($pedido->{'pre_wasabi'});
+            $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
+            $pre_palitos = intval($pedido->{'pre_palitos'});
+            $pre_soya = intval($pedido->{'pre_soya'});
+            $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
+            
+            $ocultar = intval($pedido->{'ocultar'});
+            $eliminado = intval($pedido->{'eliminado'});
+            
+            $costo = intval($pedido->{'costo'});
+            $total = intval($pedido->{'total'});
 
-
-        }
-
-        /*
-        $pedido = json_decode($_POST['pedido']);
-        $carro = $pedido->{'carro'};
-        $promos = $pedido->{'promos'};
-        
-        $id_ped = intval($pedido->{'id_ped'});
-        $despacho = intval($pedido->{'despacho'});
-        $estado = intval($pedido->{'estado'});
-        
-        $id_puser = $pedido->{'id_puser'};
-        $nombre = $pedido->{'nombre'};
-        $telefono = $pedido->{'telefono'};
-        
-        $id_pdir = $pedido->{'id_pdir'};
-        $direccion = $pedido->{'direccion'};
-        $calle = $pedido->{'calle'};
-        $num = $pedido->{'num'};
-        $depto = $pedido->{'depto'};
-        $comuna = $pedido->{'comuna'};
-        $lat = $pedido->{'lat'};
-        $lng = $pedido->{'lng'};
-        
-        $pre_gengibre = intval($pedido->{'pre_gengibre'});
-        $pre_wasabi = intval($pedido->{'pre_wasabi'});
-        $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
-        $pre_palitos = intval($pedido->{'pre_palitos'});
-        $pre_soya = intval($pedido->{'pre_soya'});
-        $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
-        
-        $ocultar = intval($pedido->{'ocultar'});
-        $eliminado = intval($pedido->{'eliminado'});
-        
-        $costo = intval($pedido->{'costo'});
-        $total = intval($pedido->{'total'});
-        
-        $id_loc = $_COOKIE['ID'];
-        $cookie_code = $_COOKIE['CODE'];
-        
-        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND cookie_code=? AND eliminado=?");
-        $sql->bind_param("iii", $id_loc, $cookie_code, $this->eliminado);
-        $sql->execute();
-        $sql->store_result();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-
-        $info["alert"] = "";
-        $id_gir = $result["id_gir"];
-        $local_code = $result["code"];
-        $enviar_cocina = $result["enviar_cocina"];
-
-        if($sql->{"num_rows"} == 1){
+            $info["alert"] = "";
+            $id_gir = $result["id_gir"];
+            $local_code = $result["code"];
+            $enviar_cocina = $result["enviar_cocina"];
 
             if($id_ped == 0){
 
@@ -1585,7 +1570,7 @@ class Core{
             $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
 
             if($id_puser == 0 && $sql_id_puser == 0){
-                if(strlen($telefono) == 12 || strlen($telefono) == 13){
+                if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
 
                     $sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES (?, ?, ?)");
                     $sqlipu->bind_param("ssi", $nombre, $telefono, $id_gir);
@@ -1600,6 +1585,7 @@ class Core{
 
                 }
             }
+
             if($id_puser > 0 && $sql_id_puser == 0){
 
                 $sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?");
@@ -1609,6 +1595,7 @@ class Core{
 
             }
 
+            
             if($id_pdir == 0 && $sql_id_pdir == 0){
                 if($direccion != ""){
 
@@ -1673,10 +1660,11 @@ class Core{
             $sqluep->bind_param("ii", $id_ped, $id_loc);
             $sqluep->execute();
             $sqluep->close();
-            
+
         }
+
+        $sql->close();
         return $info;
-        */
 
     }
     public function enviar_error(){
