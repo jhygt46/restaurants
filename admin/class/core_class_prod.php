@@ -1483,16 +1483,15 @@ class Core{
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
-        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-
-        $info['res'] = $res->{'num_rows'};
-        if($sql->num_rows == 0){
+        
+        if($res->{'num_rows'} == 0){
 
             $info['op'] = 2;
 
         }
-        if($sql->num_rows == 1){
+        if($res->{'num_rows'} == 1){
 
+            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
             $pedido = json_decode($_POST['pedido']);
             $carro = $pedido->{'carro'};
             $promos = $pedido->{'promos'};
