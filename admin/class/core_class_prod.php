@@ -939,7 +939,7 @@ class Core{
             $aux_categoria['degradado'] = $row['degradado'];
             $aux_categoria['tipo'] = $row['tipo'];
 
-            if($row['tipo'] == 0){
+            if($aux_categoria['tipo'] == 0){
 
                 $aux_categoria['tipo'] = 0;
 
@@ -978,12 +978,12 @@ class Core{
                 }
             }
 
-            if($row['tipo'] == 1){
+            if($aux_categoria['tipo'] == 1){
 
                 $aux_categoria['tipo'] = 1;
                 
                 $sqlpc = $this->con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?");
-                $sqlpc->bind_param("ii", $row['id_cae']);
+                $sqlpc->bind_param("i", $row['id_cae']);
                 $sqlpc->execute();
                 $resultpc = $sqlpc->get_result();
 
