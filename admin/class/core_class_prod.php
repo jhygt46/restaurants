@@ -937,6 +937,7 @@ class Core{
             $aux_categoria['descripcion_sub'] = $row['descripcion_sub'];
             $aux_categoria['precio'] = $row['precio'];
             $aux_categoria['degradado'] = $row['degradado'];
+            $aux_categoria['tipo'] = $row['tipo'];
 
             if($row['tipo'] == 0){
 
@@ -977,7 +978,7 @@ class Core{
                 }
             }
 
-            if($tipo == 1){
+            if($row['tipo'] == 1){
 
                 $aux_categoria['tipo'] = 1;
                 
