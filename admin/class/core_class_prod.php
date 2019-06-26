@@ -1485,6 +1485,7 @@ class Core{
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sql->store_result();
 
+        $info['res'] = $result;
         if($sql->num_rows == 0){
 
             $info['op'] = 2;
