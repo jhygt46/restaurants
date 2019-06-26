@@ -1476,7 +1476,7 @@ class Core{
 
         $ip = $this->getUserIpAddr();
         $id = $_COOKIE["id"];
-        $user_code = "a".$_COOKIE["user_code"];
+        $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
         $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
@@ -1484,14 +1484,11 @@ class Core{
         $sql->execute();
         $sql->store_result();
 
-        $info['id'] = $id;
-        $info['uc'] = $user_code;
-        $info['lc'] = $local_code;
-        $info['ip'] = $ip;
+        if($sql->num_rows == 0){
 
-        $info['sql_num_rows'] = $sql->num_rows;
-        return $info;
+            $info['op'] = 2;
 
+        }
         if($sql->num_rows == 1){
 
             $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
