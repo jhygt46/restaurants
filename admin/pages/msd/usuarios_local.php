@@ -31,6 +31,33 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
 
 }
 ?>
+<script>
+    function tipo(a) {
+        var x = (a.value || a.options[a.selectedIndex].value);
+        if(x == 0){
+            document.getElementById('opciones').style.display = 'block';
+        }
+        if(x == 1){
+            document.getElementById('opciones').style.display = 'none';
+        }
+    }
+    function web_tipo(a) {
+        var x = (a.value || a.options[a.selectedIndex].value);
+        if(x == 2){
+            document.getElementById('web_tip').style.display = 'block';
+        }else{
+            document.getElementById('web_tip').style.display = 'none';
+        }
+    }
+    function pos_tipo(a) {
+        var x = (a.value || a.options[a.selectedIndex].value);
+        if(x == 2){
+            document.getElementById('pos_tip').style.display = 'block';
+        }else{
+            document.getElementById('pos_tip').style.display = 'none';
+        }
+    }
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -63,11 +90,37 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="v_tipo" name="v_tipo">
+                        <select id="v_tipo" name="v_tipo" onchange="tipo(this)">
                             <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Punto de Venta</option>
                             <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Cocina</option>
                         </select>
                     </label>
+                    <div id="opciones">
+                        <label class="clearfix">
+                            <span><p>Pedidos Web:</p></span>
+                            <select id="save_web" name="save_web" onchange="web_tipo(this)">
+                                <option value="0" <?php if($that['save_web'] == 0){ echo "selected"; } ?>>No modificar</option>
+                                <option value="1" <?php if($that['save_web'] == 1){ echo "selected"; } ?>>Si modificar</option>
+                                <option value="2" <?php if($that['save_web'] == 2){ echo "selected"; } ?>>Modificar antes de X minutos</option>
+                            </select>
+                        </label>
+                        <label id="web_tip" class="clearfix" style="display:<?php echo ($that['save_web'] == 2) ? "block" : "none" ; ?>">
+                            <span><p>Minutos Pedidos Web:</p></span>
+                            <input id="web_min" name="web_min" class="inputs" type="text" value="<?php echo $that['web_min']; ?>" require="" placeholder="" />
+                        </label>
+                        <label class="clearfix">
+                            <span><p>Pedidos Punto de Venta:</p></span>
+                            <select id="save_pos" name="save_pos" onchange="pos_tipo(this)">
+                                <option value="0" <?php if($that['save_pos'] == 0){ echo "selected"; } ?>>No modificar</option>
+                                <option value="1" <?php if($that['save_pos'] == 1){ echo "selected"; } ?>>Si modificar</option>
+                                <option value="2" <?php if($that['save_pos'] == 2){ echo "selected"; } ?>>Modificar antes de X minutos</option>
+                            </select>
+                        </label>
+                        <label id="pos_tip" class="clearfix" style="display:<?php echo ($that['save_pos'] == 2) ? "block" : "none" ; ?>">
+                            <span><p>Minutos Pedidos POS:</p></span>
+                            <input id="pos_min" name="pos_min" class="inputs" type="text" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
+                        </label>
+                    </div>
                     <label class="clearfix">
                         <span><p>Password:</p></span>
                         <input id="v_pass1" autocomplete="off" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
