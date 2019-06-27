@@ -76,7 +76,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                                 <option value="1" <?php if($that["save_web"] == 1){ ?>selected<?php } ?>>Modificar antes de</option>
                             </select>
                         </label>
-                        <label class="clearfix" id="web" style="display: <?php echo ($that["save_web"] == 1) ? 'block' : 'nonde' ; ?>">
+                        <label class="clearfix" id="web" style="display: <?php echo ($that["save_web"] == 1) ? 'block' : 'none' ; ?>">
                             <span><p>(minutos)</p></span>
                             <input id="web_min" type="text" class="inputs" value="<?php echo $that['web_min']; ?>" require="" placeholder="" />
                         </label>
@@ -87,7 +87,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                                 <option value="1" <?php if($that["save_pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
                             </select>
                         </label>
-                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1) ? 'block' : 'nonde' ; ?>">
+                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1) ? 'block' : 'none' ; ?>">
                             <span><p>(minutos)</p></span>
                             <input id="pos_min" type="text" class="inputs" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
                         </label>
