@@ -114,9 +114,9 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
+                        <!--<a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>-->
+                        <?php if($tipo == 1){ ?><a class="icono ic7" onclick="navlink('pages/msd/configurar_usuarios_local.php?id_user=<?php echo $id; ?>')" alt="Configurar Usuario Local"></a><?php } ?>
                         <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>&id_loc=<?php echo $_GET['id_loc']; ?>')"></a>
-                        <?php if($tipo == 1){ ?><a class="icono ic7" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>&id_loc=<?php echo $_GET['id_loc']; ?>')"></a><?php } ?>
                     </div>
                 </div>
                 <?php } ?>
