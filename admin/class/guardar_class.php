@@ -1680,7 +1680,7 @@ class Guardar{
             $this->registrar(2, 0, 0, 'conf usuario local');
         }
 
-
+        return $info;
 
     }
     private function configurar_local(){
