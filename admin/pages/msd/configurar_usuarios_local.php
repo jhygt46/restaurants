@@ -9,16 +9,14 @@ $sub_titulo1 = "Modificar Configuracion";
 $accion = "configurar_local";
 /* CONFIG PAGE */
 
-$id_cae = 0;
+$id_user = 0;
 $sub_titulo = $sub_titulo1;
-$parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$sonidos = ["Applause", "Aww", "Ba-dum-tss", "Beep", "Beep_set", "Boo", "Breaking_glass", "City", "Crash", "DJ", "Fail", "Gunshot", "Happy_Birthday", "Heartbeat", "Ka-ching", "Keyboard", "Laugh_track", "Nooo", "Rain_and_thunder", "Shutter", "Whip", "White_noise", "Yeehaw", "Yes"];
 
-if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
+if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
     
-    $id_loc = $_GET["id_loc"];
-    $that = $core->get_local($id_loc);
+    $id_user = $_GET["id_user"];
+    $that = $core->get_user_local($id_user);
 
 }
 
@@ -28,7 +26,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/locales.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/usuarios_local.php?id_loc=<?php echo $_GET['id_loc']; ?>')"></li>
         </ul>
     </div>
     <hr>

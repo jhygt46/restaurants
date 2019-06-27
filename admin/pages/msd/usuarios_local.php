@@ -23,12 +23,14 @@ $sub_titulo = $sub_titulo1;
 $list = $core->get_usuarios_local($_GET["id_loc"]);
 $m_locales = false;
 
-if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
+if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
-    $id_user = $_GET["id_user"];
-    $that = $core->get_usuario($id_user);
-    $sub_titulo = $sub_titulo2;
-
+    $id_loc = $_GET["id_loc"];
+    if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] != 0){
+        $id_user = $_GET["id_user"];
+        $that = $core->get_usuario($id_user);
+        $sub_titulo = $sub_titulo2;
+    }
 }
 ?>
 <script>
@@ -62,7 +64,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                 </div>
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id_user; ?>" />
-                    <input id="id_loc" type="hidden" value="<?php echo $_GET["id_loc"]; ?>" />
+                    <input id="id_loc" type="hidden" value="<?php echo $id_loc; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
@@ -115,8 +117,8 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <!--<a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>-->
-                        <a class="icono ic7" onclick="navlink('pages/msd/configurar_usuarios_local.php?id_user=<?php echo $id; ?>')" title="Configurar Usuario Local"></a>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>&id_loc=<?php echo $_GET['id_loc']; ?>')"></a>
+                        <a class="icono ic7" onclick="navlink('pages/msd/configurar_usuarios_local.php?id_user=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>')" title="Configurar Usuario Local"></a>
+                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_user=<?php echo $id; ?>&id_loc=<?php echo $id_loc; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
