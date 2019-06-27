@@ -1561,10 +1561,10 @@ class Core{
                 $sqlped->close();
 
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc) VALUES (?, '0', now(), ?, ?)");
-                $sqlaux->bind_param("iii", $num_ped, $code, $id_loc);
+                $sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)");
+                $sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir);
                 $sqlaux->execute();
-                $id_ped = $this->con;
+                $id_ped = $this->con->insert_id;
                 $sqlaux->close();
 
                 $info['id_ped'] = $id_ped;
@@ -1572,8 +1572,6 @@ class Core{
                 $info['pedido_code'] = $code;
 
             }
-
-            
 
             $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
             $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
