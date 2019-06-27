@@ -1490,7 +1490,7 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.id_loc FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
@@ -1539,6 +1539,7 @@ class Core{
 
             $info["alert"] = "";
             $id_gir = $result["id_gir"];
+            $id_loc = $result["id_loc"];
             $local_code = $result["code"];
             $enviar_cocina = $result["enviar_cocina"];
 
