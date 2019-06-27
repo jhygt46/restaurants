@@ -252,8 +252,8 @@ class Core{
     }
     public function get_user_local($id_user, $id_loc){
 
-        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?");
-        $sql->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado);
+        $sql = $this->con->prepare("SELECT id_user, tipo, save_web, web_min, save_pos, pos_min FROM fw_usuarios WHERE id_user=? AND id_loc=? AND id_gir=? AND eliminado=?");
+        $sql->bind_param("iiii", $id_user, $id_loc, $this->id_gir, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $sql->free_result();
