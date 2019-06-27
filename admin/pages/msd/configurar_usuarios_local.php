@@ -53,20 +53,22 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                         <span><p>Accion:</p></span>
                         <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_usuario_local', '<?php echo $id_user; ?>', 'Usuario', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
-                    <label class="clearfix">
-                        <span><p>Pedidos Web:</p></span>
-                        <select id="pos">
-                            <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                            <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
-                        </select>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Pedidos Punto de Venta:</p></span>
-                        <select id="pos">
-                            <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                            <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
-                        </select>
-                    </label>
+                    <?php if(isset($that['tipo']) && $that['tipo'] == 0){ ?>
+                        <label class="clearfix">
+                            <span><p>Pedidos Web:</p></span>
+                            <select id="pos">
+                                <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                                <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
+                            </select>
+                        </label>
+                        <label class="clearfix">
+                            <span><p>Pedidos Punto de Venta:</p></span>
+                            <select id="pos">
+                                <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                                <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
+                            </select>
+                        </label>
+                    <?php } ?>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
