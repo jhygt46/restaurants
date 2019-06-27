@@ -1561,15 +1561,23 @@ class Core{
                 $sqlped->close();
 
                 $code = bin2hex(openssl_random_pseudo_bytes(10));
-                $sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)");
-                $sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir);
-                $sqlaux->execute();
-                $id_ped = $this->con->insert_id;
-                $sqlaux->close();
-
-                $info['id_ped'] = $id_ped;
-                $info['num_ped'] = $num_ped;
-                $info['pedido_code'] = $code;
+                if($sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)")){
+                    if($sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir)){
+                        if($sqlaux->execute()){
+                            $id_ped = $this->con->insert_id;
+                            $sqlaux->close();
+                            $info['id_ped'] = $id_ped;
+                            $info['num_ped'] = $num_ped;
+                            $info['pedido_code'] = $code;
+                        }else{
+                            $info['db_error'] = $sqlaux->error;
+                        }
+                    }else{
+                        $info['db_error'] = $sqlaux->error;
+                    }
+                }else{
+                    $info['db_error'] = $this->con->error;
+                }
 
             }
 
