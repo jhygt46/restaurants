@@ -19,14 +19,29 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
     $id_user = $_GET["id_user"];
     $that = $core->get_user_local($id_user, $id_loc);
 
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
-
 }
 
 ?>
-
+<script>
+    function tipo_web(a) {
+        var x = (a.value || a.options[a.selectedIndex].value);
+        if(x == 0){
+            document.getElementById('web_min').style.display = 'none';
+        }
+        if(x == 1){
+            document.getElementById('web_min').style.display = 'block';
+        }
+    }
+    function tipo_pos(a) {
+        var x = (a.value || a.options[a.selectedIndex].value);
+        if(x == 0){
+            document.getElementById('pos_min').style.display = 'none';
+        }
+        if(x == 1){
+            document.getElementById('pos_min').style.display = 'block';
+        }
+    }
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -56,16 +71,16 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <?php if(isset($that['tipo']) && $that['tipo'] == 0){ ?>
                         <label class="clearfix">
                             <span><p>Pedidos Web:</p></span>
-                            <select id="pos">
-                                <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                                <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
+                            <select id="pos" onchange="tipo_web(this)">
+                                <option value="0" <?php if($that["save_web"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                                <option value="1" <?php if($that["save_web"] == 1){ ?>selected<?php } ?>>Modificar antes de</option>
                             </select>
                         </label>
                         <label class="clearfix">
                             <span><p>Pedidos Punto de Venta:</p></span>
-                            <select id="pos">
-                                <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                                <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
+                            <select id="pos" onchange="tipo_pos(this)">
+                                <option value="0" <?php if($that["save_pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                                <option value="1" <?php if($that["save_pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
                             </select>
                         </label>
                     <?php } ?>

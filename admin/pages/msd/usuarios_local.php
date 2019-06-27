@@ -33,17 +33,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     }
 }
 ?>
-<script>
-    function tipo(a) {
-        var x = (a.value || a.options[a.selectedIndex].value);
-        if(x == 0){
-            document.getElementById('opciones').style.display = 'block';
-        }
-        if(x == 1){
-            document.getElementById('opciones').style.display = 'none';
-        }
-    }
-</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -76,7 +65,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="v_tipo" name="v_tipo" onchange="tipo(this)">
+                        <select id="v_tipo" name="v_tipo">
                             <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Punto de Venta</option>
                             <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Cocina</option>
                         </select>
