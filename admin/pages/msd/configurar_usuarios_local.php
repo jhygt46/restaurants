@@ -89,7 +89,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                                 <option value="1" <?php if($that["save_pos"] == 2){ ?>selected<?php } ?>>Modificar N vez antes de</option>
                             </select>
                         </label>
-                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1 || $that["pos_web"] == 2) ? 'block' : 'none' ; ?>">
+                        <label class="clearfix" id="pos" style="display: <?php echo ($that["save_pos"] == 1 || $that["save_pos"] == 2) ? 'block' : 'none' ; ?>">
                             <span><p>(minutos)</p></span>
                             <input id="pos_min" type="text" class="inputs" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
                         </label>
