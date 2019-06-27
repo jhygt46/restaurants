@@ -1564,7 +1564,7 @@ class Core{
                 $sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc) VALUES (?, '0', now(), ?, ?)");
                 $sqlaux->bind_param("iii", $num_ped, $code, $id_loc);
                 $sqlaux->execute();
-                $id_ped = $this->con->insert_id;
+                $id_ped = $this->con;
                 $sqlaux->close();
 
                 $info['id_ped'] = $id_ped;
