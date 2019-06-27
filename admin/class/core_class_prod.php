@@ -653,7 +653,7 @@ class Core{
     }
     public function get_usuarios_local($id_loc){
 
-        $sql = $this->con->prepare("SELECT id_user, nombre FROM fw_usuarios WHERE id_loc=? AND id_gir=? AND admin='0' AND eliminado=?");
+        $sql = $this->con->prepare("SELECT id_user, nombre, tipo FROM fw_usuarios WHERE id_loc=? AND id_gir=? AND admin='0' AND eliminado=?");
         $sql->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
