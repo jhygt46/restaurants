@@ -47,30 +47,20 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Accion:</p></span>
-                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_locales', '<?php echo $id_loc; ?>', 'Local', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
+                        <div class="btn_borrar"><div class="btn" onclick="eliminar('eliminar_usuario_local', '<?php echo $id_user; ?>', 'Usuario', '<?php echo $that['nombre']; ?>')">Eliminar</div></div>
                     </label>
                     <label class="clearfix">
-                        <span><p>Sonido:</p></span>
-                        <select id="sonido">
-                            <option value="">Seleccionar</option>
-                            <?php for($i=0; $i<count($sonidos); $i++){ ?>
-                            <option value="<?php echo $sonidos[$i]; ?>" <?php if($sonidos[$i] == $that["sonido"]){ ?>selected<?php } ?>><?php echo $sonidos[$i]; ?></option>
-                            <?php } ?>
+                        <span><p>Pedidos Web:</p></span>
+                        <select id="pos">
+                            <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                            <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
                         </select>
                     </label>
                     <label class="clearfix">
-                        <span><p>Tiempo Retiro: (minutos)</p></span>
-                        <input id="t_retiro" type="text" class="inputs" value="<?php echo $that['t_retiro']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Tiempo Despacho: (minutos)</p></span>
-                        <input id="t_despacho" type="text" class="inputs" value="<?php echo $that['t_despacho']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Punto de Venta:</p></span>
+                        <span><p>Pedidos Punto de Venta:</p></span>
                         <select id="pos">
-                            <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>Ver Pedido</option>
-                            <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Imprimir y Cerrar Pedido</option>
+                            <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
+                            <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
                         </select>
                     </label>
                     <label style="padding-top: 10px">
