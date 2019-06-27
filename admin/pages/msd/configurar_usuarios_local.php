@@ -26,19 +26,19 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
     function tipo_web(a) {
         var x = (a.value || a.options[a.selectedIndex].value);
         if(x == 0){
-            document.getElementById('web_min').style.display = 'none';
+            document.getElementById('web').style.display = 'none';
         }
         if(x == 1){
-            document.getElementById('web_min').style.display = 'block';
+            document.getElementById('web').style.display = 'block';
         }
     }
     function tipo_pos(a) {
         var x = (a.value || a.options[a.selectedIndex].value);
         if(x == 0){
-            document.getElementById('pos_min').style.display = 'none';
+            document.getElementById('pos').style.display = 'none';
         }
         if(x == 1){
-            document.getElementById('pos_min').style.display = 'block';
+            document.getElementById('pos').style.display = 'block';
         }
     }
 </script>
@@ -76,12 +76,20 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                                 <option value="1" <?php if($that["save_web"] == 1){ ?>selected<?php } ?>>Modificar antes de</option>
                             </select>
                         </label>
+                        <label class="clearfix" id="web" style="display: <?php echo ($that["save_web"] == 1) ? 'block' : 'nonde' ; ?>">
+                            <span><p>(minutos)</p></span>
+                            <input id="web_min" type="text" class="inputs" value="<?php echo $that['web_min']; ?>" require="" placeholder="" />
+                        </label>
                         <label class="clearfix">
                             <span><p>Pedidos Punto de Venta:</p></span>
                             <select id="pos" onchange="tipo_pos(this)">
                                 <option value="0" <?php if($that["save_pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
                                 <option value="1" <?php if($that["save_pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
                             </select>
+                        </label>
+                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1) ? 'block' : 'nonde' ; ?>">
+                            <span><p>(minutos)</p></span>
+                            <input id="pos_min" type="text" class="inputs" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
                         </label>
                     <?php } ?>
                     <label style="padding-top: 10px">
