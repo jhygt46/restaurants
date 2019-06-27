@@ -1490,7 +1490,7 @@ class Core{
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
@@ -1542,6 +1542,11 @@ class Core{
             $local_code = $result["code"];
             $enviar_cocina = $result["enviar_cocina"];
 
+            $save_web = $result["save_web"];
+            $web_min = $result["web_min"];
+            $save_pos = $result["save_pos"];
+            $pos_min = $result["pos_min"];
+
             if($id_ped == 0){
 
                 $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
@@ -1568,6 +1573,8 @@ class Core{
 
             }
 
+            
+
             $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
             $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlpaux->execute();
@@ -1580,6 +1587,7 @@ class Core{
             $num_ped = $resultpaux['num_ped'];
             $mod_despacho = $resultpaux['mod_despacho'];
             $sql_tipo = $resultpaux['tipo'];
+            $sql_fecha = strtotime($resultpaux['fecha']);
 
             $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
 
@@ -1636,7 +1644,7 @@ class Core{
             }
 
             if(count($carro) > 0){
-                if($sql_carro == "" || ($mod_despacho == 0 && $sql_tipo == 1)){
+                if($sql_carro == "" || $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min)){
                     
                     $sqlutp = $this->con->prepare("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', mod_despacho='1', total='".$total."' WHERE id_ped=? AND id_loc=?");
                     $sqlutp->bind_param("ii", $id_ped, $id_loc);
@@ -1679,6 +1687,54 @@ class Core{
 
         $sql->close();
         return $info;
+
+    }
+    public function permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min){
+
+        if($sql_tipo == 0){
+            // POS
+            if($save_pos == 0){
+                return false;
+            }
+            $tiempo = $sql_fecha + $pos_min * 60;
+            if(time() < $tiempo){
+                if($save_pos == 1){
+                    if($mod_despacho == 0){
+                        return true;
+                    }
+                    if($mod_despacho == 1){
+                        return false;
+                    }    
+                }
+                if($save_pos == 2){
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        }
+        if($sql_tipo == 1){
+            // WEB
+            if($save_web == 0){
+                return false;
+            }
+            $tiempo = $sql_fecha + $web_min * 60;
+            if(time() < $tiempo){
+                if($save_web == 1){
+                    if($mod_despacho == 0){
+                        return true;
+                    }
+                    if($mod_despacho == 1){
+                        return false;
+                    }    
+                }
+                if($save_web == 2){
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        } 
 
     }
     public function enviar_error(){
