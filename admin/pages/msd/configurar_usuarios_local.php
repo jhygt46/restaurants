@@ -28,7 +28,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         if(x == 0){
             document.getElementById('web').style.display = 'none';
         }
-        if(x == 1){
+        if(x == 1 || x == 2){
             document.getElementById('web').style.display = 'block';
         }
     }
@@ -37,7 +37,7 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
         if(x == 0){
             document.getElementById('pos').style.display = 'none';
         }
-        if(x == 1){
+        if(x == 1 || x == 2){
             document.getElementById('pos').style.display = 'block';
         }
     }
@@ -71,23 +71,25 @@ if(isset($_GET["id_user"]) && is_numeric($_GET["id_user"]) && $_GET["id_user"] !
                     <?php if(isset($that['tipo']) && $that['tipo'] == 0){ ?>
                         <label class="clearfix">
                             <span><p>Pedidos Web:</p></span>
-                            <select id="pos" onchange="tipo_web(this)">
+                            <select id="save_web" onchange="tipo_web(this)">
                                 <option value="0" <?php if($that["save_web"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                                <option value="1" <?php if($that["save_web"] == 1){ ?>selected<?php } ?>>Modificar antes de</option>
+                                <option value="1" <?php if($that["save_web"] == 1){ ?>selected<?php } ?>>Modificar 1 vez antes de</option>
+                                <option value="2" <?php if($that["save_web"] == 2){ ?>selected<?php } ?>>Modificar N vez antes de</option>
                             </select>
                         </label>
-                        <label class="clearfix" id="web" style="display: <?php echo ($that["save_web"] == 1) ? 'block' : 'none' ; ?>">
+                        <label class="clearfix" id="web" style="display: <?php echo ($that["save_web"] == 1 || $that["save_web"] == 2) ? 'block' : 'none' ; ?>">
                             <span><p>(minutos)</p></span>
                             <input id="web_min" type="text" class="inputs" value="<?php echo $that['web_min']; ?>" require="" placeholder="" />
                         </label>
                         <label class="clearfix">
                             <span><p>Pedidos Punto de Venta:</p></span>
-                            <select id="pos" onchange="tipo_pos(this)">
+                            <select id="save_pos" onchange="tipo_pos(this)">
                                 <option value="0" <?php if($that["save_pos"] == 0){ ?>selected<?php } ?>>No Modificar</option>
-                                <option value="1" <?php if($that["save_pos"] == 1){ ?>selected<?php } ?>>Si Modificar</option>
+                                <option value="1" <?php if($that["save_pos"] == 1){ ?>selected<?php } ?>>Modificar 1 vez antes de</option>
+                                <option value="1" <?php if($that["save_pos"] == 2){ ?>selected<?php } ?>>Modificar N vez antes de</option>
                             </select>
                         </label>
-                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1) ? 'block' : 'none' ; ?>">
+                        <label class="clearfix" id="pos" style="display: <?php echo ($that["pos_web"] == 1 || $that["pos_web"] == 2) ? 'block' : 'none' ; ?>">
                             <span><p>(minutos)</p></span>
                             <input id="pos_min" type="text" class="inputs" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
                         </label>

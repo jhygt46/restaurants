@@ -54,6 +54,9 @@ class Guardar{
             if($_POST['accion'] == "configurar_local"){
                 return $this->configurar_local();
             }
+            if($_POST['accion'] == "configurar_usuario_local"){
+                return $this->configurar_usuario_local();
+            }
             if($_POST['accion'] == "crear_locales_tramos"){
                 return $this->crear_locales_tramos();
             }
@@ -1632,6 +1635,53 @@ class Guardar{
 
         return $info;
         
+    }
+    private function configurar_usuario_local(){
+
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id_user = $_POST['id_user'];
+            $id_loc = $_POST['id_loc'];
+
+            $save_web = $_POST['save_web'];
+            $web_min = $_POST['web_min'];
+            
+            $save_pos = $_POST['save_pos'];
+            $pos_min = $_POST['pos_min'];
+
+            $sqlloc = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=? AND id_loc=? AND id_gir=? AND eliminado=?");
+            $sqlloc->bind_param("iiii", $id_user, $id_loc, $this->id_gir, $this->eliminado);
+            $sqlloc->execute();
+            $sqlloc->store_result();
+            if($sqlloc->{"num_rows"} == 1){
+                $sql = $this->con->prepare("UPDATE fw_usuarios SET save_web=?, web_min=?, save_pos=?, pos_min=? WHERE id_user=?");
+                $sql->bind_param("iiiii", $save_web, $web_min, $save_pos, $pos_min, $id_user);
+                if($sql->execute()){
+                    $info['op'] = 1;
+                    $info['mensaje'] = "Usuario editado exitosamente";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Error";
+                    $this->registrar(6, 0, 0, 'conf usuario local');
+                }
+                $sql->close();
+            }
+            if($sqlloc->{"num_rows"} == 0){
+                $info['op'] = 2;
+                $info['mensaje'] = "Error";
+                $this->registrar(7, 0, 0, 'sin acceso usuario local');
+            }
+
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+            $this->registrar(2, 0, 0, 'conf usuario local');
+        }
+
+
+
     }
     private function configurar_local(){
 
