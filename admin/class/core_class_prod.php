@@ -1128,6 +1128,8 @@ class Core{
             $sqlpus->close();
 
             $info['puser'] = $resulpus;
+            $info['nombre'] = $resulpus['nombre'];
+            $info['telefono'] = $resulpus['telefono'];
 
             if($result["despacho"] == 1 && $result["id_pdir"] != 0){
 
@@ -1138,7 +1140,13 @@ class Core{
                 $sqlpdi->free_result();
                 $sqlpdi->close();
 
-                $info['pdir'] = $resulpdi;
+                $info['calle'] = $resulpdi['calle'];
+                $info['num'] = $resulpdi['num'];
+                $info['depto'] = $resulpdi['depto'];
+                $info['direccion'] = $resulpdi['direccion'];
+                $info['comuna'] = $resulpdi['comuna'];
+                $info['lat'] = $resulpdi['lat'];
+                $info['lng'] = $resulpdi['lng'];
 
             }
 
