@@ -1144,8 +1144,8 @@ class Core{
 
             $info['id_ped'] = $result['id_ped'];
             $info['num_ped'] = $result['num_ped'];
-            $info['carro'] = $result['carro'];
-            $info['promos'] = $result['promos'];
+            $info['carro'] = json_decode($result['carro']);
+            $info['promos'] = json_decode($result['promos']);
             
             $info['pre_wasabi'] = $result['pre_wasabi'];
             $info['pre_gengibre'] = $result['pre_gengibre'];
