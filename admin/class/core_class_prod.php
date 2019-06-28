@@ -1113,10 +1113,6 @@ class Core{
         $sql->bind_param("ssi", $code, $host, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
-        $info['op'] = 2;
-        $info['res'] = $res;
-        $info['code'] = $code;
-        $info['host'] = $host;
 
         if($res->{"num_rows"} == 1){
 
@@ -1124,7 +1120,6 @@ class Core{
             $sql->free_result();
             $sql->close();
 
-            /*
             $sqlpus = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=?");
             $sqlpus->bind_param("i", $result["id_puser"]);
             $sqlpus->execute();
@@ -1146,7 +1141,6 @@ class Core{
                 $info['pdir'] = $resulpdi;
 
             }
-            */
 
             $info['id_ped'] = $result['id_ped'];
             $info['num_ped'] = $result['num_ped'];
@@ -1286,7 +1280,7 @@ class Core{
 
         if($sql->{"num_rows"} == 1){
 
-            $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
+            $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC");
             $sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlped->execute();
             $resultped = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -1357,7 +1351,7 @@ class Core{
     }
     public function get_ultimos_pedidos_pos($id_loc){
 
-        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_loc=? AND eliminado=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
+        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_loc=? AND eliminado=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY) ORDER BY id_ped DESC");
         $sql->bind_param("ii", $id_loc, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result();
