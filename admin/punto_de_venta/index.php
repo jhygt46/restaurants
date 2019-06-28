@@ -21,7 +21,7 @@ $info = $core->get_data_pos();
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
             var aud = new Audio('/audios/<?php echo $info['sonido']; ?>.mp3');
-            var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
+            var tipo_comanda = 0;
             var local_lat = '<?php echo $info['lat']; ?>';
             var local_lng = '<?php echo $info['lng']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
