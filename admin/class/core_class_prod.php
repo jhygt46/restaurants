@@ -1225,7 +1225,6 @@ class Core{
         $sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
-        //$sql = $this->con->prepare("SELECT t2.item_pos, t2.code as js_data, t2.font_family, t2.font_css, t2.estados, t1.t_retiro, t1.t_despacho, t2.dominio, t1.lat, t1.lng, t1.code, t1.nombre, t1.tipo_comanda, t1.sonido, t2.ssl FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.cookie_code=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
         
         if($res->{"num_rows"} == 0){
             die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
@@ -1246,22 +1245,7 @@ class Core{
             $info['dominio'] = $result['dominio'];
             $info['ssl'] = $result['ssl'];
             $info['dns'] = $result['dns'];
-            /*
-            $info['code'] = $result['code'];
-            $info['nombre'] = $result['nombre'];
-            $info['tipo_comanda'] = $result['tipo_comanda'];
-            $info['sonido'] = $result['sonido'];
-            $info['ssl'] = $result['ssl'];
-            
-            $info['js_data'] = $result['js_data'].".js";
-            $info['dominio'] = $result['dominio'];
-            $info['t_retiro'] = $result['t_retiro'];
-            $info['t_despacho'] = $result['t_despacho'];
-            $info['estados'] = explode(",", $result['estados']);
-            $info['font']['family'] = $result['font_family'];
-            $info['font']['css'] = $result['font_css'];
-            $info['path'] = ($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") ? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"] ;
-            */
+
             return $info;
 
         }

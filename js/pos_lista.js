@@ -1573,7 +1573,7 @@ function get_url(pedido){
             var url = 'https://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
         }
     }
-
+    url = url+'&ft=1';
     return url;
 
 }
