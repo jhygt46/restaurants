@@ -1545,10 +1545,8 @@ function guardar_pedido(index, open){
             listar_pedidos(pedidos);
 
             if(open){
-                if(tipo_comanda == 0 || tipo_comanda == 1){
-                    if(proceso(pedido)){
-                        window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
-                    }
+                if(proceso(pedido)){
+                    window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
                 }
             }
             
