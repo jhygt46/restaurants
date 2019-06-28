@@ -1104,13 +1104,16 @@ class Core{
         $sqlmod->close();
         */
     }
-    public function ver_detalle($code){
+    public function ver_detalle(){
         
+        $code = $_POST["code"];
+        $host = $_POST["host"];
+
         $sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
-        $sql->bind_param("isi", $code, $_SERVER["HTTP_HOST"], $this->eliminado);
+        $sql->bind_param("isi", $code, $host, $this->eliminado);
         $sql->execute();
         $sql->store_result();
-        $info['op'] = false;
+        $info['op'] = 2;
 
         if($sql->{"num_rows"} == 1){
 
@@ -1118,22 +1121,7 @@ class Core{
             $sql->free_result();
             $sql->close();
 
-            $path = ($result["ssl"] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") ? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"] ;
-            $info['css_base'] = $path."/css/reset.css";
-            $info['css_detalle'] = $path."/css/css_detalle_01.css";
-
-            $sqlloc = $this->con->prepare("SELECT id_loc, nombre FROM locales WHERE id_loc=? AND eliminado=?");
-            $sqlloc->bind_param("ii", $result["id_loc"], $this->eliminado);
-            $sqlloc->execute();
-            $resulloc = $sqlloc->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-            $sqlloc->free_result();
-            $sqlloc->close();
-
-            $info['local'] = $resulloc["nombre"];
-            $info['js_jquery'] = $path."/js/jquery-1.3.2.min.js";
-            $info['js_data'] = $path."/js/data/".$result['code'].".js";
-            $info['js_detalle'] = $path."/js/detalle.js";
-
+            /*
             $sqlpus = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=?");
             $sqlpus->bind_param("i", $result["id_puser"]);
             $sqlpus->execute();
@@ -1155,7 +1143,8 @@ class Core{
                 $info['pdir'] = $resulpdi;
 
             }
-
+            */
+            
             $info['id_ped'] = $result['id_ped'];
             $info['num_ped'] = $result['num_ped'];
             $info['carro'] = $result['carro'];
@@ -1176,7 +1165,7 @@ class Core{
             $info['verify_despacho'] = $result['verify_despacho'];
             $info['verify_direccion'] = 0;
             
-            $info['op'] = true;
+            $info['op'] = 1;
 
         }
         
@@ -1774,6 +1763,26 @@ class Core{
             }
             
         }
+
+    }
+    public function get_pedido(){
+
+        if($this->verificar()){
+
+            $info["verificado"] = 1;
+            $info["host"] = $_POST["host"];
+            $info['server'] = $_SERVER;
+
+        }
+
+        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_puser=? AND codigo=? AND telefono=?");
+        $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
+        $sql->execute();
+        $res = $sql->get_result();
+        if($res->{'num_rows'} == 1){
+
+        }
+        $sql->close();
 
     }
     public function enviar_pedido(){
