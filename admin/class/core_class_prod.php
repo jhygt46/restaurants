@@ -1114,6 +1114,9 @@ class Core{
         $sql->execute();
         $res = $sql->get_result();
         $info['op'] = 2;
+        $info['res'] = $res;
+        $info['code'] = $code;
+        $info['host'] = $host;
 
         if($res->{"num_rows"} == 1){
 
