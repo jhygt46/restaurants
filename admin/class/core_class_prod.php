@@ -1537,7 +1537,6 @@ class Core{
             $costo = intval($pedido->{'costo'});
             $total = intval($pedido->{'total'});
 
-            $info["alert"] = "";
             $id_gir = $result["id_gir"];
             $id_loc = $result["id_loc"];
             $local_code = $result["code"];

@@ -1530,7 +1530,7 @@ function guardar_pedido(index, open){
             
             console.log(data);
 
-            /*
+            
             var info = JSON.parse(data);
 
             if(pedidos[index].id_ped == 0){
@@ -1547,8 +1547,7 @@ function guardar_pedido(index, open){
                 cambiar_total(index, aux_total);
             }
 
-            set_pedidos(pedidos);
-            listar_pedidos();
+            listar_pedidos(pedidos);
 
             if(open){
                 if(tipo_comanda == 0 || tipo_comanda == 1){
@@ -1557,7 +1556,7 @@ function guardar_pedido(index, open){
                     }
                 }
             }
-            */
+            
             
         }, error: function(e){
             console.log(e);
