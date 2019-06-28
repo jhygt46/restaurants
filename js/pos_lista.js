@@ -1526,12 +1526,7 @@ function guardar_pedido(index, open){
         url: "/admin/ajax/set_pos_pedido.php",
         type: "POST",
         data: send,
-        success: function(data){
-            
-            console.log(data);
-
-            
-            var info = JSON.parse(data);
+        success: function(info){
 
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
