@@ -21,12 +21,11 @@ $info = $core->get_data_pos();
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
             var aud = new Audio('/audios/<?php echo $info['sonido']; ?>.mp3');
-            //var local_code = '<?php echo $info['code']; ?>';
             var tipo_comanda = '<?php echo $info['tipo_comanda']; ?>';
             var local_lat = '<?php echo $info['lat']; ?>';
             var local_lng = '<?php echo $info['lng']; ?>';
-            //var ssl = '<?php echo $info['ssl']; ?>';
-            //var dominio = '<?php echo $info['dominio']; ?>';
+            var ssl = '<?php echo $info['ssl']; ?>';
+            var dominio = '<?php echo $info['dominio']; ?>';
             var tiempos = { retiro: <?php echo $info['t_retiro']; ?>, despacho: <?php echo $info['t_despacho']; ?> };
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
