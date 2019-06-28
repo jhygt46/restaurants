@@ -1245,6 +1245,7 @@ class Core{
             $info['t_despacho'] = $result['t_despacho'];
             $info['dominio'] = $result['dominio'];
             $info['ssl'] = $result['ssl'];
+            $info['dns'] = $result['dns'];
             /*
             $info['code'] = $result['code'];
             $info['nombre'] = $result['nombre'];
