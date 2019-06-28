@@ -1248,6 +1248,7 @@ class Core{
             $info['estados'] = explode(",", $result['estados']);
             $info['t_retiro'] = $result['t_retiro'];
             $info['t_despacho'] = $result['t_despacho'];
+            $info['dominio'] = $result['dominio'];
             /*
             $info['code'] = $result['code'];
             $info['nombre'] = $result['nombre'];
