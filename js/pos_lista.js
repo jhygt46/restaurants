@@ -1561,20 +1561,20 @@ function guardar_pedido(index, open){
 }
 function get_url(pedido){
 
-    if(tipo_comanda == 0){
-        var aux = "ver";
-    }
-    if(tipo_comanda == 1){
-        var aux = "prt";
-    }
     var code = pedido.pedido_code;
-    if(ssl == 0){
-        var url = 'http://'+dominio;
+    if(dns == 0){
+        var url = 'http://35.192.157.227/detalle.php?url='+dominio+'&code='+code+'&tc='+tipo_comanda;
     }
-    if(ssl == 1){
-        var url = 'https://'+dominio;
+    if(dns == 1){
+        if(ssl == 0){
+            var url = 'http://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+        }
+        if(ssl == 1){
+            var url = 'https://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+        }
     }
-    return url+'/'+aux+'/'+code;
+
+    return url;
 
 }
 function change_despacho(that){
