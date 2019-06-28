@@ -82,9 +82,9 @@ function add_carro_producto(id_pro){
     pedidos[seleccionado].carro.push(item_carro);
     set_pedidos(pedidos);
     if(producto.preguntas){
-        mostrar_pregunta(pedido.carro.length - 1);
+        mostrar_pregunta(pedidos[seleccionado].carro.length - 1);
     }
-    listar_pedidos();
+    listar_pedidos(pedidos);
 
 }
 function add_carro_promocion(id_cae){
