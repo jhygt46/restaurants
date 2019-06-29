@@ -68,7 +68,6 @@ function init_map(){
 function add_carro_producto(id_pro){
 
     var pedidos = get_pedidos();
-    
     var producto = get_producto(id_pro);
     var item_carro = { id_pro: parseInt(id_pro) };
     
@@ -78,12 +77,13 @@ function add_carro_producto(id_pro){
             item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
         }
     }
+
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
-    set_pedidos(pedidos);
     if(producto.preguntas){
         mostrar_pregunta(pedidos[seleccionado].carro.length - 1);
     }
+
     listar_pedidos(pedidos);
 
 }
@@ -255,7 +255,7 @@ function send_chat(){
 }
 function socket_init(){
     
-    var code = localStorage.getItem("local_code");
+    var code = localStorage.getItem("code");
     if(code != ""){
 
         console.log("socket init: "+code);
@@ -307,7 +307,7 @@ function socket_init(){
         socket.on('disconnect', function() {
             $('.alert_socket').show();
         });
-        //localStorage.setItem('local_code', '');
+        //localStorage.setItem('code', '');
 
     }else{
         $(location).attr('href','/admin');

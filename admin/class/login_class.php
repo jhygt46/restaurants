@@ -210,6 +210,7 @@ class Login {
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $info['local_code'] = $res_glocal["local_code"];
+                            $info['code'] = $res_glocal["code"];
                             
                             if($res_glocal['dns'] == 1 && $res_glocal['ssl'] == 1){
                                 $info['data'] = 'https://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';

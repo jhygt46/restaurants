@@ -64,7 +64,7 @@
                             setCookie('user_code', data.user_code, 16);
                             setCookie('local_code', data.local_code, 16);
                             setCookie('data', data.data, 16);
-                            localStorage.setItem('local_code', data.local_code);
+                            localStorage.setItem('code', data.code);
                             setTimeout(function () {
                                 $(location).attr('href','/'+data.url);
                             }, 2000);
