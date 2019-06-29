@@ -2,7 +2,7 @@ $(document).ready(function(){
     socket_init();
     listar_pedidos(pedidos);
     modificar_horas();
-    //gmap_input();
+    gmap_input();
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
