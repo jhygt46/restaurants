@@ -1286,17 +1286,17 @@ class Core{
             $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC");
             $sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlped->execute();
-            $resultped = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $row = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC)[0];
             $sqlped->free_result();
             $sqlped->close();
 
-            $res['id_ped'] = $resultped['id_ped'];
-            $res['num_ped'] = $resultped['num_ped'];
-            $res['pedido_code'] = $resultped['code'];
-            $res['tipo'] = $resultped['tipo'];
-            $res['estado'] = $resultped['estado'];
-            $res['fecha'] = strtotime($resultped['fecha']);
-            $res['despacho'] = $resultped['despacho'];
+            $res['id_ped'] = $row['id_ped'];
+            $res['num_ped'] = $row['num_ped'];
+            $res['pedido_code'] = $row['code'];
+            $res['tipo'] = $row['tipo'];
+            $res['estado'] = $row['estado'];
+            $res['fecha'] = strtotime($row['fecha']);
+            $res['despacho'] = $row['despacho'];
 
             $res['carro'] = ($row['carro'] != "") ? json_decode($row['carro']) : [] ;
             $res['promos'] = ($row['promos'] != "") ? json_decode($row['promos']) : [] ;
