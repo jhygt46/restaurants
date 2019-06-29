@@ -1274,7 +1274,7 @@ class Core{
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
-        
+
         if($res->{'num_rows'} == 0){
 
             $info['op'] = 2;
@@ -1282,6 +1282,7 @@ class Core{
         }
         if($res->{'num_rows'} == 1){
 
+            $id_loc = $res->fetch_all(MYSQLI_ASSOC)[0]["id_loc"];
             $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC");
             $sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlped->execute();
