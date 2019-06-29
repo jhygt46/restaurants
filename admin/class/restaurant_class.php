@@ -16,17 +16,18 @@ class Rest{
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         
     }
+    /*
     public function get_info(){
         
         $accion = $_POST["accion"]; 
-        /*       
+           
         if($accion == "enviar_pedido"){
             return $this->enviar_pedido();
         }
         if($accion == "despacho_domicilio"){
             return $this->get_info_despacho($_POST["lat"], $_POST["lng"]);
         }
-        */
+        
         if($accion == "get_users_pedido"){
             return $this->get_users_pedido($_POST["telefono"]);
         }
@@ -390,7 +391,6 @@ class Rest{
         }
         
     }
-    /*
     public function enviar_pedido(){
         
         $info['op'] = 1;        
@@ -571,7 +571,6 @@ class Rest{
         return $info;
         
     }
-    */
     public function enviar_chat(){
 
         $id_ped = $_POST["id_ped"];
@@ -614,7 +613,7 @@ class Rest{
         return $info;
 
     }
-    /*
+    */
     public function get_info_despacho($lat, $lng){
 
         $polygons = $this->get_polygons();
@@ -660,10 +659,8 @@ class Rest{
     }
     public function get_polygons(){
 
-        $referer = ($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl") ? $_POST["referer"] : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
-
-        $sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.dominio=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
-        $sql->bind_param("iii", $referer, $this->eliminado, $this->eliminado);
+        $sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
+        $sql->bind_param("iii", $_POST["id"], $this->eliminado, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         $sql->free_result();
@@ -672,7 +669,7 @@ class Rest{
         return $result;
         
     }
-    */
+    
     
 }
 // QUE ME DEVUELTA CATEGORIA Y SUS VALORES

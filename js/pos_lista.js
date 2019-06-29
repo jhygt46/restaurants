@@ -1767,7 +1767,7 @@ function gmap_input(){
                     $('#comuna').val(places[0].address_components[i].long_name);
                 }
             }
-            var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: dominio };
+            var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), id: id };
             
             $.ajax({
                 url: "/ajax/index.php",

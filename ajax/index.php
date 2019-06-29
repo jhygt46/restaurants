@@ -1,11 +1,11 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
-
-require_once("/var/www/html/restaurants/admin/class/restaurant_class.php");
-$rest = new Rest();
-echo json_encode($rest->get_info());
+    if($_POST["accion"] == "despacho_domicilio"){
+        require_once "../admin/class/restaurant_class.php";
+        $core = new Core();
+        $info = $core->get_info_despacho($_POST["lat"], $_POST["lng"]);
+        echo json_encode($info);
+    }
 
 ?>
 
