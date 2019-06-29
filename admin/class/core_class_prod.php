@@ -1273,16 +1273,16 @@ class Core{
         $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.id_loc FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
-        $res = $sql->get_result();
+        $resu = $sql->get_result();
 
-        if($res->{'num_rows'} == 0){
+        if($resu->{'num_rows'} == 0){
 
             $info['op'] = 2;
 
         }
-        if($res->{'num_rows'} == 1){
+        if($resu->{'num_rows'} == 1){
 
-            $id_loc = $res->fetch_all(MYSQLI_ASSOC)[0]["id_loc"];
+            $id_loc = $resu->fetch_all(MYSQLI_ASSOC)[0]["id_loc"];
             $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC");
             $sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlped->execute();
@@ -1344,7 +1344,7 @@ class Core{
                 $res['comuna'] = $pedido_direccion['num'];
 
             }
-
+            
         }
 
         $sql->free_result();
