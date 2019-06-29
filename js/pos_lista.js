@@ -318,7 +318,7 @@ function agregar_pedido(id){
 
     var send = { id_ped: id };
     $.ajax({
-        url: "ajax/get_pedido.php",
+        url: "/admin/ajax/get_pos_pedido.php",
         type: "POST",
         data: send,
         success: function(data){
@@ -1523,7 +1523,7 @@ function guardar_pedido(index, open){
     var send = { accion: 'guardar_pedido', pedido: JSON.stringify(pedido) };
 
     $.ajax({
-        url: "/admin/ajax/set_pos_pedido.php",
+        url: "/admin/ajax/get_pos_pedido.php",
         type: "POST",
         data: send,
         success: function(info){

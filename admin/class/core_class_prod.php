@@ -1265,15 +1265,22 @@ class Core{
     }
     public function get_ultimos_pedidos($id_ped){
         
-        $id_loc = $_COOKIE['ID'];
-        $cookie_code = $_COOKIE['CODE'];
+        $ip = $this->getUserIpAddr();
+        $id = $_COOKIE["id"];
+        $user_code = $_COOKIE["user_code"];
+        $local_code = $_COOKIE["local_code"];
 
-        $sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND cookie_code=? AND eliminado=?");
-        $sql->bind_param("isi", $id_loc, $cookie_code, $this->eliminado);
+        $sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.id_loc FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
-        $sql->store_result();
+        $res = $sql->get_result();
+        
+        if($res->{'num_rows'} == 0){
 
-        if($sql->{"num_rows"} == 1){
+            $info['op'] = 2;
+
+        }
+        if($res->{'num_rows'} == 1){
 
             $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC");
             $sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
