@@ -209,8 +209,6 @@ class Login {
                             $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                            $info['local_code'] = $res_glocal["local_code"];
-                            $info['code'] = $res_glocal["code"];
                             
                             if($res_glocal['dns'] == 1 && $res_glocal['ssl'] == 1){
                                 $info['data'] = 'https://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
@@ -235,6 +233,7 @@ class Login {
                                 $info['user_code'] = $code_cookie_user;
                                 $info['local_code'] = $code_cookie_local;
                                 $ip = $this->getUserIpAddr();
+                                $info['code'] = $res_glocal["local_code"];
 
                                 $sqlul = $this->con->prepare("UPDATE locales SET cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?");
                                 $sqlul->bind_param("ssii", $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado);
@@ -253,6 +252,7 @@ class Login {
                                 $info['op'] = 4;
                                 $info['url'] = 'admin/cocina/';
                                 $info['message'] = "Ingreso Exitoso Cocina";
+                                $info['code'] = $res_glocal["local_code"];
 
                             }
 
