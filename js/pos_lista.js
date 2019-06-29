@@ -1768,10 +1768,9 @@ function gmap_input(){
                 }
             }
             var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), referer: dominio };
-            console.log(send);
-
+            
             $.ajax({
-                url: "ajax/index.php",
+                url: "/admin/ajax/index.php",
                 type: "POST",
                 data: send,
                 success: function(datas){
