@@ -67,7 +67,7 @@
                             setCookie('data', data.data, 16);
                             localStorage.setItem('code', data.code);
                             setTimeout(function () {
-                                //$(location).attr('href','/'+data.url);
+                                $(location).attr('href','/'+data.url);
                             }, 2000);
 
                         }
@@ -77,7 +77,7 @@
                             setCookie('data', data.data, 16);
                             localStorage.setItem('code', data.code);
                             setTimeout(function () {
-                                //$(location).attr('href','/'+data.url);
+                                $(location).attr('href','/'+data.url);
                             }, 2000);
 
                         }
