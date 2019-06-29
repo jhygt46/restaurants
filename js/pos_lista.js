@@ -324,8 +324,9 @@ function agregar_pedido(id){
         success: function(data){
             
             sound(aud1);
-            var info = JSON.parse(data);
-            nuevo(info[0]);
+            console.log(data);
+            //var info = JSON.parse(data);
+            //nuevo(info[0]);
             
         }, error: function(e){
             console.log(e);
