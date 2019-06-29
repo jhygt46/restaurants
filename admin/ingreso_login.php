@@ -47,6 +47,7 @@
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){
 
+                        console.log(data);
                         if(data.op == 1){
                             bien(data.message);
                             setTimeout(function () {
@@ -66,7 +67,7 @@
                             setCookie('data', data.data, 16);
                             localStorage.setItem('code', data.code);
                             setTimeout(function () {
-                                $(location).attr('href','/'+data.url);
+                                //$(location).attr('href','/'+data.url);
                             }, 2000);
 
                         }
@@ -74,9 +75,9 @@
 
                             bien(data.message);
                             setCookie('data', data.data, 16);
-                            localStorage.setItem('local_code', data.local_code);
+                            localStorage.setItem('code', data.code);
                             setTimeout(function () {
-                                $(location).attr('href','/'+data.url);
+                                //$(location).attr('href','/'+data.url);
                             }, 2000);
 
                         }
