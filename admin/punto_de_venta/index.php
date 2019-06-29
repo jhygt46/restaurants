@@ -22,7 +22,7 @@ $info = $core->get_data_pos();
         <script>
             var aud = new Audio('/audios/<?php echo $info['sonido']; ?>.mp3');
             var tipo_comanda = 0;
-            var id = '<?php echo $info['id_gir']; ?>';
+            var id = '<?php echo $info['id']; ?>';
             var local_lat = '<?php echo $info['lat']; ?>';
             var local_lng = '<?php echo $info['lng']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
