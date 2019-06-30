@@ -268,17 +268,7 @@ function get_producto(id_pro){
         }
     }
 }
-function create_element_class(clase){
-    var Div = document.createElement('div');
-    Div.className = clase;
-    return Div;
-}
-function create_element_class_inner(clase, value){
-    var Div = document.createElement('div');
-    Div.className = clase;
-    Div.innerHTML = value;
-    return Div;
-}
+
 
 
 function ver_motos_mapa(){

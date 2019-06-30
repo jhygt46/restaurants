@@ -342,3 +342,14 @@ function pedido_obj(){
         ocultar: 0
     };
 }
+function create_element_class(clase){
+    var Div = document.createElement('div');
+    Div.className = clase;
+    return Div;
+}
+function create_element_class_inner(clase, value){
+    var Div = document.createElement('div');
+    Div.className = clase;
+    Div.innerHTML = value;
+    return Div;
+}
