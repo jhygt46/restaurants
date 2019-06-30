@@ -24,6 +24,7 @@ html body .contenedor .pop_up {
   top: 0px;
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
+  display: none;
 }
 html body .contenedor .pop_up .cont_pop_up {
   position: relative;
@@ -37,6 +38,38 @@ html body .contenedor .pop_up .cont_pop_up .nuevo {
   max-height: 560px;
   background: #fff;
   border-radius: 12px;
+}
+html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .titulo {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  background: #999;
+}
+html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cerrar {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0px;
+  right: 0px;
+  z-index: 3;
+  background: #000;
+}
+html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .informacion {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background: #ded;
 }
 
 @media only screen and (max-width: 768px) {
