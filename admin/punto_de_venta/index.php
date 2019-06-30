@@ -196,7 +196,6 @@ $info = $core->get_data_pos();
                     </div>
                 </div>
             </div>
-            
             <div class="cont_sis clearfix">
                 <div class="alert_socket">
                     <div class="text">
