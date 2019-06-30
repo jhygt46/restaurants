@@ -3,6 +3,7 @@ $(document).ready(function(){
     listar_pedidos(pedidos);
     modificar_horas();
     gmap_input();
+    resize();
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
@@ -16,6 +17,16 @@ var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
 
+function resize(){
+    var w = window.outerWidth;
+    if(w <= 768){
+        // VERSION MOBILE
+        console.log("-V mobile");
+    }else{
+        // VERSION WEB
+        console.log("-V web");
+    }
+}
 function listar_pedidos(n){
     
     if(n !== undefined){

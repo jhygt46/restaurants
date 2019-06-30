@@ -195,11 +195,6 @@ function sound(aud){
         playPromise.catch(() => { aud.play() })
     }
 }
-
-
-
-
-
 function ver_motos_mapa(){
     
     // INICIAR MAPA
@@ -800,7 +795,6 @@ function tiene_pregunta(carro){
     }
     return false;
 }
-
 function np_close(that){
     
     $('.pop_up').hide();
@@ -1018,7 +1012,6 @@ function add_pedido_moto(id_mot, code){
         error: function(err){}
     });
 }
-
 function nuevo(data){
 
     var obj = pedido_obj();
@@ -1076,7 +1069,6 @@ function add_pedido(obj){
 function set_pedidos(pedidos){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
-
 function eliminar_pedido(){
     
     var pedidos = get_pedidos();
@@ -1276,25 +1268,6 @@ function cambiar_total(index, total){
     });
     
 }
-/*
-function eliminar_pedido(){
-    var pedidos = get_pedidos();
-    pedidos[seleccionado].eliminado = 1;
-    set_pedidos(pedidos);
-    listar_pedidos();
-    $('.p1').hide();
-    $('.pop_up').hide();
-}
-function ocultar_pedido(){
-    var pedidos = get_pedidos();
-    pedidos[seleccionado].ocultar = 1;
-    set_pedidos(pedidos);
-    listar_pedidos();
-    $('.p1').hide();
-    $('.pop_up').hide();
-}
-*/
-
 function telefono_keyup(e){
 
     var len = e.value;

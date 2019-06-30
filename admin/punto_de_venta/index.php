@@ -36,7 +36,7 @@ $info = $core->get_data_pos();
         <script src="/js/pos_lista_.js" type="text/javascript"></script>
         <script src="/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body onresize="resize()">
         <div class="contenedor">
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
