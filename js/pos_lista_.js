@@ -16,18 +16,19 @@ var crear_nuevo = 0;
 var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
+var version = 0;
 
 function resize(){
 
     var w = window.innerWidth;
     if(w <= 768){
         // VERSION MOBILE
-        console.log("-V mobile");
+        version = 0;
     }else{
         // VERSION WEB
-        console.log("-V web");
+        version = 1;
     }
-    
+
 }
 function listar_pedidos(n){
     
