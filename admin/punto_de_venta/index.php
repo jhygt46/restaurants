@@ -250,8 +250,10 @@ $info = $core->get_data_pos();
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"></div>
-                            <div class="informacion">
-                                <div style="height: 1000px; width: 100%; background: #dee"></div>
+                            <div class="cont_info">
+                                <div class="informacion">
+                                    <div class="lista"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
