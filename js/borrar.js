@@ -252,22 +252,7 @@ function categorias_base(n){
     }
     
 }
-function get_categoria(id_cae){
-    var categorias = data.catalogos[catalogo].categorias;
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].id_cae == id_cae){
-            return categorias[i];
-        }
-    }
-}
-function get_producto(id_pro){
-    var productos = data.catalogos[catalogo].productos;
-    for(var i=0, ilen=productos.length; i<ilen; i++){
-        if(productos[i].id_pro == id_pro){
-            return productos[i];
-        }
-    }
-}
+
 
 
 
