@@ -261,10 +261,11 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 }
 @media only screen and (min-width: 769px) {
   .contenedor .contenido .pedidos {
-    width: 42%;
+    width: 40%;
     height: 100%;
     background: #ddd;
     float: left;
+    padding: 1%;
   }
   .contenedor .contenido .categorias {
     width: 25%;
