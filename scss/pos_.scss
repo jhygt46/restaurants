@@ -7,6 +7,18 @@ html {
         .contenedor{
             height: 100%;
             position: relative;
+            .contenido{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+            .pop_up{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+            }
         }
     }
 }
@@ -14,14 +26,44 @@ html {
 @media only screen and (max-width: 768px){
 
     .contenedor{
-        background: #f00;
+        .contenido{
+            .pedidos{
+                width: 100%;
+                height: 100%;
+                background: #ddd;
+            }
+            .categorias{
+                
+            }
+            .productos{
+                
+            }
+            .configuracion{
+                
+            }
+        }
     }
 
 }
 @media only screen and (min-width: 769px){
 
     .contenedor{
-        background: #f0f;
+        .contenido{
+            .pedidos{
+                width: 360px;
+                height: 100%;
+                background: #ddd;
+            }
+            .categorias{
+                
+            }
+            .productos{
+                
+            }
+            .configuracion{
+                
+            }
+        }
     }
 
 }

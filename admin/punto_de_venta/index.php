@@ -38,7 +38,7 @@ $info = $core->get_data_pos();
     </head>
     <body onresize="resize()">
         <div class="contenedor">
-            
+
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
                     <div class="p1 nuevo_pedido vhalign" style="display: none">
@@ -245,7 +245,12 @@ $info = $core->get_data_pos();
             </div>
 
             <div class="pop_up"></div>
-            <div class="contenido"></div>
+            <div class="contenido">
+                <div class="pedidos"></div>
+                <div class="categorias"></div>
+                <div class="productos"></div>
+                <div class="configuracion"></div>
+            </div>
             
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY&libraries=places&callback=init_map"></script>
