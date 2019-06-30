@@ -16,6 +16,13 @@ html body .contenedor .contenido {
   height: 100%;
   z-index: 1;
 }
+html body .contenedor .contenido .pedidos .pedido {
+  width: 100%;
+  height: 80px;
+  position: relative;
+  background: #eee;
+  margin-bottom: 8px;
+}
 html body .contenedor .pop_up {
   height: 100%;
   position: absolute;
