@@ -252,7 +252,9 @@ $info = $core->get_data_pos();
                             <div class="titulo"></div>
                             <div class="cont_info">
                                 <div class="informacion">
-                                    <div class="lista"></div>
+                                    <div class="lista">
+                                        <?php for($i=0; $i<100; $i++){ ?><div class="item"></div><?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>

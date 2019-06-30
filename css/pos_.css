@@ -75,8 +75,11 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 }
 html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .informacion .lista {
   display: block;
-  height: 140px;
-  background: #f00;
+}
+html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .informacion .lista .item {
+  margin: 10px;
+  display: block;
+  background: #ded;
 }
 
 @media only screen and (max-width: 768px) {
