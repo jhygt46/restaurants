@@ -251,7 +251,7 @@ $info = $core->get_data_pos();
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"></div>
                             <div class="informacion">
-                                <div style="height: 100%; width: 100%"></div>
+                                <div style="height: 1000px; width: 100%; background: #dee"></div>
                             </div>
                         </div>
                     </div>

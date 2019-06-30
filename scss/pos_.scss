@@ -40,7 +40,7 @@ html {
                             .titulo{
                                 position: absolute;
                                 width: 100%;
-                                height: 100px;
+                                height: 70px;
                                 top: 0px;
                                 left: 0px;
                                 z-index: 2;
@@ -50,19 +50,20 @@ html {
                                 position: absolute;
                                 width: 40px;
                                 height: 40px;
-                                top: 0px;
-                                right: 0px;
+                                top: -20px;
+                                right: -20px;
                                 z-index: 3;
                                 background: #000;
                             }
                             .informacion{
                                 position: absolute;
                                 width: 100%;
-                                height: 100px;
+                                height: 100%;
                                 top: 0px;
                                 left: 0px;
                                 z-index: 1;
                                 background: #ded;
+                                overflow-y: scroll;
                             }
                         }
                     }
