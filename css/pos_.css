@@ -175,7 +175,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo .t_si
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .pedido_h1 {
-  height: 80px;
+  height: 120px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .pedido_h2 {
   height: 95px;
@@ -286,6 +286,9 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
     background: #ddd;
     float: left;
     padding: 1%;
+  }
+  .contenedor .contenido .pedidos .config_pedido {
+    display: none;
   }
   .contenedor .contenido .categorias {
     width: 25%;
