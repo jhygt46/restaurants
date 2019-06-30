@@ -7,7 +7,21 @@ html {
         .contenedor{
             height: 100%;
             position: relative;
-            
         }
     }
+}
+
+@media only screen and (max-width: 768px){
+
+    .contenedor{
+        background: #f00;
+    }
+
+}
+@media only screen and (min-width: 769px){
+
+    .contenedor{
+        background: #f0f;
+    }
+
 }
