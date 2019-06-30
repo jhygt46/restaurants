@@ -32,25 +32,25 @@ html body .contenedor .pop_up {
 }
 @media only screen and (min-width: 769px) {
   .contenedor .contenido .pedidos {
-    width: 360px;
+    width: 47%;
     height: 100%;
     background: #ddd;
     float: left;
   }
   .contenedor .contenido .categorias {
-    width: 150px;
+    width: 24%;
     height: 100%;
     background: #ccc;
     float: left;
   }
   .contenedor .contenido .productos {
-    width: 150px;
+    width: 24%;
     height: 100%;
     background: #bbb;
     float: left;
   }
   .contenedor .contenido .configuracion {
-    width: 108px;
+    width: 5%;
     height: 100%;
     background: #aaa;
     float: left;
