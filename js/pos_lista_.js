@@ -18,21 +18,16 @@ var markers = [];
 var map_socket, socket;
 
 function resize(){
-    var w1 = window.outerWidth;
-    var w2 = window.innerWidth;
-    var w3 = screen.width;
 
-    console.log(w1);
-    console.log(w2);
-    console.log(w3);
-
-    if(w1 <= 768){
+    var w = window.innerWidth;
+    if(w <= 768){
         // VERSION MOBILE
         console.log("-V mobile");
     }else{
         // VERSION WEB
         console.log("-V web");
     }
+    
 }
 function listar_pedidos(n){
     
