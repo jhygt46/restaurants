@@ -18,8 +18,15 @@ var markers = [];
 var map_socket, socket;
 
 function resize(){
-    var w = screen.width;
-    if(w <= 768){
+    var w1 = window.outerWidth;
+    var w2 = window.innerWidth;
+    var w3 = screen.width;
+
+    console.log(w1);
+    console.log(w2);
+    console.log(w3);
+
+    if(w1 <= 768){
         // VERSION MOBILE
         console.log("-V mobile");
     }else{
