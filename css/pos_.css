@@ -81,6 +81,7 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
   margin: 10px;
   display: block;
   background: #ded;
+  height: 50px;
 }
 
 @media only screen and (max-width: 768px) {
