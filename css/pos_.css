@@ -39,17 +39,17 @@ html body .contenedor .pop_up {
   .contenedor .contenido .categorias {
     width: 150px;
     height: 100%;
-    background: #ddd;
+    background: #ccc;
   }
   .contenedor .contenido .productos {
     width: 150px;
     height: 100%;
-    background: #ddd;
+    background: #bbb;
   }
   .contenedor .contenido .configuracion {
     width: 18px;
     height: 100%;
-    background: #ddd;
+    background: #aaa;
   }
 }
 
