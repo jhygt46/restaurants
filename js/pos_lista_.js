@@ -18,7 +18,7 @@ var markers = [];
 var map_socket, socket;
 
 function resize(){
-    var w = window.outerWidth;
+    var w = screen.width;
     if(w <= 768){
         // VERSION MOBILE
         console.log("-V mobile");
