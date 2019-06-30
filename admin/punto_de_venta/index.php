@@ -14,7 +14,7 @@ $info = $core->get_data_pos();
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/default.ico' />
         <link rel="stylesheet" href="/css/reset.css" media="all" />
-        <link rel="stylesheet" href="/css/pos.css" media="all" />
+        <link rel="stylesheet" href="/css/pos_.css" media="all" />
         <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -196,7 +196,7 @@ $info = $core->get_data_pos();
                     </div>
                 </div>
             </div>
-            <div class="cont_sis clearfix">
+            <div class="cont_sis clearfix" style="display: none">
                 <div class="alert_socket">
                     <div class="text">
                         <div class="text_1">ATENCION:</div>
