@@ -279,31 +279,7 @@ function create_element_class_inner(clase, value){
     Div.innerHTML = value;
     return Div;
 }
-function get_precio_carro(obj){
 
-    var total = 0;
-    
-    if(obj.carro){
-        obj.carro.forEach(function(carro_item){
-            if(carro_item.id_pro && carro_item.promo === undefined){
-                var pro = get_producto(carro_item.id_pro);
-                if(pro !== undefined){ 
-                    total = total + parseInt(pro.precio); 
-                }
-            }
-        });
-    }
-
-    if(obj.promos){
-        obj.promos.forEach(function(promo_item){
-            var cat = get_categoria(promo_item.id_cae);
-            total = total + parseInt(cat.precio);
-        });
-    }
-    
-    return total;
-
-}
 
 function ver_motos_mapa(){
     
@@ -1136,42 +1112,7 @@ function add_pedido_moto(id_mot, code){
         error: function(err){}
     });
 }
-function pedido_obj(){
-    return {
-        id_ped: 0,
-        num_ped: 0,
-        pedido_code: '', 
-        tipo: 0,
-        alert: '',
-        estado: 0,
-        fecha: Math.round(new Date().getTime()/1000),
-        despacho: 1,
-        carro: [],  
-        promos: [], 
-        pre_wasabi: 0,
-        pre_gengibre: 0,
-        pre_embarazadas: 0,
-        pre_palitos: 0,
-        pre_soya: 0,
-        pre_teriyaki: 0,
-        id_mot: 0,
-        id_puser: 0,
-        id_pdir: 0,
-        verificado: 0,
-        nombre: '',
-        telefono: '',
-        direccion: '',
-        calle: '',
-        num: '',
-        depto: '',
-        lat: 0,
-        lng: 0,
-        costo: -1,
-        total: 0,
-        eliminado: 0,
-        ocultar: 0
-    };
-}
+
 function nuevo(data){
 
     var obj = pedido_obj();
@@ -1229,12 +1170,7 @@ function add_pedido(obj){
 function set_pedidos(pedidos){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
-function get_pedidos(){
-    return JSON.parse(localStorage.getItem("pedidos")) || get_pedido_blank();
-}
-function get_pedido_blank(){
-    return [pedido_obj()];
-}
+
 function eliminar_pedido(){
     
     var pedidos = get_pedidos();
