@@ -418,3 +418,43 @@ function init_map(){
     }
 
 }
+function set_pedido(index){
+    
+    seleccionado = index;
+    categorias_base(0);
+    $('.lista_pedidos').find('.pedido').each(function(){
+        if(index == $(this).attr('pos')){
+            $(this).addClass('seleccionado');
+        }else{
+            $(this).removeClass('seleccionado');
+        }
+    });
+    
+}
+function categorias_base(n){
+    
+    $('.lista_categorias').html('');
+    $('.lista_productos').html('');
+    categoria = n;
+    var categorias = data.catalogos[catalogo].categorias;
+    for(var i=0, ilen=categorias.length; i<ilen; i++){
+        if(categorias[i].parent_id == n && categorias[i].ocultar == 0){
+            $('.lista_categorias').append(html_home_categorias(categorias[i]));  
+        }
+    }
+    
+}
+function html_home_categorias(obj){
+    
+    var Div = create_element_class('categoria');
+    if(obj.tipo == 0){
+        Div.onclick = function(){ open_categoria(obj.id_cae) };
+    }
+    if(obj.tipo == 1){
+        Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
+    }
+    var Divnombre = create_element_class_inner('nombre valign', obj.nombre);
+    Div.appendChild(Divnombre);
+    return Div;
+    
+}
