@@ -244,7 +244,11 @@ $info = $core->get_data_pos();
                 </div>
             </div>
 
-            <div class="pop_up"></div>
+            <div class="pop_up">
+                <div class="cont_pop_up">
+                    <div class="nuevo valign"></div>
+                </div>
+            </div>
             <div class="contenido">
                 <div class="pedidos"></div>
                 <div class="categorias"></div>
