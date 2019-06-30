@@ -166,3 +166,112 @@ function gmap_input(){
         }
     });
 }
+function html_home_pedidos(obj, index){
+    
+    var sub_total = get_precio_carro(obj);
+    var pedidos = get_pedidos();
+
+    if(obj.despacho == 0){
+        obj.costo = 0;
+    }
+
+    var total = parseInt(sub_total) + parseInt(obj.costo);
+
+    if(sub_total != obj.total){
+        var total_dif = sub_total - parseInt(obj.total);
+        obj.alert = "Existe un diferencia de "+formatNumber.new(total_dif, "$");
+    }
+
+    if(seleccionado == index){
+        if(obj.alert == '' || obj.alert === undefined){
+            var Div = create_element_class('pedido pedido_h1 seleccionado');
+        }else{
+            var Div = create_element_class('pedido pedido_h2 seleccionado');
+        }
+    }else{
+        if(obj.alert == '' || obj.alert === undefined){
+            var Div = create_element_class('pedido pedido_h1');
+        }else{
+            var Div = create_element_class('pedido pedido_h2');
+        }
+    }
+    
+    Div.setAttribute('pos', index);
+    if(pedidos[index].despacho == 1){
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(obj.costo), "$"));
+    }
+    if(pedidos[index].despacho == 0){
+        var p_estado = create_element_class_inner('p_estado', '');
+    }
+    
+    var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.num_ped);
+    var p_nom = create_element_class_inner('p_nom', obj.nombre);
+    
+    var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
+    var p_cont = create_element_class('p_cont');
+    p_cont.onclick = function(){ set_pedido(index, this) };
+    
+    var btn_mod = create_element_class('btn_mod');
+    btn_mod.onclick = function(){ ver_pedido(index, this) };
+    
+    var btn_open = create_element_class('btn_open');
+    btn_open.onclick = function(){ guardar_pedido(index, true) };
+    
+    var btn_carro = create_element_class('btn_carro');
+    btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
+
+    if(obj.hasOwnProperty('mensajes_cont')){
+        var btn_chat = create_element_class('btn_chat');
+        btn_chat.onclick = function(){ abrir_chat(index, this) };
+        Div.appendChild(btn_chat);
+        if(obj.mensajes_cont > 0){
+            var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
+            Div.appendChild(chat_num);
+        }
+    }
+    if(obj.alert != '' && obj.alert !== undefined){
+        var p_alert = create_element_class_inner('p_alert', obj.alert);
+        Div.appendChild(p_alert);
+    }
+
+    Div.appendChild(p_estado);
+    Div.appendChild(p_cont);
+    Div.appendChild(p_num);
+    Div.appendChild(p_nom);
+    Div.appendChild(p_precio);
+    Div.appendChild(btn_mod);
+    Div.appendChild(btn_open);
+    Div.appendChild(btn_carro);
+    
+    if(obj.tipo == 1){
+        
+        var estado = create_element_class('p_opciones');
+        var anterior = create_element_class('p_anterior');
+        anterior.onclick = function(){ cambiar_estado(index, -1, this) };
+        var nombre = create_element_class_inner('p_nombre', estados[obj.estado]);
+        var siguiente = create_element_class('p_siguiente');
+        siguiente.onclick = function(){ cambiar_estado(index, 1, this) };
+
+        estado.appendChild(anterior);
+        estado.appendChild(nombre);
+        estado.appendChild(siguiente);
+
+        var t_tiempo = create_element_class('t_tiempo');
+        var t_anterior = create_element_class('t_anterior');
+        t_anterior.onclick = function(){ cambiar_hora(index, -1, this) };
+        var t_nombre = create_element_class_inner('t_nombre', '');
+        var t_siguiente = create_element_class('t_siguiente');
+        t_siguiente.onclick = function(){ cambiar_hora(index, 1, this) };
+
+        t_tiempo.appendChild(t_anterior);
+        t_tiempo.appendChild(t_nombre);
+        t_tiempo.appendChild(t_siguiente);
+        
+        Div.appendChild(estado);
+        Div.appendChild(t_tiempo);
+        
+    }
+
+    return Div;
+    
+}
