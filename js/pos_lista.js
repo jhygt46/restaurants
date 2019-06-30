@@ -332,7 +332,6 @@ function agregar_pedido(id){
     });
     
 }
-
 function sound(aud){
     aud.play();
     var playPromise = aud.play();
@@ -340,7 +339,6 @@ function sound(aud){
         playPromise.catch(() => { aud.play() })
     }
 }
-
 function set_pedido(index, that){
     
     seleccionado = index;
@@ -1150,7 +1148,6 @@ function np_close(that){
     $(that).parent().hide();
     
 }
-
 function ver_pedido(index, that){
 
     $('.t_direcciones').html("");
@@ -1326,18 +1323,16 @@ function done_pedido(){
         }
 
         pedidos[seleccionado].id_mot = $('#id_mot').val();
-        set_pedidos(pedidos);
+        listar_pedidos(pedidos);
         
 
     }
 
     guardar_pedido(seleccionado, false);
-    listar_pedidos();
     $('.p1').hide();
     $('.pop_up').hide();
     
 }
-
 function borrar_pedido_moto(id_mot, code){
     var sends = { id_mot: id_mot, code: code };
     var link = "https://www.izusushi.cl/rm_pedido_moto";
@@ -1449,10 +1444,9 @@ function add_pedido(obj){
             aux.push(pedidos[i]);
         }
     }
-    set_pedidos(aux);
     seleccionado = 0;
-    //guardar_pedido(seleccionado, false);
-    listar_pedidos();
+    guardar_pedido(seleccionado, false);
+    listar_pedidos(aux);
     
 }
 function set_pedidos(pedidos){
@@ -1522,7 +1516,7 @@ function guardar_pedido(index, open){
     var send = { accion: 'guardar_pedido', pedido: JSON.stringify(pedido) };
 
     $.ajax({
-        url: "/admin/ajax/get_pos_pedido.php",
+        url: "/admin/ajax/set_pos_pedido.php",
         type: "POST",
         data: send,
         success: function(info){
