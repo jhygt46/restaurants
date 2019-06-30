@@ -33,7 +33,7 @@ $info = $core->get_data_pos();
             var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
             var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
         </script>
-        <script src="/js/pos_lista.js" type="text/javascript"></script>
+        <script src="/js/pos_lista_.js" type="text/javascript"></script>
         <script src="/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
     <body>
