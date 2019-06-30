@@ -36,6 +36,21 @@ html body .contenedor .pop_up {
     height: 100%;
     background: #ddd;
   }
+  .contenedor .contenido .categorias {
+    width: 150px;
+    height: 100%;
+    background: #ddd;
+  }
+  .contenedor .contenido .productos {
+    width: 150px;
+    height: 100%;
+    background: #ddd;
+  }
+  .contenedor .contenido .configuracion {
+    width: 18px;
+    height: 100%;
+    background: #ddd;
+  }
 }
 
 /*# sourceMappingURL=pos_.css.map */
