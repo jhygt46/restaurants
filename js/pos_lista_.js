@@ -39,11 +39,11 @@ function listar_pedidos(n){
         var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
     }
 
-    $('.lista_pedidos').html('');
+    $('.pedidos').html('');
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
-                $('.lista_pedidos').append(html_home_pedidos(pedidos[i], i));
+                $('.pedidos').append(html_home_pedidos(pedidos[i], i));
             }
         }
     }
