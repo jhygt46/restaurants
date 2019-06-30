@@ -35,21 +35,25 @@ html body .contenedor .pop_up {
     width: 360px;
     height: 100%;
     background: #ddd;
+    float: left;
   }
   .contenedor .contenido .categorias {
     width: 150px;
     height: 100%;
     background: #ccc;
+    float: left;
   }
   .contenedor .contenido .productos {
     width: 150px;
     height: 100%;
     background: #bbb;
+    float: left;
   }
   .contenedor .contenido .configuracion {
-    width: 18px;
+    width: 108px;
     height: 100%;
     background: #aaa;
+    float: left;
   }
 }
 
