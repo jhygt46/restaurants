@@ -472,3 +472,9 @@ function html_home_categorias(obj){
     return Div;
     
 }
+function np_close(that){
+    
+    $('.pop_up').hide();
+    $(that).parents('.nuevo').hide();
+    
+}

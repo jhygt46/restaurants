@@ -795,12 +795,6 @@ function tiene_pregunta(carro){
     }
     return false;
 }
-function np_close(that){
-    
-    $('.pop_up').hide();
-    $(that).parent().hide();
-    
-}
 function ver_pedido(index, that){
 
     $('.t_direcciones').html("");
