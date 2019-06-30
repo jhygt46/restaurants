@@ -254,9 +254,10 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 
 @media only screen and (max-width: 768px) {
   .contenedor .contenido .pedidos {
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 98%;
     background: #ddd;
+    padding: 1%;
   }
 }
 @media only screen and (min-width: 769px) {
