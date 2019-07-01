@@ -472,7 +472,7 @@ function cats_or_prods(id){
 }
 function open_productos(id){
     
-    $('.lista_productos').html('');    
+    $('.cont_productos').html('');    
     var categoria = get_categoria(id);
     if(categoria.productos){
         for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
