@@ -453,6 +453,7 @@ function pop_up(n){
 }
 function open_categoria(id){
 
+    console.log("BUENA NELSON");
     if(cats_or_prods(id)){
         categorias_base(id);
     }else{
@@ -536,6 +537,7 @@ function html_home_categorias(obj){
     if(obj.tipo == 1){
         Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     }
+
     var Divinfocat = create_element_class('cont_info_cat valign');
 
     var Divnombre = create_element_class_inner('nombre', obj.nombre);
