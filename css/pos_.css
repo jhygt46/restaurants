@@ -212,12 +212,12 @@ html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo {
   position: relative;
 }
 html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .tt {
-  left: 20px;
+  left: 15px;
   font-size: 24px;
   color: #fff;
 }
 html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .mas {
-  right: 20px;
+  right: 15px;
   font-size: 24px;
   color: #fff;
 }
