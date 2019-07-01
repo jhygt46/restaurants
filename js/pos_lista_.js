@@ -753,6 +753,8 @@ function confirmar_pregunta_productos(that){
                 if(t_pregunta >= 0){
                     mostrar_pregunta(t_pregunta);
                 }else{
+                    $('.pop_up').hide();
+                    $('.pop').hide();
                     //ver_detalle_carro(seleccionado, null);
                 }
             }
