@@ -453,10 +453,11 @@ function pop_up(n){
 }
 function open_categoria(id){
 
-    console.log("BUENA NELSON");
     if(cats_or_prods(id)){
+        console.log("BUENA NELSON CAT");
         categorias_base(id);
     }else{
+        console.log("BUENA NELSON PROD");
         open_productos(id);
     }
 
