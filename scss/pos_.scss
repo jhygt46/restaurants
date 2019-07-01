@@ -443,6 +443,15 @@ html {
                                     }
                                 }
                             }
+                            .n_submit{
+                                position: absolute;
+                                width: 100%;
+                                height: 70px;
+                                bottom: 0px;
+                                left: 0px;
+                                z-index: 2;
+                                background: #99F;
+                            }
                         }
                     }
                 }
