@@ -270,8 +270,18 @@ $info = $core->get_data_pos();
                     </div>
                     <div class="config_pedido">CONFIG</div>
                 </div>
-                <div class="categorias"></div>
-                <div class="productos"></div>
+                <div class="categorias">
+                    <div class="titulo_categorias"><div class="cont_titulo"><div class="tt valign">Pedidos</div></div></div>
+                    <div class="lista_categorias">
+                        <div class="cont_categorias"></div>
+                    </div>
+                </div>
+                <div class="productos">
+                    <div class="titulo_productos"><div class="cont_titulo"><div class="tt valign">Pedidos</div></div></div>
+                    <div class="lista_productos">
+                        <div class="cont_productos"></div>
+                    </div>
+                </div>
                 <div class="configuracion"></div>
             </div>
             
