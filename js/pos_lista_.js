@@ -671,3 +671,55 @@ function html_preguntas_producto(i){
     return html;
     
 }
+function confirmar_pregunta_productos(that){
+
+    var parent = $(that).parents('.pop');
+    var pregunta = parent.find('.s_pregunta');
+    var i = pregunta.attr('data-pos');
+    var k = 0;
+    var m = 0;
+    var n = 0;
+    var count = 0;
+    var cant = 0;
+    var valores = [];
+    var diff = 0;
+    
+    var preguntas = pregunta.find('.e_pregunta');
+    preguntas.each(function(){
+        k = $(this).attr('data-pos');
+        $(this).find('.v_pregunta').each(function(){
+            m = $(this).attr('data-pos');
+            cant = $(this).attr('data-cant');
+            count = 0;
+            valores = [];
+            $(this).find('.n_pregunta').each(function(){
+                if($(this).hasClass('selected')){
+                    count++;
+                    valores.push($(this).html().trim());
+                }
+            });
+            diff = cant - count;
+            if(diff < 0){
+                alert("HA SELECCIONADO "+Math.abs(diff)+" OPCIONES MAS");
+            }
+            if(diff > 0){
+                alert("FALTA SELECCIONAR "+diff+" OPCIONES");
+            }
+            if(diff == 0){
+                pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+                var t_pregunta = -1;
+                for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
+                    if(tiene_pregunta(pedidos[seleccionado].carro[m])){
+                        t_pregunta = m;
+                    }
+                }
+                if(t_pregunta >= 0){
+                    mostrar_pregunta(t_pregunta);
+                }else{
+                    ver_detalle_carro(seleccionado, null);
+                }
+            }
+        });
+    });
+    
+}
