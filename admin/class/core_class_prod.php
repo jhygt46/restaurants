@@ -1354,7 +1354,7 @@ class Core{
     }
     public function get_ultimos_pedidos_pos($id_loc){
 
-        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_loc=? AND eliminado=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY) ORDER BY id_ped DESC");
+        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_loc=? AND eliminado=? AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY) ORDER BY id_ped DESC");
         $sql->bind_param("ii", $id_loc, $this->eliminado);
         $sql->execute();
         $result = $sql->get_result();
