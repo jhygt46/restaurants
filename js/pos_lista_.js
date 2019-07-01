@@ -464,7 +464,7 @@ function categorias_base(n){
                 $('.pop_cats .lista').append(html_home_categorias(categorias[i]));  
             }
         }
-        
+
     }
     if(version == 1){
         // WEB
@@ -488,8 +488,15 @@ function html_home_categorias(obj){
     if(obj.tipo == 1){
         Div.onclick = function(){ add_carro_promocion(obj.id_cae) };
     }
-    var Divnombre = create_element_class_inner('nombre valign', obj.nombre);
-    Div.appendChild(Divnombre);
+    var Divinfocat = create_element_class('cont_info_cat valign');
+
+    var Divnombre = create_element_class_inner('nombre', obj.nombre);
+    var Divdescripcion = create_element_class_inner('descripcion', obj.descripcion);
+
+    Divinfocat.appendChild(Divnombre);
+    Divinfocat.appendChild(Divdescripcion);
+    Div.appendChild(Divinfocat);
+
     return Div;
     
 }
