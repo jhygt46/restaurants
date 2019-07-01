@@ -321,7 +321,7 @@ html body .contenedor .contenido .productos .lista_productos {
   overflow-y: scroll;
 }
 html body .contenedor .contenido .productos .lista_productos .cont_productos {
-  padding: 0px 10px;
+  padding: 0px 0px 0px 5px;
 }
 html body .contenedor .contenido .productos .lista_productos .cont_productos .producto {
   display: block;
