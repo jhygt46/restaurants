@@ -15,8 +15,9 @@ html {
                 .pedidos{
                     .lista_pedidos{
                         display: block;
-                        width: 100%;
-                        height: 100%;
+                        padding: 90px 10px 10px 10px;
+                        width: calc(100% - 10px);
+                        height: calc(100% - 100px);
                         overflow-y: scroll;
                         .pedido{
                             width: 100%;
@@ -190,7 +191,11 @@ html {
                     .titulo_pedidos{
                         width: 100%;
                         height: 80px;
-                        background: #aaa;
+                        background: #ccc;
+                        position: fixed;
+                        top: 0px;
+                        left: 0px;
+                        z-index: 999;
                         .cont_titulo{
                             width: 100%;
                             height: 100%;
@@ -292,7 +297,7 @@ html {
                 .config_pedido{
                     width: 100%;
                     height: 80px;
-                    background: #aaa;
+                    background: #ccc;
                     position: fixed;
                     bottom: 0px;
                     left: 0px;
