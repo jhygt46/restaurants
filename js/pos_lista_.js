@@ -447,6 +447,13 @@ function set_pedido(index){
 }
 function categorias_base(n){
     
+    if(version == 0){
+        console.log("MOBILE");
+    }
+    if(version == 1){
+        console.log("WEB");
+    }
+
     $('.cont_categorias').html('');
     $('.cont_productos').html('');
     categoria = n;
