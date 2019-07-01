@@ -197,7 +197,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .seleccionado {
 html body .contenedor .contenido .pedidos .titulo_pedidos {
   width: 100%;
   height: 80px;
-  background: #ccc;
+  background: #666;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -211,6 +211,7 @@ html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo {
 html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .tt {
   left: 20px;
   font-size: 24px;
+  color: #fff;
 }
 html body .contenedor .pop_up {
   height: 100%;
