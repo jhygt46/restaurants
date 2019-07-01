@@ -262,7 +262,7 @@ $info = $core->get_data_pos();
             
             <div class="contenido">
                 <div class="pedidos">
-                    <div class="titulo_pedidos"><div class="cont_titulo"><div class="tt valign">Pedidos</div><div class="mas valign"><div class="cont_m"></div></div></div></div>
+                    <div class="titulo_pedidos"><div class="cont_titulo"><div class="tt valign">Pedidos</div><div class="mas valign"><div class="cont_m"><div class="m1"></div><div class="m2"></div></div></div></div></div>
                     <div class="lista_pedidos">
                         <div class="cont_lista"></div>
                     </div>
