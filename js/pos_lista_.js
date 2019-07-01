@@ -607,12 +607,14 @@ function get_preguntas(id_pre){
 function mostrar_pregunta(i){
 
     var pedidos = get_pedidos();
-    var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
+    var pedido = pedidos[seleccionado];
+    var producto = get_producto(pedido.carro[i].id_pro);
 
     if(producto.preguntas){
 
         pop_up('pop_pre');
-        $('.p4 .data_info').html(html_preguntas_producto(i));
+        $('.pop_pre .titulo').html(producto.nombre);
+        $('.pop_pre .lista').html(html_preguntas_producto(i));
 
     }
 
