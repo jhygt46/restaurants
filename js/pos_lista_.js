@@ -474,14 +474,29 @@ function cats_or_prods(id){
 }
 function open_productos(id){
     
-    $('.cont_productos').html('');    
     var categoria = get_categoria(id);
-    if(categoria.productos){
-        for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
-            $('.cont_productos').append(html_home_productos(get_producto(categoria.productos[j])));
+
+    if(version == 0){
+        // MOBILE
+        pop_up('pop_cats');
+        $('.pop_cats .lista').html('');
+        if(categoria.productos){
+            for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
+                $('.pop_cats .lista').append(html_home_productos(get_producto(categoria.productos[j])));
+            }
+        }
+        
+    }
+    if(version == 1){
+        // WEB
+        $('.cont_productos').html('');   
+        if(categoria.productos){
+            for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
+                $('.cont_productos').append(html_home_productos(get_producto(categoria.productos[j])));
+            }
         }
     }
-    
+
 }
 function categorias_base(n){
     
