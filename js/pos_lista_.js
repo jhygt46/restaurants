@@ -447,13 +447,13 @@ function set_pedido(index){
 }
 function categorias_base(n){
     
-    $('.lista_categorias').html('');
-    $('.lista_productos').html('');
+    $('.cont_categorias').html('');
+    $('.cont_productos').html('');
     categoria = n;
     var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == n && categorias[i].ocultar == 0){
-            $('.lista_categorias').append(html_home_categorias(categorias[i]));  
+            $('.cont_categorias').append(html_home_categorias(categorias[i]));  
         }
     }
     
