@@ -604,7 +604,8 @@ function mostrar_pregunta(i){
     if(producto.preguntas){
 
         pop_up('pop_pre');
-        $('.pop_pre .titulo').html(producto.nombre);
+        $('.pop_pre .titulo h1').html(producto.nombre);
+        $('.pop_pre .titulo h2').html(producto.descripcion);
         $('.pop_pre .lista').html(html_preguntas_producto(i));
 
     }
