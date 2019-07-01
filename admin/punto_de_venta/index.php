@@ -252,11 +252,7 @@ $info = $core->get_data_pos();
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"></div>
                             <div class="cont_info">
-                                <div class="informacion">
-                                    <div class="lista">
-                                        <?php for($i=0; $i<10; $i++){ ?><div class="item"></div><?php } ?>
-                                    </div>
-                                </div>
+                                <div class="informacion"><div class="lista"></div></div>
                             </div>
                         </div>
                     </div>
