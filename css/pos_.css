@@ -387,14 +387,14 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
   .contenedor .contenido .categorias {
     width: calc(25% - 2px);
     height: 100%;
-    background: #ccc;
+    background: #ddd;
     float: left;
     margin-left: 2px;
   }
   .contenedor .contenido .productos {
     width: calc(25% - 2px);
     height: 100%;
-    background: #bbb;
+    background: #ddd;
     float: left;
     margin-left: 2px;
   }
