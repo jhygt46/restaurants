@@ -459,6 +459,7 @@ function categorias_base(n){
     if(version == 0){
         // MOBILE
         pop_up('pop_cats');
+        $('.pop_cats .lista').html('');
         for(var i=0, ilen=categorias.length; i<ilen; i++){
             if(categorias[i].parent_id == n && categorias[i].ocultar == 0){
                 $('.pop_cats .lista').append(html_home_categorias(categorias[i]));  

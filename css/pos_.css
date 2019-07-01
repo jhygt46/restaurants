@@ -216,6 +216,11 @@ html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .tt {
   font-size: 24px;
   color: #fff;
 }
+html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .mas {
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+}
 html body .contenedor .contenido .categorias {
   position: relative;
 }
