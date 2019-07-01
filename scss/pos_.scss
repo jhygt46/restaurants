@@ -403,22 +403,25 @@ html {
                 }
             }
             .categorias{
-                width: 25%;
+                width: calc(25% - 2px);
                 height: 100%;
                 background: #ccc;
                 float: left;
+                margin-left: 2px;
             }
             .productos{
-                width: 25%;
+                width: calc(25% - 2px);
                 height: 100%;
                 background: #bbb;
                 float: left;
+                margin-left: 2px;
             }
             .configuracion{
-                width: 8%;
+                width: calc(8% - 2px);
                 height: 100%;
                 background: #aaa;
                 float: left;
+                margin-left: 2px;
             }
         }
     }

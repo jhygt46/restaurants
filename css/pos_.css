@@ -385,22 +385,25 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
     display: none;
   }
   .contenedor .contenido .categorias {
-    width: 25%;
+    width: calc(25% - 2px);
     height: 100%;
     background: #ccc;
     float: left;
+    margin-left: 2px;
   }
   .contenedor .contenido .productos {
-    width: 25%;
+    width: calc(25% - 2px);
     height: 100%;
     background: #bbb;
     float: left;
+    margin-left: 2px;
   }
   .contenedor .contenido .configuracion {
-    width: 8%;
+    width: calc(8% - 2px);
     height: 100%;
     background: #aaa;
     float: left;
+    margin-left: 2px;
   }
 }
 ::-webkit-scrollbar {
