@@ -256,14 +256,14 @@ html body .contenedor .contenido .categorias .lista_categorias .cont_categorias 
   margin-bottom: 4px;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria .cont_info_cat {
-  width: 96%;
-  left: 2%;
+  width: 92%;
+  left: 4%;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria .cont_info_cat .nombre {
   font-size: 20px;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria .cont_info_cat .descripcion {
-  font-size: 16px;
+  font-size: 12px;
 }
 html body .contenedor .contenido .productos {
   position: relative;
@@ -358,11 +358,18 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista {
   display: block;
 }
-html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .item {
-  margin: 10px;
-  display: block;
-  background: #de0;
-  height: 50px;
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .categoria {
+  position: relative;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .categoria .cont_info_cat {
+  width: 92%;
+  left: 4%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .categoria .cont_info_cat .nombre {
+  font-size: 20px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .categoria .cont_info_cat .descripcion {
+  font-size: 12px;
 }
 
 @media only screen and (max-width: 768px) {

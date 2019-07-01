@@ -251,13 +251,13 @@ html {
                                 background: #ccc;
                                 margin-bottom: 4px;
                                 .cont_info_cat{
-                                    width: 96%;
-                                    left: 2%;
+                                    width: 92%;
+                                    left: 4%;
                                     .nombre{
                                         font-size: 20px;
                                     }
                                     .descripcion{
-                                        font-size: 16px;
+                                        font-size: 12px;
                                     }
                                 }
                             }
@@ -351,11 +351,18 @@ html {
                                     padding-top: 70px;
                                     .lista{
                                         display: block;
-                                        .item{
-                                            margin: 10px;
-                                            display: block;
-                                            background: #de0;
-                                            height: 50px;
+                                        .categoria{
+                                            position: relative;
+                                            .cont_info_cat{
+                                                width: 92%;
+                                                left: 4%;
+                                                .nombre{
+                                                    font-size: 20px;
+                                                }
+                                                .descripcion{
+                                                    font-size: 12px;
+                                                }
+                                            }
                                         }
                                     }
                                 }
