@@ -412,7 +412,7 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 }
 
 ::-webkit-scrollbar-track-piece {
-  background: #eee;
+  background: #ddd;
 }
 
 ::-webkit-scrollbar-thumb {
