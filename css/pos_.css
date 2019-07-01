@@ -389,9 +389,11 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo .ctitle h1 {
   font-size: 20px;
+  text-align: center;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo .ctitle h2 {
   font-size: 12px;
+  text-align: center;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cerrar {
   position: absolute;
