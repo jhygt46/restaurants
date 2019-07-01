@@ -690,6 +690,24 @@ function select_pregunta(that){
     }
     
 }
+function tiene_pregunta(carro){
+    
+    if(carro.preguntas){
+        for(var k=0, klen=carro.preguntas.length; k<klen; k++){
+            for(var j=0, jlen=carro.preguntas[k].valores.length; j<jlen; j++){
+                var valores = carro.preguntas[k].valores[j];
+                if(valores.seleccionados){
+                    if(valores.seleccionados.length < valores.cantidad){
+                        return true;
+                    }
+                }else{
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 function confirmar_pregunta_productos(that){
 
     var parent = $(that).parents('.pop');
