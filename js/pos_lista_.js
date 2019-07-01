@@ -454,10 +454,8 @@ function pop_up(n){
 function open_categoria(id){
 
     if(cats_or_prods(id)){
-        console.log("BUENA NELSON CAT");
         categorias_base(id);
     }else{
-        console.log("BUENA NELSON PROD");
         open_productos(id);
     }
 
@@ -485,7 +483,7 @@ function open_productos(id){
                 $('.pop_cats .lista').append(html_home_productos(get_producto(categoria.productos[j])));
             }
         }
-        
+
     }
     if(version == 1){
         // WEB

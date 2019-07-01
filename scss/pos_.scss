@@ -408,6 +408,20 @@ html {
                                                 }
                                             }
                                         }
+                                        .producto{
+                                            position: relative;
+                                            height: 100px;
+                                            .cont_info_cat{
+                                                width: 92%;
+                                                left: 4%;
+                                                .nombre{
+                                                    font-size: 20px;
+                                                }
+                                                .descripcion{
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
