@@ -75,15 +75,6 @@ function get_preguntas(id_pre){
     }
     return null;
 }
-function html_home_productos(obj){
-    
-    var Div = create_element_class('producto');
-    Div.onclick = function(){ add_carro_producto(obj.id_pro); };
-    var Divnombre = create_element_class_inner('nombre valign', obj.nombre);
-    Div.appendChild(Divnombre);
-    return Div;
-    
-}
 function categoria_padre(){
     if(categoria != 0){
         var cat = get_categoria(categoria);

@@ -510,6 +510,23 @@ function categorias_base(n){
     }
     
 }
+function html_home_productos(obj){
+    
+    var Div = create_element_class('producto');
+    Div.onclick = function(){ add_carro_producto(obj.id_pro); };
+
+    var Divinfopro = create_element_class('cont_info_pro valign');
+
+    var Divnombre = create_element_class_inner('nombre', obj.nombre);
+    var Divdescripcion = create_element_class_inner('descripcion', obj.descripcion);
+
+    Divinfopro.appendChild(Divnombre);
+    Divinfopro.appendChild(Divdescripcion);
+    Div.appendChild(Divinfopro);
+
+    return Div;
+    
+}
 function html_home_categorias(obj){
     
     var Div = create_element_class('categoria');
