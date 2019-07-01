@@ -243,11 +243,13 @@ html {
                         height: calc(100% - 90px);
                         overflow-y: scroll;
                         .cont_categorias{
-                            padding: 0px 10px;
+                            padding: 0px 0px 0px 5px;
                             .categoria{
                                 display: block;
                                 position: relative;
                                 height: 80px;
+                                background: #ccc;
+                                margin-bottom: 4px;
                                 .nombre{
                                     font-size: 20px;
                                 }

@@ -246,12 +246,14 @@ html body .contenedor .contenido .categorias .lista_categorias {
   overflow-y: scroll;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias {
-  padding: 0px 10px;
+  padding: 0px 0px 0px 5px;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria {
   display: block;
   position: relative;
   height: 80px;
+  background: #ccc;
+  margin-bottom: 4px;
 }
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria .nombre {
   font-size: 20px;
