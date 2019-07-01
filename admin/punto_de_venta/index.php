@@ -265,7 +265,9 @@ $info = $core->get_data_pos();
                                 <div class="informacion"><div class="lista"></div></div>
                             </div>
                             <div class="n_submit">
-        	                    <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
+                                <div class="cont_submit">
+        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
+                                </div>
                             </div>
                         </div>
                     </div>
