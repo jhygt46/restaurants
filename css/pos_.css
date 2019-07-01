@@ -248,6 +248,14 @@ html body .contenedor .contenido .categorias .lista_categorias {
 html body .contenedor .contenido .categorias .lista_categorias .cont_categorias {
   padding: 0px 10px;
 }
+html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria {
+  display: block;
+  position: relative;
+  height: 80px;
+}
+html body .contenedor .contenido .categorias .lista_categorias .cont_categorias .categoria .nombre {
+  font-size: 20px;
+}
 html body .contenedor .contenido .productos {
   position: relative;
 }

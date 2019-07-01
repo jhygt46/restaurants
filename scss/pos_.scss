@@ -244,6 +244,14 @@ html {
                         overflow-y: scroll;
                         .cont_categorias{
                             padding: 0px 10px;
+                            .categoria{
+                                display: block;
+                                position: relative;
+                                height: 80px;
+                                .nombre{
+                                    font-size: 20px;
+                                }
+                            }
                         }
                     }
                 }
