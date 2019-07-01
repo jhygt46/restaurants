@@ -454,6 +454,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit {
   bottom: 0px;
   left: 0px;
   z-index: 2;
+  background: #999;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_submit {
   width: 100%;
@@ -463,7 +464,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_submit input {
   max-width: 150px;
   width: 40%;
-  height: 40px;
+  height: 30px;
   text-align: center;
   font-size: 16px;
 }
