@@ -13,6 +13,7 @@ html {
                 height: 100%;
                 z-index: 1;
                 .pedidos{
+                    position: relative;
                     .lista_pedidos{
                         display: block;
                         padding: 90px 10px 10px 10px;

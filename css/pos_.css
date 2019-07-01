@@ -16,6 +16,9 @@ html body .contenedor .contenido {
   height: 100%;
   z-index: 1;
 }
+html body .contenedor .contenido .pedidos {
+  position: relative;
+}
 html body .contenedor .contenido .pedidos .lista_pedidos {
   display: block;
   padding: 90px 10px 10px 10px;
