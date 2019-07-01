@@ -362,6 +362,7 @@ html body .contenedor .pop_up .cont_pop_up .pop {
   max-height: 560px;
   background: #fff;
   border-radius: 12px;
+  display: none;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo {
   position: relative;
