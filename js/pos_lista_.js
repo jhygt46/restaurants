@@ -592,3 +592,11 @@ function add_carro_producto(id_pro){
     listar_pedidos(pedidos);
 
 }
+function get_preguntas(id_pre){
+    for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
+        if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
+            return data.catalogos[catalogo].preguntas[i];
+        }
+    }
+    return null;
+}
