@@ -383,6 +383,10 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo
   height: 100%;
   position: relative;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo .ctitle {
+  width: 92%;
+  margin: 0px auto;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo .cont_titulo .ctitle h1 {
   font-size: 20px;
 }
