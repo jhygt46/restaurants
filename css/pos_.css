@@ -18,8 +18,9 @@ html body .contenedor .contenido {
 }
 html body .contenedor .contenido .pedidos .lista_pedidos {
   display: block;
-  padding: 10px;
-  height: 100%;
+  padding: 90px 10px 10px 10px;
+  width: calc(100% - 10px);
+  height: calc(100% - 100px);
   overflow-y: scroll;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .pedido {
