@@ -264,6 +264,7 @@ $info = $core->get_data_pos();
             
             <div class="contenido">
                 <div class="pedidos">
+                    <div class="titulo_pedidos">Pedidos</div>
                     <div class="lista_pedidos"></div>
                     <div class="config_pedido">CONFIG</div>
                 </div>
