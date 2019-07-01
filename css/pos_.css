@@ -26,13 +26,16 @@ html body .contenedor .contenido .pedidos .lista_pedidos {
   height: calc(100% - 90px);
   overflow-y: scroll;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista {
+  padding: 0px 10px;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido {
   width: 100%;
   position: relative;
   background: #eee;
   margin-bottom: 8px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_cont {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_cont {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -40,35 +43,35 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_cont {
   width: 134px;
   z-index: 2;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_num {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_num {
   position: absolute;
   top: 5px;
   left: 10px;
   font-size: 14px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_nom {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_nom {
   position: absolute;
   top: 19px;
   left: 10px;
   font-size: 13px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_estado {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_estado {
   position: absolute;
   top: 40px;
   left: 10px;
   font-size: 12px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_precio {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_precio {
   position: absolute;
   top: 50px;
   left: 10px;
   font-size: 20px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_alert {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_alert {
   position: absolute;
   top: 72px;
   left: 10px;
@@ -76,7 +79,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_alert {
   z-index: 1;
   color: #900;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_mod {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_mod {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -86,7 +89,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_mod {
   background-position: -177px -382px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_open {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open {
   position: absolute;
   top: 10px;
   right: 44px;
@@ -96,7 +99,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_open {
   background-position: -415px -479px;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_carro {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;
   top: 10px;
   right: 78px;
@@ -106,7 +109,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_carro {
   background: url("../admin/images/icons-set.png") no-repeat;
   background-position: -476px -575px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_chat {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_chat {
   position: absolute;
   top: 10px;
   right: 110px;
@@ -116,7 +119,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .btn_chat {
   background: url("../admin/images/icons-set.png") no-repeat;
   background-position: -656px -235px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .chat_num {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .chat_num {
   position: absolute;
   top: 26px;
   right: 109px;
@@ -128,7 +131,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .chat_num {
   text-align: center;
   font-size: 11px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;
   top: 48px;
   right: 10px;
@@ -136,13 +139,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones {
   background: #000;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones .p_anterior {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_anterior {
   width: 20px;
   float: left;
   height: 25px;
   background: #666;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones .p_nombre {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_nombre {
   width: 74px;
   float: left;
   text-align: center;
@@ -150,13 +153,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones .p_
   padding-top: 4px;
   color: #fff;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .p_opciones .p_siguiente {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_siguiente {
   width: 20px;
   float: left;
   height: 25px;
   background: #666;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
   position: absolute;
   top: 48px;
   right: 130px;
@@ -164,13 +167,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo {
   background: #000;
   z-index: 1;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo .t_anterior {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_anterior {
   width: 20px;
   float: left;
   height: 25px;
   background: #666;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo .t_nombre {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_nombre {
   width: 40px;
   float: left;
   text-align: center;
@@ -178,19 +181,19 @@ html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo .t_no
   padding-top: 3px;
   color: #fff;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido .t_tiempo .t_siguiente {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_siguiente {
   width: 20px;
   float: left;
   height: 25px;
   background: #666;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido_h1 {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido_h1 {
   height: 120px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .pedido_h2 {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido_h2 {
   height: 95px;
 }
-html body .contenedor .contenido .pedidos .lista_pedidos .seleccionado {
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado {
   background: #c99;
   color: #fff;
 }
