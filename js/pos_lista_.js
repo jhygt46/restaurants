@@ -17,6 +17,7 @@ var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
 var version = 0;
+var pedidos = get_pedidos();
 
 function resize(){
 
@@ -30,17 +31,10 @@ function resize(){
     }
 
 }
-function listar_pedidos(n){
+function listar_pedidos(){
     
-    if(n !== undefined){
-        localStorage.setItem("pedidos", JSON.stringify(n));
-        var pedidos = n;
-    }else{
-        var pedidos = JSON.parse(localStorage.getItem("pedidos")) || false;
-    }
-
     $('.cont_lista').html('');
-    if(pedidos){
+    if(pedidos.length){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
                 $('.cont_lista').append(html_home_pedidos(pedidos[i], i));
@@ -571,10 +565,8 @@ function np_close(that){
     
 }
 
-
 function add_carro_producto(id_pro){
 
-    var pedidos = get_pedidos();
     var producto = get_producto(id_pro);
     var item_carro = { id_pro: parseInt(id_pro) };
     
@@ -591,7 +583,7 @@ function add_carro_producto(id_pro){
         mostrar_pregunta(pedidos[seleccionado].carro.length - 1);
     }
 
-    listar_pedidos(pedidos);
+    listar_pedidos();
 
 }
 function get_preguntas(id_pre){
@@ -606,13 +598,7 @@ function get_preguntas(id_pre){
 }
 function mostrar_pregunta(i){
 
-    var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-
-    console.log(pedido);
-    console.log(pedido.carro);
-    console.log(i);
-    
     var producto = get_producto(pedido.carro[i].id_pro);
 
     if(producto.preguntas){
@@ -626,7 +612,6 @@ function mostrar_pregunta(i){
 }
 function html_preguntas_producto(i){
     
-    var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
     var carro = pedido.carro;
     
