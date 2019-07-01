@@ -16,6 +16,12 @@ html body .contenedor .contenido {
   height: 100%;
   z-index: 1;
 }
+html body .contenedor .contenido .pedidos .lista_pedidos {
+  display: block;
+  padding: 10px;
+  height: 100%;
+  overflow-y: scroll;
+}
 html body .contenedor .contenido .pedidos .lista_pedidos .pedido {
   width: 100%;
   position: relative;
@@ -254,10 +260,9 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 
 @media only screen and (max-width: 768px) {
   .contenedor .contenido .pedidos {
-    width: 98%;
-    height: 98%;
+    width: 100%;
+    height: 100%;
     background: #ddd;
-    padding: 1%;
     position: relative;
   }
   .contenedor .contenido .pedidos .config_pedido {
@@ -281,11 +286,10 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
 }
 @media only screen and (min-width: 769px) {
   .contenedor .contenido .pedidos {
-    width: 40%;
+    width: 42%;
     height: 100%;
     background: #ddd;
     float: left;
-    padding: 1%;
   }
   .contenedor .contenido .pedidos .config_pedido {
     display: none;
