@@ -320,7 +320,21 @@ html {
                         .cont_productos{
                             padding: 0px 10px;
                             .producto{
+                                display: block;
                                 position: relative;
+                                height: 80px;
+                                background: #ccc;
+                                margin-bottom: 4px;
+                                .cont_info_cat{
+                                    width: 92%;
+                                    left: 4%;
+                                    .nombre{
+                                        font-size: 20px;
+                                    }
+                                    .descripcion{
+                                        font-size: 12px;
+                                    }
+                                }
                             }
                         }
                     }

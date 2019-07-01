@@ -324,7 +324,21 @@ html body .contenedor .contenido .productos .lista_productos .cont_productos {
   padding: 0px 10px;
 }
 html body .contenedor .contenido .productos .lista_productos .cont_productos .producto {
+  display: block;
   position: relative;
+  height: 80px;
+  background: #ccc;
+  margin-bottom: 4px;
+}
+html body .contenedor .contenido .productos .lista_productos .cont_productos .producto .cont_info_cat {
+  width: 92%;
+  left: 4%;
+}
+html body .contenedor .contenido .productos .lista_productos .cont_productos .producto .cont_info_cat .nombre {
+  font-size: 20px;
+}
+html body .contenedor .contenido .productos .lista_productos .cont_productos .producto .cont_info_cat .descripcion {
+  font-size: 12px;
 }
 html body .contenedor .pop_up {
   height: 100%;
