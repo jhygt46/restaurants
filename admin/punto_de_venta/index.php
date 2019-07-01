@@ -250,18 +250,22 @@ $info = $core->get_data_pos();
                     <div class="pop pop_cats vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close(this)"></div>
-                            <div class="titulo"></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle vhalign"><h1>TITULO</h1><h2>SUBTITULO</h2></div></div></div>
                             <div class="cont_info">
                                 <div class="informacion"><div class="lista"></div></div>
                             </div>
                         </div>
                     </div>
+
                     <div class="pop pop_pre vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"></div>
                             <div class="cont_info">
                                 <div class="informacion"><div class="lista"></div></div>
+                            </div>
+                            <div class="n_submit">
+        	                    <input type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
                             </div>
                         </div>
                     </div>

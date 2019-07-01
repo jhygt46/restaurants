@@ -373,6 +373,19 @@ html {
                                 left: 0px;
                                 z-index: 2;
                                 background: #999;
+                                .cont_titulo{
+                                    width: 100%;
+                                    height: 100%;
+                                    position: relative;
+                                    .ctitle{
+                                        h1{
+                                            font-size: 20px;
+                                        }
+                                        h2{
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
                             }
                             .cerrar{
                                 position: absolute;
