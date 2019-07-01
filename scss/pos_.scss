@@ -195,7 +195,7 @@ html {
                         position: fixed;
                         top: 0px;
                         left: 0px;
-                        z-index: 1;
+                        z-index: 999;
                     }
                     .config_pedido{
                         
@@ -292,7 +292,7 @@ html {
                     position: fixed;
                     bottom: 0px;
                     left: 0px;
-                    z-index: 1;
+                    z-index: 999;
                 }
             }
             .categorias{

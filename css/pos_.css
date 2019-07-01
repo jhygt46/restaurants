@@ -198,7 +198,7 @@ html body .contenedor .contenido .pedidos .titulo_pedidos {
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 1;
+  z-index: 999;
 }
 html body .contenedor .pop_up {
   height: 100%;
@@ -282,7 +282,7 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .inform
     position: fixed;
     bottom: 0px;
     left: 0px;
-    z-index: 1;
+    z-index: 999;
   }
   .contenedor .contenido .categorias {
     display: none;
