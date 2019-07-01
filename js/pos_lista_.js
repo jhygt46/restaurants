@@ -570,3 +570,25 @@ function np_close(that){
     $(that).parents('.pop').hide();
     
 }
+function add_carro_producto(id_pro){
+
+    var pedidos = get_pedidos();
+    var producto = get_producto(id_pro);
+    var item_carro = { id_pro: parseInt(id_pro) };
+    
+    if(producto.preguntas){
+        item_carro.preguntas = [];
+        for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+        }
+    }
+
+    pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
+    pedidos[seleccionado].carro.push(item_carro);
+    if(producto.preguntas){
+        mostrar_pregunta(pedidos[seleccionado].carro.length - 1);
+    }
+
+    listar_pedidos(pedidos);
+
+}
