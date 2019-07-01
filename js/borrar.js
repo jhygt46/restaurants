@@ -147,17 +147,7 @@ function ver_opciones_pos(){
     $('.p6 .data_info').html();
 
 }
-function mostrar_pregunta(i){
-    var pedidos = get_pedidos();
-    var pedido = pedidos[seleccionado];
-    var producto = get_producto(pedido.carro[i].id_pro);
-    if(producto.preguntas){
-        $('.pop_up').show();
-        $('.p4').show();
-        $('.p4 .n_title').html(producto.nombre);
-        $('.p4 .data_info').html(html_preguntas_producto(i));
-    }
-}
+
 function seleccionar_productos_categoria_promo(i){
     
     var pedidos = get_pedidos();

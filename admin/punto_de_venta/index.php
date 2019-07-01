@@ -256,6 +256,15 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
+                    <div class="pop pop_pre vhalign">
+                        <div class="cont_nuevo">
+                            <div class="cerrar" onclick="np_close(this)"></div>
+                            <div class="titulo">BUENA NELSON PREGUNTAS</div>
+                            <div class="cont_info">
+                                <div class="informacion"><div class="lista"></div></div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -570,6 +570,8 @@ function np_close(that){
     $(that).parents('.pop').hide();
     
 }
+
+
 function add_carro_producto(id_pro){
 
     var pedidos = get_pedidos();
@@ -593,10 +595,86 @@ function add_carro_producto(id_pro){
 
 }
 function get_preguntas(id_pre){
+
     for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
         if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
             return data.catalogos[catalogo].preguntas[i];
         }
     }
     return null;
+
+}
+function mostrar_pregunta(i){
+
+    var pedidos = get_pedidos();
+    var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
+
+    if(producto.preguntas){
+
+        pop_up('pop_pre');
+        $('.p4 .data_info').html(html_preguntas_producto(i));
+
+    }
+
+}
+function html_preguntas_producto(i){
+    
+    var pedidos = get_pedidos();
+    var pedido = pedidos[seleccionado];
+    var carro = pedido.carro;
+    
+    var html = document.createElement('div');
+    html.className = 's_pregunta';
+    html.setAttribute('data-pos', i);
+
+    for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
+        
+        var e_pregunta = document.createElement('div');
+        e_pregunta.className = 'e_pregunta';
+        e_pregunta.setAttribute('data-pos', k);
+        
+        var pregunta_titulo = document.createElement('div');
+        pregunta_titulo.className = 'pregunta_titulo';
+        pregunta_titulo.innerHTML = carro[i].preguntas[k].nombre;
+        e_pregunta.appendChild(pregunta_titulo);
+        
+        
+        for(var m=0, mlen=carro[i].preguntas[k].valores.length; m<mlen; m++){
+            
+            var titulo_v_pregunta = document.createElement('div');
+            titulo_v_pregunta.className = 'titulo_v_pregunta';
+            titulo_v_pregunta.innerHTML = carro[i].preguntas[k].valores[m].nombre;
+                        
+            var v_pregunta = document.createElement('div');
+            v_pregunta.className = 'v_pregunta';
+            v_pregunta.setAttribute('data-pos', m);
+            v_pregunta.setAttribute('data-cant', carro[i].preguntas[k].valores[m].cantidad);
+
+            for(var n=0, nlen=carro[i].preguntas[k].valores[m].valores.length; n<nlen; n++){
+                
+                var n_pregunta = document.createElement('div');
+                if(carro[i].preguntas[k].valores[m].seleccionados){
+                    if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
+                        n_pregunta.className = 'n_pregunta selected';
+                    }else{
+                        n_pregunta.className = 'n_pregunta';
+                    }
+                }else{
+                    n_pregunta.className = 'n_pregunta';
+                }
+                n_pregunta.innerHTML = carro[i].preguntas[k].valores[m].valores[n];
+                n_pregunta.onclick = function(){ select_pregunta(this) };
+                v_pregunta.appendChild(n_pregunta);
+                
+            }
+            
+            e_pregunta.appendChild(titulo_v_pregunta);
+            e_pregunta.appendChild(v_pregunta);
+            
+        }
+        html.appendChild(e_pregunta);
+        
+    }
+    return html;
+    
 }
