@@ -608,6 +608,11 @@ function mostrar_pregunta(i){
 
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
+
+    console.log(pedido);
+    console.log(pedido.carro);
+    console.log(i);
+    
     var producto = get_producto(pedido.carro[i].id_pro);
 
     if(producto.preguntas){
