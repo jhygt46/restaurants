@@ -445,23 +445,31 @@ function set_pedido(index){
     });
     
 }
+function pop_up(n){
+
+    $('.pop_up').show();
+    $('.'+n).show();
+
+}
 function categorias_base(n){
     
-    if(version == 0){
-        console.log("MOBILE");
-    }
-    if(version == 1){
-        console.log("WEB");
-    }
-
-    $('.cont_categorias').html('');
-    $('.cont_productos').html('');
     categoria = n;
     var categorias = data.catalogos[catalogo].categorias;
-    for(var i=0, ilen=categorias.length; i<ilen; i++){
-        if(categorias[i].parent_id == n && categorias[i].ocultar == 0){
-            $('.cont_categorias').append(html_home_categorias(categorias[i]));  
+
+    if(version == 0){
+        // MOBILE
+        pop_up('pop_cats');
+    }
+    if(version == 1){
+        // WEB
+        $('.cont_categorias').html('');
+        $('.cont_productos').html('');
+        for(var i=0, ilen=categorias.length; i<ilen; i++){
+            if(categorias[i].parent_id == n && categorias[i].ocultar == 0){
+                $('.cont_categorias').append(html_home_categorias(categorias[i]));  
+            }
         }
+
     }
     
 }
@@ -482,6 +490,6 @@ function html_home_categorias(obj){
 function np_close(that){
     
     $('.pop_up').hide();
-    $(that).parents('.nuevo').hide();
+    $(that).parents('.pop').hide();
     
 }

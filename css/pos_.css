@@ -295,7 +295,7 @@ html body .contenedor .pop_up .cont_pop_up {
   height: 100%;
   width: 100%;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo {
+html body .contenedor .pop_up .cont_pop_up .pop {
   width: 90%;
   max-width: 360px;
   height: 80%;
@@ -303,12 +303,12 @@ html body .contenedor .pop_up .cont_pop_up .nuevo {
   background: #fff;
   border-radius: 12px;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo {
   position: relative;
   width: 100%;
   height: 100%;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .titulo {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .titulo {
   position: absolute;
   width: 100%;
   height: 70px;
@@ -317,7 +317,7 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .titulo {
   z-index: 2;
   background: #999;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cerrar {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cerrar {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -327,7 +327,7 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cerrar {
   background: #000;
   border-radius: 20px;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -335,13 +335,13 @@ html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info {
   background: #ded;
   overflow-y: auto;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .informacion {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion {
   padding-top: 70px;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .informacion .lista {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista {
   display: block;
 }
-html body .contenedor .pop_up .cont_pop_up .nuevo .cont_nuevo .cont_info .informacion .lista .item {
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .item {
   margin: 10px;
   display: block;
   background: #de0;

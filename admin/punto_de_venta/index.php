@@ -246,7 +246,8 @@ $info = $core->get_data_pos();
 
             <div class="pop_up">
                 <div class="cont_pop_up">
-                    <div class="nuevo vhalign">
+                    
+                    <div class="pop pop_cats vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"></div>
@@ -259,6 +260,7 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             
