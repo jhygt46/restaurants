@@ -440,10 +440,34 @@ html {
                                                 }
                                             }
                                         }
+                                        .s_pregunta{
+                                            padding: 10px;
+                                            .e_pregunta{
+                                                padding-bottom: 16px;
+                                                .pregunta_titulo{
+                                                    font-size: 20px;
+                                                }
+                                                .titulo_v_pregunta{
+                                                    margin-top: 4px;
+                                                    font-size: 12px;
+                                                    margin-bottom: 4px;
+                                                }
+                                                .v_pregunta{
+                                                    .n_pregunta{
+                                                        font-size: 14px;
+                                                        padding: 6px;
+                                                        background: #ccc;
+                                                    }
+                                                    .selected{
+                                                        background: #999;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 .info_btn{
-                                    padding-bottom: 70px;
+                                    padding-bottom: 60px;
                                 }
                             }
                             .n_submit{
