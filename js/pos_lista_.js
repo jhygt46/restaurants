@@ -476,7 +476,7 @@ function open_productos(id){
     var categoria = get_categoria(id);
     if(categoria.productos){
         for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
-            $('.lista_productos').append(html_home_productos(get_producto(categoria.productos[j])));
+            $('.cont_productos').append(html_home_productos(get_producto(categoria.productos[j])));
         }
     }
     

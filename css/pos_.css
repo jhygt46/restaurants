@@ -323,6 +323,9 @@ html body .contenedor .contenido .productos .lista_productos {
 html body .contenedor .contenido .productos .lista_productos .cont_productos {
   padding: 0px 10px;
 }
+html body .contenedor .contenido .productos .lista_productos .cont_productos .producto {
+  position: relative;
+}
 html body .contenedor .pop_up {
   height: 100%;
   position: absolute;
