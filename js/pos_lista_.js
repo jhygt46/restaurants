@@ -451,6 +451,36 @@ function pop_up(n){
     $('.'+n).show();
 
 }
+function open_categoria(id){
+
+    if(cats_or_prods(id)){
+        categorias_base(id);
+    }else{
+        open_productos(id);
+    }
+
+}
+function cats_or_prods(id){
+    
+    var categorias = data.catalogos[catalogo].categorias;
+    for(var i=0, ilen=categorias.length; i<ilen; i++){
+        if(categorias[i].parent_id == id){
+            return true;
+        }
+    }
+    return false;
+}
+function open_productos(id){
+    
+    $('.lista_productos').html('');    
+    var categoria = get_categoria(id);
+    if(categoria.productos){
+        for(var j=0, jlen=categoria.productos.length; j<jlen; j++){
+            $('.lista_productos').append(html_home_productos(get_producto(categoria.productos[j])));
+        }
+    }
+    
+}
 function categorias_base(n){
     
     categoria = n;
