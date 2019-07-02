@@ -564,7 +564,6 @@ function np_close(that){
     $(that).parents('.pop').hide();
     
 }
-
 function add_carro_producto(id_pro){
 
     var producto = get_producto(id_pro);
@@ -761,4 +760,8 @@ function confirmar_pregunta_productos(that){
         });
     });
     
+}
+function ver_pedido(n){
+    console.log(n);
+    pop_up('pop_pedido');
 }

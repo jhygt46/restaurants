@@ -272,12 +272,27 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
+                    <div class="pop pop_pedido vhalign">
+                        <div class="cont_nuevo">
+                            <div class="cerrar" onclick="np_close(this)"></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
+                            <div class="cont_info">
+                                <div class="informacion info_btn"><div class="lista"></div></div>
+                            </div>
+                            <div class="n_submit">
+                                <div class="cont_submit">
+        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             
             <div class="contenido">
                 <div class="pedidos">
-                    <div class="titulo_pedidos"><div class="cont_titulo"><div class="tt valign">Pedidos</div><div class="mas valign"><div class="cont_m"><div class="m1"></div><div class="m2"></div></div></div></div></div>
+                    <div class="titulo_pedidos"><div class="cont_titulo"><div class="tt valign">Pedidos</div><div class="mas valign" onclick="ver_pedido(-1)"><div class="cont_m"><div class="m1"></div><div class="m2"></div></div></div></div></div>
                     <div class="lista_pedidos">
                         <div class="cont_lista"></div>
                     </div>
