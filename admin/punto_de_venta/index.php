@@ -297,6 +297,12 @@ $info = $core->get_data_pos();
                                                 <select id="despacho" onchange="change_despacho(this)"><option value="0">Retiro Local</option><option value="1">Despacho Domicilio</option></select>
                                             </div>
                                         </div>
+                                        <div id="m_direccion" class="cont_ped_input">
+                                            <div class="direccion">
+                                                <span>Direccion: </span>
+                                                <input id="direccion" type="text" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>

@@ -768,7 +768,7 @@ function ver_pedido(index){
     if(index == -1){
         console.log("NUEVO");
     }
-    
+
     if(index > -1){
         var pedido = pedidos[index];
         console.log("EXISTENTE");
@@ -776,7 +776,17 @@ function ver_pedido(index){
     }
     
 }
+function change_despacho(that){
 
+    var value = $(that).val();
+    if(value == 0){
+        $('#m_direccion').show();
+    }
+    if(value == 1){
+        $('#m_direccion').hide();
+    }
+
+}
 function ver_pedido_aux(index, that){
 
     $('.t_direcciones').html("");
