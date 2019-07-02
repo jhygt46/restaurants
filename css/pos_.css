@@ -518,6 +518,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     width: 40px;
     height: 40px;
     margin: 0px 4px;
+    float: left;
   }
   .contenedor .contenido .pedidos .config_pedido .cont_config .icons .icon1 {
     background: #600;

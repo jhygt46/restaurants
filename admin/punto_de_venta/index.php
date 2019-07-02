@@ -281,7 +281,7 @@ $info = $core->get_data_pos();
                     <div class="lista_pedidos">
                         <div class="cont_lista"></div>
                     </div>
-                    <div class="config_pedido"><div class="cont_config"><div class="icons vhalign"><div class="ic icon1"></div><div class="ic icon2"></div></div></div></div>
+                    <div class="config_pedido"><div class="cont_config"><div class="icons vhalign"><div class="ic icon1"></div><div class="ic icon2"></div><div class="ic icon3"></div></div></div></div>
                 </div>
                 <div class="categorias">
                     <div class="titulo_categorias"><div class="cont_titulo"><div class="tt valign">Categorias</div></div></div>
