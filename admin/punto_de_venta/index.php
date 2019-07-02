@@ -295,7 +295,11 @@ $info = $core->get_data_pos();
                         <div class="cont_productos"></div>
                     </div>
                 </div>
-                <div class="configuracion"></div>
+                <div class="configuracion">
+                    <div class="ic icon1"></div>
+                    <div class="ic icon2"></div>
+                    <div class="ic icon3"></div>
+                </div>
             </div>
             
         </div>

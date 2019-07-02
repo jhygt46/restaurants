@@ -514,6 +514,9 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     height: 100%;
     position: relative;
   }
+  .contenedor .contenido .pedidos .config_pedido .cont_config .icons {
+    width: 174px;
+  }
   .contenedor .contenido .pedidos .config_pedido .cont_config .icons .ic {
     width: 50px;
     height: 50px;
@@ -569,6 +572,11 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     background: #aaa;
     float: left;
     margin-left: 2px;
+  }
+  .contenedor .contenido .configuracion .ic {
+    width: 90%;
+    height: 30px;
+    background: #000;
   }
 }
 ::-webkit-scrollbar {
