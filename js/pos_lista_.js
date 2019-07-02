@@ -762,6 +762,14 @@ function confirmar_pregunta_productos(that){
     
 }
 function ver_pedido(n){
-    console.log(n);
+
     pop_up('pop_pedido');
+
+    if(n == -1){
+        console.log("NUEVO");
+    }
+    if(n > -1){
+        console.log("EXISTENTE");
+    }
+    
 }
