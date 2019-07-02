@@ -544,7 +544,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
 }
 @media only screen and (min-width: 769px) {
   .contenedor .contenido .pedidos {
-    width: calc(42% - 50px);
+    width: calc(50% - 62px);
     height: 100%;
     background: #ddd;
     float: left;
@@ -553,14 +553,14 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     display: none;
   }
   .contenedor .contenido .categorias {
-    width: calc(25% - 8px);
+    width: calc(25% - 2px);
     height: 100%;
     background: #ddd;
     float: left;
     margin-left: 2px;
   }
   .contenedor .contenido .productos {
-    width: calc(25% - 8px);
+    width: calc(25% - 2px);
     height: 100%;
     background: #ddd;
     float: left;
