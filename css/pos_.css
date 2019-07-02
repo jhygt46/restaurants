@@ -477,6 +477,10 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   float: left;
   padding-left: 1%;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .nom span {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .nom input {
   border: 0px;
   width: 100%;
@@ -486,6 +490,10 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   width: 49%;
   float: left;
   padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tel span {
+  font-size: 20px;
+  padding-bottom: 4px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tel input {
   border: 0px;
