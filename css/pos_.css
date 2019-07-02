@@ -568,10 +568,11 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   }
   .contenedor .contenido .configuracion {
     width: calc(8% - 2px);
-    height: 100%;
+    height: calc(100% - 10px);
     background: #aaa;
     float: left;
     margin-left: 2px;
+    padding-top: 10px;
   }
   .contenedor .contenido .configuracion .ic {
     width: 100%;

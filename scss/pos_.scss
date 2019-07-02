@@ -588,10 +588,11 @@ html {
             }
             .configuracion{
                 width: calc(8% - 2px);
-                height: 100%;
+                height: calc(100% - 10px);
                 background: #aaa;
                 float: left;
                 margin-left: 2px;
+                padding-top: 10px;
                 .ic{
                     width: 100%;
                     max-width: 50px;
