@@ -475,12 +475,20 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .nom {
   width: 49%;
   float: left;
-  padding-right: 1%;
+  padding-left: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .nom input {
+  border: 0px;
+  width: 100%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tel {
   width: 49%;
   float: left;
-  padding-left: 1%;
+  padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tel input {
+  border: 0px;
+  width: 100%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .info_btn {
   padding-bottom: 60px;
