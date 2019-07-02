@@ -302,6 +302,10 @@ $info = $core->get_data_pos();
                                                 <span>Direccion: </span>
                                                 <input id="direccion" type="text" />
                                             </div>
+                                            <div class="depto">
+                                                <span>Depto: </span>
+                                                <input id="depto" type="text" />
+                                            </div>
                                         </div>
                                     </div>
 

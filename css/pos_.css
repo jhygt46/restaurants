@@ -517,8 +517,9 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .direccion {
-  display: block;
-  padding-top: 8px;
+  width: 79%;
+  float: left;
+  padding-left: 1%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .direccion span {
   font-size: 16px;
@@ -526,6 +527,21 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   padding-bottom: 4px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .direccion input {
+  border: 0px;
+  width: 100%;
+  height: 25px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .depto {
+  width: 19%;
+  float: left;
+  padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .depto span {
+  font-size: 16px;
+  display: block;
+  padding-bottom: 4px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .depto input {
   border: 0px;
   width: 100%;
   height: 25px;
