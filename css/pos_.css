@@ -469,6 +469,9 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .s_pregunta .e_pregunta .v_pregunta .selected {
   background: #999;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs {
+  padding: 10px;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .md {
   width: 50%;
   float: left;
