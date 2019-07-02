@@ -468,9 +468,15 @@ html {
                                     .pedidos_inputs{
                                         padding: 10px;
                                         .cont_ped_input{
-                                            .md{
-                                                width: 50%;
+                                            .nom{
+                                                width: 49%;
                                                 float: left;
+                                                padding-right: 1%;
+                                            }
+                                            .tel{
+                                                width: 49%;
+                                                float: left;
+                                                padding-left: 1%;
                                             }
                                         }
                                     }
