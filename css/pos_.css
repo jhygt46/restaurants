@@ -572,13 +572,21 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     background: #aaa;
     float: left;
     margin-left: 2px;
-    padding-top: 10px;
+    padding-top: 5px;
   }
   .contenedor .contenido .configuracion .ic {
     width: 50px;
     height: 50px;
-    background: #000;
-    margin: 0px auto 10px auto;
+    margin: 0px auto 5px auto;
+  }
+  .contenedor .contenido .configuracion .icon1 {
+    background: #600;
+  }
+  .contenedor .contenido .configuracion .icon2 {
+    background: #060;
+  }
+  .contenedor .contenido .configuracion .icon3 {
+    background: #006;
   }
 }
 ::-webkit-scrollbar {

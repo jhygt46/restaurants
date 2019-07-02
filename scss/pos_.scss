@@ -592,12 +592,20 @@ html {
                 background: #aaa;
                 float: left;
                 margin-left: 2px;
-                padding-top: 10px;
+                padding-top: 5px;
                 .ic{
                     width: 50px;
                     height: 50px;
-                    background: #000;
-                    margin: 0px auto 10px auto;
+                    margin: 0px auto 5px auto;
+                }
+                .icon1{
+                    background: #600;
+                }
+                .icon2{
+                    background: #060;
+                }
+                .icon3{
+                    background: #006;
                 }
             }
         }
