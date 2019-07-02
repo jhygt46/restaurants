@@ -279,14 +279,16 @@ $info = $core->get_data_pos();
                             <div class="cont_info">
                                 <div class="informacion info_btn">
 
-                                    <div class="pedidos_inputs clearfix">
-                                        <div class="md tel">
-                                            <span>Telefono: </span>
-                                            <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
-                                        </div>
-                                        <div class="md nom">
-                                            <span>Nombre: </span>
-                                            <input id="nombre" type="text" />
+                                    <div class="pedidos_inputs">
+                                        <div class="cont_ped_input clearfix">
+                                            <div class="md tel">
+                                                <span>Telefono: </span>
+                                                <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
+                                            </div>
+                                            <div class="md nom">
+                                                <span>Nombre: </span>
+                                                <input id="nombre" type="text" />
+                                            </div>
                                         </div>
                                     </div>
 
