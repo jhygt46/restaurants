@@ -518,7 +518,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .direccion {
-  width: 79%;
+  width: 75%;
   float: left;
   padding-right: 1%;
 }
@@ -533,7 +533,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .depto {
-  width: 19%;
+  width: 23%;
   float: left;
   padding-left: 1%;
 }
