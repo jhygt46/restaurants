@@ -544,7 +544,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
 }
 @media only screen and (min-width: 769px) {
   .contenedor .contenido .pedidos {
-    width: 42%;
+    width: calc(42% - 50px);
     height: 100%;
     background: #ddd;
     float: left;
@@ -553,21 +553,21 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     display: none;
   }
   .contenedor .contenido .categorias {
-    width: calc(25% - 2px);
+    width: calc(25% - 8px);
     height: 100%;
     background: #ddd;
     float: left;
     margin-left: 2px;
   }
   .contenedor .contenido .productos {
-    width: calc(25% - 2px);
+    width: calc(25% - 8px);
     height: 100%;
     background: #ddd;
     float: left;
     margin-left: 2px;
   }
   .contenedor .contenido .configuracion {
-    width: calc(8% - 2px);
+    width: 60px;
     height: calc(100% - 10px);
     background: #aaa;
     float: left;
@@ -575,8 +575,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     padding-top: 10px;
   }
   .contenedor .contenido .configuracion .ic {
-    width: 100%;
-    max-width: 50px;
+    width: 50px;
     height: 50px;
     background: #000;
     margin: 0px auto 10px auto;
