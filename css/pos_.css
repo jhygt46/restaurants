@@ -515,8 +515,8 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     position: relative;
   }
   .contenedor .contenido .pedidos .config_pedido .cont_config .icons .ic {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin: 0px 4px;
     float: left;
   }
