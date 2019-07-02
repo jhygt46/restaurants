@@ -517,8 +517,16 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   .contenedor .contenido .pedidos .config_pedido .cont_config .icons .ic {
     width: 40px;
     height: 40px;
-    background: #000;
     margin: 0px 4px;
+  }
+  .contenedor .contenido .pedidos .config_pedido .cont_config .icons .icon1 {
+    background: #600;
+  }
+  .contenedor .contenido .pedidos .config_pedido .cont_config .icons .icon2 {
+    background: #060;
+  }
+  .contenedor .contenido .pedidos .config_pedido .cont_config .icons .icon3 {
+    background: #006;
   }
   .contenedor .contenido .categorias {
     display: none;
