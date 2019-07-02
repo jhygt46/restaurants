@@ -280,14 +280,21 @@ $info = $core->get_data_pos();
                                 <div class="informacion info_btn">
 
                                     <div class="pedidos_inputs">
+
                                         <div class="cont_ped_input clearfix">
-                                            <div class="md tel">
+                                            <div class="tel">
                                                 <span>Telefono: </span>
                                                 <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
                                             </div>
-                                            <div class="md nom">
+                                            <div class="nom">
                                                 <span>Nombre: </span>
                                                 <input id="nombre" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="cont_ped_input">
+                                            <div class="despacho">
+                                                <span>Tipo: </span>
+                                                <select id="despacho" onchange="change_despacho(this)"><option value="0">Retiro Local</option><option value="1">Despacho Domicilio</option></select>
                                             </div>
                                         </div>
                                     </div>
