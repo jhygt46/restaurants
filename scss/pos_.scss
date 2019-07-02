@@ -473,7 +473,8 @@ html {
                                                 float: left;
                                                 padding-left: 1%;
                                                 span{
-                                                    font-size: 20px;
+                                                    font-size: 16px;
+                                                    display: block;
                                                     padding-bottom: 4px;  
                                                 }
                                                 input{
@@ -487,8 +488,9 @@ html {
                                                 float: left;
                                                 padding-right: 1%;
                                                 span{
-                                                    font-size: 20px;
-                                                    padding-bottom: 4px;    
+                                                    font-size: 16px;
+                                                    display: block;
+                                                    padding-bottom: 4px;     
                                                 }
                                                 input{
                                                     border: 0px;
