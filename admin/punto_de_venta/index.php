@@ -277,7 +277,20 @@ $info = $core->get_data_pos();
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
                             <div class="cont_info">
-                                <div class="informacion info_btn"><div class="lista"></div></div>
+                                <div class="informacion info_btn">
+
+                                    <div class="pedidos_inputs clearfix">
+                                        <div class="md tel">
+                                            <span>Telefono: </span>
+                                            <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
+                                        </div>
+                                        <div class="md nom">
+                                            <span>Nombre: </span>
+                                            <input id="nombre" type="text" />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="n_submit">
                                 <div class="cont_submit">
