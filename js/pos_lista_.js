@@ -780,10 +780,10 @@ function change_despacho(that){
 
     var value = $(that).val();
     if(value == 0){
-        $('#m_direccion').show();
+        $('#m_direccion').hide();
     }
     if(value == 1){
-        $('#m_direccion').hide();
+        $('#m_direccion').show();
     }
 
 }
