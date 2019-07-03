@@ -468,6 +468,7 @@ html {
                                     .pedidos_inputs{
                                         padding: 10px;
                                         .cont_ped_input{
+                                            padding-bottom: 8px;
                                             .nom{
                                                 width: 49%;
                                                 float: left;
@@ -547,11 +548,13 @@ html {
                                                 position: relative;
                                                 span{
                                                     display: block;
-                                                    font-size: 16px;
+                                                    font-size: 15px;
                                                     padding: 2px 0px;
                                                 }
                                                 input{
                                                     right: 0px;
+                                                    width: 18px;
+                                                    height: 18px;
                                                 }
                                             }
                                         }
