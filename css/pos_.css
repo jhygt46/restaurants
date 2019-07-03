@@ -552,6 +552,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta span {
   display: block;
+  font-size: 14px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta input {
   left: 0px;
