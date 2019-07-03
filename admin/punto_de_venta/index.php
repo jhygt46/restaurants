@@ -280,7 +280,7 @@ $info = $core->get_data_pos();
                                 <div class="informacion info_btn">
 
                                     <div class="pedidos_inputs">
-
+                                        <input id="id_ped" type="hidden" value="" />
                                         <div class="cont_ped_input clearfix">
                                             <div class="tel">
                                                 <span>Telefono: </span>
@@ -345,7 +345,7 @@ $info = $core->get_data_pos();
                             </div>
                             <div class="n_submit">
                                 <div class="cont_submit">
-        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_pregunta_productos(this)" />
+        	                        <input class="vhalign" type="button" value="Enviar" onclick="done_pedido(this)" />
                                 </div>
                             </div>
                         </div>

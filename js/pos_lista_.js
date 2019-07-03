@@ -766,12 +766,12 @@ function ver_pedido(index){
     pop_up('pop_pedido');
 
     if(index == -1){
-        console.log("NUEVO");
+        $('#id_ped').val(0);
     }
 
     if(index > -1){
         var pedido = pedidos[index];
-        console.log("EXISTENTE");
+        $('#id_ped').val(pedido.id_ped);
         console.log(pedido);
     }
     
