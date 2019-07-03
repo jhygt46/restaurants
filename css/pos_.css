@@ -564,10 +564,10 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   height: 18px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(even) {
-  background: #ddd;
+  background: #d0d0d0;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(odd) {
-  background: #fff;
+  background: #d8d8d8;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs #m_direccion {
   display: none;
