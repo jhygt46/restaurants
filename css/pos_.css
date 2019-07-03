@@ -556,12 +556,18 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta span {
   display: block;
   font-size: 15px;
-  padding: 2px 0px;
+  padding: 6px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta input {
-  right: 0px;
+  right: 6px;
   width: 18px;
   height: 18px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(even) {
+  background: #ddd;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(odd) {
+  background: #fff;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs #m_direccion {
   display: none;

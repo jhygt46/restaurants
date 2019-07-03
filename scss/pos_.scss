@@ -549,14 +549,21 @@ html {
                                                 span{
                                                     display: block;
                                                     font-size: 15px;
-                                                    padding: 2px 0px;
+                                                    padding: 6px;
                                                 }
                                                 input{
-                                                    right: 0px;
+                                                    right: 6px;
                                                     width: 18px;
                                                     height: 18px;
                                                 }
                                             }
+                                            .pregunta:nth-child(even){
+                                                background: #ddd;
+                                            }
+                                            .pregunta:nth-child(odd){
+                                                background: #fff;
+                                            }
+
                                         }
                                         #m_direccion{
                                             display: none;
