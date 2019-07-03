@@ -334,7 +334,7 @@ $info = $core->get_data_pos();
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
-                                            <div class="comentarios">
+                                            <div class="comentario">
                                                 <span>Comentarios: </span>
                                                 <Textarea></Textarea>
                                             </div>
