@@ -569,7 +569,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   height: 18px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(even) {
-  background: #e0e0e0;
+  background: #f9f9f9;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(odd) {
   background: #f0f0f0;
