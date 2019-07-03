@@ -316,6 +316,22 @@ $info = $core->get_data_pos();
                                                 <span>Gengibre: </span>
                                                 <input type="checkbox" id="gengibre" class="valign">
                                             </div>
+                                            <div class="pregunta clearfix">
+                                                <span>Soya: </span>
+                                                <input type="checkbox" id="gengibre" class="valign">
+                                            </div>
+                                            <div class="pregunta clearfix">
+                                                <span>Tariyaki: </span>
+                                                <input type="checkbox" id="gengibre" class="valign">
+                                            </div>
+                                            <div class="pregunta clearfix">
+                                                <span>Palitos: </span>
+                                                <select class="valign">
+                                                    <?php for($i=0; $i<10; $i++){ ?>
+                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
