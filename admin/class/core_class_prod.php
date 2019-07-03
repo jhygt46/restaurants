@@ -1810,6 +1810,7 @@ class Core{
         $lat = $pedido['lat'];
         $lng = $pedido['lng'];			        
         $despacho = $pedido['despacho'];
+        $pdir_id = 0;
     
         $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?");
         $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
