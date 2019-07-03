@@ -501,8 +501,6 @@ html {
                                             }
                                             .despacho{
                                                 display: block;
-                                                padding-top: 8px;
-                                                padding-bottom: 8px;
                                                 span{
                                                     font-size: 15px;
                                                     display: block;
@@ -512,6 +510,19 @@ html {
                                                     border: 0px;
                                                     width: 100%;
                                                     height: 25px;
+                                                }
+                                            }
+                                            .comentario{
+                                                display: block;
+                                                span{
+                                                    font-size: 15px;
+                                                    display: block;
+                                                    padding-bottom: 4px;   
+                                                }
+                                                textarea{
+                                                    border: 0px;
+                                                    width: 100%;
+                                                    height: 75px;
                                                 }
                                             }
                                             .direccion{

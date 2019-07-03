@@ -333,6 +333,12 @@ $info = $core->get_data_pos();
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="cont_ped_input">
+                                            <div class="comentarios">
+                                                <span>Comentarios: </span>
+                                                <Textarea></Textarea>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
