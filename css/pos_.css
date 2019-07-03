@@ -563,6 +563,11 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   width: 18px;
   height: 18px;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta select {
+  right: 6px;
+  width: 38px;
+  height: 18px;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(even) {
   background: #e0e0e0;
 }
