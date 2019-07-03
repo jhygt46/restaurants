@@ -307,6 +307,16 @@ $info = $core->get_data_pos();
                                                 <input id="depto" type="text" />
                                             </div>
                                         </div>
+                                        <div class="cont_ped_input">
+                                            <div class="pregunta clearfix">
+                                                <span>Wasabi: </span>
+                                                <input type="checkbox" id="wasabi">
+                                            </div>
+                                            <div class="pregunta clearfix">
+                                                <span>Gengibre: </span>
+                                                <input type="checkbox" id="gengibre">
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
