@@ -1950,6 +1950,7 @@ class Core{
     
             $info['op'] = 2;
             $info['mensaje'] = 'El pedido no pudo ser enviado';
+            $info['db_err'] = $sqlipa->error;
     
         }
     
