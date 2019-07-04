@@ -1286,13 +1286,9 @@ class Core{
             $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
             $sqlu = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2 WHERE t1.id_gir=? AND t1.telefono=? AND t1.id_puser=t2.id_puser");
             $sqlu->bind_param("is", $id_gir, $telefono);
-            $sqlu->execute();
-            
+            $sqlu->execute();            
             $resdir = $sqlu->get_result();
-
-            $info['res'] = $resdir->fetch_all(MYSQLI_ASSOC);
             $info['cantidad'] = $resdir->{"num_rows"};
-            $info['id_gir'] = $id_gir;
 
             if($resdir->{"num_rows"} > 0){
 
@@ -1301,7 +1297,6 @@ class Core{
                     $info['id_puser'] = $row['id_puser'];
                     $info['nombre'] = $row['nombre'];
                     
-
                     $aux_dir["id_pdir"] = $row['id_pdir'];
                     $aux_dir["direccion"] = $row['direccion'];
                     $aux_dir["calle"] = $row['calle'];
