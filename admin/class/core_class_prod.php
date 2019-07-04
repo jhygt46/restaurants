@@ -913,18 +913,7 @@ class Core{
         return $info;
 
     }
-    function get_polygons($id_gir){
-
-        $eliminado = 0;
-        $sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
-        $sql->bind_param("iii", $id_gir, $eliminado, $eliminado);
-        $sql->execute();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        $sql->free_result();
-        $sql->close();
-        return $result;
-                    
-    }
+    
     public function get_info_catalogo($id_cat){
         
         $aux_prods = [];
@@ -1262,6 +1251,94 @@ class Core{
         $sql->close();
         return $result;
 
+    }
+    public function get_info_despacho($lat, $lng){
+
+        $polygons = $this->get_polygons_id();
+        $precio = 9999999;
+        $info['op'] = 2;
+        foreach($polygons as $polygon){
+
+            $lats = [];
+            $lngs = [];
+            $puntos = json_decode($polygon['poligono']);
+            foreach($puntos as $punto){
+                $lats[] = $punto->{'lat'};
+                $lngs[] = $punto->{'lng'};
+            }
+            $is = $this->is_in_polygon($lats, $lngs, $lat, $lng);
+            if($is){
+                if($precio > $polygon['precio']){
+                    $info['op'] = 1;
+                    $info['id_loc'] = intval($polygon['id_loc']);
+                    $info['precio'] = intval($polygon['precio']);
+                    $info['nombre'] = $polygon['nombre'];
+                    $info['lat'] = $lat;
+                    $info['lng'] = $lng;
+                    $precio = $polygon['precio'];
+                }
+            }
+        }
+        
+        return $info;
+        
+    }
+    function is_in_polygon($vertices_x, $vertices_y, $longitude_x, $latitude_y){
+
+        $points_polygon = count($vertices_x) - 1;
+        $i = $j = $c = $point = 0;
+        for($i=0, $j=$points_polygon ; $i<$points_polygon; $j=$i++) {
+            $point = $i;
+            if($point == $points_polygon)
+                $point = 0;
+            if((($vertices_y[$point] > $latitude_y != ($vertices_y[$j] > $latitude_y)) && ($longitude_x < ($vertices_x[$j] - $vertices_x[$point]) * ($latitude_y - $vertices_y[$point]) / ($vertices_y[$j] - $vertices_y[$point]) + $vertices_x[$point])))
+                $c = !$c;
+        }
+        return $c;
+
+    }
+    public function get_polygons_id(){
+
+        $ip = $this->getUserIpAddr();
+        $id = $_COOKIE["id"];
+        $user_code = $_COOKIE["user_code"];
+        $local_code = $_COOKIE["local_code"];
+
+        $sql = $this->con->prepare("SELECT t3.id_gir FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?");
+        $sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado);
+        $sql->execute();
+        $res = $sql->get_result();
+
+        if($res->{"num_rows"} == 1){
+
+            $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+            $sqlg = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
+            $sqlg->bind_param("iii", $id_gir, $this->eliminado, $this->eliminado);
+            $sqlg->execute();
+            $result = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC);
+            $sqlg->free_result();
+            $sqlg->close();
+
+        }else{
+
+            $result = [];
+            
+        }
+
+        return $result;
+        
+    }
+    function get_polygons($id_gir){
+
+        $eliminado = 0;
+        $sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?");
+        $sql->bind_param("iii", $id_gir, $eliminado, $eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sql->free_result();
+        $sql->close();
+        return $result;
+                    
     }
     public function get_pos_direcciones($telefono){
 

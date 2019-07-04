@@ -362,40 +362,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function select_pdir(that){
-    
-    var lat = $(that).attr('lat');
-    var lng = $(that).attr('lng');
 
-    var send = { accion: 'despacho_domicilio', lat: lat, lng: lng, referer: dominio };
-            
-    $.ajax({
-        url: "ajax/index.php",
-        type: "POST",
-        data: send,
-        success: function(datas){
-            var data = JSON.parse(datas);
-            if(data.op == 1){
-                
-                $('.t_direcciones').html("");
-                $('#id_pdir').val($(that).attr('id_pdir'));
-                $('#direccion').val($(that).attr('direccion'));
-                $('#depto').val($(that).attr('depto'));
-                $('#costo').val(data.precio);
-                $('.t_despacho').show();
-                $('.t_repartidor').show();
-
-            }else{
-                alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
-                $('#costo').val(-1);
-            }
-        }, error: function(e){
-            alert("Se produjo un error: intente mas tarde");
-            $('#costo').val(-1);
-        }
-    });
-
-}
 function proceso(pedido){
 
     for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
