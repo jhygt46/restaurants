@@ -886,6 +886,7 @@ function telefono_keyup(e){
             data: send,
             success: function(data){
 
+                console.log(data);
                 if(data.cantidad == 0){
 
                     $('.pop_pedido .titulo h2').html('No se encontro registro');
