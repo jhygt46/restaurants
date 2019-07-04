@@ -768,12 +768,18 @@ function ver_pedido(index){
     if(index == -1){
 
         $('.pop_pedido .titulo h1').html("Ingresar Nuevo Pedido");
-        $('.pop_pedido .titulo h2').html("");
 
         $('#id_ped').val(0);
+        $('#id_puser').val(0);
         $('#nombre').val("");
         $('#telefono').val("");
         $('#despacho').val(0);
+
+        $('#pre_wasabi').attr('checked', '');
+        $('#pre_gengibre').attr('checked', '');
+        $('#pre_soya').attr('checked', '');
+        $('#pre_teriyaki').attr('checked', '');
+        $('#pre_palitos option[value=0]').attr('selected', 'selected');
 
     }
 
@@ -782,46 +788,30 @@ function ver_pedido(index){
         var pedido = pedidos[index];
         console.log(pedido);
 
-        $('.pop_pedido .titulo h1').html("Pedido #"+pedido.num);
-        $('.pop_pedido .titulo h2').html("");
+        $('.pop_pedido .titulo h1').html("Pedido #"+pedido.num_ped);
 
         $('#id_ped').val(pedido.id_ped);
+        $('#id_puser').val(pedido.id_puser);
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
         $('#despacho').val(pedido.despacho);
 
+        if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
+        if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
+        if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
+        if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
+        $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
+
     }
     
 }
-function change_despacho(that){
-
-    var value = $(that).val();
-    if(value == 0){
-        $('#m_direccion').hide();
-    }
-    if(value == 1){
-        $('#m_direccion').show();
-    }
-
-}
-function ver_pedido_aux(index, that){
+function ver_pedido_aux(index){
 
     $('.t_direcciones').html("");
     $('.p1 .n_stitle').html("");
 
     if(index >= 0){
         
-        set_pedido(index, that);
-        var pedidos = get_pedidos();
-        var pedido = pedidos[index];
-
-        $('.p1 .n_title').html("Pedido #"+pedido.num_ped);
-        $('#id_ped').val(pedido.id_ped);
-        
-        $('#id_puser').val(pedido.id_puser);
-        $('#nombre').val(pedido.nombre);
-        $('#telefono').val(pedido.telefono);
-
         $('#id_pdir').val(pedido.id_pdir);
         $('#direccion').val(pedido.direccion);
         $('#depto').val(pedido.depto);
@@ -854,13 +844,6 @@ function ver_pedido_aux(index, that){
     }
     if(index == -1){
 
-        $('.p1 .n_title').html("Ingresar Nuevo Pedido");
-        $('#id_ped').val(0);
-        
-        $('#id_puser').val(0);
-        $('#nombre').val("");
-        $('#telefono').val("+569");
-
         $('#id_pdir').val(0);
         $('#direccion').val("");
         $('#depto').val("");
@@ -888,4 +871,15 @@ function ver_pedido_aux(index, that){
     $('.pop_up').show();
     $('.p1').show();
     
+}
+function change_despacho(that){
+
+    var value = $(that).val();
+    if(value == 0){
+        $('#m_direccion').hide();
+    }
+    if(value == 1){
+        $('#m_direccion').show();
+    }
+
 }
