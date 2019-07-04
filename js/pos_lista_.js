@@ -873,20 +873,19 @@ function ver_pedido_aux(index){
 }
 function telefono_keyup(e){
 
-    var len = e.value;
-    if(len.length >= 12){
+    var telefono = e.value;
+    if(telefono.length >= 12){
 
         $('.t_direcciones').html('');
         $('.pop_pedido .titulo h2').html('Buscando..');
 
-        var send = { accion: 'get_users_pedido', telefono: $('#telefono').val() };
+        var send = { accion: 'get_users_pedido', telefono: telefono };
         $.ajax({
             url: "/admin/ajax/get_pos_direcciones.php",
             type: "POST",
             data: send,
             success: function(data){
 
-                console.log(data);
                 if(data.cantidad == 0){
 
                     $('.pop_pedido .titulo h2').html('No se encontro registro');
