@@ -884,9 +884,8 @@ function telefono_keyup(e){
             url: "/admin/ajax/get_pos_direcciones.php",
             type: "POST",
             data: send,
-            success: function(info){
+            success: function(data){
 
-                var data = JSON.parse(info);
                 console.log(data);
                 if(data.cantidad == 0){
 
