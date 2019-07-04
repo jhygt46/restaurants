@@ -586,6 +586,9 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs #m_direccion {
   display: none;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion {
+  padding: 5px;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .info_btn {
   padding-bottom: 60px;
 }
