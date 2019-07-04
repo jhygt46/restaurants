@@ -1291,6 +1291,7 @@ class Core{
             $resdir = $sqlu->get_result();
             $info['op'] = 1;
             $info['cantidad'] = 0;
+            $info['id_gir'] = $id_gir;
 
             if($resdir->{"num_rows"} > 0){
 
