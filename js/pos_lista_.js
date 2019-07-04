@@ -898,8 +898,10 @@ function telefono_keyup(e){
                 if(data.cantidad > 0){
                     
                     $('.pop_pedido .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
-                    $('#id_puser').val(data.id_puser);
-                    $('#nombre').val(data.nombre);
+                    
+                    document.getElementById("id_puser").value = data.id_puser;
+                    document.getElementById("nombre").value = data.nombre;
+
                     $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
 
                 }
