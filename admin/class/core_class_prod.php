@@ -1290,7 +1290,7 @@ class Core{
             
             $resdir = $sqlu->get_result();
 
-            $info['op'] = 1;
+            $info['res'] = $resdir->fetch_all(MYSQLI_ASSOC);
             $info['cantidad'] = $resdir->{"num_rows"};
             $info['id_gir'] = $id_gir;
 
