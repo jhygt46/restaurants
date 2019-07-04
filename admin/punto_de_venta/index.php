@@ -308,7 +308,7 @@ $info = $core->get_data_pos();
                                                 <input id="depto" type="text" />
                                             </div>
                                         </div>
-                                        <div class="cont_ped_input">
+                                        <div class="cont_ped_input t_direcciones">
                                             LISTA DE DIRECCIONES
                                         </div>
                                         <div class="cont_ped_input">

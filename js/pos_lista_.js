@@ -771,7 +771,7 @@ function ver_pedido(index){
         $('#id_ped').val(0);
         $('#id_puser').val(0);
         $('#nombre').val("");
-        $('#telefono').val("");
+        $('#telefono').val("+569");
         $('#despacho').val(0);
 
         $('#pre_wasabi').attr('checked', '');

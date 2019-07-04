@@ -1291,7 +1291,6 @@ class Core{
             $info['cantidad'] = $resdir->{"num_rows"};
 
             if($resdir->{"num_rows"} > 0){
-
                 while($row = $resdir->fetch_assoc()){
 
                     $info['id_puser'] = $row['id_puser'];
@@ -1309,12 +1308,13 @@ class Core{
                     unset($aux_dir);
 
                 }
-
             }
+
             $sqlu->free_result();
             $sqlu->close();
 
         }
+        
         $sql->free_result();
         $sql->close();
 
