@@ -152,14 +152,15 @@ function gmap_input(){
                     $('#comuna').val(places[0].address_components[i].long_name);
                 }
             }
-            var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), id: id };
+            var send = { lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng() };
             
             $.ajax({
                 url: "/admin/ajax/despacho.php",
                 type: "POST",
                 data: send,
                 success: function(datas){
-                    var data = JSON.parse(datas);                   
+                    var data = JSON.parse(datas);   
+                    console.log(data);                
                     if(data.op == 1){
                         $('#costo').val(data.precio);
                     }else{
@@ -947,10 +948,10 @@ function select_pdir(that){
     var lat = $(that).attr('lat');
     var lng = $(that).attr('lng');
 
-    var send = { accion: 'despacho_domicilio', lat: lat, lng: lng, referer: dominio };
+    var send = { lat: lat, lng: lng };
             
     $.ajax({
-        url: "ajax/index.php",
+        url: "/admin/ajax/despacho.php",
         type: "POST",
         data: send,
         success: function(datas){
