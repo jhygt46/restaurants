@@ -158,8 +158,7 @@ function gmap_input(){
                 url: "/admin/ajax/despacho.php",
                 type: "POST",
                 data: send,
-                success: function(datas){
-                    var data = JSON.parse(datas);   
+                success: function(data){   
                     console.log(data);                
                     if(data.op == 1){
                         $('#costo').val(data.precio);
@@ -954,8 +953,7 @@ function select_pdir(that){
         url: "/admin/ajax/despacho.php",
         type: "POST",
         data: send,
-        success: function(datas){
-            var data = JSON.parse(datas);
+        success: function(data){
             console.log(data);
             /*
             if(data.op == 1){
