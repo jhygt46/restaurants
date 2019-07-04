@@ -1289,9 +1289,9 @@ class Core{
             $sqlu->execute();
             
             $resdir = $sqlu->get_result();
-            
+
             $info['op'] = 1;
-            $info['cantidad'] = 0;
+            $info['cantidad'] = $resdir->{"num_rows"};
             $info['id_gir'] = $id_gir;
 
             if($resdir->{"num_rows"} > 0){
@@ -1300,7 +1300,7 @@ class Core{
 
                     $info['id_puser'] = $row['id_puser'];
                     $info['nombre'] = $row['nombre'];
-                    $info['cantidad'] = $resdir->{"num_rows"};
+                    
 
                     $aux_dir["id_pdir"] = $row['id_pdir'];
                     $aux_dir["direccion"] = $row['direccion'];
