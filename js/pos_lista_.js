@@ -18,6 +18,7 @@ var markers = [];
 var map_socket, socket;
 var version = 0;
 var pedidos = get_pedidos();
+var global_telefono = "";
 
 function resize(){
 
@@ -562,6 +563,7 @@ function np_close(that){
     
     $('.pop_up').hide();
     $(that).parents('.pop').hide();
+    global_telefono = "";
     
 }
 function add_carro_producto(id_pro){
@@ -874,8 +876,10 @@ function ver_pedido_aux(index){
 function telefono_keyup(e){
 
     var telefono = e.value;
-    if(telefono.length >= 12){
+    
+    if(telefono.length >= 12 && telefono != global_telefono){
 
+        global_telefono = telefono;
         $('.t_direcciones').html('');
         $('.pop_pedido .titulo h2').html('Buscando..');
 
@@ -886,7 +890,6 @@ function telefono_keyup(e){
             data: send,
             success: function(data){
 
-                console.log(data);
                 if(data.cantidad == 0){
 
                     $('.pop_pedido .titulo h2').html('No se encontro registro');
