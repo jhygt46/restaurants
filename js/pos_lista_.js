@@ -766,13 +766,30 @@ function ver_pedido(index){
     pop_up('pop_pedido');
 
     if(index == -1){
+
+        $('.pop_pedido .titulo h1').html("Ingresar Nuevo Pedido");
+        $('.pop_pedido .titulo h2').html("");
+
         $('#id_ped').val(0);
+        $('#nombre').val("");
+        $('#telefono').val("");
+        $('#despacho').val(0);
+
     }
 
     if(index > -1){
+
         var pedido = pedidos[index];
-        $('#id_ped').val(pedido.id_ped);
         console.log(pedido);
+
+        $('.pop_pedido .titulo h1').html("Pedido #"+pedido.num);
+        $('.pop_pedido .titulo h2').html("");
+
+        $('#id_ped').val(pedido.id_ped);
+        $('#nombre').val(pedido.nombre);
+        $('#telefono').val(pedido.telefono);
+        $('#despacho').val(pedido.despacho);
+
     }
     
 }
