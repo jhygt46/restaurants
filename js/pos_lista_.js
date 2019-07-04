@@ -931,8 +931,8 @@ function html_pedidos_direcciones(direcciones){
         pdir.setAttribute('comuna', direcciones[i].comuna);
         pdir.onclick = function(){ select_pdir(this) };
 
-        var direccion_nom = create_element_class_inner('direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
-        var direccion_del = create_element_class('borrar valign');
+        var direccion_nom = create_element_class_inner('md_direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
+        var direccion_del = create_element_class('md_borrar valign');
 
         pdir.appendChild(direccion_nom);
         pdir.appendChild(direccion_del);

@@ -588,15 +588,15 @@ html {
                                         .pedido_direcciones{
                                             font-size: 12px;
                                             .pedido_direccion{
-                                                height: 20px;
+                                                height: 30px;
                                                 border-bottom: 1px solid #999;
                                                 background: #ddd;
                                                 position: relative;
-                                                .direccion{
-                                                    left: 0px;
+                                                .md_direccion{
+                                                    left: 5px;
                                                 }
-                                                .borrar{
-                                                    right: 0px;
+                                                .md_borrar{
+                                                    right: 5px;
                                                 }
                                             }
                                         }
