@@ -914,28 +914,30 @@ function telefono_keyup(e){
 }
 function html_pedidos_direcciones(direcciones){
 
-    var Div = document.createElement('div');
-    Div.className = 'pedido_direcciones';
+    var Div = create_element_class('pedido_direcciones');
 
     for(var i=0, ilen=direcciones.length; i<ilen; i++){
 
-        var div = document.createElement('div');
-        div.className = 'pedido_direccion';
-        div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        
         console.log(direcciones[i]);
 
-        div.setAttribute('id_pdir', direcciones[i].id_pdir);
-        div.setAttribute('direccion', direcciones[i].direccion);
-        div.setAttribute('calle', direcciones[i].calle);
-        div.setAttribute('num', direcciones[i].num);
-        div.setAttribute('depto', direcciones[i].depto);
-        div.setAttribute('lat', direcciones[i].lat);
-        div.setAttribute('lng', direcciones[i].lng);
-        div.setAttribute('comuna', direcciones[i].comuna);
+        var pdir = create_element_class('pedido_direccion');
+        pdir.setAttribute('id_pdir', direcciones[i].id_pdir);
+        pdir.setAttribute('direccion', direcciones[i].direccion);
+        pdir.setAttribute('calle', direcciones[i].calle);
+        pdir.setAttribute('num', direcciones[i].num);
+        pdir.setAttribute('depto', direcciones[i].depto);
+        pdir.setAttribute('lat', direcciones[i].lat);
+        pdir.setAttribute('lng', direcciones[i].lng);
+        pdir.setAttribute('comuna', direcciones[i].comuna);
+        pdir.onclick = function(){ select_pdir(this) };
 
-        div.onclick = function(){ select_pdir(this) };
-        Div.appendChild(div);
+        var direccion_nom = create_element_class_inner('direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
+        var direccion_del = create_element_class('borrar valign');
+
+        pdir.appendChild(direccion_nom);
+        pdir.appendChild(direccion_del);
+        
+        Div.appendChild(pdir);
 
     }
 
@@ -948,7 +950,7 @@ function select_pdir(that){
     var lng = $(that).attr('lng');
 
     var send = { lat: lat, lng: lng };
-            
+ 
     $.ajax({
         url: "/admin/ajax/despacho.php",
         type: "POST",

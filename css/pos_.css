@@ -593,9 +593,16 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   font-size: 12px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion {
-  padding: 10px 5px;
+  height: 20px;
   border-bottom: 1px solid #999;
   background: #ddd;
+  position: relative;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .direccion {
+  left: 0px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .borrar {
+  right: 0px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .info_btn {
   padding-bottom: 60px;

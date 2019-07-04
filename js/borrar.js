@@ -362,7 +362,6 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-
 function proceso(pedido){
 
     for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
