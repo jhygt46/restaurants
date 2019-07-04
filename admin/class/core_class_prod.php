@@ -1298,6 +1298,7 @@ class Core{
             $info['res'] = $resdir->fetch_all(MYSQLI_ASSOC);
             $info['cantidad'] = $resdir->{"num_rows"};
             $info['id_gir'] = $id_gir;
+            $info['telefono'] = $telefono;
 
             if($resdir->{"num_rows"} > 0){
 
