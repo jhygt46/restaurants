@@ -877,7 +877,7 @@ function telefono_keyup(e){
     if(len.length >= 12){
 
         $('.t_direcciones').html('');
-        $('.pop_pre .titulo h2').html('Buscando..');
+        $('.pop_pedido .titulo h2').html('Buscando..');
 
         var send = { accion: 'get_users_pedido', telefono: $('#telefono').val(), id: id };
         $.ajax({
@@ -890,12 +890,12 @@ function telefono_keyup(e){
                 console.log(data);
                 if(data.cantidad == 0){
 
-                    $('.pop_pre .titulo h2').html('No se encontro registro');
+                    $('.pop_pedido .titulo h2').html('No se encontro registro');
                     
                 }
                 if(data.cantidad > 0){
                     
-                    $('.pop_pre .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
+                    $('.pop_pedido .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
                     $('#id_puser').val(data.id_puser);
                     $('#nombre').val(data.nombre);
                     $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
@@ -903,7 +903,7 @@ function telefono_keyup(e){
                 }
 
             }, error: function(e){
-                $('.pop_pre .titulo h2').html('Error de comunicacion');
+                $('.pop_pedido .titulo h2').html('Error de comunicacion');
             }
         });
 

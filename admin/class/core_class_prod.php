@@ -1289,6 +1289,7 @@ class Core{
             $sqlu->execute();
             
             $resdir = $sqlu->get_result();
+            $info['op'] = 1;
             $info['cantidad'] = 0;
 
             if($resdir->{"num_rows"} > 0){
