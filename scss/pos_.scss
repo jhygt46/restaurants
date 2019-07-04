@@ -582,10 +582,15 @@ html {
                                         #m_direccion{
                                             display: none;
                                         }
+                                        .ttl_dir{
+                                            font-size: 12px;
+                                        }
                                         .pedido_direcciones{
                                             font-size: 12px;
                                             .pedido_direccion{
-                                                padding: 5px;
+                                                padding: 10px 5px;
+                                                border-bottom: 1px solid #999;
+                                                background: #ddd;
                                             }
                                         }
                                     }

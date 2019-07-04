@@ -289,7 +289,7 @@ $info = $core->get_data_pos();
                                             </div>
                                             <div class="nom">
                                                 <span>Nombre: </span>
-                                                <input id="nombre" type="text" value="" class="form_nombre" />
+                                                <input id="nombre" type="text" value="" class= />
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
@@ -308,8 +308,9 @@ $info = $core->get_data_pos();
                                                 <input id="depto" type="text" />
                                             </div>
                                         </div>
-                                        <div class="cont_ped_input t_direcciones">
-                                            LISTA DE DIRECCIONES
+                                        <div class="cont_ped_input">
+                                            <div class="ttl_dir">Direcciones:</div>
+                                            <div class="t_direcciones"></div>
                                         </div>
                                         <div class="cont_ped_input">
                                             <div class="pregunta clearfix">
