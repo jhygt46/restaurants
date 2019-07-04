@@ -285,11 +285,11 @@ $info = $core->get_data_pos();
                                         <div class="cont_ped_input clearfix">
                                             <div class="tel">
                                                 <span>Telefono: </span>
-                                                <input id="telefono" type="tel" onkeyup="telefono_keyup(this)" />
+                                                <input id="telefono" type="tel" value="" onkeyup="telefono_keyup(this)" />
                                             </div>
                                             <div class="nom">
                                                 <span>Nombre: </span>
-                                                <input id="nombre" type="text" />
+                                                <input id="nombre" type="text" value="" />
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
