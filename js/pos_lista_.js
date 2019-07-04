@@ -879,9 +879,9 @@ function telefono_keyup(e){
         $('.t_direcciones').html('');
         $('.pop_pedido .titulo h2').html('Buscando..');
 
-        var send = { accion: 'get_users_pedido', telefono: $('#telefono').val(), id: id };
+        var send = { accion: 'get_users_pedido', telefono: $('#telefono').val() };
         $.ajax({
-            url: "/ajax/index.php",
+            url: "/admin/ajax/get_pos_direcciones.php",
             type: "POST",
             data: send,
             success: function(info){
