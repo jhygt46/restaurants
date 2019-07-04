@@ -50,45 +50,6 @@ class Rest{
             return $this->enviar_chat();
         }
     }
-    public function get_users_pedido($telefono){
-
-        $telefono = $_POST["telefono"];
-        $referer = ($referer == "www.misitiodelivery.cl" || $referer == "misitiodelivery.cl") ? $_POST["referer"] : parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) ;
-
-        $sql = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio=? AND t3.id_gir=t1.id_gir AND t1.telefono=? AND t1.id_puser=t2.id_puser");
-        $sql->bind_param("ss", $referer, $telefono);
-        $sql->execute();
-        $res = $sql->get_result();
-        $info['cantidad'] = 0;
-
-        if($res->{"num_rows"} > 0){
-
-            $result = $res->fetch_all(MYSQLI_ASSOC);
-            $info['id_puser'] = $result[0]['id_puser'];
-            $info['nombre'] = $result[0]['nombre'];
-            $info['cantidad'] = $sql->{"num_rows"};
-            for($i=0; $i<count($result); $i++){
-
-                $aux_dir["id_pdir"] = $result[$i]['id_pdir'];
-                $aux_dir["direccion"] = $result[$i]['direccion'];
-                $aux_dir["calle"] = $result[$i]['calle'];
-                $aux_dir["num"] = $result[$i]['num'];
-                $aux_dir["depto"] = $result[$i]['depto'];
-                $aux_dir["comuna"] = $result[$i]['comuna'];
-                $aux_dir["lat"] = $result[$i]['lat'];
-                $aux_dir["lng"] = $result[$i]['lng'];
-                $info['direcciones'][] = $aux_dir;
-                unset($aux_dir);
-
-            }
-
-        }
-        $sql->free_result();
-        $sql->close();
-
-        return $info;
-        
-    }
     public function get_motos(){
 
         $sql = $this->con->prepare("SELECT id_mot, uid FROM motos WHERE eliminado=?");
@@ -669,7 +630,42 @@ class Rest{
         return $result;
         
     }
-    
+    public function get_users_pedido($telefono){
+
+        $sql = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.dominio=? AND t3.id_gir=t1.id_gir AND t1.telefono=? AND t1.id_puser=t2.id_puser");
+        $sql->bind_param("ss", $referer, $telefono);
+        $sql->execute();
+        $res = $sql->get_result();
+        $info['cantidad'] = 0;
+
+        if($res->{"num_rows"} > 0){
+
+            $result = $res->fetch_all(MYSQLI_ASSOC);
+            $info['id_puser'] = $result[0]['id_puser'];
+            $info['nombre'] = $result[0]['nombre'];
+            $info['cantidad'] = $sql->{"num_rows"};
+            for($i=0; $i<count($result); $i++){
+
+                $aux_dir["id_pdir"] = $result[$i]['id_pdir'];
+                $aux_dir["direccion"] = $result[$i]['direccion'];
+                $aux_dir["calle"] = $result[$i]['calle'];
+                $aux_dir["num"] = $result[$i]['num'];
+                $aux_dir["depto"] = $result[$i]['depto'];
+                $aux_dir["comuna"] = $result[$i]['comuna'];
+                $aux_dir["lat"] = $result[$i]['lat'];
+                $aux_dir["lng"] = $result[$i]['lng'];
+                $info['direcciones'][] = $aux_dir;
+                unset($aux_dir);
+
+            }
+
+        }
+        $sql->free_result();
+        $sql->close();
+
+        return $info;
+        
+    }
     
 }
 // QUE ME DEVUELTA CATEGORIA Y SUS VALORES

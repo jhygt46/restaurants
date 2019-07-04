@@ -1263,6 +1263,66 @@ class Core{
         return $result;
 
     }
+    public function get_pos_direcciones($telefono){
+
+        $ip = $this->getUserIpAddr();
+        $id = $_COOKIE["id"];
+        $user_code = $_COOKIE["user_code"];
+        $local_code = $_COOKIE["local_code"];
+
+        $sql = $this->con->prepare("SELECT t2.id_gir FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
+        $sql->execute();
+        $res = $sql->get_result();
+
+        if($res->{'num_rows'} == 0){
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error Usuario";
+
+        }
+        if($res->{'num_rows'} == 1){
+            
+            $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+            $sqlu = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2, giros t3 WHERE t3.id_gir=? AND t3.id_gir=t1.id_gir AND t1.telefono=? AND t1.id_puser=t2.id_puser");
+            $sqlu->bind_param("is", $id_gir, $telefono);
+            $sqlu->execute();
+            
+            $resdir = $sqlu->get_result();
+            $info['cantidad'] = 0;
+
+            if($resdir->{"num_rows"} > 0){
+
+                while($row = $resdir->fetch_assoc()){
+
+                    $info['id_puser'] = $row['id_puser'];
+                    $info['nombre'] = $row['nombre'];
+                    $info['cantidad'] = $resdir->{"num_rows"};
+
+                    $aux_dir["id_pdir"] = $row['id_pdir'];
+                    $aux_dir["direccion"] = $row['direccion'];
+                    $aux_dir["calle"] = $row['calle'];
+                    $aux_dir["num"] = $row['num'];
+                    $aux_dir["depto"] = $row['depto'];
+                    $aux_dir["comuna"] = $row['comuna'];
+                    $aux_dir["lat"] = $row['lat'];
+                    $aux_dir["lng"] = $row['lng'];
+                    $info['direcciones'][] = $aux_dir;
+                    unset($aux_dir);
+
+                }
+
+            }
+            $sqlu->free_result();
+            $sqlu->close();
+
+        }
+        $sql->free_result();
+        $sql->close();
+
+        return $info;
+
+    }
     public function get_ultimos_pedidos($id_ped){
         
         $ip = $this->getUserIpAddr();

@@ -876,40 +876,38 @@ function telefono_keyup(e){
     var len = e.value;
     if(len.length >= 12){
 
-        get_users_pedido();
+        $('.t_direcciones').html('');
+        $('.pop_pre .titulo h2').html('Buscando..');
+
+        var send = { accion: 'get_users_pedido', telefono: $('#telefono').val(), id: id };
+        $.ajax({
+            url: "/ajax/index.php",
+            type: "POST",
+            data: send,
+            success: function(info){
+
+                var data = JSON.parse(info);
+                console.log(data);
+                if(data.cantidad == 0){
+
+                    $('.pop_pre .titulo h2').html('No se encontro registro');
+                    
+                }
+                if(data.cantidad > 0){
+                    
+                    $('.pop_pre .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
+                    $('#id_puser').val(data.id_puser);
+                    $('#nombre').val(data.nombre);
+                    $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
+
+                }
+
+            }, error: function(e){
+                $('.pop_pre .titulo h2').html('Error de comunicacion');
+            }
+        });
 
     }
-
-}
-function get_users_pedido(){
-
-    $('.t_direcciones').html('');
-    $('.pop_pre .titulo h2').html('Buscando..');
-
-    var send = { accion: 'get_users_pedido', telefono: $('#telefono').val(), id: id };
-    $.ajax({
-        url: "/ajax/index.php",
-        type: "POST",
-        data: send,
-        success: function(datas){
-
-            var data = JSON.parse(datas);
-            if(data.cantidad == 0){
-                $('.pop_pre .titulo h2').html('No se encontro registro');
-            }
-            if(data.cantidad > 0){
-                
-                $('.pop_pre .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
-                $('#id_puser').val(data.id_puser);
-                $('#nombre').val(data.nombre);
-                $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
-
-            }
-
-        }, error: function(e){
-            $('.pop_pre .titulo h2').html('Error de comunicacion');
-        }
-    });
 
 }
 function html_pedidos_direcciones(direcciones){
