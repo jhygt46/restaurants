@@ -764,7 +764,6 @@ function confirmar_pregunta_productos(that){
 function ver_pedido(index){
 
     pop_up('pop_pedido');
-
     if(index == -1){
 
         $('.pop_pedido .titulo h1').html("Ingresar Nuevo Pedido");
@@ -871,6 +870,77 @@ function ver_pedido_aux(index){
     $('.pop_up').show();
     $('.p1').show();
     
+}
+function telefono_keyup(e){
+
+    var len = e.value;
+    if(len.length >= 12){
+
+        get_users_pedido();
+
+    }
+
+}
+function get_users_pedido(){
+
+    $('.t_direcciones').html('');
+    $('.pop_pre .titulo h2').html('Buscando..');
+
+    var send = { accion: 'get_users_pedido', telefono: $('#telefono').val(), id: id };
+    $.ajax({
+        url: "/ajax/index.php",
+        type: "POST",
+        data: send,
+        success: function(datas){
+
+            var data = JSON.parse(datas);
+            if(data.cantidad == 0){
+                $('.pop_pre .titulo h2').html('No se encontro registro');
+            }
+            if(data.cantidad > 0){
+                
+                $('.pop_pre .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
+                $('#id_puser').val(data.id_puser);
+                $('#nombre').val(data.nombre);
+                $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
+
+            }
+
+        }, error: function(e){
+            $('.pop_pre .titulo h2').html('Error de comunicacion');
+        }
+    });
+
+}
+function html_pedidos_direcciones(direcciones){
+
+    var Div = document.createElement('div');
+    Div.className = 'pedido_direcciones';
+
+    for(var i=0, ilen=direcciones.length; i<ilen; i++){
+
+        var div = document.createElement('div');
+        div.className = 'pedido_direccion';
+        div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
+        
+        console.log(direcciones[i]);
+
+        div.setAttribute('id_pdir', direcciones[i].id_pdir);
+        div.setAttribute('direccion', direcciones[i].direccion);
+        div.setAttribute('calle', direcciones[i].calle);
+        div.setAttribute('num', direcciones[i].num);
+        div.setAttribute('depto', direcciones[i].depto);
+        div.setAttribute('lat', direcciones[i].lat);
+        div.setAttribute('lng', direcciones[i].lng);
+        div.setAttribute('comuna', direcciones[i].comuna);
+
+        div.onclick = function(){ select_pdir(this) };
+        Div.appendChild(div);
+
+    }
+
+    return Div;
+
 }
 function change_despacho(that){
 

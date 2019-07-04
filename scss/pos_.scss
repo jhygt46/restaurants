@@ -16,9 +16,7 @@ html {
                     position: relative;
                     .lista_pedidos{
                         display: block;
-                        padding: 90px 0px 0px 0px;
                         width: 100%;
-                        height: calc(100% - 90px);
                         overflow-y: scroll;
                         .cont_lista{
                             padding: 0px 10px;
@@ -628,7 +626,8 @@ html {
                 background: #ddd;
                 position: relative;
                 .lista_pedidos{
-
+                    padding: 90px 0px 80px 0px;
+                    height: calc(100% - 170px);
                 }
                 .config_pedido{
                     width: 100%;
@@ -686,7 +685,8 @@ html {
                 background: #ddd;
                 float: left;
                 .lista_pedidos{
-
+                    padding: 90px 0px 0px 0px;
+                    height: calc(100% - 90px);
                 }
                 .config_pedido{
                     display: none;
