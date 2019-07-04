@@ -896,7 +896,7 @@ function telefono_keyup(e){
                     
                     $('.pop_pedido .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
                     $('#id_puser').val(data.id_puser);
-                    $('#nombre').value(data.nombre);
+                    $('#nombre').val(data.nombre);
                     $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
 
                 }
