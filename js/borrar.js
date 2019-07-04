@@ -396,36 +396,6 @@ function select_pdir(that){
     });
 
 }
-function html_pedidos_direcciones(direcciones){
-
-    var Div = document.createElement('div');
-    Div.className = 'pedido_direcciones';
-
-    for(var i=0, ilen=direcciones.length; i<ilen; i++){
-
-        var div = document.createElement('div');
-        div.className = 'pedido_direccion';
-        div.innerHTML = direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto;
-        
-        console.log(direcciones[i]);
-
-        div.setAttribute('id_pdir', direcciones[i].id_pdir);
-        div.setAttribute('direccion', direcciones[i].direccion);
-        div.setAttribute('calle', direcciones[i].calle);
-        div.setAttribute('num', direcciones[i].num);
-        div.setAttribute('depto', direcciones[i].depto);
-        div.setAttribute('lat', direcciones[i].lat);
-        div.setAttribute('lng', direcciones[i].lng);
-        div.setAttribute('comuna', direcciones[i].comuna);
-
-        div.onclick = function(){ select_pdir(this) };
-        Div.appendChild(div);
-
-    }
-
-    return Div;
-
-}
 function proceso(pedido){
 
     for(var i=0, ilen=pedido.carro.length; i<ilen; i++){

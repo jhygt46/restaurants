@@ -309,6 +309,9 @@ $info = $core->get_data_pos();
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
+                                            LISTA DE DIRECCIONES
+                                        </div>
+                                        <div class="cont_ped_input">
                                             <div class="pregunta clearfix">
                                                 <span>Wasabi: </span>
                                                 <input type="checkbox" id="pre_wasabi" class="valign">
