@@ -39,6 +39,7 @@ $info = $core->get_data_pos();
     <body onresize="resize()">
         <div class="contenedor">
 
+            <!--
             <div class="pop_up" style="display: none">
                 <div class="cont_pop_up">
                     <div class="p1 nuevo_pedido vhalign" style="display: none">
@@ -209,7 +210,7 @@ $info = $core->get_data_pos();
                         <div class="ttl">Mis Pedidos</div>
                         <div class="opciones">
                             <div class="nuevo" onclick="ver_pedido(-1, null)">+</div>
-                            <!--<div class="config">+</div>-->
+                            <div class="config">+</div>
                         </div>
                     </div>
                     <div class="contenido">
@@ -223,7 +224,7 @@ $info = $core->get_data_pos();
                         <div class="ttl">Categorias</div>
                         <div class="opciones">
                             <div class="nuevo" onclick="categoria_padre()"><</div>
-                            <!--<div class="config">+</div>-->
+                            <div class="config">+</div>
                         </div>
                     </div>
                     <div class="contenido">
@@ -242,7 +243,7 @@ $info = $core->get_data_pos();
                     <div onclick="ver_motos_mapa()"><img src="/images/local_config.jpg" alt="" /></div>
                     <div onclick="ver_opciones_pos()"><img src="/images/local_config.jpg" alt="" /></div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="pop_up">
                 <div class="cont_pop_up">
@@ -289,7 +290,7 @@ $info = $core->get_data_pos();
                                             </div>
                                             <div class="nom">
                                                 <span>Nombre: </span>
-                                                <input id="nombre" type="text" value="" class= />
+                                                <input id="nombre" type="text" value="" />
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
