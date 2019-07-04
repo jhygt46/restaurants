@@ -289,7 +289,7 @@ $info = $core->get_data_pos();
                                             </div>
                                             <div class="nom">
                                                 <span>Nombre: </span>
-                                                <input id="nombre" type="text" value="" />
+                                                <input id="nombre" type="text" value="" class="form_nombre" />
                                             </div>
                                         </div>
                                         <div class="cont_ped_input">
