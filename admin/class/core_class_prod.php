@@ -580,6 +580,26 @@ class Core{
         return $div;
         
     }
+    public function process_productos_draw($cats, $id_cae, $that){
+        
+        $div = "<div style='parent_arbol'>";
+        for($i=0; $i<count($cats); $i++){
+            
+            $cat = $cats[$i];
+            if($cat['id_cae'] == $id_cae && $cat['id_pro'] !== null){
+                $cantidad = 0;
+                for($x=0; $x<count($that['productos']); $x++){
+                    if($that['productos'][$x]['id_pro'] == $cat['id_pro']){
+                        $cantidad = $that['productos'][$x]['cantidad'];
+                    }
+                }
+                $div .= "<div class='clearfix'><div class='cantidad_arbol'>".$this->get_select("sel-pro-".$cat['id_pro'], 1000, $cantidad)."</div><div class='nombre_arbol'>".$cat['prod_nombre']."</div></div>";
+            }
+        }
+        $div .= "</div>";
+        return $div;
+        
+    }
     public function get_select($id, $cantidad, $selected){
         
         $select = "<select id='".$id."' class='select_arbol'>";
