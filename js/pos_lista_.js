@@ -779,10 +779,10 @@ function ver_pedido(index){
         $('#despacho').val(0);
         $('#m_direccion').hide();
 
-        $('#pre_wasabi').attr('checked', '');
-        $('#pre_gengibre').attr('checked', '');
-        $('#pre_soya').attr('checked', '');
-        $('#pre_teriyaki').attr('checked', '');
+        $('#pre_wasabi').prop("checked", false);
+        $('#pre_gengibre').prop("checked", false);
+        $('#pre_soya').prop("checked", false);
+        $('#pre_teriyaki').prop("checked", false);
         $('#pre_palitos option[value=0]').attr('selected', 'selected');
 
     }
