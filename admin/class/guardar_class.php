@@ -2802,7 +2802,7 @@ class Guardar{
                 $sqlepp->close();
 
             }
-            if($sql->{"num_rows"} == 0){
+            if($res->{"num_rows"} == 0){
 
                 $info['op'] = 2;
                 $info['mensaje'] = "Error";
