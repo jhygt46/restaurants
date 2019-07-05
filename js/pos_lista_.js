@@ -797,8 +797,13 @@ function ver_pedido(index){
         $('#id_ped').val(pedido.id_ped);
         $('#id_puser').val(pedido.id_puser);
         $('#nombre').val(pedido.nombre);
-        $('#telefono').val(pedido.telefono);
         $('#despacho').val(pedido.despacho);
+
+        if(pedido.telefono == ""){
+            $('#telefono').val("+569");
+        }else{
+            $('#telefono').val(pedido.telefono);
+        }
         if(pedido.despacho == 1){
             $('#m_direccion').show();
         }
