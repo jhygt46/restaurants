@@ -1036,6 +1036,57 @@ function proceso(pedido){
     return true;
     
 }
+function promo_restantes(producto, j, tiene_pregunta){
+    
+    var Div = document.createElement('div');
+    Div.className = 'restantes_detalle_item clearfix';
+    
+    var Nombre = document.createElement('div');
+    Nombre.className = 'restantes_detalle_nombre';
+    Nombre.innerHTML = producto.nombre;
+    Div.appendChild(Nombre);
+    
+    var Acciones = document.createElement('div');
+    Acciones.className = 'restantes_detalle_acciones clearfix';
+
+    var Precio = document.createElement('div');
+    Precio.className = 'precio';
+    Precio.innerHTML = formatNumber.new(parseInt(producto.precio), "$");
+    Acciones.appendChild(Precio);
+    
+    var pedidos = get_pedidos();
+    var carro = pedidos[seleccionado].carro[j];
+    
+    if(carro.preguntas !== undefined){
+    
+        var Pregunta = document.createElement('div');
+        Pregunta.className = 'pregunta material-icons';
+        if(!tiene_pregunta){
+            Pregunta.innerHTML = 'more_horiz';
+        }else{
+            Pregunta.innerHTML = 'help_outline';
+        }
+        Pregunta.onclick = function(){ mostrar_pregunta(j) };
+        Acciones.appendChild(Pregunta);
+    
+    }else{
+        
+        var Espacio = document.createElement('div');
+        Espacio.className = 'espacio';
+        Acciones.appendChild(Espacio);
+        
+    }
+    
+    var Accion = document.createElement('div');
+    Accion.className = 'accion material-icons';
+    Accion.innerHTML = 'close';
+    Accion.onclick = function(){ delete_pro_carro(j) };
+    Acciones.appendChild(Accion);
+    
+    Div.appendChild(Acciones);
+    return Div;
+    
+}
 function ver_detalle_carro(index){
     
     var pedido = pedidos[index];
