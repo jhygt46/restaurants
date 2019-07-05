@@ -950,9 +950,9 @@ function html_pedidos_direcciones(direcciones){
         pdir.setAttribute('lat', direcciones[i].lat);
         pdir.setAttribute('lng', direcciones[i].lng);
         pdir.setAttribute('comuna', direcciones[i].comuna);
-        pdir.onclick = function(){ select_pdir(this) };
 
         var direccion_nom = create_element_class_inner('md_direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
+        direccion_nom.onclick = function(){ select_pdir(this) };
         var direccion_del = create_element_class('md_borrar valign');
         direccion_del.onclick = function(){ del_pdir(this) };
 
@@ -978,8 +978,8 @@ function html_pedidos_direcciones(direcciones){
 }
 function select_pdir(that){
     
-    var lat = $(that).attr('lat');
-    var lng = $(that).attr('lng');
+    var lat = $(that).parent().attr('lat');
+    var lng = $(that).parent().attr('lng');
 
     var send = { lat: lat, lng: lng };
  
