@@ -609,7 +609,6 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   right: 5px;
   width: 20px;
   height: 20px;
-  transform: rotate(45deg);
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .md_borrar .cont {
   width: 100%;
