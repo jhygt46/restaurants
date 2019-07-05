@@ -808,10 +808,10 @@ function ver_pedido(index){
             $('#m_direccion').show();
         }
 
-        if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
-        if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
-        if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
-        if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
+        if(pedido.pre_wasabi == 1){ $('#pre_wasabi').prop("checked", true) }else{ $('#pre_wasabi').prop("checked", false) }
+        if(pedido.pre_gengibre == 1){ $('#pre_gengibre').prop("checked", true) }else{ $('#pre_gengibre').prop("checked", false) }
+        if(pedido.pre_soya == 1){ $('#pre_soya').prop("checked", true) }else{ $('#pre_soya').prop("checked", false) }
+        if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').prop("checked", true) }else{ $('#pre_teriyaki').prop("checked", false) }
         $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
 
     }
