@@ -504,9 +504,9 @@ class Core{
     }
     public function get_promocion($id_cae){
 
-        
         $sqlpre = $this->con->prepare("SELECT precio FROM categorias WHERE id_cae=? AND eliminado=?");
         $sqlpre->bind_param("ii", $id_cae, $this->eliminado);
+        $sqlpre->execute();
         $aux['precio'] = $sqlpre->get_result()->fetch_all(MYSQLI_ASSOC)[0]["precio"];
         $sqlpre->free_result();
         $sqlpre->close();
