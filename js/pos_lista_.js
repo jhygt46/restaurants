@@ -929,7 +929,7 @@ function del_pdir(that){
 
     var direccion = $(that).parent();
     var id_pdir = direccion.attr('id_pdir');
-    console.log(id_pdir);
+    console.log("BORRAR PDIR: "+id_pdir);
     direccion.remove();
 
 }
