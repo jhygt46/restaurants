@@ -590,7 +590,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   font-size: 12px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones {
-  font-size: 12px;
+  font-size: 13px;
   border-top: 1px solid #999;
   border-left: 1px solid #999;
   border-right: 1px solid #999;
@@ -604,6 +604,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .md_direccion {
   left: 5px;
   width: calc(100% - 40px);
+  padding: 5px 0px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .md_borrar {
   right: 5px;
