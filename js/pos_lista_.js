@@ -766,6 +766,8 @@ function confirmar_pregunta_productos(that){
 function ver_pedido(index){
 
     pop_up('pop_pedido');
+    $('#l_direccion').hide();
+
     if(index == -1){
 
         $('.pop_pedido .titulo h1').html("Ingresar Nuevo Pedido");
@@ -775,7 +777,6 @@ function ver_pedido(index){
         $('#nombre').val("");
         $('#telefono').val("+569");
         $('#despacho').val(0);
-        $('m_direccion').hide();
 
         $('#pre_wasabi').attr('checked', '');
         $('#pre_gengibre').attr('checked', '');
@@ -797,9 +798,6 @@ function ver_pedido(index){
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
         $('#despacho').val(pedido.despacho);
-        if(pedido.despacho == 1){
-            $('m_direccion').show();
-        }
 
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
@@ -884,6 +882,7 @@ function telefono_keyup(e){
     if(telefono.length >= 12 && telefono != global_telefono){
 
         global_telefono = telefono;
+        $('.l_direcciones').show();
         $('.t_direcciones').html('');
         $('.pop_pedido .titulo h2').html('Buscando..');
 

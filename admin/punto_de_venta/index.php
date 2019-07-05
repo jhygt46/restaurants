@@ -102,7 +102,7 @@ $info = $core->get_data_pos();
                                                 <input id="depto" type="text" />
                                             </div>
                                         </div>
-                                        <div class="cont_ped_input">
+                                        <div id="l_direccion" class="cont_ped_input">
                                             <div class="ttl_dir">Direcciones:</div>
                                             <div class="t_direcciones"></div>
                                         </div>
