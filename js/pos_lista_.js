@@ -947,6 +947,12 @@ function html_pedidos_direcciones(direcciones){
         var direccion_nom = create_element_class_inner('md_direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
         var direccion_del = create_element_class('md_borrar valign');
 
+        var l1 = create_element_class('l1');
+        var l2 = create_element_class('l2');
+
+        direccion_del.appendChild(l1);
+        direccion_del.appendChild(l2);
+
         pdir.appendChild(direccion_nom);
         pdir.appendChild(direccion_del);
         

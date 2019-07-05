@@ -591,11 +591,14 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones {
   font-size: 12px;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion {
   height: 30px;
   border-bottom: 1px solid #999;
-  background: #ddd;
+  background: #eee;
   position: relative;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .md_direccion {

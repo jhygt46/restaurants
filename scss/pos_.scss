@@ -587,10 +587,13 @@ html {
                                         }
                                         .pedido_direcciones{
                                             font-size: 12px;
+                                            border-top: 1px solid #999;
+                                            border-left: 1px solid #999;
+                                            border-right: 1px solid #999;
                                             .pedido_direccion{
                                                 height: 30px;
                                                 border-bottom: 1px solid #999;
-                                                background: #ddd;
+                                                background: #eee;
                                                 position: relative;
                                                 .md_direccion{
                                                     left: 5px;
