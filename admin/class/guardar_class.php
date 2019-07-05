@@ -2735,12 +2735,11 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
-
             $sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
             $sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado);
             $sql->execute();
-            $sql->store_result();
-            if($sql->{"num_rows"} == 1){
+            $res = $sql->get_result();
+            if($res->{"num_rows"} == 1){
 
                 $sqluc = $this->con->prepare("UPDATE categorias SET precio=? WHERE id_cae=?");
                 $sqluc->bind_param("ii", $precio, $id_cae);
