@@ -1025,6 +1025,17 @@ function change_despacho(that){
     }
 
 }
+function proceso(pedido){
+
+    for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
+        if(!pedido.carro[i].id_pro){
+            seleccionar_productos_categoria_promo(i);
+            return false;
+        }
+    }
+    return true;
+    
+}
 function ver_detalle_carro(index){
     
     var pedido = pedidos[index];
