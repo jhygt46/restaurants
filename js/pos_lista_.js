@@ -927,8 +927,10 @@ function telefono_keyup(e){
 }
 function del_pdir(that){
 
-    var id_pdir = $(that).parent().attr('id_pdir');
+    var direccion = $(that).parent();
+    var id_pdir = direccion.attr('id_pdir');
     console.log(id_pdir);
+    direccion.remove();
 
 }
 function html_pedidos_direcciones(direcciones){
