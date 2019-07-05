@@ -886,7 +886,7 @@ function telefono_keyup(e){
     if(telefono.length >= 12 && telefono != global_telefono){
 
         global_telefono = telefono;
-        $('.l_direcciones').show();
+        $('#l_direccion').hide();
         $('.t_direcciones').html('');
         $('.pop_pedido .titulo h2').html('Buscando..');
 
@@ -907,6 +907,7 @@ function telefono_keyup(e){
                     $('.pop_pedido .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
                     $('#id_puser').val(data.id_puser);
                     $('#nombre').val(data.nombre);
+                    $('#l_direccion').show();
                     $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
 
                 }
