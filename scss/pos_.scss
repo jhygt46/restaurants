@@ -600,6 +600,20 @@ html {
                                                 }
                                                 .md_borrar{
                                                     right: 5px;
+                                                    width: 20px;
+                                                    height: 20px;
+                                                    .l1{
+                                                        width: 20px;
+                                                        height: 2px;
+                                                        margin-top: 9px;
+                                                        background: #999;
+                                                    }
+                                                    .l2{
+                                                        height: 20px;
+                                                        width: 2px;
+                                                        margin-left: 9px;
+                                                        background: #999;
+                                                    }
                                                 }
                                             }
                                         }
