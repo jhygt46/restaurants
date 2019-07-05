@@ -507,7 +507,7 @@ class Core{
         $sqlpre = $this->con->prepare("SELECT precio FROM categorias WHERE id_cae=? AND eliminado=?");
         $sqlpre->bind_param("ii", $id_cae, $this->eliminado);
         if($sqlpre->execute()){
-            $aux['precio'] = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["precio"];
+            $aux['precio'] = $sqlpre->get_result()->fetch_all(MYSQLI_ASSOC)[0]["precio"];
         }else{
             $aux['err'] = $sqlpre->error;
         }
