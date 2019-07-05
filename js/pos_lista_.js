@@ -989,22 +989,23 @@ function select_pdir(that){
         data: send,
         success: function(data){
             console.log(data);
-            /*
+            
             if(data.op == 1){
                 
                 $('.t_direcciones').html("");
-                $('#id_pdir').val($(that).attr('id_pdir'));
-                $('#direccion').val($(that).attr('direccion'));
-                $('#depto').val($(that).attr('depto'));
+                $('#id_pdir').val($(that).parent().attr('id_pdir'));
+                $('#direccion').val($(that).parent().attr('direccion'));
+                $('#depto').val($(that).parent().attr('depto'));
                 $('#costo').val(data.precio);
-                $('.t_despacho').show();
-                $('.t_repartidor').show();
+                $('#l_direccion').hide();
 
             }else{
+
                 alert("Su domicilio no se encuentra en la zona de reparto, disculpe las molestias");
                 $('#costo').val(-1);
+
             }
-            */
+            
         }, error: function(e){
             alert("Se produjo un error: intente mas tarde");
             $('#costo').val(-1);
