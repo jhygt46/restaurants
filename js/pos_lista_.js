@@ -1054,7 +1054,6 @@ function promo_restantes(producto, j, tiene_pregunta){
     Precio.innerHTML = formatNumber.new(parseInt(producto.precio), "$");
     Acciones.appendChild(Precio);
     
-    var pedidos = get_pedidos();
     var carro = pedidos[seleccionado].carro[j];
     
     if(carro.preguntas !== undefined){
