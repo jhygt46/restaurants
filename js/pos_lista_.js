@@ -799,7 +799,7 @@ function ver_pedido(index){
         $('#nombre').val(pedido.nombre);
         $('#despacho').val(pedido.despacho);
 
-        if(pedido.telefono == ""){
+        if(pedido.telefono == "" || pedido.telefono == null){
             $('#telefono').val("+569");
         }else{
             $('#telefono').val(pedido.telefono);
