@@ -218,20 +218,20 @@ function html_home_pedidos(obj, index){
     
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
     var p_cont = create_element_class('p_cont');
-    p_cont.onclick = function(){ set_pedido(index, this) };
+    p_cont.onclick = function(){ set_pedido(index) };
     
     var btn_mod = create_element_class('btn_mod');
-    btn_mod.onclick = function(){ ver_pedido(index, this) };
+    btn_mod.onclick = function(){ ver_pedido(index) };
     
     var btn_open = create_element_class('btn_open');
-    btn_open.onclick = function(){ guardar_pedido(index, true) };
+    btn_open.onclick = function(){ guardar_pedido(index) };
     
     var btn_carro = create_element_class('btn_carro');
-    btn_carro.onclick = function(){ ver_detalle_carro(index, this) };
+    btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
     if(obj.hasOwnProperty('mensajes_cont')){
         var btn_chat = create_element_class('btn_chat');
-        btn_chat.onclick = function(){ abrir_chat(index, this) };
+        btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
         if(obj.mensajes_cont > 0){
             var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
