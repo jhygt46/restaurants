@@ -580,6 +580,14 @@ class Core{
         return $div;
         
     }
+    public function get_select($id, $cantidad, $selected){
+        
+        $select = "<select id='".$id."' class='select_arbol'>";
+        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."'>".$i."</option>"; } }
+        $select .="</select>";
+        return $select;
+        
+    }
     public function get_pagina($id_pag){
 
         $sql = $this->con->prepare("SELECT * FROM paginas WHERE id_pag=? AND id_gir=? AND eliminado=?");
