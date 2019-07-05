@@ -889,7 +889,6 @@ class Guardar{
         if(!$sql->execute()){
             $this->registrar(6, 0, 0, 'Error Sql: (LIST ARBOL CATS PRODS)');
         }
-        $sql->store_result();
         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         $sql->free_result();
         $sql->close();
