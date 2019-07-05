@@ -150,6 +150,16 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
+                    <div class="pop pop_detalle vhalign">
+                        <div class="cont_nuevo">
+                            <div class="cerrar" onclick="np_close(this)"></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Detalle</h1><h2>Seleccionar categoria</h2></div></div></div>
+                            <div class="cont_info">
+                                <div class="informacion"><div class="lista"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             

@@ -1025,3 +1025,68 @@ function change_despacho(that){
     }
 
 }
+function ver_detalle_carro(index){
+    
+    var pedido = pedidos[index];
+    var total = 0;
+    var html = create_element_class('process_carro');
+    
+    if(proceso(pedido)){
+        
+        $('.pop_detalle .titulo h1').html("Listado de Productos");
+        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, count, producto;
+        
+        for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
+
+            promo = get_categoria(pedido.promos[i].id_cae);
+            total = total + parseInt(promo.precio);
+            
+            process_carro_promo = create_element_class('process_carro_promo');
+            
+            promo_detalle = create_element_class('promo_detalle');
+            promo_info = create_element_class_inner('promo_info', promo.nombre);
+            promo_precio = create_element_class_inner('promo_precio', formatNumber.new(parseInt(promo.precio), "$"));
+            promo_delete = create_element_class_inner('promo_delete material-icons', 'close');
+            promo_delete.setAttribute('promo-pos', i);
+            promo_delete.onclick = function(){ delete_promo(this, promo.precio) };
+            
+            process_carro_promo.appendChild(promo_info);
+            process_carro_promo.appendChild(promo_precio);
+            process_carro_promo.appendChild(promo_delete);
+            
+            for(var j=0, jlen=pedido.carro.length; j<jlen; j++){
+                if(pedido.carro[j].promo == i){
+                    count++;
+                    producto = get_producto(pedido.carro[j].id_pro);
+                    promo_detalle.appendChild(promo_carros(producto, j));
+                }
+            }
+            
+            process_carro_promo.appendChild(promo_detalle);
+            html.appendChild(process_carro_promo);
+            
+        }
+        
+
+        var restantes = false;
+        var process_carro_restantes = create_element_class('process_carro_restantes');
+        
+        for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
+            if(!pedido.carro[i].hasOwnProperty('promo')){
+                var pro = get_producto(pedido.carro[i].id_pro);
+                process_carro_restantes.appendChild(promo_restantes(pro, i, tiene_pregunta(pedido.carro[i])));
+                total = total + parseInt(pro.precio);
+                restantes = true;
+            }
+        }
+        
+        if(restantes){ 
+            html.appendChild(process_carro_restantes);
+        }
+        
+        $('.pop_detalle .informacion').html(html);
+        pop_up('pop_detalle');
+        
+    }
+
+}
