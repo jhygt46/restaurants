@@ -775,6 +775,7 @@ function ver_pedido(index){
         $('#nombre').val("");
         $('#telefono').val("+569");
         $('#despacho').val(0);
+        $('m_direccion').hide();
 
         $('#pre_wasabi').attr('checked', '');
         $('#pre_gengibre').attr('checked', '');
@@ -796,6 +797,9 @@ function ver_pedido(index){
         $('#nombre').val(pedido.nombre);
         $('#telefono').val(pedido.telefono);
         $('#despacho').val(pedido.despacho);
+        if(pedido.despacho == 1){
+            $('m_direccion').show();
+        }
 
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
