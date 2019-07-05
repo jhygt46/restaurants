@@ -925,13 +925,19 @@ function telefono_keyup(e){
     }
 
 }
+function del_pdir(that){
+
+    var id_pdir = $(that).parent().attr('id_pdir');
+    console.log(id_pdir);
+
+}
 function html_pedidos_direcciones(direcciones){
 
     var Div = create_element_class('pedido_direcciones');
 
     for(var i=0, ilen=direcciones.length; i<ilen; i++){
 
-        console.log(direcciones[i]);
+        //console.log(direcciones[i]);
 
         var pdir = create_element_class('pedido_direccion');
         pdir.setAttribute('id_pdir', direcciones[i].id_pdir);
@@ -946,6 +952,7 @@ function html_pedidos_direcciones(direcciones){
 
         var direccion_nom = create_element_class_inner('md_direccion valign', direcciones[i].calle+' '+direcciones[i].num+' '+direcciones[i].depto);
         var direccion_del = create_element_class('md_borrar valign');
+        direccion_del.onclick = function(){ del_pdir(this) };
 
         var cont = create_element_class('cont');
 
