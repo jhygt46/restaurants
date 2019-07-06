@@ -1144,7 +1144,7 @@ function ver_detalle_carro(index){
             html.appendChild(process_carro_restantes);
         }
         
-        $('.pop_detalle .informacion').html(html);
+        $('.pop_detalle .lista').html(html);
         pop_up('pop_detalle');
         
     }
