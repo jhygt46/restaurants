@@ -471,16 +471,16 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   padding: 7px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .pro_cat_promo .pro_cat_item .pro_cat_item_select {
-  width: 20px;
+  width: 40px;
   float: left;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .pro_cat_promo .pro_cat_item .pro_cat_item_select .select_promo {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 30px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .pro_cat_promo .pro_cat_item .pro_cat_item_nombre {
   float: left;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs {
   padding: 10px;
