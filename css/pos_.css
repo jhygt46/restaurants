@@ -480,7 +480,9 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .lista .pro_cat_promo .pro_cat_item .pro_cat_item_nombre {
   float: left;
-  width: calc(100% - 40px);
+  width: calc(100% - 48px);
+  padding: 4px 0px 0px 8px;
+  font-size: 14px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs {
   padding: 10px;
