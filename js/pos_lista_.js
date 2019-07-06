@@ -602,9 +602,7 @@ function mostrar_pregunta(i){
     var pedido = pedidos[seleccionado];
     var producto = get_producto(pedido.carro[i].id_pro);
 
-    console.log(producto.preguntas);
-    console.log(producto.preguntas.length);
-    if(producto.preguntas){
+    if(producto.preguntas !== undefined){
 
         pop_up('pop_pre');
         $('.pop_pre .titulo h1').html(producto.nombre);
