@@ -391,7 +391,6 @@ function delete_pro_carro(i){
 }
 function delete_promo(that, precio){
     
-    var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
 
@@ -406,17 +405,11 @@ function delete_promo(that, precio){
            pedidos[seleccionado].carro.push(carro[j]); 
         }
     }
-    /*
-    if(pedidos[seleccionado].tipo == 1){
-        var aux_total = parseInt(pedidos[seleccionado].total) - parseInt(precio) + parseInt(pedidos[seleccionado].costo);
-        cambiar_total(seleccionado, aux_total);
-    }
-    */
+
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(precio);
-    set_pedidos(pedidos);
-    //guardar_pedido(seleccionado, false);
-    ver_detalle_carro(seleccionado, null);
-    listar_pedidos();
+    listar_pedidos(pedidos);
+    ver_detalle_carro(seleccionado);
+    
     
 }
 function ver_detalle_carro(index, that){
