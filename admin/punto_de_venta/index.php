@@ -163,7 +163,7 @@ $info = $core->get_data_pos();
                     <div class="pop pop_pro_cat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close(this)"></div>
-                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Detalle</h1><h2>Seleccionar categoria</h2></div></div></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
                             <div class="cont_info">
                                 <div class="informacion info_btn"><div class="lista"></div></div>
                             </div>
