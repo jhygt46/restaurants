@@ -165,7 +165,12 @@ $info = $core->get_data_pos();
                             <div class="cerrar" onclick="np_close(this)"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Detalle</h1><h2>Seleccionar categoria</h2></div></div></div>
                             <div class="cont_info">
-                                <div class="informacion"></div>
+                                <div class="informacion info_btn"><div class="lista"></div></div>
+                            </div>
+                            <div class="n_submit">
+                                <div class="cont_submit">
+        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_productos_promo(this)" />
+                                </div>
                             </div>
                         </div>
                     </div>

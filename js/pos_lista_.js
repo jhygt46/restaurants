@@ -1206,7 +1206,7 @@ function seleccionar_productos_categoria_promo(i){
     pop_up('pop_pro_cat');
     $('.pop_pro_cat .titulo h1').html(categoria.nombre);
     $('.pop_pro_cat .titulo h2').html('Debe seleccionar '+cantidad+' productos');
-    $('.pop_pro_cat .informacion').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
+    $('.pop_pro_cat .lista').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
     
 }
 function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
