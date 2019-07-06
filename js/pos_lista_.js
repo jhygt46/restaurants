@@ -1251,3 +1251,66 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
+function confirmar_productos_promo(that){
+    
+    var count = 0;
+    var arr = [];
+    var parent = $(that).parents('.pop');
+    
+    var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
+    var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
+    var producto;
+    var item_carro;
+    
+    parent.find('.pro_cat_item').each(function(){
+        count = count + parseInt($(this).find('.select_promo').val());
+        arr.push({id_pro: parseInt($(this).find('.select_promo').attr('id')), cantidad: parseInt($(this).find('.select_promo').val())});
+    });
+    
+    if(count == cantidad){
+        
+        var aux_promo = pedidos[seleccionado].carro[carro_pos].promo;
+        pedidos[seleccionado].carro.splice(carro_pos, 1);
+        for(var i=0, ilen=arr.length; i<ilen; i++){
+            for(var j=0, jlen=arr[i].cantidad; j<jlen; j++){
+                
+                producto = get_producto(arr[i].id_pro);
+                item_carro = { id_pro: parseInt(arr[i].id_pro), promo: aux_promo };
+                
+                if(producto.preguntas){
+                    item_carro.preguntas = [];
+                    for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+                        item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+                    }
+                }
+                pedidos[seleccionado].carro.push(item_carro);
+                
+            }
+        }
+        listar_pedidos(pedidos);
+        if(proceso(pedidos[seleccionado])){
+            
+            $('.pop_up').hide();
+            $('.pop').hide();
+
+        }
+        
+    }else{
+        
+        var diff = cantidad - count;
+        if(diff == 1){
+            alert("FALTA 1 PRODUCTO");
+        }
+        if(diff > 1){
+            alert("FALTA "+diff+" PRODUCTOS");
+        }
+        if(diff == -1){
+            alert("SOBRA 1 PRODUCTO");
+        }
+        if(diff < -1){
+            alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
+        }
+        
+    }
+     
+}
