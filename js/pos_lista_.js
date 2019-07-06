@@ -1127,7 +1127,6 @@ function ver_detalle_carro(index){
             html.appendChild(process_carro_promo);
             
         }
-        
 
         var restantes = false;
         var process_carro_restantes = create_element_class('process_carro_restantes');
@@ -1150,4 +1149,105 @@ function ver_detalle_carro(index){
         
     }
 
+}
+function add_carro_promocion(id_cae){
+    
+    var promo = get_categoria(id_cae);
+    var tiene_cats = -1;
+    
+    pedidos[seleccionado].promos.push({ id_cae: id_cae });
+    var num_promo = pedidos[seleccionado].promos.length - 1;
+
+    if(promo.categorias){
+        for(var i=0, ilen=promo.categorias.length; i<ilen; i++){
+            pedidos[seleccionado].carro.push({id_cae: parseInt(promo.categorias[i].id_cae), cantidad: parseInt(promo.categorias[i].cantidad), promo: num_promo });
+            tiene_cats = pedidos[seleccionado].carro.length - 1;
+        }
+    }
+    if(promo.productos){
+        for(var i=0, ilen=promo.productos.length; i<ilen; i++){
+            for(var j=0, jlen=promo.productos[i].cantidad; j<jlen; j++){
+                var producto = get_producto(promo.productos[i].id_pro);
+                var item_carro = { id_pro: parseInt(promo.productos[i].id_pro), promo: num_promo };
+                if(producto.preguntas){
+                    item_carro.preguntas = [];
+                    for(var k=0, klen=producto.preguntas.length; k<klen; k++){
+                        item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+                    }
+                }
+                pedidos[seleccionado].carro.push(item_carro);
+            }
+        }
+    }
+
+    /*
+    if(pedidos[seleccionado].tipo == 1){
+        var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio) + parseInt(pedidos[seleccionado].costo);
+        cambiar_total(seleccionado, aux_total);
+    }
+    */
+
+    pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio);
+    listar_pedidos(pedidos);
+    categorias_base(0);
+    if(tiene_cats >= 0){
+        seleccionar_productos_categoria_promo(tiene_cats);
+    }
+    
+}
+function seleccionar_productos_categoria_promo(i){
+
+    var pedido = pedidos[seleccionado];
+    
+    var id_cae = pedido.carro[i].id_cae;
+    var cantidad = pedido.carro[i].cantidad;
+    var categoria = get_categoria(id_cae);
+    
+    pop_up('pop_pro_cat');
+    $('.pop_pro_cat .titulo h1').html(categoria.nombre);
+    $('.pop_pro_cat .titulo h2').html('Debe seleccionar '+cantidad+' productos');
+    $('.pop_pro_cat .informacion').html(html_seleccionar_productos_categoria_promo(categoria, i, cantidad));
+    
+}
+function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
+    
+    var producto;
+    var pro_cat_item, pro_cat_item_select, pro_cat_item_nombre, select, option;
+    
+    
+    if(categoria.productos){
+        
+        var html = create_element_class('pro_cat_promo');
+        html.setAttribute('data-pos', i);
+        html.setAttribute('data-cantidad', cantidad);
+        
+        for(var i=0, ilen=categoria.productos.length; i<ilen; i++){
+            
+            producto = get_producto(categoria.productos[i]);            
+            pro_cat_item = create_element_class('pro_cat_item clearfix');
+            pro_cat_item_select = create_element_class('pro_cat_item_select');
+            
+            select = document.createElement("select");
+            select.id = categoria.productos[i];
+            select.className = 'select_promo';
+            
+            for(var j=0; j<=cantidad; j++){
+                option = document.createElement("option");
+                option.value = j;
+                option.text = j;
+                select.appendChild(option);
+            }
+            
+            pro_cat_item_select.appendChild(select);
+            pro_cat_item.appendChild(pro_cat_item_select);
+            
+            pro_cat_item_nombre = create_element_class_inner('pro_cat_item_nombre', producto.numero + '.- ' + producto.nombre);
+            pro_cat_item.appendChild(pro_cat_item_nombre);
+            html.appendChild(pro_cat_item);
+            
+        }
+        
+    }
+    return html;
+    
 }
