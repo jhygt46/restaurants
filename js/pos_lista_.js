@@ -1314,3 +1314,30 @@ function confirmar_productos_promo(that){
     }
      
 }
+function promo_carros(producto, j){
+    
+    var Div = create_element_class('promo_detalle_item clearfix');
+    
+    var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
+    Div.appendChild(Nombre);
+    
+    var Acciones = create_element_class('promo_detalle_acciones clearfix');
+    var carro = pedidos[seleccionado].carro[j];
+    
+    if(carro.preguntas){
+        
+        var Accion = create_element_class('accion material-icons');
+        Accion.onclick = function(){ mostrar_pregunta(j) };
+        if(tiene_pregunta(carro)){
+            Accion.innerHTML = 'help_outline';
+        }else{
+            Accion.innerHTML = 'more_horiz';
+        }
+        Acciones.appendChild(Accion);
+        
+    }
+    
+    Div.appendChild(Acciones);
+    return Div;
+    
+}
