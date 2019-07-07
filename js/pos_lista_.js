@@ -759,6 +759,7 @@ function confirmar_pregunta_productos(that){
                     }
                 }
                 if(t_pregunta >= 0){
+                    console.log("t-pregunta");
                     mostrar_pregunta(t_pregunta);
                 }else{
                     $('.pop_up').hide();
