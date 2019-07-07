@@ -571,11 +571,14 @@ function add_carro_producto(id_pro){
 
     var producto = get_producto(id_pro);
     var item_carro = { id_pro: parseInt(id_pro) };
-    
+    var aux = [];
+
     if(producto.hasOwnProperty('preguntas')){
         item_carro.preguntas = [];
         for(var k=0, klen=producto.preguntas.length; k<klen; k++){
-            item_carro.preguntas.push(get_preguntas(producto.preguntas[k]));
+            aux = get_preguntas(producto.preguntas[k]);
+            console.log(aux);
+            item_carro.preguntas.push(aux);
         }
     }
 
