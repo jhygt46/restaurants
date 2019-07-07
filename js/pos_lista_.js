@@ -578,6 +578,7 @@ function add_carro_producto(id_pro){
         item_carro.preguntas = [];
         for(var k=0, klen=producto.preguntas.length; k<klen; k++){
             aux = get_preguntas(producto.preguntas[k]);
+            console.log(aux);
             item_carro.preguntas.push(aux);
         }
     }
@@ -588,7 +589,7 @@ function add_carro_producto(id_pro){
         le = pedidos[seleccionado].carro.length - 1;
         mostrar_pregunta(le);
     }
-    console.log(pedidos[seleccionado]);
+    
     listar_pedidos(pedidos);
 
 }
