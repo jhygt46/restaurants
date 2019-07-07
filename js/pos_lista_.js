@@ -173,8 +173,6 @@ function gmap_input(){
 function html_home_pedidos(obj, index){
     
     var sub_total = get_precio_carro(obj);
-    var pedidos = get_pedidos();
-
     if(obj.despacho == 0){
         obj.costo = 0;
     }
