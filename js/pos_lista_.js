@@ -1045,10 +1045,6 @@ function proceso(pedido){
     
 }
 function promo_restantes(producto, j, tiene_pregunta){
-    
-    console.log(producto);
-    console.log(j);
-    console.log(tiene_pregunta);
 
     var Div = document.createElement('div');
     Div.className = 'restantes_detalle_item clearfix';
