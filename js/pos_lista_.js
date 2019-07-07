@@ -1063,7 +1063,8 @@ function promo_restantes(producto, j, tiene_pregunta){
     Acciones.appendChild(Precio);
     
     var carro = pedidos[seleccionado].carro[j];
-    
+    console.log(carro);
+
     if(carro.preguntas){
     
         var Pregunta = document.createElement('div');
