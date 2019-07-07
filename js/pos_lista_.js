@@ -4,7 +4,7 @@ $(document).ready(function(){
     //modificar_horas();
     gmap_input();
     resize();
-    console.log(data);
+    console.log(data.catalogos[0]);
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
