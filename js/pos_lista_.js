@@ -1,7 +1,7 @@
 $(document).ready(function(){
     socket_init();
     listar_pedidos();
-    modificar_horas();
+    //modificar_horas();
     gmap_input();
     resize();
 });
@@ -105,7 +105,6 @@ function socket_init(){
 }
 function modificar_horas(){
     
-    var pedidos = get_pedidos_false();
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
 
