@@ -604,6 +604,8 @@ function get_preguntas(id_pre){
 }
 function mostrar_pregunta(i){
 
+    console.log(i);
+
     var pedido = pedidos[seleccionado];
     var producto = get_producto(pedido.carro[i].id_pro);
 
@@ -1066,7 +1068,6 @@ function promo_restantes(producto, j, tiene_pregunta){
     Acciones.appendChild(Precio);
     
     var carro = pedidos[seleccionado].carro[j];
-    console.log(carro);
 
     if(carro.preguntas){
     
