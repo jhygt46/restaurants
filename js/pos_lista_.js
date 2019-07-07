@@ -751,7 +751,6 @@ function confirmar_pregunta_productos(that){
             if(diff == 0){
 
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-                console.log(pedidos[seleccionado].carro[i]);
                 var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
                     if(tiene_pregunta(pedidos[seleccionado].carro[m])){
@@ -1046,6 +1045,10 @@ function proceso(pedido){
 }
 function promo_restantes(producto, j, tiene_pregunta){
     
+    console.log(producto);
+    console.log(j);
+    console.log(tiene_pregunta);
+
     var Div = document.createElement('div');
     Div.className = 'restantes_detalle_item clearfix';
     
