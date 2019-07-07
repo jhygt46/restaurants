@@ -750,6 +750,7 @@ function confirmar_pregunta_productos(that){
             }
             if(diff == 0){
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+                /*
                 var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
                     if(tiene_pregunta(pedidos[seleccionado].carro[m])){
@@ -761,8 +762,9 @@ function confirmar_pregunta_productos(that){
                 }else{
                     $('.pop_up').hide();
                     $('.pop').hide();
-                    //ver_detalle_carro(seleccionado);
+                    ver_detalle_carro(seleccionado);
                 }
+                */
             }
         });
     });
