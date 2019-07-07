@@ -572,6 +572,7 @@ function add_carro_producto(id_pro){
     var producto = get_producto(id_pro);
     var item_carro = { id_pro: parseInt(id_pro) };
     var aux = [];
+    var le = 0;
 
     if(producto.hasOwnProperty('preguntas')){
         item_carro.preguntas = [];
@@ -584,7 +585,9 @@ function add_carro_producto(id_pro){
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
     if(producto.hasOwnProperty('preguntas')){
-        mostrar_pregunta(pedidos[seleccionado].carro.length - 1);
+        le = pedidos[seleccionado].carro.length - 1;
+        console.log("le: "+le);
+        mostrar_pregunta(le);
     }
 
     listar_pedidos(pedidos);
@@ -1059,7 +1062,7 @@ function promo_restantes(producto, j, tiene_pregunta){
     
     var carro = pedidos[seleccionado].carro[j];
     
-    if(carro.preguntas !== undefined){
+    if(carro.preguntas){
     
         var Pregunta = document.createElement('div');
         Pregunta.className = 'pregunta material-icons';
