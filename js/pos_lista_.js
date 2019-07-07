@@ -33,7 +33,6 @@ function resize(){
 
 }
 function listar_pedidos(){
-    
     $('.cont_lista').html('');
     if(pedidos.length){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
@@ -42,7 +41,6 @@ function listar_pedidos(){
             }
         }
     }
-
 }
 function socket_init(){
     
