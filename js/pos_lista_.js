@@ -752,8 +752,9 @@ function confirmar_pregunta_productos(that){
             }
             if(diff == 0){
 
-                //pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-                pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = 1;
+                pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+                listar_pedidos(pedidos);
+                
                 /*
                 var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
