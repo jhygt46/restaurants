@@ -577,7 +577,6 @@ function add_carro_producto(id_pro){
         item_carro.preguntas = [];
         for(var k=0, klen=producto.preguntas.length; k<klen; k++){
             aux = get_preguntas(producto.preguntas[k]);
-            console.log(aux);
             item_carro.preguntas.push(aux);
         }
     }
@@ -760,7 +759,7 @@ function confirmar_pregunta_productos(that){
                 }else{
                     $('.pop_up').hide();
                     $('.pop').hide();
-                    //ver_detalle_carro(seleccionado, null);
+                    ver_detalle_carro(seleccionado);
                 }
             }
         });
