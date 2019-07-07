@@ -626,9 +626,6 @@ function html_preguntas_producto(i){
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
 
-    console.log(i);
-    console.log(carro[i]);
-
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
         var e_pregunta = document.createElement('div');
@@ -753,6 +750,8 @@ function confirmar_pregunta_productos(that){
             }
             if(diff == 0){
                 pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+                console.log("Asignando pedido: ("+seleccionado+") - carro: ("+i+") - seleccionados: =>");
+                console.log(valores);
                 var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
                     if(tiene_pregunta(pedidos[seleccionado].carro[m])){
