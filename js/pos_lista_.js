@@ -586,7 +586,6 @@ function add_carro_producto(id_pro){
     pedidos[seleccionado].carro.push(item_carro);
     if(producto.hasOwnProperty('preguntas')){
         le = pedidos[seleccionado].carro.length - 1;
-        console.log("le: "+le);
         mostrar_pregunta(le);
     }
 
@@ -626,6 +625,9 @@ function html_preguntas_producto(i){
     var html = document.createElement('div');
     html.className = 's_pregunta';
     html.setAttribute('data-pos', i);
+
+    console.log(i);
+    console.log(carro[i]);
 
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
