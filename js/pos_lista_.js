@@ -578,7 +578,6 @@ function add_carro_producto(id_pro){
         item_carro.preguntas = [];
         for(var k=0, klen=producto.preguntas.length; k<klen; k++){
             aux = get_preguntas(producto.preguntas[k]);
-            console.log(aux);
             item_carro.preguntas.push(aux);
         }
     }
@@ -597,6 +596,7 @@ function get_preguntas(id_pre){
 
     for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
         if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
+            console.log(data.catalogos[catalogo].preguntas[i]);
             return data.catalogos[catalogo].preguntas[i];
         }
     }
