@@ -588,7 +588,7 @@ function add_carro_producto(id_pro){
         le = pedidos[seleccionado].carro.length - 1;
         mostrar_pregunta(le);
     }
-
+    console.log(pedidos[seleccionado]);
     listar_pedidos(pedidos);
 
 }
@@ -603,8 +603,6 @@ function get_preguntas(id_pre){
 
 }
 function mostrar_pregunta(i){
-
-    console.log(i);
 
     var pedido = pedidos[seleccionado];
     var producto = get_producto(pedido.carro[i].id_pro);
