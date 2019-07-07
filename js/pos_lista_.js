@@ -1,6 +1,6 @@
 $(document).ready(function(){
     socket_init();
-    listar_pedidos(pedidos);
+    listar_pedidos();
     modificar_horas();
     gmap_input();
     resize();
@@ -17,7 +17,6 @@ var time = new Date().getTime();
 var markers = [];
 var map_socket, socket;
 var version = 0;
-var pedidos = get_pedidos();
 var global_telefono = "";
 
 function resize(){
@@ -120,9 +119,6 @@ function modificar_horas(){
     }
     setTimeout(modificar_horas, 6000);
     
-}
-function get_pedidos_false(){
-    return JSON.parse(localStorage.getItem("pedidos")) || false;
 }
 function gmap_input(){
     
@@ -308,9 +304,6 @@ function get_precio_carro(obj){
     
     return total;
 
-}
-function get_pedidos(){
-    return JSON.parse(localStorage.getItem("pedidos")) || get_pedido_blank();
 }
 function get_pedido_blank(){
     return [pedido_obj()];
@@ -624,37 +617,29 @@ function html_preguntas_producto(i){
     var pedido = pedidos[seleccionado];
     var carro = pedido.carro;
     
-    var html = document.createElement('div');
-    html.className = 's_pregunta';
+    var html = create_element_class('s_pregunta');
     html.setAttribute('data-pos', i);
 
     for(var k=0, klen=carro[i].preguntas.length; k<klen; k++){
         
-        var e_pregunta = document.createElement('div');
-        e_pregunta.className = 'e_pregunta';
+        var e_pregunta = create_element_class('e_pregunta');
         e_pregunta.setAttribute('data-pos', k);
         
-        var pregunta_titulo = document.createElement('div');
-        pregunta_titulo.className = 'pregunta_titulo';
-        pregunta_titulo.innerHTML = carro[i].preguntas[k].nombre;
+        var pregunta_titulo = create_element_class_inner('pregunta_titulo', carro[i].preguntas[k].nombre);
         e_pregunta.appendChild(pregunta_titulo);
         
         
         for(var m=0, mlen=carro[i].preguntas[k].valores.length; m<mlen; m++){
             
-            var titulo_v_pregunta = document.createElement('div');
-            titulo_v_pregunta.className = 'titulo_v_pregunta';
-            titulo_v_pregunta.innerHTML = carro[i].preguntas[k].valores[m].nombre;
-                        
-            var v_pregunta = document.createElement('div');
-            v_pregunta.className = 'v_pregunta';
+            var titulo_v_pregunta = create_element_class_inner('titulo_v_pregunta', carro[i].preguntas[k].valores[m].nombre);                        
+            var v_pregunta = create_element_class('v_pregunta');
             v_pregunta.setAttribute('data-pos', m);
             v_pregunta.setAttribute('data-cant', carro[i].preguntas[k].valores[m].cantidad);
 
             for(var n=0, nlen=carro[i].preguntas[k].valores[m].valores.length; n<nlen; n++){
                 
                 var n_pregunta = document.createElement('div');
-                if(carro[i].preguntas[k].valores[m].seleccionados){
+                if(carro[i].preguntas[k].valores[m].hasOwnProperty('seleccionados')){
                     if(carro[i].preguntas[k].valores[m].seleccionados.indexOf(carro[i].preguntas[k].valores[m].valores[n]) != -1){
                         n_pregunta.className = 'n_pregunta selected';
                     }else{
@@ -716,6 +701,13 @@ function tiene_pregunta(carro){
     }
     return false;
 }
+function add_pedido_valores(i, k, m, valores){
+
+    console.log("add pedido valores");
+    pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+    console.log(pedidos[seleccionado].carro[i].preguntas[k].valores[m]);
+
+}
 function confirmar_pregunta_productos(that){
 
     var parent = $(that).parents('.pop');
@@ -752,8 +744,8 @@ function confirmar_pregunta_productos(that){
             }
             if(diff == 0){
 
-                pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-                listar_pedidos(pedidos);
+
+                add_pedido_valores(i, k, m, valores);
                 
                 /*
                 var t_pregunta = -1;
