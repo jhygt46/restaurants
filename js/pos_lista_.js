@@ -584,7 +584,7 @@ function add_carro_producto(id_pro){
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
-    console.log(item_carro);
+    //console.log(item_carro);
 
     if(producto.hasOwnProperty('preguntas')){
         le = pedidos[seleccionado].carro.length - 1;
