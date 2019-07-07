@@ -32,7 +32,6 @@ $info = $core->get_data_pos();
             var estados = [ <?php for($i=0; $i<count($info['estados']); $i++){ if($i>0){ echo ", "; } echo "'".$info['estados'][$i]."'";  } ?> ];
             var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
             var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
-            var preguntas = data.catalogo[0].preguntas;
         </script>
         <script src="/js/pos_lista_.js" type="text/javascript"></script>
         <script src="/js/sweetalert.min.js" type="text/javascript"></script>
