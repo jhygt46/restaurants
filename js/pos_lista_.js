@@ -703,11 +703,12 @@ function tiene_pregunta(carro){
     return false;
 }
 function add_pedido_valores(i, k, m, valores){
-
+    console.log(pedidos[seleccionado]);
+    /*
     console.log("add pedido valores");
     pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
     console.log(pedidos[seleccionado].carro[i].preguntas[k].valores[m]);
-
+    */
 }
 function confirmar_pregunta_productos(that){
 
