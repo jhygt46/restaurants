@@ -1,7 +1,7 @@
 $(document).ready(function(){
     socket_init();
     merge_pedidos();
-    //listar_pedidos();
+    listar_pedidos(pedidos);
     //modificar_horas();
     gmap_input();
     resize();
@@ -38,13 +38,8 @@ function resize(){
     }
 
 }
-function merge_pedidos(){
-    var m_pedidos = get_pedidos();
-    console.log(m_pedidos);
-    console.log(pedidos);
-}
 function get_pedidos(){
-    return localStorage.getItem("pedidos");
+    return JSON.parse(localStorage.getItem("pedidos"));
 }
 function listar_pedidos(pedidos){
     
