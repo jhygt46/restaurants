@@ -577,14 +577,13 @@ function add_carro_producto(id_pro){
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
-    //console.log(item_carro);
 
     if(producto.hasOwnProperty('preguntas')){
         le = pedidos[seleccionado].carro.length - 1;
         mostrar_pregunta(le);
     }
     
-    listar_pedidos(pedidos);
+    listar_pedidos();
 
 }
 function get_preguntas(id_pre){
@@ -703,7 +702,7 @@ function tiene_pregunta(carro){
     return false;
 }
 function add_pedido_valores(i, k, m, valores){
-    console.log(pedidos[seleccionado].carro[i]);
+    console.log(pedidos[seleccionado].carro);
     /*
     console.log("add pedido valores");
     pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
