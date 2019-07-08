@@ -1,6 +1,5 @@
 $(document).ready(function(){
     socket_init();
-    merge_pedidos();
     listar_pedidos(pedidos);
     //modificar_horas();
     gmap_input();
