@@ -574,6 +574,7 @@ function np_close(that){
 }
 function add_carro_producto(id_pro){
 
+    var pedidos = get_pedidos();
     var producto = get_producto(id_pro);
     var item_carro = { id_pro: parseInt(id_pro) };
     var aux = [];
@@ -595,7 +596,7 @@ function add_carro_producto(id_pro){
         mostrar_pregunta(le);
     }
     
-    listar_pedidos();
+    listar_pedidos(pedidos);
 
 }
 function get_preguntas(id_pre){
@@ -714,13 +715,11 @@ function tiene_pregunta(carro){
     return false;
 }
 function add_pedido_valores(i, k, m, valores){
+
+    var pedidos = get_pedidos();
     pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-    console.log(pedidos[seleccionado].carro[i].preguntas[k].valores[m]);
-    /*
-    console.log("add pedido valores");
-    pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-    console.log(pedidos[seleccionado].carro[i].preguntas[k].valores[m]);
-    */
+    listar_pedidos(pedidos);
+
 }
 function confirmar_pregunta_productos(that){
 
