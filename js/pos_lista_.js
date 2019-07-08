@@ -37,15 +37,32 @@ function resize(){
     }
 
 }
-function listar_pedidos(){
+function merge_pedidos(){
+    var m_pedidos = get_pedidos();
+    console.log(m_pedidos);
+    console.log(pedidos);
+}
+function get_pedidos(){
+    return localStorage.getItem("pedidos");
+}
+function listar_pedidos(pedidos){
+    
+    if(pedidos !== undefined){
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+        var aux_ped = pedidos;
+    }else{
+        var aux_ped = get_pedidos();
+    }
+    
     $('.cont_lista').html('');
-    if(pedidos.length){
-        for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            if(pedidos[i].eliminado == 0 && pedidos[i].ocultar == 0){
-                $('.cont_lista').append(html_home_pedidos(pedidos[i], i));
+    if(aux_ped.length){
+        for(var i=0, ilen=aux_ped.length; i<ilen; i++){
+            if(aux_ped[i].eliminado == 0 && aux_ped[i].ocultar == 0){
+                $('.cont_lista').append(html_home_pedidos(aux_ped[i], i));
             }
         }
     }
+
 }
 function socket_init(){
     
