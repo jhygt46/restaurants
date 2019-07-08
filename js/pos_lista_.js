@@ -4,12 +4,17 @@ $(document).ready(function(){
     //modificar_horas();
     gmap_input();
     resize();
-    console.log(data.catalogos[0]);
+    data_categorias = data.catalogos[0].categorias;
+    data_productos = data.catalogos[0].productos;
+    data_preguntas = data.catalogos[0].preguntas;
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
 var aud2 = new Audio('/audios/Aww.mp3');
 
+var data_categorias = [];
+var data_productos = [];
+var data_preguntas = []:
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -371,7 +376,7 @@ var formatNumber = {
     }
 }
 function get_categoria(id_cae){
-    var categorias = data.catalogos[catalogo].categorias;
+    var categorias = data_categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id_cae){
             return categorias[i];
@@ -379,7 +384,7 @@ function get_categoria(id_cae){
     }
 }
 function get_producto(id_pro){
-    var productos = data.catalogos[catalogo].productos;
+    var productos = data_productos;
     for(var i=0, ilen=productos.length; i<ilen; i++){
         if(productos[i].id_pro == id_pro){
             return productos[i];
@@ -447,7 +452,7 @@ function open_categoria(id){
 }
 function cats_or_prods(id){
     
-    var categorias = data.catalogos[catalogo].categorias;
+    var categorias = data_categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == id){
             return true;
@@ -483,8 +488,7 @@ function open_productos(id){
 }
 function categorias_base(n){
     
-    categoria = n;
-    var categorias = data.catalogos[catalogo].categorias;
+    var categorias = data_categorias;
 
     if(version == 0){
         // MOBILE
@@ -585,9 +589,10 @@ function add_carro_producto(id_pro){
 }
 function get_preguntas(id_pre){
 
-    for(var i=0, ilen=data.catalogos[catalogo].preguntas.length; i<ilen; i++){
-        if(id_pre == data.catalogos[catalogo].preguntas[i].id_pre){
-            return data.catalogos[catalogo].preguntas[i];
+    var preguntas = data_preguntas;
+    for(var i=0, ilen=preguntas.length; i<ilen; i++){
+        if(id_pre == preguntas[i].id_pre){
+            return preguntas[i];
         }
     }
     return null;
