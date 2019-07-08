@@ -702,6 +702,7 @@ function tiene_pregunta(carro){
     return false;
 }
 function add_pedido_valores(i, k, m, valores){
+    pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
     console.log(pedidos[seleccionado].carro[i].preguntas[k].valores[m]);
     /*
     console.log("add pedido valores");
