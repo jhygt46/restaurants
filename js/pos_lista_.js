@@ -14,7 +14,7 @@ var aud2 = new Audio('/audios/Aww.mp3');
 
 var data_categorias = [];
 var data_productos = [];
-var data_preguntas = []:
+var data_preguntas = [];
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
