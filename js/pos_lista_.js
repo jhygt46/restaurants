@@ -592,6 +592,7 @@ function get_preguntas(id_pre){
     var preguntas = data_preguntas;
     for(var i=0, ilen=preguntas.length; i<ilen; i++){
         if(id_pre == preguntas[i].id_pre){
+            console.log(preguntas[i]);
             return preguntas[i];
         }
     }
