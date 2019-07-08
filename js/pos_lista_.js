@@ -715,13 +715,7 @@ function tiene_pregunta(carro){
     }
     return false;
 }
-function add_pedido_valores(i, k, m, valores){
 
-    var pedidos = get_pedidos();
-    pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
-    listar_pedidos(pedidos);
-
-}
 function confirmar_pregunta_productos(that){
 
     var parent = $(that).parents('.pop');
@@ -758,10 +752,10 @@ function confirmar_pregunta_productos(that){
             }
             if(diff == 0){
 
-
-                add_pedido_valores(i, k, m, valores);
+                var pedidos = get_pedidos();
+                pedidos[seleccionado].carro[i].preguntas[k].valores[m].seleccionados = valores;
+                listar_pedidos(pedidos);                
                 
-                /*
                 var t_pregunta = -1;
                 for(var m=0, mlen=pedidos[seleccionado].carro.length; m<mlen; m++){
                     if(tiene_pregunta(pedidos[seleccionado].carro[m])){
@@ -775,7 +769,7 @@ function confirmar_pregunta_productos(that){
                     $('.pop').hide();
                     ver_detalle_carro(seleccionado);
                 }
-                */
+                
             }
         });
     });
@@ -1106,6 +1100,7 @@ function promo_restantes(producto, j, tiene_pregunta){
 }
 function ver_detalle_carro(index){
     
+    var pedidos = get_pedidos();
     var pedido = pedidos[index];
     var total = 0;
     var html = create_element_class('process_carro');
