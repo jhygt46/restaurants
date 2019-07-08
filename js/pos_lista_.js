@@ -1051,28 +1051,21 @@ function proceso(pedido){
 function promo_restantes(producto, j, tiene_pregunta){
 
     var pedidos = get_pedidos();
-    var Div = document.createElement('div');
-    Div.className = 'restantes_detalle_item clearfix';
+    var Div = create_element_class('restantes_detalle_item clearfix');
     
-    var Nombre = document.createElement('div');
-    Nombre.className = 'restantes_detalle_nombre';
-    Nombre.innerHTML = producto.nombre;
+    var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
     Div.appendChild(Nombre);
     
-    var Acciones = document.createElement('div');
-    Acciones.className = 'restantes_detalle_acciones clearfix';
+    var Acciones = create_element_class('restantes_detalle_acciones clearfix');
 
-    var Precio = document.createElement('div');
-    Precio.className = 'precio';
-    Precio.innerHTML = formatNumber.new(parseInt(producto.precio), "$");
+    var Precio = create_element_class_inner('precio', formatNumber.new(parseInt(producto.precio), "$"));
     Acciones.appendChild(Precio);
     
     var carro = pedidos[seleccionado].carro[j];
 
     if(carro.preguntas){
     
-        var Pregunta = document.createElement('div');
-        Pregunta.className = 'pregunta material-icons';
+        var Pregunta = create_element_class('pregunta material-icons');
         if(!tiene_pregunta){
             Pregunta.innerHTML = 'more_horiz';
         }else{
@@ -1083,15 +1076,12 @@ function promo_restantes(producto, j, tiene_pregunta){
     
     }else{
         
-        var Espacio = document.createElement('div');
-        Espacio.className = 'espacio';
+        var Espacio = create_element_class('espacio');
         Acciones.appendChild(Espacio);
         
     }
     
-    var Accion = document.createElement('div');
-    Accion.className = 'accion material-icons';
-    Accion.innerHTML = 'close';
+    var Accion = create_element_class_inner('accion material-icons', 'close');
     Accion.onclick = function(){ delete_pro_carro(j) };
     Acciones.appendChild(Accion);
     
@@ -1357,6 +1347,7 @@ function promo_carros(producto, j){
 }
 function delete_pro_carro(i){
     
+    var pedidos = get_pedidos();
     var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio);
     pedidos[seleccionado].carro.splice(i, 1);
