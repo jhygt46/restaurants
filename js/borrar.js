@@ -147,7 +147,6 @@ function ver_opciones_pos(){
     $('.p6 .data_info').html();
 
 }
-
 function seleccionar_productos_categoria_promo(i){
     
     var pedidos = get_pedidos();
@@ -250,7 +249,6 @@ function select_pregunta(that){
     }
     
 }
-
 function html_preguntas_producto(i){
     
     var pedidos = get_pedidos();
@@ -409,7 +407,6 @@ function delete_promo(that, precio){
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(precio);
     listar_pedidos(pedidos);
     ver_detalle_carro(seleccionado);
-    
     
 }
 function ver_detalle_carro(index, that){

@@ -715,7 +715,6 @@ function tiene_pregunta(carro){
     }
     return false;
 }
-
 function confirmar_pregunta_productos(that){
 
     var parent = $(that).parents('.pop');
@@ -1037,11 +1036,22 @@ function change_despacho(that){
     }
 
 }
-function proceso(pedido){
+function proceso_categorias(pedido){
 
     for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
         if(!pedido.carro[i].id_pro){
             seleccionar_productos_categoria_promo(i);
+            return false;
+        }
+    }
+    return true;
+    
+}
+function proceso_preguntas(pedido){
+
+    for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
+        if(tiene_pregunta(pedido.carro[i])){
+            mostrar_pregunta(i);    
             return false;
         }
     }
@@ -1093,13 +1103,14 @@ function ver_detalle_carro(index){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    var total = 0;
-    var html = create_element_class('process_carro');
     
-    if(proceso(pedido)){
+    
+    if(proceso_categorias(pedido)){
         
+        var total = 0;
+        var html = create_element_class('process_carro');
         $('.pop_detalle .titulo h1').html("Listado de Productos");
-        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, count, producto;
+        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, producto;
         
         for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
 
@@ -1292,11 +1303,11 @@ function confirmar_productos_promo(that){
             }
         }
         listar_pedidos(pedidos);
-        if(proceso(pedidos[seleccionado])){
-            
-            $('.pop_up').hide();
-            $('.pop').hide();
-
+        if(proceso_categorias(pedidos[seleccionado])){
+            if(proceso_preguntas(pedidos[seleccionado])){
+                $('.pop_up').hide();
+                $('.pop').hide();
+            }
         }
         
     }else{
