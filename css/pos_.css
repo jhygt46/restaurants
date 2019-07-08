@@ -45,28 +45,28 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   position: absolute;
   top: 5px;
   left: 10px;
-  font-size: 14px;
+  font-size: 25px;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_nom {
   position: absolute;
-  top: 19px;
+  top: 30px;
   left: 10px;
-  font-size: 13px;
+  font-size: 15px;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_estado {
   position: absolute;
-  top: 40px;
+  top: 70px;
   left: 10px;
-  font-size: 12px;
+  font-size: 15px;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_precio {
   position: absolute;
-  top: 50px;
+  top: 85px;
   left: 10px;
-  font-size: 20px;
+  font-size: 25px;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_alert {
