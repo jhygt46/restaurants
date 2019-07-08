@@ -590,14 +590,13 @@ function add_carro_producto(id_pro){
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
+    listar_pedidos(pedidos);
 
     if(producto.hasOwnProperty('preguntas')){
         le = pedidos[seleccionado].carro.length - 1;
         mostrar_pregunta(le);
     }
-    console.log(pedidos);
-    listar_pedidos(pedidos);
-
+    
 }
 function get_preguntas(id_pre){
 
