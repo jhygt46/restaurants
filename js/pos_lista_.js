@@ -589,11 +589,10 @@ function add_carro_producto(id_pro){
 }
 function get_preguntas(id_pre){
 
-    var preguntas = data_preguntas;
-    for(var i=0, ilen=preguntas.length; i<ilen; i++){
-        if(id_pre == preguntas[i].id_pre){
-            console.log(preguntas[i]);
-            return preguntas[i];
+    for(var i=0, ilen=data_preguntas.length; i<ilen; i++){
+        if(id_pre == data_preguntas[i].id_pre){
+            console.log(data_preguntas[i]);
+            return data_preguntas[i];
         }
     }
     return null;
