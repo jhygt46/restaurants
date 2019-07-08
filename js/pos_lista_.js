@@ -1110,7 +1110,7 @@ function ver_detalle_carro(index){
         var total = 0;
         var html = create_element_class('process_carro');
         $('.pop_detalle .titulo h1').html("Listado de Productos");
-        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, producto;
+        var promo, process_carro_promo, promo_detalle, promo_info, promo_precio, promo_delete, producto, count;
         
         for(var i=0, ilen=pedido.promos.length; i<ilen; i++){
 
