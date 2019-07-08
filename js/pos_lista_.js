@@ -603,7 +603,6 @@ function get_preguntas(id_pre){
 
     for(var i=0, ilen=data_preguntas.length; i<ilen; i++){
         if(id_pre == data_preguntas[i].id_pre){
-            console.log(data_preguntas[i]);
             return data_preguntas[i];
         }
     }
@@ -614,6 +613,7 @@ function mostrar_pregunta(i){
 
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
+    console.log(pedido.carro[i]);
     var producto = get_producto(pedido.carro[i].id_pro);
 
     if(producto.hasOwnProperty('preguntas')){
