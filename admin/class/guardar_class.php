@@ -2843,16 +2843,16 @@ class Guardar{
             if(!$sql->execute()){
                 $this->registrar(6, 0, 0, 'Error Sql: (select cat)');
             }
-            $sql->store_result();
-            if($sql->{"num_rows"} == 1){
+            $res = $sql->get_result();
+            if($res->{"num_rows"} == 1){
 
                 $sqlcp = $this->con->prepare("SELECT * FROM cat_pros WHERE id_cae=?");
                 $sqlcp->bind_param("i", $id_cae);
                 if(!$sqlcp->execute()){
                     $this->registrar(6, 0, 0, 'Error Sql: (select cat_pros)');
                 }
-                $sqlcp->store_result();
-                $orders = $sql->{"num_rows"};
+                $rescp = $sqlcp->get_result();
+                $orders = $rescp->{"num_rows"};
                 $sqlcp->free_result();
                 $sqlcp->close();
 
@@ -2924,7 +2924,7 @@ class Guardar{
                 $info['page'] = "msd/crear_productos.php?id=".$id_cae."&parent_id=".$parent_id;
 
             }
-            if($sql->{"num_rows"} == 0){
+            if($res->{"num_rows"} == 0){
 
                 $info['op'] = 2;
                 $info['mensaje'] = "Error";
