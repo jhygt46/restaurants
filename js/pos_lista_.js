@@ -1209,6 +1209,7 @@ function add_carro_promocion(id_cae){
 }
 function seleccionar_productos_categoria_promo(i){
 
+    var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
     
     var id_cae = pedido.carro[i].id_cae;
