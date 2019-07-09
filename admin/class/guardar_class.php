@@ -2885,8 +2885,7 @@ class Guardar{
                     if($id_pro > 0){
 
                         $sqlup = $this->con->prepare("UPDATE productos SET numero=? AND nombre=?, nombre_carro=?, descripcion=? WHERE id_pro=? AND id_gir=? AND eliminado=?");
-                        $info['sqlup'] = $sqlup;
-                        $sqlup->bind_param("isssiii", $numero, $nombre, $nombre_carro, $descripcion, $id_pro, $this->id_gir, $this->eliminado);
+                        $info['db'] = $sqlup->bind_param("isssiii", $numero, $nombre, $nombre_carro, $descripcion, $id_pro, $this->id_gir, $this->eliminado);
                         if(!$sqlup->execute()){
                             $this->registrar(6, 0, 0, 'Error Sql: (update productos)');
                         }
