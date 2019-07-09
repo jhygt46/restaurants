@@ -1167,6 +1167,7 @@ function ver_detalle_carro(index){
 }
 function add_carro_promocion(id_cae){
     
+    var pedidos = get_pedidos();
     var promo = get_categoria(id_cae);
     var tiene_cats = -1;
     
@@ -1195,18 +1196,14 @@ function add_carro_promocion(id_cae){
         }
     }
 
-    /*
-    if(pedidos[seleccionado].tipo == 1){
-        var aux_total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio) + parseInt(pedidos[seleccionado].costo);
-        cambiar_total(seleccionado, aux_total);
-    }
-    */
-
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio);
     listar_pedidos(pedidos);
     categorias_base(0);
-    if(tiene_cats >= 0){
-        seleccionar_productos_categoria_promo(tiene_cats);
+    if(proceso_categorias(pedidos[seleccionado])){
+        if(proceso_preguntas(pedidos[seleccionado])){
+            $('.pop_up').hide();
+            $('.pop').hide();
+        }
     }
     
 }
