@@ -93,26 +93,26 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
   right: 10px;
   width: 30px;
   height: 100px;
-  background: #bbb;
+  background: #888;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open .flecha_01 {
   width: 10px;
-  height: 44px;
+  height: 30px;
   position: absolute;
-  background: #999;
+  background: #333;
   left: 11px;
-  top: 50px;
-  transform: rotate(15deg);
+  top: 47px;
+  transform: rotate(25deg);
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open .flecha_02 {
   width: 10px;
-  height: 44px;
+  height: 30px;
   position: absolute;
-  background: #999;
+  background: #333;
   left: 11px;
-  top: 10px;
-  transform: rotate(-15deg);
+  top: 23px;
+  transform: rotate(-25deg);
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;
