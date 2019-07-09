@@ -78,6 +78,22 @@ html {
                                     background: url("../admin/images/icons-set.png") no-repeat;
                                     background-position: -177px -382px;
                                     z-index: 1;
+                                    .flecha_01{
+                                        width: 10px;
+                                        height: 70px;
+                                        position: absolute;
+                                        background: #99f;
+                                        left: 0px;
+                                        top: 0px;
+                                    }
+                                    .flecha_02{
+                                        width: 10px;
+                                        height: 70px;
+                                        position: absolute;
+                                        background: #9f9;
+                                        left: 0px;
+                                        top: 0px;
+                                    }
                                 }
                                 .btn_open{
                                     position: absolute;

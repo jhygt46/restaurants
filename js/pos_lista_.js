@@ -231,7 +231,13 @@ function html_home_pedidos(obj, index){
     
     var btn_mod = create_element_class('btn_mod');
     btn_mod.onclick = function(){ ver_pedido(index) };
-    
+
+    var flecha_01 = create_element_class('flecha_01');
+    var flecha_02 = create_element_class('flecha_02');
+
+    btn_mod.appendChild(flecha_01);
+    btn_mod.appendChild(flecha_02);
+
     var btn_open = create_element_class('btn_open');
     btn_open.onclick = function(){ guardar_pedido(index) };
     
