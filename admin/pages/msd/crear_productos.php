@@ -201,22 +201,14 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
-                    $nombre_carro = $list[$i]['nombre_carro'];
                     $numero = $list[$i]['numero'];
 
-                    if($nombre_carro != ""){
-                        if($numero > 0){
-                            $nombre_mostrar = $numero.".- ".$nombre_carro;
-                        }else{
-                            $nombre_mostrar = $nombre_carro;
-                        }
+                    if($numero > 0){
+                        $nombre_mostrar = $numero.".- ".$nombre;
                     }else{
-                        if($numero > 0){
-                            $nombre_mostrar = $numero.".- ".$nombre;
-                        }else{
-                            $nombre_mostrar = $nombre;
-                        }
+                        $nombre_mostrar = $nombre;
                     }
+                    
 
                 ?>
                 <div class="l_item" rel="<?php echo $id_n; ?>">
