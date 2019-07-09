@@ -72,7 +72,7 @@ html {
                                 .btn_mod{
                                     position: absolute;
                                     top: 10px;
-                                    right: 10px;
+                                    right: 44px;
                                     width: 30px;
                                     height: 30px;
                                     background: url("../admin/images/icons-set.png") no-repeat;
@@ -82,11 +82,12 @@ html {
                                 .btn_open{
                                     position: absolute;
                                     top: 10px;
-                                    right: 44px;
+                                    right: 10px;
                                     width: 30px;
-                                    height: 30px;
-                                    background: url("../admin/images/icons-set.png") no-repeat;
-                                    background-position: -415px -479px;
+                                    height: 100px;
+                                    //background: url("../admin/images/icons-set.png") no-repeat;
+                                    //background-position: -415px -479px;
+                                    background: #fff;
                                     z-index: 1;
                                 }
                                 .btn_carro{
