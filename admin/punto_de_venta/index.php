@@ -157,6 +157,12 @@ $info = $core->get_data_pos();
                             <div class="cont_info">
                                 <div class="informacion"><div class="lista"></div></div>
                             </div>
+                            <div class="n_submit">
+                                <div class="cont_submit">
+                                    <div>SUBTOTAL</div>
+                                    <div>TOTAL</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
