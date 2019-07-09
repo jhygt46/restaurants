@@ -1274,6 +1274,8 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
 }
 function confirmar_productos_promo(bool){
     
+    console.log("CONFIRMAR PRODUCTOS PROMOS");
+    
     var count = 0;
     var arr = [];
     var parent = $('.pop_pro_cat');
