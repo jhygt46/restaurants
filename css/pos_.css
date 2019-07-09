@@ -762,6 +762,17 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   text-align: center;
   font-size: 14px;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_submit .cont_total {
+  right: 10px;
+  width: calc(100% - 20px);
+  text-align: right;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_submit .cont_total .sub {
+  font-size: 12px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_submit .cont_total .total {
+  font-size: 16px;
+}
 
 @media only screen and (max-width: 768px) {
   .contenedor .contenido .pedidos {

@@ -761,6 +761,17 @@ html {
                                         text-align: center;
                                         font-size: 14px;
                                     }
+                                    .cont_total{
+                                        right: 10px;
+                                        width: calc(100% - 20px);
+                                        text-align: right;
+                                        .sub{
+                                            font-size: 12px;
+                                        }
+                                        .total{
+                                            font-size: 16px;
+                                        }
+                                    }
                                 }
                             }
                         }
