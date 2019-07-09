@@ -1282,6 +1282,7 @@ function confirmar_productos_promo(that){
     
     if(count == cantidad){
         
+        var pedidos = get_pedidos();
         var aux_promo = pedidos[seleccionado].carro[carro_pos].promo;
         pedidos[seleccionado].carro.splice(carro_pos, 1);
         for(var i=0, ilen=arr.length; i<ilen; i++){
