@@ -1158,7 +1158,7 @@ function ver_detalle_carro(index){
         if(restantes){ 
             html.appendChild(process_carro_restantes);
         }
-        
+
         if(pedido.costo > 0){
             $('.pop_detalle .sub').html(formatNumber.new(parseInt(pedido.costo), "$"));
         }else{
@@ -1250,6 +1250,7 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
             select = document.createElement("select");
             select.id = categoria.productos[i];
             select.className = 'select_promo';
+            select.onchange = function(){ confirmar_productos_promo(false); };
             
             for(var j=0; j<=cantidad; j++){
                 option = document.createElement("option");
@@ -1271,11 +1272,11 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     return html;
     
 }
-function confirmar_productos_promo(that){
+function confirmar_productos_promo(bool){
     
     var count = 0;
     var arr = [];
-    var parent = $(that).parents('.pop');
+    var parent = $('.pop_pro_cat');
     
     var cantidad = parent.find('.pro_cat_promo').attr('data-cantidad');
     var carro_pos = parent.find('.pro_cat_promo').attr('data-pos');
@@ -1318,18 +1319,20 @@ function confirmar_productos_promo(that){
         
     }else{
         
-        var diff = cantidad - count;
-        if(diff == 1){
-            alert("FALTA 1 PRODUCTO");
-        }
-        if(diff > 1){
-            alert("FALTA "+diff+" PRODUCTOS");
-        }
-        if(diff == -1){
-            alert("SOBRA 1 PRODUCTO");
-        }
-        if(diff < -1){
-            alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
+        if(bool){
+            var diff = cantidad - count;
+            if(diff == 1){
+                alert("FALTA 1 PRODUCTO");
+            }
+            if(diff > 1){
+                alert("FALTA "+diff+" PRODUCTOS");
+            }
+            if(diff == -1){
+                alert("SOBRA 1 PRODUCTO");
+            }
+            if(diff < -1){
+                alert("SOBRA "+Math.abs(diff)+" PRODUCTOS");
+            }
         }
         
     }

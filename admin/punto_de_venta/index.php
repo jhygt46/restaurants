@@ -177,7 +177,7 @@ $info = $core->get_data_pos();
                             </div>
                             <div class="n_submit">
                                 <div class="cont_submit">
-        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_productos_promo(this)" />
+        	                        <input class="vhalign" type="button" value="Enviar" onclick="confirmar_productos_promo(true)" />
                                 </div>
                             </div>
                         </div>
