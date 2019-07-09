@@ -87,25 +87,25 @@ html {
                                     height: 100px;
                                     //background: url("../admin/images/icons-set.png") no-repeat;
                                     //background-position: -415px -479px;
-                                    background: #fff;
+                                    background: #bbb;
                                     z-index: 1;
                                     .flecha_01{
                                         width: 10px;
-                                        height: 40px;
+                                        height: 44px;
                                         position: absolute;
-                                        background: #ccc;
-                                        left: 10px;
-                                        top: 40px;
-                                        transform: rotate(20deg)
+                                        background: #999;
+                                        left: 11px;
+                                        top: 50px;
+                                        transform: rotate(15deg)
                                     }
                                     .flecha_02{
                                         width: 10px;
-                                        height: 40px;
+                                        height: 44px;
                                         position: absolute;
-                                        background: #ccc;
-                                        left: 10px;
-                                        top: 40px;
-                                        transform: rotate(-20deg);
+                                        background: #999;
+                                        left: 11px;
+                                        top: 10px;
+                                        transform: rotate(-15deg);
                                     }
                                 }
                                 .btn_carro{
