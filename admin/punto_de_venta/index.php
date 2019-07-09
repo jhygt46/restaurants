@@ -160,8 +160,8 @@ $info = $core->get_data_pos();
                             <div class="n_submit">
                                 <div class="cont_submit">
                                     <div class="cont_total valign">
-                                        <div class="sub">SUBTOTAL</div>
-                                        <div class="total">TOTAL</div>
+                                        <div class="sub">$2.500</div>
+                                        <div class="total">$14.500</div>
                                     </div>
                                 </div>
                             </div>
