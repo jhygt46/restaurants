@@ -85,23 +85,23 @@ html {
                                     right: 10px;
                                     width: 30px;
                                     height: 100px;
-                                    background: #888;
+                                    background: #666;
                                     z-index: 1;
                                     .flecha_01{
-                                        width: 10px;
+                                        width: 8px;
                                         height: 30px;
                                         position: absolute;
                                         background: #333;
-                                        left: 11px;
+                                        left: 12px;
                                         top: 47px;
                                         transform: rotate(25deg)
                                     }
                                     .flecha_02{
-                                        width: 10px;
+                                        width: 8px;
                                         height: 30px;
                                         position: absolute;
                                         background: #333;
-                                        left: 11px;
+                                        left: 12px;
                                         top: 23px;
                                         transform: rotate(-25deg);
                                     }
@@ -204,6 +204,15 @@ html {
                             .seleccionado{
                                 background: #c99;
                                 color: #fff;
+                                .btn_open{
+                                    background: #b66;
+                                    .flecha_01{
+                                        background: #633;
+                                    }
+                                    .flecha_01{
+                                        background: #633;
+                                    }
+                                }
                             }
                         }
                     }
