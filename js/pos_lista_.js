@@ -1154,13 +1154,18 @@ function ver_detalle_carro(index){
                 restantes = true;
             }
         }
-        console.log(pedido.costo);
-        $('.pop_detalle .sub').html(pedido.costo);
-        $('.pop_detalle .total').html(total);
+        
         if(restantes){ 
             html.appendChild(process_carro_restantes);
         }
         
+        if(pedido.costo > 0){
+            $('.pop_detalle .sub').html(formatNumber.new(parseInt(pedido.costo), "$"));
+        }else{
+            $('.pop_detalle .sub').html("");
+        }
+        
+        $('.pop_detalle .total').html(formatNumber.new(parseInt(total), "$"));
         $('.pop_detalle .lista').html(html);
         pop_up('pop_detalle');
         
