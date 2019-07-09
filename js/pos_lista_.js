@@ -1368,6 +1368,7 @@ function delete_pro_carro(i){
 }
 function delete_promo(that, precio){
     
+    var pedidos = get_pedidos();
     var i = $(that).attr('promo-pos');
     pedidos[seleccionado].promos.splice(i, 1);
 
