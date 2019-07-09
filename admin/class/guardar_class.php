@@ -2888,6 +2888,9 @@ class Guardar{
                         $info['db'] = $sqlup->bind_param("isssiii", $numero, $nombre, $nombre_carro, $descripcion, $id_pro, $this->id_gir, $this->eliminado);
                         if(!$sqlup->execute()){
                             $this->registrar(6, 0, 0, 'Error Sql: (update productos)');
+                            $info['edit'] = "ERROR";
+                        }else{
+                            $info['edit'] = "MODIFICAR";
                         }
                         $sqlup->close();
 
