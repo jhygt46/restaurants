@@ -1330,6 +1330,7 @@ function confirmar_productos_promo(that){
 }
 function promo_carros(producto, j){
     
+    var pedidos = get_pedidos();
     var Div = create_element_class('promo_detalle_item clearfix');
     
     var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
