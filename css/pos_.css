@@ -98,19 +98,21 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open .flecha_01 {
   width: 10px;
-  height: 70px;
+  height: 40px;
   position: absolute;
-  background: #99f;
-  left: 0px;
-  top: 0px;
+  background: #ccc;
+  left: 10px;
+  top: 40px;
+  transform: rotate(20deg);
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open .flecha_02 {
   width: 10px;
-  height: 70px;
+  height: 40px;
   position: absolute;
-  background: #9f9;
-  left: 0px;
-  top: 0px;
+  background: #ccc;
+  left: 10px;
+  top: 40px;
+  transform: rotate(-20deg);
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;

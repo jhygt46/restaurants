@@ -91,19 +91,21 @@ html {
                                     z-index: 1;
                                     .flecha_01{
                                         width: 10px;
-                                        height: 70px;
+                                        height: 40px;
                                         position: absolute;
-                                        background: #99f;
-                                        left: 0px;
-                                        top: 0px;
+                                        background: #ccc;
+                                        left: 10px;
+                                        top: 40px;
+                                        transform: rotate(20deg)
                                     }
                                     .flecha_02{
                                         width: 10px;
-                                        height: 70px;
+                                        height: 40px;
                                         position: absolute;
-                                        background: #9f9;
-                                        left: 0px;
-                                        top: 0px;
+                                        background: #ccc;
+                                        left: 10px;
+                                        top: 40px;
+                                        transform: rotate(-20deg);
                                     }
                                 }
                                 .btn_carro{
