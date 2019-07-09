@@ -1154,7 +1154,9 @@ function ver_detalle_carro(index){
                 restantes = true;
             }
         }
-        
+        console.log(pedido.costo);
+        $('.pop_detalle .sub').html(pedido.costo);
+        $('.pop_detalle .total').html(total);
         if(restantes){ 
             html.appendChild(process_carro_restantes);
         }
