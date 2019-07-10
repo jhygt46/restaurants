@@ -213,12 +213,21 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .selecciona
   color: #fff;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open {
-  background: #966;
+  background: #696;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open .flecha_01 {
-  background: #633;
+  background: #363;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open .flecha_02 {
+  background: #363;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .select {
+  background: #966;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .select .flecha_01 {
+  background: #633;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .select .flecha_02 {
   background: #633;
 }
 html body .contenedor .contenido .pedidos .titulo_pedidos {

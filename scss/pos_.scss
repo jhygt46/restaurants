@@ -205,6 +205,15 @@ html {
                                 background: #c99;
                                 color: #fff;
                                 .btn_open{
+                                    background: #696;
+                                    .flecha_01{
+                                        background: #363;
+                                    }
+                                    .flecha_02{
+                                        background: #363;
+                                    }
+                                }
+                                .select{
                                     background: #966;
                                     .flecha_01{
                                         background: #633;
@@ -924,13 +933,13 @@ html {
     }
 
 }
-::-webkit-scrollbar {
+::-webkit-scrollbar{
     width: 5px;
     height: 0px;
 }
-::-webkit-scrollbar-track-piece {
+::-webkit-scrollbar-track-piece{
     background: #ddd;
 }
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb{
     background: #888;
 }
