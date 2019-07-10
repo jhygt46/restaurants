@@ -603,6 +603,7 @@ function add_carro_producto(id_pro){
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(producto.precio);
     pedidos[seleccionado].carro.push(item_carro);
+    pedidos[seleccionado].cambios = 1;
     listar_pedidos(pedidos);
 
     if(producto.hasOwnProperty('preguntas')){
@@ -1217,6 +1218,7 @@ function add_carro_promocion(id_cae){
     }
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) + parseInt(promo.precio);
+    pedidos[seleccionado].cambios = 1;
     listar_pedidos(pedidos);
     categorias_base(0);
     if(proceso_categorias(pedidos[seleccionado])){
