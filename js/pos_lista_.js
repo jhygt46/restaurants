@@ -234,7 +234,7 @@ function html_home_pedidos(index){
     
     var btn_mod = create_element_class('btn_mod');
     btn_mod.onclick = function(){ ver_pedido(index) };
-    console.log(pedidos[index].cambios);
+    
     if(pedidos[index].cambios == 0){
         var btn_open = create_element_class('btn_open');
     }else{
