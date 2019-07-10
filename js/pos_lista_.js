@@ -188,6 +188,9 @@ function gmap_input(){
 }
 function html_home_pedidos(obj, index){
     
+    console.log(obj);
+    console.log(index);
+
     var sub_total = get_precio_carro(obj);
     if(obj.despacho == 0){
         obj.costo = 0;
