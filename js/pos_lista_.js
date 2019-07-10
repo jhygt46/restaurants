@@ -191,14 +191,14 @@ function html_home_pedidos(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
 
+    console.log(pedido);
+
     var sub_total = get_precio_carro(pedido);
     if(pedido.despacho == 0){
         pedido.costo = 0;
     }
 
     var total = parseInt(sub_total) + parseInt(pedido.costo);
-
-    console.log("costo: "+pedido.costo);
 
     if(sub_total != pedido.total){
         var total_dif = sub_total - parseInt(pedido.total);
