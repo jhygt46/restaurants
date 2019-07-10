@@ -236,8 +236,7 @@ function html_home_pedidos(index){
     btn_mod.onclick = function(){ ver_pedido(index) };
     if(pedidos[index].cambios == 0){
         var btn_open = create_element_class('btn_open');
-    }
-    if(pedidos[index].cambios == 1){
+    }else{
         var btn_open = create_element_class('btn_open select');
     }
     btn_open.onclick = function(){ guardar_pedido(index) };
