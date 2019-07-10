@@ -1424,7 +1424,7 @@ function done_pedido(){
             id_puser: $('#id_puser').val(),
             nombre: $('#nombre').val(),
             telefono: $('#telefono').val(),
-            despacho: intval($('#despacho').val()),
+            despacho: parseInt($('#despacho').val()),
             id_pdir: $('#id_pdir').val(),
             direccion: $('#direccion').val(),
             depto: $('#depto').val(),
