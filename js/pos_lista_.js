@@ -252,12 +252,12 @@ function html_home_pedidos(index){
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
         if(pedidos[index].mensajes_cont > 0){
-            var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
+            var chat_num = create_element_class_inner('chat_num', pedidos[index].mensajes_cont);
             Div.appendChild(chat_num);
         }
     }
     if(pedidos[index].alert != '' && pedidos[index].alert !== undefined){
-        var p_alert = create_element_class_inner('p_alert', obj.alert);
+        var p_alert = create_element_class_inner('p_alert', pedidos[index].alert);
         Div.appendChild(p_alert);
     }
 
