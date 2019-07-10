@@ -198,8 +198,7 @@ function html_home_pedidos(index){
 
     var total = parseInt(sub_total) + parseInt(pedido.costo);
 
-    console.log("sub_total: "+sub_total);
-    console.log("total: "+pedido.total);
+    console.log("costo: "+pedido.costo);
 
     if(sub_total != pedido.total){
         var total_dif = sub_total - parseInt(pedido.total);
