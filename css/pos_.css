@@ -222,13 +222,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .selecciona
   color: #fff;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open {
-  background: #696;
+  background: #d99;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open .flecha_01 {
-  background: #363;
+  background: #e99;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .btn_open .flecha_02 {
-  background: #363;
+  background: #e99;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .seleccionado .select {
   background: #966;
