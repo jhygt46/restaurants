@@ -53,7 +53,7 @@ function listar_pedidos(pedidos){
     if(aux_ped.length){
         for(var i=0, ilen=aux_ped.length; i<ilen; i++){
             if(aux_ped[i].eliminado == 0 && aux_ped[i].ocultar == 0){
-                $('.cont_lista').append(html_home_pedidos(aux_ped[i], i));
+                $('.cont_lista').append(html_home_pedidos(i));
             }
         }
     }
@@ -186,31 +186,31 @@ function gmap_input(){
         }
     });
 }
-function html_home_pedidos(obj, index){
+function html_home_pedidos(index){
     
-    console.log(obj);
-    console.log(index);
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
 
-    var sub_total = get_precio_carro(obj);
-    if(obj.despacho == 0){
-        obj.costo = 0;
+    var sub_total = get_precio_carro(pedido);
+    if(pedido.despacho == 0){
+        pedido.costo = 0;
     }
 
-    var total = parseInt(sub_total) + parseInt(obj.costo);
+    var total = parseInt(sub_total) + parseInt(pedido.costo);
 
-    if(sub_total != obj.total){
-        var total_dif = sub_total - parseInt(obj.total);
-        obj.alert = "Existe un diferencia de "+formatNumber.new(total_dif, "$");
+    if(sub_total != pedido.total){
+        var total_dif = sub_total - parseInt(pedido.total);
+        pedidos[index].alert = "Existe un diferencia de "+formatNumber.new(total_dif, "$");
     }
 
     if(seleccionado == index){
-        if(obj.alert == '' || obj.alert === undefined){
+        if(pedidos[index].alert == '' || pedidos[index].alert === undefined){
             var Div = create_element_class('pedido pedido_h1 seleccionado');
         }else{
             var Div = create_element_class('pedido pedido_h2 seleccionado');
         }
     }else{
-        if(obj.alert == '' || obj.alert === undefined){
+        if(pedidos[index].alert == '' || pedidos[index].alert === undefined){
             var Div = create_element_class('pedido pedido_h1');
         }else{
             var Div = create_element_class('pedido pedido_h2');
@@ -219,14 +219,14 @@ function html_home_pedidos(obj, index){
     
     Div.setAttribute('pos', index);
     if(pedidos[index].despacho == 1){
-        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(obj.costo), "$"));
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
     }
     if(pedidos[index].despacho == 0){
         var p_estado = create_element_class_inner('p_estado', '');
     }
     
-    var p_num = create_element_class_inner('p_num', 'Pedido #'+obj.num_ped);
-    var p_nom = create_element_class_inner('p_nom', obj.nombre);
+    var p_num = create_element_class_inner('p_num', 'Pedido #'+pedidos[index].num_ped);
+    var p_nom = create_element_class_inner('p_nom', pedidos[index].nombre);
     
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
     var p_cont = create_element_class('p_cont');
@@ -247,16 +247,16 @@ function html_home_pedidos(obj, index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
-    if(obj.hasOwnProperty('mensajes_cont')){
+    if(pedidos[index].hasOwnProperty('mensajes_cont')){
         var btn_chat = create_element_class('btn_chat');
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
-        if(obj.mensajes_cont > 0){
+        if(pedidos[index].mensajes_cont > 0){
             var chat_num = create_element_class_inner('chat_num', obj.mensajes_cont);
             Div.appendChild(chat_num);
         }
     }
-    if(obj.alert != '' && obj.alert !== undefined){
+    if(pedidos[index].alert != '' && pedidos[index].alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', obj.alert);
         Div.appendChild(p_alert);
     }
@@ -270,12 +270,12 @@ function html_home_pedidos(obj, index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     
-    if(obj.tipo == 1){
+    if(pedidos[index].tipo == 1){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class('p_anterior');
         anterior.onclick = function(){ cambiar_estado(index, -1, this) };
-        var nombre = create_element_class_inner('p_nombre', estados[obj.estado]);
+        var nombre = create_element_class_inner('p_nombre', estados[pedidos[index].estado]);
         var siguiente = create_element_class('p_siguiente');
         siguiente.onclick = function(){ cambiar_estado(index, 1, this) };
 
