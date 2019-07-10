@@ -114,6 +114,15 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
   top: 23px;
   transform: rotate(-25deg);
 }
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select {
+  background: #bbb;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select .flecha_01 {
+  background: #666;
+}
+html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select .flecha_02 {
+  background: #666;
+}
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;
   top: 10px;

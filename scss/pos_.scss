@@ -106,6 +106,15 @@ html {
                                         transform: rotate(-25deg);
                                     }
                                 }
+                                .select{
+                                    background: #bbb;
+                                    .flecha_01{
+                                        background: #666;
+                                    }
+                                    .flecha_02{
+                                        background: #666;
+                                    }
+                                }
                                 .btn_carro{
                                     position: absolute;
                                     top: 10px;
