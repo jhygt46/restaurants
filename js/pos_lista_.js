@@ -1407,3 +1407,152 @@ function delete_promo(that, precio){
     ver_detalle_carro(seleccionado);
     
 }
+function done_pedido(){
+
+    var id_ped = $('#id_ped').val();
+    console.log("id_ped: "+id_ped);
+
+    if(id_ped == 0){
+
+        var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+        var p_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+        var p_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
+        var p_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
+        var p_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
+
+        var obj = {
+            id_ped: 0,
+            id_puser: $('#id_puser').val(),
+            nombre: $('#nombre').val(),
+            telefono: $('#telefono').val(),
+            despacho: $('#despacho').val(),
+            id_pdir: $('#id_pdir').val(),
+            direccion: $('#direccion').val(),
+            depto: $('#depto').val(),
+            calle: $('#calle').val(),
+            num: $('#num').val(),
+            comuna: $('#comuna').val(),
+            lat: $('#lat').val(),
+            lng: $('#lng').val(),
+            costo: $('#costo').val(),
+            pre_wasabi: p_wasabi,
+            pre_gengibre: p_gengibre,
+            pre_embarazadas: p_embarazadas,
+            pre_soya: p_soya,
+            pre_teriyaki: p_teriyaki,
+            pre_palitos: $('#pre_palitos').val(),
+            id_mot: $('#id_mot').val(),
+            carro: [],
+            promos: []
+        }
+
+        nuevo(obj);
+
+    }
+    if(id_ped > 0){
+        
+        var pedidos = get_pedidos();
+        pedidos[seleccionado].id_puser = $('#id_puser').val();
+        pedidos[seleccionado].nombre = $('#nombre').val();
+        pedidos[seleccionado].telefono = $('#telefono').val();
+
+        pedidos[seleccionado].despacho = $('#despacho').val();
+        
+        pedidos[seleccionado].id_pdir = $('#id_pdir').val();
+        pedidos[seleccionado].direccion = $('#direccion').val();
+        pedidos[seleccionado].depto = $('#depto').val();
+        pedidos[seleccionado].lat = $('#lat').val();
+        pedidos[seleccionado].lng = $('#lng').val();
+        pedidos[seleccionado].calle = $('#calle').val();
+        pedidos[seleccionado].num = $('#num').val();
+        pedidos[seleccionado].comuna = $('#comuna').val();
+
+        pedidos[seleccionado].costo = $('#costo').val();
+
+        pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
+        pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
+
+        /*
+        var id_mot = $('#id_mot').val();
+        if(id_mot !== pedidos[seleccionado].id_mot){
+            if(id_mot == 0){
+                if(pedidos[seleccionado].id_mot > 0){
+                    borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
+                }
+            }
+            if(id_mot > 0){
+                if(pedidos[seleccionado].id_mot > 0){
+                    borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
+                }
+                pedidos[seleccionado].id_mot = id_mot;
+                add_pedido_moto(id_mot, pedidos[seleccionado].pedido_code);
+            }
+        }
+        pedidos[seleccionado].id_mot = $('#id_mot').val();
+        */
+        listar_pedidos(pedidos);
+        
+    }
+
+    //guardar_pedido(seleccionado, false);
+    $('.pop_up').hide();
+    $('.pop').hide();
+    
+}
+function nuevo(data){
+
+    var obj = pedido_obj();
+    obj.id_ped = data.id_ped;
+    obj.num_ped = data.num_ped;
+    obj.pedido_code = data.pedido_code;
+    obj.tipo = data.tipo;
+    obj.alert = data.alert;
+    obj.estado = 0;
+    obj.despacho = data.despacho;
+    obj.carro = data.carro;
+    obj.promos = data.promos;
+    obj.total = data.total;
+    obj.costo = data.costo;
+    obj.pre_wasabi = data.pre_wasabi;
+    obj.pre_gengibre = data.pre_gengibre;
+    obj.pre_embarazadas = data.pre_embarazadas;
+    obj.pre_palitos = data.pre_palitos;
+    obj.pre_soya = data.pre_soya;
+    obj.pre_teriyaki = data.pre_teriyaki;
+    obj.id_mot = data.id_mot;
+    obj.verificado = data.verificado;
+    
+    obj.id_puser = data.id_puser;
+    obj.nombre = data.nombre;
+    obj.telefono = data.telefono;
+
+    obj.id_pdir = data.id_pdir;
+    obj.direccion = data.direccion;
+    obj.calle = data.calle;
+    obj.num = data.num;
+    obj.depto = data.depto;
+    obj.lat = data.lat;
+    obj.lng = data.lng;
+    obj.comuna = data.comuna;
+
+    add_pedido(obj);
+    
+}
+function add_pedido(obj){
+        
+    var aux = [];
+    aux.push(obj);
+    var pedidos = get_pedidos();
+    if(pedidos.length > 0){
+        for(var i=0, ilen=pedidos.length; i<ilen; i++){
+            aux.push(pedidos[i]);
+        }
+    }
+    seleccionado = 0;
+    listar_pedidos(aux);
+    
+}
