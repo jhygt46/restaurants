@@ -1439,6 +1439,7 @@ function done_pedido(){
             lat: $('#lat').val(),
             lng: $('#lng').val(),
             costo: $('#costo').val(),
+            total: 0,
             pre_wasabi: p_wasabi,
             pre_gengibre: p_gengibre,
             pre_embarazadas: p_embarazadas,
@@ -1450,8 +1451,8 @@ function done_pedido(){
             promos: []
         }
 
-        console.log("NUEVO OBJETO");
-        console.log(obj);
+        //console.log("NUEVO OBJETO");
+        //console.log(obj);
         nuevo(obj);
 
     }
@@ -1500,8 +1501,8 @@ function done_pedido(){
         }
         pedidos[seleccionado].id_mot = $('#id_mot').val();
         */
-        console.log("EDIT PEDIDO");
-        console.log(pedidos[seleccionado]);
+        //console.log("EDIT PEDIDO");
+        //console.log(pedidos[seleccionado]);
         listar_pedidos(pedidos);
         
     }
