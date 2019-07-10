@@ -224,7 +224,7 @@ function html_home_pedidos(index){
     if(pedidos[index].despacho == 0){
         var p_estado = create_element_class_inner('p_estado', '');
     }
-    
+
     var p_num = create_element_class_inner('p_num', 'Pedido #'+pedidos[index].num_ped);
     var p_nom = create_element_class_inner('p_nom', pedidos[index].nombre);
     
@@ -1428,6 +1428,7 @@ function done_pedido(){
 
         var obj = {
             id_ped: 0,
+            num_ped: 0,
             id_puser: $('#id_puser').val(),
             nombre: $('#nombre').val(),
             telefono: $('#telefono').val(),
