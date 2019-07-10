@@ -1410,7 +1410,6 @@ function delete_promo(that, precio){
 function done_pedido(){
 
     var id_ped = $('#id_ped').val();
-    console.log("id_ped: "+id_ped);
 
     if(id_ped == 0){
 
@@ -1446,6 +1445,8 @@ function done_pedido(){
             promos: []
         }
 
+        console.log("NUEVO OBJETO");
+        console.log(obj);
         nuevo(obj);
 
     }
@@ -1494,6 +1495,8 @@ function done_pedido(){
         }
         pedidos[seleccionado].id_mot = $('#id_mot').val();
         */
+        console.log("EDIT PEDIDO");
+        console.log(pedidos[seleccionado]);
         listar_pedidos(pedidos);
         
     }
