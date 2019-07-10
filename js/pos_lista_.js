@@ -191,8 +191,6 @@ function html_home_pedidos(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
 
-    console.log(pedido);
-
     var sub_total = get_precio_carro(pedido);
     if(pedido.despacho == 0){
         pedido.costo = 0;
@@ -236,8 +234,12 @@ function html_home_pedidos(index){
     
     var btn_mod = create_element_class('btn_mod');
     btn_mod.onclick = function(){ ver_pedido(index) };
-
-    var btn_open = create_element_class('btn_open');
+    if(pedidos[index].cambios == 0){
+        var btn_open = create_element_class('btn_open');
+    }
+    if(pedidos[index].cambios == 1){
+        var btn_open = create_element_class('btn_open select');
+    }
     btn_open.onclick = function(){ guardar_pedido(index) };
     
     var flecha_01 = create_element_class('flecha_01');
@@ -1440,6 +1442,7 @@ function done_pedido(){
             lng: $('#lng').val(),
             costo: $('#costo').val(),
             total: 0,
+            cambios: 1,
             pre_wasabi: p_wasabi,
             pre_gengibre: p_gengibre,
             pre_embarazadas: p_embarazadas,
@@ -1464,6 +1467,7 @@ function done_pedido(){
         pedidos[seleccionado].telefono = $('#telefono').val();
 
         pedidos[seleccionado].despacho = $('#despacho').val();
+        pedidos[seleccionado].cambios = 0;
         
         pedidos[seleccionado].id_pdir = $('#id_pdir').val();
         pedidos[seleccionado].direccion = $('#direccion').val();
@@ -1521,6 +1525,7 @@ function nuevo(data){
     obj.tipo = data.tipo;
     obj.alert = data.alert;
     obj.estado = 0;
+    obj.cambios = 1;
     obj.despacho = data.despacho;
     obj.carro = data.carro;
     obj.promos = data.promos;
