@@ -85,13 +85,13 @@ html {
                                     right: 10px;
                                     width: 30px;
                                     height: 100px;
-                                    background: #666;
+                                    background: #ccc;
                                     z-index: 1;
                                     .flecha_01{
                                         width: 8px;
                                         height: 30px;
                                         position: absolute;
-                                        background: #333;
+                                        background: #bbb;
                                         left: 12px;
                                         top: 47px;
                                         transform: rotate(25deg)
@@ -100,19 +100,19 @@ html {
                                         width: 8px;
                                         height: 30px;
                                         position: absolute;
-                                        background: #333;
+                                        background: #bbb;
                                         left: 12px;
                                         top: 23px;
                                         transform: rotate(-25deg);
                                     }
                                 }
                                 .select{
-                                    background: #ccc;
+                                    background: #999;
                                     .flecha_01{
-                                        background: #bbb;
+                                        background: #666;
                                     }
                                     .flecha_02{
-                                        background: #bbb;
+                                        background: #666;
                                     }
                                 }
                                 .btn_carro{
