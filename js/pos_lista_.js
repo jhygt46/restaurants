@@ -248,7 +248,7 @@ function html_home_pedidos(index){
     btn_open.appendChild(flecha_01);
     btn_open.appendChild(flecha_02);
 
-    var btn_carro = create_element_class('btn_carro');
+    var btn_carro = create_element_class_inner('btn_carro material-icons', 'add_shopping_cart');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
     if(pedido.hasOwnProperty('mensajes_cont')){
