@@ -192,10 +192,11 @@ function html_home_pedidos(index){
     var pedido = pedidos[index];
 
     var sub_total = get_precio_carro(pedido);
+
     if(pedido.despacho == 0){
         pedido.costo = 0;
     }
-
+    console.log(pedido);
     console.log("SUB_TOTAL: "+sub_total);
     console.log("COSTO: "+pedido.costo);
     console.log("TOTAL: "+pedido.total);
