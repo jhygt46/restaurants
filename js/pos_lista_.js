@@ -3,18 +3,12 @@ $(document).ready(function(){
     listar_pedidos(pedidos);
     //modificar_horas();
     gmap_input();
-    resize();
-    data_categorias = data.catalogos[0].categorias;
-    data_productos = data.catalogos[0].productos;
-    data_preguntas = data.catalogos[0].preguntas;
+    resize();    
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
 var aud2 = new Audio('/audios/Aww.mp3');
 
-var data_categorias = [];
-var data_productos = [];
-var data_preguntas = [];
 var seleccionado = 0;
 var categoria = 0;
 var catalogo = 0;
@@ -418,7 +412,7 @@ var formatNumber = {
     }
 }
 function get_categoria(id_cae){
-    var categorias = data_categorias;
+    var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].id_cae == id_cae){
             return categorias[i];
@@ -426,9 +420,7 @@ function get_categoria(id_cae){
     }
 }
 function get_producto(id_pro){
-    var productos = data_productos;
-    console.log(data_productos);
-    console.log(data);
+    var productos = data.catalogos[catalogo].productos;
     for(var i=0, ilen=productos.length; i<ilen; i++){
         if(productos[i].id_pro == id_pro){
             return productos[i];
@@ -496,7 +488,7 @@ function open_categoria(id){
 }
 function cats_or_prods(id){
     
-    var categorias = data_categorias;
+    var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
         if(categorias[i].parent_id == id){
             return true;
@@ -532,7 +524,7 @@ function open_productos(id){
 }
 function categorias_base(n){
     
-    var categorias = data_categorias;
+    var categorias = data.catalogos[catalogo].categorias;
 
     if(version == 0){
         // MOBILE
@@ -633,9 +625,10 @@ function add_carro_producto(id_pro){
 }
 function get_preguntas(id_pre){
 
-    for(var i=0, ilen=data_preguntas.length; i<ilen; i++){
-        if(id_pre == data_preguntas[i].id_pre){
-            return data_preguntas[i];
+    var preguntas = data.catalogos[catalogo].preguntas;
+    for(var i=0, ilen=preguntas.length; i<ilen; i++){
+        if(id_pre == preguntas[i].id_pre){
+            return preguntas[i];
         }
     }
     return null;
