@@ -1736,6 +1736,25 @@ class Core{
 
             }
 
+            /*
+            var id_mot = $('#id_mot').val();
+            if(id_mot !== pedidos[seleccionado].id_mot){
+                if(id_mot == 0){
+                    if(pedidos[seleccionado].id_mot > 0){
+                        borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
+                    }
+                }
+                if(id_mot > 0){
+                    if(pedidos[seleccionado].id_mot > 0){
+                        borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
+                    }
+                    pedidos[seleccionado].id_mot = id_mot;
+                    add_pedido_moto(id_mot, pedidos[seleccionado].pedido_code);
+                }
+            }
+            pedidos[seleccionado].id_mot = $('#id_mot').val();
+            */
+
             $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
             $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
             $sqlpaux->execute();

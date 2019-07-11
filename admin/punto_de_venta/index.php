@@ -76,6 +76,13 @@ $info = $core->get_data_pos();
                                     <div class="pedidos_inputs">
                                         <input id="id_ped" type="hidden" value="0" />
                                         <input id="id_puser" type="hidden" value="0" />
+                                        <input id="id_pdir" type="hidden" value="0" />
+                                        <input id="lat" type="hidden" value="0" />
+                                        <input id="lng" type="hidden" value="0" />
+                                        <input id="calle" type="hidden" value="0" />
+                                        <input id="num" type="hidden" value="0" />
+                                        <input id="comuna" type="hidden" value="0" />
+                                        <input id="costo" type="hidden" value="0" />
                                         <div class="cont_ped_input clearfix">
                                             <div class="tel">
                                                 <span>Telefono: </span>
@@ -125,7 +132,7 @@ $info = $core->get_data_pos();
                                             </div>
                                             <div class="pregunta clearfix">
                                                 <span>Palitos: </span>
-                                                <select class="pre_palitos valign">
+                                                <select id="pre_palitos" class="valign">
                                                     <?php for($i=0; $i<10; $i++){ ?>
                                                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                                     <?php } ?>
@@ -135,7 +142,7 @@ $info = $core->get_data_pos();
                                         <div class="cont_ped_input">
                                             <div class="comentario">
                                                 <span>Comentarios: </span>
-                                                <Textarea></Textarea>
+                                                <Textarea id="comentarios"></Textarea>
                                             </div>
                                         </div>
                                     </div>

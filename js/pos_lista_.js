@@ -372,7 +372,8 @@ function pedido_obj(){
         costo: -1,
         total: 0,
         eliminado: 0,
-        ocultar: 0
+        ocultar: 0,
+        comentarios: ''
     };
 }
 function create_element_class(clase){
@@ -1431,144 +1432,105 @@ function delete_promo(that, precio){
 function done_pedido(){
 
     var id_ped = $('#id_ped').val();
+    var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
+    var p_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
+    var p_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
+    var p_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
+    var p_palitos = $('#pre_palitos').val();
+    var id_puser = parseInt($('#id_puser').val());
+    var nombre = $('#nombre').val();
+    var telefono = $('#telefono').val();
+    var despacho = parseInt($('#despacho').val());
+    var costo = parseInt($('#costo').val());
+
+    var id_pdir = $('#id_pdir').val();
+    var direccion = $('#direccion').val();
+    var depto = $('#depto').val();
+    var calle = $('#calle').val();
+    var num = $('#num').val();
+    var comuna = $('#comuna').val();
+    var lat = $('#lat').val();
+    var lng = $('#lng').val();
+    var id_mot = $('#id_mot').val();
+    var comentarios = $('#comentarios').val();
 
     if(id_ped == 0){
 
-        var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
-        var p_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
-        var p_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
-        var p_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
-        var p_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
+        var obj = pedido_obj();
+        obj.id_ped = 0;
+        obj.num_ped = 0;
+        obj.pedido_code = '';
+        obj.tipo = 0;
+        obj.alert = '';
+        obj.estado = 0;
+        obj.cambios = 1;
+        obj.despacho = despacho;
+        obj.carro = [];
+        obj.promos = [];
+        obj.total = 0;
+        obj.costo = costo;
+        obj.pre_wasabi = p_wasabi;
+        obj.pre_gengibre = p_gengibre;
+        obj.pre_palitos = p_palitos;
+        obj.pre_soya = p_soya;
+        obj.pre_teriyaki = p_teriyaki;
+        obj.id_mot = id_mot;
+        obj.verificado = 0;
+        obj.comentarios = comentarios;
+        
+        obj.id_puser = id_puser;
+        obj.nombre = nombre;
+        obj.telefono = telefono;
 
-        var obj = {
-            id_ped: 0,
-            num_ped: 0,
-            id_puser: $('#id_puser').val(),
-            nombre: $('#nombre').val(),
-            telefono: $('#telefono').val(),
-            despacho: parseInt($('#despacho').val()),
-            id_pdir: $('#id_pdir').val(),
-            direccion: $('#direccion').val(),
-            depto: $('#depto').val(),
-            calle: $('#calle').val(),
-            num: $('#num').val(),
-            comuna: $('#comuna').val(),
-            lat: $('#lat').val(),
-            lng: $('#lng').val(),
-            costo: $('#costo').val(),
-            total: 0,
-            cambios: 1,
-            pre_wasabi: p_wasabi,
-            pre_gengibre: p_gengibre,
-            pre_embarazadas: p_embarazadas,
-            pre_soya: p_soya,
-            pre_teriyaki: p_teriyaki,
-            pre_palitos: $('#pre_palitos').val(),
-            id_mot: $('#id_mot').val(),
-            carro: [],
-            promos: []
-        }
+        obj.id_pdir = id_pdir;
+        obj.direccion = direccion;
+        obj.calle = calle;
+        obj.num = num;
+        obj.depto = depto;
+        obj.lat = lat;
+        obj.lng = lng;
+        obj.comuna = comuna;
 
-        //console.log("NUEVO OBJETO");
         console.log(obj);
-        nuevo(obj);
+        add_pedido(obj);
 
     }
     if(id_ped > 0){
         
         var pedidos = get_pedidos();
-        pedidos[seleccionado].id_puser = $('#id_puser').val();
-        pedidos[seleccionado].nombre = $('#nombre').val();
-        pedidos[seleccionado].telefono = $('#telefono').val();
+        pedidos[seleccionado].id_puser = id_puser;
+        pedidos[seleccionado].nombre = nombre;
+        pedidos[seleccionado].telefono = telefono;
 
-        pedidos[seleccionado].despacho = $('#despacho').val();
+        pedidos[seleccionado].despacho = despacho;
         pedidos[seleccionado].cambios = 0;
         
-        pedidos[seleccionado].id_pdir = $('#id_pdir').val();
-        pedidos[seleccionado].direccion = $('#direccion').val();
-        pedidos[seleccionado].depto = $('#depto').val();
-        pedidos[seleccionado].lat = $('#lat').val();
-        pedidos[seleccionado].lng = $('#lng').val();
-        pedidos[seleccionado].calle = $('#calle').val();
-        pedidos[seleccionado].num = $('#num').val();
-        pedidos[seleccionado].comuna = $('#comuna').val();
+        pedidos[seleccionado].id_pdir = id_pdir;
+        pedidos[seleccionado].direccion = direccion;
+        pedidos[seleccionado].depto = depto;
+        pedidos[seleccionado].lat = lat;
+        pedidos[seleccionado].lng = lng;
+        pedidos[seleccionado].calle = calle;
+        pedidos[seleccionado].num = num;
+        pedidos[seleccionado].comuna = comuna;
 
-        pedidos[seleccionado].costo = $('#costo').val();
+        pedidos[seleccionado].costo = costo;
 
-        pedidos[seleccionado].pre_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_embarazadas = ($('#pre_embarazadas').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_teriyaki = ($('#pre_teriyaki').is(':checked')) ? 1 : 0 ;
-        pedidos[seleccionado].pre_palitos = $('#pre_palitos').val();
+        pedidos[seleccionado].pre_wasabi = p_wasabi;
+        pedidos[seleccionado].pre_gengibre = p_gengibre;
+        pedidos[seleccionado].pre_soya = p_soya;
+        pedidos[seleccionado].pre_teriyaki = p_teriyaki;
+        pedidos[seleccionado].pre_palitos = p_palitos;
 
-        /*
-        var id_mot = $('#id_mot').val();
-        if(id_mot !== pedidos[seleccionado].id_mot){
-            if(id_mot == 0){
-                if(pedidos[seleccionado].id_mot > 0){
-                    borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
-                }
-            }
-            if(id_mot > 0){
-                if(pedidos[seleccionado].id_mot > 0){
-                    borrar_pedido_moto(pedidos[seleccionado].id_mot, pedidos[seleccionado].pedido_code);
-                }
-                pedidos[seleccionado].id_mot = id_mot;
-                add_pedido_moto(id_mot, pedidos[seleccionado].pedido_code);
-            }
-        }
-        pedidos[seleccionado].id_mot = $('#id_mot').val();
-        */
-        //console.log("EDIT PEDIDO");
+        pedidos[seleccionado].id_mot = id_mot;
+        
         console.log(pedidos[seleccionado]);
         listar_pedidos(pedidos);
         
     }
 
-    //guardar_pedido(seleccionado, false);
     $('.pop_up').hide();
     $('.pop').hide();
-    
-}
-function nuevo(data){
-
-    var obj = pedido_obj();
-    obj.id_ped = data.id_ped;
-    obj.num_ped = data.num_ped;
-    obj.pedido_code = data.pedido_code;
-    obj.tipo = data.tipo;
-    obj.alert = data.alert;
-    obj.estado = 0;
-    obj.cambios = 1;
-    obj.despacho = data.despacho;
-    obj.carro = data.carro;
-    obj.promos = data.promos;
-    obj.total = data.total;
-    obj.costo = data.costo;
-    obj.pre_wasabi = data.pre_wasabi;
-    obj.pre_gengibre = data.pre_gengibre;
-    obj.pre_embarazadas = data.pre_embarazadas;
-    obj.pre_palitos = data.pre_palitos;
-    obj.pre_soya = data.pre_soya;
-    obj.pre_teriyaki = data.pre_teriyaki;
-    obj.id_mot = data.id_mot;
-    obj.verificado = data.verificado;
-    
-    obj.id_puser = data.id_puser;
-    obj.nombre = data.nombre;
-    obj.telefono = data.telefono;
-
-    obj.id_pdir = data.id_pdir;
-    obj.direccion = data.direccion;
-    obj.calle = data.calle;
-    obj.num = data.num;
-    obj.depto = data.depto;
-    obj.lat = data.lat;
-    obj.lng = data.lng;
-    obj.comuna = data.comuna;
-
-    add_pedido(obj);
     
 }
 function add_pedido(obj){
