@@ -251,11 +251,11 @@ function html_home_pedidos(index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
-    if(pedido.hasOwnProperty('mensajes_cont')){
+    if(pedido.hasOwnProperty('mensajes_cont') || true){
         var btn_chat = create_element_class('btn_chat');
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
-        if(pedido.mensajes_cont > 0){
+        if(pedido.mensajes_cont > 0 || true){
             var chat_num = create_element_class_inner('chat_num', pedido.mensajes_cont);
             Div.appendChild(chat_num);
         }
