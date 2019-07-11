@@ -798,59 +798,77 @@ function ver_pedido(index){
 
     pop_up('pop_pedido');
     $('#l_direccion').hide();
-    console.log(index);
 
     if(index == -1){
 
         $('.pop_pedido .titulo h1').html("Ingresar Nuevo Pedido");
+        $('.pop_pedido .titulo h2').html("");
 
         $('#id_ped').val(0);
         $('#id_puser').val(0);
+        $('#id_pdir').val(0);
         $('#nombre').val("");
         $('#telefono').val("+569");
-        $('#despacho').val(0);
+        $('#despacho option[value=0]').attr('selected', 'selected');
         $('#m_direccion').hide();
+
+        $('#lat').val(0);
+        $('#lng').val(0);
+        $('#direccion').val("");
+        $('#calle').val("");
+        $('#num').val(0);
+        $('#depto').val("");
+        $('#comuna').val("");
+        $('#costo').val(0);
+        $('#comentarios').val("");
 
         $('#pre_wasabi').prop("checked", false);
         $('#pre_gengibre').prop("checked", false);
         $('#pre_soya').prop("checked", false);
         $('#pre_teriyaki').prop("checked", false);
         $('#pre_palitos option[value=0]').attr('selected', 'selected');
-
+        
     }
 
     if(index > -1){
 
         var pedidos = get_pedidos();
         var pedido = pedidos[index];
-        if(pedido.num_ped == 0){
-            var titulo = "Pedido no Guardado";
-        }
+
         if(pedido.num_ped > 0){
             var titulo = "Pedido #"+pedido.num_ped;
+        }else{
+            var titulo = "Pedido no Guardado";
         }
 
         $('.pop_pedido .titulo h1').html(titulo);
+        $('.pop_pedido .titulo h2').html("");
 
         $('#id_ped').val(pedido.id_ped);
         $('#id_puser').val(pedido.id_puser);
+        $('#id_pdir').val(pedido.id_pdir);
         $('#nombre').val(pedido.nombre);
-        $('#despacho').val(pedido.despacho);
-
-        if(pedido.telefono == "" || pedido.telefono == null){
-            $('#telefono').val("+569");
-        }else{
-            $('#telefono').val(pedido.telefono);
-        }
+        $('#telefono').val(pedido.telefono);
+        $('#despacho option[value='+pedido.despacho+']').attr('selected', 'selected');
+        
         if(pedido.despacho == 1){
             $('#m_direccion').show();
         }
-
+        
+        $('#lat').val(pedido.lat);
+        $('#lng').val(pedido.lng);
+        $('#direccion').val(pedido.direccion);
+        $('#calle').val(pedido.calle);
+        $('#num').val(pedido.num);
+        $('#depto').val(pedido.depto);
+        $('#comuna').val(pedido.comuna);
+        $('#costo').val(pedido.costo);
+        $('#comentarios').val("");
+        
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').prop("checked", true) }else{ $('#pre_wasabi').prop("checked", false) }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').prop("checked", true) }else{ $('#pre_gengibre').prop("checked", false) }
         if(pedido.pre_soya == 1){ $('#pre_soya').prop("checked", true) }else{ $('#pre_soya').prop("checked", false) }
         if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').prop("checked", true) }else{ $('#pre_teriyaki').prop("checked", false) }
-        $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
 
     }
     
