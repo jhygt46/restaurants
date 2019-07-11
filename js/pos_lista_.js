@@ -196,11 +196,12 @@ function html_home_pedidos(index){
     if(pedido.despacho == 0){
         pedido.costo = 0;
     }
+    /*
     console.log(pedido);
     console.log("SUB_TOTAL: "+sub_total);
     console.log("COSTO: "+pedido.costo);
     console.log("TOTAL: "+pedido.total);
-
+    */
     var total = parseInt(sub_total) + parseInt(pedido.costo);
 
     if(sub_total != pedido.total){
@@ -321,6 +322,7 @@ function get_precio_carro(obj){
     var total = 0;
     
     if(obj.carro){
+        console.log("EN CARRO");
         obj.carro.forEach(function(carro_item){
             if(carro_item.id_pro && carro_item.promo === undefined){
                 var pro = get_producto(carro_item.id_pro);
@@ -332,6 +334,7 @@ function get_precio_carro(obj){
     }
 
     if(obj.promos){
+        console.log("EN PROMO");
         obj.promos.forEach(function(promo_item){
             var cat = get_categoria(promo_item.id_cae);
             total = total + parseInt(cat.precio);
