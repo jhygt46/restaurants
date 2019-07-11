@@ -817,9 +817,14 @@ function ver_pedido(index){
 
         var pedidos = get_pedidos();
         var pedido = pedidos[index];
-        console.log(pedido);
+        if(pedido.num_ped == 0){
+            var titulo = "Pedido no Guardado";
+        }
+        if(pedido.num_ped > 0){
+            var titulo = "Pedido #"+pedido.num_ped;
+        }
 
-        $('.pop_pedido .titulo h1').html("Pedido #"+pedido.num_ped);
+        $('.pop_pedido .titulo h1').html(titulo);
 
         $('#id_ped').val(pedido.id_ped);
         $('#id_puser').val(pedido.id_puser);
