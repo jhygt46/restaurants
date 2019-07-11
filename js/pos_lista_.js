@@ -204,13 +204,13 @@ function html_home_pedidos(index){
     }
 
     if(seleccionado == index){
-        if(pedidos[index].alert == '' || pedidos[index].alert === undefined){
+        if(pedido.alert == '' || pedido.alert === undefined){
             var Div = create_element_class('pedido pedido_h1 seleccionado');
         }else{
             var Div = create_element_class('pedido pedido_h2 seleccionado');
         }
     }else{
-        if(pedidos[index].alert == '' || pedidos[index].alert === undefined){
+        if(pedido.alert == '' || pedido.alert === undefined){
             var Div = create_element_class('pedido pedido_h1');
         }else{
             var Div = create_element_class('pedido pedido_h2');
@@ -218,15 +218,22 @@ function html_home_pedidos(index){
     }
     
     Div.setAttribute('pos', index);
-    if(pedidos[index].despacho == 1){
-        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedidos[index].costo), "$"));
+    if(pedido.despacho == 1){
+        var p_estado = create_element_class_inner('p_estado', formatNumber.new(parseInt(pedido.costo), "$"));
     }
-    if(pedidos[index].despacho == 0){
+    if(pedido.despacho == 0){
         var p_estado = create_element_class_inner('p_estado', '');
     }
 
-    var p_num = create_element_class_inner('p_num', 'Pedido #'+pedidos[index].num_ped);
-    var p_nom = create_element_class_inner('p_nom', pedidos[index].nombre);
+    if(pedido.num_ped == 0){
+        var titulo = "Pedido no Guardado";
+    }
+    if(pedido.num_ped > 0){
+        var titulo = "Pedido #"+pedido.num_ped;
+    }
+
+    var p_num = create_element_class_inner('p_num', titulo);
+    var p_nom = create_element_class_inner('p_nom', pedido.nombre);
     
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
     var p_cont = create_element_class('p_cont');
@@ -251,17 +258,17 @@ function html_home_pedidos(index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
-    if(pedidos[index].hasOwnProperty('mensajes_cont')){
+    if(pedido.hasOwnProperty('mensajes_cont')){
         var btn_chat = create_element_class('btn_chat');
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
-        if(pedidos[index].mensajes_cont > 0){
-            var chat_num = create_element_class_inner('chat_num', pedidos[index].mensajes_cont);
+        if(pedido.mensajes_cont > 0){
+            var chat_num = create_element_class_inner('chat_num', pedido.mensajes_cont);
             Div.appendChild(chat_num);
         }
     }
-    if(pedidos[index].alert != '' && pedidos[index].alert !== undefined){
-        var p_alert = create_element_class_inner('p_alert', pedidos[index].alert);
+    if(pedido.alert != '' && pedido.alert !== undefined){
+        var p_alert = create_element_class_inner('p_alert', pedido.alert);
         Div.appendChild(p_alert);
     }
 
@@ -274,12 +281,12 @@ function html_home_pedidos(index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     
-    if(pedidos[index].tipo == 1){
+    if(pedido.tipo == 1){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class('p_anterior');
         anterior.onclick = function(){ cambiar_estado(index, -1, this) };
-        var nombre = create_element_class_inner('p_nombre', estados[pedidos[index].estado]);
+        var nombre = create_element_class_inner('p_nombre', estados[pedido.estado]);
         var siguiente = create_element_class('p_siguiente');
         siguiente.onclick = function(){ cambiar_estado(index, 1, this) };
 
