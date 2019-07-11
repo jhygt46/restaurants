@@ -125,7 +125,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .se
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;
   top: 10px;
-  right: 83px;
+  right: 82px;
   width: 35px;
   height: 35px;
   z-index: 1;

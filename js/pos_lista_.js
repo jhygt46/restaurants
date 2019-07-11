@@ -251,11 +251,11 @@ function html_home_pedidos(index){
     var btn_carro = create_element_class('btn_carro');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
-    if(pedido.hasOwnProperty('mensajes_cont') || true){
+    if(pedido.hasOwnProperty('mensajes_cont')){
         var btn_chat = create_element_class('btn_chat');
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
-        if(pedido.mensajes_cont > 0 || true){
+        if(pedido.mensajes_cont > 0){
             if(pedido.mensajes_cont === undefined){
                 var m_count = 0;
             }else{
@@ -279,7 +279,7 @@ function html_home_pedidos(index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     
-    if(pedido.tipo == 1 || true){
+    if(pedido.tipo == 1){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class('p_anterior');
