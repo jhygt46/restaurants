@@ -169,8 +169,8 @@ function gmap_input(){
                 url: "/admin/ajax/despacho.php",
                 type: "POST",
                 data: send,
-                success: function(data){   
-                    console.log(data);                
+                success: function(data){
+                    console.log(data);
                     if(data.op == 1){
                         $('#costo').val(data.precio);
                     }else{
@@ -1572,4 +1572,61 @@ function add_pedido(obj){
     seleccionado = 0;
     listar_pedidos(aux);
     
+}
+function guardar_pedido(index){
+     
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
+    var send = { pedido: JSON.stringify(pedido) };
+
+    $.ajax({
+        url: "/admin/ajax/set_pos_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(info){
+
+            if(pedidos[index].id_ped == 0){
+                pedidos[index].id_ped = info.id_ped;
+                pedidos[index].num_ped = info.num_ped;
+                pedidos[index].pedido_code = info.pedido_code;
+            }
+            pedidos[index].carro = info.carro;
+            pedidos[index].alert = info.alert;
+            pedidos[index].cambios = 0;
+            pedidos[index].total = get_precio_carro(pedido);
+            listar_pedidos(pedidos);
+
+            if(open){
+                if(tipo_comanda == 0 || tipo_comanda == 1){
+                    if(proceso(pedido)){
+                        window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
+                    }
+                }
+            }
+            
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+    
+}
+function get_url(pedido){
+
+    var code = pedido.pedido_code;
+    if(dns == 0){
+        var url = 'http://35.192.157.227/detalle.php?url='+dominio+'&code='+code+'&tc='+tipo_comanda;
+    }
+    if(dns == 1){
+        if(ssl == 0){
+            var url = 'http://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+        }
+        if(ssl == 1){
+            var url = 'https://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+        }
+    }
+    if(pedido.cambios && pedido.cambios == 1){
+        url = url+'&ft=1';
+    }
+    return url;
+
 }
