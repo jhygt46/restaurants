@@ -232,7 +232,7 @@ function html_home_pedidos(index){
     var p_cont = create_element_class('p_cont');
     p_cont.onclick = function(){ set_pedido(index) };
     
-    var btn_mod = create_element_class('btn_mod');
+    var btn_mod = create_element_class_inner('btn_mod material-icons', 'view_list');
     btn_mod.onclick = function(){ ver_pedido(index) };
     
     if(pedidos[index].cambios == 0){

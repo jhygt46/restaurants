@@ -83,7 +83,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
   right: 44px;
   width: 35px;
   height: 35px;
-  background: #900;
+  font-size: 35px;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_open {
@@ -129,7 +129,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
   width: 35px;
   height: 35px;
   z-index: 1;
-  background: #090;
+  font-size: 35px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_chat {
   position: absolute;
