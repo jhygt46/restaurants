@@ -815,6 +815,7 @@ function ver_pedido(index){
 
     if(index > -1){
 
+        var pedidos = get_pedidos();
         var pedido = pedidos[index];
         console.log(pedido);
 
