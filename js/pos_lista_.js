@@ -196,6 +196,10 @@ function html_home_pedidos(index){
         pedido.costo = 0;
     }
 
+    console.log("SUB_TOTAL: "+sub_total);
+    console.log("COSTO: "+pedido.costo);
+    console.log("TOTAL: "+pedido.total);
+
     var total = parseInt(sub_total) + parseInt(pedido.costo);
 
     if(sub_total != pedido.total){
