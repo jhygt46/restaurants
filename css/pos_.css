@@ -115,13 +115,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
   transform: rotate(-25deg);
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select {
-  background: #999;
+  background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select .flecha_01 {
-  background: #666;
+  background: #333;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .select .flecha_02 {
-  background: #666;
+  background: #333;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .btn_carro {
   position: absolute;

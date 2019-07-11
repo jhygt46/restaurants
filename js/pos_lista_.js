@@ -792,6 +792,7 @@ function ver_pedido(index){
 
     pop_up('pop_pedido');
     $('#l_direccion').hide();
+    console.log(index);
 
     if(index == -1){
 
