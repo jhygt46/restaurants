@@ -322,10 +322,11 @@ function get_precio_carro(obj){
     var total = 0;
     
     if(obj.carro){
-        console.log("EN CARRO");
+        
         obj.carro.forEach(function(carro_item){
             if(carro_item.id_pro && carro_item.promo === undefined){
                 var pro = get_producto(carro_item.id_pro);
+                console.log(pro);
                 if(pro !== undefined){ 
                     total = total + parseInt(pro.precio); 
                 }
