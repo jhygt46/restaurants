@@ -38,7 +38,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   top: 0px;
   left: 0px;
   height: 100%;
-  width: 134px;
+  width: 142px;
   z-index: 2;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_num {
@@ -158,7 +158,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   position: absolute;
   top: 48px;
   right: 44px;
-  width: 110px;
+  width: 111px;
   background: #000;
   z-index: 1;
 }
@@ -169,7 +169,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_nombre {
-  width: 70px;
+  width: 71px;
   float: left;
   text-align: center;
   font-size: 12px;
@@ -184,9 +184,9 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
   position: absolute;
-  top: 83px;
+  top: 80px;
   right: 44px;
-  width: 110px;
+  width: 111px;
   background: #000;
   z-index: 1;
 }
@@ -197,7 +197,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_nombre {
-  width: 70px;
+  width: 71px;
   float: left;
   text-align: center;
   font-size: 12px;
