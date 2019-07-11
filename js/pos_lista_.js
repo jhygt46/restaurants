@@ -256,10 +256,12 @@ function html_home_pedidos(index){
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
         if(pedido.mensajes_cont > 0 || true){
-            if(pedido.mensajes_cont){
-                pedido.mensajes_cont = 0;
+            if(pedido.mensajes_cont === undefined){
+                var m_count = 0;
+            }else{
+                var m_count = pedido.mensajes_cont;
             }
-            var chat_num = create_element_class_inner('chat_num', pedido.mensajes_cont);
+            var chat_num = create_element_class_inner('chat_num', m_count);
             Div.appendChild(chat_num);
         }
     }
