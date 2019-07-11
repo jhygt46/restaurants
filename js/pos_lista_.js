@@ -427,6 +427,8 @@ function get_categoria(id_cae){
 }
 function get_producto(id_pro){
     var productos = data_productos;
+    console.log(data_productos);
+    console.log(data);
     for(var i=0, ilen=productos.length; i<ilen; i++){
         if(productos[i].id_pro == id_pro){
             return productos[i];
