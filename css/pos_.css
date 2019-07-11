@@ -156,7 +156,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .ch
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;
-  top: 48px;
+  top: 55px;
   right: 44px;
   width: 100px;
   background: #000;
@@ -184,7 +184,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
   position: absolute;
-  top: 80px;
+  top: 84px;
   right: 44px;
   width: 100px;
   background: #000;
