@@ -142,8 +142,8 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .bt
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .chat_num {
   position: absolute;
-  top: 26px;
-  right: 109px;
+  top: 31px;
+  right: 116px;
   width: 16px;
   height: 16px;
   z-index: 2;
@@ -151,6 +151,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .ch
   background: red;
   text-align: center;
   font-size: 11px;
+  padding-top: 2px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;
