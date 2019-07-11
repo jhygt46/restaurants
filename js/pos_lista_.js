@@ -164,7 +164,6 @@ function gmap_input(){
                 type: "POST",
                 data: send,
                 success: function(data){
-                    console.log(data);
                     if(data.op == 1){
                         $('#costo').val(data.precio);
                     }else{
@@ -190,12 +189,7 @@ function html_home_pedidos(index){
     if(pedido.despacho == 0){
         pedido.costo = 0;
     }
-    /*
-    console.log(pedido);
-    console.log("SUB_TOTAL: "+sub_total);
-    console.log("COSTO: "+pedido.costo);
-    console.log("TOTAL: "+pedido.total);
-    */
+
     var total = parseInt(sub_total) + parseInt(pedido.costo);
 
     if(sub_total != pedido.total){
@@ -314,14 +308,11 @@ function html_home_pedidos(index){
 function get_precio_carro(obj){
 
     var total = 0;
-    
+    console.log(obj);
     if(obj.carro){
-        console.log(obj.carro);
         obj.carro.forEach(function(carro_item){
             if(carro_item.id_pro && carro_item.promo === undefined){
                 var pro = get_producto(carro_item.id_pro);
-                console.log(carro_item.id_pro);
-                console.log(pro);
                 if(pro !== undefined){ 
                     total = total + parseInt(pro.precio); 
                 }
@@ -330,10 +321,8 @@ function get_precio_carro(obj){
     }
 
     if(obj.promos){
-        console.log(obj.promos);
         obj.promos.forEach(function(promo_item){
             var cat = get_categoria(promo_item.id_cae);
-            console.log(promo_item.id_cae);
             total = total + parseInt(cat.precio);
         });
     }
@@ -638,7 +627,6 @@ function mostrar_pregunta(i){
 
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-    console.log(pedido.carro[i]);
     var producto = get_producto(pedido.carro[i].id_pro);
 
     if(producto.hasOwnProperty('preguntas')){
@@ -1001,8 +989,6 @@ function html_pedidos_direcciones(direcciones){
 
     for(var i=0, ilen=direcciones.length; i<ilen; i++){
 
-        //console.log(direcciones[i]);
-
         var pdir = create_element_class('pedido_direccion');
         pdir.setAttribute('id_pdir', direcciones[i].id_pdir);
         pdir.setAttribute('direccion', direcciones[i].direccion);
@@ -1050,7 +1036,6 @@ function select_pdir(that){
         type: "POST",
         data: send,
         success: function(data){
-            console.log(data);
             
             if(data.op == 1){
                 
@@ -1325,8 +1310,6 @@ function html_seleccionar_productos_categoria_promo(categoria, i, cantidad){
     
 }
 function confirmar_productos_promo(bool){
-    
-    console.log("CONFIRMAR PRODUCTOS PROMOS");
     
     var count = 0;
     var arr = [];
@@ -1605,7 +1588,7 @@ function guardar_pedido(index){
             }
             
         }, error: function(e){
-            console.log(e);
+            
         }
     });
     
