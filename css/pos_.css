@@ -151,7 +151,8 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .ch
   background: red;
   text-align: center;
   font-size: 11px;
-  padding-top: 2px;
+  padding-top: 3px 1px 0px 1px;
+  color: #fff;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;

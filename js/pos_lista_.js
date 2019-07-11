@@ -279,7 +279,7 @@ function html_home_pedidos(index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     
-    if(pedido.tipo == 1){
+    if(pedido.tipo == 1 || true){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class('p_anterior');
