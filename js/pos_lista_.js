@@ -225,14 +225,7 @@ function html_home_pedidos(index){
         var p_estado = create_element_class_inner('p_estado', '');
     }
 
-    if(pedido.num_ped == 0){
-        var titulo = "Pedido no Guardado";
-    }
-    if(pedido.num_ped > 0){
-        var titulo = "Pedido #"+pedido.num_ped;
-    }
-
-    var p_num = create_element_class_inner('p_num', titulo);
+    var p_num = create_element_class_inner('p_num', "Pedido #"+pedido.num_ped);
     var p_nom = create_element_class_inner('p_nom', pedido.nombre);
     
     var p_precio = create_element_class_inner('p_precio', formatNumber.new(parseInt(total), "$"));
