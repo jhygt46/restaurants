@@ -157,7 +157,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .ch
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;
   top: 48px;
-  right: 10px;
+  right: 44px;
   width: 110px;
   background: #000;
   z-index: 1;
@@ -184,20 +184,20 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
   position: absolute;
-  top: 48px;
-  right: 130px;
-  width: 80px;
+  top: 83px;
+  right: 44px;
+  width: 110px;
   background: #000;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_anterior {
   width: 20px;
   float: left;
-  height: 25px;
+  height: 30px;
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_nombre {
-  width: 40px;
+  width: 70px;
   float: left;
   text-align: center;
   font-size: 12px;
@@ -207,7 +207,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_siguiente {
   width: 20px;
   float: left;
-  height: 25px;
+  height: 30px;
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido_h1 {
