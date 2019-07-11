@@ -322,11 +322,10 @@ function get_precio_carro(obj){
     var total = 0;
     
     if(obj.carro){
-        
         obj.carro.forEach(function(carro_item){
             if(carro_item.id_pro && carro_item.promo === undefined){
                 var pro = get_producto(carro_item.id_pro);
-                console.log(pro);
+                console.log(carro_item.id_pro);
                 if(pro !== undefined){ 
                     total = total + parseInt(pro.precio); 
                 }
@@ -338,6 +337,7 @@ function get_precio_carro(obj){
         console.log("EN PROMO");
         obj.promos.forEach(function(promo_item){
             var cat = get_categoria(promo_item.id_cae);
+            console.log(promo_item.id_cae);
             total = total + parseInt(cat.precio);
         });
     }
