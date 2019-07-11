@@ -74,8 +74,8 @@ $info = $core->get_data_pos();
                                 <div class="informacion info_btn">
 
                                     <div class="pedidos_inputs">
-                                        <input id="id_ped" type="hidden" value="" />
-                                        <input id="id_puser" type="hidden" value="" />
+                                        <input id="id_ped" type="hidden" value="0" />
+                                        <input id="id_puser" type="hidden" value="0" />
                                         <div class="cont_ped_input clearfix">
                                             <div class="tel">
                                                 <span>Telefono: </span>

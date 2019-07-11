@@ -1470,7 +1470,7 @@ function done_pedido(){
         }
 
         //console.log("NUEVO OBJETO");
-        //console.log(obj);
+        console.log(obj);
         nuevo(obj);
 
     }
@@ -1521,7 +1521,7 @@ function done_pedido(){
         pedidos[seleccionado].id_mot = $('#id_mot').val();
         */
         //console.log("EDIT PEDIDO");
-        //console.log(pedidos[seleccionado]);
+        console.log(pedidos[seleccionado]);
         listar_pedidos(pedidos);
         
     }
