@@ -149,34 +149,34 @@ html {
                                     background: rgba(255,0,0,1);
                                     text-align: center;
                                     font-size: 11px;
-                                    padding-top: 3px 1px 0px 1px;
+                                    padding: 3px 1px 0px 1px;
                                     color: #fff;
                                 }
                                 .p_opciones{
                                     position: absolute;
                                     top: 48px;
                                     right: 10px;
-                                    width: 114px;
+                                    width: 110px;
                                     background: #000;
                                     z-index: 1;
                                     .p_anterior{
                                         width: 20px;
                                         float: left;
-                                        height: 25px;
+                                        height: 30px;
                                         background: #666;
                                     }
                                     .p_nombre{
-                                        width: 74px;
+                                        width: 70px;
                                         float: left;
                                         text-align: center;
-                                        font-size: 11px;
-                                        padding-top: 4px;
+                                        font-size: 12px;
+                                        padding-top: 7px;
                                         color: #fff;
                                     }
                                     .p_siguiente{
                                         width: 20px;
                                         float: left;
-                                        height: 25px;
+                                        height: 30px;
                                         background: #666;
                                     }
                                 }

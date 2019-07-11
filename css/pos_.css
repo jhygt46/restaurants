@@ -151,35 +151,35 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .ch
   background: red;
   text-align: center;
   font-size: 11px;
-  padding-top: 3px 1px 0px 1px;
+  padding: 3px 1px 0px 1px;
   color: #fff;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones {
   position: absolute;
   top: 48px;
   right: 10px;
-  width: 114px;
+  width: 110px;
   background: #000;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_anterior {
   width: 20px;
   float: left;
-  height: 25px;
+  height: 30px;
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_nombre {
-  width: 74px;
+  width: 70px;
   float: left;
   text-align: center;
-  font-size: 11px;
-  padding-top: 4px;
+  font-size: 12px;
+  padding-top: 7px;
   color: #fff;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_siguiente {
   width: 20px;
   float: left;
-  height: 25px;
+  height: 30px;
   background: #666;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
