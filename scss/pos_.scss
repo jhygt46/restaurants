@@ -157,17 +157,18 @@ html {
                                     position: absolute;
                                     top: 55px;
                                     right: 44px;
-                                    width: 100px;
+                                    width: 110px;
                                     background: #000;
                                     z-index: 1;
                                     .p_anterior{
-                                        width: 20px;
+                                        width: 22px;
                                         float: left;
                                         height: 26px;
                                         background: #666;
+                                        font-size: 22px;
                                     }
                                     .p_nombre{
-                                        width: 60px;
+                                        width: 66px;
                                         float: left;
                                         text-align: center;
                                         font-size: 12px;
@@ -175,10 +176,11 @@ html {
                                         color: #fff;
                                     }
                                     .p_siguiente{
-                                        width: 20px;
+                                        width: 22px;
                                         float: left;
                                         height: 26px;
                                         background: #666;
+                                        font-size: 22px;
                                     }
                                 }
                                 .t_tiempo{
