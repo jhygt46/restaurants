@@ -318,6 +318,7 @@ function cambiar_hora(index, n){
         type: "POST",
         data: send,
         success: function(data){
+            console.log(data);
             var info = JSON.parse(data);
             if(info.op == 1){
                 listar_pedidos(pedidos);
