@@ -425,25 +425,6 @@ function create_element_class_inner(clase, value){
     Div.innerHTML = value;
     return Div;
 }
-var formatNumber = {
-    separador: ".", // separador para los miles
-    sepDecimal: ',', // separador para los decimales
-    formatear:function (num){
-        num +='';
-        var splitStr = num.split('.');
-        var splitLeft = splitStr[0];
-        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
-        var regx = /(\d+)(\d{3})/;
-        while (regx.test(splitLeft)) {
-            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
-        }
-        return this.simbol + splitLeft +splitRight;
-    },
-    new: function(num, simbol){
-        this.simbol = simbol ||'';
-        return this.formatear(num);
-    }
-}
 function get_categoria(id_cae){
     var categorias = data.catalogos[catalogo].categorias;
     for(var i=0, ilen=categorias.length; i<ilen; i++){
@@ -1656,4 +1637,79 @@ function get_url(pedido){
     }
     return url;
 
+}
+function agregar_pedido(id){
+
+    var send = { id_ped: id };
+    $.ajax({
+        url: "/admin/ajax/get_pos_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
+            console.log(data);
+        
+            /*
+            var obj = pedido_obj();
+            obj.id_ped = 0;
+            obj.num_ped = 0;
+            obj.pedido_code = '';
+            obj.tipo = 0;
+            obj.alert = '';
+            obj.estado = 0;
+            obj.cambios = 1;
+            obj.despacho = despacho;
+            obj.carro = [];
+            obj.promos = [];
+            obj.total = 0;
+            obj.costo = costo;
+            obj.pre_wasabi = p_wasabi;
+            obj.pre_gengibre = p_gengibre;
+            obj.pre_palitos = p_palitos;
+            obj.pre_soya = p_soya;
+            obj.pre_teriyaki = p_teriyaki;
+            obj.id_mot = id_mot;
+            obj.verificado = 0;
+            obj.comentarios = comentarios;
+            
+            obj.id_puser = id_puser;
+            obj.nombre = nombre;
+            obj.telefono = telefono;
+
+            obj.id_pdir = id_pdir;
+            obj.direccion = direccion;
+            obj.calle = calle;
+            obj.num = num;
+            obj.depto = depto;
+            obj.lat = lat;
+            obj.lng = lng;
+            obj.comuna = comuna;
+            add_pedido(obj);
+            sound(aud1);
+            */
+        
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+    
+}
+var formatNumber = {
+    separador: ".", // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear:function (num){
+        num +='';
+        var splitStr = num.split('.');
+        var splitLeft = splitStr[0];
+        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+        var regx = /(\d+)(\d{3})/;
+        while (regx.test(splitLeft)) {
+            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+        }
+        return this.simbol + splitLeft +splitRight;
+    },
+    new: function(num, simbol){
+        this.simbol = simbol ||'';
+        return this.formatear(num);
+    }
 }
