@@ -1647,6 +1647,7 @@ function agregar_pedido(id){
         data: send,
         success: function(data){
             
+            console.log(id);
             console.log(data);
             
             var obj = pedido_obj();
