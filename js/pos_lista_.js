@@ -305,11 +305,36 @@ function html_home_pedidos(index){
     return Div;
     
 }
+function cambiar_hora(index, n){
+    
+    var pedidos = get_pedidos();
+    console.log(pedidos[index].fecha);
+    pedidos[index].fecha = pedidos[index].fecha + n*60;
+    console.log(pedidos[index].fecha);
+    var data = { accion: 1, fecha: pedidos[index].fecha };
+    var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
+    $.ajax({
+        url: "https://www.izusushi.cl/cambiar_estado",
+        type: "POST",
+        data: send,
+        success: function(data){
+            var info = JSON.parse(data);
+            if(info.op == 1){
+                listar_pedidos(pedidos);
+            }
+        }, error: function(e){
+            console.log(e);
+        }
+    });
+    
+}
 function cambiar_estado(index, n){
 
+    var pedidos = get_pedidos();
     var aux = parseInt(pedidos[index].estado) + n;
 
     if(aux >= 0 && aux < estados.length){
+
         pedidos[index].estado = aux;
         var data = { accion: 0, estado: estados[aux] };
         var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
@@ -318,12 +343,15 @@ function cambiar_estado(index, n){
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
-                listar_pedidos(pedidos);
+                var info = JSON.parse(data);
+                if(info.op == 1){
+                    listar_pedidos(pedidos);
+                }
             }, error: function(e){
                 console.log(e);
             }
         });
+
     }
 
 }
