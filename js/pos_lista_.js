@@ -1700,6 +1700,15 @@ function sound(aud){
         playPromise.catch(() => { aud.play() })
     }
 }
+function btn_mapa(){
+    console.log("mapa");
+}
+function btn_setting(){
+    console.log("setting");
+}
+function btn_chat(){
+    console.log("chat");
+}
 var formatNumber = {
     separador: ".", // separador para los miles
     sepDecimal: ',', // separador para los decimales
