@@ -189,20 +189,16 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_mapa vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
-                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Categorias</h1><h2>Seleccionar categoria</h2></div></div></div>
-                            <div class="cont_info">
-                                <div class="informacion"><div class="lista"></div></div>
-                            </div>
+                            <div class="cont_info"></div>
                         </div>
                     </div>
                     <div class="pop pop_setting vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
-                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Categorias</h1><h2>Seleccionar categoria</h2></div></div></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Configuracion</h1></div></div></div>
                             <div class="cont_info">
                                 <div class="informacion"><div class="lista"></div></div>
                             </div>
@@ -211,7 +207,7 @@ $info = $core->get_data_pos();
                     <div class="pop pop_chat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
-                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Categorias</h1><h2>Seleccionar categoria</h2></div></div></div>
+                            <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Mensajes</h1></div></div></div>
                             <div class="cont_info">
                                 <div class="informacion"><div class="lista"></div></div>
                             </div>
