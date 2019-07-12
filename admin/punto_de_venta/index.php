@@ -199,7 +199,7 @@ $info = $core->get_data_pos();
                     <div class="lista_pedidos">
                         <div class="cont_lista"></div>
                     </div>
-                    <div class="config_pedido"><div class="cont_config"><div class="icons vhalign"><div class="ic icon1 material-icons">my_location</div><div class="ic icon2 material-icons">my_location</div><div class="ic icon3 material-icons">my_location</div></div></div></div>
+                    <div class="config_pedido"><div class="cont_config"><div class="icons vhalign"><div class="ic icon1 material-icons">my_location</div><div class="ic icon2 material-icons">settings</div><div class="ic icon3 material-icons">my_location</div></div></div></div>
                 </div>
                 <div class="categorias">
                     <div class="titulo_categorias"><div class="cont_titulo"><div class="tt valign">Categorias</div></div></div>
@@ -215,7 +215,7 @@ $info = $core->get_data_pos();
                 </div>
                 <div class="configuracion">
                     <div class="ic icon1 material-icons">my_location</div>
-                    <div class="ic icon2 material-icons">my_location</div>
+                    <div class="ic icon2 material-icons">settings</div>
                     <div class="ic icon3 material-icons">my_location</div>
                 </div>
             </div>
