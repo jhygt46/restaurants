@@ -273,7 +273,7 @@ function html_home_pedidos(index){
     Div.appendChild(btn_open);
     Div.appendChild(btn_carro);
     
-    if(pedido.tipo == 1 || true){
+    if(pedido.tipo == 1){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class_inner('p_anterior material-icons', 'keyboard_arrow_left');
@@ -308,9 +308,7 @@ function html_home_pedidos(index){
 function cambiar_hora(index, n){
     
     var pedidos = get_pedidos();
-    console.log(pedidos[index].fecha);
     pedidos[index].fecha = pedidos[index].fecha + n*60;
-    console.log(pedidos[index].fecha);
     var data = { accion: 1, fecha: pedidos[index].fecha };
     var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     $.ajax({
