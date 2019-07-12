@@ -855,7 +855,6 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     margin: 0px 4px;
     float: left;
     font-size: 50px;
-    background: #aaa;
   }
   .contenedor .contenido .categorias {
     display: none;
@@ -908,7 +907,6 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
     height: 50px;
     margin: 0px 5px 5px 5px;
     font-size: 50px;
-    background: #ccc;
   }
 }
 ::-webkit-scrollbar {
