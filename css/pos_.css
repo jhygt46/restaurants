@@ -159,14 +159,14 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   top: 55px;
   right: 44px;
   width: 110px;
-  background: #000;
+  background: #ccc;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_anterior {
   width: 22px;
   float: left;
   height: 26px;
-  background: #666;
+  background: #999;
   font-size: 24px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_nombre {
@@ -175,13 +175,13 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   text-align: center;
   font-size: 12px;
   padding-top: 6px;
-  color: #fff;
+  color: #333;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_opciones .p_siguiente {
   width: 22px;
   float: left;
   height: 26px;
-  background: #666;
+  background: #999;
   font-size: 24px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo {
@@ -189,14 +189,14 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_
   top: 84px;
   right: 44px;
   width: 80px;
-  background: #ddd;
+  background: #ccc;
   z-index: 1;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_anterior {
   width: 22px;
   float: left;
   height: 26px;
-  background: #666;
+  background: #999;
   font-size: 24px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_tiempo .t_nombre {
@@ -211,7 +211,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .t_
   width: 22px;
   float: left;
   height: 26px;
-  background: #666;
+  background: #999;
   font-size: 24px;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido_h1 {
