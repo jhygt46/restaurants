@@ -276,10 +276,10 @@ function html_home_pedidos(index){
     if(pedido.tipo == 1 || true){
         
         var estado = create_element_class('p_opciones');
-        var anterior = create_element_class('p_anterior');
+        var anterior = create_element_class_inner('p_anterior material-icons', 'keyboard_arrow_left');
         anterior.onclick = function(){ cambiar_estado(index, -1, this) };
         var nombre = create_element_class_inner('p_nombre', estados[pedido.estado]);
-        var siguiente = create_element_class('p_siguiente');
+        var siguiente = create_element_class_inner('p_siguiente material-icons', 'keyboard_arrow_right');
         siguiente.onclick = function(){ cambiar_estado(index, 1, this) };
 
         estado.appendChild(anterior);
@@ -287,10 +287,10 @@ function html_home_pedidos(index){
         estado.appendChild(siguiente);
 
         var t_tiempo = create_element_class('t_tiempo');
-        var t_anterior = create_element_class('t_anterior');
+        var t_anterior = create_element_class_inner('t_anterior material-icons', 'keyboard_arrow_left');
         t_anterior.onclick = function(){ cambiar_hora(index, -1, this) };
         var t_nombre = create_element_class_inner('t_nombre', '');
-        var t_siguiente = create_element_class('t_siguiente');
+        var t_siguiente = create_element_class_inner('t_siguiente material-icons', 'keyboard_arrow_right');
         t_siguiente.onclick = function(){ cambiar_hora(index, 1, this) };
 
         t_tiempo.appendChild(t_anterior);
