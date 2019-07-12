@@ -192,7 +192,7 @@ $info = $core->get_data_pos();
                     <div class="pop pop_mapa vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
-                            <div class="cont_info"></div>
+                            <div class="cont_info" id="mapa_motos"></div>
                         </div>
                     </div>
                     <div class="pop pop_setting vhalign">
