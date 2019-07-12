@@ -603,10 +603,10 @@ function html_home_categorias(obj){
     return Div;
     
 }
-function np_close(that){
+function np_close(){
     
     $('.pop_up').hide();
-    $(that).parents('.pop').hide();
+    $('.pop').hide();
     global_telefono = "";
     
 }
@@ -1701,13 +1701,13 @@ function sound(aud){
     }
 }
 function btn_mapa(){
-    console.log("mapa");
+    pop_up('pop_mapa');
 }
 function btn_setting(){
-    console.log("setting");
+    pop_up('pop_setting');
 }
 function btn_chat(){
-    console.log("chat");
+    pop_up('pop_chat');
 }
 var formatNumber = {
     separador: ".", // separador para los miles
