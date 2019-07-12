@@ -277,10 +277,10 @@ function html_home_pedidos(index){
         
         var estado = create_element_class('p_opciones');
         var anterior = create_element_class_inner('p_anterior material-icons', 'keyboard_arrow_left');
-        anterior.onclick = function(){ cambiar_estado(index, -1, this) };
+        anterior.onclick = function(){ cambiar_estado(index, -1) };
         var nombre = create_element_class_inner('p_nombre', estados[pedido.estado]);
         var siguiente = create_element_class_inner('p_siguiente material-icons', 'keyboard_arrow_right');
-        siguiente.onclick = function(){ cambiar_estado(index, 1, this) };
+        siguiente.onclick = function(){ cambiar_estado(index, 1) };
 
         estado.appendChild(anterior);
         estado.appendChild(nombre);
@@ -288,10 +288,10 @@ function html_home_pedidos(index){
 
         var t_tiempo = create_element_class('t_tiempo');
         var t_anterior = create_element_class_inner('t_anterior material-icons', 'keyboard_arrow_left');
-        t_anterior.onclick = function(){ cambiar_hora(index, -1, this) };
+        t_anterior.onclick = function(){ cambiar_hora(index, -1) };
         var t_nombre = create_element_class_inner('t_nombre', '10');
         var t_siguiente = create_element_class_inner('t_siguiente material-icons', 'keyboard_arrow_right');
-        t_siguiente.onclick = function(){ cambiar_hora(index, 1, this) };
+        t_siguiente.onclick = function(){ cambiar_hora(index, 1) };
 
         t_tiempo.appendChild(t_anterior);
         t_tiempo.appendChild(t_nombre);
@@ -304,6 +304,28 @@ function html_home_pedidos(index){
 
     return Div;
     
+}
+function cambiar_estado(index, n){
+
+    var aux = parseInt(pedidos[index].estado) + n;
+
+    if(aux >= 0 && aux < estados.length){
+        pedidos[index].estado = aux;
+        var data = { accion: 0, estado: estados[aux] };
+        var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
+        $.ajax({
+            url: "https://www.izusushi.cl/cambiar_estado",
+            type: "POST",
+            data: send,
+            success: function(data){
+                console.log(data);
+                listar_pedidos(pedidos);
+            }, error: function(e){
+                console.log(e);
+            }
+        });
+    }
+
 }
 function get_precio_carro(obj){
 
