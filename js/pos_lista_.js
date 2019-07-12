@@ -289,7 +289,7 @@ function html_home_pedidos(index){
         var t_tiempo = create_element_class('t_tiempo');
         var t_anterior = create_element_class_inner('t_anterior material-icons', 'keyboard_arrow_left');
         t_anterior.onclick = function(){ cambiar_hora(index, -1, this) };
-        var t_nombre = create_element_class_inner('t_nombre', '');
+        var t_nombre = create_element_class_inner('t_nombre', '10');
         var t_siguiente = create_element_class_inner('t_siguiente material-icons', 'keyboard_arrow_right');
         t_siguiente.onclick = function(){ cambiar_hora(index, 1, this) };
 
