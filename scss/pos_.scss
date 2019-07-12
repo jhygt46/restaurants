@@ -165,7 +165,7 @@ html {
                                         float: left;
                                         height: 26px;
                                         background: #666;
-                                        font-size: 22px;
+                                        font-size: 24px;
                                     }
                                     .p_nombre{
                                         width: 66px;
@@ -180,24 +180,25 @@ html {
                                         float: left;
                                         height: 26px;
                                         background: #666;
-                                        font-size: 22px;
+                                        font-size: 24px;
                                     }
                                 }
                                 .t_tiempo{
                                     position: absolute;
                                     top: 84px;
                                     right: 44px;
-                                    width: 100px;
+                                    width: 90px;
                                     background: #000;
                                     z-index: 1;
                                     .t_anterior{
-                                        width: 20px;
+                                        width: 22px;
                                         float: left;
                                         height: 26px;
                                         background: #666;
+                                        font-size: 24px;
                                     }
                                     .t_nombre{
-                                        width: 60px;
+                                        width: 56px;
                                         float: left;
                                         text-align: center;
                                         font-size: 12px;
@@ -209,6 +210,7 @@ html {
                                         float: left;
                                         height: 26px;
                                         background: #666;
+                                        font-size: 24px;
                                     }
                                 }
                             }
