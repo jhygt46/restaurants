@@ -1648,51 +1648,56 @@ function agregar_pedido(id){
         success: function(data){
             
             console.log(data);
-        
-            /*
+            
             var obj = pedido_obj();
-            obj.id_ped = 0;
-            obj.num_ped = 0;
-            obj.pedido_code = '';
-            obj.tipo = 0;
+            obj.id_ped = data.id_ped;
+            obj.num_ped = data.num_ped;
+            obj.pedido_code = data.pedido_code;
+            obj.tipo = 1;
             obj.alert = '';
             obj.estado = 0;
-            obj.cambios = 1;
-            obj.despacho = despacho;
-            obj.carro = [];
-            obj.promos = [];
-            obj.total = 0;
-            obj.costo = costo;
-            obj.pre_wasabi = p_wasabi;
-            obj.pre_gengibre = p_gengibre;
-            obj.pre_palitos = p_palitos;
-            obj.pre_soya = p_soya;
-            obj.pre_teriyaki = p_teriyaki;
-            obj.id_mot = id_mot;
-            obj.verificado = 0;
-            obj.comentarios = comentarios;
+            obj.cambios = 0;
+            obj.despacho = data.despacho;
+            obj.carro = data.carro;
+            obj.promos = data.promos;
+            obj.total = data.total;
+            obj.costo = data.costo;
+            obj.pre_wasabi = data.pre_wasabi;
+            obj.pre_gengibre = data.pre_gengibre;
+            obj.pre_palitos = data.pre_palitos;
+            obj.pre_soya = data.pre_soya;
+            obj.pre_teriyaki = data.pre_teriyaki;
+            //obj.id_mot = id_mot;
+            //obj.verificado = 0;
+            //obj.comentarios = comentarios;
             
-            obj.id_puser = id_puser;
-            obj.nombre = nombre;
-            obj.telefono = telefono;
+            obj.id_puser = data.id_puser;
+            obj.nombre = data.nombre;
+            obj.telefono = data.telefono;
 
-            obj.id_pdir = id_pdir;
-            obj.direccion = direccion;
-            obj.calle = calle;
-            obj.num = num;
-            obj.depto = depto;
-            obj.lat = lat;
-            obj.lng = lng;
-            obj.comuna = comuna;
+            obj.id_pdir = data.id_pdir;
+            obj.direccion = data.direccion;
+            obj.calle = data.calle;
+            obj.num = data.num;
+            obj.depto = data.depto;
+            obj.lat = data.lat;
+            obj.lng = data.lng;
+            obj.comuna = data.comuna;
             add_pedido(obj);
             sound(aud1);
-            */
         
         }, error: function(e){
             console.log(e);
         }
     });
     
+}
+function sound(aud){
+    aud.play();
+    var playPromise = aud.play();
+    if (playPromise !== null){
+        playPromise.catch(() => { aud.play() })
+    }
 }
 var formatNumber = {
     separador: ".", // separador para los miles
