@@ -1003,9 +1003,22 @@ function telefono_keyup(e){
 function del_pdir(that){
 
     var direccion = $(that).parent();
-    var id_pdir = direccion.attr('id_pdir');
-    console.log("BORRAR PDIR: "+id_pdir);
-    direccion.remove();
+    var id = direccion.attr('id_pdir');
+
+    var send = { id_pdir: id };
+    $.ajax({
+        url: "/admin/ajax/del_pos_pedido.php",
+        type: "POST",
+        data: send,
+        success: function(data){
+            
+            direccion.remove();
+            console.log(data);
+
+        }, error: function(e){
+            console.log(e);
+        }
+    });
 
 }
 function html_pedidos_direcciones(direcciones){

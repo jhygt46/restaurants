@@ -405,11 +405,13 @@ html {
                     position: relative;
                     height: 100%;
                     width: 100%;
-                    .pop{
+                    .pop_dim_1{
                         width: 90%;
                         max-width: 600px;
                         height: 90%;
                         max-height: 600px;
+                    }
+                    .pop{
                         background: #fff;
                         border-radius: 12px;
                         display: none;

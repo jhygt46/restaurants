@@ -41,7 +41,7 @@ $info = $core->get_data_pos();
             <div class="pop_up">
                 <div class="cont_pop_up">
                     
-                    <div class="pop pop_cats vhalign">
+                    <div class="pop pop_dim_1 pop_cats vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Categorias</h1><h2>Seleccionar categoria</h2></div></div></div>
@@ -51,7 +51,7 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
-                    <div class="pop pop_pre vhalign">
+                    <div class="pop pop_dim_1 pop_pre vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
@@ -66,7 +66,7 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
-                    <div class="pop pop_pedido vhalign">
+                    <div class="pop pop_dim_1 pop_pedido vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
@@ -157,7 +157,7 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
-                    <div class="pop pop_detalle vhalign">
+                    <div class="pop pop_dim_1 pop_detalle vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Detalle</h1><h2>Seleccionar categoria</h2></div></div></div>
@@ -175,7 +175,7 @@ $info = $core->get_data_pos();
                         </div>
                     </div>
 
-                    <div class="pop pop_pro_cat vhalign">
+                    <div class="pop pop_dim_1 pop_pro_cat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1></h1><h2></h2></div></div></div>
@@ -189,13 +189,15 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-                    <div class="pop pop_mapa vhalign">
+
+                    <div class="pop pop_dim_1 pop_mapa vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="cont_info" id="mapa_motos"></div>
                         </div>
                     </div>
-                    <div class="pop pop_setting vhalign">
+                    
+                    <div class="pop pop_dim_1 pop_setting vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Configuracion</h1></div></div></div>
@@ -204,7 +206,8 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-                    <div class="pop pop_chat vhalign">
+
+                    <div class="pop pop_dim_1 pop_chat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="titulo"><div class="cont_titulo"><div class="ctitle valign"><h1>Mensajes</h1></div></div></div>

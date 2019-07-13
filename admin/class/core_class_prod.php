@@ -1368,6 +1368,41 @@ class Core{
         return $result;
                     
     }
+    public function del_pos_direcciones($id_pdir){
+
+        $ip = $this->getUserIpAddr();
+        $id = $_COOKIE["id"];
+        $user_code = $_COOKIE["user_code"];
+        $local_code = $_COOKIE["local_code"];
+
+        $sql = $this->con->prepare("SELECT t2.id_gir FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?");
+        $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
+        $sql->execute();
+        $res = $sql->get_result();
+        $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+
+        if($res->{'num_rows'} == 0){
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Error Usuario";
+
+        }
+        if($res->{'num_rows'} == 1){
+
+            $sqldel = $this->con->prepare("DELETE t1.* FROM pedidos_direccion t1, pedidos_usuarios t2 WHERE t1.id_pdir=? AND t1.id_user=t2.id_user AND t2.id_gir=?");
+            $sqldel->bind_param("ii", $id_pdir, $id_gir);
+            $sqldel->execute();
+            $sqldel->close();
+            $info['op'] = 1;
+
+        }
+
+        $sql->free_result();
+        $sql->close();
+
+        return $info;
+
+    }
     public function get_pos_direcciones($telefono){
 
         $ip = $this->getUserIpAddr();

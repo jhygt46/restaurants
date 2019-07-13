@@ -400,11 +400,13 @@ html body .contenedor .pop_up .cont_pop_up {
   height: 100%;
   width: 100%;
 }
-html body .contenedor .pop_up .cont_pop_up .pop {
+html body .contenedor .pop_up .cont_pop_up .pop_dim_1 {
   width: 90%;
   max-width: 600px;
   height: 90%;
   max-height: 600px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop {
   background: #fff;
   border-radius: 12px;
   display: none;
