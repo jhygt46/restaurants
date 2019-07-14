@@ -1379,7 +1379,6 @@ class Core{
         $sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado);
         $sql->execute();
         $res = $sql->get_result();
-        $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
 
         if($res->{'num_rows'} == 0){
 
@@ -1388,13 +1387,32 @@ class Core{
 
         }
         if($res->{'num_rows'} == 1){
-            /*
-            $sqldel = $this->con->prepare("DELETE t1.* FROM pedidos_direccion t1, pedidos_usuarios t2 WHERE t1.id_pdir=? AND t1.id_user=t2.id_user AND t2.id_gir=?");
-            $sqldel->bind_param("ii", $id_pdir, $id_gir);
-            $sqldel->execute();
-            $sqldel->close();
-            */
-            $info['op'] = 1;
+            
+            $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+            $sqldir = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?");
+            $sqldir->bind_param("i", $id_pdir);
+            $sqldir->execute();
+            $resdir = $sql->get_result();
+            $id_puser = $resdir->fetch_all(MYSQLI_ASSOC)[0]['id_puser'];
+            $sqldir->free_result();
+            $sqldir->close();
+
+            $sqluser = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND id_gir=?");
+            $sqluser->bind_param("ii", $id_puser, $id_gir);
+            $sqluser->execute();
+            $resu = $sqluser->get_result();
+            $sqluser->free_result();
+            $sqluser->close();
+
+            if($resu->{'num_rows'} == 1){
+
+                $info['op'] = 1;
+                $sqldpr = $this->con->prepare("DELETE FROM pedidos_direccion WHERE id_pdir=?");
+                $sqldpr->bind_param("i", $id_pdir);
+                $sqldpr->execute();
+                $sqldpr->close();
+
+            }
 
         }
 
