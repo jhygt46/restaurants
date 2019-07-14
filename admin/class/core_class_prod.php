@@ -1392,7 +1392,7 @@ class Core{
             $sqldir = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?");
             $sqldir->bind_param("i", $id_pdir);
             $sqldir->execute();
-            $resdir = $sql->get_result();
+            $resdir = $sqldir->get_result();
             $id_puser = $resdir->fetch_all(MYSQLI_ASSOC)[0]['id_puser'];
             $sqldir->free_result();
             $sqldir->close();
