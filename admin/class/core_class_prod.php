@@ -1388,11 +1388,12 @@ class Core{
 
         }
         if($res->{'num_rows'} == 1){
-
+            /*
             $sqldel = $this->con->prepare("DELETE t1.* FROM pedidos_direccion t1, pedidos_usuarios t2 WHERE t1.id_pdir=? AND t1.id_user=t2.id_user AND t2.id_gir=?");
             $sqldel->bind_param("ii", $id_pdir, $id_gir);
             $sqldel->execute();
             $sqldel->close();
+            */
             $info['op'] = 1;
 
         }
