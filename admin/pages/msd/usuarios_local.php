@@ -33,6 +33,17 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     }
 }
 ?>
+<script>
+    function ver_opciones(){
+        var tipo = $('#v_tipo').val();
+        if(tipo == 0){
+            $('.opc').hide();
+        }
+        if(tipo == 1){
+            $('.opc').show();
+        }
+    }
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -65,12 +76,12 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
-                        <select id="v_tipo" name="v_tipo">
+                        <select id="v_tipo" name="v_tipo" onchange="ver_opciones()">
                             <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Punto de Venta</option>
                             <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Cocina</option>
                         </select>
                     </label>
-                    <label class="clearfix">
+                    <label class="opc clearfix" style="display: none">
                         <span><p>Borrar Direcciones:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
