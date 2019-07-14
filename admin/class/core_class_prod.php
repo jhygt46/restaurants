@@ -1408,11 +1408,13 @@ class Core{
 
             if($resu->{'num_rows'} == 1){
                 if($del_pdir == 1){
+                    
                     $info['op'] = 1;
                     $sqldpr = $this->con->prepare("DELETE FROM pedidos_direccion WHERE id_pdir=?");
                     $sqldpr->bind_param("i", $id_pdir);
                     $sqldpr->execute();
                     $sqldpr->close();
+
                 }else{
                     $info['op'] = 2;
                 }

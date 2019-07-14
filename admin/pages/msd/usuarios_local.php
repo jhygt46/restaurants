@@ -71,6 +71,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         </select>
                     </label>
                     <label class="clearfix">
+                        <span><p>Borrar Direcciones:</p></span>
+                        <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Password:</p></span>
                         <input id="v_pass1" autocomplete="off" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
