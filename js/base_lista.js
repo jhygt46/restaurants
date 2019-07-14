@@ -816,6 +816,7 @@ function ver_paso_2(){
 }
 function show_modal_locales(){
     
+    console.log("show_modal_locales");
     var info_loc = info_locales();
     console.log(info_loc);
     var custom_min = 30;
