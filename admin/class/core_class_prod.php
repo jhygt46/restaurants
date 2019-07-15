@@ -764,7 +764,7 @@ class Core{
             $info['footer_html'] = $result['footer_html'];
             $info['retiro_local'] = $result['retiro_local'];
             $info['despacho_domicilio'] = $result['despacho_domicilio'];
-            //$info['lista_locales'] = $result['lista_locales'];
+            $info['lista_locales'] = $result['lista_locales'];
             $info['con_cambios'] = $result['con_cambios'];
             $info['desde'] = $result['desde'];
             
