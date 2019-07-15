@@ -1782,7 +1782,7 @@ class Guardar{
                         $info['mensaje'] = "Local modificado exitosamente";
                         $info['reload'] = 1;
                         $info['page'] = "msd/locales.php";
-                        $this->locales_giro();
+                        $info['locales_giro'] = $this->locales_giro();
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "Error";
@@ -1930,6 +1930,9 @@ class Guardar{
         $sqlug->bind_param("sii", json_encode($result, JSON_UNESCAPED_UNICODE), $this->id_gir, $this->eliminado);
         if(!$sql->execute()){
             $this->registrar(6, 0, 0, 'Error Sql: (lista_locales)');
+            return "MALA NELSON";
+        }else{
+            return "BUENA NELSON";
         }
         $sqlug->close();
 
