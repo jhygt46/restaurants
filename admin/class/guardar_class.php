@@ -1744,9 +1744,9 @@ class Guardar{
             $sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_cat=? AND id_gir=? AND eliminado=?");
             $sql->bind_param("iii", $id_cat, $this->id_gir, $this->eliminado);
             $sql->execute();
-            $sql->store_result();
+            $res = $sql->get_result();
 
-            if($sql->{"num_rows"} == 1){
+            if($res->{"num_rows"} == 1){
 
                 $sqlses = $this->con->prepare("SELECT * FROM ses_mail WHERE correo=?");
                 $sqlses->bind_param("s", $correo);
@@ -1764,6 +1764,7 @@ class Guardar{
                         $info['mensaje'] = "Local creado exitosamente";
                         $info['reload'] = 1;
                         $info['page'] = "msd/locales.php";
+                        $this->locales_giro();
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "Error";
@@ -1792,7 +1793,7 @@ class Guardar{
                 }
 
             }
-            if($sql->{"num_rows"} == 0){
+            if($res->{"num_rows"} == 0){
 
                 $info['op'] = 2;
                 $info['mensaje'] = "Error";
