@@ -1928,7 +1928,7 @@ class Guardar{
 
         $sqlug = $this->con->prepare("UPDATE giros SET lista_locales=? WHERE id_gir=? AND eliminado=?");
         $sqlug->bind_param("sii", json_encode($result, JSON_UNESCAPED_UNICODE), $this->id_gir, $this->eliminado);
-        if(!$sql->execute()){
+        if(!$sqlug->execute()){
             $this->registrar(6, 0, 0, 'Error Sql: (lista_locales)');
             return "MALA NELSON";
         }else{
