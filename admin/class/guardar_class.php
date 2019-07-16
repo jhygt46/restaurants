@@ -129,6 +129,9 @@ class Guardar{
             if($_POST['accion'] == "configurar_footer"){
                 return $this->configurar_footer();
             }
+            if($_POST['accion'] == "configurar_inicio"){
+                return $this->configurar_inicio();
+            }
             if($_POST['accion'] == "refresh"){
                 return $this->refresh();
             }
@@ -619,13 +622,52 @@ class Guardar{
         return $info;
 
     }
+    private function configurar_inicio(){
+
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $this->con_cambios(null);
+            $texto = $_POST['html'];
+            $seguir = $_POST['seguir'];
+
+            $sql = $this->con->prepare("UPDATE giros SET inicio_html=? WHERE id_gir=? AND eliminado=?");
+            $sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado);
+
+            if($sql->execute()){
+                $info['op'] = 1;
+                $info['mensaje'] = "Pagina de Inicio modificado exitosamente";
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Se produjo un error";
+                $this->registrar(2, 0, $this->id_gir, 'Config Pagina de Inicio');
+            }
+            
+            $sql->close();
+            $info['reload'] = 1;
+            
+            if($seguir == 0){
+                $info['page'] = 'msd/ver_giro.php';
+            }
+            if($seguir == 1){
+                $info['page'] = 'msd/configurar_pag_inicio.php';
+            }
+
+        }else{
+
+            $this->registrar(2, 0, 0, 'Config Footer');
+            $info['op'] = 2;
+            $info['mensaje'] = "Error";
+
+        }
+
+        return $info;
+
+    }
     private function configurar_footer(){
         
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
 
             $this->con_cambios(null);
-
-            //$tipo = $_POST['tipo'];
             $texto = $_POST['html'];
             $seguir = $_POST['seguir'];
 
