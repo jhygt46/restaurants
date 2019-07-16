@@ -773,6 +773,7 @@ class Core{
             $info['font']['css'] = $result['font_css'];
             $info['code'] = $result['code'];
             $info['footer_html'] = $result['footer_html'];
+            $info['inicio_html'] = $result['inicio_html'];
             $info['retiro_local'] = $result['retiro_local'];
             $info['despacho_domicilio'] = $result['despacho_domicilio'];
             $info['lista_locales'] = $result['lista_locales'];
