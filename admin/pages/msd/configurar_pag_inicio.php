@@ -3,7 +3,7 @@
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 
-$footer = $core->get_footer();
+$inicio = $core->get_pag_inicio();
 
 /* CONFIG PAGE */
 $titulo = "Pagina de Inicio";
@@ -56,18 +56,18 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <span><p>Pagina:</p></span>
                         <select id="tipo" onchange="ver_paginas()">
                             <option value="0">Nueva</option>
-                            <option value="1">Bajada 1</option>
-                            <option value="2">Bajada 2</option>
-                            <option value="3">Bajada 3</option>
+                            <option value="1">inicio 1</option>
+                            <option value="2">inicio 2</option>
+                            <option value="3">inicio 3</option>
                         </select>
                     </label>
                     <label class="clearfix">
                         <span><p>HTML:</p></span>
-                        <TEXTAREA id="html"><?php echo $footer; ?></TEXTAREA>
+                        <TEXTAREA id="html"><?php echo $inicio; ?></TEXTAREA>
                     </label>
                     <label class="clearfix">
                         <span><p>Preview:</p></span>
-                        <div class="perfil_preguntas view_html" style="background: #fff; min-height: 60px"><?php echo $footer; ?></div>
+                        <div class="perfil_preguntas view_html" style="background: #fff; min-height: 60px"><?php echo $inicio; ?></div>
                     </label>
                     <label class="clearfix">
                         <span><p>Seguir editando:</p></span>

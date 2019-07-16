@@ -619,6 +619,17 @@ class Core{
         return $result;
 
     }
+    public function get_pag_inicio(){
+
+        $sql = $this->con->prepare("SELECT inicio_html FROM giros WHERE id_gir=? AND eliminado=?");
+        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["inicio_html"];
+        $sql->free_result();
+        $sql->close();
+        return $result;
+
+    }
     public function get_footer(){
 
         $sql = $this->con->prepare("SELECT footer_html FROM giros WHERE id_gir=? AND eliminado=?");
