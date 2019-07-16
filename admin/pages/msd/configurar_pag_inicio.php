@@ -27,7 +27,6 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
         var pagina = $('#tipo').val();
         var info = htmls[pagina];
         $('#html').val(info.data);
-        $('.view_html').html(info.data);
     }
 
 </script>
@@ -64,10 +63,6 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     <label class="clearfix">
                         <span><p>HTML:</p></span>
                         <TEXTAREA id="html"><?php echo $inicio; ?></TEXTAREA>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Preview:</p></span>
-                        <div class="perfil_preguntas view_html" style="background: #fff; min-height: 60px"><?php echo $inicio; ?></div>
                     </label>
                     <label class="clearfix">
                         <span><p>Seguir editando:</p></span>
