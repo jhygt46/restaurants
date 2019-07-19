@@ -2163,7 +2163,7 @@ class Core{
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $tipo = 1;
             $sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $despacho, $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir']);
+            $sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir']);
             
             if($sqlipa->execute()){
         
