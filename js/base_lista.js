@@ -72,7 +72,6 @@ function open_categoria(id){
     }
     
 }
-
 function tiene_pedido(){
     
     var pedido = get_pedido();
@@ -128,8 +127,7 @@ function imprimir_productos_modal(id){
     
 }
 function imprimir_categoria_modal(categorias){
-    
-    //console.log(categorias);
+
     $('.modal_carta .info_modal').html('');
     
     var html = create_element_class('lista_categorias');
@@ -145,15 +143,10 @@ function imprimir_categoria_modal(categorias){
     $('.modal_carta .info_modal').append(html);
     
 }
-
-// ADD PRODUCTOS Y PROMOCION //
-
 function add_carro_producto_aux(that){
     var id = $(that).attr('id');
     add_carro_producto(id);
 }
-
-
 function add_carro_producto(id_pro){
     
     var producto = get_producto(id_pro);
@@ -540,7 +533,6 @@ function set_cantidad(n){
     cantidad = cantidad + n;
     $('.cantcart_num').html(cantidad);
 }
-
 function get_puser(){
     return JSON.parse(localStorage.getItem("p_user")) || { id_puser: 0, code: '', nombre: '', telefono: '+56 9 ' };
 }
@@ -553,17 +545,12 @@ function get_pdir(){
 function set_pdir(pdir){
     localStorage.setItem("p_dir", JSON.stringify(pdir));
 }
-
-
-// BORRAR //
 function get_pep(){
     return JSON.parse(localStorage.getItem("pep")) || { id_pep: 0, pep_code: '' };
 }
 function set_pep(pep){
     localStorage.setItem("pep", JSON.stringify(pep));
 }
-// BORRAR //
-
 function get_carro(){
     return JSON.parse(localStorage.getItem("carro")) || [];
 }
@@ -687,7 +674,6 @@ function tooglemenu(){
     if(menu == 1)
         hidemenu();
 }
-
 function get_horarios(id, tipo){
 
     var fecha = new Date();
@@ -724,7 +710,6 @@ function get_horarios(id, tipo){
     }
     return objeto;
 }
-
 function info_locales(){
     var fecha = new Date();
     if(data.locales !== null){
@@ -773,7 +758,6 @@ function info_despacho(){
         }
     }
 }
-
 function ver_paso_2(){
     
     var info_loc = info_locales();
@@ -881,7 +865,6 @@ function proceso(categorias, preguntas){
     return true;
     
 }
-
 function paso_2(){
 
     paso = 2;
@@ -997,18 +980,21 @@ function paso_4(){
                 success: function(info){
 
                     var data = JSON.parse(info);
+
                     if(data.op == 2){
+
                         alert(data.mensaje);
+
                     }
+
                     if(data.op == 1){
 
                         $('#pedido_nombre').css({ border: '0px' });
                         $('#pedido_telefono').css({ border: '0px' });
+
                         if(data.set_puser == 1){
                             set_puser(data.puser);
                         }
-                        
-                        document.getElementById("enviar_cotizacion").disabled = false;
 
                         pedido.id_ped = data.id_ped;
                         pedido.num_ped = data.num_ped;
@@ -1034,12 +1020,13 @@ function paso_4(){
                         time();
                         paso = 1;
 
-                    }else{
-                        document.getElementById("enviar_cotizacion").disabled = false;
-                        document.getElementById("enviar_cotizacion").disabled = false;
                     }
+
+                    document.getElementById("enviar_cotizacion").disabled = false;
+                    
                 }, error: function(e){
                     alert("En estos momentos no podemos atenderlo.. por favor intente mas tarde");
+                    document.getElementById("enviar_cotizacion").disabled = false;
                 }
             });
 
@@ -1122,25 +1109,6 @@ function show_despacho(){
         show_modal('paso_02b');
     }
     
-}
-var formatNumber = {
-    separador: ".", // separador para los miles
-    sepDecimal: ',', // separador para los decimales
-    formatear:function (num){
-        num +='';
-        var splitStr = num.split('.');
-        var splitLeft = splitStr[0];
-        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
-        var regx = /(\d+)(\d{3})/;
-        while (regx.test(splitLeft)) {
-            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
-        }
-        return this.simbol + splitLeft +splitRight;
-    },
-    new: function(num, simbol){
-        this.simbol = simbol ||'';
-        return this.formatear(num);
-    }
 }
 function initMap(){
     
@@ -1454,7 +1422,6 @@ function confirmar_productos_promo(that){
     }
      
 }
-
 function aux_nuevo(){
     borrar_carro();
     set_pedido(null);
@@ -1473,4 +1440,23 @@ function aux_nuevo(){
     $('#pedido_comentarios').val('');
     $('#pac-input').val("");
     // VOLVER A LA NORMALIDAD
+}
+var formatNumber = {
+    separador: ".", // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear:function (num){
+        num +='';
+        var splitStr = num.split('.');
+        var splitLeft = splitStr[0];
+        var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+        var regx = /(\d+)(\d{3})/;
+        while (regx.test(splitLeft)) {
+            splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+        }
+        return this.simbol + splitLeft +splitRight;
+    },
+    new: function(num, simbol){
+        this.simbol = simbol ||'';
+        return this.formatear(num);
+    }
 }

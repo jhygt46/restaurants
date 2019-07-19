@@ -33,7 +33,6 @@ class Core{
 
         $host = $_POST["host"];
         $code = substr($_POST["code"], 0, 40);
-        $ret = false;
         $ip = $_SERVER['REMOTE_ADDR'];
         $port = $_SERVER['SERVER_PORT'];
 
@@ -44,7 +43,9 @@ class Core{
                     if($res->{'num_rows'} == 1){
                         $result = $res->fetch_all(MYSQLI_ASSOC)[0];
                         if($ip == $result["ip"] && $port == "443" && $code == $result["code"]){
-                            $ret = true;
+                            $sqlgir->free_result();
+                            $sqlgir->close();
+                            return true;
                         }
                     }
                 }
@@ -53,7 +54,7 @@ class Core{
 
         $sqlgir->free_result();
         $sqlgir->close();
-        return $ret;
+        return false;
 
     }
     public function is_giro(){
@@ -952,7 +953,6 @@ class Core{
         return $info;
 
     }
-    
     public function get_info_catalogo($id_cat){
         
         $aux_prods = [];
@@ -1314,7 +1314,7 @@ class Core{
                     $info['nombre'] = $polygon['nombre'];
                     $info['lat'] = $lat;
                     $info['lng'] = $lng;
-                    $precio = $polygon['precio'];
+                    $precio = $info['precio'];
                 }
             }
         }
@@ -2007,9 +2007,9 @@ class Core{
                 $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?");
                 $sql->bind_param("is", $aux_id_puser, $code);
                 $sql->execute();
-                $sql->store_result();
+                $res = $sql->get_result();
 
-                $id_puser = ($sql->num_rows == 1) ? $aux_id_puser : 0 ;
+                $id_puser = ($res->num_rows == 1) ? $aux_id_puser : 0 ;
 
                 $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
                 $sqli->bind_param("sii", $error, $id_puser, $id_gir);
@@ -2021,197 +2021,198 @@ class Core{
         }
 
     }
-    public function get_pedido(){
+    private function pedido_direccion($pedido, $id_puser){
 
-        if($this->verificar()){
-
-            $info["verificado"] = 1;
-            $info["host"] = $_POST["host"];
-            $info['server'] = $_SERVER;
-
+        $id = 0;
+        if($direccion != ""){
+            $sqlpdi = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $sqlpdi->bind_param("sssssddi", $pedido["direccion"], $pedido["calle"], $pedido["num"], $pedido["depto"], $pedido["comuna"], $pedido["lat"], $pedido["lng"], $id_puser);
+            if($sqlpdi->execute()){
+                // REPORTAR
+                $id = $this->con->insert_id;
+            }
+            $sqlpdi->close();
         }
+        return $id;
 
-        $sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_puser=? AND codigo=? AND telefono=?");
-        $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
-        $sql->execute();
-        $res = $sql->get_result();
-        if($res->{'num_rows'} == 1){
+    }
+    private function get_local_info($id_loc){
 
+        $sqllg = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+        $sqllg->bind_param("iii", $id_loc, $this->eliminado, $this->eliminado);
+        if($sqllg->execute()){
+
+            $resultlg = $sqllg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $info['lat'] = $resultlg['lat'];
+            $info['lng'] = $resultlg['lng'];
+            $info['t_retiro'] = $resultlg['t_retiro'];
+            $info['t_despacho'] = $resultlg['t_despacho'];
+            $info['num_ped'] = $resultlg['num_ped'] + 1;
+            $info['id_gir'] = $resultlg['id_gir'];
+            $info['code'] = $resultlg['code'];
+            $info['correo'] = $resultlg['correo'];
+            $info['dominio'] = $resultlg['dominio'];
+            $info['activar_envio'] = $resultlg['activar_envio'];
+
+        }else{
+            // REPORTAR ERROR
         }
-        $sql->close();
+        $sqllg->free_result();
+        $sqllg->close();
+        return $info;
+
+    }
+    private function verify_despacho($pedido){
+
+        $verify_despacho = 0;
+        if($pedido['despacho'] == 1){
+            $aux_verify = $this->get_info_despacho($pedido['lat'], $pedido['lng']);
+            if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $pedido['id_loc'] && $aux_verify['precio'] == $pedido['costo']){
+                $verify_despacho = 1;
+            }
+        }
+        return $verify_despacho;
 
     }
     public function enviar_pedido(){
 
         if($this->verificar()){
 
-            $info["verificado"] = 1;
-            $info["host"] = $_POST["host"];
-            $info['server'] = $_SERVER;
+            $pedido = $_POST['pedido'];
+            $puser = $_POST['puser'];
+            $carro = $_POST['carro'];
+            $promos = (isset($_POST['promos']))? $_POST['promos'] : [] ;
 
-        }
+            // PEDIDOS USUARIOS Y DIRECCIONES //
+            $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?");
+            $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
+            if($sql->execute()){
 
-        $pedido = $_POST['pedido'];
-        $puser = $_POST['puser'];
-        $carro = $_POST['carro'];
-        $promos = (isset($_POST['promos']))? $_POST['promos'] : [] ;
-    
-        $dir = false;
-    
-        $direccion = $pedido['direccion'];
-        $calle = $pedido['calle'];
-        $num = $pedido['num'];
-        $depto = $pedido['depto'];
-        $comuna = $pedido['comuna'];
-        $lat = $pedido['lat'];
-        $lng = $pedido['lng'];			        
-        $despacho = $pedido['despacho'];
-        $pdir_id = 0;
-    
-        $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?");
-        $sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"]);
-        $sql->execute();
-        $res = $sql->get_result();
-    
-        if($res->{'num_rows'} == 0){
-    
-            $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
-            $cont = 1;
-            $sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont) VALUES (?, ?, ?, ?)");
-            $sqlipu->bind_param("sssi", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont);
-            $sqlipu->execute();
-            $id_puser = $this->con->insert_id;
-            $sqlipu->close();
-    
-            $info['set_puser'] = 1;
-            $info['puser']['id_puser'] = $id_puser;
-            $info['puser']['code'] = $puser_code;
-            $info['puser']['nombre'] = $pedido["nombre"];
-            $info['puser']['telefono'] = $pedido["telefono"];
-    
-        }
-        
-        if($res->{'num_rows'} == 1){
-        
-            $id_puser = intval($puser["id_puser"]);
-            $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
-            $sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?");
-            $sqlupu->bind_param("ii", $cont, $id_puser);
-            $sqlupu->execute();
-            $sqlupu->close();
-                
-            $sqlpd = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_puser=?");
-            $sqlpd->bind_param("i", $id_puser);
-            $sqlpd->execute();
-            $list_pdir = $sqlpd->get_result()->fetch_all(MYSQLI_ASSOC);
-            $sqlpd->free_result();
-            $sqlpd->close();
-    
-            for($i=0; $i<count($list_pdir); $i++){
-                if($list_pdir[$i]['lat'] == $pedido['lat'] && $list_pdir[$i]['lng'] == $pedido['lng']){
-                    $pdir_id = $list_pdir[$i]['id_pdir'];
-                    $dir = true;
+                $res = $sql->get_result();
+                if($res->{'num_rows'} == 0){
+            
+                    $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
+                    $cont = 1;
+                    $sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont) VALUES (?, ?, ?, ?)");
+                    $sqlipu->bind_param("sssi", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont);
+                    if($sqlipu->execute()){
+                        
+                        $id_puser = $this->con->insert_id;
+                        $info['set_puser'] = 1;
+                        $info['puser']['id_puser'] = $id_puser;
+                        $info['puser']['code'] = $puser_code;
+                        $info['puser']['nombre'] = $pedido["nombre"];
+                        $info['puser']['telefono'] = $pedido["telefono"];
+                        if($pedido['despacho'] == 1){
+                            $pdir_id = $this->pedido_direccion($pedido, $id_puser);
+                        }
+
+                    }else{
+                        // REPORTAR ERROR
+                    }
+                    $sqlipu->close();
+            
                 }
+                
+                if($res->{'num_rows'} == 1){
+                
+                    $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
+                    $sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?");
+                    $sqlupu->bind_param("ii", $cont, $puser["id_puser"]);
+                    if(!$sqlupu->execute()){
+                        // REPORTAR ERROR
+                    }
+                    $sqlupu->close();
+                        
+                    $sqlpd = $this->con->prepare("SELECT id_pdir FROM pedidos_direccion WHERE id_puser=? AND lat=? AND lng=?");
+                    $sqlpd->bind_param("idd", $puser["id_puser"], $pedido['lat'], $pedido['lng']);
+                    if($sqlpd->execute()){
+                        $res_pdir = $sqlpd->get_result();
+                        if($res_pdir->{'num_rows'} == 1){
+                            $pdir_id = $res_pdir->fetch_all(MYSQLI_ASSOC)[0]["id_pdir"];
+                        }
+                        if($res_pdir->{'num_rows'} == 0 && $pedido['despacho'] == 1){
+                            $pdir_id = $this->pedido_direccion($pedido, $puser["id_puser"]);
+                        }
+                    }
+                    $sqlpd->free_result();
+                    $sqlpd->close();
+                    
+                }
+
+            }else{
+                // REPORTAR ERROR
             }
+            $sql->free_result();
+            $sql->close();
+
+
+            $local_data = $this->get_local_info($pedido["id_loc"]);
+            $verify_despacho = $this->verify_despacho($pedido);
             
-        }	
-    
+            /*
+            $tz_object = new DateTimeZone('America/Santiago');
+            $datetime = new DateTime();
+            $datetime->setTimezone($tz_object);
+            $fecha_stgo = $datetime->format('Y-m-d H:i:s');
+            */
+
+            $time_stgo = time();
+            $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);
+            
+            $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+            $tipo = 1;
+            $sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $despacho, $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir']);
+            
+            if($sqlipa->execute()){
         
-        $sql->free_result();
-        $sql->close();
-    
-        if(!$dir && $despacho == 1){
-                            
-            $sqlpdi = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $sqlpdi->bind_param("sssssddi", $pedido["direccion"], $pedido["calle"], $pedido["num"], $pedido["depto"], $pedido["comuna"], $pedido["lat"], $pedido["lng"], $puser_id);
-            $sqlpdi->execute();
-            $pdir_id = $this->con->insert_id;
-            $sqlpdi->close();
-                                                
-        }
-    
-        $eliminado = 0;
-        $sqllg = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
-        $sqllg->bind_param("iii", $pedido["id_loc"], $eliminado, $eliminado);
-        $sqllg->execute();
-        $resultlg = $sqllg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-        $sqllg->free_result();
-        $sqllg->close();
-    
-    
-        $info['lat'] = $resultlg['lat'];
-        $info['lng'] = $resultlg['lng'];
-        $info['t_retiro'] = $resultlg['t_retiro'];
-        $info['t_despacho'] = $resultlg['t_despacho'];
-        $num_ped = $resultlg['num_ped'] + 1;
-        $id_gir = $resultlg['id_gir'];
-    
-        /*
-        if($despacho == 1){
-            $aux_verify = $this->get_info_despacho($lat, $lng);
-            if($aux_verify['op'] == 1 && $aux_verify['id_loc'] == $id_loc && $aux_verify['precio'] == $costo){
-                $verify_despacho = 1;
+                $id_ped = $this->con->insert_id;
+        
+                $sqlugi = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?");
+                $sqlugi->bind_param("iii", $local_data['num_ped'], $local_data['id_gir'], $this->eliminado);
+                if(!$sqlugi->execute()){
+                    // REPORTAR ERROR
+                }
+                $sqlugi->close();
+        
+                $info['op'] = 1;
+                $info['id_ped'] = $id_ped;
+                $info['num_ped'] = $local_data['num_ped'];
+                $info['pedido_code'] = $pedido_code;
+                $info['fecha'] = $time_stgo;
+        
+                $pedido_m['local_code'] = $local_data['code'];
+                $pedido_m['id_ped'] = $id_ped;
+                $pedido_m['num_ped'] = $local_data['num_ped'];
+                $pedido_m['pedido_code'] = $pedido_code;
+                
+                $pedido_m['correo'] = $local_data['correo'];
+                $pedido_m['accion'] = 'enviar_pedido_local';
+                $pedido_m['activar_envio'] = $local_data['activar_envio'];
+                $pedido_m['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
+                $pedido_m['dominio'] = $local_data['dominio'];
+                $pedido_m['nombre'] = $pedido["nombre"];
+                $pedido_m['telefono'] = $pedido["telefono"];
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
+                $info['email'] = json_decode(curl_exec($ch));
+                curl_close($ch);
+        
+            }else{
+        
+                $info['op'] = 2;
+                $info['mensaje'] = 'El pedido no pudo ser enviado';
+                $info['db_err'] = $sqlipa->error;
+        
             }
-        }
-        */
     
-        $verify_despacho = 1;
-        $tz_object = new DateTimeZone('America/Santiago');
-        $datetime = new DateTime();
-        $datetime->setTimezone($tz_object);
-        $fecha_stgo = $datetime->format('Y-m-d H:i:s');
-        
-        $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
-        $tipo = 1;
-        $sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $sqlipa->bind_param("issiiissiiiiiiisiiiii", $num_ped, $pedido_code, $fecha_stgo, $despacho, $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $id_gir);
-        
-        if($sqlipa->execute()){
-    
-            $id_ped = $this->con->insert_id;
-    
-            $sqlugi = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?");
-            $sqlugi->bind_param("iii", $num_ped, $id_gir, $eliminado);
-            $sqlugi->execute();
-            $sqlugi->close();
-    
-            $info['op'] = 1;
-            $info['id_ped'] = $id_ped;
-            $info['num_ped'] = $num_ped;
-            $info['pedido_code'] = $pedido_code;
-            $info['fecha'] = time();
-    
-            $pedido_m['local_code'] = $resultlg['code'];
-            $pedido_m['id_ped'] = $id_ped;
-            $pedido_m['num_ped'] = $num_ped;
-            $pedido_m['pedido_code'] = $pedido_code;
-            
-            $pedido_m['correo'] = $resultlg['correo'];
-            $pedido_m['accion'] = 'enviar_pedido_local';
-            $pedido_m['activar_envio'] = $resultlg['activar_envio'];
-            $pedido_m['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
-            $pedido_m['dominio'] = $resultlg['dominio'];
-            $pedido_m['nombre'] = $pedido["nombre"];
-            $pedido_m['telefono'] = $pedido["telefono"];
-    
-            $info['pedido'] = $pedido_m;
-    
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
-            $info['email'] = json_decode(curl_exec($ch));
-            curl_close($ch);
-    
-        }else{
-    
-            $info['op'] = 2;
-            $info['mensaje'] = 'El pedido no pudo ser enviado';
-            $info['db_err'] = $sqlipa->error;
+            $sqlipa->close();
     
         }
-    
-        $sqlipa->close();
         return $info;
     
     }
