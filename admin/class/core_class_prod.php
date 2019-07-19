@@ -2205,7 +2205,12 @@ class Core{
                 curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
-                $info['email'] = json_decode(curl_exec($ch));
+                $resp = json_decode(curl_exec($ch));
+                if($resp->{'op'} == 1){
+                    $info['email'] = 1;
+                }else{
+                    $info['email'] = 2;
+                }
                 curl_close($ch);
         
             }else{
