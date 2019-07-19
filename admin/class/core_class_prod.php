@@ -2149,7 +2149,7 @@ class Core{
             $sql->close();
 
 
-            $info['info'] = $this->get_local_info($pedido["id_loc"]);
+            $local_data = $this->get_local_info($pedido["id_loc"]);
             $verify_despacho = $this->verify_despacho($pedido);
             
             /*
@@ -2165,14 +2165,14 @@ class Core{
             $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
             $tipo = 1;
             $sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $sqlipa->bind_param("issiiissiiiiiiisiiiii", $info['info']['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $info['info']['id_gir']);
+            $sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir']);
             
             if($sqlipa->execute()){
         
                 $id_ped = $this->con->insert_id;
         
                 $sqlugi = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?");
-                $sqlugi->bind_param("iii", $info['info']['num_ped'], $info['info']['id_gir'], $this->eliminado);
+                $sqlugi->bind_param("iii", $local_data['num_ped'], $local_data['id_gir'], $this->eliminado);
                 if(!$sqlugi->execute()){
                     // REPORTAR ERROR
                 }
@@ -2180,20 +2180,24 @@ class Core{
         
                 $info['op'] = 1;
                 $info['id_ped'] = $id_ped;
-                $info['num_ped'] = $info['info']['num_ped'];
+                $info['num_ped'] = $local_data['num_ped'];
+                $info['lat'] = $local_data['lat'];
+                $info['lng'] = $local_data['lng'];
+                $info['t_retiro'] = $local_data['t_retiro'];
+                $info['t_despacho'] = $local_data['t_despacho'];
                 $info['pedido_code'] = $pedido_code;
                 $info['fecha'] = $time_stgo;
         
-                $pedido_m['local_code'] = $info['info']['code'];
+                $pedido_m['local_code'] = $local_data['code'];
                 $pedido_m['id_ped'] = $id_ped;
-                $pedido_m['num_ped'] = $info['info']['num_ped'];
+                $pedido_m['num_ped'] = $local_data['num_ped'];
                 $pedido_m['pedido_code'] = $pedido_code;
                 
-                $pedido_m['correo'] = $info['info']['correo'];
+                $pedido_m['correo'] = $local_data['correo'];
                 $pedido_m['accion'] = 'enviar_pedido_local';
-                $pedido_m['activar_envio'] = $info['info']['activar_envio'];
+                $pedido_m['activar_envio'] = $local_data['activar_envio'];
                 $pedido_m['hash'] = 'Lrk}..75sq[e)@/22jS?ZGJ<6hyjB~d4gp2>^qHm';
-                $pedido_m['dominio'] = $info['info']['dominio'];
+                $pedido_m['dominio'] = $local_data['dominio'];
                 $pedido_m['nombre'] = $pedido["nombre"];
                 $pedido_m['telefono'] = $pedido["telefono"];
 
