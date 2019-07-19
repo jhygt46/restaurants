@@ -2082,6 +2082,7 @@ class Core{
             $puser = $_POST['puser'];
             $carro = $_POST['carro'];
             $promos = (isset($_POST['promos']))? $_POST['promos'] : [] ;
+            $pdir_id = 0;
 
             // PEDIDOS USUARIOS Y DIRECCIONES //
             $sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?");
