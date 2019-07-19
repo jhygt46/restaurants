@@ -2116,23 +2116,24 @@ class Core{
                 
                 if($res->{'num_rows'} == 1){
                 
+                    $id_puser = $puser["id_puser"];
                     $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
                     $sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?");
-                    $sqlupu->bind_param("ii", $cont, $puser["id_puser"]);
+                    $sqlupu->bind_param("ii", $cont, $id_puser);
                     if(!$sqlupu->execute()){
                         // REPORTAR ERROR
                     }
                     $sqlupu->close();
                         
                     $sqlpd = $this->con->prepare("SELECT id_pdir FROM pedidos_direccion WHERE id_puser=? AND lat=? AND lng=?");
-                    $sqlpd->bind_param("idd", $puser["id_puser"], $pedido['lat'], $pedido['lng']);
+                    $sqlpd->bind_param("idd", $id_puser, $pedido['lat'], $pedido['lng']);
                     if($sqlpd->execute()){
                         $res_pdir = $sqlpd->get_result();
                         if($res_pdir->{'num_rows'} == 1){
                             $pdir_id = $res_pdir->fetch_all(MYSQLI_ASSOC)[0]["id_pdir"];
                         }
                         if($res_pdir->{'num_rows'} == 0 && $pedido['despacho'] == 1){
-                            $pdir_id = $this->pedido_direccion($pedido, $puser["id_puser"]);
+                            $pdir_id = $this->pedido_direccion($pedido, $id_puser);
                         }
                     }
                     $sqlpd->free_result();
