@@ -2208,7 +2208,8 @@ class Core{
                 $resp = json_decode(curl_exec($ch));
                 if($resp->{'op'} == 1){
                     $info['email'] = 1;
-                }else{
+                }
+                if($resp->{'op'} == 2){
                     $info['email'] = 2;
                 }
                 curl_close($ch);
@@ -2223,6 +2224,8 @@ class Core{
     
             $sqlipa->close();
     
+        }else{
+            $info['op'] = 2;
         }
         return $info;
     
