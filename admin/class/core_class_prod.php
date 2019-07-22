@@ -2082,6 +2082,7 @@ class Core{
             $puser = $_POST['puser'];
             $carro = $_POST['carro'];
             $promos = (isset($_POST['promos']))? $_POST['promos'] : [] ;
+            $info['set_puser'] = 0;
             $pdir_id = 0;
 
             // PEDIDOS USUARIOS Y DIRECCIONES //
@@ -2100,10 +2101,10 @@ class Core{
                         
                         $id_puser = $this->con->insert_id;
                         $info['set_puser'] = 1;
-                        $info['puser']['id_puser'] = $id_puser;
-                        $info['puser']['code'] = $puser_code;
-                        $info['puser']['nombre'] = $pedido["nombre"];
-                        $info['puser']['telefono'] = $pedido["telefono"];
+                        $info['puser_id'] = $id_puser;
+                        $info['puser_code'] = $puser_code;
+                        $info['puser_nombre'] = $pedido["nombre"];
+                        $info['puser_telefono'] = $pedido["telefono"];
                         if($pedido['despacho'] == 1){
                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
                         }
