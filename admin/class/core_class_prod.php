@@ -2038,7 +2038,7 @@ class Core{
     }
     private function get_local_info($id_loc){
 
-        $sqllg = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped, t1.telefono FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+        $sqllg = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped, t1.telefono FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
         $sqllg->bind_param("iii", $id_loc, $this->eliminado, $this->eliminado);
         if($sqllg->execute()){
 
@@ -2051,9 +2051,10 @@ class Core{
             $info['id_gir'] = $resultlg['id_gir'];
             $info['code'] = $resultlg['code'];
             $info['correo'] = $resultlg['correo'];
-            $info['dominio'] = $resultlg['dominio'];
             $info['activar_envio'] = $resultlg['activar_envio'];
             $info['telefono'] = $resultlg['telefono'];
+            $aux_url = ($resultlg['ssl'] == 1) ? 'https://' : 'http://' ;
+            $info['url'] = $aux_url.$resultlg['dominio'];
 
         }else{
             // REPORTAR ERROR
