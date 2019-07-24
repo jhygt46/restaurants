@@ -2216,7 +2216,7 @@ class Core{
                     $info['email'] = 2;
                 }
                 curl_close($ch);
-                $info['telelefono'] = $local_data['telefono'];
+                $info['telefono'] = $local_data['telefono'];
                 $info['correo'] = $local_data['correo'];
                 $info['url'] = $local_data['url'];
 
@@ -2226,7 +2226,7 @@ class Core{
                 $info['mensaje'] = 'El pedido no pudo ser enviado';
                 $info['db_err'] = $sqlipa->error;
 
-                $info['telelefono'] = $local_data['telefono'];
+                $info['telefono'] = $local_data['telefono'];
                 $info['correo'] = $local_data['correo'];
                 $info['url'] = $local_data['url'];
         
