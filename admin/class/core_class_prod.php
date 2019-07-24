@@ -2213,11 +2213,11 @@ class Core{
                 }
                 if($resp->{'op'} == 2){
                     $info['email'] = 2;
-                    $info['tel'] = $local_data['telefono'];
-                    $info['correo'] = $local_data['correo'];
                 }
                 curl_close($ch);
-        
+                $info['tel'] = $local_data['telefono'];
+                $info['correo'] = $local_data['correo'];
+
             }else{
         
                 $info['op'] = 2;
