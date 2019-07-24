@@ -2055,6 +2055,7 @@ class Core{
             $info['telefono'] = $resultlg['telefono'];
             $aux_url = ($resultlg['ssl'] == 1) ? 'https://' : 'http://' ;
             $info['url'] = $aux_url.$resultlg['dominio'];
+            
 
         }else{
             // REPORTAR ERROR
