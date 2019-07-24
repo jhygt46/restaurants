@@ -2055,7 +2055,6 @@ class Core{
             $info['telefono'] = $resultlg['telefono'];
             $aux_url = ($resultlg['ssl'] == 1) ? 'https://' : 'http://' ;
             $info['url'] = $aux_url.$resultlg['dominio'];
-            
 
         }else{
             // REPORTAR ERROR
@@ -2217,8 +2216,9 @@ class Core{
                     $info['email'] = 2;
                 }
                 curl_close($ch);
-                $info['tel'] = $local_data['telefono'];
+                $info['telelefono'] = $local_data['telefono'];
                 $info['correo'] = $local_data['correo'];
+                $info['url'] = $local_data['url'];
 
             }else{
         
@@ -2226,8 +2226,9 @@ class Core{
                 $info['mensaje'] = 'El pedido no pudo ser enviado';
                 $info['db_err'] = $sqlipa->error;
 
-                $info['tel'] = $local_data['telefono'];
+                $info['telelefono'] = $local_data['telefono'];
                 $info['correo'] = $local_data['correo'];
+                $info['url'] = $local_data['url'];
         
             }
     
