@@ -855,7 +855,7 @@ class Core{
     public function get_locales_js($id_gir){
 
         $eliminado = 0;
-        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng FROM locales WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng, telefono FROM locales WHERE id_gir=? AND eliminado=?")){
             
             $sql->bind_param("ii", $id_gir, $eliminado);
             $sql->execute();
@@ -868,6 +868,8 @@ class Core{
                 $locales['direccion'] = $row['direccion'];
                 $locales['lat'] = $row['lat'];
                 $locales['lng'] = $row['lng'];
+                $locales['telefono'] = $row['telefono'];
+                $locales['whatsapp'] = $row['whatsapp'];
 
                 $sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND eliminado=?");
                 $sqlloc->bind_param("iii", $row["id_loc"], $id_gir, $eliminado);
@@ -1996,7 +1998,7 @@ class Core{
         if($error !== null){
 
             $host = $_POST['host'];
-            $sqlg = $this->con->prepare("SELECT * FROM giros WHERE dominio=?");
+            $sqlg = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?");
             $sqlg->bind_param("s", $host);
             if($sqlg->execute()){
 
@@ -2011,7 +2013,7 @@ class Core{
 
                 $id_puser = ($res->num_rows == 1) ? $aux_id_puser : 0 ;
 
-                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, id_puser, id_gir) VALUES (?, ?, ?)");
+                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, fecha, id_puser, id_gir) VALUES (?, now(), ?, ?)");
                 $sqli->bind_param("sii", $error, $id_puser, $id_gir);
                 $sqli->execute();
                 $sqli->close();
@@ -2209,16 +2211,18 @@ class Core{
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
                 $resp = json_decode(curl_exec($ch));
+
                 if($resp->{'op'} == 1){
                     $info['email'] = 1;
                 }
                 if($resp->{'op'} == 2){
                     $info['email'] = 2;
+                    $info['telefono'] = $local_data['telefono'];
+                    $info['correo'] = $local_data['correo'];
+                    $info['url'] = $local_data['url'];
                 }
                 curl_close($ch);
-                $info['telefono'] = $local_data['telefono'];
-                $info['correo'] = $local_data['correo'];
-                $info['url'] = $local_data['url'];
+                
 
             }else{
         
