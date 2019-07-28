@@ -1995,6 +1995,9 @@ class Core{
     public function enviar_error(){
 
         $error = $_POST['error'];
+        $codes = $_POST['codes'];
+        $status = $_POST['status'];
+
         if($error !== null){
 
             $host = $_POST['host'];
@@ -2013,8 +2016,8 @@ class Core{
 
                 $id_puser = ($res->num_rows == 1) ? $aux_id_puser : 0 ;
 
-                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, fecha, id_puser, id_gir) VALUES (?, now(), ?, ?)");
-                $sqli->bind_param("sii", $error, $id_puser, $id_gir);
+                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
+                $sqli->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
                 $sqli->execute();
                 $sqli->close();
 
