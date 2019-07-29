@@ -889,14 +889,13 @@ class Core{
     }
     public function get_web_js_data_remote(){
 
-        if($this->verificar()){
+        $host = $_POST["host"];
 
-            $host = $_POST["host"];
-            $eliminado = 0;
+        if($this->verificar()){
 
             if($sqlgiro = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=? AND eliminado=?")){
                 
-                $sqlgiro->bind_param("si", $host, $eliminado);
+                $sqlgiro->bind_param("si", $host, $this->eliminado);
                 $sqlgiro->execute();		
                 $id_gir = $sqlgiro->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];
                 $sqlgiro->free_result();
@@ -928,15 +927,18 @@ class Core{
                             }
                             
                         }else{
-                            $info['error3'] = $sql->error;
+                            $info['op'] = 2;
+                            $this->enviar_error_int($sql->error, '#Y05', 0, 0, $id_gir);
                         }
 
                     }else{
-                        $info['error2'] = $sql->error;
+                        $info['op'] = 2;
+                        $this->enviar_error_int($sql->error, '#Y04', 0, 0, $id_gir);
                     }
 
                 }else{
-                    $info['error1'] = $this->con->error;
+                    $info['op'] = 2;
+                    $this->enviar_error_int($this->con->errno.' '.$this->con->error, '#Y03', 0, 0, $id_gir);
                 }
                 
                 $sql->free_result();
@@ -944,12 +946,12 @@ class Core{
 
             }else{
                 $info['op'] = 2;
-                $info['mensaje'] = $this->con->errno.' '.$this->con->error;
+                $this->enviar_error_int($host.' -> '.$this->con->errno.' '.$this->con->error, '#Y02', 0, 0, 0);
             }
             
         }else{
             $info['op'] = 2;
-            $info['mensaje'] = "ERROR: #s398";
+            $this->enviar_error_int($host.' -> Enviado Pedido no verificado', '#Y01', 0, 0, 0);
         }
 
         return $info;
@@ -1136,73 +1138,80 @@ class Core{
     }
     public function ver_detalle(){
         
-        $code = $_POST["code"];
-        $host = $_POST["host"];
+        if($this->verificar()){
 
-        $sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho, t1.fecha FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
-        $sql->bind_param("ssi", $code, $host, $this->eliminado);
-        $sql->execute();
-        $res = $sql->get_result();
+            $pedido_code = $_POST["pedido_code"];
+            $host = $_POST["host"];
 
-        if($res->{"num_rows"} == 1){
+            $sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho, t1.fecha FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
+            $sql->bind_param("ssi", $pedido_code, $host, $this->eliminado);
+            $sql->execute();
+            $res = $sql->get_result();
 
-            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-            $sql->free_result();
-            $sql->close();
+            if($res->{"num_rows"} == 1){
 
-            $sqlpus = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=?");
-            $sqlpus->bind_param("i", $result["id_puser"]);
-            $sqlpus->execute();
-            $resulpus = $sqlpus->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-            $sqlpus->free_result();
-            $sqlpus->close();
+                $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                $sql->free_result();
+                $sql->close();
 
-            $info['puser'] = $resulpus;
-            $info['nombre'] = $resulpus['nombre'];
-            $info['telefono'] = $resulpus['telefono'];
+                $sqlpus = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=?");
+                $sqlpus->bind_param("i", $result["id_puser"]);
+                $sqlpus->execute();
+                $resulpus = $sqlpus->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                $sqlpus->free_result();
+                $sqlpus->close();
 
-            if($result["despacho"] == 1 && $result["id_pdir"] != 0){
+                $info['puser'] = $resulpus;
+                $info['nombre'] = $resulpus['nombre'];
+                $info['telefono'] = $resulpus['telefono'];
 
-                $sqlpdi = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?");
-                $sqlpdi->bind_param("i", $result["id_pdir"]);
-                $sqlpdi->execute();
-                $resulpdi = $sqlpdi->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                $sqlpdi->free_result();
-                $sqlpdi->close();
+                if($result["despacho"] == 1 && $result["id_pdir"] != 0){
 
-                $info['calle'] = $resulpdi['calle'];
-                $info['num'] = $resulpdi['num'];
-                $info['depto'] = $resulpdi['depto'];
-                $info['direccion'] = $resulpdi['direccion'];
-                $info['comuna'] = $resulpdi['comuna'];
-                $info['lat'] = $resulpdi['lat'];
-                $info['lng'] = $resulpdi['lng'];
+                    $sqlpdi = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?");
+                    $sqlpdi->bind_param("i", $result["id_pdir"]);
+                    $sqlpdi->execute();
+                    $resulpdi = $sqlpdi->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $sqlpdi->free_result();
+                    $sqlpdi->close();
+
+                    $info['calle'] = $resulpdi['calle'];
+                    $info['num'] = $resulpdi['num'];
+                    $info['depto'] = $resulpdi['depto'];
+                    $info['direccion'] = $resulpdi['direccion'];
+                    $info['comuna'] = $resulpdi['comuna'];
+                    $info['lat'] = $resulpdi['lat'];
+                    $info['lng'] = $resulpdi['lng'];
+
+                }
+
+                $info['id_ped'] = $result['id_ped'];
+                $info['num_ped'] = $result['num_ped'];
+                $info['fecha'] = $result['fecha'];
+                $info['carro'] = json_decode($result['carro']);
+                $info['promos'] = json_decode($result['promos']);
+                
+                $info['pre_wasabi'] = $result['pre_wasabi'];
+                $info['pre_gengibre'] = $result['pre_gengibre'];
+                $info['pre_embarazadas'] = $result['pre_embarazadas'];
+                $info['pre_palitos'] = $result['pre_palitos'];
+                $info['pre_teriyaki'] = $result['pre_teriyaki'];
+                $info['pre_soya'] = $result['pre_soya'];
+                $info['despacho'] = $result['despacho'];
+                $info['comentarios'] = $result['comentarios'];
+                
+                $info['costo'] = $result['costo'];
+                $info['total'] = $result['total'];
+                
+                $info['verify_despacho'] = $result['verify_despacho'];
+                $info['verify_direccion'] = 0;
+                
+                $info['op'] = 1;
 
             }
 
-            $info['id_ped'] = $result['id_ped'];
-            $info['num_ped'] = $result['num_ped'];
-            $info['fecha'] = $result['fecha'];
-            $info['carro'] = json_decode($result['carro']);
-            $info['promos'] = json_decode($result['promos']);
-            
-            $info['pre_wasabi'] = $result['pre_wasabi'];
-            $info['pre_gengibre'] = $result['pre_gengibre'];
-            $info['pre_embarazadas'] = $result['pre_embarazadas'];
-            $info['pre_palitos'] = $result['pre_palitos'];
-            $info['pre_teriyaki'] = $result['pre_teriyaki'];
-            $info['pre_soya'] = $result['pre_soya'];
-            $info['despacho'] = $result['despacho'];
-            $info['comentarios'] = $result['comentarios'];
-            
-            $info['costo'] = $result['costo'];
-            $info['total'] = $result['total'];
-            
-            $info['verify_despacho'] = $result['verify_despacho'];
-            $info['verify_direccion'] = 0;
-            
-            $info['op'] = 1;
-
+        }else{
+            $info['op'] = 2;
+            $this->enviar_error_int('Ver Detalle no verificado', '#Z02', 0, 0, 0);
         }
         
         return $info;
@@ -1992,6 +2001,14 @@ class Core{
         } 
 
     }
+    public function enviar_error_int($error, $codes, $status, $id_puser, $id_gir){
+
+        $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
+        $sqli->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
+        $sqli->execute();
+        $sqli->close();
+
+    }
     public function enviar_error(){
 
         $error = $_POST['error'];
@@ -2085,8 +2102,8 @@ class Core{
 
         if($this->verificar()){
 
-            $pedido = $_POST['pedido'];
             $puser = $_POST['puser'];
+            $pedido = $_POST['pedido'];
             $carro = $_POST['carro'];
             $promos = (isset($_POST['promos']))? $_POST['promos'] : [] ;
             $info['set_puser'] = 0;
@@ -2117,7 +2134,7 @@ class Core{
                         }
 
                     }else{
-                        // REPORTAR ERROR
+                        $this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0);
                     }
                     $sqlipu->close();
             
@@ -2130,7 +2147,7 @@ class Core{
                     $sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?");
                     $sqlupu->bind_param("ii", $cont, $id_puser);
                     if(!$sqlupu->execute()){
-                        // REPORTAR ERROR
+                        $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0);
                     }
                     $sqlupu->close();
                         
@@ -2151,7 +2168,7 @@ class Core{
                 }
 
             }else{
-                // REPORTAR ERROR
+                $this->enviar_error_int($sql->error, '#P01', 0, $puser["id_puser"], 0);
             }
             $sql->free_result();
             $sql->close();
@@ -2216,22 +2233,25 @@ class Core{
                 $resp = json_decode(curl_exec($ch));
 
                 if($resp->{'op'} == 1){
+
                     $info['email'] = 1;
+
                 }
                 if($resp->{'op'} == 2){
+
                     $info['email'] = 2;
+                    $this->enviar_error_int('Email no enviado', '#A04', 0, $id_puser, $local_data['id_gir']);
                     $info['telefono'] = $local_data['telefono'];
                     $info['correo'] = $local_data['correo'];
                     $info['url'] = $local_data['url'];
+
                 }
                 curl_close($ch);
-                
 
             }else{
         
                 $info['op'] = 2;
-                $info['mensaje'] = 'El pedido no pudo ser enviado';
-                $info['db_err'] = $sqlipa->error;
+                $this->enviar_error_int($sqlipa->error, '#A03', 0, $id_puser, $local_data['id_gir']);
 
                 $info['telefono'] = $local_data['telefono'];
                 $info['correo'] = $local_data['correo'];
@@ -2243,6 +2263,7 @@ class Core{
     
         }else{
             $info['op'] = 2;
+            $this->enviar_error_int('Enviado Pedido no verificado', '#Z01', 0, 0, 0);
         }
         return $info;
     
