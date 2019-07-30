@@ -9,7 +9,7 @@ $informe = $core->get_informe();
 
 ?>
 <script>
-    Highcharts.chart('container', json_encode($informe["chart1"]));
+    Highcharts.chart('container', <?php echo json_encode($informe["chart1"]); ?>);
 </script>
 <div class="pagina">
     <div class="title">
