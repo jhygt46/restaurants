@@ -2273,7 +2273,7 @@ class Core{
         return $info;
     
     }
-    public function get_stats($tipo, $arr_loc, $from, $to){
+    public function get_stats($tipo, $locales, $from, $to){
 
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
