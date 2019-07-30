@@ -2268,8 +2268,7 @@ class Core{
         
         if($dif_tiempo <= 50){
             // MOSTRAR DIAS
-            $info['subtitle']['text'] = 'Tiempo Real en dias';
-            $infos['tipo'] = 1;
+            //$info['subtitle']['text'] = 'Tiempo Real en dias';
             $lapse = "1 day";
             
             while($to > $aux_from){
@@ -2281,8 +2280,7 @@ class Core{
         }
         if($dif_tiempo > 50 && $dif_tiempo < 548){
             // MOSTRAR MESES
-            $info['subtitle']['text'] = 'Tiempo Real en meses';
-            $infos['tipo'] = 2;
+            //$info['subtitle']['text'] = 'Tiempo Real en meses';
             $lapse = "1 month";
             
             while($to > $aux_from){
@@ -2295,8 +2293,7 @@ class Core{
         }
         if($dif_tiempo >= 548){
             // MOSTRAR AÑOS
-            $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
-            $infos['tipo'] = 3;
+            //$info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
             $lapse = "1 year";
             
             while($to > $aux_from){
