@@ -2313,7 +2313,7 @@ class Core{
         $info['plotOptions']['line']['enableMouseTracking'] = false;
         
         $sqlacc = $this->con->prepare("SELECT * FROM seguimiento WHERE id_gir=?");
-        $sqlacc->bind_param("ii", $this->id_gir);
+        $sqlacc->bind_param("i", $this->id_gir);
         $sqlacc->execute();
         $acciones = $sqlacc->get_result()->fetch_all(MYSQLI_ASSOC);
         $sqlacc->free_result();
