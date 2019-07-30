@@ -2256,6 +2256,7 @@ class Core{
         $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlgir->execute();
         $result = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        $data["nombre"] = $result["nombre"];
         $sqlgir->free_result();
         $sqlgir->close();
 
@@ -2308,20 +2309,56 @@ class Core{
         
         $info['chart']['type'] = 'line';
         $info['yAxis']['title']['text'] = null;
-        
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
+        
+        $sqlacc = $this->con->prepare("SELECT * FROM seguimiento WHERE id_gir=?");
+        $sqlacc->bind_param("ii", $this->id_gir);
+        $sqlacc->execute();
+        $acciones = $sqlacc->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sqlacc->free_result();
+        $sqlacc->close();
 
-        $data["nombre"] = $result["nombre"];
-
+        // CHART 1
         $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
+        
+        $aux['name'] = '';
+        foreach($infos['fecha'] as $fecha){
+            $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 0);
+        }
+        $data['chart1']['series'][] = $aux;
+        unset($aux);
 
+        // CHART 2
         $info['title']['text'] = 'Cantidad Ventas'; 
         $data["chart2"] = $info;
 
+        $aux['name'] = '';
+        foreach($infos['fecha'] as $fecha){
+            $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 1);
+        }
+        $data['chart2']['series'][] = $aux;
+        unset($aux);
+
+
         return $data;
 
+    }
+    public function ver_acciones($acciones, $fecha_ini, $intervalo, $tipo){
+        
+        $total = 0;
+        for($i=0; $i<count($acciones); $i++){
+            $fecha_pedido = strtotime($acciones[$i]['fecha']);
+            $fecha_fin = strtotime($intervalo, $fecha_ini);            
+            if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
+                if($tipo == $acciones[$i]['id_des']){
+                    $total = $total + 1;
+                }
+            }
+        }
+        return $total;
+        
     }
     public function get_stats($tipo, $locales, $from, $to){
 
