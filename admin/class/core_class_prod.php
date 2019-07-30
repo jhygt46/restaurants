@@ -214,9 +214,6 @@ class Core{
         $sqlgir->free_result();
         $sqlgir->close();
 
-
-        // TIPO 1 POR WEB
-        // TIPO 2 POR POS
         $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND eliminado=?");
         $sqlped->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlped->execute();
@@ -224,7 +221,7 @@ class Core{
         $sqlped->free_result();
         $sqlped->close();
 
-        $info["visitas"] = $result["visitas"];
+        $info["pedidos"] = $pedidos;
 
         return $info;
 
