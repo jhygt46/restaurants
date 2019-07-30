@@ -946,12 +946,12 @@ class Core{
 
             }else{
                 $info['op'] = 2;
-                $this->enviar_error_int($host.' -> '.$this->con->errno.' '.$this->con->error, '#Y02', 0, 0, 0);
+                $this->enviar_error_int($this->host.' -> '.$this->con->errno.' '.$this->con->error, '#Y02', 0, 0, 0);
             }
             
         }else{
             $info['op'] = 2;
-            $this->enviar_error_int($host.' -> Enviado Pedido no verificado', '#Y01', 0, 0, 0);
+            $this->enviar_error_int($this->host.' -> Enviado Pedido no verificado', '#Y01', 0, 0, 0);
         }
 
         return $info;
@@ -2014,6 +2014,7 @@ class Core{
         $error = $_POST['error'];
         $codes = $_POST['codes'];
         $status = $_POST['status'];
+        $info['op'] = 2;
 
         if($error !== null){
 
@@ -2035,12 +2036,17 @@ class Core{
 
                 $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
                 $sqli->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
-                $sqli->execute();
+                if($sqli->execute()){
+                    $info['op'] = 1;
+                }
                 $sqli->close();
 
             }
+            $sqlg->close();
             
         }
+
+        return $info;
 
     }
     private function pedido_direccion($pedido, $id_puser){
