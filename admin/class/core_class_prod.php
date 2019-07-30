@@ -2317,7 +2317,7 @@ class Core{
         $sqlacc->close();
 
         // CHART 1
-        //$info['title']['text'] = 'Total Ventas';  
+        $info['title']['text'] = null;  
         $data["chart1"] = $info;
         
         $aux['name'] = 'Ingresos';
@@ -2328,7 +2328,7 @@ class Core{
         unset($aux);
 
         // CHART 2
-        //$info['title']['text'] = 'Cantidad Ventas'; 
+        $info['title']['text'] = null; 
         $data["chart2"] = $info;
 
         $aux['name'] = 'Pedidos';
