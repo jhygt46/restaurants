@@ -4,18 +4,18 @@ require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 $core->is_giro();
 $informe = $core->get_informe();
-/*
+
 echo "<pre>";
 print_r($informe);
 echo "</pre>";
-*/
+
 ?>
 <script>
     //Highcharts.chart('container', <?php echo json_encode($informe["chart1"]); ?>);
 </script>
 <div class="pagina">
     <div class="title">
-        <h1>Actividad de <?php echo $informe["dominio"]; ?></h1>
+        <h1>Informe de <?php echo $informe["nombre"]; ?></h1>
         <ul class="clearfix">
             <li class="back" onclick="navlink('pages/msd/giros.php')"></li>
         </ul>

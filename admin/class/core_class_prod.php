@@ -205,29 +205,6 @@ class Core{
         return $result;
 
     }
-    public function get_informe(){
-
-        $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
-        $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
-        $sqlgir->execute();
-        $result = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-        $sqlgir->free_result();
-        $sqlgir->close();
-
-        $sqlped = $this->con->prepare("SELECT id_ped FROM pedidos_aux WHERE id_gir=? AND eliminado=?");
-        $sqlped->bind_param("ii", $this->id_gir, $this->eliminado);
-        $sqlped->execute();
-        $pedidos = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC);
-        $sqlped->free_result();
-        $sqlped->close();
-
-        $info["nombre"] = $result["nombre"];
-        $info["dominio"] = $result["dominio"];
-        $info["pedidos"] = $pedidos;
-
-        return $info;
-
-    }
     public function get_correos_no_ses(){
 
         $sql = $this->con->prepare("SELECT id_loc, correo FROM locales WHERE correo_ses='0' AND eliminado=?");
@@ -2272,6 +2249,75 @@ class Core{
         }
         return $info;
     
+    }
+    public function get_informe(){
+
+        $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
+        $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sqlgir->execute();
+        $result = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        $sqlgir->free_result();
+        $sqlgir->close();
+
+        $from = strtotime($from);
+        $to = strtotime($to) + 86400;        
+        $dif_tiempo = round(($to - $from)/86400);
+        $aux_from = $from;
+        $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        
+        if($dif_tiempo <= 50){
+            // MOSTRAR DIAS
+            $info['subtitle']['text'] = 'Tiempo Real en dias';
+            $infos['tipo'] = 1;
+            $lapse = "1 day";
+            
+            while($to > $aux_from){
+                $info['xAxis']['categories'][] = date("d", $aux_from);
+                $infos['fecha'][] = $aux_from;
+                $aux_from = $aux_from + 86400;
+            }
+            
+        }
+        if($dif_tiempo > 50 && $dif_tiempo < 548){
+            // MOSTRAR MESES
+            $info['subtitle']['text'] = 'Tiempo Real en meses';
+            $infos['tipo'] = 2;
+            $lapse = "1 month";
+            
+            while($to > $aux_from){
+                $aux_mes = intval(date("m", $aux_from)) - 1;
+                $info['xAxis']['categories'][] = $mes[$aux_mes];
+                $infos['fecha'][] = $aux_from;
+                $aux_from = strtotime('+1 month', $aux_from);
+            }
+            
+        }
+        if($dif_tiempo >= 548){
+            // MOSTRAR AÑOS
+            $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
+            $infos['tipo'] = 3;
+            $lapse = "1 year";
+            
+            while($to > $aux_from){
+                $info['xAxis']['categories'][] = date("Y", $aux_from);
+                $infos['fecha'][] = $aux_from;
+                $aux_from = strtotime('+1 Year', $aux_from);
+            }
+            
+        }
+        
+        $info['chart']['type'] = 'line';
+        $info['yAxis']['title']['text'] = null;
+        
+        $info['plotOptions']['line']['dataLabels']['enabled'] = true;
+        $info['plotOptions']['line']['enableMouseTracking'] = false;
+
+        $info["data"]["nombre"] = $result["nombre"];
+        $info["chart1"] = $info;
+        $info["chart2"] = $info;
+
+        return $info2;
+
     }
     public function get_stats($tipo, $locales, $from, $to){
 
