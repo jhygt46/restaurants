@@ -27,10 +27,10 @@ $informe = $core->get_informe('2019-07-01', '2019-07-31');
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container_01" style="background: #ffc; height: 300px; display: block; padding-top: 40px">
+            <div id="container_01" style="background: #ffc; height: 100px; display: block">
                 
             </div>
-            <div id="container_02" style="background: #fcf; height: 300px; display: block; padding-top: 40px">
+            <div id="container_02" style="background: #fcf; height: 100px; display: block">
                 
             </div>
         </div>

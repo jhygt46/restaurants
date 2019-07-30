@@ -2307,7 +2307,7 @@ class Core{
         }
         
         $info['chart']['type'] = 'line';
-        $info['yAxis']['title']['text'] = 'BUENA NELSON';
+        $info['yAxis']['title']['text'] = null;
         
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
