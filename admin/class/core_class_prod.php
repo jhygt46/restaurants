@@ -214,7 +214,7 @@ class Core{
         $sqlgir->free_result();
         $sqlgir->close();
 
-        $sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND eliminado=?");
+        $sqlped = $this->con->prepare("SELECT id_ped FROM pedidos_aux WHERE id_gir=? AND eliminado=?");
         $sqlped->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlped->execute();
         $pedidos = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC);
