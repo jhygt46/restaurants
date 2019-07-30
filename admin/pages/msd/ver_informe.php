@@ -5,13 +5,10 @@ $core = new Core();
 $core->is_giro();
 $informe = $core->get_informe('2019-07-01', '2019-07-31');
 
-echo "<pre>";
-print_r($informe);
-echo "</pre>";
-
 ?>
 <script>
-    //Highcharts.chart('container', <?php echo json_encode($informe["chart1"]); ?>);
+    Highcharts.chart('container_01', <?php echo json_encode($informe["chart1"]); ?>);
+    Highcharts.chart('container_02', <?php echo json_encode($informe["chart2"]); ?>);
 </script>
 <div class="pagina">
     <div class="title">
@@ -30,7 +27,10 @@ echo "</pre>";
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container" style="height: 300px; display: block; padding-top: 40px">
+            <div id="container_01" style="background: #ffc; height: 300px; display: block; padding-top: 40px">
+                
+            </div>
+            <div id="container_02" style="background: #fcf; height: 300px; display: block; padding-top: 40px">
                 
             </div>
         </div>
