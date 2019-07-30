@@ -3,8 +3,6 @@
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 $core->is_giro();
-
-$titulo = "Informe ".$_GET["nombre"];
 $informe = $core->get_informe();
 
 ?>
