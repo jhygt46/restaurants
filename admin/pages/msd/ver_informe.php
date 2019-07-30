@@ -5,9 +5,13 @@ $core = new Core();
 $core->is_giro();
 $informe = $core->get_informe();
 
+echo "<pre>";
+print_r($informe);
+echo "</pre>";
+
 ?>
 <script>
-    Highcharts.chart('container', <?php echo json_encode($informe["chart1"]); ?>);
+    //Highcharts.chart('container', <?php echo json_encode($informe["chart1"]); ?>);
 </script>
 <div class="pagina">
     <div class="title">
