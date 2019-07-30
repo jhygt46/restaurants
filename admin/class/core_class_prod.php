@@ -2313,7 +2313,11 @@ class Core{
         $info['plotOptions']['line']['enableMouseTracking'] = false;
 
         $data["nombre"] = $result["nombre"];
+
+        $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
+
+        $info['title']['text'] = 'Cantidad Ventas'; 
         $data["chart2"] = $info;
 
         return $data;
