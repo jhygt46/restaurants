@@ -2317,10 +2317,10 @@ class Core{
         $sqlacc->close();
 
         // CHART 1
-        $info['title']['text'] = null;  
+        $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
         
-        $aux['name'] = 'Ingresos';
+        $aux['name'] = null;
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 0);
         }
@@ -2328,10 +2328,10 @@ class Core{
         unset($aux);
 
         // CHART 2
-        $info['title']['text'] = null; 
+        $info['title']['text'] = 'Cantidad Ventas'; 
         $data["chart2"] = $info;
 
-        $aux['name'] = 'Pedidos';
+        $aux['name'] = null;
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 1);
         }
