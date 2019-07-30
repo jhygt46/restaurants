@@ -29,6 +29,26 @@ class Core{
         $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
         
     }
+    public function get_stats($tipo, $arr_loc, $from, $to){
+
+        $info['locales'] = $arr_loc;
+
+        if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
+            if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result();
+                    while($row = $result->fetch_assoc()){
+                        $pedidos[] = $row;
+                    }
+                }
+            }
+        }        
+
+        $sql->free_result();
+        $sql->close();
+        return $info;
+
+    }
     public function verificar(){
 
         $host = $_POST["host"];

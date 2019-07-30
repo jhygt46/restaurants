@@ -36,7 +36,7 @@ class Stats{
             $sql = "SELECT * FROM pedidos_aux WHERE (".implode(" OR ", $aux2).")";
         }
         if(count($locales) == 1){
-            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$locales[0]->{'id_loc'}."'";
+            $sql = "SELECT * FROM pedidos_aux WHERE id_loc='".$locales[0]->{"id_loc"}."'";
         }
         if(count($locales) == 0){
             $sql = "SELECT * FROM pedidos_aux WHERE id_gir='".$this->id_gir."'";
@@ -50,7 +50,7 @@ class Stats{
             }
         }
 
-        $pedidos = $aux_pedidos['resultado'];
+        //$pedidos = $aux_pedidos['resultado'];
         
         $from = strtotime($from);
         $to = strtotime($to) + 86400;        
