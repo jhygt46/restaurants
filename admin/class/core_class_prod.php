@@ -946,12 +946,12 @@ class Core{
 
             }else{
                 $info['op'] = 2;
-                $this->enviar_error_int($this->host.' -> '.$this->con->errno.' '.$this->con->error, '#Y02', 0, 0, 0);
+                $this->enviar_error_int($_SERVER["HTTP_HOST"].' -> '.$this->con->errno.' '.$this->con->error, '#Y02', 0, 0, 0);
             }
             
         }else{
             $info['op'] = 2;
-            $this->enviar_error_int($this->host.' -> Enviado Pedido no verificado', '#Y01', 0, 0, 0);
+            $this->enviar_error_int($_SERVER["HTTP_HOST"].' -> Enviado Pedido no verificado', '#Y01', 0, 0, 0);
         }
 
         return $info;
