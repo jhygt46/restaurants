@@ -15,7 +15,7 @@ echo "</pre>";
 </script>
 <div class="pagina">
     <div class="title">
-        <h1><?php echo $titulo; ?></h1>
+        <h1>Actividad de <?php echo $informe["dominio"]; ?></h1>
         <ul class="clearfix">
             <li class="back" onclick="navlink('pages/msd/giros.php')"></li>
         </ul>

@@ -221,6 +221,8 @@ class Core{
         $sqlped->free_result();
         $sqlped->close();
 
+        $info["nombre"] = $result["nombre"];
+        $info["dominio"] = $result["dominio"];
         $info["pedidos"] = $pedidos;
 
         return $info;
