@@ -2250,7 +2250,7 @@ class Core{
         return $info;
     
     }
-    public function get_informe(){
+    public function get_informe($from, $to){
 
         $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
         $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
@@ -2312,11 +2312,11 @@ class Core{
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
 
-        $info["data"]["nombre"] = $result["nombre"];
-        $info["chart1"] = $info;
-        $info["chart2"] = $info;
+        $data["nombre"] = $result["nombre"];
+        $data["chart1"] = $info;
+        $data["chart2"] = $info;
 
-        return $info2;
+        return $data;
 
     }
     public function get_stats($tipo, $locales, $from, $to){

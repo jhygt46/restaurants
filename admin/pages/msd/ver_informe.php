@@ -3,7 +3,7 @@
 require_once("/var/www/html/restaurants/admin/class/core_class_prod.php");
 $core = new Core();
 $core->is_giro();
-$informe = $core->get_informe();
+$informe = $core->get_informe('2019-07-01', '2019-07-31');
 
 echo "<pre>";
 print_r($informe);
