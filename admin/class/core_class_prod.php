@@ -2252,13 +2252,33 @@ class Core{
     }
     public function get_informe($from, $to){
 
-        $sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?");
+        $sqlgir = $this->con->prepare("SELECT nombre FROM giros WHERE id_gir=? AND eliminado=?");
         $sqlgir->bind_param("ii", $this->id_gir, $this->eliminado);
         $sqlgir->execute();
         $result = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
         $data["nombre"] = $result["nombre"];
         $sqlgir->free_result();
         $sqlgir->close();
+
+        $sqlloc = $this->con->prepare("SELECT id_loc, nombre FROM locales WHERE id_gir=? AND eliminado=?");
+        $sqlloc->bind_param("ii", $this->id_gir, $this->eliminado);
+        $sqlloc->execute();
+        $locales = $sqlloc->get_result()->fetch_all(MYSQLI_ASSOC);
+        $sqlloc->free_result();
+        $sqlloc->close();
+
+        if($sqlloc = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
+            if($sqlloc->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
+                if($sqlloc->execute()){
+                    $resultloc = $sqlloc->get_result();
+                    while($row = $resultloc->fetch_assoc()){
+                        $pedidos[] = $row;
+                    }
+                }
+            }
+        }
+        $sqlloc->free_result();
+        $sqlloc->close();
 
         $from = strtotime($from);
         $to = strtotime($to) + 86400;        
@@ -2267,41 +2287,29 @@ class Core{
         $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
         
         if($dif_tiempo <= 50){
-            // MOSTRAR DIAS
-            //$info['subtitle']['text'] = 'Tiempo Real en dias';
             $lapse = "1 day";
-            
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("d", $aux_from);
                 $infos['fecha'][] = $aux_from;
                 $aux_from = $aux_from + 86400;
             }
-            
         }
         if($dif_tiempo > 50 && $dif_tiempo < 548){
-            // MOSTRAR MESES
-            //$info['subtitle']['text'] = 'Tiempo Real en meses';
             $lapse = "1 month";
-            
             while($to > $aux_from){
                 $aux_mes = intval(date("m", $aux_from)) - 1;
                 $info['xAxis']['categories'][] = $mes[$aux_mes];
                 $infos['fecha'][] = $aux_from;
                 $aux_from = strtotime('+1 month', $aux_from);
             }
-            
         }
         if($dif_tiempo >= 548){
-            // MOSTRAR AÑOS
-            //$info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
             $lapse = "1 year";
-            
             while($to > $aux_from){
                 $info['xAxis']['categories'][] = date("Y", $aux_from);
                 $infos['fecha'][] = $aux_from;
                 $aux_from = strtotime('+1 Year', $aux_from);
             }
-            
         }
         
         $info['chart']['type'] = 'areaspline';
@@ -2330,7 +2338,6 @@ class Core{
         // CHART 1
         $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
-        
         $aux['name'] = 'Ingresos';
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 0);
@@ -2341,7 +2348,6 @@ class Core{
         // CHART 2
         $info['title']['text'] = 'Cantidad Ventas'; 
         $data["chart2"] = $info;
-
         $aux['name'] = 'Pedidos';
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 1);
@@ -2349,6 +2355,17 @@ class Core{
         $data['chart2']['series'][] = $aux;
         unset($aux);
 
+        // CHART 3
+        $info['title']['text'] = 'Total Ventas';
+        $data["chart3"] = $info;           
+        for($j=0; $j<count($locales); $j++){
+            $aux['name'] = $locales[$j]['nombre'];
+            foreach($infos['fecha'] as $fecha){
+                $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $lapse, $locales[$j]['id_loc']);
+            }
+            $data["chart3"]['series'][] = $aux;
+            unset($aux);
+        }
 
         return $data;
 

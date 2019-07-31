@@ -9,6 +9,7 @@ $informe = $core->get_informe('2019-07-01', '2019-07-31');
 <script>
     Highcharts.chart('container_01', <?php echo json_encode($informe["chart1"]); ?>);
     Highcharts.chart('container_02', <?php echo json_encode($informe["chart2"]); ?>);
+    Highcharts.chart('container_03', <?php echo json_encode($informe["chart3"]); ?>);
 </script>
 <div class="pagina">
     <div class="title">
@@ -27,12 +28,9 @@ $informe = $core->get_informe('2019-07-01', '2019-07-31');
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container_01" style="height: 160px; display: block">
-                
-            </div>
-            <div id="container_02" style="margin-top: 10px; height: 160px; display: block">
-                
-            </div>
+            <div id="container_01" style="height: 160px; display: block"></div>
+            <div id="container_02" style="margin-top: 10px; height: 160px; display: block"></div>
+            <div id="container_03" style="margin-top: 10px; height: 160px; display: block"></div>
         </div>
     </div>
 </div>
