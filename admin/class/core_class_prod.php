@@ -2306,6 +2306,16 @@ class Core{
         
         $info['chart']['type'] = 'areaspline';
         $info['credits']['enabled'] = false;
+        
+        $info['legend']['layout'] = 'vertical';
+        $info['legend']['align'] = 'left';
+        $info['legend']['verticalAlign'] = 'top';
+        $info['legend']['x'] = 100;
+        $info['legend']['y'] = 100;
+        $info['legend']['floating'] = true;
+        $info['legend']['borderWidth'] = 1;
+        $info['legend']['backgroundColor'] = '#fff';
+
         $info['yAxis']['title']['text'] = null;
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
