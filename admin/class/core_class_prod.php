@@ -2336,10 +2336,10 @@ class Core{
         $sqlacc->close();
 
         // CHART 1
-        $info['title']['text'] = 'Total Ventas';  
+        $info['title']['text'] = 'Administrador';  
         $data["chart1"] = $info;
 
-        $tipo_nom = ["Ingreso Admin", "Ingreso System"];
+        $tipo_nom = ["Ingresos", "Errores"];
         $tipo_num = [0, 1];
         for($i=0; $i<count($tipo_nom); $i++){
             $aux['name'] = $tipo_nom[$i];
