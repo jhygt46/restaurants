@@ -2338,12 +2338,17 @@ class Core{
         // CHART 1
         $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
-        $aux['name'] = 'Ingresos';
-        foreach($infos['fecha'] as $fecha){
-            $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 0);
+
+        $tipo_nom = ["Ingreso Admin", "Ingreso Admin", "Ingreso Admin"];
+        $tipo_num = [0, 1, 2];
+        for($i=0; $i<count($tipo_nom); $i++){
+            $aux['name'] = $tipo_nom[$i];
+            foreach($infos['fecha'] as $fecha){
+                $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, $tipo_num[$i]);
+            }
+            $data['chart1']['series'][] = $aux;
+            unset($aux);
         }
-        $data['chart1']['series'][] = $aux;
-        unset($aux);
 
         // CHART 2
         $info['title']['text'] = 'Cantidad Ventas'; 
