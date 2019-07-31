@@ -28,9 +28,9 @@ $informe = $core->get_informe('2019-07-01', '2019-07-31');
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container_01" style="height: 160px; display: block"></div>
-            <div id="container_02" style="margin-top: 10px; height: 160px; display: block"></div>
-            <div id="container_03" style="margin-top: 10px; height: 160px; display: block"></div>
+            <div id="container_01" style="height: 140px; display: block"></div>
+            <div id="container_02" style="margin-top: 10px; height: 140px; display: block"></div>
+            <div id="container_03" style="margin-top: 10px; height: 140px; display: block"></div>
         </div>
     </div>
 </div>
