@@ -2304,7 +2304,8 @@ class Core{
             
         }
         
-        $info['chart']['type'] = 'line';
+        $info['chart']['type'] = 'areaspline';
+        $info['credits']['enabled'] = false;
         $info['yAxis']['title']['text'] = null;
         $info['plotOptions']['line']['dataLabels']['enabled'] = true;
         $info['plotOptions']['line']['enableMouseTracking'] = false;
