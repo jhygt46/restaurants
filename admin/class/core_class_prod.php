@@ -2320,7 +2320,7 @@ class Core{
         $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
         
-        $aux['name'] = null;
+        $aux['name'] = 'Ingresos';
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 0);
         }
@@ -2331,7 +2331,7 @@ class Core{
         $info['title']['text'] = 'Cantidad Ventas'; 
         $data["chart2"] = $info;
 
-        $aux['name'] = null;
+        $aux['name'] = 'Pedidos';
         foreach($infos['fecha'] as $fecha){
             $aux['data'][] = $this->ver_acciones($acciones, $fecha, $lapse, 1);
         }
