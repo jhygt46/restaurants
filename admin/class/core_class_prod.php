@@ -2316,10 +2316,10 @@ class Core{
         $info['credits']['enabled'] = false;
 
         $info['legend']['layout'] = 'vertical';
-        $info['legend']['align'] = 'left';
+        $info['legend']['align'] = 'right';
         $info['legend']['verticalAlign'] = 'top';
-        $info['legend']['x'] = 30;
-        $info['legend']['y'] = 14;
+        $info['legend']['x'] = 20;
+        $info['legend']['y'] = 10;
         $info['legend']['floating'] = true;
         $info['legend']['borderWidth'] = 1;
         $info['legend']['backgroundColor'] = '#fff';
