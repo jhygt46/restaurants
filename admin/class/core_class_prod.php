@@ -2310,8 +2310,8 @@ class Core{
         $info['legend']['layout'] = 'vertical';
         $info['legend']['align'] = 'left';
         $info['legend']['verticalAlign'] = 'top';
-        $info['legend']['x'] = 40;
-        $info['legend']['y'] = 20;
+        $info['legend']['x'] = 30;
+        $info['legend']['y'] = 14;
         $info['legend']['floating'] = true;
         $info['legend']['borderWidth'] = 1;
         $info['legend']['backgroundColor'] = '#fff';
