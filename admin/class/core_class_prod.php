@@ -2312,7 +2312,7 @@ class Core{
             }
         }
         
-        $info['chart']['type'] = 'areaspline';
+        $info['chart']['type'] = 'line';
         $info['credits']['enabled'] = false;
 
         $info['legend']['layout'] = 'vertical';
@@ -2339,8 +2339,8 @@ class Core{
         $info['title']['text'] = 'Total Ventas';  
         $data["chart1"] = $info;
 
-        $tipo_nom = ["Ingreso Admin", "Ingreso Admin", "Ingreso Admin"];
-        $tipo_num = [0, 1, 2];
+        $tipo_nom = ["Ingreso Admin", "Ingreso System"];
+        $tipo_num = [0, 1];
         for($i=0; $i<count($tipo_nom); $i++){
             $aux['name'] = $tipo_nom[$i];
             foreach($infos['fecha'] as $fecha){
