@@ -2306,12 +2306,12 @@ class Core{
         
         $info['chart']['type'] = 'areaspline';
         $info['credits']['enabled'] = false;
-        
+
         $info['legend']['layout'] = 'vertical';
         $info['legend']['align'] = 'left';
         $info['legend']['verticalAlign'] = 'top';
-        $info['legend']['x'] = 100;
-        $info['legend']['y'] = 100;
+        $info['legend']['x'] = 40;
+        $info['legend']['y'] = 20;
         $info['legend']['floating'] = true;
         $info['legend']['borderWidth'] = 1;
         $info['legend']['backgroundColor'] = '#fff';
