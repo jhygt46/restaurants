@@ -213,7 +213,7 @@ class Guardar{
                         }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($this->con->error)); }
 
                         if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
-                            if($sqlsma->bind_param("i", $correo)){
+                            if($sqlsma->bind_param("s", $correo)){
                                 if($sqlsma->execute()){
                                     $sqlsma->close();
                                 }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
