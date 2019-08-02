@@ -19,65 +19,82 @@ class Login {
         
     }
     public function recuperar_password(){
-        
-        if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
 
-            $sqlsg = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
-            $sqlsg->bind_param("si", $user, $this->eliminado);
-            $sqlsg->execute();
-            $sqlsg->store_result();
-            $id_user = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
+        $user = $_POST['user'];
+        if(filter_var($user, FILTER_VALIDATE_EMAIL)){
 
-
-            $sql = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
-            $sql->bind_param("i", $id_user);
+            $sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
+            $sql->bind_param("si", $user, $this->eliminado);
             $sql->execute();
-            $sql->store_result();
-            if($sql->{"num_rows"} < 1){
+            $res = $sql->get_result();
+            $aux_user = $res->fetch_all(MYSQLI_ASSOC)[0];
+            $id_user = $aux_user["id_user"];
+            $correo = $aux_user["correo"];
 
-                if($sqlsg->{"num_rows"} == 1){
+            $acciones = $this->acciones($id_user, 2);
 
-                    $info['op'] = 1;
-                    $info['message'] = "Correo Enviado";
-                    // 1 INGRESAR
-                    // 2 ERRAR
-                    // 3 PEDIR PASSWORD
+            if($acciones < 1){
 
-                    $tipo = 3;
+                if($res->{"num_rows"} == 1){
+
+                    // 1 ERRAR
+                    // 2 PEDIR PASSWORD
+                    $tipo = 2;
                     $sqlia = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)");
                     $sqlia->bind_param("ii", $tipo, $id_user);
-                    $sqlia->execute();
+                    if($sqlia->execute()){
+
+                        // CURL 
+                        $send['correo'] = $correo;
+                        $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
+                        $send['id'] = $id_user;
+
+                        $sqluu = $this->con->prepare("UPDATE fw_usuarios SET pass='', mailcode=? WHERE id_user=? AND eliminado=?");
+                        $sqluu->bind_param("sii", $send["code"], $send["id"], $this->eliminado);
+                        if($sqluu->execute()){
+
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                            $resp = json_decode(curl_exec($ch));
+                            if($resp->{'op'} == 1){
+                                $info['op'] = 1;
+                                $info['message'] = "Correo Enviado";
+                            }else{
+                                $info['op'] = 2;
+                                $info['message'] = "Error";
+                                $this->registrar('13', 0, 0, 0, 'email no enviado:');
+                            }
+                            curl_close($ch);
+
+                        }else{
+                            $info['op'] = 2;
+                            $info['message'] = "Error:";
+                            $this->registrar('13', 0, 0, 0, 'usuario no cambiado:');
+                        }
+                        $sqluu->close();
+
+                    }else{
+
+                        $info['op'] = 2;
+                        $info['message'] = "Error:";
+                        $this->registrar('13', 0, 0, 0, 'acciones no ingresado:');
+
+                    }
                     $sqlia->close();
 
-                    // CURL 
-                    $send['correo'] = $user;
-                    $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
-                    $send['id'] = $id_user;
-
-
-                    $sqluu = $this->con->prepare("UPDATE fw_usuarios SET pass='', mailcode=? WHERE id_user=? AND eliminado=?");
-                    $sqluu->bind_param("sii", $send["code"], $send["id"], $this->eliminado);
-                    $sqluu->execute();
-                    $sqluu->close();
-
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                    curl_exec($ch);
-                    curl_close($ch);
-
                 }
-                if($sqlsg->{"num_rows"} == 0){
+                if($res->{"num_rows"} == 0){
                     $info['op'] = 2;
                     $info['message'] = "Error:";
+                    $this->registrar('13', 0, 0, 0, 'usuario no encontrado: '.$user);
                 }
-                $sqlsg->free_result();
-                $sqlsg->close();
 
             }else{
                 $info['op'] = 2;
                 $info['message'] = "Error: El correo ya ha sido enviado";
+                $this->registrar('13', 0, 0, 0, 'demaciadas acciones usuario: '.$user);
             }
             
             $sql->free_result();
@@ -86,6 +103,7 @@ class Login {
         }else{
             $info['op'] = 2;
             $info['message'] = "Error: debe ingresar correo valido";
+            $this->registrar('13', 0, 0, 0, 'email invalido usuario: '.$user);
         }
         return $info; 
 
@@ -97,23 +115,14 @@ class Login {
         $pass_01 = $_POST['pass_01'];
         $pass_02 = $_POST['pass_02'];
 
-        $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='3' AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
-        $sqla->bind_param("i", $id);
-        $sqla->execute();
-        $sqla->store_result();
-        $acciones = $sqla->{"num_rows"};
-        $sqla->free_result();
-        $sqla->close();
-
         $sqlb = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=? AND mailcode=? AND eliminado=?");
         $sqlb->bind_param("is", $id, $code, $this->eliminado);
         $sqlb->execute();
-        $sqlb->store_result();
-        $usuario = $sqlb->{"num_rows"};
-        $sqlb->free_result();
-        $sqlb->close();
+        $resb = $sqlb->get_result();
 
-        if($usuario == 1){
+        if($resb->{"num_rows"} == 1){
+
+            $acciones = $this->acciones($id, 3);
             if($acciones < 5){
                 if(strlen($pass_01) >= 8){
                     if($pass_01 == $pass_02){
@@ -121,12 +130,17 @@ class Login {
                         $sql = $this->con->prepare("UPDATE fw_usuarios SET mailcode='', pass=? WHERE id_user=? AND eliminado=?");
                         $sql->bind_param("sii", md5($pass_01), $id, $this->eliminado);
                         if($sql->execute()){
+
                             $info['op'] = 1;
                             $info['url'] = "";
                             $info['message'] = "Felicidades! se ha creado su password";
+
                         }else{
+
                             $info['op'] = 2;
                             $info['message'] = "Error:";
+                            $this->registrar('14', 0, 0, 0, 'usuario no modificado: ');
+
                         }
                         $sql->close();
                         
@@ -136,68 +150,76 @@ class Login {
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['message'] = "Error: assword debe tener mas de 8 caracteres";
+                    $info['message'] = "Error: password debe tener mas de 8 caracteres";
                 }
             }else{
                 $info['op'] = 2;
                 $info['message'] = "Error: Demaciados intentos";
-            }  
-        }else{
+                $this->registrar('14', 0, 0, 0, 'demaciado intentos: ');
+            }
+
+        }
+        if($resb->{"num_rows"} == 0){
 
             $info['op'] = 2;
             $info['message'] = "Error: usuario y codigo";
             
-            // 1 INGRESAR
-            // 2 ERRAR
-            // 3 PEDIR PASSWORD
-            $tipo = 2;
+            $tipo = 3;
             $sql = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)");
             $sql->bind_param("ii", $tipo, $id);
             $sql->execute();
             $sql->close();
+            $this->registrar('14', 0, 0, 0, 'new password id - code diferentes: ');
 
         }
+
+        $sqlb->free_result();
+        $sqlb->close();
         
         return $info;
 
     }
-    public function acciones(){
+    private function registrar($id_des, $id_user, $id_loc, $id_gir, $txt){
 
-        $sqla = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo='2' AND fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)");
-        $sqla->bind_param("i", $id_user);
-        $sqla->execute();
-        $res = $sqla->get_result();
-        $acciones = $res->{"num_rows"};
-        $sqla->free_result();
-        $sqla->close();
-        return $acciones;
+        $sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)");
+        $sqlipd->bind_param("iiiis", $id_des, $id_user, $id_loc, $id_gir, $txt);
+        $sqlipd->execute();
+        $sqlipd->close();
+
+    }
+    public function acciones($id_user, $tipo){
+
+        $sql = $this->con->prepare("SELECT * FROM fw_acciones WHERE id_user=? AND tipo=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)");
+        $sql->bind_param("ii", $id_user, $tipo);
+        $sql->execute();
+        $res = $sql->get_result();
+        $sql->free_result();
+        $sql->close();
+        return $res->{"num_rows"};
 
     }
     public function login_back(){
 
         if(filter_var($_POST['user'], FILTER_VALIDATE_EMAIL)){
-            
-            $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
-            $sqlu->bind_param("si", $_POST["user"], $this->eliminado);
-            $sqlu->execute();
-            $res = $sqlu->get_result();
-            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-            $cant_user = $res->{"num_rows"};
-            $sqlu->free_result();
-            $sqlu->close();
 
-            $acciones = $this->acciones();
-            
+            $acciones = $this->acciones($result["id_user"], 1);
 
             if($acciones < 5){
 
-                if($cant_user == 0){
+                $sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?");
+                $sqlu->bind_param("si", $_POST["user"], $this->eliminado);
+                $sqlu->execute();
+                $res = $sqlu->get_result();
+                
+                if($res->{"num_rows"} == 0){
                     $info['op'] = 2;
                     $info['message'] = "Error: Correo o Contraseña invalida";
+                    $this->registrar('12', 0, 0, 0, 'usuario no existe: '.$_POST["user"]);
                 }
-
-                if($cant_user == 1){
-
+                if($res->{"num_rows"} == 1){
+                    
+                    $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                    
                     $pass = $result['pass'];
                     $id_user = $result['id_user'];
 
@@ -205,7 +227,7 @@ class Login {
 
                         if($result['id_loc'] > 0){
 
-                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
+                            $sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc, t2.id_gir FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?");
                             $sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado);
                             $sqlsg->execute();
                             $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -222,6 +244,7 @@ class Login {
                             if($result['tipo'] == 0){
                                 
                                 // PUNTO DE VENTA
+                                $this->registrar('10', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
                                 $info['op'] = 3;
                                 $info['url'] = 'admin/punto_de_venta/';
                                 $info['message'] = "Ingreso Exitoso Punto de Venta";
@@ -249,6 +272,7 @@ class Login {
                             if($result['tipo'] == 1){
                                 
                                 // COCINA
+                                $this->registrar('11', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
                                 $info['op'] = 4;
                                 $info['url'] = 'admin/cocina/';
                                 $info['message'] = "Ingreso Exitoso Cocina";
@@ -271,38 +295,28 @@ class Login {
                                 $sqlsug = $this->con->prepare("SELECT id_gir FROM fw_usuarios_giros WHERE id_user=?");
                                 $sqlsug->bind_param("i", $id_user);
                                 $sqlsug->execute();
-                                $sqlsug->store_result();
-                                if($sqlsug->{"num_rows"} == 1){
-                                    $ses['id_gir'] = $sqlsug->get_result()->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+                                $ressug = $sqlsug->get_result();
+                                if($ressug->{"num_rows"} == 1){
+                                    $ses['id_gir'] = $ressug->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
                                 }
                                 $sqlsug->free_result();
                                 $sqlsug->close();
 
                             }
 
-                            $_SESSION['user'] = $ses;
                             $info['op'] = 1;
                             $info['message'] = "Ingreso Exitoso";
+                            $_SESSION['user'] = $ses;
+                            $this->registrar('9', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
                             
                         }
-
-                        // 1 INGRESAR
-                        // 2 ERRAR
-                        // 3 PEDIR PASSWORD
-
-                        $tipo = 1;
-                        $sqlia = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)");
-                        $sqlia->bind_param("ii", $tipo, $id_user);
-                        $sqlia->execute();
-                        $sqlia->close();    
                         
                     }else{
 
-                        // 1 INGRESAR
-                        // 2 ERRAR
-                        // 3 PEDIR PASSWORD
+                        // 1 ERRAR
+                        // 2 PEDIR PASSWORD
 
-                        $tipo = 2;
+                        $tipo = 1;
                         $sqlic = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)");
                         $sqlic->bind_param("ii", $tipo, $id_user);
                         $sqlic->execute();
@@ -310,19 +324,25 @@ class Login {
 
                         $info['op'] = 2;
                         $info['message'] = "Error: Correo o Contraseña invalida";
+                        $this->registrar('12', $id_user, 0, $result['id_gir'], 'pass diferente');
 
                     }
 
                 }
 
+                $sqlu->free_result();
+                $sqlu->close();
+
             }else{
                 $info['op'] = 2;
                 $info['message'] = "Error: Demaciados intentos";
+                $this->registrar('12', 0, 0, 0, 'demaciados intentos:');
             }
         
         }else{
             $info['op'] = 2;
             $info['message'] = "Error: Correo o Contraseña invalida";
+            $this->registrar('12', 0, 0, 0, 'correo invalido:');
         }
         
         return $info;  

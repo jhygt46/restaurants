@@ -1979,10 +1979,15 @@ class Core{
     }
     public function enviar_error_int($error, $codes, $status, $id_puser, $id_gir){
 
-        $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
-        $sqli->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
-        $sqli->execute();
-        $sqli->close();
+        $sql = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
+        $sql->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
+        if($sql->execute()){
+            $sql->close();
+            return true;
+        }else{
+            $sql->close();
+            return false;
+        }
 
     }
     public function enviar_error(){
@@ -2010,12 +2015,11 @@ class Core{
 
                 $id_puser = ($res->num_rows == 1) ? $aux_id_puser : 0 ;
 
-                $sqli = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)");
-                $sqli->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir);
-                if($sqli->execute()){
+                if($this->enviar_error_int($error, $codes, $status, $id_puser, $id_gir)){
                     $info['op'] = 1;
+                }else{
+                    $info['op'] = 2;
                 }
-                $sqli->close();
 
             }
             $sqlg->close();

@@ -191,39 +191,54 @@ class Guardar{
     }
     private function add_ses(){
 
-        $id_loc = $_POST['id'];
         if($this->id_user == 1){
 
-            $sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?");
-            $sql->bind_param("ii", $id_loc, $this->eliminado);
-            $sql->execute();
-            $correo = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correo"];
-            $sql->free_result();
-            $sql->close();
-
-            $sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?");
-            $sqlloc->bind_param("i", $id_loc);
-            $sqlloc->execute();
-            $sqlloc->close();
-
-            $sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)");
-            $sqlsma->bind_param("i", $correo);
-            $sqlsma->execute();
-            $sqlsma->close();
-
-            $info['tipo'] = "success";
-            $info['titulo'] = "Modificado";
-            $info['texto'] = "Correo ".$correo." agregado";
-            $info['reload'] = 1;
-            $info['page'] = "msd/panel.php";
-
-        }else{
-
-            $this->registrar(1, 0, 0, 'add ses');
             $info['tipo'] = "error";
             $info['titulo'] = "ERROR";
             $info['texto'] = "Correo ".$correo." no pudo ser agregado";
+            $id_loc = $_POST['id'];
 
+            if($sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?")){
+                if($sql->bind_param("ii", $id_loc, $this->eliminado)){
+                    if($sql->execute()){
+
+                        $correo = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correo"];
+
+                        if($sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?")){
+                            if($sqlloc->bind_param("i", $id_loc)){
+                                if($sqlloc->execute()){
+                                    $sqlloc->close();
+                                }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($this->con->error)); }
+
+                        if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
+                            if($sqlsma->bind_param("i", $correo)){
+                                if($sqlsma->execute()){
+                                    $sqlsma->close();
+                                }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($this->con->error)); }
+
+                        $info['tipo'] = "success";
+                        $info['titulo'] = "Modificado";
+                        $info['texto'] = "Correo ".$correo." agregado";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/panel.php";
+
+                    }else{
+                        $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($sql->error));
+                    }
+                }else{
+                    $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($sql->error));
+                }
+                $sql->free_result();
+                $sql->close();
+            }else{
+                $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($this->con->error));
+            }
+        }else{
+            $this->registrar(1, 0, 0, 'add ses');
         }
         return $info;
 
