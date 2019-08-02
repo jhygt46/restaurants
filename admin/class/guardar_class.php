@@ -207,24 +207,27 @@ class Guardar{
                         if($sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?")){
                             if($sqlloc->bind_param("i", $id_loc)){
                                 if($sqlloc->execute()){
+
+                                    if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
+                                        if($sqlsma->bind_param("s", $correo)){
+                                            if($sqlsma->execute()){
+
+                                                $info['tipo'] = "success";
+                                                $info['titulo'] = "Modificado";
+                                                $info['texto'] = "Correo ".$correo." agregado";
+                                                $info['reload'] = 1;
+                                                $info['page'] = "msd/panel.php";
+                                                $sqlsma->close();
+                                                
+                                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($this->con->error)); }
+            
                                     $sqlloc->close();
+
                                 }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
                             }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
                         }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($this->con->error)); }
-
-                        if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
-                            if($sqlsma->bind_param("s", $correo)){
-                                if($sqlsma->execute()){
-                                    $sqlsma->close();
-                                }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($this->con->error)); }
-
-                        $info['tipo'] = "success";
-                        $info['titulo'] = "Modificado";
-                        $info['texto'] = "Correo ".$correo." agregado";
-                        $info['reload'] = 1;
-                        $info['page'] = "msd/panel.php";
 
                     }else{
                         $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($sql->error));
