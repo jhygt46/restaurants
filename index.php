@@ -7,7 +7,9 @@
     $list[0]['link'] = "www.runasushi.cl";
     $list[0]['proto'] = "https";
     */
-    die("INDEX");
+    if($_GET["mode"] != "developer"){
+        die("INDEX");
+    }
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
