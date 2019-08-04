@@ -219,103 +219,80 @@ class Guardar{
                                                 $info['page'] = "msd/panel.php";
                                                 $sqlsma->close();
                                                 
-                                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($sqlsma->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail '.htmlspecialchars($this->con->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail1 '.htmlspecialchars($sqlsma->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail2 '.htmlspecialchars($sqlsma->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail3 '.htmlspecialchars($this->con->error)); }
             
                                     $sqlloc->close();
 
-                                }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($sqlloc->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'update correo_ses locales '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'update correo_ses locales1 '.htmlspecialchars($sqlloc->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'update correo_ses locales2 '.htmlspecialchars($sqlloc->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'update correo_ses locales3 '.htmlspecialchars($this->con->error)); }
 
-                    }else{
-                        $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($sql->error));
-                    }
-                }else{
-                    $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($sql->error));
-                }
-                $sql->free_result();
-                $sql->close();
-            }else{
-                $this->registrar(6, 0, 0, 'correo locales '.htmlspecialchars($this->con->error));
-            }
-        }else{
-            $this->registrar(1, 0, 0, 'add ses');
-        }
+                        $sql->free_result();
+                        $sql->close();
+
+                    }else{ $this->registrar(6, 0, 0, 'correo locales1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'correo locales2 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'correo locales3 '.htmlspecialchars($this->con->error)); }
+        }else{  $this->registrar(1, 0, 0, 'add ses'); }
+
         return $info;
 
     }
     private function add_dns(){
 
-        $id_gir = $_POST['id'];
         if($this->id_user == 1){
 
-            $sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=?");
-            $sql->bind_param("i", $id_gir);
-            if($sql->execute()){
-                
-                $info['tipo'] = "success";
-                $info['titulo'] = "DNS";
-                $info['texto'] = "DNS configurada";
-                $info['reload'] = 1;
-                $info['page'] = "msd/panel.php";
-
-            }else{
-
-                $info['tipo'] = "error";
-                $info['titulo'] = "ERROR";
-                $info['texto'] = "DNS no ha sido configurada";
-                $this->registrar(6, 0, 0, 'Error Sql: (ADD DNS)');
-
-            }
-            $sql->close();
-
-        }else{
-
-            $this->registrar(1, 0, 0, '(ADD DNS)');
             $info['tipo'] = "error";
             $info['titulo'] = "ERROR";
             $info['texto'] = "DNS no ha sido configurada";
+            $id_gir = $_POST['id'];
 
-        }
+            if($sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=?")){
+                if($sql->bind_param("i", $id_gir)){
+                    if($sql->execute()){
+                
+                        $info['tipo'] = "success";
+                        $info['titulo'] = "DNS";
+                        $info['texto'] = "DNS configurada";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/panel.php";
+                        $sql->close();
+        
+                    }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD DNS) '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD DNS) '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD DNS) '.htmlspecialchars($this->con->error)); }
+
+        }else{ $this->registrar(1, 0, 0, '(ADD DNS)'); }
 
         return $info;
 
     }
     private function add_ssl(){
 
-        $id_gir = $_POST['id'];
         if($this->id_user == 1){
 
-            $sql = $this->con->prepare("UPDATE giros SET ssl='1' WHERE id_gir=?");
-            $sql->bind_param("i", $id_gir);
-            if($sql->execute()){
-
-                $info['tipo'] = "success";
-                $info['titulo'] = "SSL";
-                $info['texto'] = "ssl configurada";
-                $info['reload'] = 1;
-                $info['page'] = "msd/panel.php";
-
-            }else{
-
-                $this->registrar(6, 0, 0, 'Error Sql: (ADD SSL)');
-                $info['tipo'] = "error";
-                $info['titulo'] = "SSL";
-                $info['texto'] = "ssl no ha sido configurada";
-
-            }
-            $sql->close();
-
-        }else{
-
-            $this->registrar(1, 0, 0, '(ADD SSL)');
             $info['tipo'] = "error";
             $info['titulo'] = "SSL";
             $info['texto'] = "ssl no ha sido configurada";
+            $id_gir = $_POST['id'];
 
-        }
+            if($sql = $this->con->prepare("UPDATE giros SET ssl='1' WHERE id_gir=?")){
+                if($sql->bind_param("i", $id_gir)){
+                    if($sql->execute()){
+
+                        $info['tipo'] = "success";
+                        $info['titulo'] = "SSL";
+                        $info['texto'] = "ssl configurada";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/panel.php";
+                        $sql->close();
+
+                    }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD SSL) '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD SSL) '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD SSL) '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, 0, '(ADD SSL) '); }
         
         return $info;
         
@@ -327,19 +304,16 @@ class Guardar{
                 $this->con_cambios(null);
                 $values = $_POST['values'];
                 for($i=0; $i<count($values); $i++){
-                    $sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
-                    $sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado);
-                    if(!$sql->execute()){
-                        $this->registrar(6, 0, 0, 'Error Sql: (ORDER CAT)');
-                    }
-                    $sql->close();
+                    if($sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+                        if($sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado)){
+                            if(!$sql->execute()){
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER CAT) '.$sql->error); }
+                        }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER CAT) '.$sql->error); }
+                    }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ORDERCAT) '.$this->con->error); }
                 }
-            }else{
-                $this->registrar(3, 0, 0, '(ORDER CAT)');
-            }
-        }else{
-            $this->registrar(2, 0, 0, '(ORDER CAT)'); 
-        }
+            }else{ $this->registrar(3, 0, 0, '(ORDER CAT)'); }
+        }else{ $this->registrar(2, 0, 0, '(ORDER CAT)'); }
         
     }
     private function orderprods(){
@@ -351,32 +325,27 @@ class Guardar{
                 $sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
                 $sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado);
                 $sql->execute();
-                $sql->store_result();
-                if($sql->{"num_rows"} == 1){
+                $res = $sql->get_result();
+                if($res->{"num_rows"} == 1){
 
                     $this->con_cambios(null);
                     $values = $_POST['values'];
                     for($i=0; $i<count($values); $i++){
 
-                        $sql = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?");
-                        $sql->bind_param("ii", $values[$i], $id_cae);
-                        if(!$sql->execute()){
-                            $this->registrar(6, 0, 0, 'Error Sql: (ORDER PROD)');
-                        }
-                        $sql->close();
+                        if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
+                            if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
+                                if($sqlcp->execute()){
+                                    $sqlcp->close();
+                                }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER PROD) '.$sqlcp->error); }
+                            }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER PROD) '.$sqlcp->error); }
+                        }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ORDER PROD) '.$this->con->error); }
 
                     }
                 }
-                if($sql->{"num_rows"} == 0){
-                    $this->registrar(7, 0, 0, '(XSS)'); 
-                }
+                if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, '(XSS) id_cae: ('.$id_cae.')'); }
 
-            }else{
-                $this->registrar(3, 0, 0, '(ORDER PROD)'); 
-            }
-        }else{
-            $this->registrar(2, 0, 0, '(ORDER PROD)');
-        }
+            }else{ $this->registrar(3, 0, 0, '(ORDER PROD)'); }
+        }else{ $this->registrar(2, 0, 0, '(ORDER PROD)'); }
 
     }
     public function uploadfavIcon($filename){
@@ -397,21 +366,23 @@ class Guardar{
                         $data = getimagesize($filepath.$imagename_new);
                         if($data['mime'] == 'image/vnd.microsoft.icon'){
                             $info['op'] = 1;
-                            $info['mensaje'] = "Imagen subida";
+                            $info['mensaje'] = "favicon subido";
                             @unlink($filepath.$imagename);
                             rename($filepath.$imagename_new, $filepath.$imagename);
                         }else{
-                            unlink($filepath.$imagename_new);
+                            $info['op'] = 2;
+                            $info['mensaje'] = "Formato invalido! solo archivos con extension .ico";
+                            @unlink($filepath.$imagename_new);
                             $this->registrar(8, 0, $this->id_gir, 'Favicon sin Formato image/vnd.microsoft.icon');
                         }
                     }else{
                         $info['op'] = 2;
-                        $info['mensaje'] = "No se pudo subir la imagen";
+                        $info['mensaje'] = "No se pudo subir el favicon";
                         $this->registrar(8, 0, $this->id_gir, 'Favicon no UPLOAD');
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Imagen sobrepasa los 20KB establecidos";
+                    $info['mensaje'] = "El favicon sobrepasa los 20KB establecidos";
                     $this->registrar(8, 0, $this->id_gir, 'Favicon Size Limit');
                 }
             }else{
@@ -430,7 +401,7 @@ class Guardar{
 
         $filepath = '/var/www/html/restaurants/images/logos/';
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("png", "PNG");
+        $file_formats = array("png", "PNG", "jpg", "JPG", "jpeg", "JPEG");
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
@@ -443,19 +414,21 @@ class Guardar{
                     if(move_uploaded_file($tmp, $filepath.$imagename_new)){
                         $data = getimagesize($filepath.$imagename_new);
                         if($data[0] == 260 && $data[1] == 100){
-                            if($data['mime'] == 'image/png'){
+                            if($data['mime'] == 'image/png' || $data['mime'] == 'image/jpeg'){
                                 $info['op'] = 1;
-                                $info['mensaje'] = "Imagen subida";
+                                $info['mensaje'] = "Logo subido";
                                 @unlink($filepath.$imagename);
                                 rename($filepath.$imagename_new, $filepath.$imagename);
                             }else{
-                                unlink($filepath.$imagename_new);
-                                $this->registrar(8, 0, $this->id_gir, 'Logo sin Formato image/png');
+                                $info['op'] = 2;
+                                $info['mensaje'] = "Formato invalido! solo archivos con extension .png .jpg .jpeg";
+                                @unlink($filepath.$imagename_new);
+                                $this->registrar(8, 0, $this->id_gir, 'Logo sin Formato image/png o image/jpeg');
                             }
                         }else{
                             unlink($filepath.$imagename_new);
                             $info['op'] = 2;
-                            $info['mensaje'] = "Las Imagen debe ser 260px/100px";
+                            $info['mensaje'] = "El Logo debe ser de 260px/100px";
                             $this->registrar(8, 0, $this->id_gir, 'Logo No 260px/100px');
                         }
                     }else{
@@ -489,29 +462,30 @@ class Guardar{
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)){
-                if ($size < (200 * 1024)){
+                if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-                                $width = $data[0];
-                                $height = $data[1];
-                                $destino = imagecreatetruecolor($width, $height);
+
+                                $destino = imagecreatetruecolor($data[0], $data[1]);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
-                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $data[0], $data[1]);
                                 imagejpeg($destino, $filepath.$imagename_new);
                                 imagedestroy($destino);
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Imagen subida";
                                 $info['image'] = $imagename_new;
+
                             }else{
                                 $info['op'] = 2;
-                                $info['mensaje'] = "La imagen no es jpg";
+                                $info['mensaje'] = "Formato invalido! solo archivos con extension .jpg .jpeg";
                                 $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
                             }
-                            unlink($filepath.$imagename);
+                            @unlink($filepath.$imagename);
+
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -519,7 +493,7 @@ class Guardar{
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
                     $this->registrar(8, 0, $this->id_gir, 'SubCat size limit');
                 }
             }else{
@@ -536,6 +510,7 @@ class Guardar{
     }
     public function uploadCategoria($filepath, $filename, $alto){
 
+        $width = 500;
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
@@ -543,14 +518,13 @@ class Guardar{
         if (strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)){
-                if ($size < (200 * 1024)){
+                if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".$extension;
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-                                $width = 500;
                                 $height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
@@ -562,10 +536,10 @@ class Guardar{
                                 $info['image'] = $imagename_new;
                             }else{
                                 $info['op'] = 2;
-                                $info['mensaje'] = "La imagen no es jpg";
+                                $info['mensaje'] = "La imagen no es jpg / jpeg";
                                 $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
                             }
-                            unlink($filepath.$imagename);
+                            @unlink($filepath.$imagename);
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir la imagen";
@@ -573,7 +547,7 @@ class Guardar{
                     }
                 }else{
                     $info['op'] = 2;
-                    $info['mensaje'] = "Imagen sobrepasa los 2MB establecidos";
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
                     $this->registrar(8, 0, $this->id_gir, 'Categoria size limit');
                 }
             }else{
