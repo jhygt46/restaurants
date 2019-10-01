@@ -306,7 +306,7 @@ class Guardar{
                 for($i=0; $i<count($values); $i++){
                     if($sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                         if($sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado)){
-                            if(!$sql->execute()){
+                            if($sql->execute()){
                                 $sql->close();
                             }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER CAT) '.$sql->error); }
                         }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER CAT) '.$sql->error); }
