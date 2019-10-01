@@ -427,10 +427,12 @@ $tablas[7]['campos'][16]['values'] = ["0"];
 $tablas[7]['campos'][17]['nombre'] = 'id_gir';
 $tablas[7]['campos'][17]['tipo'] = 'int(4)';
 $tablas[7]['campos'][17]['null'] = 0;
+$tablas[7]['campos'][17]['values'] = ["1"];
+/*
 $tablas[7]['campos'][17]['k'] = 1;
 $tablas[7]['campos'][17]['kt'] = 1;
 $tablas[7]['campos'][17]['kc'] = 0;
-$tablas[7]['campos'][17]['values'] = ["1"];
+*/
 $tablas[7]['campos'][18]['nombre'] = 'eliminado';
 $tablas[7]['campos'][18]['tipo'] = 'tinyint(1)';
 $tablas[7]['campos'][18]['null'] = 0;
