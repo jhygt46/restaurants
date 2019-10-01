@@ -12,10 +12,6 @@ require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0]);
 
-echo "<pre>";
-print_r($con);
-echo "</pre>";
-
 //die("INSTALADO");
 
 $tablas[0]['nombre'] = 'server';
