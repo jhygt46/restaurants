@@ -915,15 +915,23 @@ class Guardar{
     }
     public function get_alto(){
         
-        $sql = $this->con->prepare("SELECT alto FROM giros WHERE id_gir=? AND eliminado=?");
-        $sql->bind_param("ii", $this->id_gir, $this->eliminado);
-        if(!$sql->execute()){
-            $this->registrar(6, 0, 0, 'Error Sql: (GET ALTO)');
+        if($sql = $this->con->prepare("SELECT alto FROM giros WHERE id_gir=? AND eliminado=?")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["alto"];
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{
+                    die('execute() failed: ' . htmlspecialchars($sql->error));
+                    //$this->registrar(6, 0, 0, 'Error Sql: (GET ALTO)');
+                }
+            }else{
+                die('bind_param() failed: ' . htmlspecialchars($sql->error));
+            }
+        }else{
+            die('prepare() failed: ' . htmlspecialchars($mysqli->error));
         }
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["alto"];
-        $sql->free_result();
-        $sql->close();
-        return $result;
         
     }
     public function list_arbol_cats_prods(){
