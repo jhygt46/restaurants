@@ -1,6 +1,13 @@
 <?php
 session_start();
-require_once "/var/www/html/config/config.php";
+
+if($_SERVER["HTTP_HOST"] == "localhost"){
+    define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
+    define("DIR", DIR_BASE."restaurants/");
+}else{
+    define("DIR_BASE", "/var/www/html/");
+    define("DIR", DIR_BASE."restaurants/");
+}
 
 class Core{
     

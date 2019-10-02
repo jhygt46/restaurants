@@ -3,10 +3,10 @@ session_start();
 
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-    define("DIR", DIR_BASE."medici/");
+    define("DIR", DIR_BASE."restaurants/");
 }else{
     define("DIR_BASE", "/var/www/html/");
-    define("DIR", DIR_BASE."medici/");
+    define("DIR", DIR_BASE."restaurants/");
 }
 
 require_once DIR."db.php";
