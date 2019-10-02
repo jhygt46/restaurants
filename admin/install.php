@@ -12,7 +12,7 @@ require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0]);
 
-//die("INSTALADO");
+die("INSTALADO");
 
 $tablas[0]['nombre'] = 'server';
 $tablas[0]['campos'][0]['nombre'] = 'id_ser';
@@ -428,11 +428,6 @@ $tablas[7]['campos'][17]['nombre'] = 'id_gir';
 $tablas[7]['campos'][17]['tipo'] = 'int(4)';
 $tablas[7]['campos'][17]['null'] = 0;
 $tablas[7]['campos'][17]['values'] = ["1"];
-/*
-$tablas[7]['campos'][17]['k'] = 1;
-$tablas[7]['campos'][17]['kt'] = 1;
-$tablas[7]['campos'][17]['kc'] = 0;
-*/
 $tablas[7]['campos'][18]['nombre'] = 'eliminado';
 $tablas[7]['campos'][18]['tipo'] = 'tinyint(1)';
 $tablas[7]['campos'][18]['null'] = 0;

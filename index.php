@@ -1,12 +1,5 @@
 <?php 
-    
-    /*    
-    $list[0]['back'] = "#000";
-    $list[0]['img'] = "https://www.runasushi.cl/images/logos/www.runasushi.cl.jpg";
-    $list[0]['nombre'] = "RunaSushi";
-    $list[0]['link'] = "www.runasushi.cl";
-    $list[0]['proto'] = "https";
-    */
+
     if($_GET["mode"] != "developer"){
         die("INDEX");
     }
