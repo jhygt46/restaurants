@@ -1166,7 +1166,7 @@ class Guardar{
                         }else{
 
                             $info['op'] = 2;
-                            $info['mensaje'] = "Error: B1";
+                            $info['mensaje'] = htmlspecialchars($sqligir->error);
                             $this->registrar(6, 0, 0, 'Giros: err ingreso');
 
                         }
