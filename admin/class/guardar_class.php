@@ -1132,7 +1132,7 @@ class Guardar{
                     if($id == 0){
 
                         $code = bin2hex(openssl_random_pseudo_bytes(10));
-                        $sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, eliminado) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', '0')");
+                        $sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', '0', '1')");
                         $sqligir->bind_param("ssssiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina);
                         if($sqligir->execute()){
 
