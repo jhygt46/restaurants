@@ -9,6 +9,9 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
+require_once DIR."db.php";
+require_once DIR_BASE."config/config.php";
+
 class Core{
     
     public $con = null;
@@ -28,9 +31,6 @@ class Core{
         global $db_database;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
-        echo "<pre>";
-        print_r($db_user);
-        echo "</pre>";
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
         $this->admin = (isset($_SESSION['user']['info']['admin'])) ? $_SESSION['user']['info']['admin'] : 0 ;
         $this->re_venta = (isset($_SESSION['user']['info']['re_venta'])) ? $_SESSION['user']['info']['re_venta'] : 0 ;
