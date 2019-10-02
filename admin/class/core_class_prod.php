@@ -29,7 +29,7 @@ class Core{
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         echo "<pre>";
-        print_r($this->con);
+        print_r($db_user);
         echo "</pre>";
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
         $this->admin = (isset($_SESSION['user']['info']['admin'])) ? $_SESSION['user']['info']['admin'] : 0 ;
