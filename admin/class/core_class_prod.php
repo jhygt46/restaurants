@@ -638,13 +638,22 @@ class Core{
     }
     public function inicio(){
 
-        $sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?");
-        $sql->bind_param("ii", $this->id_user, $this->eliminado);
-        $sql->execute();
-        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-        $sql->free_result();
-        $sql->close();
-        return $result;
+        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
+            if($sql->bind_param("ii", $this->id_user, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{
+                    die('execute() failed: ' . htmlspecialchars($sql->error));
+                }
+            }else{
+                die('bind_param() failed: ' . htmlspecialchars($sql->error));
+            }
+        }else{
+            die('prepare() failed: ' . htmlspecialchars($this->con->error));
+        }
 
     }
     public function get_cocina($id_ped){

@@ -930,7 +930,7 @@ class Guardar{
                 die('bind_param() failed: ' . htmlspecialchars($sql->error));
             }
         }else{
-            die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+            die('prepare() failed: ' . htmlspecialchars($this->con->error));
         }
         
     }
