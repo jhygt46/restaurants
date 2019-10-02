@@ -638,7 +638,7 @@ class Core{
     }
     public function inicio(){
 
-        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_usr, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_user, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
