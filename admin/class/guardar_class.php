@@ -201,109 +201,87 @@ class Guardar{
     }
     private function add_ses(){
 
+        $info['tipo'] = "error";
+        $info['titulo'] = "ERROR";
+        $info['texto'] = "Correo no pudo ser agregado";
+        
         if($this->id_user == 1){
-
-            $info['tipo'] = "error";
-            $info['titulo'] = "ERROR";
-            $info['texto'] = "Correo ".$correo." no pudo ser agregado";
             $id_loc = $_POST['id'];
-
             if($sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?")){
                 if($sql->bind_param("ii", $id_loc, $this->eliminado)){
                     if($sql->execute()){
-
                         $correo = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correo"];
-
                         if($sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?")){
                             if($sqlloc->bind_param("i", $id_loc)){
                                 if($sqlloc->execute()){
-
                                     if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
                                         if($sqlsma->bind_param("s", $correo)){
                                             if($sqlsma->execute()){
-
                                                 $info['tipo'] = "success";
                                                 $info['titulo'] = "Modificado";
                                                 $info['texto'] = "Correo ".$correo." agregado";
                                                 $info['reload'] = 1;
                                                 $info['page'] = "msd/panel.php";
                                                 $sqlsma->close();
-                                                
                                             }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail1 '.htmlspecialchars($sqlsma->error)); }
                                         }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail2 '.htmlspecialchars($sqlsma->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail3 '.htmlspecialchars($this->con->error)); }
-            
                                     $sqlloc->close();
-
                                 }else{ $this->registrar(6, 0, 0, 'update correo_ses locales1 '.htmlspecialchars($sqlloc->error)); }
                             }else{ $this->registrar(6, 0, 0, 'update correo_ses locales2 '.htmlspecialchars($sqlloc->error)); }
                         }else{ $this->registrar(6, 0, 0, 'update correo_ses locales3 '.htmlspecialchars($this->con->error)); }
-
                         $sql->free_result();
                         $sql->close();
-
                     }else{ $this->registrar(6, 0, 0, 'correo locales1 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'correo locales2 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'correo locales3 '.htmlspecialchars($this->con->error)); }
         }else{  $this->registrar(1, 0, 0, 'add ses'); }
-
         return $info;
 
     }
     private function add_dns(){
 
+        $info['tipo'] = "error";
+        $info['titulo'] = "ERROR";
+        $info['texto'] = "DNS no ha sido configurada";
         if($this->id_user == 1){
-
-            $info['tipo'] = "error";
-            $info['titulo'] = "ERROR";
-            $info['texto'] = "DNS no ha sido configurada";
             $id_gir = $_POST['id'];
-
             if($sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=?")){
                 if($sql->bind_param("i", $id_gir)){
                     if($sql->execute()){
-                
                         $info['tipo'] = "success";
                         $info['titulo'] = "DNS";
                         $info['texto'] = "DNS configurada";
                         $info['reload'] = 1;
                         $info['page'] = "msd/panel.php";
                         $sql->close();
-        
                     }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD DNS) '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD DNS) '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD DNS) '.htmlspecialchars($this->con->error)); }
-
         }else{ $this->registrar(1, 0, 0, '(ADD DNS)'); }
-
         return $info;
 
     }
     private function add_ssl(){
 
+        $info['tipo'] = "error";
+        $info['titulo'] = "SSL";
+        $info['texto'] = "ssl no ha sido configurada";
         if($this->id_user == 1){
-
-            $info['tipo'] = "error";
-            $info['titulo'] = "SSL";
-            $info['texto'] = "ssl no ha sido configurada";
             $id_gir = $_POST['id'];
-
             if($sql = $this->con->prepare("UPDATE giros SET ssl='1' WHERE id_gir=?")){
                 if($sql->bind_param("i", $id_gir)){
                     if($sql->execute()){
-
                         $info['tipo'] = "success";
                         $info['titulo'] = "SSL";
                         $info['texto'] = "ssl configurada";
                         $info['reload'] = 1;
                         $info['page'] = "msd/panel.php";
                         $sql->close();
-
                     }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD SSL) '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD SSL) '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD SSL) '.htmlspecialchars($this->con->error)); }
         }else{ $this->registrar(1, 0, 0, '(ADD SSL) '); }
-        
         return $info;
         
     }
@@ -330,18 +308,15 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
-                
                 $id_cae = $_POST['id_cae'];
                 $sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
                 $sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado);
                 $sql->execute();
                 $res = $sql->get_result();
                 if($res->{"num_rows"} == 1){
-
                     $this->con_cambios(null);
                     $values = $_POST['values'];
                     for($i=0; $i<count($values); $i++){
-
                         if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
                             if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
                                 if($sqlcp->execute()){
@@ -349,11 +324,9 @@ class Guardar{
                                 }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER PROD) '.$sqlcp->error); }
                             }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER PROD) '.$sqlcp->error); }
                         }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ORDER PROD) '.$this->con->error); }
-
                     }
                 }
                 if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, '(XSS) id_cae: ('.$id_cae.')'); }
-
             }else{ $this->registrar(3, 0, 0, '(ORDER PROD)'); }
         }else{ $this->registrar(2, 0, 0, '(ORDER PROD)'); }
 
@@ -626,42 +599,30 @@ class Guardar{
     }
     private function configurar_inicio(){
 
+        $info['op'] = 2;
+        $info['mensaje'] = "Se produjo un error";
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
-            $this->con_cambios(null);
             $texto = $_POST['html'];
-            $seguir = $_POST['seguir'];
-
-            $sql = $this->con->prepare("UPDATE giros SET inicio_html=? WHERE id_gir=? AND eliminado=?");
-            $sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado);
-
-            if($sql->execute()){
-                $info['op'] = 1;
-                $info['mensaje'] = "Pagina de Inicio modificado exitosamente";
-            }else{
-                $info['op'] = 2;
-                $info['mensaje'] = "Se produjo un error";
-                $this->registrar(2, 0, $this->id_gir, 'Config Pagina de Inicio');
-            }
-            
-            $sql->close();
-            $info['reload'] = 1;
-            
-            if($seguir == 0){
-                $info['page'] = 'msd/ver_giro.php';
-            }
-            if($seguir == 1){
-                $info['page'] = 'msd/configurar_pag_inicio.php';
-            }
-
-        }else{
-
-            $this->registrar(2, 0, 0, 'Config Footer');
-            $info['op'] = 2;
-            $info['mensaje'] = "Error";
-
-        }
-
+            if($sql = $this->con->prepare("UPDATE giros SET inicio_html=? WHERE id_gir=? AND eliminado=?")){
+                if($sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Pagina de Inicio modificado exitosamente";
+                        $info['reload'] = 1;
+                        $sql->close();
+                        $this->con_cambios(null);
+                        $seguir = $_POST['seguir'];
+                        if($seguir == 0){
+                            $info['page'] = 'msd/ver_giro.php';
+                        }
+                        if($seguir == 1){
+                            $info['page'] = 'msd/configurar_pag_inicio.php';
+                        }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$this->con->error); }
+        }else{ $this->registrar(2, 0, 0, 'Config Footer'); }
         return $info;
 
     }
