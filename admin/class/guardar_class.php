@@ -204,7 +204,7 @@ class Guardar{
         $info['tipo'] = "error";
         $info['titulo'] = "ERROR";
         $info['texto'] = "Correo no pudo ser agregado";
-        
+
         if($this->id_user == 1){
             $id_loc = $_POST['id'];
             if($sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?")){
@@ -622,48 +622,36 @@ class Guardar{
                     }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
                 }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'Config Footer'); }
+        }else{ $this->registrar(2, 0, 0, 'Config Pagina de Inicio'); }
         return $info;
 
     }
     private function configurar_footer(){
         
+        $info['op'] = 2;
+        $info['mensaje'] = "Se produjo un error";
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
-            $this->con_cambios(null);
             $texto = $_POST['html'];
-            $seguir = $_POST['seguir'];
-
-            $sql = $this->con->prepare("UPDATE giros SET footer_html=? WHERE id_gir=? AND eliminado=?");
-            $sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado);
-
-            if($sql->execute()){
-                $info['op'] = 1;
-                $info['mensaje'] = "Footer modificado exitosamente";
-            }else{
-                $info['op'] = 2;
-                $info['mensaje'] = "Se produjo un error";
-                $this->registrar(2, 0, $this->id_gir, 'Config Footer');
-            }
-            
-            $sql->close();
-            $info['reload'] = 1;
-            
-            if($seguir == 0){
-                $info['page'] = 'msd/ver_giro.php';
-            }
-            if($seguir == 1){
-                $info['page'] = 'msd/configurar_footer.php';
-            }
-
-        }else{
-
-            $this->registrar(2, 0, 0, 'Config Footer');
-            $info['op'] = 2;
-            $info['mensaje'] = "Error";
-
-        }
-
+            if($sql = $this->con->prepare("UPDATE giros SET footer_html=? WHERE id_gir=? AND eliminado=?")){
+                if($sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Footer modificado exitosamente";
+                        $info['reload'] = 1;
+                        $sql->close();
+                        $this->con_cambios(null);s
+                        $seguir = $_POST['seguir'];
+                        if($seguir == 0){
+                            $info['page'] = 'msd/ver_giro.php';
+                        }
+                        if($seguir == 1){
+                            $info['page'] = 'msd/configurar_footer.php';
+                        }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'Config Footer '.$sql->error); }
+                }else{}
+            }else{}
+        }else{ $this->registrar(2, 0, 0, 'Config Footer'); }
         return $info;
         
     }

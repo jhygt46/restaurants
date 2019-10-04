@@ -12,7 +12,7 @@ require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0]);
 
-die("INSTALADO");
+//die("INSTALADO");
 
 $tablas[0]['nombre'] = 'server';
 $tablas[0]['campos'][0]['nombre'] = 'id_ser';
@@ -965,7 +965,7 @@ $tablas[26]['campos'][0]['null'] = 0;
 $tablas[26]['campos'][0]['pk'] = 1;
 $tablas[26]['campos'][0]['ai'] = 1;
 $tablas[26]['campos'][1]['nombre'] = 'txt';
-$tablas[26]['campos'][1]['tipo'] = 'varchar(20) COLLATE utf8_spanish2_ci';
+$tablas[26]['campos'][1]['tipo'] = 'TEXT';
 $tablas[26]['campos'][1]['null'] = 0;
 $tablas[26]['campos'][2]['nombre'] = 'fecha';
 $tablas[26]['campos'][2]['tipo'] = 'datetime';
