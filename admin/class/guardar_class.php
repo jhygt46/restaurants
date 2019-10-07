@@ -191,6 +191,127 @@ class Guardar{
         }
 
     }
+    /* LISTOS */
+    private function crear_giro(){
+        $info['op'] = 2;
+        $info['mensaje'] = "Error:";
+        if($this->admin == 1){
+            $dominio = $_POST['dominio'];
+            if($this->verificar_dominio($dominio)){
+                if($sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
+                    if($sql->bind_param("s", $dominio)){
+                        if($sql->execute()){
+                            $id = $_POST['id'];
+                            $res = $sql->get_result();
+                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                            if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $result["id_gir"])){
+                                $nombre = $_POST['nombre'];
+                                $item_pagina = $_POST['item_pagina'];
+                                $item_pos = $_POST['item_pos'];
+                                $item_cocina = $_POST['item_cocina'];
+                                $item_grafico = $_POST['item_grafico'];
+                                $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
+                                if($id == 0){
+                                    $code = bin2hex(openssl_random_pseudo_bytes(10));
+                                    if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', '0', '1')")){
+                                        if($sqligir->bind_param("ssssiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina)){
+                                            if($sqligir->execute()){
+                                                $id_gir = $this->con->insert_id;
+                                                if($sqlicat = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
+                                                    if($sqlicat->bind_param("i", $id_gir)){
+                                                        if($sqlicat->execute()){
+                                                            if($sqliugc = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
+                                                                if($sqliugc->bind_param("ii", $this->id_user, $id_gir)){
+                                                                    if($sqliugc->execute()){
+                                                                        $info['op'] = 1;
+                                                                        $info['mensaje'] = "Giro creado exitosamente";
+                                                                        $info['reload'] = 1;
+                                                                        $info['page'] = "msd/giros.php";
+                                                                        $sqliugc->close();
+                                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
+                                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
+                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                            $sqlicat->close();
+                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
+                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
+                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                $sqligir->close();
+                                                if(isset($this->id_aux_user) && is_numeric($this->id_aux_user) && $this->id_aux_user > 0){
+                                                    if($sqliugf = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
+                                                        if($sqliugf->bind_param("ii", $this->id_aux_user, $id_gir)){
+                                                            if($sqliugf->execute()){
+                                                                $sqliugf->close();
+                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
+                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
+                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                }else{  }
+                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
+                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
+                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                }
+                                if($id > 0){
+                                    if($sqlx = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
+                                        if($sqlx->bind_param("ii", $this->id_user, $id)){
+                                            if($sqlx->execute()){
+                                                $resx = $sqlx->get_result();
+                                                if($resx->{"num_rows"} == 1 || $this->id_user == 1){
+                                                    if($sqlugi = $this->con->prepare("UPDATE giros SET dns_letra=?, item_grafico=?, item_pos=?, item_cocina=?, item_pagina=?, nombre=?, dominio=? WHERE id_gir=? AND eliminado=?")){
+                                                        if($sqlugi->bind_param("siiiissii", $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina, $nombre, $dominio, $id, $this->eliminado)){
+                                                            if($sqlugi->execute()){
+                                                                $info['op'] = 1;
+                                                                $info['mensaje'] = "Giro modificado exitosamente";
+                                                                $info['reload'] = 1;
+                                                                $info['page'] = "msd/giros.php";
+                                                                $sqlugi->close();
+                                                                $this->con_cambios($id);
+                                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
+                                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
+                                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
+                                                }else{ $this->registrar(7, 0, 0, 'update user error'); }
+                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
+                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
+                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
+                                }
+                            }else{ $this->registrar(7, 0, 0, 'mod dominio exist'); }
+                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
+                    }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
+                }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
+            }else{  }
+        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
+        return $info;
+    }
+    private function eliminar_giro(){
+        $info['tipo'] = "error";
+        $info['titulo'] = "Error";
+        $info['texto'] = "El Giro no pudo ser eliminado";
+        if($this->admin == 1){
+            $id_gir = $_POST['id'];
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
+                if($sql->bind_param("ii", $this->id_user, $id_gir)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{"num_rows"} == 1){
+                            if($sqlugi = $this->con->prepare("UPDATE giros SET eliminado='1' WHERE id_gir=?")){
+                                if($sqlugi->bind_param("i", $id_gir)){
+                                    if($sqlugi->execute()){
+                                        $info['tipo'] = "success";
+                                        $info['titulo'] = "Eliminado";
+                                        $info['texto'] = "Giro Eliminado";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/giros.php";
+                                        $sqlugi->close();
+                                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
+                                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
+                            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
+                        }else{ $this->registrar(7, 0, 0, 'sin permisos'); }
+                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
+                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
+            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
+        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
+        return $info;
+    }
+    /* LISTOS */
+
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
         $ruta_data = "/var/www/html/error.log";
@@ -1014,130 +1135,6 @@ class Guardar{
         }else{
             return false;
         }
-        
-    }
-    private function crear_giro(){
-        
-        $info['op'] = 2;
-        $info['mensaje'] = "Error:";
-
-        if($this->admin == 1){
-            $dominio = $_POST['dominio'];
-            if($this->verificar_dominio($dominio)){
-                if($sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
-                    if($sql->bind_param("s", $dominio)){
-                        if($sql->execute()){
-                            $res = $sql->get_result();
-                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                            if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $result["id_gir"])){
-                                $id = $_POST['id'];
-                                $nombre = $_POST['nombre'];
-                                $item_pagina = $_POST['item_pagina'];
-                                $item_pos = $_POST['item_pos'];
-                                $item_cocina = $_POST['item_cocina'];
-                                $item_grafico = $_POST['item_grafico'];
-                                $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
-                                if($id == 0){
-                                    $code = bin2hex(openssl_random_pseudo_bytes(10));
-                                    if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', '0', '1')")){
-                                        if($sqligir->bind_param("ssssiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina)){
-                                            if($sqligir->execute()){
-                                                $id_gir = $this->con->insert_id;
-                                                if($sqlicat = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
-                                                    if($sqlicat->bind_param("i", $id_gir)){
-                                                        if($sqlicat->execute()){
-                                                            if($sqliugc = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
-                                                                if($sqliugc->bind_param("ii", $this->id_user, $id_gir)){
-                                                                    if($sqliugc->execute()){
-                                                                        $info['op'] = 1;
-                                                                        $info['mensaje'] = "Giro creado exitosamente";
-                                                                        $info['reload'] = 1;
-                                                                        $info['page'] = "msd/giros.php";
-                                                                        $sqliugc->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
-                                                            $sqlicat->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
-                                                $sqligir->close();
-                                                if(isset($this->id_aux_user) && is_numeric($this->id_aux_user) && $this->id_aux_user > 0){
-                                                    if($sqliugf = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
-                                                        if($sqliugf->bind_param("ii", $this->id_aux_user, $id_gir)){
-                                                            if($sqliugf->execute()){
-                                                                $sqliugf->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
-                                                }else{  }
-                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
-                                }
-                                if($id > 0){
-                                    if($sqlx = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
-                                        if($sqlx->bind_param("ii", $this->id_user, $id)){
-                                            if($sqlx->execute()){
-                                                $resx = $sqlx->get_result();
-                                                if($resx->{"num_rows"} == 1 || $this->id_user == 1){
-                                                    if($sqlugi = $this->con->prepare("UPDATE giros SET dns_letra=?, item_grafico=?, item_pos=?, item_cocina=?, item_pagina=?, nombre=?, dominio=? WHERE id_gir=? AND eliminado=?")){
-                                                        if($sqlugi->bind_param("siiiissii", $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina, $nombre, $dominio, $id, $this->eliminado)){
-                                                            if($sqlugi->execute()){
-                                                                $info['op'] = 1;
-                                                                $info['mensaje'] = "Giro modificado exitosamente";
-                                                                $info['reload'] = 1;
-                                                                $info['page'] = "msd/giros.php";
-                                                                $sqlugi->close();
-                                                                $this->con_cambios($id);
-                                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
-                                                }else{ $this->registrar(7, 0, 0, 'update user error'); }
-                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
-                                }
-                            }else{ $this->registrar(7, 0, 0, 'mod dominio exist'); }
-                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
-            }else{  }
-        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
-        return $info;
-
-    }
-    private function eliminar_giro(){
-
-        $info['tipo'] = "error";
-        $info['titulo'] = "Error";
-        $info['texto'] = "El Giro no pudo ser eliminado";
-
-        if($this->admin == 1){
-            $id_gir = $_POST['id'];
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
-                if($sql->bind_param("ii", $this->id_user, $id_gir)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1){
-                            if($sqlugi = $this->con->prepare("UPDATE giros SET eliminado='1' WHERE id_gir=?")){
-                                if($sqlugi->bind_param("i", $id_gir)){
-                                    if($sqlugi->execute()){
-                                        $info['tipo'] = "success";
-                                        $info['titulo'] = "Eliminado";
-                                        $info['texto'] = "Giro Eliminado";
-                                        $info['reload'] = 1;
-                                        $info['page'] = "msd/giros.php";
-                                        $sqlugi->close();
-                                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
-                                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
-                            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
-                        }else{ $this->registrar(7, 0, 0, 'sin permisos'); }
-                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
-        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
-        return $info;
         
     }
     private function eliminar_repartidor(){
