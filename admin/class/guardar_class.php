@@ -192,6 +192,14 @@ class Guardar{
 
     }
     /* LISTOS */
+    private function verificar_dominio($dominio){
+        $aux = explode(".", $dominio);
+        if($aux[0] == "www" && strlen(aux[1]) > 0 && strlen(aux[2]) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     private function crear_giro(){
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
@@ -290,7 +298,7 @@ class Guardar{
                 if($sql->bind_param("ii", $this->id_user, $id_gir)){
                     if($sql->execute()){
                         $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1){
+                        if($res->{"num_rows"} == 1 || $this->id_user == 1){
                             if($sqlugi = $this->con->prepare("UPDATE giros SET eliminado='1' WHERE id_gir=?")){
                                 if($sqlugi->bind_param("i", $id_gir)){
                                     if($sqlugi->execute()){
@@ -311,6 +319,11 @@ class Guardar{
         return $info;
     }
     /* LISTOS */
+    
+
+
+
+
 
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
@@ -1125,16 +1138,6 @@ class Guardar{
 
         }else{ $this->registrar(2, 0, 0, 'conf producto'); }
         return $info;
-        
-    }
-    private function verificar_dominio($dominio){
-        
-        $aux = explode(".", $dominio);
-        if($aux[0] == "www" && strlen(aux[1]) > 0 && strlen(aux[2]) > 0){
-            return true;
-        }else{
-            return false;
-        }
         
     }
     private function eliminar_repartidor(){
@@ -2618,28 +2621,4 @@ class Guardar{
         }else{ $this->registrar(1, 0, 0, 'crear usuario'); }
         return $info;
     }
-    
-    
-    
-    
-
-    /*
-    private function asignar_rubro(){
-        $id_gir = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $this->con->sql("DELETE FROM palabra_giros WHERE id_gir='".$id_gir."'");
-        $palabras = $this->con->sql("SELECT id_pal FROM palabras_claves WHERE is_giros='1'");
-        for($i=0; $i<$palabras['count']; $i++){
-            $id_pal = $palabras['resultado'][$i]['id_pal'];
-            $post = $_POST["rubro-".$id_pal];
-            if($post == 1){
-                $this->con->sql("INSERT INTO palabra_giros (id_gir, id_pal) VALUES ('".$id_gir."', '".$id_pal."')");
-            }
-        }
-        $info['reload'] = 1;
-        $info['page'] = "base/configurar_giro.php?id=".$id_gir."&nombre=".$nombre;
-        return $info;
-    }
-    */
-
 }
