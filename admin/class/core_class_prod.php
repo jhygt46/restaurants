@@ -59,11 +59,15 @@ class Core{
                     $res = $sqlgir->get_result();
                     if($res->{'num_rows'} == 1){
                         $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        if($ip == $result["ip"] && $port == "443" && $code == $result["code"]){
-                            $sqlgir->free_result();
-                            $sqlgir->close();
-                            return true;
-                        }else{ $this->registrar(15, 0, 0, 'ip no encontrada ip1:'.$ip.' ip2:'.$result["ip"].' port: '.$port.' code1: '.$code.' code2: '.$result["code"]); }
+                        if($ip == $result["ip"]){
+                            if($port == "443"){
+                                if($code == $result["code"]){
+                                    $sqlgir->free_result();
+                                    $sqlgir->close();
+                                    return true;
+                                }else{ $this->registrar(15, 0, 0, 'codigo no encontrado'); }
+                            }else{ $this->registrar(15, 0, 0, 'no es el puerto'); }
+                        }else{ $this->registrar(15, 0, 0, 'ip no encontrada'); }
                     }else{ $this->registrar(15, 0, 0, 'host no encontrada'); }
                     $sqlgir->free_result();
                     $sqlgir->close();
