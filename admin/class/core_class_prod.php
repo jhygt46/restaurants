@@ -63,8 +63,8 @@ class Core{
                             $sqlgir->free_result();
                             $sqlgir->close();
                             return true;
-                        }
-                    }
+                        }else{ $this->registrar(15, 0, 0, 'ip no usuarios'); }
+                    }else{ $this->registrar(15, 0, 0, 'host no encontrada'); }
                     $sqlgir->free_result();
                     $sqlgir->close();
                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlgir->error); }
