@@ -65,7 +65,7 @@ class Core{
                                     $sqlgir->free_result();
                                     $sqlgir->close();
                                     return true;
-                                }else{ $this->registrar(15, 0, 0, 'codigo no encontrado'); }
+                                }else{ $this->registrar(15, 0, 0, 'codigo no encontrado code('.$code.') - code('.$result["code"].')'); }
                             }else{ $this->registrar(15, 0, 0, 'no es el puerto'); }
                         }else{ $this->registrar(15, 0, 0, 'ip no encontrada'); }
                     }else{ $this->registrar(15, 0, 0, 'host no encontrada'); }
