@@ -2,7 +2,7 @@
 
 $file = explode("/", $_SERVER["REQUEST_URI"]);
 if($file[count($file) - 1] != ""){
-    exit;
+    header('HTTP/1.0 404 Not Found');
 }
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
