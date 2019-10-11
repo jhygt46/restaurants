@@ -1,6 +1,9 @@
 <?php
 
-echo $_SERVER["REQUEST_URI"];
+$file = explode("/", $_SERVER["REQUEST_URI"]);
+echo "<pre>";
+print_r($file);
+echo "</pre>";
 exit;
 
 if($_SERVER["HTTP_HOST"] == "localhost"){
