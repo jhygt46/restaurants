@@ -1632,51 +1632,29 @@ class Core{
         }else{ $this->registrar(6, 0, $id_gir, 'get_polygons() '.htmlspecialchars($this->con->error)); }           
     }
     public function enviar_error(){
-        $error = $_POST['error'];
-        $codes = $_POST['codes'];
-        $status = $_POST['status'];
+
         $info['op'] = 2;
-        if($error !== null){
-            $host = $_POST['host'];
-            if($sqlg = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
-                if($sqlg->bind_param("s", $host)){
-                    if($sqlg->execute()){
-                        $id_gir = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
-                        $aux_id_puser = $_POST['id_puser'];
-                        $code = $_POST['code'];
-                        if($sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=?")){
-                            if($sql->bind_param("is", $aux_id_puser, $code)){
-                                if($sql->execute()){
-                                    $res = $sql->get_result();
-                                    $id_puser = ($res->num_rows == 1) ? $aux_id_puser : 0 ;
-                                    if($this->enviar_error_int($error, $codes, $status, $id_puser, $id_gir)){
-                                        $info['op'] = 1;
-                                    }
-                                    $sql->free_result();
-                                    $sql->close();
-                                }else{ $this->registrar(6, 0, 0, 'enviar_error() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'enviar_error() #1 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'enviar_error() #1 '.htmlspecialchars($this->con->error)); }
-                        $sqlg->free_result();
-                        $sqlg->close();
-                    }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($sqlg->error)); }
-                }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($sqlg->error)); }
-            }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($this->con->error)); }
+        if($this->verificar()){
+            $error = $_POST['error'];
+            $code = $_POST['code'];
+            if($error !== null){
+                $host = $_POST['host'];
+                if($sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
+                    if($sql->bind_param("s", $host)){
+                        if($sql->execute()){
+                            $res = $sql->get_result();
+                            $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+                            $this->registrar($code, 0, $id_gir, $error);
+                            $info['op'] = 1;
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'enviar_error() #2 '.htmlspecialchars($this->con->error)); }
+            }
         }
         return $info;
-    }
-    public function enviar_error_int($error, $codes, $status, $id_puser, $id_gir){
-        if($sql = $this->con->prepare("INSERT INTO seguimiento_web (nombre, code, stat, fecha, id_puser, id_gir) VALUES (?, ?, ?, now(), ?, ?)")){
-            if($sql->bind_param("ssiii", $error, $codes, $status, $id_puser, $id_gir)){
-                if($sql->execute()){
-                    $sql->close();
-                    return true;
-                }else{
-                    $this->registrar(6, 0, 0, 'enviar_error_int() '.htmlspecialchars($sql->error));
-                    return false;
-                }
-            }else{ $this->registrar(6, 0, 0, 'enviar_error_int() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'enviar_error_int() '.htmlspecialchars($this->con->error)); }
+
     }
     public function get_web_js_data2($id_gir){
         /*
@@ -1866,7 +1844,7 @@ class Core{
                     }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #2 '.htmlspecialchars($this->con->error)); }   
                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #2 '.htmlspecialchars($this->con->error)); }
             }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #2 '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(16, 0, 0, 'no verificado'); }
+        }
         return $info;
     }
     public function ver_detalle(){
@@ -1937,7 +1915,7 @@ class Core{
                     }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(16, 0, 0, 'no verificado()'); }
+        }
         return $info;
     }
     public function set_web_pedido(){
@@ -2144,7 +2122,8 @@ class Core{
 
     }
     public function enviar_pedido(){
-
+        
+        $info['op'] = 2;
         if($this->verificar()){
             $puser = $_POST['puser'];
             $pedido = $_POST['pedido'];
@@ -2281,10 +2260,6 @@ class Core{
                     }
                 }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlipa->error)); }
             }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
-        }else{
-            $info['op'] = 2;
-            /*$this->enviar_error_int('Enviado Pedido no verificado', '#Z01', 0, 0, 0);*/
-            $this->registrar(16, 0, 0, 'no verificado');
         }
         return $info;
     }
