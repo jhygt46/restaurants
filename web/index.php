@@ -1,11 +1,9 @@
 <?php
 
 $file = explode("/", $_SERVER["REQUEST_URI"]);
-echo "<pre>";
-print_r($file);
-echo "</pre>";
-exit;
-
+if($file[count($file) - 1] != ""){
+    exit;
+}
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
     define("DIR", DIR_BASE."restaurants/");
