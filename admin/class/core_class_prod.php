@@ -47,7 +47,6 @@ class Core{
         $sqlipd->close();
 
     }
-    /* LISTOS */
     public function verificar(){
 
         $host = $_POST["host"];
@@ -2290,7 +2289,6 @@ class Core{
         return $info;
     }
     public function get_informe($from, $to){
-
         if($sqlgir = $this->con->prepare("SELECT nombre FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sqlgir->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sqlgir->execute()){
@@ -2357,7 +2355,7 @@ class Core{
                                 $info['plotOptions']['line']['enableMouseTracking'] = false;
 
                                 if($sqlacc = $this->con->prepare("SELECT * FROM seguimiento WHERE id_gir=?")){
-                                    if($sqlacc->bind_param("i", $this->id_gir))
+                                    if($sqlacc->bind_param("i", $this->id_gir)){
                                         if($sqlacc->execute()){
                                             $acciones = $sqlacc->get_result()->fetch_all(MYSQLI_ASSOC);
                                             // CHART 1
@@ -2409,8 +2407,6 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($sqlgir->error)); }
         }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($this->con->error)); }
         return $data;
-
     }
-    /* LISTOS */
 }
 ?>
