@@ -234,7 +234,6 @@ class Login {
                                                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
                                                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
                                                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-                                                        
                                                     }
                                                     if($result['tipo'] == 1){
                                                         // COCINA

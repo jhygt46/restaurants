@@ -191,7 +191,16 @@ class Guardar{
         }
 
     }
-    /* LISTOS */
+    private function registrar($id_des, $id_loc, $id_gir, $txt){
+        $ruta_data = "/var/www/html/error.log";
+        if($sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)")){
+            if($sqlipd->bind_param("iiiis", $id_des, $this->id_user, $id_loc, $id_gir, $txt)){
+                if($sqlipd->execute()){
+                    $sqlipd->close();
+                }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); }
+            }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); }
+        }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); } 
+    }
     private function verificar_dominio($dominio){
         $aux = explode(".", $dominio);
         if($aux[0] == "www" && strlen(aux[1]) > 0 && strlen(aux[2]) > 0){
@@ -200,6 +209,7 @@ class Guardar{
             return false;
         }
     }
+    /* LISTOS */
     private function crear_giro(){
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
@@ -236,26 +246,26 @@ class Guardar{
                                                                         $info['reload'] = 1;
                                                                         $info['page'] = "msd/giros.php";
                                                                         $sqliugc->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugc->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqliugc->error)); }
+                                                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqliugc->error)); }
+                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
                                                             $sqlicat->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqlicat->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($sqlicat->error)); }
+                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($sqlicat->error)); }
+                                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($this->con->error)); }
                                                 $sqligir->close();
                                                 if(isset($this->id_aux_user) && is_numeric($this->id_aux_user) && $this->id_aux_user > 0){
                                                     if($sqliugf = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
                                                         if($sqliugf->bind_param("ii", $this->id_aux_user, $id_gir)){
                                                             if($sqliugf->execute()){
                                                                 $sqliugf->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqliugf->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($sqliugf->error)); }
+                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($sqliugf->error)); }
+                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($this->con->error)); }
                                                 }else{  }
-                                            }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$sqligir->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'Giros: err ingreso '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($sqligir->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($sqligir->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($this->con->error)); }
                                 }
                                 if($id > 0){
                                     if($sqlx = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
@@ -272,28 +282,32 @@ class Guardar{
                                                                 $info['page'] = "msd/giros.php";
                                                                 $sqlugi->close();
                                                                 $this->con_cambios($id);
-                                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlugi->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
-                                                }else{ $this->registrar(7, 0, 0, 'update user error'); }
-                                            }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sqlx->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
+                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($sqlugi->error)); }
+                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($sqlugi->error)); }
+                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($this->con->error)); }
+                                                }else{ $this->registrar(7, 0, 0, 'crear_giro() XSS'); }
+                                                $sqlx->free_result();
+                                                $sqlx->close();
+                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($sqlx->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($sqlx->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($this->con->error)); }
                                 }
-                            }else{ $this->registrar(7, 0, 0, 'mod dominio exist'); }
-                        }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'update giros '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'update giros '.$this->con->error); }
+                            }else{ $this->registrar(15, 0, 0, 'crear_giro() dominio existe'); }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($this->con->error)); }
             }else{  }
-        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
+        }else{ $this->registrar(4, 0, 0, 'crear_giro()'); }
         return $info;
     }
     private function eliminar_giro(){
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "El Giro no pudo ser eliminado";
+        $id_gir = $_POST['id'];
         if($this->admin == 1){
-            $id_gir = $_POST['id'];
             if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
                 if($sql->bind_param("ii", $this->id_user, $id_gir)){
                     if($sql->execute()){
@@ -308,41 +322,22 @@ class Guardar{
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/giros.php";
                                         $sqlugi->close();
-                                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
-                                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sqlugi->error); }
-                            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
-                        }else{ $this->registrar(7, 0, 0, 'sin permisos'); }
-                    }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'borrar giro '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'borrar giro '.$this->con->error); }
-        }else{ $this->registrar(4, 0, 0, 'crear giro'); }
+                                    }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($sqlugi->error)); }
+                                }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($sqlugi->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(7, 0, $id_gir, 'eliminar_giro() XSS'); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(4, 0, $id_gir, 'eliminar_giro()'); }
         return $info;
     }
-    /* LISTOS */
-    
-
-
-
-
-
-    private function registrar($id_des, $id_loc, $id_gir, $txt){
-
-        $ruta_data = "/var/www/html/error.log";
-        if($sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)")){
-            if($sqlipd->bind_param("iiiis", $id_des, $this->id_user, $id_loc, $id_gir, $txt)){
-                if($sqlipd->execute()){
-                    $sqlipd->close();
-                }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); }
-            }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); }
-        }else{ file_put_contents($ruta_data, "NO SE PUDO GAURDAR EL SEGUIMIENTO: id_des: ".$id_des." /id_loc: ".$id_loc." /id_gir: ".$id_gir." /txt: ".$txt); } 
-        
-    }
     private function add_ses(){
-
         $info['tipo'] = "error";
         $info['titulo'] = "ERROR";
         $info['texto'] = "Correo no pudo ser agregado";
-
         if($this->id_user == 1){
             $id_loc = $_POST['id'];
             if($sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?")){
@@ -361,29 +356,27 @@ class Guardar{
                                                 $info['reload'] = 1;
                                                 $info['page'] = "msd/panel.php";
                                                 $sqlsma->close();
-                                            }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail1 '.htmlspecialchars($sqlsma->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail2 '.htmlspecialchars($sqlsma->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'insert correo ses_mail3 '.htmlspecialchars($this->con->error)); }
+                                            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
+                                        }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
+                                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($this->con->error)); }
                                     $sqlloc->close();
-                                }else{ $this->registrar(6, 0, 0, 'update correo_ses locales1 '.htmlspecialchars($sqlloc->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'update correo_ses locales2 '.htmlspecialchars($sqlloc->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'update correo_ses locales3 '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
+                            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
+                        }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($this->con->error)); }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'correo locales1 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'correo locales2 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'correo locales3 '.htmlspecialchars($this->con->error)); }
-        }else{  $this->registrar(1, 0, 0, 'add ses'); }
+                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($this->con->error)); }
+        }else{  $this->registrar(1, 0, 0, 'add_ses()'); }
         return $info;
-
     }
     private function add_dns(){
-
         $info['tipo'] = "error";
         $info['titulo'] = "ERROR";
         $info['texto'] = "DNS no ha sido configurada";
+        $id_gir = $_POST['id'];
         if($this->id_user == 1){
-            $id_gir = $_POST['id'];
             if($sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=?")){
                 if($sql->bind_param("i", $id_gir)){
                     if($sql->execute()){
@@ -393,20 +386,18 @@ class Guardar{
                         $info['reload'] = 1;
                         $info['page'] = "msd/panel.php";
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD DNS) '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD DNS) '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD DNS) '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(1, 0, 0, '(ADD DNS)'); }
+                    }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, $id_gir, 'add_dns()'); }
         return $info;
-
     }
     private function add_ssl(){
-
         $info['tipo'] = "error";
         $info['titulo'] = "SSL";
         $info['texto'] = "ssl no ha sido configurada";
+        $id_gir = $_POST['id'];
         if($this->id_user == 1){
-            $id_gir = $_POST['id'];
             if($sql = $this->con->prepare("UPDATE giros SET ssl='1' WHERE id_gir=?")){
                 if($sql->bind_param("i", $id_gir)){
                     if($sql->execute()){
@@ -416,58 +407,60 @@ class Guardar{
                         $info['reload'] = 1;
                         $info['page'] = "msd/panel.php";
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ADD SSL) '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ADD SSL) '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ADD SSL) '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(1, 0, 0, '(ADD SSL) '); }
+                    }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, $id_gir, 'add_ssl()'); }
         return $info;
-        
     }
     private function ordercat(){
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
-                $this->con_cambios(null);
                 $values = $_POST['values'];
                 for($i=0; $i<count($values); $i++){
                     if($sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                         if($sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado)){
                             if($sql->execute()){
                                 $sql->close();
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER CAT) '.$sql->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER CAT) '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ORDERCAT) '.$this->con->error); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($this->con->error)); }
                 }
-            }else{ $this->registrar(3, 0, 0, '(ORDER CAT)'); }
-        }else{ $this->registrar(2, 0, 0, '(ORDER CAT)'); }
-        
+                $this->con_cambios(null);
+            }else{ $this->registrar(3, 0, $this->id_gir, 'ordercat()'); }
+        }else{ $this->registrar(2, 0, 0, 'ordercat()'); }
     }
     private function orderprods(){
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
                 $id_cae = $_POST['id_cae'];
-                $sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?");
-                $sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado);
-                $sql->execute();
-                $res = $sql->get_result();
-                if($res->{"num_rows"} == 1){
-                    $this->con_cambios(null);
-                    $values = $_POST['values'];
-                    for($i=0; $i<count($values); $i++){
-                        if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
-                            if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
-                                if($sqlcp->execute()){
-                                    $sqlcp->close();
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql1: (ORDER PROD) '.$sqlcp->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql2: (ORDER PROD) '.$sqlcp->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql3: (ORDER PROD) '.$this->con->error); }
-                    }
-                }
-                if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, '(XSS) id_cae: ('.$id_cae.')'); }
-            }else{ $this->registrar(3, 0, 0, '(ORDER PROD)'); }
-        }else{ $this->registrar(2, 0, 0, '(ORDER PROD)'); }
-
+                if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+                    if($sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
+                        if($sql->execute()){
+                            $res = $sql->get_result();
+                            if($res->{"num_rows"} == 1){
+                                $values = $_POST['values'];
+                                for($i=0; $i<count($values); $i++){
+                                    if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
+                                        if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
+                                            if($sqlcp->execute()){
+                                                $sqlcp->close();
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($this->con->error)); }
+                                }
+                                $this->con_cambios(null);
+                            }
+                            if($res->{"num_rows"} == 0){ 
+                                $this->registrar(7, 0, $this->id_gir, 'orderprods() XSS');
+                            }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(3, 0, $this->id_gir, 'orderprods()'); }
+        }else{ $this->registrar(2, 0, 0, 'orderprods()'); }
     }
     public function uploadfavIcon($filename){
 
@@ -736,10 +729,8 @@ class Guardar{
 
     }
     private function configurar_inicio(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Se produjo un error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $texto = $_POST['html'];
             if($sql = $this->con->prepare("UPDATE giros SET inicio_html=? WHERE id_gir=? AND eliminado=?")){
@@ -748,27 +739,18 @@ class Guardar{
                         $info['op'] = 1;
                         $info['mensaje'] = "Pagina de Inicio modificado exitosamente";
                         $info['reload'] = 1;
+                        if($_POST['seguir'] == 0){ $info['page'] = 'msd/ver_giro.php'; }else{ $info['page'] = 'msd/configurar_pag_inicio.php'; }
                         $sql->close();
                         $this->con_cambios(null);
-                        $seguir = $_POST['seguir'];
-                        if($seguir == 0){
-                            $info['page'] = 'msd/ver_giro.php';
-                        }
-                        if($seguir == 1){
-                            $info['page'] = 'msd/configurar_pag_inicio.php';
-                        }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$sql->error); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'Config Pagina de Inicio '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'Config Pagina de Inicio'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_inicio() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_inicio() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_inicio() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_inicio()'); }
         return $info;
-
     }
     private function configurar_footer(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Se produjo un error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $texto = $_POST['html'];
             if($sql = $this->con->prepare("UPDATE giros SET footer_html=? WHERE id_gir=? AND eliminado=?")){
@@ -777,24 +759,16 @@ class Guardar{
                         $info['op'] = 1;
                         $info['mensaje'] = "Footer modificado exitosamente";
                         $info['reload'] = 1;
+                        if($_POST['seguir'] == 0){ $info['page'] = 'msd/ver_giro.php'; }else{ $info['page'] = 'msd/configurar_footer.php'; }
                         $sql->close();
                         $this->con_cambios(null);
-                        $seguir = $_POST['seguir'];
-                        if($seguir == 0){
-                            $info['page'] = 'msd/ver_giro.php';
-                        }
-                        if($seguir == 1){
-                            $info['page'] = 'msd/configurar_footer.php';
-                        }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'Config Footer '.$sql->error); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'Config Footer '.$sql->error); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'Config Footer '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'Config Footer'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_footer() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_footer() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_footer() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_footer()'); }
         return $info;
-        
     }
     private function con_cambios($id_gir){
-
         $id = ($id_gir === null) ? $this->id_gir : $id_gir ;
         if($sql = $this->con->prepare("SELECT t1.dns, t1.ssl, t2.ip, t2.code, t1.dominio FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
             if($sql->bind_param("ii", $id, $this->eliminado)){
@@ -817,18 +791,21 @@ class Guardar{
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                    curl_exec($ch);
-                    curl_close($ch);
+                    if(!curl_errno($ch)){
+                        curl_exec($ch);
+                        curl_close($ch);
+                    }else{
+                        $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
+                    }
                     $sql->free_result();
                     $sql->close();
                     return;
-                }else{ $this->registrar(6, 0, $this->id_gir, 'Con Cambios '.$sql->error); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'Con Cambios '.$sql->error); }
-        }else{ $this->registrar(6, 0, $this->id_gir, 'Con Cambios '.$this->con->error); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($this->con->error)); }
 
     }
     private function solicitar_ssl(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -842,9 +819,9 @@ class Guardar{
                             $info['reload'] = 1;
                             $info['page'] = "msd/ver_giro.php";
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #1 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #1 '.htmlspecialchars($this->con->error)); }
             }
             if($solicitud == 1){
                 if($sql = $this->con->prepare("UPDATE giros SET solicitar_ssl='1' WHERE id_gir=? AND eliminado=?")){
@@ -855,26 +832,22 @@ class Guardar{
                             $info['reload'] = 1;
                             $info['page'] = "msd/ver_giro.php";
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (solicitar ssl)'.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'solicitar_ssl() #2 '.htmlspecialchars($this->con->error)); }
             }
-        }else{ $this->registrar(2, 0, 0, 'socilitar ssl'); }
+        }else{ $this->registrar(2, 0, 0, 'solicitar_ssl()'); }
         return $info;
-        
     }
     private function configurar_estilos(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
             $font_family = $_POST['font-family'];
             $font_css = $_POST['font-css'];
             $css_page = $_POST['css_page'];
             $css_color = $_POST['css_color'];
             $css_modal = $_POST['css_modal'];
-            
             if($sql = $this->con->prepare("UPDATE giros SET style_modal=?, style_color=?, style_page=?, font_css=?, font_family=? WHERE id_gir=? AND eliminado=?")){
                 if($sql->bind_param("sssssii", $css_modal, $css_color, $css_page, $font_css, $font_family, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
@@ -884,50 +857,40 @@ class Guardar{
                         $info['page'] = "msd/ver_giro.php";
                         $sql->close();
                         $this->con_cambios(null);
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf estilos)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf estilos)'.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf estilos)'.$this->con->error); }
-
-        }else{ $this->registrar(2, 0, 0, 'conf estilos'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_estilos() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_estilos() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_estilos() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_estilos()'); }
         return $info;
-        
     }
     private function configurar_giro(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
             if($sql = $this->con->prepare("SELECT dominio FROM giros WHERE id_gir=? AND eliminado=?")){
                 if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
-
                         $dominio = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]['dominio'];
-                        $sql->free_result();
-                        $sql->close();
-                        
                         $foto_logo = $this->uploadLogo($dominio);
                         $foto_favicon = $this->uploadfavIcon($dominio);
-
                         if($foto_logo['op'] == 1){
                             if($sqla = $this->con->prepare("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir=? AND eliminado=?")){
                                 if($sqla->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqla->execute()){
                                         $sqla->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (logo)'.$sqla->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (logo)'.$sqla->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (logo)'.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() logo '.htmlspecialchars($sqla->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() logo '.htmlspecialchars($sqla->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() logo '.htmlspecialchars($this->con->error)); }
                         }
                         if($foto_favicon['op'] == 1){
                             if($sqlb = $this->con->prepare("UPDATE giros SET favicon='".$dominio.".ico' WHERE id_gir=? AND eliminado=?")){
                                 if($sqlb->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlb->execute()){
                                         $sqlb->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (icon)'.$sqlb->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (icon)'.$sqlb->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (icon)'.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() icono '.htmlspecialchars($sqlb->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() icono '.htmlspecialchars($sqlb->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() icono '.htmlspecialchars($this->con->error)); }
                         }
-
                         $titulo = $_POST['titulo'];
                         $pedido_wasabi = $_POST['pedido_wasabi'];
                         $pedido_gengibre = $_POST['pedido_gengibre'];
@@ -947,7 +910,6 @@ class Guardar{
                         $mapcode = $_POST['mapcode'];
                         $estados = $_POST['estados'];
                         $alto = $_POST['alto'];
-
                         if($sqlgir = $this->con->prepare("UPDATE giros SET alto=?, pedido_gengibre=?, pedido_wasabi=?, pedido_soya=?, pedido_teriyaki=?, pedido_palitos=?, pedido_comentarios=?, titulo=?, pedido_minimo=?, mapcode=?, estados=?, pedido_01_titulo=?, pedido_01_subtitulo=?, pedido_02_titulo=?, pedido_02_subtitulo=?, pedido_03_titulo=?, pedido_03_subtitulo=?, pedido_04_titulo=?, pedido_04_subtitulo=? WHERE id_gir=? AND eliminado=?")){
                             if($sqlgir->bind_param("issssssssssssssssssii", $alto, $pedido_gengibre, $pedido_wasabi, $pedido_soya, $pedido_teriyaki, $pedido_palitos, $pedido_comentarios, $titulo, $pedido_minimo, $mapcode, $estados, $pedido_01_titulo, $pedido_01_subtitulo, $pedido_02_titulo, $pedido_02_subtitulo, $pedido_03_titulo, $pedido_03_subtitulo, $pedido_04_titulo, $pedido_04_subtitulo, $this->id_gir, $this->eliminado)){
                                 if($sqlgir->execute()){
@@ -957,35 +919,30 @@ class Guardar{
                                     $info['page'] = "msd/ver_giro.php";
                                     $sqlgir->close();
                                     $this->con_cambios(null);
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$sqlgir->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$sqlgir->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$this->con->error); }
-
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf giro)'.$this->con->error); }
-
-        }else{ $this->registrar(2, 0, 0, 'conf giro'); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($sqlgir->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($sqlgir->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($this->con->error)); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() dominio '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() dominio '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() dominio '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_giro()'); }
         return $info;
-        
     }
     public function get_alto(){
-        
-        $alto = 0;
         if($sql = $this->con->prepare("SELECT alto FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $alto = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["alto"];
                     $sql->free_result();
                     $sql->close();
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (get alto)'.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (get alto)'.$sql->error); }
-        }else{ $this->registrar(6, 0, 0, 'Error Sql: (get alto)'.$this->con->error); }
-        return $alto;
-        
+                    return $alto;
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_alto() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_alto() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_alto() '.htmlspecialchars($this->con->error)); }
     }
     public function list_arbol_cats_prods(){
-
         if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo=?")){
             if($sql->bind_param("iii", $this->id_cat, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
@@ -993,28 +950,21 @@ class Guardar{
                     $sql->free_result();
                     $sql->close();
                     return $data;
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (LIST ARBOL CATS PRODS)'.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (LIST ARBOL CATS PRODS)'.$sql->error); }
-        }else{ $this->registrar(6, 0, 0, 'Error Sql: (LIST ARBOL CATS PRODS)'.$this->con->error); }
-
+                }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($this->con->error)); }
     }
     private function configurar_categoria(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
-
                 $id_cae = $_POST['id_cae'];
                 if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                     if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                         if($sql->execute()){
-
                             $categoria = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $alto = $this->get_alto();
-                            $sql->free_result();
-                            $sql->close();
                             if($categoria['parent_id'] == 0){
                                 $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
                             }
@@ -1027,17 +977,15 @@ class Guardar{
                                     if($sqlg->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                                         if($sqlg->execute()){
                                             $sqlg->close();
-                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (image)'.$sqlg->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (image)'.$sqlg->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (image)'.$sqlg->error); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() image'.htmlspecialchars($sqlg->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() image'.htmlspecialchars($sqlg->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() image'.htmlspecialchars($sqlg->error)); }
                             }
-
                             $parent_id = $_POST['parent_id'];
                             $mostar_prods = $_POST['mostrar_prods'];
                             $ocultar = $_POST['ocultar'];
                             $detalle_prods = $_POST['detalle_prods'];
                             $degradado = $_POST['degradado'];
-
                             if($sqlmc = $this->con->prepare("UPDATE categorias SET ocultar=?, mostrar_prods=?, degradado=?, detalle_prods=? WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                                 if($sqlmc->bind_param("iissiiii", $ocultar, $mostar_prods, $degradado, $detalle_prods, $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                                     if($sqlmc->execute()){
@@ -1045,24 +993,21 @@ class Guardar{
                                         $info['mensaje'] = "Configuracion modificado exitosamente";
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                                        $sqlmc->close();
                                         $this->con_cambios(null);
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$sqlmc->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$sqlmc->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$this->con->error); }
-
-
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (conf categoria)'.$this->con->error); }
-                
-            }else{ $this->registrar(3, 0, 0, 'conf categoria'); }
-        }else{ $this->registrar(2, 0, 0, 'conf categoria'); }
+                                        $sqlmc->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() update'.htmlspecialchars($sqlmc->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() update'.htmlspecialchars($sqlmc->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() update'.htmlspecialchars($this->con->error)); }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() select'.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() select'.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_categoria() select'.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(3, 0, $this->id_gir, 'configurar_categoria()'); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_categoria()'); }
         return $info;
-        
     }
     private function get_preguntas(){
-
         if($sql = $this->con->prepare("SELECT id_pre, nombre, mostrar FROM preguntas WHERE id_cat=? AND id_gir=? AND eliminado=?")){
             if($sql->bind_param("iii", $this->id_cat, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
@@ -1070,43 +1015,38 @@ class Guardar{
                     $sql->free_result();
                     $sql->close();
                     return $result;
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (get preguntas)'.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (get preguntas)'.$sql->error); }
-        }else{ $this->registrar(6, 0, 0, 'Error Sql: (get preguntas)'.$this->con->error); }
-
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_preguntas() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_preguntas() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_preguntas() '.htmlspecialchars($this->con->error)); }
     }
     private function configurar_producto(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
             $id = $_POST['id'];
             $id_pro = $_POST['id_pro'];
             $parent_id = $_POST['parent_id'];
             $alto = $this->get_alto();
-
             $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
             if($image['op'] == 1){
                 if($sql = $this->con->prepare("SELECT image FROM productos WHERE id_pro=? AND id_gir=? AND id_gir=? AND eliminado=?")){
                     if($sql->bind_param("iii", $id_pro, $this->id_gir, $this->eliminado)){
                         if($sql->execute()){
                             $pro_image = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["image"];
-                            $sql->free_result();
-                            $sql->close();
                             @unlink('/var/www/html/restaurants/images/productos/'.$pro_image);
                             if($sqlpro = $this->con->prepare("UPDATE productos SET image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
                                 if($sqlpro->bind_param("siii", $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
                                     if($sqlpro->execute()){
                                         $sqlpro->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto imagen)'.$sqlpro->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto imagen)'.$sqlpro->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto imagen)'.$this->con->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto select)'.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto select)'.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (producto select)'.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlpro->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlpro->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($this->con->error)); }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() select image '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() select image '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() select image '.htmlspecialchars($this->con->error)); }
             }
-
             $list = $this->get_preguntas();
             for($i=0; $i<count($list); $i++){
                 $pre = $_POST['pregunta-'.$list[$i]['id_pre']];
@@ -1115,33 +1055,30 @@ class Guardar{
                         if($sqldpr->bind_param("ii", $id_pro, $list[$i]["id_pre"])){
                             if($sqldpr->execute()){
                                 $sqldpr->close();
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas_productos)'.$sqldpr->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas_productos)'.$sqldpr->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas_productos)'.$this->con->error); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #1 '.htmlspecialchars($sqldpr->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #1 '.htmlspecialchars($sqldpr->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #1 '.htmlspecialchars($this->con->error)); }
                 }
                 if($pre == 1){
                     if($sqlipr = $this->con->prepare("INSERT INTO preguntas_productos (id_pro, id_pre) VALUES (?, ?)")){
                         if($sqlipr->bind_param("ii", $id_pro, $list[$i]["id_pre"])){
                             if($sqlipr->execute()){
                                 $sqlipr->close();
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert preguntas_productos)'.$sqlipr->error); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert preguntas_productos)'.$sqlipr->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert preguntas_productos)'.$this->con->error); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #2 '.htmlspecialchars($sqlipr->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #2 '.htmlspecialchars($sqlipr->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #2 '.htmlspecialchars($this->con->error)); }
                 }
             }
-
             $info['op'] = 1;
             $info['mensaje'] = "Configuracion Modificada Exitosamente";
             $info['reload'] = 1;
             $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
             $this->con_cambios(null);
-
-        }else{ $this->registrar(2, 0, 0, 'conf producto'); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_producto()'); }
         return $info;
         
     }
     private function eliminar_repartidor(){
-
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Repartidor no pudo ser eliminado";
@@ -1156,12 +1093,11 @@ class Guardar{
                         $info['reload'] = 1;
                         $info['page'] = "msd/crear_repartidor.php?id_loc=".$id[0]."&nombre=".$id[2];
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'del repartidor '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del repartidor '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del repartidor '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'del repartidor'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_repartidor() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_repartidor() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_repartidor() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_repartidor()'); }
         return $info;
-
     }
     private function eliminar_tramos(){
         
@@ -1183,23 +1119,23 @@ class Guardar{
                                         $info['texto'] = "Tramo Eliminado";
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/zonas_locales.php?id_loc=".$id[0];
-                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlugi->error); }
-                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlugi->error); }
-                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($sqlugi->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($sqlugi->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'del locales tramos'); }
-                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'eliminar_tramos()'); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_tramos() '.htmlspecialchars($this->con->error)); }
         }else{ $this->registrar(2, 0, 0, 'del tramo'); }
         return $info;
         
     }
     private function crear_horario(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id_loc = $_POST['id_loc'];
             if($sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
@@ -1207,7 +1143,6 @@ class Guardar{
                     if($sql->execute()){
                         $res = $sql->get_result();
                         if($res->{"num_rows"} == 1){
-
                             $tipo = $_POST['tipo'];
                             $id_hor = $_POST['id'];
                             $dia_ini = $_POST['dia_ini'];
@@ -1217,7 +1152,6 @@ class Guardar{
                             $hora_fin = $_POST['hora_fin'];
                             $min_fin = $_POST['min_fin'];
                             $loc_nombre = $_POST['loc_nombre'];
-
                             if($id_hor == 0){
                                 if($sqligir = $this->con->prepare("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                                     if($sqligir->bind_param("iiiiiiiiii", $dia_ini, $dia_fin, $hora_ini, $hora_fin, $min_ini, $min_fin, $tipo, $id_loc, $this->id_gir, $this->eliminado)){
@@ -1228,9 +1162,9 @@ class Guardar{
                                             $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
                                             $sqligir->close();
                                             $this->con_cambios(null);
-                                        }else{ $this->registrar(6, 0, 0, 'crear horario'); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear horario'); }
-                                }else{ $this->registrar(6, 0, 0, 'crear horario'); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #1 '.htmlspecialchars($sqligir->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #1 '.htmlspecialchars($sqligir->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #1 '.htmlspecialchars($this->con->error)); }
                             }
                             if($id_hor > 0){
                                 if($sqligir = $this->con->prepare("UPDATE horarios SET dia_ini=?, dia_fin=?, hora_ini=?, hora_fin=?, min_ini=?, min_fin=?, tipo=? WHERE id_hor=? AND id_loc=? AND id_gir=? AND eliminado=?")){
@@ -1242,11 +1176,10 @@ class Guardar{
                                             $info['page'] = "msd/crear_horario.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
                                             $sqligir->close();
                                             $this->con_cambios(null);
-                                        }else{ $this->registrar(6, 0, 0, 'mod horario '.$sqligir->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'mod horario '.$sqligir->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod horario '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #2  '.htmlspecialchars($sqligir->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #2  '.htmlspecialchars($sqligir->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #2 '.htmlspecialchars($this->con->error)); }
                             }
-
                             if($sqlre = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='1')")){
                                 if($sqlre->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlre->execute()){
@@ -1256,24 +1189,24 @@ class Guardar{
                                                 if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
                                                     if($sqlure->execute()){
                                                         $sqlure->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlure->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlure->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #3 '.htmlspecialchars($sqlure->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #3 '.htmlspecialchars($sqlure->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #3 '.htmlspecialchars($this->con->error)); }
                                         }
                                         if($resre->{"num_rows"} > 0){
                                             if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='1' WHERE id_gir=? AND eliminado=?")){
                                                 if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
                                                     if($sqlure->execute()){
                                                         $sqlure->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlure->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlure->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #4 '.htmlspecialchars($sqlure->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #4 '.htmlspecialchars($sqlure->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #4 '.htmlspecialchars($this->con->error)); }
                                         }
+                                        $sqlre->free_result();
                                         $sqlre->close();
-                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlre->error); }
-                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlre->error); }
-                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
-                            
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($sqlre->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($sqlre->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($this->con->error)); }
                             if($sqlde = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='2')")){
                                 if($sqlde->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlde->execute()){
@@ -1283,38 +1216,35 @@ class Guardar{
                                                 if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
                                                     if($sqlude->execute()){
                                                         $sqlude->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlude->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlude->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #6 '.htmlspecialchars($sqlude->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #6 '.htmlspecialchars($sqlude->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #6 '.htmlspecialchars($this->con->error)); }
                                         }
                                         if($resde->{"num_rows"} > 0){
                                             if($sqlude = $this->con->prepare("UPDATE giros SET despacho_domicilio='1' WHERE id_gir=? AND eliminado=?")){
                                                 if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
                                                     if($sqlude->execute()){
                                                         $sqlude->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlude->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlude->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #7 '.htmlspecialchars($sqlude->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #7 '.htmlspecialchars($sqlude->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #7 '.htmlspecialchars($this->con->error)); }
                                         }
                                         $sqlde->close();
-                                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlde->error); }
-                                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sqlde->error); }
-                            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
-                        }else{ $this->registrar(7, 0, 0, 'sin locales'); }
-
-                    }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del locales tramos '.$this->con->error); }
-
-        }else{ $this->registrar(2, 0, 0, 'crear horario'); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($sqlde->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($sqlde->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_horario()'); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #9 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #9 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #9 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'crear_horario()'); }
         return $info;
-
     }
     private function crear_repartidor(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $tipo = $_POST['tipo'];
             $id_loc = $_POST['id_loc'];
@@ -1340,13 +1270,13 @@ class Guardar{
                                                         $info['reload'] = 1;
                                                         $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
                                                         $sqliml->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'motos_locales '.$sqliml->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'motos_locales '.$sqliml->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'motos_locales '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #1 '.htmlspecialchars($sqliml->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #1 '.htmlspecialchars($sqliml->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #1 '.htmlspecialchars($this->con->error)); }
                                             $sqlimo->close();
-                                        }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqlimo->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqlimo->error); }
-                                }else{ $this->registrar(6, 0, 0, 'insert motos '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #2 '.htmlspecialchars($sqlimo->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #2 '.htmlspecialchars($sqlimo->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #2 '.htmlspecialchars($this->con->error)); }
                             }
                             if($tipo == 1){
                                 $id_mot = $_POST['repartidor'];
@@ -1363,25 +1293,24 @@ class Guardar{
                                                             $info['reload'] = 1;
                                                             $info['page'] = "msd/crear_repartidor.php?id_loc=".$id_loc."&nombre=".$loc_nombre;
                                                             $sqliml->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqliml->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqliml->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'insert motos '.$this->con->error); }
+                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #3 '.htmlspecialchars($sqliml->error)); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #3 '.htmlspecialchars($sqliml->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #3 '.htmlspecialchars($this->con->error)); }
                                             }
                                             if($resmot->{"num_rows"} == 0){ /*ERROR*/ }
-                                        }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqlmot->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'insert motos '.$sqlmot->error); }
-                                }else{ $this->registrar(6, 0, 0, 'insert motos '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #4 '.htmlspecialchars($sqlmot->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #4 '.htmlspecialchars($sqlmot->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #4  '.htmlspecialchars($this->con->error)); }
                             }
-                        }else{ $this->registrar(7, 0, 0, 'locales'); }
-                    }else{ $this->registrar(6, 0, 0, 'insert motos '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'insert motos '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'insert motos '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'crear repartidor'); }
+                        }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_repartidor()'); }
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #5 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #5 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_repartidor() #5 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'crear_repartidor()'); }
         return $info;
 
     }
     private function crear_catalogo(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -1397,9 +1326,9 @@ class Guardar{
                             $info['page'] = "msd/ver_giro.php";
                             $this->con_cambios(null);
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'insertar catalogo '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'insertar catalogo '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'insertar catalogo '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
             }
             if($id_cat > 0){
                 if($sql = $this->con->prepare("UPDATE catalogo_productos SET nombre=? WHERE id_cat=? AND id_gir=?")){
@@ -1411,16 +1340,14 @@ class Guardar{
                             $info['page'] = "msd/ver_giro.php";
                             $this->con_cambios(null);
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($this->con->error)); }
             }
-        }else{ $this->registrar(2, 0, 0, 'crear catalogo'); }
+        }else{ $this->registrar(2, 0, 0, 'crear_catalogo()'); }
         return $info;
-        
     }
     private function eliminar_catalogo(){
-        
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Catalogo no pudo ser eliminado";
@@ -1441,20 +1368,20 @@ class Guardar{
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/ver_giro.php?id=".$id[0];
                                         $sql->close();
-                                    }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sql->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sql->error); }
-                            }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #1 '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'catalogo'); }
-                    }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sqlcat->error); }
-                }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$sqlcat->error); }
-            }else{ $this->registrar(6, 0, 0, 'mod catalogo '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'del catalogo'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'eliminar_catalogo() XSS'); }
+                        $sqlcat->free_result();
+                        $sqlcat->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #2 '.htmlspecialchars($sqlcat->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #2 '.htmlspecialchars($sqlcat->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_catalogo() #2 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_catalogo()'); }
         return $info;
-        
     }
     private function configurar_usuario_local(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -1477,59 +1404,57 @@ class Guardar{
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
                                         $sql->close();
-                                    }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$sql->error); }
-                                }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$sql->error); }
-                            }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$this->con->error); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #1 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #1 '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'sin acceso usuario local'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'configurar_usuario_local()'); }
+                        $sqlloc->free_result();
                         $sqlloc->close();
-                    }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$sqlloc->error); }
-                }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$sqlloc->error); }
-            }else{ $this->registrar(6, 0, 0, 'conf usuario local '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'conf usuario local'); }
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #2 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #2 '.htmlspecialchars($sqlloc->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_usuario_local() #2 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_usuario_local()'); }
         return $info;
-
     }
     private function configurar_local(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-
             $t_retiro = $_POST['t_retiro'];
             $t_despacho = $_POST['t_despacho'];
             $sonido = $_POST['sonido'];
             $pos = $_POST['pos'];
             $id_loc = $_POST['id_loc'];
-
-            $sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?");
-            $sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado);
-            $sqlloc->execute();
-            $res = $sqlloc->get_result();
-            if($res->{"num_rows"} == 1){
-                if($sql = $this->con->prepare("UPDATE locales SET pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
-                    if($sql->bind_param("isiiii", $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
-                        if($sql->execute()){
-                            $info['op'] = 1;
-                            $info['mensaje'] = "Local editado exitosamente";
-                            $info['reload'] = 1;
-                            $info['page'] = "msd/locales.php";
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'conf local'); }
-                    }else{ $this->registrar(6, 0, 0, 'conf local'); }
-                }else{ $this->registrar(6, 0, 0, 'conf local'); }
-            }
-            if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'sin acceso local'); }
-        }else{ $this->registrar(2, 0, 0, 'conf local'); }
-
+            if($sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
+                if($sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
+                    if($sqlloc->execute()){
+                        $res = $sqlloc->get_result();
+                        if($res->{"num_rows"} == 1){
+                            if($sql = $this->con->prepare("UPDATE locales SET pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
+                                if($sql->bind_param("isiiii", $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
+                                    if($sql->execute()){
+                                        $info['op'] = 1;
+                                        $info['mensaje'] = "Local editado exitosamente";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/locales.php";
+                                        $sql->close();
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'configurar_local()'); }
+                        $sqlloc->free_result();
+                        $sqlloc->close();
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_local()'); }
         return $info;
-
     }
     private function crear_locales(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $code = bin2hex(openssl_random_pseudo_bytes(10));
             $id_cat = $_POST['id_cat'];
@@ -1560,9 +1485,9 @@ class Guardar{
                                                         $this->locales_giro();
                                                         $this->con_cambios(null);
                                                         $sqlloc->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'insertar locales '.$sqlloc->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'insertar locales '.$sqlloc->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'insertar locales '.$this->con->error); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #1 '.htmlspecialchars($sqlloc->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #1 '.htmlspecialchars($sqlloc->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #1 '.htmlspecialchars($this->con->error)); }
                                         }
                                         if($id_loc > 0){
                                             if($sqlloc = $this->con->prepare("UPDATE locales SET nombre=?, correo_ses=?, direccion=?, lat=?, lng=?, correo=? WHERE id_loc=? AND id_cat=? AND id_gir=? AND eliminado=?")){
@@ -1575,26 +1500,26 @@ class Guardar{
                                                         $this->locales_giro();
                                                         $this->con_cambios(null);
                                                         $sqlloc->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'mod locales '.$sqlloc->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'mod locales '.$sqlloc->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'mod locales '.$this->con->error); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #2 '.htmlspecialchars($sqlloc->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #2 '.htmlspecialchars($sqlloc->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #2 '.htmlspecialchars($this->con->error)); }
                                         }
+                                        $sqlses->free_result();
                                         $sqlses->close();
-                                    }else{ $this->registrar(6, 0, 0, 'mod locales '.$sqlses->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod locales '.$sqlses->error); }
-                            }else{ $this->registrar(6, 0, 0, 'mod locales '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #3 '.htmlspecialchars($sqlses->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #3 '.htmlspecialchars($sqlses->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #3 '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'no catalogo'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'crear_locales() XSS'); }
+                        $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'mod locales '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'mod locales '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'mod locales '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'crear locales'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #4 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #4 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #4 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'crear_locales()'); }
         return $info;
-        
     }
     private function crear_locales_tramos(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -1618,9 +1543,9 @@ class Guardar{
                                             $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
                                             $this->con_cambios(null);
                                             $sqllt->close();
-                                        }else{ $this->registrar(6, 0, 0, 'ins locales tramos '.$sqllt->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins locales tramos '.$sqllt->error); }
-                                }else{ $this->registrar(6, 0, 0, 'ins locales tramos '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #1 '.htmlspecialchars($sqllt->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #1 '.htmlspecialchars($sqllt->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #1 '.htmlspecialchars($this->con->error)); }
                             }
                             if($id_lot > 0){
                                 if($sqllt = $this->con->prepare("UPDATE locales_tramos SET nombre=?, precio=?, poligono=? WHERE id_lot=? AND id_loc=?")){
@@ -1632,48 +1557,48 @@ class Guardar{
                                             $info['page'] = "msd/zonas_locales.php?id_loc=".$id_loc;
                                             $this->con_cambios(null);
                                             $sqllt->close();
-                                        }else{ $this->registrar(6, 0, 0, 'mod locales tramos '.$sqllt->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'mod locales tramos '.$sqllt->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod locales tramos '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #2 '.htmlspecialchars($sqllt->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #2 '.htmlspecialchars($sqllt->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #2 '.htmlspecialchars($this->con->error)); }
                             }
                             if($sqlmin = $this->con->prepare("SELECT MIN(t3.precio) as min FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t3.eliminado=? AND t2.eliminado=?")){
                                 if($sqlmin->bind_param("iii", $this->id_gir, $this->eliminado, $this->eliminado)){
                                     if($sqlmin->execute()){
                                         $min = $sqlmin->get_result()->fetch_all(MYSQLI_ASSOC)[0]["min"];
-                                        $sqlmin->free_result();
-                                        $sqlmin->close();
                                         if($min !== null){
                                             if($sqlug = $this->con->prepare("UPDATE giros SET despacho_domicilio='1', desde=? WHERE id_gir=? AND eliminado=?")){
                                                 if($sqlug->bind_param("iii", $min, $this->id_gir, $this->eliminado)){
                                                     if($sqlug->execute()){
                                                         $sqlug->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=1) '.$sqlug->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=1) '.$sqlug->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=1) '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #3 '.htmlspecialchars($sqlug->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #3 '.htmlspecialchars($sqlug->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #3 '.htmlspecialchars($this->con->error)); }
                                         }else{
                                             if($sqlug = $this->con->prepare("UPDATE giros SET despacho_domicilio='0' WHERE id_gir=? AND eliminado=?")){
                                                 if($sqlug->bind_param("ii", $this->id_gir, $this->eliminado)){
                                                     if($sqlug->execute()){
                                                         $sqlug->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlug->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlug->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$this->con->error); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #4 '.htmlspecialchars($sqlug->error)); }
+                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #4 '.htmlspecialchars($sqlug->error)); }
+                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #4 '.htmlspecialchars($this->con->error)); }
                                         }
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlmin->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlmin->error); }
-                            }else{$this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$this->con->error);  }
+                                        $sqlmin->free_result();
+                                        $sqlmin->close();
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #5 '.htmlspecialchars($sqlmin->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #5 '.htmlspecialchars($sqlmin->error)); }
+                            }else{$this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #5 '.htmlspecialchars($this->con->error));  }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'acceso a locales'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'crear_locales_tramos()'); }
+                        $sqlloc->free_result();
                         $sqlloc->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlloc->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$sqlloc->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (Giros despacho=0) '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'local tramo'); }
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #6 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #6 '.htmlspecialchars($sqlloc->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_locales_tramos() #6 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, $this->id_gir, 'crear_locales_tramos()'); }
         return $info;
         
     }
     private function locales_giro(){
-
         if($sql = $this->con->prepare("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
@@ -1682,22 +1607,19 @@ class Guardar{
                         if($sqlug->bind_param("sii", json_encode($result, JSON_UNESCAPED_UNICODE), $this->id_gir, $this->eliminado)){
                             if($sqlug->execute()){
                                 $sqlug->close();
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (lista_locales)'); }
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (lista_locales)'); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (lista_locales)'); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #1 '.htmlspecialchars($sqlug->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #1 '.htmlspecialchars($sqlug->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #1 '.htmlspecialchars($this->con->error)); }
                     $sql->free_result();
                     $sql->close();
-                }
-            }
-        }
-
+                }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #2 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #2 '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'locales_giro() #2 '.htmlspecialchars($this->con->error)); }
     }
-    private function eliminar_locales(){
-                
+    private function eliminar_locales(){     
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Local no pudo ser eliminado";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id_loc = $_POST['id'];
             if($sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
@@ -1715,22 +1637,22 @@ class Guardar{
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/locales.php";
                                         $sqlult->close();
-                                    }else{ $this->registrar(6, 0, 0, 'del locales '.$sqlult->error); }
-                                }else{ $this->registrar(6, 0, 0, 'del locales '.$sqlult->error); }
-                            }else{ $this->registrar(6, 0, 0, 'del locales '.$this->con->error); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlult->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlult->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'selec locales'); }
-                    }else{ $this->registrar(6, 0, 0, 'del locales '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del locales '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del locales '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'del locales'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'eliminar_locales()'); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
         return $info;
-        
     }
     private function crear_usuario_admin(){
-
         $info['op'] = 2;
-        $info['mensaje'] = "Error: ";
+        $info['mensaje'] = "Error";
         if($this->admin == 1){
             $correo = $_POST['correo'];
             if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
@@ -1761,13 +1683,13 @@ class Guardar{
                                                                             $info['reload'] = 1;
                                                                             $info['page'] = "msd/usuarios_admin.php";
                                                                             $sqliug->close();
-                                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios giro '.$sqliug->error); }
-                                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios giro '.$sqliug->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios giro '.$this->con->error); }
+                                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #1 '.htmlspecialchars($sqliug->error)); }
+                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #1 '.htmlspecialchars($sqliug->error)); }
+                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #1 '.htmlspecialchars($this->con->error)); }
                                                                 $sqlius->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'insert usuario '.$sqlius->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'insert usuario '.$sqlius->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'insert usuario '.$this->con->error); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #2 '.htmlspecialchars($sqlius->error)); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #2 '.htmlspecialchars($sqlius->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #2 '.htmlspecialchars($this->con->error)); }
                                                 }
                                                 if($id > 0){
                                                     if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
@@ -1778,29 +1700,30 @@ class Guardar{
                                                                 $info['reload'] = 1;
                                                                 $info['page'] = "msd/usuarios_admin.php";
                                                                 $sqluus->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqluus->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqluus->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'mod usuario '.$this->con->error); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #3 '.htmlspecialchars($sqluus->error)); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #3 '.htmlspecialchars($sqluus->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #3 '.htmlspecialchars($this->con->error)); }
                                                 }
-                                            }else{ $this->registrar(7, 0, 0, 'correo no exist'); }
-                                        }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqlus->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqlus->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod usuario '.$this->con->error); }
-                            }else{ $this->registrar(7, 0, 0, 'user admin giro'); }
+                                            }else{ }
+                                            $sqlus->free_result();
+                                            $sqlus->close();
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #4 '.htmlspecialchars($sqlus->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #4 '.htmlspecialchars($sqlus->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #4 '.htmlspecialchars($this->con->error)); }
+                            }
+                            if($resugc->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'crear_usuario_admin() fw_usuarios_giros_clientes'); }
+                            $sqlugc->free_result();
                             $sqlugc->close();
-                        }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqlugc->error); }
-                    }else{ $this->registrar(6, 0, 0, 'mod usuario '.$sqlugc->error); }
-                }else{ $this->registrar(6, 0, 0, 'mod usuario '.$this->con->error); }
+                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #5 '.htmlspecialchars($sqlugc->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #5 '.htmlspecialchars($sqlugc->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_usuario_admin() #5 '.htmlspecialchars($this->con->error)); }
             }else{  }
-        }else{ $this->registrar(4, 0, 0, 'user admin giro'); }
+        }else{ $this->registrar(4, 0, 0, 'crear_usuario_admin()'); }
         return $info;
-
     }
     private function crear_usuarios_local(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $correo = $_POST['v_correo'];
             if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
@@ -1814,7 +1737,7 @@ class Guardar{
                     if($sqlsl->bind_param("ii", $id_loc, $this->id_gir)){
                         if($sqlsl->execute()){
                             $ressl = $sqlsl->get_result();
-                            if($ressl->{"num_rows"} == 1){
+                            
                                 if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
                                     if($sqlus->bind_param("s", $correo)){
                                         if($sqlus->execute()){
@@ -1833,9 +1756,9 @@ class Guardar{
                                                                         $info['reload'] = 1;
                                                                         $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
                                                                         $sqlius->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'ins user local '.$sqlius->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'ins user local '.$sqlius->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'ins user local '.$this->con->error); }
+                                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($sqlius->error)); }
+                                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($sqlius->error)); }
+                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($this->con->error)); }
                                                         }else{
                                                             $info['op'] = 2;
                                                             $info['mensaje'] = "Password debe tener al menos 8 caracteres";
@@ -1851,9 +1774,9 @@ class Guardar{
                                                             if($sqluup->bind_param("sii", md5($pass1), $id, $this->eliminado)){
                                                                 if($sqluup->execute()){
                                                                     $sqluup->close();
-                                                                }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqluup->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqluup->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'mod user local '.$this->con->error); }
+                                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
+                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
+                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($this->con->error)); }
                                                     }
                                                     if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=? WHERE id_user=? AND eliminado=?")){
                                                         if($sqluus->bind_param("ssiii", $nombre, $correo, $tipo, $id, $this->eliminado)){
@@ -1863,26 +1786,28 @@ class Guardar{
                                                                 $info['reload'] = 1;
                                                                 $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
                                                                 $sqluus->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqluus->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqluus->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'mod user local '.$this->con->error); }
+                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($sqluus->error)); }
+                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($sqluus->error)); }
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($this->con->error)); }
                                                 }
-                                            }else{ $this->registrar(7, 0, 0, 'mod correo exist'); }
+                                            }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_usuarios_local() correo existente '); }
+                                            $sqlus->free_result();
                                             $sqlus->close();
-                                        }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqlus->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'mod user local '.$sqlus->error); }
-                                }else{ $this->registrar(6, 0, 0, 'mod user local '.$this->con->error); }
-                            }else{ $this->registrar(7, 0, 0, 'no local'); }
-                        }else{ $this->registrar(6, 0, 0, 'ins user local '.$sqlsl->error); }
-                    }else{ $this->registrar(6, 0, 0, 'ins user local '.$sqlsl->error); }
-                }else{ $this->registrar(6, 0, 0, 'ins user local '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($sqlus->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($sqlus->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($this->con->error)); }
+                            }
+                            if($ressl->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'crear_usuarios_local() local'); }
+                            $sqlsl->free_result();
+                            $sqlsl->close();
+                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #5 '.htmlspecialchars($sqlsl->error)); }
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #5 '.htmlspecialchars($sqlsl->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #5 '.htmlspecialchars($this->con->error)); }
             }else{  }
-        }else{ $this->registrar(2, 0, 0, 'ins user local'); }
+        }else{ $this->registrar(2, 0, 0, 'crear_usuarios_local()'); }
         return $info;
-
     }
     private function eliminar_usuario(){
-             
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Usuario no pudo ser eliminado";
@@ -1903,16 +1828,16 @@ class Guardar{
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/usuarios.php";
                                         $sqlu->close();
-                                    }else{  $this->registrar(6, 0, 0, 'del user '.$sqlu->error); }
-                                }else{  $this->registrar(6, 0, 0, 'del user '.$sqlu->error); }
-                            }else{  $this->registrar(6, 0, 0, 'del user '.$this->con->error); }
-                        }else{ $this->registrar(7, 0, 0, 'del user '); }
+                                    }else{  $this->registrar(6, 0, 0, 'eliminar_usuario() #1 '.htmlspecialchars($sqlu->error)); }
+                                }else{  $this->registrar(6, 0, 0, 'eliminar_usuario() #1 '.htmlspecialchars($sqlu->error)); }
+                            }else{  $this->registrar(6, 0, 0, 'eliminar_usuario() #1 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(7, 0, 0, 'eliminar_usuario()'); }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'del user '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del user '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del user '.$this->con->error); }
-        }else{ $this->registrar(1, 0, 0, 'del usuario'); }
+                    }else{ $this->registrar(6, 0, 0, 'eliminar_usuario() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'eliminar_usuario() #2 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'eliminar_usuario() #2 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, 0, 'eliminar_usuario()'); }
         return $info;
     }
     private function eliminar_pagina(){
@@ -1932,10 +1857,10 @@ class Guardar{
                         $info['page'] = "msd/ver_giro.php?id_gir=".$this->id_gir;
                         $this->con_cambios(null);
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'del pag '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del pag '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del pag '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'del pag'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_pagina() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_pagina() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_pagina() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, $this->id_gir, 'eliminar_pagina()'); }
         return $info;
     }
     private function eliminar_preguntas(){
@@ -1954,14 +1879,13 @@ class Guardar{
                         $info['page'] = "msd/preguntas.php";
                         $this->con_cambios(null);
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'error sql: del preguntas'); }
-                }else{ $this->registrar(6, 0, 0, 'error sql: del preguntas'); }
-            }else{ $this->registrar(6, 0, 0, 'error sql: del preguntas'); }
-        }else{ $this->registrar(2, 0, 0, 'del preguntas'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_preguntas() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_preguntas() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_preguntas() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_preguntas()'); }
         return $info;
     }
     private function crear_categoria(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -1987,14 +1911,14 @@ class Guardar{
                                         $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
                                         $info['cambios'] = $this->con_cambios(null);
                                         $sqlic->close();
-                                    }else{ $this->registrar(6, 0, 0, 'ins user '.$sqlic->error); }
-                                }else{ $this->registrar(6, 0, 0, 'ins user '.$sqlic->error); }
-                            }else{ $this->registrar(6, 0, 0, 'ins user '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #1 '.htmlspecialchars($sqlic->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #1 '.htmlspecialchars($sqlic->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #1 '.htmlspecialchars($this->con->error)); }
                             $sql->free_result();
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'ins user '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'ins user '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'ins user '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #2 '.htmlspecialchars($this->con->error)); }
             }
             if($id_cae > 0){
                 if($sqluc = $this->con->prepare("UPDATE categorias SET nombre=?, tipo=?, descripcion=?, descripcion_sub=?, precio=? WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
@@ -2006,14 +1930,12 @@ class Guardar{
                             $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
                             $this->con_cambios(null);
                             $sqluc->close();
-                        }else{ $this->registrar(6, 0, 0, 'update cat '.$sqluc->error); }
-                    }else{ $this->registrar(6, 0, 0, 'update cat '.$sqluc->error); }
-                }else{ $this->registrar(6, 0, 0, 'update cat '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($this->con->error)); }
             }
-
-        }else{ $this->registrar(2, 0, 0, 'crear cat'); }
+        }else{ $this->registrar(2, 0, 0, 'crear_categoria()'); }
         return $info;
-        
     }
     private function eliminar_productos(){
         $info['tipo'] = "error";
@@ -2040,21 +1962,21 @@ class Guardar{
                                                     $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
                                                     $this->con_cambios(null);
                                                     $sqlup->close();
-                                                }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sqlup->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sqlup->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$this->con->error); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($this->con->error)); }
                                         $sqldcp->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sqldcp->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sqldcp->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqldcp->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqldcp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($this->con->error)); }
                         }
-                        if($sql->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'select categoria'); }
+                        if($sql->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'eliminar_productos()'); }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error sql: up cat_pros & productos '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'Error Sql: (del pro)'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_productos()'); }
         return $info;
     }
     private function eliminar_categoria(){
@@ -2073,14 +1995,13 @@ class Guardar{
                         $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
                         $this->con_cambios(null);
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'del cat'); }
-                }else{ $this->registrar(6, 0, 0, 'del cat'); }
-            }else{ $this->registrar(6, 0, 0, 'del cat'); }
-        }else{ $this->registrar(2, 0, 0, 'del cat'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_categoria()'); }
         return $info;
     }
     private function crear_pagina(){
-        
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -2099,9 +2020,9 @@ class Guardar{
                                     if($sqlupa->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
                                         if($sqlupa->execute()){
                                             $sqlupa->close();
-                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$sqlupa->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$sqlupa->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$this->con->error); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($this->con->error)); }
                             }
                             $info['op'] = 1;
                             $info['mensaje'] = "Paginas creado exitosamente";
@@ -2109,51 +2030,53 @@ class Guardar{
                             $info['page'] = "msd/configurar_contenido.php";
                             $this->con_cambios(null);
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins pagina) '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins pagina) '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins pagina) '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($this->con->error)); }
             }
             if($id_pag > 0){
                 if($sql = $this->con->prepare("SELECT imagen FROM paginas WHERE id_pag=? AND id_gir=? AND eliminado=?")){
                     if($sql->bind_param("iii", $id_pag, $this->id_gir, $this->eliminado)){
                         if($sql->execute()){
-                            $imagen = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["imagen"];
-                            if($sqlupa = $this->con->prepare("UPDATE paginas SET nombre=?, html=?, tipo=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
-                                if($sqlupa->bind_param("ssiiii", $nombre, $html, $tipo, $id_pag, $this->id_gir, $this->eliminado)){
-                                    if($sqlupa->execute()){
-                                        if($image["op"] == 1){
-                                            @unlink("/var/www/html/restaurants/images/paginas/".$imagen);
-                                            if($sqlupi = $this->con->prepare("UPDATE paginas SET image=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
-                                                if($sqlupi->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
-                                                    if($sqlupi->execute()){
-                                                        $sqlupi->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$sqlupi->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$sqlupi->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (update imagen pagina) '.$this->con->error); }
-                                        }
-                                        $info['op'] = 1;
-                                        $info['mensaje'] = "Paginas modificado exitosamente";
-                                        $info['reload'] = 1;
-                                        $info['page'] = "msd/configurar_contenido.php";
-                                        $this->con_cambios(null);
-                                        $sqlupa->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (update pagina) '.$sqlupa->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (update pagina) '.$sqlupa->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (update pagina) '.$this->con->error); }
+                            $res = $sql->get_result();
+                            if($res->{"num_rows"} == 1){
+                                if($sqlupa = $this->con->prepare("UPDATE paginas SET nombre=?, html=?, tipo=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
+                                    if($sqlupa->bind_param("ssiiii", $nombre, $html, $tipo, $id_pag, $this->id_gir, $this->eliminado)){
+                                        if($sqlupa->execute()){
+                                            if($image["op"] == 1){
+                                                $imagen = $res->fetch_all(MYSQLI_ASSOC)[0]["imagen"];
+                                                @unlink("/var/www/html/restaurants/images/paginas/".$imagen);
+                                                if($sqlupi = $this->con->prepare("UPDATE paginas SET image=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
+                                                    if($sqlupi->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
+                                                        if($sqlupi->execute()){
+                                                            $sqlupi->close();
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #3 '.htmlspecialchars($sqlupi->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #3 '.htmlspecialchars($sqlupi->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #3 '.htmlspecialchars($this->con->error)); }
+                                            }
+                                            $info['op'] = 1;
+                                            $info['mensaje'] = "Paginas modificado exitosamente";
+                                            $info['reload'] = 1;
+                                            $info['page'] = "msd/configurar_contenido.php";
+                                            $this->con_cambios(null);
+                                            $sqlupa->close();
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #4 '.htmlspecialchars($sqlupa->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #4 '.htmlspecialchars($sqlupa->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #4 '.htmlspecialchars($this->con->error)); }
+                            }
+                            if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'crear_pagina()'); }
                             $sql->free_result();
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (select imagen pagina) '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (select imagen pagina) '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (select imagen pagina) '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #5 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #5 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #5 '.htmlspecialchars($this->con->error)); }
             }
-        }else{ $this->registrar(2, 0, 0, 'crear pagina'); }
+        }else{ $this->registrar(2, 0, 0, 'crear_pagina()'); }
         return $info;
     }
     private function crear_preguntas(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id_pre = $_POST['id'];
             $nombre = $_POST['nombre'];
@@ -2169,9 +2092,9 @@ class Guardar{
                             $info['page'] = "msd/preguntas.php";
                             $this->con_cambios(null);
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'error sql: update preguntas'); }
-                    }else{ $this->registrar(6, 0, 0, 'error sql: update preguntas'); }
-                }else{ $this->registrar(6, 0, 0, 'error sql: update preguntas'); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #1 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #1 '.htmlspecialchars($this->con->error)); }
             }
             if($id_pre == 0){
                 if($sql = $this->con->prepare("INSERT INTO preguntas (nombre, mostrar, id_cat, id_gir) VALUES (?, ?, ?, ?)")){
@@ -2183,9 +2106,9 @@ class Guardar{
                             $info['page'] = "msd/preguntas.php";
                             $id_pre = $this->con->insert_id;
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'error sql: insert preguntas '.$sql->error); }
-                    }else{ $this->registrar(6, 0, 0, 'error sql: insert preguntas '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'error sql: insert preguntas '.$this->con->error); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #2 '.htmlspecialchars($this->con->error)); }
             }
             if($sqldpv = $this->con->prepare("DELETE FROM preguntas_valores WHERE id_pre=?")){
                 if($sqldpv->bind_param("i", $id_pre)){
@@ -2200,33 +2123,23 @@ class Guardar{
                                     if($sqlipv->bind_param("issi", $cant, $nombre, $valores_json, $id_pre)){
                                         if($sqlipv->execute()){
                                             $sqlipv->close();
-                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins preguntas valores)'); }
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins preguntas valores)'); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (ins preguntas valores)'); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #3 '.htmlspecialchars($sqlipv->error)); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #3 '.htmlspecialchars($sqlipv->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #3 '.htmlspecialchars($this->con->error)); }
                             }
                         }
                         $sqldpv->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas valores) '.$sqldpv->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas valores) '.$sqldpv->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (del preguntas valores) '.$this->con->error); }
-        }else{ $this->registrar(2, 0, 0, 'crear pagina'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #4 '.htmlspecialchars($sqldpv->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #4 '.htmlspecialchars($sqldpv->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_preguntas() #4 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'crear_preguntas()'); }
         return $info;
-        
     }
     private function crear_productos(){
-
-        $id_pro = $_POST['id_pro'];
-        $id_cae = $_POST['id'];
-        $parent_id = $_POST['parent_id'];
-        $tipo = $_POST['tipo'];
-        
-        $numero = $_POST['numero'];
-        $nombre = $_POST['nombre'];
-        $nombre_carro = $_POST['nombre_carro'];
-        $descripcion = $_POST['descripcion'];
-        $precio = $_POST['precio'];
-
+        $info['op'] = 2;
+        $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            $id_cae = $_POST['id'];
             if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
@@ -2237,7 +2150,15 @@ class Guardar{
                                     if($sqlcp->execute()){
                                         $rescp = $sqlcp->get_result();
                                         $orders = $rescp->{"num_rows"};
+                                        $tipo = $_POST['tipo'];
                                         if($tipo == 0){
+                                            $precio = $_POST['precio'];
+                                            $parent_id = $_POST['parent_id'];
+                                            $id_pro = $_POST['id_pro'];
+                                            $numero = $_POST['numero'];
+                                            $nombre = $_POST['nombre'];
+                                            $nombre_carro = $_POST['nombre_carro'];
+                                            $descripcion = $_POST['descripcion'];
                                             if($id_pro == 0){
                                                 if($sqlip = $this->con->prepare("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, fecha_creado, id_gir) VALUES (?, ?, ?, ?, now(), ?)")){
                                                     if($sqlip->bind_param("isssi", $numero, $nombre, $nombre_carro, $descripcion, $this->id_gir)){
@@ -2247,36 +2168,36 @@ class Guardar{
                                                                 if($sqlipr->bind_param("iii", $id_cae, $id_pro, $orders)){
                                                                     if($sqlipr->execute()){
                                                                         $sqlipr->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert cat_pros) '.$sqlipr->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert cat_pros) '.$sqlipr->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert cat_pros) '.$this->con->error); }
+                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
+                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($this->con->error)); }
                                                             if($sqlipp = $this->con->prepare("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES (?, ?, ?)")){
                                                                 if($sqlipp->bind_param("iii", $this->id_cat, $id_pro, $precio)){
                                                                     if($sqlipp->execute()){
                                                                         $sqlipp->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert productos_precio) '.$sqlipp->error); }
-                                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert productos_precio) '.$sqlipp->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (insert productos_precio) '.$this->con->error); }            
+                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($this->con->error)); }            
                                                             $sqlip->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (productos) '.$sqlip->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (productos) '.$sqlip->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (productos) '.$this->con->error); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #3 '.htmlspecialchars($sqlip->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #3 '.htmlspecialchars($sqlip->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #3 '.htmlspecialchars($this->con->error)); }
                                             }
                                             if($id_pro > 0){
                                                 if($sqlup = $this->con->prepare("UPDATE productos SET numero=?, nombre=?, nombre_carro=?, descripcion=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
                                                     if($sqlup->bind_param("isssiii", $numero, $nombre, $nombre_carro, $descripcion, $id_pro, $this->id_gir, $this->eliminado)){
                                                         if($sqlup->execute()){
                                                             $sqlup->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos) '.$sqlup->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos) '.$sqlup->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos) '.$this->con->error); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #4 '.htmlspecialchars($sqlup->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #4 '.htmlspecialchars($sqlup->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #4 '.htmlspecialchars($this->con->error)); }
                                                 if($sqlupp = $this->con->prepare("UPDATE productos_precio SET precio=? WHERE id_pro=? AND id_cat=?")){
                                                     if($sqlupp->bind_param("iii", $precio, $id_pro, $this->id_cat)){
                                                         if($sqlupp->execute()){
                                                             $sqlupp->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos_precio) '.$sqlupp->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos_precio) '.$sqlupp->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (update productos_precio) '.$this->con->error); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #5 '.htmlspecialchars($sqlupp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #5 '.htmlspecialchars($sqlupp->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #5 '.htmlspecialchars($this->con->error)); }
                                             }
                                         }
                                         if($tipo == 1){
@@ -2288,9 +2209,9 @@ class Guardar{
                                                         if($sqlxip->bind_param("iii", $id_cae, $all_prods[$i]["id_pro"], $orders)){
                                                             if($sqlxip->execute()){
                                                                 $sqlxip->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (add cat_pros) '.$sqlxip->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (add cat_pros) '.$sqlxip->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (add cat_pros) '.$this->con->error); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #6 '.htmlspecialchars($sqlxip->error)); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #6 '.htmlspecialchars($sqlxip->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #6 '.htmlspecialchars($this->con->error)); }
                                                 }
                                             }
                                         }
@@ -2301,97 +2222,95 @@ class Guardar{
                                         $this->con_cambios(null);
                                         $sqlcp->free_result();
                                         $sqlcp->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat_pros) '.$sqlcp->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat_pros) '.$sqlcp->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat_pros) '.$this->con->error); }
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #7 '.htmlspecialchars($sqlcp->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #7 '.htmlspecialchars($sqlcp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #7 '.htmlspecialchars($this->con->error)); }
                         }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'no cat selected'); }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'crear_productos()'); }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat)'); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat)'); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (select cat)'); }
-        }else{ $this->registrar(2, 0, 0, 'crear prod'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #8 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #8 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #8 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'crear_productos()'); }
         return $info;
     }
-    private function asignar_prods_promocion(){
-        $info['op'] = 2;
-        $info['mensaje'] = "Error";
+    private function eliminar_horario(){
+        $info['tipo'] = "error";
+        $info['titulo'] = "Error";
+        $info['texto'] = "Error:";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-            $id_cae = $_POST['id_cae'];
-            $parent_id = $_POST['parent_id'];
-            $precio = $_POST['precio'];
-            if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
-                if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
+            $id = explode("/", $_POST['id']);
+            if($sql = $this->con->prepare("UPDATE horarios SET eliminado='1' WHERE id_hor=? AND id_gir=?")){
+                if($sql->bind_param("ii", $id[0], $this->id_gir)){
                     if($sql->execute()){
-                        $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1){
-                            if($sqluc = $this->con->prepare("UPDATE categorias SET precio=? WHERE id_cae=?")){
-                                if($sqluc->bind_param("ii", $precio, $id_cae)){
-                                    if($sqluc->execute()){
-                                        if($sqlepc = $this->con->prepare("DELETE FROM promocion_categoria WHERE id_cae1=?")){
-                                            if($sqlepc->bind_param("i", $id_cae)){
-                                                if($sqlepc->execute()){
-                                                    if($sqlepp = $this->con->prepare("DELETE FROM promocion_productos WHERE id_cae=?")){
-                                                        if($sqlepp->bind_param("i", $id_cae)){
-                                                            if($sqlepp->execute()){
-                                                                $values = $this->list_arbol_cats_prods();
-                                                                for($i=0; $i<count($values); $i++){
-                                                                    $value = $values[$i];
-                                                                    if($value['id_cae'] !== null){
-                                                                        $cae_val = $_POST['sel-cae-'.$value['id_cae']];
-                                                                        if($cae_val > 0){
-                                                                            if($sqlipc = $this->con->prepare("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES (?, ?, ?)")){
-                                                                                if($sqlipc->bind_param("iii", $id_cae, $value["id_cae"], $cae_val)){
-                                                                                    if($sqlipc->execute()){
-                                                                                        $sqlipc->close();
-                                                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqlipc->error); }
-                                                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqlipc->error); }
-                                                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$this->con->error); }
-                                                                        }
-                                                                    }
-                                                                    if($value['id_pro'] !== null){
-                                                                        $pro_val = $_POST['sel-pro-'.$value['id_pro']];
-                                                                        if($pro_val > 0){
-                                                                            if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
-                                                                                if($sqlipp->bind_param("iii", $id_cae, $value["id_pro"], $pro_val)){
-                                                                                    if($sqlipp->execute()){
-                                                                                        $sqlipp->close();
-                                                                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo prods) '.$sqlipp->error); }
-                                                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo prods) '.$sqlipp->error); }
-                                                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo prods) '.$this->con->error); }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                $info['op'] = 1;
-                                                                $info['mensaje'] = "Productos Asignados";
-                                                                $info['reload'] = 1;
-                                                                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                                                                $sqlepp->close();
-                                                                $this->con_cambios(null);
-                                                            }else{ $this->registrar(6, 0, 0, 'error sql '.$sqlepp->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'error sql '.$sqlepp->error); }
-                                                    }else{ $this->registrar(6, 0, 0, 'error sql '.$this->con->error); }
-                                                    $sqlepc->close();
-                                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqlepc->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqlepc->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$this->con->error); }
-                                        $sqluc->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqluc->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sqluc->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$this->con->error); }
-                        }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'no select cat'); }
-                        $sql->free_result();
+                        $info['tipo'] = "success";
+                        $info['titulo'] = "Eliminado";
+                        $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/crear_horario.php?id_loc=".$id[1]."&nombre=".$id[2];
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$sql->error); }
-            }else{$this->registrar(6, 0, 0, 'Error Sql: (promo cats) '.$this->con->error);  }
-        }else{ $this->registrar(2, 0, 0, 'asig prods proms'); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #1 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #1 '.htmlspecialchars($sql->error)); }
+            if($sqlre = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='1')")){
+                if($sqlre->bind_param("ii", $this->id_gir, $this->eliminado)){
+                    if($sqlre->execute()){
+                        $resre = $sqlre->get_result();
+                        if($resre->{"num_rows"} == 0){
+                            if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='0' WHERE id_gir=? AND eliminado=?")){
+                                if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqlure->execute()){
+                                        $sqlure->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #2 '.htmlspecialchars($sqlure->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #2 '.htmlspecialchars($sqlure->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #2 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($resre->{"num_rows"} > 0){
+                            if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='1' WHERE id_gir=? AND eliminado=?")){
+                                if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqlure->execute()){
+                                        $sqlure->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #3 '.htmlspecialchars($sqlure->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #3 '.htmlspecialchars($sqlure->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #3 '.htmlspecialchars($this->con->error)); }
+                        }
+                        $sqlre->free_result();
+                        $sqlre->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #4 '.htmlspecialchars($sqlre->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #4 '.htmlspecialchars($sqlre->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #4 '.htmlspecialchars($this->con->error)); }
+            if($sqlde = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='2')")){
+                if($sqlde->bind_param("ii", $this->id_gir, $this->eliminado)){
+                    if($sqlde->execute()){
+                        $resde = $sqlde->get_result();
+                        if($resde->{"num_rows"} == 0){
+                            if($sqlude = $this->con->prepare("UPDATE giros SET despacho_domicilio='0' WHERE id_gir=? AND eliminado=?")){
+                                if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqlude->execute()){
+                                        $sqlude->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #5 '.htmlspecialchars($sqlude->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #5 '.htmlspecialchars($sqlude->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #5 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($resde->{"num_rows"} > 0){
+                            if($sqlude = $this->con->prepare("UPDATE giros SET despacho_domicilio='1' WHERE id_gir=? AND eliminado=?")){
+                                if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqlude->execute()){
+                                        $sqlude->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #6 '.htmlspecialchars($sqlude->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #6 '.htmlspecialchars($sqlude->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #6 '.htmlspecialchars($this->con->error)); }
+                        }
+                        $sqlde->free_result();
+                        $sqlde->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #7 '.htmlspecialchars($sqlde->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #7 '.htmlspecialchars($sqlde->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_horario() #7 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_horario()'); }
         return $info;
     }
-    private function eliminar_usuario_local(){
-                
+    private function eliminar_usuario_local(){   
         $id = $_POST['id'];
         $id_loc = $_POST['id_loc'];
         $info['tipo'] = "error";
@@ -2400,22 +2319,18 @@ class Guardar{
         if($sql = $this->con->prepare("UPDATE fw_usuarios SET eliminado='1' WHERE id_user=? AND admin='0' AND id_loc=? AND id_gir=?")){
             if($sql->bind_param("iii", $id, $id_loc, $this->id_gir)){
                 if($sql->execute()){
-
                     $info['tipo'] = "success";
                     $info['titulo'] = "Eliminado";
                     $info['texto'] = "Usuario Eliminado";
                     $info['reload'] = 1;
                     $info['page'] = "msd/usuarios.php";
                     $sql->close();
-
-                }else{ $this->registrar(6, 0, 0, 'del user local'); }
-            }else{ $this->registrar(6, 0, 0, 'del user local'); }
-        }else{ $this->registrar(6, 0, 0, 'del user local'); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_usuario_local() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_usuario_local() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_usuario_local()'.htmlspecialchars($sql->error)); }
         return $info;
-        
     }
-    private function eliminar_usuario_admin(){
-                
+    private function eliminar_usuario_admin(){   
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Usuario no pudo ser eliminado";
@@ -2441,108 +2356,30 @@ class Guardar{
                                                         $info['reload'] = 1;
                                                         $info['page'] = "msd/usuarios.php";
                                                         $sqluus->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'del user admin '.$sqluus->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'del user admin '.$sqluus->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'del user admin '.$this->con->error); }
+                                                    }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #1 '.htmlspecialchars($sqluus->error)); }
+                                                }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #1 '.htmlspecialchars($sqluus->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #1 '.htmlspecialchars($this->con->error)); }
                                         }
                                         if($resus->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'no permisos del user admin'); }
                                         $sqlus->free_result();
                                         $sqlus->close();
-                                    }else{ $this->registrar(6, 0, 0, 'del user admin '.$sqlus->error); }
-                                }else{ $this->registrar(6, 0, 0, 'del user admin '.$sqlus->error); }
-                            }else{$this->registrar(6, 0, 0, 'del user admin '.$this->con->error);  }
+                                    }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #2 '.htmlspecialchars($sqlus->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #2 '.htmlspecialchars($sqlus->error)); }
+                            }else{$this->registrar(6, 0, 0, 'eliminar_usuario_admin() #2 '.htmlspecialchars($this->con->error));  }
                         }
-                        if($sql->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'del user admin'); }
+                        if($sql->{"num_rows"} == 0){ $this->registrar(7, 0, 0, 'eliminar_usuario_admin()'); }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'del user admin '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'del user admin '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'del user admin '.$this->con->error); }
-        }else{ $this->registrar(4, 0, 0, 'del user admin'); }
-        return $info;
-        
-    }
-    private function eliminar_horario(){
-        $info['tipo'] = "error";
-        $info['titulo'] = "Error";
-        $info['texto'] = "Error:";
-        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-            $id = explode("/", $_POST['id']);
-            if($sql = $this->con->prepare("UPDATE horarios SET eliminado='1' WHERE id_hor=? AND id_gir=?")){
-                if($sql->bind_param("ii", $id[0], $this->id_gir)){
-                    if($sql->execute()){
-                        $info['tipo'] = "success";
-                        $info['titulo'] = "Eliminado";
-                        $info['texto'] = "Horario ".$_POST["nombre"]." Eliminado";
-                        $info['reload'] = 1;
-                        $info['page'] = "msd/crear_horario.php?id_loc=".$id[1]."&nombre=".$id[2];
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (del horario)'); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (del horario)'); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (del horario)'); }
-            if($sqlre = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='1')")){
-                if($sqlre->bind_param("ii", $this->id_gir, $this->eliminado)){
-                    if($sqlre->execute()){
-                        $resre = $sqlre->get_result();
-                        if($resre->{"num_rows"} == 0){
-                            if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='0' WHERE id_gir=? AND eliminado=?")){
-                                if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
-                                    if($sqlure->execute()){
-                                        $sqlure->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlure->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlure->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$this->con->error); }
-                        }
-                        if($resre->{"num_rows"} > 0){
-                            if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='1' WHERE id_gir=? AND eliminado=?")){
-                                if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
-                                    if($sqlure->execute()){
-                                        $sqlure->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlure->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlure->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$this->con->error); }
-                        }
-                        $sqlre->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario) '.$sqlre->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario)'.$sqlre->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario)'.$this->con->error); }
-            if($sqlde = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='2')")){
-                if($sqlde->bind_param("ii", $this->id_gir, $this->eliminado)){
-                    if($sqlde->execute()){
-                        $resde = $sqlde->get_result();
-                        if($resde->{"num_rows"} == 0){
-                            if($sqlude = $this->con->prepare("UPDATE giros SET despacho_domicilio='0' WHERE id_gir=? AND eliminado=?")){
-                                if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
-                                    if($sqlude->execute()){
-                                        $sqlude->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlude->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlude->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$this->con->error); }
-                        }
-                        if($resde->{"num_rows"} > 0){
-                            if($sqlude = $this->con->prepare("UPDATE giros SET despacho_domicilio='1' WHERE id_gir=? AND eliminado=?")){
-                                if($sqlude->bind_param("ii", $this->id_gir, $this->eliminado)){
-                                    if($sqlude->execute()){
-                                        $sqlude->close();
-                                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlude->error); }
-                                }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$sqlude->error); }
-                            }else{ $this->registrar(6, 0, 0, 'Error Sql: (up giro) '.$this->con->error); }
-                        }
-                        $sqlde->close();
-                    }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario) '.$sqlde->error); }
-                }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario) '.$sqlde->error); }
-            }else{ $this->registrar(6, 0, 0, 'Error Sql: (select horario) '.$this->con->error); }
-
-        }else{ $this->registrar(2, 0, 0, 'del horario'); }
+                    }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #3 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #3 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'eliminar_usuario_admin() #3 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(4, 0, 0, 'eliminar_usuario_admin()'); }
         return $info;
     }
     private function crear_usuario(){
-
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if($this->re_venta == 1 || $this->id_user == 1){
-            $id = $_POST['id'];
-            $nombre = $_POST['nombre'];
             $correo = $_POST['correo'];
             $tipo = $_POST['tipo'];
             if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
@@ -2550,6 +2387,8 @@ class Guardar{
                     if($sqlus->execute()){
                         $resus = $sqlus->get_result();
                         $id_user = $resus->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
+                        $id = $_POST['id'];
+                        $nombre = $_POST['nombre'];
                         if($resus->{"num_rows"} == 0 || ($resus->{"num_rows"} == 1 && $id == $id_user)){
                             if($id > 0){
                                 if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
@@ -2560,18 +2399,18 @@ class Guardar{
                                             $info['reload'] = 1;
                                             $info['page'] = "msd/usuarios.php";
                                             $sqluus->close();
-                                        }else{ $this->registrar(6, 0, 0, 'update usuarios '.$sqluus->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'update usuarios '.$sqluus->error); }
-                                }else{ $this->registrar(6, 0, 0, 'update usuarios '.$this->con->error); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($this->con->error)); }
                                 if($tipo == 0 && $this->id_user == 1){
                                     $re = 0;
                                     if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
                                         if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
                                             if($sqlup->execute()){
                                                 $sqlup->close();
-                                            }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$sqlup->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$sqlup->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($this->con->error)); }
                                 }
                                 if($tipo == 1 && $this->id_user == 1){
                                     $re = 1;
@@ -2579,9 +2418,9 @@ class Guardar{
                                         if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
                                             if($sqlup->execute()){
                                                 $sqlup->close();
-                                            }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$sqlup->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$sqlup->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'up usuarios perm '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($this->con->error)); }
                                 }
                             }
                             if($id == 0){
@@ -2595,9 +2434,9 @@ class Guardar{
                                                 $info['reload'] = 1;
                                                 $info['page'] = "msd/usuarios.php";
                                                 $sqlius->close();
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlius->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlius->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($this->con->error)); }
                                 }
                                 if($tipo == 1 && $this->id_user == 1){
                                     $reventa = 1;
@@ -2609,16 +2448,95 @@ class Guardar{
                                                 $info['reload'] = 1;
                                                 $info['page'] = "msd/usuarios.php";
                                                 $sqlius->close();
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlius->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlius->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
                                 }
                             }
-                        }else{ $this->registrar(7, 0, 0, 'correo exist'); }
-                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlus->error); }
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlus->error); }
-            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-        }else{ $this->registrar(1, 0, 0, 'crear usuario'); }
+                        }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
+                        $sqlus->free_result();
+                        $sqlus->close();
+                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, 0, 'crear_usuario()'); }
         return $info;
     }
+    private function asignar_prods_promocion(){
+        $info['op'] = 2;
+        $info['mensaje'] = "Error";
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            $id_cae = $_POST['id_cae'];
+            if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+                if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{"num_rows"} == 1){
+                            $precio = $_POST['precio'];
+                            if($sqluc = $this->con->prepare("UPDATE categorias SET precio=? WHERE id_cae=?")){
+                                if($sqluc->bind_param("ii", $precio, $id_cae)){
+                                    if($sqluc->execute()){
+                                        if($sqlepc = $this->con->prepare("DELETE FROM promocion_categoria WHERE id_cae1=?")){
+                                            if($sqlepc->bind_param("i", $id_cae)){
+                                                if($sqlepc->execute()){
+                                                    if($sqlepp = $this->con->prepare("DELETE FROM promocion_productos WHERE id_cae=?")){
+                                                        if($sqlepp->bind_param("i", $id_cae)){
+                                                            if($sqlepp->execute()){
+                                                                $values = $this->list_arbol_cats_prods();
+                                                                $parent_id = $_POST['parent_id'];
+                                                                for($i=0; $i<count($values); $i++){
+                                                                    $value = $values[$i];
+                                                                    if($value['id_cae'] !== null){
+                                                                        $cae_val = $_POST['sel-cae-'.$value['id_cae']];
+                                                                        if($cae_val > 0){
+                                                                            if($sqlipc = $this->con->prepare("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES (?, ?, ?)")){
+                                                                                if($sqlipc->bind_param("iii", $id_cae, $value["id_cae"], $cae_val)){
+                                                                                    if($sqlipc->execute()){
+                                                                                        $sqlipc->close();
+                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
+                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
+                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($this->con->error)); }
+                                                                        }
+                                                                    }
+                                                                    if($value['id_pro'] !== null){
+                                                                        $pro_val = $_POST['sel-pro-'.$value['id_pro']];
+                                                                        if($pro_val > 0){
+                                                                            if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
+                                                                                if($sqlipp->bind_param("iii", $id_cae, $value["id_pro"], $pro_val)){
+                                                                                    if($sqlipp->execute()){
+                                                                                        $sqlipp->close();
+                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                $info['op'] = 1;
+                                                                $info['mensaje'] = "Productos Asignados";
+                                                                $info['reload'] = 1;
+                                                                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+                                                                $this->con_cambios(null);
+                                                                $sqlepp->close();
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($this->con->error)); }
+                                                    $sqlepc->close();
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($this->con->error)); }
+                                        $sqluc->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'asignar_prods_promocion()'); }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
+            }else{$this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($this->con->error));  }
+        }else{ $this->registrar(2, 0, 0, 'asignar_prods_promocion()'); }
+        return $info;
+    }
+    /* LISTOS */ 
 }
