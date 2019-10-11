@@ -2,7 +2,7 @@
 
 $file = explode("/", $_SERVER["REQUEST_URI"]);
 if($file[count($file) - 1] != ""){
-    header('HTTP/1.0 404 Not Found');
+    header('HTTP/1.1 404 Not Found', true, 404);
     exit;
 }
 
