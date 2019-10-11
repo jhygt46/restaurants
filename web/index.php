@@ -1,11 +1,5 @@
 <?php
 
-$file = explode("/", $_SERVER["REQUEST_URI"]);
-if($file[count($file) - 1] != ""){
-    header('HTTP/1.1 404 Not Found', true, 404);
-    exit;
-}
-
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
     define("DIR", DIR_BASE."restaurants/");
@@ -13,6 +7,15 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", "/var/www/html/");
     define("DIR", DIR_BASE."restaurants/");
 }
+
+$file = explode("/", $_SERVER["REQUEST_URI"]);
+if($file[count($file) - 1] != ""){
+    header('HTTP/1.1 404 Not Found', true, 404);
+    include(DIR.'errors/404.html');
+    exit;
+}
+
+
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
