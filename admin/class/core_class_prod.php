@@ -1636,15 +1636,15 @@ class Core{
         $info['op'] = 2;
         if($this->verificar()){
             $error = $_POST['error'];
-            $code = $_POST['code'];
             if($error !== null){
                 $host = $_POST['host'];
+                $codes = $_POST['codes'];
                 if($sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
                     if($sql->bind_param("s", $host)){
                         if($sql->execute()){
                             $res = $sql->get_result();
                             $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
-                            $this->registrar($code, 0, $id_gir, $error);
+                            $this->registrar($codes, 0, $id_gir, $error);
                             $info['op'] = 1;
                             $sql->free_result();
                             $sql->close();
