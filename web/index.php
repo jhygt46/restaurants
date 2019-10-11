@@ -1,8 +1,6 @@
 <?php
 
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
+echo $_SERVER["REQUEST_URI"];
 exit;
 
 if($_SERVER["HTTP_HOST"] == "localhost"){
