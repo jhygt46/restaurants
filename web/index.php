@@ -8,6 +8,9 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
+$j['m'] = 1;
+echo json_encode($j);
+
 $file = explode("/", $_SERVER["REQUEST_URI"]);
 if($file[count($file) - 1] != ""){
     header('HTTP/1.1 404 Not Found', true, 404);
@@ -43,7 +46,7 @@ if(isset($_POST["tipo"])){
     header('HTTP/1.1 404 Not Found', true, 404);
     include(DIR.'errors/404.html');
     exit;
-    
+
 }
 
 ?>
