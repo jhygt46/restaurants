@@ -1050,7 +1050,7 @@ class Core{
     }
     public function get_config($id_gir){
         if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto FROM giros WHERE id_gir=? AND eliminado=?")){
-            if($sql->bind_param("si", $id_gir, $this->eliminado)){
+            if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sqlpag->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     $sql->free_result();
@@ -1820,20 +1820,13 @@ class Core{
                                     $info['op'] = 1;
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
-                                        //$info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
+                                        $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
                                     }
                                     $info['data']['paginas'] = $this->get_paginas_web($id_gir);
                                     $info['data']['locales'] = $this->get_locales_js($id_gir);
                                     $info['polygons'] = $this->get_polygons($id_gir);
                                     $info['info'] = $this->get_data($id_gir);
-                                    /*
-                                    
-                                    
                                     $info['data']['config'] = $this->get_config($id_gir);
-                                    
-                                    
-                                    
-                                    
                                     $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
                                     if($info['info']['dns'] == 0){
                                         file_put_contents($ruta_file, "var data=".json_encode($info['data']));
@@ -1841,7 +1834,6 @@ class Core{
                                     if($info['info']['dns'] == 1 && file_exists($ruta_file)){
                                         unlink($ruta_file);
                                     }
-                                    */
                                     $sql->free_result();
                                     $sql->close();
                                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
