@@ -1818,7 +1818,7 @@ class Core{
                             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                                 if($sql->execute()){
                                     $info['op'] = 1;
-                                    $info['info'] = $this->get_data($id_gir);
+                                    $info['id_gir'] = $id_gir;
                                     /*
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
