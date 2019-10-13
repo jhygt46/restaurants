@@ -8,7 +8,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
-$j['m'] = 1;
+$j['m'] = $_POST;
 echo json_encode($j);
 
 $file = explode("/", $_SERVER["REQUEST_URI"]);
