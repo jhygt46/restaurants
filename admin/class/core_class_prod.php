@@ -1818,11 +1818,11 @@ class Core{
                             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                                 if($sql->execute()){
                                     $info['op'] = 1;
-                                    $info['data']['config'] = $this->get_config($id_gir);
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
                                         $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
                                     }
+                                    $info['data']['config'] = $this->get_config($id_gir);
                                     $info['data']['paginas'] = $this->get_paginas_web($id_gir);
                                     $info['data']['locales'] = $this->get_locales_js($id_gir);
                                     $info['polygons'] = $this->get_polygons($id_gir);
