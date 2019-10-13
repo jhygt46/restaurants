@@ -1049,11 +1049,10 @@ class Core{
         return $preguntas;
     }
     public function get_config($id_gir){
-        //if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto FROM giros WHERE id_gir=? AND eliminado=?")){
-        if($sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
-                    $result = $sqlpag->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     $sql->free_result();
                     $sql->close();
                     return $result;
@@ -1820,7 +1819,6 @@ class Core{
                                 if($sql->execute()){
                                     $info['op'] = 1;
                                     $info['data']['config'] = $this->get_config($id_gir);
-                                    /*
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
                                         $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
@@ -1836,7 +1834,6 @@ class Core{
                                     if($info['info']['dns'] == 1 && file_exists($ruta_file)){
                                         unlink($ruta_file);
                                     }
-                                    */
                                     $sql->free_result();
                                     $sql->close();
                                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
