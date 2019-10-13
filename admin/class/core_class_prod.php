@@ -1826,6 +1826,7 @@ class Core{
                                     $info['data']['locales'] = $this->get_locales_js($id_gir);
                                     $info['polygons'] = $this->get_polygons($id_gir);
                                     $info['info'] = $this->get_data($id_gir);
+                                    /*
                                     $info['data']['config'] = $this->get_config($id_gir);
                                     $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
                                     if($info['info']['dns'] == 0){
@@ -1834,6 +1835,7 @@ class Core{
                                     if($info['info']['dns'] == 1 && file_exists($ruta_file)){
                                         unlink($ruta_file);
                                     }
+                                    */
                                     $sql->free_result();
                                     $sql->close();
                                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
