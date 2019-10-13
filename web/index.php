@@ -8,8 +8,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
-$j['m'] = $_POST;
-echo json_encode($j);
+
 
 $file = explode("/", $_SERVER["REQUEST_URI"]);
 if($file[count($file) - 1] != ""){
@@ -17,6 +16,9 @@ if($file[count($file) - 1] != ""){
     include(DIR.'errors/404.html');
     exit;
 }
+
+$res['tipo'] = $_POST["tipo"];
+echo json_encode($res);
 
 if(isset($_POST["tipo"])){
 
