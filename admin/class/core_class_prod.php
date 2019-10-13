@@ -1821,8 +1821,7 @@ class Core{
                                     $info['id_gir'] = $id_gir;
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
-                                        //$info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
-                                        $info['data']['catalogos'][] = $row['id_cat'];
+                                        $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
                                     }
                                     /*
                                     
