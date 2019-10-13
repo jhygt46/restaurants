@@ -1817,6 +1817,7 @@ class Core{
                         if($sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_gir=? AND eliminado=?")){
                             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                                 if($sql->execute()){
+                                    /*
                                     $result = $sql->get_result();
                                     while($row = $result->fetch_assoc()){
                                         $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
@@ -1834,6 +1835,7 @@ class Core{
                                     if($info['info']['dns'] == 1 && file_exists($ruta_file)){
                                         unlink($ruta_file);
                                     }
+                                    */
                                     $sql->free_result();
                                     $sql->close();
                                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
