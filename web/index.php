@@ -8,8 +8,6 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
-
-
 $file = explode("/", $_SERVER["REQUEST_URI"]);
 if($file[count($file) - 1] != ""){
     header('HTTP/1.1 404 Not Found', true, 404);
@@ -17,8 +15,6 @@ if($file[count($file) - 1] != ""){
     exit;
 }
 
-$res['tipo'] = $_POST["tipo"];
-echo json_encode($res);
 
 if(isset($_POST["tipo"])){
 
@@ -26,6 +22,8 @@ if(isset($_POST["tipo"])){
         require_once DIR."admin/class/core_class_prod.php";
         $core = new Core();
         if($_POST["tipo"] == 1){
+            $res['tipo'] = $_POST["tipo"];
+            echo json_encode($res);
             echo json_encode($core->get_web_js_data_remote());
         }
         if($_POST["tipo"] == 2){
