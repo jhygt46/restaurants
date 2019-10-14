@@ -231,7 +231,7 @@ class Guardar{
                                 $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
                                 if($id == 0){
                                     $code = bin2hex(openssl_random_pseudo_bytes(10));
-                                    if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, style_page, style_color, style_modal, font_family, font_css, alto, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '170', '0', '1')")){
+                                    if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, style_page, style_color, style_modal, font_family, font_css, alto, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '25', '0', '1')")){
                                         if($sqligir->bind_param("ssssiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina)){
                                             if($sqligir->execute()){
                                                 $id_gir = $this->con->insert_id;
