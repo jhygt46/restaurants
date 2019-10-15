@@ -1151,6 +1151,7 @@ class Guardar{
                             $hora_fin = $_POST['hora_fin'];
                             $min_fin = $_POST['min_fin'];
                             $loc_nombre = $_POST['loc_nombre'];
+
                             if($id_hor == 0){
                                 if($sqligir = $this->con->prepare("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                                     if($sqligir->bind_param("iiiiiiiiii", $dia_ini, $dia_fin, $hora_ini, $hora_fin, $min_ini, $min_fin, $tipo, $id_loc, $this->id_gir, $this->eliminado)){
@@ -1179,6 +1180,7 @@ class Guardar{
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #2  '.htmlspecialchars($sqligir->error)); }
                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #2 '.htmlspecialchars($this->con->error)); }
                             }
+
                             if($sqlre = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='1')")){
                                 if($sqlre->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlre->execute()){
@@ -1206,6 +1208,7 @@ class Guardar{
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($sqlre->error)); }
                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($sqlre->error)); }
                             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #5 '.htmlspecialchars($this->con->error)); }
+                            
                             if($sqlde = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='2')")){
                                 if($sqlde->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlde->execute()){
@@ -1232,6 +1235,7 @@ class Guardar{
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($sqlde->error)); }
                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($sqlde->error)); }
                             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_horario() #8 '.htmlspecialchars($this->con->error)); }
+                            
                         }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_horario()'); }
                         $sql->free_result();
                         $sql->close();
