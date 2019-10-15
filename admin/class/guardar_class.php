@@ -209,7 +209,6 @@ class Guardar{
             return false;
         }
     }
-    /* LISTOS */
     private function crear_giro(){
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
@@ -2536,5 +2535,4 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'asignar_prods_promocion()'); }
         return $info;
     }
-    /* LISTOS */ 
 }
