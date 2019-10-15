@@ -1182,7 +1182,7 @@ class Guardar{
                             if($sqlre = $this->con->prepare("SELECT * FROM horarios WHERE id_gir=? AND eliminado=? AND (tipo='0' OR tipo='1')")){
                                 if($sqlre->bind_param("ii", $this->id_gir, $this->eliminado)){
                                     if($sqlre->execute()){
-                                        $resre = $sqlde->get_result();
+                                        $resre = $sqlre->get_result();
                                         if($resre->{"num_rows"} == 0){
                                             if($sqlure = $this->con->prepare("UPDATE giros SET retiro_local='0' WHERE id_gir=? AND eliminado=?")){
                                                 if($sqlure->bind_param("ii", $this->id_gir, $this->eliminado)){
