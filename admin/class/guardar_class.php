@@ -972,7 +972,7 @@ class Guardar{
                             }
                             if($image['op'] == 1){
                                 @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['image']);
-                                if($sqlg = $this->con->prepare("UPDATE giros SET image='".$image["image"]."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+                                if($sqlg = $this->con->prepare("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                                     if($sqlg->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                                         if($sqlg->execute()){
                                             $sqlg->close();
