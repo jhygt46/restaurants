@@ -884,7 +884,7 @@ class Core{
     }
     public function get_locales_js($id_gir){
         $eliminado = 0;
-        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng, telefono FROM locales WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, nombre, direccion, lat, lng, telefono, whatsapp, image FROM locales WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result();
@@ -898,6 +898,7 @@ class Core{
                         $locales['lng'] = $row['lng'];
                         $locales['telefono'] = $row['telefono'];
                         $locales['whatsapp'] = $row['whatsapp'];
+                        $locales['image'] = $row['image'];
                         if($sqlloc = $this->con->prepare("SELECT dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo FROM horarios WHERE id_loc=? AND id_gir=? AND eliminado=?")){
                             if($sqlloc->bind_param("iii", $row["id_loc"], $id_gir, $eliminado)){
                                 if($sqlloc->execute()){

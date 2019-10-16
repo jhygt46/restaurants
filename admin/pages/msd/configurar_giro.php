@@ -9,6 +9,11 @@ $accion = "configurar_giro";
 /* CONFIG PAGE */
 
 $that = $core->get_giro();
+
+echo "<pre>";
+print_r($that);
+echo "</pre>";
+
 $titulo = "Configuracion ".$that["nombre"];
 $css = $core->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
@@ -46,6 +51,14 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     <label class="clearfix">
                         <span><p>Favicon:</p></span>
                         <input id="file_image1" type="file" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Foto Despacho:</p></span>
+                        <input id="file_image2" type="file" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Foto Retiro:</p></span>
+                        <input id="file_image3" type="file" />
                     </label>
                     <label class="clearfix">
                         <span><p>Alto Categoria-Productos:</p></span>
