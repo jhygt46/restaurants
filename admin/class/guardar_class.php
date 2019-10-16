@@ -1022,6 +1022,7 @@ class Guardar{
                         if($res->{"num_rows"} == 1){
                             $loc_image = $res->fetch_all(MYSQLI_ASSOC)[0];
                             $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 120);
+                            $info['bue'] = $image;
                             if($image['op'] == 1){
                                 @unlink('/var/www/html/restaurants/images/categorias/'.$loc_image['image']);
                                 if($sqlg = $this->con->prepare("UPDATE locales SET image='".$image["image"]."' WHERE id_loc=? AND id_gir=? AND eliminado=?")){
