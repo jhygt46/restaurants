@@ -73,6 +73,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                             <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Imprimir y Cerrar Pedido</option>
                         </select>
                     </label>
+                    <label class="clearfix">
+                        <span><p>Imagen: (380x120)</p></span>
+                        <input style="padding-top: 6px" id="file_image0" type="file" />
+                    </label>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>

@@ -1006,6 +1006,53 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'configurar_categoria()'); }
         return $info;
     }
+    private function configurar_local(){
+        $info['op'] = 2;
+        $info['mensaje'] = "Error";
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            $t_retiro = $_POST['t_retiro'];
+            $t_despacho = $_POST['t_despacho'];
+            $sonido = $_POST['sonido'];
+            $pos = $_POST['pos'];
+            $id_loc = $_POST['id_loc'];
+            if($sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
+                if($sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
+                    if($sqlloc->execute()){
+                        $res = $sqlloc->get_result();
+                        if($res->{"num_rows"} == 1){
+                            $loc_image = $res->fetch_all(MYSQLI_ASSOC)[0];
+                            $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 120);
+                            if($image['op'] == 1){
+                                @unlink('/var/www/html/restaurants/images/categorias/'.$loc_image['image']);
+                                if($sqlg = $this->con->prepare("UPDATE locales SET image='".$image["image"]."' WHERE id_loc=? AND id_gir=? AND eliminado=?")){
+                                    if($sqlg->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
+                                        if($sqlg->execute()){
+                                            $sqlg->close();
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() image'.htmlspecialchars($sqlg->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() image'.htmlspecialchars($sqlg->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() image'.htmlspecialchars($sqlg->error)); }
+                            }
+                            if($sql = $this->con->prepare("UPDATE locales SET pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
+                                if($sql->bind_param("isiiii", $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
+                                    if($sql->execute()){
+                                        $info['op'] = 1;
+                                        $info['mensaje'] = "Local editado exitosamente";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/locales.php";
+                                        $sql->close();
+                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'configurar_local()'); }
+                        $sqlloc->free_result();
+                        $sqlloc->close();
+                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
+        }else{ $this->registrar(2, 0, 0, 'configurar_local()'); }
+        return $info;
+    }
     private function get_preguntas(){
         if($sql = $this->con->prepare("SELECT id_pre, nombre, mostrar FROM preguntas WHERE id_cat=? AND id_gir=? AND eliminado=?")){
             if($sql->bind_param("iii", $this->id_cat, $this->id_gir, $this->eliminado)){
@@ -1421,41 +1468,7 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'configurar_usuario_local()'); }
         return $info;
     }
-    private function configurar_local(){
-        $info['op'] = 2;
-        $info['mensaje'] = "Error";
-        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-            $t_retiro = $_POST['t_retiro'];
-            $t_despacho = $_POST['t_despacho'];
-            $sonido = $_POST['sonido'];
-            $pos = $_POST['pos'];
-            $id_loc = $_POST['id_loc'];
-            if($sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
-                if($sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
-                    if($sqlloc->execute()){
-                        $res = $sqlloc->get_result();
-                        if($res->{"num_rows"} == 1){
-                            if($sql = $this->con->prepare("UPDATE locales SET pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
-                                if($sql->bind_param("isiiii", $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
-                                    if($sql->execute()){
-                                        $info['op'] = 1;
-                                        $info['mensaje'] = "Local editado exitosamente";
-                                        $info['reload'] = 1;
-                                        $info['page'] = "msd/locales.php";
-                                        $sql->close();
-                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
-                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($this->con->error)); }
-                        }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'configurar_local()'); }
-                        $sqlloc->free_result();
-                        $sqlloc->close();
-                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
-                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
-            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #2 '.htmlspecialchars($sqlloc->error)); }
-        }else{ $this->registrar(2, 0, 0, 'configurar_local()'); }
-        return $info;
-    }
+    
     private function crear_locales(){
         $info['op'] = 2;
         $info['mensaje'] = "Error";
