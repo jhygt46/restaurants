@@ -1142,6 +1142,7 @@ class Guardar{
                     if($sql->execute()){
                         $res = $sql->get_result();
                         if($res->{"num_rows"} == 1){
+                            
                             $tipo = $_POST['tipo'];
                             $id_hor = $_POST['id'];
                             $dia_ini = $_POST['dia_ini'];
@@ -1168,7 +1169,7 @@ class Guardar{
                             }
                             if($id_hor > 0){
                                 if($sqligir = $this->con->prepare("UPDATE horarios SET dia_ini=?, dia_fin=?, hora_ini=?, hora_fin=?, min_ini=?, min_fin=?, tipo=? WHERE id_hor=? AND id_loc=? AND id_gir=? AND eliminado=?")){
-                                    if($sqligir->bind_param("iiiiiiiiiii", $dia_ini, $dia_fin, $hora_ini, $hora_fin, $min_ini, $min_fin, $tipo, $this->id_hor, $id_loc, $this->id_gir, $this->eliminado)){
+                                    if($sqligir->bind_param("iiiiiiiiiii", $dia_ini, $dia_fin, $hora_ini, $hora_fin, $min_ini, $min_fin, $tipo, $id_hor, $id_loc, $this->id_gir, $this->eliminado)){
                                         if($sqligir->execute()){
                                             $info['op'] = 1;
                                             $info['mensaje'] = "Horario modificado exitosamente";
