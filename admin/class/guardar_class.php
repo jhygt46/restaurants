@@ -628,7 +628,7 @@ class Guardar{
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
-        if (strlen($name)){
+        if(strlen($name)){
             $extension = substr($name, strrpos($name, '.') + 1);
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
@@ -1469,7 +1469,6 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'configurar_usuario_local()'); }
         return $info;
     }
-    
     private function crear_locales(){
         $info['op'] = 2;
         $info['mensaje'] = "Error";
