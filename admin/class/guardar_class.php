@@ -970,6 +970,7 @@ class Guardar{
                             if($categoria['parent_id'] > 0){
                                 $image = $this->uploadsubCategoria('/var/www/html/restaurants/images/categorias/', null);
                             }
+                            $info['bue'] = $image;
                             if($image['op'] == 1){
                                 @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['image']);
                                 if($sqlg = $this->con->prepare("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
