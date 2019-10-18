@@ -466,14 +466,14 @@ class Guardar{
         $filepath = '/var/www/html/restaurants/images/favicon/';
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("ICO");
-        $name = $_FILES['file_image1']['name']; // filename to get file's extension
+        $name = $_FILES['file_image1']['name'];
         $size = $_FILES['file_image1']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){ // check it if it's a valid format or not
-                if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
+            if(in_array($extension, $file_formats)){
+                if($size < (20 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image1']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename_new)){
                         $data = getimagesize($filepath.$imagename_new);
@@ -491,7 +491,7 @@ class Guardar{
                     }else{
                         $info['op'] = 2;
                         $info['mensaje'] = "No se pudo subir el favicon";
-                        $this->registrar(8, 0, $this->id_gir, 'Favicon no UPLOAD');
+                        $this->registrar(8, 0, $this->id_gir, 'Favicon no Upload');
                     }
                 }else{
                     $info['op'] = 2;
@@ -515,14 +515,14 @@ class Guardar{
         $filepath = '/var/www/html/restaurants/images/logos/';
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("PNG", "JPG", "JPEG");
-        $name = $_FILES['file_image0']['name']; // filename to get file's extension
+        $name = $_FILES['file_image0']['name']; 
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.')+1));
-            if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
-                if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
+            if(in_array($extension, $file_formats)) { 
+                if($size < (20 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename_new)){
                         $data = getimagesize($filepath.$imagename_new);
@@ -572,12 +572,12 @@ class Guardar{
         $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
-        if (strlen($name)){
+        if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)){
-                if ($size < (25 * 1024)){
+            if(in_array($extension, $file_formats)){
+                if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
@@ -630,10 +630,10 @@ class Guardar{
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)){
-                if ($size < (25 * 1024)){
+            if(in_array($extension, $file_formats)){
+                if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
@@ -685,10 +685,10 @@ class Guardar{
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)){
-                if ($size < (25 * 1024)){
+            if(in_array($extension, $file_formats)){
+                if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
@@ -733,17 +733,17 @@ class Guardar{
     public function uploadRetiro($filepath, $filename){
 
         $width = 380;
-        $height = 100;
+        $height = 120;
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image2']['name'];
         $size = $_FILES['file_image2']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)){
-                if ($size < (25 * 1024)){
+            if(in_array($extension, $file_formats)){
+                if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
@@ -788,17 +788,17 @@ class Guardar{
     public function uploadDespacho($filepath, $filename){
 
         $width = 380;
-        $height = 100;
+        $height = 120;
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image3']['name'];
         $size = $_FILES['file_image3']['size'];
         if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)){
-                if ($size < (25 * 1024)){
+            if(in_array($extension, $file_formats)){
+                if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
@@ -846,12 +846,12 @@ class Guardar{
         $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
-        if (strlen($name)){
+        if(strlen($name)){
             $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
-                if ($size < (200 * 1024)) { // check it if it's bigger than 2 mb or no
+            if(in_array($extension, $file_formats)){
+                if($size < (200 * 1024)){
                     $imagename = $filename.".".$extension;
-                    $imagename_new = $filename."x.".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
                     $tmp = $_FILES['file_image0']['tmp_name'];
                     if (move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
