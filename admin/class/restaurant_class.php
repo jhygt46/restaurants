@@ -676,6 +676,13 @@ class Rest{
         return $info;
         
     }
+    public function pass_generate($n){
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for($i=0; $i<$n; $i++){
+            $r .= $chars{rand(0, strlen($chars)-1)};
+        }
+        return $r;
+    }
     
 }
 // QUE ME DEVUELTA CATEGORIA Y SUS VALORES

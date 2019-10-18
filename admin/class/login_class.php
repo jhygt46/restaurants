@@ -48,7 +48,7 @@ class Login {
                                     if($sqlia->bind_param("ii", $tipo, $id_user)){
                                         if($sqlia->execute()){
                                             $send['correo'] = $correo;
-                                            $send['code'] = bin2hex(openssl_random_pseudo_bytes(10));
+                                            $send['code'] = $this->pass_generate(20);
                                             $send['id'] = $id_user;
                                             if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET pass='', mailcode=? WHERE id_user=? AND eliminado=?")){
                                                 if($sqluu->bind_param("sii", $send["code"], $send["id"], $this->eliminado)){
@@ -213,8 +213,8 @@ class Login {
                                                         $info['op'] = 3;
                                                         $info['url'] = 'admin/punto_de_venta/';
                                                         $info['message'] = "Ingreso Exitoso Punto de Venta";
-                                                        $code_cookie_user = bin2hex(openssl_random_pseudo_bytes(30));
-                                                        $code_cookie_local = bin2hex(openssl_random_pseudo_bytes(30));
+                                                        $code_cookie_user = $this->pass_generate(60);
+                                                        $code_cookie_local = $this->pass_generate(60);
                                                         $info['id'] = $result['id_user'];
                                                         $info['user_code'] = $code_cookie_user;
                                                         $info['local_code'] = $code_cookie_local;
@@ -316,6 +316,13 @@ class Login {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         return $ip;
+    }
+    public function pass_generate($n){
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for($i=0; $i<$n; $i++){
+            $r .= $chars{rand(0, strlen($chars)-1)};
+        }
+        return $r;
     }
 
 }

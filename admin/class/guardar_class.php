@@ -229,7 +229,7 @@ class Guardar{
                                 $item_grafico = $_POST['item_grafico'];
                                 $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
                                 if($id == 0){
-                                    $code = bin2hex(openssl_random_pseudo_bytes(10));
+                                    $code = $this->pass_generate(20);
                                     if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, style_page, style_color, style_modal, font_family, font_css, alto, logo, favicon, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '25', 'sinlogo.png', 'default.ico', '0', '1')")){
                                         if($sqligir->bind_param("ssssiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina)){
                                             if($sqligir->execute()){
@@ -464,12 +464,12 @@ class Guardar{
     public function uploadfavIcon($filename){
 
         $filepath = '/var/www/html/restaurants/images/favicon/';
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("ico", "ICO");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("ICO");
         $name = $_FILES['file_image1']['name']; // filename to get file's extension
         $size = $_FILES['file_image1']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.')+1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if(in_array($extension, $file_formats)){ // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
@@ -513,12 +513,12 @@ class Guardar{
     public function uploadLogo($filename){
 
         $filepath = '/var/www/html/restaurants/images/logos/';
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("png", "PNG", "jpg", "JPG", "jpeg", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("PNG", "JPG", "JPEG");
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.')+1);
+            $extension = strtoupper(substr($name, strrpos($name, '.')+1));
             if(in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (20 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
@@ -568,12 +568,12 @@ class Guardar{
     }
     public function uploadsubCategoria($filepath, $filename){
 
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if (strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
@@ -624,12 +624,12 @@ class Guardar{
     public function uploadCategoria($filepath, $filename, $alto){
 
         $width = 500;
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
@@ -679,12 +679,12 @@ class Guardar{
 
         $width = 380;
         $height = 120;
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
@@ -734,12 +734,12 @@ class Guardar{
 
         $width = 380;
         $height = 100;
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image2']['name'];
         $size = $_FILES['file_image2']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
@@ -789,12 +789,12 @@ class Guardar{
 
         $width = 380;
         $height = 100;
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image3']['name'];
         $size = $_FILES['file_image3']['size'];
         if(strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)){
                 if ($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
@@ -842,12 +842,12 @@ class Guardar{
     }
     public function uploadPagina($filepath, $filename){
 
-        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
-        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
         if (strlen($name)){
-            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
             if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
                 if ($size < (200 * 1024)) { // check it if it's bigger than 2 mb or no
                     $imagename = $filename.".".$extension;
@@ -1493,7 +1493,7 @@ class Guardar{
                             if($tipo == 0){
                                 $nombre = $_POST['nombre'];
                                 $correo = $_POST['correo'];
-                                $uid = bin2hex(openssl_random_pseudo_bytes(10));
+                                $uid = $this->pass_generate(20);
                                 if($sqlimo = $this->con->prepare("INSERT INTO motos (nombre, correo, uid, id_gir) VALUES (?, ?, ?, ?)")){
                                     if($sqlimo->bind_param("sssi", $nombre, $correo, $uid, $this->id_gir)){
                                         if($sqlimo->execute()){
@@ -1657,7 +1657,7 @@ class Guardar{
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-            $code = bin2hex(openssl_random_pseudo_bytes(10));
+            $code = $this->pass_generate(20);
             $id_cat = $_POST['id_cat'];
             $id_loc = $_POST['id'];
             $nombre = $_POST['nombre'];
@@ -2736,5 +2736,12 @@ class Guardar{
             }else{$this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($this->con->error));  }
         }else{ $this->registrar(2, 0, 0, 'asignar_prods_promocion()'); }
         return $info;
+    }
+    public function pass_generate($n){
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for($i=0; $i<$n; $i++){
+            $r .= $chars{rand(0, strlen($chars)-1)};
+        }
+        return $r;
     }
 }

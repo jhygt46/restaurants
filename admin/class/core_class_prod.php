@@ -1980,7 +1980,7 @@ class Core{
                                         if($sqlped = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?")){
                                             if($sqlped->bind_param("iii", $num_ped, $id_gir, $this->eliminado)){
                                                 if($sqlped->execute()){
-                                                    $code = bin2hex(openssl_random_pseudo_bytes(10));
+                                                    $code = $this->pass_generate(20);
                                                     if($sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)")){
                                                         if($sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir)){
                                                             if($sqlaux->execute()){
@@ -2140,7 +2140,7 @@ class Core{
                     if($sql->execute()){
                         $res = $sql->get_result();
                         if($res->{'num_rows'} == 0){
-                            $puser_code = bin2hex(openssl_random_pseudo_bytes(10));
+                            $puser_code = $this->pass_generate(20);
                             $cont = 1;
                             if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont) VALUES (?, ?, ?, ?)")){
                                 if($sqlipu->bind_param("sssi", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont)){
@@ -2203,7 +2203,7 @@ class Core{
 
             $time_stgo = time();
             $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);
-            $pedido_code = bin2hex(openssl_random_pseudo_bytes(10));
+            $pedido_code = $this->pass_generate(20);
             $tipo = 1;
             if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                 if($sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir'])){
@@ -2385,6 +2385,13 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($sqlgir->error)); }
         }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($this->con->error)); }
         return $data;
+    }
+    public function pass_generate($n){
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for($i=0; $i<$n; $i++){
+            $r .= $chars{rand(0, strlen($chars)-1)};
+        }
+        return $r;
     }
 }
 ?>
