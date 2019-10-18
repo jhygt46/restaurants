@@ -1821,15 +1821,15 @@ class Core{
                             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                                 if($sql->execute()){
                                     $info['op'] = 1;
-                                    $result = $sql->get_result();
-                                    while($row = $result->fetch_assoc()){
-                                        $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
-                                    }
                                     $info['data']['config'] = $this->get_config($id_gir);
                                     $info['data']['paginas'] = $this->get_paginas_web($id_gir);
                                     $info['data']['locales'] = $this->get_locales_js($id_gir);
                                     $info['polygons'] = $this->get_polygons($id_gir);
                                     $info['info'] = $this->get_data($id_gir);
+                                    $result = $sql->get_result();
+                                    while($row = $result->fetch_assoc()){
+                                        $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
+                                    }
                                     $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
                                     if($info['info']['dns'] == 0){
                                         file_put_contents($ruta_file, "var data=".json_encode($info['data']));
