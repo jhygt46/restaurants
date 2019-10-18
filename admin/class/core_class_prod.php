@@ -799,6 +799,8 @@ class Core{
                         $info['id_gir'] = $result['id_gir'];            
                         $info['titulo'] = $result['titulo'];
                         $info['logo'] = $result['logo'];
+                        $info['foto_retiro'] = $result['foto_retiro'];
+                        $info['foto_despacho'] = $result['foto_despacho'];
                         $info['estados'] = explode(",",$result['estados']);
                         $info['mapcode'] = $result['mapcode'];
                         $info['dominio'] = "";

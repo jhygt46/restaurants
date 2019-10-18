@@ -675,6 +675,171 @@ class Guardar{
         return $info;
 
     }
+    public function uploadLocales($filepath, $filename){
+
+        $width = 380;
+        $alto = 120;
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $name = $_FILES['file_image0']['name'];
+        $size = $_FILES['file_image0']['size'];
+        if(strlen($name)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            if (in_array($extension, $file_formats)){
+                if ($size < (25 * 1024)){
+                    $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+                                $height = $width * $alto / 100;
+                                $destino = imagecreatetruecolor($width, $height);
+                                $origen = imagecreatefromjpeg($filepath.$imagename);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagejpeg($destino, $filepath.$imagename_new);
+                                imagedestroy($destino);
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg / jpeg";
+                                $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
+                            }
+                            @unlink($filepath.$imagename);
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                        $this->registrar(8, 0, $this->id_gir, 'Categoria no Upload');
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
+                    $this->registrar(8, 0, $this->id_gir, 'Categoria size limit');
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+                $this->registrar(8, 0, $this->id_gir, 'Categoria no Extension');
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
+    public function uploadRetiro($filepath, $filename){
+
+        $width = 380;
+        $alto = 100;
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $name = $_FILES['file_image2']['name'];
+        $size = $_FILES['file_image2']['size'];
+        if(strlen($name)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            if (in_array($extension, $file_formats)){
+                if ($size < (25 * 1024)){
+                    $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+                                $height = $width * $alto / 100;
+                                $destino = imagecreatetruecolor($width, $height);
+                                $origen = imagecreatefromjpeg($filepath.$imagename);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagejpeg($destino, $filepath.$imagename_new);
+                                imagedestroy($destino);
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg / jpeg";
+                                $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
+                            }
+                            @unlink($filepath.$imagename);
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                        $this->registrar(8, 0, $this->id_gir, 'Categoria no Upload');
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
+                    $this->registrar(8, 0, $this->id_gir, 'Categoria size limit');
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+                $this->registrar(8, 0, $this->id_gir, 'Categoria no Extension');
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
+    public function uploadDespacho($filepath, $filename){
+
+        $width = 380;
+        $alto = 100;
+        $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
+        $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
+        $name = $_FILES['file_image3']['name'];
+        $size = $_FILES['file_image3']['size'];
+        if(strlen($name)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            if (in_array($extension, $file_formats)){
+                if ($size < (25 * 1024)){
+                    $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".$extension;
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+                                $height = $width * $alto / 100;
+                                $destino = imagecreatetruecolor($width, $height);
+                                $origen = imagecreatefromjpeg($filepath.$imagename);
+                                imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                imagejpeg($destino, $filepath.$imagename_new);
+                                imagedestroy($destino);
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg / jpeg";
+                                $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
+                            }
+                            @unlink($filepath.$imagename);
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                        $this->registrar(8, 0, $this->id_gir, 'Categoria no Upload');
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
+                    $this->registrar(8, 0, $this->id_gir, 'Categoria size limit');
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+                $this->registrar(8, 0, $this->id_gir, 'Categoria no Extension');
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
     public function uploadPagina($filepath, $filename){
 
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
@@ -872,6 +1037,26 @@ class Guardar{
                         $dominio = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]['dominio'];
                         $foto_logo = $this->uploadLogo($dominio);
                         $foto_favicon = $this->uploadfavIcon($dominio);
+                        $foto_retiro = $this->uploadRetiro('/var/www/html/restaurants/images/categorias/', null);
+                        $foto_despacho = $this->uploadDespacho('/var/www/html/restaurants/images/categorias/', null);
+                        if($foto_retiro['op'] == 1){
+                            if($sqlc = $this->con->prepare("UPDATE giros SET foto_retiro='".$foto_retiro["image"]."' WHERE id_gir=? AND eliminado=?")){
+                                if($sqlc->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqlc->execute()){
+                                        $sqlc->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_retiro '.htmlspecialchars($sqlc->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_retiro '.htmlspecialchars($sqlc->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_retiro '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($foto_despacho['op'] == 1){
+                            if($sqld = $this->con->prepare("UPDATE giros SET foto_despacho='".$foto_despacho["image"]."' WHERE id_gir=? AND eliminado=?")){
+                                if($sqld->bind_param("ii", $this->id_gir, $this->eliminado)){
+                                    if($sqld->execute()){
+                                        $sqld->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_despacho '.htmlspecialchars($sqld->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_despacho '.htmlspecialchars($sqld->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() foto_despacho '.htmlspecialchars($this->con->error)); }
+                        }
                         if($foto_logo['op'] == 1){
                             if($sqla = $this->con->prepare("UPDATE giros SET logo='".$dominio.".png' WHERE id_gir=? AND eliminado=?")){
                                 if($sqla->bind_param("ii", $this->id_gir, $this->eliminado)){
@@ -1021,7 +1206,7 @@ class Guardar{
                         $res = $sqlloc->get_result();
                         if($res->{"num_rows"} == 1){
                             $loc_image = $res->fetch_all(MYSQLI_ASSOC)[0];
-                            $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, 120);
+                            $image = $this->uploadLocales('/var/www/html/restaurants/images/categorias/', null);
                             if($image['op'] == 1){
                                 @unlink('/var/www/html/restaurants/images/categorias/'.$loc_image['image']);
                                 if($sqlg = $this->con->prepare("UPDATE locales SET image='".$image["image"]."' WHERE id_loc=? AND id_gir=? AND eliminado=?")){
