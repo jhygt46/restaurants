@@ -2101,7 +2101,7 @@ class Guardar{
                         if($sql->execute()){
                             $res = $sql->get_result();
                             $orders = $res->{"num_rows"};
-                            if($sqlic = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, id_gir, descripcion, descripcion_sub, precio, orders) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+                            if($sqlic = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, id_cat, id_gir, descripcion, descripcion_sub, precio, orders, degradado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '1')")){
                                 if($sqlic->bind_param("siiiissii", $nombre, $parent_id, $tipo, $this->id_cat, $this->id_gir, $descripcion, $descripcion_sub, $precio, $orders)){
                                     if($sqlic->execute()){
                                         $info['op'] = 1;
