@@ -1800,7 +1800,7 @@ class Guardar{
         
     }
     private function locales_giro(){
-        if($sql = $this->con->prepare("SELECT id_loc, lat, lng, nombre, direccion FROM locales WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, lat, lng, nombre, direccion, image FROM locales WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
