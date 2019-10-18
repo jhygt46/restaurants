@@ -678,7 +678,7 @@ class Guardar{
     public function uploadLocales($filepath, $filename){
 
         $width = 380;
-        $alto = 120;
+        $height = 120;
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
         $name = $_FILES['file_image0']['name'];
@@ -693,7 +693,7 @@ class Guardar{
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-                                $height = $width * $alto / 100;
+                                //$height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
                                 imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
@@ -733,7 +733,7 @@ class Guardar{
     public function uploadRetiro($filepath, $filename){
 
         $width = 380;
-        $alto = 100;
+        $height = 100;
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
         $name = $_FILES['file_image2']['name'];
@@ -748,7 +748,7 @@ class Guardar{
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-                                $height = $width * $alto / 100;
+                                //$height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
                                 imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
@@ -788,7 +788,7 @@ class Guardar{
     public function uploadDespacho($filepath, $filename){
 
         $width = 380;
-        $alto = 100;
+        $height = 100;
         $filename = ($filename !== null) ? $filename : bin2hex(openssl_random_pseudo_bytes(10)) ;
         $file_formats = array("jpg", "jpeg", "JPG", "JPEG");
         $name = $_FILES['file_image3']['name'];
@@ -803,7 +803,7 @@ class Guardar{
                     if(move_uploaded_file($tmp, $filepath.$imagename)){
                             $data = getimagesize($filepath.$imagename);
                             if($data['mime'] == "image/jpeg"){
-                                $height = $width * $alto / 100;
+                                //$height = $width * $alto / 100;
                                 $destino = imagecreatetruecolor($width, $height);
                                 $origen = imagecreatefromjpeg($filepath.$imagename);
                                 imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
