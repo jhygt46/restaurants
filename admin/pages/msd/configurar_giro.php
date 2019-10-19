@@ -49,13 +49,13 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <?php if($that["retiro_local"] == 1){ ?>
                     <label class="clearfix">
-                        <span><p>Foto Retiro:</p></span>
+                        <span><p>Foto Retiro: (380x120)</p></span>
                         <input id="file_image2" type="file" />
                     </label>
                     <?php } ?>
                     <?php if($that["despacho_domicilio"] == 1){ ?>
                     <label class="clearfix">
-                        <span><p>Foto Despacho:</p></span>
+                        <span><p>Foto Despacho: (380x120)</p></span>
                         <input id="file_image3" type="file" />
                     </label>
                     <?php } ?>
