@@ -78,7 +78,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
                         </select>
                     </label>
                     <label class="clearfix">
-                        <span><p>Imagen: (500x<?php echo $alto; ?>)</p></span>
+                        <span><p>Imagen: (<?php echo $width; ?>x<?php echo $alto; ?>)</p></span>
                         <input style="padding-top: 6px" id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">
