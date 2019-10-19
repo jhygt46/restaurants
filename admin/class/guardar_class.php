@@ -469,8 +469,9 @@ class Guardar{
         $name = $_FILES['file_image1']['name'];
         $size = $_FILES['file_image1']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (20 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -518,8 +519,9 @@ class Guardar{
         $name = $_FILES['file_image0']['name']; 
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.')+1));
-            if(in_array($extension, $file_formats)) { 
+            $extension = substr($name, strrpos($name, '.')+1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)) { 
                 if($size < (20 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -573,8 +575,9 @@ class Guardar{
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -629,8 +632,9 @@ class Guardar{
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -684,8 +688,9 @@ class Guardar{
         $name = $_FILES['file_image0']['name'];
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -739,8 +744,9 @@ class Guardar{
         $name = $_FILES['file_image2']['name'];
         $size = $_FILES['file_image2']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -794,8 +800,9 @@ class Guardar{
         $name = $_FILES['file_image3']['name'];
         $size = $_FILES['file_image3']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (25 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
@@ -847,8 +854,9 @@ class Guardar{
         $name = $_FILES['file_image0']['name']; // filename to get file's extension
         $size = $_FILES['file_image0']['size'];
         if(strlen($name)){
-            $extension = strtoupper(substr($name, strrpos($name, '.') + 1));
-            if(in_array($extension, $file_formats)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
                 if($size < (200 * 1024)){
                     $imagename = $filename.".".$extension;
                     $imagename_new = $filename."x.".strtolower($extension);
