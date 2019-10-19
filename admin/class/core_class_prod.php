@@ -357,7 +357,7 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_catalogos() '.htmlspecialchars($this->con->error)); }
     }
     public function get_categoria($id_cae){
-        if($sql = $this->con->prepare("SELECT id_cae, nombre, descripcion, descripcion_sub, precio, tipo, ocultar, mostrar_prods, detalle_prods, degradado FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_cae, nombre, descripcion, descripcion_sub, precio, tipo, ocultar, mostrar_prods, detalle_prods, degradado, parent_id FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
             if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
