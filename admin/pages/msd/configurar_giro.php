@@ -76,6 +76,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="pedido_minimo" type="text" class="inputs" value="<?php echo $that['pedido_minimo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Tiempo aviso clausura:</p></span>
+                        <input id="tiempo_aviso" type="text" class="inputs" value="<?php echo $that['tiempo_aviso']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
                         <span><p>Titulo #1:</p></span>
                         <input id="titulo_01" type="text" class="inputs" value="<?php echo $that['pedido_01_titulo']; ?>" require="" placeholder="" />
                     </label>
