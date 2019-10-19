@@ -13,16 +13,22 @@ $id_cae = 0;
 $sub_titulo = $sub_titulo1;
 $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$alto = 500 * $core->get_alto() / 100;
+
 
 if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0){
     
     $id_cae = $_GET["id_cae"];
     $that = $core->get_categoria($id_cae);
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
-    
+
+    if($that["parent_id"] == 0){
+        $width = 500;
+        $alto = $width * $core->get_alto() / 100;
+    }
+    if($that["parent_id"] > 0){
+        $width = 380;
+        $alto = $width * $core->get_alto() / 100;
+    }
+
 }
 
 ?>
