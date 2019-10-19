@@ -1233,6 +1233,7 @@ class Guardar{
                                         $info['mensaje'] = "Local editado exitosamente";
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/locales.php";
+                                        $this->locales_giro();
                                         $sql->close();
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }
                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() #1 '.htmlspecialchars($sql->error)); }

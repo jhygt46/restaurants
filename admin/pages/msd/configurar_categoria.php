@@ -19,6 +19,9 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
     
     $id_cae = $_GET["id_cae"];
     $that = $core->get_categoria($id_cae);
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
     
 }
 
