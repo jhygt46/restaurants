@@ -843,9 +843,21 @@ $tablas[19]['campos'][23]['null'] = 0;
 $tablas[19]['campos'][24]['nombre'] = 'ocultar';
 $tablas[19]['campos'][24]['tipo'] = 'tinyint(1)';
 $tablas[19]['campos'][24]['null'] = 0;
-$tablas[19]['campos'][25]['nombre'] = 'eliminado';
-$tablas[19]['campos'][25]['tipo'] = 'tinyint(1)';
+$tablas[19]['campos'][25]['nombre'] = 'id_loc';
+$tablas[19]['campos'][25]['tipo'] = 'int(4)';
 $tablas[19]['campos'][25]['null'] = 0;
+$tablas[19]['campos'][25]['k'] = 1;
+$tablas[19]['campos'][25]['kt'] = 11;
+$tablas[19]['campos'][25]['kc'] = 0;
+$tablas[19]['campos'][26]['nombre'] = 'id_gir';
+$tablas[19]['campos'][26]['tipo'] = 'int(4)';
+$tablas[19]['campos'][26]['null'] = 0;
+$tablas[19]['campos'][26]['k'] = 1;
+$tablas[19]['campos'][26]['kt'] = 1;
+$tablas[19]['campos'][26]['kc'] = 0;
+$tablas[19]['campos'][27]['nombre'] = 'eliminado';
+$tablas[19]['campos'][27]['tipo'] = 'tinyint(1)';
+$tablas[19]['campos'][27]['null'] = 0;
 
 $tablas[20]['nombre'] = 'preguntas';
 $tablas[20]['campos'][0]['nombre'] = 'id_pre';
@@ -1131,6 +1143,15 @@ for($i=0; $i<count($tablas); $i++){
     }
 
 }
+
+$create = false;
+$list_tablas = ["pedidos_aux"];
+for($i=0; $i<count($tables); $i++){
+    if($create || in_array($tables_name[$i], $list_tablas)){
+        echo "ENTRO SOLO EN ".$tables_name[$i];
+    }
+}
+exit;
 
 if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI")){
     echo "BASE CREADA: ".$db_database[0]."<br/><br/>TABLAS<br/><br/>";
