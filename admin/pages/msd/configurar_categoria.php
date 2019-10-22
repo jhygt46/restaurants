@@ -26,7 +26,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
     }
     if($that["parent_id"] > 0){
         $width = 380;
-        $alto = $width * $core->get_alto() / 100;
+        $alto = intval($width * $core->get_alto() / 100);
     }
 
 }

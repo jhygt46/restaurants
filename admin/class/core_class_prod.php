@@ -2166,9 +2166,9 @@ class Core{
                                 if($sqlupu->bind_param("ii", $cont, $id_puser)){
                                     if($sqlupu->execute()){
                                         $sqlupu->close();    
-                                    }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlupu->error));/* $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0); */ }
-                                }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlupu->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($sqlupu->error));/* $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0); */ }
+                                }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($sqlupu->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($this->con->error)); }
                             if($sqlpd = $this->con->prepare("SELECT id_pdir FROM pedidos_direccion WHERE id_puser=? AND lat=? AND lng=?")){
                                 if($sqlpd->bind_param("idd", $id_puser, $pedido['lat'], $pedido['lng'])){
                                     if($sqlpd->execute()){
@@ -2181,15 +2181,15 @@ class Core{
                                         }
                                         $sqlpd->free_result();
                                         $sqlpd->close();
-                                    }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlpd->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlpd->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'get_informe() #3 '.htmlspecialchars($this->con->error)); }
                         }
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sql->error)); /*$this->enviar_error_int($sql->error, '#P01', 0, $puser["id_puser"], 0); */ }
-                }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'get_informe() #4 '.htmlspecialchars($sql->error)); /*$this->enviar_error_int($sql->error, '#P01', 0, $puser["id_puser"], 0); */ }
+                }else{ $this->registrar(6, 0, 0, 'get_informe() #4 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_informe() #4 '.htmlspecialchars($this->con->error)); }
 
             $local_data = $this->get_local_info($pedido["id_loc"]);
             $verify_despacho = $this->verify_despacho($pedido);
@@ -2213,9 +2213,9 @@ class Core{
                             if($sqlugi->bind_param("iii", $local_data['num_ped'], $local_data['id_gir'], $this->eliminado)){
                                 if($sqlugi->execute()){
                                     $sqlugi->close();
-                                }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlugi->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlugi->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($sqlugi->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($sqlugi->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($this->con->error)); }
                         $info['op'] = 1;
                         $info['id_ped'] = $id_ped;
                         $info['num_ped'] = $local_data['num_ped'];
@@ -2255,14 +2255,13 @@ class Core{
                         $sqlipa->close();
                     }else{
                         $info['op'] = 2;
-                        $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlipa->error));
-                        /*$this->enviar_error_int($sqlipa->error, '#A03', 0, $id_puser, $local_data['id_gir']); */
+                        $this->registrar(6, 0, 0, 'get_informe() #6 '.htmlspecialchars($sqlipa->error));
                         $info['telefono'] = $local_data['telefono'];
                         $info['correo'] = $local_data['correo'];
                         $info['url'] = $local_data['url'];
                     }
-                }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($sqlipa->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                }else{ $this->registrar(6, 0, 0, 'get_informe() #6 '.htmlspecialchars($sqlipa->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_informe() #6 '.htmlspecialchars($this->con->error)); }
         }
         return $info;
     }
