@@ -1156,7 +1156,7 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
             }else{
                 echo "<strong>ERROR: ".$tables_name[$i]." NO FUE CREADA</strong> => ".$con->error."<br/><br/>";
             }
-        }else{ echo $tables[$i]."<br/>"; }
+        }else{ echo $tables[$i]."<br/><br/>"; }
     }
     echo "<br/><br/>KEYS<br/><br/>";
     for($i=0; $i<count($keys); $i++){
@@ -1167,7 +1167,7 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
             }else{
                 echo "<strong>ERROR: KEY </strong> => ".$con->error." <br/><br/>";
             }
-        }else{ echo $keys[$i]."<br/>"; }
+        }else{ echo $keys[$i]."<br/><br/>"; }
     }
     echo "<br/><br/>AUTOINCREMENTS<br/><br/>";
     for($i=0; $i<count($ais); $i++){
@@ -1178,7 +1178,7 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
             }else{
                 echo "<strong>ERROR: AUTO</strong> => ".$con->error." <br/><br/>";
             }
-        }else{ echo $ais[$i]."<br/>"; }
+        }else{ echo $ais[$i]."<br/><br/>"; }
     }
     echo "<br/><br/>FILTROS<br/><br/>";
     for($i=0; $i<count($cons); $i++){
@@ -1189,7 +1189,7 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
             }else{
                 echo "<strong>ERROR: FILTRO</strong> => ".$con->error." <br/><br/>";
             }
-        }else{ echo $cons[$i]."<br/>"; }
+        }else{ echo $cons[$i]."<br/><br/>"; }
     }
     echo "<br/><br/>INSERT<br/><br/>";
     for($i=0; $i<count($tablas); $i++){
@@ -1213,7 +1213,7 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
                 }else{
                     echo "<strong>ERROR: INSERT</strong> => ".$con->error." <br/><br/>";
                 }
-            }else{ echo $sql."<br/>"; }
+            }else{ echo $sql."<br/><br/>"; }
         }
     }
 }else{
