@@ -1144,60 +1144,57 @@ for($i=0; $i<count($tablas); $i++){
 
 }
 
-$create = false;
-$list_tablas = ["pedidos_aux"];
-for($i=0; $i<count($tables); $i++){
-    if($create || in_array($tables_name[$i], $list_tablas)){
-        echo "ENTRO SOLO EN ".$tables_name[$i];
-    }
-}
-exit;
+$show = true;
 
 if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI")){
     echo "BASE CREADA: ".$db_database[0]."<br/><br/>TABLAS<br/><br/>";
     $con->select_db($db_database[0]);
     for($i=0; $i<count($tables); $i++){
-        if($con->query($tables[$i])){
-            echo "Tabla creada: ".$tables_name[$i]."<br/>";
-        }else{
-            echo "<strong>ERROR: ".$tables_name[$i]." NO FUE CREADA</strong> => ".$con->error."<br/>";
-        }
+        if(!$show){
+            if($con->query($tables[$i])){
+                echo "Tabla creada: ".$tables_name[$i]."<br/>";
+            }else{
+                echo "<strong>ERROR: ".$tables_name[$i]." NO FUE CREADA</strong> => ".$con->error."<br/>";
+            }
+        }else{ echo $tables[$i]; }
     }
     echo "<br/><br/>KEYS<br/><br/>";
     for($i=0; $i<count($keys); $i++){
-        echo $keys[$i]."<br/>";
-        if($con->query($keys[$i])){
-            echo "ALTER CREADO: <br/>";
-        }else{
-            echo "<strong>ERROR: KEY </strong> => ".$con->error."<br/>";
-        }
+        if(!$show){
+            if($con->query($keys[$i])){
+                echo $keys[$i]."<br/>";
+                echo "ALTER CREADO: <br/>";
+            }else{
+                echo "<strong>ERROR: KEY </strong> => ".$con->error."<br/>";
+            }
+        }else{ echo $keys[$i]; }
     }
     echo "<br/><br/>AUTOINCREMENTS<br/><br/>";
     for($i=0; $i<count($ais); $i++){
-        echo $ais[$i]."<br/>";
-        if($con->query($ais[$i])){
-            echo "ALTER CREADO: <br/>";
-        }else{
-            echo "<strong>ERROR: AUTO</strong> => ".$con->error."<br/>";
-        }
+        if(!$show){
+            if($con->query($ais[$i])){
+                echo $ais[$i]."<br/>";
+                echo "ALTER CREADO: <br/>";
+            }else{
+                echo "<strong>ERROR: AUTO</strong> => ".$con->error."<br/>";
+            }
+        }else{ echo $ais[$i]; }
     }
-
     echo "<br/><br/>FILTROS<br/><br/>";
     for($i=0; $i<count($cons); $i++){
-        echo $cons[$i]."<br/>";
-        if($con->query($cons[$i])){
-            echo "ALTER CREADO: <br/>";
-        }else{
-            echo "<strong>ERROR: FILTRO</strong> => ".$con->error."<br/>";
-        }
+        if(!$show){
+            if($con->query($cons[$i])){
+                echo $cons[$i]."<br/>";
+                echo "ALTER CREADO: <br/>";
+            }else{
+                echo "<strong>ERROR: FILTRO</strong> => ".$con->error."<br/>";
+            }
+        }else{ echo $cons[$i]; }
     }
-
     echo "<br/><br/>INSERT<br/><br/>";
     for($i=0; $i<count($tablas); $i++){
-
         $campos = [];
         $matriz = [];
-
         for($j=0; $j<count($tablas[$i]["campos"]); $j++){
             $cant = count($tablas[$i]["campos"][$j]["values"]);
             if($cant > 0){
@@ -1207,19 +1204,18 @@ if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET 
                 }
             }
         }
-
         for($j=0; $j<count($matriz); $j++){
-            $sql = "INSERT INTO ".$tablas[$i]["nombre"]." (".implode(", ", $campos).") VALUES (".implode(", ", $matriz[$j]).")";
-            echo $sql."<br/>";
-            if($con->query($sql)){
-                echo "INSERTAR <br/>";
-            }else{
-                echo "<strong>ERROR: INSERT</strong> => ".$con->error."<br/>";
-            }
+            if(!$show){
+                $sql = "INSERT INTO ".$tablas[$i]["nombre"]." (".implode(", ", $campos).") VALUES (".implode(", ", $matriz[$j]).")";
+                if($con->query($sql)){
+                    echo $sql." <br/>";
+                    echo "INSERTADO <br/>";
+                }else{
+                    echo "<strong>ERROR: INSERT</strong> => ".$con->error."<br/>";
+                }
+            }else{ echo $sql; }
         }
-
     }
-
 }else{
     echo "ERROR CREAR BASE: ".$con->error."<br/>";
 }
