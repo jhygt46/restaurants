@@ -959,16 +959,17 @@ class Guardar{
                     }
                     $send['accion'] = "xS3w1Dm8Po87Wltd";
                     $send['accion2'] = $data["code"];
+
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     if(!curl_errno($ch)){
                         curl_exec($ch);
-                        curl_close($ch);
                     }else{
                         $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
                     }
+                    curl_close($ch);
                     $sql->free_result();
                     $sql->close();
                     return;

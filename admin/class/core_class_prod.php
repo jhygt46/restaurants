@@ -2165,7 +2165,7 @@ class Core{
                             if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?")){
                                 if($sqlupu->bind_param("ii", $cont, $id_puser)){
                                     if($sqlupu->execute()){
-                                        $sqlupu->close();    
+                                        $sqlupu->close();
                                     }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($sqlupu->error));/* $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0); */ }
                                 }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($sqlupu->error)); }
                             }else{ $this->registrar(6, 0, 0, 'get_informe() #2 '.htmlspecialchars($this->con->error)); }
@@ -2216,6 +2216,7 @@ class Core{
                                 }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($sqlugi->error)); }
                             }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($sqlugi->error)); }
                         }else{ $this->registrar(6, 0, 0, 'get_informe() #5 '.htmlspecialchars($this->con->error)); }
+                        
                         $info['op'] = 1;
                         $info['id_ped'] = $id_ped;
                         $info['num_ped'] = $local_data['num_ped'];
@@ -2225,6 +2226,7 @@ class Core{
                         $info['t_despacho'] = $local_data['t_despacho'];
                         $info['pedido_code'] = $pedido_code;
                         $info['fecha'] = $time_stgo;
+
                         $pedido_m['local_code'] = $local_data['code'];
                         $pedido_m['id_ped'] = $id_ped;
                         $pedido_m['num_ped'] = $local_data['num_ped'];
@@ -2236,11 +2238,13 @@ class Core{
                         $pedido_m['dominio'] = $local_data['dominio'];
                         $pedido_m['nombre'] = $pedido["nombre"];
                         $pedido_m['telefono'] = $pedido["telefono"];
+
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_local');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pedido_m));
                         $resp = json_decode(curl_exec($ch));
+
                         if($resp->{'op'} == 1){
                             $info['email'] = 1;
                         }
@@ -2253,6 +2257,8 @@ class Core{
                         }
                         curl_close($ch);
                         $sqlipa->close();
+
+                        
                     }else{
                         $info['op'] = 2;
                         $this->registrar(6, 0, 0, 'get_informe() #6 '.htmlspecialchars($sqlipa->error));
