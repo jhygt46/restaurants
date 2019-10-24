@@ -2121,7 +2121,7 @@ class Guardar{
                                         $info['mensaje'] = "Categoria creada exitosamente";
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                                        $info['cambios'] = $this->con_cambios(null);
+                                        $this->con_cambios(null);
                                         $sqlic->close();
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #1 '.htmlspecialchars($sqlic->error)); }
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #1 '.htmlspecialchars($sqlic->error)); }
@@ -2140,7 +2140,7 @@ class Guardar{
                             $info['mensaje'] = "Categoria modificada exitosamente";
                             $info['reload'] = 1;
                             $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                            $info['cambios'] = $this->con_cambios(null);
+                            $this->con_cambios(null);
                             $sqluc->close();
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
