@@ -1676,6 +1676,8 @@ class Guardar{
             $direccion = $_POST['direccion'];
             $lat = $_POST['lat'];
             $lng = $_POST['lng'];
+            $telefono = $_POST['telefono'];
+            $whatsapp = $_POST['whatsapp'];
             if($sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_cat=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("iii", $id_cat, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
