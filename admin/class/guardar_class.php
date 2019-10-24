@@ -1687,8 +1687,8 @@ class Guardar{
                                         $resses = $sqlses->get_result();
                                         $correo_ses = ($resses->{"num_rows"} == 0) ? 0 : 1 ;
                                         if($id_loc == 0){
-                                            if($sqlloc = $this->con->prepare("INSERT INTO locales (nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, now(), ?, ?, ?)")){
-                                                if($sqlloc->bind_param("sisddssii", $nombre, $correo_ses, $direccion, $lat, $lng, $code, $correo, $id_cat, $this->id_gir)){
+                                            if($sqlloc = $this->con->prepare("INSERT INTO locales (telefono, whatsapp, nombre, correo_ses, direccion, lat, lng, code, fecha_creado, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, now(), ?, ?, ?)")){
+                                                if($sqlloc->bind_param("sssisddssii", $telefono, $whatsapp, $nombre, $correo_ses, $direccion, $lat, $lng, $code, $correo, $id_cat, $this->id_gir)){
                                                     if($sqlloc->execute()){
                                                         $info['op'] = 1;
                                                         $info['mensaje'] = "Local creado exitosamente";
@@ -1702,8 +1702,8 @@ class Guardar{
                                             }else{ $this->registrar(6, 0, $this->id_gir, 'crear_locales() #1 '.htmlspecialchars($this->con->error)); }
                                         }
                                         if($id_loc > 0){
-                                            if($sqlloc = $this->con->prepare("UPDATE locales SET nombre=?, correo_ses=?, direccion=?, lat=?, lng=?, correo=? WHERE id_loc=? AND id_cat=? AND id_gir=? AND eliminado=?")){
-                                                if($sqlloc->bind_param("sisddsiiii", $nombre, $correo_ses, $direccion, $lat, $lng, $correo, $id_loc, $id_cat, $this->id_gir, $this->eliminado)){
+                                            if($sqlloc = $this->con->prepare("UPDATE locales SET telefono=?, whatsapp=?, nombre=?, correo_ses=?, direccion=?, lat=?, lng=?, correo=? WHERE id_loc=? AND id_cat=? AND id_gir=? AND eliminado=?")){
+                                                if($sqlloc->bind_param("sssisddsiiii", $telefono, $whatsapp, $nombre, $correo_ses, $direccion, $lat, $lng, $correo, $id_loc, $id_cat, $this->id_gir, $this->eliminado)){
                                                     if($sqlloc->execute()){
                                                         $info['op'] = 1;
                                                         $info['mensaje'] = "Local modificado exitosamente";
@@ -1811,7 +1811,7 @@ class Guardar{
         
     }
     private function locales_giro(){
-        if($sql = $this->con->prepare("SELECT id_loc, lat, lng, nombre, direccion, image FROM locales WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_loc, lat, lng, nombre, direccion, image, telefono, whatsapp FROM locales WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

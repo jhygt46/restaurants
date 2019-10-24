@@ -146,6 +146,14 @@ function crear_llamado(map){
                         <input id="direccion" type="text" class="inputs" value="<?php echo $that['direccion']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Telefono:</p></span>
+                        <input id="telefono" type="text" class="inputs" value="<?php echo $that['telefono']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>WhatsApp:</p></span>
+                        <input id="whatsapp" type="text" class="inputs" value="<?php echo $that['whatsapp']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
                         <span><p>Mapa:</p></span>
                         <div class="map" id="input_gmap"></div>
                     </label>
