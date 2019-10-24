@@ -801,7 +801,7 @@ class Core{
                         $info['logo'] = $result['logo'];
                         $info['foto_retiro'] = $result['foto_retiro'];
                         $info['foto_despacho'] = $result['foto_despacho'];
-                        $info['estados'] = explode(",",$result['estados']);
+                        $info['estado'] = explode(",",$result['estado']);
                         $info['mapcode'] = $result['mapcode'];
                         $info['dominio'] = "";
                         $info['url'] = $dominio;
@@ -1093,7 +1093,7 @@ class Core{
         $id = $_COOKIE["id"];
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng, t2.sonido, t3.estados, t2.t_retiro, t2.t_despacho, t3.dominio, t3.ssl, t3.dns, t3.id_gir FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng, t2.sonido, t3.estado, t2.t_retiro, t2.t_despacho, t3.dominio, t3.ssl, t3.dns, t3.id_gir FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?")){
             if($sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
@@ -1107,7 +1107,7 @@ class Core{
                         $info['lat'] = $result['lat'];
                         $info['lng'] = $result['lng'];
                         $info['sonido'] = $result['sonido'];
-                        $info['estados'] = explode(",", $result['estados']);
+                        $info['estado'] = explode(",", $result['estado']);
                         $info['t_retiro'] = $result['t_retiro'];
                         $info['t_despacho'] = $result['t_despacho'];
                         $info['dominio'] = $result['dominio'];
