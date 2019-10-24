@@ -46,8 +46,9 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
 }
 
 ?>
+
+<?php if(isset($_GET['sortable'])){ ?>
 <script>
-    <?php if(isset($_GET['sortable'])){ ?>
     $('.listado_items').sortable({
         stop: function(e, ui){
             var order = [];
@@ -64,8 +65,9 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
             });
         }
     });
-    <?php } ?>
 </script>
+<?php } ?>
+
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>

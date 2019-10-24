@@ -57,6 +57,24 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
         }
 
     }
+<?php if(isset($_GET['sortable'])){ ?>
+    $('.listado_items').sortable({
+        stop: function(e, ui){
+            var order = [];
+            $(this).find('.l_item').each(function(){
+                order.push($(this).attr('rel'));
+            });
+            var send = {accion: 'orderpag', values: order};
+            $.ajax({
+                url: "ajax/index.php",
+                type: "POST",
+                data: send,
+                success: function(data){},
+                error: function(e){}
+            });
+        }
+    });
+<?php } ?>
 
 </script>
 <div class="pagina">
@@ -113,8 +131,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
                 <ul class="opts clearfix">
-                    <li class="opt">1</li>
-                    <li class="opt">2</li>
+                    <li class="opt"><div onclick="navlink('pages/msd/configurar_paginas.php?sortable=1')" class="order"></div></li>
                 </ul>
             </div>
             <div class="listado_items">
@@ -124,7 +141,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     $nombre = $list[$i]['nombre'];
                     $dominio = $list[$i]['dominio'];
                 ?>
-                <div class="l_item">
+                <div class="l_item" rel="<?php echo $id; ?>">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <a class="icono ic11" onclick="eliminar('<?php echo $eliminaraccion; ?>', '<?php echo $id; ?>', '<?php echo $eliminarobjeto; ?>', '<?php echo $nombre; ?>')"></a>
