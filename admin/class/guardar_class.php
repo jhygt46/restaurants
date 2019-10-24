@@ -2140,7 +2140,7 @@ class Guardar{
                             $info['mensaje'] = "Categoria modificada exitosamente";
                             $info['reload'] = 1;
                             $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                            $this->con_cambios(null);
+                            $info['cambios'] = $this->con_cambios(null);
                             $sqluc->close();
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'crear_categoria() #3 '.htmlspecialchars($sqluc->error)); }
