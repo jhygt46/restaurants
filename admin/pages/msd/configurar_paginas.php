@@ -44,6 +44,8 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
         var pagina = $('#ejemplo').val();
         var info = htmls[pagina];
 
+        console.log(pagina);
+        console.log(htmls);
         console.log(info);
 
         if(info.html){
