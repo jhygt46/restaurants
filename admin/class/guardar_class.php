@@ -151,6 +151,9 @@ class Guardar{
             if($_POST['accion'] == "ordercat"){
                 return $this->ordercat();
             }
+            if($_POST['accion'] == "orderpag"){
+                return $this->orderpag();
+            }
             if($_POST['accion'] == "orderprods"){
                 return $this->orderprods();
             }
@@ -428,6 +431,23 @@ class Guardar{
                 $this->con_cambios(null);
             }else{ $this->registrar(3, 0, $this->id_gir, 'ordercat()'); }
         }else{ $this->registrar(2, 0, 0, 'ordercat()'); }
+    }
+    private function orderpag(){
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
+                $values = $_POST['values'];
+                for($i=0; $i<count($values); $i++){
+                    if($sql = $this->con->prepare("UPDATE paginas SET orders='".$i."' WHERE id_pag=? AND id_gir=? AND eliminado=?")){
+                        if($sql->bind_param("iii", $values[$i], $this->id_gir, $this->eliminado)){
+                            if($sql->execute()){
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($this->con->error)); }
+                }
+                $this->con_cambios(null);
+            }else{ $this->registrar(3, 0, $this->id_gir, 'orderpag()'); }
+        }else{ $this->registrar(2, 0, 0, 'orderpag()'); }
     }
     private function orderprods(){
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
