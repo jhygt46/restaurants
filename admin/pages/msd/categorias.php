@@ -59,9 +59,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
             $.ajax({
                 url: "ajax/index.php",
                 type: "POST",
-                data: send,
-                success: function(data){},
-                error: function(e){}
+                data: send
             });
         }
     });

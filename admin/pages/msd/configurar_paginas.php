@@ -68,9 +68,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
             $.ajax({
                 url: "ajax/index.php",
                 type: "POST",
-                data: send,
-                success: function(data){ console.log(data); },
-                error: function(e){}
+                data: send
             });
         }
     });
