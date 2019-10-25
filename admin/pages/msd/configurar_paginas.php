@@ -28,6 +28,10 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     $that = $core->get_pagina($id_pag);
     $sub_titulo = $sub_titulo2;
 
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
+
 }
 
 ?>
