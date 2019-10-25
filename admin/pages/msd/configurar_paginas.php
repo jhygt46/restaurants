@@ -18,6 +18,7 @@ $page_mod = "pages/msd/configurar_paginas.php";
 /* CONFIG PAGE */
 
 $id_pag = 0;
+$html = "";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_paginas();
@@ -27,10 +28,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     $id_pag = $_GET["id_pag"];
     $that = $core->get_pagina($id_pag);
     $sub_titulo = $sub_titulo2;
-
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
+    $html = $that["html"];
 
 }
 
@@ -38,7 +36,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
 <script>
 
     var htmls = [
-        { html: true, image: true, data: '' }, 
+        { html: true, image: true, data: '<?php echo $html; ?>' }, 
         { html: true, image: true, data: '<div style="width: 100%; min-height: 100%; background: url(/restaurants/images/paginas/#FOTO#) no-repeat; border-radius: 10px"><div style="font-size: 26px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 70px">#TITULO</div><div style="font-size: 14px; padding-top: 15px; color: #f00; padding-left: 20px; padding-right: 117px">#DESCRIPCION</div></div>' },
         { html: true, image: true, data: '<div>BUENA ERNESTOR</div>' }, 
         { html: true, image: true, data: '<div>BUENA BUENA</div>' }
@@ -117,15 +115,15 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo" onchange="tipo_paginas()">
-                            <option value="0">Texto Libre</option>
-                            <option value="1">Locales</option>
-                            <option value="2">Contacto</option>
+                            <option value="0" <?php if($that["tipo"] == 0){ echo "selected"; } ?>>Texto Libre</option>
+                            <option value="1" <?php if($that["tipo"] == 1){ echo "selected"; } ?>>Locales</option>
+                            <option value="2" <?php if($that["tipo"] == 2){ echo "selected"; } ?>>Contacto</option>
                         </select>
                     </label>
                     <label class="sec_tipo0 clearfix">
                         <span><p>Ejemplos:</p></span>
                         <select id="ejemplos" onchange="ver_paginas()">
-                            <option value="0">Nueva</option>
+                            <option value="0"><?php if($id_pag > 0){ echo "Actual"; }else{ echo "Nueva"; } ?></option>
                             <option value="1">Pagina 1</option>
                             <option value="2">Pagina 2</option>
                             <option value="3">Pagina 3</option>
