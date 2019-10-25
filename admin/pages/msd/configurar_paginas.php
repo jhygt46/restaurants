@@ -19,6 +19,7 @@ $page_mod = "pages/msd/configurar_paginas.php";
 
 $id_pag = 0;
 $html = "";
+$tipo = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_paginas();
@@ -29,6 +30,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     $that = $core->get_pagina($id_pag);
     $sub_titulo = $sub_titulo2;
     $html = $that["html"];
+    $tipo = $that["tipo"];
 
 }
 
@@ -115,12 +117,12 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="tipo" onchange="tipo_paginas()">
-                            <option value="0" <?php if($that["tipo"] == 0){ echo "selected"; } ?>>Texto Libre</option>
-                            <option value="1" <?php if($that["tipo"] == 1){ echo "selected"; } ?>>Locales</option>
-                            <option value="2" <?php if($that["tipo"] == 2){ echo "selected"; } ?>>Contacto</option>
+                            <option value="0" <?php if($tipo == 0){ echo "selected"; } ?>>Texto Libre</option>
+                            <option value="1" <?php if($tipo == 1){ echo "selected"; } ?>>Locales</option>
+                            <option value="2" <?php if($tipo == 2){ echo "selected"; } ?>>Contacto</option>
                         </select>
                     </label>
-                    <label class="sec_tipo0 clearfix">
+                    <label class="sec_tipo0 clearfix" <?php if($tipo > 0){ echo "style='display: none'"; } ?>>
                         <span><p>Ejemplos:</p></span>
                         <select id="ejemplos" onchange="ver_paginas()">
                             <option value="0"><?php if($id_pag > 0){ echo "Actual"; }else{ echo "Nueva"; } ?></option>
@@ -129,11 +131,11 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                             <option value="3">Pagina 3</option>
                         </select>
                     </label>
-                    <label class="sec_tipo0 divImage clearfix">
+                    <label class="sec_tipo0 divImage clearfix" <?php if($tipo > 0){ echo "style='display: none'"; } ?>>
                         <span><p>Imagen:</p></span>
                         <input id="file_image0" type="file" style="padding-top: 8px" />
                     </label>
-                    <label class="sec_tipo0 divHtml clearfix">
+                    <label class="sec_tipo0 divHtml clearfix" <?php if($tipo > 0){ echo "style='display: none'"; } ?>>
                         <span><p>HTML:</p></span>
                         <TEXTAREA id="html"><?php echo $that['html']; ?></TEXTAREA>
                     </label>
