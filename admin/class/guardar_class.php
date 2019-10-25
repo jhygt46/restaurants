@@ -2241,28 +2241,36 @@ class Guardar{
             $html = $_POST['html'];
             $tipo = $_POST['tipo'];
             if($id_pag == 0){
-                if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir, orders) VALUES (?, ?, ?, ?, '0')")){
-                    if($sql->bind_param("ssii", $nombre, $html, $tipo, $this->id_gir)){
-                        if($sql->execute()){
-                            if($image['op'] == 1){
-                                $id_pag = $this->con->insert_id;
-                                if($sqlupa = $this->con->prepare("UPDATE paginas SET imagen=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
-                                    if($sqlupa->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
-                                        if($sqlupa->execute()){
-                                            $sqlupa->close();
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
-                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($this->con->error)); }
-                            }
-                            $info['op'] = 1;
-                            $info['mensaje'] = "Paginas creado exitosamente";
-                            $info['reload'] = 1;
-                            $info['page'] = "msd/configurar_contenido.php";
-                            $this->con_cambios(null);
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($this->con->error)); }
+                if($sqlorders = $this->con->prepare("SELECT orders FROM paginas WHERE id_gir=?")){
+                    if($sqlorders->bind_param("i", $this->id_gir)){
+                        if($sqlorders->execute()){
+                            $resorder = $sqlorders->get_result();
+                            $orders = $resorder->{"num_rows"};
+                            if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir, orders) VALUES (?, ?, ?, ?, ?)")){
+                                if($sql->bind_param("ssiii", $nombre, $html, $tipo, $this->id_gir, $orders)){
+                                    if($sql->execute()){
+                                        if($image['op'] == 1){
+                                            $id_pag = $this->con->insert_id;
+                                            if($sqlupa = $this->con->prepare("UPDATE paginas SET imagen=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
+                                                if($sqlupa->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
+                                                    if($sqlupa->execute()){
+                                                        $sqlupa->close();
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($sqlupa->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #1 '.htmlspecialchars($this->con->error)); }
+                                        }
+                                        $info['op'] = 1;
+                                        $info['mensaje'] = "Paginas creado exitosamente";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/configurar_contenido.php";
+                                        $this->con_cambios(null);
+                                        $sql->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #2 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #0 '.htmlspecialchars($sqlorders->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #0 '.htmlspecialchars($sqlorders->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_pagina() #0 '.htmlspecialchars($this->con->error)); }
             }
             if($id_pag > 0){
                 if($sql = $this->con->prepare("SELECT imagen FROM paginas WHERE id_pag=? AND id_gir=? AND eliminado=?")){
