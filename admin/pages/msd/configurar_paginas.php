@@ -41,7 +41,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     ];
     function ver_paginas(){
 
-        var pagina = $('#tipo').val();
+        var pagina = $('#ejemplo').val();
         var info = htmls[pagina];
 
         if(info.html){
@@ -54,6 +54,16 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
             $('.divImage').show();
         }else{
             $('.divImage').hide();
+        }
+
+    }
+    function tipo_paginas(){
+
+        var tipo = $('#tipo').val();
+        if(tipo == 0){
+            $('.sec_tipo0').show();
+        }else{
+            $('.sec_tipo0').hide();
         }
 
     }
@@ -101,19 +111,27 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p>Pagina:</p></span>
-                        <select id="tipo" onchange="ver_paginas()">
+                        <span><p>Tipo:</p></span>
+                        <select id="tipo" onchange="tipo_paginas()">
+                            <option value="0">Texto Libre</option>
+                            <option value="1">Locales</option>
+                            <option value="2">Contacto</option>
+                        </select>
+                    </label>
+                    <label class="sec_tipo0 clearfix">
+                        <span><p>Ejemplos:</p></span>
+                        <select id="ejemplos" onchange="ver_paginas()">
                             <option value="0">Nueva</option>
                             <option value="1">Pagina 1</option>
                             <option value="2">Pagina 2</option>
                             <option value="3">Pagina 3</option>
                         </select>
                     </label>
-                    <label class="divImage clearfix">
+                    <label class="sec_tipo0 divImage clearfix">
                         <span><p>Imagen:</p></span>
                         <input id="file_image0" type="file" style="padding-top: 8px" />
                     </label>
-                    <label class="divHtml clearfix">
+                    <label class="sec_tipo0 divHtml clearfix">
                         <span><p>HTML:</p></span>
                         <TEXTAREA id="html"><?php echo $that['html']; ?></TEXTAREA>
                     </label>
