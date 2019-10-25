@@ -504,7 +504,7 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_productos_categoria() '.htmlspecialchars($this->con->error)); } 
     }
     public function get_paginas(){
-        if($sql = $this->con->prepare("SELECT * FROM paginas WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT * FROM paginas WHERE id_gir=? AND eliminado=? ORDER BY orders")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

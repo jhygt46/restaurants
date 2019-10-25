@@ -2243,7 +2243,7 @@ class Guardar{
             $html = $_POST['html'];
             $tipo = $_POST['tipo'];
             if($id_pag == 0){
-                if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir) VALUES (?, ?, ?, ?)")){
+                if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir, orders) VALUES (?, ?, ?, ?, '0')")){
                     if($sql->bind_param("ssii", $nombre, $html, $tipo, $this->id_gir)){
                         if($sql->execute()){
                             if($image['op'] == 1){
