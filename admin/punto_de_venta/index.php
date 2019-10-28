@@ -27,7 +27,7 @@ if($_GET["mode"] == "debug"){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
         <script>
-            var aud = new Audio('/audios/<?php echo $info['sonido']; ?>.mp3');
+            var aud = new Audio('/audios/<?php echo ($info['sonido'] == "") ? "Yes" : $info['sonido'] ; ?>.mp3');
             var tipo_comanda = 0;
             var id = '<?php echo $info['id']; ?>';
             var local_lat = '<?php echo $info['lat']; ?>';
