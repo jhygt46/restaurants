@@ -2124,6 +2124,16 @@ class Core{
         return $info;
 
     }
+    public function enviar_contacto(){
+
+        $info['op'] = 2;
+        if($this->verificar()){
+            $correo = $_POST['correo'];
+            $telefono = $_POST['telefono'];
+            $comentario = $_POST['comentario'];
+        }
+
+    }
     public function enviar_pedido(){
         
         $info['op'] = 2;
@@ -2398,5 +2408,19 @@ class Core{
         }
         return $r;
     }
+    /*
+    public function acciones($id_gir){
+        if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)")){
+            if($sql->bind_param("i", $id_gir)){
+                if($sql->execute()){
+                    $res = $sql->get_result();
+                    $sql->free_result();
+                    $sql->close();
+                    return $res->{"num_rows"};
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+    }
+    */
 }
 ?>

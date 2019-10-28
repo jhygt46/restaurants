@@ -1969,64 +1969,66 @@ class Guardar{
                     if($sqlsl->bind_param("ii", $id_loc, $this->id_gir)){
                         if($sqlsl->execute()){
                             $ressl = $sqlsl->get_result();
-                            if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
-                                if($sqlus->bind_param("s", $correo)){
-                                    if($sqlus->execute()){
-                                        $res = $sqlus->get_result();
-                                        $id_user = $res->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
-                                        if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $id_user)){
-                                            if($id == 0){
-                                                if($pass1 == $pass2){
-                                                    if(strlen($pass1) > 7){
-                                                        $admin = 0;
-                                                        if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES (?, now(), ?, ?, ?, ?, ?, ?)")){
-                                                            if($sqlius->bind_param("sssiiii", $nombre, $correo, md5($pass1), $tipo, $admin, $id_loc, $this->id_gir)){
-                                                                if($sqlius->execute()){
-                                                                    $info['op'] = 1;
-                                                                    $info['mensaje'] = "Usuario creado exitosamente";
-                                                                    $info['reload'] = 1;
-                                                                    $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
-                                                                    $sqlius->close();
+                            if($ressl->{"num_rows"} == 1){
+                                if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
+                                    if($sqlus->bind_param("s", $correo)){
+                                        if($sqlus->execute()){
+                                            $res = $sqlus->get_result();
+                                            $id_user = $res->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
+                                            if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $id_user)){
+                                                if($id == 0){
+                                                    if($pass1 == $pass2){
+                                                        if(strlen($pass1) > 7){
+                                                            $admin = 0;
+                                                            if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES (?, now(), ?, ?, ?, ?, ?, ?)")){
+                                                                if($sqlius->bind_param("sssiiii", $nombre, $correo, md5($pass1), $tipo, $admin, $id_loc, $this->id_gir)){
+                                                                    if($sqlius->execute()){
+                                                                        $info['op'] = 1;
+                                                                        $info['mensaje'] = "Usuario creado exitosamente";
+                                                                        $info['reload'] = 1;
+                                                                        $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
+                                                                        $sqlius->close();
+                                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($sqlius->error)); }
                                                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($sqlius->error)); }
-                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($sqlius->error)); }
-                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($this->con->error)); }
+                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #1 '.htmlspecialchars($this->con->error)); }
+                                                        }else{
+                                                            $info['op'] = 2;
+                                                            $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                                                        }
                                                     }else{
                                                         $info['op'] = 2;
-                                                        $info['mensaje'] = "Password debe tener al menos 8 caracteres";
+                                                        $info['mensaje'] = "Password diferentes";
                                                     }
-                                                }else{
-                                                    $info['op'] = 2;
-                                                    $info['mensaje'] = "Password diferentes";
                                                 }
-                                            }
-                                            if($id > 0){
-                                                if($pass1 == $pass2 && strlen($pass1) > 7){
-                                                    if($sqluup = $this->con->prepare("UPDATE fw_usuarios SET pass=? WHERE id_user=? AND eliminado=?")){
-                                                        if($sqluup->bind_param("sii", md5($pass1), $id, $this->eliminado)){
-                                                            if($sqluup->execute()){
-                                                                $sqluup->close();
+                                                if($id > 0){
+                                                    if($pass1 == $pass2 && strlen($pass1) > 7){
+                                                        if($sqluup = $this->con->prepare("UPDATE fw_usuarios SET pass=? WHERE id_user=? AND eliminado=?")){
+                                                            if($sqluup->bind_param("sii", md5($pass1), $id, $this->eliminado)){
+                                                                if($sqluup->execute()){
+                                                                    $sqluup->close();
+                                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
                                                             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
-                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
-                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($this->con->error)); }
-                                                }
-                                                if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=? WHERE id_user=? AND eliminado=?")){
-                                                    if($sqluus->bind_param("ssiii", $nombre, $correo, $tipo, $id, $this->eliminado)){
-                                                        if($sqluus->execute()){
-                                                            $info['op'] = 1;
-                                                            $info['mensaje'] = "Usuario modificado exitosamente";
-                                                            $info['reload'] = 1;
-                                                            $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
-                                                            $sqluus->close();
+                                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($this->con->error)); }
+                                                    }
+                                                    if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=? WHERE id_user=? AND eliminado=?")){
+                                                        if($sqluus->bind_param("ssiii", $nombre, $correo, $tipo, $id, $this->eliminado)){
+                                                            if($sqluus->execute()){
+                                                                $info['op'] = 1;
+                                                                $info['mensaje'] = "Usuario modificado exitosamente";
+                                                                $info['reload'] = 1;
+                                                                $info['page'] = "msd/usuarios_local.php?id_loc=".$id_loc;
+                                                                $sqluus->close();
+                                                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($sqluus->error)); }
                                                         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($sqluus->error)); }
-                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($sqluus->error)); }
-                                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($this->con->error)); }
-                                            }
-                                        }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_usuarios_local() correo existente '); }
-                                        $sqlus->free_result();
-                                        $sqlus->close();
+                                                    }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #3 '.htmlspecialchars($this->con->error)); }
+                                                }
+                                            }else{ $this->registrar(7, $id_loc, $this->id_gir, 'crear_usuarios_local() correo existente '); }
+                                            $sqlus->free_result();
+                                            $sqlus->close();
+                                        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($sqlus->error)); }
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($sqlus->error)); }
-                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($sqlus->error)); }
-                            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #4 '.htmlspecialchars($this->con->error)); }
+                            }
                             if($ressl->{"num_rows"} == 0){ $this->registrar(7, $id_loc, $this->id_gir, 'crear_usuarios_local() local'); }
                             $sqlsl->free_result();
                             $sqlsl->close();

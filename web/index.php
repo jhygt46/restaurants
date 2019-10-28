@@ -33,6 +33,9 @@ if(isset($_POST["tipo"])){
         if($_POST["tipo"] == 4){
             echo json_encode($core->ver_detalle());
         }
+        if($_POST["tipo"] == 5){
+            echo json_encode($core->enviar_contacto());
+        }
     }else{
         header('HTTP/1.1 404 Not Found', true, 404);
         include(DIR.'errors/404.html');
