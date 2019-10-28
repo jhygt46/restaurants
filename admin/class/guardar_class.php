@@ -983,14 +983,14 @@ class Guardar{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     if(!curl_errno($ch)){
-                        $data = curl_exec($ch);
+                        curl_exec($ch);
+                        // GUARDAR DATA
                     }else{
                         $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
                     }
                     curl_close($ch);
                     $sql->free_result();
                     $sql->close();
-                    return $data;
                 }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($this->con->error)); }

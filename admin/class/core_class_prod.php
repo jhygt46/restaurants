@@ -1831,12 +1831,17 @@ class Core{
                                     $info['polygons'] = $this->get_polygons($id_gir);
                                     $info['info'] = $this->get_data($id_gir);
                                     $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
+                                    
+                                    file_put_contents($ruta_file, "var data=".json_encode($info['data']));
+                                    /*
                                     if($info['info']['dns'] == 0){
                                         file_put_contents($ruta_file, "var data=".json_encode($info['data']));
                                     }
                                     if($info['info']['dns'] == 1 && file_exists($ruta_file)){
                                         unlink($ruta_file);
                                     }
+                                    */
+
                                     $sql->free_result();
                                     $sql->close();
                                 }else{ $this->registrar(6, 0, 0, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
