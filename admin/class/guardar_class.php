@@ -984,7 +984,6 @@ class Guardar{
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     if(!curl_errno($ch)){
                         curl_exec($ch);
-                        // GUARDAR DATA
                     }else{
                         $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
                     }

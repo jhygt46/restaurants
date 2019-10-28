@@ -202,11 +202,14 @@ class Login {
                                             if($sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado)){
                                                 if($sqlsg->execute()){
                                                     $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                                                    /*
                                                     if($res_glocal['dns'] == 1 && $res_glocal['ssl'] == 1){
                                                         $info['data'] = 'https://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
                                                     }else{
                                                         $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
                                                     }
+                                                    */
+                                                    $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
                                                     if($result['tipo'] == 0){
                                                         // PUNTO DE VENTA
                                                         $this->registrar('10', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
