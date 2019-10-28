@@ -40,7 +40,6 @@ $info = $core->get_data_pos();
         <div class="contenedor">
             <div class="pop_up">
                 <div class="cont_pop_up">
-                    
                     <div class="pop pop_dim_1 pop_cats vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -50,7 +49,6 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_pre vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -65,7 +63,6 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_pedido vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -156,7 +153,6 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_detalle vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -174,7 +170,6 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_pro_cat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -189,14 +184,12 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_mapa vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
                             <div class="cont_info" id="mapa_motos"></div>
                         </div>
                     </div>
-                    
                     <div class="pop pop_dim_1 pop_setting vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -206,7 +199,6 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                     <div class="pop pop_dim_1 pop_chat vhalign">
                         <div class="cont_nuevo">
                             <div class="cerrar" onclick="np_close()"></div>
@@ -216,10 +208,8 @@ $info = $core->get_data_pos();
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-            
             <div class="contenido">
                 <div class="pedidos">
                     <div class="titulo_pedidos"><div class="cont_titulo"><div class="tt valign">Pedidos</div><div class="mas valign" onclick="ver_pedido(-1)"><div class="cont_m"><div class="m1"></div><div class="m2"></div></div></div></div></div>

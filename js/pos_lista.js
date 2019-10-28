@@ -18,6 +18,9 @@ var map_socket, socket;
 
 function listar_pedidos(n){
     
+    console.log("listar_peidos()");
+    console.log(n);
+
     if(n !== undefined){
         localStorage.setItem("pedidos", JSON.stringify(n));
         var pedidos = n;
