@@ -1518,16 +1518,11 @@ function guardar_pedido(index, open){
     var pedido = pedidos[index];
     var send = { accion: 'guardar_pedido', pedido: JSON.stringify(pedido) };
 
-    console.log("GUARDAR PEDIDO");
-
     $.ajax({
         url: "/admin/ajax/set_pos_pedido.php",
         type: "POST",
         data: send,
         success: function(info){
-
-            console.log("info");
-            console.log(info);
 
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
