@@ -733,6 +733,15 @@ $tablas[17]['campos'][3]['null'] = 0;
 $tablas[17]['campos'][4]['nombre'] = 'cont';
 $tablas[17]['campos'][4]['tipo'] = 'smallint(2)';
 $tablas[17]['campos'][4]['null'] = 0;
+$tablas[17]['campos'][5]['nombre'] = 'id_gir';
+$tablas[17]['campos'][5]['tipo'] = 'int(4)';
+$tablas[17]['campos'][5]['null'] = 0;
+$tablas[17]['campos'][5]['k'] = 1;
+$tablas[17]['campos'][5]['kt'] = 1;
+$tablas[17]['campos'][5]['kc'] = 0;
+$tablas[17]['campos'][6]['nombre'] = 'eliminado';
+$tablas[17]['campos'][6]['tipo'] = 'tinyint(1)';
+$tablas[17]['campos'][6]['null'] = 0;
 
 $tablas[18]['nombre'] = 'pedidos_direccion';
 $tablas[18]['campos'][0]['nombre'] = 'id_pdir';
