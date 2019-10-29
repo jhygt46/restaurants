@@ -49,6 +49,7 @@ class Core{
     }
     public function verificar(){
 
+        $return = false;
         $host = $_POST["host"];
         if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sqlgir->bind_param("si", $host, $this->eliminado)){
@@ -61,7 +62,7 @@ class Core{
                             if($_SERVER['SERVER_PORT'] == "443"){
                                 $code = substr($_POST["code"], 0, 40);
                                 if($code == $result["code"]){
-                                    return true;
+                                    $return = true;
                                 }else{ $this->registrar(15, 0, 0, 'verificar() codigo no encontrado'); }
                             }else{ $this->registrar(15, 0, 0, 'verificar() puerto distinto a 443'); }
                         }else{ $this->registrar(15, 0, 0, 'verificar() ip distinta'); }
@@ -71,7 +72,7 @@ class Core{
                 }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
             }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
         }else{ $this->registrar(6, 0, 0, 'verificar() '.$this->con->error); }
-        return false;
+        return $return;
 
     }
     public function getUserIpAddr(){
@@ -1264,53 +1265,64 @@ class Core{
         return $info;
     }
     public function get_pos_direcciones($telefono){
+
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+            $id_gir = $verificar['id_gir'];
+            if($sqlu = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2 WHERE t1.id_gir=? AND t1.telefono=? AND t1.id_puser=t2.id_puser")){
+                if($sqlu->bind_param("is", $id_gir, $telefono)){
+                    if($sqlu->execute()){
+                        $resdir = $sqlu->get_result();
+                        $info['cantidad'] = $resdir->{"num_rows"};
+                        if($resdir->{"num_rows"} > 0){
+                            while($row = $resdir->fetch_assoc()){
+                                $info['id_puser'] = $row['id_puser'];
+                                $info['nombre'] = $row['nombre'];
+                                $aux_dir["id_pdir"] = $row['id_pdir'];
+                                $aux_dir["direccion"] = $row['direccion'];
+                                $aux_dir["calle"] = $row['calle'];
+                                $aux_dir["num"] = $row['num'];
+                                $aux_dir["depto"] = $row['depto'];
+                                $aux_dir["comuna"] = $row['comuna'];
+                                $aux_dir["lat"] = $row['lat'];
+                                $aux_dir["lng"] = $row['lng'];
+                                $info['direcciones'][] = $aux_dir;
+                                unset($aux_dir);
+                            }
+                        }
+                        $sqlu->free_result();
+                        $sqlu->close();
+                    }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
+                }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($this->con->error)); }
+        }
+        return $info;
+    }
+    private function verificar_coockie(){
+
         $ip = $this->getUserIpAddr();
         $id = $_COOKIE["id"];
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
+
+        $return['op'] = false;
+        $return['id_gir'] = 0;
+
         if($sql = $this->con->prepare("SELECT t2.id_gir FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
             if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
-                    if($res->{'num_rows'} == 0){
-                        $info['op'] = 2;
-                        $info['mensaje'] = "Error Usuario";
-                    }
                     if($res->{'num_rows'} == 1){
-                        $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
-                        if($sqlu = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2 WHERE t1.id_gir=? AND t1.telefono=? AND t1.id_puser=t2.id_puser")){
-                            if($sqlu->bind_param("is", $id_gir, $telefono)){
-                                if($sqlu->execute()){
-                                    $resdir = $sqlu->get_result();
-                                    $info['cantidad'] = $resdir->{"num_rows"};
-                                    if($resdir->{"num_rows"} > 0){
-                                        while($row = $resdir->fetch_assoc()){
-                                            $info['id_puser'] = $row['id_puser'];
-                                            $info['nombre'] = $row['nombre'];
-                                            $aux_dir["id_pdir"] = $row['id_pdir'];
-                                            $aux_dir["direccion"] = $row['direccion'];
-                                            $aux_dir["calle"] = $row['calle'];
-                                            $aux_dir["num"] = $row['num'];
-                                            $aux_dir["depto"] = $row['depto'];
-                                            $aux_dir["comuna"] = $row['comuna'];
-                                            $aux_dir["lat"] = $row['lat'];
-                                            $aux_dir["lng"] = $row['lng'];
-                                            $info['direcciones'][] = $aux_dir;
-                                            unset($aux_dir);
-                                        }
-                                    }
-                                    $sqlu->free_result();
-                                    $sqlu->close();
-                                }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($this->con->error)); }
+                        $return['op'] = true;
+                        $return['id_gir'] = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
                     }
                     $sql->free_result();
                     $sql->close();
-                }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #2 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #2 '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #2 '.htmlspecialchars($this->con->error)); }
-        return $info;
+                }else{ $this->registrar(6, 0, 0, 'verificar_coockie() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'verificar_coockie() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, 0, 'verificar_coockie() '.htmlspecialchars($this->con->error)); }
+        return $return;
+
     }
     public function get_ultimos_pedidos($id_ped){
         $ip = $this->getUserIpAddr();
@@ -1831,7 +1843,7 @@ class Core{
                                     $info['polygons'] = $this->get_polygons($id_gir);
                                     $info['info'] = $this->get_data($id_gir);
                                     $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
-                                    
+
                                     file_put_contents($ruta_file, "var data=".json_encode($info['data']));
                                     /*
                                     if($info['info']['dns'] == 0){
@@ -2007,6 +2019,7 @@ class Core{
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlgir->error)); }
                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
                         }
+
                         $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
                         $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
                         $sqlpaux->execute();
@@ -2040,6 +2053,7 @@ class Core{
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
                             }
                         }
+
                         if($id_puser > 0 && $sql_id_puser == 0){
                             if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
                                 if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
@@ -2050,6 +2064,7 @@ class Core{
                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
                             
                         }
+
                         if($id_pdir == 0 && $sql_id_pdir == 0){
                             if($direccion != ""){
                                 if($sqlipd = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
@@ -2069,6 +2084,7 @@ class Core{
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
                             }
                         }
+
                         if($id_pdir > 0 && $sql_id_pdir == 0){
                             if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
                                 if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
@@ -2119,7 +2135,6 @@ class Core{
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-
                     }
                     $sql->free_result();
                     $sql->close();

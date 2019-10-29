@@ -962,7 +962,6 @@ function ver_pedido_aux(index){
 function telefono_keyup(e){
 
     var telefono = e.value;
-    
     if(telefono.length >= 12 && telefono != global_telefono){
 
         global_telefono = telefono;
@@ -977,19 +976,16 @@ function telefono_keyup(e){
             data: send,
             success: function(data){
 
+                console.log(data);
                 if(data.cantidad == 0){
-
                     $('.pop_pedido .titulo h2').html('No se encontro registro');
-                    
                 }
                 if(data.cantidad > 0){
-                    
                     $('.pop_pedido .titulo h2').html('Usuario encontrado, direcciones: '+data.cantidad);
                     $('#id_puser').val(data.id_puser);
                     $('#nombre').val(data.nombre);
                     $('#l_direccion').show();
                     $('.t_direcciones').html(html_pedidos_direcciones(data.direcciones));
-
                 }
 
             }, error: function(e){
