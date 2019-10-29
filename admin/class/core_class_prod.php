@@ -1266,6 +1266,7 @@ class Core{
     }
     public function get_pos_direcciones($telefono){
 
+        return "HOLA MUNDO";
         $verificar = $this->verificar_coockie();
         if($verificar['op']){
             $id_gir = $verificar['id_gir'];
