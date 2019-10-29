@@ -8,13 +8,11 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR", DIR_BASE."restaurants/");
 }
 
-$file = explode("/", $_SERVER["REQUEST_URI"]);
-if($file[count($file) - 1] != ""){
+if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
     header('HTTP/1.1 404 Not Found', true, 404);
     include(DIR.'errors/404.html');
     exit;
 }
-
 
 if(isset($_POST["tipo"])){
 
