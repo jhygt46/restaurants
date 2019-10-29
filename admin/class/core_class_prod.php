@@ -2175,7 +2175,7 @@ class Core{
                         if($res->{'num_rows'} == 0){
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
-                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont) VALUES (?, ?, ?, ?)")){
+                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, id_gir, eliminado) VALUES (?, ?, ?, ?, '0' '0')")){
                                 if($sqlipu->bind_param("sssi", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont)){
                                     if($sqlipu->execute()){
                                         $id_puser = $this->con->insert_id;
