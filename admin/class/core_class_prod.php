@@ -1266,7 +1266,6 @@ class Core{
     }
     public function get_pos_direcciones($telefono){
 
-        return "HOLA MUNDO";
         $verificar = $this->verificar_coockie();
         if($verificar['op']){
             $id_gir = $verificar['id_gir'];
@@ -1296,7 +1295,7 @@ class Core{
                     }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
                 }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
             }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($this->con->error)); }
-        }
+        }else{ $info["mensaje"] = "NO PUDO SER VERIFICADO"; }
         return $info;
     }
     private function verificar_coockie(){
