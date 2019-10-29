@@ -1604,6 +1604,7 @@ function guardar_pedido(index){
         data: send,
         success: function(info){
 
+            console.log("success guardar_pedido");
             console.log(info);
 
             if(pedidos[index].id_ped == 0){
@@ -1628,7 +1629,8 @@ function guardar_pedido(index){
             }
             
         }, error: function(e){
-            
+            console.log("error guardar_pedido");
+            console.log(e);
         }
     });
     
