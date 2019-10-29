@@ -1524,6 +1524,7 @@ function guardar_pedido(index, open){
         data: send,
         success: function(info){
 
+            console.log("info");
             console.log(info);
 
             if(pedidos[index].id_ped == 0){
