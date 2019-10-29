@@ -1272,8 +1272,6 @@ class Core{
             if($sqlu = $this->con->prepare("SELECT t1.id_puser, t1.nombre, t2.id_pdir, t2.direccion, t2.calle, t2.num, t2.depto, t2.comuna, t2.lat, t2.lng FROM pedidos_usuarios t1, pedidos_direccion t2 WHERE t1.id_gir=? AND t1.telefono=? AND t1.id_puser=t2.id_puser")){
                 if($sqlu->bind_param("is", $id_gir, $telefono)){
                     if($sqlu->execute()){
-                        $info["buena"] = "Nelson";
-                        /*
                         $resdir = $sqlu->get_result();
                         $info['cantidad'] = $resdir->{"num_rows"};
                         if($resdir->{"num_rows"} > 0){
@@ -1292,7 +1290,6 @@ class Core{
                                 unset($aux_dir);
                             }
                         }
-                        */
                         $sqlu->free_result();
                         $sqlu->close();
                     }else{ $this->registrar(6, 0, 0, 'get_pos_direcciones() #1 '.htmlspecialchars($sqlu->error)); }
