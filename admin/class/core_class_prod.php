@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
+if(strpos($_SERVER["REQUEST_URI"], "core_class_prod.php") !== false){
+    header('HTTP/1.1 404 Not Found', true, 404);
+    include('../../errors/404.html');
+    exit;
+}
 
 require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
