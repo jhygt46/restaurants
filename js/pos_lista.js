@@ -842,7 +842,7 @@ function select_pdir(that){
     var send = { accion: 'despacho_domicilio', lat: lat, lng: lng, referer: dominio };
             
     $.ajax({
-        url: "ajax/index.php",
+        url: "ajax/",
         type: "POST",
         data: send,
         success: function(datas){
@@ -1715,7 +1715,7 @@ function get_users_pedido(){
     var telefono = $('#telefono').val();
     var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
     $.ajax({
-        url: "ajax/index.php",
+        url: "ajax/",
         type: "POST",
         data: send,
         success: function(datas){
@@ -1766,7 +1766,7 @@ function gmap_input(){
             var send = { accion: 'despacho_domicilio', lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), id: id };
             
             $.ajax({
-                url: "/ajax/index.php",
+                url: "/ajax/",
                 type: "POST",
                 data: send,
                 success: function(datas){

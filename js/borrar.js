@@ -1049,7 +1049,7 @@ function get_users_pedido(){
     var telefono = $('#telefono').val();
     var send = { accion: 'get_users_pedido', telefono: telefono, referer: dominio };
     $.ajax({
-        url: "ajax/index.php",
+        url: "ajax/",
         type: "POST",
         data: send,
         success: function(datas){

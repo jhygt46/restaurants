@@ -81,7 +81,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && $_GET["id"] != 0){
             });
             var send = { accion: 'orderprods', values: order, id_cae: <?php echo $id; ?> };
             $.ajax({
-                url: "ajax/index.php",
+                url: "ajax/",
                 type: "POST",
                 data: send,
                 success: function(data){ console.log(data); },

@@ -57,7 +57,7 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
             });
             var send = {accion: 'ordercat', values: order};
             $.ajax({
-                url: "ajax/index.php",
+                url: "ajax/",
                 type: "POST",
                 data: send
             });

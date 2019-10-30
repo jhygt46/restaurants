@@ -47,7 +47,7 @@
             <div class="form">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
                 <h2>Ingresando s&oacute;lo 2 simples datos</h2>
-                <form onsubmit="return send()" action="https://misitiodelivery.cl/ajax/index.php" method="post">
+                <form onsubmit="return send()" action="https://misitiodelivery.cl/ajax/" method="post">
                     <h3><?php if(isset($_GET["realizado"]) && $_GET["realizado"] == 0 && $_GET["tipo"] == 1){ echo "<p style='color: #f00'>".$_GET['error']."</p>"; }else{ echo "Ingresa tu Dominio"; } ?></h3>
                     <input type="hidden" name="accion" value="crear_dominio" />
                     <div class="input">
@@ -92,7 +92,7 @@
             <?php if($_GET["contacto"] == 0 || !isset($_GET["contacto"])){ ?>
             <div class="form">
                 <h1>Formulario de Contacto</h1>
-                <form onsubmit="return send2()" action="https://misitiodelivery.cl/ajax/index.php" method="post">
+                <form onsubmit="return send2()" action="https://misitiodelivery.cl/ajax/" method="post">
                     <h3>Nombre</h3>
                     <input type="hidden" name="accion" value="enviar_contacto" />
                     <div class="input">
