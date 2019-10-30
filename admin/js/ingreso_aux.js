@@ -24,7 +24,7 @@ function btn_login(){
     var btn = $('#login');
     btn.prop("disabled", true);
     $.ajax({
-        url: "/admin/ajax/login_back.php",
+        url: "/admin/login/",
         type: "POST",
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
         success: function(data){
@@ -73,9 +73,8 @@ function btn_recuperar(){
                 
     var btn = $('#recuperar');
     btn.prop("disabled", true );
-    console.log("RECUPERAR");
     $.ajax({
-        url: "/admin/ajax/login_back.php",
+        url: "/admin/login/",
         type: "POST",
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
