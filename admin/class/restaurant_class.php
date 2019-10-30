@@ -1,5 +1,6 @@
 <?php
 
+/*
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
     define("DIR", DIR_BASE."restaurants/");
@@ -7,7 +8,6 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", "/var/www/html/");
     define("DIR", DIR_BASE."restaurants/");
 }
-
 require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
 
@@ -15,7 +15,6 @@ class Rest{
     
     public $con = null;
     public $eliminado = 0;
-
     public function __construct(){
         
         global $db_host;
@@ -26,7 +25,6 @@ class Rest{
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         
     }
-    /*
     public function get_info(){
         
         $accion = $_POST["accion"]; 
@@ -584,7 +582,6 @@ class Rest{
         return $info;
 
     }
-    */
     public function get_info_despacho($lat, $lng){
 
         $polygons = $this->get_polygons();
@@ -685,5 +682,5 @@ class Rest{
     }
     
 }
-// QUE ME DEVUELTA CATEGORIA Y SUS VALORES
+*/
 ?>
