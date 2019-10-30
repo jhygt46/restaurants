@@ -1,8 +1,6 @@
 <?php
-session_start();
 
 if(!isset($core_class_iniciada)){
-
     if($_SERVER["HTTP_HOST"] == "localhost"){
         define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
         define("DIR", DIR_BASE."restaurants/");
@@ -10,14 +8,12 @@ if(!isset($core_class_iniciada)){
         define("DIR_BASE", "/var/www/html/");
         define("DIR", DIR_BASE."restaurants/");
     }
-
     require_once DIR."admin/class/core_class_prod.php";
     $core = new Core();
-    echo "<pre>";
-    print_r($core);
-    echo "</pre>";
-    exit;
+}
 
+if($core->id_gir == 0){
+    die("Error: su sesion ha expirado");
 }
 
 $core->is_giro();
