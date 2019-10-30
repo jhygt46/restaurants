@@ -157,10 +157,10 @@ function gmap_input(){
                     $('#comuna').val(places[0].address_components[i].long_name);
                 }
             }
-            var send = { lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng() };
+            var send = { lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng(), accion: 'despacho_domicilio' };
             
             $.ajax({
-                url: "/admin/ajax/despacho.php",
+                url: "/ajax/",
                 type: "POST",
                 data: send,
                 success: function(data){
@@ -971,7 +971,7 @@ function telefono_keyup(e){
 
         var send = { accion: 'get_users_pedido', telefono: telefono };
         $.ajax({
-            url: "/admin/ajax/get_pos_direcciones.php",
+            url: "/ajax/",
             type: "POST",
             data: send,
             success: function(data){
@@ -1001,9 +1001,9 @@ function del_pdir(that){
     var direccion = $(that).parent();
     var id = direccion.attr('id_pdir');
 
-    var send = { id_pdir: id };
+    var send = { id_pdir: id, accion: 'del_pos_pedido' };
     $.ajax({
-        url: "/admin/ajax/del_pos_pedido.php",
+        url: "/ajax/",
         type: "POST",
         data: send,
         success: function(data){
@@ -1063,10 +1063,10 @@ function select_pdir(that){
     var lat = $(that).parent().attr('lat');
     var lng = $(that).parent().attr('lng');
 
-    var send = { lat: lat, lng: lng };
+    var send = { lat: lat, lng: lng, accion: 'get_despacho' };
  
     $.ajax({
-        url: "/admin/ajax/despacho.php",
+        url: "/ajax/",
         type: "POST",
         data: send,
         success: function(data){
@@ -1592,10 +1592,10 @@ function guardar_pedido(index){
      
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    var send = { pedido: JSON.stringify(pedido) };
+    var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
 
     $.ajax({
-        url: "/admin/ajax/set_pos_pedido.php",
+        url: "/ajax/",
         type: "POST",
         data: send,
         success: function(info){
@@ -1653,9 +1653,9 @@ function get_url(pedido){
 }
 function agregar_pedido(id){
 
-    var send = { id_ped: id };
+    var send = { id_ped: id, accion: 'get_pos_pedidos' };
     $.ajax({
-        url: "/admin/ajax/get_pos_pedido.php",
+        url: "/ajax/",
         type: "POST",
         data: send,
         success: function(data){

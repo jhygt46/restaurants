@@ -44,151 +44,151 @@ class Guardar{
         if($this->id_user > 0){
 
             if($_POST['accion'] == "crear_giro"){
-                return $this->crear_giro();
+                echo json_encode($this->crear_giro());
             }
             if($_POST['accion'] == "eliminar_giro"){
-                return $this->eliminar_giro();
+                echo json_encode($this->eliminar_giro());
             }
             if($_POST['accion'] == "eliminar_pagina"){
-                return $this->eliminar_pagina();
+                echo json_encode($this->eliminar_pagina());
             }
             if($_POST['accion'] == "crear_catalogo"){
-                return $this->crear_catalogo();
+                echo json_encode($this->crear_catalogo());
             }
             if($_POST['accion'] == "eliminar_catalogo"){
-                return $this->eliminar_catalogo();
+                echo json_encode($this->eliminar_catalogo());
             }
             if($_POST['accion'] == "crear_locales"){
-                return $this->crear_locales();
+                echo json_encode($this->crear_locales());
             }
             if($_POST['accion'] == "configurar_local"){
-                return $this->configurar_local();
+                echo json_encode($this->configurar_local());
             }
             if($_POST['accion'] == "configurar_usuario_local"){
-                return $this->configurar_usuario_local();
+                echo json_encode($this->configurar_usuario_local());
             }
             if($_POST['accion'] == "crear_locales_tramos"){
-                return $this->crear_locales_tramos();
+                echo json_encode($this->crear_locales_tramos());
             }
             if($_POST['accion'] == "eliminar_locales"){
-                return $this->eliminar_locales();
+                echo json_encode($this->eliminar_locales());
             }
             if($_POST['accion'] == "crear_usuario"){
-                return $this->crear_usuario();
+                echo json_encode($this->crear_usuario());
             }
             if($_POST['accion'] == "crear_usuario_admin"){
-                return $this->crear_usuario_admin();
+                echo json_encode($this->crear_usuario_admin());
             }
             if($_POST['accion'] == "crear_usuarios_local"){
-                return $this->crear_usuarios_local();
+                echo json_encode($this->crear_usuarios_local());
             }
             if($_POST['accion'] == "eliminar_usuario"){
-                return $this->eliminar_usuario();
+                echo json_encode($this->eliminar_usuario());
             }
             if($_POST['accion'] == "eliminar_usuario_admin"){
-                return $this->eliminar_usuario_admin();
+                echo json_encode($this->eliminar_usuario_admin());
             }
             if($_POST['accion'] == "eliminar_usuario_local"){
-                return $this->eliminar_usuario_local();
+                echo json_encode($this->eliminar_usuario_local());
             }
             if($_POST['accion'] == "asignar_rubro"){
-                return $this->asignar_rubro();
+                echo json_encode($this->asignar_rubro());
             }
             if($_POST['accion'] == "crear_categoria"){
-                return $this->crear_categoria();
+                echo json_encode($this->crear_categoria());
             }
             if($_POST['accion'] == "eliminar_categoria"){
-                return $this->eliminar_categoria();
+                echo json_encode($this->eliminar_categoria());
             }
             if($_POST['accion'] == "crear_ingredientes"){
-                return $this->crear_ingredientes();
+                echo json_encode($this->crear_ingredientes());
             }
             if($_POST['accion'] == "eliminar_ingrediente"){
-                return $this->eliminar_ingrediente();
+                echo json_encode($this->eliminar_ingrediente());
             }
             if($_POST['accion'] == "crear_promociones"){
-                return $this->crear_promociones();
+                echo json_encode($this->crear_promociones());
             }
             if($_POST['accion'] == "eliminar_promociones"){
-                return $this->eliminar_promociones();
+                echo json_encode($this->eliminar_promociones());
             }
             if($_POST['accion'] == "crear_productos"){
-                return $this->crear_productos();
+                echo json_encode($this->crear_productos());
             }
             if($_POST['accion'] == "eliminar_productos"){
-                return $this->eliminar_productos();
+                echo json_encode($this->eliminar_productos());
             }
             if($_POST['accion'] == "asignar_prods_promocion"){
-                return $this->asignar_prods_promocion();
+                echo json_encode($this->asignar_prods_promocion());
             }
             if($_POST['accion'] == "crear_preguntas"){
-                return $this->crear_preguntas();
+                echo json_encode($this->crear_preguntas());
             }
             if($_POST['accion'] == "eliminar_preguntas"){
-                return $this->eliminar_preguntas();
+                echo json_encode($this->eliminar_preguntas());
             }
             if($_POST['accion'] == "configurar_giro"){
-                return $this->configurar_giro();
+                echo json_encode($this->configurar_giro());
             }
             if($_POST['accion'] == "configurar_estilos"){
-                return $this->configurar_estilos();
+                echo json_encode($this->configurar_estilos());
             }
             if($_POST['accion'] == "crear_pagina"){
-                return $this->crear_pagina();
+                echo json_encode($this->crear_pagina());
             }
             if($_POST['accion'] == "configurar_footer"){
-                return $this->configurar_footer();
+                echo json_encode($this->configurar_footer());
             }
             if($_POST['accion'] == "configurar_inicio"){
-                return $this->configurar_inicio();
+                echo json_encode($this->configurar_inicio());
             }
             if($_POST['accion'] == "refresh"){
-                return $this->refresh();
+                echo json_encode($this->refresh());
             }
             if($_POST['accion'] == "configurar_categoria"){
-                return $this->configurar_categoria();
+                echo json_encode($this->configurar_categoria());
             }
             if($_POST['accion'] == "ordercat"){
-                return $this->ordercat();
+                echo json_encode($this->ordercat());
             }
             if($_POST['accion'] == "orderpag"){
-                return $this->orderpag();
+                echo json_encode($this->orderpag());
             }
             if($_POST['accion'] == "orderprods"){
-                return $this->orderprods();
+                echo json_encode($this->orderprods());
             }
             if($_POST['accion'] == "configurar_producto"){
-                return $this->configurar_producto();
+                echo json_encode($this->configurar_producto());
             }
             if($_POST['accion'] == "eliminar_tramos"){
-                return $this->eliminar_tramos();
+                echo json_encode($this->eliminar_tramos());
             }
             if($_POST['accion'] == "crear_lista_ingredientes"){
-                return $this->crear_lista_ingredientes();
+                echo json_encode($this->crear_lista_ingredientes());
             }
             if($_POST['accion'] == "crear_repartidor"){
-                return $this->crear_repartidor();
+                echo json_encode($this->crear_repartidor());
             }
             if($_POST['accion'] == "crear_horario"){
-                return $this->crear_horario();
+                echo json_encode($this->crear_horario());
             }
             if($_POST['accion'] == "eliminar_repartidor"){
-                return $this->eliminar_repartidor();
+                echo json_encode($this->eliminar_repartidor());
             }
             if($_POST['accion'] == "eliminar_horario"){
-                return $this->eliminar_horario();
+                echo json_encode($this->eliminar_horario());
             }
             if($_POST['accion'] == "solicitar_ssl"){
-                return $this->solicitar_ssl();
+                echo json_encode($this->solicitar_ssl());
             }
             if($_POST['accion'] == "add_ses"){
-                return $this->add_ses();
+                echo json_encode($this->add_ses());
             }
             if($_POST['accion'] == "add_dns"){
-                return $this->add_dns();
+                echo json_encode($this->add_dns());
             }
             if($_POST['accion'] == "add_dns"){
-                return $this->add_ssl();
+                echo json_encode($this->add_ssl());
             }
 
         }

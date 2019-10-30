@@ -1090,38 +1090,40 @@ class Core{
         }
     }
     public function get_data_pos(){
-        $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
-        $user_code = $_COOKIE["user_code"];
-        $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t2.id_loc, t2.lat, t2.lng, t2.sonido, t3.estado, t2.t_retiro, t2.t_despacho, t3.dominio, t3.ssl, t3.dns, t3.id_gir FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?")){
-            if($sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{"num_rows"} == 0){
-                        die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
-                    }
-                    if($res->{"num_rows"} == 1){
-                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $info['pedidos'] = $this->get_ultimos_pedidos_pos($result['id_loc']);
-                        $info['motos'] = $this->get_repartidores_local($result['id_loc']);
-                        $info['lat'] = $result['lat'];
-                        $info['lng'] = $result['lng'];
-                        $info['sonido'] = $result['sonido'];
-                        $info['estado'] = explode(",", $result['estado']);
-                        $info['t_retiro'] = $result['t_retiro'];
-                        $info['t_despacho'] = $result['t_despacho'];
-                        $info['dominio'] = $result['dominio'];
-                        $info['ssl'] = $result['ssl'];
-                        $info['dns'] = $result['dns'];
-                        $info['id'] = $result['id_gir'];
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                    return $info;
+
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+
+            $id_loc = $verificar['id_loc'];
+            $info['id'] = $verificar['id_gir'];
+            $info['pedidos'] = $this->get_ultimos_pedidos_pos($id_loc);
+            $info['motos'] = $this->get_repartidores_local($id_loc);
+            $info['lat'] = $verificar['lat'];
+            $info['lng'] = $verificar['lng'];
+            $info['sonido'] = $verificar['sonido'];
+            $info['t_retiro'] = $verificar['t_retiro'];
+            $info['t_despacho'] = $verificar['t_despacho'];
+
+            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns FROM giros t1 WHERE t1.id_gir=?")){
+                if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{'num_rows'} == 1){
+                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                            $info['estado'] = explode(",", $result['estado']);
+                            $info['dominio'] = $result['dominio'];
+                            $info['ssl'] = $result['ssl'];
+                            $info['dns'] = $result['dns'];
+                        }
+                    }else{ $this->registrar(6, 0, 0, 'get_data_pos() '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'get_data_pos() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_data_pos() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
+            
+        }else{
+            die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
+        }
+        return $info;    
+
     }
     public function get_repartidores_local($id_loc){
         if($sql = $this->con->prepare("SELECT t1.id_mot, t1.nombre FROM motos t1, motos_locales t2 WHERE t2.id_loc=? AND t2.id_mot=t1.id_mot AND t1.eliminado=?")){
@@ -1175,93 +1177,66 @@ class Core{
         return $c;
     }
     public function get_polygons_id(){
-        $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
-        $user_code = $_COOKIE["user_code"];
-        $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t3.id_gir FROM fw_usuarios t1, locales t2, giros t3 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t2.id_gir=t3.id_gir AND t1.eliminado=? AND t2.eliminado=? AND t3.eliminado=?")){
-            if($sql->bind_param("isssiii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{"num_rows"} == 1){
-                        $id_gir = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
-                        if($sqlg = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?")){
-                            if($sqlg->bind_param("iii", $id_gir, $this->eliminado, $this->eliminado)){
-                                if($sqlg->execute()){
-                                    $result = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC);
-                                    $sqlg->free_result();
-                                    $sqlg->close();
-                                }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sqlg->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sqlg->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($this->con->error)); }
-                    }else{
-                        $result = [];
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                    return $result;
-                }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($this->con->error)); }
+
+        $result = [];
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+            $id_gir = $verificar['id_gir'];
+            if($sqlg = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?")){
+                if($sqlg->bind_param("iii", $id_gir, $this->eliminado, $this->eliminado)){
+                    if($sqlg->execute()){
+                        $result = $sqlg->get_result()->fetch_all(MYSQLI_ASSOC);
+                        $sqlg->free_result();
+                        $sqlg->close();
+                    }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sqlg->error)); }
+                }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($sqlg->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_polygons_id() '.htmlspecialchars($this->con->error)); }
+        }
+        return $result;
+
     }
     public function del_pos_direcciones($id_pdir){
-        $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
-        $user_code = $_COOKIE["user_code"];
-        $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t2.id_gir, t1.del_pdir FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
-            if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{'num_rows'} == 0){
-                        $info['op'] = 2;
-                        $info['mensaje'] = "Error Usuario";
-                    }
-                    if($res->{'num_rows'} == 1){
-                        $aux = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $id_gir = $aux['id_gir'];
-                        $del_pdir = $aux['del_pdir'];
-                        if($sqldir = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
-                            if($sqldir->bind_param("i", $id_pdir)){
-                                if($sqldir->execute()){
-                                    $resdir = $sqldir->get_result();
-                                    $id_puser = $resdir->fetch_all(MYSQLI_ASSOC)[0]['id_puser'];
-                                    if($sqluser = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND id_gir=?")){
-                                        if($sqluser->bind_param("ii", $id_puser, $id_gir)){
-                                            if($sqluser->execute()){
-                                                $resu = $sqluser->get_result();
-                                                if($resu->{'num_rows'} == 1){
-                                                    if($del_pdir == 1){
+
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+            $id_gir = $verificar['id_gir'];
+            $del_pdir = $verificar['del_pdir'];
+            if($sqldir = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
+                if($sqldir->bind_param("i", $id_pdir)){
+                    if($sqldir->execute()){
+                        $resdir = $sqldir->get_result();
+                        $id_puser = $resdir->fetch_all(MYSQLI_ASSOC)[0]['id_puser'];
+                        if($sqluser = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND id_gir=?")){
+                            if($sqluser->bind_param("ii", $id_puser, $id_gir)){
+                                if($sqluser->execute()){
+                                    $resu = $sqluser->get_result();
+                                    if($resu->{'num_rows'} == 1){
+                                        if($del_pdir == 1){
+                                            if($sqldpr = $this->con->prepare("DELETE FROM pedidos_direccion WHERE id_pdir=?")){
+                                                if($sqldpr->bind_param("i", $id_pdir)){
+                                                    if($sqldpr->execute()){
+                                                        $sqldpr->close();
                                                         $info['op'] = 1;
-                                                        if($sqldpr = $this->con->prepare("DELETE FROM pedidos_direccion WHERE id_pdir=?")){
-                                                            if($sqldpr->bind_param("i", $id_pdir)){
-                                                                if($sqldpr->execute()){
-                                                                    $sqldpr->close();
-                                                                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($sqldpr->error)); }
-                                                            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($sqldpr->error)); }
-                                                        }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($this->con->error)); }
-                                                    }else{
-                                                        $info['op'] = 2;
-                                                    }
-                                                }else{
-                                                    $info['op'] = 2;
-                                                }
-                                                $sqluser->free_result();
-                                                $sqluser->close();
-                                            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($sqluser->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($sqluser->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($this->con->error)); }
-                                    $sqldir->free_result();
-                                    $sqldir->close();
-                                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($sqldir->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($sqldir->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($this->con->error)); }
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #4 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #4 '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #4 '.htmlspecialchars($this->con->error)); }
+                                                    }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($sqldpr->error)); }
+                                                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($sqldpr->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #1 '.htmlspecialchars($this->con->error)); }
+                                        }else{
+                                            $info['op'] = 2;
+                                        }
+                                    }else{
+                                        $info['op'] = 2;
+                                    }
+                                    $sqluser->free_result();
+                                    $sqluser->close();
+                                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($sqluser->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($sqluser->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #2 '.htmlspecialchars($this->con->error)); }
+                        $sqldir->free_result();
+                        $sqldir->close();
+                    }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($sqldir->error)); }
+                }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($sqldir->error)); }
+            }else{ $this->registrar(6, 0, 0, 'del_pos_direcciones() #3 '.htmlspecialchars($this->con->error)); }
+        }
         return $info;
     }
     public function get_pos_direcciones($telefono){
@@ -1304,17 +1279,29 @@ class Core{
         $id = $_COOKIE["id"];
         $user_code = $_COOKIE["user_code"];
         $local_code = $_COOKIE["local_code"];
-
         $return['op'] = false;
-        $return['id_gir'] = 0;
-
-        if($sql = $this->con->prepare("SELECT t2.id_gir FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
+        
+        if($sql = $this->con->prepare("SELECT t2.sonido, t2.t_retiro, t2.t_despacho, t2.lat, t2.lng, t2.id_gir, t1.id_loc, t1.del_pdir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
             if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
                     if($res->{'num_rows'} == 1){
                         $return['op'] = true;
-                        $return['id_gir'] = $res->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
+                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                        $return['id_gir'] = $result['id_gir'];
+                        $return['id_loc'] = $result['id_loc'];
+                        $return['del_pdir'] = $result['id_loc'];
+                        $return['code'] = $result['code'];
+                        $return['enviar_cocina'] = $result['enviar_cocina'];
+                        $return['save_web'] = $result['save_web'];
+                        $return['web_min'] = $result['web_min'];
+                        $return['save_pos'] = $result['save_pos'];
+                        $return['pos_min'] = $result['pos_min'];
+                        $return['lat'] = $result['lat'];
+                        $return['lng'] = $result['lng'];
+                        $return['sonido'] = $result['sonido'];
+                        $return['t_retiro'] = $result['t_retiro'];
+                        $return['t_despacho'] = $result['t_despacho'];
                     }
                     $sql->free_result();
                     $sql->close();
@@ -1325,86 +1312,72 @@ class Core{
 
     }
     public function get_ultimos_pedidos($id_ped){
-        $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
-        $user_code = $_COOKIE["user_code"];
-        $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.id_loc FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
-            if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $resu = $sql->get_result();
-                    if($resu->{'num_rows'} == 0){
-                        $info['op'] = 2;
-                    }
-                    if($resu->{'num_rows'} == 1){
-                        $id_loc = $resu->fetch_all(MYSQLI_ASSOC)[0]["id_loc"];
-                        if($sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC")){
-                            if($sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado)){
-                                if($sqlped->execute()){
-                                    $row = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                    $res['id_ped'] = $row['id_ped'];
-                                    $res['num_ped'] = $row['num_ped'];
-                                    $res['pedido_code'] = $row['code'];
-                                    $res['tipo'] = $row['tipo'];
-                                    $res['estado'] = $row['estado'];
-                                    $res['fecha'] = strtotime($row['fecha']);
-                                    $res['despacho'] = $row['despacho'];
-                                    $res['carro'] = ($row['carro'] != "") ? json_decode($row['carro']) : [] ;
-                                    $res['promos'] = ($row['promos'] != "") ? json_decode($row['promos']) : [] ;
-                                    $res['pre_wasabi'] = $row['pre_wasabi'];
-                                    $res['pre_gengibre'] = $row['pre_gengibre'];
-                                    $res['pre_embarazadas'] = $row['pre_embarazadas'];
-                                    $res['pre_palitos'] = $row['pre_palitos'];
-                                    $res['pre_soya'] = $row['pre_soya'];
-                                    $res['pre_teriyaki'] = $row['pre_teriyaki'];
-                                    $res['verify_despacho'] = $row['verify_despacho'];
-                                    $res['id_mot'] = $row['id_mot'];
-                                    $res['eliminado'] = $row['eliminado'];
-                                    $res['ocultar'] = $row['ocultar'];
-                                    $res['costo'] = $row['costo'];
-                                    $res['total'] = $row['total'];
-                                    $res['id_puser'] = $row['id_puser'];
-                                    $res['id_pdir'] = $row['id_pdir'];
-                                    if($sqlpu = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=?")){
-                                        if($sqlpu->bind_param("i", $row['id_puser'])){
-                                            if($sqlpu->execute()){
-                                                $pedido_usuarios = $sqlpu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                                $res['nombre'] = $pedido_usuarios['nombre'];
-                                                $res['telefono'] = $pedido_usuarios['telefono'];
-                                                if($res['despacho'] == 1){
-                                                    if($sqlpd = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
-                                                        if($sqlpd->bind_param("i", $row['id_pdir'])){
-                                                            if($sqlpd->execute()){
-                                                                $pedido_direccion = $sqlpd->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                                                $res['direccion'] = $pedido_direccion['direccion'];
-                                                                $res['lat'] = $pedido_direccion['lat'];
-                                                                $res['lng'] = $pedido_direccion['lng'];
-                                                                $res['calle'] = $pedido_direccion['calle'];
-                                                                $res['num'] = $pedido_direccion['num'];
-                                                                $res['depto'] = $pedido_direccion['depto'];
-                                                                $res['comuna'] = $pedido_direccion['num'];
-                                                                $sqlpd->free_result();
-                                                                $sqlpd->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
-                                                        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
-                                                    }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($this->con->error)); }
-                                                }
-                                                $sqlpu->free_result();
-                                                $sqlpu->close();
-                                            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($sqlpu->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($sqlpu->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($this->con->error)); }
-                                    $sqlped->free_result();
-                                    $sqlped->close();
-                                }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($sqlped->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($sqlped->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($this->con->error)); }
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #4 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #4 '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #4 '.htmlspecialchars($this->con->error)); }
+
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+            $id_loc = $verificar['id_loc'];
+            if($sqlped = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=? ORDER BY id_ped DESC")){
+                if($sqlped->bind_param("iii", $id_ped, $id_loc, $this->eliminado)){
+                    if($sqlped->execute()){
+                        $row = $sqlped->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                        $res['id_ped'] = $row['id_ped'];
+                        $res['num_ped'] = $row['num_ped'];
+                        $res['pedido_code'] = $row['code'];
+                        $res['tipo'] = $row['tipo'];
+                        $res['estado'] = $row['estado'];
+                        $res['fecha'] = strtotime($row['fecha']);
+                        $res['despacho'] = $row['despacho'];
+                        $res['carro'] = ($row['carro'] != "") ? json_decode($row['carro']) : [] ;
+                        $res['promos'] = ($row['promos'] != "") ? json_decode($row['promos']) : [] ;
+                        $res['pre_wasabi'] = $row['pre_wasabi'];
+                        $res['pre_gengibre'] = $row['pre_gengibre'];
+                        $res['pre_embarazadas'] = $row['pre_embarazadas'];
+                        $res['pre_palitos'] = $row['pre_palitos'];
+                        $res['pre_soya'] = $row['pre_soya'];
+                        $res['pre_teriyaki'] = $row['pre_teriyaki'];
+                        $res['verify_despacho'] = $row['verify_despacho'];
+                        $res['id_mot'] = $row['id_mot'];
+                        $res['eliminado'] = $row['eliminado'];
+                        $res['ocultar'] = $row['ocultar'];
+                        $res['costo'] = $row['costo'];
+                        $res['total'] = $row['total'];
+                        $res['id_puser'] = $row['id_puser'];
+                        $res['id_pdir'] = $row['id_pdir'];
+                        if($sqlpu = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=?")){
+                            if($sqlpu->bind_param("i", $row['id_puser'])){
+                                if($sqlpu->execute()){
+                                    $pedido_usuarios = $sqlpu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                                    $res['nombre'] = $pedido_usuarios['nombre'];
+                                    $res['telefono'] = $pedido_usuarios['telefono'];
+                                    if($res['despacho'] == 1){
+                                        if($sqlpd = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
+                                            if($sqlpd->bind_param("i", $row['id_pdir'])){
+                                                if($sqlpd->execute()){
+                                                    $pedido_direccion = $sqlpd->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                                                    $res['direccion'] = $pedido_direccion['direccion'];
+                                                    $res['lat'] = $pedido_direccion['lat'];
+                                                    $res['lng'] = $pedido_direccion['lng'];
+                                                    $res['calle'] = $pedido_direccion['calle'];
+                                                    $res['num'] = $pedido_direccion['num'];
+                                                    $res['depto'] = $pedido_direccion['depto'];
+                                                    $res['comuna'] = $pedido_direccion['num'];
+                                                    $sqlpd->free_result();
+                                                    $sqlpd->close();
+                                                }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #1 '.htmlspecialchars($this->con->error)); }
+                                    }
+                                    $sqlpu->free_result();
+                                    $sqlpu->close();
+                                }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($sqlpu->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($sqlpu->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #2 '.htmlspecialchars($this->con->error)); }
+                        $sqlped->free_result();
+                        $sqlped->close();
+                    }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($sqlped->error)); }
+                }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($sqlped->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_ultimos_pedidos() #3 '.htmlspecialchars($this->con->error)); }
+        }
         return $res;
     }
     public function get_ultimos_pedidos_pos($id_loc){
@@ -1940,207 +1913,187 @@ class Core{
     }
     public function set_web_pedido(){
 
-        $ip = $this->getUserIpAddr();
-        $id = $_COOKIE["id"];
-        $user_code = $_COOKIE["user_code"];
-        $local_code = $_COOKIE["local_code"];
-        if($sql = $this->con->prepare("SELECT t2.id_gir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.id_loc FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
-            if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{'num_rows'} == 0){
-                        $info['op'] = 2;
-                    }
-                    if($res->{'num_rows'} == 1){
-                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $pedido = json_decode($_POST['pedido']);
-                        $carro = $pedido->{'carro'};
-                        $promos = $pedido->{'promos'};
-                        $id_ped = intval($pedido->{'id_ped'});
-                        $despacho = intval($pedido->{'despacho'});
-                        $estado = intval($pedido->{'estado'});
-                        $id_puser = $pedido->{'id_puser'};
-                        $nombre = $pedido->{'nombre'};
-                        $telefono = $pedido->{'telefono'};
-                        $id_pdir = $pedido->{'id_pdir'};
-                        $direccion = $pedido->{'direccion'};
-                        $calle = $pedido->{'calle'};
-                        $num = $pedido->{'num'};
-                        $depto = $pedido->{'depto'};
-                        $comuna = $pedido->{'comuna'};
-                        $lat = $pedido->{'lat'};
-                        $lng = $pedido->{'lng'};
-                        $pre_gengibre = intval($pedido->{'pre_gengibre'});
-                        $pre_wasabi = intval($pedido->{'pre_wasabi'});
-                        $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
-                        $pre_palitos = intval($pedido->{'pre_palitos'});
-                        $pre_soya = intval($pedido->{'pre_soya'});
-                        $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
-                        $ocultar = intval($pedido->{'ocultar'});
-                        $eliminado = intval($pedido->{'eliminado'});
-                        $costo = intval($pedido->{'costo'});
-                        $total = intval($pedido->{'total'});
-                        $id_gir = $result["id_gir"];
-                        $id_loc = $result["id_loc"];
-                        $local_code = $result["code"];
-                        $enviar_cocina = $result["enviar_cocina"];
-                        $save_web = $result["save_web"];
-                        $web_min = $result["web_min"];
-                        $save_pos = $result["save_pos"];
-                        $pos_min = $result["pos_min"];
-                        if($id_ped == 0){
-                            if($sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?")){
-                                if($sqlgir->bind_param("ii", $id_gir, $this->eliminado)){
-                                    if($sqlgir->execute()){
-                                        $resultgir = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                        $num_ped = $resultgir["num_ped"] + 1;
-                                        if($sqlped = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?")){
-                                            if($sqlped->bind_param("iii", $num_ped, $id_gir, $this->eliminado)){
-                                                if($sqlped->execute()){
-                                                    $code = $this->pass_generate(20);
-                                                    if($sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)")){
-                                                        if($sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir)){
-                                                            if($sqlaux->execute()){
-                                                                $id_ped = $this->con->insert_id;
-                                                                $info['id_ped'] = $id_ped;
-                                                                $info['num_ped'] = $num_ped;
-                                                                $info['pedido_code'] = $code;
-                                                                $sqlaux->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlaux->error)); }
-                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlaux->error)); }
-                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                                                    $sqlped->close();
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlped->error)); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlped->error)); }
+        $verificar = $this->verificar_coockie();
+        if($verificar['op']){
+
+            $pedido = json_decode($_POST['pedido']);
+            $carro = $pedido->{'carro'};
+            $promos = $pedido->{'promos'};
+            $id_ped = intval($pedido->{'id_ped'});
+            $despacho = intval($pedido->{'despacho'});
+            $estado = intval($pedido->{'estado'});
+            $id_puser = $pedido->{'id_puser'};
+            $nombre = $pedido->{'nombre'};
+            $telefono = $pedido->{'telefono'};
+            $id_pdir = $pedido->{'id_pdir'};
+            $direccion = $pedido->{'direccion'};
+            $calle = $pedido->{'calle'};
+            $num = $pedido->{'num'};
+            $depto = $pedido->{'depto'};
+            $comuna = $pedido->{'comuna'};
+            $lat = $pedido->{'lat'};
+            $lng = $pedido->{'lng'};
+            $pre_gengibre = intval($pedido->{'pre_gengibre'});
+            $pre_wasabi = intval($pedido->{'pre_wasabi'});
+            $pre_embarazadas = intval($pedido->{'pre_embarazadas'});
+            $pre_palitos = intval($pedido->{'pre_palitos'});
+            $pre_soya = intval($pedido->{'pre_soya'});
+            $pre_teriyaki = intval($pedido->{'pre_teriyaki'});
+            $ocultar = intval($pedido->{'ocultar'});
+            $eliminado = intval($pedido->{'eliminado'});
+            $costo = intval($pedido->{'costo'});
+            $total = intval($pedido->{'total'});
+            $id_gir = $verificar['id_gir'];
+            $id_loc = $verificar['id_loc'];
+            $local_code = $verificar["code"];
+            $enviar_cocina = $verificar["enviar_cocina"];
+            $save_web = $verificar["save_web"];
+            $web_min = $verificar["web_min"];
+            $save_pos = $verificar["save_pos"];
+            $pos_min = $verificar["pos_min"];
+            if($id_ped == 0){
+                if($sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?")){
+                    if($sqlgir->bind_param("ii", $id_gir, $this->eliminado)){
+                        if($sqlgir->execute()){
+                            $resultgir = $sqlgir->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                            $num_ped = $resultgir["num_ped"] + 1;
+                            if($sqlped = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?")){
+                                if($sqlped->bind_param("iii", $num_ped, $id_gir, $this->eliminado)){
+                                    if($sqlped->execute()){
+                                        $code = $this->pass_generate(20);
+                                        if($sqlaux = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, tipo, fecha, code, id_loc, id_gir) VALUES (?, '0', now(), ?, ?, ?)")){
+                                            if($sqlaux->bind_param("isii", $num_ped, $code, $id_loc, $id_gir)){
+                                                if($sqlaux->execute()){
+                                                    $id_ped = $this->con->insert_id;
+                                                    $info['id_ped'] = $id_ped;
+                                                    $info['num_ped'] = $num_ped;
+                                                    $info['pedido_code'] = $code;
+                                                    $sqlaux->close();
+                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlaux->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlaux->error)); }
                                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                                        $sqlgir->free_result();
-                                        $sqlgir->close();
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlgir->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlgir->error)); }
+                                        $sqlped->close();
+                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlped->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlped->error)); }
                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                        }
+                            $sqlgir->free_result();
+                            $sqlgir->close();
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlgir->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlgir->error)); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+            }
 
-                        $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
-                        $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
-                        $sqlpaux->execute();
-                        $resultpaux = $sqlpaux->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                        $sql_id_puser = $resultpaux['id_puser'];
-                        $sql_id_pdir = $resultpaux['id_pdir'];
-                        $sql_carro = $resultpaux['carro'];
-                        $sql_promos = $resultpaux['promos'];
-                        $num_ped = $resultpaux['num_ped'];
-                        $mod_despacho = $resultpaux['mod_despacho'];
-                        $sql_tipo = $resultpaux['tipo'];
-                        $sql_fecha = strtotime($resultpaux['fecha']);
-                        $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
+            $sqlpaux = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND eliminado=?");
+            $sqlpaux->bind_param("iii", $id_ped, $id_loc, $this->eliminado);
+            $sqlpaux->execute();
+            $resultpaux = $sqlpaux->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+            $sql_id_puser = $resultpaux['id_puser'];
+            $sql_id_pdir = $resultpaux['id_pdir'];
+            $sql_carro = $resultpaux['carro'];
+            $sql_promos = $resultpaux['promos'];
+            $num_ped = $resultpaux['num_ped'];
+            $mod_despacho = $resultpaux['mod_despacho'];
+            $sql_tipo = $resultpaux['tipo'];
+            $sql_fecha = strtotime($resultpaux['fecha']);
+            $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
 
-                        if($id_puser == 0 && $sql_id_puser == 0){
-                            if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
-                                if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES (?, ?, ?)")){
-                                    if($sqlipu->bind_param("ssi", $nombre, $telefono, $id_gir)){
-                                        if($sqlipu->execute()){
-                                            $id_puser = $this->con->insert_id;
-                                            if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
-                                                if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
-                                                    if($sqlupa->execute()){
-                                                        $sqlupa->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                                            $sqlipu->close();
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipu->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipu->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                            }
-                        }
-
-                        if($id_puser > 0 && $sql_id_puser == 0){
-                            if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
-                                if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
-                                    if($sqlupa->execute()){
-                                        $sqlupa->close();
+            if($id_puser == 0 && $sql_id_puser == 0){
+                if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
+                    if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES (?, ?, ?)")){
+                        if($sqlipu->bind_param("ssi", $nombre, $telefono, $id_gir)){
+                            if($sqlipu->execute()){
+                                $id_puser = $this->con->insert_id;
+                                if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
+                                    if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
+                                        if($sqlupa->execute()){
+                                            $sqlupa->close();
+                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                            
-                        }
-
-                        if($id_pdir == 0 && $sql_id_pdir == 0){
-                            if($direccion != ""){
-                                if($sqlipd = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
-                                    if($sqlipd->bind_param("ssissddi", $direccion, $calle, $num, $depto, $comuna, $lat, $lng, $id_puser)){
-                                        if($sqlipd->execute()){
-                                            $id_pdir = $this->con->insert_id;
-                                            if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
-                                                if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
-                                                    if($sqlupd->execute()){
-                                                        $sqlupd->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                                            $sqlipd->close();
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipd->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipd->error)); }
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                            }
-                        }
-
-                        if($id_pdir > 0 && $sql_id_pdir == 0){
-                            if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
-                                if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
-                                    if($sqlupd->execute()){
-                                        $sqlupd->close();
+                                $sqlipu->close();
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipu->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipu->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+                }
+            }
+            if($id_puser > 0 && $sql_id_puser == 0){
+                if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
+                    if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
+                        if($sqlupa->execute()){
+                            $sqlupa->close();
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupa->error)); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+            }
+            if($id_pdir == 0 && $sql_id_pdir == 0){
+                if($direccion != ""){
+                    if($sqlipd = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
+                        if($sqlipd->bind_param("ssissddi", $direccion, $calle, $num, $depto, $comuna, $lat, $lng, $id_puser)){
+                            if($sqlipd->execute()){
+                                $id_pdir = $this->con->insert_id;
+                                if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
+                                    if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
+                                        if($sqlupd->execute()){
+                                            $sqlupd->close();
+                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                        }
-
-                        if(count($carro) > 0){
-                            if($sql_carro == "" || $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min)){
-                                if($sqlutp = $this->con->prepare("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', mod_despacho='1', total='".$total."' WHERE id_ped=? AND id_loc=?")){
-                                    if($sqlutp->bind_param("ii", $id_ped, $id_loc)){
-                                        if($sqlutp->execute()){
-                                            $info['carro'] = $carro;
-                                            if($enviar_cocina == 1){
-                                                $send['accion'] = 'enviar_cocina_local';
-                                                $send['hash'] = 'hash';
-                                                $send['local_code'] = $local_code;
-                                                $send['id_ped'] = $id_ped;
-                                                $send['num_ped'] = $num_ped;
-                                                $send['carro'] = $carro;
-                                                $send['promos'] = $promos;
-                                                $ch = curl_init();
-                                                curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
-                                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                                                curl_exec($ch);
-                                                curl_close($ch);
-                                            }
-                                            $sqlutp->close();
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlutp->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlutp->error)); }
                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
-                            }else{
-                                $cant_1 = count(json_decode($sql_carro));
-                                $cant_2 = count($carro);
-                                if($cant_2 != $cant_1){
-                                    $info['alert'] = 'no se efectuaron los cambios';
+                                $sqlipd->close();
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipd->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlipd->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+                }
+            }
+            if($id_pdir > 0 && $sql_id_pdir == 0){
+                if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
+                    if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
+                        if($sqlupd->execute()){
+                            $sqlupd->close();
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlupd->error)); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+            }
+            if(count($carro) > 0){
+                if($sql_carro == "" || $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min)){
+                    if($sqlutp = $this->con->prepare("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', mod_despacho='1', total='".$total."' WHERE id_ped=? AND id_loc=?")){
+                        if($sqlutp->bind_param("ii", $id_ped, $id_loc)){
+                            if($sqlutp->execute()){
+                                $info['carro'] = $carro;
+                                if($enviar_cocina == 1){
+                                    $send['accion'] = 'enviar_cocina_local';
+                                    $send['hash'] = 'hash';
+                                    $send['local_code'] = $local_code;
+                                    $send['id_ped'] = $id_ped;
+                                    $send['num_ped'] = $num_ped;
+                                    $send['carro'] = $carro;
+                                    $send['promos'] = $promos;
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                    curl_exec($ch);
+                                    curl_close($ch);
                                 }
-                            }
-                        }
-                        if($sqluep = $this->con->prepare("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped=? AND id_loc=?")){
-                            if($sqluep->bind_param("ii", $id_ped, $id_loc)){
-                                if($sqluep->execute()){
-                                    $sqluep->close();
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+                                $sqlutp->close();
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlutp->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqlutp->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+                }else{
+                    $cant_1 = count(json_decode($sql_carro));
+                    $cant_2 = count($carro);
+                    if($cant_2 != $cant_1){
+                        $info['alert'] = 'no se efectuaron los cambios';
                     }
-                    $sql->free_result();
-                    $sql->close();
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+                }
+            }
+            if($sqluep = $this->con->prepare("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped=? AND id_loc=?")){
+                if($sqluep->bind_param("ii", $id_ped, $id_loc)){
+                    if($sqluep->execute()){
+                        $sqluep->close();
+                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($sqluep->error)); }
+            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.htmlspecialchars($this->con->error)); }
+        }
         return $info;
 
     }
