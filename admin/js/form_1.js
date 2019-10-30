@@ -105,7 +105,7 @@ function form(that){
     if(send){
         $('.loading').show();
         $.ajax({
-            url: "ajax/index.php",
+            url: "ajax/",
             type: "POST",
             contentType: false,
             data: data,
@@ -137,6 +137,10 @@ function mensaje(op, mens){
     }
     if(op == 2){
         var type = "error";
+        var timer = 6000;
+    }
+    if(op == 3){
+        var type = "warning";
         var timer = 6000;
     }
     swal({
@@ -268,7 +272,7 @@ function confirm(message){
             console.log(send);
             
             $.ajax({
-                url: "ajax/index.php",
+                url: "ajax/",
                 type: "POST",
                 data: send,
                 success: function(data){
@@ -315,7 +319,7 @@ function confirm_warning(message){
             console.log(send);
             
             $.ajax({
-                url: "ajax/index.php",
+                url: "ajax/",
                 type: "POST",
                 data: send,
                 success: function(data){
