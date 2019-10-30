@@ -10,12 +10,6 @@
 
     require_once DIR."admin/class/core_class_prod.php";
     $core = new Core();
-
-    echo "<pre>";
-    print_r($core);
-    echo "</pre>";
-    exit;
-
     $inicio = $core->inicio();
 
 ?>
