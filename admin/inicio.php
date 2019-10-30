@@ -11,6 +11,11 @@
     require_once DIR."admin/class/core_class_prod.php";
     $core = new Core();
 
+    echo "<pre>";
+    print_r($core);
+    echo "</pre>";
+    exit;
+
     $inicio = $core->inicio();
 
 ?>
@@ -24,7 +29,7 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/sweetalert.min.js"></script>
+        <script type="text/javascript" src="<?php echo $info['path']; ?>/js/sweetalert.min.js"></script>
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/base_1.js"></script>
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/form_1.js"></script>
         <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/maps.js"></script>

@@ -319,9 +319,7 @@ function cambiar_hora(index, n){
             if(data.op == 1){
                 listar_pedidos(pedidos);
             }
-        }, error: function(e){
-            console.log(e);
-        }
+        }, error: function(){}
     });
     
 }
@@ -343,9 +341,7 @@ function cambiar_estado(index, n){
                 if(data.op == 1){
                     listar_pedidos(pedidos);
                 }
-            }, error: function(e){
-                console.log(e);
-            }
+            }, error: function(){}
         });
 
     }
@@ -976,7 +972,6 @@ function telefono_keyup(e){
             data: send,
             success: function(data){
 
-                console.log(data);
                 if(data.cantidad == 0){
                     $('.pop_pedido .titulo h2').html('No se encontro registro');
                 }
@@ -1007,13 +1002,8 @@ function del_pdir(that){
         type: "POST",
         data: send,
         success: function(data){
-            
             direccion.remove();
-            console.log(data);
-
-        }, error: function(e){
-            console.log(e);
-        }
+        }, error: function(){}
     });
 
 }
@@ -1531,8 +1521,6 @@ function done_pedido(){
         obj.lat = lat;
         obj.lng = lng;
         obj.comuna = comuna;
-
-        console.log(obj);
         add_pedido(obj);
 
     }
@@ -1564,8 +1552,6 @@ function done_pedido(){
         pedidos[seleccionado].pre_palitos = p_palitos;
 
         pedidos[seleccionado].id_mot = id_mot;
-        
-        console.log(pedidos[seleccionado]);
         listar_pedidos(pedidos);
         
     }
@@ -1600,9 +1586,6 @@ function guardar_pedido(index){
         data: send,
         success: function(info){
 
-            console.log("success guardar_pedido");
-            console.log(info);
-
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
@@ -1624,10 +1607,7 @@ function guardar_pedido(index){
                 }
             }
             
-        }, error: function(e){
-            console.log("error guardar_pedido");
-            console.log(e);
-        }
+        }, error: function(){}
     });
     
 }
@@ -1659,9 +1639,6 @@ function agregar_pedido(id){
         type: "POST",
         data: send,
         success: function(data){
-            
-            console.log(id);
-            console.log(data);
             
             var obj = pedido_obj();
             obj.id_ped = data.id_ped;
@@ -1700,9 +1677,7 @@ function agregar_pedido(id){
             add_pedido(obj);
             sound(aud1);
         
-        }, error: function(e){
-            console.log(e);
-        }
+        }, error: function(){}
     });
     
 }

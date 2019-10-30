@@ -43,7 +43,6 @@ $locales = $core->get_locales();
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
                 Highcharts.chart('container', data);
             },
             error: function(e){}

@@ -49,13 +49,11 @@ if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
                 
                 var btn = $('#recuperar');
                 btn.prop("disabled", true );
-                console.log("RECUPERAR");
                 $.ajax({
                     url: "<?php echo $info['path']; ?>/admin/login/",
                     type: "POST",
                     data: "accion=recuperar_password&user="+$('#correo').val(),
                     success: function(data){
-                        console.log(data);
                         if(data.op == 1){
                             localStorage.setItem('correo', $('#correo').val());
                             $('#correo').val('');
@@ -70,7 +68,6 @@ if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
                         }
                     },
                     error: function(e){
-                        console.log(e);
                         btn.prop("disabled", false);
                     }
                 });

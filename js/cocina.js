@@ -11,7 +11,6 @@ function socket_init(){
     var code = localStorage.getItem("local_code");
     if(code != ""){
 
-        console.log("init socket: "+code);
         var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
         socket.on('cocina-'+code, function(id) {
             agregar_pedido(id);
@@ -84,15 +83,12 @@ function agregar_pedido(id){
             pedidos.push(aux);
             listar_pedidos();
             
-        }, error: function(e){
-            console.log(e);
-        }
+        }, error: function(){}
     });
 
 }
 function ver_mas(that){
     var id = $(that).parents('.pedido').attr('id');
-    console.log("VER MAS "+id);
 }
 function borrar_mas(that){
     var id = $(that).parents('.pedido').attr('id');

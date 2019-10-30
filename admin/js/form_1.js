@@ -113,7 +113,6 @@ function form(that){
             processData: false,
             cache: false,
             success: function(data){
-                console.log(data);
                 if(data != null){
                     if(data.reload == 1)
                         navlink('pages/'+data.page);
@@ -121,9 +120,7 @@ function form(that){
                         mensaje(data.op, data.mensaje);
                 }
             },
-            error: function(e){
-                console.log(e);
-            }
+            error: function(){}
         });
     }
     return false;
@@ -269,8 +266,6 @@ function confirm(message){
         if(isConfirm){
             
             var send = {accion: message['accion'], id: message['id'], nombre: message['name']};
-            console.log(send);
-            
             $.ajax({
                 url: "ajax/",
                 type: "POST",
@@ -289,9 +284,7 @@ function confirm(message){
                             navlink('pages/'+data.page);
                     }, 10);
 
-                }, error: function(e){
-                    console.log(e);
-                }
+                }, error: function(){}
             });
  
         }
@@ -316,7 +309,6 @@ function confirm_warning(message){
         if(isConfirm){
             
             var send = {accion: message['accion'], id: message['id'], nombre: message['name']};
-            console.log(send);
             
             $.ajax({
                 url: "ajax/",
@@ -324,7 +316,6 @@ function confirm_warning(message){
                 data: send,
                 success: function(data){
                     
-                    console.log(data);
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,
@@ -337,9 +328,7 @@ function confirm_warning(message){
                             navlink('pages/'+data.page);
                     }, 10);
 
-                }, error: function(e){
-                    console.log(e);
-                }
+                }, error: function(){}
             });
  
         }

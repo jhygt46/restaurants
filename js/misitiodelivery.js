@@ -49,15 +49,9 @@ function send(){
         if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
             if(telefono.length == 12 || telefono.length == 13){
                 return true;
-            }else{
-                console.log("telefono invalido");
-            }
-        }else{
-            console.log("dominio invalido");
-        }
-    }else{
-        console.log("correo invalido");
-    }
+            }else{}
+        }else{}
+    }else{}
     return false;
 }
 function send2(){
@@ -68,14 +62,8 @@ function send2(){
         if(telefono.length == 12 || telefono.length == 13){
             if(nombre != ""){
                 return true;
-            }else{
-                console.log("nombre vacio");
-            }
-        }else{
-            console.log("telefono invalido");
-        }
-    }else{
-        console.log("correo invalido");
-    }
+            }else{}
+        }else{}
+    }else{}
     return false;
 }

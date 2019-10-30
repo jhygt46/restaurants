@@ -78,7 +78,6 @@ function btn_recuperar(){
         type: "POST",
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
-            console.log(data);
             if(data.op == 1){
                 localStorage.setItem('correo', $('#correo').val());
                 $('#correo').val('');
@@ -92,8 +91,7 @@ function btn_recuperar(){
                 btn.prop("disabled", false);
             }
         },
-        error: function(e){
-            console.log(e);
+        error: function(){
             btn.prop("disabled", false);
         }
     });
