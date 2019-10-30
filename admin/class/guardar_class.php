@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-if($_SERVER["HTTP_HOST"] == "localhost"){
-    define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-    define("DIR", DIR_BASE."restaurants/");
-}else{
-    define("DIR_BASE", "/var/www/html/");
-    define("DIR", DIR_BASE."restaurants/");
+if(strpos($_SERVER["REQUEST_URI"], "guardar_class.php") !== false){
+    header('HTTP/1.1 404 Not Found', true, 404);
+    include('../../errors/404.html');
+    exit;
 }
 
 require_once DIR."db.php";
