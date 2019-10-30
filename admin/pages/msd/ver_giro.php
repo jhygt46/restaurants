@@ -12,6 +12,7 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 }
 
+// SOLO GIROS
 if($core->id_gir == 0){
     die("Error: su sesion ha expirado");
 }
