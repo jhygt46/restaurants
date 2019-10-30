@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+echo "<pre>";
+print_r($_SERVER);
+echo "</pre>";
+
 require_once DIR."db.php";
 require_once DIR_BASE."config/config.php";
 
@@ -14,7 +18,7 @@ class Core{
     public $id_gir = null;
     public $id_cat = null;
     public $eliminado = 0;
-
+    
     public function __construct(){
 
         global $db_host;
