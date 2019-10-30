@@ -51,7 +51,7 @@ if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
                 btn.prop("disabled", true );
                 console.log("RECUPERAR");
                 $.ajax({
-                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
+                    url: "<?php echo $info['path']; ?>/admin/login/",
                     type: "POST",
                     data: "accion=recuperar_password&user="+$('#correo').val(),
                     success: function(data){

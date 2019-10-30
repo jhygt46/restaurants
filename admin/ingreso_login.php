@@ -42,7 +42,7 @@
                 var btn = $('#login');
                 btn.prop("disabled", true);
                 $.ajax({
-                    url: "/admin/ajax/login_back.php",
+                    url: "/admin/login/",
                     type: "POST",
                     data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
                     success: function(data){

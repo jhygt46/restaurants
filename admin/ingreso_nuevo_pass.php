@@ -52,7 +52,7 @@ $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
                 var btn = $('#nueva');
                 btn.prop("disabled", true );
                 $.ajax({
-                    url: "<?php echo $info['path']; ?>/admin/ajax/login_back.php",
+                    url: "<?php echo $info['path']; ?>/admin/login/",
                     type: "POST",
                     data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
                     success: function(data){
