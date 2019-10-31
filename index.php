@@ -62,7 +62,7 @@
                 </div>
                 <div class="mes_gratis">30 dias gratis</div>
             </div>
-            <div style="min-height: 430px">
+            <div style="min-height: 430px; display: none">
                 <h1 style="padding-top: 40px; font-size: 60px">Felicitaciones!</h1>
                 <h1 style="font-size: 35px">Tu cuenta ha sido creada</h1>
                 <h2 style="font-size: 18px">Te hemos enviado un correo con las instrucciones</h2>
@@ -101,7 +101,7 @@
                     <input type="submit" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                 </div>
             </div>
-            <div style="min-height: 430px">
+            <div style="min-height: 430px; display: none">
                 <h1 style="padding-top: 40px; font-size: 58px">Muchas Gracias!</h1>
                 <h1 style="font-size: 35px">Tu mensaje ha sido enviado</h1>
                 <h2 style="font-size: 22px">A la brevedad te responderemos tu solicitud</h2>
