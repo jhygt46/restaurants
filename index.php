@@ -44,22 +44,21 @@
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
                 <h2>Ingresando s&oacute;lo 2 simples datos</h2>
                 <h3>Ingresa tu Dominio</h3>
-                <input type="hidden" name="accion" value="crear_dominio" />
                 <div class="input">
                     <input type="text" name="dominio_msd" placeholder="www.tusitio.cl" />
                 </div>
                 <h3>Correo</h3>
                 <div class="input">
-                    <input type="email" name="correo_msd" placeholder="tucorreo@gmail.com" />
+                    <input type="email" name="email_msd" placeholder="tucorreo@gmail.com" />
                 </div>
                 <h3>Telefono</h3>
                 <div class="input">
                     <input type="tel" name="telefono_msd" value="+569" />
                 </div>
                 <div class="acciones">
-                    <input type="submit" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
-                    <div class="mes_gratis">30 dias gratis</div>
+                    <input type="submit" onclick="crear_dominio()" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
                 </div>
+                <div class="mes_gratis">30 dias gratis</div>
             </div>
             <div style="min-height: 430px">
                 <h1 style="padding-top: 40px; font-size: 60px">Felicitaciones!</h1>
@@ -81,24 +80,23 @@
             <div class="form">
                 <h1>Formulario de Contacto</h1>
                 <h3>Nombre</h3>
-                <input type="hidden" name="accion" value="enviar_contacto" />
                 <div class="input">
-                    <input type="text" name="nombre" placeholder="Diego" />
+                    <input type="text" name="nombre_con" placeholder="Diego" />
                 </div>
                 <h3>Correo</h3>
                 <div class="input">
-                    <input type="email" name="email" placeholder="tucorreo@gmail.com" />
+                    <input type="email" name="email_con" placeholder="tucorreo@gmail.com" />
                 </div>
                 <h3>Telefono</h3>
                 <div class="input">
-                    <input type="tel" name="telefono" value="+56 9 " />
+                    <input type="tel" name="telefono_con" value="+56 9 " />
                 </div>
                 <h3>Asunto</h3>
                 <div class="input">
-                    <TextArea name="asunto" style="width: 100%; height: 60px; padding: 4px"></TextArea>
+                    <TextArea id="asunto_con"></TextArea>
                 </div>
                 <div class="acciones">
-                    <input type="submit" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
+                    <input type="submit" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                 </div>
             </div>
             <div style="min-height: 430px">
