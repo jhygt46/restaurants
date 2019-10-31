@@ -151,6 +151,7 @@ html body .contenedor .contacto {
   font-family: "Lato", sans-serif;
 }
 html body .contenedor .contacto .form {
+  min-height: 400px;
   padding: 20px 8px 0px 8px;
 }
 html body .contenedor .contacto .form h3 {
