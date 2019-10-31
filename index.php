@@ -28,17 +28,19 @@
         <div class="logo">MiSitioDelivery</div>
         <div class="cont_btns">
             <ul class="botones clearfix">
-                <li onclick="go_pagina(0)">>Empezar</li>
+                <li onclick="go_pagina(0)">Empezar</li>
                 <li onclick="go_pagina(1)">Clientes</li>
                 <li onclick="go_pagina(2)">Contacto</li>
             </ul>
         </div>
+        <!--
         <div class="video">
             <video id="video1" width="100%">
                 <source src="video-tutorial.mp4" type="video/mp4">
             </video>
         </div>
         <div class="playvideo" onclick="playvideo()">Reproducir Video</div>
+        -->
         <div class="empezar">
             <div class="form">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
