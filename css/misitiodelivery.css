@@ -97,11 +97,6 @@ html body .contenedor .empezar .form {
 html body .contenedor .empezar .form .input input {
   height: 40px;
 }
-html body .contenedor .empezar .form .mes_gratis {
-  color: #000;
-  padding-top: 10px;
-  font-size: 16px;
-}
 html body .contenedor .empezar .empezarok {
   min-height: 430px;
   display: none;
@@ -226,7 +221,7 @@ html body .contenedor .form .acciones .btn_color_1 {
 html body .contenedor .form .acciones .btn_color_2 {
   background: #900;
 }
-html body .contenedor .form .acciones .mes_gratis {
+html body .contenedor .form .mes_gratis {
   font-size: 18px;
   color: #666;
   padding-top: 4px;
