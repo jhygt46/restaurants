@@ -44,7 +44,7 @@
         <div class="empezar">
             <div class="form formempezar">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
-                <h2>Ingresando s&oacute;lo 2 simples datos</h2>
+                <h2>Ingresa tus datos</h2>
                 <h3 id="dominio_msd_ttl">Ingresa tu Dominio</h3>
                 <div class="input">
                     <input type="text" id="dominio_msd" placeholder="www.tusitio.cl" />

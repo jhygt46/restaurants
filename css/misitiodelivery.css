@@ -172,7 +172,7 @@ html body .contenedor .contacto .form h3 {
   padding-top: 6px;
 }
 html body .contenedor .contacto .form .input input {
-  height: 30px;
+  height: 35px;
 }
 html body .contenedor .contacto .contactook {
   min-height: 430px;
@@ -191,19 +191,17 @@ html body .contenedor .contacto .contactook .leyenda {
 html body .contenedor .form {
   display: block;
   width: 303px;
-  display: block;
-  padding-top: 10px;
 }
 html body .contenedor .form h1 {
-  font-size: 20px;
+  font-size: 24px;
   color: #666;
 }
 html body .contenedor .form h2 {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
 }
 html body .contenedor .form h3 {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
 }
 html body .contenedor .form .input input {

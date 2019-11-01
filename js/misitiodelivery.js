@@ -50,6 +50,7 @@ function crear_dominio(){
     if(validar_email(correo)){
         if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
             if(telefono.length == 12 || telefono.length == 13){
+                
                 grecaptcha.ready(function(){
                     grecaptcha.execute('6LdZp78UAAAAAK56zJAVEkaSupUdCrRhsd1wnKkO', { action: 'contacto' }).then(function(token){
                         document.getElementById("crear_dominio").disabled = true;
@@ -71,16 +72,19 @@ function crear_dominio(){
                                     if(res.tipo == 1){
                                         //TELEFONO
                                         $('#telefono_msd_ttl').html(res.mensaje);
+                                        $("#telefono_msd_ttl").css({ color: '#900' });
                                         $("#telefono_msd").css({border: '1px solid #900'});
                                     }
                                     if(res.tipo == 2){
                                         //NOMBRE
                                         $('#dominio_msd_ttl').html(res.mensaje);
+                                        $("#dominio_msd_ttl").css({ color: '#900' });
                                         $("#dominio_msd").css({border: '1px solid #900'});
                                     }
                                     if(res.tipo == 3){
                                         //CORREO
                                         $('#email_msd_ttl').html(res.mensaje);
+                                        $("#email_msd_ttl").css({ color: '#900' });
                                         $("#email_msd").css({border: '1px solid #900'});
                                     }
                                 }
@@ -91,16 +95,19 @@ function crear_dominio(){
                         });
                     });
                 });
-            }else{ 
+            }else{
                 $('#telefono_msd_ttl').html("Telefono invalido");
+                $("#telefono_msd_ttl").css({ color: '#900' });
                 $("#telefono_msd").css({border: '1px solid #900'});
             }
         }else{ 
             $('#dominio_msd_ttl').html("Dominio invalido");
+            $("#dominio_msd_ttl").css({ color: '#900' });
             $("#dominio_msd").css({border: '1px solid #900'});
         }
     }else{ 
         $('#email_msd_ttl').html("Correo invalido");
+        $("#email_msd_ttl").css({ color: '#900' });
         $("#email_msd").css({border: '1px solid #900'});
     }
 
@@ -137,16 +144,19 @@ function enviar_contacto(){
                                     if(res.tipo == 1){
                                         //TELEFONO
                                         $('#telefono_con_ttl').html(res.mensaje);
+                                        $("#telefono_con_ttl").css({ color: '#900' });
                                         $("#telefono_con").css({border: '1px solid #900'});
                                     }
                                     if(res.tipo == 2){
                                         //NOMBRE
                                         $('#nombre_con_ttl').html(res.mensaje);
+                                        $("#nombre_con_ttl").css({ color: '#900' });
                                         $("#nombre_con").css({border: '1px solid #900'});
                                     }
                                     if(res.tipo == 3){
                                         //CORREO
                                         $('#email_con_ttl').html(res.mensaje);
+                                        $("#email_con_ttl").css({ color: '#900' });
                                         $("#email_con").css({border: '1px solid #900'});
                                     }
                                 }
@@ -160,16 +170,19 @@ function enviar_contacto(){
             }else{
                 // NOMBRE
                 $('#nombre_con_ttl').html("Debe ingresar nombre");
-                $("#nombre_con").css({border: '1px solid #900'});
+                $("#nombre_con_ttl").css({ color: '#900' });
+                $("#nombre_con").css({ border: '1px solid #900' });
             }
         }else{
             // TELEFONO
             $('#telefono_con_ttl').html("Debe ingresar telefono valido");
+            $("#telefono_con_ttl").css({ color: '#900' });
             $("#telefono_con").css({border: '1px solid #900'});
         }
     }else{
         // CORREO
         $('#email_con_ttl').html("Debe ingresar correo valido");
+        $("#email_con_ttl").css({ color: '#900' });
         $("#email_con").css({border: '1px solid #900'});
     }
     
