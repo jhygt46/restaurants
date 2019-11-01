@@ -94,9 +94,6 @@ html body .contenedor .empezar .form {
   min-height: 400px;
   padding: 20px 8px 0px 8px;
 }
-html body .contenedor .empezar .form h3 {
-  padding-top: 8px;
-}
 html body .contenedor .empezar .form .input input {
   height: 35px;
 }
@@ -168,9 +165,6 @@ html body .contenedor .contacto .form {
   min-height: 400px;
   padding: 20px 8px 0px 8px;
 }
-html body .contenedor .contacto .form h3 {
-  padding-top: 6px;
-}
 html body .contenedor .contacto .form .input input {
   height: 35px;
 }
@@ -204,6 +198,7 @@ html body .contenedor .form h2 {
 html body .contenedor .form h3 {
   font-size: 16px;
   color: #666;
+  padding-top: 8px;
 }
 html body .contenedor .form .input input {
   width: 100%;
