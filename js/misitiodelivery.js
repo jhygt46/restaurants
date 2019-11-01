@@ -60,8 +60,30 @@ function crear_dominio(){
                             data: send,
                             success: function(res){
                                 console.log(res);
-                                if(res.op == 1){ $('.formempezar').hide(); $('.empezarok').show(); }
-                                if(res.op == 2){}
+                                if(res.op == 1){ 
+                                    $('.formempezar').hide(); 
+                                    $('.empezarok').show();
+                                    $("#dominio_msd").val("");
+                                    $("#email_msd").val(""); 
+                                    $("#telefono_msd").val(""); 
+                                }
+                                if(res.op == 2){
+                                    if(res.tipo == 1){
+                                        //TELEFONO
+                                        $('#telefono_msd_ttl').html(res.mensaje);
+                                        $("#telefono_msd").css({border: '1px solid #900'});
+                                    }
+                                    if(res.tipo == 2){
+                                        //NOMBRE
+                                        $('#dominio_msd_ttl').html(res.mensaje);
+                                        $("#dominio_msd").css({border: '1px solid #900'});
+                                    }
+                                    if(res.tipo == 3){
+                                        //CORREO
+                                        $('#email_msd_ttl').html(res.mensaje);
+                                        $("#email_msd").css({border: '1px solid #900'});
+                                    }
+                                }
                                 document.getElementById("crear_dominio").disabled = false;
                             }, error: function(){
                                 document.getElementById("crear_dominio").disabled = false;
@@ -69,9 +91,18 @@ function crear_dominio(){
                         });
                     });
                 });
-            }else{}
-        }else{}
-    }else{}
+            }else{ 
+                $('#telefono_msd_ttl').html("Telefono invalido");
+                $("#telefono_msd").css({border: '1px solid #900'});
+            }
+        }else{ 
+            $('#dominio_msd_ttl').html("Dominio invalido");
+            $("#dominio_msd").css({border: '1px solid #900'});
+        }
+    }else{ 
+        $('#email_msd_ttl').html("Correo invalido");
+        $("#email_msd").css({border: '1px solid #900'});
+    }
 
 }
 function enviar_contacto(){
@@ -94,8 +125,31 @@ function enviar_contacto(){
                             data: send,
                             success: function(res){
                                 console.log(res);
-                                if(res.op == 1){ $('.formcontacto').hide(); $('.contactook').show(); }
-                                if(res.op == 2){}
+                                if(res.op == 1){ 
+                                    $('.formcontacto').hide(); 
+                                    $('.contactook').show();
+                                    $("#nombre_con").val("");
+                                    $("#email_con").val("");
+                                    $("#telefono_con").val("");
+                                    $("#asunto_con").val("");
+                                }
+                                if(res.op == 2){
+                                    if(res.tipo == 1){
+                                        //TELEFONO
+                                        $('#telefono_con_ttl').html(res.mensaje);
+                                        $("#telefono_con").css({border: '1px solid #900'});
+                                    }
+                                    if(res.tipo == 2){
+                                        //NOMBRE
+                                        $('#nombre_con_ttl').html(res.mensaje);
+                                        $("#nombre_con").css({border: '1px solid #900'});
+                                    }
+                                    if(res.tipo == 3){
+                                        //CORREO
+                                        $('#email_con_ttl').html(res.mensaje);
+                                        $("#email_con").css({border: '1px solid #900'});
+                                    }
+                                }
                                 document.getElementById("enviar_contacto").disabled = false;
                             }, error: function(){
                                 document.getElementById("enviar_contacto").disabled = false;
@@ -103,8 +157,20 @@ function enviar_contacto(){
                         });
                     });
                 });
-            }else{}
-        }else{}
-    }else{}
+            }else{
+                // NOMBRE
+                $('#nombre_con_ttl').html("Debe ingresar nombre");
+                $("#nombre_con").css({border: '1px solid #900'});
+            }
+        }else{
+            // TELEFONO
+            $('#telefono_con_ttl').html("Debe ingresar telefono valido");
+            $("#telefono_con").css({border: '1px solid #900'});
+        }
+    }else{
+        // CORREO
+        $('#email_con_ttl').html("Debe ingresar correo valido");
+        $("#email_con").css({border: '1px solid #900'});
+    }
     
 }
