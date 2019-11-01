@@ -94,6 +94,12 @@ html body .contenedor .empezar .form {
   min-height: 400px;
   padding: 20px 8px 0px 8px;
 }
+html body .contenedor .empezar .form h2 {
+  padding-bottom: 15px;
+}
+html body .contenedor .empezar .form h3 {
+  padding-top: 10px;
+}
 html body .contenedor .empezar .form .input input {
   height: 40px;
 }
@@ -165,6 +171,12 @@ html body .contenedor .contacto .form {
   min-height: 400px;
   padding: 20px 8px 0px 8px;
 }
+html body .contenedor .contacto .form h2 {
+  padding-bottom: 10px;
+}
+html body .contenedor .contacto .form h3 {
+  padding-top: 4px;
+}
 html body .contenedor .contacto .form .input input {
   height: 40px;
 }
@@ -193,12 +205,10 @@ html body .contenedor .form h1 {
 html body .contenedor .form h2 {
   font-size: 18px;
   color: #666;
-  padding-bottom: 15px;
 }
 html body .contenedor .form h3 {
   font-size: 18px;
   color: #666;
-  padding-top: 10px;
 }
 html body .contenedor .form .input input {
   width: 100%;
