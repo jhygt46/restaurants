@@ -44,16 +44,16 @@
         <div class="empezar">
             <div class="form formempezar">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
-                <h2>Ingresa tus datos</h2>
-                <h3 id="dominio_msd_ttl">Ingresa tu Dominio</h3>
+                <h2>Ingresa estos simples datos</h2>
+                <h3 id="dominio_msd_ttl">Tu Dominio</h3>
                 <div class="input">
                     <input type="text" id="dominio_msd" placeholder="www.tusitio.cl" />
                 </div>
-                <h3 id="email_msd_ttl">Correo</h3>
+                <h3 id="email_msd_ttl">Tu Correo</h3>
                 <div class="input">
                     <input type="email" id="email_msd" placeholder="tucorreo@gmail.com" />
                 </div>
-                <h3 id="telefono_msd_ttl">Telefono</h3>
+                <h3 id="telefono_msd_ttl">Tu Telefono</h3>
                 <div class="input">
                     <input type="tel" id="telefono_msd" value="+569" />
                 </div>
@@ -81,6 +81,7 @@
         <div class="contacto">
             <div class="form formcontacto">
                 <h1>Formulario de Contacto</h1>
+                <h2>Pronto nos contactaremos con usted</h2>
                 <h3 id="nombre_con_ttl">Nombre</h3>
                 <div class="input">
                     <input type="text" id="nombre_con" placeholder="Diego" />
