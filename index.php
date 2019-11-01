@@ -42,30 +42,30 @@
         <div class="playvideo" onclick="playvideo()">Reproducir Video</div>
         -->
         <div class="empezar">
-            <div class="form">
+            <div class="form formempezar">
                 <h1>Crear tu Sitio Ahora Mismo!</h1>
                 <h2>Ingresando s&oacute;lo 2 simples datos</h2>
-                <h3>Ingresa tu Dominio</h3>
+                <h3 id="dominio_msd_ttl">Ingresa tu Dominio</h3>
                 <div class="input">
-                    <input type="text" name="dominio_msd" placeholder="www.tusitio.cl" />
+                    <input type="text" id="dominio_msd" placeholder="www.tusitio.cl" />
                 </div>
-                <h3>Correo</h3>
+                <h3 id="email_msd_ttl">Correo</h3>
                 <div class="input">
-                    <input type="email" name="email_msd" placeholder="tucorreo@gmail.com" />
+                    <input type="email" id="email_msd" placeholder="tucorreo@gmail.com" />
                 </div>
-                <h3>Telefono</h3>
+                <h3 id="telefono_msd_ttl">Telefono</h3>
                 <div class="input">
-                    <input type="tel" name="telefono_msd" value="+569" />
+                    <input type="tel" id="telefono_msd" value="+569" />
                 </div>
                 <div class="acciones">
                     <input type="submit" onclick="crear_dominio()" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
                 </div>
                 <div class="mes_gratis">30 dias gratis</div>
             </div>
-            <div style="min-height: 430px; display: none">
-                <h1 style="padding-top: 40px; font-size: 60px">Felicitaciones!</h1>
-                <h1 style="font-size: 35px">Tu cuenta ha sido creada</h1>
-                <h2 style="font-size: 18px">Te hemos enviado un correo con las instrucciones</h2>
+            <div class="empezarok">
+                <h1 class="titulo">Felicitaciones!</h1>
+                <h1 class="subtitulo">Tu cuenta ha sido creada</h1>
+                <h2 class="leyenda">Te hemos enviado un correo con las instrucciones</h2>
             </div>
         </div>
         <div class="clientes">
@@ -79,21 +79,21 @@
             </ul>
         </div>
         <div class="contacto">
-            <div class="form">
+            <div class="form formcontacto">
                 <h1>Formulario de Contacto</h1>
-                <h3>Nombre</h3>
+                <h3 id="nombre_con_ttl">Nombre</h3>
                 <div class="input">
-                    <input type="text" name="nombre_con" placeholder="Diego" />
+                    <input type="text" id="nombre_con" placeholder="Diego" />
                 </div>
-                <h3>Correo</h3>
+                <h3 id="email_con_ttl">Correo</h3>
                 <div class="input">
-                    <input type="email" name="email_con" placeholder="tucorreo@gmail.com" />
+                    <input type="email" id="email_con" placeholder="tucorreo@gmail.com" />
                 </div>
-                <h3>Telefono</h3>
+                <h3 id="telefono_con_ttl">Telefono</h3>
                 <div class="input">
-                    <input type="tel" name="telefono_con" value="+56 9 " />
+                    <input type="tel" id="telefono_con" value="+56 9 " />
                 </div>
-                <h3>Asunto</h3>
+                <h3 id="asunto_con_ttl">Asunto</h3>
                 <div class="input">
                     <TextArea id="asunto_con"></TextArea>
                 </div>
@@ -101,10 +101,10 @@
                     <input type="submit" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                 </div>
             </div>
-            <div style="min-height: 430px; display: none">
-                <h1 style="padding-top: 40px; font-size: 58px">Muchas Gracias!</h1>
-                <h1 style="font-size: 35px">Tu mensaje ha sido enviado</h1>
-                <h2 style="font-size: 22px">A la brevedad te responderemos tu solicitud</h2>
+            <div class="contactook">
+                <h1 class="titulo">Muchas Gracias!</h1>
+                <h1 class="subtitulo">Tu mensaje ha sido enviado</h1>
+                <h2 class="leyenda">A la brevedad te responderemos tu solicitud</h2>
             </div>
         </div>       
     </div>

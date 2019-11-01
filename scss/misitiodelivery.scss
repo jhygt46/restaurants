@@ -105,7 +105,26 @@ html{
                             height: 35px;
                         }
                     }
-                    
+                    .acciones{
+
+                    }
+                    .mes_gratis{
+                        
+                    }
+                }
+                .empezarok{
+                    min-height: 430px;
+                    display: none;
+                    .titulo{
+                        padding-top: 40px;
+                        font-size: 60px;
+                    }
+                    .subtitulo{
+                        font-size: 35px;
+                    }
+                    .leyenda{
+                        font-size: 18px;
+                    }
                 }
             }
             .clientes{
@@ -174,7 +193,23 @@ html{
                             height: 30px;
                         }
                     }
-                    
+                    .acciones{
+
+                    }
+                }
+                .contactook{
+                    min-height: 430px;
+                    display: none;
+                    .titulo{
+                        padding-top: 40px;
+                        font-size: 60px;
+                    }
+                    .subtitulo{
+                        font-size: 35px;
+                    }
+                    .leyenda{
+                        font-size: 18px;
+                    }
                 }
             }
             .form{

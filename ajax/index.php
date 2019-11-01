@@ -59,10 +59,10 @@
         $info = $core->crear_dominio();
         echo json_encode($info);
     }
-    if($_POST["accion"] == "enviar_contacto"){
+    if($_POST["accion"] == "enviar_contacto_msd"){
         require_once DIR."admin/class/core_class_prod.php";
         $core = new Core();
-        $info = $core->enviar_contacto();
+        $info = $core->enviar_contacto_msd();
         echo json_encode($info);
     }
 

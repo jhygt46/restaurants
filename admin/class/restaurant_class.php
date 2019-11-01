@@ -280,7 +280,7 @@ class Rest{
                                 $telefono_val = $_POST["telefono_msd"];
                                 $code = bin2hex(openssl_random_pseudo_bytes(10));
                                 $mailcode = bin2hex(openssl_random_pseudo_bytes(10));
-
+                                
                                 $catalogo = 1;
                                 $sqligi = $this->con->prepare("INSERT INTO giros (telefono, dominio, fecha_creado, code, catalogo) VALUES (?, ?, now(), ?, ?)");
                                 $sqligi->bind_param("sssi", $telefono_val, $dominio, $code, $catalogo);

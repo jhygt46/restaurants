@@ -100,6 +100,20 @@ html body .contenedor .empezar .form h3 {
 html body .contenedor .empezar .form .input input {
   height: 35px;
 }
+html body .contenedor .empezar .empezarok {
+  min-height: 430px;
+  display: none;
+}
+html body .contenedor .empezar .empezarok .titulo {
+  padding-top: 40px;
+  font-size: 60px;
+}
+html body .contenedor .empezar .empezarok .subtitulo {
+  font-size: 35px;
+}
+html body .contenedor .empezar .empezarok .leyenda {
+  font-size: 18px;
+}
 html body .contenedor .clientes {
   display: none;
   min-width: 320px;
@@ -159,6 +173,20 @@ html body .contenedor .contacto .form h3 {
 }
 html body .contenedor .contacto .form .input input {
   height: 30px;
+}
+html body .contenedor .contacto .contactook {
+  min-height: 430px;
+  display: none;
+}
+html body .contenedor .contacto .contactook .titulo {
+  padding-top: 40px;
+  font-size: 60px;
+}
+html body .contenedor .contacto .contactook .subtitulo {
+  font-size: 35px;
+}
+html body .contenedor .contacto .contactook .leyenda {
+  font-size: 18px;
 }
 html body .contenedor .form {
   display: block;

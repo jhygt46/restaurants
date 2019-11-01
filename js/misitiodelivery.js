@@ -42,9 +42,9 @@ function validar_email(email){
 }
 function crear_dominio(){
 
-    var dom = $("input[name*='dominio_msd']").val();
-    var correo = $("input[name*='email_msd']").val();
-    var telefono = $("input[name*='telefono_msd']").val();
+    var dom = $("#dominio_msd").val();
+    var correo = $("#email_msd").val();
+    var telefono = $("#telefono_msd").val();
     var dominio = dom.split(".");
 
     if(validar_email(correo)){
@@ -53,14 +53,14 @@ function crear_dominio(){
                 grecaptcha.ready(function(){
                     grecaptcha.execute('6LdZp78UAAAAAK56zJAVEkaSupUdCrRhsd1wnKkO', { action: 'contacto' }).then(function(token){
                         document.getElementById("crear_dominio").disabled = true;
-                        var send = { accion: 'crear_dominio', nombre: nombre, correo: correo, telefono: telefono, token: token };
+                        var send = { accion: 'crear_dominio', dominio: dominio, correo: correo, telefono: telefono, token: token };
                         $.ajax({
                             url: '/ajax/',
                             type: "POST",
                             data: send,
                             success: function(res){
                                 console.log(res);
-                                if(res.op == 1){}
+                                if(res.op == 1){ $('.formempezar').hide(); $('.empezarok').show(); }
                                 if(res.op == 2){}
                                 document.getElementById("crear_dominio").disabled = false;
                             }, error: function(){
@@ -76,9 +76,9 @@ function crear_dominio(){
 }
 function enviar_contacto(){
 
-    var nombre = $("input[name*='nombre_con']").val();
-    var correo = $("input[name*='email_con']").val();
-    var telefono = $("input[name*='telefono_con']").val();
+    var nombre = $("#nombre_con").val();
+    var correo = $("#email_con").val();
+    var telefono = $("#telefono_con").val();
     var asunto = $("#asunto_con").val();
 
     if(validar_email(correo)){
@@ -94,7 +94,7 @@ function enviar_contacto(){
                             data: send,
                             success: function(res){
                                 console.log(res);
-                                if(res.op == 1){}
+                                if(res.op == 1){ $('.formcontacto').hide(); $('.contactook').show(); }
                                 if(res.op == 2){}
                                 document.getElementById("enviar_contacto").disabled = false;
                             }, error: function(){

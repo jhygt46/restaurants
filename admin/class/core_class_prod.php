@@ -2379,19 +2379,207 @@ class Core{
         }
         return $r;
     }
-    /*
-    public function acciones($id_gir){
-        if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > DATE_ADD(NOW(), INTERVAL -1 DAY)")){
-            if($sql->bind_param("i", $id_gir)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    $sql->free_result();
-                    $sql->close();
-                    return $res->{"num_rows"};
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+    public function crear_dominio(){
+
+        $info['op'] = 2;
+        $info['tipo'] = 0;
+        $info['mensaje'] = '';
+
+        $correo = $_POST["correo"];
+        $dominio = $_POST["dominio"];
+        $dominio_val = explode(".", $dominio);
+        $telefono = $_POST["telefono"];
+
+        if(count($dominio_val) == 3 && $dominio_val[0] == "www" && strlen($dominio_val[1]) > 1 && strlen($dominio_val[2]) > 1){
+            if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
+                if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
+
+                    $url = 'https://www.google.com/recaptcha/api/siteverify';
+                    $datas = [
+                        'secret' => '6LdZp78UAAAAALb66uCWx7RR3cuSjhQLhy8sWZdu',
+                        'response' => $_POST['token'],
+                        'remoteip' => $_SERVER['REMOTE_ADDR']
+                    ];
+                    $options = array(
+                        'http' => array(
+                            'header'  => 'Content-type: application/x-www-form-urlencoded\r\n',
+                            'method'  => 'POST',
+                            'content' => http_build_query($datas)
+                        )
+                    );
+                    $context  = stream_context_create($options);
+                    $response = file_get_contents($url, false, $context);
+                    $res = json_decode($response, true);
+
+                    if($res['success'] == true){
+                        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
+                            if($sql->bind_param("si", $correo, $this->eliminado)){
+                                if($sql->execute()){
+                                    $ressql = $sql->get_result();
+                                    if($ressql->{"num_rows"} == 0){
+                                        if($sqld = $this->con->prepare("SELECT * FROM giros WHERE dominio=? AND eliminado=?")){
+                                            if($sqld->bind_param("si", $dominio, $this->eliminado)){
+                                                if($sqld->execute()){
+                                                    $ressqld = $sqld->get_result();
+                                                    if($ressqld->{"num_rows"} == 0){
+                                                        $code = $this->pass_generate(20);
+                                                        $catalogo = 1;
+                                                        if($sqligi = $this->con->prepare("INSERT INTO giros (telefono, dominio, fecha_creado, code, catalogo) VALUES (?, ?, now(), ?, ?)")){
+                                                            if($sqligi->bind_param("sssi", $telefono, $dominio, $code, $catalogo)){
+                                                                if($sqligi->execute()){
+                                                                    $giro_id = $this->con->insert_id;
+                                                                    $mailcode = $this->pass_generate(20);
+                                                                    $admin = 0;
+                                                                    if($sqlis = $this->con->prepare("INSERT INTO fw_usuarios (correo, mailcode, fecha_creado, admin) VALUES (?, ?, now(), ?)")){
+                                                                        if($sqlis->bind_param("sssi", $correo, $mailcode, $admin)){
+                                                                            if($sqlis->execute()){
+                                                                                $usuario_id = $this->con->insert_id;
+                                                                                if($sqliug = $this->con->prepare("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES (?, ?)")){
+                                                                                    if($sqliug->bind_param("ii", $giro_id, $usuario_id)){
+                                                                                        if($sqliug->execute()){
+                                                                                            $n_catalogo = "Catalogo 01";
+                                                                                            if($sqlicp = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES (?, now(), ?)")){
+                                                                                                if($sqlicp->bind_param("si", $n_catalogo, $giro_id)){
+                                                                                                    if($sqlicp->execute()){
+                                                                                                        $send['dominio'] = $dominio;
+                                                                                                        $send['correo'] = $correo;
+                                                                                                        $send['id'] = $usuario_id;
+                                                                                                        $send['code'] = $mailcode;
+                                                                                                        $ch = curl_init();
+                                                                                                        curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_inicio');
+                                                                                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                                                                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                                                                                        if(!curl_errno($ch)){
+                                                                                                            $resp_email = json_decode(curl_exec($ch));
+                                                                                                            $info['op'] = 1;
+                                                                                                            $info['resp'] = $resp_email;
+                                                                                                            curl_close($ch);
+                                                                                                        }
+                                                                                                        $sqlicp->close();
+                                                                                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqlicp->error)); }
+                                                                                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqlicp->error)); }
+                                                                                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                                                                                            $sqliug->close();
+                                                                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqliug->error)); }
+                                                                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqliug->error)); }
+                                                                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                                                                                $sqlis->close();
+                                                                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqlis->error)); }
+                                                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqlis->error)); }
+                                                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                                                                    $sqligi->close();
+                                                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqligi->error)); }
+                                                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqligi->error)); }
+                                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                                                    }
+                                                    if($ressqld->{"num_rows"} > 0){
+                                                        /* DOMINIO EXISTENTE */
+                                                        $info['tipo'] = 2;
+                                                        $info['mensaje'] = 'Dominio Existente';
+                                                    }
+                                                    $sqld->free_result();
+                                                    $sqld->close();
+                                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqld->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sqld->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                                    }
+                                    if($ressql->{"num_rows"} > 0){
+                                        /* ERROR CORREO YA EXISTE */
+                                        $info['tipo'] = 3;
+                                        $info['mensaje'] = 'Correo existente';
+                                    }
+                                    $sql->free_result();
+                                    $sql->close();
+                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() '.htmlspecialchars($this->con->error)); }
+                    }else{ 
+                        /* ERROR CAPTCHA */
+                    }
+                }else{ 
+                    /* NO ES CORREO */
+                    $info['tipo'] = 3;
+                    $info['mensaje'] = 'Error con correo';
+                }
+            }else{
+                /* TELEFONO ERROR */
+                $info['tipo'] = 1;
+                $info['mensaje'] = 'Telefono Error';
+            }
+        }else{
+            /* NO ES DOMINIO */
+            $info['tipo'] = 2;
+            $info['mensaje'] = 'Error con dominio';
+        }
+        return $info;
+
     }
-    */
+    public function enviar_contacto_msd(){
+
+        $info['op'] = 2;
+        $info['tipo'] = 0;
+        $info['mensaje'] = '';
+
+        $correo = $_POST["correo"];
+        $nombre = $_POST["nombre"];
+        $telefono = $_POST["telefono"];
+        $asunto = $_POST["asunto"];
+
+        if(strlen($nombre) > 2){
+            if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
+                if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
+
+                    $url = 'https://www.google.com/recaptcha/api/siteverify';
+                    $datas = [
+                        'secret' => '6LdZp78UAAAAALb66uCWx7RR3cuSjhQLhy8sWZdu',
+                        'response' => $_POST['token'],
+                        'remoteip' => $_SERVER['REMOTE_ADDR']
+                    ];
+                    $options = array(
+                        'http' => array(
+                            'header'  => 'Content-type: application/x-www-form-urlencoded\r\n',
+                            'method'  => 'POST',
+                            'content' => http_build_query($datas)
+                        )
+                    );
+                    $context  = stream_context_create($options);
+                    $response = file_get_contents($url, false, $context);
+                    $res = json_decode($response, true);
+
+                    if($res['success'] == true){
+                        $send['email'] = $correo;
+                        $send['nombre'] = $nombre;
+                        $send['telefono'] = $telefono;
+                        $send['asunto'] = $asunto;
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_contacto');
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                        if(!curl_errno($ch)){
+                            $resp_email = json_decode(curl_exec($ch));
+                            $info['op'] = 1;
+                            $info['resp'] = $resp_email;
+                            curl_close($ch);
+                        }
+                    }
+
+                }else{ 
+                    /* NO ES CORREO */ 
+                    $info['tipo'] = 3;
+                    $info['mensaje'] = 'Correo invalido';
+                }
+            }else{ 
+                /* NO ES TELEFONO */ 
+                $info['tipo'] = 1;
+                $info['mensaje'] = 'Telefono invalido';
+            }
+        }else{ 
+            /* NO ES NOMBRE */ 
+            $info['tipo'] = 2;
+            $info['mensaje'] = 'Debe ingresar nombre';
+        }
+
+    }
+    
 }
 ?>
