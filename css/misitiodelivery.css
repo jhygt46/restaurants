@@ -95,7 +95,12 @@ html body .contenedor .empezar .form {
   padding: 20px 8px 0px 8px;
 }
 html body .contenedor .empezar .form .input input {
-  height: 35px;
+  height: 40px;
+}
+html body .contenedor .empezar .form .mes_gratis {
+  color: #000;
+  padding-top: 10px;
+  font-size: 16px;
 }
 html body .contenedor .empezar .empezarok {
   min-height: 430px;
@@ -166,7 +171,7 @@ html body .contenedor .contacto .form {
   padding: 20px 8px 0px 8px;
 }
 html body .contenedor .contacto .form .input input {
-  height: 35px;
+  height: 40px;
 }
 html body .contenedor .contacto .contactook {
   min-height: 430px;
@@ -196,9 +201,9 @@ html body .contenedor .form h2 {
   padding-bottom: 15px;
 }
 html body .contenedor .form h3 {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
-  padding-top: 8px;
+  padding-top: 10px;
 }
 html body .contenedor .form .input input {
   width: 100%;
