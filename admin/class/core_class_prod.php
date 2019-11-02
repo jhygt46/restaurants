@@ -20,6 +20,7 @@ class Core{
     public $id_gir = null;
     public $id_cat = null;
     public $eliminado = 0;
+    public $codenodejs = "k8Dqa2C9lKgxT6kpNs1z6RgKb0r3WaCvN6RjK7rU";
     
     public function __construct(){
 
@@ -2552,17 +2553,28 @@ class Core{
                         $send['nombre'] = $nombre;
                         $send['telefono'] = $telefono;
                         $send['asunto'] = $asunto;
+                        $send['codenodejs'] = $this->codenodejs;
+
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_contacto');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                         if(!curl_errno($ch)){
                             $resp_email = json_decode(curl_exec($ch));
-                            $info['op'] = 1;
-                            $info['resp'] = $resp_email;
+                            if($resp_email->{'op'} == 1){
+                                $info['op'] = 1;
+                            }
+                            if($resp_email->{'op'} == 2){
+                                $info['op'] = 2;
+                                $info['tipo'] = 4;
+                                $info['mensaje'] = 'El correo no pudo ser enviado';
+                                $this->registrar(15, 0, 0, 'Mail contacto no pudo ser enviado');
+                            }
                             curl_close($ch);
                         }
-                        
+
+                    }else{
+                        $this->registrar(15, 0, 0, 'Error reCaptcha v3 conctanto');
                     }
 
                 }else{ 
