@@ -227,10 +227,12 @@ html{
                 .input{
                     input{
                         width: 100%;
+                        border: 1px solid #aaa;
                     }
                     textarea{
                         width: 100%;
                         height: 50px;
+                        border: 1px solid #aaa;
                     }
                 }
                 .acciones{

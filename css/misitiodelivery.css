@@ -212,10 +212,12 @@ html body .contenedor .form h3 {
 }
 html body .contenedor .form .input input {
   width: 100%;
+  border: 1px solid #aaa;
 }
 html body .contenedor .form .input textarea {
   width: 100%;
   height: 50px;
+  border: 1px solid #aaa;
 }
 html body .contenedor .form .acciones {
   padding-top: 10px;

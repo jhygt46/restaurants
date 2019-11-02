@@ -48,9 +48,17 @@ function crear_dominio(){
     var dominio = dom.split(".");
 
     if(validar_email(correo)){
+        $('#email_msd_ttl').html("Tu Correo");
+        $("#email_msd_ttl").css({ color: '#666' });
+        $("#email_msd").css({border: '1px solid #aaa'});
         if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
+            $('#dominio_msd_ttl').html("Tu Dominio");
+            $("#dominio_msd_ttl").css({ color: '#666' });
+            $("#dominio_msd").css({border: '1px solid #aaa'});
             if(telefono.length == 12 || telefono.length == 13){
-                
+                $('#telefono_msd_ttl').html("Tu Telefono");
+                $("#telefono_msd_ttl").css({ color: '#666' });
+                $("#telefono_msd").css({border: '1px solid #aaa'});
                 grecaptcha.ready(function(){
                     grecaptcha.execute('6LdZp78UAAAAAK56zJAVEkaSupUdCrRhsd1wnKkO', { action: 'contacto' }).then(function(token){
                         document.getElementById("crear_dominio").disabled = true;
@@ -120,8 +128,17 @@ function enviar_contacto(){
     var asunto = $("#asunto_con").val();
 
     if(validar_email(correo)){
-        if(telefono.length == 12 || telefono.length == 13){
+        $('#email_con_ttl').html("Correo");
+        $("#email_con_ttl").css({ color: '#666' });
+        $("#email_con").css({border: '1px solid #aaa'});
+        if(telefono.length >= 12 && telefono.length <= 14){
+            $('#telefono_con_ttl').html("Telefono");
+            $("#telefono_con_ttl").css({ color: '#666' });
+            $("#telefono_con").css({border: '1px solid #aaa'});
             if(nombre != ""){
+                $('#nombre_con_ttl').html("Nombre");
+                $("#nombre_con_ttl").css({ color: '#666' });
+                $("#nombre_con").css({border: '1px solid #aaa'});
                 grecaptcha.ready(function(){
                     grecaptcha.execute('6LdZp78UAAAAAK56zJAVEkaSupUdCrRhsd1wnKkO', { action: 'contacto' }).then(function(token){
                         document.getElementById("enviar_contacto").disabled = true;
