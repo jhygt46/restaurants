@@ -28,7 +28,7 @@
         <div class="logo">MiSitioDelivery</div>
         <div class="cont_btns">
             <ul class="botones clearfix">
-                <li onclick="go_pagina(0)">Empezar</li>
+                <li onclick="go_pagina(0)" class="selected">Empezar</li>
                 <li onclick="go_pagina(1)">Clientes</li>
                 <li onclick="go_pagina(2)">Contacto</li>
             </ul>
