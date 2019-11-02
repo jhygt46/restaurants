@@ -256,12 +256,12 @@ html body .contenedor .form .mes_gratis {
   background: #888;
 }
 
-.grecaptcha-badge2 {
+.grecaptcha-badge {
   visibility: hidden;
 }
 
 .smallrecaptcha {
-  display: none;
+  display: block;
   padding-top: 30px;
   font-size: 13px;
 }
