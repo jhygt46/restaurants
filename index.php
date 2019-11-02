@@ -58,7 +58,7 @@
                     <input type="tel" id="telefono_msd" value="+569" />
                 </div>
                 <div class="acciones">
-                    <input type="submit" onclick="crear_dominio()" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
+                    <input type="submit" id="crear_dominio" onclick="crear_dominio()" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
                 </div>
                 <div class="mes_gratis">30 dias gratis</div>
                 <small class="smallrecaptcha">This site is protected by reCAPTCHA and the Google 
@@ -104,7 +104,7 @@
                     <TextArea id="asunto_con"></TextArea>
                 </div>
                 <div class="acciones">
-                    <input type="submit" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
+                    <input type="submit" id="enviar_contacto" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                 </div>
                 <small class="smallrecaptcha">This site is protected by reCAPTCHA and the Google 
                     <a href="https://policies.google.com/privacy">Privacy Policy</a> and
