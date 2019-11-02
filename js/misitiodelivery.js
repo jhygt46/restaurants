@@ -142,7 +142,7 @@ function enviar_contacto(){
                 grecaptcha.ready(function(){
                     grecaptcha.execute('6LdZp78UAAAAAK56zJAVEkaSupUdCrRhsd1wnKkO', { action: 'contacto' }).then(function(token){
                         document.getElementById("enviar_contacto").disabled = true;
-                        var send = { accion: 'enviar_contacto', nombre: nombre, correo: correo, telefono: telefono, asunto: asunto, token: token };
+                        var send = { accion: 'enviar_contacto_msd', nombre: nombre, correo: correo, telefono: telefono, asunto: asunto, token: token };
                         $.ajax({
                             url: '/ajax/',
                             type: "POST",
