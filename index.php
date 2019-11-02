@@ -61,7 +61,7 @@
                     <input type="submit" onclick="crear_dominio()" value="Empezar Prueba Gratis" class="btn_empezar btn_color_1" />
                 </div>
                 <div class="mes_gratis">30 dias gratis</div>
-                <small>This site is protected by reCAPTCHA and the Google 
+                <small class="smallrecaptcha">This site is protected by reCAPTCHA and the Google 
                     <a href="https://policies.google.com/privacy">Privacy Policy</a> and
                     <a href="https://policies.google.com/terms">Terms of Service</a> apply.
                 </small>
@@ -106,6 +106,10 @@
                 <div class="acciones">
                     <input type="submit" onclick="enviar_contacto()" value="Enviar Solicitud" class="btn_empezar btn_color_2" />
                 </div>
+                <small class="smallrecaptcha">This site is protected by reCAPTCHA and the Google 
+                    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                </small>
             </div>
             <div class="contactook">
                 <h1 class="titulo">Muchas Gracias!</h1>

@@ -256,8 +256,14 @@ html body .contenedor .form .mes_gratis {
   background: #888;
 }
 
-.grecaptcha-badge {
+.grecaptcha-badge2 {
   visibility: hidden;
+}
+
+.smallrecaptcha {
+  display: block;
+  padding-top: 30px;
+  font-size: 13px;
 }
 
 /*# sourceMappingURL=misitiodelivery.css.map */

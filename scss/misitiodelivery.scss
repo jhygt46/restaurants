@@ -273,7 +273,12 @@ html{
 ::-webkit-scrollbar-thumb {
     background: #888
 }
-.grecaptcha-badge { 
+.grecaptcha-badge2 { 
     visibility: hidden;
+}
+.smallrecaptcha{
+    display: block;
+    padding-top: 30px;
+    font-size: 13px;
 }
 
