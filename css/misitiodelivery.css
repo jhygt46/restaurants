@@ -261,7 +261,7 @@ html body .contenedor .form .mes_gratis {
 }
 
 .smallrecaptcha {
-  display: block;
+  display: none;
   padding-top: 30px;
   font-size: 13px;
 }
