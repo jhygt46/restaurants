@@ -2547,6 +2547,7 @@ class Core{
                     $res = json_decode($response, true);
 
                     if($res['success'] == true){
+
                         $send['email'] = $correo;
                         $send['nombre'] = $nombre;
                         $send['telefono'] = $telefono;
@@ -2561,6 +2562,7 @@ class Core{
                             $info['resp'] = $resp_email;
                             curl_close($ch);
                         }
+                        
                     }
 
                 }else{ 
@@ -2578,6 +2580,7 @@ class Core{
             $info['tipo'] = 2;
             $info['mensaje'] = 'Debe ingresar nombre';
         }
+        return $info;
 
     }
     
