@@ -44,7 +44,7 @@ function crear_dominio(){
 
     var dom = $("#dominio_msd").val();
     var correo = $("#email_msd").val();
-    var telefono = $("#telefono_msd").val();
+    var telefono = $("#telefono_msd").val().split(" ").join("");
     var dominio = dom.split(".");
 
     if(dominio[0] == "www" && dominio.length == 3 && dominio[1].length > 0 && dominio[2].length > 1){
@@ -124,7 +124,7 @@ function enviar_contacto(){
 
     var nombre = $("#nombre_con").val();
     var correo = $("#email_con").val();
-    var telefono = $("#telefono_con").val();
+    var telefono = $("#telefono_con").val().split(" ").join("");
     var asunto = $("#asunto_con").val();
 
     if(nombre != ""){
@@ -178,7 +178,8 @@ function enviar_contacto(){
                                     }
                                 }
                                 document.getElementById("enviar_contacto").disabled = false;
-                            }, error: function(){
+                            }, error: function(e){
+                                console.log(e);
                                 document.getElementById("enviar_contacto").disabled = false;
                             }
                         });
