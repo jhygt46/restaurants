@@ -2146,9 +2146,9 @@ class Core{
                                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
                                         }
                                         $sqlipu->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
-                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($sqlipu->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1a '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
+                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1b '.htmlspecialchars($sqlipu->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1c '.htmlspecialchars($this->con->error)); }
                         }
                         if($res->{'num_rows'} == 1){
                             $id_puser = $puser["id_puser"];
