@@ -1950,6 +1950,7 @@ class Core{
             $web_min = $verificar["web_min"];
             $save_pos = $verificar["save_pos"];
             $pos_min = $verificar["pos_min"];
+            
             if($id_ped == 0){
                 if($sqlgir = $this->con->prepare("SELECT * FROM giros WHERE id_gir=? AND eliminado=?")){
                     if($sqlgir->bind_param("ii", $id_gir, $this->eliminado)){

@@ -1578,6 +1578,10 @@ function guardar_pedido(index){
      
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
+
+    console.log("PEDIDO");
+    console.log(pedido);
+
     var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
 
     $.ajax({
@@ -1585,6 +1589,9 @@ function guardar_pedido(index){
         type: "POST",
         data: send,
         success: function(info){
+
+            console.log("INFO");
+            console.log(info);
 
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
