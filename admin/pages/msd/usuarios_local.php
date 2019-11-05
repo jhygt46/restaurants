@@ -38,9 +38,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
         $id_user = $_GET["id_user"];
         $that = $core->get_usuario($id_user);
         $sub_titulo = $sub_titulo2;
-        echo "<pre>";
-        print_r($that);
-        echo "</pre>";
     }
 }
 ?>
