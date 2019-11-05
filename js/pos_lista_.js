@@ -1534,7 +1534,7 @@ function done_pedido(){
         pedidos[seleccionado].telefono = telefono;
 
         pedidos[seleccionado].despacho = despacho;
-        pedidos[seleccionado].cambios = 0;
+        pedidos[seleccionado].cambios = 1;
         
         pedidos[seleccionado].id_pdir = id_pdir;
         pedidos[seleccionado].direccion = direccion;
