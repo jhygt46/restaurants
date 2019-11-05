@@ -2066,6 +2066,13 @@ class Core{
             }
 
             $info['permisos'] = $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min);
+            $info['sql_tipo'] = $sql_tipo;
+            $info['sql_fecha'] = $sql_fecha;
+            $info['mod_despacho'] = $mod_despacho;
+            $info['save_web'] = $save_web;
+            $info['save_pos'] = $save_pos;
+            $info['web_min'] = $web_min;
+            $info['pos_min'] = $pos_min;
 
             if(count($carro) > 0){
                 if($sql_carro == "" || $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min)){
