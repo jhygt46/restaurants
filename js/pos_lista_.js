@@ -1433,6 +1433,7 @@ function delete_pro_carro(i){
     var producto = get_producto(pedidos[seleccionado].carro[i].id_pro);
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(producto.precio);
     pedidos[seleccionado].carro.splice(i, 1);
+    pedidos[seleccionado].cambios = 1;
     listar_pedidos(pedidos);
     ver_detalle_carro(seleccionado);
     
