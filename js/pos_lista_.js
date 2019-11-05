@@ -1604,6 +1604,7 @@ function guardar_pedido(index){
             pedidos[index].total = get_precio_carro(pedido);
             listar_pedidos(pedidos);
 
+            /*
             if(open){
                 if(tipo_comanda == 0 || tipo_comanda == 1){
                     if(proceso_categorias(pedido)){
@@ -1613,6 +1614,7 @@ function guardar_pedido(index){
                     }
                 }
             }
+            */
             
         }, error: function(){}
     });
