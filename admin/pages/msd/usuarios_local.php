@@ -83,6 +83,14 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Password:</p></span>
+                        <input id="v_pass1" autocomplete="off" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Confirmacion Password:</p></span>
+                        <input id="v_pass2" autocomplete="off" name="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="v_tipo" name="v_tipo" onchange="ver_opciones()">
                             <option value="0" <?php if($that['tipo'] == 0){ echo "selected"; } ?>>Punto de Venta</option>
@@ -108,14 +116,6 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     <label class="clearfix">
                         <span><p>Tiempo Limite Modificacion:</p></span>
                         <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Password:</p></span>
-                        <input id="v_pass1" autocomplete="off" name="v_pass1" class="inputs" type="password" value="" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Confirmacion Password:</p></span>
-                        <input id="v_pass2" autocomplete="off" name="v_pass2" class="inputs" type="password" value="" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
