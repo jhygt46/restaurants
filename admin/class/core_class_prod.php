@@ -1094,7 +1094,8 @@ class Core{
         if($verificar['op']){
 
             $id_loc = $verificar['id_loc'];
-            $info['id'] = $verificar['id_gir'];
+            $id_gir = $verificar['id_gir'];
+            $info['id'] = $id_gir;
             $info['pedidos'] = $this->get_ultimos_pedidos_pos($id_loc);
             $info['motos'] = $this->get_repartidores_local($id_loc);
             $info['lat'] = $verificar['lat'];
@@ -1103,8 +1104,8 @@ class Core{
             $info['t_retiro'] = $verificar['t_retiro'];
             $info['t_despacho'] = $verificar['t_despacho'];
 
-            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns FROM giros t1 WHERE t1.id_gir=?")){
-                if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
+            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns FROM giros t1 WHERE t1.id_gir=? AND t1.eliminado=?")){
+                if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
                         if($res->{'num_rows'} == 1){
