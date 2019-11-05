@@ -751,7 +751,7 @@ class Core{
         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_usuarios_local() '.htmlspecialchars($this->con->error)); }
     }
     public function get_usuario($id_user){
-        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, id_aux_user, save_web, web_min, save_pos, pos_min, del_pdir FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, id_aux_user, save_web, web_min, save_pos, pos_min, del_pdir, tipo FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_user, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
