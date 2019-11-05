@@ -2099,8 +2099,8 @@ class Core{
                 }
             }
 
-            if($sqluep = $this->con->prepare("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_embarazadas='".$pre_embarazadas."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped=? AND id_loc=?")){
-                if($sqluep->bind_param("ii", $id_ped, $id_loc)){
+            if($sqluep = $this->con->prepare("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped=? AND id_loc=? AND id_gir=?")){
+                if($sqluep->bind_param("iii", $id_ped, $id_loc, $id_gir)){
                     if($sqluep->execute()){
                         $sqluep->close();
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #12 '.htmlspecialchars($sqluep->error)); }
