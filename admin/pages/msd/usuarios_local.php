@@ -109,7 +109,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <select id="save_web" name="save_web">
                             <option value="0" <?php if($that['save_web'] == 0){ echo "selected"; } ?>>NO</option>
                             <option value="1" <?php if($that['save_web'] == 1){ echo "selected"; } ?>>SOLO 1 Veces</option>
-                            <option value="2" <?php if($that['save_web'] == 1){ echo "selected"; } ?>>Ilimitadas</option>
+                            <option value="2" <?php if($that['save_web'] == 2){ echo "selected"; } ?>>Ilimitadas</option>
                         </select>
                     </label>
                     <label class="opc clearfix" <?php if($that['tipo'] == 1){ echo "style='display: none'"; } ?>>
@@ -121,7 +121,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <select id="save_pos" name="save_pos">
                             <option value="0" <?php if($that['save_pos'] == 0){ echo "selected"; } ?>>NO</option>
                             <option value="1" <?php if($that['save_pos'] == 1){ echo "selected"; } ?>>SOLO 1 Veces</option>
-                            <option value="2" <?php if($that['save_pos'] == 1){ echo "selected"; } ?>>Ilimitadas</option>
+                            <option value="2" <?php if($that['save_pos'] == 2){ echo "selected"; } ?>>Ilimitadas</option>
                         </select>
                     </label>
                     <label class="opc clearfix" <?php if($that['tipo'] == 1){ echo "style='display: none'"; } ?>>
