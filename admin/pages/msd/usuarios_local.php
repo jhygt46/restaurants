@@ -101,21 +101,29 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <span><p>Borrar Direcciones:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
-                    <label class="opc clearfix">
+                    <label class="clearfix">
                         <span><p>Modificar Pedidos Web:</p></span>
-                        <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Tiempo Limite Modificacion:</p></span>
-                        <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                        <select id="save_web" name="save_web">
+                            <option value="0" <?php if($that['save_web'] == 0){ echo "selected"; } ?>>NO</option>
+                            <option value="1" <?php if($that['save_web'] == 1){ echo "selected"; } ?>>SOLO 1 Veces</option>
+                            <option value="2" <?php if($that['save_web'] == 1){ echo "selected"; } ?>>Ilimitadas</option>
+                        </select>
                     </label>
                     <label class="opc clearfix">
-                        <span><p>Modificar Pedidos POS:</p></span>
-                        <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                        <span><p>Tiempo Limite Modificacion:</p></span>
+                        <input id="pos_min" name="pos_min" class="inputs" type="text" value="<?php echo $that['pos_min']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Modificar Pedidos POS:</p></span>
+                        <select id="save_pos" name="save_pos">
+                            <option value="0" <?php if($that['save_pos'] == 0){ echo "selected"; } ?>>NO</option>
+                            <option value="1" <?php if($that['save_pos'] == 1){ echo "selected"; } ?>>SOLO 1 Veces</option>
+                            <option value="2" <?php if($that['save_pos'] == 1){ echo "selected"; } ?>>Ilimitadas</option>
+                        </select>
+                    </label>
+                    <label class="opc clearfix">
                         <span><p>Tiempo Limite Modificacion:</p></span>
-                        <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                        <input id="web_min" name="web_min" class="inputs" type="text" value="<?php echo $that['web_min']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
