@@ -89,17 +89,25 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                             <option value="1" <?php if($that['tipo'] == 1){ echo "selected"; } ?>>Cocina</option>
                         </select>
                     </label>
-                    <label class="opc clearfix" style="display: none">
+                    <label class="opc clearfix">
                         <span><p>Borrar Direcciones:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
-                    <label class="opc clearfix" style="display: none">
+                    <label class="opc clearfix">
                         <span><p>Modificar Pedidos Web:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
-                    <label class="opc clearfix" style="display: none">
+                    <label class="clearfix">
+                        <span><p>Tiempo Limite Modificacion:</p></span>
+                        <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="opc clearfix">
                         <span><p>Modificar Pedidos POS:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Tiempo Limite Modificacion:</p></span>
+                        <input id="v_correo" autocomplete="off" name="v_correo" class="inputs" type="text" value="<?php echo $that['correo']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Password:</p></span>
