@@ -387,7 +387,6 @@ function pedido_obj(){
         promos: [], 
         pre_wasabi: 0,
         pre_gengibre: 0,
-        pre_embarazadas: 0,
         pre_palitos: 0,
         pre_soya: 0,
         pre_teriyaki: 0,
@@ -918,7 +917,6 @@ function ver_pedido_aux(index){
 
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').attr('checked', 'checked') }else{ $('#pre_wasabi').attr('checked', '') }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').attr('checked', 'checked') }else{ $('#pre_gengibre').attr('checked', '') }
-        if(pedido.pre_embarazadas == 1){ $('#pre_embarazadas').attr('checked', 'checked') }else{ $('#pre_embarazadas').attr('checked', '') }
         if(pedido.pre_soya == 1){ $('#pre_soya').attr('checked', 'checked') }else{ $('#pre_soya').attr('checked', '') }
         if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').attr('checked', 'checked') }else{ $('#pre_teriyaki').attr('checked', '') }
         $('#pre_palitos option[value='+pedido.pre_palitos+']').attr('selected', 'selected');
@@ -943,7 +941,6 @@ function ver_pedido_aux(index){
 
         $('#pre_wasabi').attr('checked', '');
         $('#pre_gengibre').attr('checked', '');
-        $('#pre_embarazadas').attr('checked', '');
         $('#pre_soya').attr('checked', '');
         $('#pre_teriyaki').attr('checked', '');
         $('#pre_palitos option[value=0]').attr('selected', 'selected');

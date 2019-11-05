@@ -1331,7 +1331,6 @@ class Core{
                         $res['promos'] = ($row['promos'] != "") ? json_decode($row['promos']) : [] ;
                         $res['pre_wasabi'] = $row['pre_wasabi'];
                         $res['pre_gengibre'] = $row['pre_gengibre'];
-                        $res['pre_embarazadas'] = $row['pre_embarazadas'];
                         $res['pre_palitos'] = $row['pre_palitos'];
                         $res['pre_soya'] = $row['pre_soya'];
                         $res['pre_teriyaki'] = $row['pre_teriyaki'];
@@ -1397,7 +1396,6 @@ class Core{
                         $res['promos'] = ($row['promos'] != "") ? json_decode($row['promos']) : [] ;
                         $res['pre_wasabi'] = $row['pre_wasabi'];
                         $res['pre_gengibre'] = $row['pre_gengibre'];
-                        $res['pre_embarazadas'] = $row['pre_embarazadas'];
                         $res['pre_palitos'] = $row['pre_palitos'];
                         $res['pre_soya'] = $row['pre_soya'];
                         $res['pre_teriyaki'] = $row['pre_teriyaki'];
@@ -1845,7 +1843,7 @@ class Core{
         if($this->verificar()){
             $pedido_code = $_POST["pedido_code"];
             $host = $_POST["host"];
-            if($sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_embarazadas, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho, t1.fecha FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)")){
+            if($sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho, t1.fecha FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.dominio=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)")){
                 if($sql->bind_param("ssi", $pedido_code, $host, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
@@ -1883,7 +1881,6 @@ class Core{
                                         $info['promos'] = json_decode($result['promos']);
                                         $info['pre_wasabi'] = $result['pre_wasabi'];
                                         $info['pre_gengibre'] = $result['pre_gengibre'];
-                                        $info['pre_embarazadas'] = $result['pre_embarazadas'];
                                         $info['pre_palitos'] = $result['pre_palitos'];
                                         $info['pre_teriyaki'] = $result['pre_teriyaki'];
                                         $info['pre_soya'] = $result['pre_soya'];
@@ -2203,8 +2200,8 @@ class Core{
             $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);
             $pedido_code = $this->pass_generate(20);
             $tipo = 1;
-            if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_embarazadas, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-                if($sqlipa->bind_param("issiiissiiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_embarazadas"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir'])){
+            if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+                if($sqlipa->bind_param("issiiissiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir'])){
                     if($sqlipa->execute()){
                         $id_ped = $this->con->insert_id;
                         if($sqlugi = $this->con->prepare("UPDATE giros SET num_ped=? WHERE id_gir=? AND eliminado=?")){
