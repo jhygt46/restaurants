@@ -45,10 +45,10 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     function ver_opciones(){
         var tipo = $('#v_tipo').val();
         if(tipo == 0){
-            $('.opc').hide();
+            $('.opc').show();
         }
         if(tipo == 1){
-            $('.opc').show();
+            $('.opc').hide();
         }
     }
 </script>
@@ -91,6 +91,14 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                     </label>
                     <label class="opc clearfix" style="display: none">
                         <span><p>Borrar Direcciones:</p></span>
+                        <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="opc clearfix" style="display: none">
+                        <span><p>Modificar Pedidos Web:</p></span>
+                        <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="opc clearfix" style="display: none">
+                        <span><p>Modificar Pedidos POS:</p></span>
                         <input id="borrar_direcciones" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
                     <label class="clearfix">
