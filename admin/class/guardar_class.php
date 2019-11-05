@@ -1957,15 +1957,20 @@ class Guardar{
             $correo = $_POST['v_correo'];
             if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
                 $id_loc = $_POST['id_loc'];
-                $id = $_POST['id'];
-                $nombre = $_POST['v_nombre'];
-                $tipo = $_POST['v_tipo'];
-                $pass1 = $_POST['v_pass1'];
-                $pass2 = $_POST['v_pass2'];
                 if($sqlsl = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=?")){
                     if($sqlsl->bind_param("ii", $id_loc, $this->id_gir)){
                         if($sqlsl->execute()){
                             $ressl = $sqlsl->get_result();
+                            $id = $_POST['id'];
+                            $nombre = $_POST['v_nombre'];
+                            $tipo = $_POST['v_tipo'];
+                            $save_web = $_POST['save_web'];
+                            $web_min = $_POST['web_min'];
+                            $save_pos = $_POST['save_pos'];
+                            $pos_min = $_POST['pos_min'];
+                            $del_pdir = $_POST['del_pdir'];
+                            $pass1 = $_POST['v_pass1'];
+                            $pass2 = $_POST['v_pass2'];
                             if($ressl->{"num_rows"} == 1){
                                 if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
                                     if($sqlus->bind_param("s", $correo)){
@@ -1977,8 +1982,8 @@ class Guardar{
                                                     if($pass1 == $pass2){
                                                         if(strlen($pass1) > 7){
                                                             $admin = 0;
-                                                            if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, id_loc, id_gir) VALUES (?, now(), ?, ?, ?, ?, ?, ?)")){
-                                                                if($sqlius->bind_param("sssiiii", $nombre, $correo, md5($pass1), $tipo, $admin, $id_loc, $this->id_gir)){
+                                                            if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, pass, tipo, admin, save_web, web_min, save_pos, pos_min, del_pdir, id_loc, id_gir) VALUES (?, now(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+                                                                if($sqlius->bind_param("sssiiiiiiiii", $nombre, $correo, md5($pass1), $tipo, $admin, $save_web, $web_min, $save_pos, $pos_min, $del_pdir, $id_loc, $this->id_gir)){
                                                                     if($sqlius->execute()){
                                                                         $info['op'] = 1;
                                                                         $info['mensaje'] = "Usuario creado exitosamente";
@@ -1999,16 +2004,16 @@ class Guardar{
                                                 }
                                                 if($id > 0){
                                                     if($pass1 == $pass2 && strlen($pass1) > 7){
-                                                        if($sqluup = $this->con->prepare("UPDATE fw_usuarios SET pass=? WHERE id_user=? AND eliminado=?")){
-                                                            if($sqluup->bind_param("sii", md5($pass1), $id, $this->eliminado)){
+                                                        if($sqluup = $this->con->prepare("UPDATE fw_usuarios SET pass=? WHERE id_user=? AND eliminado=? AND id_loc=? AND id_gir=?")){
+                                                            if($sqluup->bind_param("siiii", md5($pass1), $id, $this->eliminado, $id_loc, $this->id_gir)){
                                                                 if($sqluup->execute()){
                                                                     $sqluup->close();
                                                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
                                                             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($sqluup->error)); }
                                                         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'crear_usuarios_local() #2 '.htmlspecialchars($this->con->error)); }
                                                     }
-                                                    if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=? WHERE id_user=? AND eliminado=?")){
-                                                        if($sqluus->bind_param("ssiii", $nombre, $correo, $tipo, $id, $this->eliminado)){
+                                                    if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=?, tipo=?, del_pdir=?, save_web=?, web_min=?, save_pos=?, pos_min=? WHERE id_user=? AND eliminado=? AND id_loc=? AND id_gir=?")){
+                                                        if($sqluus->bind_param("ssiiiiiiiiii", $nombre, $correo, $tipo, $del_pdir, $save_web, $web_min, $save_pos, $pos_min, $id, $this->eliminado, $id_loc, $this->id_gir)){
                                                             if($sqluus->execute()){
                                                                 $info['op'] = 1;
                                                                 $info['mensaje'] = "Usuario modificado exitosamente";
