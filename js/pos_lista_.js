@@ -1457,6 +1457,7 @@ function delete_promo(that, precio){
     }
 
     pedidos[seleccionado].total = parseInt(pedidos[seleccionado].total) - parseInt(precio);
+    pedidos[seleccionado].cambios = 1;
     listar_pedidos(pedidos);
     ver_detalle_carro(seleccionado);
     
