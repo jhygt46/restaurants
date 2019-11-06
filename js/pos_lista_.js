@@ -1149,12 +1149,14 @@ function proceso_preguntas(pedido){
 }
 function promo_restantes(producto, j, tiene_pregunta){
 
-    console.log(producto);
-
     var pedidos = get_pedidos();
     var Div = create_element_class('restantes_detalle_item clearfix');
     
-    var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
+    if(producto.nombre_carro == ""){
+        var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
+    }else{
+        var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre_carro);
+    }
     Div.appendChild(Nombre);
     
     var Acciones = create_element_class('restantes_detalle_acciones clearfix');
