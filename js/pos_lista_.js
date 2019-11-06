@@ -311,6 +311,7 @@ function enviar_cambio_de_hora(index){
     console.log(pedidos[index].cambio_tiempo);
     if(pedidos[index].cambio_tiempo > 1){
         pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo - 1;
+        set_pedidos(pedidos);
     }else{
         console.log("ENVIAR PETICION");
         /*
