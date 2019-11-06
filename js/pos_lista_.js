@@ -1151,14 +1151,21 @@ function promo_restantes(producto, j, tiene_pregunta){
 
     var pedidos = get_pedidos();
     var Div = create_element_class('restantes_detalle_item clearfix');
-    
-    console.log(producto);
 
-    if(producto.nombre_carro == ""){
-        var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
+    if(producto.numero == 0){
+        if(producto.nombre_carro == ""){
+            var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
+        }else{
+            var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre_carro);
+        }
     }else{
-        var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre_carro);
+        if(producto.nombre_carro == ""){
+            var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.numero+".- "+producto.nombre);
+        }else{
+            var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.numero+".- "+producto.nombre_carro);
+        }
     }
+
     Div.appendChild(Nombre);
     
     var Acciones = create_element_class('restantes_detalle_acciones clearfix');
@@ -1439,7 +1446,20 @@ function promo_carros(producto, j){
     var pedidos = get_pedidos();
     var Div = create_element_class('promo_detalle_item clearfix');
     
-    var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
+    if(producto.numero == 0){
+        if(producto.nombre_carro == ""){
+            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.nombre);
+        }else{
+            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.nombre_carro);
+        }
+    }else{
+        if(producto.nombre_carro == ""){
+            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
+        }else{
+            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre_carro);
+        }
+    }
+    
     Div.appendChild(Nombre);
     
     var Acciones = create_element_class('promo_detalle_acciones clearfix');
