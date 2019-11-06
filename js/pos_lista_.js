@@ -370,7 +370,7 @@ function cambiar_estado(index, n){
     if(aux >= 0 && aux < estados.length){
         pedidos[index].estado = aux;
         pedidos[index].cambio_estado = pedidos[index].cambio_estado + 1;
-        set_pedidos(pedidos);
+        listar_pedidos(pedidos);
         setTimeout(function(){ enviar_cambio_de_estado(index) }, 10000);
     }
 
