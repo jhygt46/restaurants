@@ -2064,7 +2064,7 @@ class Core{
                             if($sqlutp->execute()){
                                 $info['carro'] = $carro;
                                 if($enviar_cocina == 1){
-                                    
+
                                     $send['accion'] = 'enviar_cocina_local';
                                     $send['hash'] = 'hash';
                                     $send['local_code'] = $local_code;
@@ -2137,8 +2137,8 @@ class Core{
                         if($res->{'num_rows'} == 0){
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
-                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, id_gir, eliminado) VALUES (?, ?, ?, ?, '0', '0')")){
-                                if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont)){
+                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?)")){
+                                if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminiado, $this->eliminiado)){
                                     if($sqlipu->execute()){
                                         $id_puser = $this->con->insert_id;
                                         $info['set_puser'] = 1;
@@ -2150,9 +2150,9 @@ class Core{
                                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
                                         }
                                         $sqlipu->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
-                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($sqlipu->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1a '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
+                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1b '.htmlspecialchars($sqlipu->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1c '.htmlspecialchars($this->con->error)); }
                         }
                         if($res->{'num_rows'} == 1){
                             $id_puser = $puser["id_puser"];
