@@ -115,6 +115,7 @@ function socket_init(){
 function modificar_horas(){
     
     var pedidos = get_pedidos();
+    console.log(pedidos);
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
