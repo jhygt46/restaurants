@@ -340,7 +340,7 @@ function cambiar_hora(index, n){
     
 }
 
-function enviar_cambio_de_estado(index){
+function enviar_cambio_de_estado(index, aux){
 
     var pedidos = get_pedidos();
     if(pedidos[index].cambio_estado <= 1){
@@ -371,7 +371,7 @@ function cambiar_estado(index, n){
         pedidos[index].estado = aux;
         pedidos[index].cambio_estado = pedidos[index].cambio_estado + 1;
         listar_pedidos(pedidos);
-        setTimeout(function(){ enviar_cambio_de_estado(index) }, 10000);
+        setTimeout(function(){ enviar_cambio_de_estado(index, aux) }, 10000);
     }
 
 }
