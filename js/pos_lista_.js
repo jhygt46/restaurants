@@ -125,8 +125,9 @@ function modificar_horas(){
             $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
 
         }
+        console.log("MODIFICAR HORAS");
     }
-    setTimeout(modificar_horas, 6000);
+    setTimeout(modificar_horas, 60000);
     
 }
 function gmap_input(){

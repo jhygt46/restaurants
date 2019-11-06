@@ -270,6 +270,7 @@ html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .mas .con
   position: relative;
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 html body .contenedor .contenido .pedidos .titulo_pedidos .cont_titulo .mas .cont_m .m1 {
   background: #fff;
