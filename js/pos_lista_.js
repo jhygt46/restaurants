@@ -1165,7 +1165,7 @@ function promo_restantes(producto, j, tiene_pregunta){
             var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.numero+".- "+producto.nombre_carro);
         }
     }
-
+    
     Div.appendChild(Nombre);
     
     var Acciones = create_element_class('restantes_detalle_acciones clearfix');
@@ -1446,20 +1446,7 @@ function promo_carros(producto, j){
     var pedidos = get_pedidos();
     var Div = create_element_class('promo_detalle_item clearfix');
     
-    if(producto.numero == 0){
-        if(producto.nombre_carro == ""){
-            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.nombre);
-        }else{
-            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.nombre_carro);
-        }
-    }else{
-        if(producto.nombre_carro == ""){
-            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
-        }else{
-            var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre_carro);
-        }
-    }
-    
+    var Nombre = create_element_class_inner('promo_detalle_nombre', producto.numero + '.- ' + producto.nombre);
     Div.appendChild(Nombre);
     
     var Acciones = create_element_class('promo_detalle_acciones clearfix');
