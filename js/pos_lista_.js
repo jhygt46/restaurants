@@ -305,7 +305,6 @@ function html_home_pedidos(index){
     return Div;
     
 }
-
 function enviar_cambio_de_hora(index){
 
     var pedidos = get_pedidos();
@@ -330,12 +329,15 @@ function enviar_cambio_de_hora(index){
     }
 
 }
-
+function set_pedidos(pedidos){
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+}
 function cambiar_hora(index, n){
     
     var pedidos = get_pedidos();
     pedidos[index].fecha = pedidos[index].fecha + n*60;
     pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo + 1;
+    set_pedidos(pedidos);
     setTimeout(function(){ enviar_cambio_de_hora(index) }, 7000);
     
 }
