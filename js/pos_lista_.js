@@ -1149,6 +1149,8 @@ function proceso_preguntas(pedido){
 }
 function promo_restantes(producto, j, tiene_pregunta){
 
+    console.log(producto);
+
     var pedidos = get_pedidos();
     var Div = create_element_class('restantes_detalle_item clearfix');
     
