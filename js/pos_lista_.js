@@ -1095,9 +1095,10 @@ function select_pdir(that){
                 $('#id_pdir').val($(that).parent().attr('id_pdir'));
                 $('#direccion').val($(that).parent().attr('direccion'));
                 $('#depto').val($(that).parent().attr('depto'));
-                $('#despacho').val(1);
                 $('#costo').val(data.precio);
                 $('#l_direccion').hide();
+                $('#m_direccion').show();
+                $('#despacho').val(1);
 
             }else{
 
