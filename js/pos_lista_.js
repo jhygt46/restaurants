@@ -317,7 +317,7 @@ function cambiar_hora(index, n){
     var pedidos = get_pedidos();
     pedidos[index].fecha = pedidos[index].fecha + n*60;
 
-    setTimeout(enviar_cambio_de_hora(index), 3000);
+    setTimeout(function(){ enviar_cambio_de_hora(index) }, 3000);
     
 
     /*
