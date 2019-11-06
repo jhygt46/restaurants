@@ -1463,8 +1463,6 @@ function promo_carros(producto, j){
     
     var Acciones = create_element_class('promo_detalle_acciones clearfix');
     var carro = pedidos[seleccionado].carro[j];
-    
-    console.log(carro);
 
     if(carro.preguntas){
         
