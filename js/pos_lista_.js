@@ -1098,7 +1098,7 @@ function select_pdir(that){
                 $('#costo').val(data.precio);
                 $('#l_direccion').hide();
                 $('#m_direccion').show();
-                $('#despacho').val(1);
+                $('#despacho option[value=1]').attr('selected', 'selected');
 
             }else{
 
