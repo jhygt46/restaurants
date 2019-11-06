@@ -924,4 +924,8 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   background: #888;
 }
 
+.material-icons {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=pos_.css.map */
