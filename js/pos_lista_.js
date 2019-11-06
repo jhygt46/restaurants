@@ -305,10 +305,22 @@ function html_home_pedidos(index){
     return Div;
     
 }
+
+function enviar_cambio_de_hora(index){
+
+    console.log(index);
+
+}
+
 function cambiar_hora(index, n){
     
     var pedidos = get_pedidos();
     pedidos[index].fecha = pedidos[index].fecha + n*60;
+
+    setTimeout(enviar_cambio_de_hora(index), 3000);
+    
+
+    /*
     var data = { accion: 1, fecha: pedidos[index].fecha };
     var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
     $.ajax({
@@ -321,6 +333,7 @@ function cambiar_hora(index, n){
             }
         }, error: function(){}
     });
+    */
     
 }
 function cambiar_estado(index, n){
