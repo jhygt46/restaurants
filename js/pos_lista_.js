@@ -1,7 +1,7 @@
 $(document).ready(function(){
     socket_init();
     listar_pedidos(pedidos);
-    //modificar_horas();
+    modificar_horas();
     gmap_input();
     resize();    
 });
