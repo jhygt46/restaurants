@@ -287,7 +287,7 @@ function html_home_pedidos(index){
 
         
         var time = (pedidos[index].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
-        var diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
+        var diff = Math.round((pedidos[index].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
         if(diff < 0){ diff = 0; }
         
         var t_tiempo = create_element_class('t_tiempo');
