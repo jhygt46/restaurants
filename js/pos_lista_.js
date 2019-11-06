@@ -118,18 +118,12 @@ function modificar_horas(){
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
 
-            var fecha_ahora = Math.round(new Date().getTime()/1000);
             var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
-            var diff = Math.round((pedidos[i].fecha + (time*60) - fecha_ahora)/60);
-
-            console.log(pedidos[i].fecha + "-" + (time*60) + "-" + fecha_ahora);
-            console.log(diff);
-
+            var diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
             if(diff < 0){ diff = 0; }
             $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
 
         }
-        console.log("MODIFICAR HORAS");
     }
     setTimeout(modificar_horas, 60000);
     
@@ -291,10 +285,15 @@ function html_home_pedidos(index){
         estado.appendChild(nombre);
         estado.appendChild(siguiente);
 
+        
+        var time = (pedidos[index].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
+        var diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
+        if(diff < 0){ diff = 0; }
+        
         var t_tiempo = create_element_class('t_tiempo');
         var t_anterior = create_element_class_inner('t_anterior material-icons', 'keyboard_arrow_left');
         t_anterior.onclick = function(){ cambiar_hora(index, -1) };
-        var t_nombre = create_element_class_inner('t_nombre', '10');
+        var t_nombre = create_element_class_inner('t_nombre', diff);
         var t_siguiente = create_element_class_inner('t_siguiente material-icons', 'keyboard_arrow_right');
         t_siguiente.onclick = function(){ cambiar_hora(index, 1) };
 
@@ -317,7 +316,6 @@ function enviar_cambio_de_hora(index){
 
     var pedidos = get_pedidos();
     if(pedidos[index].cambio_tiempo <= 1){
-        console.log("PETICION CAMBIO DE HORA");
         var data = { accion: 1, fecha: pedidos[index].fecha };
         var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
         $.ajax({
@@ -340,11 +338,10 @@ function cambiar_hora(index, n){
     var pedidos = get_pedidos();
     pedidos[index].fecha = pedidos[index].fecha + n*60;
     pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo + 1;
-    set_pedidos(pedidos);
+    listar_pedidos(pedidos);
     setTimeout(function(){ enviar_cambio_de_hora(index) }, 10000);
     
 }
-
 function enviar_cambio_de_estado(index, aux){
 
     var pedidos = get_pedidos();
@@ -367,7 +364,6 @@ function enviar_cambio_de_estado(index, aux){
     set_pedidos(pedidos);
 
 }
-
 function cambiar_estado(index, n){
 
     var pedidos = get_pedidos();
