@@ -305,16 +305,14 @@ function html_home_pedidos(index){
     return Div;
     
 }
+function set_pedidos(pedidos){
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+}
 function enviar_cambio_de_hora(index){
 
     var pedidos = get_pedidos();
-    console.log(pedidos[index].cambio_tiempo);
-    if(pedidos[index].cambio_tiempo > 1){
-        pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo - 1;
-        set_pedidos(pedidos);
-    }else{
-        console.log("ENVIAR PETICION");
-        /*
+    if(pedidos[index].cambio_tiempo <= 1){
+        console.log("PETICION CAMBIO DE HORA");
         var data = { accion: 1, fecha: pedidos[index].fecha };
         var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
         $.ajax({
@@ -327,12 +325,10 @@ function enviar_cambio_de_hora(index){
                 }
             }, error: function(){}
         });
-        */
     }
+    pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo - 1;
+    set_pedidos(pedidos);
 
-}
-function set_pedidos(pedidos){
-    localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
 function cambiar_hora(index, n){
     
@@ -340,17 +336,15 @@ function cambiar_hora(index, n){
     pedidos[index].fecha = pedidos[index].fecha + n*60;
     pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo + 1;
     set_pedidos(pedidos);
-    setTimeout(function(){ enviar_cambio_de_hora(index) }, 7000);
+    setTimeout(function(){ enviar_cambio_de_hora(index) }, 10000);
     
 }
-function cambiar_estado(index, n){
+
+function enviar_cambio_de_estado(index){
 
     var pedidos = get_pedidos();
-    var aux = parseInt(pedidos[index].estado) + n;
-
-    if(aux >= 0 && aux < estados.length){
-
-        pedidos[index].estado = aux;
+    if(pedidos[index].cambio_estado <= 1){
+        console.log("PETICION CAMBIO DE ESTADO");
         var data = { accion: 0, estado: estados[aux] };
         var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
         $.ajax({
@@ -363,7 +357,21 @@ function cambiar_estado(index, n){
                 }
             }, error: function(){}
         });
+    }
+    pedidos[index].cambio_estado = pedidos[index].cambio_estado - 1;
+    set_pedidos(pedidos);
 
+}
+
+function cambiar_estado(index, n){
+
+    var pedidos = get_pedidos();
+    var aux = parseInt(pedidos[index].estado) + n;
+    if(aux >= 0 && aux < estados.length){
+        pedidos[index].estado = aux;
+        pedidos[index].cambio_estado = pedidos[index].cambio_estado + 1;
+        set_pedidos(pedidos);
+        setTimeout(function(){ enviar_cambio_de_estado(index) }, 10000);
     }
 
 }
@@ -403,6 +411,7 @@ function pedido_obj(){
         estado: 0,
         fecha: Math.round(new Date().getTime()/1000),
         cambio_tiempo: 0,
+        cambio_estado: 0,
         despacho: 1,
         carro: [],  
         promos: [], 

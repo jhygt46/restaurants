@@ -1409,6 +1409,8 @@ class Core{
                         $res['ocultar'] = $row['ocultar'];
                         $res['costo'] = $row['costo'];
                         $res['cambios'] = 0;
+                        $res['cambio_tiempo'] = 0;
+                        $res['cambio_estado'] = 0;
                         $res['total'] = $row['total'];
                         $res['id_puser'] = $row['id_puser'];
                         $res['id_pdir'] = $row['id_pdir'];
