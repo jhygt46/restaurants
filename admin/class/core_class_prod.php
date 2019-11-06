@@ -2138,7 +2138,7 @@ class Core{
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
                             if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?)")){
-                                if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminiado, $this->eliminiado)){
+                                if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminado, $this->eliminado)){
                                     if($sqlipu->execute()){
                                         $id_puser = $this->con->insert_id;
                                         $info['set_puser'] = 1;
