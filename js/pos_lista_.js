@@ -42,7 +42,6 @@ function listar_pedidos(pedidos){
     }else{
         var aux_ped = get_pedidos();
     }
-    
     $('.cont_lista').html('');
     if(aux_ped.length){
         for(var i=0, ilen=aux_ped.length; i<ilen; i++){
@@ -115,16 +114,14 @@ function socket_init(){
 }
 function modificar_horas(){
     
-    console.log(pedidos);
+    var pedidos = get_pedidos();
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
-
             var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
             var diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
             console.log("diff: "+diff);
             if(diff < 0){ diff = 0; }
             $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
-
         }
     }
     setTimeout(modificar_horas, 60000);
