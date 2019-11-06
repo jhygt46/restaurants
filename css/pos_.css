@@ -756,6 +756,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   border-bottom: 1px solid #999;
   background: #eee;
   position: relative;
+  cursor: pointer;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .pedido_direcciones .pedido_direccion .md_direccion {
   left: 5px;
