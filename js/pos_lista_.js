@@ -308,6 +308,7 @@ function html_home_pedidos(index){
 function enviar_cambio_de_hora(index){
 
     var pedidos = get_pedidos();
+    console.log(pedidos[index].cambio_tiempo);
     if(pedidos[index].cambio_tiempo > 0){
         pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo - 1;
     }else{
