@@ -129,7 +129,7 @@ function modificar_horas(){
             }
         }
     }
-    setTimeout(modificar_horas, 6000);
+    setTimeout(modificar_horas, 60000);
     
 }
 function gmap_input(){
