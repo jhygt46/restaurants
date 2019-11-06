@@ -2032,7 +2032,7 @@ class Core{
                         if($sqlipd->bind_param("ssissddi", $direccion, $calle, $num, $depto, $comuna, $lat, $lng, $id_puser)){
                             if($sqlipd->execute()){
                                 $id_pdir = $this->con->insert_id;
-                                if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?AND id_gir=?")){
+                                if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=? AND id_gir=?")){
                                     if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc, $id_gir)){
                                         if($sqlupd->execute()){
                                             $sqlupd->close();
@@ -2064,6 +2064,7 @@ class Core{
                             if($sqlutp->execute()){
                                 $info['carro'] = $carro;
                                 if($enviar_cocina == 1){
+                                    
                                     $send['accion'] = 'enviar_cocina_local';
                                     $send['hash'] = 'hash';
                                     $send['local_code'] = $local_code;
@@ -2077,6 +2078,7 @@ class Core{
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                                     curl_exec($ch);
                                     curl_close($ch);
+
                                 }
                                 $sqlutp->close();
                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #11 '.htmlspecialchars($sqlutp->error)); }
