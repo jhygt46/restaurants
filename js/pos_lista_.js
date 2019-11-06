@@ -1152,6 +1152,8 @@ function promo_restantes(producto, j, tiene_pregunta){
     var pedidos = get_pedidos();
     var Div = create_element_class('restantes_detalle_item clearfix');
     
+    console.log(producto);
+
     if(producto.nombre_carro == ""){
         var Nombre = create_element_class_inner('restantes_detalle_nombre', producto.nombre);
     }else{
