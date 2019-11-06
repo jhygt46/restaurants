@@ -115,14 +115,17 @@ function socket_init(){
 function modificar_horas(){
     
     var pedidos = get_pedidos();
-    console.log(pedidos);
+    var time = 0;
+    var diff = 0;
+    
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
-            var time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
-            var diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
-            console.log("diff: "+diff);
-            if(diff < 0){ diff = 0; }
-            $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
+            if(pedidos[i].tipo == 1){
+                time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
+                diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
+                if(diff < 0){ diff = 0; }
+                $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
+            }
         }
     }
     setTimeout(modificar_horas, 6000);
