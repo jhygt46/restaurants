@@ -1147,9 +1147,9 @@ class Core{
                             }
 
                         }
-                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(6, $id_loc, $id_gir, 'cambiar_estado() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, $id_gir, 'cambiar_estado() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $id_gir, 'cambiar_estado() '.htmlspecialchars($this->con->error)); }
         }
         return $info;
 
