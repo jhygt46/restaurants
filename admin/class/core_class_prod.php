@@ -1898,6 +1898,22 @@ class Core{
     }
     public function ver_detalle(){
 
+        $verificar = $this->verificar();
+        if($verificar['op']){
+            $id_gir = $verificar['id_gir'];
+            $pedido_code = $_POST["pedido_code"];
+            if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE code=? AND id_gir=? AND eliminado=?")){
+                if($sql->bind_param("sii", $pedido_code, $id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $resp = file_get_contents("/var/www/html/pedidos_pos/".$pedido_code.".json");
+                        unlink("/var/www/html/pedidos_pos/".$pedido_code.".json");
+                        return $resp;
+                    }else{  }
+                }else{  }
+            }else{  }
+        }
+
+        /*
         $info['op'] = 2;
         $verificar = $this->verificar();
         if($verificar['op']){
@@ -1966,6 +1982,7 @@ class Core{
                 }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($this->con->error)); }
         }
+        */
         return $info;
     }
     public function set_web_pedido(){
@@ -2131,7 +2148,6 @@ class Core{
                             if($sqlutp->execute()){
 
                                 // ENVIAR ARCHIVO //
-
                                 $file['pedido']['id_ped'] = $id_ped;
                                 $file['pedido']['num_ped'] = $num_ped;
                                 $file['pedido']['fecha'] = $sql_fecha;
