@@ -1097,7 +1097,7 @@ class Core{
             $id_gir = $verificar['id_gir'];
             $id_loc = $verificar['id_loc'];
             $id_ped = $_POST['id_ped'];
-            if($sql = $this->con->prepare("SELECT code FROM pedidos_aux WHERE t1.id_ped=? AND id_loc=? AND id_gir=? AND t1.eliminado=?")){
+            if($sql = $this->con->prepare("SELECT code FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND id_gir=? AND t1.eliminado=?")){
                 if($sql->bind_param("iiii", $id_ped, $id_loc, $id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
