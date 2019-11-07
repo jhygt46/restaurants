@@ -29,7 +29,7 @@ if(isset($_POST["tipo"])){
             echo json_encode($core->enviar_error());
         }
         if($_POST["tipo"] == 4){
-            echo $core->ver_detalle();
+            echo json_encode($core->ver_detalle());
         }
         if($_POST["tipo"] == 5){
             echo json_encode($core->enviar_contacto());

@@ -1898,6 +1898,7 @@ class Core{
     }
     public function ver_detalle(){
 
+        $info['op'] = 2;
         $verificar = $this->verificar();
         if($verificar['op']){
             $id_gir = $verificar['id_gir'];
@@ -1905,14 +1906,17 @@ class Core{
             if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE code=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("sii", $pedido_code, $id_gir, $this->eliminado)){
                     if($sql->execute()){
-                        $resp = file_get_contents("/var/www/html/pedidos_pos/".$pedido_code.".json");
-                        unlink("/var/www/html/pedidos_pos/".$pedido_code.".json");
-                        return $resp;
-                    }else{  }
-                }else{  }
-            }else{  }
+                        if(file_exists("/var/www/html/pedidos_pos/".$pedido_code.".json")){
+                            $info['op'] = 1;
+                            $info['resp'] = file_get_contents("/var/www/html/pedidos_pos/".$pedido_code.".json");
+                            unlink("/var/www/html/pedidos_pos/".$pedido_code.".json");
+                        }
+                    }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($this->con->error)); }
         }
-
+        return $info;
+        
         /*
         $info['op'] = 2;
         $verificar = $this->verificar();
@@ -1983,7 +1987,7 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($this->con->error)); }
         }
         */
-        return $info;
+        
     }
     public function set_web_pedido(){
 
