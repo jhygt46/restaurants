@@ -2060,8 +2060,6 @@ class Core{
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($sqlpaux->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($this->con->error)); }
 
-
-
             // EN CASO DE USUARIO NUEVO //
             if($id_puser == 0 && $sql_id_puser == 0){
                 if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
@@ -2134,9 +2132,39 @@ class Core{
 
                                 // ENVIAR ARCHIVO //
 
-                                
+                                $file['pedido']['id_ped'] = $id_ped;
+                                $file['pedido']['num_ped'] = $num_ped;
+                                $file['pedido']['fecha'] = $sql_fecha;
+                                $file['pedido']['despacho'] = $despacho;
+                                $file['pedido']['id_loc'] = $id_loc;
 
-                                if($total != $sql_total){
+                                $file['pedido']['nombre'] = "";
+                                $file['pedido']['telefono'] = "";
+                                
+                                $file['pedido']['calle'] = "";
+                                $file['pedido']['num'] = "";
+                                $file['pedido']['depto'] = "";
+                                $file['pedido']['comuna'] = "";
+                                $file['pedido']['direccion'] = "";
+                                $file['pedido']['lat'] = "";
+                                $file['pedido']['lng'] = "";
+
+                                $file['pedido']['pre_gengibre'] = "";
+                                $file['pedido']['pre_wasabi'] = "";
+                                $file['pedido']['pre_teriyaki'] = "";
+                                $file['pedido']['pre_soya'] = "";
+                                $file['pedido']['pre_palitos'] = "";
+                                $file['pedido']['comentarios'] = "";
+
+                                $file['pedido']['costo'] = $costo;
+                                $file['pedido']['total'] = $total;
+
+                                $file['carro'] = $carro;
+                                $file['promos'] = $promos;
+
+                                file_put_contents("/var/www/html/pedidos_pos/".$code.".json", json_encode($file));
+
+                                if($total != $sql_total && $sql_tipo == 1){
                                     $aux['accion'] = 2;
                                     $aux['total'] = $total;
                                     $send['estado'] = json_encode($aux);
@@ -2154,6 +2182,7 @@ class Core{
                                 }
 
                                 if($enviar_cocina == 1){
+
                                     $send['accion'] = 'enviar_cocina_local';
                                     $send['hash'] = 'hash';
                                     $send['local_code'] = $local_code;
@@ -2170,6 +2199,7 @@ class Core{
                                         $info['resp_node2'] = $resp_node;
                                         curl_close($ch);
                                     }
+
                                 }
 
                                 $sqlutp->close();
