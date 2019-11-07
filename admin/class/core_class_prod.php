@@ -1139,7 +1139,7 @@ class Core{
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                             if(!curl_errno($ch)){
-                                $info["resp"] = json_decode(curl_exec($ch));
+                                curl_exec($ch);
                                 $info['op'] = 1;
                                 curl_close($ch);
                             }else{
