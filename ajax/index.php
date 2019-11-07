@@ -65,6 +65,12 @@
         $info = $core->enviar_contacto_msd();
         echo json_encode($info);
     }
+    if($_POST["accion"] == "cambiar_estado"){
+        require_once DIR."admin/class/core_class_prod.php";
+        $core = new Core();
+        $info = $core->cambiar_estado();
+        echo json_encode($info);
+    }
 
 ?>
 

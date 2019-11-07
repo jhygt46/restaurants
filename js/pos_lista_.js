@@ -117,14 +117,12 @@ function modificar_horas(){
     var pedidos = get_pedidos();
     var time = 0;
     var diff = 0;
-    
     if(pedidos){
         for(var i=0, ilen=pedidos.length; i<ilen; i++){
             if(pedidos[i].tipo == 1){
                 time = (pedidos[i].despacho == 1) ? tiempos.despacho : tiempos.retiro ;
                 diff = Math.round((pedidos[i].fecha + (time*60) - Math.round(new Date().getTime()/1000))/60);
                 if(diff < 0){ diff = 0; }
-                console.log(pedidos[i].num_ped + " - " + diff);
                 $('.lista_pedidos').find('.pedido').eq(i).find('.t_tiempo').find('.t_nombre').html(diff);
             }
         }
@@ -320,18 +318,16 @@ function enviar_cambio_de_hora(index){
 
     var pedidos = get_pedidos();
     if(pedidos[index].cambio_tiempo <= 1){
-        var data = { accion: 1, fecha: pedidos[index].fecha };
-        var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
+
+        var send = { accion: 'cambiar_estado', id_ped: pedidos[index].id_ped, fecha: pedidos[index].fecha, tipo: 1 };
         $.ajax({
-            url: "https://www.izusushi.cl/cambiar_estado",
+            url: "/ajax/",
             type: "POST",
             data: send,
-            success: function(data){
-                if(data.op == 1){
-                    listar_pedidos(pedidos);
-                }
-            }, error: function(){}
+            success: function(){},
+            error: function(){}
         });
+
     }
     pedidos[index].cambio_tiempo = pedidos[index].cambio_tiempo - 1;
     set_pedidos(pedidos);
@@ -350,19 +346,16 @@ function enviar_cambio_de_estado(index, aux){
 
     var pedidos = get_pedidos();
     if(pedidos[index].cambio_estado <= 1){
-        console.log("PETICION CAMBIO DE ESTADO");
-        var data = { accion: 0, estado: estados[aux] };
-        var send = { pedido_code: pedidos[index].pedido_code, estado: JSON.stringify(data) };
+        
+        var send = { accion: 'cambiar_estado', id_ped: pedidos[index].id_ped, estado: aux, tipo: 0 };
         $.ajax({
-            url: "https://www.izusushi.cl/cambiar_estado",
+            url: "/ajax/",
             type: "POST",
             data: send,
-            success: function(data){
-                if(data.op == 1){
-                    listar_pedidos(pedidos);
-                }
-            }, error: function(){}
+            success: function(){},
+            error: function(){}
         });
+
     }
     pedidos[index].cambio_estado = pedidos[index].cambio_estado - 1;
     set_pedidos(pedidos);

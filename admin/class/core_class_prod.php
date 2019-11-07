@@ -1089,6 +1089,68 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'cocina() '.htmlspecialchars($this->con->error)); }
         }
     }
+    public function cambiar_estado(){
+
+        $verificar = $this->verificar_cookie();
+        if($verificar['op']){
+            $id_gir = $verificar['id_gir'];
+            $id_loc = $verificar['id_loc'];
+            $id_ped = $_POST['id_ped'];
+            if($sql = $this->con->prepare("SELECT code FROM pedidos_aux WHERE t1.id_ped=? AND id_loc=? AND id_gir=? AND t1.eliminado=?")){
+                if($sql->bind_param("iiii", $id_loc, $id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{'num_rows'} == 1){
+
+                            $code = $res->fetch_all(MYSQLI_ASSOC)[0]['code'];
+                            $send['pedido_code'] = $code;
+
+                            $tipo = $_POST['tipo'];
+                            if($tipo == 0){
+                                $aux['accion'] = 0;
+                                $aux['estado'] = $_POST["estado"];
+                                $send['estado'] = json_encode($aux);
+                            }
+                            if($tipo == 1){
+                                $aux['accion'] = 1;
+                                $aux['fecha'] = $_POST["fecha"];
+                                $send['estado'] = json_encode($aux);
+                            }
+                            if($tipo == 2){
+                                $aux['accion'] = 2;
+                                $aux['total'] = $_POST["total"];
+                                $send['estado'] = json_encode($aux);
+                            }
+                            if($tipo == 3){
+                                $aux['accion'] = 3;
+                                $aux['mensaje'] = $_POST["mensaje"];
+                                $send['estado'] = json_encode($aux);
+                            }
+                            if($tipo == 4){
+                                $aux['accion'] = 4;
+                                $aux['lat'] = $_POST["lat"];
+                                $aux['lng'] = $_POST["lng"];
+                                $send['estado'] = json_encode($aux);
+                            }
+
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/cambiar_estado');
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                            if(!curl_errno($ch)){
+                                curl_exec($ch);
+                                curl_close($ch);
+                            }else{
+                                $this->registrar(17, $id_loc, $id_gir, 'Error Curl cambiar_estado()');
+                            }
+
+                        }
+                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
+        }
+
+    }
     public function get_data_pos(){
 
         $verificar = $this->verificar_cookie();
@@ -2072,12 +2134,16 @@ class Core{
                                     $send['num_ped'] = $num_ped;
                                     $send['carro'] = $carro;
                                     $send['promos'] = $promos;
+
                                     $ch = curl_init();
                                     curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                                    curl_exec($ch);
-                                    curl_close($ch);
+                                    if(!curl_errno($ch)){
+                                        $resp_node = json_decode(curl_exec($ch));
+                                        $info['resp_node'] = $resp_node;
+                                        curl_close($ch);
+                                    }
 
                                 }
                                 $sqlutp->close();
