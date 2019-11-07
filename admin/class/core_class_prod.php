@@ -1091,6 +1091,7 @@ class Core{
     }
     public function cambiar_estado(){
 
+        $info['op'] = 2;
         $verificar = $this->verificar_cookie();
         if($verificar['op']){
             $id_gir = $verificar['id_gir'];
@@ -1138,7 +1139,8 @@ class Core{
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                             if(!curl_errno($ch)){
-                                curl_exec($ch);
+                                $info["resp"] = json_decode(curl_exec($ch));
+                                $info['op'] = 1;
                                 curl_close($ch);
                             }else{
                                 $this->registrar(17, $id_loc, $id_gir, 'Error Curl cambiar_estado()');
@@ -1149,6 +1151,7 @@ class Core{
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
         }
+        return $info;
 
     }
     public function get_data_pos(){
