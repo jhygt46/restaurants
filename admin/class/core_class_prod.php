@@ -1117,6 +1117,7 @@ class Core{
                                 $aux['fecha'] = $_POST["fecha"];
                                 $send['estado'] = json_encode($aux);
                             }
+                            /*
                             if($tipo == 2){
                                 $aux['accion'] = 2;
                                 $aux['total'] = $_POST["total"];
@@ -1133,7 +1134,7 @@ class Core{
                                 $aux['lng'] = $_POST["lng"];
                                 $send['estado'] = json_encode($aux);
                             }
-
+                            */
                             $ch = curl_init();
                             curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/cambiar_estado');
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -2024,7 +2025,6 @@ class Core{
                                                     $id_ped = $this->con->insert_id;
                                                     $info['id_ped'] = $id_ped;
                                                     $info['num_ped'] = $num_ped;
-                                                    $info['pedido_code'] = $code;
                                                     $sqlaux->close();
                                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #1 '.htmlspecialchars($sqlaux->error)); }
                                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #1 '.htmlspecialchars($sqlaux->error)); }
@@ -2041,7 +2041,7 @@ class Core{
             }
 
             // DATA DEL PEDIDO//
-            if($sqlpaux = $this->con->prepare("SELECT id_puser, id_pdir, carro, promos, num_ped, mod_despacho, tipo, fecha FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND id_gir=? AND eliminado=?")){
+            if($sqlpaux = $this->con->prepare("SELECT id_puser, id_pdir, carro, promos, num_ped, mod_despacho, tipo, fecha, total, code FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND id_gir=? AND eliminado=?")){
                 if($sqlpaux->bind_param("iiii", $id_ped, $id_loc, $id_gir, $this->eliminado)){
                     if($sqlpaux->execute()){
                         $resultpaux = $sqlpaux->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -2052,11 +2052,15 @@ class Core{
                         $num_ped = $resultpaux['num_ped'];
                         $mod_despacho = $resultpaux['mod_despacho'];
                         $sql_tipo = $resultpaux['tipo'];
+                        $sql_total = $resultpaux['total'];
+                        $code = $resultpaux['code'];
                         $sql_fecha = strtotime($resultpaux['fecha']);
                         $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($sqlpaux->error)); }
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($sqlpaux->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($this->con->error)); }
+
+
 
             // EN CASO DE USUARIO NUEVO //
             if($id_puser == 0 && $sql_id_puser == 0){
@@ -2080,7 +2084,7 @@ class Core{
             }
 
             // EN CASO DE CAMBIAR USUARIO //
-            if($id_puser > 0 && $sql_id_puser == 0){
+            if($id_puser > 0 && $sql_id_puser != $id_puser){
                 if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
                     if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
                         if($sqlupa->execute()){
@@ -2112,7 +2116,7 @@ class Core{
             }
 
             // EN CASO DE CAMBIAR DIRECCION //
-            if($id_pdir > 0 && $sql_id_pdir == 0){
+            if($id_pdir > 0 && $sql_id_pdir != $id_pdir){
                 if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
                     if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
                         if($sqlupd->execute()){
@@ -2124,12 +2128,32 @@ class Core{
 
             if(count($carro) > 0){
                 if($sql_carro == "" || $this->permiso_modificar($sql_tipo, $sql_fecha, $mod_despacho, $save_web, $save_pos, $web_min, $pos_min)){
-                    if($sqlutp = $this->con->prepare("UPDATE pedidos_aux SET carro='".json_encode($carro)."', promos='".json_encode($promos)."', mod_despacho='1', total='".$total."' WHERE id_ped=? AND id_loc=? AND id_gir=?")){
-                        if($sqlutp->bind_param("iii", $id_ped, $id_loc, $id_gir)){
+                    if($sqlutp = $this->con->prepare("UPDATE pedidos_aux SET costo=?, pre_teriyaki=?, pre_soya=?, pre_palitos=?, pre_wasabi=?, pre_gengibre=?, estado=?, despacho=?, carro=?, promos=?, mod_despacho='1', total=? WHERE id_ped=? AND id_loc=? AND id_gir=? AND eliminado=?")){
+                        if($sqlutp->bind_param("iiiiiiiissiiiii", $costo, $pre_teriyaki, $pre_soya, $pre_palitos, $pre_wasabi, $pre_gengibre, $estado, $despacho, json_encode($carro), json_encode($promos), $total, $id_ped, $id_loc, $id_gir, $this->eliminado)){
                             if($sqlutp->execute()){
-                                $info['carro'] = $carro;
-                                if($enviar_cocina == 1){
 
+                                // ENVIAR ARCHIVO //
+
+                                
+
+                                if($total != $sql_total){
+                                    $aux['accion'] = 2;
+                                    $aux['total'] = $total;
+                                    $send['estado'] = json_encode($aux);
+                                    $send['pedido_code'] = $code;
+                                    $ch = curl_init();
+                                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/cambiar_estado');
+                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                    if(!curl_errno($ch)){
+                                        $resp_node = json_decode(curl_exec($ch));
+                                        $info['resp_node1'] = $resp_node;
+                                    }else{
+                                        $this->registrar(17, $id_loc, $id_gir, 'Error Curl cambiar_estado()');
+                                    }
+                                }
+
+                                if($enviar_cocina == 1){
                                     $send['accion'] = 'enviar_cocina_local';
                                     $send['hash'] = 'hash';
                                     $send['local_code'] = $local_code;
@@ -2137,38 +2161,25 @@ class Core{
                                     $send['num_ped'] = $num_ped;
                                     $send['carro'] = $carro;
                                     $send['promos'] = $promos;
-
                                     $ch = curl_init();
                                     curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/enviar_cocina');
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                                     if(!curl_errno($ch)){
                                         $resp_node = json_decode(curl_exec($ch));
-                                        $info['resp_node'] = $resp_node;
+                                        $info['resp_node2'] = $resp_node;
                                         curl_close($ch);
                                     }
-
                                 }
+
                                 $sqlutp->close();
                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #11 '.htmlspecialchars($sqlutp->error)); }
                         }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #11 '.htmlspecialchars($sqlutp->error)); }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #11 '.htmlspecialchars($this->con->error)); }
                 }else{
-                    $cant_1 = count(json_decode($sql_carro));
-                    $cant_2 = count($carro);
-                    if($cant_2 != $cant_1){
-                        $info['alert'] = 'no se efectuaron los cambios';
-                    }
+                    $info['alert'] = 'no se efectuaron los cambios';
                 }
             }
-
-            if($sqluep = $this->con->prepare("UPDATE pedidos_aux SET despacho='".$despacho."', estado='".$estado."', pre_gengibre='".$pre_gengibre."', pre_wasabi='".$pre_wasabi."', pre_palitos='".$pre_palitos."', pre_soya='".$pre_soya."', pre_teriyaki='".$pre_teriyaki."', costo='".$costo."' WHERE id_ped=? AND id_loc=? AND id_gir=?")){
-                if($sqluep->bind_param("iii", $id_ped, $id_loc, $id_gir)){
-                    if($sqluep->execute()){
-                        $sqluep->close();
-                    }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #12 '.htmlspecialchars($sqluep->error)); }
-                }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #12 '.htmlspecialchars($sqluep->error)); }
-            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #12 '.htmlspecialchars($this->con->error)); }
         
         }
         return $info;
