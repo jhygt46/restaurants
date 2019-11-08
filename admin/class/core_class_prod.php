@@ -1170,6 +1170,7 @@ class Core{
             $info['sonido'] = $verificar['sonido'];
             $info['t_retiro'] = $verificar['t_retiro'];
             $info['t_despacho'] = $verificar['t_despacho'];
+            $info['pos'] = $verificar['pos'];
 
             if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns FROM giros t1 WHERE t1.id_gir=? AND t1.eliminado=?")){
                 if($sql->bind_param("ii", $id_gir, $this->eliminado)){
@@ -1350,7 +1351,7 @@ class Core{
         $local_code = $_COOKIE["local_code"];
         $return['op'] = false;
         
-        if($sql = $this->con->prepare("SELECT t2.sonido, t2.t_retiro, t2.t_despacho, t2.lat, t2.lng, t2.id_gir, t1.id_loc, t1.del_pdir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t2.sonido, t2.t_retiro, t2.t_despacho, t2.lat, t2.lng, t2.id_gir, t1.id_loc, t1.del_pdir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.pos FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
             if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
@@ -1371,6 +1372,7 @@ class Core{
                         $return['sonido'] = $result['sonido'];
                         $return['t_retiro'] = $result['t_retiro'];
                         $return['t_despacho'] = $result['t_despacho'];
+                        $return['pos'] = $result['pos'];
                     }
                     $sql->free_result();
                     $sql->close();
@@ -1916,7 +1918,7 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($this->con->error)); }
         }
         return $info;
-        
+
         /*
         $info['op'] = 2;
         $verificar = $this->verificar();

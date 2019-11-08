@@ -234,9 +234,9 @@ function html_home_pedidos(index){
         var btn_open = create_element_class('btn_open');
     }else{
         var btn_open = create_element_class('btn_open select');
-        btn_open.onclick = function(){ guardar_pedido(index) };
     }
     
+    btn_open.onclick = function(){ guardar_pedido(index) };
     var flecha_01 = create_element_class('flecha_01');
     var flecha_02 = create_element_class('flecha_02');
 
@@ -1642,29 +1642,29 @@ function guardar_pedido(index){
             if(pedidos[index].id_ped == 0){
                 pedidos[index].id_ped = info.id_ped;
                 pedidos[index].num_ped = info.num_ped;
-                pedidos[index].pedido_code = info.pedido_code;
             }
             pedidos[index].carro = info.carro;
             pedidos[index].alert = info.alert;
-            pedidos[index].cambios = 0;
             pedidos[index].total = get_precio_carro(pedido);
-            listar_pedidos(pedidos);
             
-            if(open){
+            if(open_comanda){
                 if(tipo_comanda == 0 || tipo_comanda == 1){
                     if(proceso_categorias(pedido)){
                         if(proceso_preguntas(pedido)){
-                            window.open(get_url(pedido), 'Imprimir Ctrl+P').focus();
+                            window.open(get_url(pedido, pedidos[index].cambios), 'Imprimir Ctrl+P').focus();
                         }
                     }
                 }
             }
+
+            pedidos[index].cambios = 0;
+            listar_pedidos(pedidos);
             
         }, error: function(){}
     });
     
 }
-function get_url(pedido){
+function get_url(pedido, cambio){
 
     var code = pedido.pedido_code;
     if(dns == 0){

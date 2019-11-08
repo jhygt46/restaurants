@@ -79,6 +79,7 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         <select id="pos">
                             <option value="0" <?php if($that["pos"] == 0){ ?>selected<?php } ?>>Ver Pedido</option>
                             <option value="1" <?php if($that["pos"] == 1){ ?>selected<?php } ?>>Imprimir y Cerrar Pedido</option>
+                            <option value="2" <?php if($that["pos"] == 2){ ?>selected<?php } ?>>Nada</option>
                         </select>
                     </label>
                     <label class="clearfix">
