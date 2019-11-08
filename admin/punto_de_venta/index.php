@@ -41,9 +41,7 @@ if($_GET["mode"] == "debug"){
             var local_lat = '<?php echo $info['lat']; ?>';
             var local_lng = '<?php echo $info['lng']; ?>';
             var ssl = '<?php echo $info['ssl']; ?>';
-            <?php if($info['dns'] == 0){ ?>
             var ip = '<?php echo $info['ip']; ?>';
-            <?php } ?>
             var dns = '<?php echo $info['dns']; ?>';
             var dominio = '<?php echo $info['dominio']; ?>';
             var tiempos = { retiro: <?php echo $info['t_retiro']; ?>, despacho: <?php echo $info['t_despacho']; ?> };
