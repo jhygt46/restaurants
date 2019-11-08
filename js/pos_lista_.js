@@ -1628,59 +1628,65 @@ function add_pedido(obj){
     
 }
 function guardar_pedido(index){
-     
+
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
-
-    $.ajax({
-        url: "/ajax/",
-        type: "POST",
-        data: send,
-        success: function(info){
-
-            if(pedidos[index].id_ped == 0){
-                pedidos[index].id_ped = info.id_ped;
-                pedidos[index].num_ped = info.num_ped;
-            }
-            pedidos[index].carro = info.carro;
-            pedidos[index].alert = info.alert;
-            pedidos[index].total = get_precio_carro(pedido);
-            
-            if(open_comanda){
-                if(tipo_comanda == 0 || tipo_comanda == 1){
-                    if(proceso_categorias(pedido)){
-                        if(proceso_preguntas(pedido)){
-                            window.open(get_url(pedido, pedidos[index].cambios), 'Imprimir Ctrl+P').focus();
-                        }
+    if(proceso_categorias(pedido)){
+        if(proceso_preguntas(pedido)){
+            var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
+            $.ajax({
+                url: "/ajax/",
+                type: "POST",
+                data: send,
+                success: function(info){
+                    if(pedidos[index].id_ped == 0){
+                        pedidos[index].id_ped = info.id_ped;
+                        pedidos[index].num_ped = info.num_ped;
+                        pedidos[index].pedido_code = info.pedido_code;
                     }
-                }
-            }
+                    pedidos[index].alert = info.alert;
+                    pedidos[index].total = get_precio_carro(pedido);
+                    if(tipo_comanda == 0 || tipo_comanda == 1){
+                        window.open(get_url(pedido, pedidos[index].cambios), 'Imprimir Ctrl+P').focus();
+                    }
+                    pedidos[index].cambios = 0;
+                    listar_pedidos(pedidos);
+                }, error: function(){}
+            });
+        }
+    }
 
-            pedidos[index].cambios = 0;
-            listar_pedidos(pedidos);
-            
-        }, error: function(){}
-    });
-    
 }
-function get_url(pedido, cambio){
+function get_url(pedido, cambios){
 
-    var code = pedido.pedido_code;
     if(dns == 0){
-        var url = 'http://35.192.157.227/detalle.php?url='+dominio+'&code='+code+'&tc='+tipo_comanda;
+        var url = 'http://'+ip+'/';
     }
     if(dns == 1){
         if(ssl == 0){
-            var url = 'http://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+            var url = 'http://'+dominio+'/';
         }
         if(ssl == 1){
-            var url = 'https://'+dominio+'/detalle.php?code='+code+'&tc='+tipo_comanda;
+            var url = 'https://'+dominio+'/';
         }
     }
-    if(pedido.cambios && pedido.cambios == 1){
-        url = url+'&ft=1';
+    if(cambios == 0){
+        if(tipo_comanda == 0){
+            url += 'detalle/';
+        }
+        if(tipo_comanda == 1){
+            url += 'detalle1/';
+        }
     }
+    if(cambios == 1){
+        if(tipo_comanda == 0){
+            url += 'detalle_n/';
+        }
+        if(tipo_comanda == 1){
+            url += 'detalle_n1/';
+        }
+    }
+    url += pedido.pedido_code;
     return url;
 
 }

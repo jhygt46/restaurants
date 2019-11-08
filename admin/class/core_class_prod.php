@@ -1172,7 +1172,7 @@ class Core{
             $info['t_despacho'] = $verificar['t_despacho'];
             $info['pos'] = $verificar['pos'];
 
-            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns FROM giros t1 WHERE t1.id_gir=? AND t1.eliminado=?")){
+            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns, t2.ip FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.ser")){
                 if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
@@ -1182,6 +1182,7 @@ class Core{
                             $info['dominio'] = $result['dominio'];
                             $info['ssl'] = $result['ssl'];
                             $info['dns'] = $result['dns'];
+                            $info['ip'] = $result['ip'];
                         }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
@@ -1232,7 +1233,7 @@ class Core{
         }
         return $info;
     }
-    function is_in_polygon($vertices_x, $vertices_y, $longitude_x, $latitude_y){
+    public function is_in_polygon($vertices_x, $vertices_y, $longitude_x, $latitude_y){
         $points_polygon = count($vertices_x) - 1;
         $i = $j = $c = $point = 0;
         for($i=0, $j=$points_polygon ; $i<$points_polygon; $j=$i++) {
@@ -1682,7 +1683,7 @@ class Core{
         }
         return $total;
     }
-    function get_polygons($id_gir){
+    public function get_polygons($id_gir){
         if($sql = $this->con->prepare("SELECT t3.nombre, t3.poligono, t3.precio, t3.id_loc FROM giros t1, locales t2, locales_tramos t3 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t2.id_loc=t3.id_loc AND t2.eliminado=? AND t3.eliminado=?")){
             if($sql->bind_param("iii", $id_gir, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
@@ -2048,6 +2049,7 @@ class Core{
                                                     $id_ped = $this->con->insert_id;
                                                     $info['id_ped'] = $id_ped;
                                                     $info['num_ped'] = $num_ped;
+                                                    $info['pedido_code'] = $code;
                                                     $sqlaux->close();
                                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #1 '.htmlspecialchars($sqlaux->error)); }
                                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #1 '.htmlspecialchars($sqlaux->error)); }
