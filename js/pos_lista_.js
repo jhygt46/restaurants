@@ -1647,7 +1647,7 @@ function guardar_pedido(index){
                     pedidos[index].alert = info.alert;
                     pedidos[index].total = get_precio_carro(pedido);
                     if(tipo_comanda == 0 || tipo_comanda == 1){
-                        window.open(get_url(pedido, pedidos[index].cambios), 'Imprimir Ctrl+P').focus();
+                        window.open(get_url(pedido, pedidos[index].cambios), '_blank').focus();
                     }
                     pedidos[index].cambios = 0;
                     listar_pedidos(pedidos);
