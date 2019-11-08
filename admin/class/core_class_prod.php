@@ -1172,7 +1172,7 @@ class Core{
             $info['t_despacho'] = $verificar['t_despacho'];
             $info['pos'] = $verificar['pos'];
 
-            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns, t2.ip FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.ser")){
+            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns, t2.ip FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
                 if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
