@@ -1687,6 +1687,7 @@ function get_url(pedido, cambios){
         }
     }
     url += pedido.pedido_code;
+    console.log(url);
     return url;
 
 }
