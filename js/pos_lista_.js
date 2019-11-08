@@ -1633,26 +1633,31 @@ function guardar_pedido(index){
     var pedido = pedidos[index];
     if(proceso_categorias(pedido)){
         if(proceso_preguntas(pedido)){
-            var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
-            $.ajax({
-                url: "/ajax/",
-                type: "POST",
-                data: send,
-                success: function(info){
-                    if(pedidos[index].id_ped == 0){
-                        pedidos[index].id_ped = info.id_ped;
-                        pedidos[index].num_ped = info.num_ped;
-                        pedidos[index].pedido_code = info.pedido_code;
-                    }
-                    pedidos[index].alert = info.alert;
-                    pedidos[index].total = get_precio_carro(pedido);
-                    if(tipo_comanda == 0 || tipo_comanda == 1){
-                        window.open(get_url(pedido, pedidos[index].cambios), '_blank').focus();
-                    }
-                    pedidos[index].cambios = 0;
-                    listar_pedidos(pedidos);
-                }, error: function(){}
-            });
+            if(pedidos[index].cambios == 1){
+                var send = { pedido: JSON.stringify(pedido), accion: 'set_web_pedido' };
+                $.ajax({
+                    url: "/ajax/",
+                    type: "POST",
+                    data: send,
+                    success: function(info){
+                        if(pedidos[index].id_ped == 0){
+                            pedidos[index].id_ped = info.id_ped;
+                            pedidos[index].num_ped = info.num_ped;
+                            pedidos[index].pedido_code = info.pedido_code;
+                        }
+                        pedidos[index].alert = info.alert;
+                        pedidos[index].total = get_precio_carro(pedido);
+                        if(tipo_comanda == 0 || tipo_comanda == 1){
+                            window.open(get_url(pedido, 1), '_blank').focus();
+                        }
+                        pedidos[index].cambios = 0;
+                        listar_pedidos(pedidos);
+                    }, error: function(){}
+                });
+            }
+            if(pedidos[index].cambios == 0){
+                window.open(get_url(pedido, 0), '_blank').focus();
+            }
         }
     }
 
