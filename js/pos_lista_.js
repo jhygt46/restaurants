@@ -324,7 +324,7 @@ function enviar_cambio_de_hora(index){
             url: "/ajax/",
             type: "POST",
             data: send,
-            success: function(data){ console.log(data); },
+            success: function(){},
             error: function(){}
         });
 
@@ -352,7 +352,7 @@ function enviar_cambio_de_estado(index, aux){
             url: "/ajax/",
             type: "POST",
             data: send,
-            success: function(data){ console.log(data); },
+            success: function(){},
             error: function(){}
         });
 
@@ -1692,7 +1692,6 @@ function get_url(pedido, cambios){
         }
     }
     url += pedido.pedido_code;
-    console.log(url);
     return url;
 
 }

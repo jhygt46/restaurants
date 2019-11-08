@@ -2166,22 +2166,19 @@ class Core{
                                     $file['pedido']['despacho'] = $despacho;
                                     $file['pedido']['id_loc'] = $id_loc;
 
-                                    $file['pedido']['nombre'] = "";
-                                    $file['pedido']['telefono'] = "";
-                                    
-                                    $file['pedido']['calle'] = "";
-                                    $file['pedido']['num'] = "";
-                                    $file['pedido']['depto'] = "";
-                                    $file['pedido']['comuna'] = "";
-                                    $file['pedido']['direccion'] = "";
-                                    $file['pedido']['lat'] = "";
-                                    $file['pedido']['lng'] = "";
+                                    $file['pedido']['nombre'] = $nombre;
+                                    $file['pedido']['telefono'] = $telefono;
+                                    $file['pedido']['calle'] = $calle;
+                                    $file['pedido']['num'] = $num;
+                                    $file['pedido']['depto'] = $depto;
+                                    $file['pedido']['comuna'] = $comuna;
+                                    $file['pedido']['direccion'] = $direccion;
 
-                                    $file['pedido']['pre_gengibre'] = "";
-                                    $file['pedido']['pre_wasabi'] = "";
-                                    $file['pedido']['pre_teriyaki'] = "";
-                                    $file['pedido']['pre_soya'] = "";
-                                    $file['pedido']['pre_palitos'] = "";
+                                    $file['pedido']['pre_gengibre'] = $pre_gengibre;
+                                    $file['pedido']['pre_wasabi'] = $pre_wasabi;
+                                    $file['pedido']['pre_teriyaki'] = $pre_teriyaki;
+                                    $file['pedido']['pre_soya'] = $pre_soya;
+                                    $file['pedido']['pre_palitos'] = $pre_palitos;
                                     $file['pedido']['comentarios'] = "";
 
                                     $file['pedido']['costo'] = $costo;
