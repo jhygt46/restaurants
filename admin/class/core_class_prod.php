@@ -1995,6 +1995,7 @@ class Core{
     public function set_web_pedido(){
 
         $verificar = $this->verificar_cookie();
+        $info['op'] = 1;
         if($verificar['op']){
 
             $pedido = json_decode($_POST['pedido']);
