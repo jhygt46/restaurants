@@ -1203,6 +1203,7 @@ function ver_detalle_carro(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     seleccionado = index;
+    listar_pedidos();
     
     if(proceso_categorias(pedido)){
         
