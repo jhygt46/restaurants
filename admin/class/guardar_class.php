@@ -1514,7 +1514,7 @@ class Guardar{
             if($sql = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
-                        $res = $sqlde->get_result();
+                        $res = $sql->get_result();
                         if($res->{"num_rows"} == 1){
                             if($tipo == 0){
                                 $nombre = $_POST['nombre'];
