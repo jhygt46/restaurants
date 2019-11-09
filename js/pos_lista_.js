@@ -1645,6 +1645,8 @@ function guardar_pedido(index){
                     type: "POST",
                     data: send,
                     success: function(info){
+                        console.log("info");
+                        console.log(info);
                         if(pedidos[index].id_ped == 0){
                             pedidos[index].id_ped = info.id_ped;
                             pedidos[index].num_ped = info.num_ped;
