@@ -1635,7 +1635,7 @@ function guardar_pedido(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
     seleccionado = index;
-    
+
     if(proceso_categorias(pedido)){
         if(proceso_preguntas(pedido)){
             if(pedidos[index].cambios == 1){
@@ -1656,6 +1656,7 @@ function guardar_pedido(index){
                             window.open(get_url(pedido, 1), '_blank').focus();
                         }
                         pedidos[index].cambios = 0;
+                        listar_pedidos(pedidos);
                     }, error: function(){}
                 });
             }
@@ -1664,7 +1665,7 @@ function guardar_pedido(index){
             }
         }
     }
-    listar_pedidos(pedidos);
+    
 
 }
 function get_url(pedido, cambios){
