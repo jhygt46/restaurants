@@ -1199,12 +1199,10 @@ function promo_restantes(producto, j, tiene_pregunta){
     
 }
 function ver_detalle_carro(index){
-    
-    console.log("ver detalle carro");
-    console.log(index);
 
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
+    seleccionado = index;
     
     if(proceso_categorias(pedido)){
         
