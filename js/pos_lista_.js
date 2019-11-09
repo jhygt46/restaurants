@@ -840,6 +840,8 @@ function ver_pedido(index){
 
     pop_up('pop_pedido');
     $('#l_direccion').hide();
+    seleccionado = index;
+    listar_pedidos();
 
     if(index == -1){
 
