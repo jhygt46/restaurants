@@ -1200,9 +1200,11 @@ function promo_restantes(producto, j, tiene_pregunta){
 }
 function ver_detalle_carro(index){
     
+    console.log("ver detalle carro");
+    console.log(index);
+
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-    
     
     if(proceso_categorias(pedido)){
         
@@ -1460,6 +1462,7 @@ function promo_carros(producto, j){
     
     var Acciones = create_element_class('promo_detalle_acciones clearfix');
     var carro = pedidos[seleccionado].carro[j];
+    console.log(carro);
 
     if(carro.preguntas){
         

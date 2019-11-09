@@ -2016,6 +2016,7 @@ class Core{
                 $num = $pedido->{'num'};
                 $depto = $pedido->{'depto'};
                 $comuna = $pedido->{'comuna'};
+                $comentarios = $pedido->{'comentarios'};
                 $lat = $pedido->{'lat'};
                 $lng = $pedido->{'lng'};
                 $pre_gengibre = intval($pedido->{'pre_gengibre'});
@@ -2070,7 +2071,7 @@ class Core{
                 }
 
                 // DATA DEL PEDIDO//
-                if($sqlpaux = $this->con->prepare("SELECT id_puser, id_pdir, carro, promos, num_ped, mod_despacho, tipo, fecha, total, code FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND id_gir=? AND eliminado=?")){
+                if($sqlpaux = $this->con->prepare("SELECT id_puser, id_pdir, carro, promos, num_ped, mod_despacho, tipo, fecha, costo, total, code FROM pedidos_aux WHERE id_ped=? AND id_loc=? AND id_gir=? AND eliminado=?")){
                     if($sqlpaux->bind_param("iiii", $id_ped, $id_loc, $id_gir, $this->eliminado)){
                         if($sqlpaux->execute()){
                             $resultpaux = $sqlpaux->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -2082,42 +2083,60 @@ class Core{
                             $mod_despacho = $resultpaux['mod_despacho'];
                             $sql_tipo = $resultpaux['tipo'];
                             $sql_total = $resultpaux['total'];
+                            $sql_costo = $resultpaux['costo'];
                             $code = $resultpaux['code'];
                             $sql_fecha = strtotime($resultpaux['fecha']);
-                            $info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
+                            //$info['carro'] = ($sql_carro != "") ? json_decode($sql_carro) : [] ;
                         }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($sqlpaux->error)); }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($sqlpaux->error)); }
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #4 '.htmlspecialchars($this->con->error)); }
 
                 // EN CASO DE USUARIO NUEVO //
                 if($id_puser == 0 && $sql_id_puser == 0){
-                    if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
-                        if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES (?, ?, ?)")){
-                            if($sqlipu->bind_param("ssi", $nombre, $telefono, $id_gir)){
-                                if($sqlipu->execute()){
-                                    $id_puser = $this->con->insert_id;
-                                    if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
-                                        if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
-                                            if($sqlupa->execute()){
-                                                $sqlupa->close();
+                    if(strlen($nombre) >= 2){
+                        if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
+                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (nombre, telefono, id_gir) VALUES (?, ?, ?)")){
+                                if($sqlipu->bind_param("ssi", $nombre, $telefono, $id_gir)){
+                                    if($sqlipu->execute()){
+                                        $id_puser = $this->con->insert_id;
+                                        if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=? AND id_gir=?")){
+                                            if($sqlupa->bind_param("iiii", $id_puser, $id_ped, $id_loc, $id_gir)){
+                                                if($sqlupa->execute()){
+                                                    $sqlupa->close();
+                                                }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #5 '.htmlspecialchars($sqlupa->error)); }
                                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #5 '.htmlspecialchars($sqlupa->error)); }
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #5 '.htmlspecialchars($sqlupa->error)); }
-                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #5 '.htmlspecialchars($this->con->error)); }
-                                    $sqlipu->close();
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #5 '.htmlspecialchars($this->con->error)); }
+                                        $sqlipu->close();
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6 '.htmlspecialchars($sqlipu->error)); }
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6 '.htmlspecialchars($sqlipu->error)); }
-                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6 '.htmlspecialchars($sqlipu->error)); }
-                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6 '.htmlspecialchars($this->con->error)); }
-                    }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6 '.htmlspecialchars($this->con->error)); }
+                        }else{ /* TELEFONO INVALIDO */ }
+                    }else{ /* NOMBRE INVALIDO */ }
                 }
 
                 // EN CASO DE CAMBIAR USUARIO //
                 if($id_puser > 0 && $sql_id_puser != $id_puser){
-                    if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=?")){
-                        if($sqlupa->bind_param("iii", $id_puser, $id_ped, $id_loc)){
-                            if($sqlupa->execute()){
-                                $sqlupa->close();
-                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #7 '.htmlspecialchars($sqlupa->error)); }
-                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #7 '.htmlspecialchars($sqlupa->error)); }
+                    if($sqlspu = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=? AND id_gir=?")){
+                        if($sqlspu->bind_param("ii", $id_puser, $id_gir)){
+                            if($sqlspu->execute()){
+                                $resspu = $sqlspu->get_result();
+                                if($resspu->{'num_rows'} == 1){
+                                    $resultspu = $resspu->fetch_all(MYSQLI_ASSOC)[0];
+                                    $nombre = $resultspu['nombre'];
+                                    $telefono = $resultspu['telefono'];
+                                    if($sqlupa = $this->con->prepare("UPDATE pedidos_aux SET id_puser=? WHERE id_ped=? AND id_loc=? AND id_gir=?")){
+                                        if($sqlupa->bind_param("iiii", $id_puser, $id_ped, $id_loc, $id_gir)){
+                                            if($sqlupa->execute()){
+                                                $sqlupa->close();
+                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6.5 '.htmlspecialchars($sqlupa->error)); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6.5 '.htmlspecialchars($sqlupa->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #6.5 '.htmlspecialchars($this->con->error)); }
+                                }
+                                if($resspu->{'num_rows'} == 0){
+                                    // TRATANDO DE GUARDAR UNA PERSONA QUE NO ES DEL GIRO
+                                }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #7 '.htmlspecialchars($sqlspu->error)); }
+                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #7 '.htmlspecialchars($sqlspu->error)); }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #7 '.htmlspecialchars($this->con->error)); }
                 }
 
@@ -2139,17 +2158,35 @@ class Core{
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9 '.htmlspecialchars($sqlipd->error)); }
                             }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9 '.htmlspecialchars($sqlipd->error)); }
                         }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9 '.htmlspecialchars($this->con->error)); }
-                    }
+                    }else{ /* NO HAY DIRECCION */ }
                 }
 
                 // EN CASO DE CAMBIAR DIRECCION //
                 if($id_pdir > 0 && $sql_id_pdir != $id_pdir){
-                    if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=?")){
-                        if($sqlupd->bind_param("iii", $id_pdir, $id_ped, $id_loc)){
-                            if($sqlupd->execute()){
-                                $sqlupd->close();
-                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #10 '.htmlspecialchars($sqlupd->error)); }
-                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #10 '.htmlspecialchars($sqlupd->error)); }
+                    if($sqlspp = $this->con->prepare("SELECT t1.direccion, t1.calle, t1.num, t1.depto, t1.comuna FROM pedidos_direccion t1, pedidos_usuarios t2 WHERE t1.id_pdir=? AND t1.id_puser=t2.id_puser AND t2.id_gir=?")){
+                        if($sqlspp->bind_param("iii", $id_pdir, $id_gir)){
+                            if($sqlspp->execute()){
+                                $resspp = $sqlspp->get_result();
+                                if($resspp->{'num_rows'} == 1){
+                                    $resultspp = $resspp->fetch_all(MYSQLI_ASSOC)[0];
+                                    $direccion = $resultspp["direccion"];
+                                    $calle = $resultspp["calle"];
+                                    $num = $resultspp["num"];
+                                    $depto = $resultspp["depto"];
+                                    $comuna = $resultspp["comuna"];
+                                    if($sqlupd = $this->con->prepare("UPDATE pedidos_aux SET id_pdir=? WHERE id_ped=? AND id_loc=? AND id_gir=?")){
+                                        if($sqlupd->bind_param("iiii", $id_pdir, $id_ped, $id_loc, $id_gir)){
+                                            if($sqlupd->execute()){
+                                                $sqlupd->close();
+                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9.5 '.htmlspecialchars($sqlupd->error)); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9.5 '.htmlspecialchars($sqlupd->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #9.5 '.htmlspecialchars($this->con->error)); }
+                                }
+                                if($resspp->{'num_rows'} == 0){
+                                    // TRATANDO DE GUARDAR UNA DIRECCION QUE NO ES DE LA PERSONA
+                                }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #10 '.htmlspecialchars($sqlspp->error)); }
+                        }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #10 '.htmlspecialchars($sqlspp->error)); }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'set_web_pedido() #10 '.htmlspecialchars($this->con->error)); }
                 }
 
@@ -2179,7 +2216,7 @@ class Core{
                                     $file['pedido']['pre_teriyaki'] = $pre_teriyaki;
                                     $file['pedido']['pre_soya'] = $pre_soya;
                                     $file['pedido']['pre_palitos'] = $pre_palitos;
-                                    $file['pedido']['comentarios'] = "";
+                                    $file['pedido']['comentarios'] = $comentarios;
 
                                     $file['pedido']['costo'] = $costo;
                                     $file['pedido']['total'] = $total;
