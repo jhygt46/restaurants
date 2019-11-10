@@ -820,7 +820,6 @@ class Core{
                         $info['path'] = ($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") ? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"] ;
                         $info['pedido_wasabi'] = $result['pedido_wasabi'];
                         $info['pedido_gengibre'] = $result['pedido_gengibre'];
-                        $info['pedido_embarazadas'] = $result['pedido_embarazadas'];
                         $info['pedido_palitos'] = $result['pedido_palitos'];
                         $info['pedido_comentarios'] = $result['pedido_comentarios'];
                         $info['pedido_soya'] = $result['pedido_soya'];
@@ -1172,7 +1171,7 @@ class Core{
             $info['t_despacho'] = $verificar['t_despacho'];
             $info['pos'] = $verificar['pos'];
 
-            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns, t2.ip FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
+            if($sql = $this->con->prepare("SELECT t1.estado, t1.dominio, t1.ssl, t1.dns, t2.ip, t1.pedido_wasabi, t1.pedido_gengibre, t1.pedido_palitos, t1.pedido_soya, t1.pedido_teriyaki, t1.pedido_comentarios FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
                 if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $res = $sql->get_result();
@@ -1183,6 +1182,12 @@ class Core{
                             $info['ssl'] = $result['ssl'];
                             $info['dns'] = $result['dns'];
                             $info['ip'] = $result['ip'];
+                            $info['pedido_wasabi'] = $result['pedido_wasabi'];
+                            $info['pedido_gengibre'] = $result['pedido_gengibre'];
+                            $info['pedido_palitos'] = $result['pedido_palitos'];
+                            $info['pedido_soya'] = $result['pedido_soya'];
+                            $info['pedido_teriyaki'] = $result['pedido_teriyaki'];
+                            $info['pedido_comentarios'] = $result['pedido_comentarios'];
                         }
                     }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($sql->error)); }
