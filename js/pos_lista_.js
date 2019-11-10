@@ -5,10 +5,14 @@ $(document).ready(function(){
     gmap_input();
     resize();
     
-    var h1 = $('.cont_ped_input1').height();
-    var h2 = $('.cont_ped_input2').height();
-    console.log(h1 + "/" + h2);
-    
+    var h1 = $('.cont_ped_input1').outerHeight();
+    var h2 = $('.cont_ped_input2').outerHeight();
+    if(h1 <= h2){
+        $('.cont_ped_input1').height(h2);
+    }else{
+        $('.cont_ped_input2').height(h1);
+    }
+
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
