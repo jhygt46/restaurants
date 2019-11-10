@@ -954,12 +954,14 @@ html {
     cursor: pointer;
 }
 .cont_check_coment{
-    display: block;
+    display: table;
+    border-collapse: separate;
     .list_checks{
-        width: 49%;
-        padding-right: 1%;
-        float: left;
+        width: 50%;
+        display: table-cell;
         background: #009;
+        position:relative;
+        
         .pregunta{
             span{
                 float: left;
@@ -970,12 +972,14 @@ html {
                 width: 10%;
             }
         }
+        
     }
     .list_coment{
-        width: 49%;
-        padding-left: 1%;
-        float: left;
+        width: 50%;
+        display: table-cell;
         background: #909;
+        position:relative;
+
         span{
             display: block;
         }
@@ -983,5 +987,6 @@ html {
             display: block;
             height: 100%;
         }
+
     }
 }

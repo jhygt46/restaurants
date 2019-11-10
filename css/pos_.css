@@ -931,13 +931,14 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
 }
 
 .cont_check_coment {
-  display: block;
+  display: table;
+  border-collapse: separate;
 }
 .cont_check_coment .list_checks {
-  width: 49%;
-  padding-right: 1%;
-  float: left;
+  width: 50%;
+  display: table-cell;
   background: #009;
+  position: relative;
 }
 .cont_check_coment .list_checks .pregunta span {
   float: left;
@@ -948,10 +949,10 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   width: 10%;
 }
 .cont_check_coment .list_coment {
-  width: 49%;
-  padding-left: 1%;
-  float: left;
+  width: 50%;
+  display: table-cell;
   background: #909;
+  position: relative;
 }
 .cont_check_coment .list_coment span {
   display: block;
