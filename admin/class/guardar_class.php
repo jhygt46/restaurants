@@ -1505,6 +1505,7 @@ class Guardar{
         return $info;
     }
     private function crear_repartidor(){
+        
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){

@@ -126,40 +126,41 @@ if($_GET["mode"] == "debug"){
                                             <div class="ttl_dir">Direcciones:</div>
                                             <div class="t_direcciones"></div>
                                         </div>
-                                        <div class="cont_ped_input">
-                                            <div class="pregunta clearfix">
-                                                <span>Wasabi: </span>
-                                                <input type="checkbox" id="pre_wasabi" class="valign">
+                                        <div class="cont_check_coment clearfix">
+                                            <div class="cont_ped_input" style="width: 50%; float: left">
+                                                <div class="pregunta clearfix">
+                                                    <span>Wasabi: </span>
+                                                    <input type="checkbox" id="pre_wasabi" class="valign">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Gengibre: </span>
+                                                    <input type="checkbox" id="pre_gengibre" class="valign">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Soya: </span>
+                                                    <input type="checkbox" id="pre_soya" class="valign">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Tariyaki: </span>
+                                                    <input type="checkbox" id="pre_teriyaki" class="valign">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Palitos: </span>
+                                                    <select id="pre_palitos" class="valign">
+                                                        <?php for($i=0; $i<10; $i++){ ?>
+                                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="pregunta clearfix">
-                                                <span>Gengibre: </span>
-                                                <input type="checkbox" id="pre_gengibre" class="valign">
-                                            </div>
-                                            <div class="pregunta clearfix">
-                                                <span>Soya: </span>
-                                                <input type="checkbox" id="pre_soya" class="valign">
-                                            </div>
-                                            <div class="pregunta clearfix">
-                                                <span>Tariyaki: </span>
-                                                <input type="checkbox" id="pre_teriyaki" class="valign">
-                                            </div>
-                                            <div class="pregunta clearfix">
-                                                <span>Palitos: </span>
-                                                <select id="pre_palitos" class="valign">
-                                                    <?php for($i=0; $i<10; $i++){ ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="cont_ped_input">
-                                            <div class="comentario">
-                                                <span>Comentarios: </span>
-                                                <Textarea id="comentarios"></Textarea>
+                                            <div class="cont_ped_input" style="width: 50%; float: left">
+                                                <div class="comentario">
+                                                    <span>Comentarios: </span>
+                                                    <Textarea id="comentarios"></Textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="n_submit">
