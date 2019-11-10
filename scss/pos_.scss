@@ -953,3 +953,18 @@ html {
 .material-icons{
     cursor: pointer;
 }
+.cont_check_coment{
+    display: block;
+    .list_checks{
+        width: 49%;
+        padding-right: 1%;
+        float: left;
+        background: #009;
+    }
+    .list_coment{
+        width: 49%;
+        padding-left: 1%;
+        float: left;
+        background: #909;
+    }
+}

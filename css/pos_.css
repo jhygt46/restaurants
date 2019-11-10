@@ -930,4 +930,20 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   cursor: pointer;
 }
 
+.cont_check_coment {
+  display: block;
+}
+.cont_check_coment .list_checks {
+  width: 49%;
+  padding-right: 1%;
+  float: left;
+  background: #009;
+}
+.cont_check_coment .list_coment {
+  width: 49%;
+  padding-left: 1%;
+  float: left;
+  background: #909;
+}
+
 /*# sourceMappingURL=pos_.css.map */

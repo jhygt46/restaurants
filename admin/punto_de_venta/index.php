@@ -127,7 +127,12 @@ if($_GET["mode"] == "debug"){
                                             <div class="t_direcciones"></div>
                                         </div>
                                         <div class="cont_check_coment clearfix">
-                                            <div class="cont_ped_input" style="width: 50%; float: left">
+                                            <div class="list_checks"></div>
+                                            <div class="list_coment"></div>
+                                        </div>
+                                        <!--
+                                        <div class="cont_check_coment clearfix">
+                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-right: 1%">
                                                 <div class="pregunta clearfix">
                                                     <span>Wasabi: </span>
                                                     <input type="checkbox" id="pre_wasabi" class="valign">
@@ -153,13 +158,14 @@ if($_GET["mode"] == "debug"){
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="cont_ped_input" style="width: 50%; float: left">
+                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-left: 1%">
                                                 <div class="comentario">
                                                     <span>Comentarios: </span>
                                                     <Textarea id="comentarios"></Textarea>
                                                 </div>
                                             </div>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>
