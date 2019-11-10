@@ -160,7 +160,6 @@ if($_GET["mode"] == "debug"){
                                                 </div>
                                             </div>
                                         </div>
-                                        -->
                                     </div>
                                 </div>
                             </div>
