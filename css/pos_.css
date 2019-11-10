@@ -939,11 +939,26 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .n_submit .cont_subm
   float: left;
   background: #009;
 }
+.cont_check_coment .list_checks .pregunta span {
+  float: left;
+  width: 90%;
+}
+.cont_check_coment .list_checks .pregunta input {
+  float: left;
+  width: 10%;
+}
 .cont_check_coment .list_coment {
   width: 49%;
   padding-left: 1%;
   float: left;
   background: #909;
+}
+.cont_check_coment .list_coment span {
+  display: block;
+}
+.cont_check_coment .list_coment textarea {
+  display: block;
+  height: 100%;
 }
 
 /*# sourceMappingURL=pos_.css.map */

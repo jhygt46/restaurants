@@ -136,6 +136,18 @@ if($_GET["mode"] == "debug"){
                                                     <span>Wasabi: </span>
                                                     <input type="checkbox" id="pre_wasabi">
                                                 </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Wasabi: </span>
+                                                    <input type="checkbox" id="pre_wasabi">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Wasabi: </span>
+                                                    <input type="checkbox" id="pre_wasabi">
+                                                </div>
+                                                <div class="pregunta clearfix">
+                                                    <span>Wasabi: </span>
+                                                    <input type="checkbox" id="pre_wasabi">
+                                                </div>
                                             </div>
                                             <div class="list_coment">
                                                 <span>Comentario: </span>
