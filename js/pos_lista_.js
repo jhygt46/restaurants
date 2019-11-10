@@ -3,7 +3,12 @@ $(document).ready(function(){
     listar_pedidos(pedidos);
     modificar_horas();
     gmap_input();
-    resize();    
+    resize();
+    
+    var h1 = $('.cont_ped_input1').height();
+    var h2 = $('.cont_ped_input2').height();
+    console.log(h1 + "/" + h2);
+    
 });
 
 var aud1 = new Audio('/audios/Ba-dum-tss.mp3');
