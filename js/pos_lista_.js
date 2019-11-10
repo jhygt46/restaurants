@@ -8,9 +8,9 @@ $(document).ready(function(){
     var h1 = $('.cont_ped_input1').outerHeight();
     var h2 = $('.cont_ped_input2').outerHeight();
     if(h1 <= h2){
-        $('.cont_ped_input1').height(h2);
+        $('.cont_ped_input1').height(h2+"px");
     }else{
-        $('.cont_ped_input2').height(h1);
+        $('.cont_ped_input2').height(h1+"px");
     }
 
 });
