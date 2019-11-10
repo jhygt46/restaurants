@@ -19,6 +19,7 @@ var markers = [];
 var map_socket, socket;
 var version = 0;
 var global_telefono = "";
+var pedido_height = 0;
 
 function resize(){
 
@@ -916,17 +917,13 @@ function ver_pedido(index){
         if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').prop("checked", true) }else{ $('#pre_teriyaki').prop("checked", false) }
 
     }
-    var h1 = $('.cont_ped_input1').outerHeight();
-    var h2 = $('.cont_ped_input2').outerHeight();
 
-    console.log(h1);
-    console.log(h2);
-
-    if(h1 < h2){
-        $('.cont_ped_input1').height(h2);
-    }
-    if(h1 > h2){
-        $('.cont_ped_input2').height(h1);
+    if(pedido_height == 0){
+        var h1 = $('.cont_ped_input1').outerHeight();
+        var h2 = $('.cont_ped_input2').outerHeight();
+        if(h1 < h2){ $('.cont_ped_input1').height(h2); }
+        if(h1 > h2){ $('.cont_ped_input2').height(h1); }
+        pedido_height = 1;
     }
     
 }
