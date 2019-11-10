@@ -127,7 +127,7 @@ if($_GET["mode"] == "debug"){
                                             <div class="t_direcciones"></div>
                                         </div>
                                         <div class="cont_check_coment clearfix">
-                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-right: 1%">
+                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-right: 1%; padding-bottom: 0px">
                                                 <div class="pregunta clearfix">
                                                     <span>Wasabi: </span>
                                                     <input type="checkbox" id="pre_wasabi" class="valign">
@@ -153,7 +153,7 @@ if($_GET["mode"] == "debug"){
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-left: 1%">
+                                            <div class="cont_ped_input" style="width: 49%; float: left; padding-left: 1%; padding-bottom: 0px">
                                                 <div class="comentario">
                                                     <span>Comentarios: </span>
                                                     <Textarea id="comentarios"></Textarea>
