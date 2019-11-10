@@ -127,35 +127,6 @@ if($_GET["mode"] == "debug"){
                                             <div class="t_direcciones"></div>
                                         </div>
                                         <div class="cont_check_coment clearfix">
-                                            <div class="list_checks">
-                                                <div class="pregunta clearfix">
-                                                    <span>Wasabi: </span>
-                                                    <input type="checkbox" id="pre_wasabi">
-                                                </div>
-                                                <div class="pregunta clearfix">
-                                                    <span>Wasabi: </span>
-                                                    <input type="checkbox" id="pre_wasabi">
-                                                </div>
-                                                <div class="pregunta clearfix">
-                                                    <span>Wasabi: </span>
-                                                    <input type="checkbox" id="pre_wasabi">
-                                                </div>
-                                                <div class="pregunta clearfix">
-                                                    <span>Wasabi: </span>
-                                                    <input type="checkbox" id="pre_wasabi">
-                                                </div>
-                                                <div class="pregunta clearfix">
-                                                    <span>Wasabi: </span>
-                                                    <input type="checkbox" id="pre_wasabi">
-                                                </div>
-                                            </div>
-                                            <div class="list_coment">
-                                                <span>Comentario: </span>
-                                                <textarea id="pre_wasabi"></textarea>
-                                            </div>
-                                        </div>
-                                        <!--
-                                        <div class="cont_check_coment clearfix">
                                             <div class="cont_ped_input" style="width: 49%; float: left; padding-right: 1%">
                                                 <div class="pregunta clearfix">
                                                     <span>Wasabi: </span>
