@@ -225,7 +225,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                         <div class="cont_ped_input clearfix">
                                             <div class="tipo_pago_1">
                                                 <span>Tipo de Pago: </span>
-                                                <select id="tipo_pago">
+                                                <select id="tipo_pago" onchange="change_tipo_pago(this)">
                                                     <option value="1">Efectivo</option>
                                                     <option value="2">Tarjeta de Debito</option>
                                                     <option value="3">Tarjeta de Credito</option>
