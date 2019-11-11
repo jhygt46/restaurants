@@ -742,7 +742,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 {
   width: 32%;
   float: left;
-  padding-right: 1%;
+  padding-right: 2%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 span {
   display: block;
@@ -756,7 +756,7 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 {
   width: 32%;
   float: left;
-  padding-right: 1%;
+  padding-right: 2%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 span {
   display: block;
@@ -770,7 +770,6 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 {
   width: 32%;
   float: left;
-  padding-right: 1%;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 span {
   display: block;
