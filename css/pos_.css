@@ -38,7 +38,7 @@ html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_
   top: 0px;
   left: 0px;
   height: 100%;
-  width: 142px;
+  width: calc(100% - 154px);
   z-index: 2;
 }
 html body .contenedor .contenido .pedidos .lista_pedidos .cont_lista .pedido .p_num {
