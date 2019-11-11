@@ -842,8 +842,6 @@ function ver_pedido(index){
 
     pop_up('pop_pedido');
     $('#l_direccion').hide();
-    seleccionado = index;
-    listar_pedidos();
 
     if(index == -1){
 
@@ -916,11 +914,14 @@ function ver_pedido(index){
         if(pedido.pre_soya == 1){ $('#pre_soya').prop("checked", true) }else{ $('#pre_soya').prop("checked", false) }
         if(pedido.pre_teriyaki == 1){ $('#pre_teriyaki').prop("checked", true) }else{ $('#pre_teriyaki').prop("checked", false) }
 
+        seleccionado = index;
+        listar_pedidos();
+
     }
 
     if(pedido_height == 0){
-        var h1 = $('.cont_ped_input1').outerHeight();
-        var h2 = $('.cont_ped_input2').outerHeight();
+        var h1 = $('.cont_ped_input1').outerHeight() || 0;
+        var h2 = $('.cont_ped_input2').outerHeight() || 0;
         if(h1 < h2){ $('.cont_ped_input1').height(h2); }
         if(h1 > h2){ $('.cont_ped_input2').height(h1); }
         pedido_height = 1;
@@ -1636,7 +1637,7 @@ function add_pedido(obj){
             aux.push(pedidos[i]);
         }
     }
-    seleccionado = 0;
+    seleccionado = seleccionado + 1;
     listar_pedidos(aux);
     
 }
