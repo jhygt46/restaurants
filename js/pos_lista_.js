@@ -1660,7 +1660,8 @@ function guardar_pedido(index){
     seleccionado = index;
 
     console.log("CARRO");
-    console.log(pedido.carro);
+    console.log(pedido.carro.length);
+    console.log(pedido.promos.length);
 
     if(proceso_categorias(pedido)){
         if(proceso_preguntas(pedido)){
