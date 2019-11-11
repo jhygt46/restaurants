@@ -2232,9 +2232,9 @@ class Core{
 
                                     file_put_contents("/var/www/html/pedidos_pos/".$code.".json", json_encode($file));
 
-                                    if($total != $sql_total && $sql_tipo == 1){
+                                    if($total + $costo != $sql_total + $sql_costo && $sql_tipo == 1){
                                         $aux['accion'] = 2;
-                                        $aux['total'] = $total;
+                                        $aux['total'] = $total + $costo;
                                         $send['estado'] = json_encode($aux);
                                         $send['pedido_code'] = $code;
                                         $ch = curl_init();
