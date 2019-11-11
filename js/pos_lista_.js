@@ -1140,6 +1140,7 @@ function change_despacho(that){
 function change_tipo_pago(that){
 
     var value = $(that).val();
+    console.log(value);
     if(value == 0){
         $('.tipo_pago_2').show();
         $('.tipo_pago_3').show();
