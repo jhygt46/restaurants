@@ -872,6 +872,9 @@ function ver_pedido(index){
         $('#pre_soya').prop("checked", false);
         $('#pre_teriyaki').prop("checked", false);
         $('#pre_palitos option[value=0]').attr('selected', 'selected');
+
+        $('.tipo_pago_2').hide();
+        $('.tipo_pago_3').hide();
         
     }
 
@@ -911,6 +914,9 @@ function ver_pedido(index){
         $('#costo').val(pedido.costo);
         $('#comentarios').val("");
         
+        $('.tipo_pago_2').show();
+        $('.tipo_pago_3').show();
+
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').prop("checked", true) }else{ $('#pre_wasabi').prop("checked", false) }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').prop("checked", true) }else{ $('#pre_gengibre').prop("checked", false) }
         if(pedido.pre_soya == 1){ $('#pre_soya').prop("checked", true) }else{ $('#pre_soya').prop("checked", false) }
@@ -1037,7 +1043,9 @@ function monto_keyup(e){
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
     var total = monto - pedido.costo - pedido.total;
-    $('#vuelto').val(total);
+    if(total > 0){
+        $('#vuelto').val(total);
+    }
 
 }
 function del_pdir(that){
