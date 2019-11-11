@@ -1141,18 +1141,18 @@ function change_tipo_pago(that){
 
     var value = $(that).val();
     if(value == 0){
-        $('#monto').show();
-        $('#vuelto').show();
+        $('.tipo_pago_2').show();
+        $('.tipo_pago_3').show();
     }
     if(value == 1){
-        $('#monto').hide();
-        $('#vuelto').hide();
+        $('.tipo_pago_2').hide();
+        $('.tipo_pago_3').hide();
     }
     if(value == 2){
-        $('#monto').hide();
-        $('#vuelto').hide();
+        $('.tipo_pago_2').hide();
+        $('.tipo_pago_3').hide();
     }
-    
+
 }
 function proceso_categorias(pedido){
 
