@@ -1643,9 +1643,7 @@ function add_pedido(obj, n){
     if(n == 2){
         seleccionado = seleccionado + 1;
         if($('.pop_pedido').is(':visible')){
-            console.log("SI ABIERTO");
-        }else{
-            console.log("NO ABIERTO");
+            $('#seleccionado').val($('#seleccionado').val() + 1);
         }
     }
     if(n == 1){
