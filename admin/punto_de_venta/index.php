@@ -222,6 +222,9 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                                 </div>
                                             </div>
                                         <?php } ?>
+                                        <div>
+                                            HOLA MUNDO
+                                        </div>
                                     </div>
                                 </div>
                             </div>
