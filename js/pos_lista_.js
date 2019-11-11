@@ -1046,7 +1046,7 @@ function monto_keyup(e){
     var pedido = pedidos[seleccionado];
     var total = monto - pedido.costo - pedido.total;
     if(total > 0){
-        $('#vuelto').html(formatNumber.new(total, "$"));
+        $('#vuelto').val(formatNumber.new(total, "$"));
     }
 
 }
