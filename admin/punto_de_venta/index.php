@@ -233,7 +233,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                             </div>
                                             <div class="tipo_pago_2">
                                                 <span>Monto: </span>
-                                                <input type="text" id="monto" />
+                                                <input type="text" id="monto" onkeyup="monto_keyup(this)" />
                                             </div>
                                             <div class="tipo_pago_3">
                                                 <span>Vuelto: </span>

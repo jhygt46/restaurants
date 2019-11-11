@@ -1031,6 +1031,12 @@ function telefono_keyup(e){
     }
 
 }
+function monto_keyup(e){
+
+    var monto = e.value;
+    console.log(monto);
+
+}
 function del_pdir(that){
 
     var direccion = $(that).parent();
@@ -1140,16 +1146,15 @@ function change_despacho(that){
 function change_tipo_pago(that){
 
     var value = $(that).val();
-    console.log(value);
-    if(value == 0){
+    if(value == 1){
         $('.tipo_pago_2').show();
         $('.tipo_pago_3').show();
     }
-    if(value == 1){
+    if(value == 2){
         $('.tipo_pago_2').hide();
         $('.tipo_pago_3').hide();
     }
-    if(value == 2){
+    if(value == 3){
         $('.tipo_pago_2').hide();
         $('.tipo_pago_3').hide();
     }
