@@ -1034,6 +1034,11 @@ function telefono_keyup(e){
 function monto_keyup(e){
 
     var monto = e.value;
+    
+    var pedidos = get_pedidos();
+    var pedido = pedidos[index];
+
+    console.log(pedido);
     console.log(monto);
 
 }
