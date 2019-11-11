@@ -740,16 +740,43 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
   background: #f0f0f0;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 {
-  width: 33%;
+  width: 32%;
   float: left;
+  padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 span {
+  display: block;
+  font-size: 14px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 select {
+  width: 100%;
+  height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 {
-  width: 33%;
+  width: 32%;
   float: left;
+  padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 span {
+  display: block;
+  font-size: 14px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 input {
+  width: 100%;
+  height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 {
-  width: 33%;
+  width: 32%;
   float: left;
+  padding-right: 1%;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 span {
+  display: block;
+  font-size: 14px;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 input {
+  width: 100%;
+  height: 25px;
 }
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs #m_direccion {
   display: none;
