@@ -1588,7 +1588,7 @@ function done_pedido(){
         obj.lat = lat;
         obj.lng = lng;
         obj.comuna = comuna;
-        add_pedido(obj);
+        add_pedido(obj, 1);
 
     }
     if(id_ped > 0){
@@ -1627,7 +1627,7 @@ function done_pedido(){
     $('.pop').hide();
     
 }
-function add_pedido(obj){
+function add_pedido(obj, n){
         
     var aux = [];
     aux.push(obj);
@@ -1637,7 +1637,13 @@ function add_pedido(obj){
             aux.push(pedidos[i]);
         }
     }
-    seleccionado = seleccionado + 1;
+    if(n == 2){
+        seleccionado = seleccionado + 1;
+    }
+    if(n == 1){
+        seleccionado = 0;
+    }
+    
     listar_pedidos(aux);
     
 }
@@ -1741,9 +1747,10 @@ function agregar_pedido(id){
             obj.pre_palitos = data.pre_palitos;
             obj.pre_soya = data.pre_soya;
             obj.pre_teriyaki = data.pre_teriyaki;
+            obj.comentarios = comentarios;
+
             //obj.id_mot = id_mot;
             //obj.verificado = 0;
-            //obj.comentarios = comentarios;
             
             obj.id_puser = data.id_puser;
             obj.nombre = data.nombre;
@@ -1757,7 +1764,7 @@ function agregar_pedido(id){
             obj.lat = data.lat;
             obj.lng = data.lng;
             obj.comuna = data.comuna;
-            add_pedido(obj);
+            add_pedido(obj, 2);
             sound(aud1);
         
         }, error: function(){}
