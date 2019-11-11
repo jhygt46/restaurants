@@ -132,7 +132,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                         </div>
                                         <?php if($preguntas && $comentarios){ ?>
                                         <div class="cont_check_coment clearfix">
-                                            <div class="cont_ped_input cont_ped_input1" style="width: 49%; float: left; padding-right: 1%; padding-bottom: 0px; min-height: 80px">
+                                            <div class="cont_ped_input cont_ped_input1" style="width: 49%; float: left; padding-right: 1%; min-height: 80px">
                                                 <?php if($info['pedido_wasabi'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Wasabi: </span>
@@ -168,7 +168,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                                 </div>
                                                 <?php } ?>
                                             </div>
-                                            <div class="cont_ped_input cont_ped_input2" style="width: 49%; float: left; padding-left: 1%; padding-bottom: 0px">
+                                            <div class="cont_ped_input cont_ped_input2" style="width: 49%; float: left; padding-left: 1%">
                                                 <div class="comentario" style="height: 100%">
                                                     <span style="height: 25px; padding-bottom: 0px">Comentarios: </span>
                                                     <Textarea style="height: calc(100% - 25px)" id="comentarios"></Textarea>
