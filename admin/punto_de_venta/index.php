@@ -237,7 +237,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                             </div>
                                             <div class="tipo_pago_3">
                                                 <span>Vuelto: </span>
-                                                <input type="text" id="vuelto" />
+                                                <div id="vuelto" style="font-size: 16px"></div>
                                             </div>
                                         </div>
                                     </div>
