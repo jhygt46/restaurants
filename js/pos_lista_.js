@@ -849,6 +849,7 @@ function ver_pedido(index){
         $('.pop_pedido .titulo h2').html("");
 
         $('#id_ped').val(0);
+        $('#seleccionado').val(-1);
         $('#id_puser').val(0);
         $('#id_pdir').val(0);
         $('#nombre').val("");
@@ -889,6 +890,7 @@ function ver_pedido(index){
         $('.pop_pedido .titulo h2').html("");
 
         $('#id_ped').val(pedido.id_ped);
+        $('#seleccionado').val(index);
         $('#id_puser').val(pedido.id_puser);
         $('#id_pdir').val(pedido.id_pdir);
         $('#nombre').val(pedido.nombre);
@@ -1530,6 +1532,7 @@ function delete_promo(that, precio){
 function done_pedido(){
 
     var id_ped = $('#id_ped').val();
+    var select = $('#seleccionado').val();
     var p_wasabi = ($('#pre_wasabi').is(':checked')) ? 1 : 0 ;
     var p_gengibre = ($('#pre_gengibre').is(':checked')) ? 1 : 0 ;
     var p_soya = ($('#pre_soya').is(':checked')) ? 1 : 0 ;
@@ -1552,7 +1555,7 @@ function done_pedido(){
     var id_mot = $('#id_mot').val();
     var comentarios = $('#comentarios').val();
 
-    if(id_ped == 0){
+    if(id_ped == 0 && select != seleccionado){
 
         var obj = pedido_obj();
         obj.id_ped = 0;

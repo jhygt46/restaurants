@@ -91,6 +91,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
 
                                     <div class="pedidos_inputs">
                                         <input id="id_ped" type="hidden" value="0" />
+                                        <input id="seleccionado" type="hidden" value="-1" />
                                         <input id="id_puser" type="hidden" value="0" />
                                         <input id="id_pdir" type="hidden" value="0" />
                                         <input id="lat" type="hidden" value="0" />
