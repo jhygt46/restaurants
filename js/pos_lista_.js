@@ -1659,6 +1659,9 @@ function guardar_pedido(index){
     var pedido = pedidos[index];
     seleccionado = index;
 
+    console.log("CARRO");
+    console.log(pedido.carro);
+
     if(proceso_categorias(pedido)){
         if(proceso_preguntas(pedido)){
             if(pedidos[index].cambios == 1){
