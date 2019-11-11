@@ -223,13 +223,21 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                             </div>
                                         <?php } ?>
                                         <div class="cont_ped_input clearfix">
-                                            <div class="repartidor">
-                                                <span>Repartidor: </span>
-                                                <select id="repartidor">
-                                                    <option value="1">Repartidor 1</option>
-                                                    <option value="2">Repartidor 2</option>
-                                                    <option value="3">Repartidor 3</option>
+                                            <div class="tipo_pago_1">
+                                                <span>Tipo de Pago: </span>
+                                                <select id="tipo_pago">
+                                                    <option value="1">Efectivo</option>
+                                                    <option value="2">Tarjeta de Debito</option>
+                                                    <option value="3">Tarjeta de Credito</option>
                                                 </select>
+                                            </div>
+                                            <div class="tipo_pago_2">
+                                                <span>Monto: </span>
+                                                <input type="text" id="monto" />
+                                            </div>
+                                            <div class="tipo_pago_3">
+                                                <span>Vuelto: </span>
+                                                <input type="text" id="vuelto" />
                                             </div>
                                         </div>
                                     </div>

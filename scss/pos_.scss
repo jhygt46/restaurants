@@ -742,7 +742,18 @@ html {
                                             .pregunta:nth-child(odd){
                                                 background: #f0f0f0;
                                             }
-
+                                            .tipo_pago_1{
+                                                width: 33%;
+                                                float: left;
+                                            }
+                                            .tipo_pago_2{
+                                                width: 33%;
+                                                float: left;
+                                            }
+                                            .tipo_pago_3{
+                                                width: 33%;
+                                                float: left;
+                                            }
                                         }
                                         #m_direccion{
                                             display: none;

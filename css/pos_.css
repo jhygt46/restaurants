@@ -739,6 +739,18 @@ html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informac
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .pregunta:nth-child(odd) {
   background: #f0f0f0;
 }
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_1 {
+  width: 33%;
+  float: left;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_2 {
+  width: 33%;
+  float: left;
+}
+html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs .cont_ped_input .tipo_pago_3 {
+  width: 33%;
+  float: left;
+}
 html body .contenedor .pop_up .cont_pop_up .pop .cont_nuevo .cont_info .informacion .pedidos_inputs #m_direccion {
   display: none;
 }
