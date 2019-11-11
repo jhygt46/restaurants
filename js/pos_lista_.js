@@ -1036,7 +1036,7 @@ function monto_keyup(e){
     var monto = e.value;
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-    var total = monto - pedido.costo + pedido.total;
+    var total = monto - pedido.costo - pedido.total;
     $('#vuelto').val(total);
 
 }
