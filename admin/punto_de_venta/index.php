@@ -168,9 +168,9 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                                 <?php } ?>
                                             </div>
                                             <div class="cont_ped_input cont_ped_input2" style="width: 49%; float: left; padding-left: 1%; padding-bottom: 0px">
-                                                <div class="comentario">
-                                                    <span style="height: 20px">Comentarios: </span>
-                                                    <Textarea style="height: calc(100% - 20px)" id="comentarios"></Textarea>
+                                                <div class="comentario" style="height: 100%">
+                                                    <span style="height: 25px; padding-bottom: 0px">Comentarios: </span>
+                                                    <Textarea style="height: calc(100% - 25px)" id="comentarios"></Textarea>
                                                 </div>
                                             </div>
                                         </div>
