@@ -1137,6 +1137,23 @@ function change_despacho(that){
     }
 
 }
+function change_tipo_pago(that){
+
+    var value = $(that).val();
+    if(value == 0){
+        $('#monto').show();
+        $('#vuelto').show();
+    }
+    if(value == 1){
+        $('#monto').hide();
+        $('#vuelto').hide();
+    }
+    if(value == 2){
+        $('#monto').hide();
+        $('#vuelto').hide();
+    }
+    
+}
 function proceso_categorias(pedido){
 
     for(var i=0, ilen=pedido.carro.length; i<ilen; i++){
