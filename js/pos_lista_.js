@@ -1643,7 +1643,7 @@ function add_pedido(obj, n){
     if(n == 2){
         seleccionado = seleccionado + 1;
         if($('.pop_pedido').is(':visible')){
-            $('#seleccionado').val($('#seleccionado').val() + 1);
+            $('#seleccionado').val(parseInt($('#seleccionado').val()) + 1);
         }
     }
     if(n == 1){
