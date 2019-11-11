@@ -916,6 +916,8 @@ function ver_pedido(index){
         
         $('.tipo_pago_2').show();
         $('.tipo_pago_3').show();
+        $('#monto').val("");
+        $('#vuelto').val("");
 
         if(pedido.pre_wasabi == 1){ $('#pre_wasabi').prop("checked", true) }else{ $('#pre_wasabi').prop("checked", false) }
         if(pedido.pre_gengibre == 1){ $('#pre_gengibre').prop("checked", true) }else{ $('#pre_gengibre').prop("checked", false) }
