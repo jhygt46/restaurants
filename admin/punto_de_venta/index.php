@@ -19,6 +19,9 @@ if($_GET["mode"] == "debug"){
     exit;
 }
 
+$preguntas = ($info['pedido_wasabi'] == 1 || $info['pedido_gengibre'] == 1 || $info['pedido_palitos'] == 1 || $info['pedido_soya'] == 1 || $info['pedido_teriyaki'] == 1) ? true : false ;
+$comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -126,24 +129,34 @@ if($_GET["mode"] == "debug"){
                                             <div class="ttl_dir">Direcciones:</div>
                                             <div class="t_direcciones"></div>
                                         </div>
+                                        <?php if($preguntas && $comentarios){ ?>
                                         <div class="cont_check_coment clearfix">
                                             <div class="cont_ped_input cont_ped_input1" style="width: 49%; float: left; padding-right: 1%; padding-bottom: 0px">
+                                                <?php if($info['pedido_wasabi'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Wasabi: </span>
                                                     <input type="checkbox" id="pre_wasabi" class="valign">
                                                 </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_gengibre'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Gengibre: </span>
                                                     <input type="checkbox" id="pre_gengibre" class="valign">
                                                 </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_soya'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Soya: </span>
                                                     <input type="checkbox" id="pre_soya" class="valign">
                                                 </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_teriyaki'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Tariyaki: </span>
                                                     <input type="checkbox" id="pre_teriyaki" class="valign">
                                                 </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_palitos'] == 1){ ?>
                                                 <div class="pregunta clearfix">
                                                     <span>Palitos: </span>
                                                     <select id="pre_palitos" class="valign">
@@ -152,6 +165,7 @@ if($_GET["mode"] == "debug"){
                                                         <?php } ?>
                                                     </select>
                                                 </div>
+                                                <?php } ?>
                                             </div>
                                             <div class="cont_ped_input cont_ped_input2" style="width: 49%; float: left; padding-left: 1%; padding-bottom: 0px">
                                                 <div class="comentario">
@@ -160,6 +174,53 @@ if($_GET["mode"] == "debug"){
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php } ?>
+                                        <?php if($preguntas && !$comentarios){ ?>
+                                            <div class="cont_ped_input">
+                                                <?php if($info['pedido_wasabi'] == 1){ ?>
+                                                <div class="pregunta clearfix">
+                                                    <span>Wasabi: </span>
+                                                    <input type="checkbox" id="pre_wasabi" class="valign">
+                                                </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_gengibre'] == 1){ ?>
+                                                <div class="pregunta clearfix">
+                                                    <span>Gengibre: </span>
+                                                    <input type="checkbox" id="pre_gengibre" class="valign">
+                                                </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_soya'] == 1){ ?>
+                                                <div class="pregunta clearfix">
+                                                    <span>Soya: </span>
+                                                    <input type="checkbox" id="pre_soya" class="valign">
+                                                </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_teriyaki'] == 1){ ?>
+                                                <div class="pregunta clearfix">
+                                                    <span>Tariyaki: </span>
+                                                    <input type="checkbox" id="pre_teriyaki" class="valign">
+                                                </div>
+                                                <?php } ?>
+                                                <?php if($info['pedido_palitos'] == 1){ ?>
+                                                <div class="pregunta clearfix">
+                                                    <span>Palitos: </span>
+                                                    <select id="pre_palitos" class="valign">
+                                                        <?php for($i=0; $i<10; $i++){ ?>
+                                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if(!$preguntas && $comentarios){ ?>
+                                            <div class="cont_ped_input">
+                                                <div class="comentario">
+                                                    <span>Comentarios: </span>
+                                                    <Textarea id="comentarios"></Textarea>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
