@@ -1034,12 +1034,10 @@ function telefono_keyup(e){
 function monto_keyup(e){
 
     var monto = e.value;
-    
     var pedidos = get_pedidos();
     var pedido = pedidos[seleccionado];
-
-    console.log(pedido);
-    console.log(monto);
+    var total = monto - pedido.costo + pedido.total;
+    $('#vuelto').val(total);
 
 }
 function del_pdir(that){
