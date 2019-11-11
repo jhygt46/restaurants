@@ -222,8 +222,15 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                        <div>
-                                            HOLA MUNDO
+                                        <div class="cont_ped_input clearfix">
+                                            <div class="repartidor">
+                                                <span>Repartidor: </span>
+                                                <select id="repartidor">
+                                                    <option value="1">Repartidor 1</option>
+                                                    <option value="2">Repartidor 2</option>
+                                                    <option value="3">Repartidor 3</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
