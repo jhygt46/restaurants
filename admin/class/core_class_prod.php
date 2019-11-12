@@ -2300,7 +2300,10 @@ class Core{
         $info['op'] = 2;
         $verificar = $this->verificar();
         if($verificar['op']){
+
             $id_gir = $verificar['id_gir'];
+            $id_loc = $verificar['id_loc'];
+
             $puser = $_POST['puser'];
             $pedido = $_POST['pedido'];
             $carro = $_POST['carro'];
@@ -2308,11 +2311,14 @@ class Core{
             $info['set_puser'] = 0;
             $pdir_id = 0;
             $id_puser = 0;
+
             // PEDIDOS USUARIOS Y DIRECCIONES //
             if($sql = $this->con->prepare("SELECT * FROM pedidos_usuarios WHERE id_puser=? AND codigo=? AND telefono=?")){
                 if($sql->bind_param("iss", $puser["id_puser"], $puser["code"], $pedido["telefono"])){
                     if($sql->execute()){
                         $res = $sql->get_result();
+
+                        // USUARIO NUEVO
                         if($res->{'num_rows'} == 0){
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
@@ -2329,20 +2335,25 @@ class Core{
                                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
                                         }
                                         $sqlipu->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1a '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
-                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1b '.htmlspecialchars($sqlipu->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #1c '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #1a '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #1b '.htmlspecialchars($sqlipu->error)); }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #1c '.htmlspecialchars($this->con->error)); }
                         }
+
+                        // USUARIO EXISTENTE
                         if($res->{'num_rows'} == 1){
+
                             $id_puser = $puser["id_puser"];
                             $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
+                            
                             if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?")){
                                 if($sqlupu->bind_param("ii", $cont, $id_puser)){
                                     if($sqlupu->execute()){
                                         $sqlupu->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #2 '.htmlspecialchars($sqlupu->error));/* $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0); */ }
-                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #2 '.htmlspecialchars($sqlupu->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #2 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #2 '.htmlspecialchars($sqlupu->error));/* $this->enviar_error_int($sqlupu->error, '#P02', 0, $id_puser, 0); */ }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #2 '.htmlspecialchars($sqlupu->error)); }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #2 '.htmlspecialchars($this->con->error)); }
+                            
                             if($sqlpd = $this->con->prepare("SELECT id_pdir FROM pedidos_direccion WHERE id_puser=? AND lat=? AND lng=?")){
                                 if($sqlpd->bind_param("idd", $id_puser, $pedido['lat'], $pedido['lng'])){
                                     if($sqlpd->execute()){
@@ -2355,30 +2366,32 @@ class Core{
                                         }
                                         $sqlpd->free_result();
                                         $sqlpd->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
-                                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #3 '.htmlspecialchars($this->con->error)); }
+                                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #3 '.htmlspecialchars($sqlpd->error)); }
+                            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #3 '.htmlspecialchars($this->con->error)); }
                         }
+
                         $sql->free_result();
                         $sql->close();
-                    }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #4 '.htmlspecialchars($sql->error)); /*$this->enviar_error_int($sql->error, '#P01', 0, $puser["id_puser"], 0); */ }
-                }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #4 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #4 '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #4 '.htmlspecialchars($sql->error)); /*$this->enviar_error_int($sql->error, '#P01', 0, $puser["id_puser"], 0); */ }
+                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #4 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #4 '.htmlspecialchars($this->con->error)); }
 
+            $info['pdir_id'] = $pdir_id;
+
+            /*
             $local_data = $this->get_local_info($pedido["id_loc"]);
             $verify_despacho = $this->verify_despacho($pedido);
-            
-            /*
             $tz_object = new DateTimeZone('America/Santiago');
             $datetime = new DateTime();
             $datetime->setTimezone($tz_object);
             $fecha_stgo = $datetime->format('Y-m-d H:i:s');
-            */
 
             $time_stgo = time();
             $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);
             $pedido_code = $this->pass_generate(20);
             $tipo = 1;
+
             if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, verify_despacho, pre_gengibre, pre_wasabi, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                 if($sqlipa->bind_param("issiiissiiiiiisiiiii", $local_data['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $pedido["id_loc"], json_encode($_POST['carro']), json_encode($promos), $verify_despacho, $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $local_data['id_gir'])){
                     if($sqlipa->execute()){
@@ -2442,6 +2455,7 @@ class Core{
                     }
                 }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #6 '.htmlspecialchars($sqlipa->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'get_informe() #6 '.htmlspecialchars($this->con->error)); }
+            */
         }
         return $info;
     }
