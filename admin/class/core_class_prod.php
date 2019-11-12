@@ -1629,7 +1629,7 @@ class Core{
     }
     private function pedido_direccion($pedido, $id_puser){
         $id = 0;
-        if($direccion != ""){
+        if($pedido["direccion"] != ""){
             if($sql = $this->con->prepare("INSERT INTO pedidos_direccion (direccion, calle, num, depto, comuna, lat, lng, id_puser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
                 if($sql->bind_param("sssssddi", $pedido["direccion"], $pedido["calle"], $pedido["num"], $pedido["depto"], $pedido["comuna"], $pedido["lat"], $pedido["lng"], $id_puser)){
                     if($sql->execute()){
