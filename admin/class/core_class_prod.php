@@ -2333,6 +2333,8 @@ class Core{
                                         $info['puser_telefono'] = $pedido["telefono"];
                                         if($pedido['despacho'] == 1){
                                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
+                                            $info['pdir_id'] = $pdir_id;
+                                            $info['pdir_id_2'] = 1;
                                         }
                                         $sqlipu->close();
                                     }else{ $this->registrar(6, $id_loc, $id_gir, 'get_informe() #1a '.htmlspecialchars($sqlipu->error));/*$this->enviar_error_int($sqlipu->error, '#P03', 0, 0, 0); */ }
@@ -2345,7 +2347,7 @@ class Core{
 
                             $id_puser = $puser["id_puser"];
                             $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
-                            
+
                             if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=? WHERE id_puser=?")){
                                 if($sqlupu->bind_param("ii", $cont, $id_puser)){
                                     if($sqlupu->execute()){
@@ -2360,9 +2362,11 @@ class Core{
                                         $res_pdir = $sqlpd->get_result();
                                         if($res_pdir->{'num_rows'} == 1){
                                             $pdir_id = $res_pdir->fetch_all(MYSQLI_ASSOC)[0]["id_pdir"];
+                                            $info['pdir_id_2'] = 2;
                                         }
                                         if($res_pdir->{'num_rows'} == 0 && $pedido['despacho'] == 1){
                                             $pdir_id = $this->pedido_direccion($pedido, $id_puser);
+                                            $info['pdir_id_2'] = 3;
                                         }
                                         $sqlpd->free_result();
                                         $sqlpd->close();
