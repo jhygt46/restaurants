@@ -2375,6 +2375,13 @@ class Core{
 
             $verify_despacho = $this->verify_despacho($pedido['lat'], $pedido['lng'], $pedido['costo'], $id_loc, $id_gir);
 
+            $info['verify']['lat'] = $pedido['lat'];
+            $info['verify']['lng'] = $pedido['lng'];
+            $info['verify']['costo'] = $pedido['costo'];
+            $info['verify']['id_loc'] = $id_loc;
+            $info['verify']['id_gir'] = $id_gir
+            $info['verify']['verify'] = $verify_despacho;
+
             $time_stgo = time();
             $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);
             $pedido_code = $this->pass_generate(20);
