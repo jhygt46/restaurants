@@ -2379,7 +2379,7 @@ class Core{
             $info['verify']['lng'] = $pedido['lng'];
             $info['verify']['costo'] = $pedido['costo'];
             $info['verify']['id_loc'] = $id_loc;
-            $info['verify']['id_gir'] = $id_gir
+            $info['verify']['id_gir'] = $id_gir;
             $info['verify']['verify'] = $verify_despacho;
 
             $time_stgo = time();
