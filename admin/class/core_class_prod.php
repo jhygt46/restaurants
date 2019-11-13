@@ -46,37 +46,6 @@ class Core{
         $sqlipd->close();
 
     }
-    /*
-    private function get_local_info($id_loc){
-
-        if($sql = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t1.id_gir, t2.num_ped, t1.telefono FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?")){
-            if($sql->bind_param("iii", $id_loc, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{'num_rows'} == 1){
-                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $info['lat'] = $result['lat'];
-                        $info['lng'] = $result['lng'];
-                        $info['t_retiro'] = $result['t_retiro'];
-                        $info['t_despacho'] = $result['t_despacho'];
-                        $info['num_ped'] = $result['num_ped'] + 1;
-                        $info['id_gir'] = $result['id_gir'];
-                        $info['code'] = $result['code'];
-                        $info['correo'] = $result['correo'];
-                        $info['activar_envio'] = $result['activar_envio'];
-                        $info['telefono'] = $result['telefono'];
-                        $aux_url = ($result['ssl'] == 1) ? 'https://' : 'http://' ;
-                        $info['url'] = $aux_url.$result['dominio'];
-                        $sqllg->free_result();
-                        $sqllg->close();
-                    }
-                }else{ $this->registrar(6, $id_loc, 0, 'get_local_info() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, $id_loc, 0, 'get_local_info() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, $id_loc, 0, 'get_local_info() '.htmlspecialchars($this->con->error)); }
-        return $info;
-
-    }
-    */
     private function is_in_polygon($vertices_x, $vertices_y, $longitude_x, $latitude_y){
         $points_polygon = count($vertices_x) - 1;
         $i = $j = $c = $point = 0;
@@ -1762,38 +1731,6 @@ class Core{
         return $info;
 
     }
-    public function get_web_js_data2($id_gir){
-        /*
-        $sql = $this->con->prepare("SELECT t2.id_cat, t1.code FROM giros t1, catalogo_productos t2 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t1.eliminado=?");
-        $sql->bind_param("ii", $id_gir, $this->eliminado);
-        $sql->execute();
-        $result = $sql->get_result();
-
-        while($row = $result->fetch_assoc()){
-            $info['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
-            $code = $row['code'];
-        }
-
-        $sqlpag = $this->con->prepare("SELECT id_pag, nombre, imagen, html FROM paginas WHERE id_gir=? AND eliminado=?");
-        $sqlpag->bind_param("ii", $id_gir, $this->eliminado);
-        $sqlpag->execute();
-        $resultpag = $sqlpag->get_result()->fetch_all(MYSQLI_ASSOC);
-        $sqlpag->free_result();
-        $sqlpag->close();
-
-        $info['paginas'] = $resultpag;
-        $info['config'] = $this->get_config($id_gir);
-        $info['locales'] = $this->get_locales_js($id_gir);
-
-        $ruta_data = "/var/www/html/restaurants/js/data/".$code.".js";
-        file_put_contents($ruta_data, "var data=".json_encode($info));
-        
-        $sqlmod = $this->con->prepare("UPDATE giros SET ultima_actualizacion=now(), con_cambios='0' WHERE id_gir=? AND eliminado=?");
-        $sqlmod->bind_param("ii", $id_gir, $this->eliminado);
-        $sqlmod->execute();
-        $sqlmod->close();
-        */
-    }
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
         $total = 0;
         for($i=0; $i<count($pedidos); $i++){
@@ -2426,17 +2363,16 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #4 '.htmlspecialchars($this->con->error)); }
             // FIN PEDIDOS USUARIOS Y DIRECCIONES //
 
-
-
-            
-            $verify_despacho = $this->verify_despacho($pedido);
-
             /*
             $tz_object = new DateTimeZone('America/Santiago');
             $datetime = new DateTime();
             $datetime->setTimezone($tz_object);
             $fecha_stgo = $datetime->format('Y-m-d H:i:s');
             */
+
+            
+
+            $verify_despacho = $this->verify_despacho($pedido['lat'], $pedido['lng'], $pedido['costo'], $id_loc, $id_gir);
 
             $time_stgo = time();
             $fecha_stgo = date('Y-m-d H:i:s', $time_stgo);

@@ -208,6 +208,7 @@ class Login {
                                         if($sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc, t2.id_gir, t1.fecha_cocina FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?")){
                                             if($sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado)){
                                                 if($sqlsg->execute()){
+                                                    
                                                     $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 
                                                     $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
@@ -225,10 +226,15 @@ class Login {
                                                         $info['user_code'] = $code_cookie_user;
                                                         $info['local_code'] = $code_cookie_local;
                                                         
-                                                        $code_local = $this->pass_generate(20);
+                                                        if(time() - strtotime($res_glocal['fecha_cocina']) < 57600){
+                                                            $enviar_cocina = 0;
+                                                            $code_local = $this->pass_generate(20);
+                                                        }else{
+                                                            $enviar_cocina = 1;
+                                                            $code_local = $res_glocal['local_code'];
+                                                        }
+
                                                         $info['code'] = $code_local;
-                                                        $enviar_cocina = (time() - strtotime($res_glocal['fecha_cocina']) < 57600) ? 0 : 1 ;
-                                                        
                                                         if($sqlul = $this->con->prepare("UPDATE locales SET enviar_cocina=?, code=?, cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
                                                             if($sqlul->bind_param("isssii", $enviar_cocina, $code_local, $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado)){
                                                                 if($sqlul->execute()){
@@ -247,6 +253,7 @@ class Login {
                                                     }
 
                                                     if($result['tipo'] == 1){
+
                                                         // COCINA
                                                         $this->registrar('11', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
                                                         $info['op'] = 4;
