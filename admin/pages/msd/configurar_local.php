@@ -23,6 +23,9 @@ $parent_id = (isset($_GET["parent_id"]))? $_GET["parent_id"] : 0 ;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sonidos = ["Applause", "Aww", "Ba-dum-tss", "Beep", "Beep_set", "Boo", "Breaking_glass", "City", "Crash", "DJ", "Fail", "Gunshot", "Happy_Birthday", "Heartbeat", "Ka-ching", "Keyboard", "Laugh_track", "Nooo", "Rain_and_thunder", "Shutter", "Whip", "White_noise", "Yeehaw", "Yes"];
 
+$width = 500;
+$alto = intval($width * $core->get_alto() / 100);
+
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
     
     $id_loc = $_GET["id_loc"];
@@ -83,8 +86,12 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
                         </select>
                     </label>
                     <label class="clearfix">
-                        <span><p>Imagen: (380x120)</p></span>
+                        <span><p>Imagen: (<?php echo $width; ?>x<?php echo $alto; ?>)</p></span>
                         <input style="padding-top: 6px" id="file_image0" type="file" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Enviar Correo:</p></span>
+                        <input id="activar_envio" type="checkbox" class="checkbox" value="1" <?php if($that['activar_envio'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
                     <label style="padding-top: 10px">
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>

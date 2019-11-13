@@ -1224,6 +1224,7 @@ class Guardar{
             $t_despacho = $_POST['t_despacho'];
             $sonido = $_POST['sonido'];
             $pos = $_POST['pos'];
+            $activar_envio = $_POST['activar_envio'];
             $id_loc = $_POST['id_loc'];
             if($sqlloc = $this->con->prepare("SELECT * FROM locales WHERE id_loc=? AND id_gir=? AND eliminado=?")){
                 if($sqlloc->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
@@ -1242,8 +1243,8 @@ class Guardar{
                                     }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() image'.htmlspecialchars($sqlg->error)); }
                                 }else{ $this->registrar(6, $id_loc, $this->id_gir, 'configurar_local() image'.htmlspecialchars($sqlg->error)); }
                             }
-                            if($sql = $this->con->prepare("UPDATE locales SET pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
-                                if($sql->bind_param("isiiii", $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
+                            if($sql = $this->con->prepare("UPDATE locales SET activar_envio=?, pos=?, sonido=?, t_retiro=?, t_despacho=? WHERE id_loc=? AND id_gir=?")){
+                                if($sql->bind_param("iisiiii", $activar_envio, $pos, $sonido, $t_retiro, $t_despacho, $id_loc, $this->id_gir)){
                                     if($sql->execute()){
                                         $info['op'] = 1;
                                         $info['mensaje'] = "Local editado exitosamente";
