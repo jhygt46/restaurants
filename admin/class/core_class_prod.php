@@ -115,7 +115,7 @@ class Core{
         $return['op'] = false;
         $host = $_POST["host"];
         $id_loc = $_POST["id_loc"];
-        if($sqlgir = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code as local_code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t2.num_ped, t1.telefono, t3.ip, t3.code as server_code, t2.id_gir FROM locales t1, giros t2, server t3 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t2.dominio=? AND t2.id_ser=t3.id_ser AND t3.eliminado=? AND t3.eliminado=t2.eliminado AND t3.eliminado=t1.eliminado")){
+        if($sqlgir = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code as local_code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t2.num_ped, t1.telefono, t3.ip, t3.code as server_code, t2.id_gir FROM locales t1, giros t2, server t3 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t2.dominio=? AND t2.id_ser=t3.id_ser AND t1.eliminado=? AND t1.eliminado=t2.eliminado")){
             if($sqlgir->bind_param("isi", $id_loc, $host, $this->eliminado)){
                 if($sqlgir->execute()){
                     $res = $sqlgir->get_result();
@@ -141,15 +141,15 @@ class Core{
                                     $aux_url = ($result['ssl'] == 1) ? 'https://' : 'http://' ;
                                     $return['url'] = $aux_url.$result['dominio'];
                                     $return['id_gir'] = $result["id_gir"];
-                                }else{ $this->registrar(15, 0, 0, 'verificar() codigo no encontrado'); }
-                            }else{ $this->registrar(15, 0, 0, 'verificar() puerto distinto a 443'); }
-                        }else{ $this->registrar(15, 0, 0, 'verificar() ip distinta'); }
-                    }else{ $this->registrar(15, 0, 0, 'verificar() host no encontrada'); }
+                                }else{ $this->registrar(15, 0, 0, 'verificar() #1 codigo no encontrado'); }
+                            }else{ $this->registrar(15, 0, 0, 'verificar() #1 puerto distinto a 443'); }
+                        }else{ $this->registrar(15, 0, 0, 'verificar() #1 ip distinta'); }
+                    }else{ $this->registrar(15, 0, 0, 'verificar() #1 host no encontrada'); }
                     $sqlgir->free_result();
                     $sqlgir->close();
-                }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
-            }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
-        }else{ $this->registrar(6, 0, 0, 'verificar() '.$this->con->error); }
+                }else{ $this->registrar(6, 0, 0, 'verificar() #2 '.$sqlgir->error); }
+            }else{ $this->registrar(6, 0, 0, 'verificar() #2 '.$sqlgir->error); }
+        }else{ $this->registrar(6, 0, 0, 'verificar() #2 '.$this->con->error); }
         return $return;
 
     }
@@ -2362,6 +2362,7 @@ class Core{
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #4 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #4 '.htmlspecialchars($this->con->error)); }
             // FIN PEDIDOS USUARIOS Y DIRECCIONES //
+
 
             /*
             $tz_object = new DateTimeZone('America/Santiago');
