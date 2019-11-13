@@ -183,33 +183,36 @@ class Login {
             if($sqlu = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
                 if($sqlu->bind_param("si", $_POST["user"], $this->eliminado)){
                     if($sqlu->execute()){
+
                         $res = $sqlu->get_result();
+
                         if($res->{"num_rows"} == 0){
                             $info['op'] = 2;
                             $info['message'] = "Error: Correo o Contraseña invalida";
                             $this->registrar('12', 0, 0, 0, 'usuario no existe: '.$_POST["user"]);
                         }
+
                         if($res->{"num_rows"} == 1){
+
                             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
                             $acciones = $this->acciones($result["id_user"], 1);
+
                             if($acciones < 5){
+
                                 $pass = $result['pass'];
                                 $id_user = $result['id_user'];
+
                                 if($pass == md5($_POST['pass'])){
+
                                     if($result['id_loc'] > 0){
-                                        if($sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc, t2.id_gir FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?")){
+                                        if($sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc, t2.id_gir, t1.fecha_cocina FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?")){
                                             if($sqlsg->bind_param("iii", $result['id_loc'], $this->eliminado, $this->eliminado)){
                                                 if($sqlsg->execute()){
                                                     $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                                    /*
-                                                    if($res_glocal['dns'] == 1 && $res_glocal['ssl'] == 1){
-                                                        $info['data'] = 'https://'.$res_glocal['dominio'].'/data/'.$res_glocal["giro_code"].'/index.js';
-                                                    }else{
-                                                        $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
-                                                    }
-                                                    */
+
                                                     $info['data'] = 'https://misitiodelivery.cl/data/'.$res_glocal["giro_code"].'.js';
                                                     if($result['tipo'] == 0){
+
                                                         // PUNTO DE VENTA
                                                         $this->registrar('10', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
                                                         $info['op'] = 3;
@@ -217,13 +220,17 @@ class Login {
                                                         $info['message'] = "Ingreso Exitoso Punto de Venta";
                                                         $code_cookie_user = $this->pass_generate(60);
                                                         $code_cookie_local = $this->pass_generate(60);
+                                                        $ip = $this->getUserIpAddr();
                                                         $info['id'] = $result['id_user'];
                                                         $info['user_code'] = $code_cookie_user;
                                                         $info['local_code'] = $code_cookie_local;
-                                                        $ip = $this->getUserIpAddr();
-                                                        $info['code'] = $res_glocal["local_code"];
-                                                        if($sqlul = $this->con->prepare("UPDATE locales SET cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
-                                                            if($sqlul->bind_param("ssii", $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado)){
+                                                        
+                                                        $code_local = $this->pass_generate(20);
+                                                        $info['code'] = $code_local;
+                                                        $enviar_cocina = (time() - strtotime($res_glocal['fecha_cocina']) < 57600) ? 0 : 1 ;
+                                                        
+                                                        if($sqlul = $this->con->prepare("UPDATE locales SET enviar_cocina=?, code=?, cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
+                                                            if($sqlul->bind_param("isssii", $enviar_cocina, $code_local, $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado)){
                                                                 if($sqlul->execute()){
                                                                     if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?")){
                                                                         if($sqluu->bind_param("sii", $code_cookie_user, $result['id_user'], $this->eliminado)){
@@ -236,7 +243,9 @@ class Login {
                                                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
                                                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
                                                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+
                                                     }
+
                                                     if($result['tipo'] == 1){
                                                         // COCINA
                                                         $this->registrar('11', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
@@ -244,7 +253,18 @@ class Login {
                                                         $info['url'] = 'admin/cocina/';
                                                         $info['message'] = "Ingreso Exitoso Cocina";
                                                         $info['code'] = $res_glocal["local_code"];
+
+                                                        $enviar_cocina = 1;
+                                                        if($sqlul = $this->con->prepare("UPDATE locales SET enviar_cocina=?, fecha_cocina=now() WHERE id_loc=? AND eliminado=?")){
+                                                            if($sqlul->bind_param("iii", $enviar_cocina, $res_glocal['id_loc'], $this->eliminado)){
+                                                                if($sqlul->execute()){
+                                                                    $sqlul->close();
+                                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
+                                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
+                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+
                                                     }
+
                                                     $sqlsg->free_result();
                                                     $sqlsg->close();
                                                 }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlsg->error); }
@@ -252,6 +272,7 @@ class Login {
                                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
                                     }
                                     if($result['id_loc'] == 0){
+
                                         $ses['info']['id_user'] = $id_user;
                                         $ses['info']['nombre'] = $result['nombre'];
                                         $ses['info']['admin'] = $result['admin'];
@@ -259,6 +280,7 @@ class Login {
                                         $ses['info']['id_aux_user'] = $result['id_aux_user'];
                                         $ses['id_gir'] = 0;
                                         $ses['id_cat'] = 0;
+
                                         if($result['admin'] == 0){
                                             if($sqlsug = $this->con->prepare("SELECT id_gir FROM fw_usuarios_giros WHERE id_user=?")){
                                                 if($sqlsug->bind_param("i", $id_user)){
@@ -277,8 +299,10 @@ class Login {
                                         $info['message'] = "Ingreso Exitoso";
                                         $_SESSION['user'] = $ses;
                                         $this->registrar('9', $result['id_user'], $res_glocal['id_loc'], $res_glocal['id_gir'], '');
+                                        
                                     }
                                 }else{
+
                                     $tipo = 1;
                                     if($sqlic = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)")){
                                         if($sqlic->bind_param("ii", $tipo, $id_user)){
@@ -289,6 +313,7 @@ class Login {
                                             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlic->error); }
                                         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlic->error); }
                                     }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                
                                 }
                             }else{
                                 $info['op'] = 2;
