@@ -98,10 +98,10 @@ class Core{
         return $info;
 
     }
-    private function verify_despacho($lat, $lng, $costo, $id_loc, $id_gir){
+    private function verify_despacho($despacho, $lat, $lng, $costo, $id_loc, $id_gir){
 
         $res = false;
-        if($pedido['despacho'] == 1){
+        if($despacho == 1){
             $aux = $this->get_info_despacho($lat, $lng, $id_gir);
             if($aux['op'] == 1 && $aux['id_loc'] == $id_loc && $aux['precio'] == $costo){
                 $res = true;
@@ -115,7 +115,7 @@ class Core{
         $return['op'] = false;
         $host = $_POST["host"];
         $id_loc = $_POST["id_loc"];
-        if($sqlgir = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code as local_code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t2.num_ped, t1.telefono, t3.ip, t3.code as server_code, t2.id_gir FROM locales t1, giros t2, server t3 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t2.dominio=? AND t2.id_ser=t3.id_ser AND t1.eliminado=? AND t1.eliminado=t2.eliminado")){
+        if($sqlgir = $this->con->prepare("SELECT t1.t_retiro, t1.t_despacho, t1.code as local_code, t1.correo, t2.ssl, t2.dominio, t1.activar_envio, t1.lat, t1.lng, t2.num_ped, t1.telefono, t3.ip, t3.code as server_code, t2.id_gir, t1.id_loc FROM locales t1, giros t2, server t3 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t2.dominio=? AND t2.id_ser=t3.id_ser AND t1.eliminado=? AND t1.eliminado=t2.eliminado")){
             if($sqlgir->bind_param("isi", $id_loc, $host, $this->eliminado)){
                 if($sqlgir->execute()){
                     $res = $sqlgir->get_result();
@@ -132,7 +132,7 @@ class Core{
                                     $return['t_retiro'] = $result['t_retiro'];
                                     $return['t_despacho'] = $result['t_despacho'];
                                     $return['num_ped'] = $result['num_ped'] + 1;
-                                    $return['id_loc'] = $id_loc;
+                                    $return['id_loc'] = $result['id_loc'];
                                     $return['id_gir'] = $result['id_gir'];
                                     $return['code'] = $result['local_code'];
                                     $return['correo'] = $result['correo'];
@@ -1907,77 +1907,6 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($this->con->error)); }
         }
         return $info;
-
-        /*
-        $info['op'] = 2;
-        $verificar = $this->verificar();
-        if($verificar['op']){
-            $id_gir = $verificar['id_gir'];
-            $pedido_code = $_POST["pedido_code"];
-            if($sql = $this->con->prepare("SELECT t1.id_ped, t1.num_ped, t1.id_loc, t3.ssl, t3.code, t1.id_ped, t1.id_puser, t1.id_pdir, t1.despacho, t1.carro, t1.promos, t1.pre_wasabi, t1.pre_gengibre, t1.pre_soya, t1.pre_teriyaki, t1.pre_palitos, t1.comentarios, t1.costo, t1.total, t1.verify_despacho, t1.fecha FROM pedidos_aux t1, locales t2, giros t3 WHERE t1.code=? AND t1.id_loc=t2.id_loc AND t2.id_gir=t3.id_gir AND t3.id_gir=? AND t1.eliminado=? AND t1.fecha > DATE_ADD(NOW(), INTERVAL -2 DAY)")){
-                if($sql->bind_param("sii", $pedido_code, $id_gir, $this->eliminado)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1){
-                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                            if($sqlpus = $this->con->prepare("SELECT nombre, telefono FROM pedidos_usuarios WHERE id_puser=?")){
-                                if($sqlpus->bind_param("i", $result["id_puser"])){
-                                    if($sqlpus->execute()){
-                                        $resulpus = $sqlpus->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                        $info['puser'] = $resulpus;
-                                        $info['nombre'] = $resulpus['nombre'];
-                                        $info['telefono'] = $resulpus['telefono'];
-                                        if($result["despacho"] == 1 && $result["id_pdir"] != 0){
-                                            if($sqlpdi = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
-                                                if($sqlpdi->bind_param("i", $result["id_pdir"])){
-                                                    if($sqlpdi->execute()){
-                                                        $resulpdi = $sqlpdi->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                                        $info['calle'] = $resulpdi['calle'];
-                                                        $info['num'] = $resulpdi['num'];
-                                                        $info['depto'] = $resulpdi['depto'];
-                                                        $info['direccion'] = $resulpdi['direccion'];
-                                                        $info['comuna'] = $resulpdi['comuna'];
-                                                        $info['lat'] = $resulpdi['lat'];
-                                                        $info['lng'] = $resulpdi['lng'];
-                                                        $sqlpdi->free_result();
-                                                        $sqlpdi->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sqlpdi->error)); }
-                                                }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sqlpdi->error)); }
-                                            }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($this->con->error)); }
-                                        }
-                                        $info['id_ped'] = $result['id_ped'];
-                                        $info['num_ped'] = $result['num_ped'];
-                                        $info['fecha'] = $result['fecha'];
-                                        $info['carro'] = json_decode($result['carro']);
-                                        $info['promos'] = json_decode($result['promos']);
-                                        $info['pre_wasabi'] = $result['pre_wasabi'];
-                                        $info['pre_gengibre'] = $result['pre_gengibre'];
-                                        $info['pre_palitos'] = $result['pre_palitos'];
-                                        $info['pre_teriyaki'] = $result['pre_teriyaki'];
-                                        $info['pre_soya'] = $result['pre_soya'];
-                                        $info['despacho'] = $result['despacho'];
-                                        $info['comentarios'] = $result['comentarios'];
-                                        $info['costo'] = $result['costo'];
-                                        $info['total'] = $result['total'];
-                                        $info['verify_despacho'] = $result['verify_despacho'];
-                                        $info['verify_direccion'] = 0;
-                                        $info['op'] = 1;
-                                        $sqlpus->free_result();
-                                        $sqlpus->close();
-                                    }else{ $this->registrar(6, 0, 0, 'ver_detalle() #2 '.htmlspecialchars($sqlpus->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'ver_detalle() #2 '.htmlspecialchars($sqlpus->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'ver_detalle() #2 '.htmlspecialchars($this->con->error)); }
-                            $sql->free_result();
-                            $sql->close();
-                        }
-                        if($res->{"num_rows"} == 0){
-                            $this->registrar(2, 0, 0, 'ver_detalle()');
-                        }
-                    }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'ver_detalle() #3 '.htmlspecialchars($this->con->error)); }
-        }
-        */
         
     }
     public function set_web_pedido(){
@@ -2373,7 +2302,7 @@ class Core{
 
             
 
-            $verify_despacho = $this->verify_despacho($pedido['lat'], $pedido['lng'], $pedido['costo'], $id_loc, $id_gir);
+            $verify_despacho = $this->verify_despacho($pedido['despacho'], $pedido['lat'], $pedido['lng'], $pedido['costo'], $id_loc, $id_gir);
 
             $info['verify']['lat'] = $pedido['lat'];
             $info['verify']['lng'] = $pedido['lng'];
