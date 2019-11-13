@@ -195,13 +195,13 @@ class Login {
                         if($res->{"num_rows"} == 1){
 
                             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                            $id_gir = $result["id_gir"];
                             $acciones = $this->acciones($result["id_user"], 1);
 
                             if($acciones < 5){
 
                                 $pass = $result['pass'];
                                 $id_user = $result['id_user'];
-
                                 if($pass == md5($_POST['pass'])){
 
                                     if($result['id_loc'] > 0){
@@ -236,13 +236,13 @@ class Login {
                                                                         if($sqluu->bind_param("sii", $code_cookie_user, $result['id_user'], $this->eliminado)){
                                                                             if($sqluu->execute()){
                                                                                 $sqluu->close();
-                                                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
-                                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
-                                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                                                            }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #1 '.$sqluu->error); }
+                                                                        }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #1 '.$sqluu->error); }
+                                                                    }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #1 '.$this->con->error); }
                                                                     $sqlul->close();
-                                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                                                }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #2 '.$sqlul->error); }
+                                                            }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #2 '.$sqlul->error); }
+                                                        }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #2 '.$this->con->error); }
 
                                                     }
 
@@ -259,17 +259,17 @@ class Login {
                                                             if($sqlul->bind_param("iii", $enviar_cocina, $res_glocal['id_loc'], $this->eliminado)){
                                                                 if($sqlul->execute()){
                                                                     $sqlul->close();
-                                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
-                                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlul->error); }
-                                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                                                }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #3 '.$sqlul->error); }
+                                                            }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #3 '.$sqlul->error); }
+                                                        }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #3 '.$this->con->error); }
 
                                                     }
 
                                                     $sqlsg->free_result();
                                                     $sqlsg->close();
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlsg->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlsg->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                                }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #4 '.$sqlsg->error); }
+                                            }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #4 '.$sqlsg->error); }
+                                        }else{ $this->registrar(6, $result['id_loc'], $id_gir, 'login_back() #4 '.$this->con->error); }
                                     }
                                     if($result['id_loc'] == 0){
 
@@ -291,10 +291,11 @@ class Login {
                                                         }
                                                         $sqlsug->free_result();
                                                         $sqlsug->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlsug->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlsug->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                                    }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$sqlsug->error); }
+                                                }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$sqlsug->error); }
+                                            }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$this->con->error); }
                                         }
+
                                         $info['op'] = 1;
                                         $info['message'] = "Ingreso Exitoso";
                                         $_SESSION['user'] = $ses;
@@ -310,9 +311,9 @@ class Login {
                                                 $sqlic->close();
                                                 $info['op'] = 2;
                                                 $info['message'] = "Error: Correo o Contraseña invalida";
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlic->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlic->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                                            }else{ $this->registrar(6, 0, $id_gir, 'login_back() #6 '.$sqlic->error); }
+                                        }else{ $this->registrar(6, 0, $id_gir, 'login_back() #6 '.$sqlic->error); }
+                                    }else{ $this->registrar(6, 0, $id_gir, 'login_back() #6 '.$this->con->error); }
                                 
                                 }
                             }else{
@@ -323,9 +324,9 @@ class Login {
                         }
                         $sqlu->free_result();
                         $sqlu->close();
-                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlu->error); }
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlu->error); }
-            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                    }else{ $this->registrar(6, 0, 0, 'login_back() #7 '.$sqlu->error); }
+                }else{ $this->registrar(6, 0, 0, 'login_back() #7 '.$sqlu->error); }
+            }else{ $this->registrar(6, 0, 0, 'login_back() #7 '.$this->con->error); }
         }else{
             $info['op'] = 2;
             $info['message'] = "Error: Correo o Contraseña invalida";
