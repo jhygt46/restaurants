@@ -233,9 +233,9 @@ class Login {
                                                             $enviar_cocina = 1;
                                                             $code_local = $res_glocal['local_code'];
                                                         }
-
+                                                        
                                                         $info['code'] = $code_local;
-                                                        if($sqlul = $this->con->prepare("UPDATE locales SET enviar_cocina=?, code=?, cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
+                                                        if($sqlul = $this->con->prepare("UPDATE locales SET fecha_pos=now(), enviar_cocina=?, code=?, cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
                                                             if($sqlul->bind_param("isssii", $enviar_cocina, $code_local, $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado)){
                                                                 if($sqlul->execute()){
                                                                     if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?")){

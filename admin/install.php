@@ -560,21 +560,24 @@ $tablas[11]['campos'][20]['null'] = 0;
 $tablas[11]['campos'][21]['nombre'] = 'fecha_cocina';
 $tablas[11]['campos'][21]['tipo'] = 'datetime';
 $tablas[11]['campos'][21]['null'] = 0;
-$tablas[11]['campos'][22]['nombre'] = 'id_cat';
-$tablas[11]['campos'][22]['tipo'] = 'int(4)';
+$tablas[11]['campos'][22]['nombre'] = 'fecha_pos';
+$tablas[11]['campos'][22]['tipo'] = 'datetime';
 $tablas[11]['campos'][22]['null'] = 0;
-$tablas[11]['campos'][22]['k'] = 1;
-$tablas[11]['campos'][22]['kt'] = 2;
-$tablas[11]['campos'][22]['kc'] = 0;
-$tablas[11]['campos'][23]['nombre'] = 'id_gir';
+$tablas[11]['campos'][23]['nombre'] = 'id_cat';
 $tablas[11]['campos'][23]['tipo'] = 'int(4)';
 $tablas[11]['campos'][23]['null'] = 0;
 $tablas[11]['campos'][23]['k'] = 1;
-$tablas[11]['campos'][23]['kt'] = 1;
+$tablas[11]['campos'][23]['kt'] = 2;
 $tablas[11]['campos'][23]['kc'] = 0;
-$tablas[11]['campos'][24]['nombre'] = 'eliminado';
-$tablas[11]['campos'][24]['tipo'] = 'tinyint(1)';
+$tablas[11]['campos'][24]['nombre'] = 'id_gir';
+$tablas[11]['campos'][24]['tipo'] = 'int(4)';
 $tablas[11]['campos'][24]['null'] = 0;
+$tablas[11]['campos'][24]['k'] = 1;
+$tablas[11]['campos'][24]['kt'] = 1;
+$tablas[11]['campos'][24]['kc'] = 0;
+$tablas[11]['campos'][25]['nombre'] = 'eliminado';
+$tablas[11]['campos'][25]['tipo'] = 'tinyint(1)';
+$tablas[11]['campos'][25]['null'] = 0;
 
 $tablas[12]['nombre'] = 'locales_tramos';
 $tablas[12]['campos'][0]['nombre'] = 'id_lot';
@@ -1055,6 +1058,21 @@ $tablas[29]['campos'][0]['tipo'] = 'varchar(150) COLLATE utf8_spanish2_ci';
 $tablas[29]['campos'][0]['null'] = 0;
 $tablas[29]['campos'][0]['pk'] = 1;
 
+$tablas[30]['nombre'] = 'ip_error';
+$tablas[30]['campos'][0]['nombre'] = 'ip';
+$tablas[30]['campos'][0]['tipo'] = 'varchar(15) COLLATE utf8_spanish2_ci';
+$tablas[30]['campos'][0]['null'] = 0;
+$tablas[30]['campos'][0]['pk'] = 1;
+$tablas[30]['campos'][1]['nombre'] = 'fecha';
+$tablas[30]['campos'][1]['tipo'] = 'datetime';
+$tablas[30]['campos'][1]['null'] = 0;
+$tablas[30]['campos'][2]['nombre'] = 'id_gir';
+$tablas[30]['campos'][2]['tipo'] = 'int(4)';
+$tablas[30]['campos'][2]['null'] = 0;
+$tablas[30]['campos'][2]['k'] = 1;
+$tablas[30]['campos'][2]['kt'] = 1;
+$tablas[30]['campos'][2]['kc'] = 0;
+
 
 
 
@@ -1151,7 +1169,7 @@ for($i=0; $i<count($tablas); $i++){
 
 }
 
-$show = true;
+$show = false;
 
 if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI")){
     echo "BASE CREADA: ".$db_database[0]."<br/><br/>TABLAS<br/><br/>";
