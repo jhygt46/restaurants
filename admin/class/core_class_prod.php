@@ -113,7 +113,7 @@ class Core{
         return $res;
 
     }
-    private function verificar_pedido($despacho, $lat, $lng){
+    private function verificar_pedido($despacho, $lat, $lng, $costo){
 
         $return['op'] = false;
         $host = $_POST["host"];
@@ -123,15 +123,13 @@ class Core{
                 if($sqlgir->execute()){
                     $res = $sqlgir->get_result();
                     if($res->{'num_rows'} == 1){
-
                         $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        if($this->verify_despacho($despacho, $lat, $lng, $id_loc, $result['id_gir'])){
-                            $return['verify_despacho'] = 1;
-                            $ip = $this->getUserIpAddr();
-                            if($ip == $result["ip"]){
-                                if($_SERVER['SERVER_PORT'] == "443"){
-                                    $code = substr($_POST["code"], 0, 40);
-                                    if($code == $result["server_code"]){
+                        $ip = $this->getUserIpAddr();
+                        if($ip == $result["ip"]){
+                            if($_SERVER['SERVER_PORT'] == "443"){
+                                $code = substr($_POST["code"], 0, 40);
+                                if($code == $result["server_code"]){
+                                    if($this->verify_despacho($despacho, $lat, $lng, $costo, $id_loc, $result['id_gir'])){
                                         $return['op'] = true;
                                         $return['lat'] = $result['lat'];
                                         $return['lng'] = $result['lng'];
@@ -149,12 +147,13 @@ class Core{
                                         $return['url'] = $aux_url.$result['dominio'];
                                         $return['id_gir'] = $result["id_gir"];
                                         $return['envio_pos'] = (time() - strtotime($result["fecha_pos"]) < 57600) ? 1 : 0 ;
-                                    }else{ $this->registrar(15, 0, 0, 'verificar() #1 codigo no encontrado'); }
-                                }else{ $this->registrar(15, 0, 0, 'verificar() #1 puerto distinto a 443'); }
-                            }else{ $this->registrar(15, 0, 0, 'verificar() #1 ip distinta'); }
-                        }
-
-                    }else{ $this->registrar(15, 0, 0, 'verificar() #1 host no encontrada'); }
+                                    }else{
+                                        $this->registrar(15, 0, $result["id_gir"], 'verify_despacho() pedido no verificado');
+                                    }
+                                }else{ $this->registrar(15, 0, $result["id_gir"], 'verificar() #1 codigo no encontrado'); }
+                            }else{ $this->registrar(15, 0, $result["id_gir"], 'verificar() #1 puerto distinto a 443'); }
+                        }else{ $this->registrar(15, 0, $result["id_gir"], 'verificar() #1 ip distinta'); }
+                    }else{ $this->registrar(15, 0, $result["id_gir"], 'verificar() #1 host no encontrada'); }
                     $sqlgir->free_result();
                     $sqlgir->close();
                 }else{ $this->registrar(6, 0, 0, 'verificar() #2 '.$sqlgir->error); }
