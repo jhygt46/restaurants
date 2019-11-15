@@ -957,8 +957,9 @@ class Guardar{
         return $info;
     }
     private function con_cambios($id_gir){
+
         $id = ($id_gir === null) ? $this->id_gir : $id_gir ;
-        if($sql = $this->con->prepare("SELECT t1.dns, t1.ssl, t2.ip, t2.code, t1.dominio FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
+        if($sql = $this->con->prepare("SELECT t1.dns, t1.ssl, t2.ip, t1.dominio FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_ser=t2.id_ser")){
             if($sql->bind_param("ii", $id, $this->eliminado)){
                 if($sql->execute()){
                     $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -974,18 +975,19 @@ class Guardar{
                         }
                     }
                     $send['accion'] = "xS3w1Dm8Po87Wltd";
-                    $send['accion2'] = $data["code"];
 
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     if(!curl_errno($ch)){
-                        curl_exec($ch);
+                        $resp = curl_exec($ch);
+                        $this->registrar(18, 0, $this->id_gir, 'resp: '.$resp);
+                        curl_close($ch);
                     }else{
                         $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
                     }
-                    curl_close($ch);
+                    
                     $sql->free_result();
                     $sql->close();
                 }else{ $this->registrar(6, 0, $this->id_gir, 'con_cambios() '.htmlspecialchars($sql->error)); }

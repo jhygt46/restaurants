@@ -27,11 +27,11 @@ $tablas[0]['campos'][1]['values'] = ["Server 1"];
 $tablas[0]['campos'][2]['nombre'] = 'ip';
 $tablas[0]['campos'][2]['tipo'] = 'varchar(15) COLLATE utf8_spanish2_ci';
 $tablas[0]['campos'][2]['null'] = 0;
-$tablas[0]['campos'][2]['values'] = ["35.222.247.75"];
+$tablas[0]['campos'][2]['values'] = ["35.184.226.86"];
 $tablas[0]['campos'][3]['nombre'] = 'code';
 $tablas[0]['campos'][3]['tipo'] = 'varchar(40) COLLATE utf8_spanish2_ci';
 $tablas[0]['campos'][3]['null'] = 0;
-$tablas[0]['campos'][3]['values'] = ["$)7_&6p@)N>KGh[H{GttdQ\'Pt$>3sYb%+/{.wM)"];
+$tablas[0]['campos'][3]['values'] = ["$)7_&6p@)N>KGh[H{GttdQs'Pt$>3sYb%+/{.wM)"];
 
 $tablas[1]['nombre'] = 'giros';
 $tablas[1]['campos'][0]['nombre'] = 'id_gir';
