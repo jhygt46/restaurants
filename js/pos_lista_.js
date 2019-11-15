@@ -187,6 +187,8 @@ function html_home_pedidos(index){
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
 
+    console.log(pedido);
+
     var sub_total = get_precio_carro(pedido);
 
     if(pedido.despacho == 0){
@@ -248,7 +250,14 @@ function html_home_pedidos(index){
     var btn_carro = create_element_class_inner('btn_carro material-icons', 'add_shopping_cart');
     btn_carro.onclick = function(){ ver_detalle_carro(index) };
 
-    if(!pedido.hasOwnProperty('mensajes_cont')){
+    if(pedido.despacho == 1){
+        var btn_map = create_element_class('btn_map');
+        btn_map.onclick = function(){ abrir_map(pedido.lat, pedido.lng) };
+        Div.appendChild(btn_map);
+    }
+
+    /*
+    if(pedido.hasOwnProperty('mensajes_cont')){
         var btn_chat = create_element_class('btn_chat');
         btn_chat.onclick = function(){ abrir_chat(index) };
         Div.appendChild(btn_chat);
@@ -262,10 +271,11 @@ function html_home_pedidos(index){
             Div.appendChild(chat_num);
         }
     }
-    //if(pedido.alert != '' && pedido.alert !== undefined){
+    if(pedido.alert != '' && pedido.alert !== undefined){
         var p_alert = create_element_class_inner('p_alert', pedido.alert);
         Div.appendChild(p_alert);
-    //}
+    }
+    */
 
     Div.appendChild(p_estado);
     Div.appendChild(p_cont);
