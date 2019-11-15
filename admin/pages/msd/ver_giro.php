@@ -181,24 +181,6 @@ function init_chart(){
         <div class="cont_pag">
             <div class="list_titulo clearfix">
                 <div class="titulo" onclick="navlink('pages/msd/locales.php')"><h1>LOCALES</h1><h2>Todos los locales que tiene tu negocio</h2></div>
-                <ul class="opts clearfix">
-                    <li class="opt" onclick="navlink('pages/msd/locales.php')">AGREGAR/MODIFICAR</li>
-                </ul>
-            </div>
-            <div class="listado_items">
-                <?php
-                for($i=0; $i<count($list); $i++){
-                    $id_n = $list[$i][$id_list];
-                    $nombre = $list[$i]['nombre'];
-                    $code = $list[$i]['code'];
-                ?>
-                <div class="l_item">
-                    <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic5" href="../locales.php?id_loc=<?php echo $id_n; ?>" target="_self"></a>
-                    </div>
-                </div>
-                <?php } ?>
             </div>
         </div>
     </div>
