@@ -737,12 +737,15 @@ $tablas[17]['campos'][3]['null'] = 0;
 $tablas[17]['campos'][4]['nombre'] = 'cont';
 $tablas[17]['campos'][4]['tipo'] = 'smallint(2)';
 $tablas[17]['campos'][4]['null'] = 0;
-$tablas[17]['campos'][5]['nombre'] = 'id_gir';
-$tablas[17]['campos'][5]['tipo'] = 'int(4)';
+$tablas[17]['campos'][5]['nombre'] = 'fecha_ultimo';
+$tablas[17]['campos'][5]['tipo'] = 'datetime';
 $tablas[17]['campos'][5]['null'] = 0;
-$tablas[17]['campos'][6]['nombre'] = 'eliminado';
-$tablas[17]['campos'][6]['tipo'] = 'tinyint(1)';
+$tablas[17]['campos'][6]['nombre'] = 'id_gir';
+$tablas[17]['campos'][6]['tipo'] = 'int(4)';
 $tablas[17]['campos'][6]['null'] = 0;
+$tablas[17]['campos'][7]['nombre'] = 'eliminado';
+$tablas[17]['campos'][7]['tipo'] = 'tinyint(1)';
+$tablas[17]['campos'][7]['null'] = 0;
 
 $tablas[18]['nombre'] = 'pedidos_direccion';
 $tablas[18]['campos'][0]['nombre'] = 'id_pdir';
@@ -1057,21 +1060,6 @@ $tablas[29]['campos'][0]['nombre'] = 'correo';
 $tablas[29]['campos'][0]['tipo'] = 'varchar(150) COLLATE utf8_spanish2_ci';
 $tablas[29]['campos'][0]['null'] = 0;
 $tablas[29]['campos'][0]['pk'] = 1;
-
-$tablas[30]['nombre'] = 'ip_error';
-$tablas[30]['campos'][0]['nombre'] = 'ip';
-$tablas[30]['campos'][0]['tipo'] = 'varchar(15) COLLATE utf8_spanish2_ci';
-$tablas[30]['campos'][0]['null'] = 0;
-$tablas[30]['campos'][0]['pk'] = 1;
-$tablas[30]['campos'][1]['nombre'] = 'fecha';
-$tablas[30]['campos'][1]['tipo'] = 'datetime';
-$tablas[30]['campos'][1]['null'] = 0;
-$tablas[30]['campos'][2]['nombre'] = 'id_gir';
-$tablas[30]['campos'][2]['tipo'] = 'int(4)';
-$tablas[30]['campos'][2]['null'] = 0;
-$tablas[30]['campos'][2]['k'] = 1;
-$tablas[30]['campos'][2]['kt'] = 1;
-$tablas[30]['campos'][2]['kc'] = 0;
 
 
 

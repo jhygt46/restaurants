@@ -188,7 +188,8 @@ class Core{
                         if($res->{'num_rows'} == 0){
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
-                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, id_gir, eliminado) VALUES (?, ?, ?, ?, ?, ?)")){
+
+                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, fecha_ultimo, id_gir, eliminado) VALUES (?, ?, ?, ?, now(), ?, ?)")){
                                 if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminado, $this->eliminado)){
                                     if($sqlipu->execute()){
                                         $id_puser = $this->con->insert_id;
@@ -210,9 +211,16 @@ class Core{
                         if($res->{'num_rows'} == 1){
 
                             $id_puser = $puser["id_puser"];
-                            $cont = $res->fetch_all(MYSQLI_ASSOC)[0]["cont"] + 1;
+                            $puser_res = $res->fetch_all(MYSQLI_ASSOC)[0];
 
-                            if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=?, nombre=?, telefono=? WHERE id_puser=?")){
+                            $cont = $puser_res["cont"] + 1;
+                            $dif_usuario_tiempo = time() - strtotime($puser_res["fecha_ultimo"]);
+                            if($dif_usuario_tiempo < 43200){
+                                $t_user = intval($dif_usuario_tiempo/3600);
+                                $info['alert'] = "Usuarios hizo otro pedidos antes de ".$t_user." hrs";
+                            }
+                            
+                            if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=?, fecha_ultimo=now(), nombre=?, telefono=? WHERE id_puser=?")){
                                 if($sqlupu->bind_param("issi", $cont, $pedido["nombre"], $pedido["telefono"], $id_puser)){
                                     if($sqlupu->execute()){
                                         $sqlupu->close();
