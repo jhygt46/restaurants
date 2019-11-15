@@ -256,7 +256,7 @@ class Core{
             $pedido_code = $this->pass_generate(20);
             $tipo = 1;
 
-            if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, pre_gengibre, pre_wasabi, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+            if($sqlipa = $this->con->prepare("INSERT INTO pedidos_aux (num_ped, code, fecha, despacho, tipo, id_loc, carro, promos, pre_gengibre, pre_wasabi, pre_palitos, pre_teriyaki, pre_soya, comentarios, costo, total, id_puser, id_pdir, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                 if($sqlipa->bind_param("issiiissiiiiisiiiii", $verificar['num_ped'], $pedido_code, $fecha_stgo, $pedido['despacho'], $tipo, $id_loc, json_encode($_POST['carro']), json_encode($promos), $pedido["pre_gengibre"], $pedido["pre_wasabi"], $pedido["pre_palitos"], $pedido["pre_teriyaki"], $pedido["pre_soya"], $pedido["comentarios"], $pedido["costo"], $pedido["total"], $id_puser, $pdir_id, $id_gir)){
                     if($sqlipa->execute()){
 
@@ -337,8 +337,6 @@ class Core{
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #6 '.htmlspecialchars($sqlipa->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #6 '.htmlspecialchars($this->con->error)); }
             
-        }else{
-            $this->registrar(15, 0, 0, 'Error Curl enviar_pedido()');
         }
         return $info;
     }
