@@ -740,12 +740,21 @@ $tablas[17]['campos'][4]['null'] = 0;
 $tablas[17]['campos'][5]['nombre'] = 'fecha_ultimo';
 $tablas[17]['campos'][5]['tipo'] = 'datetime';
 $tablas[17]['campos'][5]['null'] = 0;
-$tablas[17]['campos'][6]['nombre'] = 'id_gir';
-$tablas[17]['campos'][6]['tipo'] = 'int(4)';
+$tablas[17]['campos'][6]['nombre'] = 'pedido_falso';
+$tablas[17]['campos'][6]['tipo'] = 'tinyint(1)';
 $tablas[17]['campos'][6]['null'] = 0;
-$tablas[17]['campos'][7]['nombre'] = 'eliminado';
+$tablas[17]['campos'][7]['nombre'] = 'tipo';
 $tablas[17]['campos'][7]['tipo'] = 'tinyint(1)';
 $tablas[17]['campos'][7]['null'] = 0;
+$tablas[16]['campos'][8]['nombre'] = 'id_gir';
+$tablas[16]['campos'][8]['tipo'] = 'int(4)';
+$tablas[16]['campos'][8]['null'] = 0;
+$tablas[16]['campos'][8]['k'] = 1;
+$tablas[16]['campos'][8]['kt'] = 1;
+$tablas[16]['campos'][8]['kc'] = 0;
+$tablas[17]['campos'][9]['nombre'] = 'eliminado';
+$tablas[17]['campos'][9]['tipo'] = 'tinyint(1)';
+$tablas[17]['campos'][9]['null'] = 0;
 
 $tablas[18]['nombre'] = 'pedidos_direccion';
 $tablas[18]['campos'][0]['nombre'] = 'id_pdir';
@@ -1061,40 +1070,8 @@ $tablas[29]['campos'][0]['tipo'] = 'varchar(150) COLLATE utf8_spanish2_ci';
 $tablas[29]['campos'][0]['null'] = 0;
 $tablas[29]['campos'][0]['pk'] = 1;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// TRUE SOLO MUESTRA - FALSE LAS CREA
+$show = false;
 
 for($i=0; $i<count($tablas); $i++){
 
@@ -1157,7 +1134,7 @@ for($i=0; $i<count($tablas); $i++){
 
 }
 
-$show = false;
+
 
 if($con->query("CREATE DATABASE IF NOT EXISTS ".$db_database[0]." CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI")){
     echo "BASE CREADA: ".$db_database[0]."<br/><br/>TABLAS<br/><br/>";

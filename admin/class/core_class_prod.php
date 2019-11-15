@@ -189,8 +189,8 @@ class Core{
                             $puser_code = $this->pass_generate(20);
                             $cont = 1;
 
-                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, fecha_ultimo, id_gir, eliminado) VALUES (?, ?, ?, ?, now(), ?, ?)")){
-                                if($sqlipu->bind_param("sssiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminado, $this->eliminado)){
+                            if($sqlipu = $this->con->prepare("INSERT INTO pedidos_usuarios (codigo, nombre, telefono, cont, fecha_ultimo, tipo, id_gir, eliminado) VALUES (?, ?, ?, ?, now(), ?, ?, ?)")){
+                                if($sqlipu->bind_param("sssiiii", $puser_code, $pedido["nombre"], $pedido["telefono"], $cont, $this->eliminado, $id_gir, $this->eliminado)){
                                     if($sqlipu->execute()){
                                         $id_puser = $this->con->insert_id;
                                         $info['set_puser'] = 1;
@@ -219,7 +219,7 @@ class Core{
                                 $t_user = intval($dif_usuario_tiempo/3600);
                                 $info['alert'] = "Usuarios hizo otro pedidos antes de ".$t_user." hrs";
                             }
-                            
+
                             if($sqlupu = $this->con->prepare("UPDATE pedidos_usuarios SET cont=?, fecha_ultimo=now(), nombre=?, telefono=? WHERE id_puser=?")){
                                 if($sqlupu->bind_param("issi", $cont, $pedido["nombre"], $pedido["telefono"], $id_puser)){
                                     if($sqlupu->execute()){
@@ -1738,6 +1738,7 @@ class Core{
                                     $pedido_usuarios = $sqlpu->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                                     $res['nombre'] = $pedido_usuarios['nombre'];
                                     $res['telefono'] = $pedido_usuarios['telefono'];
+                                    $res['cont'] = $pedido_usuarios['cont'];
                                     if($res['despacho'] == 1){
                                         if($sqlpd = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
                                             if($sqlpd->bind_param("i", $row['id_pdir'])){
@@ -1749,7 +1750,7 @@ class Core{
                                                     $res['calle'] = $pedido_direccion['calle'];
                                                     $res['num'] = $pedido_direccion['num'];
                                                     $res['depto'] = $pedido_direccion['depto'];
-                                                    $res['comuna'] = $pedido_direccion['num'];
+                                                    $res['comuna'] = $pedido_direccion['comuna'];
                                                     $sqlpd->free_result();
                                                     $sqlpd->close();
                                                 }else{ $this->registrar(6, $id_loc, 0, 'get_ultimos_pedidos_pos() #1 '.htmlspecialchars($sqlpd->error)); }
