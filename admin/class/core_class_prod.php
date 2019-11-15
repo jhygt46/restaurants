@@ -337,6 +337,8 @@ class Core{
                 }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #6 '.htmlspecialchars($sqlipa->error)); }
             }else{ $this->registrar(6, $id_loc, $id_gir, 'enviar_pedido() #6 '.htmlspecialchars($this->con->error)); }
             
+        }else{
+            $this->registrar(15, 0, 0, 'Error Curl enviar_pedido()');
         }
         return $info;
     }
