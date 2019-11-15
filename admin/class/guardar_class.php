@@ -964,7 +964,7 @@ class Guardar{
                 if($sql->execute()){
                     $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     if($data["dns"] == 0){
-                        $url = "http://".$data["ip"]."/?url=".$dominio;
+                        $url = "http://".$data["ip"]."/?url=".$data["dominio"];
                     }
                     if($data["dns"] == 1){
                         if($data["ssl"] == 0){
@@ -981,8 +981,7 @@ class Guardar{
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
                     if(!curl_errno($ch)){
-                        $resp = curl_exec($ch);
-                        $this->registrar(18, 0, $this->id_gir, 'resp: '.$resp.' // url: '.$url);
+                        curl_exec($ch);
                         curl_close($ch);
                     }else{
                         $this->registrar(15, 0, $this->id_gir, 'con_cambios() curl error');
