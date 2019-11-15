@@ -186,8 +186,7 @@ function init_chart(){
                 </ul>
             </div>
             <div class="listado_items">
-                <?php 
-                
+                <?php
                 for($i=0; $i<count($list); $i++){
                     $id_n = $list[$i][$id_list];
                     $nombre = $list[$i]['nombre'];
