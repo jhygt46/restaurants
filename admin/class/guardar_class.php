@@ -2175,68 +2175,142 @@ class Guardar{
         return $info;
     }
     private function eliminar_productos(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Producto no pudo ser eliminado";
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
             $id = explode("/", $_POST['id']);
             $nombre = $_POST["nombre"];
+
             if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("iiii", $id[1], $this->id_cat, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
+
                         $res = $sql->get_result();
                         if($res->{"num_rows"} == 1){
+
                             if($sqldcp = $this->con->prepare("DELETE FROM cat_pros WHERE id_pro=? AND id_cae=?")){
                                 if($sqldcp->bind_param("ii", $id[0], $id[1])){
                                     if($sqldcp->execute()){
-                                        if($sqlup = $this->con->prepare("UPDATE productos SET eliminado='1' WHERE id_pro=? AND id_gir=?")){
-                                            if($sqlup->bind_param("ii", $id[0], $this->id_gir)){
-                                                if($sqlup->execute()){
-                                                    $info['tipo'] = "success";
-                                                    $info['titulo'] = "Eliminado";
-                                                    $info['texto'] = "Producto ".$nombre." Eliminado";
-                                                    $info['reload'] = 1;
-                                                    $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
-                                                    $this->con_cambios(null);
-                                                    $sqlup->close();
-                                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
-                                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($this->con->error)); }
+
+                                        if($sqlb = $this->con->prepare("SELECT * FROM cat_pros WHERE id_pro=?")){
+                                            if($sqlb->bind_param("i", $id[0])){
+                                                if($sqlb->execute()){
+
+                                                    $resb = $sqlb->get_result();
+                                                    if($resb->{"num_rows"} == 0){
+
+                                                        if($sqla = $this->con->prepare("SELECT t1.nombre FROM categorias t1, promocion_productos t2 WHERE t2.id_pro=? AND t1.id_cae=t2.id_cae AND t1.id_gir=? AND t1.eliminado=?")){
+                                                            if($sqla->bind_param("iii", $id[0], $this->id_gir, $this->eliminado)){
+                                                                if($sqla->execute()){
+                                                                
+                                                                    $resa = $sqla->get_result();
+                                                                    if($resa->{"num_rows"} > 0){
+
+                                                                        $nombre1 = $resa->fetch_all(MYSQLI_ASSOC)[0]["nombre"];
+                                                                        $info['tipo'] = "error";
+                                                                        $info['titulo'] = "Error";
+                                                                        $info['texto'] = "El producto no pudo ser eliminado, por que existe una Promocion relacionada al producto (".$nombre1.")";
+
+                                                                    }
+                                                                    if($resa->{"num_rows"} == 0){
+
+                                                                        if($sqlup = $this->con->prepare("UPDATE productos SET eliminado='1' WHERE id_pro=? AND id_gir=?")){
+                                                                            if($sqlup->bind_param("ii", $id[0], $this->id_gir)){
+                                                                                if($sqlup->execute()){
+                                                                                    $info['tipo'] = "success";
+                                                                                    $info['titulo'] = "Eliminado";
+                                                                                    $info['texto'] = "Producto ".$nombre." Eliminado";
+                                                                                    $info['reload'] = 1;
+                                                                                    $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
+                                                                                    $sqlup->close();
+                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
+                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($sqlup->error)); }
+                                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #1 '.htmlspecialchars($this->con->error)); }
+                                                                        
+                                                                    }
+                                                                    $sqla->close();
+                                            
+                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #4 '.htmlspecialchars($sqla->error)); }
+                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #4 '.htmlspecialchars($sqla->error)); }
+                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #4 '.htmlspecialchars($this->con->error)); }
+                                            
+                                                    }
+                                                    $sqlb->free_result();
+                                                    $sqlb->close();
+
+                                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqlb->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqlb->error)); }
+                                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($this->con->error)); }
+                                        
+                                        $this->con_cambios(null);
                                         $sqldcp->close();
+
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqldcp->error)); }
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($sqldcp->error)); }
                             }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #2 '.htmlspecialchars($this->con->error)); }
+                        
                         }
+
                         if($sql->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'eliminar_productos()'); }
+                        
                         $sql->free_result();
                         $sql->close();
+
                     }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_productos() #3 '.htmlspecialchars($this->con->error)); }
+
         }else{ $this->registrar(2, 0, 0, 'eliminar_productos()'); }
+
         return $info;
     }
     private function eliminar_categoria(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Categoria no pudo ser eliminado";
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = explode("/", $_POST['id']);
-            if($sql = $this->con->prepare("UPDATE categorias SET eliminado='1' WHERE id_cae=? AND id_gir=?")){
-                if($sql->bind_param("ii", $id[0], $this->id_gir)){
-                    if($sql->execute()){
-                        $info['tipo'] = "success";
-                        $info['titulo'] = "Eliminado";
-                        $info['texto'] = "Categoria Eliminado";
-                        $info['reload'] = 1;
-                        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
-                        $this->con_cambios(null);
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() '.htmlspecialchars($sql->error)); }
+            if($sqla = $this->con->prepare("SELECT t1.nombre FROM categorias t1, promocion_categoria t2 WHERE t2.id_cae2=? AND t1.id_cae=t2.id_cae1 AND t1.id_gir=? AND t1.eliminado=?")){
+                if($sqla->bind_param("iii", $id[0], $this->id_gir, $this->eliminado)){
+                    if($sqla->execute()){
+
+                        $res = $sqla->get_result();
+                        if($res->{"num_rows"} > 0){
+                            $nombre = $res->fetch_all(MYSQLI_ASSOC)[0]["nombre"];
+                            $info['tipo'] = "error";
+                            $info['titulo'] = "Error";
+                            $info['texto'] = "La categoria no pudo ser eliminado, por que existe una Promocion relacionada a la categoria (".$nombre.")";
+                        }
+                        if($res->{"num_rows"} == 0){
+                            if($sql = $this->con->prepare("UPDATE categorias SET eliminado='1' WHERE id_cae=? AND id_gir=?")){
+                                if($sql->bind_param("ii", $id[0], $this->id_gir)){
+                                    if($sql->execute()){
+                                        $info['tipo'] = "success";
+                                        $info['titulo'] = "Eliminado";
+                                        $info['texto'] = "Categoria Eliminado";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/categorias.php?id=".$id[0]."&parent_id=".$id[1];
+                                        $this->con_cambios(null);
+                                        $sql->close();
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #2 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #2 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #2 '.htmlspecialchars($sql->error)); }
+                        }
+                        $sqla->free_result();
+                        $sqla->close();
+
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #1 '.htmlspecialchars($sqla->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #1 '.htmlspecialchars($sqla->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_categoria() #1 '.htmlspecialchars($this->con->error)); }
         }else{ $this->registrar(2, 0, 0, 'eliminar_categoria()'); }
         return $info;
+
     }
     private function crear_pagina(){
         $info['op'] = 2;
