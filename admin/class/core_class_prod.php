@@ -942,7 +942,7 @@ class Core{
     }
     public function get_select($id, $cantidad, $selected, $id_cae){
         $select = "<select id='".$id."' class='select_arbol'>";
-        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."/".$id_cae."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."'>".$i."</option>"; } }
+        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."/".$id_cae."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."/".$id_cae."'>".$i."</option>"; } }
         $select .="</select>";
         return $select;
     }
