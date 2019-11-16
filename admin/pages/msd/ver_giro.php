@@ -182,7 +182,7 @@ function init_chart(){
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1>LOCALES</h1><h2>Todos los locales que tiene tu negocio</h2></div>
             </div>
-            <div class=""><img src="images/locales.png" alt="" /></div>
+            <div class=""><img src="images/locales_icon.png" alt="" /></div>
         </div>
     </div>
     <div class="cont_pagina">
