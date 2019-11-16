@@ -220,13 +220,10 @@ body .relative {
   left: 0px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo h1 {
-  font-size: 30px;
+  font-size: 22px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo h2 {
-  font-size: 20px;
-}
-.pagina .cont_pagina .cont_pag .list_titulo .foto_local {
-  right: 10px;
+  font-size: 14px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .opts {
   position: absolute;
@@ -244,9 +241,6 @@ body .relative {
   height: 28px;
   background: url("../images/icons-set.png") no-repeat;
   background-position: -776px -672px;
-}
-.pagina .cont_pagina .cont_pag .h_local {
-  height: 120px;
 }
 .pagina .cont_pagina .cont_pag .listado_items {
   padding: 60px 2% 10px 2%;

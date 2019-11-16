@@ -179,9 +179,9 @@ function init_chart(){
     </div>
     <div class="cont_pagina">
         <div class="cont_pag" onclick="navlink('pages/msd/locales.php')">
-            <div class="list_titulo h_local">
-                <div class="titulo valign"><h1>LOCALES</h1><h2>Todos los locales que tiene tu negocio</h2></div>
-                <div class="foto_local valign"><img src="images/locales_icon.png" alt="" /></div>
+            <div class="list_titulo" style="height: 120px">
+                <div class="valign" style="left: 10px"><h1 style="font-size: 30px">LOCALES</h1><h2 style="font-size: 20px">Todos los locales que tiene tu negocio</h2></div>
+                <div class="valign" style="right: 10px"><img src="images/locales_icon.png" alt="" /></div>
             </div>
         </div>
     </div>
