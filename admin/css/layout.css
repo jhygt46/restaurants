@@ -213,6 +213,7 @@ body .relative {
 
 .pagina .cont_pagina .cont_pag .list_titulo {
   position: relative;
+  height: 120px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo {
   position: absolute;
@@ -220,10 +221,13 @@ body .relative {
   left: 0px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo h1 {
-  font-size: 22px;
+  font-size: 30px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo h2 {
-  font-size: 14px;
+  font-size: 20px;
+}
+.pagina .cont_pagina .cont_pag .list_titulo .foto_local {
+  right: 10px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .opts {
   position: absolute;
@@ -316,7 +320,7 @@ body .relative {
   background-position: -294px 1px;
 }
 .pagina .cont_pagina .cont_pag .listado_items .l_item .detalle_item .ic16 {
-  background-position: -713px -384px;
+  background-position: -718px -385px;
 }
 .pagina .cont_pagina .cont_pag .listado_items .l_item .detalle_item .ic17 {
   background-position: -54px -335px;

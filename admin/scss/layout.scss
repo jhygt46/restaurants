@@ -223,16 +223,20 @@ body {
         .cont_pag{
             .list_titulo{
                 position: relative;
+                height: 120px;
                 .titulo{
                     position: absolute;
                     top: 0px;
                     left: 0px;
                     h1{
-                        font-size: 22px;
+                        font-size: 30px;
                     }
                     h2{
-                        font-size: 14px;
+                        font-size: 20px;
                     }
+                }
+                .foto_local{
+                    right: 10px;
                 }
                 .opts{
                     position: absolute;
