@@ -1003,6 +1003,9 @@ $tablas[25]['campos'][1]['kc'] = 0;
 $tablas[25]['campos'][2]['nombre'] = 'cantidad';
 $tablas[25]['campos'][2]['tipo'] = 'int(4)';
 $tablas[25]['campos'][2]['null'] = 0;
+$tablas[25]['campos'][3]['nombre'] = 'parent_id';
+$tablas[25]['campos'][3]['tipo'] = 'int(4)';
+$tablas[25]['campos'][3]['null'] = 0;
 
 $tablas[26]['nombre'] = 'seguimiento';
 $tablas[26]['campos'][0]['nombre'] = 'id_seg';

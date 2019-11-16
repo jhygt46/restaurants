@@ -873,6 +873,7 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #3 '.htmlspecialchars($this->con->error)); }
     }
     public function get_arbol_productos($that){
+
         if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo='0'")){
             if($sql->bind_param("ii", $this->id_cat, $this->eliminado)){
                 if($sql->execute()){
@@ -883,6 +884,7 @@ class Core{
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($this->con->error)); } 
+        
     }
     public function process_arbol_draw($cats, $parent_id, $that){
         $in = [];
@@ -920,6 +922,7 @@ class Core{
         return $div;
     }
     public function process_productos_draw($cats, $id_cae, $that){
+
         $div = "<div style='parent_arbol'>";
         for($i=0; $i<count($cats); $i++){
             $cat = $cats[$i];
@@ -930,15 +933,16 @@ class Core{
                         $cantidad = $that['productos'][$x]['cantidad'];
                     }
                 }
-                $div .= "<div class='clearfix'><div class='cantidad_arbol'>".$this->get_select("sel-pro-".$cat['id_pro'], 1000, $cantidad)."</div><div class='nombre_arbol'>".$cat['prod_nombre']."</div></div>";
+                $div .= "<div class='clearfix'><div class='cantidad_arbol'>".$this->get_select("sel-pro-".$cat['id_pro'], 100, $cantidad, $id_cae)."</div><div class='nombre_arbol'>".$cat['prod_nombre']."</div></div>";
             }
         }
         $div .= "</div>";
         return $div;
+
     }
-    public function get_select($id, $cantidad, $selected){
+    public function get_select($id, $cantidad, $selected, $id_cae){
         $select = "<select id='".$id."' class='select_arbol'>";
-        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."'>".$i."</option>"; } }
+        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."/".$id_cae."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."'>".$i."</option>"; } }
         $select .="</select>";
         return $select;
     }
