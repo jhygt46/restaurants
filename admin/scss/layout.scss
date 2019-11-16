@@ -223,7 +223,6 @@ body {
         .cont_pag{
             .list_titulo{
                 position: relative;
-                height: 120px;
                 .titulo{
                     position: absolute;
                     top: 0px;
@@ -255,6 +254,9 @@ body {
                         }
                     }
                 }
+            }
+            .h_local{
+                height: 120px;
             }
             .listado_items{
                 padding: 60px 2% 10px 2%;

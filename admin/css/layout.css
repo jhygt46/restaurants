@@ -213,7 +213,6 @@ body .relative {
 
 .pagina .cont_pagina .cont_pag .list_titulo {
   position: relative;
-  height: 120px;
 }
 .pagina .cont_pagina .cont_pag .list_titulo .titulo {
   position: absolute;
@@ -245,6 +244,9 @@ body .relative {
   height: 28px;
   background: url("../images/icons-set.png") no-repeat;
   background-position: -776px -672px;
+}
+.pagina .cont_pagina .cont_pag .h_local {
+  height: 120px;
 }
 .pagina .cont_pagina .cont_pag .listado_items {
   padding: 60px 2% 10px 2%;
