@@ -182,7 +182,7 @@ function init_chart(){
             <div class="list_titulo">
                 <div class="titulo valign"><h1>LOCALES</h1><h2>Todos los locales que tiene tu negocio</h2></div>
             </div>
-            <div class="valign" style="right: 10px"><img src="images/locales_icon.png" alt="" /></div>
+            <div style="position: relative"><div class="valign" style="right: 10px"><img src="images/locales_icon.png" alt="" /></div></div>
         </div>
     </div>
     <div class="cont_pagina">
