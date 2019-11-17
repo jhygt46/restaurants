@@ -10,6 +10,10 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
+echo "<pre>";
+print_r($core->list_arbol_cats_prods());
+echo "</pre>";
+exit;
 
 if($core->id_user == 1 || $core->re_venta == 1){
 
