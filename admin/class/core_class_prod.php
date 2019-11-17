@@ -921,7 +921,7 @@ class Core{
         }
         $div .= "</div>";
         return $div;
-        
+
     }
     public function process_productos_draw($cats, $id_cae, $that){
 
@@ -931,7 +931,7 @@ class Core{
             if($cat['id_cae'] == $id_cae && $cat['id_pro'] !== null){
                 $cantidad = 0;
                 for($x=0; $x<count($that['productos']); $x++){
-                    if($that['productos'][$x]['id_pro'] == $cat['id_pro']){
+                    if($that['productos'][$x]['id_pro'] == $cat['id_pro'] && $that['productos'][$x]['parent_id'] == $cat['id_cae']){
                         $cantidad = $that['productos'][$x]['cantidad'];
                     }
                 }
