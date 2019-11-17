@@ -203,7 +203,6 @@ function textme(x, i){
     return false;
 }
 function eliminar(accion, id, tipo, name){
-
     var msg = {
         title: "Eliminar "+tipo, 
         text: "Esta seguro que desea eliminar a "+name, 
@@ -212,9 +211,7 @@ function eliminar(accion, id, tipo, name){
         accion: accion,
         id: id,
     };
-
     confirm(msg);
-        
 }
 function add_ses(id, correo){
     var msg = {
@@ -249,7 +246,6 @@ function add_ssl(id, dominio){
     };
     confirm_warning(msg);
 }
-
 function confirm(message){
     
     swal({   
@@ -272,6 +268,9 @@ function confirm(message){
                 data: send,
                 success: function(data){
                     
+                    console.log("DATA1");
+                    console.log(data);
+
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,
@@ -286,13 +285,11 @@ function confirm(message){
 
                 }, error: function(){}
             });
- 
+
         }
-        
     });
     
 }
-
 function confirm_warning(message){
     
     swal({   
@@ -316,6 +313,9 @@ function confirm_warning(message){
                 data: send,
                 success: function(data){
                     
+                    console.log("DATA1");
+                    console.log(data);
+
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,
