@@ -10,6 +10,12 @@
 
     require_once DIR."admin/class/core_class_prod.php";
     $core = new Core();
+
+    echo "<pre>";
+    print_r($core->list_arbol_cats_prods());
+    echo "</pre>";
+    exit;
+
     $inicio = $core->inicio();
     $core_class_iniciada = 0;
 
