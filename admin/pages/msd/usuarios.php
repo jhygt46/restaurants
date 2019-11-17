@@ -11,7 +11,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 echo "<pre>";
-print_r($core->list_arbol_cats_prods());
+print_r($core->get_arbol_productos2());
 echo "</pre>";
 exit;
 
