@@ -2823,7 +2823,7 @@ class Guardar{
                                                                         $cae_val = $_POST['sel-cae-'.$value['id_cae']];
                                                                         if($cae_val > 0){
 
-                                                                            $this->registrar(18, 0, $this->id_gir, $id_cae.' / '.$value["id_cae"]);
+                                                                            $this->registrar(18, 0, $this->id_gir, 'promocion_categoria: '.$id_cae.' // '.$value["id_cae"]);
 
                                                                             if($sqlipc = $this->con->prepare("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES (?, ?, ?)")){
                                                                                 if($sqlipc->bind_param("iii", $id_cae, $value["id_cae"], $cae_val)){
@@ -2838,7 +2838,7 @@ class Guardar{
                                                                         $pro_val = $_POST['sel-pro-'.$value['id_pro'].'-'.$value['id_cae']];
                                                                         if($pro_val > 0){
 
-                                                                            $this->registrar(18, 0, $this->id_gir, $id_cae.' / '.$value["id_pro"]);
+                                                                            $this->registrar(18, 0, $this->id_gir, 'promocion_productos: '.$id_cae.' // '.$value["id_pro"]);
 
                                                                             if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad, parent_id) VALUES (?, ?, ?, ?)")){
                                                                                 if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], $pro_val, $value['id_cae'])){
