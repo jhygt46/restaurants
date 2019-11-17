@@ -2832,10 +2832,10 @@ class Guardar{
                                                                         }
                                                                     }
                                                                     if($value['id_pro'] !== null){
-                                                                        $pro_val = $_POST['sel-pro-'.$value['id_pro']];
+                                                                        $pro_val = $_POST['sel-pro-'.$value['id_pro'].'-'.$value['id_cae']];
                                                                         if($pro_val > 0){
                                                                             if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad, parent_id) VALUES (?, ?, ?, ?)")){
-                                                                                if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], $pro_val, $pro_val)){
+                                                                                if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], $pro_val, $value['id_cae'])){
                                                                                     if($sqlipp->execute()){
                                                                                         $sqlipp->close();
                                                                                     }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
