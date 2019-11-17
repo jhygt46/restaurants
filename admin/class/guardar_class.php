@@ -2835,6 +2835,7 @@ class Guardar{
                                                                             if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad, parent_id) VALUES (?, ?, ?, ?)")){
                                                                                 if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], intval($pro_val[0]), intval($pro_val[1]))){
                                                                                     if($sqlipp->execute()){
+                                                                                        $this->registrar(18, 0, $this->id_gir, $id_cae.' '.$value["id_pro"].' '.intval($pro_val[0]).' '.intval($pro_val[1]));
                                                                                         $sqlipp->close();
                                                                                     }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
                                                                                 }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
