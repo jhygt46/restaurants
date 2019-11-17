@@ -847,15 +847,11 @@ class Core{
             if($sqlpre->bind_param("ii", $id_cae, $this->eliminado)){
                 if($sqlpre->execute()){
                     $aux['precio'] = $sqlpre->get_result()->fetch_all(MYSQLI_ASSOC)[0]["precio"];
-                    $sqlpre->free_result();
-                    $sqlpre->close();
                     if($sqlcat = $this->con->prepare("SELECT id_cae2 as id_cae, cantidad FROM promocion_categoria WHERE id_cae1=?")){
                         if($sqlcat->bind_param("i", $id_cae)){
                             if($sqlcat->execute()){
                                 $aux['categorias'] = $sqlcat->get_result()->fetch_all(MYSQLI_ASSOC);
-                                $sqlcat->free_result();
-                                $sqlcat->close();
-                                if($sqlpro = $this->con->prepare("SELECT id_pro, cantidad FROM promocion_productos WHERE id_cae=?")){
+                                if($sqlpro = $this->con->prepare("SELECT id_pro, cantidad, parent_id FROM promocion_productos WHERE id_cae=?")){
                                     if($sqlpro->bind_param("i", $id_cae)){
                                         if($sqlpro->execute()){
                                             $aux['productos'] = $sqlpro->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -865,41 +861,17 @@ class Core{
                                         }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #1 '.htmlspecialchars($sqlpro->error)); }
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #1 '.htmlspecialchars($sqlpro->error)); }
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #1 '.htmlspecialchars($this->con->error)); }
+                                $sqlcat->free_result();
+                                $sqlcat->close();
                             }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #2 '.htmlspecialchars($sqlcat->error)); }
                         }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #2 '.htmlspecialchars($sqlcat->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #2 '.htmlspecialchars($this->con->error)); }
+                    $sqlpre->free_result();
+                    $sqlpre->close();
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #3 '.htmlspecialchars($sqlpre->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #3 '.htmlspecialchars($sqlpre->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_promocion() #3 '.htmlspecialchars($this->con->error)); }
     }
-    // BORRAR //
-    public function list_arbol_cats_prods(){
-        if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo=?")){
-            if($sql->bind_param("iii", $this->id_cat, $this->eliminado, $this->eliminado)){
-                if($sql->execute()){
-                    $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-                    $sql->free_result();
-                    $sql->close();
-                    return $data;
-                }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $this->id_gir, 'list_arbol_cats_prods() '.htmlspecialchars($this->con->error)); }
-    }
-    public function get_arbol_productos2($that){
-
-        if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo='0'")){
-            if($sql->bind_param("ii", $this->id_cat, $this->eliminado)){
-                if($sql->execute()){
-                    $aux = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-                    $sql->free_result();
-                    $sql->close();
-                    return $aux;
-                }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($this->con->error)); } 
-        
-    }
-    // BORRAR //
     public function get_arbol_productos($that){
 
         if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo='0'")){
@@ -909,12 +881,13 @@ class Core{
                     $sql->free_result();
                     $sql->close();
                     return $this->process_arbol_draw($aux, 0, $that);
-                }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() '.htmlspecialchars($this->con->error)); } 
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() #1a '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() #1b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_arbol_productos() #1c '.htmlspecialchars($this->con->error)); } 
         
     }
     public function process_arbol_draw($cats, $parent_id, $that){
+
         $in = [];
         $div = "<div class='parent_arbol'>";
         for($i=0; $i<count($cats); $i++){
@@ -948,6 +921,7 @@ class Core{
         }
         $div .= "</div>";
         return $div;
+        
     }
     public function process_productos_draw($cats, $id_cae, $that){
 
@@ -961,16 +935,16 @@ class Core{
                         $cantidad = $that['productos'][$x]['cantidad'];
                     }
                 }
-                $div .= "<div class='clearfix'><div class='cantidad_arbol'>".$this->get_select("sel-pro-".$cat['id_pro']."-".$cat['id_cae'], 100, $cantidad, $id_cae)."</div><div class='nombre_arbol'>".$cat['prod_nombre']."</div></div>";
+                $div .= "<div class='clearfix'><div class='cantidad_arbol'>".$this->get_select("sel-pro-".$cat['id_pro']."-".$cat['id_cae'], 100, $cantidad)."</div><div class='nombre_arbol'>".$cat['prod_nombre']."</div></div>";
             }
         }
         $div .= "</div>";
         return $div;
 
     }
-    public function get_select($id, $cantidad, $selected, $id_cae){
+    public function get_select($id, $cantidad, $selected){
         $select = "<select id='".$id."' class='select_arbol'>";
-        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."/".$id_cae."'>".$i."</option>"; } }
+        for($i=0; $i<$cantidad; $i++){ if($i == $selected){ $select .="<option value='".$i."' selected>".$i."</option>"; }else{ $select .="<option value='".$i."'>".$i."</option>"; } }
         $select .="</select>";
         return $select;
     }
