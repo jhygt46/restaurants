@@ -1294,8 +1294,8 @@ class Guardar{
                         if($sql->execute()){
                             $pro_image = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["image"];
                             @unlink('/var/www/html/restaurants/images/productos/'.$pro_image);
-                            if($sqlpro = $this->con->prepare("UPDATE productos SET disponible=?, image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
-                                if($sqlpro->bind_param("isiii", $disponible, $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
+                            if($sqlpro = $this->con->prepare("UPDATE productos SET image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
+                                if($sqlpro->bind_param("siii", $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
                                     if($sqlpro->execute()){
                                         $sqlpro->close();
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlpro->error)); }
@@ -1329,11 +1329,20 @@ class Guardar{
                     }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() preguntas #2 '.htmlspecialchars($this->con->error)); }
                 }
             }
-            $info['op'] = 1;
-            $info['mensaje'] = "Configuracion Modificada Exitosamente";
-            $info['reload'] = 1;
-            $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
-            $this->con_cambios(null);
+
+            if($sqlprod = $this->con->prepare("UPDATE productos SET disponible=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
+                if($sqlprod->bind_param("iiii", $disponible, $id_pro, $this->id_gir, $this->eliminado)){
+                    if($sqlprod->execute()){
+                        $info['op'] = 1;
+                        $info['mensaje'] = "Configuracion Modificada Exitosamente";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/crear_productos.php?id=".$id."&parent_id=".$parent_id;
+                        $this->con_cambios(null);
+                        $sqlprod->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlprod->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlprod->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($this->con->error)); }
+            
         }else{ $this->registrar(2, 0, 0, 'configurar_producto()'); }
         return $info;
         
