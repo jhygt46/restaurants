@@ -17,9 +17,6 @@ $accion = "configurar_giro";
 /* CONFIG PAGE */
 
 $that = $core->get_giro();
-echo "<pre>";
-print_r($that);
-echo "</pre>";
 
 $titulo = "Configuracion ".$that["nombre"];
 $css = $core->get_css();
@@ -89,7 +86,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                             <?php
                                 for($i=15; $i<41; $i++){
                                     $sel = '';
-                                    if($i == $that['alto_producto']){ $sel='selected'; }
+                                    if($i == $that['alto_pro']){ $sel='selected'; }
                                     echo '<option value="'.$i.'" '.$sel.'>'.$i.'%</option>';
                                 }
                             ?>
