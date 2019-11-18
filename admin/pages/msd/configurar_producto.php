@@ -68,13 +68,23 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                     <label class="clearfix">
                         <span><p>Preguntas:</p></span>
                         <div class="perfil_preguntas">
-                            <?php foreach($list_pre as $value){ $checked = ''; for($i=0; $i<count($pre_prod); $i++){ if($value['id_pre'] == $pre_prod[$i]['id_pre']){ $checked="checked='checked'"; } } ?>
+                            <?php 
+                                if(count($list_pre) > 0){
+                                foreach($list_pre as $value){ $checked = ''; for($i=0; $i<count($pre_prod); $i++){ if($value['id_pre'] == $pre_prod[$i]['id_pre']){ $checked="checked='checked'"; } } ?>
                                 <div class="clearfix">
                                     <input style="margin-top: 4px; width: 18px; height: 18px; float: left" id="pregunta-<?php echo $value['id_pre']; ?>" <?php echo $checked; ?> type="checkbox" value="1" />
                                     <div style="font-size: 18px; padding-left: 4px; float: left" class='detail'><?php echo $value['nombre']; ?></div>
                                 </div>
-                            <?php } ?>
+                            <?php }}else{ ?>No hay preguntas creadas<?php } ?>
                         </div>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Disponibilidad:</p></span>
+                        <select id="tipo">
+                            <option value="0">Disponible</option>
+                            <option value="1">No Disponible</option>
+                            <option value="2">Ocultar</option>
+                        </select>
                     </label>
                     <label class="clearfix">
                         <span><p>Accion:</p></span>

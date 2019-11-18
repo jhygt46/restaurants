@@ -2241,7 +2241,7 @@ class Guardar{
                                                                                         $info['texto'] = "Producto ".$nombre." ha sido desvinculado, pero no ha sido eliminado, ya que se encuentra en la categoria ".$nombre2;
                                                                                         $info['reload'] = 1;
                                                                                         $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
-
+                                                                                        
                                                                                     }
                                                                                     $sqlb->free_result();
                                                                                     $sqlb->close();
