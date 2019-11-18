@@ -1284,6 +1284,7 @@ class Guardar{
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = $_POST['id'];
             $id_pro = $_POST['id_pro'];
+            $disponible = $_POST['disponible'];
             $parent_id = $_POST['parent_id'];
             $alto = $this->get_alto();
             $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
@@ -1293,8 +1294,8 @@ class Guardar{
                         if($sql->execute()){
                             $pro_image = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["image"];
                             @unlink('/var/www/html/restaurants/images/productos/'.$pro_image);
-                            if($sqlpro = $this->con->prepare("UPDATE productos SET image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
-                                if($sqlpro->bind_param("siii", $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
+                            if($sqlpro = $this->con->prepare("UPDATE productos SET disponible=?, image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
+                                if($sqlpro->bind_param("isiii", $disponible, $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
                                     if($sqlpro->execute()){
                                         $sqlpro->close();
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlpro->error)); }
@@ -2241,7 +2242,7 @@ class Guardar{
                                                                                         $info['texto'] = "Producto ".$nombre." ha sido desvinculado, pero no ha sido eliminado, ya que se encuentra en la categoria ".$nombre2;
                                                                                         $info['reload'] = 1;
                                                                                         $info['page'] = "msd/crear_productos.php?id=".$id[1]."&parent_id=".$id[2];
-                                                                                        
+
                                                                                     }
                                                                                     $sqlb->free_result();
                                                                                     $sqlb->close();
