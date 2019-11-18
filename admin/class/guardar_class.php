@@ -1284,7 +1284,7 @@ class Guardar{
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = $_POST['id'];
             $id_pro = $_POST['id_pro'];
-            $disponible = $_POST['disponible'];
+            $disponible = $_POST['disponibilidad'];
             $parent_id = $_POST['parent_id'];
             $alto = $this->get_alto();
             $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);

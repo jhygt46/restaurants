@@ -33,7 +33,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
     $id_pro = $_GET["id_pro"];
     $that = $core->get_producto($id_pro);
     $pre_prod = $core->get_preguntas_pro($id_pro);
-    
+
 }
 
 ?>
