@@ -1361,7 +1361,7 @@ class Core{
         return $preguntas;
     }
     public function get_config($id_gir){
-        if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto, tiempo_aviso FROM giros WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto, alto_pro, tiempo_aviso FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -2584,7 +2584,7 @@ class Core{
                                                     if($ressqld->{"num_rows"} == 0){
                                                         $code = $this->pass_generate(20);
                                                         $catalogo = 1;
-                                                        if($sqligi = $this->con->prepare("INSERT INTO giros (telefono, dominio, fecha_creado, code, catalogo) VALUES (?, ?, now(), ?, ?)")){
+                                                        if($sqligi = $this->con->prepare("INSERT INTO giros (telefono, dominio, fecha_creado, code, catalogo, item_grafico, item_pos, item_cocina, item_pagina, style_page, style_color, style_modal, font_family, font_css, alto, alto_pro, logo, favicon, eliminado, id_ser) VALUES (?, ?, now(), ?, ?, '1', '1', '1', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '25', '20', 'sinlogo.png', 'default.ico', '0', '1')")){
                                                             if($sqligi->bind_param("sssi", $telefono, $dominio, $code, $catalogo)){
                                                                 if($sqligi->execute()){
                                                                     $giro_id = $this->con->insert_id;

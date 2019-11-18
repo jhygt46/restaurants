@@ -68,12 +68,24 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <?php } ?>
                     <label class="clearfix">
-                        <span><p>Alto Categoria-Productos:</p></span>
+                        <span><p>Alto Categorias:</p></span>
                         <select id="alto">
                             <?php
                                 for($i=15; $i<41; $i++){
                                     $sel = '';
                                     if($i == $that['alto']){ $sel='selected'; }
+                                    echo '<option value="'.$i.'" '.$sel.'>'.$i.'%</option>';
+                                }
+                            ?>
+                        </select>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Alto Productos:</p></span>
+                        <select id="alto_pro">
+                            <?php
+                                for($i=15; $i<41; $i++){
+                                    $sel = '';
+                                    if($i == $that['alto_producto']){ $sel='selected'; }
                                     echo '<option value="'.$i.'" '.$sel.'>'.$i.'%</option>';
                                 }
                             ?>
