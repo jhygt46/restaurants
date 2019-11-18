@@ -268,15 +268,14 @@ function confirm(message){
                 data: send,
                 success: function(data){
                     
-                    console.log("DATA1");
-                    console.log(data);
+                    var timer = (data.timer === undefined) ? 2000 : data.timer ;
 
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,
                             text: data.texto,
                             type: data.tipo,
-                            timer: 2000,
+                            timer: timer,
                             showConfirmButton: false
                         });
                         if(data.reload)
@@ -313,15 +312,14 @@ function confirm_warning(message){
                 data: send,
                 success: function(data){
                     
-                    console.log("DATA1");
-                    console.log(data);
+                    var timer = (data.timer === undefined) ? 2000 : data.timer ;
 
                     setTimeout(function(){  
                         swal({
                             title: data.titulo,
                             text: data.texto,
                             type: data.tipo,
-                            timer: 2000,
+                            timer: timer,
                             showConfirmButton: false
                         });
                         if(data.reload)

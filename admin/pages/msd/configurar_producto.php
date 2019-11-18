@@ -80,7 +80,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Disponibilidad:</p></span>
-                        <select id="disponibilidad">
+                        <select id="disponible">
                             <option value="0" <?php echo ($that['disponible'] == 0) ? "selected" : "" ; ?>>Disponible</option>
                             <option value="1" <?php echo ($that['disponible'] == 1) ? "selected" : "" ; ?>>No Disponible</option>
                             <option value="2" <?php echo ($that['disponible'] == 2) ? "selected" : "" ; ?>>Ocultar</option>

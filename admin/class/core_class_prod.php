@@ -1259,6 +1259,7 @@ class Core{
                                                 $aux_productos['numero'] = $rowp['numero'];
                                                 $aux_productos['descripcion'] = $rowp['descripcion'];
                                                 $aux_productos['precio'] = $rowp['precio'];
+                                                $aux_productos['disponible'] = $rowp['disponible'];
                                                 $aux_prods[] = $rowp['id_pro'];
                                                 if($sqlppr = $this->con->prepare("SELECT * FROM preguntas_productos WHERE id_pro=?")){
                                                     if($sqlppr->bind_param("i", $rowp['id_pro'])){
