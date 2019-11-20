@@ -695,6 +695,82 @@ class Guardar{
         return $info;
 
     }
+    public function uploadProducto($filepath, $filename, $alto){
+
+        $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
+        $file_formats = array("JPG", "JPEG");
+        $name = $_FILES['file_image0']['name'];
+        $size = $_FILES['file_image0']['size'];
+        if(strlen($name)){
+            $extension = substr($name, strrpos($name, '.') + 1);
+            $extension2 = strtoupper($extension);
+            if(in_array($extension2, $file_formats)){
+                if($size < (25 * 1024)){
+                    $imagename = $filename.".".$extension;
+                    $imagename_new = $filename."x.".strtolower($extension);
+                    $tmp = $_FILES['file_image0']['tmp_name'];
+                    if(move_uploaded_file($tmp, $filepath.$imagename)){
+                            $data = getimagesize($filepath.$imagename);
+                            if($data['mime'] == "image/jpeg"){
+
+                                if($data[0] == $data[1]){
+
+                                    $width = 115;
+                                    $height = 115;
+                                    $destino = imagecreatetruecolor($width, $height);
+                                    $origen = imagecreatefromjpeg($filepath.$imagename);
+                                    imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                    imagejpeg($destino, $filepath.$imagename_new);
+                                    imagedestroy($destino);
+                                    $info['tipo'] = 1;
+
+                                }else{
+
+                                    $width = 500;
+                                    $height = $width * $alto / 100;
+                                    $destino = imagecreatetruecolor($width, $height);
+                                    $origen = imagecreatefromjpeg($filepath.$imagename);
+                                    imagecopy($destino, $origen, 0, 0, 0, 0, $width, $height);
+                                    imagejpeg($destino, $filepath.$imagename_new);
+                                    imagedestroy($destino);
+                                    $info['tipo'] = 2;
+
+                                }
+
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Imagen subida";
+                                $info['image'] = $imagename_new;
+
+
+
+                            }else{
+                                $info['op'] = 2;
+                                $info['mensaje'] = "La imagen no es jpg / jpeg";
+                                $this->registrar(8, 0, $this->id_gir, 'SubCat sin Formato image/jpeg');
+                            }
+                            @unlink($filepath.$imagename);
+                    }else{
+                        $info['op'] = 2;
+                        $info['mensaje'] = "No se pudo subir la imagen";
+                        $this->registrar(8, 0, $this->id_gir, 'Categoria no Upload');
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['mensaje'] = "Imagen sobrepasa los 25KB establecidos";
+                    $this->registrar(8, 0, $this->id_gir, 'Categoria size limit');
+                }
+            }else{
+                $info['op'] = 2;
+                $info['mensaje'] = "Formato Invalido";
+                $this->registrar(8, 0, $this->id_gir, 'Categoria no Extension');
+            }
+        }else{
+            $info['op'] = 2;
+            $info['mensaje'] =  "No ha seleccionado una imagen";
+        }
+        return $info;
+
+    }
     public function uploadLocales($filepath, $filename){
 
         $width = 380;
@@ -1283,6 +1359,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_preguntas() '.htmlspecialchars($this->con->error)); }
     }
     private function configurar_producto(){
+
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -1291,15 +1368,15 @@ class Guardar{
             $disponible = $_POST['disponible'];
             $parent_id = $_POST['parent_id'];
             $alto = $this->get_alto();
-            $image = $this->uploadCategoria('/var/www/html/restaurants/images/productos/', null, $alto);
+            $image = $this->uploadProducto('/var/www/html/restaurants/images/productos/', null, $alto);
             if($image['op'] == 1){
                 if($sql = $this->con->prepare("SELECT image FROM productos WHERE id_pro=? AND id_gir=? AND id_gir=? AND eliminado=?")){
                     if($sql->bind_param("iii", $id_pro, $this->id_gir, $this->eliminado)){
                         if($sql->execute()){
                             $pro_image = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["image"];
                             @unlink('/var/www/html/restaurants/images/productos/'.$pro_image);
-                            if($sqlpro = $this->con->prepare("UPDATE productos SET image=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
-                                if($sqlpro->bind_param("siii", $image["image"], $id_pro, $this->id_gir, $this->eliminado)){
+                            if($sqlpro = $this->con->prepare("UPDATE productos SET image=?, tipo=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
+                                if($sqlpro->bind_param("siiii", $image["image"], $image["tipo"], $id_pro, $this->id_gir, $this->eliminado)){
                                     if($sqlpro->execute()){
                                         $sqlpro->close();
                                     }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_producto() update image '.htmlspecialchars($sqlpro->error)); }

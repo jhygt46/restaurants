@@ -62,7 +62,7 @@ if(isset($_GET["id_pro"]) && is_numeric($_GET["id_pro"]) && $_GET["id_pro"] != 0
                     <input id="id_pro" type="hidden" value="<?php echo $id_pro; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
-                        <span><p>Imagen: (500x<?php echo $alto; ?>)</p></span>
+                        <span><p>Imagen: (500x<?php echo $alto; ?> o 115x115)</p></span>
                         <input style="padding-top: 6px" id="file_image0" type="file" />
                     </label>
                     <label class="clearfix">

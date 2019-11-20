@@ -328,6 +328,9 @@ $tablas[4]['campos'][8]['null'] = 0;
 $tablas[4]['campos'][9]['nombre'] = 'disponible';
 $tablas[4]['campos'][9]['tipo'] = 'tinyint(1)';
 $tablas[4]['campos'][9]['null'] = 0;
+$tablas[4]['campos'][10]['nombre'] = 'tipo';
+$tablas[4]['campos'][10]['tipo'] = 'tinyint(1)';
+$tablas[4]['campos'][10]['null'] = 0;
 
 $tablas[5]['nombre'] = 'cat_pros';
 $tablas[5]['campos'][0]['nombre'] = 'id_cae';
