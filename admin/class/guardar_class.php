@@ -1721,7 +1721,7 @@ class Guardar{
                                         $resses = $sqlses->get_result();
                                         $correo_ses = ($resses->{"num_rows"} == 0) ? 0 : 1 ;
                                         if($id_loc == 0){
-                                            if($sqlloc = $this->con->prepare("INSERT INTO locales (telefono, whatsapp, nombre, correo_ses, direccion, lat, lng, code, fecha_creado, fecha_cocina, fecha_cocina, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, now(), now(), now(), ?, ?, ?)")){
+                                            if($sqlloc = $this->con->prepare("INSERT INTO locales (telefono, whatsapp, nombre, correo_ses, direccion, lat, lng, code, fecha_pos, fecha_cocina, fecha_cocina, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, now(), now(), now(), ?, ?, ?)")){
                                                 if($sqlloc->bind_param("sssisddssii", $telefono, $whatsapp, $nombre, $correo_ses, $direccion, $lat, $lng, $code, $correo, $id_cat, $this->id_gir)){
                                                     if($sqlloc->execute()){
                                                         $info['op'] = 1;
