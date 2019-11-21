@@ -76,7 +76,7 @@ $arbol = $core->get_arbol_productos($that);
                     </label>
                     <div class="arbol">
                         <div class="cont_arbol">
-                            <TEXTAREA style="width: 100%; height: 150px"><?php echo $arbol; ?></TEXTAREA>
+                            <?php echo $arbol; ?>
                         </div>
                     </div>
                     <label>
