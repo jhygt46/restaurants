@@ -26,7 +26,16 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
     $id_cae = $_GET["id_cae"];
     $that = $core->get_promocion($id_cae);
 }
+
 $arbol = $core->get_arbol_productos($that);
+
+echo "<pre>";
+print_r($that);
+echo "</pre>";
+
+echo "<pre>";
+print_r($arbol);
+echo "</pre>";
 
 ?>
 <script>
