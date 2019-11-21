@@ -920,7 +920,6 @@ class Core{
             }
         }
         $div .= "</div>";
-        $div = "HOLA MUNDO";
         return $div;
 
     }

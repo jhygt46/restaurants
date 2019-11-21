@@ -29,12 +29,6 @@ if(isset($_GET["id_cae"]) && is_numeric($_GET["id_cae"]) && $_GET["id_cae"] != 0
 
 $arbol = $core->get_arbol_productos($that);
 
-echo "<pre>";
-print_r($that);
-echo "</pre>";
-
-echo "ARBOL => ".$arbol." <= FIN";
-
 ?>
 <script>
     
@@ -82,7 +76,7 @@ echo "ARBOL => ".$arbol." <= FIN";
                     </label>
                     <div class="arbol">
                         <div class="cont_arbol">
-                            <?php echo $arbol; ?>
+                            <TEXTAREA style="width: 100%; height: 150px"><?php echo $arbol; ?></TEXTAREA>
                         </div>
                     </div>
                     <label>
