@@ -33,9 +33,7 @@ echo "<pre>";
 print_r($that);
 echo "</pre>";
 
-echo "<pre>";
-print_r($arbol);
-echo "</pre>";
+echo "ARBOL => ".$arbol." <= FIN";
 
 ?>
 <script>
