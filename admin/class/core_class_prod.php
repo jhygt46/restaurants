@@ -888,9 +888,10 @@ class Core{
     }
     public function process_arbol_draw($cats, $parent_id, $that){
 
+        return "HOLA MUNDO";
+
         $in = [];
         $div = "<div class='parent_arbol'>";
-        return $div;
         for($i=0; $i<count($cats); $i++){
             $cat = $cats[$i];
             if($cat['parent_id'] == $parent_id && !in_array($cat['id_cae'], $in)){
