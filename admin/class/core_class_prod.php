@@ -874,7 +874,7 @@ class Core{
     }
     public function get_arbol_productos($that){
 
-        if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND tipo='0'")){
+        if($sql = $this->con->prepare("SELECT t1.id_cae, t1.nombre as cat_nombre, t1.parent_id, t2.id_pro, t3.nombre as prod_nombre FROM categorias t1 LEFT JOIN cat_pros t2 ON t1.id_cae=t2.id_cae LEFT JOIN productos t3 ON t2.id_pro=t3.id_pro WHERE t1.id_cat=? AND t1.eliminado=? AND t1.tipo='0'")){
             if($sql->bind_param("ii", $this->id_cat, $this->eliminado)){
                 if($sql->execute()){
                     $aux = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -887,8 +887,6 @@ class Core{
         
     }
     public function process_arbol_draw($cats, $parent_id, $that){
-
-        return "HOLA MUNDO";
 
         $in = [];
         $div = "<div class='parent_arbol'>";
