@@ -997,8 +997,9 @@ class Guardar{
         $info['mensaje'] = "Se produjo un error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $texto = $_POST['html'];
-            if($sql = $this->con->prepare("UPDATE giros SET inicio_html=? WHERE id_gir=? AND eliminado=?")){
-                if($sql->bind_param("sii", $texto, $this->id_gir, $this->eliminado)){
+            $ver_inicio = $_POST['ver_inicio'];
+            if($sql = $this->con->prepare("UPDATE giros SET ver_inicio=?, inicio_html=? WHERE id_gir=? AND eliminado=?")){
+                if($sql->bind_param("isii", $ver_inicio, $texto, $this->id_gir, $this->eliminado)){
                     if($sql->execute()){
                         $info['op'] = 1;
                         $info['mensaje'] = "Pagina de Inicio modificado exitosamente";

@@ -961,7 +961,7 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_pagina() '.htmlspecialchars($this->con->error)); } 
     }
     public function get_pag_inicio(){
-        if($sql = $this->con->prepare("SELECT inicio_html FROM giros WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT ver_inicio, inicio_html FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["inicio_html"];

@@ -73,6 +73,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <TEXTAREA id="html"><?php echo $inicio; ?></TEXTAREA>
                     </label>
                     <label class="clearfix">
+                        <span><p>Inicio visible:</p></span>
+                        <input id="ver_inicio" type="checkbox" class="checkbox" value="1" <?php if($that['ver_inicio'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Seguir editando:</p></span>
                         <select id="seguir">
                             <option value="0">No</option>
