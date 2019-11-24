@@ -1148,6 +1148,7 @@ class Core{
                         $info['pedido_04_subtitulo'] = $result['pedido_04_subtitulo'];
                         $info['item_pagina'] = $result['item_pagina'];
                         $info['ultima_actualizacion'] = $result['ultima_actualizacion'];
+                        $info['ver_inicio'] = $result['ver_inicio'];
                     }else{
                         if($dominio == "misitiodelivery.cl" || $dominio == "www.misitiodelivery.cl"){
                             $info['path'] = "https://misitiodelivery.cl";
