@@ -964,7 +964,7 @@ class Core{
         if($sql = $this->con->prepare("SELECT ver_inicio, inicio_html FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["inicio_html"];
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     $sql->free_result();
                     $sql->close();
                     return $result;

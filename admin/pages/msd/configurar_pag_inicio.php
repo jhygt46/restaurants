@@ -11,7 +11,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 
-$inicio = $core->get_pag_inicio();
+$that = $core->get_pag_inicio();
 
 /* CONFIG PAGE */
 $titulo = "Pagina de Inicio";
@@ -70,7 +70,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <label class="clearfix">
                         <span><p>HTML:</p></span>
-                        <TEXTAREA id="html"><?php echo $inicio; ?></TEXTAREA>
+                        <TEXTAREA id="html"><?php echo $that["inicio_html"]; ?></TEXTAREA>
                     </label>
                     <label class="clearfix">
                         <span><p>Inicio visible:</p></span>
