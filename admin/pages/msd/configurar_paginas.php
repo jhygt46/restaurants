@@ -42,13 +42,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     $tipo = $that["tipo"];
     $visible = $that["visible"];
 
-    echo "<pre>";
-    print_r($that);
-    echo "</pre>";
-
 }
-
-echo "((".$visible."))";
 
 ?>
 <script>
