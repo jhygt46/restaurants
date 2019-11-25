@@ -729,6 +729,9 @@ $tablas[16]['campos'][6]['kc'] = 0;
 $tablas[16]['campos'][7]['nombre'] = 'eliminado';
 $tablas[16]['campos'][7]['tipo'] = 'tinyint(1)';
 $tablas[16]['campos'][7]['null'] = 0;
+$tablas[16]['campos'][8]['nombre'] = 'visible';
+$tablas[16]['campos'][8]['tipo'] = 'tinyint(1)';
+$tablas[16]['campos'][8]['null'] = 0;
 
 $tablas[17]['nombre'] = 'pedidos_usuarios';
 $tablas[17]['campos'][0]['nombre'] = 'id_puser';

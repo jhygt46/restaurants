@@ -2439,14 +2439,15 @@ class Guardar{
             $nombre = $_POST['nombre'];
             $html = $_POST['html'];
             $tipo = $_POST['tipo'];
+            $visible = $_POST['visible'];
             if($id_pag == 0){
                 if($sqlorders = $this->con->prepare("SELECT orders FROM paginas WHERE id_gir=?")){
                     if($sqlorders->bind_param("i", $this->id_gir)){
                         if($sqlorders->execute()){
                             $resorder = $sqlorders->get_result();
                             $orders = $resorder->{"num_rows"};
-                            if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir, orders) VALUES (?, ?, ?, ?, ?)")){
-                                if($sql->bind_param("ssiii", $nombre, $html, $tipo, $this->id_gir, $orders)){
+                            if($sql = $this->con->prepare("INSERT INTO paginas (nombre, html, tipo, id_gir, orders, visible) VALUES (?, ?, ?, ?, ?, ?)")){
+                                if($sql->bind_param("ssiiii", $nombre, $html, $tipo, $this->id_gir, $orders, $visible)){
                                     if($sql->execute()){
                                         if($image['op'] == 1){
                                             $id_pag = $this->con->insert_id;
@@ -2477,8 +2478,8 @@ class Guardar{
                         if($sql->execute()){
                             $res = $sql->get_result();
                             if($res->{"num_rows"} == 1){
-                                if($sqlupa = $this->con->prepare("UPDATE paginas SET nombre=?, html=?, tipo=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
-                                    if($sqlupa->bind_param("ssiiii", $nombre, $html, $tipo, $id_pag, $this->id_gir, $this->eliminado)){
+                                if($sqlupa = $this->con->prepare("UPDATE paginas SET nombre=?, html=?, tipo=?, visible=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
+                                    if($sqlupa->bind_param("ssiiiii", $nombre, $html, $tipo, $visible, $id_pag, $this->id_gir, $this->eliminado)){
                                         if($sqlupa->execute()){
                                             if($image["op"] == 1){
                                                 $imagen = $res->fetch_all(MYSQLI_ASSOC)[0]["imagen"];
