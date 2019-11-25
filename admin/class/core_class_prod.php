@@ -612,6 +612,18 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_giros_user() #2 '.htmlspecialchars($this->con->error)); }
         }
     }
+    public function get_pagos(){
+        if($sql = $this->con->prepare("SELECT t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1, pagos t2 WHERE t1.id_gir=? AND t1.id_gir=t2.id_gir AND t1.eliminado=?")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+    }
     public function get_giro(){
         if($sql = $this->con->prepare("SELECT t1.dns, t1.dominio, t1.catalogo, t1.nombre, t1.dns_letra, t1.ssl, t2.ip, t1.titulo, t1.retiro_local, t1.despacho_domicilio, t1.alto, t1.alto_pro, t1.pedido_minimo, t1.tiempo_aviso, t1.pedido_01_titulo, t1.pedido_01_subtitulo, t1.pedido_02_titulo, t1.pedido_02_subtitulo, t1.pedido_03_titulo, t1.pedido_03_subtitulo, t1.pedido_04_titulo, t1.pedido_04_subtitulo, t1.mapcode, t1.pedido_gengibre, t1.pedido_wasabi, t1.pedido_soya, t1.pedido_teriyaki, t1.pedido_palitos, t1.pedido_comentarios, t1.estado, t1.font_family, t1.font_css, t1.style_page, t1.style_color, t1.style_modal FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
@@ -639,7 +651,7 @@ class Core{
         }
     }
     public function set_giro_dns(){
-        if($sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("UPDATE giros SET dns='1', fecha_dns=now() WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $sql->close();

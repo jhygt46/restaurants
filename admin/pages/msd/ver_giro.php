@@ -22,8 +22,13 @@ $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 $titulo = "GIRO NO SELECIONADO";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
-$list = $core->get_locales();
+
+$pagos = $core->get_pagos();
 $giro = $core->get_giro();
+
+echo "<pre>";
+print_r($pagos);
+echo "</pre>";
 
 if($giro['dns'] == 0){
     
