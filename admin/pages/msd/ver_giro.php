@@ -26,6 +26,16 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 $pagos = $core->get_pagos();
 $giro = $core->get_giro();
 
+if(count($pagos) == 1){
+    if($pagos[0]['id_pago'] == ""){
+        die("NI UN PAGO");
+    }else{
+        die("UN PAGO");
+    }
+}else{
+    die("MAS DE UN PAGO");
+}
+
 echo "<pre>";
 print_r($pagos);
 echo "</pre>";
