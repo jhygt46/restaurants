@@ -1182,8 +1182,9 @@ class Core{
         }else{ $this->registrar(6, 0, 0, 'is_pass() '.htmlspecialchars($this->con->error)); }
     }
     public function get_paginas_web($id_gir){
-        if($sqlpag = $this->con->prepare("SELECT id_pag, nombre, imagen, html, tipo FROM paginas WHERE id_gir=? AND eliminado=? ORDER BY orders")){
-            if($sqlpag->bind_param("ii", $id_gir, $this->eliminado)){
+        $visible = 1;
+        if($sqlpag = $this->con->prepare("SELECT id_pag, nombre, imagen, html, tipo FROM paginas WHERE id_gir=? AND eliminado=? AND visible=? ORDER BY orders")){
+            if($sqlpag->bind_param("iii", $id_gir, $this->eliminado, $visible)){
                 if($sqlpag->execute()){
                     $resultpag = $sqlpag->get_result()->fetch_all(MYSQLI_ASSOC);
                     $sqlpag->free_result();
