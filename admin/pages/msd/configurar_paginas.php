@@ -28,7 +28,7 @@ $page_mod = "pages/msd/configurar_paginas.php";
 $id_pag = 0;
 $html = "";
 $tipo = 0;
-$visible = null;
+$visible = -1;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $sub_titulo = $sub_titulo1;
 $list = $core->get_paginas();
@@ -42,7 +42,13 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
     $tipo = $that["tipo"];
     $visible = $that["visible"];
 
+    echo "<pre>";
+    print_r($that);
+    echo "</pre>";
+
 }
+
+echo "((".$visible."))";
 
 ?>
 <script>
@@ -134,7 +140,7 @@ if(isset($_GET["id_pag"]) && is_numeric($_GET["id_pag"]) && $_GET["id_pag"] != 0
                     </label>
                     <label class="clearfix">
                         <span><p>Visible:</p></span>
-                        <input id="visible" type="checkbox" class="checkbox" value="1" <?php if($visible == 1 || $visible == null){ ?>checked="checked"<?php } ?>>
+                        <input id="visible" type="checkbox" class="checkbox" value="1" <?php if($visible == 1 || $visible == -1){ ?>checked="checked"<?php } ?>>
                     </label>
                     <label class="sec_tipo0 clearfix" <?php if($tipo > 0){ echo "style='display: none'"; } ?>>
                         <span><p>Ejemplos:</p></span>
