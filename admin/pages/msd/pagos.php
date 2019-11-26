@@ -17,7 +17,13 @@ if($core->id_user == 0){
     die("Error: su sesion ha expirado");
 }
 
-$list = $core->get_giros_user();
+$list = $core->get_giros_pagos();
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+exit;
+
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
