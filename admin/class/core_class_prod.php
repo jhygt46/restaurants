@@ -625,7 +625,7 @@ class Core{
                     $sql->close();
 
                     if($sqlx = $this->con->prepare("SELECT id_pago FROM pagos WHERE id_gir=?")){
-                        if($sqlx->bind_param("ii", $id_gir, $this->eliminado)){
+                        if($sqlx->bind_param("i", $id_gir)){
                             if($sqlx->execute()){
             
                                 $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC);
