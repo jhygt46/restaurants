@@ -792,6 +792,11 @@ body .relative {
   background-position: -594px -334px;
   cursor: pointer;
 }
+.pagina .title ul li.pagos {
+  background: url("../images/icons-set.png") no-repeat;
+  background-position: -594px -334px;
+  cursor: pointer;
+}
 .pagina .cont_pagina {
   display: block;
   padding: 2px;

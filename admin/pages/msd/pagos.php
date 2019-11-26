@@ -33,7 +33,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
-        <ul><li>BUENA NELSON</li></ul>
+        <ul class="clearfix">
+            <li class="pagos" onclick="navlink('pages/msd/todos_los_pagos.php')"></li>
+        </ul>
     </div>
     <hr>
     <div class="cont_pagina">
