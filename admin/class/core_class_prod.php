@@ -614,7 +614,7 @@ class Core{
     }
     public function get_pagos_giros($id_gir){
 
-        if($sql = $this->con->prepare("SELECT * FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.id_gir=? AND t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t1.dominio, t1.monto FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.id_gir=? AND t1.eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
 
