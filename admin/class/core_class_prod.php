@@ -616,10 +616,23 @@ class Core{
         if($sql = $this->con->prepare("SELECT t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.id_gir=? AND t1.eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
+
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $sql->free_result();
                     $sql->close();
-                    return $result;
+                    $res['fecha_dns'] = $result[0]['fecha_dns'];
+                    $res['monto'] = $result[0]['monto'];
+                    if(count($result) == 1){
+                        if($result[0]['id_pago'] == ""){
+                            $res['cpagos'] = 0;
+                        }else{
+                            $res['cpagos'] = 1;
+                        }
+                    }else{
+                        $res['cpagos'] = count($result);
+                    }
+                    return $res;
+
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }

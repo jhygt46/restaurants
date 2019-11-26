@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Santiago');
+
 if(!isset($core_class_iniciada)){
     if($_SERVER["HTTP_HOST"] == "localhost"){
         define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
@@ -26,19 +28,14 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 $pagos = $core->get_pagos();
 $giro = $core->get_giro();
 
-if(count($pagos) == 1){
-    if($pagos[0]['id_pago'] == ""){
-        die("NI UN PAGO");
-    }else{
-        die("UN PAGO");
-    }
-}else{
-    die("MAS DE UN PAGO");
-}
+$fechainicial = new DateTime($pagos['fecha_dns']);
+$fechafinal = new DateTime();
+$diferencia = $fechainicial->diff($fechafinal);
+$meses = ( $diferencia->y * 12 ) + $diferencia->m;
 
-echo "<pre>";
-print_r($pagos);
-echo "</pre>";
+if($meses > $pagos['cpagos']){
+    echo "LISTO PARA PAGO: ".$pagos['monto'];
+}
 
 if($giro['dns'] == 0){
     
