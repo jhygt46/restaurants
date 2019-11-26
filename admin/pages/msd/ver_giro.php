@@ -32,18 +32,9 @@ $fechainicial = new DateTime($pagos['fecha_dns']);
 $fechafinal = new DateTime();
 $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
-$diff = $meses - $pagos['cpagos'];
+$diff_pago = $meses - $pagos['cpagos'];
 
-echo "HOLA MUNDO";
 
-echo "<pre>";
-print_r($pagos);
-echo "</pre>";
-
-if($diff > 0){
-    $monto = $diff * $pagos['monto'];
-    echo "LISTO PARA PAGO: ".$monto;
-}
 
 if($giro['dns'] == 0){
     
@@ -65,7 +56,6 @@ $catalogos = $core->get_catalogos();
 $num_cats = $giro['catalogo'];
 $mis_cats = count($catalogos);
 $titulo = ($giro['nombre'] != '') ? 'Bienvenido '.$giro['nombre'] : 'Bienvenido '.$giro['dominio'] ;
-
 $diff = $num_cats - $mis_cats;
 
 ?>
@@ -138,12 +128,9 @@ function init_chart(){
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
-        <ul class="clearfix">
-            <!--<li class="back" onclick="backurl()"></li>-->
-        </ul>
     </div>
     <hr>
-    <?php if($diff > 0){ ?>
+    <?php /* if($diff > 0){ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
             <form action="" method="post">
@@ -168,11 +155,25 @@ function init_chart(){
             </form>
         </div>
     </div>
+    <?php } */ ?>
+
+    <?php if($diff_pago > 0){ $monto = $diff_pago * $pagos['monto']; ?>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="lista_items">
+                <div class="titulo_items"><h1>Pagos</h1><h2></h2></div>
+                <div class="items_list clearfix">
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/categorias.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuicon.png" alt="" /></div><div class="item_ttl">CARTA</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/preguntas.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menupreguntas.png" alt="" /></div><div class="item_ttl">PREGUNTAS</div></div></div>
+                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/ingredientes.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuingredientes.png" alt="" /></div><div class="item_ttl">LISTA<br>INGREDIENTES</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php } ?>
     <?php for($i=0; $i<count($catalogos); $i++){ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
-            
             <div class="lista_items">
                 <div class="titulo_items"><h1><?php echo $catalogos[$i]['nombre']; ?></h1><h2>Crea el arbol de Productos para este catalogo</h2></div>
                 <div class="items_list clearfix">
@@ -181,7 +182,6 @@ function init_chart(){
                     <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/ingredientes.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuingredientes.png" alt="" /></div><div class="item_ttl">LISTA<br>INGREDIENTES</div></div></div>
                 </div>
             </div>
-            
         </div>
     </div>
     <?php } ?>
