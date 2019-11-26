@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Santiago');
+
 if(!isset($core_class_iniciada)){
     if($_SERVER["HTTP_HOST"] == "localhost"){
         define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
@@ -19,28 +21,16 @@ if($core->id_user == 0){
 
 $list = $core->get_giros_pagos();
 
-/*
-Array
-(
-    [1] => Array
-        (
-            [fecha_dns] => 2019-09-25
-            [monto] => 50000
-            [dominio] => www.tockedelivery.cl
-            [cpagos] => 3
-        )
+foreach($list as $clave => $value){
 
-    [2] => Array
-        (
-            [fecha_dns] => 2019-07-25
-            [monto] => 50000
-            [dominio] => www.sitiodeprueba.cl
-            [cpagos] => 0
-        )
+    echo $clave;
+    echo "<pre>";
+    print_r($value);
+    echo "</pre>";
+    
+}
 
-)
-*/
-
+exit;
 
 /* CONFIG PAGE */
 $titulo = "Pagos";
@@ -121,16 +111,40 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 <?php 
                 for($i=0; $i<count($list); $i++){
 
-                    
+                /*
+                Array
+                (
+                    [1] => Array
+                        (
+                            [fecha_dns] => 2019-09-25
+                            [monto] => 50000
+                            [dominio] => www.tockedelivery.cl
+                            [cpagos] => 3
+                        )
+
+                    [2] => Array
+                        (
+                            [fecha_dns] => 2019-07-25
+                            [monto] => 50000
+                            [dominio] => www.sitiodeprueba.cl
+                            [cpagos] => 0
+                        )
+
+                )
+                */
+
+                $fechainicial = new DateTime($pagos['fecha_dns']);
+                $fechafinal = new DateTime();
+                $diferencia = $fechainicial->diff($fechafinal);
+                $meses = ( $diferencia->y * 12 ) + $diferencia->m;
+                $diff_pago = $meses - $pagos['cpagos'];
+
 
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php if($dns_letra == ""){ echo "<p style='font-weight: bold; color: #900; font-size: 17px'>Falta crear zona DNS para ".$dominio."</p>"; }else{ echo $nombre; } ?></div>
+                        <div class="nombre"><?php echo $dominio; ?></div>
                         <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_gir=<?php echo $id; ?>')"></a>
-                        <a class="icono ic3" onclick="navlink('pages/msd/ver_informe.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic16" onclick="navlink('pages/msd/usuarios_admin.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
-                        <a class="icono ic2" onclick="navlink('pages/msd/ver_giro.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
