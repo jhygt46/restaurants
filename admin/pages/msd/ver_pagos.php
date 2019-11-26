@@ -39,6 +39,14 @@ $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 ?>
+<script>
+
+    function cambiar_meses(){
+        var meses = $('#meses').val();
+        console.log("meses: "+meses);
+    }
+
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -58,32 +66,16 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     <input id="id" type="hidden" value="<?php echo $id_gir; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
-                        <span><p>Nombre del Giro:</p></span>
+                        <span><p>Numero de Factura:</p></span>
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p>Dominio del Giro:</p></span>
-                        <input id="dominio" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Pagina:</p></span>
-                        <input id="item_pagina" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Punto de Venta:</p></span>
-                        <input id="item_pos" type="checkbox" class="checkbox" value="1" <?php if($that['item_pos'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Cocina:</p></span>
-                        <input id="item_cocina" type="checkbox" class="checkbox" value="1" <?php if($that['item_cocina'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Graficos:</p></span>
-                        <input id="item_grafico" type="checkbox" class="checkbox" value="1" <?php if($that['item_grafico'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Letra Dns:</p></span>
-                        <input id="dns_letra" class="inputs" type="text" value="<?php echo $that['dns_letra']; ?>" require="" placeholder="" />
+                        <span><p>Meses:</p></span>
+                        <select id="meses" onchange="cambiar_meses()">
+                            <option value="1">1</option>
+                            <option value="6">6</option>
+                            <option value="12">12</option>
+                        </select>
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
