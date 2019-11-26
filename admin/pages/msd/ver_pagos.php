@@ -19,7 +19,11 @@ if($core->id_user == 0){
     die("Error: su sesion ha expirado");
 }
 
-$list = $core->get_pagos_giros();
+$list = $core->get_pagos_giros($_GET["id_gir"]);
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
 
 /* CONFIG PAGE */
 $titulo = "Pagos";

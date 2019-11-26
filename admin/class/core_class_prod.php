@@ -612,6 +612,23 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_giros_user() #2 '.htmlspecialchars($this->con->error)); }
         }
     }
+    public function get_pagos_giros($id_gir){
+
+        if($sql = $this->con->prepare("SELECT * FROM pagos t1, giros t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_gir=t2.id_gir")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+    
+
+    }
     public function get_giros_pagos(){
 
         if($sql = $this->con->prepare("SELECT t1.id_gir, t1.dominio, t2.meses, t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.eliminado=?")){
