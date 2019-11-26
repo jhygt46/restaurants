@@ -32,8 +32,11 @@ $fechainicial = new DateTime($pagos['fecha_dns']);
 $fechafinal = new DateTime();
 $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
-
 $diff = $meses - $pagos['cpagos'];
+
+echo "<pre>";
+print_r($pagos);
+echo "</pre>";
 
 if($diff > 0){
     $monto = $diff * $pagos['monto'];

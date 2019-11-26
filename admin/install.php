@@ -1105,15 +1105,18 @@ $tablas[30]['campos'][1]['null'] = 0;
 $tablas[30]['campos'][2]['nombre'] = 'monto';
 $tablas[30]['campos'][2]['tipo'] = 'int(4)';
 $tablas[30]['campos'][2]['null'] = 0;
-$tablas[30]['campos'][3]['nombre'] = 'factura';
+$tablas[30]['campos'][3]['nombre'] = 'meses';
 $tablas[30]['campos'][3]['tipo'] = 'tinyint(1)';
 $tablas[30]['campos'][3]['null'] = 0;
-$tablas[30]['campos'][4]['nombre'] = 'id_gir';
-$tablas[30]['campos'][4]['tipo'] = 'int(4)';
+$tablas[30]['campos'][4]['nombre'] = 'factura';
+$tablas[30]['campos'][4]['tipo'] = 'tinyint(1)';
 $tablas[30]['campos'][4]['null'] = 0;
-$tablas[30]['campos'][4]['k'] = 1;
-$tablas[30]['campos'][4]['kt'] = 1;
-$tablas[30]['campos'][4]['kc'] = 0;
+$tablas[30]['campos'][5]['nombre'] = 'id_gir';
+$tablas[30]['campos'][5]['tipo'] = 'int(4)';
+$tablas[30]['campos'][5]['null'] = 0;
+$tablas[30]['campos'][5]['k'] = 1;
+$tablas[30]['campos'][5]['kt'] = 1;
+$tablas[30]['campos'][5]['kc'] = 0;
 
 // TRUE SOLO MUESTRA - FALSE LAS CREA
 $show = true;
