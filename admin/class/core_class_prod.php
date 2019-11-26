@@ -614,21 +614,23 @@ class Core{
     }
     public function get_giros_pagos(){
 
-        if($sql = $this->con->prepare("SELECT t1.id_gir, t2.meses, t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t1.id_gir, t1.dominio, t2.meses, t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.eliminado=?")){
             if($sql->bind_param("i", $this->eliminado)){
                 if($sql->execute()){
 
-                    return $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-                    
                     $result = $sql->get_result();
                     while($row = $result->fetch_assoc()){
-                        $res['fecha_dns'] = $row['fecha_dns'];
-                        $res['monto'] = $row['monto'];
+
+                        $res[$row['id_gir']]['fecha_dns'] = $row['fecha_dns'];
+                        $res[$row['id_gir']]['monto'] = $row['monto'];
+                        $res[$row['id_gir']]['dominio'] = $row['dominio'];
+
                         if($row['id_pago'] == ""){
-                            $res['cpagos'] = 0;
+                            $res[$row['id_gir']]['cpagos'] = 0;
                         }else{
-                            $res['cpagos'] = $res['cpagos'] + $row['meses'];
+                            $res[$row['id_gir']]['cpagos'] = $res[$row['id_gir']]['cpagos'] + $row['meses'];
                         }
+
                     }
                     $sql->free_result();
                     $sql->close();
