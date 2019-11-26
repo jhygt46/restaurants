@@ -20,6 +20,7 @@ if($core->id_user == 0){
 }
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
+$iva = 1.19;
 
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
@@ -42,12 +43,15 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
         var meses = $('#meses').val();
         if(meses == 1){
             $('#monto').val(monto);
+            $('#monto2').val(parseint(monto * <?php echo $iva; ?>));
         }
         if(meses == 6){
             $('#monto').val(monto * 5.5);
+            $('#monto2').val(parseint(monto * 5.5 * <?php echo $iva; ?>));
         }
         if(meses == 12){
             $('#monto').val(monto * 10);
+            $('#monto2').val(parseint(monto * 10 * <?php echo $iva; ?>));
         }
     }
 
@@ -83,8 +87,12 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         </select>
                     </label>
                     <label class="clearfix">
-                        <span><p>Monto:</p></span>
+                        <span><p>Monto Bruto:</p></span>
                         <input id="monto" class="inputs" type="text" value="<?php echo $list['monto']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Monto Neto:</p></span>
+                        <input id="monto2" class="inputs" type="text" value="<?php echo intval($list['monto'] * $iva); ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
