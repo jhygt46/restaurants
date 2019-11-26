@@ -43,15 +43,15 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
         var meses = $('#meses').val();
         if(meses == 1){
             $('#monto').val(monto);
-            $('#monto2').val(parseint(monto * <?php echo $iva; ?>));
+            $('#monto2').val(parseInt(monto * <?php echo $iva; ?>));
         }
         if(meses == 6){
             $('#monto').val(monto * 5.5);
-            $('#monto2').val(parseint(monto * 5.5 * <?php echo $iva; ?>));
+            $('#monto2').val(parseInt(monto * 5.5 * <?php echo $iva; ?>));
         }
         if(meses == 12){
             $('#monto').val(monto * 10);
-            $('#monto2').val(parseint(monto * 10 * <?php echo $iva; ?>));
+            $('#monto2').val(parseInt(monto * 10 * <?php echo $iva; ?>));
         }
     }
 
