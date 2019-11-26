@@ -38,56 +38,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
+        <ul><li>BUENA</li></ul>
     </div>
     <hr>
-    <div class="cont_pagina">
-        <div class="cont_pag">
-            <form action="" method="post">
-                <div class="form_titulo clearfix">
-                    <div class="titulo"><?php echo $sub_titulo; ?></div>
-                    <ul class="opts clearfix">
-                        <li class="opt">1</li>
-                        <li class="opt">2</li>
-                    </ul>
-                </div>
-                <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id_gir; ?>" />
-                    <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    <label class="clearfix">
-                        <span><p>Nombre del Giro:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Dominio del Giro:</p></span>
-                        <input id="dominio" class="inputs" type="text" value="<?php echo $that['dominio']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Pagina:</p></span>
-                        <input id="item_pagina" type="checkbox" class="checkbox" value="1" <?php if($that['item_pagina'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Punto de Venta:</p></span>
-                        <input id="item_pos" type="checkbox" class="checkbox" value="1" <?php if($that['item_pos'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Cocina:</p></span>
-                        <input id="item_cocina" type="checkbox" class="checkbox" value="1" <?php if($that['item_cocina'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Graficos:</p></span>
-                        <input id="item_grafico" type="checkbox" class="checkbox" value="1" <?php if($that['item_grafico'] == 1){ ?>checked="checked"<?php } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Letra Dns:</p></span>
-                        <input id="dns_letra" class="inputs" type="text" value="<?php echo $that['dns_letra']; ?>" require="" placeholder="" />
-                    </label>
-                    <label>
-                        <div class="enviar"><a onclick="form(this)">Enviar</a></div>
-                    </label>
-                </fieldset>
-            </form>
-        </div>
-    </div>
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
