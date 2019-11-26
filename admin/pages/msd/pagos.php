@@ -120,10 +120,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             <div class="listado_items">
                 <?php 
                 for($i=0; $i<count($list); $i++){
-                    $id = $list[$i][$id_list];
-                    $nombre = $list[$i]['nombre'];
-                    $dominio = $list[$i]['dominio'];
-                    $dns_letra = $list[$i]['dns_letra'];
+
+                    
+
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
