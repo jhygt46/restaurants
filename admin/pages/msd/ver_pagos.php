@@ -21,6 +21,10 @@ if($core->id_user == 0){
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
 $titulo_list = "Lista de Pagos";
@@ -84,7 +88,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <label class="clearfix">
                         <span><p>Monto:</p></span>
-                        <input id="monto" class="inputs" type="text" value="<?php echo $list[0]['monto']; ?>" require="" placeholder="" />
+                        <input id="monto" class="inputs" type="text" value="<?php echo $list['monto']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
