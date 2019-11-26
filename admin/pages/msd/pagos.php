@@ -21,17 +21,6 @@ if($core->id_user == 0){
 
 $list = $core->get_giros_pagos();
 
-foreach($list as $clave => $value){
-
-    echo $clave;
-    echo "<pre>";
-    print_r($value);
-    echo "</pre>";
-    
-}
-
-exit;
-
 /* CONFIG PAGE */
 $titulo = "Pagos";
 $titulo_list = "Pagos Atrasados";
@@ -108,46 +97,26 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 </ul>
             </div>
             <div class="listado_items">
-                <?php 
-                for($i=0; $i<count($list); $i++){
+                <?php
 
-                /*
-                Array
-                (
-                    [1] => Array
-                        (
-                            [fecha_dns] => 2019-09-25
-                            [monto] => 50000
-                            [dominio] => www.tockedelivery.cl
-                            [cpagos] => 3
-                        )
+                foreach($list as $clave => $value){
 
-                    [2] => Array
-                        (
-                            [fecha_dns] => 2019-07-25
-                            [monto] => 50000
-                            [dominio] => www.sitiodeprueba.cl
-                            [cpagos] => 0
-                        )
+                    $fechainicial = new DateTime($value['fecha_dns']);
+                    $fechafinal = new DateTime();
+                    $diferencia = $fechainicial->diff($fechafinal);
+                    $meses = ( $diferencia->y * 12 ) + $diferencia->m;
+                    $diff_pago = $meses - $value['cpagos'];
 
-                )
-                */
-
-                $fechainicial = new DateTime($pagos['fecha_dns']);
-                $fechafinal = new DateTime();
-                $diferencia = $fechainicial->diff($fechafinal);
-                $meses = ( $diferencia->y * 12 ) + $diferencia->m;
-                $diff_pago = $meses - $pagos['cpagos'];
-
+                    if($diff_pago > 0){
 
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $dominio; ?></div>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_gir=<?php echo $id; ?>')"></a>
+                        <div class="nombre"><?php echo $value['dominio']; ?></div>
+                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>
