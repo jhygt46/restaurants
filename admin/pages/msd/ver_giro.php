@@ -33,8 +33,11 @@ $fechafinal = new DateTime();
 $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 
-if($meses > $pagos['cpagos']){
-    echo "LISTO PARA PAGO: ".$pagos['monto'];
+$diff = $meses - $pagos['cpagos'];
+
+if($diff > 0){
+    $monto = $diff * $pagos['monto'];
+    echo "LISTO PARA PAGO: ".$monto;
 }
 
 if($giro['dns'] == 0){
