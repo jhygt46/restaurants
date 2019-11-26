@@ -614,14 +614,29 @@ class Core{
     }
     public function get_pagos_giros($id_gir){
 
-        if($sql = $this->con->prepare("SELECT t1.dominio, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.id_gir=? AND t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT dominio, monto FROM giros WHERE t1.id_gir=? AND t1.eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
 
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $res['dominio'] = $result['dominio'];
+                    $res['monto'] = $result['monto'];
                     $sql->free_result();
                     $sql->close();
-                    return $result;
+
+                    if($sqlx = $this->con->prepare("SELECT id_pago FROM pagos WHERE id_gir=?")){
+                        if($sqlx->bind_param("ii", $id_gir, $this->eliminado)){
+                            if($sqlx->execute()){
+            
+                                $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC);
+                                $res['pagos'] = $resultx;
+                                $sqlx->free_result();
+                                $sqlx->close();
+                                return $res;
+            
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
 
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }

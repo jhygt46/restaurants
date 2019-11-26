@@ -24,11 +24,6 @@ $list = $core->get_giros_pagos();
 /* CONFIG PAGE */
 $titulo = "Pagos";
 $titulo_list = "Pagos Atrasados";
-$sub_titulo = "Ingresar Pago";
-$accion = "crear_pago";
-
-$id_list = "id_gir";
-$eliminarobjeto = "Empresa";
 $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 /* CONFIG PAGE */
 

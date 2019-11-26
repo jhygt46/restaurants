@@ -21,13 +21,9 @@ if($core->id_user == 0){
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 /* CONFIG PAGE */
-$titulo = "Pagos";
-$titulo_list = "Pagos Atrasados";
+$titulo = "Pagos de ".$list['dominio'];
+$titulo_list = "Lista de Pagos";
 $sub_titulo = "Ingresar Pago";
 $accion = "crear_pago";
 
@@ -42,7 +38,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <script>
 
     function cambiar_meses(){
-        var monto = <?php echo $list[0]['monto']; ?>;
+        var monto = <?php echo $list['monto']; ?>;
         var meses = $('#meses').val();
         if(meses == 1){
             $('#monto').val(monto);
