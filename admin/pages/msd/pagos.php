@@ -19,36 +19,40 @@ if($core->id_user == 0){
 
 $list = $core->get_giros_pagos();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-exit;
+/*
+Array
+(
+    [1] => Array
+        (
+            [fecha_dns] => 2019-09-25
+            [monto] => 50000
+            [dominio] => www.tockedelivery.cl
+            [cpagos] => 3
+        )
+
+    [2] => Array
+        (
+            [fecha_dns] => 2019-07-25
+            [monto] => 50000
+            [dominio] => www.sitiodeprueba.cl
+            [cpagos] => 0
+        )
+
+)
+*/
 
 
 /* CONFIG PAGE */
-$titulo = "Empresa";
-$titulo_list = "Mis Empresas";
-$sub_titulo1 = "Ingresar Empresa";
-$sub_titulo2 = "Modificar Empresa";
-$accion = "crear_giro";
+$titulo = "Pagos";
+$titulo_list = "Pagos Atrasados";
+$sub_titulo = "Ingresar Pago";
+$accion = "crear_pago";
 
-$eliminaraccion = "eliminar_giro";
 $id_list = "id_gir";
 $eliminarobjeto = "Empresa";
-$page_mod = "pages/msd/giros.php";
 /* CONFIG PAGE */
 
-$id_gir = 0;
-$sub_titulo = $sub_titulo1;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
-$that = ["nombre" => "", "dominio" => "", "item_pagina" => 0, "item_pos" => 0, "item_cocina" => 0, "item_grafico" => 0, "dns_letra" => ""];
-if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0){
-    
-    $sub_titulo = $sub_titulo2;
-    $id_gir = $_GET["id_gir"];
-    $that = $core->get_giro_id($id_gir);
-    
-}
 
 ?>
 <div class="pagina">
