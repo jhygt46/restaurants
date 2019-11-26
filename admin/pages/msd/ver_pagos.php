@@ -42,7 +42,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <script>
 
     function cambiar_meses(){
-        var monto = <?php echo $list['monto']; ?>;
+        var monto = <?php echo $list[0]['monto']; ?>;
         var meses = $('#meses').val();
         if(meses == 1){
             $('#monto').val(monto);
