@@ -42,8 +42,17 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <script>
 
     function cambiar_meses(){
+        var monto = <?php echo $list['monto']; ?>;
         var meses = $('#meses').val();
-        console.log("meses: "+meses);
+        if(meses == 1){
+            $('#monto').val(monto);
+        }
+        if(meses == 6){
+            $('#monto').val(monto * 5.5);
+        }
+        if(meses == 12){
+            $('#monto').val(monto * 10);
+        }
     }
 
 </script>
@@ -76,6 +85,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                             <option value="6">6</option>
                             <option value="12">12</option>
                         </select>
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Monto:</p></span>
+                        <input id="monto" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
