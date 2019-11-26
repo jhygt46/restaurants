@@ -88,7 +88,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <label class="clearfix">
                         <span><p>Monto:</p></span>
-                        <input id="monto" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="monto" class="inputs" type="text" value="<?php echo $list[0]['monto']; ?>" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
