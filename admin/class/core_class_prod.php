@@ -614,8 +614,8 @@ class Core{
     }
     public function get_pagos_giros($id_gir){
 
-        if($sql = $this->con->prepare("SELECT * FROM pagos t1, giros t2 WHERE t1.id_gir=? AND t1.eliminado=? AND t1.id_gir=t2.id_gir")){
-            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+        if($sql = $this->con->prepare("SELECT * FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.id_gir=? AND t1.eliminado=?")){
+            if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
 
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
