@@ -621,6 +621,7 @@ class Core{
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     $res['dominio'] = $result['dominio'];
                     $res['monto'] = $result['monto'];
+                    $res['pagos'] = [];
                     $sql->free_result();
                     $sql->close();
 
@@ -632,11 +633,12 @@ class Core{
                                 $res['pagos'] = $resultx;
                                 $sqlx->free_result();
                                 $sqlx->close();
-                                return $res;
             
                             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
                         }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+
+                    return $res;
 
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
