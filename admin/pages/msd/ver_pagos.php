@@ -21,10 +21,6 @@ if($core->id_user == 0){
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
 $titulo_list = "Lista de Pagos";
@@ -108,25 +104,15 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             </div>
             <div class="listado_items">
                 <?php
-
-                foreach($list as $clave => $value){
-
-                    $fechainicial = new DateTime($value['fecha_dns']);
-                    $fechafinal = new DateTime();
-                    $diferencia = $fechainicial->diff($fechafinal);
-                    $meses = ( $diferencia->y * 12 ) + $diferencia->m;
-                    $diff_pago = $meses - $value['cpagos'];
-
-                    if($diff_pago > 0){
-
+                foreach($list['pagos'] as $value){
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $value['dominio']; ?></div>
+                        <div class="nombre"><?php echo $value['factura']; ?></div>
                         <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
-                <?php }} ?>
+                <?php } ?>
             </div>
         </div>
     </div>
