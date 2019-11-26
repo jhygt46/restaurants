@@ -34,6 +34,8 @@ $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 $diff = $meses - $pagos['cpagos'];
 
+echo "HOLA MUNDO";
+
 echo "<pre>";
 print_r($pagos);
 echo "</pre>";

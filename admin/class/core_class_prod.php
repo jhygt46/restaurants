@@ -618,8 +618,6 @@ class Core{
                 if($sql->execute()){
 
                     $result = $sql->get_result();
-                    $sql->free_result();
-                    $sql->close();
                     while($row = $result->fetch_assoc()){
                         $res['fecha_dns'] = $row['fecha_dns'];
                         $res['monto'] = $row['monto'];
@@ -629,6 +627,8 @@ class Core{
                             $res['cpagos'] = $res['cpagos'] + $row['meses'];
                         }
                     }
+                    $sql->free_result();
+                    $sql->close();
                     return $res;
 
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
