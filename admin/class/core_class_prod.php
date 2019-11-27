@@ -648,13 +648,11 @@ class Core{
     }
     public function get_pagos_giros($id_gir){
 
-        if($sql = $this->con->prepare("SELECT dominio, monto FROM giros WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT dominio, monto, fecha_dns FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
 
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                    $res['dominio'] = $result['dominio'];
-                    $res['monto'] = $result['monto'];
+                    $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     $sql->free_result();
                     $sql->close();
 
