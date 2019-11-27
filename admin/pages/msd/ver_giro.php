@@ -156,7 +156,7 @@ function init_chart(){
     <?php } */ ?>
 
     <?php if($diff_pago > 0){ $monto = $diff_pago * $pagos['monto']; ?>
-    <div class="cont_pagina" style="background: #a66" onclick="navlink('pages/msd/renovar_servicio.php')">
+    <div class="cont_pagina" style="background: #a66; cursor: pointer" onclick="navlink('pages/msd/renovar_servicio.php')">
         <div class="cont_pag" style="background: #edd">
             <div class="lista_items">
                 <div class="titulo_items" style="padding-bottom: 0px"><h1 style="color: #900; font-size: 26px">Aviso! Renovacion de Servicio</h1><h2 style="color: #900; font-size: 18px">Si desea renovar su servicio con nosotros, haga click aca</h2></div>
