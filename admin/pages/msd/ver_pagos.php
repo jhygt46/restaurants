@@ -18,11 +18,6 @@ if($core->id_user == 0){
 }
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
-
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 $iva = 1.19;
 
 /* CONFIG PAGE */
@@ -123,7 +118,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $value['factura']; ?></div>
-                        <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
+                        <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>
