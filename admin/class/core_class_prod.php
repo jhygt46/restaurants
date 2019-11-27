@@ -678,32 +678,36 @@ class Core{
     }
     public function get_giros_pagos(){
 
-        if($sql = $this->con->prepare("SELECT t1.id_gir, t1.dominio, t2.meses, t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.eliminado=?")){
-            if($sql->bind_param("i", $this->eliminado)){
-                if($sql->execute()){
+        if($this->id_user == 1){
 
-                    $result = $sql->get_result();
-                    while($row = $result->fetch_assoc()){
+            if($sql = $this->con->prepare("SELECT t1.id_gir, t1.dominio, t2.meses, t1.fecha_dns, t1.monto, t2.id_pago FROM giros t1 LEFT JOIN pagos t2 ON t1.id_gir=t2.id_gir WHERE t1.eliminado=?")){
+                if($sql->bind_param("i", $this->eliminado)){
+                    if($sql->execute()){
 
-                        $res[$row['id_gir']]['fecha_dns'] = $row['fecha_dns'];
-                        $res[$row['id_gir']]['monto'] = $row['monto'];
-                        $res[$row['id_gir']]['dominio'] = $row['dominio'];
+                        $result = $sql->get_result();
+                        while($row = $result->fetch_assoc()){
 
-                        if($row['id_pago'] == ""){
-                            $res[$row['id_gir']]['cpagos'] = 0;
-                        }else{
-                            $res[$row['id_gir']]['cpagos'] = $res[$row['id_gir']]['cpagos'] + $row['meses'];
+                            $res[$row['id_gir']]['fecha_dns'] = $row['fecha_dns'];
+                            $res[$row['id_gir']]['monto'] = $row['monto'];
+                            $res[$row['id_gir']]['dominio'] = $row['dominio'];
+
+                            if($row['id_pago'] == ""){
+                                $res[$row['id_gir']]['cpagos'] = 0;
+                            }else{
+                                $res[$row['id_gir']]['cpagos'] = $res[$row['id_gir']]['cpagos'] + $row['meses'];
+                            }
+
                         }
+                        $sql->free_result();
+                        $sql->close();
+                        return $res;
 
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                    return $res;
-
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
-    
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+        
+        }
+
     }
     public function get_pago($id){
 
