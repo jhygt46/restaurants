@@ -614,7 +614,7 @@ class Core{
     }
     public function ver_todos_los_pagos(){
 
-        if($sqlx = $this->con->prepare("SELECT * FROM pagos")){
+        if($sqlx = $this->con->prepare("SELECT * FROM pagos t1, giros t2 WHERE t1.id_gir=t2.id_gir ORDER BY t1.factura")){
                 if($sqlx->execute()){
 
                     $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC);

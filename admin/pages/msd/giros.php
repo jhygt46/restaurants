@@ -30,6 +30,7 @@ $eliminaraccion = "eliminar_giro";
 $id_list = "id_gir";
 $eliminarobjeto = "Empresa";
 $page_mod = "pages/msd/giros.php";
+$page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 /* CONFIG PAGE */
 
 $id_gir = 0;
@@ -122,6 +123,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                         <a class="icono ic3" onclick="navlink('pages/msd/ver_informe.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic16" onclick="navlink('pages/msd/usuarios_admin.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
                         <a class="icono ic2" onclick="navlink('pages/msd/ver_giro.php?id_gir=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>

@@ -19,10 +19,6 @@ if($core->id_user == 0){
 
 $list = $core->ver_todos_los_pagos();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
 $titulo_list = "Lista de Pagos";
