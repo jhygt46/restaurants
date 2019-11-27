@@ -612,6 +612,20 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_giros_user() #2 '.htmlspecialchars($this->con->error)); }
         }
     }
+    public function ver_todos_los_pagos(){
+
+        if($sqlx = $this->con->prepare("SELECT * FROM pagos")){
+                if($sqlx->execute()){
+
+                    $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sqlx->free_result();
+                    $sqlx->close();
+                    return $resultx;
+
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+
+    }
     public function get_pagos_giros($id_gir){
 
         if($sql = $this->con->prepare("SELECT dominio, monto FROM giros WHERE id_gir=? AND eliminado=?")){
