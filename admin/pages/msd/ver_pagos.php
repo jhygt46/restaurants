@@ -28,8 +28,6 @@ $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 $diff_pago = $meses - count($list['pagos']);
 
-echo "((".$diff_pago."))<br/>";
-
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
 $titulo_list = "Lista de Pagos";
@@ -90,6 +88,15 @@ if(isset($_GET["id_pago"])){
         </ul>
     </div>
     <hr>
+    <?php if($diff_pago > 0){ ?>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="factura">Meses Deuda: <strong><?php echo $diff_pago; ?></strong></div>
+            <div class="factura">Monto Deuda: <strong><?php echo $list['monto']; ?></strong></div>
+            <div class="factura">Total Deuda: <strong><?php echo intval($diff_pago * $list['monto']); ?></strong></div>
+        </div>
+    </div>
+    <?php } ?>
     <?php if(!isset($_GET["id_pago"])){ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
