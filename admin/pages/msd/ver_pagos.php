@@ -68,7 +68,8 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/pagos.php')"></li>
+            <?php if($_GET["back"] == 1){ ?><li class="back" onclick="navlink('pages/msd/giros.php')"></li><?php } ?>
+            <?php if($_GET["back"] == 2){ ?><li class="back" onclick="navlink('pages/msd/pagos.php')"></li><?php } ?>
         </ul>
     </div>
     <hr>
