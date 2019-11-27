@@ -32,9 +32,12 @@ $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 /* CONFIG PAGE */
 
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
+$next_factura = 0;
 
 if(isset($_GET["id_pago"])){
     $pago = $core->get_pago($_GET["id_pago"]);
+}else{
+    $next_factura = $core->next_factura();
 }
 
 ?>
@@ -94,7 +97,7 @@ if(isset($_GET["id_pago"])){
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Numero de Factura:</p></span>
-                        <input id="factura" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="factura" class="inputs" type="text" value="<?php echo $next_factura; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha:</p></span>

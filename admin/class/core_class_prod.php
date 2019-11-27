@@ -612,6 +612,21 @@ class Core{
             }else{ $this->registrar(6, 0, 0, 'get_giros_user() #2 '.htmlspecialchars($this->con->error)); }
         }
     }
+    public function next_factura(){
+
+        if($sqlx = $this->con->prepare("SELECT MAX(factura) FROM pagos")){
+            if($sqlx->execute()){
+
+                $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                $sqlx->free_result();
+                $sqlx->close();
+                return $resultx;
+
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+
+
+    }
     public function ver_todos_los_pagos(){
 
         if($sqlx = $this->con->prepare("SELECT * FROM pagos t1, giros t2 WHERE t1.id_gir=t2.id_gir ORDER BY t1.factura")){
