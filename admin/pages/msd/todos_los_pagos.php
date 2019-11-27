@@ -76,7 +76,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $factura; ?></div>
+                        <div class="nombre">#<?php echo $factura; ?> - <?php echo date("Y-m-d", strtotime($list[$i]['fecha_dns'])); ?></div>
                         <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>

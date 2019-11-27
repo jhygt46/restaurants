@@ -56,7 +56,7 @@ if(isset($_GET["id_pago"])){
         var meses = $('#meses').val();
         if(meses >= 1 && meses < 6){
             $('#monto').val(monto * meses);
-            $('#monto2').val(parseInt(monto * <?php echo $iva; ?>));
+            $('#monto2').val(parseInt(monto * meses * <?php echo $iva; ?>));
         }
         if(meses == 6){
             $('#monto').val(monto * 5.5);

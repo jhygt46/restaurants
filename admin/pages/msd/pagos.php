@@ -15,8 +15,8 @@ if(!isset($core_class_iniciada)){
 }
 
 // SOLO ADMIN
-if($core->id_user == 0){
-    die("Error: su sesion ha expirado");
+if($core->id_user != 1){
+    die("Error:");
 }
 
 $list = $core->get_giros_pagos();
