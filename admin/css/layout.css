@@ -354,7 +354,11 @@ body .relative {
 .pagina .cont_pagina .cont_pag .resp .data {
   width: 100%;
 }
-
+.pagina .cont_pagina .cont_pag .factura {
+  width: 100%;
+  font-size: 18px;
+  padding-bottom: 2px;
+}
 .pagina .cont_pagina .cont_pag .lista_items_graficos {
   position: relative;
   height: 240px;
