@@ -33,6 +33,10 @@ $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
+if(isset($_GET["id_pago"])){
+    
+}
+
 ?>
 <script>
 
@@ -73,6 +77,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
         </ul>
     </div>
     <hr>
+    <?php if(!isset($_GET["id_pago"])){ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
             <form action="" method="post">
@@ -118,6 +123,39 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             </form>
         </div>
     </div>
+    <?php }else{ ?>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="form_titulo clearfix">
+                <div class="titulo"><?php echo $sub_titulo; ?></div>
+            </div>
+            <label class="clearfix">
+                <span><p>Numero de Factura:</p></span>
+                <input id="factura" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+            </label>
+            <label class="clearfix">
+                <span><p>Fecha:</p></span>
+                <input id="fecha" class="inputs" type="text" value="" require="" placeholder="" />
+            </label>
+            <label class="clearfix">
+                <span><p>Meses:</p></span>
+                <select id="meses" onchange="cambiar_meses()">
+                    <option value="1">1</option>
+                    <option value="6">6</option>
+                    <option value="12">12</option>
+                </select>
+            </label>
+            <label class="clearfix">
+                <span><p>Monto Bruto:</p></span>
+                <input id="monto" class="inputs" type="text" value="<?php echo $list['monto']; ?>" require="" placeholder="" />
+            </label>
+            <label class="clearfix">
+                <span><p>Monto Neto:</p></span>
+                <input id="monto2" class="inputs" type="text" value="<?php echo intval($list['monto'] * $iva); ?>" require="" placeholder="" />
+            </label>
+        </div>
+    </div>
+    <?php } ?>
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
