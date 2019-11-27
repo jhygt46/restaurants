@@ -34,7 +34,7 @@ $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_pago"])){
-    
+    $pago = $core->get_pago($_GET["id_pago"]);
 }
 
 ?>
@@ -126,33 +126,7 @@ if(isset($_GET["id_pago"])){
     <?php }else{ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
-            <div class="form_titulo clearfix">
-                <div class="titulo"><?php echo $sub_titulo; ?></div>
-            </div>
-            <label class="clearfix">
-                <span><p>Numero de Factura:</p></span>
-                <input id="factura" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-            </label>
-            <label class="clearfix">
-                <span><p>Fecha:</p></span>
-                <input id="fecha" class="inputs" type="text" value="" require="" placeholder="" />
-            </label>
-            <label class="clearfix">
-                <span><p>Meses:</p></span>
-                <select id="meses" onchange="cambiar_meses()">
-                    <option value="1">1</option>
-                    <option value="6">6</option>
-                    <option value="12">12</option>
-                </select>
-            </label>
-            <label class="clearfix">
-                <span><p>Monto Bruto:</p></span>
-                <input id="monto" class="inputs" type="text" value="<?php echo $list['monto']; ?>" require="" placeholder="" />
-            </label>
-            <label class="clearfix">
-                <span><p>Monto Neto:</p></span>
-                <input id="monto2" class="inputs" type="text" value="<?php echo intval($list['monto'] * $iva); ?>" require="" placeholder="" />
-            </label>
+            FACTURA #<?php echo $pago["factura"]; ?>
         </div>
     </div>
     <?php } ?>
