@@ -126,7 +126,10 @@ if(isset($_GET["id_pago"])){
     <?php }else{ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
-            FACTURA #<?php echo $pago["factura"]; ?>
+            <div>Factura #<?php echo $pago["factura"]; ?></div>
+            <div>Fecha <?php echo $pago["fecha"]; ?></div>
+            <div>Monto <?php echo $pago["monto"]; ?></div>
+            <div>Meses <?php echo $pago["meses"]; ?></div>
         </div>
     </div>
     <?php } ?>
