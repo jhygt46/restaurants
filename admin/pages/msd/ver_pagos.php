@@ -18,6 +18,11 @@ if($core->id_user == 0){
 }
 
 $list = $core->get_pagos_giros($_GET["id_gir"]);
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 $iva = 1.19;
 
 /* CONFIG PAGE */
