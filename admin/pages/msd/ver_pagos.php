@@ -59,8 +59,6 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
              changeMonth: true,
              numberOfMonths: 1,
              dateFormat: 'yy-mm-dd'
-         }).on( "change", function() {
-             to.datepicker( "option", "minDate", getDate( this ) );
          });
 
     });
