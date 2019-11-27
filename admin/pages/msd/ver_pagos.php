@@ -61,9 +61,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
              dateFormat: 'yy-mm-dd'
          }).on( "change", function() {
              to.datepicker( "option", "minDate", getDate( this ) );
-         })
+         });
 
-    }
+    });
 
 </script>
 <div class="pagina">
