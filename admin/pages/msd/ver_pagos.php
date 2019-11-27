@@ -90,10 +90,10 @@ if(isset($_GET["id_pago"])){
     <hr>
     <?php if($diff_pago > 0){ ?>
     <div class="cont_pagina">
-        <div class="cont_pag">
-            <div class="factura">Meses Deuda: <strong><?php echo $diff_pago; ?></strong></div>
-            <div class="factura">Monto Deuda: <strong><?php echo $list['monto']; ?></strong></div>
-            <div class="factura">Total Deuda: <strong><?php echo intval($diff_pago * $list['monto']); ?></strong></div>
+        <div class="cont_pag" style="background: #d99">
+            <div class="factura">Meses Deuda: <strong style="color: #933"><?php echo $diff_pago; ?></strong></div>
+            <div class="factura">Monto Deuda: <strong style="color: #933"><?php echo $list['monto']; ?></strong></div>
+            <div class="factura">Total Deuda: <strong style="color: #933"><?php echo intval($diff_pago * $list['monto']); ?></strong></div>
         </div>
     </div>
     <?php } ?>
