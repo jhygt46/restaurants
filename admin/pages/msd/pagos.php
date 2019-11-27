@@ -61,14 +61,13 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
                     if($diff_pago > 0){
                         
-                        $total = $diff_pago * $value['monto'] * $iva;
-                        if($diff_pago == 1){ $mensaje = 'deuda 1 mes por '; }
-                        if($diff_pago > 1){ $mensaje = 'deuda '.$diff_pago.' meses por '; }
+                        if($diff_pago == 1){ $mensaje = 'deuda 1 '; }
+                        if($diff_pago > 1){ $mensaje = 'deuda '.$diff_pago.' meses'; }
 
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $value['dominio']; ?> <strong style="color: #900"> <?php echo $mensaje.number_format($total, 0, '', '.'); ?></strong></div>
+                        <div class="nombre" style="font-weight: bold"><?php echo $value['dominio']; ?> <?php echo $mensaje; ?></div>
                         <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>&back=2')"></a>
                     </div>
                 </div>
