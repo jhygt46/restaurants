@@ -20,6 +20,10 @@ if($core->id_user == 0){
 $list = $core->get_pagos_giros($_GET["id_gir"]);
 $iva = 1.19;
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
 $titulo_list = "Lista de Pagos";

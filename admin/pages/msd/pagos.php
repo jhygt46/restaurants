@@ -61,8 +61,8 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
                     if($diff_pago > 0){
                         
-                        if($diff_pago == 1){ $mensaje = 'deuda 1 '; }
-                        if($diff_pago > 1){ $mensaje = 'deuda '.$diff_pago.' meses'; }
+                        if($diff_pago == 1){ $mensaje = '( 1 mes )'; }
+                        if($diff_pago > 1){ $mensaje = '( '.$diff_pago.' meses )'; }
 
                 ?>
                 <div class="l_item">
