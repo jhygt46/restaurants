@@ -638,7 +638,7 @@ class Core{
                     $sql->free_result();
                     $sql->close();
 
-                    if($sqlx = $this->con->prepare("SELECT id_pago FROM pagos WHERE id_gir=?")){
+                    if($sqlx = $this->con->prepare("SELECT id_pago, fecha, monto, factura, meses FROM pagos WHERE id_gir=?")){
                         if($sqlx->bind_param("i", $id_gir)){
                             if($sqlx->execute()){
             
