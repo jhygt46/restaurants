@@ -159,7 +159,7 @@ function init_chart(){
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="lista_items">
-                <div class="titulo_items" style="padding-bottom: 0px"><h1>Pago del Servicio</h1><h2>hace <?php echo $diferencia->d; ?> </h2></div>
+                <div class="titulo_items" style="padding-bottom: 0px"><h1>Renovar Servicio</h1><h2>Si desea renovar su servicio haga click aca</h2></div>
             </div>
         </div>
     </div>
