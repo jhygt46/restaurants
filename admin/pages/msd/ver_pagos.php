@@ -80,8 +80,8 @@ if(isset($_GET["id_pago"])){
         </ul>
     </div>
     <hr>
-    <div class="cont_pagina">
     <?php if(!isset($_GET["id_pago"])){ ?>
+    <div class="cont_pagina">
         <div class="cont_pag">
             <form action="" method="post">
                 <div class="form_titulo clearfix">
@@ -125,10 +125,12 @@ if(isset($_GET["id_pago"])){
                 </fieldset>
             </form>
         </div>
+    </div>
     <?php }else{ ?>
+    <div class="cont_pagina">
         <div class="cont_pag">
             <div class="factura">Factura: <strong>#<?php echo $pago["factura"]; ?></strong></div>
-            <div class="factura">Fecha: <strong><?php echo date("d-m-y", strtotime($pago["fecha"])); ?><</strong>/div>
+            <div class="factura">Fecha: <strong><?php echo date("d-m-y", strtotime($pago["fecha"])); ?></strong></div>
             <div class="factura">Monto: <strong><?php echo $pago["monto"]; ?></strong></div>
             <?php if($pago["meses"] > 1){ ?>
             <div class="factura">Meses: <strong><?php echo $pago["meses"]; ?></strong></div>
@@ -137,8 +139,8 @@ if(isset($_GET["id_pago"])){
             <div class="factura">Mes: <strong>1</strong></div>
             <?php } ?>
         </div>
-    <?php } ?>
     </div>
+    <?php } ?>
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
