@@ -34,6 +34,7 @@ $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 $diff_pago = $meses - $pagos['cpagos'];
 
+$dias = 5 - $diferencia->d;
 
 if($giro['dns'] == 0){
     
@@ -160,7 +161,7 @@ function init_chart(){
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="lista_items">
-                <div class="titulo_items"><h1>Pagos</h1><h2></h2></div>
+                <div class="titulo_items"><h1>Le informamos que el plazo</h1><h2>tiene un plazo de <?php echo $dias; ?> dias</h2></div>
             </div>
         </div>
     </div>
