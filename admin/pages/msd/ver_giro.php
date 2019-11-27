@@ -34,10 +34,6 @@ $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 $diff_pago = $meses - $pagos['cpagos'];
 
-echo "<pre>";
-print_r($pagos);
-echo "</pre>";
-
 
 if($giro['dns'] == 0){
     
@@ -165,11 +161,6 @@ function init_chart(){
         <div class="cont_pag">
             <div class="lista_items">
                 <div class="titulo_items"><h1>Pagos</h1><h2></h2></div>
-                <div class="items_list clearfix">
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/categorias.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuicon.png" alt="" /></div><div class="item_ttl">CARTA</div></div></div>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/preguntas.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menupreguntas.png" alt="" /></div><div class="item_ttl">PREGUNTAS</div></div></div>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/ingredientes.php?id_cat=<?php echo $catalogos[$i]['id_cat']; ?>&nombre=<?php echo $catalogos[$i]['nombre']; ?>')"><div class="item_image"><img src="images/menuingredientes.png" alt="" /></div><div class="item_ttl">LISTA<br>INGREDIENTES</div></div></div>
-                </div>
             </div>
         </div>
     </div>
