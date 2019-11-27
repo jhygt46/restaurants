@@ -222,7 +222,7 @@ class Guardar{
                                         $info['mensaje'] = "Factura creada exitosamente";
                                         $info['reload'] = 1;
                                         $info['page'] = "msd/ver_pagos.php?id_gir=".$id_gir."&back=".$back;
-                                        $sqliugc->close();
+                                        $sql->close();
                                     }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
                                 }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
                             }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
@@ -232,6 +232,8 @@ class Guardar{
                             $info['op'] = 2;
                             $info['mensaje'] = "Factura #".$factura." ya existe";
                         }
+                        $sqlx->free_result();
+                        $sqlx->close();
 
                     }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqlx->error)); }
                 }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqlx->error)); }

@@ -617,14 +617,19 @@ class Core{
         if($sqlx = $this->con->prepare("SELECT MAX(factura) as max_factura FROM pagos")){
             if($sqlx->execute()){
 
-                $resultx = intval($sqlx->get_result()->fetch_all(MYSQLI_ASSOC)[0]['max_factura'] + 1);
-                $sqlx->free_result();
-                $sqlx->close();
-                return $resultx;
+                $resx = $sqlx->get_result();
+                if($resx->{"num_rows"} == 0){
+                    return 1;
+                }
+                if($resx->{"num_rows"} > 0){
+                    $resultx = intval($resx->fetch_all(MYSQLI_ASSOC)[0]['max_factura'] + 1);
+                    $sqlx->free_result();
+                    $sqlx->close();
+                    return $resultx;
+                }
 
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sqlx->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
-
 
     }
     public function ver_todos_los_pagos(){
