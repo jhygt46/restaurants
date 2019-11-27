@@ -19,8 +19,12 @@ if($core->id_user == 0){
 
 $list = $core->ver_todos_los_pagos();
 
+if(isset($_GET["id_pago"])){
+    $pago = $core->get_pago($_GET["id_pago"]);
+}
+
 /* CONFIG PAGE */
-$titulo = "Pagos de ".$list['dominio'];
+$titulo = "Todos los Pagos";
 $titulo_list = "Lista de Pagos";
 $sub_titulo = "Ingresar Pago";
 $accion = "crear_pago";
@@ -41,46 +45,21 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
         </ul>
     </div>
     <hr>
+    <?php if(isset($_GET["id_pago"])){ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
-            <form action="" method="post">
-                <div class="form_titulo clearfix">
-                    <div class="titulo"><?php echo $sub_titulo; ?></div>
-                    <ul class="opts clearfix">
-                        <li class="opt">1</li>
-                        <li class="opt">2</li>
-                    </ul>
-                </div>
-                <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id_gir; ?>" />
-                    <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    <label class="clearfix">
-                        <span><p>Numero de Factura:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Meses:</p></span>
-                        <select id="meses" onchange="cambiar_meses()">
-                            <option value="1">1</option>
-                            <option value="6">6</option>
-                            <option value="12">12</option>
-                        </select>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Monto Bruto:</p></span>
-                        <input id="monto" class="inputs" type="text" value="<?php echo $list['monto']; ?>" require="" placeholder="" />
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Monto Neto:</p></span>
-                        <input id="monto2" class="inputs" type="text" value="<?php echo intval($list['monto'] * $iva); ?>" require="" placeholder="" />
-                    </label>
-                    <label>
-                        <div class="enviar"><a onclick="form(this)">Enviar</a></div>
-                    </label>
-                </fieldset>
-            </form>
+            <div class="factura">Factura: <strong>#<?php echo $pago["factura"]; ?></strong></div>
+            <div class="factura">Fecha: <strong><?php echo date("d-m-y", strtotime($pago["fecha"])); ?></strong></div>
+            <div class="factura">Monto: <strong><?php echo $pago["monto"]; ?></strong></div>
+            <?php if($pago["meses"] > 1){ ?>
+            <div class="factura">Meses: <strong><?php echo $pago["meses"]; ?></strong></div>
+            <?php } ?>
+            <?php if($pago["meses"] == 1){ ?>
+            <div class="factura">Mes: <strong>1</strong></div>
+            <?php } ?>
         </div>
     </div>
+    <?php } ?>
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="list_titulo clearfix">
