@@ -118,7 +118,7 @@ if(isset($_GET["id_pago"])){
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha:</p></span>
-                        <input id="fecha" class="inputs" type="text" value="" require="" placeholder="" />
+                        <input id="fecha" class="inputs" type="text" value="<?php echo date("Y-m-d"); ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Meses:</p></span>
