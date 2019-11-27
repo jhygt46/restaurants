@@ -54,8 +54,8 @@ if(isset($_GET["id_pago"])){
     function cambiar_meses(){
         var monto = <?php echo $list['monto']; ?>;
         var meses = $('#meses').val();
-        if(meses == 1){
-            $('#monto').val(monto);
+        if(meses >= 1 && meses < 6){
+            $('#monto').val(monto * meses);
             $('#monto2').val(parseInt(monto * <?php echo $iva; ?>));
         }
         if(meses == 6){
@@ -124,6 +124,10 @@ if(isset($_GET["id_pago"])){
                         <span><p>Meses:</p></span>
                         <select id="meses" onchange="cambiar_meses()">
                             <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="12">12</option>
                         </select>
@@ -173,7 +177,7 @@ if(isset($_GET["id_pago"])){
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo date("d-m-Y", strtotime($value['fecha'])); ?> - <?php echo $value['monto']; ?></div>
+                        <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo date("Y-m-d", strtotime($value['fecha'])); ?> - <?php echo $value['monto']; ?></div>
                         <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_pago=<?php echo $value["id_pago"]; ?>&id_gir=<?php echo $_GET["id_gir"]; ?>&back=<?php echo $_GET["back"]; ?>')"></a>
                     </div>
                 </div>
