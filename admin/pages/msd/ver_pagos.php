@@ -117,7 +117,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $value['factura']; ?></div>
+                        <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo $value['fecha']; ?></div>
                         <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
