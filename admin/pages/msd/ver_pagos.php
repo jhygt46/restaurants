@@ -38,9 +38,6 @@ if(isset($_GET["id_pago"])){
     $pago = $core->get_pago($_GET["id_pago"]);
 }else{
     $next_factura = $core->next_factura();
-    echo "<pre>";
-    print_r($next_factura);
-    echo "</pre>";
 }
 
 ?>

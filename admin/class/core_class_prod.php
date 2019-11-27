@@ -614,10 +614,10 @@ class Core{
     }
     public function next_factura(){
 
-        if($sqlx = $this->con->prepare("SELECT MAX(factura) FROM pagos")){
+        if($sqlx = $this->con->prepare("SELECT MAX(factura) as max_factura FROM pagos")){
             if($sqlx->execute()){
 
-                $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                $resultx = $sqlx->get_result()->fetch_all(MYSQLI_ASSOC)[0]['max_factura'];
                 $sqlx->free_result();
                 $sqlx->close();
                 return $resultx;
