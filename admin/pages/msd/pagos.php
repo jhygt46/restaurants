@@ -21,6 +21,10 @@ if($core->id_user == 0){
 
 $list = $core->get_giros_pagos();
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 /* CONFIG PAGE */
 $titulo = "Pagos";
 $titulo_list = "Pagos Atrasados";
