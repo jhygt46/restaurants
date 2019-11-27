@@ -37,26 +37,6 @@ $page_ver_pagos_giro = "pages/msd/ver_pagos.php";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 ?>
-<script>
-
-    function cambiar_meses(){
-        var monto = <?php echo $list['monto']; ?>;
-        var meses = $('#meses').val();
-        if(meses == 1){
-            $('#monto').val(monto);
-            $('#monto2').val(parseInt(monto * <?php echo $iva; ?>));
-        }
-        if(meses == 6){
-            $('#monto').val(monto * 5.5);
-            $('#monto2').val(parseInt(monto * 5.5 * <?php echo $iva; ?>));
-        }
-        if(meses == 12){
-            $('#monto').val(monto * 10);
-            $('#monto2').val(parseInt(monto * 10 * <?php echo $iva; ?>));
-        }
-    }
-
-</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -116,11 +96,12 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             </div>
             <div class="listado_items">
                 <?php
-                foreach($list['pagos'] as $value){
+                for($i=0; $i<count($list); $i++){
+                    $factura = $list[$i]['factura'];
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $value['factura']; ?></div>
+                        <div class="nombre"><?php echo $factura; ?></div>
                         <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
                     </div>
                 </div>
