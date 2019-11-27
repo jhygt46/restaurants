@@ -126,10 +126,15 @@ if(isset($_GET["id_pago"])){
     <?php }else{ ?>
     <div class="cont_pagina">
         <div class="cont_pag">
-            <div class="factura">Factura #<?php echo $pago["factura"]; ?></div>
-            <div class="factura">Fecha <?php echo $pago["fecha"]; ?></div>
-            <div class="factura">Monto <?php echo $pago["monto"]; ?></div>
-            <div class="factura">Meses <?php echo $pago["meses"]; ?></div>
+            <div class="factura">Factura: <strong>#<?php echo $pago["factura"]; ?></strong></div>
+            <div class="factura">Fecha: <strong><?php echo date("d-m-y", strtotime($pago["fecha"])); ?><</strong>/div>
+            <div class="factura">Monto: <strong><?php echo $pago["monto"]; ?></strong></div>
+            <?php if($pago["meses"] > 1){ ?>
+            <div class="factura">Meses: <strong><?php echo $pago["meses"]; ?></strong></div>
+            <?php } ?>
+            <?php if($pago["meses"] == 1){ ?>
+            <div class="factura">Mes: <strong>1</strong></div>
+            <?php } ?>
         </div>
     </div>
     <?php } ?>
