@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Santiago');
+
 if(!isset($core_class_iniciada)){
     if($_SERVER["HTTP_HOST"] == "localhost"){
         define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
@@ -20,9 +22,13 @@ if($core->id_user == 0){
 $list = $core->get_pagos_giros($_GET["id_gir"]);
 $iva = 1.19;
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
+$fechainicial = new DateTime($list['fecha_dns']);
+$fechafinal = new DateTime();
+$diferencia = $fechainicial->diff($fechafinal);
+$meses = ( $diferencia->y * 12 ) + $diferencia->m;
+$diff_pago = $meses - count($list['pagos']);
+
+echo "((".$diff_pago."))<br/>";
 
 /* CONFIG PAGE */
 $titulo = "Pagos de ".$list['dominio'];
