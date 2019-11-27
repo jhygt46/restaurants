@@ -52,6 +52,18 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             $('#monto2').val(parseInt(monto * 10 * <?php echo $iva; ?>));
         }
     }
+    $(document).ready(function(){
+         
+         var dateFormat = "yy-mm-dd";
+         var from = $( "#fecha" ).datepicker({
+             changeMonth: true,
+             numberOfMonths: 1,
+             dateFormat: 'yy-mm-dd'
+         }).on( "change", function() {
+             to.datepicker( "option", "minDate", getDate( this ) );
+         });
+
+    }
 
 </script>
 <div class="pagina">
@@ -78,6 +90,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     <label class="clearfix">
                         <span><p>Numero de Factura:</p></span>
                         <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Fecha:</p></span>
+                        <input id="fecha" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Meses:</p></span>
