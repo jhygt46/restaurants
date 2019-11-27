@@ -20,10 +20,7 @@ if($core->id_user == 0){
 }
 
 $list = $core->get_giros_pagos();
-
-echo "<pre>";
-print_r($list);
-echo "</pre>";
+$iva = 1.19;
 
 /* CONFIG PAGE */
 $titulo = "Pagos";
@@ -63,11 +60,13 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     $diff_pago = $meses - $value['cpagos'];
 
                     if($diff_pago > 0){
+                        
+                        $total = $diff_pago * $value['monto'] * $iva;
 
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $value['dominio']; ?></div>
+                        <div class="nombre"><?php echo $value['dominio']; ?> <strong style="color: #900"><?php echo number_format($total, 0, '', '.'); ?></strong></div>
                         <a class="icono ic18" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>&back=2')"></a>
                     </div>
                 </div>
