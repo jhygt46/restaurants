@@ -161,7 +161,7 @@ function init_chart(){
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="lista_items">
-                <div class="titulo_items"><h1>Le informamos que el plazo</h1><h2>tiene un plazo de <?php echo $dias; ?> dias</h2></div>
+                <div class="titulo_items"><h1>Pago del Servicio</h1><h2>tiene un plazo de <?php echo $dias; ?> dias</h2></div>
             </div>
         </div>
     </div>
