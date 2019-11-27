@@ -34,6 +34,9 @@ $diferencia = $fechainicial->diff($fechafinal);
 $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 $diff_pago = $meses - $pagos['cpagos'];
 
+echo "<pre>";
+print_r($pagos);
+echo "</pre>";
 
 
 if($giro['dns'] == 0){

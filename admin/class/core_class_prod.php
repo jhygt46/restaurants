@@ -702,14 +702,16 @@ class Core{
                         $sql->close();
                         return $res;
 
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_giros_pagos() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_giros_pagos() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_giros_pagos() '.htmlspecialchars($this->con->error)); }
         
         }
 
     }
     public function get_pago($id){
+
+        
 
         if($sql = $this->con->prepare("SELECT * FROM pagos WHERE id_pago=?")){
             if($sql->bind_param("i", $id)){
