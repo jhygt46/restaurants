@@ -84,11 +84,12 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id_gir; ?>" />
+                    <input id="id_gir" type="hidden" value="<?php echo $_GET["id_gir"]; ?>" />
+                    <input id="back" type="hidden" value="<?php echo $_GET["back"]; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Numero de Factura:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
+                        <input id="factura" class="inputs" type="text" value="<?php echo $that['nombre']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha:</p></span>
@@ -133,7 +134,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo date("d-m-Y", strtotime($value['fecha'])); ?> - <?php echo $value['monto']; ?></div>
-                        <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>')"></a>
+                        <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_gir=<?php echo $clave; ?>&back=<?php echo $_GET["back"]; ?>')"></a>
                     </div>
                 </div>
                 <?php } ?>

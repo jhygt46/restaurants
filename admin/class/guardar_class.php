@@ -188,8 +188,57 @@ class Guardar{
             if($_POST['accion'] == "add_dns"){
                 echo json_encode($this->add_ssl());
             }
-
+            if($_POST['accion'] == "crear_pago"){
+                echo json_encode($this->crear_pago());
+            }
         }
+
+    }
+    private function crear_pago(){
+
+        if($this->id_user == 1){
+
+            $info['op'] = 2;
+            $info['mensaje'] = "Factura no se pudo guardar";
+            $factura = $_POST["factura"];
+            
+            if($sqlx = $this->con->prepare("SELECT * FROM pagos WHERE factura=?")){
+                if($sqlx->bind_param("i", $factura)){
+                    if($sqlx->execute()){
+                        
+                        $resx = $sqlx->get_result();
+                        if($resx->{"num_rows"} == 0){
+                        
+                            $id_gir = $_POST["id_gir"];
+                            $fecha = $_POST["fecha"];
+                            $meses = $_POST["meses"];
+                            $monto = $_POST["monto"];
+
+                            if($sql = $this->con->prepare("INSERT INTO pagos (fecha, monto, factura, meses, id_gir) VALUES (?, ?, ?, ?, ?)")){
+                                if($sql->bind_param("siiii", $fecha, $monto, $factura, $meses, $id_gir)){
+                                    if($sql->execute()){
+                                        $back = $_POST["back"];
+                                        $info['op'] = 1;
+                                        $info['mensaje'] = "Factura creada exitosamente";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/ver_pagos.php?id_gir=".$id_gir."&back=".$back;
+                                        $sqliugc->close();
+                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+
+                        }
+                        if($resx->{"num_rows"} == 1){
+                            $info['op'] = 2;
+                            $info['mensaje'] = "Factura #".$factura." ya existe";
+                        }
+
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqlx->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqlx->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+
+        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+        return $info;
 
     }
     private function registrar($id_des, $id_loc, $id_gir, $txt){
