@@ -332,9 +332,13 @@ body .relative {
 }
 .pagina .cont_pagina .cont_pag .listado_items .resumen_ventas .rv1{
   float: left;
+  font-size: 18px;
+  min-width: 120px;
+  padding-right: 10px;
 }
 .pagina .cont_pagina .cont_pag .listado_items .resumen_ventas .rv2{
   float: left;
+  font-size: 18px;
 }
 .pagina .cont_pagina .cont_pag .list_data .data {
   float: left;
