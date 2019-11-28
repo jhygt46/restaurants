@@ -29,21 +29,21 @@ $core = new Core();
                     <div class="plan">
                         <div class="detalleplan">
                             <div class="cont_detalle">
-                                <h1>Plan Mensual</h1>
+                                <h1>Plan<br/>Mensual</h1>
                             </div>
                         </div>
                     </div>
                     <div class="plan">
                         <div class="detalleplan">
                             <div class="cont_detalle">
-                                <h1>Plan Semestral</h1>
+                                <h1>Plan<br/>Semestral</h1>
                             </div>
                         </div>
                     </div>
                     <div class="plan">
                         <div class="detalleplan">
                             <div class="cont_detalle">
-                                <h1>Plan Anual</h1>
+                                <h1>Plan<br/>Anual</h1>
                             </div>
                         </div>
                     </div>
