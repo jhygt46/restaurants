@@ -388,7 +388,6 @@ body .relative {
   float: left;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan{
-  height: 240px;
   width: 94%;
   min-width: 100px;
   border: 1px solid #000;
