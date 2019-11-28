@@ -152,7 +152,7 @@ if(isset($_GET["id_pago"])){
         <div class="cont_pag">
             <div class="factura">Factura: <strong>#<?php echo $pago["factura"]; ?></strong></div>
             <div class="factura">Fecha: <strong><?php echo date("d-m-y", strtotime($pago["fecha"])); ?></strong></div>
-            <div class="factura">Monto: <strong><?php echo $pago["monto"]; ?></strong></div>
+            <div class="factura">Monto: <strong>$<?php echo number_format($pago["monto"], 0, '', '.'); ?></strong></div>
             <?php if($pago["meses"] > 1){ ?>
             <div class="factura">Meses: <strong><?php echo $pago["meses"]; ?></strong></div>
             <?php } ?>

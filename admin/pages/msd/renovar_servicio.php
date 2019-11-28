@@ -34,7 +34,7 @@ $monto3 = $monto * 10;
                             <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=1')">
                                 <h1>Plan<br/>Mensual</h1>
                                 <h2>No hay ahorro</h2>
-                                <h3>$<?php echo $monto; ?> + iva</h3>
+                                <h3>$<?php echo number_format($monto, 0, '', '.'); ?> + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ $monto3 = $monto * 10;
                             <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=2')">
                                 <h1>Plan<br/>Semestral</h1>
                                 <h2>Ahorra 1 mes al año</h2>
-                                <h3>$<?php echo $monto2; ?> + iva</h3>
+                                <h3>$<?php echo number_format($monto2, 0, '', '.'); ?> + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ $monto3 = $monto * 10;
                             <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=3')">
                                 <h1>Plan<br/>Anual</h1>
                                 <h2>Ahorra 2 meses al año</h2>
-                                <h3>$<?php echo $monto3; ?> + iva</h3>
+                                <h3>$<?php echo number_format($monto3, 0, '', '.'); ?> + iva</h3>
                             </div>
                         </div>
                     </div>

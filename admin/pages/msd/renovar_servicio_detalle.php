@@ -47,7 +47,7 @@ if($_GET["pago"] == 3){
                     <h1>Correo</h1>
                     <h2>misitiodelivery@gmail.com</h2>
                     <h1>Monto</h1>
-                    <h2><?php echo $monto; ?></h2>
+                    <h2>$<?php echo number_format($monto, 0, '', '.'); ?></h2>
                 </div>
             </div>
         </div>
