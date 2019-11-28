@@ -142,7 +142,14 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1>Resumen Ventas</h1></div>
                 <div class="listado_items">
-                    <div></div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Ventas Totales</div>
+                        <div class="rv2">$1.400.000</div>
+                    </div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Ventas Totales DNS</div>
+                        <div class="rv2">$900.000</div>
+                    </div>
                 </div>
             </div>
         </div>
