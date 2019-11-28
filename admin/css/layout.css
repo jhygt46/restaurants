@@ -380,7 +380,16 @@ body .relative {
   right: 0px;
   width: calc(100% - 115px);
 }
-.pagina .cont_pagina .cont_pag .lista_items .planes {
+.pagina .cont_pagina .cont_pag .lista_items .detalle_transferencia{
+
+}
+.pagina .cont_pagina .cont_pag .lista_items .detalle_transferencia h1{
+
+}
+.pagina .cont_pagina .cont_pag .lista_items .detalle_transferencia h2{
+
+}
+.pagina .cont_pagina .cont_pag .lista_items .planes{
 
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan{
