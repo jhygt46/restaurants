@@ -18,7 +18,7 @@ $monto3 = $monto * 10;
 
 <div class="pagina">
     <div class="title">
-        <h1>Renovación del Servicio</h1>
+        <h1>Renovación del servicio</h1>
         <ul class="clearfix">
             <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
         </ul>
