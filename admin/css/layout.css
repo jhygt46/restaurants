@@ -386,14 +386,14 @@ body .relative {
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan{
   width: 33.33%;
   float: left;
-  text-align: center;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan{
   height: 240px;
   width: 90%;
   min-width: 100px;
   border: 1px solid #000;
-  background: #ddd;
+  background: #eee;
+  margin: 0 auto;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle{
   padding: 10px;
