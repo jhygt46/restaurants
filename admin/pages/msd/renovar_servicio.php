@@ -28,17 +28,23 @@ $core = new Core();
                 <div class="planes clearfix">
                     <div class="plan">
                         <div class="detalleplan">
-                            <h1>Plan Mensual</h1>
+                            <div class="cont_detalle">
+                                <h1>Plan Mensual</h1>
+                            </div>
                         </div>
                     </div>
                     <div class="plan">
                         <div class="detalleplan">
-                            <h1>Plan Semestral</h1>
+                            <div class="cont_detalle">
+                                <h1>Plan Semestral</h1>
+                            </div>
                         </div>
                     </div>
                     <div class="plan">
                         <div class="detalleplan">
-                            <h1>Plan Anual</h1>
+                            <div class="cont_detalle">
+                                <h1>Plan Anual</h1>
+                            </div>
                         </div>
                     </div>
                 </div>

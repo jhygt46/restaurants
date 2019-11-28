@@ -394,6 +394,9 @@ body .relative {
   min-width: 100px;
   border: 1px solid #000;
 }
+.pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle{
+  padding: 10px;
+}
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
   font-size: 28px;
   padding-bottom: 20px;
