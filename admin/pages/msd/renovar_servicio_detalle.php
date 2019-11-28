@@ -10,6 +10,16 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
+$monto = $core->get_monto();
+
+if($_GET["pago"] == 2){
+    $monto = $monto * 5.5;
+}
+if($_GET["pago"] == 3){
+    $monto = $monto * 10;
+}
+
+echo "((".$monto."))";
 
 ?>
 

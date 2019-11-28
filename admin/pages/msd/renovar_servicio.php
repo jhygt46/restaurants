@@ -10,6 +10,9 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
+$monto = $core->get_monto();
+$monto2 = $monto * 5.5;
+$monto3 = $monto * 10;
 
 ?>
 
@@ -28,10 +31,10 @@ $core = new Core();
                 <div class="planes clearfix">
                     <div class="plan">
                         <div class="detalleplan">
-                            <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=1')">
+                            <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php')">
                                 <h1>Plan<br/>Mensual</h1>
                                 <h2>No hay ahorro</h2>
-                                <h3>$50.000 + iva</h3>
+                                <h3>$<?php echo $monto; ?> + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -40,7 +43,7 @@ $core = new Core();
                             <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=2')">
                                 <h1>Plan<br/>Semestral</h1>
                                 <h2>Ahorra 1 mes al año</h2>
-                                <h3>$275.000 + iva</h3>
+                                <h3>$<?php echo $monto2; ?> + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -49,7 +52,7 @@ $core = new Core();
                             <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=3')">
                                 <h1>Plan<br/>Anual</h1>
                                 <h2>Ahorra 2 meses al año</h2>
-                                <h3>$500.000 + iva</h3>
+                                <h3>$<?php echo $monto3; ?> + iva</h3>
                             </div>
                         </div>
                     </div>

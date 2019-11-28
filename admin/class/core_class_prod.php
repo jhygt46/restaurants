@@ -711,7 +711,7 @@ class Core{
     }
     public function get_pago($id){
 
-        
+
 
         if($sql = $this->con->prepare("SELECT * FROM pagos WHERE id_pago=?")){
             if($sql->bind_param("i", $id)){
@@ -725,6 +725,20 @@ class Core{
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_giro() '.htmlspecialchars($this->con->error)); }
+    
+    }
+    public function get_monto(){
+
+        if($sql = $this->con->prepare("SELECT monto FROM giros WHERE id_gir=? AND eliminado=?")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["monto"];
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_monto() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_monto() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_monto() '.htmlspecialchars($this->con->error)); }
     
     }
     public function get_pagos(){
