@@ -24,11 +24,23 @@ $core = new Core();
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="lista_items">
-                <div class="titulo_items"><h1>Selecciona Plazos de Pago</h1></div>
+                <div class="titulo_items" style="padding-bottom: 10px"><h1>Elije el plazos que mas te acomode</h1></div>
                 <div class="planes clearfix">
-                    <div class="plan"><div class="detalleplan"></div></div>
-                    <div class="plan"><div class="detalleplan"></div></div>
-                    <div class="plan"><div class="detalleplan"></div></div>
+                    <div class="plan">
+                        <div class="detalleplan">
+                            <h1>Plan Mensual</h1>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="detalleplan">
+                            <h1>Plan Semestral</h1>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="detalleplan">
+                            <h1>Plan Anual</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
