@@ -588,7 +588,7 @@ class Core{
     }
     public function get_giros_user(){
         if($this->admin == 1 && $this->id_user > 1){
-            if($sql = $this->con->prepare("SELECT t2.id_gir, t2.nombre, t2.dominio FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user=? AND t1.id_gir=t2.id_gir AND t2.eliminado=? ORDER BY dns_letra")){
+            if($sql = $this->con->prepare("SELECT t2.id_gir, t2.nombre, t2.dominio, t2.dns_letra, t2.monto, t2.dns, t2.fecha_dns FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user=? AND t1.id_gir=t2.id_gir AND t2.eliminado=? ORDER BY dns_letra")){
                 if($sql->bind_param("ii", $this->id_user, $this->eliminado)){
                     if($sql->execute()){
                         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -599,8 +599,8 @@ class Core{
                 }else{ $this->registrar(6, 0, 0, 'get_giros_user() #1 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'get_giros_user() #1 '.htmlspecialchars($this->con->error)); }
         }
-        if($this->admin == 1 && $this->id_user == 1){
-            if($sql = $this->con->prepare("SELECT id_gir, nombre, dominio, dns_letra FROM giros WHERE eliminado=? ORDER BY dns_letra")){
+        if($this->id_user == 1){
+            if($sql = $this->con->prepare("SELECT id_gir, nombre, dominio, dns_letra, monto, dns, fecha_dns FROM giros WHERE eliminado=? ORDER BY dns_letra")){
                 if($sql->bind_param("i", $this->eliminado)){
                     if($sql->execute()){
                         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
