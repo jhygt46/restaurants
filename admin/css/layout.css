@@ -380,6 +380,14 @@ body .relative {
   right: 0px;
   width: calc(100% - 115px);
 }
+.pagina .cont_pagina .cont_pag .lista_items .planes {
+
+}
+.pagina .cont_pagina .cont_pag .lista_items .planes .plan{
+  width: 33.33%;
+  float: left;
+  height: 120px;
+}
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
   font-size: 28px;
   padding-bottom: 20px;

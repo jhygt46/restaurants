@@ -24,11 +24,11 @@ $core = new Core();
     <div class="cont_pagina">
         <div class="cont_pag">
             <div class="lista_items">
-                <div class="titulo_items"><h1>Seleccionar Plazos de Pago</h1><h2>Mensual, Semestral o Anual</h2></div>
-                <div class="items_list clearfix">
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_paginas.php')"><div class="item_image"><img src="images/configpages.png" alt="" /></div><div class="item_ttl">Mensual</div></div></div>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_footer.php')"><div class="item_image"><img src="images/configfooter.png" alt="" /></div><div class="item_ttl">Semestral</div></div></div>
-                    <div class="list_item wi_01"><div class="cont_item" onclick="navlink('pages/msd/configurar_pag_inicio.php')"><div class="item_image"><img src="images/configpaginicio.png" alt="" /></div><div class="item_ttl">Anual</div></div></div>
+                <div class="titulo_items"><h1>Selecciona Plazos de Pago</h1></div>
+                <div class="planes clearfix">
+                    <div class="plan">A</div>
+                    <div class="plan">B</div>
+                    <div class="plan">C</div>
                 </div>
             </div>
         </div>
