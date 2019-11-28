@@ -21,31 +21,31 @@ if($core->id_user == 0){
 
 $list = $core->get_giros_user();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
+//if($core->id_user != 1){
 
-$total = 0;
-$total_dns = 0;
-$disponible = 0;
-$eliminados = 0;
-for($i=0; $i<count($list); $i++){
-    if($list[$i]['prueba'] == 0){
-        $total = $total + intval($list[$i]['monto'] * 3);
-        if($list[$i]['dns'] == 1){
-            $total_dns = $total_dns + intval($list[$i]['monto'] * 3);
-        }
-        if($list[$i]['cant_pagos'] > 0){
-            $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
-            $disponible = $disponible + intval($list[$i]['monto'] * $cant_pagos);
-        }
-        if($list[$i]['eliminado'] == 1){
-            $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
-            $eliminado = (3 - $cant_pagos) * $list[$i]['monto'];
+    $total = 0;
+    $total_dns = 0;
+    $disponible = 0;
+    $eliminados = 0;
+    for($i=0; $i<count($list); $i++){
+
+        if($list[$i]['prueba'] == 0){
+            $total = $total + intval($list[$i]['monto_vendedor'] * 3);
+            if($list[$i]['dns'] == 1){
+                $total_dns = $total_dns + intval($list[$i]['monto_vendedor'] * 3);
+            }
+            if($list[$i]['cant_pagos'] > 0){
+                $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
+                $disponible = $disponible + intval($list[$i]['monto_vendedor'] * $cant_pagos);
+            }
+            if($list[$i]['eliminado'] == 1){
+                $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
+                $eliminado = (3 - $cant_pagos) * $list[$i]['monto_vendedor'];
+            }
         }
     }
-}
 
+//}
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
@@ -123,6 +123,10 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                     </label>
                     <?php } ?>
                     <label class="clearfix">
+                        <span><p>Plan:</p></span>
+                        <select id="plan"><option value="0">Base</option><option value="1">Full</option></select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Tipo:</p></span>
                         <select id="prueba"><option value="0">Venta</option><option value="1">Prueba</option></select>
                     </label>
@@ -131,6 +135,14 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                     </label>
                 </fieldset>
             </form>
+        </div>
+    </div>
+    <div class="cont_pagina">
+        <div class="cont_pag">
+            <div class="list_titulo clearfix">
+                <div class="titulo"><h1>Resumen Ventas</h1></div>
+                <div>Hola Mundo</div>
+            </div>
         </div>
     </div>
     <div class="cont_pagina">
