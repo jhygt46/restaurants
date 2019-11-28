@@ -17,7 +17,7 @@ $core = new Core();
     <div class="title">
         <h1>Renovación del Servicio</h1>
         <ul class="clearfix">
-            <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
+            <li class="back" onclick="navlink('pages/msd/renovar_servicio.php')"></li>
         </ul>
     </div>
     <hr>

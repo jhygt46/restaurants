@@ -389,15 +389,16 @@ body .relative {
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan{
   height: 240px;
-  width: 90%;
+  width: 94%;
   min-width: 100px;
   border: 1px solid #000;
   background: #f9f9f9;
   margin: 0 auto;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle{
-  padding: 10px;
+  padding: 20px 10px 10px 10px;
   text-align: left;
+  cursor: pointer;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle h1{
   line-height: 16px;
@@ -408,7 +409,7 @@ body .relative {
   padding: 10px 0px;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle h3{
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
 }
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
