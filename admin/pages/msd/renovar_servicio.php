@@ -30,6 +30,7 @@ $core = new Core();
                         <div class="detalleplan">
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Mensual</h1>
+                                <h2>No hay ahorro</h2>
                             </div>
                         </div>
                     </div>
@@ -37,6 +38,7 @@ $core = new Core();
                         <div class="detalleplan">
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Semestral</h1>
+                                <h2>Ahorra 1 Mes</h2>
                             </div>
                         </div>
                     </div>
@@ -44,6 +46,7 @@ $core = new Core();
                         <div class="detalleplan">
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Anual</h1>
+                                <h2>Ahorra 2 Meses</h2>
                             </div>
                         </div>
                     </div>

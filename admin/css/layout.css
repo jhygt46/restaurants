@@ -392,7 +392,7 @@ body .relative {
   width: 90%;
   min-width: 100px;
   border: 1px solid #000;
-  background: #eee;
+  background: #f9f9f9;
   margin: 0 auto;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle{
@@ -402,6 +402,9 @@ body .relative {
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle h1{
   line-height: 16px;
   font-size: 22px;
+}
+.pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle h2{
+  font-size: 16px;
 }
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
   font-size: 28px;
