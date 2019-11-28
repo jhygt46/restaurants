@@ -217,11 +217,37 @@ class Guardar{
                             if($sql = $this->con->prepare("INSERT INTO pagos (fecha, monto, factura, meses, id_gir) VALUES (?, ?, ?, ?, ?)")){
                                 if($sql->bind_param("siiii", $fecha, $monto, $factura, $meses, $id_gir)){
                                     if($sql->execute()){
-                                        $back = $_POST["back"];
-                                        $info['op'] = 1;
-                                        $info['mensaje'] = "Factura creada exitosamente";
-                                        $info['reload'] = 1;
-                                        $info['page'] = "msd/ver_pagos.php?id_gir=".$id_gir."&back=".$back;
+
+                                        if($sqls = $this->con->prepare("SELECT count(*) as cantidad FROM pagos WHERE id_gir=?")){
+                                            if($sqls->bind_param("i", $id_gir)){
+                                                if($sqls->execute()){
+
+                                                    $res = $sqls->get_result();
+                                                    $cantidad = $res->fetch_all(MYSQLI_ASSOC)[0]['cantidad'];
+
+                                                    if($sqli = $this->con->prepare("UPDATE giros SET cant_pagos=? WHERE id_gir=?")){
+                                                        if($sqli->bind_param("ii", $cantidad, $id_gir)){
+                                                            if($sqli->execute()){
+
+                                                                $back = $_POST["back"];
+                                                                $info['op'] = 1;
+                                                                $info['mensaje'] = "Factura creada exitosamente";
+                                                                $info['reload'] = 1;
+                                                                $info['page'] = "msd/ver_pagos.php?id_gir=".$id_gir."&back=".$back;
+                                                                $sqli->close();
+
+                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqli->error)); }
+                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqli->error)); }
+                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+
+                                                    $sqls->free_result();
+                                                    $sqls->close();
+
+                                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqls->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqls->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+
+                                        
                                         $sql->close();
                                     }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
                                 }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
