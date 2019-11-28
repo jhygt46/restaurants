@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Santiago');
+
 if(!isset($core_class_iniciada)){
     if($_SERVER["HTTP_HOST"] == "localhost"){
         define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
@@ -22,6 +24,28 @@ $list = $core->get_giros_user();
 echo "<pre>";
 print_r($list);
 echo "</pre>";
+
+$total = 0;
+$total_dns = 0;
+$disponible = 0;
+$eliminados = 0;
+for($i=0; $i<count($list); $i++){
+    if($list[$i]['prueba'] == 0){
+        $total = $total + intval($list[$i]['monto'] * 3);
+        if($list[$i]['dns'] == 1){
+            $total_dns = $total_dns + intval($list[$i]['monto'] * 3);
+        }
+        if($list[$i]['cant_pagos'] > 0){
+            $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
+            $disponible = $disponible + intval($list[$i]['monto'] * $cant_pagos);
+        }
+        if($list[$i]['eliminado'] == 1){
+            $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
+            $eliminado = (3 - $cant_pagos) * $list[$i]['monto'];
+        }
+    }
+}
+
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
@@ -92,9 +116,15 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                         <span><p>Graficos:</p></span>
                         <input id="item_grafico" type="checkbox" class="checkbox" value="1" <?php if($that['item_grafico'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>
+                    <?php if($core->id_user == 1){ ?>
                     <label class="clearfix">
                         <span><p>Letra Dns:</p></span>
                         <input id="dns_letra" class="inputs" type="text" value="<?php echo $that['dns_letra']; ?>" require="" placeholder="" />
+                    </label>
+                    <?php } ?>
+                    <label class="clearfix">
+                        <span><p>Tipo:</p></span>
+                        <select id="prueba"><option value="0">Venta</option><option value="1">Prueba</option></select>
                     </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
