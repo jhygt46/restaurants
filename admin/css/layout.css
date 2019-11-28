@@ -327,6 +327,15 @@ body .relative {
 .pagina .cont_pagina .cont_pag .listado_items .l_item .detalle_item .ic19 {
   background-position: -773px -142px;
 }
+.pagina .cont_pagina .cont_pag .listado_items .resumen_ventas {
+
+}
+.pagina .cont_pagina .cont_pag .listado_items .resumen_ventas .rv1{
+  float: left;
+}
+.pagina .cont_pagina .cont_pag .listado_items .resumen_ventas .rv2{
+  float: left;
+}
 .pagina .cont_pagina .cont_pag .list_data .data {
   float: left;
 }
