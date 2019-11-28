@@ -404,7 +404,8 @@ body .relative {
   font-size: 22px;
 }
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan .cont_detalle h2{
-  font-size: 16px;
+  font-size: 14px;
+  padding: 10px 0px;
 }
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
   font-size: 28px;
