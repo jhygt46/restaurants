@@ -386,7 +386,13 @@ body .relative {
 .pagina .cont_pagina .cont_pag .lista_items .planes .plan{
   width: 33.33%;
   float: left;
-  height: 120px;
+  text-align: center;
+}
+.pagina .cont_pagina .cont_pag .lista_items .planes .plan .detalleplan{
+  height: 240px;
+  width: 70%;
+  min-width: 100px;
+  border: 1px solid #000;
 }
 .pagina .cont_pagina .cont_pag .lista_items .titulo_items {
   font-size: 28px;

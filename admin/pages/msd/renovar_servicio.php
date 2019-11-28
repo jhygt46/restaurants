@@ -26,9 +26,9 @@ $core = new Core();
             <div class="lista_items">
                 <div class="titulo_items"><h1>Selecciona Plazos de Pago</h1></div>
                 <div class="planes clearfix">
-                    <div class="plan">A</div>
-                    <div class="plan">B</div>
-                    <div class="plan">C</div>
+                    <div class="plan"><div class="detalleplan"></div></div>
+                    <div class="plan"><div class="detalleplan"></div></div>
+                    <div class="plan"><div class="detalleplan"></div></div>
                 </div>
             </div>
         </div>
