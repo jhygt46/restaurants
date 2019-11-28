@@ -31,6 +31,7 @@ $core = new Core();
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Mensual</h1>
                                 <h2>No hay ahorro</h2>
+                                <h3>$50.000 + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -39,6 +40,7 @@ $core = new Core();
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Semestral</h1>
                                 <h2>Ahorra 1 mes al año</h2>
+                                <h3>$275.000 + iva</h3>
                             </div>
                         </div>
                     </div>
@@ -47,6 +49,7 @@ $core = new Core();
                             <div class="cont_detalle">
                                 <h1>Plan<br/>Anual</h1>
                                 <h2>Ahorra 2 meses al año</h2>
+                                <h3>$500.000 + iva</h3>
                             </div>
                         </div>
                     </div>
