@@ -92,8 +92,8 @@ if(isset($_GET["id_pago"])){
     <div class="cont_pagina">
         <div class="cont_pag" style="background: #fdd">
             <div class="factura">Meses Deuda: <strong style="color: #900"><?php echo $diff_pago; ?></strong></div>
-            <div class="factura">Monto Deuda: <strong style="color: #900"><?php echo $list['monto']; ?></strong></div>
-            <div class="factura">Total Deuda: <strong style="color: #900"><?php echo intval($diff_pago * $list['monto']); ?></strong></div>
+            <div class="factura">Monto Deuda: <strong style="color: #900">$<?php echo number_format($list['monto'], 0, '', '.'); ?></strong></div>
+            <div class="factura">Total Deuda: <strong style="color: #900">$<?php echo number_format(intval($diff_pago * $list['monto']), 0, '', '.'); ?></strong></div>
         </div>
     </div>
     <?php } ?>
@@ -177,7 +177,7 @@ if(isset($_GET["id_pago"])){
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
-                        <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo date("Y-m-d", strtotime($value['fecha'])); ?> - <?php echo $value['monto']; ?></div>
+                        <div class="nombre">#<?php echo $value['factura']; ?> - <?php echo date("Y-m-d", strtotime($value['fecha'])); ?> - $<?php echo number_format($value['monto'], 0, '', '.'); ?></div>
                         <a class="icono ic19" onclick="navlink('<?php echo $page_ver_pagos_giro; ?>?id_pago=<?php echo $value["id_pago"]; ?>&id_gir=<?php echo $_GET["id_gir"]; ?>&back=<?php echo $_GET["back"]; ?>')"></a>
                     </div>
                 </div>
