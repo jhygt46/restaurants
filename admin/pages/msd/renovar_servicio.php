@@ -15,7 +15,7 @@ $core = new Core();
 
 <div class="pagina">
     <div class="title">
-        <h1>Configurar Contenido</h1>
+        <h1>Renovar Servicio</h1>
         <ul class="clearfix">
             <li class="back" onclick="navlink('pages/msd/ver_giro.php')"></li>
         </ul>
