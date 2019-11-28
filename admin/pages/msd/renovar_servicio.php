@@ -31,7 +31,7 @@ $monto3 = $monto * 10;
                 <div class="planes clearfix">
                     <div class="plan">
                         <div class="detalleplan">
-                            <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php')">
+                            <div class="cont_detalle" onclick="navlink('pages/msd/renovar_servicio_detalle.php?pago=1')">
                                 <h1>Plan<br/>Mensual</h1>
                                 <h2>No hay ahorro</h2>
                                 <h3>$<?php echo $monto; ?> + iva</h3>
