@@ -47,6 +47,8 @@ $list = $core->get_giros_user();
 
 //}
 
+$deuda = $total_dns - $entregado - $eliminado;
+
 /* CONFIG PAGE */
 $titulo = "Empresa";
 $titulo_list = "Mis Empresas";
@@ -144,11 +146,27 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                 <div class="listado_items">
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Ventas Totales</div>
-                        <div class="rv2">$1.400.000</div>
+                        <div class="rv2">$<?php echo $total; ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Ventas Totales DNS</div>
-                        <div class="rv2">$900.000</div>
+                        <div class="rv2">$<?php echo $total_dns; ?></div>
+                    </div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Pagos Entregado</div>
+                        <div class="rv2">$<?php echo $entregado; ?></div>
+                    </div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Pagos Eliminado</div>
+                        <div class="rv2">$<?php echo $eliminado; ?></div>
+                    </div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Pago Disponible</div>
+                        <div class="rv2">$<?php echo $disponible; ?></div>
+                    </div>
+                    <div class="resumen_ventas clearfix">
+                        <div class="rv1">Total Deuda</div>
+                        <div class="rv2">$<?php echo $deuda; ?></div>
                     </div>
                 </div>
             </div>

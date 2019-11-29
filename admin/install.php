@@ -1128,6 +1128,25 @@ $tablas[30]['campos'][5]['k'] = 1;
 $tablas[30]['campos'][5]['kt'] = 1;
 $tablas[30]['campos'][5]['kc'] = 0;
 
+$tablas[31]['nombre'] = 'pago_proveedores';
+$tablas[31]['campos'][0]['nombre'] = 'id_pap';
+$tablas[31]['campos'][0]['tipo'] = 'int(4)';
+$tablas[31]['campos'][0]['null'] = 0;
+$tablas[31]['campos'][0]['pk'] = 1;
+$tablas[31]['campos'][0]['ai'] = 1;
+$tablas[31]['campos'][1]['nombre'] = 'monto';
+$tablas[31]['campos'][1]['tipo'] = 'int(4)';
+$tablas[31]['campos'][1]['null'] = 0;
+$tablas[31]['campos'][2]['nombre'] = 'fecha';
+$tablas[31]['campos'][2]['tipo'] = 'datetime';
+$tablas[31]['campos'][2]['null'] = 0;
+$tablas[31]['campos'][3]['nombre'] = 'id_user';
+$tablas[31]['campos'][3]['tipo'] = 'int(4)';
+$tablas[31]['campos'][3]['null'] = 0;
+$tablas[31]['campos'][3]['k'] = 1;
+$tablas[31]['campos'][3]['kt'] = 7;
+$tablas[31]['campos'][3]['kc'] = 0;
+
 // TRUE SOLO MUESTRA - FALSE LAS CREA
 $show = true;
 
