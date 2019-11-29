@@ -155,27 +155,27 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                 <div class="listado_items">
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Ventas Totales</div>
-                        <div class="rv2">$<?php echo $total; ?></div>
+                        <div class="rv2">$<?php echo number_format($total, 0, '', '.'); ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Ventas Totales DNS</div>
-                        <div class="rv2">$<?php echo $total_dns; ?></div>
+                        <div class="rv2">$<?php echo number_format($total_dns, 0, '', '.'); ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Pagos Entregado</div>
-                        <div class="rv2">$<?php echo $entregado; ?></div>
+                        <div class="rv2">$<?php echo number_format($entregado, 0, '', '.'); ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Pagos Eliminado</div>
-                        <div class="rv2">$<?php echo $eliminados; ?></div>
+                        <div class="rv2">$<?php echo number_format($eliminados, 0, '', '.'); ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Pago Disponible</div>
-                        <div class="rv2">$<?php echo $disponible; ?></div>
+                        <div class="rv2">$<?php echo number_format($disponible, 0, '', '.'); ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Total Deuda</div>
-                        <div class="rv2">$<?php echo $deuda; ?></div>
+                        <div class="rv2">$<?php echo number_format($deuda, 0, '', '.'); ?></div>
                     </div>
                 </div>
             </div>
