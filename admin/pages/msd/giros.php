@@ -49,7 +49,7 @@ if($core->admin == 1){
             }
             if($list[$i]['eliminado'] == 1){
                 $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
-                $eliminado = (3 - $cant_pagos) * $list[$i]['monto_vendedor'];
+                $eliminados = (3 - $cant_pagos) * $list[$i]['monto_vendedor'];
             }
         }
     }
@@ -167,7 +167,7 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Pagos Eliminado</div>
-                        <div class="rv2">$<?php echo $eliminado; ?></div>
+                        <div class="rv2">$<?php echo $eliminados; ?></div>
                     </div>
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Pago Disponible</div>
