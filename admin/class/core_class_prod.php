@@ -586,6 +586,22 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local() '.htmlspecialchars($this->con->error)); }
     }
+    public function get_pago_proveedores(){
+
+        if($this->admin == 1){
+            if($sql = $this->con->prepare("SELECT monto, fecha FROM pago_proveedores WHERE id_user=?")){
+                if($sql->bind_param("i", $this->id_user)){
+                    if($sql->execute()){
+                        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                        $sql->free_result();
+                        $sql->close();
+                        return $result;
+                    }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($this->con->error)); }
+        }
+
+    }
     public function get_giros_user(){
         if($this->admin == 1 && $this->id_user > 1){
             if($sql = $this->con->prepare("SELECT t2.id_gir, t2.nombre, t2.dominio, t2.dns_letra, t2.monto_vendedor, t2.dns, t2.fecha_dns, t2.cant_pagos, t2.eliminado, t1.prueba FROM fw_usuarios_giros_clientes t1, giros t2 WHERE t1.id_user=? AND t1.id_gir=t2.id_gir ORDER BY t2.fecha_dns")){

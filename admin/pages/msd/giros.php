@@ -20,6 +20,11 @@ if($core->id_user == 0){
 }
 
 $list = $core->get_giros_user();
+$pap = $core->get_pago_proveedores();
+
+echo "<pre>";
+print_r($pap);
+echo "</pre>";
 
 //if($core->id_user != 1){
 
