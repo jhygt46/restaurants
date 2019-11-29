@@ -22,10 +22,6 @@ if($core->id_user == 0){
 $list = $core->get_pagos_proveedores();
 $proveedores = $core->get_proveedores();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 /*
 $fechainicial = new DateTime($list['fecha_dns']);
 $fechafinal = new DateTime();
