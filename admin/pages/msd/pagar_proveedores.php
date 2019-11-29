@@ -112,7 +112,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix" style="height: 28px">
-                        <div class="nombre"><?php echo $list[$i]['usuario']; ?> <?php echo $list[$i]['fecha']; ?> <?php echo $list[$i]['monto']; ?></div>
+                        <div class="nombre"><?php echo $list[$i]['nombre']; ?> <?php echo date("Y-m-d", strtotime($list[$i]['fecha'])); ?> <?php echo number_format($list[$i]['monto'], 0, '', '.'); ?></div>
                     </div>
                 </div>
                 <?php } ?>
