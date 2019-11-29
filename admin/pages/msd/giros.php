@@ -56,6 +56,7 @@ if($core->admin == 1){
 
 }
 
+$disponible = $disponible - $entregado;
 $deuda = $total - $entregado - $eliminado;
 
 /* CONFIG PAGE */
