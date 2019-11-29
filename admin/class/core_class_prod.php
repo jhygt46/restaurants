@@ -586,6 +586,34 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local() '.htmlspecialchars($this->con->error)); }
     }
+    public function get_proveedores(){
+
+        if($this->id_user == 1){
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE admin='1'")){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($this->con->error)); }
+        }
+
+    }
+    public function get_pagos_proveedores(){
+
+        if($this->id_user == 1){
+            if($sql = $this->con->prepare("SELECT t1.monto, t1.fecha, t2.nombre FROM pago_proveedores t1, fw_usuarios t2 WHERE t1.id_user=t2.id_user")){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_pago_proveedores() #1 '.htmlspecialchars($this->con->error)); }
+        }
+
+    }
     public function get_pago_proveedores(){
 
         if($this->admin == 1){
