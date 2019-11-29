@@ -22,11 +22,15 @@ if($core->id_user == 0){
 $list = $core->get_giros_user();
 $pap = $core->get_pago_proveedores();
 
-echo "<pre>";
-print_r($pap);
-echo "</pre>";
-
-//if($core->id_user != 1){
+if(count($pap) == 0){
+    $entregado = 0;
+}
+if(count($pap) > 0){
+    for($i=0; $i<count($pap); $i++){
+        $entregado = $entregado + $pap[$i]["monto"];
+    }
+}
+if($core->admin == 1){
 
     $total = 0;
     $total_dns = 0;
@@ -50,9 +54,9 @@ echo "</pre>";
         }
     }
 
-//}
+}
 
-$deuda = $total_dns - $entregado - $eliminado;
+$deuda = $total - $entregado - $eliminado;
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
