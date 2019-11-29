@@ -589,7 +589,7 @@ class Core{
     public function get_proveedores(){
 
         if($this->id_user == 1){
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE admin='1'")){
+            if($sql = $this->con->prepare("SELECT id_user, nombre FROM fw_usuarios WHERE admin='1'")){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $sql->free_result();

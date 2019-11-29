@@ -26,10 +26,6 @@ echo "<pre>";
 print_r($list);
 echo "</pre>";
 
-echo "<pre>";
-print_r($proveedores);
-echo "</pre>";
-
 /*
 $fechainicial = new DateTime($list['fecha_dns']);
 $fechafinal = new DateTime();
@@ -92,14 +88,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     </label>
                     <label class="clearfix">
                         <span><p>Proveedor:</p></span>
-                        <select id="proveedor">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="12">12</option>
+                        <select id="id_user">
+                            <?php for($i=0; $i<count($proveedores); $i++){ ?>
+                            <option value="<?php echo $proveedores[$i]["id_user"]; ?>"><?php echo $proveedores[$i]["nombre"]; ?></option>
+                            <?php } ?>
                         </select>
                     </label>
                     <label>
