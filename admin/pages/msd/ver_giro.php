@@ -16,10 +16,10 @@ if(!isset($core_class_iniciada)){
 
 // SOLO GIROS
 if($core->id_user == 0){
-    die("Error: su sesion ha expirado");
+    die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
 }
 if($core->id_gir == 0){
-    die("Error: No hay giro asignado");
+    die('<div class="pagina"><div class="title"><h1>Error: No hay Giro Asignado</h1></div></div>');
 }
 
 $core->is_giro();
