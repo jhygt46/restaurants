@@ -6,10 +6,6 @@
         exit;
     }
 
-    if($_GET["mode"] != "developer"){
-        die("INDEX");
-    }
-
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -66,7 +62,6 @@
                     <a href="https://policies.google.com/terms">Terms of Service</a> apply.
                 </small>
             </div>
-
             <div class="empezarok">
                 <h1 class="titulo">Felicitaciones!</h1>
                 <h1 class="subtitulo">Tu cuenta ha sido creada</h1>

@@ -288,6 +288,7 @@ class Guardar{
         }
     }
     private function crear_giro(){
+
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
         if($this->admin == 1){
@@ -300,15 +301,20 @@ class Guardar{
                             $res = $sql->get_result();
                             $result = $res->fetch_all(MYSQLI_ASSOC)[0];
                             if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $result["id_gir"])){
+                                
                                 $nombre = $_POST['nombre'];
                                 $item_pagina = $_POST['item_pagina'];
                                 $item_pos = $_POST['item_pos'];
                                 $item_cocina = $_POST['item_cocina'];
                                 $item_grafico = $_POST['item_grafico'];
+                                $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
                                 $prueba = $_POST['prueba'];
+
                                 if($_POST['plan'] == 0){ $monto_vendedor = "40000"; $monto = "40000"; }
                                 if($_POST['plan'] == 1){ $monto_vendedor = "45000"; $monto = "50000"; }
-                                $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
+                                
+                                
+                                
                                 if($id == 0){
                                     $code = $this->pass_generate(20);
                                     if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, style_page, style_color, style_modal, font_family, font_css, alto, alto_pro, logo, favicon, eliminado, id_ser, prueba, monto_vendedor, monto) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '25', '20', 'sinlogo.png', 'default.ico', '0', '1', ?, ?, ?)")){
@@ -347,6 +353,7 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($sqligir->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($this->con->error)); }
                                 }
+
                                 if($id > 0){
                                     if($sqlx = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
                                         if($sqlx->bind_param("ii", $this->id_user, $id)){
@@ -372,6 +379,7 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($sqlx->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($this->con->error)); }
                                 }
+
                             }else{ $this->registrar(15, 0, 0, 'crear_giro() dominio existe'); }
                             $sql->free_result();
                             $sql->close();
@@ -2908,20 +2916,28 @@ class Guardar{
         return $info;
     }
     private function crear_usuario(){
+
         $info['op'] = 2;
         $info['mensaje'] = "Error";
-        if($this->re_venta == 1 || $this->id_user == 1){
+
+        if($this->id_user == 1){
+
             $correo = $_POST['correo'];
             $tipo = $_POST['tipo'];
+
             if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
                 if($sqlus->bind_param("s", $correo)){
                     if($sqlus->execute()){
+
                         $resus = $sqlus->get_result();
                         $id_user = $resus->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
                         $id = $_POST['id'];
                         $nombre = $_POST['nombre'];
+
                         if($resus->{"num_rows"} == 0 || ($resus->{"num_rows"} == 1 && $id == $id_user)){
+                            
                             if($id > 0){
+
                                 if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
                                     if($sqluus->bind_param("ssii", $nombre, $correo, $id_user, $this->eliminado)){
                                         if($sqluus->execute()){
@@ -2933,6 +2949,7 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
                                 }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($this->con->error)); }
+                                
                                 if($tipo == 0 && $this->id_user == 1){
                                     $re = 0;
                                     if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
@@ -2943,6 +2960,7 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($this->con->error)); }
                                 }
+
                                 if($tipo == 1 && $this->id_user == 1){
                                     $re = 1;
                                     if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
@@ -2953,9 +2971,13 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($this->con->error)); }
                                 }
+
                             }
+
                             if($id == 0){
+
                                 $admin = 1;
+
                                 if($tipo == 0){
                                     if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, id_aux_user) VALUES (?, now(), ?, ?, ?)")){
                                         if($sqlius->bind_param("ssii", $nombre, $correo, $admin, $this->id_user)){
@@ -2969,6 +2991,7 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($this->con->error)); }
                                 }
+
                                 if($tipo == 1 && $this->id_user == 1){
                                     $reventa = 1;
                                     if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, re_venta) VALUES (?, now(), ?, ?, ?)")){
@@ -2983,13 +3006,18 @@ class Guardar{
                                         }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
                                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
                                 }
+
                             }
+
                         }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
+
                         $sqlus->free_result();
                         $sqlus->close();
+
                     }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
                 }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
             }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
+        
         }else{ $this->registrar(1, 0, 0, 'crear_usuario()'); }
         return $info;
     }
