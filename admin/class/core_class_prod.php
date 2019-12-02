@@ -2976,7 +2976,7 @@ class Core{
             for($i=0; $i<count($db); $i++){
 
                 if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
-                    if($sql->bind_param('".$db[$i]["tipo"]."i', $db[$i]["value"], $id)){
+                    if($sql->bind_param('".$db[$i]["tipo"]."i', $db[$i]["value"], $id_gir)){
                         if($sql->execute()){
                             $return['op'][] = 1;
                         }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
