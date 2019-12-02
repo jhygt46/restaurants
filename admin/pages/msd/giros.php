@@ -16,21 +16,25 @@ if(!isset($core_class_iniciada)){
 
 // SOLO ADMIN
 if($core->id_user == 0){
-    die("Error: su sesion ha expirado");
+    die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
+}
+if($core->admin == 0){
+    die('<div class="pagina"><div class="title"><h1>Error: no tiene permisos</h1></div></div>');
 }
 
 $list = $core->get_giros_user();
-$pap = $core->get_pago_proveedores();
 
-if(count($pap) == 0){
-    $entregado = 0;
-}
-if(count($pap) > 0){
-    for($i=0; $i<count($pap); $i++){
-        $entregado = $entregado + $pap[$i]["monto"];
+if($core->id_user != 1){
+
+    $pap = $core->get_pago_proveedores();
+    if(count($pap) == 0){
+        $entregado = 0;
     }
-}
-if($core->admin == 1){
+    if(count($pap) > 0){
+        for($i=0; $i<count($pap); $i++){
+            $entregado = $entregado + $pap[$i]["monto"];
+        }
+    }
 
     $total = 0;
     $total_dns = 0;
@@ -53,11 +57,12 @@ if($core->admin == 1){
             }
         }
     }
+    $disponible = $disponible - $entregado;
+    $deuda = $total - $entregado - $eliminado;
 
 }
 
-$disponible = $disponible - $entregado;
-$deuda = $total - $entregado - $eliminado;
+
 
 /* CONFIG PAGE */
 $titulo = "Empresa";

@@ -14,6 +14,13 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 }
 
+$data['nombre'] = "Buena";
+$data['telefono'] = "+56988888888";
+echo "<pre>";
+print_r($core->crear_giro_sql(1, $data));
+echo "</pre>";
+exit;
+
 // SOLO GIROS
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');

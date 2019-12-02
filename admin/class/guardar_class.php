@@ -287,6 +287,91 @@ class Guardar{
             return false;
         }
     }
+
+    public function crear_giro_sql($id_gir, $data){
+
+        if(isset($data['nombre'])){
+            $aux['tipo'] = 's';
+            $aux['key'] = 'nombre';
+            $aux['value'] = $data['nombre'];
+            $db[] = $aux;
+        }
+        if(isset($data['telefono'])){
+            $aux['tipo'] = 's';
+            $aux['key'] = 'telefono';
+            $aux['value'] = $data['telefono'];
+            $db[] = $aux;
+        }
+
+        if(count($db) > 0){
+            for($i=0; $i<count($db); $i++){
+
+                if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
+                    if($sql->bind_param('".$db[$i]["tipo"]."i', $db[$i]["value"], $id)){
+                        if($sql->execute()){
+
+                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }
+
+            }
+        }
+
+        /*
+        if($id_gir == 0){
+
+            $code = $this->pass_generate(20);
+            if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado) VALUES (?, now(), ?, '1', '0')")){
+                if($sql->bind_param("ss", $dominio, $code)){
+                    if($sql->execute()){
+                        $id_gir = $this->con->insert_id;
+                        if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
+                            if($sqlc->bind_param("i", $id_gir)){
+                                if($sqlc->execute()){
+                                    $sqlc->close();
+                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
+
+        }
+        if($id > 0){
+
+
+
+        }
+
+        $data_giro['nombre'] = "";
+        $data_giro['dominio'] = "";
+        $data_giro['telefono'] = "";
+        $data_giro['estado'] = "";
+        $data_giro['titulo'] = "";
+        $data_giro['code'] = "";
+        $data_giro['catalogo'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['solicitar_ssl'] = "";
+        $data_giro['dns'] = "";
+        $data_giro['dns_letra'] = "";
+        $data_giro['pos'] = "";
+        $data_giro['inicio_html'] = "";
+        $data_giro['footer_html'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $data_giro['ssl'] = "";
+        $return['op'] = 2;
+        
+        */
+        return $return;
+
+    }
+
     private function crear_giro(){
 
         $info['op'] = 2;
@@ -312,8 +397,6 @@ class Guardar{
 
                                 if($_POST['plan'] == 0){ $monto_vendedor = "40000"; $monto = "40000"; }
                                 if($_POST['plan'] == 1){ $monto_vendedor = "45000"; $monto = "50000"; }
-                                
-                                
                                 
                                 if($id == 0){
                                     $code = $this->pass_generate(20);
