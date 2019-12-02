@@ -2975,14 +2975,25 @@ class Core{
         if(count($db) > 0){
             for($i=0; $i<count($db); $i++){
 
-                if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
-                    if($sql->bind_param('".$db[$i]["tipo"]."i', $db[$i]["value"], $id_gir)){
-                        if($sql->execute()){
-                            $return['op'][] = 1;
-                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }
-
+                if($db[$i]["tipo"] == "s"){
+                    if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
+                        if($sql->bind_param("si", $db[$i]["value"], $id_gir)){
+                            if($sql->execute()){
+                                $return['op'][] = 1;
+                            }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }    
+                }
+                if($db[$i]["tipo"] == "i"){
+                    if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
+                        if($sql->bind_param("ii", $db[$i]["value"], $id_gir)){
+                            if($sql->execute()){
+                                $return['op'][] = 1;
+                            }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }    
+                }
+                
             }
         }
         return $return;
