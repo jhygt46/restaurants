@@ -24,45 +24,6 @@ if($core->admin == 0){
 
 $list = $core->get_giros_user();
 
-//if($core->id_user != 1){
-
-    $pap = $core->get_pago_proveedores();
-    if(count($pap) == 0){
-        $entregado = 0;
-    }
-    if(count($pap) > 0){
-        for($i=0; $i<count($pap); $i++){
-            $entregado = $entregado + $pap[$i]["monto"];
-        }
-    }
-
-    $total = 0;
-    $total_dns = 0;
-    $disponible = 0;
-    $eliminados = 0;
-    for($i=0; $i<count($list); $i++){
-
-        if($list[$i]['prueba'] == 0){
-            $total = $total + intval($list[$i]['monto_vendedor'] * 3);
-            if($list[$i]['dns'] == 1){
-                $total_dns = $total_dns + intval($list[$i]['monto_vendedor'] * 3);
-            }
-            if($list[$i]['cant_pagos'] > 0){
-                $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
-                $disponible = $disponible + intval($list[$i]['monto_vendedor'] * $cant_pagos);
-            }
-            if($list[$i]['eliminado'] == 1){
-                $cant_pagos = ($list[$i]['cant_pagos'] > 3) ? 3 : $list[$i]['cant_pagos'] ;
-                $eliminados = (3 - $cant_pagos) * $list[$i]['monto_vendedor'];
-            }
-        }
-    }
-    $disponible = $disponible - $entregado;
-    $deuda = $total - $entregado - $eliminado;
-
-//}
-
-
 
 /* CONFIG PAGE */
 $titulo = "Empresa";
@@ -148,39 +109,6 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                     </label>
                 </fieldset>
             </form>
-        </div>
-    </div>
-    <div class="cont_pagina">
-        <div class="cont_pag">
-            <div class="list_titulo clearfix">
-                <div class="titulo"><h1>Resumen Ventas</h1></div>
-                <div class="listado_items">
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Ventas Totales</div>
-                        <div class="rv2">$<?php echo number_format($total, 0, '', '.'); ?></div>
-                    </div>
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Ventas Totales DNS</div>
-                        <div class="rv2">$<?php echo number_format($total_dns, 0, '', '.'); ?></div>
-                    </div>
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Pagos Entregado</div>
-                        <div class="rv2">$<?php echo number_format($entregado, 0, '', '.'); ?></div>
-                    </div>
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Pagos Eliminado</div>
-                        <div class="rv2">$<?php echo number_format($eliminados, 0, '', '.'); ?></div>
-                    </div>
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Pago Disponible</div>
-                        <div class="rv2">$<?php echo number_format($disponible, 0, '', '.'); ?></div>
-                    </div>
-                    <div class="resumen_ventas clearfix">
-                        <div class="rv1">Total Deuda</div>
-                        <div class="rv2">$<?php echo number_format($deuda, 0, '', '.'); ?></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="cont_pagina">

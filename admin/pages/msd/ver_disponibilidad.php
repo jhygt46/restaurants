@@ -11,6 +11,10 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 
+if($core->admin == 0){
+    die('<div class="pagina"><div class="title"><h1>Error:</h1></div></div>');
+}
+
 $titulo = "Verificar Dominio";
 $sub_titulo = "Ingrese el dominio y verifique si esta disponible";
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
