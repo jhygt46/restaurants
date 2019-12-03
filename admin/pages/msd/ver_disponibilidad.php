@@ -57,7 +57,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="nombre" type="text" class="inputs" value="www." require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p class="disponibilidad"></p></span>
+                        <span><p class="disponibilidad" style="font-size: 20px; font-weight: bold"></p></span>
                     </label>
                     <label>
                         <div class="enviar"><a onclick="verificar_dominio()">Enviar</a></div>
