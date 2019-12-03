@@ -299,7 +299,7 @@ class Guardar{
                 $res = $sqld->get_result();
                 if($res->{"num_rows"} == 0){
                     $code = $this->pass_generate(20);
-                    if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
+                    if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, fecha_dns, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
                     if($sql->bind_param("ss", $dominio, $code)){
                     if($sql->execute()){
                         $id_gir = $this->con->insert_id;
@@ -666,6 +666,16 @@ class Guardar{
                 $data["item_cocina"] = $_POST['item_cocina'];
                 $data["item_grafico"] = $_POST['item_grafico'];
                 $data["dns_letra"] = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
+                
+                if($_POST['plan'] == 1){
+                    $data["monto"] = 40000;
+                    $data["monto_vendedor"] = 40000;
+                }
+                if($_POST['plan'] == 2){
+                    $data["monto"] = 50000;
+                    $data["monto_vendedor"] = 45000;
+                }
+
                 $id = $_POST['id'];
 
                 if($id == 0){
