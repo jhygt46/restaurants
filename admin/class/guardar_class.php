@@ -793,7 +793,7 @@ class Guardar{
 
                     if($res['success'] == true){
                         
-                        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
+                        if($sql = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=? AND eliminado=?")){
                         if($sql->bind_param("si", $correo, $this->eliminado)){
                         if($sql->execute()){
 
@@ -852,9 +852,55 @@ class Guardar{
                                 }
 
                             }
-                            if($res->{"num_rows"} > 0){
-                                $info['tipo'] = 3;
-                                $info['mensaje'] = 'Correo existente';
+                            if($res->{"num_rows"} == 1){
+                                
+                                $usuario_id = $res->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
+
+                                if($sqlx = $this->con->prepare("SELECT * FROM giros t1, fw_usuarios_giros t2 WHERE t1.dominio=? AND t1.telefono=? AND t1.id_gir=t2.id_gir AND t2.id_user=?")){
+                                if($sqlx->bind_param("ssi", $dominio, $telefono, $usuario_id)){
+                                if($sqlx->execute()){
+
+                                    $resx = $sqlx->get_result();
+                                    if($resx->{"num_rows"} == 1){
+
+                                        $mailcode = $this->pass_generate(20);
+                                        if($sqly = $this->con->prepare("UPDATE fw_usuarios SET mailcode=? WHERE id_user=?")){
+                                            if($sqly->bind_param("ssi", $mailcode, $usuario_id)){
+                                                if($sqly->execute()){
+
+                                                    $send['dominio'] = $dominio;
+                                                    $send['correo'] = $correo;
+                                                    $send['id'] = $usuario_id;
+                                                    $send['code'] = $mailcode;
+
+                                                    $ch = curl_init();
+                                                    curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_inicio');
+                                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                                    if(!curl_errno($ch)){
+                                                        $resp_email = json_decode(curl_exec($ch));
+                                                        $info['op'] = 1;
+                                                        $info['resp'] = $resp_email;
+                                                        curl_close($ch);
+                                                    }
+                                                    $sqly->close();
+
+                                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqly->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqly->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($this->con->error)); }
+
+                                    }
+                                    if($resx->{"num_rows"} == 0){
+                                        $info['tipo'] = 3;
+                                        $info['mensaje'] = 'Error con correo';
+                                    }
+                                    $sqlx->free_result();
+                                    $sqlx->close();
+
+                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqlx->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqlx->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($this->con->error)); }
+
                             }
                             $sql->free_result();
                             $sql->close();
