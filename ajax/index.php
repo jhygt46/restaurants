@@ -71,12 +71,6 @@
         $info = $core->cambiar_estado();
         echo json_encode($info);
     }
-    if($_POST["accion"] == "verificar_dominio"){
-        require_once DIR."admin/class/core_class_prod.php";
-        $core = new Core();
-        $info = $core->verificar_dominio();
-        echo json_encode($info);
-    }
 
 ?>
 

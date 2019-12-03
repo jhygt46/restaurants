@@ -191,8 +191,26 @@ class Guardar{
             if($_POST['accion'] == "crear_pago"){
                 echo json_encode($this->crear_pago());
             }
+            if($_POST['accion'] == "verificar_dominio_existente"){
+                echo json_encode($this->verificar_dominio_existente());
+            }
         }
 
+    }
+    private function verificar_dominio_existente(){
+        if($this->admin == 1){
+            if($sql = $this->con->prepare("SELECT * FROM giros WHERE dominio=?")){
+                if($sql->bind_param("s", $_POST["nombre"])){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        $result = $res->{"num_rows"};
+                        $sql->free_result();
+                        $sql->close();
+                        return $result;
+                    }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
+        }
     }
     private function crear_pago(){
 

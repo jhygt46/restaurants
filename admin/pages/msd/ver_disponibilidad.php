@@ -17,7 +17,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 ?>
 <script>
     function verificar_dominio(){
-        var send = { accion: 'verificar_dominio', nombre: $('.nombre').val() };
+        var send = { accion: 'verificar_dominio_existente', nombre: $('.nombre').val() };
         $.ajax({
             url: "ajax/",
             type: "POST",
