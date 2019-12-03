@@ -1152,7 +1152,7 @@ $tablas[31]['campos'][3]['kt'] = 7;
 $tablas[31]['campos'][3]['kc'] = 0;
 
 // TRUE SOLO MUESTRA - FALSE LAS CREA
-$show = true;
+$show = false;
 
 for($i=0; $i<count($tablas); $i++){
 
