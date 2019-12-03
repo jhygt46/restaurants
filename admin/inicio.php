@@ -115,7 +115,7 @@
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/panel.php')">Panel de Control</li><?php } ?>
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/pagos.php')">Pagos</li><?php } ?>
                                         <?php if($inicio['id_user'] == 1){ ?><li onclick="navlink('pages/msd/pagar_proveedores.php')">Pagar Proveedores</li><?php } ?>
-                                        <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/ver_disponibilidad.php.php')">Disponibilidad</li><?php } ?>
+                                        <?php if($inicio['admin'] == 1){ ?><li onclick="navlink('pages/msd/ver_disponibilidad.php')">Disponibilidad</li><?php } ?>
                                     </ul>
                                 </div>
                             </div>                            
