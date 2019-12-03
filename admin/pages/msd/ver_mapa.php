@@ -11,6 +11,11 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 
+$locales = $core->get_makers_locales();
+
+echo "<pre>";
+print_r($locales);
+echo "</pre>";
 
 ?>
 <script>
