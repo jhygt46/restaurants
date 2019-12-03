@@ -26,7 +26,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                 console.log("data");
                 console.log(data);
             },
-            error: function(e){}
+            error: function(e){
+                console.log(e);
+            }
         });
     }
 </script>
