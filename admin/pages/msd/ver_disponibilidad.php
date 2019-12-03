@@ -18,13 +18,19 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 <script>
     function verificar_dominio(){
         var send = { accion: 'verificar_dominio_existente', nombre: $('#nombre').val() };
-        console.log(send);
         $.ajax({
             url: "ajax/",
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
+                if(data == 0){
+                    $('.disponibilidad').html("Disponible");
+                    $('.disponibilidad').css({ color: '#090' });
+                }
+                if(data == 1){
+                    $('.disponibilidad').html("No disponible");
+                    $('.disponibilidad').css({ color: '#900' });
+                }
             },
             error: function(e){}
         });
@@ -50,6 +56,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <span><p>Dominio:</p></span>
                         <input id="nombre" type="text" class="inputs" value="www." require="" placeholder="" />
                     </label>
+                    <div class="disponibilidad"></div>
                     <label>
                         <div class="enviar"><a onclick="verificar_dominio()">Enviar</a></div>
                     </label>
