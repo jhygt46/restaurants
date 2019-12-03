@@ -203,8 +203,7 @@ class Guardar{
                 if($sql->bind_param("s", $_POST["nombre"])){
                     if($sql->execute()){
                         $res = $sql->get_result();
-                        $result['num'] = $res->{"num_rows"};
-                        $result['nombre'] = $_POST["nombre"];
+                        $result = $res->{"num_rows"};
                         $sql->free_result();
                         $sql->close();
                         return $result;
