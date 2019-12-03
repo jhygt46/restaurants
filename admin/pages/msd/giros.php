@@ -143,10 +143,6 @@ if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0
                         <span><p>Plan:</p></span>
                         <select id="plan"><option value="0">Base</option><option value="1">Full</option></select>
                     </label>
-                    <label class="clearfix">
-                        <span><p>Tipo:</p></span>
-                        <select id="prueba"><option value="0">Venta</option><option value="1">Prueba</option></select>
-                    </label>
                     <label>
                         <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
