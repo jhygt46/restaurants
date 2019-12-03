@@ -287,91 +287,371 @@ class Guardar{
             return false;
         }
     }
+    private function crear_giro_sql($id_gir, $dominio, $data){
 
-    public function crear_giro_sql($id_gir, $data){
-
-        if(isset($data['nombre'])){
-            $aux['tipo'] = 's';
-            $aux['key'] = 'nombre';
-            $aux['value'] = $data['nombre'];
-            $db[] = $aux;
-        }
-        if(isset($data['telefono'])){
-            $aux['tipo'] = 's';
-            $aux['key'] = 'telefono';
-            $aux['value'] = $data['telefono'];
-            $db[] = $aux;
-        }
-
-        if(count($db) > 0){
-            for($i=0; $i<count($db); $i++){
-
-                if($sql = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
-                    if($sql->bind_param('".$db[$i]["tipo"]."i', $db[$i]["value"], $id)){
-                        if($sql->execute()){
-
-                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }
-
-            }
-        }
-
-        /*
+        $return['op'] = 2;
         if($id_gir == 0){
 
-            $code = $this->pass_generate(20);
-            if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado) VALUES (?, now(), ?, '1', '0')")){
-                if($sql->bind_param("ss", $dominio, $code)){
-                    if($sql->execute()){
-                        $id_gir = $this->con->insert_id;
-                        if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
-                            if($sqlc->bind_param("i", $id_gir)){
-                                if($sqlc->execute()){
-                                    $sqlc->close();
-                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
+            if($sqld = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
+                if($sqld->bind_param("s", $dominio)){
+                    if($sqld->execute()){
+
+                        $res = $sqld->get_result();
+                        if($res->{"num_rows"} == 0){
+                            $code = $this->pass_generate(20);
+                            if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
+                                if($sql->bind_param("ss", $dominio, $code)){
+                                    if($sql->execute()){
+                                        $id_gir = $this->con->insert_id;
+                                        $return['id_gir'] = $id_gir;
+                                        if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
+                                            if($sqlc->bind_param("i", $id_gir)){
+                                                if($sqlc->execute()){
+                                                    $return['op'] = 1;
+                                                    $sqlc->close();
+                                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
+                                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
+                                        $sql->close();
+                                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($res->{"num_rows"} == 1){
+                            $return['op'] = 3;
+                            $return['mensaje'] = "Dominio ya existe";
+                        }
+                        $sqld->close();
+
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3a '.htmlspecialchars($sqld->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3b '.htmlspecialchars($sqld->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3c '.htmlspecialchars($sqld->error)); }
 
         }
-        if($id > 0){
+        if($id_gir > 0){
 
-
+            if(isset($data['nombre'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'nombre';
+                $aux['value'] = $data['nombre'];
+                $db[] = $aux;
+            }
+            if(isset($data['telefono'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'telefono';
+                $aux['value'] = $data['telefono'];
+                $db[] = $aux;
+            }
+            if(isset($data['estado'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'estado';
+                $aux['value'] = $data['estado'];
+                $db[] = $aux;
+            }
+            if(isset($data['titulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'titulo';
+                $aux['value'] = $data['titulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['ssl'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'ssl';
+                $aux['value'] = $data['ssl'];
+                $db[] = $aux;
+            }
+            if(isset($data['solicitar_ssl'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'solicitar_ssl';
+                $aux['value'] = $data['solicitar_ssl'];
+                $db[] = $aux;
+            }
+            if(isset($data['dns'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'dns';
+                $aux['value'] = $data['dns'];
+                $db[] = $aux;
+            }
+            if(isset($data['dns_letra'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'dns_letra';
+                $aux['value'] = $data['dns_letra'];
+                $db[] = $aux;
+            }
+            if(isset($data['inicio_html'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'inicio_html';
+                $aux['value'] = $data['inicio_html'];
+                $db[] = $aux;
+            }
+            if(isset($data['footer_html'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'footer_html';
+                $aux['value'] = $data['footer_html'];
+                $db[] = $aux;
+            }
+            if(isset($data['style_page'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'style_page';
+                $aux['value'] = $data['style_page'];
+                $db[] = $aux;
+            }
+            if(isset($data['style_color'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'style_color';
+                $aux['value'] = $data['style_color'];
+                $db[] = $aux;
+            }
+            if(isset($data['style_modal'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'style_modal';
+                $aux['value'] = $data['style_modal'];
+                $db[] = $aux;
+            }
+            if(isset($data['font_family'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'font_family';
+                $aux['value'] = $data['font_family'];
+                $db[] = $aux;
+            }
+            if(isset($data['font_css'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'font_css';
+                $aux['value'] = $data['font_css'];
+                $db[] = $aux;
+            }
+            if(isset($data['logo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'logo';
+                $aux['value'] = $data['logo'];
+                $db[] = $aux;
+            }
+            if(isset($data['favicon'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'favicon';
+                $aux['value'] = $data['favicon'];
+                $db[] = $aux;
+            }
+            if(isset($data['foto_retiro'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'foto_retiro';
+                $aux['value'] = $data['foto_retiro'];
+                $db[] = $aux;
+            }
+            if(isset($data['foto_despacho'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'foto_despacho';
+                $aux['value'] = $data['foto_despacho'];
+                $db[] = $aux;
+            }
+            if(isset($data['alto'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'alto';
+                $aux['value'] = $data['alto'];
+                $db[] = $aux;
+            }
+            if(isset($data['alto_pro'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'alto_pro';
+                $aux['value'] = $data['alto_pro'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_minimo'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_minimo';
+                $aux['value'] = $data['pedido_minimo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_01_titulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_01_titulo';
+                $aux['value'] = $data['pedido_01_titulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_01_subtitulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_01_subtitulo';
+                $aux['value'] = $data['pedido_01_subtitulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_02_titulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_02_titulo';
+                $aux['value'] = $data['pedido_02_titulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_02_subtitulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_02_subtitulo';
+                $aux['value'] = $data['pedido_02_subtitulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_03_titulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_03_titulo';
+                $aux['value'] = $data['pedido_03_titulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_03_subtitulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_03_subtitulo';
+                $aux['value'] = $data['pedido_03_subtitulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_04_titulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_04_titulo';
+                $aux['value'] = $data['pedido_04_titulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_04_subtitulo'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'pedido_04_subtitulo';
+                $aux['value'] = $data['pedido_04_subtitulo'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_wasabi'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_wasabi';
+                $aux['value'] = $data['pedido_wasabi'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_gengibre'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_gengibre';
+                $aux['value'] = $data['pedido_gengibre'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_palitos'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_palitos';
+                $aux['value'] = $data['pedido_palitos'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_comentarios'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_comentarios';
+                $aux['value'] = $data['pedido_comentarios'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_soya'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_soya';
+                $aux['value'] = $data['pedido_soya'];
+                $db[] = $aux;
+            }
+            if(isset($data['pedido_teriyaki'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'pedido_teriyaki';
+                $aux['value'] = $data['pedido_teriyaki'];
+                $db[] = $aux;
+            }
+            if(isset($data['desde'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'desde';
+                $aux['value'] = $data['desde'];
+                $db[] = $aux;
+            }
+            if(isset($data['mapcode'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'mapcode';
+                $aux['value'] = $data['mapcode'];
+                $db[] = $aux;
+            }
+            if(isset($data['item_grafico'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'item_grafico';
+                $aux['value'] = $data['item_grafico'];
+                $db[] = $aux;
+            }
+            if(isset($data['item_pos'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'item_pos';
+                $aux['value'] = $data['item_pos'];
+                $db[] = $aux;
+            }
+            if(isset($data['item_cocina'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'item_cocina';
+                $aux['value'] = $data['item_cocina'];
+                $db[] = $aux;
+            }
+            if(isset($data['item_pagina'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'item_pagina';
+                $aux['value'] = $data['item_pagina'];
+                $db[] = $aux;
+            }
+            if(isset($data['tiempo_aviso'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'tiempo_aviso';
+                $aux['value'] = $data['tiempo_aviso'];
+                $db[] = $aux;
+            }
+            if(isset($data['ver_inicio'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'ver_inicio';
+                $aux['value'] = $data['ver_inicio'];
+                $db[] = $aux;
+            }
+            if(isset($data['fecha_dns'])){
+                $aux['tipo'] = 's';
+                $aux['key'] = 'fecha_dns';
+                $aux['value'] = $data['fecha_dns'];
+                $db[] = $aux;
+            }
+            if(isset($data['monto'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'monto';
+                $aux['value'] = $data['monto'];
+                $db[] = $aux;
+            }
+            if(isset($data['monto_vendedor'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'monto_vendedor';
+                $aux['value'] = $data['monto_vendedor'];
+                $db[] = $aux;
+            }
+            if(isset($data['prueba'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'prueba';
+                $aux['value'] = $data['prueba'];
+                $db[] = $aux;
+            }
+            if(isset($data['cant_pagos'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'cant_pagos';
+                $aux['value'] = $data['cant_pagos'];
+                $db[] = $aux;
+            }
+    
+            if(count($db) > 0){
+                for($i=0; $i<count($db); $i++){
+                    if($db[$i]["tipo"] == "s"){
+                        if($sqlm = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
+                            if($sqlm->bind_param("si", $db[$i]["value"], $id_gir)){
+                                if($sqlm->execute()){
+                                    $sqlm->close();
+                                }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sqlm->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sqlm->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }    
+                    }
+                    if($db[$i]["tipo"] == "i"){
+                        if($sqlm = $this->con->prepare("UPDATE giros SET ".$db[$i]["key"]."=? WHERE id_gir=?")){
+                            if($sqlm->bind_param("ii", $db[$i]["value"], $id_gir)){
+                                if($sqlm->execute()){
+                                    $sqlm->close();
+                                }else{ $this->registrar(6, 0, 0, 'mod_giro() #1a '.htmlspecialchars($sqlm->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'mod_giro() #1b '.htmlspecialchars($sqlm->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'mod_giro() #1c '.htmlspecialchars($this->con->error)); }    
+                    }
+                }
+            }
 
         }
-
-        $data_giro['nombre'] = "";
-        $data_giro['dominio'] = "";
-        $data_giro['telefono'] = "";
-        $data_giro['estado'] = "";
-        $data_giro['titulo'] = "";
-        $data_giro['code'] = "";
-        $data_giro['catalogo'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['solicitar_ssl'] = "";
-        $data_giro['dns'] = "";
-        $data_giro['dns_letra'] = "";
-        $data_giro['pos'] = "";
-        $data_giro['inicio_html'] = "";
-        $data_giro['footer_html'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $data_giro['ssl'] = "";
-        $return['op'] = 2;
-        
-        */
         return $return;
 
     }
-
     private function crear_giro(){
 
         $info['op'] = 2;
@@ -379,274 +659,386 @@ class Guardar{
         if($this->admin == 1){
             $dominio = $_POST['dominio'];
             if($this->verificar_dominio($dominio)){
-                if($sql = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
-                    if($sql->bind_param("s", $dominio)){
+
+                $data["nombre"] = $_POST['nombre'];
+                $data["item_pagina"] = $_POST['item_pagina'];
+                $data["item_pos"] = $_POST['item_pos'];
+                $data["item_cocina"] = $_POST['item_cocina'];
+                $data["item_grafico"] = $_POST['item_grafico'];
+                $data["dns_letra"] = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
+                $id = $_POST['id'];
+
+                if($id == 0){
+                    $giro = $this->crear_giro_sql($id, $dominio, $data);
+                    if($giro['op'] == 1){
+                        if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
+                        if($sql->bind_param("ii", $this->id_user, $giro['id_gir'])){
                         if($sql->execute()){
-                            $id = $_POST['id'];
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Giro creado exitosamente";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/giros.php";
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+                    }
+                }
+                if($id > 0){
+                    if($this->id_user == 1){
+                        $giro = $this->crear_giro_sql($id, $dominio, $data);
+                        if($giro['op'] == 1){
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Giro creado exitosamente";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/giros.php";
+                        }
+                    }else{
+                        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
+                        if($sql->bind_param("ii", $this->id_user, $id)){
+                        if($sql->execute()){
                             $res = $sql->get_result();
-                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                            if($res->{"num_rows"} == 0 || ($res->{"num_rows"} == 1 && $id == $result["id_gir"])){
-                                
-                                $nombre = $_POST['nombre'];
-                                $item_pagina = $_POST['item_pagina'];
-                                $item_pos = $_POST['item_pos'];
-                                $item_cocina = $_POST['item_cocina'];
-                                $item_grafico = $_POST['item_grafico'];
-                                $dns_letra = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
-                                $prueba = $_POST['prueba'];
-
-                                if($_POST['plan'] == 0){ $monto_vendedor = "40000"; $monto = "40000"; }
-                                if($_POST['plan'] == 1){ $monto_vendedor = "45000"; $monto = "50000"; }
-                                
-                                if($id == 0){
-                                    $code = $this->pass_generate(20);
-                                    if($sqligir = $this->con->prepare("INSERT INTO giros (nombre, dominio, fecha_creado, code, dns_letra, item_grafico, item_pos, item_cocina, item_pagina, catalogo, style_page, style_color, style_modal, font_family, font_css, alto, alto_pro, logo, favicon, eliminado, id_ser, prueba, monto_vendedor, monto) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', '25', '20', 'sinlogo.png', 'default.ico', '0', '1', ?, ?, ?)")){
-                                        if($sqligir->bind_param("ssssiiiiiii", $nombre, $dominio, $code, $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina, $prueba, $monto_vendedor, $monto)){
-                                            if($sqligir->execute()){
-                                                $id_gir = $this->con->insert_id;
-                                                if($sqlicat = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
-                                                    if($sqlicat->bind_param("i", $id_gir)){
-                                                        if($sqlicat->execute()){
-                                                            if($sqliugc = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
-                                                                if($sqliugc->bind_param("ii", $this->id_user, $id_gir)){
-                                                                    if($sqliugc->execute()){
-                                                                        $info['op'] = 1;
-                                                                        $info['mensaje'] = "Giro creado exitosamente";
-                                                                        $info['reload'] = 1;
-                                                                        $info['page'] = "msd/giros.php";
-                                                                        $sqliugc->close();
-                                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqliugc->error)); }
-                                                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sqliugc->error)); }
-                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
-                                                            $sqlicat->close();
-                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($sqlicat->error)); }
-                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($sqlicat->error)); }
-                                                }else{ $this->registrar(6, 0, 0, 'crear_giro() #2 '.htmlspecialchars($this->con->error)); }
-                                                $sqligir->close();
-                                                if(isset($this->id_aux_user) && is_numeric($this->id_aux_user) && $this->id_aux_user > 0){
-                                                    if($sqliugf = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
-                                                        if($sqliugf->bind_param("ii", $this->id_aux_user, $id_gir)){
-                                                            if($sqliugf->execute()){
-                                                                $sqliugf->close();
-                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($sqliugf->error)); }
-                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($sqliugf->error)); }
-                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #3 '.htmlspecialchars($this->con->error)); }
-                                                }else{  }
-                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($sqligir->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($sqligir->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #4 '.htmlspecialchars($this->con->error)); }
+                            if($res->{"num_rows"} == 1){
+                                $giro = $this->crear_giro_sql($id, $dominio, $data);
+                                if($giro['op'] == 1){
+                                    $info['op'] = 1;
+                                    $info['mensaje'] = "Giro creado exitosamente";
+                                    $info['reload'] = 1;
+                                    $info['page'] = "msd/giros.php";
                                 }
-
-                                if($id > 0){
-                                    if($sqlx = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
-                                        if($sqlx->bind_param("ii", $this->id_user, $id)){
-                                            if($sqlx->execute()){
-                                                $resx = $sqlx->get_result();
-                                                if($resx->{"num_rows"} == 1 || $this->id_user == 1){
-                                                    if($sqlugi = $this->con->prepare("UPDATE giros SET dns_letra=?, item_grafico=?, item_pos=?, item_cocina=?, item_pagina=?, nombre=?, dominio=?, monto_vendedor=?, monto=? WHERE id_gir=? AND eliminado=?")){
-                                                        if($sqlugi->bind_param("siiiissiiii", $dns_letra, $item_grafico, $item_pos, $item_cocina, $item_pagina, $nombre, $dominio, $monto_vendedor, $monto, $id, $this->eliminado)){
-                                                            if($sqlugi->execute()){
-                                                                $info['op'] = 1;
-                                                                $info['mensaje'] = "Giro modificado exitosamente";
-                                                                $info['reload'] = 1;
-                                                                $info['page'] = "msd/giros.php";
-                                                                $sqlugi->close();
-                                                                $this->con_cambios($id);
-                                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($sqlugi->error)); }
-                                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($sqlugi->error)); }
-                                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #5 '.htmlspecialchars($this->con->error)); }
-                                                }else{ $this->registrar(7, 0, 0, 'crear_giro() XSS'); }
-                                                $sqlx->free_result();
-                                                $sqlx->close();
-                                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($sqlx->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($sqlx->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #6 '.htmlspecialchars($this->con->error)); }
-                                }
-
-                            }else{ $this->registrar(15, 0, 0, 'crear_giro() dominio existe'); }
+                            }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
                             $sql->free_result();
                             $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_giro() #7 '.htmlspecialchars($this->con->error)); }
-            }else{  }
+                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                    }
+                }
+            }else{ $info['mensaje'] = "Error: dominio invalido"; }
         }else{ $this->registrar(4, 0, 0, 'crear_giro()'); }
         return $info;
     }
     private function eliminar_giro(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "El Giro no pudo ser eliminado";
-        $id_gir = $_POST['id'];
+        $id = $_POST['id'];
+
         if($this->admin == 1){
-            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
-                if($sql->bind_param("ii", $this->id_user, $id_gir)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1 || $this->id_user == 1){
-                            if($sqlugi = $this->con->prepare("UPDATE giros SET eliminado='1' WHERE id_gir=?")){
-                                if($sqlugi->bind_param("i", $id_gir)){
-                                    if($sqlugi->execute()){
-                                        $info['tipo'] = "success";
-                                        $info['titulo'] = "Eliminado";
-                                        $info['texto'] = "Giro Eliminado";
-                                        $info['reload'] = 1;
-                                        $info['page'] = "msd/giros.php";
-                                        $sqlugi->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($sqlugi->error)); }
-                                }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($sqlugi->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #1 '.htmlspecialchars($this->con->error)); }
-                        }else{ $this->registrar(7, 0, $id_gir, 'eliminar_giro() XSS'); }
-                        $sql->free_result();
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'eliminar_giro() #2 '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(4, 0, $id_gir, 'eliminar_giro()'); }
+            $data['eliminado'] = 1;
+            if($this->id_user == 1){
+                $giro = $this->crear_giro_sql($id, '', $data);
+                if($giro['op'] == 1){
+                    $info['tipo'] = "success";
+                    $info['titulo'] = "Eliminado";
+                    $info['texto'] = "Giro Eliminado";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/giros.php";
+                }
+            }else{
+                if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
+                if($sql->bind_param("ii", $this->id_user, $id)){
+                if($sql->execute()){
+                    $res = $sql->get_result();
+                    if($res->{"num_rows"} == 1){
+                        $giro = $this->crear_giro_sql($id, '', $data);
+                        if($giro['op'] == 1){
+                            $info['tipo'] = "success";
+                            $info['titulo'] = "Eliminado";
+                            $info['texto'] = "Giro Eliminado";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/giros.php";
+                        }
+                    }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
+                    $sql->free_result();
+                    $sql->close();
+                }else{ $this->registrar(6, 0, $id, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $id, 'eliminar_giro() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $id, 'eliminar_giro() #2 '.htmlspecialchars($this->con->error)); }
+            }
+        }else{ $this->registrar(4, 0, $id, 'eliminar_giro()'); }
         return $info;
     }
+    public function crear_dominio(){
+
+        $info['op'] = 2;
+        $info['tipo'] = 0;
+        $info['mensaje'] = '';
+
+        $correo = $_POST["correo"];
+        $dominio = $_POST["dominio"];
+        $telefono = $_POST["telefono"];
+
+        if($this->verificar_dominio($dominio)){
+            if(strlen($telefono) >= 12 && strlen($telefono) <= 14){
+                if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
+
+                    $url = 'https://www.google.com/recaptcha/api/siteverify';
+                    $datas = [
+                        'secret' => '6LdZp78UAAAAALb66uCWx7RR3cuSjhQLhy8sWZdu',
+                        'response' => $_POST['token'],
+                        'remoteip' => $_SERVER['REMOTE_ADDR']
+                    ];
+                    $options = array(
+                        'http' => array(
+                            'header'  => 'Content-type: application/x-www-form-urlencoded\r\n',
+                            'method'  => 'POST',
+                            'content' => http_build_query($datas)
+                        )
+                    );
+                    $context  = stream_context_create($options);
+                    $response = file_get_contents($url, false, $context);
+                    $res = json_decode($response, true);
+
+                    if($res['success'] == true){
+                        
+                        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
+                        if($sql->bind_param("si", $correo, $this->eliminado)){
+                        if($sql->execute()){
+
+                            $res = $sql->get_result();
+                            if($res->{"num_rows"} == 0){
+
+                                $data["telfono"] = $telefono;
+                                $giro = $this->crear_giro_sql(0, $dominio, $data);
+                                if($giro["op"] == 1){
+
+                                    $mailcode = $this->pass_generate(20);
+                                    if($sqlu = $this->con->prepare("INSERT INTO fw_usuarios (correo, mailcode, fecha_creado, admin, telefono) VALUES (?, ?, now(), ?, ?)")){
+                                    if($sqlu->bind_param("sssi", $correo, $mailcode, $this->eliminado, $telefono)){
+                                    if($sqlu->execute()){
+
+                                        $usuario_id = $this->con->insert_id;
+                                        if($sqlg = $this->con->prepare("INSERT INTO fw_usuarios_giros (id_gir, id_user) VALUES (?, ?)")){
+                                        if($sqlg->bind_param("ii", $giro["id_gir"], $usuario_id)){
+                                        if($sqlg->execute()){
+
+                                            $send['dominio'] = $dominio;
+                                            $send['correo'] = $correo;
+                                            $send['id'] = $usuario_id;
+                                            $send['code'] = $mailcode;
+
+                                            $ch = curl_init();
+                                            curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_inicio');
+                                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                            if(!curl_errno($ch)){
+                                                $resp_email = json_decode(curl_exec($ch));
+                                                $info['op'] = 1;
+                                                $info['resp'] = $resp_email;
+                                                curl_close($ch);
+                                            }
+
+                                            $sqlg->close();
+
+                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqlg->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($sqlg->error)); }
+                                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #2 '.htmlspecialchars($this->con->error)); }
+                                        $sqlu->close();
+                                        
+                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() #3 '.htmlspecialchars($sqlu->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() #3 '.htmlspecialchars($sqlu->error)); }
+                                    }else{ $this->registrar(6, 0, 0, 'crear_dominio() #3 '.htmlspecialchars($this->con->error)); }
+
+                                }
+                                if($giro["op"] == 2){
+                                    $info['tipo'] = 4;
+                                    $info['mensaje'] = 'Se produjo un error';
+                                }
+                                if($giro["op"] == 3){
+                                    $info['tipo'] = 2;
+                                    $info['mensaje'] = 'Dominio Existente';
+                                }
+
+                            }
+                            if($res->{"num_rows"} > 0){
+                                $info['tipo'] = 3;
+                                $info['mensaje'] = 'Correo existente';
+                            }
+                            $sql->free_result();
+                            $sql->close();
+
+                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #6 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #6 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_dominio() #6 '.htmlspecialchars($this->con->error)); }
+
+                    }else{ 
+                        /* ERROR CAPTCHA */
+                    }
+                }else{ 
+                    /* NO ES CORREO */
+                    $info['tipo'] = 3;
+                    $info['mensaje'] = 'Error con correo';
+                }
+            }else{
+                /* TELEFONO ERROR */
+                $info['tipo'] = 1;
+                $info['mensaje'] = 'Telefono Error';
+            }
+        }else{
+            /* NO ES DOMINIO */
+            $info['tipo'] = 2;
+            $info['mensaje'] = 'Error con dominio';
+        }
+        return $info;
+
+    }
     private function add_ses(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "ERROR";
         $info['texto'] = "Correo no pudo ser agregado";
+
         if($this->id_user == 1){
             $id_loc = $_POST['id'];
             if($sql = $this->con->prepare("SELECT correo FROM locales WHERE id_loc=? AND eliminado=?")){
-                if($sql->bind_param("ii", $id_loc, $this->eliminado)){
-                    if($sql->execute()){
-                        $correo = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correo"];
-                        if($sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?")){
-                            if($sqlloc->bind_param("i", $id_loc)){
-                                if($sqlloc->execute()){
-                                    if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
-                                        if($sqlsma->bind_param("s", $correo)){
-                                            if($sqlsma->execute()){
-                                                $info['tipo'] = "success";
-                                                $info['titulo'] = "Modificado";
-                                                $info['texto'] = "Correo ".$correo." agregado";
-                                                $info['reload'] = 1;
-                                                $info['page'] = "msd/panel.php";
-                                                $sqlsma->close();
-                                            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
-                                        }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
-                                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($this->con->error)); }
-                                    $sqlloc->close();
-                                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
-                            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
-                        }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($this->con->error)); }
-                        $sql->free_result();
-                        $sql->close();
-                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
+            if($sql->bind_param("ii", $id_loc, $this->eliminado)){
+            if($sql->execute()){
+                $correo = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correo"];
+                if($sqlloc = $this->con->prepare("UPDATE locales SET correo_ses='1' WHERE id_loc=?")){
+                if($sqlloc->bind_param("i", $id_loc)){
+                if($sqlloc->execute()){
+                    if($sqlsma = $this->con->prepare("INSERT INTO ses_mail (correo) VALUES (?)")){
+                    if($sqlsma->bind_param("s", $correo)){
+                    if($sqlsma->execute()){
+                        $info['tipo'] = "success";
+                        $info['titulo'] = "Modificado";
+                        $info['texto'] = "Correo ".$correo." agregado";
+                        $info['reload'] = 1;
+                        $info['page'] = "msd/panel.php";
+                        $sqlsma->close();
+                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
+                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($sqlsma->error)); }
+                    }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #1 '.htmlspecialchars($this->con->error)); }
+                    $sqlloc->close();
+                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($sqlloc->error)); }
+                }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #2 '.htmlspecialchars($this->con->error)); }
+                $sql->free_result();
+                $sql->close();
+            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, $id_loc, 0, 'add_ses() #3 '.htmlspecialchars($this->con->error)); }
         }else{  $this->registrar(1, 0, 0, 'add_ses()'); }
         return $info;
+
     }
     private function add_dns(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "ERROR";
         $info['texto'] = "DNS no ha sido configurada";
-        $id_gir = $_POST['id'];
+        $id = $_POST['id'];
         if($this->id_user == 1){
             if($sql = $this->con->prepare("UPDATE giros SET dns='1' WHERE id_gir=?")){
-                if($sql->bind_param("i", $id_gir)){
-                    if($sql->execute()){
-                        $info['tipo'] = "success";
-                        $info['titulo'] = "DNS";
-                        $info['texto'] = "DNS configurada";
-                        $info['reload'] = 1;
-                        $info['page'] = "msd/panel.php";
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'add_dns() '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(1, 0, $id_gir, 'add_dns()'); }
+            if($sql->bind_param("i", $id)){
+            if($sql->execute()){
+                $info['tipo'] = "success";
+                $info['titulo'] = "DNS";
+                $info['texto'] = "DNS configurada";
+                $info['reload'] = 1;
+                $info['page'] = "msd/panel.php";
+                $sql->close();
+            }else{ $this->registrar(6, 0, $id, 'add_dns() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id, 'add_dns() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id, 'add_dns() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, $id, 'add_dns()'); }
         return $info;
+
     }
     private function add_ssl(){
+
         $info['tipo'] = "error";
         $info['titulo'] = "SSL";
         $info['texto'] = "ssl no ha sido configurada";
-        $id_gir = $_POST['id'];
+        $id = $_POST['id'];
         if($this->id_user == 1){
             if($sql = $this->con->prepare("UPDATE giros SET ssl='1' WHERE id_gir=?")){
-                if($sql->bind_param("i", $id_gir)){
-                    if($sql->execute()){
-                        $info['tipo'] = "success";
-                        $info['titulo'] = "SSL";
-                        $info['texto'] = "ssl configurada";
-                        $info['reload'] = 1;
-                        $info['page'] = "msd/panel.php";
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'add_ssl() '.htmlspecialchars($this->con->error)); }
-        }else{ $this->registrar(1, 0, $id_gir, 'add_ssl()'); }
+            if($sql->bind_param("i", $id)){
+            if($sql->execute()){
+                $info['tipo'] = "success";
+                $info['titulo'] = "SSL";
+                $info['texto'] = "ssl configurada";
+                $info['reload'] = 1;
+                $info['page'] = "msd/panel.php";
+                $sql->close();
+            }else{ $this->registrar(6, 0, $id, 'add_ssl() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id, 'add_ssl() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id, 'add_ssl() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(1, 0, $id, 'add_ssl()'); }
         return $info;
+
     }
     private function ordercat(){
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
                 $values = $_POST['values'];
                 for($i=0; $i<count($values); $i++){
                     if($sql = $this->con->prepare("UPDATE categorias SET orders='".$i."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
-                        if($sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado)){
-                            if($sql->execute()){
-                                $sql->close();
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
+                    if($sql->bind_param("iiii", $values[$i], $this->id_cat, $this->id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($sql->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'ordercat() '.htmlspecialchars($this->con->error)); }
                 }
                 $this->con_cambios(null);
             }else{ $this->registrar(3, 0, $this->id_gir, 'ordercat()'); }
         }else{ $this->registrar(2, 0, 0, 'ordercat()'); }
+
     }
     private function orderpag(){
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $values = $_POST['values'];
             for($i=0; $i<count($values); $i++){
                 if($sql = $this->con->prepare("UPDATE paginas SET orders='".$i."' WHERE id_pag=? AND id_gir=? AND eliminado=?")){
-                    if($sql->bind_param("iii", $values[$i], $this->id_gir, $this->eliminado)){
-                        if($sql->execute()){
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                if($sql->bind_param("iii", $values[$i], $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $sql->close();
+                }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($this->con->error)); }
             }
             $this->con_cambios(null);
         }else{ $this->registrar(2, 0, 0, 'orderpag()'); }
+
     }
     private function orderprods(){
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             if(isset($this->id_cat) && is_numeric($this->id_cat) && $this->id_cat > 0){
                 $id_cae = $_POST['id_cae'];
                 if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
-                    if($sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
-                        if($sql->execute()){
-                            $res = $sql->get_result();
-                            if($res->{"num_rows"} == 1){
-                                $values = $_POST['values'];
-                                for($i=0; $i<count($values); $i++){
-                                    if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
-                                        if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
-                                            if($sqlcp->execute()){
-                                                $sqlcp->close();
-                                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
-                                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($this->con->error)); }
-                                }
-                                $this->con_cambios(null);
-                            }
-                            if($res->{"num_rows"} == 0){ 
-                                $this->registrar(7, 0, $this->id_gir, 'orderprods() XSS');
-                            }
-                            $sql->free_result();
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
+                if($sql->bind_param("iii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $res = $sql->get_result();
+                    if($res->{"num_rows"} == 1){
+                        $values = $_POST['values'];
+                        for($i=0; $i<count($values); $i++){
+                            if($sqlcp = $this->con->prepare("UPDATE cat_pros SET orders='".$i."' WHERE id_pro=? AND id_cae=?")){
+                            if($sqlcp->bind_param("ii", $values[$i], $id_cae)){
+                            if($sqlcp->execute()){
+                                $sqlcp->close();
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($sqlcp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #1 '.htmlspecialchars($this->con->error)); }
+                        }
+                        $this->con_cambios(null);
+                    }
+                    if($res->{"num_rows"} == 0){ 
+                        $this->registrar(7, 0, $this->id_gir, 'orderprods() XSS');
+                    }
+                    $sql->free_result();
+                    $sql->close();
+                }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, $this->id_gir, 'orderprods() #2 '.htmlspecialchars($this->con->error)); }
             }else{ $this->registrar(3, 0, $this->id_gir, 'orderprods()'); }
         }else{ $this->registrar(2, 0, 0, 'orderprods()'); }
+
     }
     public function uploadfavIcon($filename){
 
@@ -3009,96 +3401,90 @@ class Guardar{
             $tipo = $_POST['tipo'];
 
             if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
-                if($sqlus->bind_param("s", $correo)){
-                    if($sqlus->execute()){
+            if($sqlus->bind_param("s", $correo)){
+            if($sqlus->execute()){
 
-                        $resus = $sqlus->get_result();
-                        $id_user = $resus->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
-                        $id = $_POST['id'];
-                        $nombre = $_POST['nombre'];
+                $resus = $sqlus->get_result();
+                $id_user = $resus->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
+                $id = $_POST['id'];
+                $nombre = $_POST['nombre'];
 
-                        if($resus->{"num_rows"} == 0 || ($resus->{"num_rows"} == 1 && $id == $id_user)){
-                            
-                            if($id > 0){
+                if($resus->{"num_rows"} == 0 || ($resus->{"num_rows"} == 1 && $id == $id_user)){
+                    
+                    if($id > 0){
 
-                                if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
-                                    if($sqluus->bind_param("ssii", $nombre, $correo, $id_user, $this->eliminado)){
-                                        if($sqluus->execute()){
-                                            $info['op'] = 1;
-                                            $info['mensaje'] = "Usuarios modificado exitosamente";
-                                            $info['reload'] = 1;
-                                            $info['page'] = "msd/usuarios.php";
-                                            $sqluus->close();
-                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($this->con->error)); }
-                                
-                                if($tipo == 0 && $this->id_user == 1){
-                                    $re = 0;
-                                    if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
-                                        if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
-                                            if($sqlup->execute()){
-                                                $sqlup->close();
-                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($this->con->error)); }
-                                }
+                        if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
+                        if($sqluus->bind_param("ssii", $nombre, $correo, $id_user, $this->eliminado)){
+                        if($sqluus->execute()){
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Usuarios modificado exitosamente";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/usuarios.php";
+                            $sqluus->close();
+                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($this->con->error)); }
 
-                                if($tipo == 1 && $this->id_user == 1){
-                                    $re = 1;
-                                    if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
-                                        if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
-                                            if($sqlup->execute()){
-                                                $sqlup->close();
-                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($this->con->error)); }
-                                }
+                        if($tipo == 0 && $this->id_user == 1){
+                            $re = 0;
+                            if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
+                            if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
+                            if($sqlup->execute()){
+                                $sqlup->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($this->con->error)); }
+                        }
 
-                            }
+                        if($tipo == 1 && $this->id_user == 1){
+                            $re = 1;
+                            if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
+                            if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
+                            if($sqlup->execute()){
+                                $sqlup->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($this->con->error)); }
+                        }
+                        
+                    }
 
-                            if($id == 0){
+                    if($id == 0){
 
-                                $admin = 1;
+                        if($tipo == 0){
+                            if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, id_aux_user) VALUES (?, now(), ?, '1', ?)")){
+                            if($sqlius->bind_param("ssi", $nombre, $correo, $this->id_user)){
+                            if($sqlius->execute()){
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Usuarios agregado exitosamente";
+                                $info['reload'] = 1;
+                                $info['page'] = "msd/usuarios.php";
+                                $sqlius->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($tipo == 1 && $this->id_user == 1){
+                            if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, re_venta) VALUES (?, now(), ?, '1', '1')")){
+                            if($sqlius->bind_param("ss", $nombre, $correo)){   
+                            if($sqlius->execute()){
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Usuarios agregado exitosamente";
+                                $info['reload'] = 1;
+                                $info['page'] = "msd/usuarios.php";
+                                $sqlius->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
+                        }
 
-                                if($tipo == 0){
-                                    if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, id_aux_user) VALUES (?, now(), ?, ?, ?)")){
-                                        if($sqlius->bind_param("ssii", $nombre, $correo, $admin, $this->id_user)){
-                                            if($sqlius->execute()){
-                                                $info['op'] = 1;
-                                                $info['mensaje'] = "Usuarios agregado exitosamente";
-                                                $info['reload'] = 1;
-                                                $info['page'] = "msd/usuarios.php";
-                                                $sqlius->close();
-                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($this->con->error)); }
-                                }
+                    }
 
-                                if($tipo == 1 && $this->id_user == 1){
-                                    $reventa = 1;
-                                    if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, re_venta) VALUES (?, now(), ?, ?, ?)")){
-                                        if($sqlius->bind_param("ssii", $nombre, $correo, $admin, $reventa)){   
-                                            if($sqlius->execute()){
-                                                $info['op'] = 1;
-                                                $info['mensaje'] = "Usuarios agregado exitosamente";
-                                                $info['reload'] = 1;
-                                                $info['page'] = "msd/usuarios.php";
-                                                $sqlius->close();
-                                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
-                                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
-                                }
-
-                            }
-
-                        }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
-
-                        $sqlus->free_result();
-                        $sqlus->close();
-
-                    }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
+                $sqlus->free_result();
+                $sqlus->close();
+            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
             }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
         
         }else{ $this->registrar(1, 0, 0, 'crear_usuario()'); }
@@ -3111,111 +3497,104 @@ class Guardar{
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id_cae = $_POST['id_cae'];
             if($sql = $this->con->prepare("SELECT * FROM categorias WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
-                if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        if($res->{"num_rows"} == 1){
-                            $precio = $_POST['precio'];
-                            if($sqluc = $this->con->prepare("UPDATE categorias SET precio=? WHERE id_cae=?")){
-                                if($sqluc->bind_param("ii", $precio, $id_cae)){
-                                    if($sqluc->execute()){
-                                        if($sqlepc = $this->con->prepare("DELETE FROM promocion_categoria WHERE id_cae1=?")){
-                                            if($sqlepc->bind_param("i", $id_cae)){
-                                                if($sqlepc->execute()){
-                                                    if($sqlepp = $this->con->prepare("DELETE FROM promocion_productos WHERE id_cae=?")){
-                                                        if($sqlepp->bind_param("i", $id_cae)){
-                                                            if($sqlepp->execute()){
-                                                                $values = $this->list_arbol_cats_prods();
-                                                                $parent_id = $_POST['parent_id'];
-                                                                for($i=0; $i<count($values); $i++){
-                                                                    $value = $values[$i];
-                                                                    if($value['id_cae'] !== null){
-                                                                        $cae_val = $_POST['sel-cae-'.$value['id_cae']];
-                                                                        if($cae_val > 0){
-
-                                                                            if($sqlspc = $this->con->prepare("SELECT * FROM promocion_categoria WHERE id_cae1=? AND id_cae2=?")){
-                                                                                if($sqlspc->bind_param("ii", $id_cae, $value["id_cae"])){
-                                                                                    if($sqlspc->execute()){
-                                                                                        $resspc = $sqlspc->get_result();
-                                                                                        if($resspc->{'num_rows'} == 0){
-                                                                                            if($sqlipc = $this->con->prepare("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES (?, ?, ?)")){
-                                                                                                if($sqlipc->bind_param("iii", $id_cae, $value["id_cae"], $cae_val)){
-                                                                                                    if($sqlipc->execute()){
-                                                                                                        $sqlipc->close();
-                                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
-                                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
-                                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($this->con->error)); }
-                                                                                        }
-                                                                                        $sqlspc->free_result();
-                                                                                        $sqlspc->close();
-                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlspc->error)); }
-                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlspc->error)); }
-                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($this->con->error)); }
-                                                                            
-                                                                        }
-                                                                    }
-                                                                    if($value['id_pro'] !== null){
-                                                                        $pro_val = $_POST['sel-pro-'.$value['id_pro'].'-'.$value['id_cae']];
-                                                                        if($pro_val > 0){
-
-                                                                            if($sqlspp = $this->con->prepare("SELECT * FROM promocion_categoria WHERE id_cae1=? AND id_cae2=?")){
-                                                                                if($sqlspp->bind_param("ii", $id_cae, $value["id_cae"])){
-                                                                                    if($sqlspp->execute()){
-                                                                                        $resspp = $sqlspp->get_result();
-                                                                                        if($resspp->{'num_rows'} == 0){
-
-                                                                                            if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad, parent_id) VALUES (?, ?, ?, ?)")){
-                                                                                                if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], $pro_val, $value['id_cae'])){
-                                                                                                    if($sqlipp->execute()){
-                                                                                                        $sqlipp->close();
-                                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
-                                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
-                                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
-
-                                                                                        }
-                                                                                        if($resspp->{'num_rows'} == 1){
-                                                                                            
-                                                                                            if($sqlxpp = $this->con->prepare("UPDATE promocion_productos SET cantidad=?, parent_id=? WHERE id_cae=? AND id_pro=?")){
-                                                                                                if($sqlxpp->bind_param("iiii", $pro_val, $value['id_cae'], $id_cae, $value["id_pro"])){
-                                                                                                    if($sqlxpp->execute()){
-                                                                                                        $sqlxpp->close();
-                                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlxpp->error)); }
-                                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlxpp->error)); }
-                                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
-
-                                                                                        }
-                                                                                        $sqlspp->free_result();
-                                                                                        $sqlspp->close();
-                                                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlspp->error)); }
-                                                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlspp->error)); }
-                                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
-
-                                                                        }
-                                                                    }
-                                                                }
-                                                                $info['op'] = 1;
-                                                                $info['mensaje'] = "Productos Asignados";
-                                                                $info['reload'] = 1;
-                                                                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
-                                                                $this->con_cambios(null);
-                                                                $sqlepp->close();
-                                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
-                                                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
-                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($this->con->error)); }
-                                                    $sqlepc->close();
-                                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
-                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($this->con->error)); }
-                                        $sqluc->close();
-                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($this->con->error)); }
-                        }
-                        if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'asignar_prods_promocion()'); }
-                        $sql->free_result();
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
+            if($sql->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
+            if($sql->execute()){
+                $res = $sql->get_result();
+                if($res->{"num_rows"} == 1){
+                    $precio = $_POST['precio'];
+                    if($sqluc = $this->con->prepare("UPDATE categorias SET precio=? WHERE id_cae=?")){
+                    if($sqluc->bind_param("ii", $precio, $id_cae)){
+                    if($sqluc->execute()){
+                        if($sqlepc = $this->con->prepare("DELETE FROM promocion_categoria WHERE id_cae1=?")){
+                        if($sqlepc->bind_param("i", $id_cae)){
+                        if($sqlepc->execute()){
+                            if($sqlepp = $this->con->prepare("DELETE FROM promocion_productos WHERE id_cae=?")){
+                            if($sqlepp->bind_param("i", $id_cae)){
+                            if($sqlepp->execute()){
+                                $values = $this->list_arbol_cats_prods();
+                                $parent_id = $_POST['parent_id'];
+                                for($i=0; $i<count($values); $i++){
+                                    $value = $values[$i];
+                                    if($value['id_cae'] !== null){
+                                        $cae_val = $_POST['sel-cae-'.$value['id_cae']];
+                                        if($cae_val > 0){
+                                            if($sqlspc = $this->con->prepare("SELECT * FROM promocion_categoria WHERE id_cae1=? AND id_cae2=?")){
+                                            if($sqlspc->bind_param("ii", $id_cae, $value["id_cae"])){
+                                            if($sqlspc->execute()){
+                                                $resspc = $sqlspc->get_result();
+                                                if($resspc->{'num_rows'} == 0){
+                                                    if($sqlipc = $this->con->prepare("INSERT INTO promocion_categoria (id_cae1, id_cae2, cantidad) VALUES (?, ?, ?)")){
+                                                    if($sqlipc->bind_param("iii", $id_cae, $value["id_cae"], $cae_val)){
+                                                    if($sqlipc->execute()){
+                                                        $sqlipc->close();
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlipc->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($this->con->error)); }
+                                                }
+                                                $sqlspc->free_result();
+                                                $sqlspc->close();
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlspc->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($sqlspc->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #1 '.htmlspecialchars($this->con->error)); }
+                                            
+                                        }
+                                    }
+                                    if($value['id_pro'] !== null){
+                                        $pro_val = $_POST['sel-pro-'.$value['id_pro'].'-'.$value['id_cae']];
+                                        if($pro_val > 0){
+                                            if($sqlspp = $this->con->prepare("SELECT * FROM promocion_categoria WHERE id_cae1=? AND id_cae2=?")){
+                                            if($sqlspp->bind_param("ii", $id_cae, $value["id_cae"])){
+                                            if($sqlspp->execute()){
+                                                $resspp = $sqlspp->get_result();
+                                                if($resspp->{'num_rows'} == 0){
+                                                    if($sqlipp = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad, parent_id) VALUES (?, ?, ?, ?)")){
+                                                    if($sqlipp->bind_param("iiii", $id_cae, $value["id_pro"], $pro_val, $value['id_cae'])){
+                                                    if($sqlipp->execute()){
+                                                        $sqlipp->close();
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlipp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
+                                                }
+                                                if($resspp->{'num_rows'} == 1){
+                                                    if($sqlxpp = $this->con->prepare("UPDATE promocion_productos SET cantidad=?, parent_id=? WHERE id_cae=? AND id_pro=?")){
+                                                    if($sqlxpp->bind_param("iiii", $pro_val, $value['id_cae'], $id_cae, $value["id_pro"])){
+                                                    if($sqlxpp->execute()){
+                                                        $sqlxpp->close();
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlxpp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlxpp->error)); }
+                                                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
+                                                }
+                                                $sqlspp->free_result();
+                                                $sqlspp->close();
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlspp->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($sqlspp->error)); }
+                                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #2 '.htmlspecialchars($this->con->error)); }
+                                        }
+                                    }
+                                }
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Productos Asignados";
+                                $info['reload'] = 1;
+                                $info['page'] = "msd/categorias.php?parent_id=".$parent_id;
+                                $this->con_cambios(null);
+                                $sqlepp->close();
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($sqlepp->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #3 '.htmlspecialchars($this->con->error)); }
+                            $sqlepc->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($sqlepc->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #4 '.htmlspecialchars($this->con->error)); }
+                        $sqluc->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($sqluc->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #5 '.htmlspecialchars($this->con->error)); }
+                }
+                if($res->{"num_rows"} == 0){ $this->registrar(7, 0, $this->id_gir, 'asignar_prods_promocion()'); }
+                $sql->free_result();
+                $sql->close();
+            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($sql->error)); }
             }else{$this->registrar(6, 0, $this->id_gir, 'asignar_prods_promocion() #6 '.htmlspecialchars($this->con->error));  }
         }else{ $this->registrar(2, 0, 0, 'asignar_prods_promocion()'); }
         return $info;

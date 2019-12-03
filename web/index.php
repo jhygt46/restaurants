@@ -5,6 +5,11 @@ if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
     include('../errors/404.html');
     exit;
 }
+if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
+    header('HTTP/1.1 404 Not Found', true, 404);
+    include('../errors/404.html');
+    exit;
+}
 
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");

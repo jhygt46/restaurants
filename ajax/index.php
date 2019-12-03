@@ -54,7 +54,7 @@
         echo json_encode($info);
     }
     if($_POST["accion"] == "crear_dominio"){
-        require_once DIR."admin/class/core_class_prod.php";
+        require_once DIR."admin/class/guardar_class.php";
         $core = new Core();
         $info = $core->crear_dominio();
         echo json_encode($info);

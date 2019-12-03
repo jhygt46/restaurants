@@ -6,6 +6,12 @@ if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
     include('../errors/404.html');
     exit;
 }
+if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
+    $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $location);
+    exit;
+}
 
 if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     session_destroy();
