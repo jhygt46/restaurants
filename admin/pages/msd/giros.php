@@ -24,7 +24,7 @@ if($core->admin == 0){
 
 $list = $core->get_giros_user();
 
-if($core->id_user != 1){
+//if($core->id_user != 1){
 
     $pap = $core->get_pago_proveedores();
     if(count($pap) == 0){
@@ -60,7 +60,7 @@ if($core->id_user != 1){
     $disponible = $disponible - $entregado;
     $deuda = $total - $entregado - $eliminado;
 
-}
+//}
 
 
 
