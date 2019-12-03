@@ -1208,7 +1208,7 @@ class Core{
     }
     public function get_makers_locales(){
         if($sql = $this->con->prepare("SELECT t2.lat, t2.lng, t1.nombre FROM giros t1, locales t2 WHERE t1.id_gir=t2.id_gir AND t1.prueba=?")){
-            if($sql->bind_param("ii", $this->id_user, $this->eliminado)){
+            if($sql->bind_param("i", $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $sql->free_result();
