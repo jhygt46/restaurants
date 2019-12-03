@@ -24,12 +24,12 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             data: send,
             success: function(data){
                 if(data == 0){
-                    $('.disponibilidad').html("Disponible");
-                    $('.disponibilidad').css({ color: '#090' });
+                    $('#disponibilidad').html("Disponible");
+                    $('#disponibilidad').css({ color: '#090' });
                 }
                 if(data == 1){
-                    $('.disponibilidad').html("No disponible");
-                    $('.disponibilidad').css({ color: '#900' });
+                    $('#disponibilidad').html("No disponible");
+                    $('#disponibilidad').css({ color: '#900' });
                 }
             },
             error: function(e){}
@@ -57,7 +57,8 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="nombre" type="text" class="inputs" value="www." require="" placeholder="" />
                     </label>
                     <label class="clearfix">
-                        <span><p class="disponibilidad" style="font-size: 20px; font-weight: bold"></p></span>
+                        <span><p>Disponibilidad</p></span>
+                        <input id="disponibilidad" type="text" class="inputs" value="" require="" placeholder="" />
                     </label>
                     <label>
                         <div class="enviar"><a onclick="verificar_dominio()">Enviar</a></div>
