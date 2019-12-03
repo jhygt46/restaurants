@@ -14,6 +14,8 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 }
 
+$core->is_giro();
+
 // SOLO GIROS
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
@@ -22,7 +24,6 @@ if($core->id_gir == 0){
     die('<div class="pagina"><div class="title"><h1>Error: No hay Giro Asignado</h1></div></div>');
 }
 
-$core->is_giro();
 $titulo_list = "Aplicaciones";
 $id_list = "id_loc";
 $titulo = "GIRO NO SELECIONADO";
