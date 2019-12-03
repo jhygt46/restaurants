@@ -24,6 +24,10 @@ if($core->admin == 0){
 
 $list = $core->get_giros_user();
 
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 //if($core->id_user != 1){
 
     $pap = $core->get_pago_proveedores();
