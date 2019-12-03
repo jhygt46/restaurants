@@ -293,38 +293,38 @@ class Guardar{
         if($id_gir == 0){
 
             if($sqld = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
-                if($sqld->bind_param("s", $dominio)){
-                    if($sqld->execute()){
+            if($sqld->bind_param("s", $dominio)){
+            if($sqld->execute()){
 
-                        $res = $sqld->get_result();
-                        if($res->{"num_rows"} == 0){
-                            $code = $this->pass_generate(20);
-                            if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
-                                if($sql->bind_param("ss", $dominio, $code)){
-                                    if($sql->execute()){
-                                        $id_gir = $this->con->insert_id;
-                                        $return['id_gir'] = $id_gir;
-                                        if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
-                                            if($sqlc->bind_param("i", $id_gir)){
-                                                if($sqlc->execute()){
-                                                    $return['op'] = 1;
-                                                    $sqlc->close();
-                                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
-                                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
-                                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
-                                        $sql->close();
-                                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
-                                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
-                        }
-                        if($res->{"num_rows"} == 1){
-                            $return['op'] = 3;
-                            $return['mensaje'] = "Dominio ya existe";
-                        }
-                        $sqld->close();
+                $res = $sqld->get_result();
+                if($res->{"num_rows"} == 0){
+                    $code = $this->pass_generate(20);
+                    if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
+                    if($sql->bind_param("ss", $dominio, $code)){
+                    if($sql->execute()){
+                        $id_gir = $this->con->insert_id;
+                        $return['id_gir'] = $id_gir;
+                        if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
+                        if($sqlc->bind_param("i", $id_gir)){
+                        if($sqlc->execute()){
+                            $return['op'] = 1;
+                            $sqlc->close();
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
+                        }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
+                }
+                if($res->{"num_rows"} == 1){
+                    $return['op'] = 3;
+                    $return['mensaje'] = "Dominio ya existe";
+                }
+                $sqld->close();
 
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3a '.htmlspecialchars($sqld->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3b '.htmlspecialchars($sqld->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3a '.htmlspecialchars($sqld->error)); }
+            }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3b '.htmlspecialchars($sqld->error)); }
             }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #3c '.htmlspecialchars($sqld->error)); }
 
         }

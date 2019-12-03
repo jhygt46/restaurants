@@ -20,18 +20,27 @@ $tablas[0]['campos'][0]['tipo'] = 'int(4)';
 $tablas[0]['campos'][0]['null'] = 0;
 $tablas[0]['campos'][0]['pk'] = 1;
 $tablas[0]['campos'][0]['ai'] = 1;
+
 $tablas[0]['campos'][1]['nombre'] = 'nombre';
 $tablas[0]['campos'][1]['tipo'] = 'varchar(20) COLLATE utf8_spanish2_ci';
 $tablas[0]['campos'][1]['null'] = 0;
 $tablas[0]['campos'][1]['values'] = ["Server 1"];
+
 $tablas[0]['campos'][2]['nombre'] = 'ip';
 $tablas[0]['campos'][2]['tipo'] = 'varchar(15) COLLATE utf8_spanish2_ci';
 $tablas[0]['campos'][2]['null'] = 0;
 $tablas[0]['campos'][2]['values'] = ["35.184.226.86"];
+
 $tablas[0]['campos'][3]['nombre'] = 'code';
-$tablas[0]['campos'][3]['tipo'] = 'varchar(40) COLLATE utf8_spanish2_ci';
+$tablas[0]['campos'][3]['tipo'] = 'varchar(60) COLLATE utf8_spanish2_ci';
 $tablas[0]['campos'][3]['null'] = 0;
-$tablas[0]['campos'][3]['values'] = ["$)7_&6p@)N>KGh[H{GttdQs'Pt$>3sYb%+/{.wM)"];
+$tablas[0]['campos'][3]['values'] = ["bPmhF7nhgOizr0mXcjiOYNiXK55L0fT3GSrbg5WZIr6Ow49vDxOpwXim9UkI"];
+
+
+
+
+
+
 
 $tablas[1]['nombre'] = 'giros';
 $tablas[1]['campos'][0]['nombre'] = 'id_gir';
