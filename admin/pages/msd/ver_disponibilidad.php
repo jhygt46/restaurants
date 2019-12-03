@@ -24,11 +24,11 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
             data: send,
             success: function(data){
                 if(data == 0){
-                    $('#disponibilidad').html("Disponible");
+                    $('#disponibilidad').val("Disponible");
                     $('#disponibilidad').css({ color: '#090' });
                 }
                 if(data == 1){
-                    $('#disponibilidad').html("No disponible");
+                    $('#disponibilidad').val("No disponible");
                     $('#disponibilidad').css({ color: '#900' });
                 }
             },
