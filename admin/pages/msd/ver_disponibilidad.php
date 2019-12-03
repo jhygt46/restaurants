@@ -13,6 +13,7 @@ $core = new Core();
 
 $titulo = "Verificar Dominio";
 $sub_titulo = "Ingrese el dominio y verifique si esta disponible";
+$class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 ?>
 <script>
     function verificar_dominio(){
