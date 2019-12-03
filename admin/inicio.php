@@ -8,10 +8,21 @@
         define("DIR", DIR_BASE."restaurants/");
     }
 
+    if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
+        $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $location);
+        exit;
+    }
+
     require_once DIR."admin/class/core_class_prod.php";
     $core = new Core();
     $inicio = $core->inicio();
     $core_class_iniciada = 0;
+
+    if($core->id_user == 0){
+        die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
+    }
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">

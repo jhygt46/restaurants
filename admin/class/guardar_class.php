@@ -3395,66 +3395,25 @@ class Guardar{
         $info['op'] = 2;
         $info['mensaje'] = "Error";
 
-        if($this->id_user == 1){
+        if($this->id_user == 1 || $this->re_venta == 1){
 
             $correo = $_POST['correo'];
-            $tipo = $_POST['tipo'];
+            if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
 
-            if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
-            if($sqlus->bind_param("s", $correo)){
-            if($sqlus->execute()){
+                if($sqlus = $this->con->prepare("SELECT id_user FROM fw_usuarios WHERE correo=?")){
+                if($sqlus->bind_param("s", $correo)){
+                if($sqlus->execute()){
 
-                $resus = $sqlus->get_result();
-                $id_user = $resus->fetch_all(MYSQLI_ASSOC)[0]["id_user"];
-                $id = $_POST['id'];
-                $nombre = $_POST['nombre'];
-
-                if($resus->{"num_rows"} == 0 || ($resus->{"num_rows"} == 1 && $id == $id_user)){
-                    
-                    if($id > 0){
-
-                        if($sqluus = $this->con->prepare("UPDATE fw_usuarios SET nombre=?, correo=? WHERE id_user=? AND eliminado=?")){
-                        if($sqluus->bind_param("ssii", $nombre, $correo, $id_user, $this->eliminado)){
-                        if($sqluus->execute()){
-                            $info['op'] = 1;
-                            $info['mensaje'] = "Usuarios modificado exitosamente";
-                            $info['reload'] = 1;
-                            $info['page'] = "msd/usuarios.php";
-                            $sqluus->close();
-                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($sqluus->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1 '.htmlspecialchars($this->con->error)); }
-
-                        if($tipo == 0 && $this->id_user == 1){
-                            $re = 0;
-                            if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
-                            if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
-                            if($sqlup->execute()){
-                                $sqlup->close();
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($sqlup->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2 '.htmlspecialchars($this->con->error)); }
-                        }
-
-                        if($tipo == 1 && $this->id_user == 1){
-                            $re = 1;
-                            if($sqlup = $this->con->prepare("UPDATE fw_usuarios SET re_venta=? WHERE id_user=? AND eliminado=?")){
-                            if($sqlup->bind_param("iii", $re, $id_user, $this->eliminado)){
-                            if($sqlup->execute()){
-                                $sqlup->close();
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($sqlup->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #3 '.htmlspecialchars($this->con->error)); }
-                        }
+                    $resus = $sqlus->get_result();
+                    if($resus->{"num_rows"} == 0){
                         
-                    }
-
-                    if($id == 0){
-
+                        $nombre = $_POST['nombre'];
+                        $tipo = $_POST['tipo'];
                         if($tipo == 0){
                             if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, id_aux_user) VALUES (?, now(), ?, '1', ?)")){
                             if($sqlius->bind_param("ssi", $nombre, $correo, $this->id_user)){
                             if($sqlius->execute()){
+                                $id_user = $this->con->insert_id;
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Usuarios agregado exitosamente";
                                 $info['reload'] = 1;
@@ -3468,6 +3427,7 @@ class Guardar{
                             if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, re_venta) VALUES (?, now(), ?, '1', '1')")){
                             if($sqlius->bind_param("ss", $nombre, $correo)){   
                             if($sqlius->execute()){
+                                $id_user = $this->con->insert_id;
                                 $info['op'] = 1;
                                 $info['mensaje'] = "Usuarios agregado exitosamente";
                                 $info['reload'] = 1;
@@ -3478,15 +3438,28 @@ class Guardar{
                             }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
                         }
 
-                    }
+                        $dominio = "www.sitiodeprueba-".explode("@", $correo)[0].".cl";
+                        $data['prueba'] = 1;
+                        $giro = $this->crear_giro_sql(0, $dominio, $data);
+                        if($giro['op'] == 1){
+                            if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
+                            if($sql->bind_param("ii", $id_user, $giro['id_gir'])){
+                            if($sql->execute()){
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+                        }
 
-                }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
-                $sqlus->free_result();
-                $sqlus->close();
-            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
-            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
-            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
+                    $sqlus->free_result();
+                    $sqlus->close();
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
         
+            }else{ /* CORREO INVALIDO */ }
+
         }else{ $this->registrar(1, 0, 0, 'crear_usuario()'); }
         return $info;
     }
