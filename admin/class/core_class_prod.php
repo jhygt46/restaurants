@@ -361,7 +361,7 @@ class Core{
                         $ip = $this->getUserIpAddr();
                         if($ip == $result["ip"]){
                             if($_SERVER['SERVER_PORT'] == "443"){
-                                $code = substr($_POST["code"], 0, 40);
+                                $code = substr($_POST["code"], 0, 60);
                                 if($code == $result["code"]){
                                     $return['op'] = true;
                                     $return['id_gir'] = $result["id_gir"];
