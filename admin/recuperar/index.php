@@ -31,9 +31,9 @@ $core = new Core();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='shortcut icon' type='image/x-icon' href='../images/favicon.ico' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="../admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="../admin/js/ingreso_aux.js"></script>
-        <link rel="stylesheet" href="../admin/css/login.css" type="text/css" media="all">
+        <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="../js/ingreso_aux.js"></script>
+        <link rel="stylesheet" href="../css/login.css" type="text/css" media="all">
         <script>
 
             $(document).on('keypress',function(e){
@@ -47,7 +47,7 @@ $core = new Core();
                 var btn = $('#recuperar');
                 btn.prop("disabled", true );
                 $.ajax({
-                    url: "../admin/login/",
+                    url: "../login/",
                     type: "POST",
                     data: "accion=recuperar_password&user="+$('#correo').val(),
                     success: function(data){
