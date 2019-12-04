@@ -2823,58 +2823,58 @@ class Core{
     }
     public function crear_categorias_productos_prueba(){
 
-        $prods00[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods00[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods00[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[0] = crear_array_categoria("Pizza Margarita", 0, 0, "Descripcion inicio Pizza Margarita", "Descripcion subtitulo Pizza Margarita", 3600, 0, 0, "image.jpg", 1, 0, 0, [], $prods00);
+        $prods00[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods00[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods00[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae0[0] = $this->crear_array_categoria("Pizza Margarita", 0, 0, "Descripcion inicio Pizza Margarita", "Descripcion subtitulo Pizza Margarita", 3600, 0, 0, "image.jpg", 1, 0, 0, [], $prods00);
         
-        $prods01[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods01[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods01[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[1] = crear_array_categoria("Pizza Napolitana", 0, 0, "Descripcion inicio Pizza Napolitana", "Descripcion subtitulo Pizza Napolitana", 3800, 0, 0, "image.jpg", 1, 0, 0, [], $prods01);
+        $prods01[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods01[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods01[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae0[1] = $this->crear_array_categoria("Pizza Napolitana", 0, 0, "Descripcion inicio Pizza Napolitana", "Descripcion subtitulo Pizza Napolitana", 3800, 0, 0, "image.jpg", 1, 0, 0, [], $prods01);
         
-        $prods02[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods02[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods02[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[2] = crear_array_categoria("Pizza Hawaina", 0, 0, "Descripcion inicio Pizza Hawaina", "Descripcion subtitulo Pizza Hawaina", 4000, 0, 0, "image.jpg", 1, 0, 0, [], $prods02);
+        $prods02[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods02[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods02[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae0[2] = $this->crear_array_categoria("Pizza Hawaina", 0, 0, "Descripcion inicio Pizza Hawaina", "Descripcion subtitulo Pizza Hawaina", 4000, 0, 0, "image.jpg", 1, 0, 0, [], $prods02);
         
-        $prods03[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods03[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods03[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[3] = crear_array_categoria("Pizza Peperoni", 0, 0, "Descripcion inicio Pizza Peperoni", "Descripcion subtitulo Pizza Peperoni", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods03);
+        $prods03[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods03[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods03[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae0[3] = $this->crear_array_categoria("Pizza Peperoni", 0, 0, "Descripcion inicio Pizza Peperoni", "Descripcion subtitulo Pizza Peperoni", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods03);
         
-        $cat[0] = crear_array_categoria("Pizzas", 0, 0, "Descripcion inicio Pizza", "Descripcion subtitulo Pizza", 3500, 0, 0, "image.jpg", 1, 0, 0, $sub_cae0, []);
-        
-
-        $prods10[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods10[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods10[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[0] = crear_array_categoria("Sandwich Barros Luco", 0, 0, "Descripcion inicio Sandwich Margarita", "Descripcion subtitulo Sandwich Margarita", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods10);
-        
-        $prods11[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods11[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods11[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[1] = crear_array_categoria("Sandwich Completo", 0, 0, "Descripcion inicio Sandwich Napolitana", "Descripcion subtitulo Sandwich Napolitana", 4600, 0, 0, "image.jpg", 1, 0, 0, [], $prods11);
-        
-        $prods12[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods12[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods12[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[2] = crear_array_categoria("Sandwich Dinamico", 0, 0, "Descripcion inicio Sandwich Hawaina", "Descripcion subtitulo Sandwich Hawaina", 4800, 0, 0, "image.jpg", 1, 0, 0, [], $prods12);
-        
-        $prods13[0] = crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods13[1] = crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods13[2] = crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[3] = crear_array_categoria("Sandwich Chacarero", 0, 0, "Descripcion inicio Sandwich Peperoni", "Descripcion subtitulo Sandwich Peperoni", 5300, 0, 0, "image.jpg", 1, 0, 0, [], $prods13);
-        
-        $cat[1] = crear_array_categoria("Sandwich", 0, 0, "Descripcion inicio Sandwich", "Descripcion subtitulo Sandwich", 4000, 0, 0, "image.jpg", 1, 0, 0, $sub_cae1, []);
+        $cat[0] = $this->crear_array_categoria("Pizzas", 0, 0, "Descripcion inicio Pizza", "Descripcion subtitulo Pizza", 3500, 0, 0, "image.jpg", 1, 0, 0, $sub_cae0, []);
         
 
-        $prods2[0] = crear_array_producto("1", "Palta Mayo", "Completo Palta Mayo", "Descripcion Completo Palta Mayo", 3600, "image.jpg", 0, 0);
-        $prods2[1] = crear_array_producto("2", "Palta Queso", "Completo Palta Queso", "Descripcion Completo Queso", 3700, "image.jpg", 0, 0);
-        $prods2[2] = crear_array_producto("3", "Completo x", "Completo x", "Descripcion Completo x", 3800, "image.jpg", 0, 0);
-        $prods2[3] = crear_array_producto("4", "Palta y", "Completo Palta y", "Descripcion Completo y", 4000, "image.jpg", 0, 0);
-        $prods2[4] = crear_array_producto("5", "Palta z", "Completo Palta z", "Descripcion Completo z", 4200, "image.jpg", 0, 0);
-        $cat[2] = crear_array_categoria("Completos", 0, 0, "Descripcion inicio Completos", "Descripcion subtitulo Completos", 3500, 0, 0, "image.jpg", 1, 0, 0, [], $prods2);
+        $prods10[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods10[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods10[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae1[0] = $this->crear_array_categoria("Sandwich Barros Luco", 0, 0, "Descripcion inicio Sandwich Margarita", "Descripcion subtitulo Sandwich Margarita", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods10);
+        
+        $prods11[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods11[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods11[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae1[1] = $this->crear_array_categoria("Sandwich Completo", 0, 0, "Descripcion inicio Sandwich Napolitana", "Descripcion subtitulo Sandwich Napolitana", 4600, 0, 0, "image.jpg", 1, 0, 0, [], $prods11);
+        
+        $prods12[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods12[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods12[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae1[2] = $this->crear_array_categoria("Sandwich Dinamico", 0, 0, "Descripcion inicio Sandwich Hawaina", "Descripcion subtitulo Sandwich Hawaina", 4800, 0, 0, "image.jpg", 1, 0, 0, [], $prods12);
+        
+        $prods13[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
+        $prods13[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
+        $prods13[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
+        $sub_cae1[3] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Descripcion inicio Sandwich Peperoni", "Descripcion subtitulo Sandwich Peperoni", 5300, 0, 0, "image.jpg", 1, 0, 0, [], $prods13);
+        
+        $cat[1] = $this->crear_array_categoria("Sandwich", 0, 0, "Descripcion inicio Sandwich", "Descripcion subtitulo Sandwich", 4000, 0, 0, "image.jpg", 1, 0, 0, $sub_cae1, []);
+        
+
+        $prods2[0] = $this->crear_array_producto("1", "Palta Mayo", "Completo Palta Mayo", "Descripcion Completo Palta Mayo", 3600, "image.jpg", 0, 0);
+        $prods2[1] = $this->crear_array_producto("2", "Palta Queso", "Completo Palta Queso", "Descripcion Completo Queso", 3700, "image.jpg", 0, 0);
+        $prods2[2] = $this->crear_array_producto("3", "Completo x", "Completo x", "Descripcion Completo x", 3800, "image.jpg", 0, 0);
+        $prods2[3] = $this->crear_array_producto("4", "Palta y", "Completo Palta y", "Descripcion Completo y", 4000, "image.jpg", 0, 0);
+        $prods2[4] = $this->crear_array_producto("5", "Palta z", "Completo Palta z", "Descripcion Completo z", 4200, "image.jpg", 0, 0);
+        $cat[2] = $this->crear_array_categoria("Completos", 0, 0, "Descripcion inicio Completos", "Descripcion subtitulo Completos", 3500, 0, 0, "image.jpg", 1, 0, 0, [], $prods2);
 
         echo "<pre>";
         print_r($cat);
