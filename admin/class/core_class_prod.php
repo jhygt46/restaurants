@@ -2980,6 +2980,44 @@ class Core{
         */
 
     }
+    private function crear_array_categoria($nombre, $parent_id, $tipo, $descripcion, $descripcion_sub, $precio, $orders, $ocultar, $image, $degradado, $mostrar_prods, $detalle_prods, $sub_cae, $prods){
+
+        $arr["nombre"] = $nombre;
+        $arr["parent_id"] = $parent_id;
+        $arr["tipo"] = $tipo;
+        $arr["descripcion"] = $descripcion;
+        $arr["descripcion_sub"] = $descripcion_sub;
+        $arr["precio"] = $precio;
+        $arr["orders"] = $orders;
+        $arr["ocultar"] = $ocultar;
+        $arr["image"] = $image;
+        $arr["degradado"] = $degradado;
+        $arr["mostrar_prods"] = $mostrar_prods;
+        $arr["detalle_prods"] = $detalle_prods;
+
+        if(count($sub_cae) > 0){
+            $arr["sub_cae"] = $sub_cae;
+        }
+        if(count($prods) > 0){
+            $arr["prods"] = $prods;
+        }
+
+        return $arr;
+
+    }
+    private function crear_array_producto($numero, $nombre, $nombre_carro, $descripcion, $precio, $image, $tipo, $disponible){
+
+        $arr["numero"] = $numero;
+        $arr["nombre"] = $nombre;
+        $arr["nombre_carro"] = $nombre_carro;
+        $arr["descripcion"] = $descripcion;
+        $arr["precio"] = $precio;
+        $arr["image"] = $image;
+        $arr["tipo"] = $tipo;
+        $arr["disponible"] = $disponible;
+        return $arr;
+
+    }
     
 }
 ?>
