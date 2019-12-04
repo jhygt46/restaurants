@@ -31,7 +31,6 @@ $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
         <link rel="stylesheet" href="../admin/css/login.css" type="text/css" media="all">
         <script>
 
-            var n_correo = "<?php echo $_GET["correo"]; ?>";
             $(document).on('keypress',function(e){
                 if(e.which == 13){
                     btn_nueva();

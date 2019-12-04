@@ -74,7 +74,7 @@ function btn_recuperar(){
     var btn = $('#recuperar');
     btn.prop("disabled", true );
     $.ajax({
-        url: "../login/",
+        url: "/admin/login/",
         type: "POST",
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
@@ -108,7 +108,7 @@ function btn_nueva(){
         success: function(data){
             if(data.op == 1){
                 bien(data.message);
-                localStorage.setItem("mail_nuevo", "<?php echo $correo; ?>");
+                localStorage.setItem("n_correo", data.correo);
                 setTimeout(function () {
                     $(location).attr("href","https://misitiodelivery.cl/admin");
                 }, 2000);
