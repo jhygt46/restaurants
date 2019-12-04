@@ -348,6 +348,8 @@ class Guardar{
         }
         if($id_gir > 0){
 
+            $return['op'] = 1;
+
             if(isset($data['nombre'])){
                 $aux['tipo'] = 's';
                 $aux['key'] = 'nombre';
