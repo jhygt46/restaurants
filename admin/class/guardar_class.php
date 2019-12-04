@@ -722,6 +722,7 @@ class Guardar{
                             $info['mensaje'] = "Giro creado exitosamente";
                             $info['reload'] = 1;
                             $info['page'] = "msd/giros.php";
+                            $this->con_cambios($id);
                         }
                     }else{
                         if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
@@ -735,6 +736,7 @@ class Guardar{
                                     $info['mensaje'] = "Giro creado exitosamente";
                                     $info['reload'] = 1;
                                     $info['page'] = "msd/giros.php";
+                                    $this->con_cambios($id);
                                 }
                             }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
                             $sql->free_result();
@@ -765,6 +767,7 @@ class Guardar{
                     $info['texto'] = "Giro Eliminado";
                     $info['reload'] = 1;
                     $info['page'] = "msd/giros.php";
+                    $this->con_cambios($id);
                 }
             }else{
                 if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
@@ -779,6 +782,7 @@ class Guardar{
                             $info['texto'] = "Giro Eliminado";
                             $info['reload'] = 1;
                             $info['page'] = "msd/giros.php";
+                            $this->con_cambios($id);
                         }
                     }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
                     $sql->free_result();
