@@ -489,7 +489,7 @@ class Guardar{
         }
 
     }
-    private function crear_giro_sql($id_gir, $dominio, $data){
+    private function crear_giro_sql($id_gir, $dominio, $data, $catalogo){
 
         $return['op'] = 2;
         if($id_gir == 0){
@@ -510,7 +510,9 @@ class Guardar{
                         if($sqlc->bind_param("i", $id_gir)){
                         if($sqlc->execute()){
                             $id_cat = $this->con->insert_id;
-                            $this->crear_categorias_productos_prueba($id_gir, $id_cat);
+                            if($catalogo){
+                                $this->crear_categorias_productos_prueba($id_gir, $id_cat);
+                            }
                             $return['op'] = 1;
                             $sqlc->close();
                         }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1a '.htmlspecialchars($sqlc->error)); }
@@ -885,7 +887,7 @@ class Guardar{
                 $id = $_POST['id'];
 
                 if($id == 0){
-                    $giro = $this->crear_giro_sql($id, $dominio, $data);
+                    $giro = $this->crear_giro_sql($id, $dominio, $data, false);
                     if($giro['op'] == 1){
                         if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
                         if($sql->bind_param("ii", $this->id_user, $giro['id_gir'])){
@@ -902,7 +904,7 @@ class Guardar{
                 }
                 if($id > 0){
                     if($this->id_user == 1){
-                        $giro = $this->crear_giro_sql($id, $dominio, $data);
+                        $giro = $this->crear_giro_sql($id, $dominio, $data, false);
                         if($giro['op'] == 1){
                             $info['op'] = 1;
                             $info['mensaje'] = "Giro creado exitosamente";
@@ -916,7 +918,7 @@ class Guardar{
                         if($sql->execute()){
                             $res = $sql->get_result();
                             if($res->{"num_rows"} == 1){
-                                $giro = $this->crear_giro_sql($id, $dominio, $data);
+                                $giro = $this->crear_giro_sql($id, $dominio, $data, false);
                                 if($giro['op'] == 1){
                                     $info['op'] = 1;
                                     $info['mensaje'] = "Giro creado exitosamente";
@@ -946,7 +948,7 @@ class Guardar{
         if($this->admin == 1){
             $data['eliminado'] = 1;
             if($this->id_user == 1){
-                $giro = $this->crear_giro_sql($id, '', $data);
+                $giro = $this->crear_giro_sql($id, '', $data, false);
                 if($giro['op'] == 1){
                     $info['tipo'] = "success";
                     $info['titulo'] = "Eliminado";
@@ -961,7 +963,7 @@ class Guardar{
                 if($sql->execute()){
                     $res = $sql->get_result();
                     if($res->{"num_rows"} == 1){
-                        $giro = $this->crear_giro_sql($id, '', $data);
+                        $giro = $this->crear_giro_sql($id, '', $data, false);
                         if($giro['op'] == 1){
                             $info['tipo'] = "success";
                             $info['titulo'] = "Eliminado";
@@ -1021,7 +1023,7 @@ class Guardar{
                             if($res->{"num_rows"} == 0){
 
                                 $data["telfono"] = $telefono;
-                                $giro = $this->crear_giro_sql(0, $dominio, $data);
+                                $giro = $this->crear_giro_sql(0, $dominio, $data, false);
                                 if($giro["op"] == 1){
 
                                     $mailcode = $this->pass_generate(20);
@@ -3707,7 +3709,7 @@ class Guardar{
                         $dominio = "www.sitiodeprueba-".explode("@", $correo)[0].".cl";
                         $data['prueba'] = 1;
                         $data['nombre'] = "Sitio de Prueba";
-                        $giro = $this->crear_giro_sql(0, $dominio, $data);
+                        $giro = $this->crear_giro_sql(0, $dominio, $data, true);
                         if($giro['op'] == 1){
                             if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
                             if($sql->bind_param("ii", $id_user, $giro['id_gir'])){
