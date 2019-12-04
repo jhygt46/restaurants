@@ -317,7 +317,7 @@ class Guardar{
                 $res = $sqld->get_result();
                 if($res->{"num_rows"} == 0){
                     $code = $this->pass_generate(20);
-                    if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, fecha_dns, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro) VALUES (?, now(), now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25')")){
+                    if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, fecha_dns, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro, item_pagina, item_cocina, item_pos, item_grafico, mapcode) VALUES (?, now(), now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25', '1', '1', '1', '1', 'AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY')")){
                     if($sql->bind_param("ss", $dominio, $code)){
                     if($sql->execute()){
                         $id_gir = $this->con->insert_id;
@@ -3514,6 +3514,7 @@ class Guardar{
 
                         $dominio = "www.sitiodeprueba-".explode("@", $correo)[0].".cl";
                         $data['prueba'] = 1;
+                        $data['nombre'] = "Sitio de Prueba";
                         $giro = $this->crear_giro_sql(0, $dominio, $data);
                         if($giro['op'] == 1){
                             if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
