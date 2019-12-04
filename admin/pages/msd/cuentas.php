@@ -75,12 +75,12 @@ $titulo = "Cuentas";
         <div class="cont_pag">
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1>Resumen Ventas</h1></div>
-                <div class="listado_items">
+                <div class="listado_items" style="45px 2% 10px 2%">
                     <div class="resumen_ventas clearfix">
                         <div class="rv1">Ventas Totales</div>
                         <div class="rv2">$<?php echo number_format($total, 0, '', '.'); ?></div>
                     </div>
-                    <div class="resumen_ventas clearfix">
+                    <div class="resumen_ventas clearfix" style="padding-bottom: 20px">
                         <div class="rv1">Ventas Totales DNS</div>
                         <div class="rv2">$<?php echo number_format($total_dns, 0, '', '.'); ?></div>
                     </div>
@@ -92,7 +92,7 @@ $titulo = "Cuentas";
                         <div class="rv1">Pagos Eliminado</div>
                         <div class="rv2">$<?php echo number_format($eliminados, 0, '', '.'); ?></div>
                     </div>
-                    <div class="resumen_ventas clearfix">
+                    <div class="resumen_ventas clearfix" style="padding-bottom: 20px">
                         <div class="rv1">Pago Disponible</div>
                         <div class="rv2">$<?php echo number_format($disponible, 0, '', '.'); ?></div>
                     </div>
