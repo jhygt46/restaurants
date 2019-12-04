@@ -57,6 +57,7 @@ function listar_pedidos(pedidos){
 function socket_init(){
     
     var code = localStorage.getItem("code");
+    console.log("code: "+code);
     if(code != ""){
 
         socket = io.connect('https://www.izusushi.cl', { 'secure': true });
@@ -107,7 +108,6 @@ function socket_init(){
         socket.on('disconnect', function() {
             $('.alert_socket').show();
         });
-        //localStorage.setItem('code', '');
 
     }else{
         $(location).attr('href','/admin');

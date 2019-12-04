@@ -9,6 +9,7 @@ var catalogo = 0;
 function socket_init(){
     
     var code = localStorage.getItem("local_code");
+    console.log("code: "+code);
     if(code != ""){
 
         var socket = io.connect('https://www.izusushi.cl', { 'secure': true });
