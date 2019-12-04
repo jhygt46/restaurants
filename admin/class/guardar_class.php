@@ -3493,9 +3493,9 @@ class Guardar{
                                 $info['reload'] = 1;
                                 $info['page'] = "msd/usuarios.php";
                                 $sqlius->close();
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($sqlius->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4 '.htmlspecialchars($this->con->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1a '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1b '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #1c '.htmlspecialchars($this->con->error)); }
                         }
                         if($tipo == 1 && $this->id_user == 1){
                             if($sqlius = $this->con->prepare("INSERT INTO fw_usuarios (nombre, fecha_creado, correo, admin, re_venta) VALUES (?, now(), ?, '1', '1')")){
@@ -3507,9 +3507,9 @@ class Guardar{
                                 $info['reload'] = 1;
                                 $info['page'] = "msd/usuarios.php";
                                 $sqlius->close();
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($sqlius->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #5 '.htmlspecialchars($this->con->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2a '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2b '.htmlspecialchars($sqlius->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2c '.htmlspecialchars($this->con->error)); }
                         }
 
                         $dominio = "www.sitiodeprueba-".explode("@", $correo)[0].".cl";
@@ -3520,21 +3520,21 @@ class Guardar{
                             if($sql->bind_param("ii", $id_user, $giro['id_gir'])){
                             if($sql->execute()){
                                 $sql->close();
-                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #3a '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #3b '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #3c '.htmlspecialchars($this->con->error)); }
                         }
 
-                    }else{ $this->registrar(7, 0, 0, 'crear_usuario()'); }
+                    }else{ $this->registrar(7, 0, 0, 'crear_usuario() #5'); }
                     $sqlus->free_result();
                     $sqlus->close();
-                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($sqlus->error)); }
-                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #6 '.htmlspecialchars($this->con->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4a '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4b '.htmlspecialchars($sqlus->error)); }
+                }else{ $this->registrar(6, 0, 0, 'crear_usuario() #4c '.htmlspecialchars($this->con->error)); }
         
             }else{ /* CORREO INVALIDO */ }
 
-        }else{ $this->registrar(1, 0, 0, 'crear_usuario()'); }
+        }else{ $this->registrar(1, 0, 0, 'crear_usuario() #6'); }
         return $info;
     }
     private function asignar_prods_promocion(){
