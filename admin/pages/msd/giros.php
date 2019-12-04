@@ -14,9 +14,6 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 }
 
-$core->crear_categorias_productos_prueba();
-exit;
-
 // SOLO ADMIN
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
