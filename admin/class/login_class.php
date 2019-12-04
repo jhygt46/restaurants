@@ -33,62 +33,69 @@ class Login {
         $info['message'] = "Error:";
         if(filter_var($user, FILTER_VALIDATE_EMAIL)){
             if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE correo=? AND eliminado=?")){
-                if($sql->bind_param("si", $user, $this->eliminado)){
-                    if($sql->execute()){
-                        $res = $sql->get_result();
-                        $aux_user = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $id_user = $aux_user["id_user"];
-                        $correo = $aux_user["correo"];
-                        $acciones = $this->acciones($id_user, 2);
-                        if($acciones < 1){
-                            if($res->{"num_rows"} == 1){
-                                $tipo = 2;
-                                if($sqlia = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)")){
-                                    if($sqlia->bind_param("ii", $tipo, $id_user)){
-                                        if($sqlia->execute()){
-                                            $send['correo'] = $correo;
-                                            $send['code'] = $this->pass_generate(20);
-                                            $send['id'] = $id_user;
-                                            if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET pass='', mailcode=? WHERE id_user=? AND eliminado=?")){
-                                                if($sqluu->bind_param("sii", $send["code"], $send["id"], $this->eliminado)){
-                                                    if($sqluu->execute()){
-                                                        $ch = curl_init();
-                                                        curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
-                                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
-                                                        $resp = json_decode(curl_exec($ch));
-                                                        if($resp->{'op'} == 1){
-                                                            $info['op'] = 1;
-                                                            $info['message'] = "Correo Enviado";
-                                                        }else{
-                                                            $info['op'] = 2;
-                                                            $info['message'] = "Error";
-                                                            $this->registrar('13', 0, 0, 0, 'email no enviado:');
-                                                        }
-                                                        curl_close($ch);
-                                                        $sqluu->close();
-                                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
-                                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-                                            $sqlia->close();
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlia->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlia->error); }
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-                            }
-                            if($res->{"num_rows"} == 0){
-                                $info['op'] = 2;
-                                $info['message'] = "Error:";
-                                $this->registrar('13', 0, 0, 0, 'usuario no encontrado: '.$user);
-                            }
-                        }else{
-                            $info['op'] = 2;
-                            $info['message'] = "Error: El correo ya ha sido enviado";
-                            $this->registrar('13', 0, 0, 0, 'demaciadas acciones usuario: '.$user);
-                        }
-                        $sql->free_result();
-                        $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+            if($sql->bind_param("si", $user, $this->eliminado)){
+            if($sql->execute()){
+
+                $res = $sql->get_result();
+                $aux_user = $res->fetch_all(MYSQLI_ASSOC)[0];
+                $id_user = $aux_user["id_user"];
+                $correo = $aux_user["correo"];
+                $acciones = $this->acciones($id_user, 2);
+
+                if($acciones < 1){
+                    if($res->{"num_rows"} == 1){
+                        $tipo = 2;
+                        if($sqlia = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)")){
+                        if($sqlia->bind_param("ii", $tipo, $id_user)){
+                        if($sqlia->execute()){
+
+                            $send['correo'] = $correo;
+                            $send['code'] = $this->pass_generate(20);
+                            $send['id'] = $id_user;
+
+                            if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET mailcode=? WHERE id_user=? AND eliminado=?")){
+                            if($sqluu->bind_param("sii", $send["code"], $send["id"], $this->eliminado)){
+                            if($sqluu->execute()){
+
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, 'https://www.izusushi.cl/mail_recuperar');
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($send));
+                                $resp = json_decode(curl_exec($ch));
+                                if($resp->{'op'} == 1){
+                                    $info['op'] = 1;
+                                    $info['message'] = "Correo Enviado";
+                                }else{
+                                    $info['op'] = 2;
+                                    $info['message'] = "Error";
+                                    $this->registrar('13', 0, 0, 0, 'email no enviado:');
+                                }
+                                curl_close($ch);
+                                $sqluu->close();
+                                
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqluu->error); }
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                            $sqlia->close();
+
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlia->error); }
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlia->error); }
+                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+                    }
+                    if($res->{"num_rows"} == 0){
+                        $info['op'] = 2;
+                        $info['message'] = "Error:";
+                        $this->registrar('13', 0, 0, 0, 'usuario no encontrado: '.$user);
+                    }
+                }else{
+                    $info['op'] = 2;
+                    $info['message'] = "Error: El correo ya ha sido enviado";
+                    $this->registrar('13', 0, 0, 0, 'demaciadas acciones usuario: '.$user);
+                }
+                $sql->free_result();
+                $sql->close();
+            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
             }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
         }else{
             $info['op'] = 2;
@@ -102,57 +109,59 @@ class Login {
 
         $id = $_POST['id'];
         $code = $_POST['code'];
+
         if($sqlb = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_user=? AND mailcode=? AND eliminado=?")){
-            if($sqlb->bind_param("is", $id, $code, $this->eliminado)){
-                if($sqlb->execute()){
-                    $resb = $sqlb->get_result();
-                    if($resb->{"num_rows"} == 1){
-                        $acciones = $this->acciones($id, 3);
-                        if($acciones < 5){
-                            $pass_01 = $_POST['pass_01'];
-                            $pass_02 = $_POST['pass_02'];
-                            if(strlen($pass_01) >= 8){
-                                if($pass_01 == $pass_02){
-                                    if($sql = $this->con->prepare("UPDATE fw_usuarios SET mailcode='', pass=? WHERE id_user=? AND eliminado=?")){
-                                        if($sql->bind_param("sii", md5($pass_01), $id, $this->eliminado)){
-                                            if($sql->execute()){
-                                                $info['op'] = 1;
-                                                $info['url'] = "";
-                                                $info['message'] = "Felicidades! se ha creado su password";
-                                                $sql->close();
-                                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-                                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-                                    }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-                                }else{
-                                    $info['op'] = 2;
-                                    $info['message'] = "Error: password diferentes";
-                                }
-                            }else{
-                                $info['op'] = 2;
-                                $info['message'] = "Error: password debe tener mas de 8 caracteres";
-                            }
+        if($sqlb->bind_param("is", $id, $code, $this->eliminado)){
+        if($sqlb->execute()){
+            
+            $resb = $sqlb->get_result();
+            if($resb->{"num_rows"} == 1){
+                $acciones = $this->acciones($id, 3);
+                if($acciones < 5){
+                    $pass_01 = $_POST['pass_01'];
+                    $pass_02 = $_POST['pass_02'];
+                    if(strlen($pass_01) >= 8){
+                        if($pass_01 == $pass_02){
+                            if($sql = $this->con->prepare("UPDATE fw_usuarios SET mailcode='', pass=? WHERE id_user=? AND eliminado=?")){
+                            if($sql->bind_param("sii", md5($pass_01), $id, $this->eliminado)){
+                            if($sql->execute()){
+                                $info['op'] = 1;
+                                $info['url'] = "";
+                                $info['message'] = "Felicidades! se ha creado su password";
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
                         }else{
                             $info['op'] = 2;
-                            $info['message'] = "Error: Demaciados intentos";
+                            $info['message'] = "Error: password diferentes";
                         }
+                    }else{
+                        $info['op'] = 2;
+                        $info['message'] = "Error: password debe tener mas de 8 caracteres";
                     }
-                    if($resb->{"num_rows"} == 0){
-                        $tipo = 3;
-                        if($sql = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)")){
-                            if($sql->bind_param("ii", $tipo, $id)){
-                                if($sql->execute()){
-                                    $info['op'] = 2;
-                                    $info['message'] = "Error: usuario y codigo";
-                                    $sql->close();
-                                    $this->registrar('14', 0, 0, 0, 'new password id - code diferentes: ');
-                                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-                            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
-                        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
-                    }
-                    $sqlb->free_result();
-                    $sqlb->close();
-                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlb->error); }
-            }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlb->error); }
+                }else{
+                    $info['op'] = 2;
+                    $info['message'] = "Error: Demaciados intentos";
+                }
+            }
+            if($resb->{"num_rows"} == 0){
+                $tipo = 3;
+                if($sql = $this->con->prepare("INSERT INTO fw_acciones (tipo, fecha, id_user) VALUES (?, now(), ?)")){
+                if($sql->bind_param("ii", $tipo, $id)){
+                if($sql->execute()){
+                    $info['op'] = 2;
+                    $info['message'] = "Error: usuario y codigo";
+                    $sql->close();
+                    $this->registrar('14', 0, 0, 0, 'new password id - code diferentes: ');
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sql->error); }
+                }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
+            }
+            $sqlb->free_result();
+            $sqlb->close();
+        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlb->error); }
+        }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$sqlb->error); }
         }else{ $this->registrar(6, 0, 0, 'ins usuarios '.$this->con->error); }
         return $info;
 
