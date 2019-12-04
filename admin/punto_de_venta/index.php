@@ -1,5 +1,17 @@
 <?php
 
+if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
+    $location = 'https://misitiodelivery.cl/admin/punto_de_venta';
+    header('HTTP/1.1 302 Moved Temporarily');
+    header('Location: ' . $location);
+}
+
+if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
+    header('HTTP/1.1 404 Not Found', true, 404);
+    include('../../errors/404.html');
+    exit;
+}
+
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
     define("DIR", DIR_BASE."restaurants/");
@@ -11,13 +23,6 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 $info = $core->get_data_pos();
-
-if($_GET["mode"] == "debug"){
-    echo "<pre>";
-    print_r($info);
-    echo "</pre>";
-    exit;
-}
 
 $preguntas = ($info['pedido_wasabi'] == 1 || $info['pedido_gengibre'] == 1 || $info['pedido_palitos'] == 1 || $info['pedido_soya'] == 1 || $info['pedido_teriyaki'] == 1) ? true : false ;
 $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
@@ -36,7 +41,9 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
         <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="<?php echo $_COOKIE["data"]; ?>" type="text/javascript"></script>
+        <script src="https://misitiodelivery.cl/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
+        <script src="/js/pos_lista_.js" type="text/javascript"></script>
+        <script src="/js/sweetalert.min.js" type="text/javascript"></script>
         <script>
             var aud = new Audio('/audios/<?php echo ($info['sonido'] == "") ? "Yes" : $info['sonido'] ; ?>.mp3');
             var tipo_comanda = <?php echo $info['pos']; ?>;
@@ -52,8 +59,6 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
             var pedidos = <?php if($info["pedidos"] != null){ echo json_encode($info["pedidos"]); }else{ echo '[]'; } ?>;
             var motos = <?php if($info["motos"] != null){ echo json_encode($info["motos"]); }else{ echo '[]'; } ?>;
         </script>
-        <script src="/js/pos_lista_.js" type="text/javascript"></script>
-        <script src="/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
     <body onresize="resize()">
         <div class="contenedor">

@@ -47,8 +47,8 @@ function btn_login(){
                 setCookie('local_code', data.local_code, 16);
                 setCookie('data', data.data, 16);
                 localStorage.setItem('code', data.code);
-                setTimeout(function () {
-                    $(location).attr('href','/'+data.url);
+                setTimeout(function(){
+                    $(location).attr('href','/admin/punto_de_venta/');
                 }, 2000);
 
             }
@@ -57,8 +57,8 @@ function btn_login(){
                 bien(data.message);
                 setCookie('data', data.data, 16);
                 localStorage.setItem('code', data.code);
-                setTimeout(function () {
-                    $(location).attr('href','/'+data.url);
+                setTimeout(function(){
+                    $(location).attr('href','/admin/cocina/');
                 }, 2000);
 
             }
