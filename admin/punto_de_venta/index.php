@@ -1,7 +1,7 @@
 <?php
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    $location = 'https://misitiodelivery.cl/admin/punto_de_venta';
+    $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/punto_de_venta';
     header('HTTP/1.1 302 Moved Temporarily');
     header('Location: ' . $location);
 }
@@ -41,7 +41,7 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
         <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://misitiodelivery.cl/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
+        <script src="/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
         <script src="/js/pos_lista_.js" type="text/javascript"></script>
         <script src="/js/sweetalert.min.js" type="text/javascript"></script>
         <script>

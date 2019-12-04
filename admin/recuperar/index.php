@@ -1,10 +1,8 @@
 <?php
 
-    echo $_SERVER["HTTP_HOST"];
-    exit;
 
     if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-        $location = 'https://misitiodelivery.cl/admin/recuperar';
+        $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/recuperar';
         header('HTTP/1.1 302 Moved Temporarily');
         header('Location: ' . $location);
     }
