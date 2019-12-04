@@ -74,7 +74,7 @@ function btn_recuperar(){
     var btn = $('#recuperar');
     btn.prop("disabled", true );
     $.ajax({
-        url: "/admin/login/",
+        url: "../login/",
         type: "POST",
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
@@ -91,12 +91,39 @@ function btn_recuperar(){
                 btn.prop("disabled", false);
             }
         },
-        error: function(){
+        error: function(e){
             btn.prop("disabled", false);
         }
     });
 
 }
+function btn_nueva(){
+                
+    var btn = $('#nueva');
+    btn.prop("disabled", true );
+    $.ajax({
+        url: "/admin/login/",
+        type: "POST",
+        data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
+        success: function(data){
+            if(data.op == 1){
+                bien(data.message);
+                localStorage.setItem("mail_nuevo", "<?php echo $correo; ?>");
+                setTimeout(function () {
+                    $(location).attr("href","https://misitiodelivery.cl/admin");
+                }, 2000);
+            }
+            if(data.op == 2){
+                mal(data.message);
+                btn.prop("disabled", false);
+            }     
+        },
+        error: function(e){
+            btn.prop("disabled", false);
+        }
+    });
+}
+
 function bien(msg){
                 
     $('.msg').html(msg);

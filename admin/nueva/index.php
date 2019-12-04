@@ -1,5 +1,11 @@
 <?php
 
+if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
+    $location = 'https://misitiodelivery.cl/admin/nueva/?id_user='.$_GET['id_user'].'&code='.$_GET['code'];
+    header('HTTP/1.1 302 Moved Temporarily');
+    header('Location: ' . $location);
+}
+
 if($_SERVER["HTTP_HOST"] == "localhost"){
     define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
     define("DIR", DIR_BASE."restaurants/");
@@ -10,22 +16,6 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
-
-$info = $core->get_data($_SERVER["HTTP_HOST"]);
-
-if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    if($info['ssl'] == 0){
-        $location = 'https://misitiodelivery.cl/passw/'.$_GET['id_user'].'/'.$_GET['code'];
-        header('HTTP/1.1 302 Moved Temporarily');
-        header('Location: ' . $location);
-    }
-    if($info['ssl'] == 1){
-        $location = 'https://'.$_SERVER['HTTP_HOST'].'/passw/'.$_GET['id_user'].'/'.$_GET['code'];
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $location);
-    }
-}
-
 $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
 
 ?>
@@ -36,43 +26,18 @@ $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/ingreso_aux.js"></script>
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/login.css" type="text/css" media="all">
+        <script type="text/javascript" src="../admin/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="../admin/js/ingreso.js"></script>
+        <link rel="stylesheet" href="../admin/css/login.css" type="text/css" media="all">
         <script>
 
+            var n_correo = "<?php echo $_GET["correo"]; ?>";
             $(document).on('keypress',function(e){
                 if(e.which == 13){
                     btn_nueva();
                 }
             });
-
-            function btn_nueva(){
-                
-                var btn = $('#nueva');
-                btn.prop("disabled", true );
-                $.ajax({
-                    url: "<?php echo $info['path']; ?>/admin/login/",
-                    type: "POST",
-                    data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
-                    success: function(data){
-                        if(data.op == 1){
-                            bien(data.message);
-                            localStorage.setItem("mail_nuevo", "<?php echo $correo; ?>");
-                            setTimeout(function () {
-                                $(location).attr("href","https://misitiodelivery.cl/admin");
-                            }, 2000);
-                        }
-                        if(data.op == 2){
-                            mal(data.message);
-                            btn.prop("disabled", false);
-                        }     
-                    },
-                    error: function(e){
-                        btn.prop("disabled", false);
-                    }
-                });
-            }
+            
         </script>
     </head>
     <body>

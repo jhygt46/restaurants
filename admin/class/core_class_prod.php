@@ -1367,13 +1367,13 @@ class Core{
                     if($res->{"num_rows"} == 0){
                         $sql->free_result();
                         $sql->close();
-                        header("Location: https://misitiodelivery.cl/admin/?paso=recuperar"); 
+                        header("Location: https://misitiodelivery.cl/admin/recuperar"); 
                     }
                     if($res->{"num_rows"} == 1){ 
-                        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]['correo'];
                         $sql->free_result();
                         $sql->close();
-                        return $result['correo']; 
+                        return $result; 
                     }
                 }else{ $this->registrar(6, 0, 0, 'is_pass() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'is_pass() '.htmlspecialchars($sql->error)); }

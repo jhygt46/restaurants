@@ -20,7 +20,7 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
 }
 
 if(!isset($_SESSION['user']['info']['id_user'])){
-    include("ingreso_login.php");
+    include("login.php");
 }else{
     include("inicio.php");
 }

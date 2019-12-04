@@ -1,12 +1,5 @@
 <?php
-
-    if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
-        $location = 'https://'.$_SERVER['HTTP_HOST']."/admin";
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $location);
-        exit;
-    }
-    
+        
     if(strpos($_SERVER["REQUEST_URI"], "inicio.php") !== false){
         header('HTTP/1.1 404 Not Found', true, 404);
         include('../errors/404.html');
