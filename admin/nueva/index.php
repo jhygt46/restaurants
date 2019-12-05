@@ -1,7 +1,7 @@
 <?php
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    $location = 'https://misitiodelivery.cl/admin/nueva/?id_user='.$_GET['id_user'].'&code='.$_GET['code'];
+    $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/nueva/?id_user='.$_GET['id_user'].'&code='.$_GET['code'];
     header('HTTP/1.1 302 Moved Temporarily');
     header('Location: ' . $location);
 }

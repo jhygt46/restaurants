@@ -110,7 +110,7 @@ function btn_nueva(){
                 bien(data.message);
                 localStorage.setItem("n_correo", data.correo);
                 setTimeout(function () {
-                    $(location).attr("href","https://misitiodelivery.cl/admin");
+                    $(location).attr("href","/admin");
                 }, 2000);
             }
             if(data.op == 2){

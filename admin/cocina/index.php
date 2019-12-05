@@ -1,7 +1,7 @@
 <?php
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    $location = 'https://misitiodelivery.cl/admin/cocina';
+    $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/cocina';
     header('HTTP/1.1 302 Moved Temporarily');
     header('Location: ' . $location);
 }
@@ -25,7 +25,7 @@ if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
         <link rel="stylesheet" href="/css/cocina.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://misitiodelivery.cl/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
+        <script src="/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
         <script src="/js/cocina.js" type="text/javascript"></script>
     </head>
     <body>

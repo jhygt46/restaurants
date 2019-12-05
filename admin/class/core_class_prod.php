@@ -352,27 +352,27 @@ class Core{
 
         $return['op'] = false;
         $host = $_POST["host"];
-        if($sqlgir = $this->con->prepare("SELECT t2.ip, t2.code, t1.id_gir FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
-            if($sqlgir->bind_param("si", $host, $this->eliminado)){
-                if($sqlgir->execute()){
-                    $res = $sqlgir->get_result();
-                    if($res->{'num_rows'} == 1){
-                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                        $ip = $this->getUserIpAddr();
-                        if($ip == $result["ip"]){
-                            if($_SERVER['SERVER_PORT'] == "443"){
-                                $code = substr($_POST["code"], 0, 60);
-                                if($code == $result["code"]){
-                                    $return['op'] = true;
-                                    $return['id_gir'] = $result["id_gir"];
-                                }else{ $this->registrar(15, 0, 0, 'verificar() codigo no encontrado'); }
-                            }else{ $this->registrar(15, 0, 0, 'verificar() puerto distinto a 443'); }
-                        }else{ $this->registrar(15, 0, 0, 'verificar() ip distinta'); }
-                    }else{ $this->registrar(15, 0, 0, 'verificar() host no encontrada'); }
-                    $sqlgir->free_result();
-                    $sqlgir->close();
-                }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
-            }else{ $this->registrar(6, 0, 0, 'verificar() '.$sqlgir->error); }
+        if($sql= $this->con->prepare("SELECT t2.ip, t2.code, t1.id_gir FROM giros t1, server t2 WHERE t1.dominio=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
+        if($sql->bind_param("si", $host, $this->eliminado)){
+        if($sql->execute()){
+            $res = $sql->get_result();
+            if($res->{'num_rows'} == 1){
+                $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                $ip = $this->getUserIpAddr();
+                if($ip == $result["ip"]){
+                    if($_SERVER['SERVER_PORT'] == "443"){
+                        $code = substr($_POST["code"], 0, 60);
+                        if($code == $result["code"]){
+                            $return['op'] = true;
+                            $return['id_gir'] = $result["id_gir"];
+                        }else{ $this->registrar(15, 0, 0, 'verificar() codigo no encontrado'); }
+                    }else{ $this->registrar(15, 0, 0, 'verificar() puerto distinto a 443'); }
+                }else{ $this->registrar(15, 0, 0, 'verificar() ip distinta'); }
+            }else{ $this->registrar(15, 0, 0, 'verificar() host no encontrada '.$host); }
+            $sql->free_result();
+            $sql->close();
+        }else{ $this->registrar(6, 0, 0, 'verificar() '.$sql->error); }
+        }else{ $this->registrar(6, 0, 0, 'verificar() '.$sql->error); }
         }else{ $this->registrar(6, 0, 0, 'verificar() '.$this->con->error); }
         return $return;
 
@@ -1699,7 +1699,7 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $id_gir, 'get_data_pos() '.htmlspecialchars($this->con->error)); }
             
         }else{
-            die("<meta http-equiv='refresh' content='0; url=https://misitiodelivery.cl/admin'>");
+            die("<meta http-equiv='refresh' content='0; url=/admin'>");
         }
         return $info;    
 
@@ -2247,6 +2247,11 @@ class Core{
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($this->con->error)); }
         return $info;
+
+        https://pelisplus.me/pelicula/los-infiltrados/
+        
+        +56956592417
+
     }
     public function get_web_js_data_remote(){
 
