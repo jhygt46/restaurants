@@ -368,7 +368,7 @@ class Core{
                         }else{ $this->registrar(15, 0, 0, 'verificar() codigo no encontrado'); }
                     }else{ $this->registrar(15, 0, 0, 'verificar() puerto distinto a 443'); }
                 }else{ $this->registrar(15, 0, 0, 'verificar() ip distinta'); }
-            }else{ $this->registrar(15, 0, 0, 'verificar() host no encontrada '.$host); }
+            }else{ $this->registrar(15, 0, 0, 'verificar() host no encontrada ('.$host.')'); }
             $sql->free_result();
             $sql->close();
         }else{ $this->registrar(6, 0, 0, 'verificar() '.$sql->error); }
