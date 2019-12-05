@@ -70,7 +70,7 @@ $list = $core->get_usuarios();
                     </label>
                     <label class="clearfix">
                         <span><p>Url Prueba:</p></span>
-                        <input id="url" class="inputs" type="text" value="www.sitiodeprueba" require="" placeholder="" />
+                        <input id="url" class="inputs" type="text" value="www.sitiodeprueba.cl" require="" placeholder="" />
                     </label>
                     <?php if($core->id_user == 1){ ?>
                     <label class="clearfix">

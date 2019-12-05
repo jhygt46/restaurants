@@ -3706,7 +3706,7 @@ class Guardar{
                             }else{ $this->registrar(6, 0, 0, 'crear_usuario() #2c '.htmlspecialchars($this->con->error)); }
                         }
 
-                        $dominio = "www.sitiodeprueba-".explode("@", $correo)[0].".cl";
+                        $dominio = $_POST['url'];
                         $data['prueba'] = 1;
                         $data['nombre'] = "Sitio de Prueba";
                         $giro = $this->crear_giro_sql(0, $dominio, $data, true);
