@@ -2248,10 +2248,6 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($this->con->error)); }
         return $info;
 
-        https://pelisplus.me/pelicula/los-infiltrados/
-        
-        +56956592417
-
     }
     public function get_web_js_data_remote(){
 
