@@ -32,7 +32,7 @@ $list = $core->get_usuarios();
 ?>
 <script>
     function create_url(that){
-        console.log(that);
+        console.log(that.value);
     }
 </script>
 <div class="pagina">
