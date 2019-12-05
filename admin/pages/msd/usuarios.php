@@ -36,8 +36,7 @@ $list = $core->get_usuarios();
         res = res.replace(".", "");
         res = res.replace("_", "");
         res = res.replace("-", "");
-        console.log(res);
-        document.getElementById("url").value = "www.sitiodeprueba-"+res;
+        document.getElementById("url").value = "www.sitiodeprueba-"+res+".cl";
     }
 </script>
 <div class="pagina">
