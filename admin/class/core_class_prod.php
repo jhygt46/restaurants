@@ -1298,7 +1298,6 @@ class Core{
             if($sql->bind_param("i", $id_gir)){
                 if($sql->execute()){
                     $res = $sql->get_result();
-                    //$info['favicon'] = "misitiodelivery.ico";
                     if($res->{"num_rows"} == 1){
                         $result = $res->fetch_all(MYSQLI_ASSOC)[0];
                         $info['ssl'] = $result['ssl'];
@@ -1323,7 +1322,6 @@ class Core{
                         $info['lista_locales'] = $result['lista_locales'];
                         $info['con_cambios'] = $result['con_cambios'];
                         $info['desde'] = $result['desde'];
-                        $info['path'] = ($info['ssl'] == 1 || $_SERVER["HTTP_HOST"] == "misitiodelivery.cl") ? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"] ;
                         $info['pedido_wasabi'] = $result['pedido_wasabi'];
                         $info['pedido_gengibre'] = $result['pedido_gengibre'];
                         $info['pedido_palitos'] = $result['pedido_palitos'];
@@ -1347,10 +1345,6 @@ class Core{
                         $info['item_pagina'] = $result['item_pagina'];
                         $info['ultima_actualizacion'] = $result['ultima_actualizacion'];
                         $info['ver_inicio'] = $result['ver_inicio'];
-                    }else{
-                        if($dominio == "misitiodelivery.cl" || $dominio == "www.misitiodelivery.cl"){
-                            $info['path'] = "https://misitiodelivery.cl";
-                        }
                     }
                     $sql->free_result();
                     $sql->close();
@@ -1367,7 +1361,7 @@ class Core{
                     if($res->{"num_rows"} == 0){
                         $sql->free_result();
                         $sql->close();
-                        header("Location: https://misitiodelivery.cl/admin/recuperar"); 
+                        header("Location: /admin/recuperar"); 
                     }
                     if($res->{"num_rows"} == 1){ 
                         $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]['correo'];

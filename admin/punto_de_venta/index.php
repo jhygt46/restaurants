@@ -1,4 +1,8 @@
+<meta http-equiv='refresh' content='0; url=/admin'>
+
 <?php
+
+
 
 if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
     $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/punto_de_venta';
