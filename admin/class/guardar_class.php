@@ -361,7 +361,7 @@ class Guardar{
         $prods03[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
         $prods03[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
         $sub_cae0[3] = $this->crear_array_categoria("Pizza Peperoni", 0, 0, "Descripcion inicio Pizza Peperoni", "Descripcion subtitulo Pizza Peperoni", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods03);
-        $cat[0] = $this->crear_array_categoria("Pizzas", 0, 0, "Descripcion inicio Pizza", "Descripcion subtitulo Pizza", 3500, 0, 0, "image.jpg", 1, 0, 0, $sub_cae0, []);
+        $cae[0] = $this->crear_array_categoria("Pizzas", 0, 0, "Descripcion inicio Pizza", "Descripcion subtitulo Pizza", 3500, 0, 0, "image.jpg", 1, 0, 0, $sub_cae0, []);
         
 
         $prods10[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
@@ -380,7 +380,7 @@ class Guardar{
         $prods13[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
         $prods13[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
         $sub_cae1[3] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Descripcion inicio Sandwich Peperoni", "Descripcion subtitulo Sandwich Peperoni", 5300, 0, 0, "image.jpg", 1, 0, 0, [], $prods13);
-        $cat[1] = $this->crear_array_categoria("Sandwich", 0, 0, "Descripcion inicio Sandwich", "Descripcion subtitulo Sandwich", 4000, 0, 0, "image.jpg", 1, 0, 0, $sub_cae1, []);
+        $cae[1] = $this->crear_array_categoria("Sandwich", 0, 0, "Descripcion inicio Sandwich", "Descripcion subtitulo Sandwich", 4000, 0, 0, "image.jpg", 1, 0, 0, $sub_cae1, []);
         
 
         $prods2[0] = $this->crear_array_producto("1", "Palta Mayo", "Completo Palta Mayo", "Descripcion Completo Palta Mayo", 3600, "image.jpg", 0, 0);
@@ -388,7 +388,7 @@ class Guardar{
         $prods2[2] = $this->crear_array_producto("3", "Completo x", "Completo x", "Descripcion Completo x", 3800, "image.jpg", 0, 0);
         $prods2[3] = $this->crear_array_producto("4", "Palta y", "Completo Palta y", "Descripcion Completo y", 4000, "image.jpg", 0, 0);
         $prods2[4] = $this->crear_array_producto("5", "Palta z", "Completo Palta z", "Descripcion Completo z", 4200, "image.jpg", 0, 0);
-        $cat[2] = $this->crear_array_categoria("Completos", 0, 0, "Descripcion inicio Completos", "Descripcion subtitulo Completos", 3500, 0, 0, "image.jpg", 1, 0, 0, [], $prods2);
+        $cae[2] = $this->crear_array_categoria("Completos", 0, 0, "Descripcion inicio Completos", "Descripcion subtitulo Completos", 3500, 0, 0, "image.jpg", 1, 0, 0, [], $prods2);
 
 
         for($i=0; $i<count($cae); $i++){
@@ -460,17 +460,17 @@ class Guardar{
                             if($sqlipr->bind_param("iii", $parent_id, $id_pro, $j)){
                             if($sqlipr->execute()){
                                 $sqlipr->close();
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #1 '.htmlspecialchars($this->con->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sqlipr->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5b '.htmlspecialchars($sqlipr->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5c '.htmlspecialchars($this->con->error)); }
                             
                             if($sqlipp = $this->con->prepare("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES (?, ?, ?)")){
                             if($sqlipp->bind_param("iii", $id_cat, $id_pro, $cae[$i]['prods'][$j]['precio'])){
                             if($sqlipp->execute()){
                                 $sqlipp->close();
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_productos() #2 '.htmlspecialchars($this->con->error)); }            
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($sqlipp->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4b '.htmlspecialchars($sqlipp->error)); }
+                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4c '.htmlspecialchars($this->con->error)); }            
                             $sqlx->close();
 
                         }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3a '.htmlspecialchars($sqlx->error)); }
