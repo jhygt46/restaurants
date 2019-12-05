@@ -33,9 +33,9 @@ $list = $core->get_usuarios();
 <script>
     function create_url(that){
         var res = that.value.split("@")[0];
-        res = res.replace("/./g", "");
-        res = res.replace("/_/g", "");
-        res = res.replace("/-/g", "");
+        res = res.replace(/\./g, '');
+        res = res.replace(/\_/g, '');
+        res = res.replace(/\-/g, '');
         document.getElementById("url").value = "www.sitiodeprueba-"+res+".cl";
     }
 </script>
