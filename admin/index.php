@@ -15,7 +15,7 @@ if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
 
 if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     session_destroy();
-    echo '<meta http-equiv="refresh" content="0; url=h/admin">';
+    echo '<meta http-equiv="refresh" content="0; url=/admin">';
     exit;
 }
 
