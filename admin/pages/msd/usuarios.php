@@ -32,7 +32,12 @@ $list = $core->get_usuarios();
 ?>
 <script>
     function create_url(that){
-        console.log(that.value);
+        var res = that.value.split("@")[0];
+        res = res.replace(".", "");
+        res = res.replace("_", "");
+        res = res.replace("-", "");
+        console.log(res);
+        document.getElementById("url").value = "www.sitiodeprueba-"+res;
     }
 </script>
 <div class="pagina">
