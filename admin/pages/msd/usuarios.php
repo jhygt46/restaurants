@@ -30,7 +30,11 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $list = $core->get_usuarios();
 
 ?>
-
+<script>
+    function create_url(that){
+        console.log(that);
+    }
+</script>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
@@ -58,7 +62,11 @@ $list = $core->get_usuarios();
                     </label>
                     <label class="clearfix">
                         <span><p>Correo:</p></span>
-                        <input id="correo" class="inputs" type="text" value="" require="" placeholder="" />
+                        <input id="correo" onkeyup="create_url(this)" class="inputs" type="text" value="" require="" placeholder="" />
+                    </label>
+                    <label class="clearfix">
+                        <span><p>Url Prueba:</p></span>
+                        <input id="url" class="inputs" type="text" value="www.sitiodeprueba" require="" placeholder="" />
                     </label>
                     <?php if($core->id_user == 1){ ?>
                     <label class="clearfix">
