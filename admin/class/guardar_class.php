@@ -568,7 +568,7 @@ class Guardar{
         $cae[] = $this->crear_array_categoria("Ceviches", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
-        
+
 
         $this->crear_categorias_prueba($cae, 0, $id_cat, $id_gir);
 
@@ -582,9 +582,9 @@ class Guardar{
             if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $cae[$i]['parent_id'], $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
             if($sql->execute()){
 
-                $parent_id = $this->con->insert_id;
+                $p_id = $this->con->insert_id;
                 if(isset($cae[$i]['sub_cae'])){
-                    $this->crear_categorias_prueba($cae[$i]['sub_cae'], $parent_id, $id_cat, $id_gir);
+                    $this->crear_categorias_prueba($cae[$i]['sub_cae'], $p_id, $id_cat, $id_gir);
                 }
                 if(isset($cae[$i]['prods'])){
                     $this->crear_productos_prueba($cae[$i]['prods'], $parent_id, $id_cat, $id_gir);
