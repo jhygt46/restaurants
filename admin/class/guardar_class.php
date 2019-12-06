@@ -579,7 +579,7 @@ class Guardar{
         for($i=0; $i<count($cae); $i++){
 
             if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, descripcion, descripcion_sub, precio, orders, ocultar, image, degradado, mostrar_prods, detalle_prods, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $cae[$i]['parent_id'], $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
+            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $parent_id, $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
             if($sql->execute()){
 
                 $p_id = $this->con->insert_id;
@@ -587,7 +587,7 @@ class Guardar{
                     $this->crear_categorias_prueba($cae[$i]['sub_cae'], $p_id, $id_cat, $id_gir);
                 }
                 if(isset($cae[$i]['prods'])){
-                    $this->crear_productos_prueba($cae[$i]['prods'], $parent_id, $id_cat, $id_gir);
+                    $this->crear_productos_prueba($cae[$i]['prods'], $p_id, $id_cat, $id_gir);
                 }
                 $sql->close();
 
