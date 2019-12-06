@@ -305,7 +305,7 @@ class Guardar{
             return false;
         }
     }
-    private function crear_array_categoria($nombre, $parent_id, $tipo, $descripcion, $descripcion_sub, $precio, $orders, $ocultar, $image, $degradado, $mostrar_prods, $detalle_prods, $sub_cae, $prods){
+    private function crear_array_categoria($nombre, $parent_id, $tipo, $descripcion, $descripcion_sub, $precio, $ocultar, $image, $degradado, $mostrar_prods, $detalle_prods, $sub_cae, $prods){
 
         $arr["nombre"] = $nombre;
         $arr["parent_id"] = $parent_id;
@@ -313,7 +313,6 @@ class Guardar{
         $arr["descripcion"] = $descripcion;
         $arr["descripcion_sub"] = $descripcion_sub;
         $arr["precio"] = $precio;
-        $arr["orders"] = $orders;
         $arr["ocultar"] = $ocultar;
         $arr["image"] = $image;
         $arr["degradado"] = $degradado;
@@ -345,140 +344,250 @@ class Guardar{
     }
     private function crear_categorias_productos_prueba($id_gir, $id_cat){
 
-        $prods00[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods00[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods00[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[0] = $this->crear_array_categoria("Pizza Margarita", 0, 0, "Descripcion inicio Pizza Margarita", "Descripcion subtitulo Pizza Margarita", 3600, 0, 0, "image.jpg", 1, 0, 0, [], $prods00);
-        $prods01[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods01[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods01[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[1] = $this->crear_array_categoria("Pizza Napolitana", 0, 0, "Descripcion inicio Pizza Napolitana", "Descripcion subtitulo Pizza Napolitana", 3800, 0, 0, "image.jpg", 1, 0, 0, [], $prods01);
-        $prods02[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods02[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods02[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[2] = $this->crear_array_categoria("Pizza Hawaina", 0, 0, "Descripcion inicio Pizza Hawaina", "Descripcion subtitulo Pizza Hawaina", 4000, 0, 0, "image.jpg", 1, 0, 0, [], $prods02);
-        $prods03[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods03[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods03[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae0[3] = $this->crear_array_categoria("Pizza Peperoni", 0, 0, "Descripcion inicio Pizza Peperoni", "Descripcion subtitulo Pizza Peperoni", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods03);
-        $cae[0] = $this->crear_array_categoria("Pizzas", 0, 0, "Descripcion inicio Pizza", "Descripcion subtitulo Pizza", 3500, 0, 0, "image.jpg", 1, 0, 0, $sub_cae0, []);
+
+        $prod[] = $this->crear_array_producto("1", "Individual", "Pizza Margarita Individual", "", 3000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Mediana", "Pizza Margarita Mediana", "", 7900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Grande", "Pizza Margarita Grande", "", 9500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Margarita", 0, 0, "Tomate y Albahaca", "Tomate y Albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("4", "Individual", "Pizza Chilena Individual", "", 3300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("5", "Mediana", "Pizza Chilena Mediana", "", 8600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("6", "Grande", "Pizza Chilena Grande", "", 10700, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Chilena", 0, 0, "Salchicha, cebolla morada y choclo", "Salchicha, cebolla morada y choclo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("7", "Individual", "Pizza Española Individual", "", 3400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("8", "Mediana", "Pizza Española Mediana", "", 9000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("9", "Grande", "Pizza Española Grande", "", 10900, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Española", 0, 0, "Pimenton, tomate y choricillo", "Pimenton, tomate y choricillo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("10", "Individual", "Pizza Hawaiana Individual", "", 3400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("11", "Mediana", "Pizza Hawaiana Mediana", "", 9000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("12", "Grande", "Pizza Hawaiana Grande", "", 11000, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Hawaiana", 0, 0, "Jamon y Piña", "Jamon y Piña", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("13", "Individual", "Pizza Napolitana Individual", "", 3600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("14", "Mediana", "Pizza Napolitana Mediana", "", 9400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("15", "Grande", "Pizza Napolitana Grande", "", 11400, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Napolitana", 0, 0, "Jamon, tomate y aceitunas", "Jamon, tomate y aceitunas", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("16", "Individual", "Pizza Primavera Individual", "", 3600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("17", "Mediana", "Pizza Primavera Mediana", "", 9400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("18", "Grande", "Pizza Primavera Grande", "", 11500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Primavera", 0, 0, "Palmitos, choclo y jamon", "Palmitos, choclo y jamon", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("19", "Individual", "Pizza Pepperoni Individual", "", 3700, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("20", "Mediana", "Pizza Pepperoni Mediana", "", 9600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("21", "Grande", "Pizza Pepperoni Grande", "", 11900, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Pepperoni", 0, 0, "Pepperoni", "Pepperoni", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("22", "Individual", "Pizza Vegetariana Individual", "", 3800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("23", "Mediana", "Pizza Vegetariana Mediana", "", 10000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("24", "Grande", "Pizza Vegetariana Grande", "", 12000, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Vegetariana", 0, 0, "Pimenton, choclo, champiñon y palmitos", "Pimenton, choclo, champiñon y palmitos", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("25", "Individual", "Pizza Maravilla Individual", "", 4000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("26", "Mediana", "Pizza Maravilla Mediana", "", 10500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("27", "Grande", "Pizza Maravilla Grande", "", 12600, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Maravilla", 0, 0, "Cebolla morada, tocino ahumado y queso crema", "Cebolla morada, tocino ahumado y queso crema", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("28", "Individual", "Pizza Griega Individual", "", 4000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("29", "Mediana", "Pizza Griega Mediana", "", 10500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("30", "Grande", "Pizza Griega Grande", "", 12600, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Griega", 0, 0, "Tomate, queso de cabra, aceitunas y albahaca", "Tomate, queso de cabra, aceitunas y albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("31", "Individual", "Pizza Mediterranea Individual", "", 4100, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("32", "Mediana", "Pizza Mediterranea Mediana", "", 10600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("33", "Grande", "Pizza Mediterranea Grande", "", 13000, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Mediterranea", 0, 0, "Aceitunas, jamon y salame ahumado", "Aceitunas, jamon y salame ahumado", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("34", "Individual", "Pizza Carnivora Individual", "", 4200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("35", "Mediana", "Pizza Carnivora Mediana", "", 10800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("36", "Grande", "Pizza Carnivora Grande", "", 13400, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Carnivora", 0, 0, "Carne, pollo, chorizo", "Carne, pollo, chorizo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("37", "Individual", "Pizza Cuatro Quesos Individual", "", 4300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("38", "Mediana", "Pizza Cuatro Quesos Mediana", "", 11400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("39", "Grande", "Pizza Cuatro Quesos Grande", "", 13800, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Cuatro Quesos", 0, 0, "Mozzarella, roquefort, queso crema y mantecoso", "Mozzarella, roquefort, queso crema y mantecoso", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("40", "Individual", "Pizza Camaron Individual", "", 4500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("41", "Mediana", "Pizza Camaron Mediana", "", 12000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("42", "Grande", "Pizza Camaron Grande", "", 14900, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Camaron", 0, 0, "Camarones adobados, queso mantecoso y albahaca", "Camarones adobados, queso mantecoso y albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $cae[] = $this->crear_array_categoria("Pizzas", 0, 0, "Nuestras pizzas a la piedra son con masa casera, salsa casera y queso mozarella", "Descripcion subtitulo Pizza", 3500, 0, "image.jpg", 1, 0, 0, $sub_cae, []);
+        unset($sub_cae);
+
+        $prod[] = $this->crear_array_producto("43", "Pollo", "Sandwich Pollo Mayo", "", 3500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("44", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Mayo", "", 3900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("45", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Mayo", "", 4500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("46", "Lomito", "Sandwich Lomito Mayo", "", 4500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("47", "Pescado Frito", "Sandwich Pescado Frito Mayo", "", 4600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("48", "Carne Mechada", "Sandwich Carne Mechada Mayo", "", 5200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("49", "Churrasco", "Sandwich Churrasco Mayo", "", 5200, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Mayo", 0, 0, "Sandwich Mayo", "Sandwich Mayo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("50", "Pollo", "Sandwich Pollo Tomate Mayo", "", 3900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("51", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Tomate Mayo", "", 4200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("52", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Tomate Mayo", "", 4800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("53", "Lomito", "Sandwich Lomito Tomate Mayo", "", 4800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("54", "Pescado Frito", "Sandwich Pescado Frito Tomate Mayo", "", 4900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("55", "Carne Mechada", "Sandwich Carne Mechada Tomate Mayo", "", 5500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("56", "Churrasco", "Sandwich Churrasco Tomate Mayo", "", 5500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Tomate Mayo", 0, 0, "Sandwich Tomate Mayo", "Sandwich Tomate Mayo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("57", "Pollo", "Sandwich Pollo Queso", "", 4500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("58", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Queso", "", 4900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("59", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Queso", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("60", "Lomito", "Sandwich Lomito Queso", "", 5500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("61", "Pescado Frito", "Sandwich Pescado Frito Queso", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("62", "Carne Mechada", "Sandwich Carne Mechada Queso", "", 6300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("63", "Churrasco", "Sandwich Churrasco Queso", "", 6300, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Queso", 0, 0, "Sandwich Queso", "Sandwich Queso", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("64", "Pollo", "Sandwich Pollo Palta Mayo", "", 4900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("65", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Palta Mayo", "", 5000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("66", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Palta Mayo", "", 5800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("67", "Lomito", "Sandwich Lomito Palta Mayo", "", 5500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("68", "Pescado Frito", "Sandwich Pescado Frito Palta Mayo", "", 5800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("69", "Carne Mechada", "Sandwich Carne Mechada Palta Mayo", "", 6500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("70", "Churrasco", "Sandwich Churrasco Palta Mayo", "", 6500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Palta Mayo", 0, 0, "Sandwich Palta Mayo", "Sandwich Palta Mayo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("71", "Pollo", "Sandwich Pollo Gringa", "", 4600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("72", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Gringa", "", 4900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("73", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Gringa", "", 5300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("74", "Lomito", "Sandwich Lomito Gringa", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("75", "Pescado Frito", "Sandwich Pescado Frito Gringa", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("76", "Carne Mechada", "Sandwich Carne Mechada Gringa", "", 6500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("77", "Churrasco", "Sandwich Churrasco Gringa", "", 6500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Gringa", 0, 0, "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("78", "Pollo", "Sandwich Pollo Chacarero", "", 4800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("79", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Chacarero", "", 5100, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("80", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Chacarero", "", 6000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("81", "Lomito", "Sandwich Lomito Chacarero", "", 5700, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("82", "Pescado Frito", "Sandwich Pescado Frito Chacarero", "", 5800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("83", "Carne Mechada", "Sandwich Carne Mechada Chacarero", "", 6700, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("84", "Churrasco", "Sandwich Churrasco Chacarero", "", 6500, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("85", "Pollo", "Sandwich Pollo Italiano", "", 4800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("86", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Italiano", "", 5300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("87", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Italiano", "", 6100, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("88", "Lomito", "Sandwich Lomito Italiano", "", 5800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("89", "Pescado Frito", "Sandwich Pescado Frito Italiano", "", 6100, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("90", "Carne Mechada", "Sandwich Carne Mechada Italiano", "", 6800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("91", "Churrasco", "Sandwich Churrasco Italiano", "", 6800, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Italiano", 0, 0, "Tomate, Palta y Mayonesa casera", "Tomate, Palta y Mayonesa casera", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("92", "Pollo", "Sandwich Pollo Dinamico", "", 5000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("93", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Dinamico", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("94", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Dinamico", "", 6500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("95", "Lomito", "Sandwich Lomito Dinamico", "", 6200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("96", "Pescado Frito", "Sandwich Pescado Frito Dinamico", "", 6400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("97", "Carne Mechada", "Sandwich Carne Mechada Dinamico", "", 6900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("98", "Churrasco", "Sandwich Churrasco Dinamico", "", 6900, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Dinamico", 0, 0, "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("99", "Pollo", "Sandwich Pollo Tocke", "", 5000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("100", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Tocke", "", 5600, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("101", "Hamburguesa Casera", "Sandwich Hamburguesa Casera Tocke", "", 6500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("102", "Lomito", "Sandwich Lomito Tocke", "", 6300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("103", "Pescado Frito", "Sandwich Pescado Frito Tocke", "", 6400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("104", "Carne Mechada", "Sandwich Carne Mechada Tocke", "", 7000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("105", "Churrasco", "Sandwich Churrasco Tocke", "", 7000, "image.jpg", 0, 0);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Tocke", 0, 0, "Champiñones, Queso y Cebolla caramelizada", "Champiñones, Queso y Cebolla caramelizada", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $cae[] = $this->crear_array_categoria("Sandwiches", 0, 0, "Hechos con pan amasado, 200gr de carne y mayonesa casera con huevos pasteurizados", "Hechos con pan amasado, 200gr de carne y mayonesa casera con huevos pasteurizados", 3500, 0, "image.jpg", 1, 0, 0, $sub_cae, []);
+        unset($sub_cae);
+
+        $prod[] = $this->crear_array_producto("1", "Veggie", "Ensalada Veggie", "Lechuga, Tomate, Palta, Zanahoria, Pepino, Crutones y Vinagreta", 3900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Cesar", "Ensalada Cesar", "Lechuga, Pollo, Queso parmesano recien rayado, Crutones y Aderezo cesar", 3900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Del Huerto", "Ensalada Del Huerto", "Lechuga, Tomate, Huevo, Choclo, Zanahoria, Crutones y Vinagreta", 3900, "image.jpg", 0, 0);
+        $cae[] = $this->crear_array_categoria("Ensaladas", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("1", "Bebida 1.5 Litros", "", "Coca-Cola, Coca-Cola Zero, Fanta o Sprite", 2000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Jugos Nectar Andina del Valle 1.5 Litros", "", "Piña, Piña Light, Duranzno o Naranja", 2000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Bebidas lata 350cc", "", "Coca-Cola, Coca-Cola Zero, Fanta o Sprite", 1000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Agua Benedictino 1.5 Litros", "", "Con o Sin Gas", 1500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Agua Benedictino 600cc", "", "Con o Sin Gas", 900, "image.jpg", 0, 0);
+        $cae[] = $this->crear_array_categoria("Bebidas", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("1", "Empandas (4u)", "Empanadas pollo, queso crema y cebollin (4u)", "Pollo, Queso crema y Cebollin", 1900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Empandas (4u)", "Empanadas champiñon, queso crema y cebollin (4u)", "Champiñon, Queso crema y Cebollin", 22000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Empandas (4u)", "Empanadas camaron, queso crema y cebollin (4u)", "Camaron, Queso crema y Cebollin", 2500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Empandas (4u)", "Empanadas pulpo, queso crema y cebollin (4u)", "Pulpo, Queso crema y Cebollin", 2400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Empandas (4u)", "Empanadas queso (4u)", "Queso", 2300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("1", "Empandas (4u)", "Empanadas jamon queso (4u)", "Jamon y Queso", 2200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Empandas (4u)", "Empanadas pino (4u)", "Pino", 2200, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Camarones Apanados", "", "", 3800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Calamares Apanados", "", "", 2900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Champiñones Tempura", "", "", 3100, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("1", "Mix Tempura", "", "2 emp queso, 2 champiñones tempura, 2 calamares apanados y 2 camarones apanados", 3500, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Aros de Cebolla", "", "", 2300, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Pulpo al Olivo", "", "Tiras de pulpo en salsa de oliva", 6500, "image.jpg", 0, 0);
+        $cae[] = $this->crear_array_categoria("Para Compartir", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("1", "Reineta", "Ceviches Reineta", "", 5800, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Salmon", "Ceviches Salmon", "", 7400, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Atun", "Ceviches Atun", "", 6900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Champiñon", "Ceviches Champiñon", "", 4900, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("3", "Mixto", "Ceviches Mixto", "Pulpo, Calamar y Camaron", 6500, "image.jpg", 0, 0);
+        $cae[] = $this->crear_array_categoria("Ceviches", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
+        $prod[] = $this->crear_array_producto("1", "Chomp", "", "Frambuesa, Sahne Nuss y Prestigio", 3000, "image.jpg", 0, 0);
+        $prod[] = $this->crear_array_producto("2", "Cassata", "", "Piña, Chocolate y Trisabor", 3000, "image.jpg", 0, 0);
+        $cae[] = $this->crear_array_categoria("Ceviches", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        unset($prod);
+
         
 
-        $prods10[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods10[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods10[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[0] = $this->crear_array_categoria("Sandwich Barros Luco", 0, 0, "Descripcion inicio Sandwich Margarita", "Descripcion subtitulo Sandwich Margarita", 4200, 0, 0, "image.jpg", 1, 0, 0, [], $prods10);
-        $prods11[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods11[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods11[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[1] = $this->crear_array_categoria("Sandwich Completo", 0, 0, "Descripcion inicio Sandwich Napolitana", "Descripcion subtitulo Sandwich Napolitana", 4600, 0, 0, "image.jpg", 1, 0, 0, [], $prods11);
-        $prods12[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods12[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods12[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[2] = $this->crear_array_categoria("Sandwich Dinamico", 0, 0, "Descripcion inicio Sandwich Hawaina", "Descripcion subtitulo Sandwich Hawaina", 4800, 0, 0, "image.jpg", 1, 0, 0, [], $prods12);
-        $prods13[0] = $this->crear_array_producto("1", "Individual", "", "", 3600, "image.jpg", 0, 0);
-        $prods13[1] = $this->crear_array_producto("2", "Normal", "", "", 3700, "image.jpg", 0, 0);
-        $prods13[2] = $this->crear_array_producto("3", "Grande", "", "", 3800, "image.jpg", 0, 0);
-        $sub_cae1[3] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Descripcion inicio Sandwich Peperoni", "Descripcion subtitulo Sandwich Peperoni", 5300, 0, 0, "image.jpg", 1, 0, 0, [], $prods13);
-        $cae[1] = $this->crear_array_categoria("Sandwich", 0, 0, "Descripcion inicio Sandwich", "Descripcion subtitulo Sandwich", 4000, 0, 0, "image.jpg", 1, 0, 0, $sub_cae1, []);
-        
+        $this->crear_categorias_prueba($cae, 0, $id_cat, $id_gir);
 
-        $prods2[0] = $this->crear_array_producto("1", "Palta Mayo", "Completo Palta Mayo", "Descripcion Completo Palta Mayo", 3600, "image.jpg", 0, 0);
-        $prods2[1] = $this->crear_array_producto("2", "Palta Queso", "Completo Palta Queso", "Descripcion Completo Queso", 3700, "image.jpg", 0, 0);
-        $prods2[2] = $this->crear_array_producto("3", "Completo x", "Completo x", "Descripcion Completo x", 3800, "image.jpg", 0, 0);
-        $prods2[3] = $this->crear_array_producto("4", "Palta y", "Completo Palta y", "Descripcion Completo y", 4000, "image.jpg", 0, 0);
-        $prods2[4] = $this->crear_array_producto("5", "Palta z", "Completo Palta z", "Descripcion Completo z", 4200, "image.jpg", 0, 0);
-        $cae[2] = $this->crear_array_categoria("Completos", 0, 0, "Descripcion inicio Completos", "Descripcion subtitulo Completos", 3500, 0, 0, "image.jpg", 1, 0, 0, [], $prods2);
+    }
 
+    private function crear_categorias_prueba($cae, $parent_id, $id_cat, $id_gir){
 
         for($i=0; $i<count($cae); $i++){
 
             if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, descripcion, descripcion_sub, precio, orders, ocultar, image, degradado, mostrar_prods, detalle_prods, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $cae[$i]['parent_id'], $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $cae[$i]['orders'], $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
+            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $cae[$i]['parent_id'], $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
             if($sql->execute()){
 
                 $parent_id = $this->con->insert_id;
                 if(isset($cae[$i]['sub_cae'])){
-
-                    for($j=0; $j<count($cae[$i]['sub_cae']); $j++){
-
-                        if($sqlx = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, descripcion, descripcion_sub, precio, orders, ocultar, image, degradado, mostrar_prods, detalle_prods, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-                        if($sqlx->bind_param("siissiiisiiiii", $cae[$i]['sub_cae'][$j]['nombre'], $parent_id, $cae[$i]['sub_cae'][$j]['tipo'], $cae[$i]['sub_cae'][$j]['descripcion'], $cae[$i]['sub_cae'][$j]['descripcion_sub'], $cae[$i]['sub_cae'][$j]['precio'], $cae[$i]['sub_cae'][$j]['orders'], $cae[$i]['sub_cae'][$j]['ocultar'], $cae[$i]['sub_cae'][$j]['image'], $cae[$i]['sub_cae'][$j]['degradado'], $cae[$i]['sub_cae'][$j]['mostrar_prods'], $cae[$i]['sub_cae'][$j]['detalle_prods'], $id_cat, $id_gir)){
-                        if($sqlx->execute()){
-
-                            $sub_parent_id = $this->con->insert_id;
-                            if(isset($cae[$i]['sub_cae'][$j]['prods'])){
-                                for($z=0; $z<count($cae[$i]['sub_cae'][$j]['prods']); $z++){
-
-                                    if($sqlx = $this->con->prepare("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, image, tipo, disponible, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
-                                    if($sqlx->bind_param("issssiii", $cae[$i]['sub_cae'][$j]['prods'][$z]['numero'], $cae[$i]['sub_cae'][$j]['prods'][$z]['nombre'], $cae[$i]['sub_cae'][$j]['prods'][$z]['nombre_carro'], $cae[$i]['sub_cae'][$j]['prods'][$z]['descripcion'], $cae[$i]['sub_cae'][$j]['prods'][$z]['image'], $cae[$i]['sub_cae'][$j]['prods'][$z]['tipo'], $cae[$i]['sub_cae'][$j]['prods'][$z]['disponible'], $id_gir)){
-                                    if($sqlx->execute()){
-            
-                                        $id_pro = $this->con->insert_id;
-                                        if($sqlipr = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-                                        if($sqlipr->bind_param("iii", $sub_parent_id, $id_pro, $z)){
-                                        if($sqlipr->execute()){
-                                            $sqlipr->close();
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($sqlipr->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #1 '.htmlspecialchars($this->con->error)); }
-                                        
-                                        if($sqlipp = $this->con->prepare("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES (?, ?, ?)")){
-                                        if($sqlipp->bind_param("iii", $id_cat, $id_pro, $cae[$i]['sub_cae'][$j]['prods'][$z]['precio'])){
-                                        if($sqlipp->execute()){
-                                            $sqlipp->close();
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($sqlipp->error)); }
-                                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_productos() #2 '.htmlspecialchars($this->con->error)); }            
-                                        $sqlx->close();
-            
-                                    }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3a '.htmlspecialchars($sqlx->error)); }
-                                    }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($sqlx->error)); }
-                                    }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($this->con->error)); }
-
-                                }
-                            }
-
-                            $sqlx->close();
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #2a '.htmlspecialchars($sqlx->error)); }
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #2b '.htmlspecialchars($sqlx->error)); }
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #2b '.htmlspecialchars($this->con->error)); }
-                    
-                    }
-                
+                    $this->crear_categorias_prueba($cae[$i]['sub_cae'], $parent_id, $id_cat, $id_gir);
                 }
                 if(isset($cae[$i]['prods'])){
-
-                    for($j=0; $j<count($cae[$i]['prods']); $j++){
-
-                        if($sqlx = $this->con->prepare("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, image, tipo, disponible, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
-                        if($sqlx->bind_param("issssiii", $cae[$i]['prods'][$j]['numero'], $cae[$i]['prods'][$j]['nombre'], $cae[$i]['prods'][$j]['nombre_carro'], $cae[$i]['prods'][$j]['descripcion'], $cae[$i]['prods'][$j]['image'], $cae[$i]['prods'][$j]['tipo'], $cae[$i]['prods'][$j]['disponible'], $id_gir)){
-                        if($sqlx->execute()){
-
-                            $id_pro = $this->con->insert_id;
-                            if($sqlipr = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-                            if($sqlipr->bind_param("iii", $parent_id, $id_pro, $j)){
-                            if($sqlipr->execute()){
-                                $sqlipr->close();
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sqlipr->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5b '.htmlspecialchars($sqlipr->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5c '.htmlspecialchars($this->con->error)); }
-                            
-                            if($sqlipp = $this->con->prepare("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES (?, ?, ?)")){
-                            if($sqlipp->bind_param("iii", $id_cat, $id_pro, $cae[$i]['prods'][$j]['precio'])){
-                            if($sqlipp->execute()){
-                                $sqlipp->close();
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($sqlipp->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4b '.htmlspecialchars($sqlipp->error)); }
-                            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4c '.htmlspecialchars($this->con->error)); }            
-                            $sqlx->close();
-
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3a '.htmlspecialchars($sqlx->error)); }
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($sqlx->error)); }
-                        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($this->con->error)); }
-                    
-                    }
-
+                    $this->crear_productos_prueba($cae[$i]['prods'], $parent_id, $id_cat, $id_gir);
                 }
                 $sql->close();
 
@@ -489,6 +598,44 @@ class Guardar{
         }
 
     }
+    private function crear_productos_prueba($prods, $parent_id, $id_cat, $id_gir){
+
+        for($j=0; $j<count($prods); $j++){
+
+            if($sqlx = $this->con->prepare("INSERT INTO productos (numero, nombre, nombre_carro, descripcion, image, tipo, disponible, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")){
+            if($sqlx->bind_param("issssiii", $prods[$j]['numero'], $prods[$j]['nombre'], $prods[$j]['nombre_carro'], $prods[$j]['descripcion'], $prods[$j]['image'], $prods[$j]['tipo'], $prods[$j]['disponible'], $id_gir)){
+            if($sqlx->execute()){
+
+                $id_pro = $this->con->insert_id;
+                if($sqlipr = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
+                if($sqlipr->bind_param("iii", $parent_id, $id_pro, $j)){
+                if($sqlipr->execute()){
+                    $sqlipr->close();
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sqlipr->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5b '.htmlspecialchars($sqlipr->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5c '.htmlspecialchars($this->con->error)); }
+                
+                if($sqlipp = $this->con->prepare("INSERT INTO productos_precio (id_cat, id_pro, precio) VALUES (?, ?, ?)")){
+                if($sqlipp->bind_param("iii", $id_cat, $id_pro, $prods[$j]['precio'])){
+                if($sqlipp->execute()){
+                    $sqlipp->close();
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($sqlipp->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4b '.htmlspecialchars($sqlipp->error)); }
+                }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4c '.htmlspecialchars($this->con->error)); }            
+                $sqlx->close();
+
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3a '.htmlspecialchars($sqlx->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($sqlx->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #3b '.htmlspecialchars($this->con->error)); }
+        
+        }
+
+    }
+
+
+
+
+
     private function crear_giro_sql($id_gir, $dominio, $data, $catalogo){
 
         $return['op'] = 2;
