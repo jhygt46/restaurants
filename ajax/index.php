@@ -74,8 +74,7 @@
     if($_POST["accion"] == "get_stats"){
         require_once DIR."admin/class/core_class_prod.php";
         $core = new Core();
-        $info = $core->get_stats();
-        echo json_encode($info);
+        echo json_encode($core->get_stats($_POST['tipo'], json_decode($_POST['locales']), $_POST['from'], $_POST['to']));
     }
 
 ?>

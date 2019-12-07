@@ -755,6 +755,8 @@ class Core{
     }
     public function get_pago($id){
 
+
+
         if($sql = $this->con->prepare("SELECT * FROM pagos WHERE id_pago=?")){
             if($sql->bind_param("i", $id)){
                 if($sql->execute()){
@@ -2155,28 +2157,20 @@ class Core{
         }
         return $total;
     }
-    public function get_stats(){
-
-        $tipo = $_POST['tipo'];
-        $from = $_POST['from'];
-        $to = $_POST['to'];
-        $locales = $_POST['locales'];
+    public function get_stats($tipo, $locales, $from, $to){
 
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
-
                     $result = $sql->get_result();
                     while($row = $result->fetch_assoc()){
                         $pedidos[] = $row;
                     }
-
                     $from = strtotime($from);
                     $to = strtotime($to) + 86400;        
                     $dif_tiempo = round(($to - $from)/86400);
                     $aux_from = $from;
                     $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-                    
                     if($dif_tiempo <= 50){
                         // MOSTRAR DIAS
                         $info['subtitle']['text'] = 'Tiempo Real en dias';
@@ -2188,7 +2182,6 @@ class Core{
                             $aux_from = $aux_from + 86400;
                         }
                     }
-                    
                     if($dif_tiempo > 50 && $dif_tiempo < 548){
                         // MOSTRAR MESES
                         $info['subtitle']['text'] = 'Tiempo Real en meses';
@@ -2201,7 +2194,6 @@ class Core{
                             $aux_from = strtotime('+1 month', $aux_from);
                         }
                     }
-                    
                     if($dif_tiempo >= 548){
                         // MOSTRAR AÑOS
                         $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
@@ -2213,14 +2205,10 @@ class Core{
                             $aux_from = strtotime('+1 Year', $aux_from);
                         }
                     }
-
-
-
                     $info['chart']['type'] = 'line';
                     $info['yAxis']['title']['text'] = null;
                     $info['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $info['plotOptions']['line']['enableMouseTracking'] = false;
-
                     if($tipo == 0){
                         $info['title']['text'] = 'Total Ventas';            
                         for($j=0; $j<count($locales); $j++){
@@ -2232,7 +2220,6 @@ class Core{
                             unset($aux);
                         }
                     }
-
                     if($tipo == 1){
                         $info['title']['text'] = 'Total Pedidos Despacho Domicilio';          
                         for($j=0; $j<count($locales); $j++){
@@ -2244,7 +2231,6 @@ class Core{
                             unset($aux);
                         }
                     }
-
                     if($tipo == 2){
                         $info['title']['text'] = 'Total Pedidos Retiro Local';          
                         for($j=0; $j<count($locales); $j++){
@@ -2256,7 +2242,6 @@ class Core{
                             unset($aux);
                         }
                     }
-
                     $sql->free_result();
                     $sql->close();
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
