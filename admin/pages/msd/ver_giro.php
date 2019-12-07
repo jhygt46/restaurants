@@ -23,7 +23,7 @@ echo "<pre>";
 print_r($locales);
 echo "</pre>";
 
-$core->crear_locales_prueba($locales, 1, 1);
+//$core->crear_locales_prueba($locales, 1, 1);
 exit;
 
 

@@ -616,8 +616,8 @@ class Guardar{
 
         /*
         $dom_mail = explode(".", $dominio);
-        $locales[] = crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@'.$dom_mail[1].'.'.$dom_mail[2]);
-        $locales[] = crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@'.$dom_mail[1].'.'.$dom_mail[2]);
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@'.$dom_mail[1].'.'.$dom_mail[2]);
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@'.$dom_mail[1].'.'.$dom_mail[2]);
         $this->crear_locales_prueba($locales, $id_cat, $id_gir);
         */
 
