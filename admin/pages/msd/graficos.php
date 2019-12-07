@@ -25,6 +25,10 @@ $vendedores = $core->get_vendedores();
 ?>
 <script>
 
+    function checkcheckboc(){
+        console.log("CHECKBOX");
+    }
+
     function stats(that){
         
         var locales = new Array();  
@@ -128,21 +132,31 @@ $vendedores = $core->get_vendedores();
                         <span><p>Fecha Fin:</p></span>
                         <input id="fecha_to" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
-                    <div>
-                    <?php for($i=0; $i<count($locales); $i++){ ?>
-                    <label class="clearfix">
-                        <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
-                        <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1">
-                    </label>
+                    <?php if(count($locales) > 1){ ?>
+                        <div class="div_locales">
+                            <?php for($i=0; $i<count($locales); $i++){ ?>
+                            <label class="clearfix">
+                                <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
+                                <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" onchange='checkcheckboc()'>
+                            </label>
+                            <?php } ?>
+                        </div>
                     <?php } ?>
-                    </div>
-                    <div>
-                    <?php for($i=0; $i<count($vendedores); $i++){ ?>
-                    <label class="clearfix">
-                        <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
-                        <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
-                    </label>
+                    <?php if(count($locales) == 1){ ?>
+                        <div class="div_locales">
+                            <label class="clearfix" style="display: none">
+                                <span><p><?php echo $locales[0]['nombre']; ?>:</p></span>
+                                <input id="<?php echo $locales[0]['id_loc']; ?>" nombre="<?php echo $locales[0]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" checked="checked" onchange='checkcheckboc()'>
+                            </label>
+                        </div>
                     <?php } ?>
+                    <div class="div_vendedores">
+                        <?php for($i=0; $i<count($vendedores); $i++){ ?>
+                        <label class="clearfix" display="none">
+                            <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
+                            <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
+                        </label>
+                        <?php } ?>
                     </div>
                     <label>
                         <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
