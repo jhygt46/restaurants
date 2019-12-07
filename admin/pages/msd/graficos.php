@@ -35,6 +35,13 @@ $vendedores = $core->get_vendedores();
                 id_loc = $(this).attr('id');
             }
         });
+        if(count > 1){
+            // BORRAR USUARIOS
+            $('.div_vendedores').hide();
+        }
+        if(count == 1){
+            $('.div_vendedores').show();
+        }
         console.log(cont);
         console.log(id_loc);
 
