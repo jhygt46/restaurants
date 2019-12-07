@@ -40,10 +40,8 @@ $vendedores = $core->get_vendedores();
             $('.div_vendedores').hide();
         }
         if(count == 1){
-            $('.div_vendedores').show();
+            $('.ven'.id_loc).show();
         }
-        console.log(cont);
-        console.log(id_loc);
 
     }
 
@@ -170,7 +168,7 @@ $vendedores = $core->get_vendedores();
                     <?php } ?>
                     <div class="div_vendedores">
                         <?php for($i=0; $i<count($vendedores); $i++){ ?>
-                        <label class="clearfix" display="none">
+                        <label class="clearfix ven<?php echo $vendedores[$i]['id_loc']; ?>" style="display: none">
                             <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
                             <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
                         </label>
