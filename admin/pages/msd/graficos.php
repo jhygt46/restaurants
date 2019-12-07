@@ -22,6 +22,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $locales = $core->get_locales();
 $vendedores = $core->get_vendedores();
 
+echo "Vendedores";
 echo "<pre>";
 print_r($vendedores);
 echo "</pre>";
