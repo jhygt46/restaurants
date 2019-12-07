@@ -20,7 +20,6 @@ $sub_titulo = "Configurar Grafico";
 $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $locales = $core->get_locales();
-$vendedores = $core->get_vendedores();
 
 ?>
 <script>
