@@ -613,7 +613,7 @@ class Guardar{
         unset($prod);
 
         $this->crear_categorias_prueba($cae, 0, $id_cat, $id_gir);
-        $this->crear_locales_prueba($dominio, $id_cat, $id_gir);
+        $this->crear_locales_prueba($id_cat, $id_gir);
         
 
     }
@@ -718,11 +718,10 @@ class Guardar{
         }
 
     }
-    private function crear_locales_prueba($dominio, $id_cat, $id_gir){
+    private function crear_locales_prueba($id_cat, $id_gir){
 
-        $dom_mail = explode(".", $dominio);
-        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@'.$dom_mail[1].'.'.$dom_mail[2]);
-        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@'.$dom_mail[1].'.'.$dom_mail[2]);
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@wefwefwef.cl');
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@rthrthrth.cl');
         
 
         for($i=0; $i<count($locales); $i++){
@@ -739,8 +738,11 @@ class Guardar{
 
                 for($k=0; $k<count($usuarios); $k++){
 
+                    $nombre = $usuarios[$k]['nombre'];
+                    $correo = $usuarios[$k]['nombre'].'-'.$this->pass_generate(10).'@gmail.com';
+
                     if($sqly = $this->con->prepare("INSERT INTO fw_usuarios (nombre, correo, fecha_creado, tipo, id_loc, id_gir) VALUES (?, ?, now(), '1', ?, ?)")){
-                    if($sqly->bind_param("ssii", $usuarios[$k]['nombre'], $usuarios[$k]['nombre'].'-'.$this->pass_generate(10).'@gmail.com', $id_loc, $id_gir)){
+                    if($sqly->bind_param("ssii", $nombre, $correo, $id_loc, $id_gir)){
                     if($sqly->execute()){
                         
                         $id_user = $this->con->insert_id;
