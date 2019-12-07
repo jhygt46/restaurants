@@ -32,18 +32,14 @@ $locales = $core->get_locales();
                 locales.push({id_loc: $(this).attr('id'), nombre: $(this).attr('nombre')});
             }
         });
-        var vendedores = new Array();  
-        $(that).parents('form').find('.vendedor').each(function(){
-            if($(this).is(':checked')){
-                vendedores.push({id_loc: $(this).attr('id'), nombre: $(this).attr('nombre')});
-            }
-        });
         
         var from = $('#fecha_from').val();
         var to = $('#fecha_to').val();
         var tipo = $('#tipo').val();
         var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to, tipo: tipo };
         
+        console.log(send);
+
         $.ajax({
             url: "../ajax/",
             type: "POST",
