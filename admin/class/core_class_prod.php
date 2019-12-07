@@ -2157,7 +2157,12 @@ class Core{
         }
         return $total;
     }
-    public function get_stats($tipo, $locales, $from, $to){
+    public function get_stats(){
+
+        $tipo = $_POST['tipo'];
+        $locales = json_decode($_POST['locales']);
+        $from = $_POST['from'];
+        $to = $_POST['to'];
 
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
