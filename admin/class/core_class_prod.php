@@ -515,7 +515,7 @@ class Core{
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($this->con->error)); }
     }
     public function get_vendedores(){
-        if($sql = $this->con->prepare("SELECT id_user, nombre FROM fw_usuarios WHERE id_gir=? AND id_loc!=0 AND tipo=1 AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT id_user, nombre, id_loc FROM fw_usuarios WHERE id_gir=? AND id_loc!=0 AND tipo=1 AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
