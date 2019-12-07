@@ -2161,13 +2161,15 @@ class Core{
         $from = $_POST['from'];
         $to = $_POST['to'];
         $locales = $_POST['locales'];
-        $vendedores = $_POST['vendedores'];
 
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
 
-                    $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $result = $sql->get_result();
+                    while($row = $result->fetch_assoc()){
+                        $pedidos[] = $row;
+                    }
 
                     $from = strtotime($from);
                     $to = strtotime($to) + 86400;        
