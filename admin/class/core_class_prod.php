@@ -2833,7 +2833,6 @@ class Core{
         $arr["lng"] = $lng;
         $arr["code"] = $this->pass_generate(20);
         $arr["correo"] = $correo;
-
         return $arr;
 
     }
