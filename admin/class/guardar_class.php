@@ -620,7 +620,7 @@ class Guardar{
         $locales[] = crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@'.$dom_mail[1].'.'.$dom_mail[2]);
         $this->crear_locales_prueba($locales, $id_cat, $id_gir);
         */
-        
+
     }
     private function crear_array_locales($telefono, $whatsapp, $nombre, $correo_ses, $direccion, $lat, $lng, $correo){
 
@@ -628,7 +628,6 @@ class Guardar{
         $arr["whatsapp"] = $whatsapp;
         $arr["nombre"] = $nombre;
         $arr["correo_ses"] = $correo_ses;
-        $arr["direccion"] = $direccion;
         $arr["direccion"] = $direccion;
         $arr["lat"] = $lat;
         $arr["lng"] = $lng;
@@ -784,7 +783,7 @@ class Guardar{
             }else{ $this->registrar(6, 0, $id_gir, 'crear_locales_prueba() #2b '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'crear_locales_prueba() #2c '.htmlspecialchars($this->con->error)); }
         }
-        $this->locales_giro($id_gir);
+        //$this->locales_giro($id_gir);
 
     }
     private function crear_giro_sql($id_gir, $dominio, $data, $catalogo){
