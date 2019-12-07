@@ -28,12 +28,15 @@ $vendedores = $core->get_vendedores();
     function checkcheckboc(){
 
         var cont = 0;
+        var id_loc = 0;
         $('form').find('.local').each(function(){
             if($(this).is(':checked')){
                 cont++;
+                id_loc = $(this).attr('id');
             }
         });
         console.log(cont);
+        console.log(id_loc);
 
     }
 
