@@ -2167,10 +2167,9 @@ class Core{
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
-                    $result = $sql->get_result();
-                    while($row = $result->fetch_assoc()){
-                        $pedidos[] = $row;
-                    }
+                    
+                    $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+
                     $from = strtotime($from);
                     $to = strtotime($to) + 86400;        
                     $dif_tiempo = round(($to - $from)/86400);
