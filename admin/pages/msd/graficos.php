@@ -35,11 +35,11 @@ $vendedores = $core->get_vendedores();
                 id_loc = $(this).attr('id');
             }
         });
-        if(count > 1){
-            // BORRAR USUARIOS
-            $('.div_vendedores').hide();
+        if(cont > 1){
+            $('.itemvendedor').hide();
         }
-        if(count == 1){
+        if(cont == 1){
+            $('.itemvendedor').hide();
             $('.ven'.id_loc).show();
         }
 
@@ -168,7 +168,7 @@ $vendedores = $core->get_vendedores();
                     <?php } ?>
                     <div class="div_vendedores">
                         <?php for($i=0; $i<count($vendedores); $i++){ ?>
-                        <label class="clearfix ven<?php echo $vendedores[$i]['id_loc']; ?>" style="display: none">
+                        <label class="clearfix itemvendedor ven<?php echo $vendedores[$i]['id_loc']; ?>" style="display: none">
                             <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
                             <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
                         </label>
