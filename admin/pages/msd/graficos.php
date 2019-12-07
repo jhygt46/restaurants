@@ -24,7 +24,7 @@ $vendedores = $core->get_vendedores();
 
 ?>
 <script>
-    
+
     function stats(that){
         
         var locales = new Array();  
@@ -50,6 +50,7 @@ $vendedores = $core->get_vendedores();
             type: "POST",
             data: send,
             success: function(data){
+                console.log(data);
                 Highcharts.chart('container', data);
             },
             error: function(e){}
@@ -133,7 +134,7 @@ $vendedores = $core->get_vendedores();
                             <?php for($i=0; $i<count($locales); $i++){ ?>
                             <label class="clearfix">
                                 <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
-                                <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" <?php if($i==0){ echo "checked='checked'"; } ?> onchange='checkcheckboc()'>
+                                <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox" value="1" <?php if($i == 0){ echo "checked='checked'"; } ?>>
                             </label>
                             <?php } ?>
                         </div>
@@ -142,7 +143,7 @@ $vendedores = $core->get_vendedores();
                         <div class="div_locales">
                             <label class="clearfix" style="display: none">
                                 <span><p><?php echo $locales[0]['nombre']; ?>:</p></span>
-                                <input id="<?php echo $locales[0]['id_loc']; ?>" nombre="<?php echo $locales[0]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" checked="checked" onchange='checkcheckboc()'>
+                                <input id="<?php echo $locales[0]['id_loc']; ?>" nombre="<?php echo $locales[0]['nombre']; ?>" type="checkbox" class="checkbox" value="1" checked="checked">
                             </label>
                         </div>
                     <?php } ?>
