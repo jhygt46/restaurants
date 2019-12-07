@@ -265,8 +265,8 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
                             <div class="n_submit">
                                 <div class="cont_submit">
                                     <div class="cont_total valign">
-                                        <div class="sub">$2.500</div>
-                                        <div class="total">$14.500</div>
+                                        <div class="sub"></div>
+                                        <div class="total"></div>
                                     </div>
                                 </div>
                             </div>

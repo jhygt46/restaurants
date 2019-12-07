@@ -1804,16 +1804,17 @@ class Core{
         $local_code = $_COOKIE["local_code"];
         $return['op'] = false;
         
-        if($sql = $this->con->prepare("SELECT t2.sonido, t2.t_retiro, t2.t_despacho, t2.lat, t2.lng, t2.id_gir, t1.id_loc, t1.del_pdir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.pos FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t1.id_user, t2.sonido, t2.t_retiro, t2.t_despacho, t2.lat, t2.lng, t2.id_gir, t1.id_loc, t1.del_pdir, t2.code, t2.enviar_cocina, t1.save_web, t1.web_min, t1.save_pos, t1.pos_min, t2.pos FROM fw_usuarios t1, locales t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_loc=t2.id_loc AND t2.cookie_code=? AND t2.cookie_ip=? AND t1.eliminado=? AND t2.eliminado=?")){
             if($sql->bind_param("isssii", $id, $user_code, $local_code, $ip, $this->eliminado, $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
                     if($res->{'num_rows'} == 1){
                         $return['op'] = true;
                         $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                        $return['id_user'] = $result['id_user'];
                         $return['id_gir'] = $result['id_gir'];
                         $return['id_loc'] = $result['id_loc'];
-                        $return['del_pdir'] = $result['id_loc'];
+                        $return['del_pdir'] = $result['del_pdir'];
                         $return['code'] = $result['code'];
                         $return['enviar_cocina'] = $result['enviar_cocina'];
                         $return['save_web'] = $result['save_web'];
@@ -1875,20 +1876,20 @@ class Core{
                                     $res['telefono'] = $pedido_usuarios['telefono'];
                                     if($res['despacho'] == 1){
                                         if($sqlpd = $this->con->prepare("SELECT * FROM pedidos_direccion WHERE id_pdir=?")){
-                                            if($sqlpd->bind_param("i", $row['id_pdir'])){
-                                                if($sqlpd->execute()){
-                                                    $pedido_direccion = $sqlpd->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                                                    $res['direccion'] = $pedido_direccion['direccion'];
-                                                    $res['lat'] = $pedido_direccion['lat'];
-                                                    $res['lng'] = $pedido_direccion['lng'];
-                                                    $res['calle'] = $pedido_direccion['calle'];
-                                                    $res['num'] = $pedido_direccion['num'];
-                                                    $res['depto'] = $pedido_direccion['depto'];
-                                                    $res['comuna'] = $pedido_direccion['num'];
-                                                    $sqlpd->free_result();
-                                                    $sqlpd->close();
-                                                }else{ $this->registrar(6, $id_loc, $id_gir, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
-                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
+                                        if($sqlpd->bind_param("i", $row['id_pdir'])){
+                                        if($sqlpd->execute()){
+                                            $pedido_direccion = $sqlpd->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                                            $res['direccion'] = $pedido_direccion['direccion'];
+                                            $res['lat'] = $pedido_direccion['lat'];
+                                            $res['lng'] = $pedido_direccion['lng'];
+                                            $res['calle'] = $pedido_direccion['calle'];
+                                            $res['num'] = $pedido_direccion['num'];
+                                            $res['depto'] = $pedido_direccion['depto'];
+                                            $res['comuna'] = $pedido_direccion['num'];
+                                            $sqlpd->free_result();
+                                            $sqlpd->close();
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'get_ultimos_pedidos() #1 '.htmlspecialchars($sqlpd->error)); }
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'get_ultimos_pedidos() #1 '.htmlspecialchars($this->con->error)); }
                                     }
                                     $sqlpu->free_result();
