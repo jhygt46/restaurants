@@ -26,7 +26,15 @@ $vendedores = $core->get_vendedores();
 <script>
 
     function checkcheckboc(){
-        console.log("CHECKBOX");
+
+        var cont = 0;
+        $('.form').find('.local').each(function(){
+            if($(this).is(':checked')){
+                cont++;
+            }
+        });
+        console.log(cont);
+
     }
 
     function stats(that){
@@ -137,7 +145,7 @@ $vendedores = $core->get_vendedores();
                             <?php for($i=0; $i<count($locales); $i++){ ?>
                             <label class="clearfix">
                                 <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
-                                <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" onchange='checkcheckboc()'>
+                                <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1" <?php if($i==0){ echo "checked='checked'"; } ?> onchange='checkcheckboc()'>
                             </label>
                             <?php } ?>
                         </div>
