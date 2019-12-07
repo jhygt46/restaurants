@@ -750,7 +750,7 @@ class Guardar{
                         for($j=0; $j<50; $j++){
     
                             $num_ped = $i * 50 + $j + 1;
-                            $time = time() * 17280 * $j;
+                            $time = time() + 17280 * $j;
                             $fecha =  date("Y-m-d H:i:s", $time);
                             $total = rand(20, 70) * 100;
                             $despacho = rand(0, 1);
