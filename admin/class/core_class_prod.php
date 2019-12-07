@@ -2839,7 +2839,11 @@ class Core{
     }
     public function crear_locales_prueba($locales, $id_cat, $id_gir){
 
+        echo "BUENA NELSON 1<br/>";
+
         for($i=0; $i<count($locales); $i++){
+
+            echo "BUENA LOCALES ".$locales[$i]['nombre']."<br/>";
 
             if($sql = $this->con->prepare("INSERT INTO locales (telefono, whatsapp, nombre, correo_ses, direccion, lat, lng, code, fecha_pos, fecha_cocina, fecha_creado, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, now(), now(), now(), ?, ?, ?)")){
             if($sql->bind_param("sssisddssii", $locales[$i]['telefono'], $locales[$i]['whatsapp'], $locales[$i]['nombre'], $locales[$i]['correo_ses'], $locales[$i]['direccion'], $locales[$i]['lat'], $locales[$i]['lng'], $locales[$i]['code'], $locales[$i]['correo'], $id_cat, $id_gir)){
