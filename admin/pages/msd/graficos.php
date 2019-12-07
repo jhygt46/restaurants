@@ -43,7 +43,7 @@ $vendedores = $core->get_vendedores();
         var from = $('#fecha_from').val();
         var to = $('#fecha_to').val();
         var tipo = $('#tipo').val();
-        var send = { accion: 'get_stats', locales: JSON.stringify(locales), vendedores: JSON.stringify(vendedores), from: from, to: to, tipo: tipo };
+        var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to, tipo: tipo };
         
         $.ajax({
             url: "../ajax/",
