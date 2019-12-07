@@ -24,27 +24,7 @@ $vendedores = $core->get_vendedores();
 
 ?>
 <script>
-
-    function checkcheckboc(){
-
-        var cont = 0;
-        var id_loc = 0;
-        $('form').find('.local').each(function(){
-            if($(this).is(':checked')){
-                cont++;
-                id_loc = $(this).attr('id');
-            }
-        });
-        if(cont > 1){
-            $('.itemvendedor').hide();
-        }
-        if(cont == 1){
-            $('.itemvendedor').hide();
-            $('.ven'.id_loc).show();
-        }
-
-    }
-
+    
     function stats(that){
         
         var locales = new Array();  
@@ -166,14 +146,6 @@ $vendedores = $core->get_vendedores();
                             </label>
                         </div>
                     <?php } ?>
-                    <div class="div_vendedores">
-                        <?php for($i=0; $i<count($vendedores); $i++){ ?>
-                        <label class="clearfix itemvendedor ven<?php echo $vendedores[$i]['id_loc']; ?>" style="display: none">
-                            <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
-                            <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
-                        </label>
-                        <?php } ?>
-                    </div>
                     <label>
                         <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
                     </label>
