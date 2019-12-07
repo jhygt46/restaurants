@@ -14,9 +14,6 @@ if(!isset($core_class_iniciada)){
     $core = new Core();
 }
 
-
-
-
 $core->is_giro();
 
 // SOLO GIROS
