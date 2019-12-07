@@ -28,14 +28,13 @@ $vendedores = $core->get_vendedores();
     function checkcheckboc(){
 
         var cont = 0;
-        $('.form').find('.div_locales .local').each(function(){
+        $('form').find('.local').each(function(){
             if($(this).is(':checked')){
-                console.log("CHECKED");
-            }else{
-                console.log("NO CHECKED");
+                cont++;
             }
         });
-        
+        console.log(cont);
+
     }
 
     function stats(that){
