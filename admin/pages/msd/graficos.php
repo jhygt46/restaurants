@@ -20,6 +20,11 @@ $sub_titulo = "Configurar Grafico";
 $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $locales = $core->get_locales();
+$vendedores = $core->get_vendedores();
+
+echo "<pre>";
+print_r($vendedores);
+echo "</pre>";
 
 ?>
 <script>
@@ -27,19 +32,25 @@ $locales = $core->get_locales();
     function stats(that){
         
         var locales = new Array();  
-        $(that).parents('form').find('input').each(function(){
-            if($(this).attr('type') == "checkbox" && $(this).is(':checked')){
+        $(that).parents('form').find('.local').each(function(){
+            if($(this).is(':checked')){
                 locales.push({id_loc: $(this).attr('id'), nombre: $(this).attr('nombre')});
+            }
+        });
+        var vendedores = new Array();  
+        $(that).parents('form').find('.vendedor').each(function(){
+            if($(this).is(':checked')){
+                vendedores.push({id_loc: $(this).attr('id'), nombre: $(this).attr('nombre')});
             }
         });
         
         var from = $('#fecha_from').val();
         var to = $('#fecha_to').val();
         var tipo = $('#tipo').val();
-        var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to, tipo: tipo };
+        var send = { accion: 'get_stats', locales: JSON.stringify(locales), vendedores: JSON.stringify(vendedores), from: from, to: to, tipo: tipo };
         
         $.ajax({
-            url: "ajax/stats.php",
+            url: "../ajax/",
             type: "POST",
             data: send,
             success: function(data){
@@ -53,7 +64,7 @@ $locales = $core->get_locales();
     $(document).ready(function(){
          
         var dateFormat = "mm/dd/yy";
-        var from = $( "#fecha_from" ).datepicker({
+        var from = $("#fecha_from").datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 1,
@@ -61,7 +72,7 @@ $locales = $core->get_locales();
         }).on( "change", function() {
             to.datepicker( "option", "minDate", getDate( this ) );
         })
-        var to = $( "#fecha_to" ).datepicker({
+        var to = $("#fecha_to").datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 1,
@@ -70,11 +81,11 @@ $locales = $core->get_locales();
             from.datepicker( "option", "maxDate", getDate( this ) );
         });
  
-        function getDate( element ) {
+        function getDate(element){
             var date;
-            try {
+            try{
                 date = $.datepicker.parseDate( dateFormat, element.value );
-            } catch( error ) {
+            }catch(error){
                 date = null;
             }
             return date;
@@ -124,7 +135,7 @@ $locales = $core->get_locales();
                     <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
                         <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
-                        <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox" value="1">
+                        <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1">
                     </label>
                     <?php } ?>
                     <label>

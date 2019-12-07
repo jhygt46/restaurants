@@ -71,6 +71,12 @@
         $info = $core->cambiar_estado();
         echo json_encode($info);
     }
+    if($_POST["accion"] == "get_stats"){
+        require_once DIR."admin/class/core_class_prod.php";
+        $core = new Core();
+        $info = $core->get_stats();
+        echo json_encode($info);
+    }
 
 ?>
 
