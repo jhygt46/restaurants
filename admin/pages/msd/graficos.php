@@ -22,11 +22,6 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $locales = $core->get_locales();
 $vendedores = $core->get_vendedores();
 
-echo "Vendedores";
-echo "<pre>";
-print_r($vendedores);
-echo "</pre>";
-
 ?>
 <script>
 
@@ -133,12 +128,22 @@ echo "</pre>";
                         <span><p>Fecha Fin:</p></span>
                         <input id="fecha_to" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
+                    <div>
                     <?php for($i=0; $i<count($locales); $i++){ ?>
                     <label class="clearfix">
                         <span><p><?php echo $locales[$i]['nombre']; ?>:</p></span>
                         <input id="<?php echo $locales[$i]['id_loc']; ?>" nombre="<?php echo $locales[$i]['nombre']; ?>" type="checkbox" class="checkbox local" value="1">
                     </label>
                     <?php } ?>
+                    </div>
+                    <div>
+                    <?php for($i=0; $i<count($vendedores); $i++){ ?>
+                    <label class="clearfix">
+                        <span><p><?php echo $vendedores[$i]['nombre']; ?>:</p></span>
+                        <input id="<?php echo $vendedores[$i]['id_user']; ?>" nombre="<?php echo $vendedores[$i]['nombre']; ?>" type="checkbox" class="checkbox vendedor" value="1">
+                    </label>
+                    <?php } ?>
+                    </div>
                     <label>
                         <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
                     </label>
