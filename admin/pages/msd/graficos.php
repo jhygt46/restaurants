@@ -44,6 +44,7 @@ $locales = $core->get_locales();
             data: send,
             success: function(data){
 
+                $('.cont_container').html("");
                 for(var i=0; i<data.length; i++){
                     var Div = document.createElement('div');
                     Div.className = 'graph_container';
