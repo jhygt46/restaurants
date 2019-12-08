@@ -43,6 +43,7 @@ $locales = $core->get_locales();
             type: "POST",
             data: send,
             success: function(data){
+                console.log(data);
                 Highcharts.chart('container0', data[0]);
                 Highcharts.chart('container1', data[1]);
                 Highcharts.chart('container2', data[2]);
@@ -168,7 +169,7 @@ $locales = $core->get_locales();
 
             <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container5" style="height: 300px; display: block; padding-top: 40px"></div>
-            
+
         </div>
     </div>
 </div>
