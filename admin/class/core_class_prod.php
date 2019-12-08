@@ -2235,18 +2235,18 @@ class Core{
                     }
                     
                     // GRAFICO 1 VENTAS TOTALES //
-                    $info[4] = $grafico_ejex['graph'];
-                    $info[4]['chart']['type'] = 'line';
-                    $info[4]['yAxis']['title']['text'] = null;
-                    $info[4]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[4]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[4]['title']['text'] = 'Total Ventas';            
+                    $info[3] = $grafico_ejex['graph'];
+                    $info[3]['chart']['type'] = 'line';
+                    $info[3]['yAxis']['title']['text'] = null;
+                    $info[3]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[3]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[3]['title']['text'] = 'Total Ventas';            
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_total_acum_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'});
                         }
-                        $info[4]['series'][] = $aux;
+                        $info[3]['series'][] = $aux;
                         unset($aux);
                     }
 
