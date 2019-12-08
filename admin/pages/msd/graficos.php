@@ -38,15 +38,14 @@ $locales = $core->get_locales();
         var tipo = $('#tipo').val();
         var send = { accion: 'get_stats', locales: JSON.stringify(locales), from: from, to: to, tipo: tipo };
         
-        console.log(send);
-
         $.ajax({
             url: "../ajax/",
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
-                Highcharts.chart('container', data);
+                Highcharts.chart('container1', data);
+                Highcharts.chart('container2', data);
+                Highcharts.chart('container3', data);
             },
             error: function(e){}
         });
@@ -158,9 +157,9 @@ $locales = $core->get_locales();
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container" style="height: 300px; display: block; padding-top: 40px">
-                
-            </div>
+            <div id="container1" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container3" style="height: 300px; display: block; padding-top: 40px"></div>
         </div>
     </div>
 </div>
