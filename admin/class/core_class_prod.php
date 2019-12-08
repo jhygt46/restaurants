@@ -2157,16 +2157,25 @@ class Core{
         }
         return $total;
     }
-    public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc, $tipo){
+    public function pedidos_despacho_fecha($pedidos, $fecha_ini, $intervalo, $id_loc, $tipo, $acum){
         $total = 0;
         for($i=0; $i<count($pedidos); $i++){
             $fecha_pedido = strtotime($pedidos[$i]['fecha']);
-            $fecha_fin = strtotime($intervalo, $fecha_ini);            
-            if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
-                if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == $tipo){
-                    $total = $total + 1;
+            $fecha_fin = strtotime($intervalo, $fecha_ini);
+            if($acum == 0){
+                if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
+                    if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == $tipo){
+                        $total = $total + 1;
+                    }
                 }
             }
+            if($acum == 1){
+                if($fecha_pedido < $fecha_fin){
+                    if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['despacho'] == $tipo){
+                        $total = $total + 1;
+                    }
+                }
+            }         
         }
         return $total;
     }
@@ -2212,7 +2221,7 @@ class Core{
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
-                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1);
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 0);
                         }
                         $info[1]['series'][] = $aux;
                         unset($aux);
@@ -2228,25 +2237,57 @@ class Core{
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
-                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0);
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 0);
                         }
                         $info[2]['series'][] = $aux;
                         unset($aux);
                     }
                     
-                    // GRAFICO 1 VENTAS TOTALES //
+                    // GRAFICO 4 VENTAS TOTALES ACUMULADO //
                     $info[3] = $grafico_ejex['graph'];
                     $info[3]['chart']['type'] = 'line';
                     $info[3]['yAxis']['title']['text'] = null;
                     $info[3]['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $info[3]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[3]['title']['text'] = 'Total Ventas';            
+                    $info[3]['title']['text'] = 'Total Ventas Acumulado';            
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_total_acum_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'});
                         }
                         $info[3]['series'][] = $aux;
+                        unset($aux);
+                    }
+
+                    // GRAFICO 5 TOTAL DESPACHO DOMICILIO ACUMULADO //
+                    $info[4] = $grafico_ejex['graph'];
+                    $info[4]['chart']['type'] = 'line';
+                    $info[4]['yAxis']['title']['text'] = null;
+                    $info[4]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[4]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[4]['title']['text'] = 'Total Pedidos Despacho Domicilio ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 1);
+                        }
+                        $info[4]['series'][] = $aux;
+                        unset($aux);
+                    }
+                    
+                    // GRAFICO 3 TOTAL RETIRO LOCAL ACUMULADO //
+                    $info[5] = $grafico_ejex['graph'];
+                    $info[5]['chart']['type'] = 'line';
+                    $info[5]['yAxis']['title']['text'] = null;
+                    $info[5]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[5]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[5]['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 1);
+                        }
+                        $info[5]['series'][] = $aux;
                         unset($aux);
                     }
 
