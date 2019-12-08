@@ -2326,6 +2326,78 @@ class Core{
                     $info[] = $aux_gr;
                     unset($aux_gr);
 
+                    // GRAFICO 7 TOTAL PEDIDOS PAGINA //
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_tipo_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 0);
+                        }
+                        $aux_gr['series'][] = $aux;
+                        unset($aux);
+                    }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
+                    // GRAFICO 7 TOTAL PEDIDOS POS //
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_tipo_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 0);
+                        }
+                        $aux_gr['series'][] = $aux;
+                        unset($aux);
+                    }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
+                    // GRAFICO 8 TOTAL PEDIDOS PAGINA ACUMULADO //
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_tipo_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 1);
+                        }
+                        $aux_gr['series'][] = $aux;
+                        unset($aux);
+                    }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
+                    // GRAFICO 9 TOTAL PEDIDOS POS ACUMULADO //
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_tipo_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 1);
+                        }
+                        $aux_gr['series'][] = $aux;
+                        unset($aux);
+                    }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
                     $sql->free_result();
                     $sql->close();
 

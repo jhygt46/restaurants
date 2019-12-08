@@ -43,13 +43,16 @@ $locales = $core->get_locales();
             type: "POST",
             data: send,
             success: function(data){
-                console.log(data);
                 Highcharts.chart('container0', data[0]);
                 Highcharts.chart('container1', data[1]);
                 Highcharts.chart('container2', data[2]);
                 Highcharts.chart('container3', data[3]);
                 Highcharts.chart('container4', data[4]);
                 Highcharts.chart('container5', data[5]);
+                Highcharts.chart('container6', data[6]);
+                Highcharts.chart('container7', data[7]);
+                Highcharts.chart('container8', data[8]);
+                Highcharts.chart('container9', data[9]);
             },
             error: function(e){}
         });
