@@ -2167,90 +2167,102 @@ class Core{
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
-                    
-                    $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
 
+                    $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $from = strtotime($from);
-                    $to = strtotime($to) + 86400;        
-                    $dif_tiempo = round(($to - $from)/86400);
-                    $aux_from = $from;
-                    $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-                    if($dif_tiempo <= 50){
-                        // MOSTRAR DIAS
-                        $info['subtitle']['text'] = 'Tiempo Real en dias';
-                        $infos['tipo'] = 1;
-                        $lapse = "1 day";
-                        while($to > $aux_from){
-                            $info['xAxis']['categories'][] = date("d", $aux_from);
-                            $infos['fecha'][] = $aux_from;
-                            $aux_from = $aux_from + 86400;
+                    $to = strtotime($to) + 86400;
+                    $grafico_ejex = $this->grafico_ejex($to, $from);
+
+                    $info[0] = $grafico_ejex['graph'];
+                    $info[0]['chart']['type'] = 'line';
+                    $info[0]['yAxis']['title']['text'] = null;
+                    $info[0]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[0]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[0]['title']['text'] = 'Total Ventas';            
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'});
                         }
+                        $info[0]['series'][] = $aux;
+                        unset($aux);
                     }
-                    if($dif_tiempo > 50 && $dif_tiempo < 548){
-                        // MOSTRAR MESES
-                        $info['subtitle']['text'] = 'Tiempo Real en meses';
-                        $infos['tipo'] = 2;
-                        $lapse = "1 month";
-                        while($to > $aux_from){
-                            $aux_mes = intval(date("m", $aux_from)) - 1;
-                            $info['xAxis']['categories'][] = $mes[$aux_mes];
-                            $infos['fecha'][] = $aux_from;
-                            $aux_from = strtotime('+1 month', $aux_from);
+                    
+                    $info[1] = $grafico_ejex['graph'];
+                    $info[1]['chart']['type'] = 'line';
+                    $info[1]['yAxis']['title']['text'] = null;
+                    $info[1]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[1]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[1]['title']['text'] = 'Total Pedidos Despacho Domicilio';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1);
                         }
+                        $info[1]['series'][] = $aux;
+                        unset($aux);
                     }
-                    if($dif_tiempo >= 548){
-                        // MOSTRAR AÑOS
-                        $info['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
-                        $infos['tipo'] = 3;
-                        $lapse = "1 year";
-                        while($to > $aux_from){
-                            $info['xAxis']['categories'][] = date("Y", $aux_from);
-                            $infos['fecha'][] = $aux_from;
-                            $aux_from = strtotime('+1 Year', $aux_from);
+                    
+                    $info[2] = $grafico_ejex['graph'];
+                    $info[2]['chart']['type'] = 'line';
+                    $info[2]['yAxis']['title']['text'] = null;
+                    $info[2]['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $info[2]['plotOptions']['line']['enableMouseTracking'] = false;
+                    $info[2]['title']['text'] = 'Total Pedidos Retiro Local';          
+                    for($j=0; $j<count($locales); $j++){
+                        $aux['name'] = $locales[$j]->{'nombre'};
+                        foreach($grafico_ejex['fecha'] as $fecha){
+                            $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0);
                         }
+                        $info[2]['series'][] = $aux;
+                        unset($aux);
                     }
-                    $info['chart']['type'] = 'line';
-                    $info['yAxis']['title']['text'] = null;
-                    $info['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info['plotOptions']['line']['enableMouseTracking'] = false;
-                    if($tipo == 0){
-                        $info['title']['text'] = 'Total Ventas';            
-                        for($j=0; $j<count($locales); $j++){
-                            $aux['name'] = $locales[$j]->{'nombre'};
-                            foreach($infos['fecha'] as $fecha){
-                                $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'});
-                            }
-                            $info['series'][] = $aux;
-                            unset($aux);
-                        }
-                    }
-                    if($tipo == 1){
-                        $info['title']['text'] = 'Total Pedidos Despacho Domicilio';          
-                        for($j=0; $j<count($locales); $j++){
-                            $aux['name'] = $locales[$j]->{'nombre'};
-                            foreach($infos['fecha'] as $fecha){
-                                $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'}, 1);
-                            }
-                            $info['series'][] = $aux;
-                            unset($aux);
-                        }
-                    }
-                    if($tipo == 2){
-                        $info['title']['text'] = 'Total Pedidos Retiro Local';          
-                        for($j=0; $j<count($locales); $j++){
-                            $aux['name'] = $locales[$j]->{'nombre'};
-                            foreach($infos['fecha'] as $fecha){
-                                $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $lapse, $locales[$j]->{'id_loc'}, 0);
-                            }
-                            $info['series'][] = $aux;
-                            unset($aux);
-                        }
-                    }
+                    
                     $sql->free_result();
                     $sql->close();
+
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($this->con->error)); }
+        return $info;
+
+    }
+    private function grafico_ejex($to, $from){
+
+        $dif_tiempo = round(($to - $from)/86400);
+        $aux_from = $from;
+        $mes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        if($dif_tiempo <= 50){
+            // MOSTRAR DIAS
+            $info['graph']['subtitle']['text'] = 'Tiempo Real en dias';
+            $info['lapse'] = "1 day";
+            while($to > $aux_from){
+                $info['graph']['xAxis']['categories'][] = date("d", $aux_from);
+                $info['fecha'][] = $aux_from;
+                $aux_from = $aux_from + 86400;
+            }
+        }
+        if($dif_tiempo > 50 && $dif_tiempo < 548){
+            // MOSTRAR MESES
+            $info['graph']['subtitle']['text'] = 'Tiempo Real en meses';
+            $info['lapse'] = "1 month";
+            while($to > $aux_from){
+                $aux_mes = intval(date("m", $aux_from)) - 1;
+                $info['graph']['xAxis']['categories'][] = $mes[$aux_mes];
+                $info['fecha'][] = $aux_from;
+                $aux_from = strtotime('+1 month', $aux_from);
+            }
+        }
+        if($dif_tiempo >= 548){
+            // MOSTRAR AÑOS
+            $info['graph']['subtitle']['text'] = 'Tiempo Real en a&ntilde;os';
+            $info['lapse'] = "1 year";
+            while($to > $aux_from){
+                $info['graph']['xAxis']['categories'][] = date("Y", $aux_from);
+                $info['fecha'][] = $aux_from;
+                $aux_from = strtotime('+1 Year', $aux_from);
+            }
+        }
         return $info;
 
     }
