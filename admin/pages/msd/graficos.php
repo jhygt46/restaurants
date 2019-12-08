@@ -173,6 +173,12 @@ $locales = $core->get_locales();
             <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container5" style="height: 300px; display: block; padding-top: 40px"></div>
 
+            <div id="container6" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container7" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container8" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container9" style="height: 300px; display: block; padding-top: 40px"></div>
+
+            
         </div>
     </div>
 </div>
