@@ -49,10 +49,11 @@ $locales = $core->get_locales();
                     Div.setAttribute('id', 'container'+i);
                     $('.cont_container').append(Div);
                 }
-
+                for(var i=0; i<data.length; i++){
+                    Highcharts.chart('container'+i, data[i]);
+                }
                 
                 /*
-                Highcharts.chart('container0', data[0]);
                 Highcharts.chart('container1', data[1]);
                 Highcharts.chart('container2', data[2]);
                 Highcharts.chart('container3', data[3]);
