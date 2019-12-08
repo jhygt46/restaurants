@@ -161,11 +161,14 @@ $locales = $core->get_locales();
                 </ul>
             </div>
             <div id="container0" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container1" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container3" style="height: 300px; display: block; padding-top: 40px"></div>
+
+            <div id="container1" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container4" style="height: 300px; display: block; padding-top: 40px"></div>
+
+            <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container5" style="height: 300px; display: block; padding-top: 40px"></div>
+            
         </div>
     </div>
 </div>

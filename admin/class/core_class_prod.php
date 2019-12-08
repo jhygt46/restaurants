@@ -2179,6 +2179,28 @@ class Core{
         }
         return $total;
     }
+    public function pedidos_tipo_fecha($pedidos, $fecha_ini, $intervalo, $id_loc, $tipo, $acum){
+        $total = 0;
+        for($i=0; $i<count($pedidos); $i++){
+            $fecha_pedido = strtotime($pedidos[$i]['fecha']);
+            $fecha_fin = strtotime($intervalo, $fecha_ini);
+            if($acum == 0){
+                if($fecha_pedido >= $fecha_ini && $fecha_pedido < $fecha_fin){
+                    if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['tipo'] == $tipo){
+                        $total = $total + 1;
+                    }
+                }
+            }
+            if($acum == 1){
+                if($fecha_pedido < $fecha_fin){
+                    if($id_loc == $pedidos[$i]['id_loc'] && $pedidos[$i]['tipo'] == $tipo){
+                        $total = $total + 1;
+                    }
+                }
+            }         
+        }
+        return $total;
+    }
     public function get_stats(){
 
         $tipo = $_POST['tipo'];
@@ -2196,100 +2218,113 @@ class Core{
                     $grafico_ejex = $this->grafico_ejex($to, $from);
 
                     // GRAFICO 1 VENTAS TOTALES //
-                    $info[0] = $grafico_ejex['graph'];
-                    $info[0]['chart']['type'] = 'line';
-                    $info[0]['yAxis']['title']['text'] = null;
-                    $info[0]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[0]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[0]['title']['text'] = 'Total Ventas';            
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Ventas';            
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_total_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'});
                         }
-                        $info[0]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
                     
                     // GRAFICO 2 TOTAL DESPACHO DOMICILIO //
-                    $info[1] = $grafico_ejex['graph'];
-                    $info[1]['chart']['type'] = 'line';
-                    $info[1]['yAxis']['title']['text'] = null;
-                    $info[1]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[1]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[1]['title']['text'] = 'Total Pedidos Despacho Domicilio';          
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Despacho Domicilio';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 0);
                         }
-                        $info[1]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
                     
                     // GRAFICO 3 TOTAL RETIRO LOCAL //
-                    $info[2] = $grafico_ejex['graph'];
-                    $info[2]['chart']['type'] = 'line';
-                    $info[2]['yAxis']['title']['text'] = null;
-                    $info[2]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[2]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[2]['title']['text'] = 'Total Pedidos Retiro Local';          
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 0);
                         }
-                        $info[2]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
                     
                     // GRAFICO 4 VENTAS TOTALES ACUMULADO //
-                    $info[3] = $grafico_ejex['graph'];
-                    $info[3]['chart']['type'] = 'line';
-                    $info[3]['yAxis']['title']['text'] = null;
-                    $info[3]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[3]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[3]['title']['text'] = 'Total Ventas Acumulado';            
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Ventas Acumulado';            
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_total_acum_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'});
                         }
-                        $info[3]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
 
                     // GRAFICO 5 TOTAL DESPACHO DOMICILIO ACUMULADO //
-                    $info[4] = $grafico_ejex['graph'];
-                    $info[4]['chart']['type'] = 'line';
-                    $info[4]['yAxis']['title']['text'] = null;
-                    $info[4]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[4]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[4]['title']['text'] = 'Total Pedidos Despacho Domicilio ACUMULADO';          
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Despacho Domicilio ACUMULADO';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 1, 1);
                         }
-                        $info[4]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
                     
-                    // GRAFICO 3 TOTAL RETIRO LOCAL ACUMULADO //
-                    $info[5] = $grafico_ejex['graph'];
-                    $info[5]['chart']['type'] = 'line';
-                    $info[5]['yAxis']['title']['text'] = null;
-                    $info[5]['plotOptions']['line']['dataLabels']['enabled'] = true;
-                    $info[5]['plotOptions']['line']['enableMouseTracking'] = false;
-                    $info[5]['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    // GRAFICO 6 TOTAL RETIRO LOCAL ACUMULADO //
+                    $aux_gr = $grafico_ejex['graph'];
+                    $aux_gr['chart']['type'] = 'line';
+                    $aux_gr['yAxis']['title']['text'] = null;
+                    $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
+                    $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
+                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
                             $aux['data'][] = $this->pedidos_despacho_fecha($pedidos, $fecha, $grafico_ejex['lapse'], $locales[$j]->{'id_loc'}, 0, 1);
                         }
-                        $info[5]['series'][] = $aux;
+                        $aux_gr['series'][] = $aux;
                         unset($aux);
                     }
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
 
                     $sql->free_result();
                     $sql->close();
