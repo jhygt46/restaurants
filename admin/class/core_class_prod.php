@@ -2415,8 +2415,8 @@ class Core{
                     $aux_gr['series'][0]['colorByPoint'] = true;
                     $aux_gr['series'][0]['data'][0]['name'] = 'Chrome';
                     $aux_gr['series'][0]['data'][0]['y'] = 61.41;
-                    $aux_gr['series'][0]['data'][0]['sliced'] = true;
-                    $aux_gr['series'][0]['data'][0]['selected'] = true;
+                    $aux_gr['series'][0]['data'][0]['sliced'] = false;
+                    $aux_gr['series'][0]['data'][0]['selected'] = false;
                     $aux_gr['series'][0]['data'][1]['name'] = 'Internet Explorer';
                     $aux_gr['series'][0]['data'][1]['y'] = 11.85;
                     $aux_gr['series'][0]['data'][2]['name'] = 'Firefox';
@@ -2425,8 +2425,8 @@ class Core{
                     $aux_gr['series'][0]['data'][3]['y'] = 4.67;
                     $aux_gr['series'][0]['data'][4]['name'] = 'Safari';
                     $aux_gr['series'][0]['data'][4]['y'] = 4.18;
-                    $aux_gr['series'][0]['data'][4]['name'] = 'Other';
-                    $aux_gr['series'][0]['data'][4]['y'] = 7.05;
+                    $aux_gr['series'][0]['data'][5]['name'] = 'Other';
+                    $aux_gr['series'][0]['data'][5]['y'] = 7.05;
 
                     $info[] = $aux_gr;
                     unset($aux_gr);
