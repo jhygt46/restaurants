@@ -46,24 +46,13 @@ $locales = $core->get_locales();
 
                 for(var i=0; i<data.length; i++){
                     var Div = document.createElement('div');
+                    Div.className = 'graph_container';
                     Div.setAttribute('id', 'container'+i);
                     $('.cont_container').append(Div);
                 }
                 for(var i=0; i<data.length; i++){
                     Highcharts.chart('container'+i, data[i]);
                 }
-                
-                /*
-                Highcharts.chart('container1', data[1]);
-                Highcharts.chart('container2', data[2]);
-                Highcharts.chart('container3', data[3]);
-                Highcharts.chart('container4', data[4]);
-                Highcharts.chart('container5', data[5]);
-                Highcharts.chart('container6', data[6]);
-                Highcharts.chart('container7', data[7]);
-                Highcharts.chart('container8', data[8]);
-                Highcharts.chart('container9', data[9]);
-                */
 
             },
             error: function(e){}

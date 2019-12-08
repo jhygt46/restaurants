@@ -822,6 +822,14 @@ body .relative {
   margin: 5px 5% 0 5%;
   background: #999;
 }
+.pagina .cont_pagina .cont_pag .cont_container {
+  padding-top: 40px;
+}
+.pagina .cont_pagina .cont_pag .cont_container .graph_container{
+  padding-bottom: 20px;
+}
+
+
 
 .pagina {
   padding: 0px 10px 15px 10px;
