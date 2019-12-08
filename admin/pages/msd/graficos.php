@@ -45,9 +45,9 @@ $locales = $core->get_locales();
             success: function(data){
 
                 for(var i=0; i<data.length; i++){
-                    var div = create_element_class('cont_grafico');
-                    div.setAttribute('id', 'container'+i);
-                    $('#cont_container').append(div);
+                    var Div = document.createElement('div');
+                    Div.setAttribute('id', 'container'+i);
+                    $('#cont_container').append(Div);
                 }
 
                 
