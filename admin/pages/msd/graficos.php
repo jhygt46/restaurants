@@ -47,7 +47,7 @@ $locales = $core->get_locales();
                 for(var i=0; i<data.length; i++){
                     var Div = document.createElement('div');
                     Div.setAttribute('id', 'container'+i);
-                    $('#cont_container').append(Div);
+                    $('.cont_container').append(Div);
                 }
 
                 
