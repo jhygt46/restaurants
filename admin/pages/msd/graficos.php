@@ -43,6 +43,15 @@ $locales = $core->get_locales();
             type: "POST",
             data: send,
             success: function(data){
+
+                for(var i=0; i<data.length; i++){
+                    var div = create_element_class('cont_grafico');
+                    div.setAttribute('id', 'container'+i);
+                    $('#cont_container').append(div);
+                }
+
+                
+                /*
                 Highcharts.chart('container0', data[0]);
                 Highcharts.chart('container1', data[1]);
                 Highcharts.chart('container2', data[2]);
@@ -53,6 +62,8 @@ $locales = $core->get_locales();
                 Highcharts.chart('container7', data[7]);
                 Highcharts.chart('container8', data[8]);
                 Highcharts.chart('container9', data[9]);
+                */
+
             },
             error: function(e){}
         });
@@ -164,20 +175,13 @@ $locales = $core->get_locales();
                     <li class="opt">2</li>
                 </ul>
             </div>
-            <div id="container0" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container3" style="height: 300px; display: block; padding-top: 40px"></div>
 
-            <div id="container1" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container4" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div class="cont_container">
 
-            <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container5" style="height: 300px; display: block; padding-top: 40px"></div>
 
-            <div id="container6" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container7" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container8" style="height: 300px; display: block; padding-top: 40px"></div>
-            <div id="container9" style="height: 300px; display: block; padding-top: 40px"></div>
-
+            </div>
+            
+            
             
         </div>
     </div>
