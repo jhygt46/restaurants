@@ -2398,6 +2398,40 @@ class Core{
                     $info[] = $aux_gr;
                     unset($aux_gr);
 
+                    $aux_gr['chart']['plotBackgroundColor'] = null;
+                    $aux_gr['chart']['plotBorderWidth'] = null;
+                    $aux_gr['chart']['plotShadow'] = false;
+                    $aux_gr['chart']['type'] = 'pie';
+
+                    $aux_gr['title']['text'] = 'Browser market shares in January, 2018';
+                    $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
+
+                    $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
+                    $aux_gr['plotOptions']['pie']['cursor'] = 'pointer';
+                    $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
+                    $aux_gr['plotOptions']['pie']['showInLegend'] = true;
+
+                    $aux_gr['series'][0]['name'] = 'Brands';
+                    $aux_gr['series'][0]['colorByPoint'] = true;
+                    $aux_gr['series'][0]['data'][0]['name'] = 'Chrome';
+                    $aux_gr['series'][0]['data'][0]['y'] = 61.41;
+                    $aux_gr['series'][0]['data'][0]['sliced'] = true;
+                    $aux_gr['series'][0]['data'][0]['selected'] = true;
+                    $aux_gr['series'][0]['data'][1]['name'] = 'Internet Explorer';
+                    $aux_gr['series'][0]['data'][1]['y'] = 11.85;
+                    $aux_gr['series'][0]['data'][2]['name'] = 'Firefox';
+                    $aux_gr['series'][0]['data'][2]['y'] = 10.85;
+                    $aux_gr['series'][0]['data'][3]['name'] = 'Edge';
+                    $aux_gr['series'][0]['data'][3]['y'] = 4.67;
+                    $aux_gr['series'][0]['data'][4]['name'] = 'Safari';
+                    $aux_gr['series'][0]['data'][4]['y'] = 4.18;
+                    $aux_gr['series'][0]['data'][4]['name'] = 'Other';
+                    $aux_gr['series'][0]['data'][4]['y'] = 7.05;
+
+                    $info[] = $aux_gr;
+                    unset($aux_gr);
+
+
                     $sql->free_result();
                     $sql->close();
 
