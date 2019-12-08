@@ -2332,7 +2332,7 @@ class Core{
                     $aux_gr['yAxis']['title']['text'] = null;
                     $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
-                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    $aux_gr['title']['text'] = 'Total Pedidos Pagina';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
@@ -2350,7 +2350,7 @@ class Core{
                     $aux_gr['yAxis']['title']['text'] = null;
                     $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
-                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    $aux_gr['title']['text'] = 'Total Pedidos Pos';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
@@ -2368,7 +2368,7 @@ class Core{
                     $aux_gr['yAxis']['title']['text'] = null;
                     $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
-                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    $aux_gr['title']['text'] = 'Total Pedidos Pagina ACUMULADO';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
@@ -2386,7 +2386,7 @@ class Core{
                     $aux_gr['yAxis']['title']['text'] = null;
                     $aux_gr['plotOptions']['line']['dataLabels']['enabled'] = true;
                     $aux_gr['plotOptions']['line']['enableMouseTracking'] = false;
-                    $aux_gr['title']['text'] = 'Total Pedidos Retiro Local ACUMULADO';          
+                    $aux_gr['title']['text'] = 'Total Pedidos Pos ACUMULADO';          
                     for($j=0; $j<count($locales); $j++){
                         $aux['name'] = $locales[$j]->{'nombre'};
                         foreach($grafico_ejex['fecha'] as $fecha){
