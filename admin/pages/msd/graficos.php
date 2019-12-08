@@ -46,6 +46,7 @@ $locales = $core->get_locales();
                 Highcharts.chart('container0', data[0]);
                 Highcharts.chart('container1', data[1]);
                 Highcharts.chart('container2', data[2]);
+                Highcharts.chart('container3', data[3]);
             },
             error: function(e){}
         });
@@ -160,6 +161,7 @@ $locales = $core->get_locales();
             <div id="container0" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container1" style="height: 300px; display: block; padding-top: 40px"></div>
             <div id="container2" style="height: 300px; display: block; padding-top: 40px"></div>
+            <div id="container3" style="height: 300px; display: block; padding-top: 40px"></div>
         </div>
     </div>
 </div>
