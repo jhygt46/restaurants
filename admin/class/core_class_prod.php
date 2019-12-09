@@ -2227,9 +2227,16 @@ class Core{
         }
 
         $total = $despacho + $retiro;
-        $aux[0]['name'] = 'Despacho a Domicilio';
+        if($tipo == 0){
+            $aux[0]['name'] = 'Cantidad Despacho';
+            $aux[1]['name'] = 'Cantidad Retiro';
+        }
+        if($tipo == 1){
+            $aux[0]['name'] = 'Total Despacho';
+            $aux[1]['name'] = 'Total Retiro';
+        }
+        
         $aux[0]['y'] = $despacho / ($total) * 100;
-        $aux[1]['name'] = 'Retiro en Local';
         $aux[1]['y'] = $retiro / ($total) * 100;
         return $aux;
 
@@ -2260,11 +2267,55 @@ class Core{
         }
 
         $total = $tipo0 + $tipo1;
-        $aux[0]['name'] = 'Pedido Pagina';
+
+        if($tipo == 0){
+            $aux[0]['name'] = 'Cantidad Pagina';
+            $aux[1]['name'] = 'Cantidad POS';
+        }
+        if($tipo == 1){
+            $aux[0]['name'] = 'Total Pagina';
+            $aux[1]['name'] = 'Total POS';
+        }
         $aux[0]['y'] = $tipo0 / ($total) * 100;
-        $aux[1]['name'] = 'Pedido Punto de Venta';
+        
         $aux[1]['y'] = $tipo1 / ($total) * 100;
         return $aux;
+
+    }
+    public function pedidos_porcentaje_user_pos($pedidos, $id_loc, $tipo, $vendedores){
+
+        $total = 0;
+        for($i=0; $i<count($pedidos); $i++){
+
+            if($pedidos[$i]['id_loc'] == $id_loc){
+                if($tipo == 0){
+                    $aux[$pedidos[$i]['id_user']] += 1;
+                    $total++;
+                }
+                if($tipo == 1){
+                    $aux[$pedidos[$i]['id_user']] += $pedidos[$i]['total'];
+                    $total += $pedidos[$i]['total'];
+                }
+            }
+
+        }
+        foreach($aux as $key => $value){
+
+            if($key == 0){
+                $aux_r['name'] = "Sin Vendedor Asignado";
+                $aux_r['y'] = $value;
+            }else{
+                for($i=0; $i<count($vendedores); $i++){
+                    if($key == $vendedores[$i]['id_user']){
+                        $aux_r['name'] = $vendedores[$i]['nombre'];
+                        $aux_r['y'] = $value;
+                    }
+                }
+            }
+            $aux_re[] = $aux_r;
+
+        }
+        return $aux_re;
 
     }
     public function get_stats(){
@@ -2277,6 +2328,17 @@ class Core{
         if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
+
+                    $vendedores = [];
+                    if($sqlv = $this->con->prepare("SELECT id_user, nombre FROM fw_usuarios WHERE id_gir=? AND eliminado=?")){
+                    if($sqlv->bind_param("ii", $this->id_gir, $this->eliminado)){
+                    if($sqlv->execute()){
+
+                        $vendedores = $sqlv->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($sqlv->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($sqlv->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($this->con->error)); }
 
                     $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $from = strtotime($from);
@@ -2553,7 +2615,30 @@ class Core{
 
                         $aux_gr['series'][0]['name'] = 'Porcentaje';
                         $aux_gr['series'][0]['colorByPoint'] = true;
-                        $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_tipo($pedidos, $locales[$j]->{'id_loc'}, 1);
+                        $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 0, $vendedores);
+                        
+                        $info[] = $aux_gr;
+                        unset($aux_gr);
+
+                    }
+                    for($j=0; $j<count($locales); $j++){
+
+                        $aux_gr['chart']['plotBackgroundColor'] = null;
+                        $aux_gr['chart']['plotBorderWidth'] = null;
+                        $aux_gr['chart']['plotShadow'] = false;
+                        $aux_gr['chart']['type'] = 'pie';
+
+                        $aux_gr['title']['text'] = 'Local '.$locales[$j]->{'nombre'}.' Origen Pedido en Dinero';
+                        $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
+
+                        $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
+                        $aux_gr['plotOptions']['pie']['cursor'] = 'pointer';
+                        $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
+                        $aux_gr['plotOptions']['pie']['showInLegend'] = true;
+
+                        $aux_gr['series'][0]['name'] = 'Porcentaje';
+                        $aux_gr['series'][0]['colorByPoint'] = true;
+                        $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 1, $vendedores);
                         
                         $info[] = $aux_gr;
                         unset($aux_gr);
