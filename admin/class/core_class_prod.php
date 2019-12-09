@@ -2217,12 +2217,33 @@ class Core{
         }
 
         $total = $despacho + $retiro;
-
         $aux[0]['name'] = 'Despacho a Domicilio';
         $aux[0]['y'] = $despacho / ($total) * 100;
         $aux[1]['name'] = 'Retiro en Local';
         $aux[1]['y'] = $retiro / ($total) * 100;
+        return $aux;
 
+    }
+    public function pedidos_porcentaje_tipo($pedidos, $id_loc){
+
+        $tipo0 = 0;
+        $tipo1 = 0;
+        for($i=0; $i<count($pedidos); $i++){
+            if($pedidos[$i]['id_loc'] == $id_loc){
+                if($pedidos[$i]['tipo'] == 0){
+                    $tipo0++;
+                }
+                if($pedidos[$i]['tipo'] == 1){
+                    $tipo1++;
+                }
+            }
+        }
+
+        $total = $tipo0 + $tipo1;
+        $aux[0]['name'] = 'Despacho a Domicilio';
+        $aux[0]['y'] = $tipo0 / ($total) * 100;
+        $aux[1]['name'] = 'Retiro en Local';
+        $aux[1]['y'] = $tipo1 / ($total) * 100;
         return $aux;
 
     }
@@ -2431,7 +2452,7 @@ class Core{
                         $aux_gr['chart']['plotShadow'] = false;
                         $aux_gr['chart']['type'] = 'pie';
 
-                        $aux_gr['title']['text'] = 'Browser market shares in January, 2018';
+                        $aux_gr['title']['text'] = 'Local '.$locales[$j]->{'nombre'}.' Tipo de Despacho';
                         $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
 
                         $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
@@ -2439,9 +2460,33 @@ class Core{
                         $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
                         $aux_gr['plotOptions']['pie']['showInLegend'] = true;
 
-                        $aux_gr['series'][0]['name'] = 'Brands';
+                        $aux_gr['series'][0]['name'] = 'Porcentaje';
                         $aux_gr['series'][0]['colorByPoint'] = true;
                         $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_despacho($pedidos, $locales[$j]->{'id_loc'});
+                        
+                        $info[] = $aux_gr;
+                        unset($aux_gr);
+
+                    }
+
+                    for($j=0; $j<count($locales); $j++){
+
+                        $aux_gr['chart']['plotBackgroundColor'] = null;
+                        $aux_gr['chart']['plotBorderWidth'] = null;
+                        $aux_gr['chart']['plotShadow'] = false;
+                        $aux_gr['chart']['type'] = 'pie';
+
+                        $aux_gr['title']['text'] = 'Local '.$locales[$j]->{'nombre'}.' Tipo de Despacho';
+                        $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
+
+                        $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
+                        $aux_gr['plotOptions']['pie']['cursor'] = 'pointer';
+                        $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
+                        $aux_gr['plotOptions']['pie']['showInLegend'] = true;
+
+                        $aux_gr['series'][0]['name'] = 'Porcentaje';
+                        $aux_gr['series'][0]['colorByPoint'] = true;
+                        $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_tipo($pedidos, $locales[$j]->{'id_loc'});
                         
                         $info[] = $aux_gr;
                         unset($aux_gr);
