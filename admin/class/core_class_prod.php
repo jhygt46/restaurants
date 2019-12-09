@@ -2341,7 +2341,8 @@ class Core{
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
 
-                    $vendedores = $this->get_vendedores();
+                    $vendedores = [];
+                    //$vendedores = $this->get_vendedores();
 
                     $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $from = strtotime($from);
