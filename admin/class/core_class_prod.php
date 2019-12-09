@@ -2311,10 +2311,13 @@ class Core{
             }
 
         }
-        
+
         $vendedores[0]['id_user'] = 3;
+        $vendedores[0]['nombre'] = 'Pedro';
         $vendedores[1]['id_user'] = 4;
+        $vendedores[1]['nombre'] = 'Juan';
         $vendedores[2]['id_user'] = 5;
+        $vendedores[2]['nombre'] = 'Diego';
 
         foreach($aux as $key => $value){
 
