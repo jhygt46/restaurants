@@ -2320,6 +2320,12 @@ class Core{
         $vendedores[1]['nombre'] = 'Juan';
         $vendedores[2]['id_user'] = 5;
         $vendedores[2]['nombre'] = 'Diego';
+        $vendedores[3]['id_user'] = 6;
+        $vendedores[3]['nombre'] = 'Mario';
+        $vendedores[4]['id_user'] = 7;
+        $vendedores[4]['nombre'] = 'Alberto';
+        $vendedores[5]['id_user'] = 8;
+        $vendedores[5]['nombre'] = 'Nelson';
 
         foreach($aux as $key => $value){
 
