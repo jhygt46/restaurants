@@ -2298,7 +2298,6 @@ class Core{
 
         $total = 0;
         for($i=0; $i<count($pedidos); $i++){
-
             if($pedidos[$i]['id_loc'] == $id_loc){
                 if($tipo == 0){
                     $aux[$pedidos[$i]['id_user']] += 1;
@@ -2309,7 +2308,6 @@ class Core{
                     $total += $pedidos[$i]['total'];
                 }
             }
-
         }
 
         $vendedores[0]['id_user'] = 3;
@@ -2326,20 +2324,18 @@ class Core{
         $vendedores[5]['nombre'] = 'Nelson';
 
         foreach($aux as $key => $value){
-
             if($key == 0){
                 $aux_r['name'] = "Sin Vendedor Asignado";
                 $aux_r['y'] = $value;
             }else{
                 for($i=0; $i<count($vendedores); $i++){
                     if($key == $vendedores[$i]['id_user']){
-                        $aux_r['name'] = $vendedores[$i]['nombre'];
-                        $aux_r['y'] = $value;
+                        $aux_r['name'] = $vendedores[$i]['nombre'] .' ('.$value.')';
+                        $aux_r['y'] = ($value / $total) * 100 ;
                     }
                 }
             }
             $aux_re[] = $aux_r;
-
         }
         return $aux_re;
 
