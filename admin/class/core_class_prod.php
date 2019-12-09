@@ -514,6 +514,18 @@ class Core{
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($this->con->error)); }
     }
+    public function get_vendedores(){
+        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios WHERE id_gir=? AND eliminado=?")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $this->id_gir, 'get_locales() '.htmlspecialchars($this->con->error)); }
+    }
     public function get_horarios($id_loc){
         if($sql = $this->con->prepare("SELECT * FROM horarios WHERE id_loc=? AND id_gir=? AND eliminado=?")){
             if($sql->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
@@ -2329,16 +2341,7 @@ class Core{
             if($sql->bind_param("issi", $this->id_gir, $from, $to, $this->eliminado)){
                 if($sql->execute()){
 
-                    $vendedores = [];
-                    if($sqlv = $this->con->prepare("SELECT id_user, nombre FROM fw_usuarios WHERE id_gir=? AND eliminado=?")){
-                    if($sqlv->bind_param("ii", $this->id_gir, $this->eliminado)){
-                    if($sqlv->execute()){
-
-                        $vendedores = $sqlv->get_result()->fetch_all(MYSQLI_ASSOC);
-
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($sqlv->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($sqlv->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() #2 '.htmlspecialchars($this->con->error)); }
+                    $vendedores = $this->get_vendedores();
 
                     $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $from = strtotime($from);
