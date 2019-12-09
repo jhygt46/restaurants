@@ -2342,7 +2342,7 @@ class Core{
                 if($sql->execute()){
 
                     $vendedores = [];
-                    $vendedores = $this->get_vendedores();
+                    //$vendedores = $this->get_vendedores();
 
                     $pedidos = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $from = strtotime($from);
