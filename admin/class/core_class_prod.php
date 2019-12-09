@@ -2201,6 +2201,31 @@ class Core{
         }
         return $total;
     }
+    public function pedidos_porcentaje_despacho($pedidos, $id_loc){
+
+        $despacho = 0;
+        $retiro = 0;
+        for($i=0; $i<count($pedidos); $i++){
+            if($pedidos[$i]['id_loc'] == $id_loc){
+                if($pedidos[$i]['despacho'] == 0){
+                    $despacho++;
+                }
+                if($pedidos[$i]['despacho'] == 1){
+                    $retiro++;
+                }
+            }
+        }
+
+        $total = $despacho + $retiro;
+
+        $aux[0]['name'] = 'Despacho a Domicilio';
+        $aux[0]['y'] = $despacho / ($total) * 100;
+        $aux[1]['name'] = 'Retiro en Local';
+        $aux[1]['y'] = $retiro / ($total) * 100;
+
+        return $aux;
+
+    }
     public function get_stats(){
 
         $tipo = $_POST['tipo'];
@@ -2398,39 +2423,30 @@ class Core{
                     $info[] = $aux_gr;
                     unset($aux_gr);
 
-                    $aux_gr['chart']['plotBackgroundColor'] = null;
-                    $aux_gr['chart']['plotBorderWidth'] = null;
-                    $aux_gr['chart']['plotShadow'] = false;
-                    $aux_gr['chart']['type'] = 'pie';
 
-                    $aux_gr['title']['text'] = 'Browser market shares in January, 2018';
-                    $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
+                    for($j=0; $j<count($locales); $j++){
 
-                    $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
-                    $aux_gr['plotOptions']['pie']['cursor'] = 'pointer';
-                    $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
-                    $aux_gr['plotOptions']['pie']['showInLegend'] = true;
+                        $aux_gr['chart']['plotBackgroundColor'] = null;
+                        $aux_gr['chart']['plotBorderWidth'] = null;
+                        $aux_gr['chart']['plotShadow'] = false;
+                        $aux_gr['chart']['type'] = 'pie';
 
-                    $aux_gr['series'][0]['name'] = 'Brands';
-                    $aux_gr['series'][0]['colorByPoint'] = true;
-                    $aux_gr['series'][0]['data'][0]['name'] = 'Chrome';
-                    $aux_gr['series'][0]['data'][0]['y'] = 61.41;
-                    $aux_gr['series'][0]['data'][0]['sliced'] = false;
-                    $aux_gr['series'][0]['data'][0]['selected'] = false;
-                    $aux_gr['series'][0]['data'][1]['name'] = 'Internet Explorer';
-                    $aux_gr['series'][0]['data'][1]['y'] = 11.85;
-                    $aux_gr['series'][0]['data'][2]['name'] = 'Firefox';
-                    $aux_gr['series'][0]['data'][2]['y'] = 10.85;
-                    $aux_gr['series'][0]['data'][3]['name'] = 'Edge';
-                    $aux_gr['series'][0]['data'][3]['y'] = 4.67;
-                    $aux_gr['series'][0]['data'][4]['name'] = 'Safari';
-                    $aux_gr['series'][0]['data'][4]['y'] = 4.18;
-                    $aux_gr['series'][0]['data'][5]['name'] = 'Other';
-                    $aux_gr['series'][0]['data'][5]['y'] = 7.05;
+                        $aux_gr['title']['text'] = 'Browser market shares in January, 2018';
+                        $aux_gr['tooltip']['pointFormat'] = '{series.name}: <b>{point.percentage:.1f}%</b>';
 
-                    $info[] = $aux_gr;
-                    unset($aux_gr);
+                        $aux_gr['plotOptions']['pie']['allowPointSelect'] = true;
+                        $aux_gr['plotOptions']['pie']['cursor'] = 'pointer';
+                        $aux_gr['plotOptions']['pie']['dataLabels']['enabled'] = false;
+                        $aux_gr['plotOptions']['pie']['showInLegend'] = true;
 
+                        $aux_gr['series'][0]['name'] = 'Brands';
+                        $aux_gr['series'][0]['colorByPoint'] = true;
+                        $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_despacho($pedidos, $locales[$j]->{'id_loc'});
+                        
+                        $info[] = $aux_gr;
+                        unset($aux_gr);
+
+                    }
 
                     $sql->free_result();
                     $sql->close();
