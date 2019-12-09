@@ -2311,7 +2311,11 @@ class Core{
             }
 
         }
-        return $aux;
+        
+        $vendedores[0]['id_user'] = 3;
+        $vendedores[1]['id_user'] = 4;
+        $vendedores[2]['id_user'] = 5;
+
         foreach($aux as $key => $value){
 
             if($key == 0){
