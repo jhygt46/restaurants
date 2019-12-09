@@ -2311,6 +2311,7 @@ class Core{
             }
 
         }
+        return $aux;
         foreach($aux as $key => $value){
 
             if($key == 0){
