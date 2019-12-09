@@ -2628,7 +2628,8 @@ class Core{
                         $aux_gr['series'][0]['name'] = 'Porcentaje';
                         $aux_gr['series'][0]['colorByPoint'] = true;
                         $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 0, $vendedores);
-                        
+                        $info2[] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 0, $vendedores);
+
                         $info[] = $aux_gr;
                         unset($aux_gr);
 
@@ -2651,7 +2652,8 @@ class Core{
                         $aux_gr['series'][0]['name'] = 'Porcentaje';
                         $aux_gr['series'][0]['colorByPoint'] = true;
                         $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 1, $vendedores);
-                        
+                        $info2[] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 1, $vendedores);
+
                         $info[] = $aux_gr;
                         unset($aux_gr);
 
@@ -2663,7 +2665,7 @@ class Core{
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_stats() '.htmlspecialchars($this->con->error)); }
-        return $info;
+        return $info2;
 
     }
     private function grafico_ejex($to, $from){
