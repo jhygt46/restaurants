@@ -2628,7 +2628,7 @@ class Core{
                         $aux_gr['series'][0]['name'] = 'Porcentaje';
                         $aux_gr['series'][0]['colorByPoint'] = true;
                         $aux_gr['series'][0]['data'] = $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 0, $vendedores);
-                        return $aux_gr['series'][0]['data'];
+                        return $this->pedidos_porcentaje_user_pos($pedidos, $locales[$j]->{'id_loc'}, 0, $vendedores);
                         $info[] = $aux_gr;
                         unset($aux_gr);
 
