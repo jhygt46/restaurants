@@ -2312,8 +2312,6 @@ class Core{
 
         }
 
-        return $aux;
-
         $vendedores[0]['id_user'] = 3;
         $vendedores[0]['nombre'] = 'Pedro';
         $vendedores[1]['id_user'] = 4;
