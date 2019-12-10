@@ -106,9 +106,12 @@ echo "</pre>";
             </div>
             <div class="listado_items">
                 <?php 
-                for($i=0; $i<count($list); $i++){
-                    $id = $list[$i][$id_list];
-                    $nombre = $list[$i]['nombre'];
+                for($k=0; $k<count($graficos); $k++){ 
+                    if(in_array($graficos[$k]['num'], $list)){
+
+                    $id = $list;
+                    $nombre = $graficos[$k]['nombre'];
+                    
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
