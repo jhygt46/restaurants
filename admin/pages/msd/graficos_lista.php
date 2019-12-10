@@ -50,11 +50,6 @@ $graficos[7]['nombre'] = 'Ventas Totales F';
 $graficos[8]['num'] = 9;
 $graficos[8]['nombre'] = 'Ventas Totales G';
 
-
-echo "<pre>";
-print_r($graficos);
-echo "</pre>";
-
 ?>
 <?php if(isset($_GET['sortable'])){ ?>
 <script>
@@ -64,7 +59,7 @@ echo "</pre>";
             $(this).find('.l_item').each(function(){
                 order.push($(this).attr('rel'));
             });
-            var send = {accion: 'ordercat', values: order};
+            var send = {accion: 'ordergralista', values: order};
             $.ajax({
                 url: "ajax/",
                 type: "POST",
@@ -130,7 +125,7 @@ echo "</pre>";
                     $nombre = $graficos[$k]['nombre'];
 
                 ?>
-                <div class="l_item">
+                <div class="l_item" rel="<?php echo $id; ?>">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <a class="icono ic1" onclick="eliminar('eliminar_gra_lista', '<?php echo $id_pro; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
