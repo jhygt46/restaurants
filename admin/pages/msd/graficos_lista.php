@@ -12,9 +12,9 @@ require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 $list = $core->get_graficos_lista();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
+if(count($list) == 0){
+    $id_set = 0;
+}
 
 /* CONFIG PAGE */
 $titulo = "Lista Graficos";

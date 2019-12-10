@@ -2152,7 +2152,7 @@ class Core{
                     $result = $sql->get_result();
                     while($row = $result->fetch_assoc()){
                         $res['id_grf'] = $row['nombre'];
-                        $res['id_grf'][] = $row['id_grf'];
+                        $res['id_grf'] = $row['id_grf'];
                     }
                     return $res;
 
