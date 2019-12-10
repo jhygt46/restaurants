@@ -12,10 +12,6 @@ require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 $list = $core->get_graficos_giro();
 
-echo "<pre>";
-print_r($list);
-echo "</pre>";
-
 /* CONFIG PAGE */
 $titulo = "Graficos";
 $titulo_list = "Estadisticas";
@@ -30,9 +26,10 @@ $locales = $core->get_locales();
 <script>
 
     function cambiar_tipo(that){
-        if(that.value == 1){
+        if(that.value == 0){
             navlink('pages/msd/graficos_lista.php');
-        }else{
+        }
+        if(that.value > 0){
             navlink('pages/msd/graficos_lista.php?id_set='.that.value);
         }
     }
@@ -128,8 +125,8 @@ $locales = $core->get_locales();
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
                         <select id="tipo" onchange="cambiar_tipo(this)">
-                            <option value="0">Todos</option>
-                            <option value="1">Crear Nueva Lista</option>
+                            <option value="-1">Todos</option>
+                            <option value="0">Crear Nueva Lista</option>
                             <?php for($k=0; $k<count($list); $k++){ ?>
                                 <option value="<?php echo $list[$k]['id_set']; ?>"><?php echo $list[$k]['nombre']; ?></option>
                             <?php } ?>
