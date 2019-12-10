@@ -25,12 +25,10 @@ if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0
 
     $id = $_GET["id_set"];
     $list = $core->get_graficos_lista($id);
-    echo "id: ".$id;
-    /*
     echo "<pre>";
     print_r($list);
     echo "</pre>";
-    */
+    
 }
 
 ?>
