@@ -24,10 +24,10 @@ $locales = $core->get_locales();
 ?>
 <script>
 
-    function cambiar_tipo(that){
-
-        console.log(that.value);
-        
+    function cambiar_tipo(that){}
+        if(that.value == 1){
+            navlink('pages/msd/graficos_lista.php');
+        }
     }
 
     function stats(that){
