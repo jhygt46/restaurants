@@ -111,15 +111,15 @@ echo "</pre>";
 
                     $id = $list;
                     $nombre = $graficos[$k]['nombre'];
-                    
+
                 ?>
                 <div class="l_item">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic1" onclick="navlink('<?php echo $page_mod; ?>?id_loc=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic1" onclick="eliminar('eliminar_gra_lista', '<?php echo $id_pro; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
                     </div>
                 </div>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>
