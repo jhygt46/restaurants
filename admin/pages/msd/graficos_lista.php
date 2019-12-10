@@ -16,18 +16,17 @@ $core = new Core();
 $titulo = "Lista Graficos";
 $titulo_list = "Estadisticas";
 $sub_titulo = "Configurar Grafico";
+$accion = "crear_gra_lista";
 /* CONFIG PAGE */
 
 $id = 0;
+$list = [];
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
 
     $id = $_GET["id_set"];
     $list = $core->get_graficos_lista($id);
-    echo "<pre>";
-    print_r($list);
-    echo "</pre>";
     
 }
 
@@ -90,6 +89,12 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
+                    <?php if($id > 0){ ?>
+                    <label class="clearfix">
+                        <span><p>Nombre:</p></span>
+                        <input id="nombre" class="inputs" type="text" value="" require="" placeholder="" />
+                    </label>
+                    <?php } ?>
                     <?php 
                     for($k=0; $k<count($graficos); $k++){ 
                         if(!in_array($graficos[$k]['num'], $list)){
