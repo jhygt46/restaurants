@@ -35,14 +35,20 @@ $graficos[0]['num'] = 1;
 $graficos[0]['nombre'] = 'Ventas Totales';
 $graficos[1]['num'] = 2;
 $graficos[1]['nombre'] = 'Ventas Totales Acumulado';
-$graficos[1]['num'] = 3;
-$graficos[1]['nombre'] = 'Ventas Totales A';
-$graficos[1]['num'] = 4;
-$graficos[1]['nombre'] = 'Ventas Totales B';
-$graficos[1]['num'] = 5;
-$graficos[1]['nombre'] = 'Ventas Totales C';
-$graficos[1]['num'] = 6;
-$graficos[1]['nombre'] = 'Ventas Totales D';
+$graficos[2]['num'] = 3;
+$graficos[2]['nombre'] = 'Ventas Totales A';
+$graficos[3]['num'] = 4;
+$graficos[3]['nombre'] = 'Ventas Totales B';
+$graficos[4]['num'] = 5;
+$graficos[4]['nombre'] = 'Ventas Totales C';
+$graficos[5]['num'] = 6;
+$graficos[5]['nombre'] = 'Ventas Totales D';
+$graficos[6]['num'] = 7;
+$graficos[6]['nombre'] = 'Ventas Totales E';
+$graficos[7]['num'] = 8;
+$graficos[7]['nombre'] = 'Ventas Totales F';
+$graficos[8]['num'] = 9;
+$graficos[8]['nombre'] = 'Ventas Totales G';
 
 
 echo "<pre>";
