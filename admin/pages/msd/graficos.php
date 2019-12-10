@@ -27,9 +27,11 @@ $locales = $core->get_locales();
     function cambiar_tipo(that){
         if(that.value == 1){
             navlink('pages/msd/graficos_lista.php');
+        }else{
+            navlink('pages/msd/graficos_lista.php?id_set='.that.value);
         }
     }
-
+    
     function stats(that){
         
         var locales = new Array();  

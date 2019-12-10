@@ -2158,8 +2158,9 @@ class Core{
     }
     public function get_graficos_lista(){
 
-        if($sql = $this->con->prepare("SELECT t1.nombre, t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=?")){
-            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+        $id_set = $_GET["id_set"];
+        if($sql = $this->con->prepare("SELECT t1.nombre, t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_set=? AND t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=?")){
+            if($sql->bind_param("iii", $id_set, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result();
                     while($row = $result->fetch_assoc()){

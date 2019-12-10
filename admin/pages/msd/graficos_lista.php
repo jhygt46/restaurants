@@ -21,6 +21,12 @@ $sub_titulo = "Configurar Grafico";
 $id = 0;
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
+if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
+
+
+    
+}
+
 ?>
 
 <div class="pagina">
