@@ -25,6 +25,9 @@ if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0
 
     $id = $_GET["id_set"];
     $list = $core->get_graficos_lista($id);
+    echo "<pre>";
+    print_r($list);
+    echo "</pre>";
     
 }
 
@@ -41,6 +44,10 @@ $graficos[1]['nombre'] = 'Ventas Totales C';
 $graficos[1]['num'] = 6;
 $graficos[1]['nombre'] = 'Ventas Totales D';
 
+
+echo "<pre>";
+print_r($graficos);
+echo "</pre>";
 
 ?>
 
