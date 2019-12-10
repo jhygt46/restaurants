@@ -2143,6 +2143,17 @@ class Core{
         return $info;
 
     }
+    public function get_graficos_lista(){
+
+        if($sql = $this->con->prepare("SELECT t1.nombre, t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=?")){
+            if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    return $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                }else{ $this->registrar(6, 0, 0, 'get_graficos_lista() #1a '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'get_graficos_lista() #1b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, 0, 'get_graficos_lista() #1c'.htmlspecialchars($this->con->error)); }
+
+    }
     public function pedidos_total_fecha($pedidos, $fecha_ini, $intervalo, $id_loc){
         $total = 0;
         for($i=0; $i<count($pedidos); $i++){
@@ -2309,7 +2320,7 @@ class Core{
                 }
             }
         }
-        
+
         $vendedores[0]['id_user'] = 3;
         $vendedores[0]['nombre'] = 'Pedro';
         $vendedores[1]['id_user'] = 4;
