@@ -130,9 +130,9 @@ $locales = $core->get_locales();
                         <select id="tipo" onchange="cambiar_tipo(this)">
                             <option value="0">Todos</option>
                             <option value="1">Crear Nueva Lista</option>
-                        <?php for($i=0; $i<count($list); $i++){ ?>
-                            <option value="<?php $list[$i]['id_set']; ?>"><?php $list[$i]['nombre']; ?></option>
-                        <?php } ?>
+                            <?php for($k=0; $k<count($list); $k++){ ?>
+                                <option value="<?php echo $list[$k]['id_set']; ?>"><?php echo $list[$k]['nombre']; ?></option>
+                            <?php } ?>
                         </select>
                     </label>
                     <label class="clearfix">
