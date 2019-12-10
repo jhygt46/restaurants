@@ -70,8 +70,8 @@ $graficos[1]['nombre'] = 'Ventas Totales D';
                         if(!in_array($graficos[$k]['num'], $list)){
                     ?>
                         <label class="clearfix">
-                            <span><p><?php echo $list[$k]['nombre']; ?>:</p></span>
-                            <input id="gra-<?php echo $list[$k]['id_grf']; ?>" type="checkbox" class="checkbox" />
+                            <span><p><?php echo $graficos[$k]['nombre']; ?>:</p></span>
+                            <input id="gra-<?php echo $list; ?>" type="checkbox" class="checkbox" />
                         </label>
                     <?php }} ?>
                     <label>
