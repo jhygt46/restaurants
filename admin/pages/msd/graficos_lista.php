@@ -31,7 +31,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
         <ul class="clearfix">
-            <li class="back" onclick="backurl()"></li>
+            <li class="back" onclick="navlink('pages/msd/graficos.php')"></li>
         </ul>
     </div>
     <hr>

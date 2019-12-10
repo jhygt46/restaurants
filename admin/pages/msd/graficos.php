@@ -50,8 +50,6 @@ $locales = $core->get_locales();
             data: send,
             success: function(data){
 
-                console.log(data);
-
                 $('.cont_container').html("");
                 for(var i=0; i<data.length; i++){
                     var Div = document.createElement('div');
@@ -105,9 +103,6 @@ $locales = $core->get_locales();
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>
-        <ul class="clearfix">
-            <li class="back" onclick="backurl()"></li>
-        </ul>
     </div>
     <hr>
     <div class="cont_pagina">
