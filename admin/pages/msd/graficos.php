@@ -10,7 +10,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
-$list = $core->get_graficos_lista();
+$list = $core->get_graficos_giro();
 /* CONFIG PAGE */
 $titulo = "Graficos";
 $titulo_list = "Estadisticas";
@@ -123,6 +123,9 @@ $locales = $core->get_locales();
                         <select id="tipo" onchange="cambiar_tipo(this)">
                             <option value="0">Todos</option>
                             <option value="1">Crear Nueva Lista</option>
+                        <?php for($i=0; $i<count($list); $i++){ ?>
+                            <option value="<?php $list[$i]['id_set']; ?>"><?php $list[$i]['nombre']; ?></option>
+                        <?php } ?>
                         </select>
                     </label>
                     <label class="clearfix">
