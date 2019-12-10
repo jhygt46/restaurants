@@ -25,11 +25,22 @@ if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0
 
     $id = $_GET["id_set"];
     $list = $core->get_graficos_lista($id);
-    echo "<pre>";
-    print_r($list);
-    echo "</pre>";
     
 }
+
+$graficos[0]['num'] = 1;
+$graficos[0]['nombre'] = 'Ventas Totales';
+$graficos[1]['num'] = 2;
+$graficos[1]['nombre'] = 'Ventas Totales Acumulado';
+$graficos[1]['num'] = 3;
+$graficos[1]['nombre'] = 'Ventas Totales A';
+$graficos[1]['num'] = 4;
+$graficos[1]['nombre'] = 'Ventas Totales B';
+$graficos[1]['num'] = 5;
+$graficos[1]['nombre'] = 'Ventas Totales C';
+$graficos[1]['num'] = 6;
+$graficos[1]['nombre'] = 'Ventas Totales D';
+
 
 ?>
 
@@ -54,14 +65,15 @@ if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    <label class="clearfix">
-                        <span><p>Grafico 1:</p></span>
-                        <input id="gra-1" type="checkbox" class="checkbox local" value="1" <?php if($i == 0){ echo "checked='checked'"; } ?>>
-                    </label>
-                    <label class="clearfix">
-                        <span><p>Grafico 1:</p></span>
-                        <input id="gra-2" type="checkbox" class="checkbox local" value="1" <?php if($i == 0){ echo "checked='checked'"; } ?>>
-                    </label>
+                    <?php 
+                    for($k=0; $k<count($graficos); $k++){ 
+                        if(!in_array($graficos[$k]['num'], $list)){
+                    ?>
+                        <label class="clearfix">
+                            <span><p><?php echo $list[$k]['nombre']; ?>:</p></span>
+                            <input id="gra-<?php echo $list[$k]['id_grf']; ?>" type="checkbox" class="checkbox" />
+                        </label>
+                    <?php }} ?>
                     <label>
                         <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
                     </label>
