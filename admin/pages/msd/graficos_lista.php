@@ -56,7 +56,24 @@ print_r($graficos);
 echo "</pre>";
 
 ?>
-
+<?php if(isset($_GET['sortable'])){ ?>
+<script>
+    $('.listado_items').sortable({
+        stop: function(e, ui){
+            var order = [];
+            $(this).find('.l_item').each(function(){
+                order.push($(this).attr('rel'));
+            });
+            var send = {accion: 'ordercat', values: order};
+            $.ajax({
+                url: "ajax/",
+                type: "POST",
+                data: send
+            });
+        }
+    });
+</script>
+<?php } ?>
 <div class="pagina">
     <div class="title">
         <h1><?php echo $titulo; ?></h1>

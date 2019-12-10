@@ -170,8 +170,7 @@ $locales = $core->get_locales();
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
                 <ul class="opts clearfix">
-                    <li class="opt">1</li>
-                    <li class="opt">2</li>
+                    <li class="opt"><div onclick="navlink('pages/msd/graficos.php?sortable=1')" class="order"></div></li>
                 </ul>
             </div>
 
