@@ -11,6 +11,11 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 $list = $core->get_graficos_giro();
+
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+
 /* CONFIG PAGE */
 $titulo = "Graficos";
 $titulo_list = "Estadisticas";
@@ -31,7 +36,7 @@ $locales = $core->get_locales();
             navlink('pages/msd/graficos_lista.php?id_set='.that.value);
         }
     }
-    
+
     function stats(that){
         
         var locales = new Array();  

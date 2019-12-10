@@ -10,7 +10,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
-$list = $core->get_graficos_lista();
+
 
 /* CONFIG PAGE */
 $titulo = "Lista Graficos";
@@ -23,7 +23,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
 
-
+    $list = $core->get_graficos_lista();
+    echo "<pre>";
+    print_r($list);
+    echo "</pre>";
     
 }
 

@@ -2162,10 +2162,8 @@ class Core{
         if($sql = $this->con->prepare("SELECT t1.nombre, t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_set=? AND t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=?")){
             if($sql->bind_param("iii", $id_set, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
-                    $result = $sql->get_result();
-                    while($row = $result->fetch_assoc()){
-                        $res[] = $row;
-                    }
+                    $res = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $sql->close();
                     return $res;
                 }else{ $this->registrar(6, 0, 0, 'get_graficos_lista() #1a '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'get_graficos_lista() #1b '.htmlspecialchars($sql->error)); }
