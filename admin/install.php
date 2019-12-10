@@ -229,7 +229,6 @@ $tablas[1]['campos'][62]['nombre'] = 'eliminado';
 $tablas[1]['campos'][62]['tipo'] = 'tinyint(1)';
 $tablas[1]['campos'][62]['null'] = 0;
 
-
 $tablas[2]['nombre'] = 'catalogo_productos';
 $tablas[2]['campos'][0]['nombre'] = 'id_cat';
 $tablas[2]['campos'][0]['tipo'] = 'int(4)';
@@ -1153,6 +1152,41 @@ $tablas[31]['campos'][3]['null'] = 0;
 $tablas[31]['campos'][3]['k'] = 1;
 $tablas[31]['campos'][3]['kt'] = 7;
 $tablas[31]['campos'][3]['kc'] = 0;
+
+$tablas[32]['nombre'] = 'set_graficos';
+$tablas[32]['campos'][0]['nombre'] = 'id_set';
+$tablas[32]['campos'][0]['tipo'] = 'int(4)';
+$tablas[32]['campos'][0]['null'] = 0;
+$tablas[32]['campos'][0]['pk'] = 1;
+$tablas[32]['campos'][0]['ai'] = 1;
+$tablas[32]['campos'][1]['nombre'] = 'nombre';
+$tablas[32]['campos'][1]['tipo'] = 'varchar(100) COLLATE utf8_spanish2_ci';
+$tablas[32]['campos'][1]['null'] = 0;
+$tablas[32]['campos'][2]['nombre'] = 'fecha_creado';
+$tablas[32]['campos'][2]['tipo'] = 'datetime';
+$tablas[32]['campos'][2]['null'] = 0;
+$tablas[32]['campos'][3]['nombre'] = 'id_gir';
+$tablas[32]['campos'][3]['tipo'] = 'int(4)';
+$tablas[32]['campos'][3]['null'] = 0;
+$tablas[32]['campos'][3]['k'] = 1;
+$tablas[32]['campos'][3]['kt'] = 1;
+$tablas[32]['campos'][3]['kc'] = 0;
+$tablas[32]['campos'][4]['nombre'] = 'eliminado';
+$tablas[32]['campos'][4]['tipo'] = 'tinyint(1)';
+$tablas[32]['campos'][4]['null'] = 0;
+
+$tablas[33]['nombre'] = 'set_graficos_id';
+$tablas[33]['campos'][0]['nombre'] = 'id_set';
+$tablas[33]['campos'][0]['tipo'] = 'int(4)';
+$tablas[33]['campos'][0]['null'] = 0;
+$tablas[33]['campos'][0]['pk'] = 1;
+$tablas[33]['campos'][1]['nombre'] = 'id_grf';
+$tablas[33]['campos'][1]['tipo'] = 'int(4)';
+$tablas[33]['campos'][1]['null'] = 0;
+$tablas[33]['campos'][1]['pk'] = 1;
+$tablas[33]['campos'][2]['nombre'] = 'orders';
+$tablas[33]['campos'][2]['tipo'] = 'int(4)';
+$tablas[33]['campos'][2]['null'] = 0;
 
 // TRUE SOLO MUESTRA - FALSE LAS CREA
 $show = false;

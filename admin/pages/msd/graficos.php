@@ -24,6 +24,12 @@ $locales = $core->get_locales();
 ?>
 <script>
 
+    function cambiar_tipo(that){
+
+        console.log(that.value);
+        
+    }
+
     function stats(that){
         
         var locales = new Array();  
@@ -119,11 +125,9 @@ $locales = $core->get_locales();
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
-                        <select id="tipo">
-                            <option selected disabled>Choose one</option>
-                            <option value="0">Ventas Totales</option>
-                            <option value="1">Cantidad de Despachos Domicilio</option>
-                            <option value="2">Cantidad Retiro Local</option>
+                        <select id="tipo" onchange="cambiar_tipo(this)">
+                            <option value="0">Todos</option>
+                            <option value="1">Crear Nueva Lista</option>
                         </select>
                     </label>
                     <label class="clearfix">
