@@ -474,6 +474,12 @@ body {
                         float: right;
                         .opt{
                             float: left;
+                            .order{
+                                width: 28px;
+                                height: 28px;
+                                background: url('../images/icons-set.png') no-repeat;
+                                background-position: -776px -672px;
+                            }
                         }
                     }
                 }

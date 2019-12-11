@@ -506,6 +506,12 @@ body .relative {
 .pagina .cont_pagina .cont_pag form .form_titulo .opts .opt {
   float: left;
 }
+.pagina .cont_pagina .cont_pag form .form_titulo .opts .opt .order{
+  width: 28px;
+  height: 28px;
+  background: url('../images/icons-set.png') no-repeat;
+  background-position: -776px -672px;
+}
 .pagina .cont_pagina .cont_pag form fieldset.normal {
   padding: 10px 0px;
 }
