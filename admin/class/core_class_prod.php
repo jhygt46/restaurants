@@ -2398,7 +2398,7 @@ class Core{
                         $to = strtotime($to) + 86400;
                         $grafico_ejex = $this->grafico_ejex($to, $from);
     
-                        for($m=1; $m<=$res; $m++){
+                        for($m=0; $m<count($res); $m++){
 
                             if($res[$m]['id_grf'] == 1 || $tipo == -1){
 
