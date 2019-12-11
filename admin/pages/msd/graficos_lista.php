@@ -89,12 +89,10 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                 <fieldset class="<?php echo $class; ?>">
                     <input id="id" type="hidden" value="<?php echo $id_set; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
-                    <?php if($id > 0){ ?>
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
                         <input id="nombre" class="inputs" type="text" value="" require="" placeholder="" />
                     </label>
-                    <?php } ?>
                     <?php 
                     for($k=0; $k<count($graficos); $k++){ 
                         if(!in_array($graficos[$k]['num'], $list)){
