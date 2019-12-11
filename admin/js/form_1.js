@@ -262,7 +262,6 @@ function confirm(message){
         if(isConfirm){
             
             var send = {accion: message['accion'], id: message['id'], nombre: message['name']};
-            console.log(send);
             $.ajax({
                 url: "ajax/",
                 type: "POST",
