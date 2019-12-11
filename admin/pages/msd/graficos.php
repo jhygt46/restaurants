@@ -30,7 +30,10 @@ $locales = $core->get_locales();
             navlink('pages/msd/graficos_lista.php');
         }
         if(that.value > 0){
-            //MOSTRAR CONFIG
+            $("#bfCaptchaEntry").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value); });
+            $('.showconfig').show();
+        }else{
+            $('.showconfig').hide();
         }
     }
 
@@ -131,6 +134,10 @@ $locales = $core->get_locales();
                                 <option value="<?php echo $list[$k]['id_set']; ?>"><?php echo $list[$k]['nombre']; ?></option>
                             <?php } ?>
                         </select>
+                    </label>
+                    <label class="clearfix showconfig">
+                        <span><p></p></span>
+                        <input id="config" class="button" type="text" value="" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha Inicio:</p></span>
