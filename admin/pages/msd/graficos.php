@@ -26,11 +26,12 @@ $locales = $core->get_locales();
 <script>
 
     function cambiar_tipo(that){
+        console.log(that);
         if(that.value == 0){
             navlink('pages/msd/graficos_lista.php');
         }
         if(that.value > 0){
-            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value+'&nombre='.that.name); });
+            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value+'&nombre='); });
             $('.showconfig').show();
         }else{
             $('.showconfig').hide();
