@@ -19,13 +19,13 @@ $sub_titulo = "Configurar Grafico";
 $accion = "crear_gra_lista";
 /* CONFIG PAGE */
 
-$id = 0;
+$id_set = 0;
 $list = [];
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
 
-    $id = $_GET["id_set"];
+    $id_set = $_GET["id_set"];
     $list = $core->get_graficos_lista($id);
     
 }
@@ -58,7 +58,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
             $(this).find('.l_item').each(function(){
                 order.push($(this).attr('rel'));
             });
-            var send = {accion: 'ordergralista', values: order};
+            var send = {accion: 'ordergralista', values: order, id_set: <?php echo $id_set; ?>};
             $.ajax({
                 url: "ajax/",
                 type: "POST",
@@ -87,7 +87,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
-                    <input id="id" type="hidden" value="<?php echo $id; ?>" />
+                    <input id="id" type="hidden" value="<?php echo $id_set; ?>" />
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <?php if($id > 0){ ?>
                     <label class="clearfix">
@@ -133,7 +133,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                 <div class="l_item" rel="<?php echo $id; ?>">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic1" onclick="eliminar('eliminar_gra_lista', '<?php echo $id_pro; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
+                        <a class="icono ic1" onclick="eliminar('eliminar_gra_lista', '<?php echo $id; ?>/<?php echo $id_set; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
                     </div>
                 </div>
                 <?php }} ?>

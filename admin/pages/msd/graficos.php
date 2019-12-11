@@ -29,9 +29,6 @@ $locales = $core->get_locales();
         if(that.value == 0){
             navlink('pages/msd/graficos_lista.php');
         }
-        if(that.value > 0){
-            navlink('pages/msd/graficos_lista.php?id_set='+that.value);
-        }
     }
 
     function stats(that){

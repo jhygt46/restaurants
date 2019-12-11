@@ -155,6 +155,9 @@ class Guardar{
             if($_POST['accion'] == "orderprods"){
                 echo json_encode($this->orderprods());
             }
+            if($_POST['accion'] == "ordergralista"){
+                echo json_encode($this->ordergralista());
+            }
             if($_POST['accion'] == "configurar_producto"){
                 echo json_encode($this->configurar_producto());
             }
@@ -176,6 +179,9 @@ class Guardar{
             if($_POST['accion'] == "eliminar_horario"){
                 echo json_encode($this->eliminar_horario());
             }
+            if($_POST['accion'] == "eliminar_gra_lista"){
+                echo json_encode($this->eliminar_gra_lista());
+            }
             if($_POST['accion'] == "solicitar_ssl"){
                 echo json_encode($this->solicitar_ssl());
             }
@@ -194,6 +200,10 @@ class Guardar{
             if($_POST['accion'] == "verificar_dominio_existente"){
                 echo json_encode($this->verificar_dominio_existente());
             }
+            if($_POST['accion'] == "crear_gra_lista"){
+                echo json_encode($this->crear_gra_lista());
+            }
+            
         }
 
     }
@@ -1573,6 +1583,26 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'orderpag()'); }
 
     }
+    private function ordergralista(){
+
+        $id_set = $_GET["id_set"];
+        if($id_set > 0){
+            if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+                $values = $_POST['values'];
+                for($i=0; $i<count($values); $i++){
+                    if($sql = $this->con->prepare("UPDATE set_graficos_id SET orders='".$i."' WHERE id_grf=? AND id_set=? AND eliminado=?")){
+                    if($sql->bind_param("iii", $values[$i], $id_set, $this->eliminado)){
+                    if($sql->execute()){
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($this->con->error)); }
+                }
+                $this->con_cambios(null);
+            }else{ $this->registrar(2, 0, 0, 'orderpag()'); }
+        }
+
+    }
     private function orderprods(){
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -2834,6 +2864,75 @@ class Guardar{
         }else{ $this->registrar(2, 0, 0, 'crear_catalogo()'); }
         return $info;
     }
+    private function crear_gra_lista(){
+        $info['op'] = 2;
+        $info['mensaje'] = "Error";
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+
+            $id_set = $_POST['id'];
+            $nombre = $_POST['nombre'];
+            $verify = false;
+
+            if($id_set > 0){
+                if($sql = $this->con->prepare("UPDATE set_graficos SET nombre=? WHERE id_set=? AND id_gir=?")){
+                    if($sql->bind_param("sii", $nombre, $id_set, $this->id_gir)){
+                        if($sql->execute()){
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Catalogo modificado exitosamente";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/ver_giro.php";
+                            $this->con_cambios(null);
+                            $verify = true;
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($this->con->error)); }
+            }
+            if($id_set == 0){
+                if($sql = $this->con->prepare("INSERT INTO set_graficos (nombre, fecha_creado, id_gir) VALUES (?, now(), ?)")){
+                    if($sql->bind_param("si", $nombre, $this->id_gir)){
+                        if($sql->execute()){
+                            $id_set = $this->con->insert_id;
+                            $info['op'] = 1;
+                            $info['mensaje'] = "Catalogo creado exitosamente";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/ver_giro.php";
+                            $this->con_cambios(null);
+                            $verify = true;
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+            }
+            
+            if($verify){
+                for($k=1; $k<=15; $k++){
+                    $gra = $_POST['gra-'.$k];
+                    if($gra == 0){
+                        if($sql = $this->con->prepare("DELETE set_graficos_id WHERE id_set=? AND id_grf=?)")){
+                            if($sql->bind_param("ii", $id_set, $k)){
+                                if($sql->execute()){
+                                    $sql->close();
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+                    }
+                    if($gra == 1){
+                        if($sql = $this->con->prepare("INSERT INTO set_graficos_id (id_set, id_grf) VALUES (?, ?)")){
+                            if($sql->bind_param("ii", $id_set, $k)){
+                                if($sql->execute()){
+                                    $sql->close();
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+                    }
+                }
+            }
+
+
+        }else{ $this->registrar(2, 0, 0, 'crear_catalogo()'); }
+        return $info;
+    }
     private function eliminar_catalogo(){
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
@@ -3069,6 +3168,27 @@ class Guardar{
                 }else{ $this->registrar(6, 0, $id_gir, 'locales_giro() #2 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'locales_giro() #2 '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $id_gir, 'locales_giro() #2 '.htmlspecialchars($this->con->error)); }
+    }
+    private function eliminar_gra_lista(){
+
+        $info['tipo'] = "error";
+        $info['titulo'] = "Error";
+        $info['texto'] = "Local no pudo ser eliminado";
+
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            $id = explode("/", $_POST['id']);
+            if($sql = $this->con->prepare("DELETE set_graficos_id WHERE id_grf IN (SELECT id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_gir=? AND t1.id_set=? AND t1.id_set=t2.id_set AND t2.id_grf=?)")){
+            if($sql->bind_param("iii", $this->id_gir, $id[1], $id[0])){
+            if($sql->execute()){
+                
+                $sql->free_result();
+                $sql->close();
+
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
+        return $info;
     }
     private function eliminar_locales(){     
         $info['tipo'] = "error";
