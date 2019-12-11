@@ -138,13 +138,13 @@ $graficos[14]['nombre'] = 'Ventas Totales M';
                     if(in_array($graficos[$k]['num'], $list)){
 
                     $ids = $graficos[$k]['num'];
-                    $nombre = $graficos[$k]['nombre'];
+                    $nombres = $graficos[$k]['nombre'];
 
                 ?>
                 <div class="l_item" rel="<?php echo $ids; ?>">
                     <div class="detalle_item clearfix">
-                        <div class="nombre"><?php echo $nombre; ?></div>
-                        <a class="icono ic6" onclick="eliminar('eliminar_gra_lista', '<?php echo $ids; ?>/<?php echo $id_set; ?>/<?php echo $nombre; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
+                        <div class="nombre"><?php echo $nombres; ?></div>
+                        <a class="icono ic6" onclick="eliminar('eliminar_gra_lista', '<?php echo $ids; ?>/<?php echo $id_set; ?>/<?php echo $nombre; ?>', 'Grafico', '<?php echo $nombres; ?>')"></a>
                     </div>
                 </div>
                 <?php }} ?>

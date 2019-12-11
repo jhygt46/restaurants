@@ -3176,7 +3176,7 @@ class Guardar{
 
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
-        $info['texto'] = "Local no pudo ser eliminado";
+        $info['texto'] = "Grafico no pudo ser eliminado";
         $info['id'] = $_POST['id'];
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -3187,7 +3187,7 @@ class Guardar{
                 
                 $info['tipo'] = "success";
                 $info['titulo'] = "Eliminado";
-                $info['texto'] = "Lista Eliminada";
+                $info['texto'] = "Grafico Eliminada";
                 $info['reload'] = 1;
                 $info['page'] = "msd/graficos_lista.php?id_set=".$id[1]."&nombre=".$id[2];
 
