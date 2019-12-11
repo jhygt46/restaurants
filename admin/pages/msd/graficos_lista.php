@@ -50,6 +50,18 @@ $graficos[7]['num'] = 8;
 $graficos[7]['nombre'] = 'Ventas Totales F';
 $graficos[8]['num'] = 9;
 $graficos[8]['nombre'] = 'Ventas Totales G';
+$graficos[9]['num'] = 10;
+$graficos[9]['nombre'] = 'Ventas Totales H';
+$graficos[10]['num'] = 11;
+$graficos[10]['nombre'] = 'Ventas Totales I';
+$graficos[11]['num'] = 12;
+$graficos[11]['nombre'] = 'Ventas Totales J';
+$graficos[12]['num'] = 13;
+$graficos[12]['nombre'] = 'Ventas Totales K';
+$graficos[13]['num'] = 14;
+$graficos[13]['nombre'] = 'Ventas Totales L';
+$graficos[14]['num'] = 15;
+$graficos[14]['nombre'] = 'Ventas Totales M';
 
 ?>
 <?php if(isset($_GET['sortable'])){ ?>
