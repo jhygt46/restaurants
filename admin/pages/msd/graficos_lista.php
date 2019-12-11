@@ -101,7 +101,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                     ?>
                         <label class="clearfix">
                             <span><p><?php echo $graficos[$k]['nombre']; ?>:</p></span>
-                            <input id="gra-<?php echo $list; ?>" type="checkbox" class="checkbox" />
+                            <input id="gra-<?php echo $graficos[$k]['num']; ?>" type="checkbox" class="checkbox" />
                         </label>
                     <?php }} ?>
                     <label>
