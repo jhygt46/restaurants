@@ -137,7 +137,7 @@ $locales = $core->get_locales();
                     </label>
                     <label class="clearfix showconfig" style="display: none">
                         <span><p></p></span>
-                        <input id="config" class="button" type="button" value="Config" require="" placeholder="" />
+                        <input id="config" class="button" type="button" value="Config" style="padding: 6px 10px" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
                         <span><p>Fecha Inicio:</p></span>
