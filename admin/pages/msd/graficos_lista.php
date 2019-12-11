@@ -20,12 +20,14 @@ $accion = "crear_gra_lista";
 /* CONFIG PAGE */
 
 $id_set = 0;
+$nombre = "";
 $list = [];
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
 if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
 
     $id_set = $_GET["id_set"];
+    $nombre = $_GET["nombre"];
     $list = $core->get_graficos_lista($id_set);
     
 }
@@ -91,7 +93,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Nombre:</p></span>
-                        <input id="nombre" class="inputs" type="text" value="" require="" placeholder="" />
+                        <input id="nombre" class="inputs" type="text" value="<?php echo $nombre; ?>" require="" placeholder="" />
                     </label>
                     <?php 
                     for($k=0; $k<count($graficos); $k++){ 

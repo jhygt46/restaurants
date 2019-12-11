@@ -30,7 +30,7 @@ $locales = $core->get_locales();
             navlink('pages/msd/graficos_lista.php');
         }
         if(that.value > 0){
-            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value); });
+            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value+'&nombre='.that.name); });
             $('.showconfig').show();
         }else{
             $('.showconfig').hide();
