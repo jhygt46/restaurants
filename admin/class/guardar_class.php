@@ -3188,9 +3188,9 @@ class Guardar{
                 $sql->free_result();
                 $sql->close();
 
-            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
         }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
         return $info;
     }
