@@ -105,7 +105,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                         </label>
                     <?php }} ?>
                     <label>
-                        <div class="enviar"><a onclick="stats(this)">Enviar</a></div>
+                        <div class="enviar"><a onclick="form(this)">Enviar</a></div>
                     </label>
                 </fieldset>
             </form>
