@@ -26,7 +26,7 @@ $locales = $core->get_locales();
 <script>
 
     function cambiar_tipo(that){
-        console.log(that);
+        console.log(that.text);
         if(that.value == 0){
             navlink('pages/msd/graficos_lista.php');
         }
