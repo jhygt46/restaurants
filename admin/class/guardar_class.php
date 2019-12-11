@@ -3175,8 +3175,8 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = explode("/", $_POST['id']);
-            if($sql = $this->con->prepare("DELETE set_graficos_id WHERE id_grf IN (SELECT id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_gir=? AND t1.id_set=? AND t1.id_set=t2.id_set AND t2.id_grf=?)")){
-            if($sql->bind_param("iii", $this->id_gir, $id[1], $id[0])){
+            if($sql = $this->con->prepare("DELETE set_graficos_id WHERE id_set=? AND id_grf=?)")){
+            if($sql->bind_param("ii", $id[1], $id[0])){
             if($sql->execute()){
                 
                 $info['tipo'] = "success";
