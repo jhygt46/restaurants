@@ -26,8 +26,7 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 if(isset($_GET["id_set"]) && is_numeric($_GET["id_set"]) && $_GET["id_set"] != 0){
 
     $id_set = $_GET["id_set"];
-    $list = $core->get_graficos_lista($id);
-    echo "ID_SET: ".$id_set;
+    $list = $core->get_graficos_lista($id_set);
     
 }
 
