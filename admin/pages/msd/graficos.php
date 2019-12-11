@@ -183,18 +183,8 @@ $locales = $core->get_locales();
         <div class="cont_pag">
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
-                <ul class="opts clearfix">
-                    <li class="opt"><div onclick="navlink('pages/msd/graficos.php?sortable=1')" class="order"></div></li>
-                </ul>
             </div>
-
-            <div class="cont_container">
-
-
-            </div>
-            
-            
-            
+            <div class="cont_container"></div>
         </div>
     </div>
 </div>

@@ -117,8 +117,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
             <div class="list_titulo clearfix">
                 <div class="titulo"><h1><?php echo $titulo_list; ?></h1></div>
                 <ul class="opts clearfix">
-                    <li class="opt">1</li>
-                    <li class="opt">2</li>
+                    <li class="opt"><div onclick="navlink('pages/msd/graficos_lista.php?sortable=1&id_set=<?php echo $id_set; ?>&nombre=<?php echo $nombre; ?>')" class="order"></div></li>
                 </ul>
             </div>
             <div class="listado_items">
