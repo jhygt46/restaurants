@@ -62,6 +62,7 @@ $locales = $core->get_locales();
             data: send,
             success: function(data){
 
+                console.log(data);
                 if(data.length > 0){
                     $('.cont_container').html("");
                     for(var i=0; i<data.length; i++){
