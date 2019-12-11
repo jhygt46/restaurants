@@ -2376,8 +2376,8 @@ class Core{
         $from = $_POST['from'];
         $to = $_POST['to'];
 
-        if($sqlz = $this->con->prepare("SELECT id_grf FROM set_graficos_id WHERE id_gir=? AND fecha > ? AND fecha < ? AND eliminado=?")){
-        if($sqlz->bind_param("issi", $tipo)){
+        if($sqlz = $this->con->prepare("SELECT id_grf FROM set_graficos_id WHERE id_set=?")){
+        if($sqlz->bind_param("i", $tipo)){
         if($sqlz->execute()){
 
             $resultz = $sqlz->get_result();
