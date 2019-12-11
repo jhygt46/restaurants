@@ -2158,7 +2158,7 @@ class Core{
     }
     public function get_graficos_lista($id){
 
-        if($sql = $this->con->prepare("SELECT t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_set=? AND t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t2.id_grf FROM set_graficos t1, set_graficos_id t2 WHERE t1.id_set=? AND t1.id_gir=? AND t1.id_set=t2.id_set AND t1.eliminado=? ORDER BY t2.orders")){
             if($sql->bind_param("iii", $id, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result();
@@ -2376,7 +2376,7 @@ class Core{
         $from = $_POST['from'];
         $to = $_POST['to'];
 
-        if($sqlz = $this->con->prepare("SELECT id_grf FROM set_graficos_id WHERE id_set=? ORDER BY orders")){
+        if($sqlz = $this->con->prepare("SELECT id_grf FROM set_graficos_id WHERE id_set=? ORDER BY orders, id_grf")){
         if($sqlz->bind_param("i", $tipo)){
         if($sqlz->execute()){
 

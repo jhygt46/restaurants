@@ -1586,13 +1586,16 @@ class Guardar{
     private function ordergralista(){
 
         $id_set = $_GET["id_set"];
+        $info['id_set'] = $id_set;
         if($id_set > 0){
             if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
                 $values = $_POST['values'];
+                $info['values'] = $values;
                 for($i=0; $i<count($values); $i++){
                     if($sql = $this->con->prepare("UPDATE set_graficos_id SET orders='".$i."' WHERE id_grf=? AND id_set=? AND eliminado=?")){
                     if($sql->bind_param("iii", $values[$i], $id_set, $this->eliminado)){
                     if($sql->execute()){
+                        $info['sql'][] = 1;
                         $sql->close();
                     }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
                     }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
