@@ -1590,8 +1590,8 @@ class Guardar{
             if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
                 $values = $_POST['values'];
                 for($i=0; $i<count($values); $i++){
-                    if($sql = $this->con->prepare("UPDATE set_graficos_id SET orders='".$i."' WHERE id_grf=? AND id_set=?")){
-                    if($sql->bind_param("iii", $values[$i], $id_set)){
+                    if($sql = $this->con->prepare("UPDATE set_graficos_id SET orders=? WHERE id_grf=? AND id_set=?")){
+                    if($sql->bind_param("iii", $i, $values[$i], $id_set)){
                     if($sql->execute()){
                         $sql->close();
                     }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() #1a '.htmlspecialchars($sql->error)); }
