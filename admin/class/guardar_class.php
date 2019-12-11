@@ -3172,6 +3172,7 @@ class Guardar{
         $info['tipo'] = "error";
         $info['titulo'] = "Error";
         $info['texto'] = "Local no pudo ser eliminado";
+        $info['id'] = $_POST['id'];
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = explode("/", $_POST['id']);
