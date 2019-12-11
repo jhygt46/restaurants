@@ -1585,7 +1585,7 @@ class Guardar{
     }
     private function ordergralista(){
 
-        $id_set = $_GET["id_set"];
+        $id_set = $_POST["id_set"];
         $info['id_set'] = $id_set;
         if($id_set > 0){
             if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
