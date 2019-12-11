@@ -1594,9 +1594,9 @@ class Guardar{
                     if($sql->bind_param("iii", $values[$i], $id_set)){
                     if($sql->execute()){
                         $sql->close();
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() '.htmlspecialchars($this->con->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() #1a '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() #1b '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'orderpag() #1c '.htmlspecialchars($this->con->error)); }
                 }
             }else{ $this->registrar(2, 0, 0, 'orderpag()'); }
         }
