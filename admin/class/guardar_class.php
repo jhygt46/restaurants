@@ -2865,6 +2865,7 @@ class Guardar{
         return $info;
     }
     private function crear_gra_lista(){
+
         $info['op'] = 2;
         $info['mensaje'] = "Error";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
@@ -2878,14 +2879,14 @@ class Guardar{
                     if($sql->bind_param("sii", $nombre, $id_set, $this->id_gir)){
                         if($sql->execute()){
                             $info['op'] = 1;
-                            $info['mensaje'] = "Catalogo modificado exitosamente";
+                            $info['mensaje'] = "Graficos modificado exitosamente";
                             $info['reload'] = 1;
                             $info['page'] = "msd/graficos_lista.php?id_set=".$id_set."&nombre=".$nombre;
                             $verify = true;
                             $sql->close();
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #1a '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #1b '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #1c '.htmlspecialchars($this->con->error)); }
             }
             if($id_set == 0){
                 if($sql = $this->con->prepare("INSERT INTO set_graficos (nombre, fecha_creado, id_gir) VALUES (?, now(), ?)")){
@@ -2893,36 +2894,36 @@ class Guardar{
                         if($sql->execute()){
                             $id_set = $this->con->insert_id;
                             $info['op'] = 1;
-                            $info['mensaje'] = "Catalogo creado exitosamente";
+                            $info['mensaje'] = "Graficos creado exitosamente";
                             $info['reload'] = 1;
                             $info['page'] = "msd/graficos_lista.php?id_set=".$id_set."&nombre=".$nombre;
                             $verify = true;
                             $sql->close();
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #2a '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #2b '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #2c '.htmlspecialchars($this->con->error)); }
             }
             
             if($verify){
                 for($k=1; $k<=15; $k++){
                     $gra = $_POST['gra-'.$k];
                     if($gra == 0){
-                        if($sql = $this->con->prepare("DELETE set_graficos_id WHERE id_set=? AND id_grf=?)")){
+                        if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=? AND id_grf=?)")){
                             if($sql->bind_param("ii", $id_set, $k)){
                                 if($sql->execute()){
                                     $sql->close();
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3a '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3b '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3c '.htmlspecialchars($this->con->error)); }
                     }
                     if($gra == 1){
                         if($sql = $this->con->prepare("INSERT INTO set_graficos_id (id_set, id_grf) VALUES (?, ?)")){
                             if($sql->bind_param("ii", $id_set, $k)){
                                 if($sql->execute()){
                                     $sql->close();
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($this->con->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4a '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4b '.htmlspecialchars($sql->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4c '.htmlspecialchars($this->con->error)); }
                     }
                 }
             }
