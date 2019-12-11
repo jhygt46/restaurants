@@ -506,7 +506,7 @@ body .relative {
 .pagina .cont_pagina .cont_pag form .form_titulo .opts .opt {
   float: left;
 }
-.pagina .cont_pagina .cont_pag form .form_titulo .opts .opt .order{
+.pagina .cont_pagina .cont_pag form .form_titulo .opts .opt .borrar{
   width: 28px;
   height: 28px;
   background: url('../images/icons-set.png') no-repeat;

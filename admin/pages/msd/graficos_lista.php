@@ -96,7 +96,7 @@ $graficos[14]['nombre'] = 'Ventas Totales M';
                 <div class="form_titulo clearfix">
                     <div class="titulo"><?php echo $sub_titulo; ?></div>
                     <ul class="opts clearfix">
-                        <li class="opt"><div onclick="eliminar('eliminar_gra_set', '<?php echo $id_set; ?>', 'Lista Grafico', '<?php echo $nombres; ?>')" class="order"></div></li>
+                        <li class="opt"><div onclick="eliminar('eliminar_gra_set', '<?php echo $id_set; ?>', 'Lista Grafico', '<?php echo $nombres; ?>')" class="borrar"></div></li>
                     </ul>
                 </div>
                 <fieldset class="<?php echo $class; ?>">
