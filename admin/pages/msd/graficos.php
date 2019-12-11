@@ -25,17 +25,21 @@ $locales = $core->get_locales();
 ?>
 <script>
 
-    function cambiar_tipo(that){
-        console.log(that.text);
-        if(that.value == 0){
+    function cambiar_tipo(){
+        
+        var value = $("#tipo").val();
+        var nombre = $("#tipo option:selected").text();
+
+        if(value == 0){
             navlink('pages/msd/graficos_lista.php');
         }
-        if(that.value > 0){
-            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+that.value+'&nombre='); });
+        if(value > 0){
+            $("#config").click( function(){ navlink('pages/msd/graficos_lista.php?id_set='+value+'&nombre='+nombre); });
             $('.showconfig').show();
         }else{
             $('.showconfig').hide();
         }
+        
     }
 
     function stats(that){
@@ -128,7 +132,7 @@ $locales = $core->get_locales();
                     <input id="accion" type="hidden" value="<?php echo $accion; ?>" />
                     <label class="clearfix">
                         <span><p>Tipo de Grafico:</p></span>
-                        <select id="tipo" onchange="cambiar_tipo(this)">
+                        <select id="tipo" onchange="cambiar_tipo()">
                             <option value="-1">Todos</option>
                             <option value="0">Crear Nueva Lista</option>
                             <?php for($k=0; $k<count($list); $k++){ ?>
