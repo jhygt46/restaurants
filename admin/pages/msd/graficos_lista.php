@@ -64,10 +64,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
             $.ajax({
                 url: "ajax/",
                 type: "POST",
-                data: send,
-                success: function(data){
-                    console.log(data);
-                }
+                data: send
             });
         }
     });
