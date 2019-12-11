@@ -29,6 +29,9 @@ $locales = $core->get_locales();
         if(that.value == 0){
             navlink('pages/msd/graficos_lista.php');
         }
+        if(that.value > 0){
+            //MOSTRAR CONFIG
+        }
     }
 
     function stats(that){
