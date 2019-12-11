@@ -2907,26 +2907,27 @@ class Guardar{
             if($verify){
                 for($k=1; $k<=15; $k++){
                     $gra = $_POST['gra-'.$k];
-                    $info['post'][] = $_POST['gra-'.$k];
-                    if($gra == 0){
-                        if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=? AND id_grf=?")){
-                            if($sql->bind_param("ii", $id_set, $k)){
-                                if($sql->execute()){
-                                    $sql->close();
-                                    $info['delete'][] = 1;
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3a '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3b '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3c '.htmlspecialchars($this->con->error)); }
-                    }
-                    if($gra == 1){
-                        if($sql = $this->con->prepare("INSERT INTO set_graficos_id (id_set, id_grf) VALUES (?, ?)")){
-                            if($sql->bind_param("ii", $id_set, $k)){
-                                if($sql->execute()){
-                                    $sql->close();
-                                    $info['insert'][] = 1;
-                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4a '.htmlspecialchars($sql->error)); }
-                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4b '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4c '.htmlspecialchars($this->con->error)); }
+                    if($gra != null){
+                        if($gra == 0){
+                            if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=? AND id_grf=?")){
+                                if($sql->bind_param("ii", $id_set, $k)){
+                                    if($sql->execute()){
+                                        $sql->close();
+                                        $info['delete'][] = 1;
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3a '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3b '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3c '.htmlspecialchars($this->con->error)); }
+                        }
+                        if($gra == 1){
+                            if($sql = $this->con->prepare("INSERT INTO set_graficos_id (id_set, id_grf) VALUES (?, ?)")){
+                                if($sql->bind_param("ii", $id_set, $k)){
+                                    if($sql->execute()){
+                                        $sql->close();
+                                        $info['insert'][] = 1;
+                                    }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4a '.htmlspecialchars($sql->error)); }
+                                }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4b '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4c '.htmlspecialchars($this->con->error)); }
+                        }
                     }
                 }
             }
