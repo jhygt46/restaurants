@@ -2398,11 +2398,9 @@ class Core{
                         $to = strtotime($to) + 86400;
                         $grafico_ejex = $this->grafico_ejex($to, $from);
     
-                        $total_graficos = 15;
+                        for($m=1; $m<=$res; $m++){
 
-                        for($m=1; $m<=$total_graficos; $m++){
-
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 1 || $tipo == -1){
 
                                 // GRAFICO 1 VENTAS TOTALES //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2423,7 +2421,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 2 || $tipo == -1){
                             
                                 // GRAFICO 2 TOTAL DESPACHO DOMICILIO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2444,7 +2442,7 @@ class Core{
                                 unset($aux_gr);
                                 
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 3 || $tipo == -1){
                             
                                 // GRAFICO 3 TOTAL RETIRO LOCAL //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2465,7 +2463,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 4 || $tipo == -1){
                             
                                 // GRAFICO 4 VENTAS TOTALES ACUMULADO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2486,7 +2484,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 5 || $tipo == -1){
         
                                 // GRAFICO 5 TOTAL DESPACHO DOMICILIO ACUMULADO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2507,7 +2505,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 6 || $tipo == -1){
                             
                                 // GRAFICO 6 TOTAL RETIRO LOCAL ACUMULADO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2528,7 +2526,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 7 || $tipo == -1){
         
                                 // GRAFICO 7 TOTAL PEDIDOS PAGINA //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2549,7 +2547,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 8 || $tipo == -1){
         
                                 // GRAFICO 8 TOTAL PEDIDOS POS //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2570,7 +2568,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 9 || $tipo == -1){
         
                                 // GRAFICO 9 TOTAL PEDIDOS PAGINA ACUMULADO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2591,7 +2589,7 @@ class Core{
                                 unset($aux_gr);
     
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 10 || $tipo == -1){
         
                                 // GRAFICO 9 TOTAL PEDIDOS POS ACUMULADO //
                                 $aux_gr = $grafico_ejex['graph'];
@@ -2612,7 +2610,7 @@ class Core{
                                 unset($aux_gr);
             
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 11 || $tipo == -1){
                                 for($j=0; $j<count($locales); $j++){
             
                                     $aux_gr['chart']['plotBackgroundColor'] = null;
@@ -2637,7 +2635,7 @@ class Core{
             
                                 }
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 12 || $tipo == -1){
                                 for($j=0; $j<count($locales); $j++){
             
                                     $aux_gr['chart']['plotBackgroundColor'] = null;
@@ -2662,7 +2660,7 @@ class Core{
             
                                 }
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 13 || $tipo == -1){
                                 for($j=0; $j<count($locales); $j++){
             
                                     $aux_gr['chart']['plotBackgroundColor'] = null;
@@ -2687,7 +2685,7 @@ class Core{
             
                                 }
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 14 || $tipo == -1){
                                 for($j=0; $j<count($locales); $j++){
             
                                     $aux_gr['chart']['plotBackgroundColor'] = null;
@@ -2712,7 +2710,7 @@ class Core{
             
                                 }
                             }
-                            if(in_array($m, $res) || $tipo == -1){
+                            if($res[$m]['id_grf'] == 15 || $tipo == -1){
                                 for($j=0; $j<count($locales); $j++){
             
                                     $aux_gr['chart']['plotBackgroundColor'] = null;
