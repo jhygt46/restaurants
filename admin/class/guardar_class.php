@@ -2908,7 +2908,7 @@ class Guardar{
                 for($k=1; $k<=15; $k++){
                     $gra = $_POST['gra-'.$k];
                     if($gra == 0){
-                        if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=? AND id_grf=?)")){
+                        if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=? AND id_grf=?")){
                             if($sql->bind_param("ii", $id_set, $k)){
                                 if($sql->execute()){
                                     $sql->close();
