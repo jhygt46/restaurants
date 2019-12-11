@@ -125,7 +125,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                 for($k=0; $k<count($graficos); $k++){ 
                     if(in_array($graficos[$k]['num'], $list)){
 
-                    $ids = $list;
+                    $ids = $graficos[$k]['num'];
                     $nombre = $graficos[$k]['nombre'];
 
                 ?>
