@@ -2912,6 +2912,7 @@ class Guardar{
                             if($sql->bind_param("ii", $id_set, $k)){
                                 if($sql->execute()){
                                     $sql->close();
+                                    $info['delete'][] = 1;
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3a '.htmlspecialchars($sql->error)); }
                             }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3b '.htmlspecialchars($sql->error)); }
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #3c '.htmlspecialchars($this->con->error)); }
@@ -2921,6 +2922,7 @@ class Guardar{
                             if($sql->bind_param("ii", $id_set, $k)){
                                 if($sql->execute()){
                                     $sql->close();
+                                    $info['insert'][] = 1;
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4a '.htmlspecialchars($sql->error)); }
                             }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4b '.htmlspecialchars($sql->error)); }
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_gra_lista() #4c '.htmlspecialchars($this->con->error)); }
