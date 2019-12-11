@@ -182,6 +182,9 @@ class Guardar{
             if($_POST['accion'] == "eliminar_gra_lista"){
                 echo json_encode($this->eliminar_gra_lista());
             }
+            if($_POST['accion'] == "eliminar_gra_set"){
+                echo json_encode($this->eliminar_gra_set());
+            }
             if($_POST['accion'] == "solicitar_ssl"){
                 echo json_encode($this->solicitar_ssl());
             }
@@ -3190,8 +3193,6 @@ class Guardar{
                 $info['texto'] = "Grafico Eliminada";
                 $info['reload'] = 1;
                 $info['page'] = "msd/graficos_lista.php?id_set=".$id[1]."&nombre=".$id[2];
-
-                $sql->free_result();
                 $sql->close();
 
             }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
@@ -3199,6 +3200,44 @@ class Guardar{
             }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
         }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
         return $info;
+    }
+    private function eliminar_gra_set(){
+
+        $info['tipo'] = "error";
+        $info['titulo'] = "Error";
+        $info['texto'] = "Grafico no pudo ser eliminado";
+        $info['id'] = $_POST['id'];
+
+        if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
+            $id = $_POST['id'];
+            if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=?")){
+            if($sql->bind_param("i", $id)){
+            if($sql->execute()){
+
+                if($sqlx = $this->con->prepare("DELETE FROM set_graficos WHERE id_set=?")){
+                if($sqlx->bind_param("i", $id)){
+                if($sqlx->execute()){
+                    
+                    $info['tipo'] = "success";
+                    $info['titulo'] = "Eliminado";
+                    $info['texto'] = "Lista de Graficos Eliminada";
+                    $info['reload'] = 1;
+                    $info['page'] = "msd/graficos.php";
+
+                    $sqlx->close();
+
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
+                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+
+                $sql->close();
+
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
+        return $info;
+
     }
     private function eliminar_locales(){     
         $info['tipo'] = "error";
