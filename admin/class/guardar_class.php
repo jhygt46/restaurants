@@ -2880,8 +2880,7 @@ class Guardar{
                             $info['op'] = 1;
                             $info['mensaje'] = "Catalogo modificado exitosamente";
                             $info['reload'] = 1;
-                            $info['page'] = "msd/ver_giro.php";
-                            $this->con_cambios(null);
+                            $info['page'] = "msd/graficos_lista.php?id_set=".$id_set."&nombre=".$nombre;
                             $verify = true;
                             $sql->close();
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #2 '.htmlspecialchars($sql->error)); }
@@ -2896,8 +2895,7 @@ class Guardar{
                             $info['op'] = 1;
                             $info['mensaje'] = "Catalogo creado exitosamente";
                             $info['reload'] = 1;
-                            $info['page'] = "msd/ver_giro.php";
-                            $this->con_cambios(null);
+                            $info['page'] = "msd/graficos_lista.php?id_set=".$id_set."&nombre=".$nombre;
                             $verify = true;
                             $sql->close();
                         }else{ $this->registrar(6, 0, $this->id_gir, 'crear_catalogo() #1 '.htmlspecialchars($sql->error)); }
@@ -3181,6 +3179,12 @@ class Guardar{
             if($sql->bind_param("iii", $this->id_gir, $id[1], $id[0])){
             if($sql->execute()){
                 
+                $info['tipo'] = "success";
+                $info['titulo'] = "Eliminado";
+                $info['texto'] = "Lista Eliminada";
+                $info['reload'] = 1;
+                $info['page'] = "msd/graficos_lista.php?id_set=".$id[1]."&nombre=".$id[2];
+
                 $sql->free_result();
                 $sql->close();
 
