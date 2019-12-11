@@ -132,7 +132,7 @@ $graficos[8]['nombre'] = 'Ventas Totales G';
                     $nombre = $graficos[$k]['nombre'];
 
                 ?>
-                <div class="l_item" rel="<?php echo $id; ?>">
+                <div class="l_item" rel="<?php echo $ids; ?>">
                     <div class="detalle_item clearfix">
                         <div class="nombre"><?php echo $nombre; ?></div>
                         <a class="icono ic6" onclick="eliminar('eliminar_gra_lista', '<?php echo $ids; ?>/<?php echo $id_set; ?>/<?php echo $nombre; ?>', 'Grafico', '<?php echo $nombre; ?>')"></a>
