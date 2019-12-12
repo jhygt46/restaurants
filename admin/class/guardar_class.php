@@ -342,7 +342,7 @@ class Guardar{
         return $arr;
 
     }
-    private function crear_array_producto($numero, $nombre, $nombre_carro, $descripcion, $precio, $image, $tipo, $disponible, $pregunta){
+    private function crear_array_producto($numero, $nombre, $nombre_carro, $descripcion, $precio, $image, $tipo, $disponible, $preguntas){
 
         $arr["numero"] = $numero;
         $arr["nombre"] = $nombre;
@@ -352,8 +352,8 @@ class Guardar{
         $arr["image"] = $image;
         $arr["tipo"] = $tipo;
         $arr["disponible"] = $disponible;
-        if($pregunta != null){
-            $arr["pregunta"] = $pregunta;
+        if($preguntas != null){
+            $arr["preguntas"] = $preguntas;
         }
         return $arr;
 
@@ -694,6 +694,7 @@ class Guardar{
                 }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4b '.htmlspecialchars($sqlipp->error)); }
                 }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4c '.htmlspecialchars($this->con->error)); }            
                 $sqlx->close();
+
 
                 if(isset($prods[$j]['preguntas'])){
                     if($sql = $this->con->prepare("INSERT INTO preguntas (nombre, mostrar, id_cat, id_gir) VALUES (?, ?, ?, ?)")){
@@ -3210,31 +3211,48 @@ class Guardar{
 
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id = $_POST['id'];
-            if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=?")){
-            if($sql->bind_param("i", $id)){
-            if($sql->execute()){
 
-                if($sqlx = $this->con->prepare("DELETE FROM set_graficos WHERE id_set=?")){
-                if($sqlx->bind_param("i", $id)){
-                if($sqlx->execute()){
+            if($sqly = $this->con->prepare("SELECT * FROM set_graficos WHERE id_set=? AND id_gir=?")){
+            if($sqly->bind_param("ii", $id, $this->id_gir)){
+            if($sqly->execute()){
+
+                $res = $sql->get_result();
+                if($res->{"num_rows"} == 1){
                     
-                    $info['tipo'] = "success";
-                    $info['titulo'] = "Eliminado";
-                    $info['texto'] = "Lista de Graficos Eliminada";
-                    $info['reload'] = 1;
-                    $info['page'] = "msd/graficos.php";
+                    if($sql = $this->con->prepare("DELETE FROM set_graficos_id WHERE id_set=?")){
+                    if($sql->bind_param("i", $id)){
+                    if($sql->execute()){
+        
+                        if($sqlx = $this->con->prepare("DELETE FROM set_graficos WHERE id_set=?")){
+                        if($sqlx->bind_param("i", $id)){
+                        if($sqlx->execute()){
+                            
+                            $info['tipo'] = "success";
+                            $info['titulo'] = "Eliminado";
+                            $info['texto'] = "Lista de Graficos Eliminada";
+                            $info['reload'] = 1;
+                            $info['page'] = "msd/graficos.php";
+        
+                            $sqlx->close();
+        
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
+                        }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+        
+                        $sql->close();
+        
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+                    }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
 
-                    $sqlx->close();
+                }
+                $sqly->free_result();
+                $sqly->close();
 
-                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqlx->error)); }
-                }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
-
-                $sql->close();
-
-            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqly->error)); }
+            }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($sqly->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'eliminar_locales() '.htmlspecialchars($this->con->error)); }
+
         }else{ $this->registrar(2, 0, 0, 'eliminar_locales()'); }
         return $info;
 
