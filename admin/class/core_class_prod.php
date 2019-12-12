@@ -430,6 +430,11 @@ class Core{
                 $this->id_gir = $id_gir;
                 $_SESSION['user']['id_gir'] = $id_gir;
             }
+        }else{
+            if($this->id_gir == 0){
+                $this->registrar(7, 0, $id_gir, 'is_giro() #3');
+                die("ERROR");
+            }
         }
     }
     public function is_catalogo(){

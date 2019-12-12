@@ -20,17 +20,16 @@ $core->is_giro();
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
 }
-if($core->id_gir == 0){
-    die('<div class="pagina"><div class="title"><h1>Error: No hay Giro Asignado</h1></div></div>');
-}
 
-$titulo_list = "Aplicaciones";
-$id_list = "id_loc";
-$titulo = "GIRO NO SELECIONADO";
+$titulo = "Giro no seleccionado";
 $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 
 $pagos = $core->get_pagos();
 $giro = $core->get_giro();
+
+echo "<pre>";
+print_r($giro);
+echo "</pre>";
 
 $fechainicial = new DateTime($pagos['fecha_dns']);
 $fechafinal = new DateTime();
