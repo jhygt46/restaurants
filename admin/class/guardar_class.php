@@ -738,7 +738,6 @@ class Guardar{
         $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@wefwefwef.cl');
         $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@rthrthrth.cl');
         
-
         for($i=0; $i<count($locales); $i++){
 
             if($sql = $this->con->prepare("INSERT INTO locales (telefono, whatsapp, nombre, correo_ses, direccion, lat, lng, code, fecha_pos, fecha_cocina, fecha_creado, correo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, now(), now(), now(), ?, ?, ?)")){
