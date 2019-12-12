@@ -622,7 +622,7 @@ class Guardar{
 
         $prod[] = $this->crear_array_producto("1", "Chomp", "", "Frambuesa, Sahne Nuss y Prestigio", 3000, "image.jpg", 0, 0, $pre03);
         $prod[] = $this->crear_array_producto("2", "Cassata", "", "Piña, Chocolate y Trisabor", 3000, "image.jpg", 0, 0, $pre04);
-        $cae[] = $this->crear_array_categoria("Ceviches", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $cae[] = $this->crear_array_categoria("Postres", 0, 0, "", "", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $this->crear_categorias_prueba($cae, 0, $id_cat, $id_gir);
@@ -734,6 +734,7 @@ class Guardar{
     }
     private function crear_locales_prueba($id_cat, $id_gir){
 
+
         $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@wefwefwef.cl');
         $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@rthrthrth.cl');
         
@@ -799,7 +800,7 @@ class Guardar{
             }else{ $this->registrar(6, 0, $id_gir, 'crear_locales_prueba() #2b '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'crear_locales_prueba() #2c '.htmlspecialchars($this->con->error)); }
         }
-        //$this->locales_giro($id_gir);
+        $this->locales_giro($id_gir);
 
     }
     private function crear_giro_sql($id_gir, $dominio, $data, $catalogo){
