@@ -486,7 +486,7 @@ class Guardar{
         $sub_cae[] = $this->crear_array_categoria("Pizza Camaron", 0, 0, "Camarones adobados, queso mantecoso y albahaca", "Camarones adobados, queso mantecoso y albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
-        $cae[] = $this->crear_array_categoria("Pizzas", 0, 0, "Nuestras pizzas a la piedra son con masa casera, salsa casera y queso mozarella", "Descripcion subtitulo Pizza", 3500, 0, "image.jpg", 1, 0, 0, $sub_cae, []);
+        $cae[] = $this->crear_array_categoria("Pizzas", 0, 0, "Nuestras pizzas a la piedra son con masa casera, salsa casera y queso mozarella", "Descripcion subtitulo Pizza", 3500, 0, "cat_pizza.jpg", 1, 0, 0, $sub_cae, []);
         unset($sub_cae);
 
         $prod[] = $this->crear_array_producto("43", "Pollo", "Sandwich Pollo Mayo", "", 3500, "image.jpg", 0, 0, null);
@@ -649,8 +649,11 @@ class Guardar{
 
         for($i=0; $i<count($cae); $i++){
 
+            $new_image = $this->pass_generate(20).".jpg";
+            copy('/var/www/html/restaurants/admin/prueba/'.$cae[$i]['image'], '/var/www/html/restaurants/images/categorias/'.$new_image);
+
             if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, descripcion, descripcion_sub, precio, orders, ocultar, image, degradado, mostrar_prods, detalle_prods, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $parent_id, $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
+            if($sql->bind_param("siissiiisiiiii", $cae[$i]['nombre'], $parent_id, $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $new_image, $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $id_cat, $id_gir)){
             if($sql->execute()){
 
                 $p_id = $this->con->insert_id;
@@ -735,8 +738,8 @@ class Guardar{
     private function crear_locales_prueba($id_cat, $id_gir){
 
 
-        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 1', '1', 'Avda Manuel Montt 1256, Santiago, Chile', -33.438931, -70.615707, 'local1@wefwefwef.cl');
-        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local 2', '1', 'Avda Los Leones 1245, Providencia, Chile', -33.430810, -70.602630, 'local2@rthrthrth.cl');
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local Providencia', '1', 'Avda Manuel Montt 1256, Providencia, Chile', -33.438931, -70.615707, 'local1@wefwefwef.cl');
+        $locales[] = $this->crear_array_locales('+56966166923', '+56966166923', 'Local Santiago', '1', 'Alonso de Ovalle 1209, Santiago, Chile', -33.446180, -70.652599, 'local2@rthrthrth.cl');
         
         for($i=0; $i<count($locales); $i++){
 
