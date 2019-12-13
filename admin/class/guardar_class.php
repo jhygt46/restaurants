@@ -363,43 +363,43 @@ class Guardar{
         $pre01['nombre'] = "Bebida 1.5 Lts";
         $pre01['mostrar'] = "Seleccionar Bebida";
         $pre01['valores'][0]['cantidad'] = "1";
-        $pre01['valores'][0]['nombre'] = "Seleccionar Bebida";
+        $pre01['valores'][0]['nombre'] = "Elija una opcion";
         $pre01['valores'][0]['valores'] = "Coca-Cola,Coca-Cola Zero,Fanta,Sprite";
 
         $pre02['nombre'] = "Bebida Lata 350cc";
         $pre02['mostrar'] = "Seleccionar Bebida";
         $pre02['valores'][0]['cantidad'] = "1";
-        $pre02['valores'][0]['nombre'] = "Seleccionar Bebida";
+        $pre02['valores'][0]['nombre'] = "Elija una opcion";
         $pre02['valores'][0]['valores'] = "Coca-Cola,Coca-Cola Zero,Fanta,Sprite";
 
         $pre03['nombre'] = "Chomp";
         $pre03['mostrar'] = "Seleccionar Sabor";
         $pre03['valores'][0]['cantidad'] = "1";
-        $pre03['valores'][0]['nombre'] = "Seleccionar Sabor";
+        $pre03['valores'][0]['nombre'] = "Elija una opcion";
         $pre03['valores'][0]['valores'] = "Frambuesa,Sahne Nuss,Prestigio";
 
         $pre04['nombre'] = "Cassata";
         $pre04['mostrar'] = "Seleccionar Sabor";
         $pre04['valores'][0]['cantidad'] = "1";
-        $pre04['valores'][0]['nombre'] = "Seleccionar Sabor";
+        $pre04['valores'][0]['nombre'] = "Elija una opcion";
         $pre04['valores'][0]['valores'] = "Piña,Chocolate,Trisabor";
 
         $pre05['nombre'] = "Jugos Nectar Andina del Valle 1.5 Litros";
         $pre05['mostrar'] = "Seleccionar Sabor";
         $pre05['valores'][0]['cantidad'] = "1";
-        $pre05['valores'][0]['nombre'] = "Seleccionar Sabor";
+        $pre05['valores'][0]['nombre'] = "Elija una opcion";
         $pre05['valores'][0]['valores'] = "Piña,Piña Light,Duranzno,Naranja";
 
         $pre06['nombre'] = "Agua Benedictino 1.5 Litros";
         $pre06['mostrar'] = "Seleccionar";
         $pre06['valores'][0]['cantidad'] = "1";
-        $pre06['valores'][0]['nombre'] = "Seleccionar";
+        $pre06['valores'][0]['nombre'] = "Elija una opcion";
         $pre06['valores'][0]['valores'] = "Con gas,Sin gas";
 
         $pre07['nombre'] = "Agua Benedictino 600cc";
         $pre07['mostrar'] = "Seleccionar";
         $pre07['valores'][0]['cantidad'] = "1";
-        $pre07['valores'][0]['nombre'] = "Seleccionar";
+        $pre07['valores'][0]['nombre'] = "Elija una opcion";
         $pre07['valores'][0]['valores'] = "Con gas,Sin gas";
 
         $prod[] = $this->crear_array_producto("1", "Individual", "Pizza Margarita Individual", "", 3000, "image.jpg", 0, 0, null);
