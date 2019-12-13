@@ -93,6 +93,13 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         </select>
                     </label>
                     <label class="clearfix">
+                        <span><p>Agregar a Carro:</p></span>
+                        <select id="tipo_add_carro">
+                            <option value="0">Automatico</option>
+                            <option value="1">Mostrar carro</option>
+                        </select>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Pedido Minimo:</p></span>
                         <input id="pedido_minimo" type="text" class="inputs" value="<?php echo $that['pedido_minimo']; ?>" require="" placeholder="" />
                     </label>

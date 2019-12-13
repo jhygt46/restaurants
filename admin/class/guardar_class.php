@@ -2363,9 +2363,10 @@ class Guardar{
                         $alto = $_POST['alto'];
                         $alto_pro = $_POST['alto_pro'];
                         $tiempo_aviso = $_POST['tiempo_aviso'];
+                        $tipo_add_carro = $_POST['tipo_add_carro'];
 
-                        if($sqlgir = $this->con->prepare("UPDATE giros SET tiempo_aviso=?, alto=?, alto_pro=?, pedido_gengibre=?, pedido_wasabi=?, pedido_soya=?, pedido_teriyaki=?, pedido_palitos=?, pedido_comentarios=?, titulo=?, pedido_minimo=?, mapcode=?, estado=?, pedido_01_titulo=?, pedido_01_subtitulo=?, pedido_02_titulo=?, pedido_02_subtitulo=?, pedido_03_titulo=?, pedido_03_subtitulo=?, pedido_04_titulo=?, pedido_04_subtitulo=? WHERE id_gir=? AND eliminado=?")){
-                            if($sqlgir->bind_param("iiissssssssssssssssssii", $tiempo_aviso, $alto, $alto_pro, $pedido_gengibre, $pedido_wasabi, $pedido_soya, $pedido_teriyaki, $pedido_palitos, $pedido_comentarios, $titulo, $pedido_minimo, $mapcode, $estados, $pedido_01_titulo, $pedido_01_subtitulo, $pedido_02_titulo, $pedido_02_subtitulo, $pedido_03_titulo, $pedido_03_subtitulo, $pedido_04_titulo, $pedido_04_subtitulo, $this->id_gir, $this->eliminado)){
+                        if($sqlgir = $this->con->prepare("UPDATE giros SET tipo_add_carro=?, tiempo_aviso=?, alto=?, alto_pro=?, pedido_gengibre=?, pedido_wasabi=?, pedido_soya=?, pedido_teriyaki=?, pedido_palitos=?, pedido_comentarios=?, titulo=?, pedido_minimo=?, mapcode=?, estado=?, pedido_01_titulo=?, pedido_01_subtitulo=?, pedido_02_titulo=?, pedido_02_subtitulo=?, pedido_03_titulo=?, pedido_03_subtitulo=?, pedido_04_titulo=?, pedido_04_subtitulo=? WHERE id_gir=? AND eliminado=?")){
+                            if($sqlgir->bind_param("iiiissssssssssssssssssii", $tipo_add_carro, $tiempo_aviso, $alto, $alto_pro, $pedido_gengibre, $pedido_wasabi, $pedido_soya, $pedido_teriyaki, $pedido_palitos, $pedido_comentarios, $titulo, $pedido_minimo, $mapcode, $estados, $pedido_01_titulo, $pedido_01_subtitulo, $pedido_02_titulo, $pedido_02_subtitulo, $pedido_03_titulo, $pedido_03_subtitulo, $pedido_04_titulo, $pedido_04_subtitulo, $this->id_gir, $this->eliminado)){
                                 if($sqlgir->execute()){
                                     $info['op'] = 1;
                                     $info['mensaje'] = "Configuracion Base Modificado Exitosamente";
@@ -2376,6 +2377,7 @@ class Guardar{
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($sqlgir->error)); }
                             }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($sqlgir->error)); }
                         }else{ $this->registrar(6, 0, $this->id_gir, 'configurar_giro() datos '.htmlspecialchars($this->con->error)); }
+                        
                         $sql->free_result();
                         $sql->close();
 
