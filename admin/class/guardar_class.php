@@ -793,6 +793,14 @@ class Guardar{
         
                 }
 
+                $dia_ini = 1;
+                $dia_fin = 7;
+                $hora_ini = 11;
+                $hora_fin = 23;
+                $min_ini = 30;
+                $min_fin = 30;
+                $tipo = 0;
+
                 if($sqlw = $this->con->prepare("INSERT INTO horarios (dia_ini, dia_fin, hora_ini, hora_fin, min_ini, min_fin, tipo, id_loc, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")){
                 if($sqlw->bind_param("iiiiiiiii", $dia_ini, $din_fin, $hora_ini, $hora_fin, $min_ini, $min_fin, $tipo, $id_loc, $id_gir)){
                 if($sqlw->execute()){
