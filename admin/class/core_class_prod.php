@@ -1362,6 +1362,7 @@ class Core{
                         $info['item_pagina'] = $result['item_pagina'];
                         $info['ultima_actualizacion'] = $result['ultima_actualizacion'];
                         $info['ver_inicio'] = $result['ver_inicio'];
+                        $info['tipo_add_carro'] = $result['tipo_add_carro'];
                     }
                     $sql->free_result();
                     $sql->close();
