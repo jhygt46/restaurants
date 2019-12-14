@@ -588,7 +588,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("1", "Veggie", "Ensalada Veggie", "Lechuga, Tomate, Palta, Zanahoria, Pepino, Crutones y Vinagreta", 3900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("2", "Cesar", "Ensalada Cesar", "Lechuga, Pollo, Queso parmesano recien rayado, Crutones y Aderezo cesar", 3900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Del Huerto", "Ensalada Del Huerto", "Lechuga, Tomate, Huevo, Choclo, Zanahoria, Crutones y Vinagreta", 3900, "", 0, 0, null);
-        $cae[] = $this->crear_array_categoria("Ensaladas", 0, 0, "Pruebas nuestras freasca y deliciosas ensaladas", "Descripcion subtitulo Enselada", 0, 0, "", 1, 0, 0, [], $prod);
+        $cae[] = $this->crear_array_categoria("Ensaladas", 0, 0, "Pruebas nuestras freasca y deliciosas ensaladas", "Descripcion subtitulo Enselada", 0, 0, "cat_ensalada.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("1", "Bebida 1.5 Litros", "", "Coca-Cola, Coca-Cola Zero, Fanta o Sprite", 2000, "", 0, 0, $pre01);
@@ -596,7 +596,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("3", "Bebidas lata 350cc", "", "Coca-Cola, Coca-Cola Zero, Fanta o Sprite", 1000, "", 0, 0, $pre02);
         $prod[] = $this->crear_array_producto("3", "Agua Benedictino 1.5 Litros", "", "Con o Sin Gas", 1500, "", 0, 0, $pre06);
         $prod[] = $this->crear_array_producto("3", "Agua Benedictino 600cc", "", "Con o Sin Gas", 900, "", 0, 0, $pre07);
-        $cae[] = $this->crear_array_categoria("Bebidas", 0, 0, "A la temperatura ideal", "Descripcion subtitulo Bebidas", 0, 0, "", 1, 0, 0, [], $prod);
+        $cae[] = $this->crear_array_categoria("Bebidas", 0, 0, "A la temperatura ideal", "Descripcion subtitulo Bebidas", 0, 0, "cat_bebidas.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("1", "Empandas (4u)", "Empanadas pollo, queso crema y cebollin (4u)", "Pollo, Queso crema y Cebollin", 1900, "", 0, 0, null);
@@ -612,6 +612,11 @@ class Guardar{
         $prod[] = $this->crear_array_producto("1", "Mix Tempura", "", "2 emp queso, 2 champiñones tempura, 2 calamares apanados y 2 camarones apanados", 3500, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("2", "Aros de Cebolla", "", "", 2300, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Pulpo al Olivo", "", "Tiras de pulpo en salsa de oliva", 6500, "", 0, 0, null);
+        $cae[] = $this->crear_array_categoria("Para Picar", 0, 0, "Prueba nuestras exquisiteses para compartir", "Descripcion subtitulo Ceviches", 0, 0, "", 1, 0, 0, [], $prod);
+        unset($prod);
+        
+        $prod[] = $this->crear_array_producto("3", "Reineta", "Ceviches Reineta", "", 6900, "", 0, 0, null);
+        $prod[] = $this->crear_array_producto("3", "Salmon", "Ceviches Salmon", "", 6900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Atun", "Ceviches Atun", "", 6900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Champiñon", "Ceviches Champiñon", "", 4900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Mixto", "Ceviches Mixto", "Pulpo, Calamar y Camaron", 6500, "", 0, 0, null);
