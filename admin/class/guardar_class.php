@@ -499,7 +499,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("47", "Pescado Frito", "Sandwich Pescado Frito Mayo", "", 4600, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("48", "Carne Mechada", "Sandwich Carne Mechada Mayo", "", 5200, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("49", "Churrasco", "Sandwich Churrasco Mayo", "", 5200, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Mayo", 0, 0, "", "Sandwich Mayo", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Mayo", 0, 0, "", "Sandwich Mayo", 0, 0, "cat_sandwich_mayo.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("50", "Pollo", "Sandwich Pollo Tomate Mayo", "", 3900, "", 0, 0, null);
@@ -509,7 +509,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("54", "Pescado Frito", "Sandwich Pescado Frito Tomate Mayo", "", 4900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("55", "Carne Mechada", "Sandwich Carne Mechada Tomate Mayo", "", 5500, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("56", "Churrasco", "Sandwich Churrasco Tomate Mayo", "", 5500, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Tomate Mayo", 0, 0, "", "Sandwich Tomate Mayo", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Tomate Mayo", 0, 0, "", "Sandwich Tomate Mayo", 0, 0, "cat_sandwich_tomate_mayo.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("57", "Pollo", "Sandwich Pollo Queso", "", 4500, "", 0, 0, null);
@@ -519,7 +519,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("61", "Pescado Frito", "Sandwich Pescado Frito Queso", "", 5600, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("62", "Carne Mechada", "Sandwich Carne Mechada Queso", "", 6300, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("63", "Churrasco", "Sandwich Churrasco Queso", "", 6300, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Queso", 0, 0, "", "Sandwich Queso", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Queso", 0, 0, "", "Sandwich Queso", 0, 0, "cat_sandwich_queso.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("64", "Pollo", "Sandwich Pollo Palta Mayo", "", 4900, "", 0, 0, null);
@@ -529,7 +529,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("68", "Pescado Frito", "Sandwich Pescado Frito Palta Mayo", "", 5800, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("69", "Carne Mechada", "Sandwich Carne Mechada Palta Mayo", "", 6500, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("70", "Churrasco", "Sandwich Churrasco Palta Mayo", "", 6500, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Palta Mayo", 0, 0, "", "Sandwich Palta Mayo", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Palta Mayo", 0, 0, "", "Sandwich Palta Mayo", 0, 0, "cat_sandwich_palta_mayo.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("71", "Pollo", "Sandwich Pollo Gringa", "", 4600, "", 0, 0, null);
@@ -539,7 +539,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("75", "Pescado Frito", "Sandwich Pescado Frito Gringa", "", 5600, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("76", "Carne Mechada", "Sandwich Carne Mechada Gringa", "", 6500, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("77", "Churrasco", "Sandwich Churrasco Gringa", "", 6500, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Gringa", 0, 0, "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Gringa", 0, 0, "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", "Sandwich Lechuga, Tomate, Pepinillos, Cebolla morada y Mayonesa Casera", 0, 0, "cat_sandwich_gringa.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("78", "Pollo", "Sandwich Pollo Chacarero", "", 4800, "", 0, 0, null);
@@ -549,7 +549,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("82", "Pescado Frito", "Sandwich Pescado Frito Chacarero", "", 5800, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("83", "Carne Mechada", "Sandwich Carne Mechada Chacarero", "", 6700, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("84", "Churrasco", "Sandwich Churrasco Chacarero", "", 6500, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Chacarero", 0, 0, "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", "Sandwich Tomate, Porotos verdes, Ají verde y Mayonesa casera", 0, 0, "cat_sandwich_chacarero.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("85", "Pollo", "Sandwich Pollo Italiano", "", 4800, "", 0, 0, null);
@@ -559,7 +559,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("89", "Pescado Frito", "Sandwich Pescado Frito Italiano", "", 6100, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("90", "Carne Mechada", "Sandwich Carne Mechada Italiano", "", 6800, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("91", "Churrasco", "Sandwich Churrasco Italiano", "", 6800, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Italiano", 0, 0, "Tomate, Palta y Mayonesa casera", "Tomate, Palta y Mayonesa casera", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Italiano", 0, 0, "Tomate, Palta y Mayonesa casera", "Tomate, Palta y Mayonesa casera", 0, 0, "cat_sandwich_italiano.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("92", "Pollo", "Sandwich Pollo Dinamico", "", 5000, "", 0, 0, null);
@@ -569,7 +569,7 @@ class Guardar{
         $prod[] = $this->crear_array_producto("96", "Pescado Frito", "Sandwich Pescado Frito Dinamico", "", 6400, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("97", "Carne Mechada", "Sandwich Carne Mechada Dinamico", "", 6900, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("98", "Churrasco", "Sandwich Churrasco Dinamico", "", 6900, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Dinamico", 0, 0, "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Dinamico", 0, 0, "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", "Tomate, Palta, Salsa verde, Americana y Mayonesa casera", 0, 0, "cat_sandwich_dinamico.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("99", "Pollo", "Sandwich Pollo Tocke", "", 5000, "", 0, 0, null);
@@ -579,10 +579,10 @@ class Guardar{
         $prod[] = $this->crear_array_producto("103", "Pescado Frito", "Sandwich Pescado Frito Tocke", "", 6400, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("104", "Carne Mechada", "Sandwich Carne Mechada Tocke", "", 7000, "", 0, 0, null);
         $prod[] = $this->crear_array_producto("105", "Churrasco", "Sandwich Churrasco Tocke", "", 7000, "", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Sandwich Tocke", 0, 0, "Champiñones, Queso y Cebolla caramelizada", "Champiñones, Queso y Cebolla caramelizada", 0, 0, "", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Sandwich Tocke", 0, 0, "Champiñones, Queso y Cebolla caramelizada", "Champiñones, Queso y Cebolla caramelizada", 0, 0, "cat_sandwich_tocke.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
-        $cae[] = $this->crear_array_categoria("Sandwiches", 0, 0, "Hechos con pan amasado, 200gr de carne y mayonesa casera con huevos pasteurizados", "Decripion subtitulo Sandwich", 3500, 0, "", 1, 0, 0, $sub_cae, []);
+        $cae[] = $this->crear_array_categoria("Sandwiches", 0, 0, "Hechos con pan amasado, 200gr de carne y mayonesa casera con huevos pasteurizados", "Decripion subtitulo Sandwich", 3500, 0, "cat_sandwich.jpg", 1, 0, 0, $sub_cae, []);
         unset($sub_cae);
 
         $prod[] = $this->crear_array_producto("1", "Veggie", "Ensalada Veggie", "Lechuga, Tomate, Palta, Zanahoria, Pepino, Crutones y Vinagreta", 3900, "", 0, 0, null);
