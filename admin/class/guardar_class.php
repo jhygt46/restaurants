@@ -405,89 +405,92 @@ class Guardar{
         $prod[] = $this->crear_array_producto("1", "Individual", "Pizza Margarita Individual", "", 3000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("2", "Mediana", "Pizza Margarita Mediana", "", 7900, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("3", "Grande", "Pizza Margarita Grande", "", 9500, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Margarita", 0, 0, "Tomate y Albahaca", "Tomate y Albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Margarita", 0, 0, "Tomate y Albahaca", "Tomate y Albahaca", 0, 0, "cat_pizza_margarita.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("4", "Individual", "Pizza Chilena Individual", "", 3300, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("5", "Mediana", "Pizza Chilena Mediana", "", 8600, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("6", "Grande", "Pizza Chilena Grande", "", 10700, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Chilena", 0, 0, "Salchicha, cebolla morada y choclo", "Salchicha, cebolla morada y choclo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Chilena", 0, 0, "Salchicha, cebolla morada y choclo", "Salchicha, cebolla morada y choclo", 0, 0, "cat_pizza_chilena.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("7", "Individual", "Pizza Española Individual", "", 3400, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("8", "Mediana", "Pizza Española Mediana", "", 9000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("9", "Grande", "Pizza Española Grande", "", 10900, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Española", 0, 0, "Pimenton, tomate y choricillo", "Pimenton, tomate y choricillo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Española", 0, 0, "Pimenton, tomate y choricillo", "Pimenton, tomate y choricillo", 0, 0, "cat_pizza_espanola.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("10", "Individual", "Pizza Hawaiana Individual", "", 3400, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("11", "Mediana", "Pizza Hawaiana Mediana", "", 9000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("12", "Grande", "Pizza Hawaiana Grande", "", 11000, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Hawaiana", 0, 0, "Jamon y Piña", "Jamon y Piña", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Hawaiana", 0, 0, "Jamon y Piña", "Jamon y Piña", 0, 0, "cat_pizza_hawaiana.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("13", "Individual", "Pizza Napolitana Individual", "", 3600, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("14", "Mediana", "Pizza Napolitana Mediana", "", 9400, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("15", "Grande", "Pizza Napolitana Grande", "", 11400, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Napolitana", 0, 0, "Jamon, tomate y aceitunas", "Jamon, tomate y aceitunas", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Napolitana", 0, 0, "Jamon, tomate y aceitunas", "Jamon, tomate y aceitunas", 0, 0, "cat_pizza_napolitana.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("16", "Individual", "Pizza Primavera Individual", "", 3600, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("17", "Mediana", "Pizza Primavera Mediana", "", 9400, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("18", "Grande", "Pizza Primavera Grande", "", 11500, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Primavera", 0, 0, "Palmitos, choclo y jamon", "Palmitos, choclo y jamon", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Primavera", 0, 0, "Palmitos, choclo y jamon", "Palmitos, choclo y jamon", 0, 0, "cat_pizza_primavera.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("19", "Individual", "Pizza Pepperoni Individual", "", 3700, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("20", "Mediana", "Pizza Pepperoni Mediana", "", 9600, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("21", "Grande", "Pizza Pepperoni Grande", "", 11900, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Pepperoni", 0, 0, "Pepperoni", "Pepperoni", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Pepperoni", 0, 0, "Pepperoni", "Pepperoni", 0, 0, "cat_pizza_pepperoni.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("22", "Individual", "Pizza Vegetariana Individual", "", 3800, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("23", "Mediana", "Pizza Vegetariana Mediana", "", 10000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("24", "Grande", "Pizza Vegetariana Grande", "", 12000, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Vegetariana", 0, 0, "Pimenton, choclo, champiñon y palmitos", "Pimenton, choclo, champiñon y palmitos", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Vegetariana", 0, 0, "Pimenton, choclo, champiñon y palmitos", "Pimenton, choclo, champiñon y palmitos", 0, 0, "cat_pizza_vegetariana.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("25", "Individual", "Pizza Maravilla Individual", "", 4000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("26", "Mediana", "Pizza Maravilla Mediana", "", 10500, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("27", "Grande", "Pizza Maravilla Grande", "", 12600, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Maravilla", 0, 0, "Cebolla morada, tocino ahumado y queso crema", "Cebolla morada, tocino ahumado y queso crema", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Maravilla", 0, 0, "Cebolla morada, tocino ahumado y queso crema", "Cebolla morada, tocino ahumado y queso crema", 0, 0, "cat_pizza_maravilla.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("28", "Individual", "Pizza Griega Individual", "", 4000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("29", "Mediana", "Pizza Griega Mediana", "", 10500, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("30", "Grande", "Pizza Griega Grande", "", 12600, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Griega", 0, 0, "Tomate, queso de cabra, aceitunas y albahaca", "Tomate, queso de cabra, aceitunas y albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Griega", 0, 0, "Tomate, queso de cabra, aceitunas y albahaca", "Tomate, queso de cabra, aceitunas y albahaca", 0, 0, "cat_pizza_griega.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("31", "Individual", "Pizza Mediterranea Individual", "", 4100, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("32", "Mediana", "Pizza Mediterranea Mediana", "", 10600, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("33", "Grande", "Pizza Mediterranea Grande", "", 13000, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Mediterranea", 0, 0, "Aceitunas, jamon y salame ahumado", "Aceitunas, jamon y salame ahumado", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Mediterranea", 0, 0, "Aceitunas, jamon y salame ahumado", "Aceitunas, jamon y salame ahumado", 0, 0, "cat_pizza_mediterranea.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("34", "Individual", "Pizza Carnivora Individual", "", 4200, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("35", "Mediana", "Pizza Carnivora Mediana", "", 10800, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("36", "Grande", "Pizza Carnivora Grande", "", 13400, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Carnivora", 0, 0, "Carne, pollo, chorizo", "Carne, pollo, chorizo", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Carnivora", 0, 0, "Carne, pollo, chorizo", "Carne, pollo, chorizo", 0, 0, "cat_pizza_carnivora.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("37", "Individual", "Pizza Cuatro Quesos Individual", "", 4300, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("38", "Mediana", "Pizza Cuatro Quesos Mediana", "", 11400, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("39", "Grande", "Pizza Cuatro Quesos Grande", "", 13800, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Cuatro Quesos", 0, 0, "Mozzarella, roquefort, queso crema y mantecoso", "Mozzarella, roquefort, queso crema y mantecoso", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Cuatro Quesos", 0, 0, "Mozzarella, roquefort, queso crema y mantecoso", "Mozzarella, roquefort, queso crema y mantecoso", 0, 0, "cat_pizza_cuatro_quesos.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
         $prod[] = $this->crear_array_producto("40", "Individual", "Pizza Camaron Individual", "", 4500, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("41", "Mediana", "Pizza Camaron Mediana", "", 12000, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("42", "Grande", "Pizza Camaron Grande", "", 14900, "image.jpg", 0, 0, null);
-        $sub_cae[] = $this->crear_array_categoria("Pizza Camaron", 0, 0, "Camarones adobados, queso mantecoso y albahaca", "Camarones adobados, queso mantecoso y albahaca", 0, 0, "image.jpg", 1, 0, 0, [], $prod);
+        $sub_cae[] = $this->crear_array_categoria("Pizza Camaron", 0, 0, "Camarones adobados, queso mantecoso y albahaca", "Camarones adobados, queso mantecoso y albahaca", 0, 0, "cat_pizza_camaron.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
-        $cae[] = $this->crear_array_categoria("Pizzas", 0, 0, "Nuestras pizzas a la piedra son con masa casera, salsa casera y queso mozarella", "Descripcion subtitulo Pizza", 3500, 0, "image.jpg", 1, 0, 0, $sub_cae, []);
+        $cae[] = $this->crear_array_categoria("Pizzas", 0, 0, "Nuestras pizzas a la piedra son con masa casera, salsa casera y queso mozarella", "Descripcion subtitulo Pizza", 3500, 0, "cat_pizza.jpg", 1, 0, 0, $sub_cae, []);
         unset($sub_cae);
+
+
+
 
         $prod[] = $this->crear_array_producto("43", "Pollo", "Sandwich Pollo Mayo", "", 3500, "image.jpg", 0, 0, null);
         $prod[] = $this->crear_array_producto("44", "Hamburguesa Vegetariana", "Sandwich Hamburguesa Vegetariana Mayo", "", 3900, "image.jpg", 0, 0, null);
