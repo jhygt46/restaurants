@@ -585,9 +585,9 @@ class Guardar{
         $cae[] = $this->crear_array_categoria("Sandwiches", 0, 0, "Hechos con pan amasado, 200gr de carne y mayonesa casera con huevos pasteurizados", "Decripion subtitulo Sandwich", 3500, 0, "cat_sandwich.jpg", 1, 0, 0, $sub_cae, []);
         unset($sub_cae);
 
-        $prod[] = $this->crear_array_producto("1", "Veggie", "Ensalada Veggie", "Lechuga, Tomate, Palta, Zanahoria, Pepino, Crutones y Vinagreta", 3900, "", 0, 0, null);
-        $prod[] = $this->crear_array_producto("2", "Cesar", "Ensalada Cesar", "Lechuga, Pollo, Queso parmesano recien rayado, Crutones y Aderezo cesar", 3900, "", 0, 0, null);
-        $prod[] = $this->crear_array_producto("3", "Del Huerto", "Ensalada Del Huerto", "Lechuga, Tomate, Huevo, Choclo, Zanahoria, Crutones y Vinagreta", 3900, "", 0, 0, null);
+        $prod[] = $this->crear_array_producto("1", "Veggie", "Ensalada Veggie", "Lechuga, Tomate, Palta, Zanahoria, Pepino, Crutones y Vinagreta", 3900, "ensalada_veggie.jpg", 1, 0, null);  
+        $prod[] = $this->crear_array_producto("2", "Cesar", "Ensalada Cesar", "Lechuga, Pollo, Queso parmesano recien rayado, Crutones y Aderezo cesar", 3900, "ensalada_cesar.jpg", 1, 0, null);
+        $prod[] = $this->crear_array_producto("3", "Del Huerto", "Ensalada Del Huerto", "Lechuga, Tomate, Huevo, Choclo, Zanahoria, Crutones y Vinagreta", 3900, "ensalada_del_huerto.jpg", 1, 0, null);
         $cae[] = $this->crear_array_categoria("Ensaladas", 0, 0, "Pruebas nuestras freasca y deliciosas ensaladas", "Descripcion subtitulo Enselada", 0, 0, "cat_ensalada.jpg", 1, 0, 0, [], $prod);
         unset($prod);
 
