@@ -1298,6 +1298,18 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramos() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramos() '.htmlspecialchars($this->con->error)); }
     }
+    public function get_coords($id_loc){
+        if($sql = $this->con->prepare("SELECT lat, lng, nombre FROM locales WHERE id_loc=? AND eliminado=?")){
+            if($sql->bind_param("ii", $id_loc, $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramos() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramos() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramos() '.htmlspecialchars($this->con->error)); }
+    }
     public function get_local_tramo($id_lot, $id_loc){
         if($sql = $this->con->prepare("SELECT * FROM locales_tramos WHERE id_lot=? AND id_loc=? AND eliminado=?")){
             if($sql->bind_param("iii", $id_lot, $id_loc, $this->eliminado)){

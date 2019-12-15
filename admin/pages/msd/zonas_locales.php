@@ -31,6 +31,7 @@ $class = ($_POST['w'] < 700) ? 'resp' : 'normal' ;
 if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0){
 
     $id_loc = $_GET["id_loc"];
+    $coords = $core->get_coords($id_loc);
     $list = $core->get_local_tramos($id_loc);
     $id_lot = 0;
     
@@ -43,16 +44,12 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
     }
 
 }
-/*
-echo "<pre>";
-print_r($core->get_info_despacho(-33.43457716115334, -70.601704));
-echo "</pre>";
-*/
+
 ?>
 <script>
     labelIndex = 0;
     iniciar_mapa();
-    testmarker(-33.4397949, -70.61695209999999);
+    testmarker(<?php echo $coords['lat']; ?>, <?php echo $coords['lng']; ?>, <?php echo $coords['nombre']; ?>);
     renderMarkers_mod(<?php echo $that['poligono']; ?>);
 </script>
 <div class="pagina">

@@ -19,10 +19,10 @@ function iniciar_mapa() {
     });
     
 }
-function testmarker(lat, lng){
+function testmarker(lat, lng, name){
     var marker = new google.maps.Marker({
         position: {lat: lat, lng: lng},
-        label: 'BUE',
+        label: name,
         map: map
     });
 }
