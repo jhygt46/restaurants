@@ -2224,7 +2224,7 @@ class Guardar{
                 if($sql->execute()){
                     $data = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                     if($data["dns"] == 0){
-                        $url = "http://".$data["ip"]."/?url=".$data["dominio"];
+                        $url = "http://".$data["ip"]."/".$data["dominio"];
                     }
                     if($data["dns"] == 1){
                         if($data["ssl"] == 0){
