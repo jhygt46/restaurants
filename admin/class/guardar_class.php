@@ -1164,7 +1164,18 @@ class Guardar{
                 $aux['value'] = $data['cant_pagos'];
                 $db[] = $aux;
             }
-    
+            if(isset($data['retiro_local'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'retiro_local';
+                $aux['value'] = $data['retiro_local'];
+                $db[] = $aux;
+            }
+            if(isset($data['despacho_domicilio'])){
+                $aux['tipo'] = 'i';
+                $aux['key'] = 'despacho_domicilio';
+                $aux['value'] = $data['despacho_domicilio'];
+                $db[] = $aux;
+            }
             if(count($db) > 0){
                 for($i=0; $i<count($db); $i++){
                     if($db[$i]["tipo"] == "s"){
@@ -4217,6 +4228,8 @@ class Guardar{
                         $dominio = $_POST['url'];
                         $data['prueba'] = 1;
                         $data['nombre'] = "Sitio de Prueba";
+                        $data['retiro_local'] = 1;
+                        $data['despacho_domicilio'] = 1;
                         $giro = $this->crear_giro_sql(0, $dominio, $data, true);
                         if($giro['op'] == 1){
                             if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){

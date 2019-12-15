@@ -1412,8 +1412,6 @@ class Core{
             if($sql->bind_param("ii", $id_gir, $eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result();
-                    $sql->free_result();
-                    $sql->close();
                     while($row = $result->fetch_assoc()){
                         $locales['id_loc'] = $row['id_loc'];
                         $locales['nombre'] = $row['nombre'];
@@ -1433,8 +1431,10 @@ class Core{
                         }else{ $this->registrar(6, 0, $id_gir, 'get_locales_js() #1 '.htmlspecialchars($this->con->error)); }
                         $loc[] = $locales;
                         unset($locales);
-                        return $loc;
                     }
+                    $sql->free_result();
+                    $sql->close();
+                    return $loc;
                 }else{ $this->registrar(6, 0, $id_gir, 'get_locales_js() #2 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'get_locales_js() #2 '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $id_gir, 'get_locales_js() #2 '.htmlspecialchars($this->con->error)); }
