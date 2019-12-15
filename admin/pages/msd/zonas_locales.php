@@ -48,8 +48,8 @@ if(isset($_GET["id_loc"]) && is_numeric($_GET["id_loc"]) && $_GET["id_loc"] != 0
 ?>
 <script>
     labelIndex = 0;
-    iniciar_mapa();
-    testmarker(<?php echo $coords['lat']; ?>, <?php echo $coords['lng']; ?>, <?php echo $coords['nombre']; ?>);
+    iniciar_mapa(<?php echo $coords['lat']; ?>, <?php echo $coords['lng']; ?>);
+    testmarker(<?php echo $coords['lat']; ?>, <?php echo $coords['lng']; ?>, '<?php echo $coords['nombre']; ?>');
     renderMarkers_mod(<?php echo $that['poligono']; ?>);
 </script>
 <div class="pagina">

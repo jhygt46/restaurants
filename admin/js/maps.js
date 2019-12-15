@@ -4,10 +4,10 @@ var labelIndex = 0;
 var map;
 var bermudaTriangle = null;
 
-function iniciar_mapa() {
+function iniciar_mapa(lat, lng) {
     
     markers = [];
-    var bangalore = { lat: -33.405412, lng: -70.653332 };
+    var bangalore = { lat: lat, lng: lng };
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: bangalore
