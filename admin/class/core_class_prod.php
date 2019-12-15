@@ -1310,7 +1310,7 @@ class Core{
             }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramo() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, $id_loc, $this->id_gir, 'get_local_tramo() '.htmlspecialchars($this->con->error)); }
     }
-    public function get_data($id_gir){
+    public function get_data($id_gir, $paginas, $categorias){
         if($sql = $this->con->prepare("SELECT * FROM giros WHERE id_gir=?")){
             if($sql->bind_param("i", $id_gir)){
                 if($sql->execute()){
@@ -1363,6 +1363,8 @@ class Core{
                         $info['ultima_actualizacion'] = $result['ultima_actualizacion'];
                         $info['ver_inicio'] = $result['ver_inicio'];
                         $info['tipo_add_carro'] = $result['tipo_add_carro'];
+                        $info['categorias'] = $categorias;
+                        $info['paginas'] = $paginas;
                     }
                     $sql->free_result();
                     $sql->close();
@@ -1444,6 +1446,7 @@ class Core{
                 if($sql->execute()){
                     $result = $sql->get_result();
                     while($row = $result->fetch_assoc()){
+
                         $aux_categoria['id_cae'] = $row['id_cae'];
                         $aux_categoria['parent_id'] = $row['parent_id'];
                         $aux_categoria['nombre'] = $row['nombre'];
@@ -1456,7 +1459,14 @@ class Core{
                         $aux_categoria['precio'] = $row['precio'];
                         $aux_categoria['degradado'] = $row['degradado'];
                         $aux_categoria['tipo'] = $row['tipo'];
+
                         if($aux_categoria['tipo'] == 0){
+
+                            $aux_r2['nombre'] = $row['nombre'];
+                            $aux_r2['parent_id'] = $row['parent_id'];
+                            $info['res2'][] = $aux_r2;
+                            unset($aux_r2);
+
                             $aux_categoria['tipo'] = 0;
                             if($sqlpro = $this->con->prepare("SELECT * FROM cat_pros t1, productos t2, productos_precio t3 WHERE t1.id_cae=? AND t1.id_pro=t2.id_pro AND t1.id_pro=t3.id_pro AND t3.id_cat=? ORDER BY t1.orders")){
                                 if($sqlpro->bind_param("ii", $row['id_cae'], $id_cat)){
@@ -1482,7 +1492,7 @@ class Core{
                                                             while($rowpr = $resultppr->fetch_assoc()){
                                                                 $aux_productos['preguntas'][] = $rowpr['id_pre'];
                                                             }
-                                                            $info['productos'][] = $aux_productos;
+                                                            $info['res1']['productos'][] = $aux_productos;
                                                             unset($aux_productos);
                                                             $sqlppr->free_result();
                                                             $sqlppr->close();
@@ -1530,7 +1540,7 @@ class Core{
                                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_info_catalogo() '.htmlspecialchars($sqlpp->error)); }
                             }else{ $this->registrar(6, 0, $this->id_gir, 'get_info_catalogo() '.htmlspecialchars($this->con->error)); }
                         }
-                        $info['categorias'][] = $aux_categoria;
+                        $info['res1']['categorias'][] = $aux_categoria;
                         unset($aux_categoria);
                     }
                     $sql->free_result();
@@ -1538,7 +1548,7 @@ class Core{
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_info_catalogo() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_info_catalogo() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_info_catalogo() '.htmlspecialchars($this->con->error)); }
-        $info['preguntas'] = $this->get_info_preguntas($id_cat);        
+        $info['res1']['preguntas'] = $this->get_info_preguntas($id_cat);        
         return $info;
     }
     public function get_info_preguntas($id_cat){
@@ -2810,24 +2820,16 @@ class Core{
                         $info['op'] = 1;
                         $result = $sql->get_result();
                         while($row = $result->fetch_assoc()){
-                            $info['data']['catalogos'][] = $this->get_info_catalogo($row['id_cat']);
+                            $aux = $this->get_info_catalogo($row['id_cat']);
+                            $info['data']['catalogos'][] = $aux['res1'];
+                            $categorias = $aux['res2'];
                         }
                         $info['data']['config'] = $this->get_config($id_gir);
                         $info['data']['paginas'] = $this->get_paginas_web($id_gir);
                         $info['data']['locales'] = $this->get_locales_js($id_gir);
                         $info['polygons'] = $this->get_polygons($id_gir);
-                        $info['info'] = $this->get_data($id_gir);
-                        $ruta_file = "/var/www/html/restaurants/data/".$info['info']['code'].".js";
-
-                        file_put_contents($ruta_file, "var data=".json_encode($info['data']));
-                        /*
-                        if($info['info']['dns'] == 0){
-                            file_put_contents($ruta_file, "var data=".json_encode($info['data']));
-                        }
-                        if($info['info']['dns'] == 1 && file_exists($ruta_file)){
-                            unlink($ruta_file);
-                        }
-                        */
+                        $info['info'] = $this->get_data($id_gir, $info['data']['paginas'], $categorias);
+                        file_put_contents("/var/www/html/restaurants/data/".$info['info']['code'].".js", "var data=".json_encode($info['data']));
                         $sql->free_result();
                         $sql->close();
                     }else{ $this->registrar(6, 0, $id_gir, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
