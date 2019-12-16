@@ -1474,6 +1474,7 @@ class Core{
 
                         if($aux_categoria['tipo'] == 0){
 
+                            $aux_r2['id'] = $row['id_cae'];
                             $aux_r2['nombre'] = $row['nombre'];
                             $aux_r2['parent_id'] = $row['parent_id'];
                             $info['res2'][] = $aux_r2;
