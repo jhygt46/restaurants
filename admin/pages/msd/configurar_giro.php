@@ -95,8 +95,8 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                     <label class="clearfix">
                         <span><p>Agregar a Carro:</p></span>
                         <select id="tipo_add_carro">
-                            <option value="0">Automatico</option>
-                            <option value="1">Mostrar carro</option>
+                            <option value="0" <?php if($that['tipo_add_carro'] == 0){ echo "selected"; } ?>>Automatico</option>
+                            <option value="1" <?php if($that['tipo_add_carro'] == 1){ echo "selected"; } ?>>Mostrar carro</option>
                         </select>
                     </label>
                     <label class="clearfix">
