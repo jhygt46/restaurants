@@ -311,6 +311,9 @@ $tablas[3]['campos'][14]['kc'] = 0;
 $tablas[3]['campos'][15]['nombre'] = 'eliminado';
 $tablas[3]['campos'][15]['tipo'] = 'tinyint(1)';
 $tablas[3]['campos'][15]['null'] = 0;
+$tablas[3]['campos'][16]['nombre'] = 'aux_promo';
+$tablas[3]['campos'][16]['tipo'] = 'tinyint(1)';
+$tablas[3]['campos'][16]['null'] = 0;
 
 $tablas[4]['nombre'] = 'productos';
 $tablas[4]['campos'][0]['nombre'] = 'id_pro';
@@ -351,6 +354,9 @@ $tablas[4]['campos'][9]['null'] = 0;
 $tablas[4]['campos'][10]['nombre'] = 'tipo';
 $tablas[4]['campos'][10]['tipo'] = 'tinyint(1)';
 $tablas[4]['campos'][10]['null'] = 0;
+$tablas[4]['campos'][11]['nombre'] = 'aux_promo';
+$tablas[4]['campos'][11]['tipo'] = 'tinyint(1)';
+$tablas[4]['campos'][11]['null'] = 0;
 
 $tablas[5]['nombre'] = 'cat_pros';
 $tablas[5]['campos'][0]['nombre'] = 'id_cae';
