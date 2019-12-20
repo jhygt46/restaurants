@@ -17,7 +17,7 @@ if(!isset($core_class_iniciada)){
 $core->is_giro();
 
 echo "<pre>";
-print_r(get_aux_promo(1, $core->id_gir));
+print_r($core->get_aux_promo(1, $core->id_gir));
 echo "</pre>";
 
 // SOLO GIROS
