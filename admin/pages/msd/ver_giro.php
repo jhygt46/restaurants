@@ -16,6 +16,10 @@ if(!isset($core_class_iniciada)){
 
 $core->is_giro();
 
+echo "<pre>";
+print_r(get_aux_promo(1, $core->id_gir));
+echo "</pre>";
+
 // SOLO GIROS
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');

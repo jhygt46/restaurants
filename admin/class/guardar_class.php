@@ -646,7 +646,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $id_gir, 'crear_categoria_aux() #1c '.htmlspecialchars($this->con->error)); }
     
     }
-    private function get_aux_promo($aux_promo, $id_gir){
+    public function get_aux_promo($aux_promo, $id_gir){
 
         if($sql = $this->con->prepare("SELECT id_pro FROM productos WHERE id_gir=? AND aux_promo=?")){
         if($sql->bind_param("ii", $id_gir, $aux_promo)){
