@@ -634,7 +634,7 @@ class Guardar{
     }
 
     private function crear_categoria_aux($nombre, $p_id, $tipo, $ocultar, $precio, $id_cat, $id_gir){
-        
+
         if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, ocultar, tipo, precio, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?)")){
         if($sql->bind_param("siiiiii", $nombre, $p_id, $ocultar, $tipo, $precio, $id_cat, $id_gir)){
         if($sql->execute()){
@@ -679,6 +679,11 @@ class Guardar{
         $pro_2 = $this->get_aux_promo(2, $id_gir);
         $pro_3 = $this->get_aux_promo(3, $id_gir);
         $pro_4 = $this->get_aux_promo(4, $id_gir);
+
+        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_1));
+        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_2));
+        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_3));
+        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_4));
 
         for($x=0; $x<count($pro_1); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
