@@ -674,7 +674,6 @@ class Guardar{
         $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 0, 1, 0, 10000, $id_cat, $id_gir);
 
         $this->registrar(6, 0, $id_gir, ' id_promo_individual: '.$id_promo_individual.' // id_promo_mediana: '.$id_promo_mediana.' // id_promo_familiar: '.$id_promo_familiar);
-        exit;
 
         $pro_1 = $this->get_aux_promo(1, $id_gir);
         $pro_2 = $this->get_aux_promo(2, $id_gir);
