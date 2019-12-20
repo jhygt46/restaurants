@@ -672,7 +672,7 @@ class Guardar{
         $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 0, 1, 0, 5000, $id_cat, $id_gir);
         $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 0, 1, 0, 7500, $id_cat, $id_gir);
         $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 0, 1, 0, 10000, $id_cat, $id_gir);
-        
+
         $pro_1 = $this->get_aux_promo(1, $id_gir);
         $pro_2 = $this->get_aux_promo(2, $id_gir);
         $pro_3 = $this->get_aux_promo(3, $id_gir);
@@ -683,27 +683,27 @@ class Guardar{
             if($sql->bind_param("iii", $id_promo_individual, $pro_1[$x], $x)){
             if($sql->execute()){
                 $sql->close();
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #1a '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #1b '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #1c '.htmlspecialchars($this->con->error)); }
         }
         for($x=0; $x<count($pro_2); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
             if($sql->bind_param("iii", $id_pizza_mediana, $pro_2[$x], $x)){
             if($sql->execute()){
                 $sql->close();
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #2a '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #2b '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #2c '.htmlspecialchars($this->con->error)); }
         }
         for($x=0; $x<count($pro_3); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
             if($sql->bind_param("iii", $id_pizza_familiar, $pro_3[$x], $x)){
             if($sql->execute()){
                 $sql->close();
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #3a '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #3b '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #3c '.htmlspecialchars($this->con->error)); }
         }
 
 
@@ -718,17 +718,17 @@ class Guardar{
         if($sql->bind_param("iii", $id_promo_individual, $id_pizza_individual, $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #4a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #4b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #4c '.htmlspecialchars($this->con->error)); }
 
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
         if($sql->bind_param("iii", $id_promo_individual, $pro_4[0], $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #5a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #5b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #5c '.htmlspecialchars($this->con->error)); }
 
             
 
@@ -737,17 +737,17 @@ class Guardar{
         if($sql->bind_param("iii", $id_promo_mediana, $id_pizza_mediana, $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #6a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #6b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #6c '.htmlspecialchars($this->con->error)); }
     
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
         if($sql->bind_param("iii", $id_promo_mediana, $pro_4[0], $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #7a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #7b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #7c '.htmlspecialchars($this->con->error)); }
 
 
 
@@ -756,17 +756,17 @@ class Guardar{
         if($sql->bind_param("iii", $id_promo_familiar, $id_pizza_familiar, $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #8a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #8b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #8c '.htmlspecialchars($this->con->error)); }
 
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
         if($sql->bind_param("iii", $id_promo_familiar, $pro_4[0], $cantidad)){
         if($sql->execute()){
             $sql->close();
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #5a '.htmlspecialchars($this->con->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9b '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9c '.htmlspecialchars($this->con->error)); }
 
 
     }
