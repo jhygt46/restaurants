@@ -38,6 +38,20 @@ class Core{
         $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
         
     }
+    public function get_aux_promo($aux_promo, $id_gir){
+
+        if($sql = $this->con->prepare("SELECT id_pro FROM productos WHERE id_gir=? AND aux_promo=?")){
+        if($sql->bind_param("ii", $id_gir, $aux_promo)){
+        if($sql->execute()){
+            $return = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            $sql->free_result();
+            $sql->close();
+            return $return;
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, $id_gir, 'crear_categorias_productos_prueba() #4a '.htmlspecialchars($this->con->error)); }
+
+    }
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
         $sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)");
