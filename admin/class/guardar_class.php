@@ -680,14 +680,9 @@ class Guardar{
         $pro_3 = $this->get_aux_promo(3, $id_gir);
         $pro_4 = $this->get_aux_promo(4, $id_gir);
 
-        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_1));
-        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_2));
-        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_3));
-        $this->registrar(6, 0, $id_gir, 'implode: '.implode("", $pro_4));
-
         for($x=0; $x<count($pro_1); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-            if($sql->bind_param("iii", $id_promo_individual, $pro_1[$x], $x)){
+            if($sql->bind_param("iii", $id_promo_individual, $pro_1[$x]['id_pro'], $x)){
             if($sql->execute()){
                 $sql->close();
             }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #1a '.htmlspecialchars($sql->error)); }
@@ -696,7 +691,7 @@ class Guardar{
         }
         for($x=0; $x<count($pro_2); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-            if($sql->bind_param("iii", $id_pizza_mediana, $pro_2[$x], $x)){
+            if($sql->bind_param("iii", $id_pizza_mediana, $pro_2[$x]['id_pro'], $x)){
             if($sql->execute()){
                 $sql->close();
             }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #2a '.htmlspecialchars($sql->error)); }
@@ -705,7 +700,7 @@ class Guardar{
         }
         for($x=0; $x<count($pro_3); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-            if($sql->bind_param("iii", $id_pizza_familiar, $pro_3[$x], $x)){
+            if($sql->bind_param("iii", $id_pizza_familiar, $pro_3[$x]['id_pro'], $x)){
             if($sql->execute()){
                 $sql->close();
             }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #3a '.htmlspecialchars($sql->error)); }
