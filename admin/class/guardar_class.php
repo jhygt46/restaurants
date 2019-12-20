@@ -665,7 +665,8 @@ class Guardar{
     private function crear_promociones_prueba($id_cat, $id_gir){
 
         $id_cat_oculta = $this->crear_categoria_aux("Categoria Oculta Promocion", 0, 0, 1, 0, $id_cat, $id_gir);
-        
+        $this->registrar(6, 0, $id_gir, ' id_cat_oculta: '.$id_cat_oculta);
+
         /*
         $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, 0, $id_cat, $id_gir);
         $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, 0, $id_cat, $id_gir);
