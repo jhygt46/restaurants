@@ -634,9 +634,7 @@ class Guardar{
     }
 
     private function crear_categoria_aux($nombre, $p_id, $tipo, $ocultar, $precio, $id_cat, $id_gir){
-
-        $this->registrar(6, 0, $id_gir, ' id_cat: '.$id_cat.' // id_gir: '.$id_gir);
-
+        
         if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, ocultar, tipo, precio, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?)")){
         if($sql->bind_param("siiiiii", $nombre, $p_id, $ocultar, $tipo, $precio, $id_cat, $id_gir)){
         if($sql->execute()){
@@ -665,21 +663,18 @@ class Guardar{
     private function crear_promociones_prueba($id_cat, $id_gir){
 
         $id_cat_oculta = $this->crear_categoria_aux("Categoria Oculta Promocion", 0, 0, 1, 0, $id_cat, $id_gir);
-        $this->registrar(6, 0, $id_gir, ' id_cat_oculta: '.$id_cat_oculta);
 
-        /*
-        $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, 0, $id_cat, $id_gir);
-        $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, 0, $id_cat, $id_gir);
-        $id_pizza_familiar = $this->crear_categoria_aux("Pizzas Familiares", $id_cat_oculta, 0, 0, 0, 0, $id_cat, $id_gir);
+        $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, $id_cat, $id_gir);
+        $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, $id_cat, $id_gir);
+        $id_pizza_familiar = $this->crear_categoria_aux("Pizzas Familiares", $id_cat_oculta, 0, 0, 0, $id_cat, $id_gir);
         
         $id_promo = $this->crear_categoria_aux("Promociones", 0, 0, 0, 0, $id_cat, $id_gir);
 
-        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 0, 1, 0, 5000, $id_cat, $id_gir);
-        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 0, 1, 0, 7500, $id_cat, $id_gir);
-        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 0, 1, 0, 10000, $id_cat, $id_gir);
+        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 1, 0, 5000, $id_cat, $id_gir);
+        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 1, 0, 7500, $id_cat, $id_gir);
+        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 1, 0, 10000, $id_cat, $id_gir);
 
-        $this->registrar(6, 0, $id_gir, ' id_promo_individual: '.$id_promo_individual.' // id_promo_mediana: '.$id_promo_mediana.' // id_promo_familiar: '.$id_promo_familiar);
-
+        
         $pro_1 = $this->get_aux_promo(1, $id_gir);
         $pro_2 = $this->get_aux_promo(2, $id_gir);
         $pro_3 = $this->get_aux_promo(3, $id_gir);
@@ -770,7 +765,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9a '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9b '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9c '.htmlspecialchars($this->con->error)); }
-        */
+        
 
     }
     private function crear_array_locales($telefono, $whatsapp, $nombre, $correo_ses, $direccion, $lat, $lng, $correo){
