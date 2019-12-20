@@ -682,7 +682,7 @@ class Guardar{
 
         for($x=0; $x<count($pro_1); $x++){
             if($sql = $this->con->prepare("INSERT INTO cat_pros (id_cae, id_pro, orders) VALUES (?, ?, ?)")){
-            if($sql->bind_param("iii", $id_promo_individual, $pro_1[$x]['id_pro'], $x)){
+            if($sql->bind_param("iii", $id_pizza_individual, $pro_1[$x]['id_pro'], $x)){
             if($sql->execute()){
                 $sql->close();
             }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #1a '.htmlspecialchars($sql->error)); }
@@ -721,7 +721,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #4c '.htmlspecialchars($this->con->error)); }
 
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
-        if($sql->bind_param("iii", $id_promo_individual, $pro_4[0], $cantidad)){
+        if($sql->bind_param("iii", $id_promo_individual, $pro_4[0]['id_pro'], $cantidad)){
         if($sql->execute()){
             $sql->close();
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #5a '.htmlspecialchars($sql->error)); }
@@ -740,7 +740,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #6c '.htmlspecialchars($this->con->error)); }
     
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
-        if($sql->bind_param("iii", $id_promo_mediana, $pro_4[0], $cantidad)){
+        if($sql->bind_param("iii", $id_promo_mediana, $pro_4[0]['id_pro'], $cantidad)){
         if($sql->execute()){
             $sql->close();
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #7a '.htmlspecialchars($sql->error)); }
@@ -759,7 +759,7 @@ class Guardar{
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #8c '.htmlspecialchars($this->con->error)); }
 
         if($sql = $this->con->prepare("INSERT INTO promocion_productos (id_cae, id_pro, cantidad) VALUES (?, ?, ?)")){
-        if($sql->bind_param("iii", $id_promo_familiar, $pro_4[0], $cantidad)){
+        if($sql->bind_param("iii", $id_promo_familiar, $pro_4[0]['id_pro'], $cantidad)){
         if($sql->execute()){
             $sql->close();
         }else{ $this->registrar(6, 0, $id_gir, 'crear_promociones_prueba() #9a '.htmlspecialchars($sql->error)); }
