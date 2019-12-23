@@ -311,6 +311,9 @@ $tablas[3]['campos'][14]['kc'] = 0;
 $tablas[3]['campos'][15]['nombre'] = 'eliminado';
 $tablas[3]['campos'][15]['tipo'] = 'tinyint(1)';
 $tablas[3]['campos'][15]['null'] = 0;
+$tablas[3]['campos'][16]['nombre'] = 'aux_promo';
+$tablas[3]['campos'][16]['tipo'] = 'tinyint(1)';
+$tablas[3]['campos'][16]['null'] = 0;
 
 $tablas[4]['nombre'] = 'productos';
 $tablas[4]['campos'][0]['nombre'] = 'id_pro';
