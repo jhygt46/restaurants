@@ -686,9 +686,9 @@ class Guardar{
 
 
         $id_promo = $this->crear_categoria_aux("Promociones", 0, 0, 0, 0, "promo_pizzas.jpg", 8, $id_cat, $id_gir);
-        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 1, 0, 5000, "promo1_pizzas.jpg", 0, $id_cat, $id_gir);
-        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 1, 0, 7500, "promo2_pizzas.jpg", 1, $id_cat, $id_gir);
-        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 1, 0, 10000, "promo3_pizzas.jpg", 2, $id_cat, $id_gir);
+        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 1, 0, 5000, "promo_pizzas.jpg", 0, $id_cat, $id_gir);
+        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 1, 0, 7500, "promo_pizzas.jpg", 1, $id_cat, $id_gir);
+        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 1, 0, 10000, "promo_pizzas.jpg", 2, $id_cat, $id_gir);
 
 
 
