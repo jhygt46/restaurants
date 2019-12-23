@@ -634,11 +634,11 @@ class Guardar{
 
     }
 
-    private function crear_categoria_aux($nombre, $p_id, $tipo, $ocultar, $precio, $image, $id_cat, $id_gir){
+    private function crear_categoria_aux($nombre, $p_id, $tipo, $ocultar, $precio, $image, $orders, $id_cat, $id_gir){
 
         $degradado = 1;
-        if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, ocultar, tipo, precio, degradado, image, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-        if($sql->bind_param("siiiiisii", $nombre, $p_id, $ocultar, $tipo, $precio, $degradado, $image, $id_cat, $id_gir)){
+        if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, ocultar, tipo, precio, degradado, image, orders, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+        if($sql->bind_param("siiiiisiii", $nombre, $p_id, $ocultar, $tipo, $precio, $degradado, $image, $orders, $id_cat, $id_gir)){
         if($sql->execute()){
             $id = $this->con->insert_id;
             $sql->close();
@@ -678,20 +678,21 @@ class Guardar{
     }
     private function crear_promociones_prueba($id_cat, $id_gir){
 
-        $id_cat_oculta = $this->crear_categoria_aux("Categoria Oculta Promocion", 0, 0, 1, 0, "", $id_cat, $id_gir);
-
-        $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, "", $id_cat, $id_gir);
-        $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, "", $id_cat, $id_gir);
-        $id_pizza_familiar = $this->crear_categoria_aux("Pizzas Familiares", $id_cat_oculta, 0, 0, 0, "", $id_cat, $id_gir);
+        $id_cat_oculta = $this->crear_categoria_aux("Categoria Oculta Promocion", 0, 0, 1, 0, "", 0, $id_cat, $id_gir);
+        $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, "", 0, $id_cat, $id_gir);
+        $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, "", 1, $id_cat, $id_gir);
+        $id_pizza_familiar = $this->crear_categoria_aux("Pizzas Familiares", $id_cat_oculta, 0, 0, 0, "", 2, $id_cat, $id_gir);
         
-        $id_promo = $this->crear_categoria_aux("Promociones", 0, 0, 0, 0, "promo_pizzas.jpg", $id_cat, $id_gir);
 
-        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 1, 0, 5000, "promo1_pizzas.jpg", $id_cat, $id_gir);
-        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 1, 0, 7500, "promo2_pizzas.jpg", $id_cat, $id_gir);
-        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 1, 0, 10000, "promo3_pizzas.jpg", $id_cat, $id_gir);
+
+        $id_promo = $this->crear_categoria_aux("Promociones", 0, 0, 0, 0, "promo_pizzas.jpg", 8, $id_cat, $id_gir);
+        $id_promo_individual = $this->crear_categoria_aux("Promo 1", $id_promo, 1, 0, 5000, "promo1_pizzas.jpg", 0, $id_cat, $id_gir);
+        $id_promo_mediana = $this->crear_categoria_aux("Promo 2", $id_promo, 1, 0, 7500, "promo2_pizzas.jpg", 1, $id_cat, $id_gir);
+        $id_promo_familiar = $this->crear_categoria_aux("Promo 3", $id_promo, 1, 0, 10000, "promo3_pizzas.jpg", 2, $id_cat, $id_gir);
+
+
 
         $cat_1 = $this->get_aux_cat_promo(1, $id_gir);
-        
         $pro_1 = $this->get_aux_promo(1, $id_gir);
         $pro_2 = $this->get_aux_promo(2, $id_gir);
         $pro_3 = $this->get_aux_promo(3, $id_gir);
@@ -807,8 +808,14 @@ class Guardar{
 
         for($i=0; $i<count($cae); $i++){
 
+            if($parent_id == 0){
+                $w = $i + 1;
+            }else{
+                $w = $i;
+            }
+            
             if($sql = $this->con->prepare("INSERT INTO categorias (nombre, parent_id, tipo, descripcion, descripcion_sub, precio, orders, ocultar, image, degradado, mostrar_prods, detalle_prods, aux_promo, id_cat, id_gir) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
-            if($sql->bind_param("siissiiisiiiiii", $cae[$i]['nombre'], $parent_id, $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $i, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $cae[$i]['aux_promo'], $id_cat, $id_gir)){
+            if($sql->bind_param("siissiiisiiiiii", $cae[$i]['nombre'], $parent_id, $cae[$i]['tipo'], $cae[$i]['descripcion'], $cae[$i]['descripcion_sub'], $cae[$i]['precio'], $w, $cae[$i]['ocultar'], $cae[$i]['image'], $cae[$i]['degradado'], $cae[$i]['mostrar_prods'], $cae[$i]['detalle_prods'], $cae[$i]['aux_promo'], $id_cat, $id_gir)){
             if($sql->execute()){
 
                 $p_id = $this->con->insert_id;
