@@ -21,20 +21,18 @@ $accion = "configurar_inicio";
 
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
+$htmls[0] = '';
+$htmls[1] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px">#TITULO</div><div style="font-size: 14px; padding: 20px 20px 20px 20px">#DESCRIPCION</div></div>';
+
+
 ?>
 <script>
 
-    var htmls = [
-        { data: '' }, 
-        { data: '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px">#TITULO</div><div style="font-size: 14px; padding: 20px 40px 20px 20px; color: #f00">#DESCRIPCION</div></div>' },
-        { data: '<div>BUENA ERNESTOR</div>' }, 
-        { data: '<div>BUENA BUENA</div>' }
-    ];
-
+    var htmls = [ <?php implode("," , $htmls); ?> ];
     function ver_paginas(){
         var pagina = $('#tipo').val();
         var info = htmls[pagina];
-        $('#html').val(info.data);
+        $('#html').val(info);
     }
 
 </script>
