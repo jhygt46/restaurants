@@ -144,6 +144,10 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
                         <input id="mapcode" type="text" class="inputs" value="<?php echo $that['mapcode']; ?>" require="" placeholder="" />
                     </label>
                     <label class="clearfix">
+                        <span><p>Mostrar Numero:</p></span>
+                        <input id="mostrar_numero" type="checkbox" class="checkbox" value="1" <?php if($that['mostrar_numero'] == 1){ ?>checked="checked"<?php } ?>>
+                    </label>
+                    <label class="clearfix">
                         <span><p>Gengibre:</p></span>
                         <input id="pedido_gengibre" type="checkbox" class="checkbox" value="1" <?php if($that['pedido_gengibre'] == 1){ ?>checked="checked"<?php } ?>>
                     </label>

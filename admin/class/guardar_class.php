@@ -678,6 +678,8 @@ class Guardar{
     }
     private function crear_promociones_prueba($id_cat, $id_gir){
 
+
+
         $id_cat_oculta = $this->crear_categoria_aux("Categoria Oculta Promocion", 0, 0, 1, 0, "", 0, $id_cat, $id_gir);
         $id_pizza_individual = $this->crear_categoria_aux("Pizzas Individuales", $id_cat_oculta, 0, 0, 0, "", 0, $id_cat, $id_gir);
         $id_pizza_mediana = $this->crear_categoria_aux("Pizzas Medianas", $id_cat_oculta, 0, 0, 0, "", 1, $id_cat, $id_gir);
@@ -2555,9 +2557,10 @@ class Guardar{
                         $alto_pro = $_POST['alto_pro'];
                         $tiempo_aviso = $_POST['tiempo_aviso'];
                         $tipo_add_carro = $_POST['tipo_add_carro'];
+                        $mostrar_numero = $_POST['mostrar_numero'];
 
-                        if($sqlgir = $this->con->prepare("UPDATE giros SET tipo_add_carro=?, tiempo_aviso=?, alto=?, alto_pro=?, pedido_gengibre=?, pedido_wasabi=?, pedido_soya=?, pedido_teriyaki=?, pedido_palitos=?, pedido_comentarios=?, titulo=?, pedido_minimo=?, mapcode=?, estado=?, pedido_01_titulo=?, pedido_01_subtitulo=?, pedido_02_titulo=?, pedido_02_subtitulo=?, pedido_03_titulo=?, pedido_03_subtitulo=?, pedido_04_titulo=?, pedido_04_subtitulo=? WHERE id_gir=? AND eliminado=?")){
-                            if($sqlgir->bind_param("iiiissssssssssssssssssii", $tipo_add_carro, $tiempo_aviso, $alto, $alto_pro, $pedido_gengibre, $pedido_wasabi, $pedido_soya, $pedido_teriyaki, $pedido_palitos, $pedido_comentarios, $titulo, $pedido_minimo, $mapcode, $estados, $pedido_01_titulo, $pedido_01_subtitulo, $pedido_02_titulo, $pedido_02_subtitulo, $pedido_03_titulo, $pedido_03_subtitulo, $pedido_04_titulo, $pedido_04_subtitulo, $this->id_gir, $this->eliminado)){
+                        if($sqlgir = $this->con->prepare("UPDATE giros SET mostrar_numero=?, tipo_add_carro=?, tiempo_aviso=?, alto=?, alto_pro=?, pedido_gengibre=?, pedido_wasabi=?, pedido_soya=?, pedido_teriyaki=?, pedido_palitos=?, pedido_comentarios=?, titulo=?, pedido_minimo=?, mapcode=?, estado=?, pedido_01_titulo=?, pedido_01_subtitulo=?, pedido_02_titulo=?, pedido_02_subtitulo=?, pedido_03_titulo=?, pedido_03_subtitulo=?, pedido_04_titulo=?, pedido_04_subtitulo=? WHERE id_gir=? AND eliminado=?")){
+                            if($sqlgir->bind_param("iiiiissssssssssssssssssii", $mostrar_numero, $tipo_add_carro, $tiempo_aviso, $alto, $alto_pro, $pedido_gengibre, $pedido_wasabi, $pedido_soya, $pedido_teriyaki, $pedido_palitos, $pedido_comentarios, $titulo, $pedido_minimo, $mapcode, $estados, $pedido_01_titulo, $pedido_01_subtitulo, $pedido_02_titulo, $pedido_02_subtitulo, $pedido_03_titulo, $pedido_03_subtitulo, $pedido_04_titulo, $pedido_04_subtitulo, $this->id_gir, $this->eliminado)){
                                 if($sqlgir->execute()){
                                     $info['op'] = 1;
                                     $info['mensaje'] = "Configuracion Base Modificado Exitosamente";

@@ -57,7 +57,6 @@ function listar_pedidos(pedidos){
 function socket_init(){
     
     var code = localStorage.getItem("code");
-    console.log("code: "+code);
     if(code != ""){
 
         socket = io.connect('https://www.izusushi.cl', { 'secure': true });
@@ -186,8 +185,6 @@ function html_home_pedidos(index){
     
     var pedidos = get_pedidos();
     var pedido = pedidos[index];
-
-    console.log(pedido);
 
     var sub_total = get_precio_carro(pedido);
 
@@ -1783,8 +1780,6 @@ function agregar_pedido(id){
         type: "POST",
         data: send,
         success: function(data){
-            
-            console.log(data);
 
             var obj = pedido_obj();
             obj.id_ped = data.id_ped;

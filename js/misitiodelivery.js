@@ -68,7 +68,6 @@ function crear_dominio(){
                             type: "POST",
                             data: send,
                             success: function(res){
-                                console.log(res);
                                 if(res.op == 1){ 
                                     $('.formempezar').hide(); 
                                     $('.empezarok').show();
@@ -148,7 +147,6 @@ function enviar_contacto(){
                             type: "POST",
                             data: send,
                             success: function(res){
-                                console.log(res);
                                 if(res.op == 1){ 
                                     $('.formcontacto').hide(); 
                                     $('.contactook').show();
@@ -179,7 +177,6 @@ function enviar_contacto(){
                                 }
                                 document.getElementById("enviar_contacto").disabled = false;
                             }, error: function(e){
-                                console.log(e);
                                 document.getElementById("enviar_contacto").disabled = false;
                             }
                         });
