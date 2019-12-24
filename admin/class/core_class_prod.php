@@ -1598,7 +1598,7 @@ class Core{
         return $preguntas;
     }
     public function get_config($id_gir){
-        if($sql = $this->con->prepare("SELECT retiro_local, despacho_domicilio, desde, pedido_minimo, alto, alto_pro, tiempo_aviso FROM giros WHERE id_gir=? AND eliminado=?")){
+        if($sql = $this->con->prepare("SELECT mostrar_numero, tipo_add_carro, retiro_local, despacho_domicilio, desde, pedido_minimo, alto, alto_pro, tiempo_aviso, dns FROM giros WHERE id_gir=? AND eliminado=?")){
             if($sql->bind_param("ii", $id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];

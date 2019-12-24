@@ -21,7 +21,7 @@ if($_SERVER["HTTP_HOST"] == "localhost"){
 
 if(isset($_POST["tipo"])){
 
-    if($_POST["tipo"] == 1 || $_POST["tipo"] == 2 || $_POST["tipo"] == 3 || $_POST["tipo"] == 4){
+    if($_POST["tipo"] == 1 || $_POST["tipo"] == 2 || $_POST["tipo"] == 3 || $_POST["tipo"] == 4 || $_POST["tipo"] == 5){
         require_once DIR."admin/class/core_class_prod.php";
         $core = new Core();
         if($_POST["tipo"] == 1){
