@@ -27,8 +27,8 @@ $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26
 
 ?>
 <script>
-    
-    var htmls = [ <?php for($i=0; $i<count($htmls); $i++){ if($i > 0){ echo ","; } echo '"'.$htmls[$i].'"'; } ?> ];
+
+    var htmls = [ <?php for($i=0; $i<count($htmls); $i++){ if($i > 0){ echo ","; } echo "'".$htmls[$i]."'"; } ?> ];
     function ver_paginas(){
         var pagina = $('#tipo').val();
         var info = htmls[pagina];
