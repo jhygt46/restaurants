@@ -21,7 +21,7 @@ $accion = "configurar_inicio";
 
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
-$htmls[] = '';
+$htmls[] = $that["inicio_html"];
 $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px; color: #000">#TITULO</div><div style="font-size: 14px; padding: 20px 20px 20px 20px; color: #000">#DESCRIPCION</div></div>';
 $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px; color: #000">#TITULO</div><div style="font-size: 14px; padding: 20px 20px 20px 20px; color: #000">#DESCRIPCION</div></div>';
 
@@ -60,10 +60,9 @@ $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26
                     <label class="clearfix">
                         <span><p>Pagina:</p></span>
                         <select id="tipo" onchange="ver_paginas()">
-                            <option value="0">Nueva</option>
-                            <option value="1">inicio 1</option>
-                            <option value="2">inicio 2</option>
-                            <option value="3">inicio 3</option>
+                            <?php for($i=0; $i<count($htmls); $i++){ ?>
+                            <option value="<?php echo $i; ?>"><?php if($i==0){ echo "Nueva"; }else{ echo "Template ".$i; } ?></option>
+                            <?php } ?>
                         </select>
                     </label>
                     <label class="clearfix">
