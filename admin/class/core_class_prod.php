@@ -828,7 +828,7 @@ class Core{
     
     }
     public function get_giro(){
-        if($sql = $this->con->prepare("SELECT t1.dns, t1.dominio, t1.catalogo, t1.nombre, t1.dns_letra, t1.ssl, t2.ip, t1.titulo, t1.retiro_local, t1.despacho_domicilio, t1.alto, t1.alto_pro, t1.pedido_minimo, t1.tiempo_aviso, t1.pedido_01_titulo, t1.pedido_01_subtitulo, t1.pedido_02_titulo, t1.pedido_02_subtitulo, t1.pedido_03_titulo, t1.pedido_03_subtitulo, t1.pedido_04_titulo, t1.pedido_04_subtitulo, t1.mapcode, t1.pedido_gengibre, t1.pedido_wasabi, t1.pedido_soya, t1.pedido_teriyaki, t1.pedido_palitos, t1.pedido_comentarios, t1.estado, t1.font_family, t1.font_css, t1.style_page, t1.style_color, t1.style_modal, t1.tipo_add_carro FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
+        if($sql = $this->con->prepare("SELECT t1.mostrar_numero, t1.dns, t1.dominio, t1.catalogo, t1.nombre, t1.dns_letra, t1.ssl, t2.ip, t1.titulo, t1.retiro_local, t1.despacho_domicilio, t1.alto, t1.alto_pro, t1.pedido_minimo, t1.tiempo_aviso, t1.pedido_01_titulo, t1.pedido_01_subtitulo, t1.pedido_02_titulo, t1.pedido_02_subtitulo, t1.pedido_03_titulo, t1.pedido_03_subtitulo, t1.pedido_04_titulo, t1.pedido_04_subtitulo, t1.mapcode, t1.pedido_gengibre, t1.pedido_wasabi, t1.pedido_soya, t1.pedido_teriyaki, t1.pedido_palitos, t1.pedido_comentarios, t1.estado, t1.font_family, t1.font_css, t1.style_page, t1.style_color, t1.style_modal, t1.tipo_add_carro FROM giros t1, server t2 WHERE t1.id_gir=? AND t1.id_ser=t2.id_ser AND t1.eliminado=?")){
             if($sql->bind_param("ii", $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
