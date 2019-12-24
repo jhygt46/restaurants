@@ -25,11 +25,10 @@ $htmls[] = '';
 $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px; color: #000">#TITULO</div><div style="font-size: 14px; padding: 20px 20px 20px 20px; color: #000">#DESCRIPCION</div></div>';
 $htmls[] = '<div style="width: 100%; min-height: 100%"><div style="font-size: 26px; color: #f00; padding: 20px 40px 0px 20px; color: #000">#TITULO</div><div style="font-size: 14px; padding: 20px 20px 20px 20px; color: #000">#DESCRIPCION</div></div>';
 
-
 ?>
 <script>
-
-    var htmls = [ <?php echo implode("," , $htmls); ?> ];
+    
+    var htmls = [ <?php for($i=0; $i<count($htmls); $i++){ if($i > 0){ echo ","; } echo '"'.$htmls[$i].'"'; } ?> ];
     function ver_paginas(){
         var pagina = $('#tipo').val();
         var info = htmls[pagina];
