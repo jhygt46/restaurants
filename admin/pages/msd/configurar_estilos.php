@@ -21,6 +21,10 @@ $titulo = "Configuracion ".$that["nombre"];
 $css = $core->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
+echo "<pre>";
+print_r($that);
+echo "</pre>";
+
 ?>
 <div class="pagina">
     <div class="title">
