@@ -924,8 +924,8 @@ class Core{
     }
     public function get_css(){
         $id_gir = 0;
-        if($sql = $this->con->prepare("SELECT * FROM css WHERE id_gir=? OR id_gir=?")){
-            if($sql->bind_param("ii", $id_gir, $this->id_gir)){
+        if($sql = $this->con->prepare("SELECT * FROM css WHERE id_gir=? OR id_gir=? AND eliminado=?")){
+            if($sql->bind_param("iii", $id_gir, $this->id_gir, $this->eliminado)){
                 if($sql->execute()){
                     $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
                     $sql->free_result();
