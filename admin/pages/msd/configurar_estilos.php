@@ -21,10 +21,6 @@ $titulo = "Configuracion ".$that["nombre"];
 $css = $core->get_css();
 $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 
-$style_page = $that['style_page'];
-$style_color = $that['style_color'];
-$style_modal = $that['style_modal'];
-
 ?>
 <div class="pagina">
     <div class="title">
@@ -62,8 +58,8 @@ $style_modal = $that['style_modal'];
                                 foreach($css as $value){ 
                                     if($value['tipo'] == 1){
                                         $sel='';
-                                        if($value['nombre'] == $that['style_page']){ $sel='selected'; }
-                                        echo '<option value="'.$value['nombre'].'" '.$sel.'>'.$value['nombre'].'</option>';
+                                        if($value['archivo'] == $that['style_page']){ $sel='selected'; }
+                                        echo '<option value="'.$value['archivo'].'" '.$sel.'>'.$value['nombre'].'</option>';
                                     } 
                                 }
                             ?>
@@ -77,8 +73,8 @@ $style_modal = $that['style_modal'];
                                 foreach($css as $value){ 
                                     if($value['tipo'] == 2){
                                         $sel='';
-                                        if($value['nombre'] == $that['style_color']){ $sel='selected'; }
-                                        echo '<option value="'.$value['nombre'].'" '.$sel.'>'.$value['nombre'].'</option>';
+                                        if($value['archivo'] == $that['style_color']){ $sel='selected'; }
+                                        echo '<option value="'.$value['archivo'].'" '.$sel.'>'.$value['nombre'].'</option>';
                                     } 
                                 }
                             ?>
@@ -92,8 +88,8 @@ $style_modal = $that['style_modal'];
                                 foreach($css as $value){ 
                                     if($value['tipo'] == 3){
                                         $sel='';
-                                        if($value['nombre'] == $that['style_modal']){ $sel='selected'; }
-                                        echo '<option value="'.$value['nombre'].'" '.$sel.'>'.$value['nombre'].'</option>';
+                                        if($value['archivo'] == $that['style_modal']){ $sel='selected'; }
+                                        echo '<option value="'.$value['archivo'].'" '.$sel.'>'.$value['nombre'].'</option>';
                                     } 
                                 }
                             ?>
