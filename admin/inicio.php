@@ -1,26 +1,16 @@
 <?php
-        
-    if(strpos($_SERVER["REQUEST_URI"], "inicio.php") !== false){
-        header('HTTP/1.1 404 Not Found', true, 404);
-        include('../errors/404.html');
-        exit;
-    }
+    
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+    esconder("inicio.php");
+    $url = url();
 
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-        define("DIR", DIR_BASE."restaurants/");
-    }else{
-        define("DIR_BASE", "/var/www/html/");
-        define("DIR", DIR_BASE."restaurants/");
-    }
-
-    require_once DIR."admin/class/core_class_prod.php";
+    require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
     $inicio = $core->inicio();
     $core_class_iniciada = 0;
 
     if($core->id_user == 0){
-        die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
+        //die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
     }
 
 ?>
@@ -29,19 +19,19 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
+        <link rel='shortcut icon' type='image/x-icon' href='<?php echo $url["path"]; ?>images/favicon/' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/js/sweetalert.min.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/base_1.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/form_1.js"></script>
-        <script type="text/javascript" src="<?php echo $info['path']; ?>/admin/js/maps.js"></script>
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/reset.css" type="text/css" media="all">
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/sweetalert.css" type="text/css" media="all">
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/layout.css" type="text/css" media="all">
-        <link rel="stylesheet" href="<?php echo $info['path']; ?>/admin/css/jquery-ui.css" type="text/css" media="all">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url['path']; ?>admin/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url['path']; ?>js/sweetalert.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url['path']; ?>admin/js/base_1.js"></script>
+        <script type="text/javascript" src="<?php echo $url['path']; ?>admin/js/form_1.js"></script>
+        <script type="text/javascript" src="<?php echo $url['path']; ?>admin/js/maps.js"></script>
+        <link rel="stylesheet" href="<?php echo $url['path']; ?>admin/css/reset.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $url['path']; ?>admin/css/sweetalert.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $url['path']; ?>admin/css/layout.css" type="text/css" media="all">
+        <link rel="stylesheet" href="<?php echo $url['path']; ?>admin/css/jquery-ui.css" type="text/css" media="all">
     </head>
     <body>
         <div class="contenedor relative">

@@ -21,14 +21,17 @@ function getCookie(name){
 */
 function btn_login(){
 
+    console.log("login");
+
     var btn = $('#login');
     btn.prop("disabled", true);
     $.ajax({
-        url: "/admin/login/",
+        url: path+"admin/login/",
         type: "POST",
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
         success: function(data){
 
+            console.log(data);
             if(data.op == 1){
                 bien(data.message);
                 setTimeout(function () {
@@ -65,6 +68,7 @@ function btn_login(){
         },
         error: function(e){
             btn.prop("disabled", false);
+            console.log(e);
         }
     });
 
@@ -74,7 +78,7 @@ function btn_recuperar(){
     var btn = $('#recuperar');
     btn.prop("disabled", true );
     $.ajax({
-        url: "/admin/login/",
+        url: path+"admin/login/",
         type: "POST",
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
@@ -102,7 +106,7 @@ function btn_nueva(){
     var btn = $('#nueva');
     btn.prop("disabled", true );
     $.ajax({
-        url: "/admin/login/",
+        url: path+"admin/login/",
         type: "POST",
         data: "accion=nueva_password&pass_01="+$('#pass_01').val()+"&pass_02="+$('#pass_02').val()+"&id="+$('#id_user').val()+"&code="+$('#code').val(),
         success: function(data){

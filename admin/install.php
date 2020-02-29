@@ -1,15 +1,12 @@
 <?php
 
-if($_SERVER["HTTP_HOST"] == "localhost"){
-    define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-    define("DIR", DIR_BASE."restaurants/");
-}else{
-    define("DIR_BASE", "/var/www/html/");
-    define("DIR", DIR_BASE."restaurants/");
-}
+set_time_limit(0);
 
-require_once DIR."db.php";
-require_once DIR_BASE."config/config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+$url = url();
+
+require_once $url["dir"]."db.php";
+require_once $url["dir_base"]."config/config.php";
 $con = new mysqli($db_host[0], $db_user[0], $db_password[0]);
 
 //die("INSTALADO");

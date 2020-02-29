@@ -1,27 +1,12 @@
 <?php
 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+    
+    esconder_index();
+    redireccion_ssl();
+    $url = url();
 
-    if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-        $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/recuperar';
-        header('HTTP/1.1 302 Moved Temporarily');
-        header('Location: ' . $location);
-    }
-
-    if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
-        header('HTTP/1.1 404 Not Found', true, 404);
-        include('../../errors/404.html');
-        exit;
-    }
-
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-        define("DIR", DIR_BASE."restaurants/");
-    }else{
-        define("DIR_BASE", "/var/www/html/");
-        define("DIR", DIR_BASE."restaurants/");
-    }
-
-    require_once DIR."admin/class/core_class_prod.php";
+    require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
 
 ?>

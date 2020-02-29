@@ -1,14 +1,9 @@
 <?php
 
-if(!isset($core_class_iniciada)){
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-        define("DIR", DIR_BASE."restaurants/");
-    }else{
-        define("DIR_BASE", "/var/www/html/");
-        define("DIR", DIR_BASE."restaurants/");
-    }
-    require_once DIR."admin/class/core_class_prod.php";
+if(!isset($url)){
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+    $url = url();
+    require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
 }
 

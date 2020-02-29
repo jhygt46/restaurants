@@ -1,21 +1,21 @@
-<?php 
+<?php
 
+    die("HOLA");
+
+    /*
     if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
         $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $location);
         exit;
     }
-
+    
     if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
         header('HTTP/1.1 404 Not Found', true, 404);
         include('errors/404.html');
         exit;
     }
-    
-    if($_GET["mode"] != "developer"){
-        exit;
-    }
+    */
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -81,12 +81,12 @@
         </div>
         <div class="clientes">
             <ul class="lista_clientes"> 
-                <?php for($i=0; $i<count($list); $i++){ ?>
+                <?php /*for($i=0; $i<count($list); $i++){ ?>
                 <li>
                     <div style="background: <?php echo $list[$i]['back']; ?>" class="foto"><a target="_blank" href="<?php echo $list[$i]['proto']; ?>://<?php echo $list[$i]['link']; ?>"><img src="<?php echo $list[$i]['img']; ?>" alt="" /></a></div>
                     <div class="info"><a target="_blank" style="display: block; color: #000; text-decoration: none" href="<?php echo $list[$i]['proto']; ?>://<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['nombre']; ?></a><a target="_blank" style="display: block; color: #000; text-decoration: none; font-size: 20px" href="<?php echo $list[$i]['proto']; ?>://<?php echo $list[$i]['link']; ?>"><?php echo $list[$i]['link']; ?></a></div>
                 </li>
-                <?php } ?>
+                <?php }*/ ?>
             </ul>
         </div>
         <div class="contacto">

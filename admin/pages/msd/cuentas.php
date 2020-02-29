@@ -2,18 +2,12 @@
 
 date_default_timezone_set('America/Santiago');
 
-if(!isset($core_class_iniciada)){
-    if($_SERVER["HTTP_HOST"] == "localhost"){
-        define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-        define("DIR", DIR_BASE."restaurants/");
-    }else{
-        define("DIR_BASE", "/var/www/html/");
-        define("DIR", DIR_BASE."restaurants/");
-    }
-    require_once DIR."admin/class/core_class_prod.php";
+if(!isset($url)){
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+    $url = url();
+    require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
 }
-
 // SOLO ADMIN
 if($core->id_user == 0){
     die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');

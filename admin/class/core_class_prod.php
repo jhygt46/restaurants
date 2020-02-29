@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-if(strpos($_SERVER["REQUEST_URI"], "core_class_prod.php") !== false){
-    header('HTTP/1.1 404 Not Found', true, 404);
-    include('../../errors/404.html');
-    exit;
-}
+require_once $_SERVER['DOCUMENT_ROOT'].'/functions.php';
+esconder("core_class_prod.php");
+if(!isset($url)){ $url = url(); }
 
-require_once DIR."db.php";
-require_once DIR_BASE."config/config.php";
+require_once $url["dir"]."db.php";
+require_once $url["dir_base"]."config/config.php";
 
 class Core{
     

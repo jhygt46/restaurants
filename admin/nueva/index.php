@@ -1,20 +1,10 @@
 <?php
 
-if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"){
-    $location = 'https://'.$_SERVER["HTTP_HOST"].'/admin/nueva/?id_user='.$_GET['id_user'].'&code='.$_GET['code'];
-    header('HTTP/1.1 302 Moved Temporarily');
-    header('Location: ' . $location);
-}
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+redireccion_ssl();
+$url = url();
+require_once $url["dir"]."admin/class/core_class_prod.php";
 
-if($_SERVER["HTTP_HOST"] == "localhost"){
-    define("DIR_BASE", $_SERVER["DOCUMENT_ROOT"]."/");
-    define("DIR", DIR_BASE."restaurants/");
-}else{
-    define("DIR_BASE", "/var/www/html/");
-    define("DIR", DIR_BASE."restaurants/");
-}
-
-require_once DIR."admin/class/core_class_prod.php";
 $core = new Core();
 $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
 

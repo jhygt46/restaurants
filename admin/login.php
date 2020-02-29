@@ -1,12 +1,8 @@
 <?php 
 
-    if(strpos($_SERVER["REQUEST_URI"], "login.php") !== false){
-        header('HTTP/1.1 404 Not Found', true, 404);
-        include('../errors/404.html');
-        exit;
-    }
-
-    unset($_COOKIE);
+    esconder("login.php");
+    $url = url();
+    //unset($_COOKIE);
     
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
@@ -16,10 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="/admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="/admin/js/ingreso.js"></script>
-        <link rel="stylesheet" href="/admin/css/login.css" type="text/css" media="all">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url["path"]; ?>admin/js/ingreso.js"></script>
+        <link rel="stylesheet" href="<?php echo $url["path"]; ?>admin/css/login.css" type="text/css" media="all">
         <script>
+            var path = '<?php echo $url['path']; ?>';
             $(document).ready(function(){
                 $('#user').val(localStorage.getItem("n_correo"));
                 localStorage.setItem("n_correo", "");
