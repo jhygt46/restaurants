@@ -2824,6 +2824,7 @@ class Core{
     public function get_web_js_data_remote(){
 
         $info['op'] = 2;
+        return $info;
         $verificar = $this->verificar();
         if($verificar['op']){
             $id_gir = $verificar['id_gir'];
@@ -2848,9 +2849,6 @@ class Core{
                     }else{ $this->registrar(6, 0, $id_gir, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, $id_gir, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $id_gir, 'get_web_js_data_remote() #1 '.htmlspecialchars($this->con->error)); }
-        }else{
-            $info["op"] = 2;
-            $info["err"] = "Buena";
         }
         return $info;
     }
