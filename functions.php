@@ -33,12 +33,14 @@ function url(){
         $aux['dir_base'] = $_SERVER["DOCUMENT_ROOT"]."/";
         $aux['dir'] = $aux['dir_base'].$url[1]."/";
         $aux['path'] = "/".$url[1]."/";
+        $aux['pedidos_pos'] = "C:/AppServ/var/";
     }else{
         $a = explode("/", $_SERVER["DOCUMENT_ROOT"]);
         array_pop($a);
         $aux['dir_base'] = implode("/", $a)."/";
         $aux['dir'] = $_SERVER["DOCUMENT_ROOT"]."/";
         $aux['path'] = "/";
+        $aux['pedidos_pos'] = "/var/www/html/";
     }
     return $aux;
 }

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 esconder("guardar_class.php");
 
 require_once $url["dir"]."db.php";
@@ -17,6 +16,7 @@ class Guardar{
     public $id_cat = null;
     public $re_venta = null;
     public $id_aux_user = null;
+    public $url = null;
     public $eliminado = 0;
     
     public function __construct(){
@@ -25,6 +25,7 @@ class Guardar{
         global $db_user;
         global $db_password;
         global $db_database;
+        global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
@@ -33,6 +34,7 @@ class Guardar{
         $this->id_aux_user = (isset($_SESSION['user']['info']['id_aux_user'])) ? $_SESSION['user']['info']['id_aux_user'] : 0 ;
         $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
         $this->id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
+        $this->url = $url;
 
     }
     public function process(){
@@ -299,7 +301,7 @@ class Guardar{
 
     }
     private function registrar($id_des, $id_loc, $id_gir, $txt){
-        $ruta_data = "/var/www/html/error.log";
+        $ruta_data = $this->url["pedidos_pos"]."error.log";
         if($sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)")){
             if($sqlipd->bind_param("iiiis", $id_des, $this->id_user, $id_loc, $id_gir, $txt)){
                 if($sqlipd->execute()){
@@ -1833,7 +1835,7 @@ class Guardar{
     }
     public function uploadfavIcon($filename){
 
-        $filepath = '/var/www/html/restaurants/images/favicon/';
+        $filepath = $this->url["dir"].'images/favicon/';
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("ICO");
         $name = $_FILES['file_image1']['name'];
@@ -1883,7 +1885,7 @@ class Guardar{
     }
     public function uploadLogo($filename){
 
-        $filepath = '/var/www/html/restaurants/images/logos/';
+        $filepath = $this->url["dir"].'images/logos/';
         $filename = ($filename !== null) ? $filename : $this->pass_generate(20) ;
         $file_formats = array("PNG", "JPG", "JPEG");
         $name = $_FILES['file_image0']['name']; 
@@ -2493,8 +2495,8 @@ class Guardar{
                         $dominio = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]['dominio'];
                         $foto_logo = $this->uploadLogo($dominio);
                         $foto_favicon = $this->uploadfavIcon($dominio);
-                        $foto_retiro = $this->uploadRetiro('/var/www/html/restaurants/images/categorias/', null);
-                        $foto_despacho = $this->uploadDespacho('/var/www/html/restaurants/images/categorias/', null);
+                        $foto_retiro = $this->uploadRetiro($this->url["dir"].'images/categorias/', null);
+                        $foto_despacho = $this->uploadDespacho($this->url["dir"].'images/categorias/', null);
                         if($foto_retiro['op'] == 1){
                             if($sqlc = $this->con->prepare("UPDATE giros SET foto_retiro='".$foto_retiro["image"]."' WHERE id_gir=? AND eliminado=?")){
                                 if($sqlc->bind_param("ii", $this->id_gir, $this->eliminado)){
@@ -2614,13 +2616,13 @@ class Guardar{
                             $categoria = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                             $alto = $this->get_alto();
                             if($categoria['parent_id'] == 0){
-                                $image = $this->uploadCategoria('/var/www/html/restaurants/images/categorias/', null, $alto);
+                                $image = $this->uploadCategoria($this->url["dir"].'images/categorias/', null, $alto);
                             }
                             if($categoria['parent_id'] > 0){
-                                $image = $this->uploadsubCategoria('/var/www/html/restaurants/images/categorias/', null);
+                                $image = $this->uploadsubCategoria($this->url["dir"].'images/categorias/', null);
                             }
                             if($image['op'] == 1){
-                                @unlink('/var/www/html/restaurants/images/categorias/'.$categoria['image']);
+                                @unlink($this->url["dir"].'images/categorias/'.$categoria['image']);
                                 if($sqlg = $this->con->prepare("UPDATE categorias SET image='".$image["image"]."' WHERE id_cae=? AND id_cat=? AND id_gir=? AND eliminado=?")){
                                     if($sqlg->bind_param("iiii", $id_cae, $this->id_cat, $this->id_gir, $this->eliminado)){
                                         if($sqlg->execute()){
@@ -2671,9 +2673,9 @@ class Guardar{
                         $res = $sqlloc->get_result();
                         if($res->{"num_rows"} == 1){
                             $loc_image = $res->fetch_all(MYSQLI_ASSOC)[0];
-                            $image = $this->uploadLocales('/var/www/html/restaurants/images/categorias/', null);
+                            $image = $this->uploadLocales($this->url["dir"].'images/categorias/', null);
                             if($image['op'] == 1){
-                                @unlink('/var/www/html/restaurants/images/categorias/'.$loc_image['image']);
+                                @unlink($this->url["dir"].'images/categorias/'.$loc_image['image']);
                                 if($sqlg = $this->con->prepare("UPDATE locales SET image='".$image["image"]."' WHERE id_loc=? AND id_gir=? AND eliminado=?")){
                                     if($sqlg->bind_param("iii", $id_loc, $this->id_gir, $this->eliminado)){
                                         if($sqlg->execute()){
@@ -2726,13 +2728,13 @@ class Guardar{
             $disponible = $_POST['disponible'];
             $parent_id = $_POST['parent_id'];
             $alto = $this->get_alto();
-            $image = $this->uploadProducto('/var/www/html/restaurants/images/productos/', null, $alto);
+            $image = $this->uploadProducto($this->url["dir"].'images/productos/', null, $alto);
             if($image['op'] == 1){
                 if($sql = $this->con->prepare("SELECT image FROM productos WHERE id_pro=? AND id_gir=? AND id_gir=? AND eliminado=?")){
                     if($sql->bind_param("iii", $id_pro, $this->id_gir, $this->eliminado)){
                         if($sql->execute()){
                             $pro_image = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0]["image"];
-                            @unlink('/var/www/html/restaurants/images/productos/'.$pro_image);
+                            @unlink($this->url["dir"].'images/productos/'.$pro_image);
                             if($sqlpro = $this->con->prepare("UPDATE productos SET image=?, tipo=? WHERE id_pro=? AND id_gir=? AND eliminado=?")){
                                 if($sqlpro->bind_param("siiii", $image["image"], $image["tipo"], $id_pro, $this->id_gir, $this->eliminado)){
                                     if($sqlpro->execute()){
@@ -3944,7 +3946,7 @@ class Guardar{
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
-            $image = $this->uploadPagina('/var/www/html/restaurants/images/paginas/', null);
+            $image = $this->uploadPagina($this->url["dir"].'images/paginas/', null);
             $id_pag = $_POST['id'];
             $nombre = $_POST['nombre'];
             $html = $_POST['html'];
@@ -3993,7 +3995,7 @@ class Guardar{
                                         if($sqlupa->execute()){
                                             if($image["op"] == 1){
                                                 $imagen = $res->fetch_all(MYSQLI_ASSOC)[0]["imagen"];
-                                                @unlink("/var/www/html/restaurants/images/paginas/".$imagen);
+                                                @unlink($this->url["dir"]."images/paginas/".$imagen);
                                                 if($sqlupi = $this->con->prepare("UPDATE paginas SET image=? WHERE id_pag=? AND id_gir=? AND eliminado=?")){
                                                     if($sqlupi->bind_param("siii", $image["image"], $id_pag, $this->id_gir, $this->eliminado)){
                                                         if($sqlupi->execute()){

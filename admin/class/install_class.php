@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-$url = url();
+if(!isset($url)){ $url = url(); }
 
 require_once $url["dir"]."db.php";
 require_once $url["dir_base"]."config/config.php";
@@ -235,56 +235,59 @@ class Install{
     }
     public function llenar_data($url){
 
-        for($i=0; $i<count($this->tablas); $i++){
+        if($_SERVER["HTTP_HOST"] == "localhost"){
 
-            $tabla = $this->tablas[$i];
-            $datas = $this->get_data($tabla["nombre"], $url);
-            $pk = []; $k = []; $vp = [];
-        
-            for($j=0; $j<count($tabla['campos']); $j++){
-                $campo = $tabla['campos'][$j];
-                if(isset($campo['pk'])){
-                    $pk[] = $campo['nombre'];
-                }
-                if(isset($campo['k']) || isset($campo['pk'])){
-                    $k[] = $campo['nombre'];
-                }
-            }
+            for($i=0; $i<count($this->tablas); $i++){
+
+                $tabla = $this->tablas[$i];
+                $datas = $this->get_data($tabla["nombre"], $url);
+                $pk = []; $k = []; $vp = [];
             
-            for($j=0; $j<count($datas); $j++){
-            
-                $data = $datas[$j];
-                $v = [];
-                for($m=0; $m<count($k); $m++){
-                    $v[] = $data->{$k[$m]};
+                for($j=0; $j<count($tabla['campos']); $j++){
+                    $campo = $tabla['campos'][$j];
+                    if(isset($campo['pk'])){
+                        $pk[] = $campo['nombre'];
+                    }
+                    if(isset($campo['k']) || isset($campo['pk'])){
+                        $k[] = $campo['nombre'];
+                    }
                 }
-                if(!in_array(0, $v)){
-                    $sql = "INSERT INTO ".$tabla["nombre"]." (".implode(",", $k).") VALUES (".implode(",", $v).")";
-                    if($this->ejecutar){
-                        if(!$this->con->query($sql)){
-                            echo "<strong>ERROR: INSERT LLAVES</strong> => ".$this->con->error."<br/>";
+                
+                for($j=0; $j<count($datas); $j++){
+                
+                    $data = $datas[$j];
+                    $v = [];
+                    for($m=0; $m<count($k); $m++){
+                        $v[] = $data->{$k[$m]};
+                    }
+                    if(!in_array(0, $v)){
+                        $sql = "INSERT INTO ".$tabla["nombre"]." (".implode(",", $k).") VALUES (".implode(",", $v).")";
+                        if($this->ejecutar){
+                            if(!$this->con->query($sql)){
+                                echo "<strong>ERROR: INSERT LLAVES</strong> => ".$this->con->error."<br/>";
+                            }
+                        }else{
+                            echo $sql."<br/>";
                         }
-                    }else{
-                        echo $sql."<br/>";
-                    }
-                    $where = [];
-                    for($m=0; $m<count($pk); $m++){
-                        $where[] = $pk[$m]."='".$data->{$k[$m]}."'";
-                    }
-                    foreach($data as $key => $value){
-                        if(!in_array($key, $k)){
-                            $sql = "UPDATE ".$tabla["nombre"]." SET ".$key."='".$value."' WHERE ".implode(" AND ", $where);
-                            if($this->ejecutar){
-                                if(!$this->con->query($sql)){
-                                    echo "<strong>ERROR: UPDATE DATA</strong> => ".$this->con->error."<br/>";
+                        $where = [];
+                        for($m=0; $m<count($pk); $m++){
+                            $where[] = $pk[$m]."='".$data->{$k[$m]}."'";
+                        }
+                        foreach($data as $key => $value){
+                            if(!in_array($key, $k)){
+                                $sql = "UPDATE ".$tabla["nombre"]." SET ".$key."='".$value."' WHERE ".implode(" AND ", $where);
+                                if($this->ejecutar){
+                                    if(!$this->con->query($sql)){
+                                        echo "<strong>ERROR: UPDATE DATA</strong> => ".$this->con->error."<br/>";
+                                    }
+                                }else{
+                                    echo $sql."<br/>";
                                 }
-                            }else{
-                                echo $sql."<br/>";
                             }
                         }
+                    }else{
+                        echo $sql."ERROR EN ".$tabla["nombre"]." LLAVES IGUAL 0<br/>";
                     }
-                }else{
-                    echo $sql."ERROR EN ".$tabla["nombre"]." LLAVES IGUAL 0<br/>";
                 }
             }
         }

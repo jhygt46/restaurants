@@ -1,21 +1,9 @@
 <?php
 
-    die("HOLA");
-
-    /*
-    if((empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")) {
-        $location = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $location);
-        exit;
-    }
-    
-    if(strpos($_SERVER["REQUEST_URI"], "index.php") !== false){
-        header('HTTP/1.1 404 Not Found', true, 404);
-        include('errors/404.html');
-        exit;
-    }
-    */
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+    $url = url();
+    redireccion_ssl();
+    esconder_index();
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -25,10 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='shortcut icon' type='image/x-icon' href='/images/favicon/locales.ico' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script type="text/javascript" src="js/misitiodelivery.js"></script>
+    <script type="text/javascript" src="<?php echo $url["path"]; ?>js/misitiodelivery.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pattaya|Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css" media="all" />
-    <link rel="stylesheet" href="css/misitiodelivery.css" media="all" />
+    <link rel="stylesheet" href="<?php echo $url["path"]; ?>css/misitiodelivery.css" media="all" />
 </head>
 <body>
     <div class="contenedor">

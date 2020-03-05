@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 esconder("login_class.php");
 
 require_once $url["dir"]."db.php";

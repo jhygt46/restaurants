@@ -17,6 +17,7 @@ class Core{
     public $id_aux_user = null;
     public $id_gir = null;
     public $id_cat = null;
+    public $url = null;
     public $eliminado = 0;
     public $codenodejs = "k8Dqa2C9lKgxT6kpNs1z6RgKb0r3WaCvN6RjK7rU";
     
@@ -26,6 +27,7 @@ class Core{
         global $db_user;
         global $db_password;
         global $db_database;
+        global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
@@ -34,7 +36,10 @@ class Core{
         $this->id_aux_user = (isset($_SESSION['user']['info']['id_aux_user'])) ? $_SESSION['user']['info']['id_aux_user'] : 0 ;
         $this->id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
         $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
-        
+        $this->url = $url;
+
+        print_r($url);
+
     }
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
@@ -2841,7 +2846,7 @@ class Core{
                         $info['data']['locales'] = $this->get_locales_js($id_gir);
                         $info['polygons'] = $this->get_polygons($id_gir);
                         $info['info'] = $this->get_data($id_gir, $info['data']['paginas'], $categorias);
-                        file_put_contents("/var/www/html/restaurants/data/".$info['info']['code'].".js", "var data=".json_encode($info['data']));
+                        file_put_contents($this->url["dir"]."data/".$info['info']['code'].".js", "var data=".json_encode($info['data']));
                         $sql->free_result();
                         $sql->close();
                     }else{ $this->registrar(6, 0, $id_gir, 'get_web_js_data_remote() #1 '.htmlspecialchars($sql->error)); }
@@ -2860,10 +2865,10 @@ class Core{
             if($sql = $this->con->prepare("SELECT * FROM pedidos_aux WHERE code=? AND id_gir=? AND eliminado=?")){
                 if($sql->bind_param("sii", $pedido_code, $id_gir, $this->eliminado)){
                     if($sql->execute()){
-                        if(file_exists("/var/www/html/pedidos_pos/".$pedido_code.".json")){
+                        if(file_exists($this->url["pedidos_pos"]."pedidos_pos/".$pedido_code.".json")){
                             $info['op'] = 1;
-                            $info['resp'] = file_get_contents("/var/www/html/pedidos_pos/".$pedido_code.".json");
-                            unlink("/var/www/html/pedidos_pos/".$pedido_code.".json");
+                            $info['resp'] = file_get_contents($this->url["pedidos_pos"]."pedidos_pos/".$pedido_code.".json");
+                            unlink($this->url["pedidos_pos"]."pedidos_pos/".$pedido_code.".json");
                         }
                     }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sql->error)); }
                 }else{ $this->registrar(6, 0, 0, 'ver_detalle() #1 '.htmlspecialchars($sql->error)); }
@@ -3105,7 +3110,7 @@ class Core{
                                     $file['carro'] = $carro;
                                     $file['promos'] = $promos;
 
-                                    file_put_contents("/var/www/html/pedidos_pos/".$code.".json", json_encode($file));
+                                    file_put_contents($this->url["pedidos_pos"]."pedidos_pos/".$code.".json", json_encode($file));
 
                                     if($total + $costo != $sql_total + $sql_costo && $sql_tipo == 1){
                                         $aux['accion'] = 2;
