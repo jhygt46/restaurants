@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-die("INSTALADO");
+//die("INSTALADO");
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 $url = url();
@@ -10,14 +10,14 @@ require_once $url["dir"]."/admin/class/install_class.php";
 $in = new Install();
 
 $in->crearTable('server');
-$in->add('id_ser', 'int(4)', 0, 1, 1);
-$in->add('nombre', 'varchar(20) COLLATE utf8_spanish2_ci', 0, 'Server 1');
-$in->add('ip', 'varchar(15) COLLATE utf8_spanish2_ci', 0, '35.184.226.86');
-$in->add('code', 'varchar(60) COLLATE utf8_spanish2_ci', 0, 'bPmhF7nhgOizr0mXcjiOYNiXK55L0fT3GSrbg5WZIr6Ow49vDxOpwXim9UkI');
+$in->add('id_ser', 'int(4)', 0, null, 1, 1);
+$in->add('nombre', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
+$in->add('ip', 'varchar(15) COLLATE utf8_spanish2_ci', 0);
+$in->add('code', 'varchar(60) COLLATE utf8_spanish2_ci', 0);
 $in->add_tabla();
 
 $in->crearTable('giros');
-$in->add('id_gir', 'int(4)', 0, 1, 1);
+$in->add('id_gir', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('telefono', 'varchar(14) COLLATE utf8_spanish2_ci', 0);
 $in->add('dominio', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
@@ -85,7 +85,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('catalogo_productos');
-$in->add('id_cat', 'int(4)', 0, 1, 1);
+$in->add('id_cat', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('fecha_creado', 'datetime', 0);
 $in->add('id_gir', 'int(4)', 0, null, null, null, 1, 1, 0);
@@ -93,7 +93,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('categorias');
-$in->add('id_cae', 'int(4)', 0, 1, 1);
+$in->add('id_cae', 'int(4)', 0, null, 1, 1);
 $in->add('parent_id', 'int(4)', 0);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('descripcion', 'varchar(255) COLLATE utf8_spanish2_ci', 0);
@@ -113,7 +113,7 @@ $in->add('aux_promo', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('productos');
-$in->add('id_pro', 'int(4)', 0, 1, 1);
+$in->add('id_pro', 'int(4)', 0, null, 1, 1);
 $in->add('numero', 'smallint(2)', 0);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('nombre_carro', 'varchar(255) COLLATE utf8_spanish2_ci', 0);
@@ -134,7 +134,7 @@ $in->add('orders', 'int(4)', 0);
 $in->add_tabla();
 
 $in->crearTable('css');
-$in->add('id_css', 'int(4)', 0, 1, 1);
+$in->add('id_css', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(70) COLLATE utf8_spanish2_ci', 0);
 $in->add('archivo', 'varchar(40) COLLATE utf8_spanish2_ci', 0);
 $in->add('tipo', 'tinyint(1)', 0);
@@ -143,7 +143,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('fw_usuarios');
-$in->add('id_user', 'int(4)', 0, 1, 1);
+$in->add('id_user', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0, 'Diego Gomez');
 $in->add('correo', 'varchar(100) COLLATE utf8_spanish2_ci', 0, 'misitiodelivery@gmail.com');
 $in->add('pass', 'varchar(32) COLLATE utf8_spanish2_ci', 0, 'ef3901f2629f57c096651c2f5697f01b');
@@ -166,7 +166,7 @@ $in->add('eliminado', 'tinyint(1)', 0, '0');
 $in->add_tabla();
 
 $in->crearTable('fw_acciones');
-$in->add('id_acc', 'int(4)', 0, 1, 1);
+$in->add('id_acc', 'int(4)', 0, null, 1, 1);
 $in->add('tipo', 'tinyint(1)', 0);
 $in->add('fecha', 'datetime', 0);
 $in->add('id_user', 'int(4)', 0, null, null, null, 1, 7, 0);
@@ -183,7 +183,7 @@ $in->add('id_gir', 'int(4)', 0, null, null, null, 1, 1, 0);
 $in->add_tabla();
 
 $in->crearTable('locales');
-$in->add('id_loc', 'int(4)', 0, 1, 1);
+$in->add('id_loc', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('direccion', 'varchar(255) COLLATE utf8_spanish2_ci', 0);
 $in->add('telefono', 'varchar(15) COLLATE utf8_spanish2_ci', 0);
@@ -212,7 +212,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('locales_tramos');
-$in->add('id_lot', 'int(4)', 0, 1, 1);
+$in->add('id_lot', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(60) COLLATE utf8_spanish2_ci', 0);
 $in->add('precio', 'int(4)', 0);
 $in->add('poligono', 'TEXT', 0);
@@ -221,7 +221,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('horarios');
-$in->add('id_hor', 'int(4)', 0, 1, 1);
+$in->add('id_hor', 'int(4)', 0, null, 1, 1);
 $in->add('dia_ini', 'tinyint(1)', 0);
 $in->add('dia_fin', 'tinyint(1)', 0);
 $in->add('hora_ini', 'tinyint(1)', 0);
@@ -235,7 +235,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('motos');
-$in->add('id_mot', 'int(4)', 0, 1, 1);
+$in->add('id_mot', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(40) COLLATE utf8_spanish2_ci', 0);
 $in->add('correo', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('uid', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
@@ -249,7 +249,7 @@ $in->add('id_loc', 'int(4)', 0, null, null, null, 1, 11, 0);
 $in->add_tabla();
 
 $in->crearTable('paginas');
-$in->add('id_pag', 'int(4)', 0, 1, 1);
+$in->add('id_pag', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('html', 'TEXT', 0);
 $in->add('imagen', 'varchar(40) COLLATE utf8_spanish2_ci', 0);
@@ -261,7 +261,7 @@ $in->add('visible', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('pedidos_usuarios');
-$in->add('id_puser', 'int(4)', 0, 1, 1);
+$in->add('id_puser', 'int(4)', 0, null, 1, 1);
 $in->add('codigo', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
 $in->add('nombre', 'varchar(30) COLLATE utf8_spanish2_ci', 0);
 $in->add('telefono', 'varchar(15) COLLATE utf8_spanish2_ci', 0);
@@ -274,7 +274,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('pedidos_direccion');
-$in->add('id_pdir', 'int(4)', 0, 1, 1);
+$in->add('id_pdir', 'int(4)', 0, null, 1, 1);
 $in->add('direccion', 'varchar(230) COLLATE utf8_spanish2_ci', 0);
 $in->add('calle', 'varchar(150) COLLATE utf8_spanish2_ci', 0);
 $in->add('num', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
@@ -286,7 +286,7 @@ $in->add('id_puser', 'int(4)', 0, null, null, null, 1, 17, 0);
 $in->add_tabla();
 
 $in->crearTable('pedidos_aux');
-$in->add('id_ped', 'int(4)', 0, 1, 1);
+$in->add('id_ped', 'int(4)', 0, null, 1, 1);
 $in->add('num_ped', 'int(4)', 0);
 $in->add('code', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
 $in->add('fecha', 'datetime', 0);
@@ -317,7 +317,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('preguntas');
-$in->add('id_pre', 'int(4)', 0, 1, 1);
+$in->add('id_pre', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('mostrar', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('id_cat', 'int(4)', 0, null, null, null, 1, 2, 0);
@@ -326,7 +326,7 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('preguntas_valores');
-$in->add('id_prv', 'int(4)', 0, 1, 1);
+$in->add('id_prv', 'int(4)', 0, null, 1, 1);
 $in->add('cantidad', 'int(4)', 0);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('valores', 'TEXT', 0);
@@ -358,7 +358,7 @@ $in->add('parent_id', 'int(4)', 0);
 $in->add_tabla();
 
 $in->crearTable('seguimiento');
-$in->add('id_seg', 'int(4)', 0, 1, 1);
+$in->add('id_seg', 'int(4)', 0, null, 1, 1);
 $in->add('txt', 'TEXT', 0);
 $in->add('fecha', 'datetime', 0);
 $in->add('id_des', 'int(4)', 0);
@@ -421,7 +421,7 @@ $in->add_tabla();
 $in->ejecutar(true);
 $in->detalle(2);
 $in->process();
-$in->llenar_data('http://www.misitiodelivery.cl/admin/aux.php?aux=');
+$in->llenar_data('http://www.misitiodelivery.cl/admin/info.php?aux=');
 
 
 
