@@ -35,7 +35,7 @@
                     $.ajax({
                         url: path+"admin/login/",
                         type: "POST",
-                        data: "accion=login&user="+$('input[name=login_usuario]').val()+"&pass="+$('input[name=login_password]').val().val(),
+                        data: "accion=login&user="+$('input[name=login_usuario]').val()+"&pass="+$('input[name=login_password]').val(),
                         success: function(data){
 
                             form.submitted = false;
