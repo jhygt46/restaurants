@@ -80,6 +80,9 @@
                             console.log(e);
                         }
                     });
+
+                    return false;
+
                 });
             });
             $(document).on('keypress',function(e){
