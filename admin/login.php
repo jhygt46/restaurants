@@ -32,7 +32,7 @@
         <div class="cont_login">
             <div class='login vhalign'>
                 <div class='titulo'>INGRESO</div>
-                <form class='contlogin' action="login" onSubmit="return btn_login();">
+                <form class='contlogin' action="login.php" onSubmit="return btn_login();">
                     <div class='us'>
                         <div class='txt'>Correo</div>
                         <div class='input'><input type='text' name="login_usuario" id='user' value=''></div>
