@@ -30,21 +30,33 @@ function btn_login(){
         type: "POST",
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
         success: function(data){
-
+            
             if(data.op == 1){
                 bien(data.message);
-                setTimeout(function () {
-                    $(location).attr('href','');
-                }, 2000);
+                if(data.tipo == 1){
+                    setTimeout(function () {
+                        $(location).attr('href','');
+                    }, 2000);
+                }
+                if(data.tipo == 2){
+                    setTimeout(function(){
+                        $(location).attr('href','/admin/punto_de_venta/');
+                    }, 2000);
+                }
+                if(data.tipo == 3){
+                    setTimeout(function(){
+                        $(location).attr('href','/admin/cocina/');
+                    }, 2000);
+                }
             }
             if(data.op == 2){
                 mal(data.message);
                 btn.prop("disabled", false);
             }
+            /*
             if(data.op == 3){
-                
                 bien(data.message);
-                setCookie('id', data.id, 16);
+                //setCookie('id', data.id, 16);
                 setCookie('user_code', data.user_code, 16);
                 setCookie('local_code', data.local_code, 16);
                 setCookie('data', data.data, 16);
@@ -52,18 +64,16 @@ function btn_login(){
                 setTimeout(function(){
                     $(location).attr('href','/admin/punto_de_venta/');
                 }, 2000);
-
             }
             if(data.op == 4){
-
                 bien(data.message);
                 setCookie('data', data.data, 16);
                 localStorage.setItem('code', data.code);
                 setTimeout(function(){
                     $(location).attr('href','/admin/cocina/');
                 }, 2000);
-
             }
+            */
         },
         error: function(e){
             btn.prop("disabled", false);

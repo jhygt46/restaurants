@@ -180,16 +180,21 @@ class Login {
                 if($res->{"num_rows"} == 1){
 
                     $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                    $id_gir = $result["id_gir"];
-                    $id_loc = $result["id_loc"];
                     $id_user = $result['id_user'];
                     $pass = $result['pass'];
+
+                    $id_gir = $result["id_gir"];
+                    $id_loc = $result["id_loc"];
+                    
+                    
 
                     $acciones = $this->get_acciones($result["id_user"], 1);
 
                     if($acciones < 5){
 
                         if($pass == md5($_POST['pass'])){
+
+                            $info['message'] = "Ingreso Exitoso";
 
                             if($id_loc > 0){
 
@@ -239,7 +244,6 @@ class Login {
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #2 '.$this->con->error); }
 
                                     }
-
                                     if($result['tipo'] == 1){
 
                                         // COCINA
@@ -264,10 +268,17 @@ class Login {
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #4 '.$sqlsg->error); }
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #4 '.$sqlsg->error); }
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #4 '.$this->con->error); }
+                            
                             }
 
                             if($id_loc == 0){
 
+                                $code_cookie_user = $this->pass_generate(60);
+
+                                setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
+                                setcookie('user_code', $code_cookie_user, $tiempo, '/', '', true, true);
+
+                                /*
                                 $ses['info']['id_user'] = $id_user;
                                 $ses['info']['nombre'] = $result['nombre'];
                                 $ses['info']['admin'] = $result['admin'];
@@ -296,6 +307,7 @@ class Login {
                                 $info['op'] = 1;
                                 $info['message'] = "Ingreso Exitoso";
                                 $_SESSION['user'] = $ses;
+                                */
                                 
                             }
 

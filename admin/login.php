@@ -3,6 +3,10 @@
     esconder("login.php");
     $url = url();
     //unset($_COOKIE);
+    echo "cookie:";
+    echo "<pre>";
+    print_r($_COOKIE);
+    echo "</pre>";
     
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
@@ -17,10 +21,6 @@
         <link rel="stylesheet" href="<?php echo $url["path"]; ?>admin/css/login.css" type="text/css" media="all">
         <script>
             var path = '<?php echo $url['path']; ?>';
-            $(document).ready(function(){
-                $('#user').val(localStorage.getItem("n_correo"));
-                localStorage.setItem("n_correo", "");
-            });
             $(document).on('keypress',function(e){
                 if(e.which == 13){
                     btn_login();
