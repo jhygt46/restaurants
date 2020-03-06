@@ -368,12 +368,12 @@ $in->add('id_gir', 'int(4)', 0);
 $in->add_tabla();
 
 $in->crearTable('seguimiento_desc');
-$in->add('id_des', 'int(4)', 0, 1, 1);
+$in->add('id_des', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add_tabla();
 
 $in->crearTable('seguimiento_web');
-$in->add('id', 'int(4)', 0, 1, 1);
+$in->add('id', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(255) COLLATE utf8_spanish2_ci', 0);
 $in->add('code', 'varchar(4) COLLATE utf8_spanish2_ci', 0);
 $in->add('stat', 'int(4)', 0);
@@ -383,11 +383,11 @@ $in->add('id_gir', 'int(4)', 0);
 $in->add_tabla();
 
 $in->crearTable('ses_mail');
-$in->add('correo', 'varchar(150) COLLATE utf8_spanish2_ci', 0, 1, 1);
+$in->add('correo', 'varchar(150) COLLATE utf8_spanish2_ci', 0, null, 1);
 $in->add_tabla();
 
 $in->crearTable('pagos');
-$in->add('id_pago', 'int(4)', 0, 1, 1);
+$in->add('id_pago', 'int(4)', 0, null, 1, 1);
 $in->add('fecha', 'datetime', 0);
 $in->add('monto', 'int(4)', 0);
 $in->add('meses', 'tinyint(1)', 0);
@@ -396,14 +396,14 @@ $in->add('id_gir', 'int(4)', 0, null, null, null, 1, 1, 0);
 $in->add_tabla();
 
 $in->crearTable('pago_proveedores');
-$in->add('id_pap', 'int(4)', 0, 1, 1);
+$in->add('id_pap', 'int(4)', 0, null, 1, 1);
 $in->add('monto', 'int(4)', 0);
 $in->add('fecha', 'datetime', 0);
 $in->add('id_user', 'int(4)', 0, null, null, null, 1, 7, 0);
 $in->add_tabla();
 
 $in->crearTable('set_graficos');
-$in->add('id_set', 'int(4)', 0, 1, 1);
+$in->add('id_set', 'int(4)', 0, null, 1, 1);
 $in->add('nombre', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('fecha_creado', 'datetime', 0);
 $in->add('id_gir', 'int(4)', 0, null, null, null, 1, 1, 0);
@@ -411,8 +411,8 @@ $in->add('eliminado', 'tinyint(1)', 0);
 $in->add_tabla();
 
 $in->crearTable('set_graficos_id');
-$in->add('id_set', 'int(4)', 0, 1, 1);
-$in->add('id_grf', 'int(4)', 0, 1, 1);
+$in->add('id_grf', 'int(4)', 0, null, 1);
+$in->add('id_set', 'int(4)', 0, null, null, null, 1, 32, 0);
 $in->add('orders', 'int(4)', 0);
 $in->add_tabla();
 
@@ -421,7 +421,7 @@ $in->add_tabla();
 $in->ejecutar(true);
 $in->detalle(2);
 $in->process();
-$in->llenar_data('http://www.misitiodelivery.cl/admin/info.php?aux=');
+//$in->llenar_data('http://www.misitiodelivery.cl/admin/info.php?aux=');
 
 
 

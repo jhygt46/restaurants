@@ -18,7 +18,7 @@
         <link rel='shortcut icon' type='image/x-icon' href='../images/favicon.ico' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="../js/ingreso.js"></script>
+        <script type="text/javascript" src="../js/login.js"></script>
         <link rel="stylesheet" href="../css/login.css" type="text/css" media="all">
         <script>
             $(document).on('keypress',function(e){
@@ -42,7 +42,7 @@
                         <div class='btn'><input type='button'  onclick="btn_recuperar()" id='recuperar' value='Entrar'></div>
                     </div>
                 </div>
-                <div class='ltpass'><a href='/admin'>Deseo ingresar</a></div>
+                <div class='ltpass'><a href='<?php echo $url["path"]; ?>admin'>Deseo ingresar</a></div>
             </div>
         </div>
     </body>

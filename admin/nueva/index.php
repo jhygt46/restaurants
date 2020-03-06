@@ -17,7 +17,7 @@ $correo = $core->is_pass($_GET["id_user"], $_GET["code"]);
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="../admin/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="../admin/js/ingreso.js"></script>
+        <script type="text/javascript" src="../admin/js/login.js"></script>
         <link rel="stylesheet" href="../admin/css/login.css" type="text/css" media="all">
         <script>
 

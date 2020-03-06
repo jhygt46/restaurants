@@ -117,7 +117,7 @@ class Install{
                 if($this->ejecutar){
                     if($this->con->query($tables[$i])){
                         if($this->detalle > 1){
-                            echo "Tabla creada: ".$tables_name[$i]."<br/>";
+                            echo "Tabla creada (".$i."): ".$tables_name[$i]."<br/>";
                         }
                     }else{
                         if($this->detalle > 0){ 

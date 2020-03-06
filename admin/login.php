@@ -13,7 +13,7 @@
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo $info["path"]; ?>/images/favicon/<?php echo $info["favicon"]; ?>' />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo $url["path"]; ?>admin/js/ingreso.js"></script>
+        <script type="text/javascript" src="<?php echo $url["path"]; ?>admin/js/login.js"></script>
         <link rel="stylesheet" href="<?php echo $url["path"]; ?>admin/css/login.css" type="text/css" media="all">
         <script>
             var path = '<?php echo $url['path']; ?>';
@@ -32,7 +32,7 @@
         <div class="cont_login">
             <div class='login vhalign'>
                 <div class='titulo'>INGRESO</div>
-                <div class='contlogin'>
+                <form class='contlogin' onSubmit="return btn_login();">
                     <div class='us'>
                         <div class='txt'>Correo</div>
                         <div class='input'><input type='text' name="login_usuario" id='user' value=''></div>
@@ -43,10 +43,10 @@
                     </div>
                     <div class='button clearfix'>
                         <div class='msg'></div>
-                        <div class='btn'><input type='button' onclick="btn_login()" id='login' value='Entrar'></div>
+                        <div class='btn'><input type='submit' id='login' value='Entrar'></div>
                     </div>
-                </div>
-                <div class='ltpass'><a href='/admin/recuperar'>No tiene contrase&ntilde;a?</a></div>
+                </form>
+                <div class='ltpass'><a href='<?php echo $url["path"]; ?>admin/recuperar'>No tiene contrase&ntilde;a?</a></div>
             </div>
         </div>
     </body>

@@ -31,11 +31,10 @@ function btn_login(){
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
         success: function(data){
 
-            console.log(data);
             if(data.op == 1){
                 bien(data.message);
                 setTimeout(function () {
-                    $(location).attr('href','');
+                    //$(location).attr('href','');
                 }, 2000);
             }
             if(data.op == 2){
@@ -71,6 +70,7 @@ function btn_login(){
             console.log(e);
         }
     });
+    return false;
 
 }
 function btn_recuperar(){
