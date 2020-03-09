@@ -253,7 +253,7 @@ class Login {
                                 $info['tipo'] = 1;
                                 $cookie_code = $this->pass_generate(60);
                                 $tiempo = ($_POST["recordar"] == 1) ? time() + 3*365*24*60*60 : 0 ;
-                                if($sql = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=?)")){
+                                if($sql = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=?")){
                                 if($sql->bind_param("si", $cookie_code, $id_user)){
                                 if($sql->execute()){
                                     
@@ -263,9 +263,9 @@ class Login {
                                     setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
                                     $sql->close();
 
-                                }else{ return $sql->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
-                                }else{ return $sql->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1b '.$sql->error); }
-                                }else{ return $this->con->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1c '.$this->con->error); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1b '.$sql->error); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1c '.$this->con->error); }
 
                             }
 
