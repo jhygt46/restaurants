@@ -21,7 +21,6 @@ function getCookie(name){
 */
 function btn_login(){
 
-    console.log("login");
 
     var btn = $('#login');
     btn.prop("disabled", true);
@@ -31,6 +30,7 @@ function btn_login(){
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
         success: function(data){
             
+            console.log(data);
             if(data.op == 1){
                 bien(data.message);
                 if(data.tipo == 1){
