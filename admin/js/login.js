@@ -21,7 +21,6 @@ function getCookie(name){
 */
 function btn_login(){
 
-
     var btn = $('#login');
     btn.prop("disabled", true);
     $.ajax({

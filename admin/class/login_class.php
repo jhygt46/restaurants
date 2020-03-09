@@ -209,7 +209,7 @@ class Login {
                                         if($sql->execute()){
 
                                             $info['op'] = 1;
-                                            $info['message'] = "Ingreso Exitoso";
+                                            $info['message'] = "Ingreso Exitoso, redireccionando...";
                                             setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
                                             setcookie('coockie_pos', $coockie_pos, $tiempo, '/', '', true, true);
                                             $sql->close();
@@ -228,7 +228,7 @@ class Login {
                                         if($sql->execute()){
                                             
                                             $info['op'] = 1;
-                                            $info['message'] = "Ingreso Exitoso";
+                                            $info['message'] = "Ingreso Exitoso, redireccionando...";
                                             setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
                                             setcookie('coockie_coc', $coockie_coc, $tiempo, '/', '', true, true);
                                             $sql->close();
@@ -258,7 +258,7 @@ class Login {
                                 if($sql->execute()){
                                     
                                     $info['op'] = 1;
-                                    $info['message'] = "Ingreso Exitoso";
+                                    $info['message'] = "Ingreso Exitoso, redireccionando...";
                                     setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
                                     setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
                                     $sql->close();

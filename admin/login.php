@@ -2,12 +2,12 @@
 
     esconder("login.php");
     $url = url();
-    
+    /*
     echo "cookie:";
     echo "<pre>";
     print_r($_COOKIE);
     echo "</pre>";
-    
+    */
     
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
@@ -33,16 +33,18 @@
         <div class="cont_login">
             <div class='login vhalign'>
                 <div class='titulo'>INGRESO</div>
-                <form class='contlogin' onSubmit="return btn_login()">
-                    <div class='us'>
+                <form class='form_login' onSubmit="return btn_login()">
+                    <div class='data'>
                         <div class='txt'>Correo</div>
                         <div class='input'><input type='text' name="login_usuario" id='user' value=''></div>
                     </div>
-                    <div class='pa'>
+                    <div class='data'>
                         <div class='txt'>Contrase&ntilde;a</div>
                         <div class='input'><input type='password' name="login_password" id='pass'></div>
                     </div>
-                    <div class='button clearfix'>
+                    <div class='button'>
+                        <div class='recordar_checkbox'><input class="vhalign" type="checkbox" name="recordad" id='recordad'></div>
+                        <div class='recordar'><div class="valign">Recordar</div></div>
                         <div class='msg'></div>
                         <div class='btn'><input type='submit' id='login' value='Entrar'></div>
                     </div>

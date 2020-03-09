@@ -14,87 +14,102 @@ body {
     height: 100%;
 }
 .cont_login .login {
-    max-width: 427px;
+    max-width: 300px;
     width: 85%;
 }
-.login .titulo{
-    width: 311px;
+.cont_login .login .titulo{
+    display: block;
     margin: 0 auto;
     text-align: center;
     font-size: 34px;
     color: #E34A25;
     font-weight: bold;
 }
-.login .titulo2{
-    width: 311px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 20px;
-    color: #E34A25;
-}
-.login .contlogin{
+.cont_login .login .form_login{
     display: block;
-    width: 311px;
     background: #fff;
-    margin: 10px auto;
+    margin: 10px 0px;
     border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.31);
+    padding: 15px 15px 10px 15px;
 }
-.login .contlogin .txt{
-    padding: 20px 15px 0px 15px;
+.cont_login .login .form_login .data{
+
+}
+.cont_login .login .form_login .data .txt{
     text-align: left;
     font-size: 16px;
     color: #666;
 }
-.login .contlogin .input{
-    padding: 0px 15px 0px 15px;
-    text-align: left;
+.cont_login .login .form_login .data .input{
+    padding-bottom: 15px;
 }
-.login .contlogin .button{
-    padding: 15px;
-}
-.login .contlogin .button .msg{
-    float: left;
-    width: 184px;
-    text-align: left;
-    font-size: 12px;
-    padding-top: 5px;
-}
-.login .contlogin .button .btn{
-    float: left;
-    width: 96px;
-}
-.login .contlogin .input input{
-    width: 280px;
+.cont_login .login .form_login .data .input input{
+    width: 100%;
     height: 35px;
     border: 1px solid #ccc;
     background: #FCFCFC;
     padding: 5px;
 }
-.login .contlogin .button input{
+.cont_login .login .form_login .button{
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+.cont_login .login .form_login .button .btn{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.cont_login .login .form_login .button .btn input{
     background: #E34A25;
+    width: 85px;
+    height: 35px;
     border: none;
-    padding: 10px 25px 10px 25px;
-    color: #FFF;
+    color: #fff;
     box-shadow: 1px 1px 5px #B6B6B6;
     border-radius: 3px;
-    text-shadow: text-shadow;
     cursor: pointer;
-    -webkit-appearance: buton;
     font-size: 13px;
 }
-.login .ltpass{
-    text-align: left;
-    padding-left: 60px;
+.cont_login .login .form_login .button .recordar{
+    position: absolute;
+    width: calc(100% - 110px);
+    height: 33px;
+    left: 20px;
+    top: 0px;
 }
-.login .ltpass a{   
+.cont_login .login .form_login .button .recordar_checkbox{
+    position: absolute;
+    width: 15px;
+    height: 35px;
+    left: 0px;
+    top: 0px;
+}
+.cont_login .login .form_login .button .recordar_checkbox input{
+    width: 15px;
+    height: 15px;
+}
+.cont_login .login .form_login .button .msg{
+    position: absolute;
+    width: 100%;
+    height: 18px;
+    left: 0px;
+    top: 35px;
+    font-size: 13px;
+}
+.cont_login .login .ltpass{
+    text-align: left;
+}
+.cont_login .login .ltpass a{   
     font-size: 16px;
     color: #E34A25;
     font-weight: bold;
     text-decoration: none;
+    padding-left: 5px;
 }
+
+
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,span{
 	margin:0;
 	padding:0;
@@ -152,14 +167,6 @@ a{
 }/**/
 .margen_bloque{
     margin-right:10px;
-}
-.flotar_izq{
-    float:left;
-    display:inline;
-}
-.flotar_der{
-    float:right;
-    display:inline;
 }
 .vhalign{
     position: absolute;
