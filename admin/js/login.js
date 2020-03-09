@@ -39,11 +39,13 @@ function btn_login(){
                     }, 2000);
                 }
                 if(data.tipo == 2){
+                    localStorage.setItem('local_code', data.local_code);
                     setTimeout(function(){
                         $(location).attr('href','/admin/punto_de_venta/');
                     }, 2000);
                 }
                 if(data.tipo == 3){
+                    localStorage.setItem('local_code', data.local_code);
                     setTimeout(function(){
                         $(location).attr('href','/admin/cocina/');
                     }, 2000);

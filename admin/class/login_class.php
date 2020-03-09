@@ -170,11 +170,8 @@ class Login {
                 $res = $sqlu->get_result();
 
                 if($res->{"num_rows"} == 0){
-
                     $info['op'] = 2;
                     $info['message'] = "Error: Correo o Contraseña invalida";
-                    $this->registrar('12', 0, 0, 0, 'usuario no existe: '.$_POST["user"]);
-
                 }
 
                 if($res->{"num_rows"} == 1){
@@ -182,83 +179,63 @@ class Login {
                     $result = $res->fetch_all(MYSQLI_ASSOC)[0];
                     $id_user = $result['id_user'];
                     $pass = $result['pass'];
-
                     $id_gir = $result["id_gir"];
                     $id_loc = $result["id_loc"];
                     
-                    
-
-                    $acciones = $this->get_acciones($result["id_user"], 1);
+                    $acciones = $this->get_acciones($id_user, 1);
 
                     if($acciones < 5){
-
                         if($pass == md5($_POST['pass'])){
-
-                            $info['message'] = "Ingreso Exitoso";
-
                             if($id_loc > 0){
 
+                                $tiempo = time() + 16 * 60 * 60;
                                 if($sqlsg = $this->con->prepare("SELECT t1.code as local_code, t2.code as giro_code, t2.ssl, t2.dominio, t2.dns, t1.id_loc, t2.id_gir, t1.fecha_cocina FROM locales t1, giros t2 WHERE t1.id_loc=? AND t1.id_gir=t2.id_gir AND t1.eliminado=? AND t2.eliminado=?")){
                                 if($sqlsg->bind_param("iii", $id_loc, $this->eliminado, $this->eliminado)){
                                 if($sqlsg->execute()){
                                     
                                     $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                                    $giro_code = $res_glocal["giro_code"];
+                                    $local_code = $res_glocal["local_code"];
 
-                                    $info['data'] = $res_glocal["giro_code"];
+                                    setcookie('giro_code', $giro_code, $tiempo, '/', '', true, true);
+                                    $info['local_code'] = $local_code;
+
                                     if($result['tipo'] == 0){
-
                                         // PUNTO DE VENTA
-                                        $info['op'] = 3;
-                                        $info['message'] = "Ingreso Exitoso Punto de Venta";
-                                        $code_cookie_user = $this->pass_generate(60);
-                                        $code_cookie_local = $this->pass_generate(60);
-                                        $ip = $this->getUserIpAddr();
-                                        $info['id'] = $result['id_user'];
-                                        $info['user_code'] = $code_cookie_user;
-                                        $info['local_code'] = $code_cookie_local;
-                                        
-                                        if(time() - strtotime($res_glocal['fecha_cocina']) < 57600){
-                                            $enviar_cocina = 0;
-                                            $code_local = $this->pass_generate(20);
-                                        }else{
-                                            $enviar_cocina = 1;
-                                            $code_local = $res_glocal['local_code'];
-                                        }
-                                        
-                                        $info['code'] = $code_local;
-                                        if($sqlul = $this->con->prepare("UPDATE locales SET fecha_pos=now(), enviar_cocina=?, code=?, cookie_ip=?, cookie_code=? WHERE id_loc=? AND eliminado=?")){
-                                        if($sqlul->bind_param("isssii", $enviar_cocina, $code_local, $ip, $code_cookie_local, $res_glocal['id_loc'], $this->eliminado)){
-                                        if($sqlul->execute()){
+                                        $info['tipo'] = 2;
+                                        $coockie_pos = $this->pass_generate(60);
+                                        if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_pos=? WHERE id_user=?)")){
+                                        if($sql->bind_param("si", $coockie_pos, $id_user)){
+                                        if($sql->execute()){
 
-                                            if($sqluu = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=? AND eliminado=?")){
-                                            if($sqluu->bind_param("sii", $code_cookie_user, $result['id_user'], $this->eliminado)){
-                                            if($sqluu->execute()){
-                                                $sqluu->close();
-                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #1 '.$sqluu->error); }
-                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #1 '.$sqluu->error); }
-                                            }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #1 '.$this->con->error); }
-                                            $sqlul->close();
+                                            $info['op'] = 1;
+                                            $info['message'] = "Ingreso Exitoso";
+                                            setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
+                                            setcookie('coockie_pos', $coockie_pos, $tiempo, '/', '', true, true);
+                                            $sql->close();
 
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #2 '.$sqlul->error); }
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #2 '.$sqlul->error); }
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #2 '.$this->con->error); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_pos() #1a '.$sql->error); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_pos() #1b '.$sql->error); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_pos() #1c '.$this->con->error); }
 
                                     }
                                     if($result['tipo'] == 1){
-
                                         // COCINA
-                                        $info['op'] = 4;
-                                        $info['message'] = "Ingreso Exitoso Cocina";
-                                        $info['code'] = $res_glocal["local_code"];
-
-                                        $enviar_cocina = 1;
-                                        if($sqlul = $this->con->prepare("UPDATE locales SET enviar_cocina=?, fecha_cocina=now() WHERE id_loc=? AND eliminado=?")){
-                                        if($sqlul->bind_param("iii", $enviar_cocina, $res_glocal['id_loc'], $this->eliminado)){
-                                        if($sqlul->execute()){
-                                            $sqlul->close();
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #3 '.$sqlul->error); }
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #3 '.$sqlul->error); }
-                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_back() #3 '.$this->con->error); }
+                                        $info['tipo'] = 3;
+                                        $coockie_coc = $this->pass_generate(60);
+                                        if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_coc=? WHERE id_user=?)")){
+                                        if($sql->bind_param("si", $coockie_coc, $id_user)){
+                                        if($sql->execute()){
+                                            
+                                            $info['op'] = 1;
+                                            $info['message'] = "Ingreso Exitoso";
+                                            setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
+                                            setcookie('coockie_coc', $coockie_coc, $tiempo, '/', '', true, true);
+                                            $sql->close();
+                                            
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_cocina() #1a '.$sql->error); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_cocina() #1b '.$sql->error); }
+                                        }else{ $this->registrar(6, $id_loc, $id_gir, 'login_cocina() #1c '.$this->con->error); }
 
                                     }
 
@@ -273,61 +250,37 @@ class Login {
 
                             if($id_loc == 0){
 
-                                $code_cookie_user = $this->pass_generate(60);
+                                $info['tipo'] = 1;
+                                $coockie_code = $this->pass_generate(60);
+                                $tiempo = ($_POST["recordar"] == 1) ? time() + 3*365*24*60*60 : 0 ;
+                                if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_code=? WHERE id_user=?)")){
+                                if($sql->bind_param("si", $coockie_code, $id_user)){
+                                if($sql->execute()){
+                                    
+                                    $info['op'] = 1;
+                                    $info['message'] = "Ingreso Exitoso";
+                                    setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
+                                    setcookie('user_code', $coockie_code, $tiempo, '/', '', true, true);
+                                    $sql->close();
 
-                                setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                setcookie('user_code', $code_cookie_user, $tiempo, '/', '', true, true);
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1b '.$sql->error); }
+                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1c '.$this->con->error); }
 
-                                /*
-                                $ses['info']['id_user'] = $id_user;
-                                $ses['info']['nombre'] = $result['nombre'];
-                                $ses['info']['admin'] = $result['admin'];
-                                $ses['info']['re_venta'] = $result['re_venta'];
-                                $ses['info']['id_aux_user'] = $result['id_aux_user'];
-                                $ses['id_gir'] = 0;
-                                $ses['id_cat'] = 0;
-
-                                if($result['admin'] == 0){
-
-                                    if($sqlg = $this->con->prepare("SELECT id_gir FROM fw_usuarios_giros WHERE id_user=?")){
-                                    if($sqlg->bind_param("i", $id_user)){
-                                    if($sqlg->execute()){
-                                        $resg = $sqlg->get_result();
-                                        if($resg->{"num_rows"} == 1){
-                                            $ses['id_gir'] = $resg->fetch_all(MYSQLI_ASSOC)[0]['id_gir'];
-                                        }
-                                        $sqlg->free_result();
-                                        $sqlg->close();
-                                    }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$sqlg->error); }
-                                    }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$sqlg->error); }
-                                    }else{ $this->registrar(6, 0, $id_gir, 'login_back() #5 '.$this->con->error); }
-
-                                }
-
-                                $info['op'] = 1;
-                                $info['message'] = "Ingreso Exitoso";
-                                $_SESSION['user'] = $ses;
-                                */
-                                
                             }
 
                         }else{
-
                             $this->set_acciones($id_user, 1);
                             $info['op'] = 2;
                             $info['message'] = "Error: Correo o Contraseña invalida";
-
                         }
 
                     }else{
-
                         $info['op'] = 2;
                         $info['message'] = "Error: Demaciados intentos";
                         $this->registrar('12', 0, 0, 0, 'demaciados intentos:');
-
                     }
                 }
-                
                 $sqlu->free_result();
                 $sqlu->close();
             }else{ $this->registrar(6, 0, 0, 'login_back() #7 '.$sqlu->error); }

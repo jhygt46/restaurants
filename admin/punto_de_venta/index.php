@@ -26,9 +26,9 @@ $comentarios = ($info['pedido_comentarios'] == 1) ? true : false ;
         <link rel="stylesheet" href="/css/sweetalert.css" media="all" />
         <script src="https://www.izusushi.cl/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="/data/<?php echo $_COOKIE["data"]; ?>.js" type="text/javascript"></script>
-        <script src="/js/pos_lista_.js" type="text/javascript"></script>
-        <script src="/js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url["path"]; ?>data/<?php echo $_COOKIE["giro_code"]; ?>.js" type="text/javascript"></script>
+        <script src="<?php echo $url["path"]; ?>js/pos_lista_.js" type="text/javascript"></script>
+        <script src="<?php echo $url["path"]; ?>js/sweetalert.min.js" type="text/javascript"></script>
         <script>
             var aud = new Audio('/audios/<?php echo ($info['sonido'] == "") ? "Yes" : $info['sonido'] ; ?>.mp3');
             var tipo_comanda = <?php echo $info['pos']; ?>;

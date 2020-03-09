@@ -149,6 +149,8 @@ $in->add('correo', 'varchar(100) COLLATE utf8_spanish2_ci', 0, 'misitiodelivery@
 $in->add('pass', 'varchar(32) COLLATE utf8_spanish2_ci', 0, 'ef3901f2629f57c096651c2f5697f01b');
 $in->add('mailcode', 'varchar(32) COLLATE utf8_spanish2_ci', 0, '');
 $in->add('cookie_code', 'varchar(60) COLLATE utf8_spanish2_ci', 0, '');
+$in->add('cookie_pos', 'varchar(60) COLLATE utf8_spanish2_ci', 0, '');
+$in->add('cookie_coc', 'varchar(60) COLLATE utf8_spanish2_ci', 0, '');
 $in->add('fecha_creado', 'datetime', 0, '2018-08-07 00:00:00');
 $in->add('admin', 'tinyint(1)', 0, '1');
 $in->add('tipo', 'tinyint(1)', 0, '1');
@@ -192,8 +194,6 @@ $in->add('lat', 'double', 0);
 $in->add('lng', 'double', 0);
 $in->add('image', 'varchar(50) COLLATE utf8_spanish2_ci', 0);
 $in->add('code', 'varchar(20) COLLATE utf8_spanish2_ci', 0);
-$in->add('cookie_code', 'varchar(60) COLLATE utf8_spanish2_ci', 0);
-$in->add('cookie_ip', 'varchar(15) COLLATE utf8_spanish2_ci', 0);
 $in->add('correo', 'varchar(100) COLLATE utf8_spanish2_ci', 0);
 $in->add('correo_ses', 'tinyint(1)', 0);
 $in->add('tipo_comanda', 'tinyint(1)', 0);
@@ -414,6 +414,11 @@ $in->crearTable('set_graficos_id');
 $in->add('id_grf', 'int(4)', 0, null, 1);
 $in->add('id_set', 'int(4)', 0, null, null, null, 1, 32, 0);
 $in->add('orders', 'int(4)', 0);
+$in->add_tabla();
+
+$in->crearTable('locales_login');
+$in->add('fecha', 'datetime', 0, null, 1);
+$in->add('id_loc', 'int(4)', 0, null, null, null, 1, 11, 0);
 $in->add_tabla();
 
 

@@ -13,8 +13,9 @@ body {
     width: 100%;
     height: 100%;
 }
-.login {
-    width: 427px;
+.cont_login .login {
+    max-width: 427px;
+    width: 85%;
 }
 .login .titulo{
     width: 311px;
