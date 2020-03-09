@@ -21,15 +21,20 @@ function getCookie(name){
 */
 function btn_login(){
 
-    console.log("accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+$('#recordar').val());
+    var recordar = 0;
+    if($('#recordad').is(":checked")){
+        recordar = 1;
+    }
+
+    console.log("accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+recordar);
     return false;
-    
+
     var btn = $('#login');
     btn.prop("disabled", true);
     $.ajax({
         url: path+"admin/login/",
         type: "POST",
-        data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+$('#recordar').val(),
+        data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+recordar,
         success: function(data){
             
             console.log(data);
