@@ -263,9 +263,9 @@ class Login {
                                     setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
                                     $sql->close();
 
-                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
-                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1b '.$sql->error); }
-                                }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1c '.$this->con->error); }
+                                }else{ return $sql->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
+                                }else{ return $sql->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1b '.$sql->error); }
+                                }else{ return $this->con->error; $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1c '.$this->con->error); }
 
                             }
 
