@@ -251,16 +251,16 @@ class Login {
                             if($id_loc == 0){
 
                                 $info['tipo'] = 1;
-                                $coockie_code = $this->pass_generate(60);
+                                $cookie_code = $this->pass_generate(60);
                                 $tiempo = ($_POST["recordar"] == 1) ? time() + 3*365*24*60*60 : 0 ;
-                                if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_code=? WHERE id_user=?)")){
-                                if($sql->bind_param("si", $coockie_code, $id_user)){
+                                if($sql = $this->con->prepare("UPDATE fw_usuarios SET cookie_code=? WHERE id_user=?)")){
+                                if($sql->bind_param("si", $cookie_code, $id_user)){
                                 if($sql->execute()){
                                     
                                     $info['op'] = 1;
                                     $info['message'] = "Ingreso Exitoso";
                                     setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                    setcookie('user_code', $coockie_code, $tiempo, '/', '', true, true);
+                                    setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
                                     $sql->close();
 
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
