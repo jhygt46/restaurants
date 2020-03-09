@@ -21,12 +21,15 @@ function getCookie(name){
 */
 function btn_login(){
 
+    console.log("accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+$('#recordar').val());
+    return false;
+    
     var btn = $('#login');
     btn.prop("disabled", true);
     $.ajax({
         url: path+"admin/login/",
         type: "POST",
-        data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val(),
+        data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+$('#recordar').val(),
         success: function(data){
             
             console.log(data);
@@ -54,27 +57,6 @@ function btn_login(){
                 mal(data.message);
                 btn.prop("disabled", false);
             }
-            /*
-            if(data.op == 3){
-                bien(data.message);
-                //setCookie('id', data.id, 16);
-                setCookie('user_code', data.user_code, 16);
-                setCookie('local_code', data.local_code, 16);
-                setCookie('data', data.data, 16);
-                localStorage.setItem('code', data.code);
-                setTimeout(function(){
-                    $(location).attr('href','/admin/punto_de_venta/');
-                }, 2000);
-            }
-            if(data.op == 4){
-                bien(data.message);
-                setCookie('data', data.data, 16);
-                localStorage.setItem('code', data.code);
-                setTimeout(function(){
-                    $(location).attr('href','/admin/cocina/');
-                }, 2000);
-            }
-            */
         },
         error: function(e){
             btn.prop("disabled", false);

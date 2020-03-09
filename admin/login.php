@@ -43,7 +43,7 @@
                         <div class='input'><input type='password' name="login_password" id='pass'></div>
                     </div>
                     <div class='button'>
-                        <div class='recordar_checkbox'><input class="vhalign" type="checkbox" name="recordad" id='recordad'></div>
+                        <div class='recordar_checkbox'><input class="vhalign" type="checkbox" name="recordad" id='recordad' value='1'></div>
                         <div class='recordar'><div class="valign">Recordar</div></div>
                         <div class='msg'></div>
                         <div class='btn'><input type='submit' id='login' value='Entrar'></div>
