@@ -14,10 +14,18 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     exit;
 }
 
-if(!isset($_COOKIE['user']['info']['id_user'])){
+if(!isset($_COOKIE['user_id'])){
     include("login.php");
 }else{
-    include("inicio.php");
+    if(isset($_COOKIE['user_code'])){
+        include("inicio.php");
+    }
+    if(isset($_COOKIE['cookie_pos'])){
+        echo '<meta http-equiv="refresh" content="0; url='.$url['path'].'admin/punto_de_venta">';
+    }
+    if(isset($_COOKIE['cookie_coc'])){
+        echo '<meta http-equiv="refresh" content="0; url='.$url['path'].'admin/cocina">';
+    }
 }
 
 ?>

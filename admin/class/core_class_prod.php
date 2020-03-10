@@ -1213,6 +1213,18 @@ class Core{
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_repartidor() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_repartidor() '.htmlspecialchars($this->con->error)); }
     }
+    public function get_info_cookie(){
+        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND cookie_code=? AND eliminado=?")){
+            if($sql->bind_param("iii", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
+                if($sql->execute()){
+                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $sql->free_result();
+                    $sql->close();
+                    return $result;
+                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
+    }
     public function inicio(){
         if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
             if($sql->bind_param("ii", $this->id_user, $this->eliminado)){

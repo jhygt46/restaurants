@@ -1,12 +1,16 @@
 <?php
     
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
     esconder("inicio.php");
-    $url = url();
 
     require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
-    $inicio = $core->inicio();
+    $inicio = $core->get_info_cookie();
+
+    echo "<pre>";
+    print_r($inicio);
+    echo "</pre>";
+    exit;
+
     $core_class_iniciada = 0;
 
     if($core->id_user == 0){
