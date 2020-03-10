@@ -6,17 +6,6 @@
     $core = new Core();
     $inicio = $core->get_info_cookie();
 
-    echo "<pre>";
-    print_r($inicio);
-    echo "</pre>";
-    exit;
-
-    $core_class_iniciada = 0;
-
-    if($core->id_user == 0){
-        //die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
-    }
-
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
     <head>
