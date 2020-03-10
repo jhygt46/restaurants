@@ -30,6 +30,7 @@ class Core{
         global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
+
         $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
         $this->admin = (isset($_SESSION['user']['info']['admin'])) ? $_SESSION['user']['info']['admin'] : 0 ;
         $this->re_venta = (isset($_SESSION['user']['info']['re_venta'])) ? $_SESSION['user']['info']['re_venta'] : 0 ;
@@ -37,8 +38,6 @@ class Core{
         $this->id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
         $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
         $this->url = $url;
-
-        print_r($url);
 
     }
     private function registrar($id_des, $id_loc, $id_gir, $txt){

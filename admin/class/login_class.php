@@ -196,22 +196,22 @@ class Login {
                                     $res_glocal = $sqlsg->get_result()->fetch_all(MYSQLI_ASSOC)[0];
                                     $giro_code = $res_glocal["giro_code"];
                                     $local_code = $res_glocal["local_code"];
-
+                                    
                                     setcookie('giro_code', $giro_code, $tiempo, '/', '', true, true);
                                     $info['local_code'] = $local_code;
 
                                     if($result['tipo'] == 0){
                                         // PUNTO DE VENTA
                                         $info['tipo'] = 2;
-                                        $coockie_pos = $this->pass_generate(60);
+                                        $cookie_pos = $this->pass_generate(60);
                                         if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_pos=? WHERE id_user=?)")){
-                                        if($sql->bind_param("si", $coockie_pos, $id_user)){
+                                        if($sql->bind_param("si", $cookie_pos, $id_user)){
                                         if($sql->execute()){
 
                                             $info['op'] = 1;
                                             $info['message'] = "Ingreso Exitoso, redireccionando...";
                                             setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                            setcookie('coockie_pos', $coockie_pos, $tiempo, '/', '', true, true);
+                                            setcookie('coockie_pos', $cookie_pos, $tiempo, '/', '', true, true);
                                             $sql->close();
 
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'login_pos() #1a '.$sql->error); }
@@ -222,15 +222,15 @@ class Login {
                                     if($result['tipo'] == 1){
                                         // COCINA
                                         $info['tipo'] = 3;
-                                        $coockie_coc = $this->pass_generate(60);
+                                        $cookie_coc = $this->pass_generate(60);
                                         if($sql = $this->con->prepare("UPDATE fw_usuarios SET coockie_coc=? WHERE id_user=?)")){
-                                        if($sql->bind_param("si", $coockie_coc, $id_user)){
+                                        if($sql->bind_param("si", $cookie_coc, $id_user)){
                                         if($sql->execute()){
                                             
                                             $info['op'] = 1;
                                             $info['message'] = "Ingreso Exitoso, redireccionando...";
                                             setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                            setcookie('coockie_coc', $coockie_coc, $tiempo, '/', '', true, true);
+                                            setcookie('cookie_coc', $cookie_coc, $tiempo, '/', '', true, true);
                                             $sql->close();
                                             
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'login_cocina() #1a '.$sql->error); }

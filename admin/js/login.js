@@ -1,43 +1,19 @@
-function setCookie(name, value, hour){
-    var expires = "";
-    if(hour){
-        var date = new Date();
-        date.setTime(date.getTime() + (hour*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
-/*
-function getCookie(name){
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++){
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-*/
 function btn_login(){
 
     var recordar = 0;
+    var btn = $('#login');
+
     if($('#recordad').is(":checked")){
         recordar = 1;
     }
-
-    console.log("accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+recordar);
-    return false;
-
-    var btn = $('#login');
     btn.prop("disabled", true);
+
     $.ajax({
         url: path+"admin/login/",
         type: "POST",
         data: "accion=login&user="+$('#user').val()+"&pass="+$('#pass').val()+"&recordar="+recordar,
         success: function(data){
             
-            console.log(data);
             if(data.op == 1){
                 bien(data.message);
                 if(data.tipo == 1){
@@ -81,8 +57,6 @@ function btn_recuperar(){
         data: "accion=recuperar_password&user="+$('#correo').val(),
         success: function(data){
             if(data.op == 1){
-                localStorage.setItem('correo', $('#correo').val());
-                $('#correo').val('');
                 bien(data.message);
                 setTimeout(function () {
                     $(location).attr("href","/admin");
@@ -125,7 +99,6 @@ function btn_nueva(){
         }
     });
 }
-
 function bien(msg){
                 
     $('.msg').html(msg);
