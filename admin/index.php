@@ -11,20 +11,10 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     setcookie("user_code", "", time() - 3600, "/");
     setcookie("cookie_pos", "", time() - 3600, "/");
     setcookie("cookie_coc", "", time() - 3600, "/");
-
-    /*
-    setcookie("user_id", NULL, strtotime('-1 day'));
-    setcookie("user_code", NULL, strtotime('-1 day'));
-    setcookie("cookie_pos", NULL, strtotime('-1 day'));
-    setcookie("cookie_coc", NULL, strtotime('-1 day'));
-    */
     die('<meta http-equiv="refresh" content="5; url='.$url['path'].'admin">');
 
 }
 
-echo "<pre>";
-print_r($_COOKIE);
-echo "</pre>";
 
 if(!isset($_COOKIE['user_id'])){
     include("login.php");

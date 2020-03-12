@@ -123,6 +123,7 @@ class Core{
         
     }
     public function get_info_cookie(){
+
         if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND cookie_code=? AND eliminado=?")){
             if($sql->bind_param("iii", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
                 if($sql->execute()){
@@ -136,6 +137,7 @@ class Core{
                 }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
+        
     }
 
     private function registrar($id_des, $id_loc, $id_gir, $txt){
