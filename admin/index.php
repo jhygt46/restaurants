@@ -6,10 +6,11 @@ esconder_index();
 $url = url();
 
 if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
-    setcookie("user_id");
-    setcookie("user_code");
-    setcookie("cookie_pos");
-    setcookie("cookie_coc");
+    $time = time() - 100;
+    setcookie("user_id", "", $time);
+    setcookie("user_code", "", $time);
+    setcookie("cookie_pos", "", $time);
+    setcookie("cookie_coc", "", $time);
     echo '<meta http-equiv="refresh" content="0; url='.$url['path'].'admin">';
     exit;
 }
