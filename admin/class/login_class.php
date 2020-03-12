@@ -181,6 +181,7 @@ class Login {
                     $pass = $result['pass'];
                     $id_gir = $result["id_gir"];
                     $id_loc = $result["id_loc"];
+                    $admin = $result["admin"];
                     
                     $acciones = $this->get_acciones($id_user, 1);
 
@@ -259,6 +260,23 @@ class Login {
                                     
                                     $info['op'] = 1;
                                     $info['message'] = "Ingreso Exitoso, redireccionando...";
+
+                                    if($admin == 0){
+                                        if($sqlf = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_user=?")){
+                                            if($sqlf->bind_param("i", $id_user)){
+                                                if($sqlf->execute()){
+                                                    $res = $sqlf->get_result();
+                                                    if($res->{"num_rows"} == 1){
+                                                        $giro_id = $sqlf->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];
+                                                        setcookie('giro_id', $giro_id, $tiempo, '/', '', true, true);
+                                                    }
+                                                    $sql->free_result();
+                                                    $sql->close();
+                                                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                                            }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                                        }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
+                                    }
+
                                     setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
                                     setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
                                     $sql->close();

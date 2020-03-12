@@ -1,10 +1,11 @@
 <?php
     
     esconder("inicio.php");
-
     require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
-    $inicio = $core->get_info_cookie();
+    echo "<pre>";
+    print_r($core->get_info_cookie());
+    echo "</pre>";
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">

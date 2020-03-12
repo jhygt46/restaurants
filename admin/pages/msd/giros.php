@@ -7,7 +7,8 @@ if(!isset($url)){
     $url = url();
     require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
-} 
+}
+
 
 
 // SOLO ADMIN
