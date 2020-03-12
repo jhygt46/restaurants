@@ -1,10 +1,6 @@
 <?php 
 
-    esconder("login.php");
-    echo "<pre>";
-    print_r($_COOKIE);
-    echo "</pre>";
-    
+    esconder("login.php");  
     
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="es-CL">
