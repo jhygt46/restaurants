@@ -3,8 +3,10 @@
     esconder("inicio.php");
     require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
+    $inicio = $core->get_info_cookie();
+
     echo "<pre>";
-    print_r($core->get_info_cookie());
+    print_r($inicio);
     echo "</pre>";
 
 ?>

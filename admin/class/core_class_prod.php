@@ -38,8 +38,6 @@ class Core{
 
     }
 
-
-
     public function is_giro(){
         if(isset($_GET["id_gir"]) && $_GET["id_gir"] > 0 && $this->id_gir != $_GET["id_gir"]){
             $id_gir = $_GET["id_gir"];
@@ -89,39 +87,57 @@ class Core{
                 die("ERROR");
             }
         }
-    }
-    public function get_giro_no_admin($id_gir){
-        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?")){
-            if($sql->bind_param("ii", $id_gir, $this->id_user)){
-                if($sql->execute()){
-                    $res = $sql->get_result();
-                    if($res->{"num_rows"} == 1){
-                        $this->id_gir = $id_gir;
-                        $_SESSION['user']['id_gir'] = $id_gir;
-                    }else{
-                        $this->registrar(7, 0, $id_gir, 'is_giro() #1 XSS');
-                        die("ERROR");
-                    }
-                    $sql->free_result();
-                    $sql->close();
-                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
-            }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
-        }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
-    }
-    public function verificar_giro(){
+    }    
+    public function verificar_giro($id_gir = null){
 
+        $id_gir = ($id_gir == null) ? $_COOKIE['giro_id'] : $id_gir ;
+        if($this->admin == 0){
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, fw_usuarios_giros_clientes t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_user=t2.id_user AND t2.id_gir=? AND t1.admin='0' AND t1.eliminado=?")){
+                if($sql->bind_param("isii", $_COOKIE['user_id'], $_COOKIE['user_code'], $id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{"num_rows"} == 1){
+                            return true;
+                        }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+            }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
+        }
+        if($this->admin == 1){
+            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_user=t2.id_user AND t2.id_gir=? AND t1.admin='1' AND t1.eliminado=?")){
+                if($sql->bind_param("isii", $_COOKIE['user_id'], $_COOKIE['user_code'], $id_gir, $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        if($res->{"num_rows"} == 1){
+                            return true;
+                        }
+                        $sql->free_result();
+                        $sql->close();
+                    }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+            }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
+        }
+        die();
+        
+    }
+    public function get_info_cookie(){
         if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND cookie_code=? AND eliminado=?")){
             if($sql->bind_param("iii", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
                 if($sql->execute()){
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+                    $res = $sql->get_result();
+                    if($res->{"num_rows"} == 1){
+                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                    }
                     $sql->free_result();
                     $sql->close();
                     return $result;
                 }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
-
     }
+
     private function registrar($id_des, $id_loc, $id_gir, $txt){
 
         $sqlipd = $this->con->prepare("INSERT INTO seguimiento (id_des, id_user, id_loc, id_gir, fecha, txt) VALUES (?, ?, ?, ?, now(), ?)");
@@ -1244,31 +1260,6 @@ class Core{
                 }else{ $this->registrar(6, 0, $this->id_gir, 'get_repartidor() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, $this->id_gir, 'get_repartidor() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, $this->id_gir, 'get_repartidor() '.htmlspecialchars($this->con->error)); }
-    }
-    public function get_info_cookie(){
-        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND cookie_code=? AND eliminado=?")){
-            if($sql->bind_param("iii", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
-                if($sql->execute()){
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                    $result['giro_id'] = $_COOKIE['giro_id'];
-                    $sql->free_result();
-                    $sql->close();
-                    return $result;
-                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
-    }
-    public function inicio(){
-        if($sql = $this->con->prepare("SELECT id_user, nombre, correo, re_venta, admin, id_aux_user FROM fw_usuarios WHERE id_user=? AND eliminado=?")){
-            if($sql->bind_param("ii", $this->id_user, $this->eliminado)){
-                if($sql->execute()){
-                    $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC)[0];
-                    $sql->free_result();
-                    $sql->close();
-                    return $result;
-                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
-            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
-        }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
     }
     public function get_cocina($id_ped){
         if($sql = $this->con->prepare("SELECT id_ped, num_ped, carro, promos FROM pedidos_aux WHERE id_ped=? AND eliminado=?")){

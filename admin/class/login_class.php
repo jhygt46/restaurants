@@ -12,6 +12,8 @@ class Login {
     
     public $con = null;
     public $eliminado = 0;
+    public $cookie_secure = 0;
+    public $cookie_httponly = 0;
 
     public function __construct(){
         
@@ -19,12 +21,15 @@ class Login {
         global $db_user;
         global $db_password;
         global $db_database;
+        global $cookie_secure;
+        global $cookie_httponly;
+
+        $this->cookie_secure = $cookie_secure;
+        $this->cookie_httponly = $cookie_httponly;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
         
     }
-
-
 
     // FUNCCIONES IMPORTANTES //
     public function recuperar_password(){
@@ -198,7 +203,7 @@ class Login {
                                     $giro_code = $res_glocal["giro_code"];
                                     $local_code = $res_glocal["local_code"];
                                     
-                                    setcookie('giro_code', $giro_code, $tiempo, '/', '', true, true);
+                                    setcookie('giro_code', $giro_code, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                     $info['local_code'] = $local_code;
 
                                     if($result['tipo'] == 0){
@@ -211,8 +216,8 @@ class Login {
 
                                             $info['op'] = 1;
                                             $info['message'] = "Ingreso Exitoso, redireccionando...";
-                                            setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                            setcookie('cookie_pos', $cookie_pos, $tiempo, '/', '', true, true);
+                                            setcookie('user_id', $id_user, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
+                                            setcookie('cookie_pos', $cookie_pos, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                             $sql->close();
 
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'login_pos() #1a '.$sql->error); }
@@ -230,8 +235,8 @@ class Login {
                                             
                                             $info['op'] = 1;
                                             $info['message'] = "Ingreso Exitoso, redireccionando...";
-                                            setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                            setcookie('cookie_coc', $cookie_coc, $tiempo, '/', '', true, true);
+                                            setcookie('user_id', $id_user, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
+                                            setcookie('cookie_coc', $cookie_coc, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                             $sql->close();
                                             
                                         }else{ $this->registrar(6, $id_loc, $id_gir, 'login_cocina() #1a '.$sql->error); }
@@ -268,7 +273,7 @@ class Login {
                                                     $res = $sqlf->get_result();
                                                     if($res->{"num_rows"} == 1){
                                                         $giro_id = $sqlf->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id_gir"];
-                                                        setcookie('giro_id', $giro_id, $tiempo, '/', '', true, true);
+                                                        setcookie('giro_id', $giro_id, 0, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                                     }
                                                     $sql->free_result();
                                                     $sql->close();
@@ -277,8 +282,8 @@ class Login {
                                         }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
                                     }
 
-                                    setcookie('user_id', $id_user, $tiempo, '/', '', true, true);
-                                    setcookie('user_code', $cookie_code, $tiempo, '/', '', true, true);
+                                    setcookie('user_id', $id_user, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
+                                    setcookie('user_code', $cookie_code, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                     $sql->close();
 
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }
