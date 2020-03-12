@@ -15,6 +15,10 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     exit;
 }
 
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
+
 if(!isset($_COOKIE['user_id'])){
     include("login.php");
 }else{
