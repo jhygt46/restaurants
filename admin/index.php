@@ -11,7 +11,7 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "logout"){
     setcookie("user_code", "", time() - 3600, "/");
     setcookie("cookie_pos", "", time() - 3600, "/");
     setcookie("cookie_coc", "", time() - 3600, "/");
-    die('<meta http-equiv="refresh" content="5; url='.$url['path'].'admin">');
+    die('<meta http-equiv="refresh" content="0; url='.$url['path'].'admin">');
 
 }
 

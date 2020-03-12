@@ -7,16 +7,7 @@ if(!isset($url)){
     $url = url();
     require_once $url["dir"]."admin/class/core_class_prod.php";
     $core = new Core();
-}
-
-
-
-// SOLO ADMIN
-if($core->id_user == 0){
-    die('<div class="pagina"><div class="title"><h1>Error: su sesion ha expirado</h1></div></div>');
-}
-if($core->admin == 0){
-    die('<div class="pagina"><div class="title"><h1>Error: no tiene permisos</h1></div></div>');
+    $inicio = $core->get_info_cookie();
 }
 
 $list = $core->get_giros_user();

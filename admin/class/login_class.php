@@ -284,6 +284,7 @@ class Login {
 
                                     setcookie('user_id', $id_user, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                     setcookie('user_code', $cookie_code, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
+                                    setcookie('user_admin', $admin, $tiempo, '/', '', $this->cookie_secure, $this->cookie_httponly);
                                     $sql->close();
 
                                 }else{ $this->registrar(6, $id_loc, $id_gir, 'login_sistema() #1a '.$sql->error); }

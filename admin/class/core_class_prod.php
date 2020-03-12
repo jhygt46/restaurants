@@ -29,12 +29,11 @@ class Core{
         global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
-
-        $cookie = $this->get_info_cookie();
-        $this->id_user = (isset($cookie["id_user"])) ? $cookie["id_user"] : 0 ;
-        $this->id_gir = (isset($cookie["giro_id"])) ? $cookie["giro_id"] : 0 ;
-        $this->admin = (isset($cookie["admin"]) && $cookie["admin"] == 1) ? 1 : 0 ;
         $this->url = $url;
+
+        //$this->id_user = (isset($cookie["id_user"])) ? $cookie["id_user"] : 0 ;
+        //$this->id_gir = (isset($cookie["giro_id"])) ? $cookie["giro_id"] : 0 ;
+        //$this->admin = (isset($cookie["admin"]) && $cookie["admin"] == 1) ? 1 : 0 ;
 
     }
 
@@ -128,16 +127,19 @@ class Core{
             if($sql->bind_param("iii", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
                 if($sql->execute()){
                     $res = $sql->get_result();
-                    if($res->{"num_rows"} == 1){
-                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
-                    }
                     $sql->free_result();
                     $sql->close();
-                    return $result;
+                    if($res->{"num_rows"} == 1){
+                        $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                        $this->id_user = $result['id_user'];
+                        $this->admin = $result['admin'];
+                        return $result;
+                    }
                 }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
             }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
         }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
-        
+        die("ERROR");
+
     }
 
     private function registrar($id_des, $id_loc, $id_gir, $txt){
