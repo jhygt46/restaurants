@@ -26,6 +26,8 @@ class Core{
         global $db_user;
         global $db_password;
         global $db_database;
+        global $cookie_secure;
+        global $cookie_httponly;
         global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
@@ -38,8 +40,10 @@ class Core{
     }
 
     public function is_giro(){
-        if(isset($_GET["id_gir"]) && $_GET["id_gir"] > 0 && $this->id_gir != $_GET["id_gir"]){
-            $id_gir = $_GET["id_gir"];
+
+        $id_gir = (isset($_GET["id_gir"])) ? $_GET["id_gir"] : $_COOKIE['giro_id'] ;
+
+        if(isset($id_gir)){
             if($this->admin == 0){
                 if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros WHERE id_gir=? AND id_user=?")){
                     if($sql->bind_param("ii", $id_gir, $this->id_user)){
@@ -47,7 +51,7 @@ class Core{
                             $res = $sql->get_result();
                             if($res->{"num_rows"} == 1){
                                 $this->id_gir = $id_gir;
-                                $_SESSION['user']['id_gir'] = $id_gir;
+                                setcookie('giro_id', $id_gir, 0, '/', '', $this->cookie_secure, $this->cookie_httponly);
                             }else{
                                 $this->registrar(7, 0, $id_gir, 'is_giro() #1 XSS');
                                 die("ERROR");
@@ -65,7 +69,7 @@ class Core{
                             $res = $sql->get_result();
                             if($res->{"num_rows"} == 1){
                                 $this->id_gir = $id_gir;
-                                $_SESSION['user']['id_gir'] = $id_gir;
+                                setcookie('giro_id', $id_gir, 0, '/', '', $this->cookie_secure, $this->cookie_httponly);
                             }else{
                                 $this->registrar(7, 0, $id_gir, 'is_giro() #2 XSS');
                                 die("ERROR");
@@ -78,14 +82,11 @@ class Core{
             }
             if($this->admin == 1 && $this->id_user == 1){
                 $this->id_gir = $id_gir;
-                $_SESSION['user']['id_gir'] = $id_gir;
+                setcookie('giro_id', $id_gir, 0, '/', '', $this->cookie_secure, $this->cookie_httponly);
             }
-        }else{
-            if($this->id_gir == 0){
-                $this->registrar(7, 0, $id_gir, 'is_giro() #3');
-                die("ERROR");
-            }
+            
         }
+
     }    
     public function verificar_giro($id_gir = null){
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 esconder("guardar_class.php");
 
@@ -25,191 +24,271 @@ class Guardar{
         global $db_user;
         global $db_password;
         global $db_database;
+        global $planes;
         global $url;
 
         $this->con = new mysqli($db_host[0], $db_user[0], $db_password[0], $db_database[0]);
-        $this->id_user = (isset($_SESSION['user']['info']['id_user'])) ? $_SESSION['user']['info']['id_user'] : 0 ;
-        $this->admin = (isset($_SESSION['user']['info']['admin'])) ? $_SESSION['user']['info']['admin'] : 0 ;
-        $this->re_venta = (isset($_SESSION['user']['info']['re_venta'])) ? $_SESSION['user']['info']['re_venta'] : 0 ;
-        $this->id_aux_user = (isset($_SESSION['user']['info']['id_aux_user'])) ? $_SESSION['user']['info']['id_aux_user'] : 0 ;
-        $this->id_cat = (isset($_SESSION['user']['id_cat'])) ? $_SESSION['user']['id_cat'] : 0 ;
-        $this->id_gir = (isset($_SESSION['user']['id_gir'])) ? $_SESSION['user']['id_gir'] : 0 ;
         $this->url = $url;
 
     }
     public function process(){
         
-        if($this->id_user > 0){
-
-            if($_POST['accion'] == "crear_giro"){
-                echo json_encode($this->crear_giro());
-            }
-            if($_POST['accion'] == "eliminar_giro"){
-                echo json_encode($this->eliminar_giro());
-            }
-            if($_POST['accion'] == "eliminar_pagina"){
-                echo json_encode($this->eliminar_pagina());
-            }
-            if($_POST['accion'] == "crear_catalogo"){
-                echo json_encode($this->crear_catalogo());
-            }
-            if($_POST['accion'] == "eliminar_catalogo"){
-                echo json_encode($this->eliminar_catalogo());
-            }
-            if($_POST['accion'] == "crear_locales"){
-                echo json_encode($this->crear_locales());
-            }
-            if($_POST['accion'] == "configurar_local"){
-                echo json_encode($this->configurar_local());
-            }
-            if($_POST['accion'] == "configurar_usuario_local"){
-                echo json_encode($this->configurar_usuario_local());
-            }
-            if($_POST['accion'] == "crear_locales_tramos"){
-                echo json_encode($this->crear_locales_tramos());
-            }
-            if($_POST['accion'] == "eliminar_locales"){
-                echo json_encode($this->eliminar_locales());
-            }
-            if($_POST['accion'] == "crear_usuario"){
-                echo json_encode($this->crear_usuario());
-            }
-            if($_POST['accion'] == "crear_usuario_admin"){
-                echo json_encode($this->crear_usuario_admin());
-            }
-            if($_POST['accion'] == "crear_usuarios_local"){
-                echo json_encode($this->crear_usuarios_local());
-            }
-            if($_POST['accion'] == "eliminar_usuario"){
-                echo json_encode($this->eliminar_usuario());
-            }
-            if($_POST['accion'] == "eliminar_usuario_admin"){
-                echo json_encode($this->eliminar_usuario_admin());
-            }
-            if($_POST['accion'] == "eliminar_usuario_local"){
-                echo json_encode($this->eliminar_usuario_local());
-            }
-            if($_POST['accion'] == "asignar_rubro"){
-                echo json_encode($this->asignar_rubro());
-            }
-            if($_POST['accion'] == "crear_categoria"){
-                echo json_encode($this->crear_categoria());
-            }
-            if($_POST['accion'] == "eliminar_categoria"){
-                echo json_encode($this->eliminar_categoria());
-            }
-            if($_POST['accion'] == "crear_ingredientes"){
-                echo json_encode($this->crear_ingredientes());
-            }
-            if($_POST['accion'] == "eliminar_ingrediente"){
-                echo json_encode($this->eliminar_ingrediente());
-            }
-            if($_POST['accion'] == "crear_promociones"){
-                echo json_encode($this->crear_promociones());
-            }
-            if($_POST['accion'] == "eliminar_promociones"){
-                echo json_encode($this->eliminar_promociones());
-            }
-            if($_POST['accion'] == "crear_productos"){
-                echo json_encode($this->crear_productos());
-            }
-            if($_POST['accion'] == "eliminar_productos"){
-                echo json_encode($this->eliminar_productos());
-            }
-            if($_POST['accion'] == "asignar_prods_promocion"){
-                echo json_encode($this->asignar_prods_promocion());
-            }
-            if($_POST['accion'] == "crear_preguntas"){
-                echo json_encode($this->crear_preguntas());
-            }
-            if($_POST['accion'] == "eliminar_preguntas"){
-                echo json_encode($this->eliminar_preguntas());
-            }
-            if($_POST['accion'] == "configurar_giro"){
-                echo json_encode($this->configurar_giro());
-            }
-            if($_POST['accion'] == "configurar_estilos"){
-                echo json_encode($this->configurar_estilos());
-            }
-            if($_POST['accion'] == "crear_pagina"){
-                echo json_encode($this->crear_pagina());
-            }
-            if($_POST['accion'] == "configurar_footer"){
-                echo json_encode($this->configurar_footer());
-            }
-            if($_POST['accion'] == "configurar_inicio"){
-                echo json_encode($this->configurar_inicio());
-            }
-            if($_POST['accion'] == "refresh"){
-                echo json_encode($this->refresh());
-            }
-            if($_POST['accion'] == "configurar_categoria"){
-                echo json_encode($this->configurar_categoria());
-            }
-            if($_POST['accion'] == "ordercat"){
-                echo json_encode($this->ordercat());
-            }
-            if($_POST['accion'] == "orderpag"){
-                echo json_encode($this->orderpag());
-            }
-            if($_POST['accion'] == "orderprods"){
-                echo json_encode($this->orderprods());
-            }
-            if($_POST['accion'] == "ordergralista"){
-                echo json_encode($this->ordergralista());
-            }
-            if($_POST['accion'] == "configurar_producto"){
-                echo json_encode($this->configurar_producto());
-            }
-            if($_POST['accion'] == "eliminar_tramos"){
-                echo json_encode($this->eliminar_tramos());
-            }
-            if($_POST['accion'] == "crear_lista_ingredientes"){
-                echo json_encode($this->crear_lista_ingredientes());
-            }
-            if($_POST['accion'] == "crear_repartidor"){
-                echo json_encode($this->crear_repartidor());
-            }
-            if($_POST['accion'] == "crear_horario"){
-                echo json_encode($this->crear_horario());
-            }
-            if($_POST['accion'] == "eliminar_repartidor"){
-                echo json_encode($this->eliminar_repartidor());
-            }
-            if($_POST['accion'] == "eliminar_horario"){
-                echo json_encode($this->eliminar_horario());
-            }
-            if($_POST['accion'] == "eliminar_gra_lista"){
-                echo json_encode($this->eliminar_gra_lista());
-            }
-            if($_POST['accion'] == "eliminar_gra_set"){
-                echo json_encode($this->eliminar_gra_set());
-            }
-            if($_POST['accion'] == "solicitar_ssl"){
-                echo json_encode($this->solicitar_ssl());
-            }
-            if($_POST['accion'] == "add_ses"){
-                echo json_encode($this->add_ses());
-            }
-            if($_POST['accion'] == "add_dns"){
-                echo json_encode($this->add_dns());
-            }
-            if($_POST['accion'] == "add_dns"){
-                echo json_encode($this->add_ssl());
-            }
-            if($_POST['accion'] == "crear_pago"){
-                echo json_encode($this->crear_pago());
-            }
-            if($_POST['accion'] == "verificar_dominio_existente"){
-                echo json_encode($this->verificar_dominio_existente());
-            }
-            if($_POST['accion'] == "crear_gra_lista"){
-                echo json_encode($this->crear_gra_lista());
-            }
-            
+        if($_POST['accion'] == "crear_giro"){
+            echo json_encode($this->crear_giro());
         }
+        if($_POST['accion'] == "eliminar_giro"){
+            echo json_encode($this->eliminar_giro());
+        }
+        if($_POST['accion'] == "eliminar_pagina"){
+            echo json_encode($this->eliminar_pagina());
+        }
+        if($_POST['accion'] == "crear_catalogo"){
+            echo json_encode($this->crear_catalogo());
+        }
+        if($_POST['accion'] == "eliminar_catalogo"){
+            echo json_encode($this->eliminar_catalogo());
+        }
+        if($_POST['accion'] == "crear_locales"){
+            echo json_encode($this->crear_locales());
+        }
+        if($_POST['accion'] == "configurar_local"){
+            echo json_encode($this->configurar_local());
+        }
+        if($_POST['accion'] == "configurar_usuario_local"){
+            echo json_encode($this->configurar_usuario_local());
+        }
+        if($_POST['accion'] == "crear_locales_tramos"){
+            echo json_encode($this->crear_locales_tramos());
+        }
+        if($_POST['accion'] == "eliminar_locales"){
+            echo json_encode($this->eliminar_locales());
+        }
+        if($_POST['accion'] == "crear_usuario"){
+            echo json_encode($this->crear_usuario());
+        }
+        if($_POST['accion'] == "crear_usuario_admin"){
+            echo json_encode($this->crear_usuario_admin());
+        }
+        if($_POST['accion'] == "crear_usuarios_local"){
+            echo json_encode($this->crear_usuarios_local());
+        }
+        if($_POST['accion'] == "eliminar_usuario"){
+            echo json_encode($this->eliminar_usuario());
+        }
+        if($_POST['accion'] == "eliminar_usuario_admin"){
+            echo json_encode($this->eliminar_usuario_admin());
+        }
+        if($_POST['accion'] == "eliminar_usuario_local"){
+            echo json_encode($this->eliminar_usuario_local());
+        }
+        if($_POST['accion'] == "asignar_rubro"){
+            echo json_encode($this->asignar_rubro());
+        }
+        if($_POST['accion'] == "crear_categoria"){
+            echo json_encode($this->crear_categoria());
+        }
+        if($_POST['accion'] == "eliminar_categoria"){
+            echo json_encode($this->eliminar_categoria());
+        }
+        if($_POST['accion'] == "crear_ingredientes"){
+            echo json_encode($this->crear_ingredientes());
+        }
+        if($_POST['accion'] == "eliminar_ingrediente"){
+            echo json_encode($this->eliminar_ingrediente());
+        }
+        if($_POST['accion'] == "crear_promociones"){
+            echo json_encode($this->crear_promociones());
+        }
+        if($_POST['accion'] == "eliminar_promociones"){
+            echo json_encode($this->eliminar_promociones());
+        }
+        if($_POST['accion'] == "crear_productos"){
+            echo json_encode($this->crear_productos());
+        }
+        if($_POST['accion'] == "eliminar_productos"){
+            echo json_encode($this->eliminar_productos());
+        }
+        if($_POST['accion'] == "asignar_prods_promocion"){
+            echo json_encode($this->asignar_prods_promocion());
+        }
+        if($_POST['accion'] == "crear_preguntas"){
+            echo json_encode($this->crear_preguntas());
+        }
+        if($_POST['accion'] == "eliminar_preguntas"){
+            echo json_encode($this->eliminar_preguntas());
+        }
+        if($_POST['accion'] == "configurar_giro"){
+            echo json_encode($this->configurar_giro());
+        }
+        if($_POST['accion'] == "configurar_estilos"){
+            echo json_encode($this->configurar_estilos());
+        }
+        if($_POST['accion'] == "crear_pagina"){
+            echo json_encode($this->crear_pagina());
+        }
+        if($_POST['accion'] == "configurar_footer"){
+            echo json_encode($this->configurar_footer());
+        }
+        if($_POST['accion'] == "configurar_inicio"){
+            echo json_encode($this->configurar_inicio());
+        }
+        if($_POST['accion'] == "refresh"){
+            echo json_encode($this->refresh());
+        }
+        if($_POST['accion'] == "configurar_categoria"){
+            echo json_encode($this->configurar_categoria());
+        }
+        if($_POST['accion'] == "ordercat"){
+            echo json_encode($this->ordercat());
+        }
+        if($_POST['accion'] == "orderpag"){
+            echo json_encode($this->orderpag());
+        }
+        if($_POST['accion'] == "orderprods"){
+            echo json_encode($this->orderprods());
+        }
+        if($_POST['accion'] == "ordergralista"){
+            echo json_encode($this->ordergralista());
+        }
+        if($_POST['accion'] == "configurar_producto"){
+            echo json_encode($this->configurar_producto());
+        }
+        if($_POST['accion'] == "eliminar_tramos"){
+            echo json_encode($this->eliminar_tramos());
+        }
+        if($_POST['accion'] == "crear_lista_ingredientes"){
+            echo json_encode($this->crear_lista_ingredientes());
+        }
+        if($_POST['accion'] == "crear_repartidor"){
+            echo json_encode($this->crear_repartidor());
+        }
+        if($_POST['accion'] == "crear_horario"){
+            echo json_encode($this->crear_horario());
+        }
+        if($_POST['accion'] == "eliminar_repartidor"){
+            echo json_encode($this->eliminar_repartidor());
+        }
+        if($_POST['accion'] == "eliminar_horario"){
+            echo json_encode($this->eliminar_horario());
+        }
+        if($_POST['accion'] == "eliminar_gra_lista"){
+            echo json_encode($this->eliminar_gra_lista());
+        }
+        if($_POST['accion'] == "eliminar_gra_set"){
+            echo json_encode($this->eliminar_gra_set());
+        }
+        if($_POST['accion'] == "solicitar_ssl"){
+            echo json_encode($this->solicitar_ssl());
+        }
+        if($_POST['accion'] == "add_ses"){
+            echo json_encode($this->add_ses());
+        }
+        if($_POST['accion'] == "add_dns"){
+            echo json_encode($this->add_dns());
+        }
+        if($_POST['accion'] == "add_dns"){
+            echo json_encode($this->add_ssl());
+        }
+        if($_POST['accion'] == "crear_pago"){
+            echo json_encode($this->crear_pago());
+        }
+        if($_POST['accion'] == "verificar_dominio_existente"){
+            echo json_encode($this->verificar_dominio_existente());
+        }
+        if($_POST['accion'] == "crear_gra_lista"){
+            echo json_encode($this->crear_gra_lista());
+        }
+        
+    }
+
+
+    private function verificar_catalogo(){
+        
+        if($sql = $this->con->prepare("SELECT * FROM catalogo_productos WHERE id_cat=? AND id_gir=? AND eliminado=?")){
+            if($sql->bind_param("isi", $_COOKIE['id_cat'], $this->id_gir, $this->eliminado)){
+                if($sql->execute()){
+                    $res = $sql->get_result();
+                    $sql->free_result();
+                    $sql->close();
+                    if($res->{"num_rows"} == 1){
+                        return true;
+                    }
+                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+        }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
+        return false;
+        
+    }
+    private function verificar_cookie_giro(){
+
+        if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_code']) && strlen($_COOKIE['user_code']) == 60 && isset($_COOKIE['giro_id'])){
+            if($_COOKIE['user_admin'] == 0){
+                if($sql = $this->con->prepare("SELECT t1.id_user, t1.admin FROM fw_usuarios t1, fw_usuarios_giros_clientes t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_user=t2.id_user AND t2.id_gir=? AND t1.admin='0' AND t1.eliminado=?")){
+                    if($sql->bind_param("isii", $_COOKIE['user_id'], $_COOKIE['user_code'], $_COOKIE['giro_id'], $this->eliminado)){
+                        if($sql->execute()){
+                            $res = $sql->get_result();
+                            if($res->{"num_rows"} == 1){
+                                $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                                $this->id_user = $result['id_user'];
+                                $this->admin = $result['admin'];
+                                $this->id_gir = $_COOKIE['giro_id'];
+                                return true;
+                            }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                    }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
+            }
+            if($_COOKIE['user_admin'] == 1){
+                if($sql = $this->con->prepare("SELECT t1.id_user, t1.admin FROM fw_usuarios t1, fw_usuarios_giros t2 WHERE t1.id_user=? AND t1.cookie_code=? AND t1.id_user=t2.id_user AND t2.id_gir=? AND t1.admin='1' AND t1.eliminado=?")){
+                    if($sql->bind_param("isii", $_COOKIE['user_id'], $_COOKIE['user_code'], $_COOKIE['giro_id'], $this->eliminado)){
+                        if($sql->execute()){
+                            $res = $sql->get_result();
+                            if($res->{"num_rows"} == 1){
+                                $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                                $this->id_user = $result['id_user'];
+                                $this->admin = $result['admin'];
+                                $this->id_gir = $_COOKIE['giro_id'];
+                                return true;
+                            }
+                            $sql->free_result();
+                            $sql->close();
+                        }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                    }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$sql->error); }
+                }else{ $this->registrar(6, 0, $id_gir, 'is_giro() #1 '.$this->con->error); }
+            }
+        }
+        return false;
 
     }
+    private function verificar_cookie_usuario(){
+
+        if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_code']) && strlen($_COOKIE['user_code']) == 60){
+            if($sql = $this->con->prepare("SELECT id_user, admin, re_venta, id_aux_user FROM fw_usuarios WHERE id_user=? AND cookie_code=? AND eliminado=?")){
+                if($sql->bind_param("isi", $_COOKIE['user_id'], $_COOKIE['user_code'], $this->eliminado)){
+                    if($sql->execute()){
+                        $res = $sql->get_result();
+                        $sql->free_result();
+                        $sql->close();
+                        if($res->{"num_rows"} == 1){
+                            $result = $res->fetch_all(MYSQLI_ASSOC)[0];
+                            $this->id_user = $result['id_user'];
+                            $this->admin = $result['admin'];
+                            $this->re_venta = $result['re_venta'];
+                            $this->id_aux_user = $result['id_aux_user'];
+                            return true;
+                        }
+                    }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+                }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($sql->error)); }
+            }else{ $this->registrar(6, 0, 0, 'inicio() '.htmlspecialchars($this->con->error)); }
+        }
+        return false;
+        
+    }
+
+
+
     private function verificar_dominio_existente(){
         if($this->admin == 1){
             if($sql = $this->con->prepare("SELECT * FROM giros WHERE dominio=?")){
@@ -991,13 +1070,13 @@ class Guardar{
             if($sqld = $this->con->prepare("SELECT id_gir FROM giros WHERE dominio=?")){
             if($sqld->bind_param("s", $dominio)){
             if($sqld->execute()){
-
                 $res = $sqld->get_result();
                 if($res->{"num_rows"} == 0){
                     $code = $this->pass_generate(20);
                     if($sql = $this->con->prepare("INSERT INTO giros (dominio, fecha_creado, fecha_dns, code, id_ser, eliminado, catalogo, style_page, style_color, style_modal, font_family, font_css, logo, favicon, alto, alto_pro, item_pagina, item_cocina, item_pos, item_grafico, mapcode) VALUES (?, now(), now(), ?, '1', '0', '1', 'css_tipo_01.css', 'css_colores_01_basico.css', 'css_fontsize_01.css', 'K2D', 'K2D', 'sinlogo.png', 'default.ico', '25', '25', '1', '1', '1', '1', 'AIzaSyDbKlHezhqgy7z57ipcJk8mDK4rf6drvjY')")){
                     if($sql->bind_param("ss", $dominio, $code)){
                     if($sql->execute()){
+
                         $id_gir = $this->con->insert_id;
                         $return['id_gir'] = $id_gir;
                         if($sqlc = $this->con->prepare("INSERT INTO catalogo_productos (nombre, fecha_creado, id_gir) VALUES ('Catalog 01', now(), ?)")){
@@ -1013,9 +1092,10 @@ class Guardar{
                         }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1b '.htmlspecialchars($sqlc->error)); }
                         }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #1c '.htmlspecialchars($this->con->error)); }
                         $sql->close();
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
-                    }else{ $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
+                        
+                    }else{ $return['db'] = htmlspecialchars($sql->error); $this->registrar(6, 0, 0, 'crear_giro_sql() #2a '.htmlspecialchars($sql->error)); }
+                    }else{ $return['db'] = htmlspecialchars($sql->error); $this->registrar(6, 0, 0, 'crear_giro_sql() #2b '.htmlspecialchars($sql->error)); }
+                    }else{ $return['db'] = htmlspecialchars($this->con->error); $this->registrar(6, 0, 0, 'crear_giro_sql() #2c '.htmlspecialchars($this->con->error)); }
                 }
                 if($res->{"num_rows"} == 1){
                     $return['op'] = 3;
@@ -1367,81 +1447,100 @@ class Guardar{
     }
     private function crear_giro(){
 
-        $info['op'] = 2;
-        $info['mensaje'] = "Error:";
-        if($this->admin == 1){
-            $dominio = $_POST['dominio'];
-            if($this->verificar_dominio($dominio)){
+        if($this->verificar_cookie_usuario()){
 
-                $data["nombre"] = $_POST['nombre'];
-                $data["item_pagina"] = $_POST['item_pagina'];
-                $data["item_pos"] = $_POST['item_pos'];
-                $data["item_cocina"] = $_POST['item_cocina'];
-                $data["item_grafico"] = $_POST['item_grafico'];
-                $data["dns_letra"] = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
-                
-                if($_POST['plan'] == 1){
-                    $data["monto"] = 40000;
-                    $data["monto_vendedor"] = 40000;
-                }
-                if($_POST['plan'] == 2){
-                    $data["monto"] = 50000;
-                    $data["monto_vendedor"] = 45000;
-                }
+            if($this->admin == 1){
+                $dominio = $_POST['dominio'];
+                if($this->verificar_dominio($dominio)){
+    
+                    $plan = $_POST['plan'];
 
-                $id = $_POST['id'];
-
-                if($id == 0){
-                    $giro = $this->crear_giro_sql($id, $dominio, $data, false);
-                    if($giro['op'] == 1){
-                        if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
-                        if($sql->bind_param("ii", $this->id_user, $giro['id_gir'])){
-                        if($sql->execute()){
-                            $info['op'] = 1;
-                            $info['mensaje'] = "Giro creado exitosamente";
-                            $info['reload'] = 1;
-                            $info['page'] = "msd/giros.php";
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+                    /*
+                    $data["item_pagina"] = $_POST['item_pagina'];
+                    $data["item_pos"] = $_POST['item_pos'];
+                    $data["item_cocina"] = $_POST['item_cocina'];
+                    $data["item_grafico"] = $_POST['item_grafico'];
+                    */
+    
+                    $data["nombre"] = $_POST['nombre'];
+                    $data["dns_letra"] = ($_POST['dns_letra'] != "") ? $_POST['dns_letra'] : null ;
+                    
+                    if($plan == 1){
+                        $data["monto"] = $planes[0]['monto'];
+                        $data["monto_vendedor"] = $planes[0]['monto_vendedor'];
                     }
-                }
-                if($id > 0){
-                    if($this->id_user == 1){
+                    if($plan == 2){
+                        $data["monto"] = $planes[1]['monto'];
+                        $data["monto_vendedor"] = $planes[1]['monto_vendedor'];
+                    }
+    
+                    $id = $_POST['id'];
+    
+                    if($id == 0){
                         $giro = $this->crear_giro_sql($id, $dominio, $data, false);
+                        $info["giro"] = $giro;
                         if($giro['op'] == 1){
-                            $info['op'] = 1;
-                            $info['mensaje'] = "Giro creado exitosamente";
-                            $info['reload'] = 1;
-                            $info['page'] = "msd/giros.php";
-                            $this->con_cambios($id);
+                            if($sql = $this->con->prepare("INSERT INTO fw_usuarios_giros_clientes (id_user, id_gir) VALUES (?, ?)")){
+                            if($sql->bind_param("ii", $this->id_user, $giro['id_gir'])){
+                            if($sql->execute()){
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Giro creado exitosamente";
+                                $info['reload'] = 1;
+                                $info['page'] = "msd/giros.php";
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, 0, 'crear_giro() #1 '.htmlspecialchars($this->con->error)); }
+                        }else{
+                            $info["op"] = 2;
+                            $info['mensaje'] = "Error crear_giro_sql";
                         }
-                    }else{
-                        if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
-                        if($sql->bind_param("ii", $this->id_user, $id)){
-                        if($sql->execute()){
-                            $res = $sql->get_result();
-                            if($res->{"num_rows"} == 1){
-                                $giro = $this->crear_giro_sql($id, $dominio, $data, false);
-                                if($giro['op'] == 1){
-                                    $info['op'] = 1;
-                                    $info['mensaje'] = "Giro creado exitosamente";
-                                    $info['reload'] = 1;
-                                    $info['page'] = "msd/giros.php";
-                                    $this->con_cambios($id);
-                                }
-                            }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
-                            $sql->free_result();
-                            $sql->close();
-                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
-                        }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
                     }
-                }
-            }else{ $info['mensaje'] = "Error: dominio invalido"; }
+                    if($id > 0){
+                        if($this->id_user == 1){
+                            $giro = $this->crear_giro_sql($id, $dominio, $data, false);
+                            if($giro['op'] == 1){
+                                $info['op'] = 1;
+                                $info['mensaje'] = "Giro creado exitosamente";
+                                $info['reload'] = 1;
+                                $info['page'] = "msd/giros.php";
+                                $this->con_cambios($id);
+                            }else{
+                                $info["op"] = 2;
+                                $info['mensaje'] = "Error crear_giro_sql";
+                            }
+                        }else{
+                            if($sql = $this->con->prepare("SELECT * FROM fw_usuarios_giros_clientes WHERE id_user=? AND id_gir=?")){
+                            if($sql->bind_param("ii", $this->id_user, $id)){
+                            if($sql->execute()){
+                                $res = $sql->get_result();
+                                if($res->{"num_rows"} == 1){
+                                    $giro = $this->crear_giro_sql($id, $dominio, $data, false);
+                                    if($giro['op'] == 1){
+                                        $info['op'] = 1;
+                                        $info['mensaje'] = "Giro creado exitosamente";
+                                        $info['reload'] = 1;
+                                        $info['page'] = "msd/giros.php";
+                                        $this->con_cambios($id);
+                                    }else{
+                                        $info["op"] = 2;
+                                        $info['mensaje'] = "Error crear_giro_sql";
+                                    }
+                                }else{ $this->registrar(7, 0, $id, 'crear_giro() XSS'); }
+                                $sql->free_result();
+                                $sql->close();
+                            }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                            }else{ $this->registrar(6, 0, $id, 'crear_giro() #6 '.htmlspecialchars($sql->error)); }
+                        }
+                    }
+                }else{ $info['mensaje'] = "Error: dominio invalido"; }
+            }else{ $this->registrar(4, 0, 0, 'crear_giro()'); }
+
         }else{ $this->registrar(4, 0, 0, 'crear_giro()'); }
+        
         return $info;
+
     }
     private function eliminar_giro(){
 
@@ -3727,8 +3826,10 @@ class Guardar{
         return $info;
     }
     private function crear_categoria(){
+
         $info['op'] = 2;
         $info['mensaje'] = "Error:";
+
         if(isset($this->id_gir) && is_numeric($this->id_gir) && $this->id_gir > 0){
             $id_cae = $_POST['id'];
             $parent_id = $_POST['parent_id'];

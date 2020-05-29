@@ -113,6 +113,7 @@ function form(that){
             processData: false,
             cache: false,
             success: function(data){
+                console.log(data);
                 if(data != null){
                     if(data.reload == 1)
                         navlink('pages/'+data.page);

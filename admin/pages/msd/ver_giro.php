@@ -9,7 +9,6 @@ if(!isset($url)){
     $core = new Core();
 }
 
-
 $core->is_giro();
 
 // SOLO GIROS

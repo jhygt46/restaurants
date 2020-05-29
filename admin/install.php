@@ -161,6 +161,7 @@ $in->add('web_min', 'smallint(2)', 0, '0');
 $in->add('save_pos', 'tinyint(1)', 0, '0');
 $in->add('pos_min', 'smallint(2)', 0, '0');
 $in->add('del_pdir', 'tinyint(1)', 0, '0');
+$in->add('pos_min', 'smallint(2)', 0, '0');
 $in->add('telefono', 'varchar(15) COLLATE utf8_spanish2_ci', 0, '+56966166923');
 $in->add('id_loc', 'int(4)', 0, '0');
 $in->add('id_gir', 'int(4)', 0, '1');

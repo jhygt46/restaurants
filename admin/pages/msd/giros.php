@@ -33,9 +33,9 @@ $class = ($_POST['w'] < 600) ? 'resp' : 'normal' ;
 $that = ["nombre" => "", "dominio" => "", "item_pagina" => 0, "item_pos" => 0, "item_cocina" => 0, "item_grafico" => 0, "dns_letra" => ""];
 if(isset($_GET["id_gir"]) && is_numeric($_GET["id_gir"]) && $_GET["id_gir"] != 0){
     
-    $sub_titulo = $sub_titulo2;
     $id_gir = $_GET["id_gir"];
     $that = $core->get_giro_id($id_gir);
+    $sub_titulo = $sub_titulo2;
     
 }
 
